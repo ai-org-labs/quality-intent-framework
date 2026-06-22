@@ -1,0 +1,36 @@
+{
+  "packet_type": "team-output",
+  "recorded_at": "2026-06-22T01:05:21.678Z",
+  "team_output_id": "TOUT-MQOIKCNI-SEUU9I",
+  "team_id": "qif-v021-runtime-hardening",
+  "stage": "review",
+  "expected_roles": [
+    "Guardian",
+    "Visionary",
+    "Builder"
+  ],
+  "received_roles": [
+    "Guardian",
+    "Visionary",
+    "Builder"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-council-review",
+  "blocking_signals": [],
+  "recommended_next_step": "Record approved council packet and close TASK-005 after verification.",
+  "joined_role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV021-GUARDIAN-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV021-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV021-BUILDER-REVIEW.json"
+  ],
+  "artifact_refs": [
+    "docs/qif-v0.2-discovery-application-runtime.md",
+    "tools/validate-qif-runtime.mjs",
+    "examples/review-run-package.json"
+  ],
+  "decision_required": false,
+  "summary": "v0.2.1 hardening is implemented, executable, and verifier-backed; semantic truth remains governed outside local checks.",
+  "source_task_id": "TASK-005",
+  "source_parent_session_id": "SESS-MQOI0C6D-VHA2NY",
+  "source_decision_record_id": "DEC-MQOI1YGW-FW25BE"
+}

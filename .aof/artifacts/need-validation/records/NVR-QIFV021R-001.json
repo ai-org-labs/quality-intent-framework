@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-06-22T01:40:33.893Z",
+  "validation_id": "NVR-MQOJTMG5-EZUI7I",
+  "raw_need": "Release and tag QIF v0.2.1.",
+  "validation_status": "validated",
+  "validated_need": "Publish the accepted QIF v0.2.1 runtime, schema, verifier, example, documentation, consolidation review, and AOF evidence as an immutable committed tag and GitHub Release.",
+  "decision_summary": "The release request is valid because v0.2.1 hardening and consolidation are complete; release should proceed only after npm and AOF checks pass and before v0.3 pilot work begins.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is in scope?",
+      "answer": "Current QIF v0.2.1 repo state, release commit, v0.2.1 tag, push, and GitHub Release.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What is out of scope?",
+      "answer": "New QIF features, UI, external integrations, and conceptual redesign.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A release should not silently include unverified working-tree changes; verification must run before tagging."
+  ],
+  "evidence_gaps": [
+    "Remote release creation depends on authenticated GitHub access."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV021R-001.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV021R-001.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV021R-001.json",
+  "experiment_proposal_ref": null,
+    "project_charter_ref": ".aof/artifacts/need-validation/project-charters/PCH-QIFV021R-001.json",
+  "discovery_handoff_ref": null,
+  "source_task_id": "TASK-007",
+  "source_decision_record_id": "DEC-MQOJSHAP-3DA37N"
+}

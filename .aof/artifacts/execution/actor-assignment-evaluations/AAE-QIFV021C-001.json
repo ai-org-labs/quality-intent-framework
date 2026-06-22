@@ -1,0 +1,46 @@
+{
+  "evaluation_type": "actor-assignment-evaluation",
+  "evaluation_format_version": 1,
+  "recorded_at": "2026-06-22T01:19:36.349Z",
+  "evaluation_id": "AAE-QIFV021C-001",
+  "actor_skill_packet_ref": ".aof/artifacts/execution/actor-skill-packets/ASP-QIFV021C-001.json",
+  "actor_skill_packet_id": "ASP-MQOJ294Z-OUB0MZ",
+  "source_task_id": "TASK-006",
+  "source_parent_session_id": "SESS-MQOIZKHZ-RTF1GF",
+  "source_decision_record_id": "DEC-MQOJ17R5-Z672G0",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "Builder",
+    "team_ref": "qif-consolidation-review",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "schema-review",
+    "concept-review"
+  ],
+  "capability_fit_summary": {
+    "strong_count": 0,
+    "sufficient_count": 1,
+    "weak_count": 0,
+    "missing_count": 0,
+    "blocked_count": 0,
+    "evidence_ref_count": 3
+  },
+  "assignment_decision": {
+    "assignment_state": "selected",
+    "confidence_label": "medium",
+    "rationale": "Assignment has sufficient skill and capability evidence to proceed to governed execution.",
+    "recommended_action": "Proceed to resource and policy gate evaluation."
+  },
+  "missing_evidence": [],
+  "review_required": true,
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will consolidate the model without expanding it.",
+    "current_action": "Inspect artifacts and write review.",
+    "confidence_label": "medium",
+    "visible_state": "selected",
+    "visible_blockers": [],
+    "next_action": "Proceed to resource and policy gate evaluation."
+  }
+}

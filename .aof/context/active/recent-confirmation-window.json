@@ -1,0 +1,36 @@
+{
+  "window_type": "recent-confirmation-window",
+  "updated_at": "2026-06-22T15:24:30.996Z",
+  "entries": [
+    {
+      "question": "framework self-audit で次に残る gap は何か",
+      "answer": "The original local development repository still contains legacy history; the public migration target intentionally does not preserve that history.",
+      "recorded_at": "2026-06-22T15:14:34.628Z",
+      "expectation_state": "Tracked files are sanitized, tests pass, and clean-history publication uses neutral AI Org Labs author metadata.",
+      "mismatch_state": "The original local development repository still contains legacy history; the public migration target intentionally does not preserve that history.",
+      "scale_direction": "Push the clean main branch to AI Org Labs and do not push legacy tags.",
+      "source_session_id": "SESS-MQPCHTJC-94FWQ8",
+      "source_decision_record_id": "DEC-MQPCJQQL-YWG68R"
+    },
+    {
+      "question": "framework self-audit で次に残る gap は何か",
+      "answer": "The active GitHub credential does not have write permission to the AI Org Labs target repository.",
+      "recorded_at": "2026-06-22T15:16:12.029Z",
+      "expectation_state": "Sanitized clean-history repository is ready locally, but remote publication is blocked by GitHub authorization.",
+      "mismatch_state": "The active GitHub credential does not have write permission to the AI Org Labs target repository.",
+      "scale_direction": "Authenticate with an AI Org Labs authorized credential or grant write access, then push main only.",
+      "source_session_id": "SESS-MQPCHTJC-94FWQ8",
+      "source_decision_record_id": "DEC-MQPCJQQL-YWG68R"
+    },
+    {
+      "question": "framework self-audit で次に残る gap は何か",
+      "answer": "Remote publication is still blocked by AI Org Labs write authorization, but the local public tree is sanitized and verified.",
+      "recorded_at": "2026-06-22T15:24:30.996Z",
+      "expectation_state": "Hidden AOF evidence, docs, gitignore, and active task state were cleaned for public clean-history publication.",
+      "mismatch_state": "Remote publication is still blocked by AI Org Labs write authorization, but the local public tree is sanitized and verified.",
+      "scale_direction": "Authenticate with an AI Org Labs authorized credential, then push main only.",
+      "source_session_id": "SESS-MQPCHTJC-94FWQ8",
+      "source_decision_record_id": "DEC-MQPCJQQL-YWG68R"
+    }
+  ]
+}

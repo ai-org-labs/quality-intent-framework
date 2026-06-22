@@ -1,0 +1,31 @@
+{
+  "view_type": "operator_progress",
+  "generated_at": "2026-06-22T01:47:08.966Z",
+  "current_checkpoint": {
+    "stage": "frontier-definition-needed",
+    "frontier_task_id": null,
+    "summary": "The runtime is frontier-definition-needed.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  },
+  "previous_checkpoint": {
+    "summary": "TASK-007 was the latest completed checkpoint.",
+    "artifact_ref": ".aof/tasks/done/TASK-007.json"
+  },
+  "changes_since_last_checkpoint": [
+    {
+      "kind": "completed-task",
+      "summary": "TASK-007 completed: Release QIF v0.2.1",
+      "artifact_ref": ".aof/tasks/done/TASK-007.json"
+    },
+    {
+      "kind": "goal-refresh",
+      "summary": "After v0.2.1 release, open v0.2.2 cleanup for canonical entity cores, package composition, cross-package lineage, and negative verifier fixtures.",
+      "artifact_ref": ".aof/goals/next-value-slice.json"
+    }
+  ],
+  "progress_answer": {
+    "what_changed": "TASK-007 completed: Release QIF v0.2.1 After v0.2.1 release, open v0.2.2 cleanup for canonical entity cores, package composition, cross-package lineage, and negative verifier fixtures.",
+    "why_it_matters": "The runtime still needs a concrete current frontier to make progress legible.",
+    "next_checkpoint": "Open an implementation task for the current frontier: After v0.2.1 release, open v0.2.2 cleanup for canonical entity cores, package composition, cross-package lineage, and negative verifier fixtures."
+  }
+}

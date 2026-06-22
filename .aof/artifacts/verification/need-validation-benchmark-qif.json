@@ -1,0 +1,50 @@
+{
+  "artifact_type": "need-validation-benchmark",
+  "generated_at": "2026-06-21T16:39:40.265Z",
+  "project_root": "<local-project-root>",
+  "records_evaluated": 2,
+  "benchmarks": {
+    "NV-001": {
+      "status": "pass",
+      "detail": "At least one weak or incorrect need was blocked before project creation.",
+      "evidence": [
+        ".aof/artifacts/need-validation/records/NVR-QIF-NEGATIVE-001.json"
+      ]
+    },
+    "NV-002": {
+      "status": "pass",
+      "detail": "At least one project recommendation explicitly prevented project creation.",
+      "evidence": [
+        ".aof/artifacts/need-validation/records/NVR-QIF-NEGATIVE-001.json"
+      ]
+    },
+    "NV-003": {
+      "status": "pass",
+      "detail": "Value hypotheses are evidence-backed in the evaluated records.",
+      "evidence": [
+        ".aof/artifacts/need-validation/records/NVR-QIF-001.json",
+        ".aof/artifacts/need-validation/records/NVR-QIF-NEGATIVE-001.json"
+      ]
+    },
+    "NV-004": {
+      "status": "pass",
+      "detail": "Alternative analyses include both alternative and stop paths.",
+      "evidence": [
+        ".aof/artifacts/need-validation/records/NVR-QIF-001.json",
+        ".aof/artifacts/need-validation/records/NVR-QIF-NEGATIVE-001.json"
+      ]
+    },
+    "NV-005": {
+      "status": "pass",
+      "detail": "Experiment-required records include minimal experiment proposals.",
+      "evidence": []
+    },
+    "NV-006": {
+      "status": "pass",
+      "detail": "Project-ready records include validated need and project charter links.",
+      "evidence": [
+        ".aof/artifacts/need-validation/records/NVR-QIF-001.json"
+      ]
+    }
+  }
+}

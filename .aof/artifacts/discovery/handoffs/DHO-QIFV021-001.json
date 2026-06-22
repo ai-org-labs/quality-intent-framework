@@ -1,0 +1,28 @@
+{
+  "packet_type": "discovery-to-delivery-handoff",
+  "recorded_at": "2026-06-22T00:50:29.874Z",
+  "handoff_id": "DHO-MQOI18J6-767FF8",
+  "selected_need": "Make accepted QIF v0.2 runtime schemas and verifier rules executable for v0.2.1",
+  "intended_user_or_segment": "QIF maintainers, auditors, and AI review agents",
+  "context_summary": "Current runtime hardening separates conceptual entities; this slice must make records structured enough for schema validation and verifier execution.",
+  "hypothesis": "First-class Raw Expert Answers, Question Log Entries, derivation records, structured applicability conditions, confidence policies, and governance events will remove replay ambiguity without redesigning QIF.",
+  "evidence_refs": [
+    "schemas/discovery-session-package.schema.json",
+    "schemas/review-run-package.schema.json",
+    "tools/validate-qif-runtime.mjs"
+  ],
+  "rejected_alternatives": [
+    "Do not use free-text selection logic as the only source of applicability truth."
+  ],
+  "explicit_risks": [
+    "Overfitting schema rules could make the framework less domain-general; use structured conditions with domain-neutral names."
+  ],
+  "delivery_validation_requirements": [
+    "Run npm test plus AOF review and organization verification."
+  ],
+  "need": "Strengthen implementation traceability and executable verifier rules.",
+  "intent": "Make QIF v0.2.1 packages replayable from raw answer through extraction, derivation, applicability, review, governance, and confidence policy.",
+  "context": "No UI, no external integration, no software-only assumptions, no semantic-truth claim.",
+  "source_task_id": "TASK-005",
+  "source_decision_record_id": "DEC-MQOI0IS3-TAT1PA"
+}

@@ -1,0 +1,31 @@
+{
+  "view_type": "operator_progress",
+  "generated_at": "2026-06-21T23:23:26.489Z",
+  "current_checkpoint": {
+    "stage": "frontier-definition-needed",
+    "frontier_task_id": null,
+    "summary": "The runtime is frontier-definition-needed.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  },
+  "previous_checkpoint": {
+    "summary": "TASK-004 was the latest completed checkpoint.",
+    "artifact_ref": ".aof/tasks/done/TASK-004.json"
+  },
+  "changes_since_last_checkpoint": [
+    {
+      "kind": "completed-task",
+      "summary": "TASK-004 completed: Harden QIF v0.2 runtime model",
+      "artifact_ref": ".aof/tasks/done/TASK-004.json"
+    },
+    {
+      "kind": "goal-refresh",
+      "summary": "Add negative fixtures for applicability decisions, extraction-step omissions, and governance trigger failures.",
+      "artifact_ref": ".aof/goals/next-value-slice.json"
+    }
+  ],
+  "progress_answer": {
+    "what_changed": "TASK-004 completed: Harden QIF v0.2 runtime model Add negative fixtures for applicability decisions, extraction-step omissions, and governance trigger failures.",
+    "why_it_matters": "The runtime still needs a concrete current frontier to make progress legible.",
+    "next_checkpoint": "Open an implementation task for the current frontier: Add negative fixtures for applicability decisions, extraction-step omissions, and governance trigger failures."
+  }
+}

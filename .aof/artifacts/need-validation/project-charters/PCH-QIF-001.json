@@ -1,0 +1,26 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-06-21T16:28:01.864Z",
+  "project_charter_id": "PCH-MQO0326G-WRKE5P",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIF-001.json",
+  "validated_objective": "Deliver the first executable Quality Intent Framework baseline: entity model, lifecycle model, discovery workflow, evaluation workflow, governance workflow, acceptance framework, canonical schemas, sample package, and local validator.",
+  "scope": [
+    "Human-readable operational specification under docs/.",
+    "Canonical machine-readable schema for a QIF package under schemas/.",
+    "Sample QIF package under examples/.",
+    "Local validator under tools/ and npm script for repeatable verification.",
+    "AOF runtime evidence log connecting Need Validation, direction, review, self-review, and retrospective."
+  ],
+  "constraints": [
+    "Do not define quality as page count, review count, test count, or any activity volume.",
+    "Do not make the framework software-development-specific.",
+    "Do not build a production app in this slice.",
+    "Confidence and verdicts must be traceable to evidence, source reliability, coverage, recency, independence, and contradiction signals."
+  ],
+  "expected_outcomes": [
+    "QIF can be executed by humans, AI agents, or hybrid organizations using the same artifacts.",
+    "The repository contains a validating sample and clear acceptance gates for future QIF packages."
+  ],
+  "source_task_id": "TASK-001",
+  "source_decision_record_id": "DEC-MQO00MBF-OSBW7X"
+}

@@ -1,0 +1,34 @@
+{
+  "packet_type": "team-output",
+  "recorded_at": "2026-06-22T15:06:10.374Z",
+  "team_output_id": "TOUT-MQPCLN46-ZKWB6D",
+  "team_id": "migration-council",
+  "stage": "review",
+  "expected_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-council-review",
+  "blocking_signals": [],
+  "recommended_next_step": "Sanitize tracked files, verify, create clean-history commit, set AI Org Labs remote, and push only main.",
+  "joined_role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFMIG-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFMIG-BUILDER-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFMIG-GUARDIAN-REVIEW.json"
+  ],
+  "artifact_refs": [
+    ".aof/artifacts/execution/actor-execution-gates/AEG-QIFMIG-001.json"
+  ],
+  "decision_required": false,
+  "summary": "Migration execution is approved subject to clean identifier and history checks.",
+  "source_task_id": "TASK-008",
+  "source_parent_session_id": "SESS-MQPCHTJC-94FWQ8",
+  "source_decision_record_id": "DEC-MQPCJQQL-YWG68R"
+}

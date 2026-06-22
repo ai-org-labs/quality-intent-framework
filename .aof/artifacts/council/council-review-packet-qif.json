@@ -1,0 +1,42 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-06-21T16:35:31.849Z",
+  "review_packet_id": "CREV-MQO0CPE1-FNZR5X",
+  "council_id": "quality-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve the first executable QIF baseline.",
+  "rationale": "Need Validation and Project Charter preceded implementation; validator passes; Guardian guardrail blocks activity-count-as-quality misuse.",
+  "recommendation": "Proceed to self-review and retrospective after recording validation evidence.",
+  "target_audience": "QIF maintainers and AI/human evaluators",
+  "expected_user_reaction": "They can inspect docs, schema, sample, and validator without relying on hidden assumptions.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [
+    "In a future slice, add real organization case corpora and negative fixtures."
+  ],
+  "organization_change_recommendations": [
+    "Use QIF package validation as the default acceptance gate for new Quality Intents."
+  ],
+  "diagnosis_category": "baseline-approved",
+  "diagnosis_confidence": 0.86,
+  "diagnosis_evidence_refs": [
+    ".aof/artifacts/execution/team-outputs/TOUT-QIF-REVIEW.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [
+    ".aof/artifacts/execution/team-outputs/TOUT-QIF-REVIEW.json"
+  ],
+  "role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIF-BUILDER-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIF-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIF-GUARDIAN-REVIEW.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/council/review-council-exec.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-001",
+  "source_parent_session_id": "SESS-MQO00FSS-ZXQN1D",
+  "source_decision_record_id": "DEC-MQO0370N-32YV2X"
+}

@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-06-22T00:50:44.304Z",
+  "validation_id": "NVR-MQOI1JO0-YUV0PE",
+  "raw_need": "QIF v0.2.1 Implementation Hardening.",
+  "validation_status": "reframed",
+  "validated_need": "Refine the accepted QIF v0.2 runtime implementation so raw expert answers, question records, derivation records, executable applicability rules, governance event linkage, and confidence policies are explicit, reference-resolvable, and verifier-executable without redesigning the core model or claiming semantic truth.",
+  "decision_summary": "The raw request is accepted as an implementation hardening slice, not a conceptual redesign: make schemas and verifier rules executable for v0.2.1 while preserving v0.2 baseline boundaries.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is being hardened?",
+      "answer": "Runtime implementation artifacts: schemas, examples, verifier, docs, changelog, and AOF log.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must remain out of scope?",
+      "answer": "UI, external integrations, software specialization, from-scratch redesign, and semantic-truth claims.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Structured schemas alone could be mistaken for semantic validity unless verifier boundaries remain explicit."
+  ],
+  "evidence_gaps": [
+    "Negative fixtures for failing verifier paths are still future work after v0.2.1 hardening."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV021-001.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV021-001.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV021-001.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": ".aof/artifacts/need-validation/project-charters/PCH-QIFV021-001.json",
+  "discovery_handoff_ref": ".aof/artifacts/discovery/handoffs/DHO-QIFV021-001.json",
+  "source_task_id": "TASK-005",
+  "source_decision_record_id": "DEC-MQOI0IS3-TAT1PA"
+}

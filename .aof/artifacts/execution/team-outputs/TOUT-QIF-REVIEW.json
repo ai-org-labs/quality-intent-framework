@@ -1,0 +1,37 @@
+{
+  "packet_type": "team-output",
+  "recorded_at": "2026-06-21T16:35:31.837Z",
+  "team_output_id": "TOUT-MQO0CPDP-XCWCRH",
+  "team_id": "qa-team",
+  "stage": "review",
+  "expected_roles": [
+    "Builder",
+    "Visionary",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Builder",
+    "Visionary",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-council-review",
+  "blocking_signals": [],
+  "recommended_next_step": "Record council review approval and proceed to self-review.",
+  "joined_role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIF-BUILDER-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIF-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIF-GUARDIAN-REVIEW.json"
+  ],
+  "artifact_refs": [
+    "docs/qif-operational-framework.md",
+    "schemas/qif-package.schema.json",
+    "examples/qif-sample-package.json",
+    "tools/validate-qif.mjs"
+  ],
+  "decision_required": false,
+  "summary": "Executable QIF baseline is ready for council review.",
+  "source_task_id": "TASK-001",
+  "source_parent_session_id": "SESS-MQO00FSS-ZXQN1D",
+  "source_decision_record_id": "DEC-MQO0370N-32YV2X"
+}

@@ -1,0 +1,28 @@
+{
+  "join_type": "role-join",
+  "recorded_at": "2026-06-21T17:14:50.555Z",
+  "join_id": "RJOIN-MQO1R9DN-HD3ZA7",
+  "join_status": "resolved",
+  "stage": "review",
+  "expected_roles": [
+    "Builder",
+    "Visionary",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Builder",
+    "Visionary",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-orchestrator-decision",
+  "blocking_signals": [],
+  "recommended_next_step": "Approve the expert judgment baseline and record self-audit evidence.",
+  "received_session_ids": [
+    "SESS-MQO1FUI2-48HHS2"
+  ],
+  "source_task_id": "TASK-002",
+  "source_parent_session_id": "SESS-MQO1FUI2-48HHS2",
+  "decision_record_ref": ".aof/decisions/DEC-MQO1IM30-0T04IG.json",
+  "summary": "All three review perspectives support proceeding; Guardian raises no veto."
+}

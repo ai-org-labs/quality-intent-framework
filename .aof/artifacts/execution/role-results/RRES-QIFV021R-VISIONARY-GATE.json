@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-22T01:43:28.772Z",
+  "role": "Visionary",
+  "stage": "review",
+  "session_id": "SESS-MQOJRHLV-HVR0SV",
+  "status": "completed",
+  "recommendation": "approve release execution",
+  "rationale": "The release fixes an accepted v0.2.1 baseline as an immutable reference for v0.3 pilot planning without expanding scope.",
+  "signals": [
+    "no scope expansion"
+  ],
+  "artifact_refs": [
+    ".aof/artifacts/execution/actor-execution-gates/AEG-QIFV021R-001.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-007",
+  "source_decision_record_id": "DEC-MQOJU639-0K81F5",
+  "source_parent_session_id": "SESS-MQOJRHLV-HVR0SV",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.91
+}

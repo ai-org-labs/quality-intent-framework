@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-06-21T22:44:50.934Z",
+  "validation_id": "NVR-MQODJNG6-9PTKOJ",
+  "raw_need": "Add discovery and application runtime to QIF",
+  "validation_status": "validated",
+  "validated_need": "Make QIF runtime-executable from discovery through applicability and review execution by capturing discovery sessions, organizational quality culture, evaluation targets, explicit applicability rules, and evidence-backed review runs with governance triggers.",
+  "decision_summary": "The request was narrowed from a broad version bump into a runtime slice that makes knowledge elicitation, target selection, and verdict execution inspectable end to end.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "answer": "Scope: extend QIF with a domain-general discovery and application runtime covering discovery sessions, organizational quality culture aggregation, evaluation targets, applicability rules, and review runs across software, product, service operations, accounting, administration, maintenance, and customer support. Out of scope: UI, external integrations, software-tool assumptions, checklist-only quality, and treating expert opinion or activity counts as quality truth.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "How should improvement success be judged: which metric or end state matters most?",
+      "answer": "Success: QIF v0.2 can show how expert judgment was extracted, transformed into reusable quality knowledge, selected for a real target through explicit applicability rules, evaluated with evidence, and turned into a verdict with residual risk and governance triggers that a non-expert human or AI agent can inspect and replay.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Existing QIF and expert-judgment models are enough without explicit runtime selection and execution artifacts."
+  ],
+  "evidence_gaps": [
+    "Real organizational runtime traces and broader multi-domain corpora are still future work beyond the baseline examples."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV02-001.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV02-001.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV02-001.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": ".aof/artifacts/need-validation/project-charters/PCH-QIFV02-001.json",
+  "discovery_handoff_ref": ".aof/artifacts/discovery/handoffs/DHO-QIFV02-001.json",
+  "source_task_id": "TASK-003",
+  "source_decision_record_id": "DEC-MQODIII3-BRTR1A"
+}

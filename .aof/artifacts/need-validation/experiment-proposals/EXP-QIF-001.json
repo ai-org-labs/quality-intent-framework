@@ -1,0 +1,12 @@
+{
+  "artifact_type": "experiment-proposal",
+  "recorded_at": "2026-06-21T16:27:11.316Z",
+  "experiment_proposal_id": "EXP-MQO01Z6C-W7N7X5",
+  "assumption_to_test": "A compact schema-plus-validator baseline is enough to make the quality theory operational and AI-verifiable without building an application.",
+  "smallest_testable_validation": "Create a sample QIF package and run a local validator that checks entity references, required fields, evidence confidence inputs, verdict derivation constraints, and acceptance gates.",
+  "expected_learning": "Whether the framework can be executed by humans or AI agents from artifacts alone.",
+  "expected_cost": "One focused repository slice: docs, schemas, sample data, validator, and runtime evidence.",
+  "success_threshold": "The validator returns pass for the sample package and fails if required QIF references or confidence inputs are removed.",
+  "source_task_id": "TASK-001",
+  "source_decision_record_id": "DEC-MQO00MBF-OSBW7X"
+}

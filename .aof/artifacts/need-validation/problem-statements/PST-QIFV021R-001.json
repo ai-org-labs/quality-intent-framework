@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-06-22T01:40:23.195Z",
+  "problem_statement_id": "PST-MQOJTE6Z-GXTJGY",
+  "affected_party": "QIF maintainers and v0.3 pilot users",
+  "actual_problem": "The accepted v0.2.1 runtime baseline is not yet fixed as a committed, tagged, and released artifact.",
+  "why_it_matters": "Pilot planning needs an immutable reference for schemas, examples, verifier behavior, documentation, and AOF evidence.",
+  "why_now": "v0.2.1 hardening and consolidation review are complete, and the next work is v0.3 pilot preparation.",
+  "evidence_refs": [
+    "CHANGELOG.md",
+    "docs/qif-v0.2.1-consolidation-review.md"
+  ],
+  "source_task_id": "TASK-007",
+  "source_decision_record_id": "DEC-MQOJSHAP-3DA37N"
+}

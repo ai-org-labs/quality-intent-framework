@@ -1,0 +1,24 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-06-21T23:08:14.374Z",
+  "project_root": "<local-project-root>",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "Make QIF runtime-executable from discovery through applicability and review execution by capturing discovery sessions, organizational quality culture, evaluation targets, explicit applicability rules, and evidence-backed review runs with governance triggers.",
+  "next_value_slice": "Add larger corpora, disagreement fixtures, and multi-run runtime scenarios for QIF v0.2 validation.",
+  "current_runtime_stage": "frontier-definition-needed",
+  "primary_frontier_task": null,
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Open an implementation task for the current frontier: Add larger corpora, disagreement fixtures, and multi-run runtime scenarios for QIF v0.2 validation.",
+    "prioritized_task_ids": [],
+    "scale_direction": "Define or reconcile the next frontier before expanding execution."
+  },
+  "recommended_action": {
+    "recommended_action": "Open an implementation task for the current frontier: Add larger corpora, disagreement fixtures, and multi-run runtime scenarios for QIF v0.2 validation.",
+    "rationale": "No current open implementation task is aligned to the current operating goal.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  }
+}

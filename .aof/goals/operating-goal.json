@@ -1,0 +1,9 @@
+{
+  "goal_type": "operating-goal",
+  "content": "Publish a sanitized clean-history QIF repository under ai-org-labs/quality-intent-framework, removing legacy personal account identifiers from tracked files and avoiding legacy author metadata or tags in the new public history.",
+  "updated_at": "2026-06-22T15:04:41.769Z",
+  "agreed_with_human": true,
+  "source_session_id": "SESS-MQPCHTJC-94FWQ8",
+  "source_decision_record_id": "DEC-MQPCJQQL-YWG68R",
+  "declared_complete_at": null
+}

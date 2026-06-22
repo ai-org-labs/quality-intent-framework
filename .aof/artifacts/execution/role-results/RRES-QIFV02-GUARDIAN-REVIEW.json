@@ -1,0 +1,21 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-21T22:51:07.190Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MQODID63-10U4EO",
+  "status": "completed",
+  "recommendation": "Proceed with governance safeguards.",
+  "rationale": "The runtime keeps applicability explicit, blocks activity-count-as-quality misuse, and requires governance triggers for low-confidence or conflicting review outcomes.",
+  "signals": [],
+  "artifact_refs": [
+    "tools/validate-qif-runtime.mjs"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-003",
+  "source_decision_record_id": "DEC-MQODJNGU-7MLA9J",
+  "source_parent_session_id": "SESS-MQODID63-10U4EO",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.93
+}

@@ -1,0 +1,87 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-06-22T00:51:36.409Z",
+  "packet_id": "ASP-MQOI2NVD-SKJMS1",
+  "source_task_id": "TASK-005",
+  "source_parent_session_id": "SESS-MQOI0C6D-VHA2NY",
+  "source_decision_record_id": "DEC-MQOI1YGW-FW25BE",
+  "objective": "Implement QIF v0.2.1 schema and verifier hardening without redesigning the accepted v0.2 baseline.",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns repository-local schemas, examples, verifier, docs, changelog, and runtime log after Need Validation and Charter approval.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "skill-schema-design",
+    "skill-verifier-implementation",
+    "skill-runtime-modeling"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-runtime-schema-verifier-hardening",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        ".aof/artifacts/need-validation/project-charters/PCH-QIFV021-001.json",
+        "tools/validate-qif-runtime.mjs"
+      ],
+      "rationale": "The slice is schema/verifier implementation hardening."
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repo"
+  ],
+  "policy_refs": [
+    "policy-no-semantic-truth-claim",
+    "policy-no-conceptual-redesign"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-v0.2.1-runtime-hardening",
+    "artifact_schema_ref": "schemas/review-run-package.schema.json",
+    "required_sections": [
+      "Raw Expert Answer",
+      "Question Log Entry",
+      "Quality Intent Derivation",
+      "Executable Applicability Rule",
+      "Confidence Policy",
+      "Governance Event"
+    ],
+    "acceptance_criteria": [
+      "npm test validates v0.2.1 runtime examples.",
+      "Verifier checks traceability and confidence reproducibility without claiming semantic truth."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "v0.2 baseline is preserved",
+      "evaluator_ref": "visionary",
+      "evidence_required": "docs and examples",
+      "blocking": true
+    },
+    {
+      "criterion": "verifier rules are executable and bounded",
+      "evaluator_ref": "guardian",
+      "evidence_required": "npm test and verifier implementation",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "concept-redesign",
+      "trigger_condition": "implementation replaces accepted v0.2 conceptual model",
+      "consequence": "block-assignment",
+      "recovery_action": "limit changes to implementation hardening"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I can make the model executable without moving the goalposts.",
+    "current_action": "Update schemas, examples, verifier, docs, changelog, and runtime log.",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run npm test and submit to Guardian/Visionary review."
+  },
+  "status": "ready-for-assignment"
+}

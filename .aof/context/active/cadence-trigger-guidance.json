@@ -1,0 +1,22 @@
+{
+  "guidance_type": "cadence-trigger-guidance",
+  "recorded_at": "2026-06-22T15:24:31.003Z",
+  "open_task_count": 1,
+  "retire_review_candidate_ids": [],
+  "trigger_state": "follow-through-recommended",
+  "batching_mode": "single-action",
+  "policy_reason": "One cadence action is sufficient to restore follow-through.",
+  "recommended_actions": [
+    "run alignment-pulse"
+  ],
+  "suggested_commands": [
+    {
+      "action": "run alignment-pulse",
+      "command": "node ./src/cli.js alignment-pulse --project . --question \"まだ解くべき問題は同じか\" --answer \"はい\"",
+      "reason": "No active alignment-pulse artifact is present."
+    }
+  ],
+  "summary": "Cadence guidance recommends: run alignment-pulse.",
+  "source_session_id": "SESS-MQPCHTJC-94FWQ8",
+  "source_decision_record_id": "DEC-MQPCJQQL-YWG68R"
+}

@@ -1,0 +1,26 @@
+{
+  "report_type": "policy-evaluation-report",
+  "recorded_at": "2026-06-21T16:29:01.002Z",
+  "evaluation_id": "PER-MQO04BT5-VIZA57",
+  "subject_ref": "TASK-001",
+  "evaluation_scope": "QIF baseline implementation policy gate",
+  "policy_refs": [
+    "policy-runtime-backed-answer-discipline"
+  ],
+  "overall_outcome": "allowed",
+  "results": [
+    {
+      "policy_id": "policy-runtime-backed-answer-discipline",
+      "effect": "allow",
+      "outcome": "allowed",
+      "reason": "Need Validation and Project Charter exist before implementation; runtime commands are being used for direction and review.",
+      "blocking": false
+    }
+  ],
+  "recommended_actions": [
+    "Proceed with scoped docs, schema, sample, and validator implementation; reject volume metrics as direct quality definitions."
+  ],
+  "source_task_id": "TASK-001",
+  "source_parent_session_id": "SESS-MQO00FSS-ZXQN1D",
+  "source_decision_record_id": "DEC-MQO0370N-32YV2X"
+}

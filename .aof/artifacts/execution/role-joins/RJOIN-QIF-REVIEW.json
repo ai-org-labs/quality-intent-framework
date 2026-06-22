@@ -1,0 +1,28 @@
+{
+  "join_type": "role-join",
+  "recorded_at": "2026-06-21T16:35:31.837Z",
+  "join_id": "RJOIN-MQO0CPDP-Y8DY7C",
+  "join_status": "resolved",
+  "stage": "review",
+  "expected_roles": [
+    "Builder",
+    "Visionary",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Builder",
+    "Visionary",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-orchestrator-decision",
+  "blocking_signals": [],
+  "recommended_next_step": "Approve the baseline and record self-review.",
+  "received_session_ids": [
+    "SESS-MQO00FSS-ZXQN1D"
+  ],
+  "source_task_id": "TASK-001",
+  "source_parent_session_id": "SESS-MQO00FSS-ZXQN1D",
+  "decision_record_ref": ".aof/decisions/DEC-MQO0370N-32YV2X.json",
+  "summary": "All three review roles produced completed results."
+}

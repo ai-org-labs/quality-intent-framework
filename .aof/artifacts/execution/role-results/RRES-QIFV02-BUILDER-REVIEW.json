@@ -1,0 +1,21 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-21T22:51:07.066Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-MQODID63-10U4EO",
+  "status": "completed",
+  "recommendation": "Proceed with QIF v0.2 runtime baseline.",
+  "rationale": "The slice now has runtime documentation, four machine-readable package families, and verifier support for discovery-to-verdict traceability.",
+  "signals": [],
+  "artifact_refs": [
+    "docs/qif-v0.2-discovery-application-runtime.md"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-003",
+  "source_decision_record_id": "DEC-MQODJNGU-7MLA9J",
+  "source_parent_session_id": "SESS-MQODID63-10U4EO",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.9
+}

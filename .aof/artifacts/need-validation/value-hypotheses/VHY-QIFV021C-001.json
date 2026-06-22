@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-06-22T01:17:49.745Z",
+  "value_hypothesis_id": "VHY-MQOJ0DV5-KRR2YO",
+  "expected_value_creation": "A consolidated review will make QIF v0.2.1 easier to explain, safer to pilot, and less likely to accumulate ambiguous or duplicate concepts before v0.3.",
+  "beneficiary": "QIF maintainers, human reviewers, AI agents, and pilot organizations",
+  "supporting_evidence": [
+    "The current runtime has separate discovery, culture, target, and review-run packages with verifier behavior spanning multiple files.",
+    "The user requested concept inventory, responsibility boundaries, flow integrity, verifier boundary, and pilot readiness before v0.3."
+  ],
+  "success_criteria": [
+    "A single consolidation document covers all requested deliverables.",
+    "npm test still passes after review documentation updates.",
+    "AOF council review records Guardian, Visionary, and Builder judgments."
+  ],
+  "source_task_id": "TASK-006",
+  "source_decision_record_id": "DEC-MQOIZQEP-G0ZH5M"
+}

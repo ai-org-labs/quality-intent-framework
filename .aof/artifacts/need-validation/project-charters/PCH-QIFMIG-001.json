@@ -1,0 +1,25 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-06-22T15:04:28.334Z",
+  "project_charter_id": "PCH-MQPCJGDQ-J9VVNX",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFMIG-001.json",
+  "validated_objective": "Move QIF publication to AI Org Labs using sanitized tracked files and clean Git history.",
+  "scope": [
+    "Replace legacy source references in tracked files with AI Org Labs references",
+    "Verify no legacy personal account identifiers remain in tracked files",
+    "Create a clean-history branch or repository state with neutral AI Org Labs author metadata",
+    "Set publication remote to ai-org-labs/quality-intent-framework",
+    "Push only sanitized clean history, not legacy tags"
+  ],
+  "constraints": [
+    "Do not change QIF feature behavior",
+    "Do not preserve legacy author metadata in the new public history",
+    "Do not push if scans still find legacy identifiers"
+  ],
+  "expected_outcomes": [
+    "New remote has a sanitized main branch with clean initial history",
+    "Local publication remote points to AI Org Labs"
+  ],
+  "source_task_id": "TASK-008",
+  "source_decision_record_id": "DEC-MQPCIFWN-BFPMQ9"
+}

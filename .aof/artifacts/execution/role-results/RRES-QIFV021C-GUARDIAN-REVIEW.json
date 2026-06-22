@@ -1,0 +1,24 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-22T01:23:05.319Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MQOIZKHZ-RTF1GF",
+  "status": "completed",
+  "recommendation": "approve",
+  "rationale": "The consolidation review explicitly preserves verifier boundaries: structural and arithmetic checks are separated from semantic truth, expert correctness, and business approval.",
+  "signals": [
+    "no-veto"
+  ],
+  "artifact_refs": [
+    "docs/qif-v0.2.1-consolidation-review.md",
+    "tools/validate-qif-runtime.mjs"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-006",
+  "source_decision_record_id": "DEC-MQOJ17R5-Z672G0",
+  "source_parent_session_id": "SESS-MQOIZKHZ-RTF1GF",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.92
+}

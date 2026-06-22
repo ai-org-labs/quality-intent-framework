@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-06-22T15:04:07.116Z",
+  "problem_statement_id": "PST-MQPCJ00C-0H52B2",
+  "affected_party": "QIF maintainers and future AI Org Labs users",
+  "actual_problem": "The current repository publication state still carries legacy personal-account identity through Git history and one tracked source reference.",
+  "why_it_matters": "The public AI-knowledge repository should not expose legacy personal-account identifiers or author metadata.",
+  "why_now": "The project is being moved to the AI Org Labs account before further AOF and QIF development.",
+  "evidence_refs": [
+    "docs/aof-runtime-log.md",
+    ".aof/artifacts/runtime/qif-ai-org-labs-migration-situation-assessment.json"
+  ],
+  "source_task_id": "TASK-008",
+  "source_decision_record_id": "DEC-MQPCIFWN-BFPMQ9"
+}

@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-06-22T15:04:07.155Z",
+  "alternative_analysis_id": "ALT-MQPCJ01F-M54I3V",
+  "subject_need": "Publish QIF under AI Org Labs without legacy personal identity leakage",
+  "alternative_solutions": [
+    "Create a clean-history sanitized branch and push only that branch to the new remote",
+    "Rewrite all historical commits and tags to replace legacy author metadata"
+  ],
+  "non_solution_options": [
+    "Only change the remote URL while preserving legacy history"
+  ],
+  "defer_options": [
+    "Wait until after more QIF feature work to migrate"
+  ],
+  "stop_options": [
+    "Do not push if tracked files still contain legacy identifiers",
+    "Do not push legacy tags to the new remote"
+  ],
+  "source_task_id": "TASK-008",
+  "source_decision_record_id": "DEC-MQPCIFWN-BFPMQ9"
+}

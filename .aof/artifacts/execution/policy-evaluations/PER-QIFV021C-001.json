@@ -1,0 +1,26 @@
+{
+  "report_type": "policy-evaluation-report",
+  "recorded_at": "2026-06-22T01:18:59.944Z",
+  "evaluation_id": "PER-MQOJ1W14-4VH1ID",
+  "subject_ref": "TASK-006",
+  "evaluation_scope": "review-only consolidation scope",
+  "policy_refs": [
+    "policy-runtime-backed-answer-discipline"
+  ],
+  "overall_outcome": "allowed",
+  "results": [
+    {
+      "policy_id": "policy-runtime-backed-answer-discipline",
+      "effect": "allow",
+      "outcome": "allowed",
+      "reason": "The task creates a review document and AOF evidence; it does not add features, UI, integrations, or semantic-truth claims.",
+      "blocking": false
+    }
+  ],
+  "recommended_actions": [
+    "Proceed with documentation-only consolidation and verification."
+  ],
+  "source_task_id": "TASK-006",
+  "source_parent_session_id": "SESS-MQOIZKHZ-RTF1GF",
+  "source_decision_record_id": "DEC-MQOJ17R5-Z672G0"
+}

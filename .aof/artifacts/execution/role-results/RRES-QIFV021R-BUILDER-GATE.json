@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-22T01:43:28.773Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-MQOJRHLV-HVR0SV",
+  "status": "completed",
+  "recommendation": "approve release execution after verification",
+  "rationale": "Required artifacts, release notes, and execution path are present; npm and AOF checks must pass before commit/tag.",
+  "signals": [
+    "verification-gated"
+  ],
+  "artifact_refs": [
+    ".aof/artifacts/execution/actor-skill-packets/ASP-QIFV021R-001.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-007",
+  "source_decision_record_id": "DEC-MQOJU639-0K81F5",
+  "source_parent_session_id": "SESS-MQOJRHLV-HVR0SV",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.9
+}

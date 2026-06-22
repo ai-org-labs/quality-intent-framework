@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-06-21T23:09:30.966Z",
+  "alternative_analysis_id": "ALT-MQOEFDG6-OSU9OC",
+  "subject_need": "Harden QIF v0.2 runtime model",
+  "alternative_solutions": [
+    "Patch only documentation and leave schemas/verifier unchanged",
+    "Introduce a new v0.3 model instead of preserving v0.2 compatibility"
+  ],
+  "non_solution_options": [
+    "Treat human expert review as enough and skip structural verifier updates"
+  ],
+  "defer_options": [
+    "Wait for real organization corpora before clarifying core runtime boundaries"
+  ],
+  "stop_options": [
+    "Do not proceed if changes require UI, external systems, or software-specific assumptions",
+    "Do not proceed if verifier wording would claim semantic truth rather than structural traceability"
+  ],
+  "source_task_id": "TASK-004",
+  "source_decision_record_id": "DEC-MQOEEMHC-BE8OF7"
+}

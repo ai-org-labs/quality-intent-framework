@@ -1,0 +1,25 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-06-22T00:50:53.328Z",
+  "project_charter_id": "PCH-MQOI1QMO-XLPCZV",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV021-001.json",
+  "validated_objective": "Deliver QIF v0.2.1 implementation hardening so runtime packages are schema-explicit and verifier-executable from raw answers through confidence policy and governance event linkage.",
+  "scope": [
+    "Update v0.2 runtime document for v0.2.1 implementation semantics.",
+    "Update discovery, culture, evaluation target, and review-run schemas/examples.",
+    "Update runtime verifier for raw answers, question records, derivations, executable applicability, governance events, and confidence policies.",
+    "Update package version, changelog, and AOF runtime log."
+  ],
+  "constraints": [
+    "Do not redesign QIF core concepts.",
+    "Do not add UI or external integrations.",
+    "Do not specialize for software development.",
+    "Do not claim semantic truth from verifier success."
+  ],
+  "expected_outcomes": [
+    "npm test passes with v0.2.1 runtime examples.",
+    "AOF council review and organization verification pass."
+  ],
+  "source_task_id": "TASK-005",
+  "source_decision_record_id": "DEC-MQOI0IS3-TAT1PA"
+}

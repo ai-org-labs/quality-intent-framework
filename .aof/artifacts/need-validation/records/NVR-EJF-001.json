@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-06-21T17:08:07.106Z",
+  "validation_id": "NVR-MQO1IM2Q-HVK5AQ",
+  "raw_need": "Capture veteran expertise before it disappears",
+  "validation_status": "validated",
+  "validated_need": "Convert tacit expert judgments into case-grounded, reproducible decision patterns and quality intent derivations that humans and AI can apply to new cases with explicit cues, concerns, loss boundaries, evidence needs, and governance.",
+  "decision_summary": "The raw preservation request was reframed from generic know-how capture into a reproducible decision-pattern framework grounded in concrete judgments and bounded by governance.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "answer": "Scope: define a domain-general expert judgment framework that extracts tacit judgments from concrete cases, review history, and multi-expert practice, then turns them into reproducible decision patterns, quality intent derivations, and governance artifacts. Out of scope: employee surveillance, blame assignment, generic advice capture, checklist-only reduction, and treating activity counts as quality itself.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "How should improvement success be judged: which metric or end state matters most?",
+      "answer": "Success: a non-expert human or AI agent can apply extracted decision patterns to unseen cases with acceptable agreement, explicit cues, concerns, loss boundaries, applicability limits, evidence needs, counterexamples, and governance-based revision.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Veteran expertise can be elicited through abstract explanations alone."
+  ],
+  "evidence_gaps": [
+    "Real organizational case corpora and disagreement studies are not yet included in the baseline sample."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-EJF-001.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-EJF-001.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-EJF-001.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": ".aof/artifacts/need-validation/project-charters/PCH-EJF-001.json",
+  "discovery_handoff_ref": ".aof/artifacts/discovery/handoffs/DHO-EJF-001.json",
+  "source_task_id": "TASK-002",
+  "source_decision_record_id": "DEC-MQO1G6WX-SPJ4DO"
+}

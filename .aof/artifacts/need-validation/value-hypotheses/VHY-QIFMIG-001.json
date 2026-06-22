@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-06-22T15:04:07.115Z",
+  "value_hypothesis_id": "VHY-MQPCJ00B-PB1Y47",
+  "expected_value_creation": "A sanitized clean-history repository under AI Org Labs enables public development without legacy personal identity leakage.",
+  "beneficiary": "AI Org Labs maintainers, QIF users, and future AOF contributors",
+  "supporting_evidence": [
+    "Tracked-file scan found only one legacy account source reference to replace",
+    "Git log contains legacy personal-account author metadata, so clean history is safer than preserving history"
+  ],
+  "success_criteria": [
+    "No legacy personal account identifiers appear in tracked files",
+    "New public remote points to ai-org-labs/quality-intent-framework",
+    "New remote history starts from a clean AI Org Labs initial commit"
+  ],
+  "source_task_id": "TASK-008",
+  "source_decision_record_id": "DEC-MQPCIFWN-BFPMQ9"
+}

@@ -1,0 +1,24 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-06-22T00:49:31.551Z",
+  "project_root": "<local-project-root>",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "Refine the existing QIF v0.2 runtime so applicability selection, extraction interpretation, culture aggregation, governance triggers, and verifier authority are structurally explicit, replayable, and domain-general without expanding into semantic truth claims.",
+  "next_value_slice": "Add negative fixtures for applicability decisions, extraction-step omissions, and governance trigger failures.",
+  "current_runtime_stage": "frontier-definition-needed",
+  "primary_frontier_task": null,
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Open an implementation task for the current frontier: Add negative fixtures for applicability decisions, extraction-step omissions, and governance trigger failures.",
+    "prioritized_task_ids": [],
+    "scale_direction": "Define or reconcile the next frontier before expanding execution."
+  },
+  "recommended_action": {
+    "recommended_action": "Open an implementation task for the current frontier: Add negative fixtures for applicability decisions, extraction-step omissions, and governance trigger failures.",
+    "rationale": "No current open implementation task is aligned to the current operating goal.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  }
+}

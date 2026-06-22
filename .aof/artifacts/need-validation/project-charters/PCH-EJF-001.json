@@ -1,0 +1,27 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-06-21T17:07:50.133Z",
+  "project_charter_id": "PCH-MQO1I8Z9-9H0IM9",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-EJF-001.json",
+  "validated_objective": "Deliver an executable expert judgment framework that extracts case-based tacit knowledge into reproducible decision patterns and QIF quality intent derivations.",
+  "scope": [
+    "expert judgment entity model",
+    "decision pattern schema",
+    "tacit knowledge extraction workflow",
+    "review history inference workflow",
+    "organizational quality culture model",
+    "reproduction test framework",
+    "governance model and cross-domain examples"
+  ],
+  "constraints": [
+    "Do not store vague advice as knowledge.",
+    "Do not treat expert authority or activity counts as quality truth.",
+    "Do not use the framework for surveillance or blame assignment."
+  ],
+  "expected_outcomes": [
+    "A machine-readable sample package and validator for expert judgment patterns.",
+    "A human-readable specification that links tacit judgment extraction to QIF quality intent derivation."
+  ],
+  "source_task_id": "TASK-002",
+  "source_decision_record_id": "DEC-MQO1G6WX-SPJ4DO"
+}

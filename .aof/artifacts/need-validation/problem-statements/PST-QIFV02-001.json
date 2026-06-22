@@ -1,0 +1,14 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-06-21T22:44:25.197Z",
+  "problem_statement_id": "PST-MQODJ3L9-30HSKZ",
+  "affected_party": "Organizations, reviewers, operators, managers, successors, and AI agents that need to discover and apply quality knowledge to real evaluation targets",
+  "actual_problem": "The current QIF baseline defines quality knowledge and expert-judgment structure, but it does not yet show the runtime path from discovery session through applicability selection to review execution on a real target.",
+  "why_it_matters": "Without runtime models, organizations cannot inspect how knowledge was elicited, why specific intents or patterns applied to a target, or how final verdicts were reached.",
+  "why_now": "QIF v0.1 and the expert judgment baseline already exist; the next missing capability is executable discovery-and-application flow rather than more static concepts.",
+  "evidence_refs": [
+    ".aof/sessions/SESS-MQODID63-10U4EO.json"
+  ],
+  "source_task_id": "TASK-003",
+  "source_decision_record_id": "DEC-MQODIII3-BRTR1A"
+}

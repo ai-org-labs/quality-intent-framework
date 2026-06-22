@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-06-21T17:07:31.716Z",
+  "value_hypothesis_id": "VHY-MQO1HURO-OFQPW8",
+  "expected_value_creation": "A case-grounded expert judgment framework will let organizations convert tacit judgments into reproducible decision patterns, derive quality intents, and preserve evidence-backed review behavior across humans and AI.",
+  "beneficiary": "Quality owners, successor staff, domain specialists, cross-functional reviewers, and AI agents that need explicit judgment logic",
+  "supporting_evidence": [
+    "The framed request defines concrete-case judgment, cue extraction, concern mapping, loss boundaries, counterexamples, and reproduction tests as the usable path.",
+    "QIF already models quality intent, evidence, and verdicts, so the missing value is the upstream extraction layer for tacit judgment."
+  ],
+  "success_criteria": [
+    "Decision patterns include cues, concerns, loss boundaries, evidence requirements, applicability boundaries, exceptions, and counterexamples.",
+    "A non-expert or AI agent can apply patterns to unseen cases with acceptable agreement.",
+    "Derived Quality Intents remain challengeable and governable rather than frozen as expert authority."
+  ],
+  "source_task_id": "TASK-002",
+  "source_decision_record_id": "DEC-MQO1G6WX-SPJ4DO"
+}

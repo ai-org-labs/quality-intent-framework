@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-06-22T01:40:23.195Z",
+  "value_hypothesis_id": "VHY-MQOJTE6Z-H24ER8",
+  "expected_value_creation": "A tagged and released QIF v0.2.1 baseline gives downstream users a stable reference for the executable discovery/application runtime and consolidation review.",
+  "beneficiary": "QIF maintainers, reviewers, and v0.3 pilot operators",
+  "supporting_evidence": [
+    "npm test and AOF verification passed during consolidation review",
+    "package version is 0.2.1 and latest existing tag is v0.2.0"
+  ],
+  "success_criteria": [
+    "npm test passes before release",
+    "v0.2.1 tag is pushed to origin",
+    "GitHub Release v0.2.1 is created"
+  ],
+  "source_task_id": "TASK-007",
+  "source_decision_record_id": "DEC-MQOJSHAP-3DA37N"
+}

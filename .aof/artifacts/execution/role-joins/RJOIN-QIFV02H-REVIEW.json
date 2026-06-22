@@ -1,0 +1,28 @@
+{
+  "join_type": "role-join",
+  "recorded_at": "2026-06-21T23:21:48.787Z",
+  "join_id": "RJOIN-MQOEV6R7-ERMTJA",
+  "join_status": "resolved",
+  "stage": "review",
+  "expected_roles": [
+    "Guardian",
+    "Visionary",
+    "Builder"
+  ],
+  "received_roles": [
+    "Guardian",
+    "Visionary",
+    "Builder"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-orchestrator-decision",
+  "blocking_signals": [],
+  "recommended_next_step": "accept hardened QIF v0.2 runtime slice",
+  "received_session_ids": [
+    "SESS-MQOEEGKQ-WAW3RU"
+  ],
+  "source_task_id": "TASK-004",
+  "source_parent_session_id": "SESS-MQOEEGKQ-WAW3RU",
+  "decision_record_ref": ".aof/decisions/DEC-MQOEFZU1-ILLA2V.md",
+  "summary": "Guardian, Visionary, and Builder review results approve the hardening slice."
+}

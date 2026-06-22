@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-06-21T22:44:25.197Z",
+  "value_hypothesis_id": "VHY-MQODJ3L9-PURGNG",
+  "expected_value_creation": "A discovery and application runtime will let QIF show, in machine-readable form, how expert judgments become reusable knowledge and how that knowledge is selected and executed against real targets with evidence-backed verdicts.",
+  "beneficiary": "Quality leaders, reviewers, auditors, successors, and AI evaluators who need inspectable review logic across domains",
+  "supporting_evidence": [
+    "The current repository already validates QIF entities and expert judgment entities, so the remaining gap is runtime traceability from elicitation to application.",
+    "The request explicitly requires discovery sessions, organizational quality culture, evaluation targets, applicability, and review runs as the missing capabilities."
+  ],
+  "success_criteria": [
+    "Every discovery session links experts, cases, questions, answers, extracted cues, concerns, and derived patterns.",
+    "Every review run shows target selection, applicability rule, evidence, confidence, verdicts, residual risks, and governance triggers.",
+    "Local verifiers reject metric substitution and low-confidence conflicting results without governance review."
+  ],
+  "source_task_id": "TASK-003",
+  "source_decision_record_id": "DEC-MQODIII3-BRTR1A"
+}

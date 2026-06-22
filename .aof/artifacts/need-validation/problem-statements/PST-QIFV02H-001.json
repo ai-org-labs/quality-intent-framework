@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-06-21T23:09:30.966Z",
+  "problem_statement_id": "PST-MQOEFDG6-BTDBRI",
+  "affected_party": "QIF users, reviewers, auditors, and AI agents applying v0.2 runtime packages",
+  "actual_problem": "QIF v0.2 is executable, but reusable applicability rules are conflated with target-specific decisions, extraction traceability is implicit, governance triggers are not first-class, and verifier scope can be misread as semantic truth.",
+  "why_it_matters": "The runtime must be auditable and domain-general; ambiguity in selection, extraction, or verifier authority would make review results hard to reproduce or govern.",
+  "why_now": "v0.2 has just been released, so hardening the model before larger corpora or integrations prevents unstable concepts from spreading.",
+  "evidence_refs": [
+    "docs/qif-v0.2-discovery-application-runtime.md",
+    "tools/validate-qif-runtime.mjs"
+  ],
+  "source_task_id": "TASK-004",
+  "source_decision_record_id": "DEC-MQOEEMHC-BE8OF7"
+}

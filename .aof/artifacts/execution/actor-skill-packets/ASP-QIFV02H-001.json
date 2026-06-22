@@ -1,0 +1,85 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-06-21T23:10:58.255Z",
+  "packet_id": "ASP-MQOEH8SV-SNHPZ1",
+  "source_task_id": "TASK-004",
+  "source_parent_session_id": "SESS-MQOEEGKQ-WAW3RU",
+  "source_decision_record_id": "DEC-MQOEFZU1-ILLA2V",
+  "objective": "Harden the QIF v0.2 runtime model and verifier while preserving domain-general executability.",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns the repository update after Need Validation and Project Charter approval.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "skill-runtime-modeling",
+    "skill-schema-design",
+    "skill-validation-tooling"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-traceable-schema-verifier",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        ".aof/artifacts/need-validation/project-charters/PCH-QIFV02H-001.json",
+        "tools/validate-qif-runtime.mjs"
+      ],
+      "rationale": "The task updates schemas, examples, and verifier rules for traceability."
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repo"
+  ],
+  "policy_refs": [
+    "policy-no-semantic-truth-claim",
+    "policy-no-activity-count-as-quality"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-v0.2-hardening-slice",
+    "artifact_schema_ref": "schemas/review-run-package.schema.json",
+    "required_sections": [
+      "Extraction Step",
+      "Applicability Decision",
+      "Governance Trigger",
+      "Verifier Boundary"
+    ],
+    "acceptance_criteria": [
+      "npm test validates hardened examples.",
+      "Review run verdicts link to evidence and governance triggers fire for low confidence/context mismatch."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "structural traceability is enforced",
+      "evaluator_ref": "guardian",
+      "evidence_required": "npm test and verifier output",
+      "blocking": true
+    },
+    {
+      "criterion": "model remains domain-general and culture is not prerequisite",
+      "evaluator_ref": "visionary",
+      "evidence_required": "framework document and examples",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "semantic-truth-claim",
+      "trigger_condition": "verifier wording claims to prove quality truth",
+      "consequence": "block-assignment",
+      "recovery_action": "clarify verifier checks structure, traceability, reference resolution, confidence reproducibility, and rule compliance only"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I can make the runtime stricter without making it brittle.",
+    "current_action": "Update docs, schemas, examples, verifier, changelog, and AOF log.",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Submit hardened runtime to Guardian/Visionary review."
+  },
+  "status": "ready-for-assignment"
+}

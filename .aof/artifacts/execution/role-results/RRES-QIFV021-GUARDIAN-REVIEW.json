@@ -1,0 +1,25 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-22T01:05:03.599Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MQOI0C6D-VHA2NY",
+  "status": "completed",
+  "recommendation": "approve",
+  "rationale": "Verifier success is limited to structural integrity, traceability, reference resolution, policy execution, and confidence reproducibility; semantic truth remains explicitly outside the verifier and requires expert review, reproduction tests, operational feedback, and governance.",
+  "signals": [
+    "no-veto"
+  ],
+  "artifact_refs": [
+    ".aof/artifacts/council/qif-v0.2.1-review-council.json",
+    "tools/validate-qif-runtime.mjs",
+    "examples/review-run-package.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-005",
+  "source_decision_record_id": "DEC-MQOI1YGW-FW25BE",
+  "source_parent_session_id": "SESS-MQOI0C6D-VHA2NY",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.92
+}

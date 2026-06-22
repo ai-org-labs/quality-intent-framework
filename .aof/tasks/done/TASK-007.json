@@ -1,0 +1,22 @@
+{
+  "task_id": "TASK-007",
+  "title": "Release QIF v0.2.1",
+  "description": "Validate, commit, tag, push, and publish the QIF v0.2.1 release from the accepted hardening and consolidation baseline.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MQOJRHLV-HVR0SV",
+  "assigned_session_ids": [
+    "SESS-MQOJRHLV-HVR0SV"
+  ],
+  "related_decision_record_id": "DEC-MQOJU639-0K81F5",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-06-22T01:39:50.393Z",
+  "updated_at": "2026-06-22T01:47:03.319Z",
+  "assigned_at": null,
+  "done_at": "2026-06-22T01:47:03.319Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Release readiness and publication path completed; final git/GitHub release commands execute from the committed baseline."
+}

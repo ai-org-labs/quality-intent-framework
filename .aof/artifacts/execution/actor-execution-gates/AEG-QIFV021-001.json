@@ -1,0 +1,70 @@
+{
+  "gate_type": "actor-execution-gate",
+  "gate_format_version": 1,
+  "recorded_at": "2026-06-22T00:51:56.693Z",
+  "gate_id": "AEG-QIFV021-001",
+  "actor_assignment_evaluation_ref": ".aof/artifacts/execution/actor-assignment-evaluations/AAE-QIFV021-001.json",
+  "actor_skill_packet_ref": ".aof/artifacts/execution/actor-skill-packets/ASP-QIFV021-001.json",
+  "source_task_id": "TASK-005",
+  "source_parent_session_id": "SESS-MQOI0C6D-VHA2NY",
+  "source_decision_record_id": "DEC-MQOI1YGW-FW25BE",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "execution_mode": "tool-backed",
+    "assignment_state": "selected"
+  },
+  "resource_gate": {
+    "state": "allowed",
+    "required_resource_refs": [
+      "resource-qif-repo"
+    ],
+    "claim_refs": [
+      ".aof/artifacts/execution/resource-claims/RCL-QIFV021-001.json"
+    ],
+    "missing_resource_refs": [],
+    "claim_summaries": [
+      {
+        "artifact_ref": ".aof/artifacts/execution/resource-claims/RCL-QIFV021-001.json",
+        "resource_ref": "resource-qif-repo",
+        "claim_status": "approved",
+        "claimant_role_ref": "builder"
+      }
+    ]
+  },
+  "policy_gate": {
+    "state": "allowed",
+    "required_policy_refs": [
+      "policy-no-semantic-truth-claim",
+      "policy-no-conceptual-redesign"
+    ],
+    "evaluation_refs": [
+      ".aof/artifacts/execution/policy-evaluations/PER-QIFV021-001.json"
+    ],
+    "missing_policy_refs": [],
+    "evaluation_summaries": [
+      {
+        "artifact_ref": ".aof/artifacts/execution/policy-evaluations/PER-QIFV021-001.json",
+        "policy_refs": [
+          "policy-no-semantic-truth-claim",
+          "policy-no-conceptual-redesign"
+        ],
+        "overall_outcome": "allowed"
+      }
+    ]
+  },
+  "gate_decision": {
+    "execution_gate_state": "allowed",
+    "rationale": "Assignment, resource claims, and policy evaluations are explicit and non-blocking.",
+    "recommended_action": "Proceed to governed actor execution."
+  },
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "Resources and policies are explicit; I can execute under the gate.",
+    "current_action": "Update schemas, examples, verifier, docs, changelog, and runtime log.",
+    "visible_state": "allowed",
+    "visible_blockers": [],
+    "next_action": "Proceed to governed actor execution."
+  }
+}

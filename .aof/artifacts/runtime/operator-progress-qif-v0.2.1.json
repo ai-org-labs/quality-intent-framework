@@ -1,0 +1,31 @@
+{
+  "view_type": "operator_progress",
+  "generated_at": "2026-06-22T01:07:32.304Z",
+  "current_checkpoint": {
+    "stage": "frontier-definition-needed",
+    "frontier_task_id": null,
+    "summary": "The runtime is frontier-definition-needed.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  },
+  "previous_checkpoint": {
+    "summary": "TASK-005 was the latest completed checkpoint.",
+    "artifact_ref": ".aof/tasks/done/TASK-005.json"
+  },
+  "changes_since_last_checkpoint": [
+    {
+      "kind": "completed-task",
+      "summary": "TASK-005 completed: Implement QIF v0.2.1 runtime hardening",
+      "artifact_ref": ".aof/tasks/done/TASK-005.json"
+    },
+    {
+      "kind": "goal-refresh",
+      "summary": "Add negative fixtures for v0.2.1 verifier failure modes.",
+      "artifact_ref": ".aof/goals/next-value-slice.json"
+    }
+  ],
+  "progress_answer": {
+    "what_changed": "TASK-005 completed: Implement QIF v0.2.1 runtime hardening Add negative fixtures for v0.2.1 verifier failure modes.",
+    "why_it_matters": "The runtime still needs a concrete current frontier to make progress legible.",
+    "next_checkpoint": "Open an implementation task for the current frontier: Add negative fixtures for v0.2.1 verifier failure modes."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "evaluation_type": "actor-assignment-evaluation",
+  "evaluation_format_version": 1,
+  "recorded_at": "2026-06-21T23:11:51.085Z",
+  "evaluation_id": "AAE-QIFV02H-001",
+  "actor_skill_packet_ref": ".aof/artifacts/execution/actor-skill-packets/ASP-QIFV02H-001.json",
+  "actor_skill_packet_id": "ASP-MQOEH8SV-SNHPZ1",
+  "source_task_id": "TASK-004",
+  "source_parent_session_id": "SESS-MQOEEGKQ-WAW3RU",
+  "source_decision_record_id": "DEC-MQOEFZU1-ILLA2V",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "skill-runtime-modeling",
+    "skill-schema-design",
+    "skill-validation-tooling"
+  ],
+  "capability_fit_summary": {
+    "strong_count": 0,
+    "sufficient_count": 1,
+    "weak_count": 0,
+    "missing_count": 0,
+    "blocked_count": 0,
+    "evidence_ref_count": 2
+  },
+  "assignment_decision": {
+    "assignment_state": "selected",
+    "confidence_label": "medium",
+    "rationale": "Assignment has sufficient skill and capability evidence to proceed to governed execution.",
+    "recommended_action": "Proceed to resource and policy gate evaluation."
+  },
+  "missing_evidence": [],
+  "review_required": true,
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I can make the runtime stricter without making it brittle.",
+    "current_action": "Update docs, schemas, examples, verifier, changelog, and AOF log.",
+    "confidence_label": "medium",
+    "visible_state": "selected",
+    "visible_blockers": [],
+    "next_action": "Proceed to resource and policy gate evaluation."
+  }
+}

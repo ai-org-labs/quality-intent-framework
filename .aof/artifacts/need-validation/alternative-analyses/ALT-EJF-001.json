@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-06-21T17:07:31.714Z",
+  "alternative_analysis_id": "ALT-MQO1HURM-1LPK30",
+  "subject_need": "Preserve tacit expert judgment as reproducible organizational quality knowledge",
+  "alternative_solutions": [
+    "Capture concrete case judgments, cues, concerns, loss boundaries, and reproduction tests as canonical decision patterns.",
+    "Infer candidate patterns from review history, incidents, and audit records, then validate them through reproduction on unseen cases."
+  ],
+  "non_solution_options": [
+    "Store generic tips, heuristics, and informal best practices without explicit case grounding."
+  ],
+  "defer_options": [
+    "Wait until retirement risk materializes and continue relying on current veterans."
+  ],
+  "stop_options": [
+    "Do not create a framework if extracted knowledge cannot be challenged, bounded by context, or reproduced on unseen cases."
+  ],
+  "source_task_id": "TASK-002",
+  "source_decision_record_id": "DEC-MQO1G6WX-SPJ4DO"
+}

@@ -1,0 +1,24 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-21T23:21:41.488Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MQOEEGKQ-WAW3RU",
+  "status": "completed",
+  "recommendation": "approve",
+  "rationale": "The hardened runtime prevents verifier semantic-truth claims, preserves activity-count guardrails, and triggers governance for low confidence, conflicting evidence, and context mismatch.",
+  "signals": [
+    "no-veto"
+  ],
+  "artifact_refs": [
+    "tools/validate-qif-runtime.mjs",
+    "examples/review-run-package.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-004",
+  "source_decision_record_id": "DEC-MQOEFZU1-ILLA2V",
+  "source_parent_session_id": "SESS-MQOEEGKQ-WAW3RU",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.9
+}

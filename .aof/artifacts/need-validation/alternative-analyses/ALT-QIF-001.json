@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-06-21T16:27:11.317Z",
+  "alternative_analysis_id": "ALT-MQO01Z6D-3PF5O1",
+  "subject_need": "Make Quality Intent Framework operational and AI-verifiable",
+  "alternative_solutions": [
+    "Documentation-only framework: create a human-readable model without executable validation.",
+    "Schema-plus-validator framework: create docs, canonical JSON schemas, example package, and a validator for AI/human verification.",
+    "Application-first framework: build a full workflow application before stabilizing the conceptual contract."
+  ],
+  "non_solution_options": [
+    "Continue using review counts, test counts, page counts, or expert opinion as direct substitutes for quality."
+  ],
+  "defer_options": [
+    "Delay implementation until more industry-specific project histories exist."
+  ],
+  "stop_options": [
+    "Do not create a project if the validated need collapses into software-test-only tooling or volume-metric scorekeeping."
+  ],
+  "source_task_id": "TASK-001",
+  "source_decision_record_id": "DEC-MQO00MBF-OSBW7X"
+}

@@ -1,0 +1,22 @@
+{
+  "task_id": "TASK-005",
+  "title": "Implement QIF v0.2.1 runtime hardening",
+  "description": "Make runtime schemas and verifier execution explicit: Raw Expert Answer, Question Log Entry, derivation-record Quality Intent Derivation, executable applicability rules, confidence policies, and Governance Event linkage.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MQOI0C6D-VHA2NY",
+  "assigned_session_ids": [
+    "SESS-MQOI0C6D-VHA2NY"
+  ],
+  "related_decision_record_id": "DEC-MQOI1YGW-FW25BE",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-06-22T00:50:04.519Z",
+  "updated_at": "2026-06-22T01:06:05.490Z",
+  "assigned_at": null,
+  "done_at": "2026-06-22T01:06:05.490Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Completed after npm test, council review, need-validation benchmark, command-routing audit, and organization-verify."
+}

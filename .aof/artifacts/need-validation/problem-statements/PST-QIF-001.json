@@ -1,0 +1,14 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-06-21T16:26:52.135Z",
+  "problem_statement_id": "PST-MQO01KDJ-IKV81H",
+  "affected_party": "Organizations and AI/human teams that need to evaluate quality without relying on volume metrics or undocumented veteran judgment",
+  "actual_problem": "The discovered quality theory is currently conceptual; it lacks canonical entities, schemas, workflows, evidence rules, confidence calculation, verdict production, and governance lifecycle needed for AI-verifiable operation.",
+  "why_it_matters": "Without an operational framework, organizations may confuse activity counts with quality, lose tacit quality knowledge, or let AI agents make unverifiable quality judgments.",
+  "why_now": "The repository is being established as the Quality Intent Framework managed project and needs its first executable specification baseline.",
+  "evidence_refs": [
+    ".aof/sessions/SESS-MQO00FSS-ZXQN1D.json"
+  ],
+  "source_task_id": "TASK-001",
+  "source_decision_record_id": "DEC-MQO00MBF-OSBW7X"
+}

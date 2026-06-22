@@ -1,0 +1,40 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-06-22T15:06:21.267Z",
+  "review_packet_id": "CREV-MQPCLVIR-Y9NCM6",
+  "council_id": "migration-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "AI Org Labs migration is approved as clean-history publication, not history-preserving transfer.",
+  "rationale": "Clean-history publication best satisfies the privacy requirement because existing Git author metadata carries legacy identity. Tracked-file scan is clean after source URL replacement, and legacy tags must not be pushed.",
+  "recommendation": "Proceed with tests, identifier scan, clean initial commit, new remote setup, and push only sanitized main.",
+  "target_audience": "AI Org Labs maintainers",
+  "expected_user_reaction": "Use the new repository as the public QIF development home without legacy personal identity exposure.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [
+    "Do not add QIF features; only sanitize source references and add migration evidence."
+  ],
+  "organization_change_recommendations": [
+    "Treat AI Org Labs as the publication owner for QIF and AOF references."
+  ],
+  "diagnosis_category": "privacy-preserving-migration",
+  "diagnosis_confidence": 0.93,
+  "diagnosis_evidence_refs": [
+    ".aof/artifacts/execution/team-outputs/TOUT-QIFMIG-REVIEW.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [
+    ".aof/artifacts/execution/team-outputs/TOUT-QIFMIG-REVIEW.json"
+  ],
+  "role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFMIG-GUARDIAN-REVIEW.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFMIG-001.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-008",
+  "source_parent_session_id": "SESS-MQPCHTJC-94FWQ8",
+  "source_decision_record_id": "DEC-MQPCJQQL-YWG68R"
+}

@@ -1,0 +1,274 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-06-21T22:51:07.080Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MQODID63-10U4EO",
+    "stage": "review",
+    "executionId": "CRUN-MQODRPOK-G9QA9X",
+    "executionStatus": "prepared",
+    "invokedModel": false,
+    "seatCount": 2,
+    "summary": "prototype council execution prepared 2 seat calls in single-instance-role-switching: Guardian -> Builder",
+    "lastCouncilExecutionId": "CRUN-MQODRPOK-G9QA9X",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "seats": [
+        {
+          "role": "Guardian",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQODID63-10U4EO",
+              "decision_id": "DEC-MQODJNGU-7MLA9J",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: extend QIF with a domain-general discovery and application runtime covering discovery sessions, organizational quality culture aggregation, evaluation targets, applicability rules, and review runs across software, product, service operations, accounting, administration, maintenance, and customer support. Out of scope: UI, external integrations, software-tool assumptions, checklist-only quality, and treating expert opinion or activity counts as quality truth.",
+              "intent": "Success: QIF v0.2 can show how expert judgment was extracted, transformed into reusable quality knowledge, selected for a real target through explicit applicability rules, evaluated with evidence, and turned into a verdict with residual risk and governance triggers that a non-expert human or AI agent can inspect and replay.",
+              "active_context": "context: Scope: extend QIF with a domain-general discovery and application runtime covering discovery sessions, organizational quality culture aggregation, evaluation targets, applicability rules, and review runs across software, product, service operations, accounting, administration, maintenance, and customer support. Out of scope: UI, external integrations, software-tool assumptions, checklist-only quality, and treating expert opinion or activity counts as quality truth. | success: Success: QIF v0.2 can show how expert judgment was extracted, transformed into reusable quality knowledge, selected for a real target through explicit applicability rules, evaluated with evidence, and turned into a verdict with residual risk and governance triggers that a non-expert human or AI agent can inspect and replay.",
+              "context_snapshot_id": "CTX-MQODIII0-1RE2H2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: extend QIF with a domain-general discovery and application runtime covering discovery sessions, organizational quality culture aggregation, evaluation targets, applicability rules, and review runs across software, product, service operations, accounting, administration, maintenance, and customer support. Out of scope: UI, external integrations, software-tool assumptions, checklist-only quality, and treating expert opinion or activity counts as quality truth. / How should improvement success be judged: which metric or end state matters most? => Success: QIF v0.2 can show how expert judgment was extracted, transformed into reusable quality knowledge, selected for a real target through explicit applicability rules, evaluated with evidence, and turned into a verdict with residual risk and governance triggers that a non-expert human or AI agent can inspect and replay."
+            },
+            "task": {
+              "request": "Extend QIF into a discovery and application runtime that shows how expert judgments become reusable quality knowledge and how that knowledge is applied to real evaluation targets",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV02-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV02-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV02-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV02-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV02-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV02-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQODJNGU-7MLA9J"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQODID63-10U4EO",
+              "decision_id": "DEC-MQODJNGU-7MLA9J",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: extend QIF with a domain-general discovery and application runtime covering discovery sessions, organizational quality culture aggregation, evaluation targets, applicability rules, and review runs across software, product, service operations, accounting, administration, maintenance, and customer support. Out of scope: UI, external integrations, software-tool assumptions, checklist-only quality, and treating expert opinion or activity counts as quality truth.",
+              "intent": "Success: QIF v0.2 can show how expert judgment was extracted, transformed into reusable quality knowledge, selected for a real target through explicit applicability rules, evaluated with evidence, and turned into a verdict with residual risk and governance triggers that a non-expert human or AI agent can inspect and replay.",
+              "active_context": "context: Scope: extend QIF with a domain-general discovery and application runtime covering discovery sessions, organizational quality culture aggregation, evaluation targets, applicability rules, and review runs across software, product, service operations, accounting, administration, maintenance, and customer support. Out of scope: UI, external integrations, software-tool assumptions, checklist-only quality, and treating expert opinion or activity counts as quality truth. | success: Success: QIF v0.2 can show how expert judgment was extracted, transformed into reusable quality knowledge, selected for a real target through explicit applicability rules, evaluated with evidence, and turned into a verdict with residual risk and governance triggers that a non-expert human or AI agent can inspect and replay.",
+              "context_snapshot_id": "CTX-MQODIII0-1RE2H2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: extend QIF with a domain-general discovery and application runtime covering discovery sessions, organizational quality culture aggregation, evaluation targets, applicability rules, and review runs across software, product, service operations, accounting, administration, maintenance, and customer support. Out of scope: UI, external integrations, software-tool assumptions, checklist-only quality, and treating expert opinion or activity counts as quality truth. / How should improvement success be judged: which metric or end state matters most? => Success: QIF v0.2 can show how expert judgment was extracted, transformed into reusable quality knowledge, selected for a real target through explicit applicability rules, evaluated with evidence, and turned into a verdict with residual risk and governance triggers that a non-expert human or AI agent can inspect and replay."
+            },
+            "task": {
+              "request": "Extend QIF into a discovery and application runtime that shows how expert judgments become reusable quality knowledge and how that knowledge is applied to real evaluation targets",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV02-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV02-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV02-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV02-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV02-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV02-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQODJNGU-7MLA9J"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MQODRPOK-G9QA9X",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "prepared",
+      "started_at": "2026-06-21T22:51:07.075Z",
+      "completed_at": "2026-06-21T22:51:07.075Z",
+      "summary": "prototype council execution prepared 2 seat calls in single-instance-role-switching: Guardian -> Builder",
+      "steps": [
+        {
+          "step_id": "CRUN-MQODRPOK-G9QA9X-STEP-01",
+          "role": "Guardian",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Guardian review call as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQODID63-10U4EO",
+              "decision_id": "DEC-MQODJNGU-7MLA9J",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: extend QIF with a domain-general discovery and application runtime covering discovery sessions, organizational quality culture aggregation, evaluation targets, applicability rules, and review runs across software, product, service operations, accounting, administration, maintenance, and customer support. Out of scope: UI, external integrations, software-tool assumptions, checklist-only quality, and treating expert opinion or activity counts as quality truth.",
+              "intent": "Success: QIF v0.2 can show how expert judgment was extracted, transformed into reusable quality knowledge, selected for a real target through explicit applicability rules, evaluated with evidence, and turned into a verdict with residual risk and governance triggers that a non-expert human or AI agent can inspect and replay.",
+              "active_context": "context: Scope: extend QIF with a domain-general discovery and application runtime covering discovery sessions, organizational quality culture aggregation, evaluation targets, applicability rules, and review runs across software, product, service operations, accounting, administration, maintenance, and customer support. Out of scope: UI, external integrations, software-tool assumptions, checklist-only quality, and treating expert opinion or activity counts as quality truth. | success: Success: QIF v0.2 can show how expert judgment was extracted, transformed into reusable quality knowledge, selected for a real target through explicit applicability rules, evaluated with evidence, and turned into a verdict with residual risk and governance triggers that a non-expert human or AI agent can inspect and replay.",
+              "context_snapshot_id": "CTX-MQODIII0-1RE2H2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: extend QIF with a domain-general discovery and application runtime covering discovery sessions, organizational quality culture aggregation, evaluation targets, applicability rules, and review runs across software, product, service operations, accounting, administration, maintenance, and customer support. Out of scope: UI, external integrations, software-tool assumptions, checklist-only quality, and treating expert opinion or activity counts as quality truth. / How should improvement success be judged: which metric or end state matters most? => Success: QIF v0.2 can show how expert judgment was extracted, transformed into reusable quality knowledge, selected for a real target through explicit applicability rules, evaluated with evidence, and turned into a verdict with residual risk and governance triggers that a non-expert human or AI agent can inspect and replay."
+            },
+            "task": {
+              "request": "Extend QIF into a discovery and application runtime that shows how expert judgments become reusable quality knowledge and how that knowledge is applied to real evaluation targets",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV02-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV02-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV02-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV02-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV02-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV02-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQODJNGU-7MLA9J"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MQODRPOK-G9QA9X-STEP-02",
+          "role": "Builder",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Builder review call as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQODID63-10U4EO",
+              "decision_id": "DEC-MQODJNGU-7MLA9J",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: extend QIF with a domain-general discovery and application runtime covering discovery sessions, organizational quality culture aggregation, evaluation targets, applicability rules, and review runs across software, product, service operations, accounting, administration, maintenance, and customer support. Out of scope: UI, external integrations, software-tool assumptions, checklist-only quality, and treating expert opinion or activity counts as quality truth.",
+              "intent": "Success: QIF v0.2 can show how expert judgment was extracted, transformed into reusable quality knowledge, selected for a real target through explicit applicability rules, evaluated with evidence, and turned into a verdict with residual risk and governance triggers that a non-expert human or AI agent can inspect and replay.",
+              "active_context": "context: Scope: extend QIF with a domain-general discovery and application runtime covering discovery sessions, organizational quality culture aggregation, evaluation targets, applicability rules, and review runs across software, product, service operations, accounting, administration, maintenance, and customer support. Out of scope: UI, external integrations, software-tool assumptions, checklist-only quality, and treating expert opinion or activity counts as quality truth. | success: Success: QIF v0.2 can show how expert judgment was extracted, transformed into reusable quality knowledge, selected for a real target through explicit applicability rules, evaluated with evidence, and turned into a verdict with residual risk and governance triggers that a non-expert human or AI agent can inspect and replay.",
+              "context_snapshot_id": "CTX-MQODIII0-1RE2H2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: extend QIF with a domain-general discovery and application runtime covering discovery sessions, organizational quality culture aggregation, evaluation targets, applicability rules, and review runs across software, product, service operations, accounting, administration, maintenance, and customer support. Out of scope: UI, external integrations, software-tool assumptions, checklist-only quality, and treating expert opinion or activity counts as quality truth. / How should improvement success be judged: which metric or end state matters most? => Success: QIF v0.2 can show how expert judgment was extracted, transformed into reusable quality knowledge, selected for a real target through explicit applicability rules, evaluated with evidence, and turned into a verdict with residual risk and governance triggers that a non-expert human or AI agent can inspect and replay."
+            },
+            "task": {
+              "request": "Extend QIF into a discovery and application runtime that shows how expert judgments become reusable quality knowledge and how that knowledge is applied to real evaluation targets",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV02-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV02-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV02-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV02-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV02-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV02-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQODJNGU-7MLA9J"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

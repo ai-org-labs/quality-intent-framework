@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-06-22T00:50:29.851Z",
+  "alternative_analysis_id": "ALT-MQOI18IJ-30U2O4",
+  "subject_need": "Implement QIF v0.2.1 runtime hardening",
+  "alternative_solutions": [
+    "Keep raw answers embedded in question logs and rely on free-text extraction rationale",
+    "Introduce a new conceptual model instead of refining accepted v0.2"
+  ],
+  "non_solution_options": [
+    "Only update documentation without schemas or verifier rules"
+  ],
+  "defer_options": [
+    "Wait until external integrations exist before defining executable schema boundaries"
+  ],
+  "stop_options": [
+    "Do not proceed if the work redesigns QIF from scratch",
+    "Do not proceed if verifier success is described as semantic truth"
+  ],
+  "source_task_id": "TASK-005",
+  "source_decision_record_id": "DEC-MQOI0IS3-TAT1PA"
+}

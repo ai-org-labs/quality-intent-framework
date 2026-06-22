@@ -1,0 +1,37 @@
+{
+  "packet_type": "team-output",
+  "recorded_at": "2026-06-21T17:14:50.555Z",
+  "team_output_id": "TOUT-MQO1R9DN-FM4HB8",
+  "team_id": "runtime-team",
+  "stage": "review",
+  "expected_roles": [
+    "Builder",
+    "Visionary",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Builder",
+    "Visionary",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-council-review",
+  "blocking_signals": [],
+  "recommended_next_step": "Record self-audit and retrospective, then use this package as the baseline for future case corpora.",
+  "joined_role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-EJF-BUILDER-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-EJF-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-EJF-GUARDIAN-REVIEW.json"
+  ],
+  "artifact_refs": [
+    "docs/expert-judgment-framework.md",
+    "schemas/expert-judgment-package.schema.json",
+    "examples/expert-judgment-sample-package.json",
+    "tools/validate-expert-judgment.mjs"
+  ],
+  "decision_required": false,
+  "summary": "The expert judgment slice is executable, bounded by governance, and validated by sample-package checks.",
+  "source_task_id": "TASK-002",
+  "source_parent_session_id": "SESS-MQO1FUI2-48HHS2",
+  "source_decision_record_id": "DEC-MQO1IM30-0T04IG"
+}

@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-06-21T22:44:25.197Z",
+  "alternative_analysis_id": "ALT-MQODJ3L9-U7QSWJ",
+  "subject_need": "Make QIF knowledge discovery and application runtime-executable",
+  "alternative_solutions": [
+    "Add explicit discovery-session, evaluation-target, applicability-rule, and review-run models with verifier checks and sample packages.",
+    "Extend organizational quality culture into a first-class aggregation artifact grounded in multiple decision patterns."
+  ],
+  "non_solution_options": [
+    "Keep runtime behavior implicit in narrative docs and rely on humans to infer how discovery and application should work."
+  ],
+  "defer_options": [
+    "Postpone runtime design until a UI or external system integration exists."
+  ],
+  "stop_options": [
+    "Do not ship v0.2 if discovery and verdict execution cannot be traced end-to-end in machine-readable artifacts."
+  ],
+  "source_task_id": "TASK-003",
+  "source_decision_record_id": "DEC-MQODIII3-BRTR1A"
+}

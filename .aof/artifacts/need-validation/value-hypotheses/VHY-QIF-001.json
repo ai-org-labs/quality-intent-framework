@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-06-21T16:27:11.316Z",
+  "value_hypothesis_id": "VHY-MQO01Z6C-LKHHC4",
+  "expected_value_creation": "A canonical, AI-verifiable QIF baseline lets humans and agents discover organization-specific quality intent, collect evidence, compute confidence, issue verdicts, and govern lifecycle changes without treating output volume as quality.",
+  "beneficiary": "Quality leaders, auditors, project teams, operators, AI agents, and hybrid organizations applying QIF",
+  "supporting_evidence": [
+    "The framed session identifies canonical schemas, workflows, governance, and acceptance criteria as the success condition.",
+    "The prior quality theory defines quality as value realization within loss boundaries, supported by evidence and learning rather than activity counts."
+  ],
+  "success_criteria": [
+    "Entity model covers purpose, attributes, lifecycle, and relationships for core QIF entities.",
+    "Discovery, evaluation, governance, and acceptance workflows are documented and machine-verifiable.",
+    "A sample QIF package validates through a local validator."
+  ],
+  "source_task_id": "TASK-001",
+  "source_decision_record_id": "DEC-MQO00MBF-OSBW7X"
+}

@@ -1,0 +1,28 @@
+{
+  "join_type": "role-join",
+  "recorded_at": "2026-06-22T15:06:10.374Z",
+  "join_id": "RJOIN-MQPCLN46-P0EJ9F",
+  "join_status": "resolved",
+  "stage": "review",
+  "expected_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-orchestrator-decision",
+  "blocking_signals": [],
+  "recommended_next_step": "Proceed with sanitized clean-history migration after scans and tests pass.",
+  "received_session_ids": [
+    "SESS-MQPCHTJC-94FWQ8"
+  ],
+  "source_task_id": "TASK-008",
+  "source_parent_session_id": "SESS-MQPCHTJC-94FWQ8",
+  "decision_record_ref": ".aof/decisions/DEC-MQPCJQQL-YWG68R.json",
+  "summary": "Visionary, Builder, and Guardian approve clean-history AI Org Labs migration with identifier scan gates."
+}

@@ -1,0 +1,26 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-06-21T22:44:50.910Z",
+  "project_charter_id": "PCH-MQODJNFI-UQ7ADK",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV02-001.json",
+  "validated_objective": "Deliver QIF v0.2 runtime artifacts that show discovery, aggregation, applicability selection, and review execution on real targets.",
+  "scope": [
+    "discovery session model",
+    "organizational quality culture model",
+    "evaluation target model",
+    "applicability model",
+    "review run model",
+    "schemas, examples, verifier, changelog, and runtime log updates"
+  ],
+  "constraints": [
+    "Do not build a UI or external integration.",
+    "Do not assume software-specific tools or artifacts.",
+    "Do not reduce quality to checklist completion or expert authority."
+  ],
+  "expected_outcomes": [
+    "Machine-readable packages for discovery sessions, quality culture, evaluation targets, and review runs.",
+    "Verifier coverage for end-to-end runtime traceability and governance-trigger discipline."
+  ],
+  "source_task_id": "TASK-003",
+  "source_decision_record_id": "DEC-MQODIII3-BRTR1A"
+}

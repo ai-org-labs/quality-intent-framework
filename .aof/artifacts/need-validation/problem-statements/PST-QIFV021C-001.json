@@ -1,0 +1,16 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-06-22T01:17:49.745Z",
+  "problem_statement_id": "PST-MQOJ0DV5-4U1VVE",
+  "affected_party": "QIF maintainers and pilot users",
+  "actual_problem": "QIF v0.2.1 is executable but now contains many entities across docs, schemas, examples, and verifier logic; without consolidation, v0.3 pilot users may not know which concepts own which responsibilities or what verifier success means.",
+  "why_it_matters": "A pilot must be explainable end to end: captured judgment, derived pattern, quality intent, applicability decision, evidence-backed verdict, and governance trigger.",
+  "why_now": "v0.2.1 schema/verifier hardening just completed, so this is the right point to check coherence before adding v0.3 pilot scenarios.",
+  "evidence_refs": [
+    "docs/qif-v0.2-discovery-application-runtime.md",
+    "schemas/review-run-package.schema.json",
+    "tools/validate-qif-runtime.mjs"
+  ],
+  "source_task_id": "TASK-006",
+  "source_decision_record_id": "DEC-MQOIZQEP-G0ZH5M"
+}

@@ -1,0 +1,42 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-06-21T16:36:58.396Z",
+  "validation_id": "NVR-MQO0EK64-9LVI8R",
+  "raw_need": "Quality Intent Frameworkの開発です。ここまでに定義した内容をAIが検証できる仕組みを作ってください。",
+  "validation_status": "reframed",
+  "validated_need": "Create a domain-general, AI-verifiable operational baseline for Quality Intent Framework that models quality intent, evidence, confidence, verdicts, discovery, evaluation, governance, and acceptance without reducing quality to activity volume.",
+  "decision_summary": "The raw request is accepted only after reframing: it is not a generic project to build everything, but a first executable framework slice consisting of canonical model, workflows, schemas, sample, validator, and governance evidence.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is the need?",
+      "answer": "Make QIF theory operational and AI-verifiable across organizations with varied quality knowledge sources.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What should not be built now?",
+      "answer": "Do not build a production app or software-test-only model; do not define quality by page/review/test counts.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "How can success be validated cheaply?",
+      "answer": "Run a local validator on a sample QIF package and review runtime artifacts with council roles.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "The initial request could be mistaken as asking for a broad methodology document or software testing framework."
+  ],
+  "evidence_gaps": [
+    "No real organizational case corpus exists yet; the first baseline must use sample data and make future corpus evidence pluggable."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIF-001.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIF-001.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIF-001.json",
+  "experiment_proposal_ref": ".aof/artifacts/need-validation/experiment-proposals/EXP-QIF-001.json",
+  "project_charter_ref": ".aof/artifacts/need-validation/project-charters/PCH-QIF-001.json",
+  "discovery_handoff_ref": ".aof/artifacts/discovery/handoffs/DHO-QIF-001.json",
+  "source_task_id": "TASK-001",
+  "source_decision_record_id": "DEC-MQO00MBF-OSBW7X"
+}

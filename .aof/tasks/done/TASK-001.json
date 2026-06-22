@@ -1,0 +1,22 @@
+{
+  "task_id": "TASK-001",
+  "title": "Deliver executable QIF baseline",
+  "description": "Create docs, schema, sample package, validator, and AOF runtime evidence for the first Quality Intent Framework baseline.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MQO00FSS-ZXQN1D",
+  "assigned_session_ids": [
+    "SESS-MQO00FSS-ZXQN1D"
+  ],
+  "related_decision_record_id": "DEC-MQO0370N-32YV2X",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-06-21T16:35:57.543Z",
+  "updated_at": "2026-06-21T16:37:24.122Z",
+  "assigned_at": null,
+  "done_at": "2026-06-21T16:37:24.122Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Completed executable QIF baseline and validation."
+}

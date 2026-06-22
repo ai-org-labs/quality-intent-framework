@@ -1,0 +1,84 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-06-21T16:28:44.363Z",
+  "packet_id": "ASP-MQO03YYZ-BTQY36",
+  "source_task_id": "TASK-001",
+  "source_parent_session_id": "SESS-MQO00FSS-ZXQN1D",
+  "source_decision_record_id": "DEC-MQO0370N-32YV2X",
+  "objective": "Implement the first executable QIF baseline: docs, schemas, sample package, validator, and runtime log.",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": "qa-team",
+    "assignment_reason": "Builder owns the implementation slice after Need Validation and Project Charter approval.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "skill-framework-modeling",
+    "skill-schema-design",
+    "skill-validation-tooling"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-domain-modeling",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        ".aof/artifacts/need-validation/project-charters/PCH-QIF-001.json"
+      ],
+      "rationale": "The task is a domain model and artifact validation baseline."
+    }
+  ],
+  "resource_refs": [
+    "resource-repo-main"
+  ],
+  "policy_refs": [
+    "policy-runtime-backed-answer-discipline"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-operational-baseline",
+    "artifact_schema_ref": "schemas/qif-package.schema.json",
+    "required_sections": [
+      "Entity Model",
+      "Discovery Workflow",
+      "Evaluation Workflow",
+      "Governance Workflow",
+      "Acceptance Framework"
+    ],
+    "acceptance_criteria": [
+      "npm test validates the sample QIF package.",
+      "AOF review artifacts include council judgment and runtime logs."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "QIF package validates",
+      "evaluator_ref": "guardian",
+      "evidence_required": "validator output",
+      "blocking": true
+    },
+    {
+      "criterion": "framework remains domain-general",
+      "evaluator_ref": "visionary",
+      "evidence_required": "docs review",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "volume-metric-substitution",
+      "trigger_condition": "page/review/test count is used as quality itself",
+      "consequence": "block-assignment",
+      "recovery_action": "treat count as evidence only when linked to an intent and risk"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I can turn the theory into an executable baseline.",
+    "current_action": "Create docs, schemas, sample, and validator.",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run validator and submit to review."
+  },
+  "status": "ready-for-assignment"
+}

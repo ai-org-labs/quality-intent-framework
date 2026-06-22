@@ -1,0 +1,26 @@
+{
+  "report_type": "policy-evaluation-report",
+  "recorded_at": "2026-06-22T01:42:16.301Z",
+  "evaluation_id": "PER-MQOJVTGT-AED4XI",
+  "subject_ref": "TASK-007",
+  "evaluation_scope": "QIF v0.2.1 release execution",
+  "policy_refs": [
+    "policy-release-integrity"
+  ],
+  "overall_outcome": "requires-review",
+  "results": [
+    {
+      "policy_id": "policy-release-integrity",
+      "effect": "require-review",
+      "outcome": "requires-review",
+      "reason": "Release may update git refs and publish a remote GitHub Release; verification and traceability are required before execution.",
+      "blocking": false
+    }
+  ],
+  "recommended_actions": [
+    "Proceed only after npm test, AOF verification, explicit artifact traceability, and release notes are present."
+  ],
+  "source_task_id": "TASK-007",
+  "source_parent_session_id": "SESS-MQOJRHLV-HVR0SV",
+  "source_decision_record_id": "DEC-MQOJU639-0K81F5"
+}

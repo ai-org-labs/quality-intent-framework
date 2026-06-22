@@ -1,0 +1,28 @@
+{
+  "join_type": "role-join",
+  "recorded_at": "2026-06-22T01:23:19.250Z",
+  "join_id": "RJOIN-MQOJ7G42-NUOJ87",
+  "join_status": "resolved",
+  "stage": "review",
+  "expected_roles": [
+    "Guardian",
+    "Visionary",
+    "Builder"
+  ],
+  "received_roles": [
+    "Guardian",
+    "Visionary",
+    "Builder"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-orchestrator-decision",
+  "blocking_signals": [],
+  "recommended_next_step": "Accept the consolidation review and proceed to verification and retrospective.",
+  "received_session_ids": [
+    "SESS-MQOIZKHZ-RTF1GF"
+  ],
+  "source_task_id": "TASK-006",
+  "source_parent_session_id": "SESS-MQOIZKHZ-RTF1GF",
+  "decision_record_ref": ".aof/decisions/DEC-MQOJ17R5-Z672G0.json",
+  "summary": "Guardian, Visionary, and Builder approved the QIF v0.2.1 consolidation review."
+}

@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-06-21T23:09:45.089Z",
+  "validation_id": "NVR-MQOEFOCH-N9RWR7",
+  "raw_need": "Harden QIF v0.2 Discovery and Application Runtime.",
+  "validation_status": "reframed",
+  "validated_need": "Refine the existing QIF v0.2 runtime so applicability selection, extraction interpretation, culture aggregation, governance triggers, and verifier authority are structurally explicit, replayable, and domain-general without expanding into semantic truth claims.",
+  "decision_summary": "The raw request was narrowed into a hardening slice: update current v0.2 artifacts and verifier to make traceability explicit while preserving no-UI, no-external-integration, no-activity-count-as-quality constraints.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What should be made explicit?",
+      "answer": "Split Applicability Rule from Applicability Decision, add Extraction Step, make Governance Trigger first-class, and clarify verifier boundaries.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must not be changed?",
+      "answer": "Do not require Organizational Quality Culture before deriving Quality Intent; do not make verifier claim semantic truth; do not introduce UI or external integration.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A v0.2 verifier may be mistaken for proving quality truth rather than checking traceability and rule compliance."
+  ],
+  "evidence_gaps": [
+    "Semantic validity still requires expert review, reproduction tests, operational feedback, and governance after structural verification."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV02H-001.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV02H-001.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV02H-001.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": ".aof/artifacts/need-validation/project-charters/PCH-QIFV02H-001.json",
+  "discovery_handoff_ref": ".aof/artifacts/discovery/handoffs/DHO-QIFV02H-001.json",
+  "source_task_id": "TASK-004",
+  "source_decision_record_id": "DEC-MQOEEMHC-BE8OF7"
+}

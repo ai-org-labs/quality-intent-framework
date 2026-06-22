@@ -1,0 +1,21 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-21T17:14:37.282Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MQO1FUI2-48HHS2",
+  "status": "completed",
+  "recommendation": "Proceed with governance safeguards.",
+  "rationale": "The framework keeps inferred patterns provisional, requires unseen-case reproduction, rejects surveillance use, and does not equate expert opinion with truth.",
+  "signals": [],
+  "artifact_refs": [
+    "tools/validate-expert-judgment.mjs"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-002",
+  "source_decision_record_id": "DEC-MQO1IM30-0T04IG",
+  "source_parent_session_id": "SESS-MQO1FUI2-48HHS2",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.91
+}

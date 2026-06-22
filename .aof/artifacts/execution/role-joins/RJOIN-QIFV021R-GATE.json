@@ -1,0 +1,28 @@
+{
+  "join_type": "role-join",
+  "recorded_at": "2026-06-22T01:43:42.307Z",
+  "join_id": "RJOIN-MQOJXNTV-H32UBT",
+  "join_status": "resolved",
+  "stage": "review",
+  "expected_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-orchestrator-decision",
+  "blocking_signals": [],
+  "recommended_next_step": "Proceed with verification-gated release execution.",
+  "received_session_ids": [
+    "SESS-MQOJRHLV-HVR0SV"
+  ],
+  "source_task_id": "TASK-007",
+  "source_parent_session_id": "SESS-MQOJRHLV-HVR0SV",
+  "decision_record_ref": ".aof/decisions/DEC-MQOJU639-0K81F5.json",
+  "summary": "Visionary, Builder, and Guardian approved QIF v0.2.1 release execution with verification and no semantic-truth claim constraints."
+}

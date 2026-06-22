@@ -1,0 +1,22 @@
+{
+  "task_id": "TASK-004",
+  "title": "Harden QIF v0.2 runtime model",
+  "description": "Split applicability rules from decisions, add extraction steps, make governance triggers first-class, reposition organizational quality culture, and clarify verifier boundaries.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MQOEEGKQ-WAW3RU",
+  "assigned_session_ids": [
+    "SESS-MQOEEGKQ-WAW3RU"
+  ],
+  "related_decision_record_id": "DEC-MQOEFZU1-ILLA2V",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-06-21T23:09:05.757Z",
+  "updated_at": "2026-06-21T23:23:26.471Z",
+  "assigned_at": null,
+  "done_at": "2026-06-21T23:23:26.471Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "QIF v0.2 hardening delivered and verified with npm test plus AOF council review."
+}

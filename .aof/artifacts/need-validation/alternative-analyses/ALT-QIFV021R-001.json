@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-06-22T01:40:23.195Z",
+  "alternative_analysis_id": "ALT-MQOJTE6Z-VWWJYD",
+  "subject_need": "Publish the accepted QIF v0.2.1 baseline",
+  "alternative_solutions": [
+    "Commit, tag, push, and create a GitHub Release for v0.2.1",
+    "Only tag locally without creating a release"
+  ],
+  "non_solution_options": [
+    "Leave the baseline uncommitted and refer to the working tree"
+  ],
+  "defer_options": [
+    "Wait until v0.3 work is complete before releasing"
+  ],
+  "stop_options": [
+    "Do not release if npm test or AOF checks fail",
+    "Do not release if tag v0.2.1 already exists with different content"
+  ],
+  "source_task_id": "TASK-007",
+  "source_decision_record_id": "DEC-MQOJSHAP-3DA37N"
+}

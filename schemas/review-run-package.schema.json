@@ -1,0 +1,468 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/qif/schemas/review-run-package.schema.json",
+  "title": "QIF Review Run Package",
+  "type": "object",
+  "required": [
+    "packageType",
+    "runtimeVersion",
+    "packageId",
+    "evaluationTargets",
+    "qualityIntents",
+    "decisionPatterns",
+    "applicabilityRules",
+    "applicabilityDecisions",
+    "confidencePolicies",
+    "evidenceItems",
+    "indicators",
+    "governanceTriggers",
+    "governanceEvents",
+    "reviewRuns",
+    "verifierBoundary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "packageType": { "const": "review-run" },
+    "runtimeVersion": { "type": "string" },
+    "packageId": { "type": "string" },
+    "evaluationTargets": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/evaluationTarget" }
+    },
+    "qualityIntents": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/qualityIntent" }
+    },
+    "decisionPatterns": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/decisionPattern" }
+    },
+    "applicabilityRules": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/applicabilityRule" }
+    },
+    "applicabilityDecisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/applicabilityDecision" }
+    },
+    "confidencePolicies": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/confidencePolicy" }
+    },
+    "evidenceItems": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/evidenceItem" }
+    },
+    "indicators": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/indicator" }
+    },
+    "governanceTriggers": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/governanceTrigger" }
+    },
+    "governanceEvents": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/governanceEvent" }
+    },
+    "reviewRuns": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/reviewRun" }
+    },
+    "verifierBoundary": {
+      "$ref": "#/$defs/verifierBoundary"
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]+-[A-Z0-9-]+$"
+    },
+    "refArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" },
+      "minItems": 1
+    },
+    "maybeRefArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" }
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "positiveNumber": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "evaluationTarget": {
+      "type": "object",
+      "required": ["id", "title", "domain", "artifactType", "context", "stakeholderImpact", "operationalImpact"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "domain": { "type": "string" },
+        "artifactType": { "type": "string" },
+        "context": { "type": "string" },
+        "stakeholderImpact": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "operationalImpact": { "type": "string" }
+      }
+    },
+    "qualityIntent": {
+      "type": "object",
+      "required": ["id", "statement", "lossBoundary", "derivationMode", "sourceDecisionPatternRefs"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "statement": { "type": "string" },
+        "lossBoundary": { "type": "string" },
+        "derivationMode": { "enum": ["direct-from-decision-pattern", "culture-informed", "policy-stated"] },
+        "sourceDecisionPatternRefs": { "$ref": "#/$defs/refArray" },
+        "organizationalCultureRef": { "type": "string" }
+      }
+    },
+    "decisionPattern": {
+      "type": "object",
+      "required": ["id", "title", "applicableContext"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "applicableContext": { "type": "string" }
+      }
+    },
+    "applicabilityRule": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "ruleScope",
+        "matchConditions",
+        "selectedIntentRefs",
+        "selectedDecisionPatternRefs",
+        "exclusionConditions"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "ruleScope": { "type": "string" },
+        "matchConditions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/matchCondition" },
+          "minItems": 1
+        },
+        "selectedIntentRefs": { "$ref": "#/$defs/refArray" },
+        "selectedDecisionPatternRefs": { "$ref": "#/$defs/refArray" },
+        "exclusionConditions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/exclusionCondition" }
+        }
+      }
+    },
+    "matchCondition": {
+      "type": "object",
+      "required": ["id", "field", "operator", "expectedValues"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "field": { "enum": ["context", "stakeholderImpact", "risk", "domain", "lossBoundary", "artifactType", "operationalImpact"] },
+        "operator": { "enum": ["equals", "contains-text", "intersects", "includes", "exists"] },
+        "expectedValues": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "exclusionCondition": {
+      "type": "object",
+      "required": ["id", "field", "operator", "expectedValues", "excludedIntentRefs", "excludedDecisionPatternRefs"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "field": { "enum": ["context", "stakeholderImpact", "risk", "domain", "lossBoundary", "artifactType", "operationalImpact"] },
+        "operator": { "enum": ["equals", "contains-text", "intersects", "includes", "exists"] },
+        "expectedValues": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "excludedIntentRefs": { "$ref": "#/$defs/maybeRefArray" },
+        "excludedDecisionPatternRefs": { "$ref": "#/$defs/maybeRefArray" }
+      }
+    },
+    "excludedIntent": {
+      "type": "object",
+      "required": ["intentRef", "ruleRef", "conditionRef", "rationale"],
+      "additionalProperties": false,
+      "properties": {
+        "intentRef": { "$ref": "#/$defs/id" },
+        "ruleRef": { "$ref": "#/$defs/id" },
+        "conditionRef": { "$ref": "#/$defs/id" },
+        "rationale": { "type": "string" }
+      }
+    },
+    "excludedDecisionPattern": {
+      "type": "object",
+      "required": ["decisionPatternRef", "ruleRef", "conditionRef", "rationale"],
+      "additionalProperties": false,
+      "properties": {
+        "decisionPatternRef": { "$ref": "#/$defs/id" },
+        "ruleRef": { "$ref": "#/$defs/id" },
+        "conditionRef": { "$ref": "#/$defs/id" },
+        "rationale": { "type": "string" }
+      }
+    },
+    "applicabilityDecision": {
+      "type": "object",
+      "required": [
+        "id",
+        "targetRef",
+        "ruleRefs",
+        "matchedContext",
+        "matchedStakeholderRefs",
+        "matchedRiskRefs",
+        "matchedDomain",
+        "matchedLossBoundaryRefs",
+        "matchedArtifactTypes",
+        "matchedOperationalImpacts",
+        "selectedIntentRefs",
+        "selectedDecisionPatternRefs",
+        "matchedConditionRefs",
+        "excludedIntents",
+        "excludedDecisionPatterns",
+        "selectionRationale",
+        "contextMismatches",
+        "confidence"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "targetRef": { "$ref": "#/$defs/id" },
+        "ruleRefs": { "$ref": "#/$defs/refArray" },
+        "matchedContext": { "type": "string" },
+        "matchedStakeholderRefs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "matchedRiskRefs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "matchedDomain": { "type": "string" },
+        "matchedLossBoundaryRefs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "matchedArtifactTypes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "matchedOperationalImpacts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "selectedIntentRefs": { "$ref": "#/$defs/refArray" },
+        "selectedDecisionPatternRefs": { "$ref": "#/$defs/refArray" },
+        "matchedConditionRefs": { "$ref": "#/$defs/refArray" },
+        "excludedIntents": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/excludedIntent" }
+        },
+        "excludedDecisionPatterns": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/excludedDecisionPattern" }
+        },
+        "selectionRationale": { "type": "string" },
+        "contextMismatches": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "confidence": { "$ref": "#/$defs/score" }
+      }
+    },
+    "confidencePolicy": {
+      "type": "object",
+      "required": ["id", "evidenceAggregationRule", "verdictAggregationRule", "reviewRunAggregationRule", "rounding"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "evidenceAggregationRule": { "enum": ["minimum-evidence-confidence", "weighted-average"] },
+        "verdictAggregationRule": { "enum": ["minimum-evidence-confidence", "weighted-average"] },
+        "reviewRunAggregationRule": { "enum": ["average-verdict-confidence", "minimum-verdict-confidence"] },
+        "rounding": { "enum": ["nearest-0.01"] }
+      }
+    },
+    "evidenceItem": {
+      "type": "object",
+      "required": ["id", "targetRef", "finding", "polarity", "confidence", "weight"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "targetRef": { "$ref": "#/$defs/id" },
+        "finding": { "type": "string" },
+        "polarity": { "enum": ["supports", "contradicts", "mixed"] },
+        "confidence": { "$ref": "#/$defs/score" },
+        "weight": { "$ref": "#/$defs/positiveNumber" }
+      }
+    },
+    "indicator": {
+      "type": "object",
+      "required": ["id", "name", "metricKind", "interpretation", "linkedIntentRef"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "metricKind": { "enum": ["activity-count", "outcome", "risk-signal", "experience-signal", "control-signal"] },
+        "interpretation": { "enum": ["evidence-only", "quality-itself"] },
+        "linkedIntentRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "verdict": {
+      "type": "object",
+      "required": ["intentRef", "decision", "confidence", "confidencePolicyRef", "evidenceRefs", "weight", "residualRisk"],
+      "additionalProperties": false,
+      "properties": {
+        "intentRef": { "$ref": "#/$defs/id" },
+        "decision": { "enum": ["achieved", "partially-achieved", "not-achieved", "inconclusive", "waived"] },
+        "confidence": { "$ref": "#/$defs/score" },
+        "confidencePolicyRef": { "$ref": "#/$defs/id" },
+        "evidenceRefs": { "$ref": "#/$defs/refArray" },
+        "weight": { "$ref": "#/$defs/positiveNumber" },
+        "residualRisk": { "type": "string" }
+      }
+    },
+    "governanceTrigger": {
+      "type": "object",
+      "required": [
+        "id",
+        "triggerType",
+        "reason",
+        "sourceReviewRunRef",
+        "affectedTargetRef",
+        "severity",
+        "requiredAction",
+        "owner",
+        "status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "triggerType": { "enum": ["low-confidence", "conflicting-evidence", "context-mismatch", "waiver-needed", "indicator-misuse", "other"] },
+        "reason": { "type": "string" },
+        "sourceReviewRunRef": { "$ref": "#/$defs/id" },
+        "affectedTargetRef": { "$ref": "#/$defs/id" },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "requiredAction": { "type": "string" },
+        "owner": { "type": "string" },
+        "status": { "enum": ["open", "reviewed", "resolved"] },
+        "resultingGovernanceEventRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "governanceEvent": {
+      "type": "object",
+      "required": ["id", "sourceGovernanceTriggerRef", "decision", "decidedBy", "decisionRationale", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sourceGovernanceTriggerRef": { "$ref": "#/$defs/id" },
+        "decision": { "enum": ["accept-risk", "require-change", "waive-with-conditions", "reject", "defer"] },
+        "decidedBy": { "type": "string" },
+        "decisionRationale": { "type": "string" },
+        "status": { "enum": ["recorded", "implemented", "superseded"] }
+      }
+    },
+    "reviewRun": {
+      "type": "object",
+      "required": [
+        "id",
+        "targetRef",
+        "applicabilityRuleRefs",
+        "applicabilityDecisionRefs",
+        "selectedIntentRefs",
+        "selectedDecisionPatternRefs",
+        "collectedEvidenceRefs",
+        "confidence",
+        "confidencePolicyRef",
+        "verdicts",
+        "residualRisks",
+        "recommendations",
+        "governanceTriggerRefs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "targetRef": { "$ref": "#/$defs/id" },
+        "applicabilityRuleRefs": { "$ref": "#/$defs/refArray" },
+        "applicabilityDecisionRefs": { "$ref": "#/$defs/refArray" },
+        "selectedIntentRefs": { "$ref": "#/$defs/refArray" },
+        "selectedDecisionPatternRefs": { "$ref": "#/$defs/refArray" },
+        "collectedEvidenceRefs": { "$ref": "#/$defs/refArray" },
+        "confidence": { "$ref": "#/$defs/score" },
+        "confidencePolicyRef": { "$ref": "#/$defs/id" },
+        "verdicts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/verdict" },
+          "minItems": 1
+        },
+        "residualRisks": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "recommendations": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "governanceTriggerRefs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" }
+        }
+      }
+    },
+    "verifierBoundary": {
+      "type": "object",
+      "required": ["checks", "doesNotClaim", "semanticValidityRequires"],
+      "additionalProperties": false,
+      "properties": {
+        "checks": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "doesNotClaim": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "semanticValidityRequires": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

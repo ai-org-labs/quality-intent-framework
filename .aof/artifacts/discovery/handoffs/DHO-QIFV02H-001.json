@@ -1,0 +1,27 @@
+{
+  "packet_type": "discovery-to-delivery-handoff",
+  "recorded_at": "2026-06-21T23:09:30.966Z",
+  "handoff_id": "DHO-MQOEFDG6-DE2344",
+  "selected_need": "Harden QIF v0.2 runtime model while preserving v0.2 executability",
+  "intended_user_or_segment": "QIF framework maintainers, organizational quality reviewers, auditors, and AI review agents",
+  "context_summary": "Existing v0.2 runtime already has discovery, culture, target, review-run packages and local validation; hardening must refine conceptual boundaries and traceability.",
+  "hypothesis": "Separating reusable selection logic from target-specific decisions and adding extraction/governance entities will make QIF review packages more replayable and auditable.",
+  "evidence_refs": [
+    "docs/qif-v0.2-discovery-application-runtime.md",
+    "examples/review-run-package.json"
+  ],
+  "rejected_alternatives": [
+    "Do not make Organizational Quality Culture a mandatory prerequisite for Quality Intent derivation."
+  ],
+  "explicit_risks": [
+    "Over-hardening could create checklist-only bureaucracy; verifier must remain structural and not semantic."
+  ],
+  "delivery_validation_requirements": [
+    "Run npm test and AOF review artifacts after updating docs, schemas, examples, verifier, changelog, and runtime log."
+  ],
+  "need": "Refine QIF v0.2 runtime ambiguity points without expanding scope.",
+  "intent": "Produce an auditable model where extraction, applicability, verdict, and governance reasoning can be replayed.",
+  "context": "Domain-general runtime; no UI; no external integration; no quality-as-activity-count; no expert-opinion-as-truth.",
+  "source_task_id": "TASK-004",
+  "source_decision_record_id": "DEC-MQOEEMHC-BE8OF7"
+}

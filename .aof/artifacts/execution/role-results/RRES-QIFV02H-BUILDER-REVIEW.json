@@ -1,0 +1,25 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-21T23:21:41.488Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-MQOEEGKQ-WAW3RU",
+  "status": "completed",
+  "recommendation": "approve",
+  "rationale": "Schemas, examples, documentation, verifier, changelog, and runtime evidence were updated; npm test passes.",
+  "signals": [
+    "implementation-complete"
+  ],
+  "artifact_refs": [
+    "schemas/discovery-session-package.schema.json",
+    "schemas/review-run-package.schema.json",
+    "tools/validate-qif-runtime.mjs"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-004",
+  "source_decision_record_id": "DEC-MQOEFZU1-ILLA2V",
+  "source_parent_session_id": "SESS-MQOEEGKQ-WAW3RU",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.92
+}

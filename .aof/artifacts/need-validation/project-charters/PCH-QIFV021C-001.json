@@ -1,0 +1,25 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-06-22T01:18:18.019Z",
+  "project_charter_id": "PCH-MQOJ0ZOJ-U4G6NZ",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV021C-001.json",
+  "validated_objective": "Produce a QIF v0.2.1 consolidation review that makes the model coherent, executable, explainable, and ready or not-ready for v0.3 pilot judgment.",
+  "scope": [
+    "Create consolidated concept map and entity responsibility matrix.",
+    "Review runtime flow integrity and schema/docs/example/verifier alignment.",
+    "Clarify verifier boundaries and package architecture recommendation.",
+    "Assess naming and v0.3 pilot readiness, then list v0.2.2 cleanup tasks."
+  ],
+  "constraints": [
+    "Do not redesign QIF from scratch.",
+    "Do not add UI, external integrations, software-specific assumptions, or business discovery expansion.",
+    "Do not claim verifier success means semantic quality truth."
+  ],
+  "expected_outcomes": [
+    "A committed-ready consolidation review document in docs.",
+    "Passing npm test after documentation changes.",
+    "AOF council review and retrospective evidence recorded."
+  ],
+  "source_task_id": "TASK-006",
+  "source_decision_record_id": "DEC-MQOIZQEP-G0ZH5M"
+}

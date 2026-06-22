@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-003",
+  "title": "Build QIF v0.2 discovery and application runtime",
+  "description": "Extend QIF with discovery sessions, organizational quality culture aggregation, evaluation targets, applicability rules, and review runs with verifier support.",
+  "status": "done",
+  "origin": null,
+  "orchestrator_session_id": null,
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MQODJNGU-7MLA9J",
+  "operating_goal_ref": null,
+  "created_at": "2026-06-21T22:43:45.665Z",
+  "updated_at": "2026-06-21T22:51:30.065Z",
+  "assigned_at": null,
+  "done_at": "2026-06-21T22:51:30.065Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Completed QIF v0.2 runtime baseline with schemas, examples, verifier, changelog, and review evidence."
+}

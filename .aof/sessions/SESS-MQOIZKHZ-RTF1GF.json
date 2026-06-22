@@ -1,0 +1,501 @@
+{
+  "session_id": "SESS-MQOIZKHZ-RTF1GF",
+  "workflow_id": "service-design",
+  "organization_id": "civic-studio",
+  "organization": {
+    "language": "en"
+  },
+  "status": "framed",
+  "trigger": {
+    "trigger_id": "TRG-MQOIZKHZ-NS4Q9A",
+    "trigger_type": "cli",
+    "received_at": "2026-06-22T01:17:11.685Z",
+    "request_payload": "Review and consolidate QIF v0.2.1 after schema and verifier hardening; produce concept, responsibility, flow, alignment, verifier boundary, package architecture, naming, pilot readiness, and v0.2.2 cleanup recommendations without redesign or feature expansion."
+  },
+  "current_stage": "planning",
+  "routing_mode": "deep-path",
+  "routing_mode_history": [
+    {
+      "from_mode": null,
+      "to_mode": "deep-path",
+      "at": "2026-06-22T01:17:11.685Z",
+      "reason": "session-created"
+    }
+  ],
+  "context_snapshot_id": "CTX-MQOIZQEM-PBFONX",
+  "open_decision_ids": [
+    "DEC-MQOJ17R5-Z672G0"
+  ],
+  "closed_decision_ids": [
+    "DEC-MQOIZKI4-ZXKXZA",
+    "DEC-MQOIZQEP-G0ZH5M"
+  ],
+  "stage_transitions": [
+    {
+      "from_stage": null,
+      "to_stage": "clarification",
+      "from_status": null,
+      "to_status": "waiting_user",
+      "at": "2026-06-22T01:17:11.685Z",
+      "reason": "session-created"
+    },
+    {
+      "from_stage": "clarification",
+      "to_stage": "need-validation",
+      "from_status": "waiting_user",
+      "to_status": "framed",
+      "at": "2026-06-22T01:17:19.342Z",
+      "reason": "clarification-complete"
+    },
+    {
+      "from_stage": "need-validation",
+      "to_stage": "planning",
+      "from_status": "framed",
+      "to_status": "framed",
+      "at": "2026-06-22T01:18:28.483Z",
+      "reason": "need-validation-approved"
+    }
+  ],
+  "reopen_count": 0,
+  "outcome_reports": [
+    {
+      "report_id": "OUT-MQOJ8C70-A4T0C5",
+      "result": "success",
+      "observed_at": "2026-06-22T01:24:00.828Z",
+      "note": "QIF v0.2.1 consolidation review completed: concept map, responsibility matrix, runtime flow review, alignment report, verifier boundary matrix, package architecture recommendation, naming list, v0.3 pilot readiness, and v0.2.2 cleanup tasks are documented.",
+      "signal_ref": "TASK-006"
+    }
+  ],
+  "clarification": {
+    "round_count": 1,
+    "dimensions": {
+      "need_clarity": "partial",
+      "intent_clarity": "partial",
+      "context_completeness": "missing",
+      "success_criteria_clarity": "missing",
+      "prohibited_conditions_clarity": "partial",
+      "governance_scope_clarity": "clear",
+      "brownfield_orientation_completeness": "clear",
+      "risk_exposure": "partial"
+    },
+    "gaps": [
+      {
+        "dimension": "need_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The underlying need is not specific enough yet."
+      },
+      {
+        "dimension": "intent_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The intended direction is not yet explicit."
+      },
+      {
+        "dimension": "context_completeness",
+        "status": "missing",
+        "trigger_class": "missing-constraint",
+        "summary": "Key constraints, scope, and current conditions are missing."
+      },
+      {
+        "dimension": "success_criteria_clarity",
+        "status": "missing",
+        "trigger_class": "missing-success-criteria",
+        "summary": "Success cannot be evaluated yet."
+      },
+      {
+        "dimension": "prohibited_conditions_clarity",
+        "status": "partial",
+        "trigger_class": "missing-prohibition",
+        "summary": "Forbidden changes or non-negotiables are not explicit."
+      }
+    ],
+    "pending_questions": [],
+    "asked_questions": [
+      "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "How should improvement success be judged: which metric or end state matters most?"
+    ],
+    "question_rationale": [],
+    "trigger_classes": [],
+    "target_fields": [],
+    "user_answers": [
+      {
+        "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+        "answer": "Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth.",
+        "target_fields": [
+          "need",
+          "context"
+        ]
+      },
+      {
+        "question": "How should improvement success be judged: which metric or end state matters most?",
+        "answer": "Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands.",
+        "target_fields": [
+          "success_criteria",
+          "intent"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "ask_or_assume_decision": "ask",
+    "remaining_gaps": [],
+    "unresolved_ambiguity": [],
+    "question_budget": {
+      "initial_question_budget": 2,
+      "followup_budget": 1,
+      "max_rounds": 2
+    },
+    "next_stop_condition": "need validation can proceed",
+    "clarification_summary": "runtime captured first-round clarification answers and can proceed to need validation",
+    "should_wait_for_user": false
+  },
+  "created_at": "2026-06-22T01:17:11.685Z",
+  "updated_at": "2026-06-22T01:24:00.828Z",
+  "framing": {
+    "request": "Review and consolidate QIF v0.2.1 after schema and verifier hardening; produce concept, responsibility, flow, alignment, verifier boundary, package architecture, naming, pilot readiness, and v0.2.2 cleanup recommendations without redesign or feature expansion.",
+    "need": "Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth.",
+    "intent": "Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands.",
+    "active_context": "context: Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth. | success: Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands.",
+    "success_criteria": "Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands.",
+    "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth. / How should improvement success be judged: which metric or end state matters most? => Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands."
+  },
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV021C-001.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV021C-001.json",
+    ".aof/artifacts/need-validation/problem-statements/PST-QIFV021C-001.json",
+    ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV021C-001.json",
+    ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV021C-001.json",
+    ".aof/artifacts/discovery/handoffs/DHO-QIFV021C-001.json"
+  ],
+  "council_execution_runs": [
+    {
+      "execution_id": "CRUN-MQOJ1CSF-RHE790",
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "status": "prepared",
+      "started_at": "2026-06-22T01:18:35.007Z",
+      "completed_at": "2026-06-22T01:18:35.007Z",
+      "summary": "prototype council execution prepared 2 seat calls in single-instance-role-switching: Builder -> Visionary",
+      "steps": [
+        {
+          "step_id": "CRUN-MQOJ1CSF-RHE790-STEP-01",
+          "role": "Builder",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Builder planning call as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOIZKHZ-RTF1GF",
+              "decision_id": "DEC-MQOJ17R5-Z672G0",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth.",
+              "intent": "Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands.",
+              "active_context": "context: Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth. | success: Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands.",
+              "context_snapshot_id": "CTX-MQOIZQEM-PBFONX",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth. / How should improvement success be judged: which metric or end state matters most? => Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands."
+            },
+            "task": {
+              "request": "Review and consolidate QIF v0.2.1 after schema and verifier hardening; produce concept, responsibility, flow, alignment, verifier boundary, package architecture, naming, pilot readiness, and v0.2.2 cleanup recommendations without redesign or feature expansion.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV021C-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV021C-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOJ17R5-Z672G0"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MQOJ1CSF-RHE790-STEP-02",
+          "role": "Visionary",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Visionary planning call as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOIZKHZ-RTF1GF",
+              "decision_id": "DEC-MQOJ17R5-Z672G0",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth.",
+              "intent": "Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands.",
+              "active_context": "context: Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth. | success: Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands.",
+              "context_snapshot_id": "CTX-MQOIZQEM-PBFONX",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth. / How should improvement success be judged: which metric or end state matters most? => Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands."
+            },
+            "task": {
+              "request": "Review and consolidate QIF v0.2.1 after schema and verifier hardening; produce concept, responsibility, flow, alignment, verifier boundary, package architecture, naming, pilot readiness, and v0.2.2 cleanup recommendations without redesign or feature expansion.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV021C-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV021C-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOJ17R5-Z672G0"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "execution_id": "CRUN-MQOJ6SLO-QL8OLL",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "prepared",
+      "started_at": "2026-06-22T01:22:48.779Z",
+      "completed_at": "2026-06-22T01:22:48.779Z",
+      "summary": "prototype council execution prepared 3 seat calls in single-instance-role-switching: Guardian -> Visionary -> Builder",
+      "steps": [
+        {
+          "step_id": "CRUN-MQOJ6SLO-QL8OLL-STEP-01",
+          "role": "Guardian",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Guardian review call as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOIZKHZ-RTF1GF",
+              "decision_id": "DEC-MQOJ17R5-Z672G0",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth.",
+              "intent": "Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands.",
+              "active_context": "context: Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth. | success: Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands.",
+              "context_snapshot_id": "CTX-MQOIZQEM-PBFONX",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth. / How should improvement success be judged: which metric or end state matters most? => Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands."
+            },
+            "task": {
+              "request": "Review and consolidate QIF v0.2.1 after schema and verifier hardening; produce concept, responsibility, flow, alignment, verifier boundary, package architecture, naming, pilot readiness, and v0.2.2 cleanup recommendations without redesign or feature expansion.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV021C-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV021C-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOJ17R5-Z672G0"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MQOJ6SLO-QL8OLL-STEP-02",
+          "role": "Visionary",
+          "participation_mode": "optional",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Visionary review call as optional",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOIZKHZ-RTF1GF",
+              "decision_id": "DEC-MQOJ17R5-Z672G0",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth.",
+              "intent": "Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands.",
+              "active_context": "context: Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth. | success: Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands.",
+              "context_snapshot_id": "CTX-MQOIZQEM-PBFONX",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth. / How should improvement success be judged: which metric or end state matters most? => Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands."
+            },
+            "task": {
+              "request": "Review and consolidate QIF v0.2.1 after schema and verifier hardening; produce concept, responsibility, flow, alignment, verifier boundary, package architecture, naming, pilot readiness, and v0.2.2 cleanup recommendations without redesign or feature expansion.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV021C-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV021C-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOJ17R5-Z672G0"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MQOJ6SLO-QL8OLL-STEP-03",
+          "role": "Builder",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Builder review call as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOIZKHZ-RTF1GF",
+              "decision_id": "DEC-MQOJ17R5-Z672G0",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth.",
+              "intent": "Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands.",
+              "active_context": "context: Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth. | success: Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands.",
+              "context_snapshot_id": "CTX-MQOIZQEM-PBFONX",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: review the existing QIF v0.2.1 repository artifacts only: docs, schemas, examples, local verifiers, npm test behavior, changelog, and AOF runtime evidence. Stay out of scope: redesign from scratch, UI, external integrations, software-development specialization, business discovery expansion, and any claim that verifier success proves semantic quality truth. / How should improvement success be judged: which metric or end state matters most? => Success: produce a consolidation review document covering concept map, entity responsibility matrix, runtime flow review, schema/docs/example/verifier alignment, verifier boundary matrix, package architecture recommendation, naming improvement list, v0.3 pilot readiness assessment, and v0.2.2 cleanup tasks; run npm test and AOF review/self-review/retrospective commands."
+            },
+            "task": {
+              "request": "Review and consolidate QIF v0.2.1 after schema and verifier hardening; produce concept, responsibility, flow, alignment, verifier boundary, package architecture, naming, pilot readiness, and v0.2.2 cleanup recommendations without redesign or feature expansion.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV021C-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV021C-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV021C-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOJ17R5-Z672G0"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "last_council_execution_id": "CRUN-MQOJ6SLO-QL8OLL"
+}

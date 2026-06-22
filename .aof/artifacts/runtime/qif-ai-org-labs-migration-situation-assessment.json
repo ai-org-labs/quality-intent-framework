@@ -1,0 +1,24 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-06-22T15:03:07.884Z",
+  "project_root": "<local-project-root>",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "Publish the accepted QIF v0.2.1 runtime, schema, verifier, example, documentation, consolidation review, and AOF evidence as an immutable committed tag and GitHub Release.",
+  "next_value_slice": "After v0.2.1 release, open v0.2.2 cleanup for canonical entity cores, package composition, cross-package lineage, and negative verifier fixtures.",
+  "current_runtime_stage": "frontier-definition-needed",
+  "primary_frontier_task": null,
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Open an implementation task for the current frontier: After v0.2.1 release, open v0.2.2 cleanup for canonical entity cores, package composition, cross-package lineage, and negative verifier fixtures.",
+    "prioritized_task_ids": [],
+    "scale_direction": "Define or reconcile the next frontier before expanding execution."
+  },
+  "recommended_action": {
+    "recommended_action": "Open an implementation task for the current frontier: After v0.2.1 release, open v0.2.2 cleanup for canonical entity cores, package composition, cross-package lineage, and negative verifier fixtures.",
+    "rationale": "No current open implementation task is aligned to the current operating goal.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-06-21T17:14:37.302Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MQO1FUI2-48HHS2",
+    "stage": "review",
+    "executionId": "CRUN-MQO1QZ5E-GJ93LL",
+    "executionStatus": "prepared",
+    "invokedModel": false,
+    "seatCount": 2,
+    "summary": "prototype council execution prepared 2 seat calls in single-instance-role-switching: Guardian -> Builder",
+    "lastCouncilExecutionId": "CRUN-MQO1QZ5E-GJ93LL",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "seats": [
+        {
+          "role": "Guardian",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQO1FUI2-48HHS2",
+              "decision_id": "DEC-MQO1IM30-0T04IG",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: define a domain-general expert judgment framework that extracts tacit judgments from concrete cases, review history, and multi-expert practice, then turns them into reproducible decision patterns, quality intent derivations, and governance artifacts. Out of scope: employee surveillance, blame assignment, generic advice capture, checklist-only reduction, and treating activity counts as quality itself.",
+              "intent": "Success: a non-expert human or AI agent can apply extracted decision patterns to unseen cases with acceptable agreement, explicit cues, concerns, loss boundaries, applicability limits, evidence needs, counterexamples, and governance-based revision.",
+              "active_context": "context: Scope: define a domain-general expert judgment framework that extracts tacit judgments from concrete cases, review history, and multi-expert practice, then turns them into reproducible decision patterns, quality intent derivations, and governance artifacts. Out of scope: employee surveillance, blame assignment, generic advice capture, checklist-only reduction, and treating activity counts as quality itself. | success: Success: a non-expert human or AI agent can apply extracted decision patterns to unseen cases with acceptable agreement, explicit cues, concerns, loss boundaries, applicability limits, evidence needs, counterexamples, and governance-based revision.",
+              "context_snapshot_id": "CTX-MQO1G6WS-X0R8SP",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: define a domain-general expert judgment framework that extracts tacit judgments from concrete cases, review history, and multi-expert practice, then turns them into reproducible decision patterns, quality intent derivations, and governance artifacts. Out of scope: employee surveillance, blame assignment, generic advice capture, checklist-only reduction, and treating activity counts as quality itself. / How should improvement success be judged: which metric or end state matters most? => Success: a non-expert human or AI agent can apply extracted decision patterns to unseen cases with acceptable agreement, explicit cues, concerns, loss boundaries, applicability limits, evidence needs, counterexamples, and governance-based revision."
+            },
+            "task": {
+              "request": "Transform tacit expert judgments into reproducible decision patterns and quality intent derivations that humans and AI can apply to new cases",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-EJF-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-EJF-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-EJF-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-EJF-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-EJF-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-EJF-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQO1IM30-0T04IG"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQO1FUI2-48HHS2",
+              "decision_id": "DEC-MQO1IM30-0T04IG",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: define a domain-general expert judgment framework that extracts tacit judgments from concrete cases, review history, and multi-expert practice, then turns them into reproducible decision patterns, quality intent derivations, and governance artifacts. Out of scope: employee surveillance, blame assignment, generic advice capture, checklist-only reduction, and treating activity counts as quality itself.",
+              "intent": "Success: a non-expert human or AI agent can apply extracted decision patterns to unseen cases with acceptable agreement, explicit cues, concerns, loss boundaries, applicability limits, evidence needs, counterexamples, and governance-based revision.",
+              "active_context": "context: Scope: define a domain-general expert judgment framework that extracts tacit judgments from concrete cases, review history, and multi-expert practice, then turns them into reproducible decision patterns, quality intent derivations, and governance artifacts. Out of scope: employee surveillance, blame assignment, generic advice capture, checklist-only reduction, and treating activity counts as quality itself. | success: Success: a non-expert human or AI agent can apply extracted decision patterns to unseen cases with acceptable agreement, explicit cues, concerns, loss boundaries, applicability limits, evidence needs, counterexamples, and governance-based revision.",
+              "context_snapshot_id": "CTX-MQO1G6WS-X0R8SP",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: define a domain-general expert judgment framework that extracts tacit judgments from concrete cases, review history, and multi-expert practice, then turns them into reproducible decision patterns, quality intent derivations, and governance artifacts. Out of scope: employee surveillance, blame assignment, generic advice capture, checklist-only reduction, and treating activity counts as quality itself. / How should improvement success be judged: which metric or end state matters most? => Success: a non-expert human or AI agent can apply extracted decision patterns to unseen cases with acceptable agreement, explicit cues, concerns, loss boundaries, applicability limits, evidence needs, counterexamples, and governance-based revision."
+            },
+            "task": {
+              "request": "Transform tacit expert judgments into reproducible decision patterns and quality intent derivations that humans and AI can apply to new cases",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-EJF-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-EJF-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-EJF-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-EJF-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-EJF-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-EJF-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQO1IM30-0T04IG"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MQO1QZ5E-GJ93LL",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "prepared",
+      "started_at": "2026-06-21T17:14:37.296Z",
+      "completed_at": "2026-06-21T17:14:37.296Z",
+      "summary": "prototype council execution prepared 2 seat calls in single-instance-role-switching: Guardian -> Builder",
+      "steps": [
+        {
+          "step_id": "CRUN-MQO1QZ5E-GJ93LL-STEP-01",
+          "role": "Guardian",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Guardian review call as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQO1FUI2-48HHS2",
+              "decision_id": "DEC-MQO1IM30-0T04IG",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: define a domain-general expert judgment framework that extracts tacit judgments from concrete cases, review history, and multi-expert practice, then turns them into reproducible decision patterns, quality intent derivations, and governance artifacts. Out of scope: employee surveillance, blame assignment, generic advice capture, checklist-only reduction, and treating activity counts as quality itself.",
+              "intent": "Success: a non-expert human or AI agent can apply extracted decision patterns to unseen cases with acceptable agreement, explicit cues, concerns, loss boundaries, applicability limits, evidence needs, counterexamples, and governance-based revision.",
+              "active_context": "context: Scope: define a domain-general expert judgment framework that extracts tacit judgments from concrete cases, review history, and multi-expert practice, then turns them into reproducible decision patterns, quality intent derivations, and governance artifacts. Out of scope: employee surveillance, blame assignment, generic advice capture, checklist-only reduction, and treating activity counts as quality itself. | success: Success: a non-expert human or AI agent can apply extracted decision patterns to unseen cases with acceptable agreement, explicit cues, concerns, loss boundaries, applicability limits, evidence needs, counterexamples, and governance-based revision.",
+              "context_snapshot_id": "CTX-MQO1G6WS-X0R8SP",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: define a domain-general expert judgment framework that extracts tacit judgments from concrete cases, review history, and multi-expert practice, then turns them into reproducible decision patterns, quality intent derivations, and governance artifacts. Out of scope: employee surveillance, blame assignment, generic advice capture, checklist-only reduction, and treating activity counts as quality itself. / How should improvement success be judged: which metric or end state matters most? => Success: a non-expert human or AI agent can apply extracted decision patterns to unseen cases with acceptable agreement, explicit cues, concerns, loss boundaries, applicability limits, evidence needs, counterexamples, and governance-based revision."
+            },
+            "task": {
+              "request": "Transform tacit expert judgments into reproducible decision patterns and quality intent derivations that humans and AI can apply to new cases",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-EJF-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-EJF-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-EJF-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-EJF-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-EJF-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-EJF-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQO1IM30-0T04IG"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MQO1QZ5E-GJ93LL-STEP-02",
+          "role": "Builder",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Builder review call as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQO1FUI2-48HHS2",
+              "decision_id": "DEC-MQO1IM30-0T04IG",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: define a domain-general expert judgment framework that extracts tacit judgments from concrete cases, review history, and multi-expert practice, then turns them into reproducible decision patterns, quality intent derivations, and governance artifacts. Out of scope: employee surveillance, blame assignment, generic advice capture, checklist-only reduction, and treating activity counts as quality itself.",
+              "intent": "Success: a non-expert human or AI agent can apply extracted decision patterns to unseen cases with acceptable agreement, explicit cues, concerns, loss boundaries, applicability limits, evidence needs, counterexamples, and governance-based revision.",
+              "active_context": "context: Scope: define a domain-general expert judgment framework that extracts tacit judgments from concrete cases, review history, and multi-expert practice, then turns them into reproducible decision patterns, quality intent derivations, and governance artifacts. Out of scope: employee surveillance, blame assignment, generic advice capture, checklist-only reduction, and treating activity counts as quality itself. | success: Success: a non-expert human or AI agent can apply extracted decision patterns to unseen cases with acceptable agreement, explicit cues, concerns, loss boundaries, applicability limits, evidence needs, counterexamples, and governance-based revision.",
+              "context_snapshot_id": "CTX-MQO1G6WS-X0R8SP",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: define a domain-general expert judgment framework that extracts tacit judgments from concrete cases, review history, and multi-expert practice, then turns them into reproducible decision patterns, quality intent derivations, and governance artifacts. Out of scope: employee surveillance, blame assignment, generic advice capture, checklist-only reduction, and treating activity counts as quality itself. / How should improvement success be judged: which metric or end state matters most? => Success: a non-expert human or AI agent can apply extracted decision patterns to unseen cases with acceptable agreement, explicit cues, concerns, loss boundaries, applicability limits, evidence needs, counterexamples, and governance-based revision."
+            },
+            "task": {
+              "request": "Transform tacit expert judgments into reproducible decision patterns and quality intent derivations that humans and AI can apply to new cases",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-EJF-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-EJF-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-EJF-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-EJF-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-EJF-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-EJF-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQO1IM30-0T04IG"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

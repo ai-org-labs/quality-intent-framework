@@ -1,0 +1,74 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-06-22T15:05:27.684Z",
+  "packet_id": "ASP-MQPCKQ6C-W44SPX",
+  "source_task_id": "TASK-008",
+  "source_parent_session_id": "SESS-MQPCHTJC-94FWQ8",
+  "source_decision_record_id": "DEC-MQPCJQQL-YWG68R",
+  "objective": "Publish QIF to AI Org Labs with sanitized clean history",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "Builder",
+    "team_ref": "migration-council",
+    "assignment_reason": "Builder executes file sanitization, verification, clean-history commit, remote update, and new repository push.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "skill-git-clean-history-publication",
+    "skill-privacy-scan",
+    "skill-aof-runtime-discipline"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-privacy-preserving-migration",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "docs/aof-runtime-log.md",
+        ".aof/artifacts/need-validation/records/NVR-QIFMIG-001.json"
+      ],
+      "rationale": "The migration has a validated clean-history need and a concrete tracked-file scan target."
+    }
+  ],
+  "resource_refs": [
+    "resource-ai-org-labs-publication"
+  ],
+  "policy_refs": [
+    "policy-identity-sanitized-publication"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "sanitized-repository-publication",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "identifier scan, clean commit, remote update, push result"
+    ],
+    "acceptance_criteria": [
+      "Tracked files have no legacy identifiers and new remote history has no legacy author metadata."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "privacy-preserving publication",
+      "evaluator_ref": "Guardian",
+      "evidence_required": "identifier scan, git log of new history, remote URL, push output",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "legacy-identifier-found",
+      "trigger_condition": "scan finds legacy personal identifier before push",
+      "consequence": "block-assignment",
+      "recovery_action": "remove identifier and rerun scan"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will publish only the sanitized clean history.",
+    "current_action": "Prepare migration execution",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run execution gate and clean-history migration"
+  },
+  "status": "ready-for-assignment"
+}

@@ -1,0 +1,34 @@
+{
+  "packet_type": "team-output",
+  "recorded_at": "2026-06-22T01:23:19.482Z",
+  "team_output_id": "TOUT-MQOJ7GAI-XQ53M0",
+  "team_id": "qif-v021-consolidation-review",
+  "stage": "review",
+  "expected_roles": [
+    "Guardian",
+    "Visionary",
+    "Builder"
+  ],
+  "received_roles": [
+    "Guardian",
+    "Visionary",
+    "Builder"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-council-review",
+  "blocking_signals": [],
+  "recommended_next_step": "Record approved council packet and close TASK-006 after verification.",
+  "joined_role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV021C-GUARDIAN-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV021C-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV021C-BUILDER-REVIEW.json"
+  ],
+  "artifact_refs": [
+    "docs/qif-v0.2.1-consolidation-review.md"
+  ],
+  "decision_required": false,
+  "summary": "Consolidation review deliverables are complete; v0.3 pilot readiness is conditional on v0.2.2 cleanup.",
+  "source_task_id": "TASK-006",
+  "source_parent_session_id": "SESS-MQOIZKHZ-RTF1GF",
+  "source_decision_record_id": "DEC-MQOJ17R5-Z672G0"
+}

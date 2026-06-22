@@ -1,0 +1,501 @@
+{
+  "session_id": "SESS-MQOI0C6D-VHA2NY",
+  "workflow_id": "service-design",
+  "organization_id": "civic-studio",
+  "organization": {
+    "language": "en"
+  },
+  "status": "framed",
+  "trigger": {
+    "trigger_id": "TRG-MQOI0C6D-R4R3PT",
+    "trigger_type": "cli",
+    "received_at": "2026-06-22T00:49:47.941Z",
+    "request_payload": "Implement QIF v0.2.1 hardening for schema implementation and verifier execution: first-class Raw Expert Answer and Question Log Entry, derivation-record Quality Intent Derivation, executable Applicability Rules, confidence policy reproducibility, Governance Trigger to Governance Event linkage, and context-only Organizational Quality Culture without redesigning the accepted v0.2 baseline."
+  },
+  "current_stage": "planning",
+  "routing_mode": "deep-path",
+  "routing_mode_history": [
+    {
+      "from_mode": null,
+      "to_mode": "deep-path",
+      "at": "2026-06-22T00:49:47.941Z",
+      "reason": "session-created"
+    }
+  ],
+  "context_snapshot_id": "CTX-MQOI0IRS-0J7S62",
+  "open_decision_ids": [
+    "DEC-MQOI1YGW-FW25BE"
+  ],
+  "closed_decision_ids": [
+    "DEC-MQOI0C6F-5H81QD",
+    "DEC-MQOI0IS3-TAT1PA"
+  ],
+  "stage_transitions": [
+    {
+      "from_stage": null,
+      "to_stage": "clarification",
+      "from_status": null,
+      "to_status": "waiting_user",
+      "at": "2026-06-22T00:49:47.941Z",
+      "reason": "session-created"
+    },
+    {
+      "from_stage": "clarification",
+      "to_stage": "need-validation",
+      "from_status": "waiting_user",
+      "to_status": "framed",
+      "at": "2026-06-22T00:49:56.487Z",
+      "reason": "clarification-complete"
+    },
+    {
+      "from_stage": "need-validation",
+      "to_stage": "planning",
+      "from_status": "framed",
+      "to_status": "framed",
+      "at": "2026-06-22T00:51:03.490Z",
+      "reason": "need-validation-approved"
+    }
+  ],
+  "reopen_count": 0,
+  "outcome_reports": [
+    {
+      "report_id": "OUT-MQOILAGJ-M54EHV",
+      "result": "success",
+      "observed_at": "2026-06-22T01:06:05.490Z",
+      "note": "QIF v0.2.1 implementation hardening completed: schemas, docs, examples, verifier, npm test, changelog, and AOF runtime evidence now cover Raw Expert Answers, Question Log Entries, derivation-record Quality Intent Derivations, executable Applicability Rules, confidence policies, context-only culture, Governance Triggers, and Governance Events.",
+      "signal_ref": "TASK-005"
+    }
+  ],
+  "clarification": {
+    "round_count": 1,
+    "dimensions": {
+      "need_clarity": "partial",
+      "intent_clarity": "partial",
+      "context_completeness": "missing",
+      "success_criteria_clarity": "missing",
+      "prohibited_conditions_clarity": "partial",
+      "governance_scope_clarity": "clear",
+      "brownfield_orientation_completeness": "clear",
+      "risk_exposure": "partial"
+    },
+    "gaps": [
+      {
+        "dimension": "need_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The underlying need is not specific enough yet."
+      },
+      {
+        "dimension": "intent_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The intended direction is not yet explicit."
+      },
+      {
+        "dimension": "context_completeness",
+        "status": "missing",
+        "trigger_class": "missing-constraint",
+        "summary": "Key constraints, scope, and current conditions are missing."
+      },
+      {
+        "dimension": "success_criteria_clarity",
+        "status": "missing",
+        "trigger_class": "missing-success-criteria",
+        "summary": "Success cannot be evaluated yet."
+      },
+      {
+        "dimension": "prohibited_conditions_clarity",
+        "status": "partial",
+        "trigger_class": "missing-prohibition",
+        "summary": "Forbidden changes or non-negotiables are not explicit."
+      }
+    ],
+    "pending_questions": [],
+    "asked_questions": [
+      "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "How should improvement success be judged: which metric or end state matters most?"
+    ],
+    "question_rationale": [],
+    "trigger_classes": [],
+    "target_fields": [],
+    "user_answers": [
+      {
+        "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+        "answer": "Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success.",
+        "target_fields": [
+          "need",
+          "context"
+        ]
+      },
+      {
+        "question": "How should improvement success be judged: which metric or end state matters most?",
+        "answer": "Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies.",
+        "target_fields": [
+          "success_criteria",
+          "intent"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "ask_or_assume_decision": "ask",
+    "remaining_gaps": [],
+    "unresolved_ambiguity": [],
+    "question_budget": {
+      "initial_question_budget": 2,
+      "followup_budget": 1,
+      "max_rounds": 2
+    },
+    "next_stop_condition": "need validation can proceed",
+    "clarification_summary": "runtime captured first-round clarification answers and can proceed to need validation",
+    "should_wait_for_user": false
+  },
+  "created_at": "2026-06-22T00:49:47.941Z",
+  "updated_at": "2026-06-22T01:06:05.490Z",
+  "framing": {
+    "request": "Implement QIF v0.2.1 hardening for schema implementation and verifier execution: first-class Raw Expert Answer and Question Log Entry, derivation-record Quality Intent Derivation, executable Applicability Rules, confidence policy reproducibility, Governance Trigger to Governance Event linkage, and context-only Organizational Quality Culture without redesigning the accepted v0.2 baseline.",
+    "need": "Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success.",
+    "intent": "Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies.",
+    "active_context": "context: Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success. | success: Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies.",
+    "success_criteria": "Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies.",
+    "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success. / How should improvement success be judged: which metric or end state matters most? => Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies."
+  },
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV021-001.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV021-001.json",
+    ".aof/artifacts/need-validation/problem-statements/PST-QIFV021-001.json",
+    ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV021-001.json",
+    ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV021-001.json",
+    ".aof/artifacts/discovery/handoffs/DHO-QIFV021-001.json"
+  ],
+  "council_execution_runs": [
+    {
+      "execution_id": "CRUN-MQOI23H9-MO6BKM",
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "status": "prepared",
+      "started_at": "2026-06-22T00:51:09.980Z",
+      "completed_at": "2026-06-22T00:51:09.980Z",
+      "summary": "prototype council execution prepared 2 seat calls in single-instance-role-switching: Builder -> Visionary",
+      "steps": [
+        {
+          "step_id": "CRUN-MQOI23H9-MO6BKM-STEP-01",
+          "role": "Builder",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Builder planning call as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOI0C6D-VHA2NY",
+              "decision_id": "DEC-MQOI1YGW-FW25BE",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success.",
+              "intent": "Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies.",
+              "active_context": "context: Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success. | success: Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies.",
+              "context_snapshot_id": "CTX-MQOI0IRS-0J7S62",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success. / How should improvement success be judged: which metric or end state matters most? => Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies."
+            },
+            "task": {
+              "request": "Implement QIF v0.2.1 hardening for schema implementation and verifier execution: first-class Raw Expert Answer and Question Log Entry, derivation-record Quality Intent Derivation, executable Applicability Rules, confidence policy reproducibility, Governance Trigger to Governance Event linkage, and context-only Organizational Quality Culture without redesigning the accepted v0.2 baseline.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV021-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV021-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV021-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV021-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV021-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV021-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOI1YGW-FW25BE"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MQOI23H9-MO6BKM-STEP-02",
+          "role": "Visionary",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Visionary planning call as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOI0C6D-VHA2NY",
+              "decision_id": "DEC-MQOI1YGW-FW25BE",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success.",
+              "intent": "Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies.",
+              "active_context": "context: Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success. | success: Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies.",
+              "context_snapshot_id": "CTX-MQOI0IRS-0J7S62",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success. / How should improvement success be judged: which metric or end state matters most? => Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies."
+            },
+            "task": {
+              "request": "Implement QIF v0.2.1 hardening for schema implementation and verifier execution: first-class Raw Expert Answer and Question Log Entry, derivation-record Quality Intent Derivation, executable Applicability Rules, confidence policy reproducibility, Governance Trigger to Governance Event linkage, and context-only Organizational Quality Culture without redesigning the accepted v0.2 baseline.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV021-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV021-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV021-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV021-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV021-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV021-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOI1YGW-FW25BE"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "execution_id": "CRUN-MQOIJK7F-6ATY71",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "prepared",
+      "started_at": "2026-06-22T01:04:44.811Z",
+      "completed_at": "2026-06-22T01:04:44.811Z",
+      "summary": "prototype council execution prepared 3 seat calls in single-instance-role-switching: Guardian -> Visionary -> Builder",
+      "steps": [
+        {
+          "step_id": "CRUN-MQOIJK7F-6ATY71-STEP-01",
+          "role": "Guardian",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Guardian review call as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOI0C6D-VHA2NY",
+              "decision_id": "DEC-MQOI1YGW-FW25BE",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success.",
+              "intent": "Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies.",
+              "active_context": "context: Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success. | success: Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies.",
+              "context_snapshot_id": "CTX-MQOI0IRS-0J7S62",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success. / How should improvement success be judged: which metric or end state matters most? => Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies."
+            },
+            "task": {
+              "request": "Implement QIF v0.2.1 hardening for schema implementation and verifier execution: first-class Raw Expert Answer and Question Log Entry, derivation-record Quality Intent Derivation, executable Applicability Rules, confidence policy reproducibility, Governance Trigger to Governance Event linkage, and context-only Organizational Quality Culture without redesigning the accepted v0.2 baseline.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV021-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV021-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV021-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV021-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV021-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV021-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOI1YGW-FW25BE"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MQOIJK7F-6ATY71-STEP-02",
+          "role": "Visionary",
+          "participation_mode": "optional",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Visionary review call as optional",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOI0C6D-VHA2NY",
+              "decision_id": "DEC-MQOI1YGW-FW25BE",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success.",
+              "intent": "Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies.",
+              "active_context": "context: Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success. | success: Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies.",
+              "context_snapshot_id": "CTX-MQOI0IRS-0J7S62",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success. / How should improvement success be judged: which metric or end state matters most? => Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies."
+            },
+            "task": {
+              "request": "Implement QIF v0.2.1 hardening for schema implementation and verifier execution: first-class Raw Expert Answer and Question Log Entry, derivation-record Quality Intent Derivation, executable Applicability Rules, confidence policy reproducibility, Governance Trigger to Governance Event linkage, and context-only Organizational Quality Culture without redesigning the accepted v0.2 baseline.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV021-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV021-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV021-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV021-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV021-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV021-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOI1YGW-FW25BE"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MQOIJK7F-6ATY71-STEP-03",
+          "role": "Builder",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Builder review call as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOI0C6D-VHA2NY",
+              "decision_id": "DEC-MQOI1YGW-FW25BE",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success.",
+              "intent": "Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies.",
+              "active_context": "context: Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success. | success: Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies.",
+              "context_snapshot_id": "CTX-MQOI0IRS-0J7S62",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: update the existing QIF v0.2 Discovery and Application Runtime implementation artifacts for v0.2.1: docs, runtime package schemas, discovery/culture/evaluation-target/review-run examples, local verifier, npm test integration, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-development specialization, from-scratch redesign, and semantic-truth claims from verifier success. / How should improvement success be judged: which metric or end state matters most? => Success: npm test verifies an end-to-end v0.2.1 runtime showing Raw Expert Answers, Question Log Entries, Extraction Steps, cues, concerns, loss boundaries, Decision Patterns, Quality Intent Derivations as derivation records, context-only culture aggregation, Evaluation Targets, executable Applicability Rules, target-specific Applicability Decisions, evidence-backed Review Runs, Governance Triggers linked optionally to Governance Events, and confidence reproducibility from evidence inputs plus explicit confidence policies."
+            },
+            "task": {
+              "request": "Implement QIF v0.2.1 hardening for schema implementation and verifier execution: first-class Raw Expert Answer and Question Log Entry, derivation-record Quality Intent Derivation, executable Applicability Rules, confidence policy reproducibility, Governance Trigger to Governance Event linkage, and context-only Organizational Quality Culture without redesigning the accepted v0.2 baseline.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV021-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV021-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV021-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV021-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV021-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV021-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOI1YGW-FW25BE"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "last_council_execution_id": "CRUN-MQOIJK7F-6ATY71"
+}

@@ -1,0 +1,20 @@
+{
+  "claim_type": "resource-claim",
+  "recorded_at": "2026-06-22T15:05:27.588Z",
+  "claim_id": "RCL-MQPCKQ3O-6N8FFN",
+  "subject_ref": "TASK-008",
+  "resource_ref": "resource-ai-org-labs-publication",
+  "claimant_role_ref": "Builder",
+  "claim_scope": "Create clean-history publication state, set new remote, and push sanitized main branch to AI Org Labs without legacy tags.",
+  "claim_status": "approved",
+  "approval_policy_refs": [
+    "policy-identity-sanitized-publication"
+  ],
+  "justification": "The migration requires Git ref manipulation and remote publication to the new AI Org Labs repository.",
+  "allocation_plan_ref": null,
+  "policy_evaluation_ref": null,
+  "expires_at": null,
+  "source_task_id": "TASK-008",
+  "source_parent_session_id": "SESS-MQPCHTJC-94FWQ8",
+  "source_decision_record_id": "DEC-MQPCJQQL-YWG68R"
+}

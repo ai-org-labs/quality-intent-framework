@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-06-21T23:09:30.966Z",
+  "value_hypothesis_id": "VHY-MQOEFDG6-21Q6YD",
+  "expected_value_creation": "A hardened QIF v0.2 runtime that remains executable and auditable while preventing conceptual shortcuts around applicability, extraction, culture, governance, and verifier authority.",
+  "beneficiary": "Organizations using QIF with humans, AI agents, or hybrid review teams",
+  "supporting_evidence": [
+    "User acceptance criteria explicitly require raw answers, extraction steps, direct quality-intent derivation, applicability decisions, evidence-backed verdicts, and governance triggers.",
+    "Existing v0.2 packages and verifier provide an executable baseline that can be extended without a new UI or external dependency."
+  ],
+  "success_criteria": [
+    "npm test validates the hardened schemas and examples.",
+    "The runtime document and examples show traceability from raw answers through extraction, applicability decision, verdict, and governance trigger without claiming semantic truth."
+  ],
+  "source_task_id": "TASK-004",
+  "source_decision_record_id": "DEC-MQOEEMHC-BE8OF7"
+}

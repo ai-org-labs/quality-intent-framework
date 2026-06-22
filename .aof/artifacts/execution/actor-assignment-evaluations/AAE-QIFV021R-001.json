@@ -1,0 +1,46 @@
+{
+  "evaluation_type": "actor-assignment-evaluation",
+  "evaluation_format_version": 1,
+  "recorded_at": "2026-06-22T01:42:54.100Z",
+  "evaluation_id": "AAE-MQOJWMMQ-ZZA9NQ",
+  "actor_skill_packet_ref": ".aof/artifacts/execution/actor-skill-packets/ASP-QIFV021R-001.json",
+  "actor_skill_packet_id": "ASP-MQOJW6J3-3UQR9Y",
+  "source_task_id": "TASK-007",
+  "source_parent_session_id": "SESS-MQOJRHLV-HVR0SV",
+  "source_decision_record_id": "DEC-MQOJU639-0K81F5",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "Builder",
+    "team_ref": "release-council",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "skill-git-release",
+    "skill-aof-runtime-discipline"
+  ],
+  "capability_fit_summary": {
+    "strong_count": 0,
+    "sufficient_count": 1,
+    "weak_count": 0,
+    "missing_count": 0,
+    "blocked_count": 0,
+    "evidence_ref_count": 3
+  },
+  "assignment_decision": {
+    "assignment_state": "selected",
+    "confidence_label": "medium",
+    "rationale": "Assignment has sufficient skill and capability evidence to proceed to governed execution.",
+    "recommended_action": "Proceed to resource and policy gate evaluation."
+  },
+  "missing_evidence": [],
+  "review_required": true,
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will ship only the verified release baseline.",
+    "current_action": "Prepare release execution",
+    "confidence_label": "medium",
+    "visible_state": "selected",
+    "visible_blockers": [],
+    "next_action": "Proceed to resource and policy gate evaluation."
+  }
+}

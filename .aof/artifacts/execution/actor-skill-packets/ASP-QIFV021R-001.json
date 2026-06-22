@@ -1,0 +1,74 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-06-22T01:42:33.231Z",
+  "packet_id": "ASP-MQOJW6J3-3UQR9Y",
+  "source_task_id": "TASK-007",
+  "source_parent_session_id": "SESS-MQOJRHLV-HVR0SV",
+  "source_decision_record_id": "DEC-MQOJU639-0K81F5",
+  "objective": "Release QIF v0.2.1 after verification",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "Builder",
+    "team_ref": "release-council",
+    "assignment_reason": "Builder executes verification, release commit, tag, push, and GitHub Release creation under validated release charter.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "skill-git-release",
+    "skill-aof-runtime-discipline"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-release-execution",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "CHANGELOG.md",
+        "RELEASE-NOTES-v0.2.1.md",
+        "docs/qif-v0.2.1-consolidation-review.md"
+      ],
+      "rationale": "The repository has version 0.2.1, release notes, and accepted consolidation evidence."
+    }
+  ],
+  "resource_refs": [
+    "resource-git-origin-github-release"
+  ],
+  "policy_refs": [
+    "policy-release-integrity"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "release-baseline",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "verification, commit, tag, push, release notes, AOF runtime log"
+    ],
+    "acceptance_criteria": [
+      "npm test and AOF verification pass; v0.2.1 tag and GitHub Release are published."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "release integrity",
+      "evaluator_ref": "Guardian",
+      "evidence_required": "test output, AOF checks, git tag, GitHub release URL",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "verification-failed",
+      "trigger_condition": "npm or AOF verification fails",
+      "consequence": "block-assignment",
+      "recovery_action": "fix release blockers before tagging"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will ship only the verified release baseline.",
+    "current_action": "Prepare release execution",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run verification and create release commit"
+  },
+  "status": "ready-for-assignment"
+}

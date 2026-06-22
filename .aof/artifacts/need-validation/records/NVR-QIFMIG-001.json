@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-06-22T15:04:19.850Z",
+  "validation_id": "NVR-MQPCJ9U2-49JS2Y",
+  "raw_need": "Migrate repository publication to AI Org Labs without legacy personal identity leakage.",
+  "validation_status": "validated",
+  "validated_need": "Publish a sanitized clean-history QIF repository under ai-org-labs/quality-intent-framework, removing legacy personal account identifiers from tracked files and avoiding legacy author metadata or tags in the new public history.",
+  "decision_summary": "Clean-history migration is selected because preserving existing history would carry legacy author metadata; file-level replacement alone is insufficient for the privacy goal.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "Should old history be preserved?",
+      "answer": "No. History may be discarded, and clean history better satisfies the identity-removal goal.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must not change?",
+      "answer": "QIF v0.2.1 functional content, schemas, examples, verifier behavior, and AOF evidence should remain intact except for sanitized source references.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Changing only tracked text would not remove author metadata from pushed history."
+  ],
+  "evidence_gaps": [
+    "Push success depends on authenticated access to the new AI Org Labs repository."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFMIG-001.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFMIG-001.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFMIG-001.json",
+  "experiment_proposal_ref": null,
+    "project_charter_ref": ".aof/artifacts/need-validation/project-charters/PCH-QIFMIG-001.json",
+  "discovery_handoff_ref": null,
+  "source_task_id": "TASK-008",
+  "source_decision_record_id": "DEC-MQPCIFWN-BFPMQ9"
+}

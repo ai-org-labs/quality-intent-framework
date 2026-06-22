@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-06-21T16:36:58.396Z",
+  "validation_id": "NVR-MQO0EK64-Z29218",
+  "raw_need": "Judge organizational quality by increasing review count, test count, and document page count.",
+  "validation_status": "rejected",
+  "validated_need": null,
+  "decision_summary": "Rejected because activity volume is not quality itself and would violate the QIF loss boundary against metric substitution.",
+  "authority_action": "reject-need",
+  "project_creation_recommendation": "do-not-create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is being requested?",
+      "answer": "A volume-metric scorecard that treats counts as quality itself.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "Why reject?",
+      "answer": "The request conflicts with QIF theory and the Project Charter constraint that counts may only be evidence when linked to intent and risk.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "More activity automatically means higher quality."
+  ],
+  "evidence_gaps": [
+    "No stakeholder value or loss boundary is specified for the requested counts."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIF-001.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIF-001.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIF-001.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": "TASK-001",
+  "source_decision_record_id": "DEC-MQO00MBF-OSBW7X"
+}

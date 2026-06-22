@@ -1,0 +1,28 @@
+{
+  "packet_type": "discovery-to-delivery-handoff",
+  "recorded_at": "2026-06-21T17:07:31.713Z",
+  "handoff_id": "DHO-MQO1HURL-FXJAEY",
+  "selected_need": "Transform tacit expert judgments into reproducible decision patterns and quality intent derivations",
+  "intended_user_or_segment": "Organizations that rely on veteran reviewers, operators, managers, or specialists whose quality knowledge is mostly tacit",
+  "context_summary": "Experts often cannot define quality abstractly, but they can judge concrete cases. The framework must extract reusable patterns from those judgments without treating expert opinion as self-justifying truth.",
+  "hypothesis": "A case-based extraction and reproduction framework can make tacit quality knowledge executable by humans and AI while preserving context, exceptions, and loss boundaries.",
+  "evidence_refs": [
+    ".aof/artifacts/need-validation/problem-statements/PST-EJF-001.json",
+    ".aof/artifacts/need-validation/value-hypotheses/VHY-EJF-001.json"
+  ],
+  "rejected_alternatives": [
+    "Collect generic know-how without concrete cases.",
+    "Promote inferred review-history patterns directly to active knowledge without validation."
+  ],
+  "explicit_risks": [
+    "Patterns may overfit one expert or one department unless counterexamples, applicability boundaries, and multi-expert aggregation are explicit."
+  ],
+  "delivery_validation_requirements": [
+    "Validate extracted patterns on unseen cases and require acceptable agreement by non-experts or AI agents."
+  ],
+  "need": "Preserve tacit expert judgment as reusable organizational quality knowledge.",
+  "intent": "Define entities, workflows, schemas, culture aggregation, and reproduction tests that turn case judgments into decision patterns and quality intent derivations.",
+  "context": "QIF baseline exists; this framework adds the upstream extraction layer and must remain domain-general, non-surveillant, and governance-backed.",
+  "source_task_id": "TASK-002",
+  "source_decision_record_id": "DEC-MQO1G6WX-SPJ4DO"
+}

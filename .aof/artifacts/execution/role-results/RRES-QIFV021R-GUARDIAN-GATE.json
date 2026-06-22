@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-22T01:43:28.780Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MQOJRHLV-HVR0SV",
+  "status": "completed",
+  "recommendation": "approve with verification and no semantic-truth claim",
+  "rationale": "Release is acceptable if tests and structural AOF checks pass, tag v0.2.1 is absent before creation, and release notes preserve verifier boundary language.",
+  "signals": [
+    "guardian-veto-not-used"
+  ],
+  "artifact_refs": [
+    "RELEASE-NOTES-v0.2.1.md"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-007",
+  "source_decision_record_id": "DEC-MQOJU639-0K81F5",
+  "source_parent_session_id": "SESS-MQOJRHLV-HVR0SV",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.92
+}

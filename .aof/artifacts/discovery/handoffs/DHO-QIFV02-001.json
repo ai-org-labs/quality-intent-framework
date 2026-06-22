@@ -1,0 +1,28 @@
+{
+  "packet_type": "discovery-to-delivery-handoff",
+  "recorded_at": "2026-06-21T22:44:25.197Z",
+  "handoff_id": "DHO-MQODJ3L9-JJE8GI",
+  "selected_need": "Extend QIF into a discovery and application runtime",
+  "intended_user_or_segment": "Organizations that need to extract quality knowledge from experts or history and then apply it to real targets without domain-specific tooling assumptions",
+  "context_summary": "QIF v0.1 and the expert-judgment baseline define knowledge structures, but runtime visibility is missing between elicitation, applicability selection, evidence collection, and verdict production.",
+  "hypothesis": "A v0.2 runtime package set can make discovery and application inspectable through discovery sessions, quality culture aggregation, evaluation targets, applicability rules, and review runs.",
+  "evidence_refs": [
+    ".aof/artifacts/need-validation/problem-statements/PST-QIFV02-001.json",
+    ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV02-001.json"
+  ],
+  "rejected_alternatives": [
+    "Assume software-development artifacts as the default target model.",
+    "Treat checklist completion as sufficient runtime evidence."
+  ],
+  "explicit_risks": [
+    "Runtime artifacts may drift into software-specific assumptions unless target and applicability models stay domain-general."
+  ],
+  "delivery_validation_requirements": [
+    "Run local validators against discovery, culture, target, and review-run packages and verify governance triggers on low-confidence conflict."
+  ],
+  "need": "Show how quality knowledge is discovered and applied in a real QIF runtime.",
+  "intent": "Add runtime models, schemas, examples, verifier rules, changelog, and AOF evidence for end-to-end discovery and application.",
+  "context": "The repository already has operational and expert-judgment baselines; v0.2 must remain domain-general and non-surveillant while making verdict paths inspectable.",
+  "source_task_id": "TASK-003",
+  "source_decision_record_id": "DEC-MQODIII3-BRTR1A"
+}

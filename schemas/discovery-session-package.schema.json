@@ -1,0 +1,377 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/qif/schemas/discovery-session-package.schema.json",
+  "title": "QIF Discovery Session Package",
+  "type": "object",
+  "required": [
+    "packageType",
+    "runtimeVersion",
+    "packageId",
+    "experts",
+    "cases",
+    "questionLogEntries",
+    "rawExpertAnswers",
+    "expertJudgments",
+    "cues",
+    "concerns",
+    "lossBoundaries",
+    "qualityIntents",
+    "qualityIntentDerivations",
+    "decisionPatterns",
+    "extractionSteps",
+    "discoverySessions"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "packageType": { "const": "discovery-session" },
+    "runtimeVersion": { "type": "string" },
+    "packageId": { "type": "string" },
+    "experts": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/expert" }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/case" }
+    },
+    "questionLogEntries": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/questionLogEntry" }
+    },
+    "rawExpertAnswers": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/rawExpertAnswer" }
+    },
+    "expertJudgments": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/expertJudgment" }
+    },
+    "cues": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/cue" }
+    },
+    "concerns": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/concern" }
+    },
+    "lossBoundaries": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/lossBoundary" }
+    },
+    "qualityIntents": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/qualityIntent" }
+    },
+    "qualityIntentDerivations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/qualityIntentDerivation" }
+    },
+    "decisionPatterns": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/decisionPattern" }
+    },
+    "extractionSteps": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/extractionStep" }
+    },
+    "discoverySessions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/discoverySession" }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]+-[A-Z0-9-]+$"
+    },
+    "refArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" },
+      "minItems": 1
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "expert": {
+      "type": "object",
+      "required": ["id", "name", "role", "domain"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "domain": { "type": "string" }
+      }
+    },
+    "case": {
+      "type": "object",
+      "required": ["id", "title", "domain", "context", "facts"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "domain": { "type": "string" },
+        "context": { "type": "string" },
+        "facts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "questionLogEntry": {
+      "type": "object",
+      "required": ["id", "sessionRef", "questionText", "questionType", "targetCaseRef", "askedBy", "order"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sessionRef": { "$ref": "#/$defs/id" },
+        "questionText": { "type": "string" },
+        "questionType": {
+          "enum": [
+            "acceptability",
+            "cue-probe",
+            "concern-probe",
+            "loss-boundary-probe",
+            "evidence-probe",
+            "waiver-probe",
+            "history-probe",
+            "junior-miss-probe",
+            "other"
+          ]
+        },
+        "targetCaseRef": { "$ref": "#/$defs/id" },
+        "askedBy": { "type": "string" },
+        "order": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "rawExpertAnswer": {
+      "type": "object",
+      "required": [
+        "id",
+        "sessionRef",
+        "expertRef",
+        "caseRef",
+        "questionRef",
+        "answerText",
+        "captureMode",
+        "ambiguity",
+        "sensitiveDataHandling"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sessionRef": { "$ref": "#/$defs/id" },
+        "expertRef": { "$ref": "#/$defs/id" },
+        "caseRef": { "$ref": "#/$defs/id" },
+        "questionRef": { "$ref": "#/$defs/id" },
+        "answerText": { "type": "string" },
+        "captureMode": { "enum": ["verbatim", "summarized", "translated", "reconstructed"] },
+        "ambiguity": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "sensitiveDataHandling": {
+          "type": "object",
+          "required": ["classification", "redactionState", "handlingNotes"],
+          "additionalProperties": false,
+          "properties": {
+            "classification": { "enum": ["none", "internal", "confidential", "restricted"] },
+            "redactionState": { "enum": ["not-needed", "redacted", "restricted-access", "pending-review"] },
+            "handlingNotes": { "type": "string" }
+          }
+        }
+      }
+    },
+    "expertJudgment": {
+      "type": "object",
+      "required": ["id", "caseRef", "expertRef", "judgment", "cueRefs", "concernRef", "lossBoundaryRef", "confidence"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "caseRef": { "$ref": "#/$defs/id" },
+        "expertRef": { "$ref": "#/$defs/id" },
+        "judgment": { "enum": ["acceptable", "unacceptable", "conditionally-acceptable"] },
+        "cueRefs": { "$ref": "#/$defs/refArray" },
+        "concernRef": { "$ref": "#/$defs/id" },
+        "lossBoundaryRef": { "$ref": "#/$defs/id" },
+        "confidence": { "$ref": "#/$defs/score" }
+      }
+    },
+    "cue": {
+      "type": "object",
+      "required": ["id", "statement", "concernRef"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "statement": { "type": "string" },
+        "concernRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "concern": {
+      "type": "object",
+      "required": ["id", "statement", "lossBoundaryRef"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "statement": { "type": "string" },
+        "lossBoundaryRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "lossBoundary": {
+      "type": "object",
+      "required": ["id", "statement", "severity"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "statement": { "type": "string" },
+        "severity": { "enum": ["low", "medium", "high", "critical"] }
+      }
+    },
+    "decisionPattern": {
+      "type": "object",
+      "required": ["id", "title", "sourceJudgmentRefs", "typicalDecision", "confidence"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "sourceJudgmentRefs": { "$ref": "#/$defs/refArray" },
+        "typicalDecision": { "enum": ["acceptable", "unacceptable", "conditionally-acceptable"] },
+        "confidence": { "$ref": "#/$defs/score" }
+      }
+    },
+    "qualityIntent": {
+      "type": "object",
+      "required": ["id", "statement", "lossBoundaryRefs", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "statement": { "type": "string" },
+        "lossBoundaryRefs": { "$ref": "#/$defs/refArray" },
+        "status": { "enum": ["candidate", "accepted", "retired"] }
+      }
+    },
+    "qualityIntentDerivation": {
+      "type": "object",
+      "required": [
+        "id",
+        "sourceDecisionPatternRefs",
+        "sourceConcernRefs",
+        "sourceLossBoundaryRefs",
+        "derivedQualityIntentRef",
+        "derivationRationale",
+        "confidence",
+        "status",
+        "reviewerRefs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sourceDecisionPatternRefs": { "$ref": "#/$defs/refArray" },
+        "sourceConcernRefs": { "$ref": "#/$defs/refArray" },
+        "sourceLossBoundaryRefs": { "$ref": "#/$defs/refArray" },
+        "derivedQualityIntentRef": { "$ref": "#/$defs/id" },
+        "derivationRationale": { "type": "string" },
+        "confidence": { "$ref": "#/$defs/score" },
+        "status": { "enum": ["candidate", "validated", "retired"] },
+        "reviewerRefs": { "$ref": "#/$defs/refArray" }
+      }
+    },
+    "maybeRefArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" }
+    },
+    "extractionStep": {
+      "type": "object",
+      "required": [
+        "id",
+        "sessionRef",
+        "extractor",
+        "extractionMethod",
+        "rawExpertAnswerRefs",
+        "outputCueRefs",
+        "outputConcernRefs",
+        "outputLossBoundaryRefs",
+        "outputDecisionPatternRefs",
+        "outputQualityIntentDerivationRefs",
+        "rationale",
+        "confidence",
+        "ambiguity"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sessionRef": { "$ref": "#/$defs/id" },
+        "extractor": { "enum": ["human", "ai", "hybrid"] },
+        "extractionMethod": { "type": "string" },
+        "rawExpertAnswerRefs": { "$ref": "#/$defs/refArray" },
+        "outputCueRefs": { "$ref": "#/$defs/maybeRefArray" },
+        "outputConcernRefs": { "$ref": "#/$defs/maybeRefArray" },
+        "outputLossBoundaryRefs": { "$ref": "#/$defs/maybeRefArray" },
+        "outputDecisionPatternRefs": { "$ref": "#/$defs/maybeRefArray" },
+        "outputQualityIntentDerivationRefs": { "$ref": "#/$defs/maybeRefArray" },
+        "rationale": { "type": "string" },
+        "confidence": { "$ref": "#/$defs/score" },
+        "ambiguity": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "discoverySession": {
+      "type": "object",
+      "required": [
+        "id",
+        "expertRef",
+        "caseRefs",
+        "questionLogEntryRefs",
+        "rawExpertAnswerRefs",
+        "judgmentRefs",
+        "extractedCueRefs",
+        "extractedConcernRefs",
+        "mappedLossBoundaryRefs",
+        "derivedDecisionPatternRefs",
+        "derivedQualityIntentDerivationRefs",
+        "extractionStepRefs",
+        "confidence",
+        "unresolvedAmbiguity"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "expertRef": { "$ref": "#/$defs/id" },
+        "caseRefs": { "$ref": "#/$defs/refArray" },
+        "questionLogEntryRefs": { "$ref": "#/$defs/refArray" },
+        "rawExpertAnswerRefs": { "$ref": "#/$defs/refArray" },
+        "judgmentRefs": { "$ref": "#/$defs/refArray" },
+        "extractedCueRefs": { "$ref": "#/$defs/refArray" },
+        "extractedConcernRefs": { "$ref": "#/$defs/refArray" },
+        "mappedLossBoundaryRefs": { "$ref": "#/$defs/refArray" },
+        "derivedDecisionPatternRefs": { "$ref": "#/$defs/refArray" },
+        "derivedQualityIntentDerivationRefs": { "$ref": "#/$defs/refArray" },
+        "extractionStepRefs": { "$ref": "#/$defs/refArray" },
+        "confidence": { "$ref": "#/$defs/score" },
+        "unresolvedAmbiguity": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "sessionVerdict": { "type": "string" }
+      }
+    }
+  }
+}

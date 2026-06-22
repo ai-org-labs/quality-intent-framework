@@ -1,0 +1,390 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-06-21T23:21:24.212Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MQOEEGKQ-WAW3RU",
+    "stage": "review",
+    "executionId": "CRUN-MQOEUNSH-X74XAS",
+    "executionStatus": "prepared",
+    "invokedModel": false,
+    "seatCount": 3,
+    "summary": "prototype council execution prepared 3 seat calls in single-instance-role-switching: Guardian -> Visionary -> Builder",
+    "lastCouncilExecutionId": "CRUN-MQOEUNSH-X74XAS",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "seats": [
+        {
+          "role": "Guardian",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOEEGKQ-WAW3RU",
+              "decision_id": "DEC-MQOEFZU1-ILLA2V",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth.",
+              "intent": "Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth.",
+              "active_context": "context: Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth. | success: Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth.",
+              "context_snapshot_id": "CTX-MQOEEMGT-C9VCK2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth. / How should improvement success be judged: which metric or end state matters most? => Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth."
+            },
+            "task": {
+              "request": "Harden QIF v0.2 runtime model by splitting reusable applicability rules from target-specific applicability decisions, adding extraction steps and first-class governance triggers, repositioning organizational quality culture as aggregation context, and clarifying verifier boundaries without semantic-truth claims.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV02H-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV02H-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOEFZU1-ILLA2V"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Visionary",
+          "participation_mode": "optional",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOEEGKQ-WAW3RU",
+              "decision_id": "DEC-MQOEFZU1-ILLA2V",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth.",
+              "intent": "Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth.",
+              "active_context": "context: Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth. | success: Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth.",
+              "context_snapshot_id": "CTX-MQOEEMGT-C9VCK2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth. / How should improvement success be judged: which metric or end state matters most? => Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth."
+            },
+            "task": {
+              "request": "Harden QIF v0.2 runtime model by splitting reusable applicability rules from target-specific applicability decisions, adding extraction steps and first-class governance triggers, repositioning organizational quality culture as aggregation context, and clarifying verifier boundaries without semantic-truth claims.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV02H-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV02H-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOEFZU1-ILLA2V"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOEEGKQ-WAW3RU",
+              "decision_id": "DEC-MQOEFZU1-ILLA2V",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth.",
+              "intent": "Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth.",
+              "active_context": "context: Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth. | success: Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth.",
+              "context_snapshot_id": "CTX-MQOEEMGT-C9VCK2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth. / How should improvement success be judged: which metric or end state matters most? => Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth."
+            },
+            "task": {
+              "request": "Harden QIF v0.2 runtime model by splitting reusable applicability rules from target-specific applicability decisions, adding extraction steps and first-class governance triggers, repositioning organizational quality culture as aggregation context, and clarifying verifier boundaries without semantic-truth claims.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV02H-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV02H-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOEFZU1-ILLA2V"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MQOEUNSH-X74XAS",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "prepared",
+      "started_at": "2026-06-21T23:21:24.208Z",
+      "completed_at": "2026-06-21T23:21:24.208Z",
+      "summary": "prototype council execution prepared 3 seat calls in single-instance-role-switching: Guardian -> Visionary -> Builder",
+      "steps": [
+        {
+          "step_id": "CRUN-MQOEUNSH-X74XAS-STEP-01",
+          "role": "Guardian",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Guardian review call as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOEEGKQ-WAW3RU",
+              "decision_id": "DEC-MQOEFZU1-ILLA2V",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth.",
+              "intent": "Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth.",
+              "active_context": "context: Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth. | success: Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth.",
+              "context_snapshot_id": "CTX-MQOEEMGT-C9VCK2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth. / How should improvement success be judged: which metric or end state matters most? => Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth."
+            },
+            "task": {
+              "request": "Harden QIF v0.2 runtime model by splitting reusable applicability rules from target-specific applicability decisions, adding extraction steps and first-class governance triggers, repositioning organizational quality culture as aggregation context, and clarifying verifier boundaries without semantic-truth claims.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV02H-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV02H-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOEFZU1-ILLA2V"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MQOEUNSH-X74XAS-STEP-02",
+          "role": "Visionary",
+          "participation_mode": "optional",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Visionary review call as optional",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOEEGKQ-WAW3RU",
+              "decision_id": "DEC-MQOEFZU1-ILLA2V",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth.",
+              "intent": "Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth.",
+              "active_context": "context: Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth. | success: Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth.",
+              "context_snapshot_id": "CTX-MQOEEMGT-C9VCK2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth. / How should improvement success be judged: which metric or end state matters most? => Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth."
+            },
+            "task": {
+              "request": "Harden QIF v0.2 runtime model by splitting reusable applicability rules from target-specific applicability decisions, adding extraction steps and first-class governance triggers, repositioning organizational quality culture as aggregation context, and clarifying verifier boundaries without semantic-truth claims.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV02H-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV02H-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOEFZU1-ILLA2V"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MQOEUNSH-X74XAS-STEP-03",
+          "role": "Builder",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Builder review call as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQOEEGKQ-WAW3RU",
+              "decision_id": "DEC-MQOEFZU1-ILLA2V",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth.",
+              "intent": "Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth.",
+              "active_context": "context: Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth. | success: Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth.",
+              "context_snapshot_id": "CTX-MQOEEMGT-C9VCK2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: refine the existing QIF v0.2 Discovery and Application Runtime artifacts in this repository: framework document, schemas, example packages, verifier rules, runtime story, changelog, and AOF runtime log. Out of scope: UI, external integrations, software-tool assumptions, replacing v0.2 wholesale, treating Organizational Quality Culture as a prerequisite, or claiming verifier semantic truth. / How should improvement success be judged: which metric or end state matters most? => Success: the revised v0.2 demonstrates raw expert answers, extraction steps, decision patterns, direct quality-intent derivation, evaluation target, applicability decisions that select and exclude items, evidence-backed verdicts, governance triggers for low confidence or context mismatch, and verifier checks that enforce traceability without claiming semantic truth."
+            },
+            "task": {
+              "request": "Harden QIF v0.2 runtime model by splitting reusable applicability rules from target-specific applicability decisions, adding extraction steps and first-class governance triggers, repositioning organizational quality culture as aggregation context, and clarifying verifier boundaries without semantic-truth claims.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV02H-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV02H-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV02H-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQOEFZU1-ILLA2V"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

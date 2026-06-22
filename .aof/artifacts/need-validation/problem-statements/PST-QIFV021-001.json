@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-06-22T00:50:29.854Z",
+  "problem_statement_id": "PST-MQOI18IM-PKTFV9",
+  "affected_party": "QIF maintainers, auditors, and AI agents executing v0.2 runtime packages",
+  "actual_problem": "The accepted v0.2 runtime model now has the right conceptual boundaries, but implementation ambiguity remains around raw answers, question references, derivation records, executable applicability rules, governance trigger outcomes, and confidence reproducibility.",
+  "why_it_matters": "If these fields remain implicit or free-text only, schemas may validate while verifier execution cannot reliably replay why extraction, selection, exclusion, verdicts, and governance happened.",
+  "why_now": "The current branch already hardens conceptual ambiguity; v0.2.1 should now make the same baseline executable and testable before release or larger fixtures.",
+  "evidence_refs": [
+    "docs/qif-v0.2-discovery-application-runtime.md",
+    "tools/validate-qif-runtime.mjs"
+  ],
+  "source_task_id": "TASK-005",
+  "source_decision_record_id": "DEC-MQOI0IS3-TAT1PA"
+}

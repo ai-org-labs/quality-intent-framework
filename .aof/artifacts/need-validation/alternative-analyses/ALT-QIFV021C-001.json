@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-06-22T01:17:49.745Z",
+  "alternative_analysis_id": "ALT-MQOJ0DV5-9P2WED",
+  "subject_need": "Consolidate QIF v0.2.1 before v0.3 pilot",
+  "alternative_solutions": [
+    "Create a review-only consolidation document and only record cleanup tasks for later.",
+    "Immediately patch schemas and examples for every naming concern found."
+  ],
+  "non_solution_options": [
+    "Skip consolidation and proceed directly to v0.3 pilot examples."
+  ],
+  "defer_options": [
+    "Wait until after pilot to consolidate observed confusion."
+  ],
+  "stop_options": [
+    "Do not create a project if the review would redesign QIF from scratch.",
+    "Do not create a project if the work requires UI or external integrations."
+  ],
+  "source_task_id": "TASK-006",
+  "source_decision_record_id": "DEC-MQOIZQEP-G0ZH5M"
+}

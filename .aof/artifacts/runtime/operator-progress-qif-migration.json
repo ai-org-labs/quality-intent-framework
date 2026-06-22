@@ -1,0 +1,36 @@
+{
+  "view_type": "operator_progress",
+  "generated_at": "2026-06-22T15:16:28.426Z",
+  "current_checkpoint": {
+    "stage": "implementation-ready",
+    "frontier_task_id": "TASK-008",
+    "summary": "TASK-008 is active and the runtime is implementation-ready.",
+    "artifact_ref": ".aof/tasks/open/TASK-008.json"
+  },
+  "previous_checkpoint": {
+    "summary": "TASK-007 was the latest completed checkpoint.",
+    "artifact_ref": ".aof/tasks/done/TASK-007.json"
+  },
+  "changes_since_last_checkpoint": [
+    {
+      "kind": "completed-task",
+      "summary": "TASK-007 completed: Release QIF v0.2.1",
+      "artifact_ref": ".aof/tasks/done/TASK-007.json"
+    },
+    {
+      "kind": "frontier-task",
+      "summary": "TASK-008 is now the active frontier: Migrate QIF to AI Org Labs",
+      "artifact_ref": ".aof/tasks/open/TASK-008.json"
+    },
+    {
+      "kind": "goal-refresh",
+      "summary": "Complete AI Org Labs push after authorization is fixed.",
+      "artifact_ref": ".aof/goals/next-value-slice.json"
+    }
+  ],
+  "progress_answer": {
+    "what_changed": "TASK-007 completed: Release QIF v0.2.1 TASK-008 is now the active frontier: Migrate QIF to AI Org Labs Complete AI Org Labs push after authorization is fixed.",
+    "why_it_matters": "TASK-008 now defines the current operating move after the latest completed release step.",
+    "next_checkpoint": "Start TASK-008: Migrate QIF to AI Org Labs"
+  }
+}

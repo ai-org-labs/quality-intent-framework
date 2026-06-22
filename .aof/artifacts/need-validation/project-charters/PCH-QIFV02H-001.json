@@ -1,0 +1,25 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-06-21T23:09:52.927Z",
+  "project_charter_id": "PCH-MQOEFUE7-QB26SW",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV02H-001.json",
+  "validated_objective": "Harden QIF v0.2 runtime artifacts so extraction, applicability decisions, culture aggregation, governance triggers, and verifier boundaries are explicit and structurally verifiable.",
+  "scope": [
+    "Update v0.2 framework document and runtime story.",
+    "Update discovery, culture, review-run schemas and examples.",
+    "Update runtime verifier rules for extraction steps, applicability decisions, governance triggers, and verifier-boundary wording.",
+    "Update changelog and AOF runtime log."
+  ],
+  "constraints": [
+    "Do not build UI or external integrations.",
+    "Do not assume software-specific artifacts or tools.",
+    "Do not require Organizational Quality Culture before deriving Quality Intents.",
+    "Do not claim that verifier output proves semantic truth."
+  ],
+  "expected_outcomes": [
+    "npm test passes with hardened packages.",
+    "Acceptance criteria are demonstrated by examples and verifier traceability checks."
+  ],
+  "source_task_id": "TASK-004",
+  "source_decision_record_id": "DEC-MQOEEMHC-BE8OF7"
+}

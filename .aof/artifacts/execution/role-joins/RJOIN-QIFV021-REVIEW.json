@@ -1,0 +1,28 @@
+{
+  "join_type": "role-join",
+  "recorded_at": "2026-06-22T01:05:21.678Z",
+  "join_id": "RJOIN-MQOIKCNI-8KW0P2",
+  "join_status": "resolved",
+  "stage": "review",
+  "expected_roles": [
+    "Guardian",
+    "Visionary",
+    "Builder"
+  ],
+  "received_roles": [
+    "Guardian",
+    "Visionary",
+    "Builder"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-orchestrator-decision",
+  "blocking_signals": [],
+  "recommended_next_step": "Accept v0.2.1 implementation hardening after npm test and AOF verification.",
+  "received_session_ids": [
+    "SESS-MQOI0C6D-VHA2NY"
+  ],
+  "source_task_id": "TASK-005",
+  "source_parent_session_id": "SESS-MQOI0C6D-VHA2NY",
+  "decision_record_ref": ".aof/decisions/DEC-MQOI1YGW-FW25BE.json",
+  "summary": "Guardian, Visionary, and Builder all approved the v0.2.1 hardening with no veto."
+}

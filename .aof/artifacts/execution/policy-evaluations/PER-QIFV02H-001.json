@@ -1,0 +1,34 @@
+{
+  "report_type": "policy-evaluation-report",
+  "recorded_at": "2026-06-21T23:11:17.962Z",
+  "evaluation_id": "PER-MQOEHO0A-4DXNOT",
+  "subject_ref": "TASK-004",
+  "evaluation_scope": "QIF v0.2 hardening implementation",
+  "policy_refs": [
+    "policy-no-semantic-truth-claim",
+    "policy-no-activity-count-as-quality"
+  ],
+  "overall_outcome": "allowed",
+  "results": [
+    {
+      "policy_id": "policy-no-semantic-truth-claim",
+      "effect": "allow",
+      "outcome": "allowed",
+      "reason": "Verifier will be described and implemented as structural traceability checking only.",
+      "blocking": false
+    },
+    {
+      "policy_id": "policy-no-activity-count-as-quality",
+      "effect": "allow",
+      "outcome": "allowed",
+      "reason": "Existing indicator guardrail remains and examples do not treat counts as quality itself.",
+      "blocking": false
+    }
+  ],
+  "recommended_actions": [
+    "Proceed with implementation and require Guardian review evidence."
+  ],
+  "source_task_id": "TASK-004",
+  "source_parent_session_id": "SESS-MQOEEGKQ-WAW3RU",
+  "source_decision_record_id": "DEC-MQOEFZU1-ILLA2V"
+}

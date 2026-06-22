@@ -1,0 +1,351 @@
+{
+  "session_id": "SESS-MQPCHTJC-94FWQ8",
+  "workflow_id": "service-design",
+  "organization_id": "civic-studio",
+  "organization": {
+    "language": "en"
+  },
+  "status": "framed",
+  "trigger": {
+    "trigger_id": "TRG-MQPCHTJC-C0EOG7",
+    "trigger_type": "cli",
+    "received_at": "2026-06-22T15:03:12.071Z",
+    "request_payload": "Migrate the Quality Intent Framework repository from a legacy personal-account development context to the AI Org Labs public account. Need: publish a sanitized repository state under ai-org-labs/quality-intent-framework with no legacy personal account identifiers in files or pushed history. Intent: remove legacy account references from tracked files, avoid preserving legacy author history by using a clean initial commit, point the repository at the new remote, and push only the sanitized branch without legacy tags. Context: keep QIF v0.2.1 content and AOF evidence, avoid new QIF features, and treat AOF source as moved to AI Org Labs."
+  },
+  "current_stage": "planning",
+  "routing_mode": "deep-path",
+  "routing_mode_history": [
+    {
+      "from_mode": null,
+      "to_mode": "deep-path",
+      "at": "2026-06-22T15:03:12.071Z",
+      "reason": "session-created"
+    }
+  ],
+  "context_snapshot_id": "CTX-MQPCIFWH-W590TD",
+  "open_decision_ids": [
+    "DEC-MQPCJQQL-YWG68R"
+  ],
+  "closed_decision_ids": [
+    "DEC-MQPCHTJF-Y2LEXG",
+    "DEC-MQPCIFWN-BFPMQ9"
+  ],
+  "stage_transitions": [
+    {
+      "from_stage": null,
+      "to_stage": "clarification",
+      "from_status": null,
+      "to_status": "waiting_user",
+      "at": "2026-06-22T15:03:12.071Z",
+      "reason": "session-created"
+    },
+    {
+      "from_stage": "clarification",
+      "to_stage": "need-validation",
+      "from_status": "waiting_user",
+      "to_status": "framed",
+      "at": "2026-06-22T15:03:41.050Z",
+      "reason": "clarification-complete"
+    },
+    {
+      "from_stage": "need-validation",
+      "to_stage": "planning",
+      "from_status": "framed",
+      "to_status": "framed",
+      "at": "2026-06-22T15:04:41.767Z",
+      "reason": "need-validation-approved"
+    }
+  ],
+  "reopen_count": 0,
+  "outcome_reports": [
+    {
+      "report_id": "OUT-MQPCWG51-Z34PF1",
+      "result": "success",
+      "observed_at": "2026-06-22T15:14:34.549Z",
+      "note": "AI Org Labs migration readiness completed: tracked identifier scan is clean, npm test passed, AOF verification passed, and clean-history commit uses neutral AI Org Labs metadata. Push only main to the new remote.",
+      "signal_ref": "MIG-QIF-AI-ORG-LABS-READY"
+    },
+    {
+      "report_id": "OUT-MQPCYL5Q-D0LVKE",
+      "result": "partial",
+      "observed_at": "2026-06-22T15:16:14.364Z",
+      "note": "Sanitized clean-history repository is ready locally and verified, but push to AI Org Labs is blocked by GitHub authorization. No legacy tags were pushed.",
+      "signal_ref": "MIG-QIF-AI-ORG-LABS-AUTH-BLOCKED"
+    }
+  ],
+  "clarification": {
+    "round_count": 1,
+    "dimensions": {
+      "need_clarity": "partial",
+      "intent_clarity": "partial",
+      "context_completeness": "missing",
+      "success_criteria_clarity": "missing",
+      "prohibited_conditions_clarity": "partial",
+      "governance_scope_clarity": "clear",
+      "brownfield_orientation_completeness": "partial",
+      "risk_exposure": "partial"
+    },
+    "gaps": [
+      {
+        "dimension": "need_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The underlying need is not specific enough yet."
+      },
+      {
+        "dimension": "intent_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The intended direction is not yet explicit."
+      },
+      {
+        "dimension": "context_completeness",
+        "status": "missing",
+        "trigger_class": "missing-constraint",
+        "summary": "Key constraints, scope, and current conditions are missing."
+      },
+      {
+        "dimension": "success_criteria_clarity",
+        "status": "missing",
+        "trigger_class": "missing-success-criteria",
+        "summary": "Success cannot be evaluated yet."
+      },
+      {
+        "dimension": "prohibited_conditions_clarity",
+        "status": "partial",
+        "trigger_class": "missing-prohibition",
+        "summary": "Forbidden changes or non-negotiables are not explicit."
+      },
+      {
+        "dimension": "brownfield_orientation_completeness",
+        "status": "partial",
+        "trigger_class": "brownfield-gap",
+        "summary": "The request likely refers to an existing flow or system, but current-state context is incomplete."
+      }
+    ],
+    "pending_questions": [],
+    "asked_questions": [
+      "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "In the current implementation or operation, what context must be carried forward into this decision?"
+    ],
+    "question_rationale": [],
+    "trigger_classes": [],
+    "target_fields": [],
+    "user_answers": [
+      {
+        "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+        "answer": "The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags.",
+        "target_fields": [
+          "need",
+          "context"
+        ]
+      },
+      {
+        "question": "In the current implementation or operation, what context must be carried forward into this decision?",
+        "answer": "Carry forward the accepted QIF v0.2.1 runtime content, release notes, docs, schemas, examples, verifier, and AOF evidence, but remove legacy personal account identifiers from files and avoid carrying old author metadata into the new public history.",
+        "target_fields": [
+          "background_or_prior_decisions",
+          "context"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "ask_or_assume_decision": "ask",
+    "remaining_gaps": [],
+    "unresolved_ambiguity": [],
+    "question_budget": {
+      "initial_question_budget": 2,
+      "followup_budget": 1,
+      "max_rounds": 2
+    },
+    "next_stop_condition": "need validation can proceed",
+    "clarification_summary": "runtime captured first-round clarification answers and can proceed to need validation",
+    "should_wait_for_user": false
+  },
+  "created_at": "2026-06-22T15:03:12.071Z",
+  "updated_at": "2026-06-22T15:16:14.364Z",
+  "framing": {
+    "request": "Migrate the Quality Intent Framework repository from a legacy personal-account development context to the AI Org Labs public account. Need: publish a sanitized repository state under ai-org-labs/quality-intent-framework with no legacy personal account identifiers in files or pushed history. Intent: remove legacy account references from tracked files, avoid preserving legacy author history by using a clean initial commit, point the repository at the new remote, and push only the sanitized branch without legacy tags. Context: keep QIF v0.2.1 content and AOF evidence, avoid new QIF features, and treat AOF source as moved to AI Org Labs.",
+    "need": "The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags.",
+    "intent": "to be refined after clarification",
+    "active_context": "context: The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags. / Carry forward the accepted QIF v0.2.1 runtime content, release notes, docs, schemas, examples, verifier, and AOF evidence, but remove legacy personal account identifiers from files and avoid carrying old author metadata into the new public history.",
+    "success_criteria": "not yet explicit",
+    "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags. / In the current implementation or operation, what context must be carried forward into this decision? => Carry forward the accepted QIF v0.2.1 runtime content, release notes, docs, schemas, examples, verifier, and AOF evidence, but remove legacy personal account identifiers from files and avoid carrying old author metadata into the new public history."
+  },
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFMIG-001.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFMIG-001.json",
+    ".aof/artifacts/need-validation/problem-statements/PST-QIFMIG-001.json",
+    ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFMIG-001.json",
+    ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFMIG-001.json"
+  ],
+  "council_execution_runs": [
+    {
+      "execution_id": "CRUN-MQPCJV4L-V2ORCC",
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "status": "completed",
+      "started_at": "2026-06-22T15:04:47.444Z",
+      "completed_at": "2026-06-22T15:04:47.449Z",
+      "summary": "prototype council execution prepared 2 seat calls in single-instance-role-switching: Builder -> Visionary with 2 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MQPCJV4L-V2ORCC-STEP-01",
+          "role": "Builder",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Builder planning call as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQPCHTJC-94FWQ8",
+              "decision_id": "DEC-MQPCJQQL-YWG68R",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags.",
+              "intent": "to be refined after clarification",
+              "active_context": "context: The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags. / Carry forward the accepted QIF v0.2.1 runtime content, release notes, docs, schemas, examples, verifier, and AOF evidence, but remove legacy personal account identifiers from files and avoid carrying old author metadata into the new public history.",
+              "context_snapshot_id": "CTX-MQPCIFWH-W590TD",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags. / In the current implementation or operation, what context must be carried forward into this decision? => Carry forward the accepted QIF v0.2.1 runtime content, release notes, docs, schemas, examples, verifier, and AOF evidence, but remove legacy personal account identifiers from files and avoid carrying old author metadata into the new public history."
+            },
+            "task": {
+              "request": "Migrate the Quality Intent Framework repository from a legacy personal-account development context to the AI Org Labs public account. Need: publish a sanitized repository state under ai-org-labs/quality-intent-framework with no legacy personal account identifiers in files or pushed history. Intent: remove legacy account references from tracked files, avoid preserving legacy author history by using a clean initial commit, point the repository at the new remote, and push only the sanitized branch without legacy tags. Context: keep QIF v0.2.1 content and AOF evidence, avoid new QIF features, and treat AOF source as moved to AI Org Labs.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFMIG-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFMIG-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFMIG-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFMIG-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFMIG-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQPCJQQL-YWG68R"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-06-22T15:04:47.445Z",
+          "completed_at": "2026-06-22T15:04:47.449Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-06-22T15:04:47.448Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder planning response: focus on The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags. and align to to be refined after clarification.",
+            "output_summary": "DECISION: proceed VETO: no Builder planning response: focus on The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Migrate the Quality Intent Framework repository from a legacy personal-account development context to the AI Org Labs public account. Need: publish a sanitized repository state under ai-org-labs/quality-intent-framework with no legacy personal account identifiers in files or pushed history. Intent: remove legacy account references from tracked files, avoid preserving legacy author history by using a clean initial commit, point the repository at the new remote, and push only the sanitized branch without legacy tags. Context: keep QIF v0.2.1 content and AOF evidence, avoid new QIF features, and treat AOF source as moved to AI Org Labs.\nNeed: The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags.\nIntent: to be refined after clarification\nActive Context: context: The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags. / Carry forward the accepted QIF v0.2.1 runtime content, release notes, docs, schemas, examples, verifier, and AOF evidence, but remove legacy personal account identifiers from files and avoid carrying old author metadata into the new public history.\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags. / In the current implementation or operation, what context must be carried forward into this decision? => Carry forward the accepted QIF v0.2.1 runtime content, release notes, docs, schemas, examples, verifier, and AOF evidence, but remove legacy personal account identifiers from files and avoid carrying old author metadata into the new public history."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MQPCJV4L-V2ORCC-STEP-02",
+          "role": "Visionary",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Visionary planning call as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQPCHTJC-94FWQ8",
+              "decision_id": "DEC-MQPCJQQL-YWG68R",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags.",
+              "intent": "to be refined after clarification",
+              "active_context": "context: The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags. / Carry forward the accepted QIF v0.2.1 runtime content, release notes, docs, schemas, examples, verifier, and AOF evidence, but remove legacy personal account identifiers from files and avoid carrying old author metadata into the new public history.",
+              "context_snapshot_id": "CTX-MQPCIFWH-W590TD",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags. / In the current implementation or operation, what context must be carried forward into this decision? => Carry forward the accepted QIF v0.2.1 runtime content, release notes, docs, schemas, examples, verifier, and AOF evidence, but remove legacy personal account identifiers from files and avoid carrying old author metadata into the new public history."
+            },
+            "task": {
+              "request": "Migrate the Quality Intent Framework repository from a legacy personal-account development context to the AI Org Labs public account. Need: publish a sanitized repository state under ai-org-labs/quality-intent-framework with no legacy personal account identifiers in files or pushed history. Intent: remove legacy account references from tracked files, avoid preserving legacy author history by using a clean initial commit, point the repository at the new remote, and push only the sanitized branch without legacy tags. Context: keep QIF v0.2.1 content and AOF evidence, avoid new QIF features, and treat AOF source as moved to AI Org Labs.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFMIG-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFMIG-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFMIG-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFMIG-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFMIG-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQPCJQQL-YWG68R"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-06-22T15:04:47.449Z",
+          "completed_at": "2026-06-22T15:04:47.449Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-06-22T15:04:47.449Z",
+            "output_text": "DECISION: proceed\nVETO: no\nVisionary planning response: focus on The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags. and align to to be refined after clarification.",
+            "output_summary": "DECISION: proceed VETO: no Visionary planning response: focus on The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Visionary in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Migrate the Quality Intent Framework repository from a legacy personal-account development context to the AI Org Labs public account. Need: publish a sanitized repository state under ai-org-labs/quality-intent-framework with no legacy personal account identifiers in files or pushed history. Intent: remove legacy account references from tracked files, avoid preserving legacy author history by using a clean initial commit, point the repository at the new remote, and push only the sanitized branch without legacy tags. Context: keep QIF v0.2.1 content and AOF evidence, avoid new QIF features, and treat AOF source as moved to AI Org Labs.\nNeed: The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags.\nIntent: to be refined after clarification\nActive Context: context: The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags. / Carry forward the accepted QIF v0.2.1 runtime content, release notes, docs, schemas, examples, verifier, and AOF evidence, but remove legacy personal account identifiers from files and avoid carrying old author metadata into the new public history.\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags. / In the current implementation or operation, what context must be carried forward into this decision? => Carry forward the accepted QIF v0.2.1 runtime content, release notes, docs, schemas, examples, verifier, and AOF evidence, but remove legacy personal account identifiers from files and avoid carrying old author metadata into the new public history."
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "last_council_execution_id": "CRUN-MQPCJV4L-V2ORCC"
+}

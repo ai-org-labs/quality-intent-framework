@@ -1,0 +1,457 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/qif/schemas/expert-judgment-package.schema.json",
+  "title": "Expert Judgment Framework Package",
+  "type": "object",
+  "required": [
+    "frameworkVersion",
+    "packageId",
+    "stakeholders",
+    "knowledgeSources",
+    "cases",
+    "expertJudgments",
+    "cues",
+    "concerns",
+    "lossBoundaries",
+    "decisionPatterns",
+    "applicabilityBoundaries",
+    "counterexamples",
+    "qualityIntentDerivations",
+    "reproductionTests",
+    "organizationalQualityCultures",
+    "reviewHistoryInferences",
+    "governanceEvents",
+    "acceptanceGates"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "frameworkVersion": { "type": "string" },
+    "packageId": { "type": "string" },
+    "title": { "type": "string" },
+    "stakeholders": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/stakeholder" }
+    },
+    "knowledgeSources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/knowledgeSource" }
+    },
+    "cases": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/case" }
+    },
+    "expertJudgments": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/expertJudgment" }
+    },
+    "cues": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/cue" }
+    },
+    "concerns": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/concern" }
+    },
+    "lossBoundaries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/lossBoundary" }
+    },
+    "decisionPatterns": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/decisionPattern" }
+    },
+    "applicabilityBoundaries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/applicabilityBoundary" }
+    },
+    "counterexamples": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/counterexample" }
+    },
+    "qualityIntentDerivations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/qualityIntentDerivation" }
+    },
+    "reproductionTests": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/reproductionTest" }
+    },
+    "organizationalQualityCultures": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/organizationalQualityCulture" }
+    },
+    "reviewHistoryInferences": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/reviewHistoryInference" }
+    },
+    "governanceEvents": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/governanceEvent" }
+    },
+    "acceptanceGates": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/acceptanceGate" }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]+-[A-Z0-9-]+$"
+    },
+    "refArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" },
+      "minItems": 1
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "stakeholder": {
+      "type": "object",
+      "required": ["id", "name", "category"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "category": { "type": "string" }
+      }
+    },
+    "knowledgeSource": {
+      "type": "object",
+      "required": ["id", "sourceType", "title", "reliability"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sourceType": {
+          "enum": ["interview", "review-comment", "approval-history", "rejection-history", "incident-report", "meeting-note", "ticket", "complaint", "audit-record", "observation"]
+        },
+        "title": { "type": "string" },
+        "reliability": { "$ref": "#/$defs/score" }
+      }
+    },
+    "case": {
+      "type": "object",
+      "required": ["id", "title", "domain", "context", "presentedFacts", "availableEvidence", "stakeholderRefs", "sourceRef"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "domain": { "enum": ["software", "operations", "accounting", "maintenance", "administration", "general"] },
+        "context": { "type": "string" },
+        "presentedFacts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "availableEvidence": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "actualOutcome": { "type": "string" },
+        "stakeholderRefs": { "$ref": "#/$defs/refArray" },
+        "sourceRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "expertJudgment": {
+      "type": "object",
+      "required": ["id", "caseRef", "expertRole", "judgment", "confidence", "primaryCueRefs", "concernRef", "lossBoundaryRef", "acceptanceConditions", "requiredEvidence", "waiverConditions"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "caseRef": { "$ref": "#/$defs/id" },
+        "expertRole": { "type": "string" },
+        "judgment": { "enum": ["acceptable", "unacceptable", "conditionally-acceptable"] },
+        "confidence": { "$ref": "#/$defs/score" },
+        "primaryCueRefs": { "$ref": "#/$defs/refArray" },
+        "concernRef": { "$ref": "#/$defs/id" },
+        "lossBoundaryRef": { "$ref": "#/$defs/id" },
+        "acceptanceConditions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "requiredEvidence": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "waiverConditions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "similarCaseNotes": { "type": "string" },
+        "juniorMissRisk": { "type": "string" }
+      }
+    },
+    "cue": {
+      "type": "object",
+      "required": ["id", "statement", "cueType", "detectionMethod", "salience"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "statement": { "type": "string" },
+        "cueType": { "enum": ["document-gap", "behavioral-signal", "structural-risk", "missing-evidence", "context-shift", "exception-signal"] },
+        "detectionMethod": { "type": "string" },
+        "salience": { "$ref": "#/$defs/score" },
+        "ambiguityNotes": { "type": "string" }
+      }
+    },
+    "concern": {
+      "type": "object",
+      "required": ["id", "statement", "harmMode", "affectedParties"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "statement": { "type": "string" },
+        "harmMode": { "type": "string" },
+        "affectedParties": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "escalationTrigger": { "type": "string" }
+      }
+    },
+    "lossBoundary": {
+      "type": "object",
+      "required": ["id", "statement", "severity", "irreversibility", "stakeholderRefs", "waiverAuthority"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "statement": { "type": "string" },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "irreversibility": { "enum": ["low", "medium", "high"] },
+        "stakeholderRefs": { "$ref": "#/$defs/refArray" },
+        "waiverAuthority": { "type": "string" }
+      }
+    },
+    "decisionPattern": {
+      "type": "object",
+      "required": ["id", "title", "triggerCueRefs", "applicableContext", "concernRef", "lossBoundaryRef", "typicalDecision", "acceptanceConditions", "evidenceRequired", "exceptions", "counterexampleRefs", "sourceJudgmentRefs", "confidence", "reproductionTestRef"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "triggerCueRefs": { "$ref": "#/$defs/refArray" },
+        "applicableContext": { "type": "string" },
+        "concernRef": { "$ref": "#/$defs/id" },
+        "lossBoundaryRef": { "$ref": "#/$defs/id" },
+        "typicalDecision": { "enum": ["acceptable", "unacceptable", "conditionally-acceptable"] },
+        "acceptanceConditions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "evidenceRequired": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "exceptions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "counterexampleRefs": { "$ref": "#/$defs/refArray" },
+        "sourceJudgmentRefs": { "$ref": "#/$defs/refArray" },
+        "confidence": { "$ref": "#/$defs/score" },
+        "reproductionTestRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "applicabilityBoundary": {
+      "type": "object",
+      "required": ["id", "patternRef", "includedContexts", "excludedContexts", "assumptions", "invalidationSignals"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "patternRef": { "$ref": "#/$defs/id" },
+        "includedContexts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "excludedContexts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "assumptions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "invalidationSignals": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "counterexample": {
+      "type": "object",
+      "required": ["id", "caseRef", "patternRef", "distinguishingFactors", "effectOnPattern"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "caseRef": { "$ref": "#/$defs/id" },
+        "patternRef": { "$ref": "#/$defs/id" },
+        "distinguishingFactors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "effectOnPattern": { "enum": ["narrow-boundary", "split-pattern", "invalidate-pattern", "no-change"] }
+      }
+    },
+    "qualityIntentDerivation": {
+      "type": "object",
+      "required": ["id", "patternRefs", "derivedIntentStatement", "rationale", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "patternRefs": { "$ref": "#/$defs/refArray" },
+        "derivedIntentStatement": { "type": "string" },
+        "rationale": { "type": "string" },
+        "status": { "enum": ["candidate", "validated", "active", "retired"] },
+        "qifIntentRef": { "type": "string" }
+      }
+    },
+    "reproductionTest": {
+      "type": "object",
+      "required": ["id", "patternRef", "evaluatorType", "usesUnseenCases", "unseenCaseRefs", "expectedDecisions", "observedAgreement", "failureAnalysis", "result"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "patternRef": { "$ref": "#/$defs/id" },
+        "evaluatorType": { "enum": ["non-expert-human", "ai-agent", "hybrid-team"] },
+        "usesUnseenCases": { "type": "boolean" },
+        "unseenCaseRefs": { "$ref": "#/$defs/refArray" },
+        "expectedDecisions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["caseRef", "decision"],
+            "additionalProperties": false,
+            "properties": {
+              "caseRef": { "$ref": "#/$defs/id" },
+              "decision": { "enum": ["acceptable", "unacceptable", "conditionally-acceptable"] }
+            }
+          }
+        },
+        "observedAgreement": { "$ref": "#/$defs/score" },
+        "failureAnalysis": { "type": "array", "items": { "type": "string" } },
+        "result": { "enum": ["pass", "partial-pass", "fail"] }
+      }
+    },
+    "organizationalQualityCulture": {
+      "type": "object",
+      "required": ["id", "name", "nonNegotiableLossBoundaryRefs", "preferredEvidence", "riskAppetite", "escalationNorms", "waiverPractices", "repeatedFears", "qualityTradeoffs", "subgroupDifferences", "patternRefs"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "nonNegotiableLossBoundaryRefs": { "$ref": "#/$defs/refArray" },
+        "preferredEvidence": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "riskAppetite": { "type": "string" },
+        "escalationNorms": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "waiverPractices": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "repeatedFears": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "qualityTradeoffs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "subgroupDifferences": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "patternRefs": { "$ref": "#/$defs/refArray" }
+      }
+    },
+    "reviewHistoryInference": {
+      "type": "object",
+      "required": ["id", "sourceType", "sourceRefs", "inferredPatternSummary", "supportingClues", "confidence", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sourceType": {
+          "enum": ["review-comments", "approval-history", "rejection-history", "incident-reports", "meeting-notes", "tickets", "customer-complaints", "audit-records"]
+        },
+        "sourceRefs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "inferredPatternSummary": { "type": "string" },
+        "supportingClues": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "confidence": { "$ref": "#/$defs/score" },
+        "status": { "enum": ["candidate", "validated", "rejected"] }
+      }
+    },
+    "governanceEvent": {
+      "type": "object",
+      "required": ["id", "eventType", "targetRef", "reason", "decision"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "eventType": { "enum": ["introduce-pattern", "revise-pattern", "retire-pattern", "challenge-pattern", "promote-derivation", "retire-derivation"] },
+        "targetRef": { "$ref": "#/$defs/id" },
+        "reason": { "type": "string" },
+        "decision": { "type": "string" }
+      }
+    },
+    "acceptanceGate": {
+      "type": "object",
+      "required": ["id", "name", "requiredArtifactRefs", "criteria"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "requiredArtifactRefs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["statement", "status"],
+            "additionalProperties": false,
+            "properties": {
+              "statement": { "type": "string" },
+              "status": { "enum": ["pass", "fail"] }
+            }
+          }
+        }
+      }
+    }
+  }
+}

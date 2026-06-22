@@ -1,0 +1,24 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-06-22T01:40:43.555Z",
+  "project_charter_id": "PCH-MQOJTTWJ-XDSQCG",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV021R-001.json",
+  "validated_objective": "Release QIF v0.2.1 as a committed, tagged, pushed, and GitHub-published baseline after verification.",
+  "scope": [
+    "Run npm and AOF verification before release",
+    "Create a release commit containing current v0.2/v0.2.1 runtime, schema, verifier, example, docs, changelog, and AOF evidence",
+    "Create and push annotated tag v0.2.1",
+    "Create GitHub Release v0.2.1 with release notes"
+  ],
+  "constraints": [
+    "Do not add new QIF features",
+    "Do not claim verifier success means semantic truth",
+    "Do not release if verification fails"
+  ],
+  "expected_outcomes": [
+    "Origin contains the release commit and v0.2.1 tag",
+    "GitHub Release v0.2.1 exists and summarizes the accepted runtime baseline"
+  ],
+  "source_task_id": "TASK-007",
+  "source_decision_record_id": "DEC-MQOJSHAP-3DA37N"
+}

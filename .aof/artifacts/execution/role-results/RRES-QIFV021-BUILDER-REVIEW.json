@@ -1,0 +1,26 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-22T01:05:03.596Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-MQOI0C6D-VHA2NY",
+  "status": "completed",
+  "recommendation": "approve",
+  "rationale": "Schemas, examples, docs, package version, runtime verifier, npm test integration, changelog, and AOF runtime log were updated for v0.2.1; npm test passes end to end.",
+  "signals": [
+    "npm-test-passed"
+  ],
+  "artifact_refs": [
+    "schemas/discovery-session-package.schema.json",
+    "schemas/review-run-package.schema.json",
+    "tools/validate-qif-runtime.mjs",
+    "CHANGELOG.md"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-005",
+  "source_decision_record_id": "DEC-MQOI1YGW-FW25BE",
+  "source_parent_session_id": "SESS-MQOI0C6D-VHA2NY",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.94
+}

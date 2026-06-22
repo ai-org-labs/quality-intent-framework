@@ -1,0 +1,14 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-06-21T17:07:31.716Z",
+  "problem_statement_id": "PST-MQO1HURO-DEOQUF",
+  "affected_party": "Organizations, successors, reviewers, operators, managers, and AI agents that must reproduce veteran judgment after experts retire",
+  "actual_problem": "Tacit expert judgment often remains embedded in concrete cases and reviewer instincts, so organizations cannot reliably derive quality intent, exceptions, or loss boundaries from it.",
+  "why_it_matters": "Without a structured extraction method, critical decisions drift, non-experts miss important cues, and AI agents cannot justify or reproduce high-stakes judgments.",
+  "why_now": "QIF currently assumes quality intents can be discovered, but many organizations need a case-based path from tacit judgment to reusable decision patterns before expertise is lost.",
+  "evidence_refs": [
+    ".aof/sessions/SESS-MQO1FUI2-48HHS2.json"
+  ],
+  "source_task_id": "TASK-002",
+  "source_decision_record_id": "DEC-MQO1G6WX-SPJ4DO"
+}

@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-06-22T00:50:29.850Z",
+  "value_hypothesis_id": "VHY-MQOI18II-CKD6CZ",
+  "expected_value_creation": "QIF v0.2.1 packages become more executable and auditable because raw answers, questions, derivations, applicability, governance outcomes, and confidence policies are explicit and verifier-checkable.",
+  "beneficiary": "Organizations and AI/human reviewers applying QIF to domain-general evaluation targets",
+  "supporting_evidence": [
+    "User acceptance criteria require npm test to verify end-to-end packages with raw answers, extraction, derivations, executable rules, governance triggers, and confidence reproducibility.",
+    "Existing v0.2 hardening already has schemas, examples, verifier logic, and AOF evidence that can be refined rather than redesigned."
+  ],
+  "success_criteria": [
+    "npm test passes and runtime verifier checks the new v0.2.1 traceability rules.",
+    "Docs and examples show derivation records separate from Quality Intents and confidence reproduced through policies rather than verdict average alone."
+  ],
+  "source_task_id": "TASK-005",
+  "source_decision_record_id": "DEC-MQOI0IS3-TAT1PA"
+}

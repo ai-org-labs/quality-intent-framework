@@ -1,0 +1,38 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-06-22T01:23:31.481Z",
+  "review_packet_id": "CREV-MQOJ7PJT-OKPYG6",
+  "council_id": "qif-v021-consolidation-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve QIF v0.2.1 consolidation review.",
+  "rationale": "The review covers all requested deliverables, preserves the no-redesign constraint, separates verifier authority from semantic truth, and identifies package composition plus canonical entity cleanup as the v0.3 pilot path.",
+  "recommendation": "Accept review deliverable and open v0.2.2 cleanup work later.",
+  "target_audience": "QIF maintainers and v0.3 pilot planners",
+  "expected_user_reaction": "They should see v0.2.1 as executable but conditionally pilot-ready after cleanup.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [
+    ".aof/artifacts/execution/team-outputs/TOUT-QIFV021C-REVIEW.json"
+  ],
+  "role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV021C-GUARDIAN-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV021C-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV021C-BUILDER-REVIEW.json"
+  ],
+  "evidence_refs": [
+    "docs/qif-v0.2.1-consolidation-review.md",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-006",
+  "source_parent_session_id": "SESS-MQOIZKHZ-RTF1GF",
+  "source_decision_record_id": "DEC-MQOJ17R5-Z672G0"
+}

@@ -1,0 +1,18 @@
+{
+  "claim_type": "resource-claim",
+  "recorded_at": "2026-06-21T23:11:45.721Z",
+  "claim_id": "RCL-MQOEI9FD-L2M79G",
+  "subject_ref": "TASK-004",
+  "resource_ref": "resource-qif-repo",
+  "claimant_role_ref": "builder",
+  "claim_scope": "Edit QIF v0.2 docs, schemas, examples, verifier, changelog, and AOF runtime log.",
+  "claim_status": "approved",
+  "approval_policy_refs": [],
+  "justification": "Project Charter authorizes this repository-local implementation slice after Need Validation; policy evidence is attached at execution gate.",
+  "allocation_plan_ref": null,
+  "policy_evaluation_ref": null,
+  "expires_at": null,
+  "source_task_id": "TASK-004",
+  "source_parent_session_id": "SESS-MQOEEGKQ-WAW3RU",
+  "source_decision_record_id": "DEC-MQOEFZU1-ILLA2V"
+}

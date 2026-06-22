@@ -1,0 +1,26 @@
+{
+  "report_type": "policy-evaluation-report",
+  "recorded_at": "2026-06-22T15:05:27.586Z",
+  "evaluation_id": "PER-MQPCKQ3M-N1AODY",
+  "subject_ref": "TASK-008",
+  "evaluation_scope": "privacy-preserving repository migration",
+  "policy_refs": [
+    "policy-identity-sanitized-publication"
+  ],
+  "overall_outcome": "requires-review",
+  "results": [
+    {
+      "policy_id": "policy-identity-sanitized-publication",
+      "effect": "require-review",
+      "outcome": "requires-review",
+      "reason": "Publishing to a new public repository must not carry legacy personal identifiers in files, author history, remotes, or tags.",
+      "blocking": false
+    }
+  ],
+  "recommended_actions": [
+    "Proceed only after identifier scan, clean-history commit, neutral author metadata, and no legacy tag push."
+  ],
+  "source_task_id": "TASK-008",
+  "source_parent_session_id": "SESS-MQPCHTJC-94FWQ8",
+  "source_decision_record_id": "DEC-MQPCJQQL-YWG68R"
+}

@@ -1,0 +1,38 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-06-22T01:05:31.152Z",
+  "review_packet_id": "CREV-MQOIKJYO-YMWEC1",
+  "council_id": "qif-v021-runtime-hardening-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve QIF v0.2.1 implementation hardening.",
+  "rationale": "The accepted v0.2 model was preserved while schemas, examples, and verifier logic now make raw expert answers, extraction steps, Quality Intent Derivations, executable applicability, confidence policies, and governance events traceable and executable.",
+  "recommendation": "Complete TASK-005 after verification artifacts and runtime log update.",
+  "target_audience": "QIF maintainers and AI/human review agents",
+  "expected_user_reaction": "The runtime can be inspected end to end without mistaking verifier success for semantic truth.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [
+    ".aof/artifacts/execution/team-outputs/TOUT-QIFV021-REVIEW.json"
+  ],
+  "role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV021-GUARDIAN-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV021-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV021-BUILDER-REVIEW.json"
+  ],
+  "evidence_refs": [
+    "docs/qif-v0.2-discovery-application-runtime.md",
+    "tools/validate-qif-runtime.mjs",
+    "examples/review-run-package.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-005",
+  "source_parent_session_id": "SESS-MQOI0C6D-VHA2NY",
+  "source_decision_record_id": "DEC-MQOI1YGW-FW25BE"
+}

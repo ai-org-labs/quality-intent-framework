@@ -1,0 +1,51 @@
+{
+  "snapshot_type": "aof-learning-loop",
+  "snapshot_format_version": 1,
+  "organization_ref": ".aof/organization.json",
+  "generated_at": "2026-06-22T15:16:27.955Z",
+  "latest_outcome": {
+    "source_session_id": "SESS-MQPCHTJC-94FWQ8",
+    "report_id": "OUT-MQPCYL5Q-D0LVKE",
+    "result": "partial",
+    "observed_at": "2026-06-22T15:16:14.364Z",
+    "note": "Sanitized clean-history repository is ready locally and verified, but push to AI Org Labs is blocked by GitHub authorization. No legacy tags were pushed.",
+    "signal_ref": "MIG-QIF-AI-ORG-LABS-AUTH-BLOCKED"
+  },
+  "latest_self_audit": {
+    "audit_id": "FSA-QIFMIG-002",
+    "recorded_at": "2026-06-22T15:16:12.016Z",
+    "summary": "Sanitized clean-history repository is ready locally, but remote publication is blocked by GitHub authorization.",
+    "detected_gap": "The active GitHub credential does not have write permission to the AI Org Labs target repository.",
+    "result_state": "escalate",
+    "next_action": "Authenticate with an AI Org Labs authorized credential or grant write access, then push main only.",
+    "related_task_ids": [
+      "TASK-008"
+    ]
+  },
+  "current_next_value_slice": {
+    "content": "Complete AI Org Labs push after authorization is fixed.",
+    "updated_at": "2026-06-22T15:16:14.370Z",
+    "declared_complete_at": "2026-06-22T15:16:14.370Z",
+    "source_session_id": "SESS-MQPCHTJC-94FWQ8",
+    "source_decision_record_id": null
+  },
+  "improvement_proposal": {
+    "proposal_basis": "framework-self-audit",
+    "proposed_focus": "Authenticate with an AI Org Labs authorized credential or grant write access, then push main only.",
+    "related_task_ids": [
+      "TASK-008"
+    ],
+    "open_task_count": 1
+  },
+  "learning_state": {
+    "has_outcome_evidence": true,
+    "has_self_audit": true,
+    "has_next_value_slice": true,
+    "loop_state": "improving"
+  },
+  "observations": [
+    "Current next value slice: Complete AI Org Labs push after authorization is fixed.",
+    "Latest self-audit next action: Authenticate with an AI Org Labs authorized credential or grant write access, then push main only.",
+    "Latest outcome result: partial"
+  ]
+}

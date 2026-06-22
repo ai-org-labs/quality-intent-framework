@@ -1,0 +1,83 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-06-22T01:19:16.931Z",
+  "packet_id": "ASP-MQOJ294Z-OUB0MZ",
+  "source_task_id": "TASK-006",
+  "source_parent_session_id": "SESS-MQOIZKHZ-RTF1GF",
+  "source_decision_record_id": "DEC-MQOJ17R5-Z672G0",
+  "objective": "Produce QIF v0.2.1 consolidation review deliverables",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "Builder",
+    "team_ref": "qif-consolidation-review",
+    "assignment_reason": "Builder can inspect docs, schemas, examples, and verifier behavior and create a review-only consolidation artifact.",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "schema-review",
+    "concept-review"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-concept-schema-review",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "docs/qif-v0.2-discovery-application-runtime.md",
+        "schemas/review-run-package.schema.json",
+        "tools/validate-qif-runtime.mjs"
+      ],
+      "rationale": "The task requires cross-artifact review and documentation, not runtime feature build."
+    }
+  ],
+  "resource_refs": [
+    "resource-repo-main"
+  ],
+  "policy_refs": [
+    "policy-runtime-backed-answer-discipline"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "consolidation-review",
+    "artifact_schema_ref": "docs/qif-v0.2.1-consolidation-review.md",
+    "required_sections": [
+      "concept inventory",
+      "responsibility matrix",
+      "runtime flow review",
+      "verifier boundary matrix"
+    ],
+    "acceptance_criteria": [
+      "All requested deliverables are present in the consolidation review document."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "No semantic-truth claim",
+      "evaluator_ref": "Guardian",
+      "evidence_required": "verifier boundary section",
+      "blocking": true
+    },
+    {
+      "criterion": "v0.3 pilot readiness is explicit",
+      "evaluator_ref": "Visionary",
+      "evidence_required": "pilot readiness section",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "scope-creep",
+      "trigger_condition": "review adds new feature or redesign",
+      "consequence": "require-council-review",
+      "recovery_action": "move to v0.2.2 cleanup task instead"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will consolidate the model without expanding it.",
+    "current_action": "Inspect artifacts and write review.",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run npm test and council review."
+  },
+  "status": "ready-for-assignment"
+}

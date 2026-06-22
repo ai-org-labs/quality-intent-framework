@@ -1,0 +1,15 @@
+{
+  "audit_type": "framework-self-audit",
+  "recorded_at": "2026-06-22T15:24:30.970Z",
+  "audit_id": "FSA-QIFMIG-CLEANUP-001",
+  "scope": "public repository cleanup",
+  "summary": "Hidden AOF evidence, docs, gitignore, and active task state were cleaned for public clean-history publication.",
+  "detected_gap": "Remote publication is still blocked by AI Org Labs write authorization, but the local public tree is sanitized and verified.",
+  "result_state": "stable",
+  "next_action": "Authenticate with an AI Org Labs authorized credential, then push main only.",
+  "related_task_ids": [
+    "TASK-008"
+  ],
+  "source_session_id": "SESS-MQPCHTJC-94FWQ8",
+  "source_decision_record_id": "DEC-MQPCJQQL-YWG68R"
+}

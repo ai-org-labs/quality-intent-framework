@@ -1,0 +1,28 @@
+{
+  "join_type": "role-join",
+  "recorded_at": "2026-06-21T22:51:30.045Z",
+  "join_id": "RJOIN-MQODS7EL-XAJPHM",
+  "join_status": "resolved",
+  "stage": "review",
+  "expected_roles": [
+    "Builder",
+    "Visionary",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Builder",
+    "Visionary",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-orchestrator-decision",
+  "blocking_signals": [],
+  "recommended_next_step": "Approve the QIF v0.2 runtime baseline and record self-audit plus retrospective evidence.",
+  "received_session_ids": [
+    "SESS-MQODID63-10U4EO"
+  ],
+  "source_task_id": "TASK-003",
+  "source_parent_session_id": "SESS-MQODID63-10U4EO",
+  "decision_record_ref": ".aof/decisions/DEC-MQODJNGU-7MLA9J.json",
+  "summary": "All three review perspectives support proceeding; Guardian raises no veto."
+}

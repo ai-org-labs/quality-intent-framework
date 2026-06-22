@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/qif/schemas/organizational-quality-culture-package.schema.json",
+  "title": "QIF Organizational Quality Culture Package",
+  "type": "object",
+  "required": [
+    "packageType",
+    "runtimeVersion",
+    "packageId",
+    "lossBoundaries",
+    "decisionPatterns",
+    "organizationalQualityCultures"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "packageType": { "const": "organizational-quality-culture" },
+    "runtimeVersion": { "type": "string" },
+    "packageId": { "type": "string" },
+    "lossBoundaries": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/lossBoundary" }
+    },
+    "decisionPatterns": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/decisionPattern" }
+    },
+    "organizationalQualityCultures": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/culture" }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]+-[A-Z0-9-]+$"
+    },
+    "refArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" },
+      "minItems": 1
+    },
+    "lossBoundary": {
+      "type": "object",
+      "required": ["id", "statement"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "statement": { "type": "string" }
+      }
+    },
+    "decisionPattern": {
+      "type": "object",
+      "required": ["id", "title"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" }
+      }
+    },
+    "culture": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "aggregationRole",
+        "nonNegotiableLossBoundaryRefs",
+        "recurringFears",
+        "preferredEvidence",
+        "riskAppetite",
+        "escalationNorms",
+        "waiverPractices",
+        "qualityTradeoffs",
+        "departmentOrRoleDifferences",
+        "patternRefs",
+        "provisional"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "aggregationRole": { "const": "context-only" },
+        "nonNegotiableLossBoundaryRefs": { "$ref": "#/$defs/refArray" },
+        "recurringFears": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "preferredEvidence": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "riskAppetite": { "type": "string" },
+        "escalationNorms": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "waiverPractices": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "qualityTradeoffs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "departmentOrRoleDifferences": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "patternRefs": { "$ref": "#/$defs/refArray" },
+        "provisional": { "type": "boolean" }
+      }
+    }
+  }
+}

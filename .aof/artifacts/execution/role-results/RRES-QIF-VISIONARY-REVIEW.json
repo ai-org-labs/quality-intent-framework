@@ -1,0 +1,24 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-21T16:35:10.259Z",
+  "role": "Visionary",
+  "stage": "review",
+  "session_id": "SESS-MQO00FSS-ZXQN1D",
+  "status": "completed",
+  "recommendation": "Accept direction as aligned with the validated need.",
+  "rationale": "The framework stays domain-general and preserves quality as intent, loss boundary, evidence, and governance rather than output volume.",
+  "signals": [
+    "scope remains aligned to Project Charter"
+  ],
+  "artifact_refs": [
+    "docs/qif-operational-framework.md",
+    ".aof/artifacts/need-validation/records/NVR-QIF-001.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-001",
+  "source_decision_record_id": "DEC-MQO0370N-32YV2X",
+  "source_parent_session_id": "SESS-MQO00FSS-ZXQN1D",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.84
+}
