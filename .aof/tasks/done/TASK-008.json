@@ -2,7 +2,7 @@
   "task_id": "TASK-008",
   "title": "Migrate QIF to AI Org Labs",
   "description": "Sanitize legacy personal-account references, create clean public history, point to ai-org-labs/quality-intent-framework, and push without legacy tags.",
-  "status": "open",
+  "status": "done",
   "origin": "orchestrator",
   "orchestrator_session_id": "SESS-MQPCHTJC-94FWQ8",
   "assigned_session_ids": [
@@ -11,12 +11,12 @@
   "related_decision_record_id": "DEC-MQPCJQQL-YWG68R",
   "operating_goal_ref": ".aof/goals/operating-goal.json",
   "created_at": "2026-06-22T15:03:49.687Z",
-  "updated_at": "2026-06-22T15:16:15.440Z",
+  "updated_at": "2026-06-23T17:15:33.640Z",
   "assigned_at": null,
-  "done_at": null,
+  "done_at": "2026-06-23T17:15:33.640Z",
   "retired_at": null,
   "last_triaged_at": null,
   "stale_candidate_at": null,
   "retire_candidate_at": null,
-  "triage_notes": "Local sanitized clean-history repository is ready; remote push is blocked until AI Org Labs authorization is available."
+  "triage_notes": "AI Org Labs main branch, v0.2.1 tag, and GitHub Release are published; migration is complete."
 }

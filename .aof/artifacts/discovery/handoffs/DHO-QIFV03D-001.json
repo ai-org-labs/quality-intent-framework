@@ -1,0 +1,21 @@
+{
+  "artifact_type": "discovery-handoff",
+  "recorded_at": "2026-06-24T00:00:00.000+09:00",
+  "handoff_id": "DHO-QIFV03D-001",
+  "source_need_validation_record_ref": ".aof/artifacts/need-validation/records/NVR-QIFV03D-001.json",
+  "handoff_summary": "Proceed to a review-only v0.3 Discovery Layer design that defines discovery patterns and boundaries before schema or verifier implementation.",
+  "required_context": [
+    "QIF remains the representation layer for discovered quality intents.",
+    "Discovery Layer remains the mechanism for finding candidate quality intents.",
+    "Checklist-driven quality coverage is an anti-pattern.",
+    "Discovery coverage must measure exploration breadth, not checklist completion."
+  ],
+  "open_questions": [
+    "Which Discovery Patterns should be canonical in v0.3 versus experimental?",
+    "What confidence model is sufficient for candidate Quality Intents before expert validation?",
+    "Should v0.3 include schemas for Discovery Patterns or remain design-only first?"
+  ],
+  "source_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "source_task_id": "TASK-009",
+  "source_decision_record_id": "DEC-MQQWP5L8-L04DY1"
+}

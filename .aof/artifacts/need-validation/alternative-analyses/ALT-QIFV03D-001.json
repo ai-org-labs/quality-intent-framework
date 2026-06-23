@@ -1,0 +1,24 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-06-24T00:00:00.000+09:00",
+  "alternative_analysis_id": "ALT-QIFV03D-001",
+  "subject_need": "Enable quality intent discovery before QIF artifact generation",
+  "alternative_solutions": [
+    "Create a separate QIF Discovery Layer design with discovery patterns, dynamic flow, and traceability to QIF generation.",
+    "Extend existing Discovery Session schema only, without a separate conceptual layer.",
+    "Create a fixed quality category checklist as a guided questionnaire."
+  ],
+  "non_solution_options": [
+    "Ask users to manually author Quality Intents without discovery support.",
+    "Treat common quality categories such as performance, security, and availability as default coverage requirements."
+  ],
+  "defer_options": [
+    "Wait for a v0.3 pilot before defining Discovery Patterns."
+  ],
+  "stop_options": [
+    "Do not implement a fixed category checklist as the discovery mechanism.",
+    "Do not start v0.3 schema implementation until the Discovery Layer boundary is accepted."
+  ],
+  "source_task_id": "TASK-009",
+  "source_decision_record_id": "DEC-MQQWP5L8-L04DY1"
+}

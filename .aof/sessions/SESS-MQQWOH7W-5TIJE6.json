@@ -1,0 +1,441 @@
+{
+  "session_id": "SESS-MQQWOH7W-5TIJE6",
+  "workflow_id": "service-design",
+  "organization_id": "civic-studio",
+  "organization": {
+    "language": "en"
+  },
+  "status": "framed",
+  "trigger": {
+    "trigger_id": "TRG-MQQWOH7W-QC6EZJ",
+    "trigger_type": "cli",
+    "received_at": "2026-06-23T17:16:01.195Z",
+    "request_payload": "Design exploration for QIF v0.3 Discovery Layer. Need: enable non-experts to discover quality intents through failure-oriented discovery patterns without checklist-driven quality definition. Intent: produce an AOF-reviewed concept boundary, discovery pattern taxonomy, dynamic discovery flow, evidence and confidence model, and v0.3 acceptance criteria before implementation. Context: QIF remains the representation layer for discovered quality intents; Discovery Layer is a separate mechanism for discovering quality intents; no UI, external integration, or fixed checklist coverage model is in scope for this slice."
+  },
+  "current_stage": "planning",
+  "routing_mode": "deep-path",
+  "routing_mode_history": [
+    {
+      "from_mode": null,
+      "to_mode": "deep-path",
+      "at": "2026-06-23T17:16:01.195Z",
+      "reason": "session-created"
+    }
+  ],
+  "context_snapshot_id": "CTX-MQQWP5C8-WQ5104",
+  "open_decision_ids": [
+    "DEC-MQQWRX8V-2CR7HN"
+  ],
+  "closed_decision_ids": [
+    "DEC-MQQWOH84-FKU9E6",
+    "DEC-MQQWP5L8-L04DY1"
+  ],
+  "stage_transitions": [
+    {
+      "from_stage": null,
+      "to_stage": "clarification",
+      "from_status": null,
+      "to_status": "waiting_user",
+      "at": "2026-06-23T17:16:01.195Z",
+      "reason": "session-created"
+    },
+    {
+      "from_stage": "clarification",
+      "to_stage": "need-validation",
+      "from_status": "waiting_user",
+      "to_status": "framed",
+      "at": "2026-06-23T17:16:32.430Z",
+      "reason": "clarification-complete"
+    },
+    {
+      "from_stage": "need-validation",
+      "to_stage": "planning",
+      "from_status": "framed",
+      "to_status": "framed",
+      "at": "2026-06-23T17:18:41.946Z",
+      "reason": "need-validation-approved"
+    }
+  ],
+  "reopen_count": 0,
+  "outcome_reports": [
+    {
+      "report_id": "OUT-MQQX6HJU-MBW2V8",
+      "result": "success",
+      "observed_at": "2026-06-23T17:30:01.433Z",
+      "note": "QIF v0.3 Discovery Layer design was produced, reviewed by Visionary/Builder/Guardian evidence, verified by repository and AOF checks, and kept separate from schema implementation.",
+      "signal_ref": "docs/qif-v0.3-discovery-layer-design.md"
+    }
+  ],
+  "clarification": {
+    "round_count": 1,
+    "dimensions": {
+      "need_clarity": "partial",
+      "intent_clarity": "partial",
+      "context_completeness": "missing",
+      "success_criteria_clarity": "missing",
+      "prohibited_conditions_clarity": "partial",
+      "governance_scope_clarity": "clear",
+      "brownfield_orientation_completeness": "clear",
+      "risk_exposure": "partial"
+    },
+    "gaps": [
+      {
+        "dimension": "need_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The underlying need is not specific enough yet."
+      },
+      {
+        "dimension": "intent_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The intended direction is not yet explicit."
+      },
+      {
+        "dimension": "context_completeness",
+        "status": "missing",
+        "trigger_class": "missing-constraint",
+        "summary": "Key constraints, scope, and current conditions are missing."
+      },
+      {
+        "dimension": "success_criteria_clarity",
+        "status": "missing",
+        "trigger_class": "missing-success-criteria",
+        "summary": "Success cannot be evaluated yet."
+      },
+      {
+        "dimension": "prohibited_conditions_clarity",
+        "status": "partial",
+        "trigger_class": "missing-prohibition",
+        "summary": "Forbidden changes or non-negotiables are not explicit."
+      }
+    ],
+    "pending_questions": [],
+    "asked_questions": [
+      "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "How should improvement success be judged: which metric or end state matters most?"
+    ],
+    "question_rationale": [],
+    "trigger_classes": [],
+    "target_fields": [],
+    "user_answers": [
+      {
+        "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+        "answer": "Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer.",
+        "target_fields": [
+          "need",
+          "context"
+        ]
+      },
+      {
+        "question": "How should improvement success be judged: which metric or end state matters most?",
+        "answer": "Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion.",
+        "target_fields": [
+          "success_criteria",
+          "intent"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "ask_or_assume_decision": "ask",
+    "remaining_gaps": [],
+    "unresolved_ambiguity": [],
+    "question_budget": {
+      "initial_question_budget": 2,
+      "followup_budget": 1,
+      "max_rounds": 2
+    },
+    "next_stop_condition": "need validation can proceed",
+    "clarification_summary": "runtime captured first-round clarification answers and can proceed to need validation",
+    "should_wait_for_user": false
+  },
+  "created_at": "2026-06-23T17:16:01.195Z",
+  "updated_at": "2026-06-23T17:30:01.433Z",
+  "framing": {
+    "request": "Design exploration for QIF v0.3 Discovery Layer. Need: enable non-experts to discover quality intents through failure-oriented discovery patterns without checklist-driven quality definition. Intent: produce an AOF-reviewed concept boundary, discovery pattern taxonomy, dynamic discovery flow, evidence and confidence model, and v0.3 acceptance criteria before implementation. Context: QIF remains the representation layer for discovered quality intents; Discovery Layer is a separate mechanism for discovering quality intents; no UI, external integration, or fixed checklist coverage model is in scope for this slice.",
+    "need": "Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer.",
+    "intent": "Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion.",
+    "active_context": "context: Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer. | success: Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion.",
+    "success_criteria": "Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion.",
+    "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer. / How should improvement success be judged: which metric or end state matters most? => Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion."
+  },
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV03D-001.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV03D-001.json",
+    ".aof/artifacts/need-validation/problem-statements/PST-QIFV03D-001.json",
+    ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV03D-001.json",
+    ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV03D-001.json",
+    ".aof/artifacts/discovery/handoffs/DHO-QIFV03D-001.json"
+  ],
+  "council_execution_runs": [
+    {
+      "execution_id": "CRUN-MQQWSIXT-L1UY73",
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "status": "prepared",
+      "started_at": "2026-06-23T17:19:10.047Z",
+      "completed_at": "2026-06-23T17:19:10.047Z",
+      "summary": "prototype council execution prepared 2 seat calls in single-instance-role-switching: Builder -> Visionary",
+      "steps": [
+        {
+          "step_id": "CRUN-MQQWSIXT-L1UY73-STEP-01",
+          "role": "Builder",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Builder planning call as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQQWOH7W-5TIJE6",
+              "decision_id": "DEC-MQQWRX8V-2CR7HN",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer.",
+              "intent": "Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion.",
+              "active_context": "context: Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer. | success: Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion.",
+              "context_snapshot_id": "CTX-MQQWP5C8-WQ5104",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer. / How should improvement success be judged: which metric or end state matters most? => Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion."
+            },
+            "task": {
+              "request": "Design exploration for QIF v0.3 Discovery Layer. Need: enable non-experts to discover quality intents through failure-oriented discovery patterns without checklist-driven quality definition. Intent: produce an AOF-reviewed concept boundary, discovery pattern taxonomy, dynamic discovery flow, evidence and confidence model, and v0.3 acceptance criteria before implementation. Context: QIF remains the representation layer for discovered quality intents; Discovery Layer is a separate mechanism for discovering quality intents; no UI, external integration, or fixed checklist coverage model is in scope for this slice.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV03D-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV03D-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQQWRX8V-2CR7HN"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MQQWSIXT-L1UY73-STEP-02",
+          "role": "Visionary",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Visionary planning call as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQQWOH7W-5TIJE6",
+              "decision_id": "DEC-MQQWRX8V-2CR7HN",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer.",
+              "intent": "Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion.",
+              "active_context": "context: Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer. | success: Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion.",
+              "context_snapshot_id": "CTX-MQQWP5C8-WQ5104",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer. / How should improvement success be judged: which metric or end state matters most? => Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion."
+            },
+            "task": {
+              "request": "Design exploration for QIF v0.3 Discovery Layer. Need: enable non-experts to discover quality intents through failure-oriented discovery patterns without checklist-driven quality definition. Intent: produce an AOF-reviewed concept boundary, discovery pattern taxonomy, dynamic discovery flow, evidence and confidence model, and v0.3 acceptance criteria before implementation. Context: QIF remains the representation layer for discovered quality intents; Discovery Layer is a separate mechanism for discovering quality intents; no UI, external integration, or fixed checklist coverage model is in scope for this slice.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV03D-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV03D-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQQWRX8V-2CR7HN"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "execution_id": "CRUN-MQQX37LH-0AOGKE",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "prepared",
+      "started_at": "2026-06-23T17:27:28.562Z",
+      "completed_at": "2026-06-23T17:27:28.562Z",
+      "summary": "prototype council execution prepared 2 seat calls in single-instance-role-switching: Guardian -> Builder",
+      "steps": [
+        {
+          "step_id": "CRUN-MQQX37LH-0AOGKE-STEP-01",
+          "role": "Guardian",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Guardian review call as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQQWOH7W-5TIJE6",
+              "decision_id": "DEC-MQQWRX8V-2CR7HN",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer.",
+              "intent": "Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion.",
+              "active_context": "context: Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer. | success: Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion.",
+              "context_snapshot_id": "CTX-MQQWP5C8-WQ5104",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer. / How should improvement success be judged: which metric or end state matters most? => Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion."
+            },
+            "task": {
+              "request": "Design exploration for QIF v0.3 Discovery Layer. Need: enable non-experts to discover quality intents through failure-oriented discovery patterns without checklist-driven quality definition. Intent: produce an AOF-reviewed concept boundary, discovery pattern taxonomy, dynamic discovery flow, evidence and confidence model, and v0.3 acceptance criteria before implementation. Context: QIF remains the representation layer for discovered quality intents; Discovery Layer is a separate mechanism for discovering quality intents; no UI, external integration, or fixed checklist coverage model is in scope for this slice.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV03D-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV03D-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQQWRX8V-2CR7HN"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MQQX37LH-0AOGKE-STEP-02",
+          "role": "Builder",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Builder review call as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MQQWOH7W-5TIJE6",
+              "decision_id": "DEC-MQQWRX8V-2CR7HN",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer.",
+              "intent": "Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion.",
+              "active_context": "context: Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer. | success: Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion.",
+              "context_snapshot_id": "CTX-MQQWP5C8-WQ5104",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Touchpoint is the pre-QIF discovery process: stakeholder interviews, document review, incident/history review, and AI-assisted exploration before QIF artifacts are generated. Out of scope for this slice: UI, external integrations, checklist-style quality categories, software-only assumptions, and changing the stable QIF representation layer. / How should improvement success be judged: which metric or end state matters most? => Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion."
+            },
+            "task": {
+              "request": "Design exploration for QIF v0.3 Discovery Layer. Need: enable non-experts to discover quality intents through failure-oriented discovery patterns without checklist-driven quality definition. Intent: produce an AOF-reviewed concept boundary, discovery pattern taxonomy, dynamic discovery flow, evidence and confidence model, and v0.3 acceptance criteria before implementation. Context: QIF remains the representation layer for discovered quality intents; Discovery Layer is a separate mechanism for discovering quality intents; no UI, external integration, or fixed checklist coverage model is in scope for this slice.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV03D-001.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV03D-001.json",
+                ".aof/artifacts/discovery/handoffs/DHO-QIFV03D-001.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MQQWRX8V-2CR7HN"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "last_council_execution_id": "CRUN-MQQX37LH-0AOGKE"
+}

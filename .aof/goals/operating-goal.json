@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Publish a sanitized clean-history QIF repository under ai-org-labs/quality-intent-framework, removing legacy personal account identifiers from tracked files and avoiding legacy author metadata or tags in the new public history.",
-  "updated_at": "2026-06-22T15:04:41.769Z",
+  "content": "QIF needs a separate Discovery Layer design for v0.3 so non-experts and AI agents can discover candidate quality intents through failure-oriented exploration without converting QIF into a checklist framework.",
+  "updated_at": "2026-06-23T17:18:41.952Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MQPCHTJC-94FWQ8",
-  "source_decision_record_id": "DEC-MQPCJQQL-YWG68R",
+  "source_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN",
   "declared_complete_at": null
 }

@@ -1,0 +1,42 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-06-23T17:21:55.895Z",
+  "review_packet_id": "CREV-MQQWW2WN-I5WJTZ",
+  "council_id": "discovery-layer-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Proceed with QIF v0.3 Discovery Layer design as a separate pre-QIF discovery mechanism.",
+  "rationale": "The validated need, gate packet, and three-role review agree that the next version should design failure-oriented Discovery Patterns while preserving QIF as representation and blocking checklist regression.",
+  "recommendation": "Draft docs/qif-v0.3-discovery-layer-design.md and defer schema/runtime implementation to a follow-up task.",
+  "target_audience": "QIF maintainers and AI coding agents",
+  "expected_user_reaction": "Use the design as the next-version planning basis before implementation.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [
+    "Add a design document only; update README/changelog later when implementation scope is accepted."
+  ],
+  "organization_change_recommendations": [
+    "Treat Discovery Layer governance as candidate-intent review, not semantic truth approval."
+  ],
+  "diagnosis_category": "discovery-layer-boundary-approved",
+  "diagnosis_confidence": 0.87,
+  "diagnosis_evidence_refs": [
+    ".aof/artifacts/execution/team-outputs/TOUT-QIFV03D-GATE.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [
+    ".aof/artifacts/execution/team-outputs/TOUT-QIFV03D-GATE.json"
+  ],
+  "role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV03D-GUARDIAN-GATE.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV03D-001.json"
+  ],
+  "follow_up_task_ids": [
+    "TASK-009"
+  ],
+  "escalation_required": false,
+  "source_task_id": "TASK-009",
+  "source_parent_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN"
+}

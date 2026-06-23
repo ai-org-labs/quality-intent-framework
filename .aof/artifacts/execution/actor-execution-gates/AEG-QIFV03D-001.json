@@ -1,0 +1,70 @@
+{
+  "gate_type": "actor-execution-gate",
+  "gate_format_version": 1,
+  "recorded_at": "2026-06-23T17:20:49.353Z",
+  "gate_id": "AEG-QIFV03D-001",
+  "actor_assignment_evaluation_ref": ".aof/artifacts/execution/actor-assignment-evaluations/AAE-QIFV03D-001.json",
+  "actor_skill_packet_ref": ".aof/artifacts/execution/actor-skill-packets/ASP-QIFV03D-001.json",
+  "source_task_id": "TASK-009",
+  "source_parent_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "discovery-layer-council",
+    "execution_mode": "single-actor",
+    "assignment_state": "selected"
+  },
+  "resource_gate": {
+    "state": "allowed",
+    "required_resource_refs": [
+      "resource-repository-docs"
+    ],
+    "claim_refs": [
+      ".aof/artifacts/execution/resource-claims/RCL-QIFV03D-001.json"
+    ],
+    "missing_resource_refs": [],
+    "claim_summaries": [
+      {
+        "artifact_ref": ".aof/artifacts/execution/resource-claims/RCL-QIFV03D-001.json",
+        "resource_ref": "resource-repository-docs",
+        "claim_status": "approved",
+        "claimant_role_ref": "builder"
+      }
+    ]
+  },
+  "policy_gate": {
+    "state": "requires-council-review",
+    "required_policy_refs": [
+      "policy-no-checklist-quality-definition"
+    ],
+    "evaluation_refs": [
+      ".aof/artifacts/execution/policy-evaluations/PER-QIFV03D-001.json"
+    ],
+    "missing_policy_refs": [],
+    "evaluation_summaries": [
+      {
+        "artifact_ref": ".aof/artifacts/execution/policy-evaluations/PER-QIFV03D-001.json",
+        "policy_refs": [
+          "policy-no-checklist-quality-definition"
+        ],
+        "overall_outcome": "requires-review"
+      }
+    ]
+  },
+  "gate_decision": {
+    "execution_gate_state": "requires-council-review",
+    "rationale": "Execution requires council review because a resource claim or policy evaluation is not fully allowed.",
+    "recommended_action": "Submit the gate packet to council review before actor execution."
+  },
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I need council review before I should execute.",
+    "current_action": "Draft Discovery Layer design",
+    "visible_state": "requires-council-review",
+    "visible_blockers": [
+      "policy outcome requires-review: policy-no-checklist-quality-definition"
+    ],
+    "next_action": "Submit the gate packet to council review before actor execution."
+  }
+}

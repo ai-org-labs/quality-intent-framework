@@ -820,10 +820,127 @@ Cleanup actions:
 - Local machine paths in AOF evidence and runtime documentation were replaced with placeholders.
 - Obsolete pre-migration release execution notes under `docs/releases/` were removed because the clean public repository intentionally does not carry legacy tags or prior release-publication state.
 - `.gitignore` was expanded to block common local, secret, log, coverage, and build-output files.
-- The active migration task remains open until AI Org Labs push authorization is available.
+- The migration task was later closed after the clean public repository, tag, and release were published under AI Org Labs.
 
 Decision reason:
 
 - Public-readiness requires scanning hidden AOF evidence, not just product documentation and examples.
 - The public clean-history repository should preserve QIF v0.2.1 content and necessary AOF traceability while avoiding stale local paths, legacy repository identifiers, and obsolete release-execution files.
 
+Publication closure:
+
+- Runtime command: `outcome-report --session .aof/sessions/SESS-MQPCHTJC-94FWQ8.json --result success`
+- Runtime command: `task-update --task-id TASK-008 --status done`
+- Completed task: `.aof/tasks/done/TASK-008.json`
+- Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.2.1`
+
+## QIF v0.3 Discovery Layer Design
+
+This repository then opened a design-only slice for the next version: a Discovery Layer that helps non-experts discover candidate Quality Intents before QIF artifacts are authored.
+
+Runtime session:
+
+- Session: `.aof/sessions/SESS-MQQWOH7W-5TIJE6.json`
+- Initial decision: `.aof/decisions/DEC-MQQWOH84-FKU9E6.md`
+- Framing decision: `.aof/decisions/DEC-MQQWP5L8-L04DY1.md`
+- Need validation decision: `.aof/decisions/DEC-MQQWRX8V-2CR7HN.md`
+- Task: `.aof/tasks/done/TASK-009.json`
+
+Need / Intent / Context:
+
+- Need: enable quality intent discovery before QIF artifact generation.
+- Intent: produce a reviewed concept boundary, discovery pattern taxonomy, dynamic discovery flow, evidence and confidence model, and v0.3 acceptance criteria.
+- Context: QIF remains the representation layer for discovered quality intents; the Discovery Layer is a separate pre-QIF mechanism; no UI, external integration, software-only assumption, or fixed checklist coverage model is in scope.
+
+Need validation artifacts:
+
+- Problem Statement: `.aof/artifacts/need-validation/problem-statements/PST-QIFV03D-001.json`
+- Value Hypothesis: `.aof/artifacts/need-validation/value-hypotheses/VHY-QIFV03D-001.json`
+- Alternative Analysis: `.aof/artifacts/need-validation/alternative-analyses/ALT-QIFV03D-001.json`
+- Discovery Handoff: `.aof/artifacts/discovery/handoffs/DHO-QIFV03D-001.json`
+- Need Validation Record: `.aof/artifacts/need-validation/records/NVR-QIFV03D-001.json`
+- Project Charter: `.aof/artifacts/need-validation/project-charters/PCH-QIFV03D-001.json`
+
+Direction runtime commands:
+
+- `run --project . --deep-path`
+- `answer --session .aof/sessions/SESS-MQQWOH7W-5TIJE6.json`
+- `need-validation-advance --session .aof/sessions/SESS-MQQWOH7W-5TIJE6.json`
+- `situation-assess --write-artifact .aof/artifacts/runtime/qif-v0.3-discovery-layer-situation-assessment.json`
+- `council-exec --stage planning --provider mock --write-artifact .aof/artifacts/council/qif-v0.3-discovery-layer-planning-council.json`
+
+Direction decision:
+
+- The raw request was not used directly as a project.
+- The validated need is a pre-QIF discovery design, not a QIF representation redesign.
+- Fixed quality category checklists remain a rejected alternative.
+
+Execution gate artifacts:
+
+- Policy Evaluation: `.aof/artifacts/execution/policy-evaluations/PER-QIFV03D-001.json`
+- Resource Claim: `.aof/artifacts/execution/resource-claims/RCL-QIFV03D-001.json`
+- Actor Skill Packet: `.aof/artifacts/execution/actor-skill-packets/ASP-QIFV03D-001.json`
+- Actor Assignment Evaluation: `.aof/artifacts/execution/actor-assignment-evaluations/AAE-QIFV03D-001.json`
+- Actor Execution Gate: `.aof/artifacts/execution/actor-execution-gates/AEG-QIFV03D-001.json`
+
+Execution decision:
+
+- Builder execution was limited to documentation and planning artifacts.
+- The policy evaluation required review because the main risk is accidentally converting discovery patterns into mandatory quality checklists.
+- Visionary, Builder, and Guardian gate evidence approved proceeding with a design document only.
+
+Implemented artifact:
+
+- Added design document: `docs/qif-v0.3-discovery-layer-design.md`
+
+Review runtime commands:
+
+- `council-exec --stage review --provider mock --write-artifact .aof/artifacts/council/qif-v0.3-discovery-layer-review-council-exec.json`
+- `role-result-record` for Visionary, Builder, and Guardian review evidence.
+- `role-join-record --write-artifact .aof/artifacts/execution/role-joins/RJOIN-QIFV03D-REVIEW.json`
+- `team-output-record --write-artifact .aof/artifacts/execution/team-outputs/TOUT-QIFV03D-REVIEW.json`
+- `council-review-packet --write-artifact .aof/artifacts/council/qif-v0.3-discovery-layer-review-council-packet.json`
+
+Council judgment:
+
+- Visionary: approved. The layer boundary lets QIF move toward quality-consultant-like discovery while preserving the stable representation layer.
+- Builder: approved. The slice produced a coherent design document and explicitly deferred schemas, examples, and verifier changes.
+- Guardian: approved with guardrails. Discovery Patterns must remain exploratory strategies, AI-suggested Quality Intents remain candidates, and coverage must measure exploration breadth rather than checklist completion.
+
+Verification:
+
+- Repository command: `npm test`
+- AOF command: `need-validation-benchmark --write-artifact .aof/artifacts/verification/need-validation-benchmark-qif-v0.3-discovery-layer.json`
+- AOF command: `command-routing-audit --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.3-discovery-layer.json`
+- AOF command: `organization-verify --project .`
+
+Verification result:
+
+- `npm test` passed.
+- Need Validation benchmark passed.
+- Command routing audit passed.
+- Organization verification passed with 143/143 checks before task closure.
+
+Self-review:
+
+- Runtime command: `self-audit-record --audit-id FSA-QIFV03D-001`
+- Artifact: `.aof/context/active/framework-self-audit.json`
+
+Self-review reason:
+
+- The design slice is stable and intentionally does not implement v0.3 runtime schemas yet.
+- Remaining gap: no executable Discovery Layer package, verifier rule, negative checklist-regression fixture, or pilot evidence exists yet.
+
+Retrospective:
+
+- Runtime command: `outcome-report --session .aof/sessions/SESS-MQQWOH7W-5TIJE6.json --result success`
+- Runtime command: `task-update --task-id TASK-009 --status done`
+- Runtime command: `goal-project --goal-type next-value-slice`
+- Runtime command: `learning-loop-snapshot --project .`
+- Runtime command: `operator-progress --write-artifact .aof/artifacts/runtime/operator-progress-qif-v0.3-discovery-layer.json`
+
+Retrospective reason:
+
+- Outcome `OUT-MQQX6HJU-MBW2V8` is recorded as `success`.
+- `TASK-009` is done.
+- The next value slice is explicit: after human acceptance, implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the accepted design boundary.

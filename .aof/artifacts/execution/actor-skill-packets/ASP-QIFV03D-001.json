@@ -1,0 +1,84 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-06-23T17:20:27.429Z",
+  "packet_id": "ASP-MQQWU6N9-BN8AD8",
+  "source_task_id": "TASK-009",
+  "source_parent_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN",
+  "objective": "Design QIF v0.3 Discovery Layer",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "discovery-layer-council",
+    "assignment_reason": "Builder prepares the design artifact from the validated need while preserving QIF representation boundaries.",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "skill-concept-design",
+    "skill-runtime-boundary-review"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-discovery-layer-design",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "PCH-QIFV03D-001",
+        "docs/qif-v0.2.1-consolidation-review.md"
+      ],
+      "rationale": "The task is design-only and depends on concept boundary and runtime flow judgment."
+    }
+  ],
+  "resource_refs": [
+    "resource-repository-docs"
+  ],
+  "policy_refs": [
+    "policy-no-checklist-quality-definition"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "discovery-layer-design-doc",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "architectural boundary",
+      "discovery pattern taxonomy",
+      "dynamic discovery flow",
+      "evidence confidence and coverage",
+      "v0.3 recommendations"
+    ],
+    "acceptance_criteria": [
+      "The design keeps Discovery Layer separate from QIF representation.",
+      "The design rejects checklist completion as a quality definition."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "non-checklist discovery",
+      "evaluator_ref": "guardian",
+      "evidence_required": "design language separates exploration coverage from checklist completion",
+      "blocking": true
+    },
+    {
+      "criterion": "implementable v0.3 slice",
+      "evaluator_ref": "builder",
+      "evidence_required": "entities and workflows are specific enough for later schemas",
+      "blocking": false
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "checklist-regression",
+      "trigger_condition": "design uses fixed quality categories as mandatory coverage",
+      "consequence": "block-assignment",
+      "recovery_action": "recast categories as optional discovery patterns and prompts"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will keep discovery exploratory, not checkbox-shaped.",
+    "current_action": "Draft Discovery Layer design",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Submit design to Guardian/Visionary/Builder review"
+  },
+  "status": "ready-for-assignment"
+}

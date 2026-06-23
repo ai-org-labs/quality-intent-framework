@@ -1,0 +1,42 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-06-23T17:27:45.303Z",
+  "review_packet_id": "CREV-MQQX3KI8-YRVZ6D",
+  "council_id": "qif-v0.3-discovery-layer-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve the QIF v0.3 Discovery Layer design as a planning artifact, not a runtime/schema implementation.",
+  "rationale": "The design responds to the validated need by separating discovery from QIF representation, defining exploratory Discovery Patterns, preserving candidate status and traceability, and blocking checklist-completion behavior.",
+  "recommendation": "Use docs/qif-v0.3-discovery-layer-design.md as the scope boundary for the next implementation slice; implement schemas and verifier rules only after this boundary is accepted.",
+  "target_audience": "QIF maintainers and AI implementation agents",
+  "expected_user_reaction": "They can plan v0.3 implementation without confusing discovery prompts with QIF quality semantics.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [
+    "Keep Discovery Patterns exploratory, preserve QIF Generation Map traceability, and add schemas only in a later implementation task."
+  ],
+  "organization_change_recommendations": [
+    "Treat candidate Quality Intents as requiring governance acceptance before becoming organizational quality knowledge."
+  ],
+  "diagnosis_category": "qif-v0.3-discovery-layer-approved",
+  "diagnosis_confidence": 0.88,
+  "diagnosis_evidence_refs": [
+    "docs/qif-v0.3-discovery-layer-design.md"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [
+    ".aof/artifacts/execution/team-outputs/TOUT-QIFV03D-REVIEW.json"
+  ],
+  "role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV03D-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV03D-BUILDER-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV03D-GUARDIAN-REVIEW.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/council/qif-v0.3-discovery-layer-review-council-exec.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-009",
+  "source_parent_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN"
+}

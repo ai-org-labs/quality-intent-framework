@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-23T17:26:56.119Z",
+  "role": "Visionary",
+  "stage": "review",
+  "session_id": "SESS-MQQWOH7W-5TIJE6",
+  "status": "completed",
+  "recommendation": "Proceed with the v0.3 Discovery Layer as a separate pre-QIF design slice.",
+  "rationale": "The design preserves QIF as the representation layer while giving non-experts a failure-oriented discovery path for candidate Quality Intents.",
+  "signals": [
+    "Layer separation and candidate status are retained."
+  ],
+  "artifact_refs": [
+    "docs/qif-v0.3-discovery-layer-design.md"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-009",
+  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN",
+  "source_parent_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.88
+}

@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-06-22T15:24:30.996Z",
+  "updated_at": "2026-06-23T17:29:52.667Z",
   "entries": [
     {
-      "question": "framework self-audit で次に残る gap は何か",
-      "answer": "The original local development repository still contains legacy history; the public migration target intentionally does not preserve that history.",
-      "recorded_at": "2026-06-22T15:14:34.628Z",
-      "expectation_state": "Tracked files are sanitized, tests pass, and clean-history publication uses neutral AI Org Labs author metadata.",
-      "mismatch_state": "The original local development repository still contains legacy history; the public migration target intentionally does not preserve that history.",
-      "scale_direction": "Push the clean main branch to AI Org Labs and do not push legacy tags.",
-      "source_session_id": "SESS-MQPCHTJC-94FWQ8",
-      "source_decision_record_id": "DEC-MQPCJQQL-YWG68R"
+      "question": "How should improvement success be judged: which metric or end state matters most?",
+      "answer": "Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion.",
+      "recorded_at": "2026-06-23T17:16:32.986Z",
+      "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
+      "mismatch_state": null,
+      "scale_direction": "complete need validation before planning",
+      "source_session_id": "SESS-MQQWOH7W-5TIJE6",
+      "source_decision_record_id": null
+    },
+    {
+      "question": "need validation で何が確定したか",
+      "answer": "Validated as a design and boundary-setting slice, not a schema implementation or UI project. The Discovery Layer should guide discovery strategies while QIF remains the representation of discovered quality intents.",
+      "recorded_at": "2026-06-23T17:18:41.958Z",
+      "expectation_state": "validated",
+      "mismatch_state": null,
+      "scale_direction": "advance toward planning",
+      "source_session_id": "SESS-MQQWOH7W-5TIJE6",
+      "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "The active GitHub credential does not have write permission to the AI Org Labs target repository.",
-      "recorded_at": "2026-06-22T15:16:12.029Z",
-      "expectation_state": "Sanitized clean-history repository is ready locally, but remote publication is blocked by GitHub authorization.",
-      "mismatch_state": "The active GitHub credential does not have write permission to the AI Org Labs target repository.",
-      "scale_direction": "Authenticate with an AI Org Labs authorized credential or grant write access, then push main only.",
-      "source_session_id": "SESS-MQPCHTJC-94FWQ8",
-      "source_decision_record_id": "DEC-MQPCJQQL-YWG68R"
-    },
-    {
-      "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Remote publication is still blocked by AI Org Labs write authorization, but the local public tree is sanitized and verified.",
-      "recorded_at": "2026-06-22T15:24:30.996Z",
-      "expectation_state": "Hidden AOF evidence, docs, gitignore, and active task state were cleaned for public clean-history publication.",
-      "mismatch_state": "Remote publication is still blocked by AI Org Labs write authorization, but the local public tree is sanitized and verified.",
-      "scale_direction": "Authenticate with an AI Org Labs authorized credential, then push main only.",
-      "source_session_id": "SESS-MQPCHTJC-94FWQ8",
-      "source_decision_record_id": "DEC-MQPCJQQL-YWG68R"
+      "answer": "No executable v0.3 schema, package example, or verifier rule has been implemented yet; pilot evidence is also still absent.",
+      "recorded_at": "2026-06-23T17:29:52.667Z",
+      "expectation_state": "The design slice produced a separate Discovery Layer proposal with discovery pattern taxonomy, dynamic discovery flow, traceability, confidence, coverage, governance, and verifier boundaries while keeping QIF representation stable.",
+      "mismatch_state": "No executable v0.3 schema, package example, or verifier rule has been implemented yet; pilot evidence is also still absent.",
+      "scale_direction": "After human acceptance, open an implementation slice for Discovery Layer schemas, example packages, verifier rules, and negative checklist-regression fixtures.",
+      "source_session_id": "SESS-MQQWOH7W-5TIJE6",
+      "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN"
     }
   ]
 }

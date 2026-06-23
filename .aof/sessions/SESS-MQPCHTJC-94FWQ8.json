@@ -71,6 +71,13 @@
       "observed_at": "2026-06-22T15:16:14.364Z",
       "note": "Sanitized clean-history repository is ready locally and verified, but push to AI Org Labs is blocked by GitHub authorization. No legacy tags were pushed.",
       "signal_ref": "MIG-QIF-AI-ORG-LABS-AUTH-BLOCKED"
+    },
+    {
+      "report_id": "OUT-MQQWNVZ9-4TTYHH",
+      "result": "success",
+      "observed_at": "2026-06-23T17:15:33.638Z",
+      "note": "AI Org Labs clean-history repository, v0.2.1 tag, and GitHub Release are published.",
+      "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.2.1"
     }
   ],
   "clarification": {
@@ -163,7 +170,7 @@
     "should_wait_for_user": false
   },
   "created_at": "2026-06-22T15:03:12.071Z",
-  "updated_at": "2026-06-22T15:16:14.364Z",
+  "updated_at": "2026-06-23T17:15:33.638Z",
   "framing": {
     "request": "Migrate the Quality Intent Framework repository from a legacy personal-account development context to the AI Org Labs public account. Need: publish a sanitized repository state under ai-org-labs/quality-intent-framework with no legacy personal account identifiers in files or pushed history. Intent: remove legacy account references from tracked files, avoid preserving legacy author history by using a clean initial commit, point the repository at the new remote, and push only the sanitized branch without legacy tags. Context: keep QIF v0.2.1 content and AOF evidence, avoid new QIF features, and treat AOF source as moved to AI Org Labs.",
     "need": "The touchpoint is repository publication and developer handoff: tracked files, AOF evidence, Git remote configuration, clean initial commit, and push to ai-org-labs/quality-intent-framework. Out of scope: QIF feature changes, UI, external integrations, preserving legacy personal-account history, and pushing legacy tags.",

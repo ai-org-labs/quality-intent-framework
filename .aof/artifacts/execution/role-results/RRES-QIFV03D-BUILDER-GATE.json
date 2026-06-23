@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-23T17:21:13.460Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-MQQWOH7W-5TIJE6",
+  "status": "completed",
+  "recommendation": "approve design execution",
+  "rationale": "The design can be delivered as a scoped documentation artifact with entities, workflows, and v0.3 implementation recommendations, without schema churn in this slice.",
+  "signals": [
+    "Keep later schema/runtime work as a separate task."
+  ],
+  "artifact_refs": [
+    ".aof/artifacts/execution/actor-skill-packets/ASP-QIFV03D-001.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-009",
+  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN",
+  "source_parent_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.83
+}

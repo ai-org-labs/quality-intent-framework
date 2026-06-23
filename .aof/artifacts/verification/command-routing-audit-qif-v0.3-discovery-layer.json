@@ -1,0 +1,214 @@
+{
+  "ok": true,
+  "artifact_type": "command-routing-audit",
+  "generated_at": "2026-06-23T17:28:10.790Z",
+  "project_root": "<local-project-root>",
+  "checks": [
+    {
+      "name": "command registry presence",
+      "status": "pass",
+      "detail": "<local-project-root>/.aof/command-registry.json"
+    },
+    {
+      "name": "bootstrap command_registry_ref alignment",
+      "status": "pass",
+      "detail": ".aof/command-registry.json"
+    },
+    {
+      "name": "orientation command_registry_ref alignment",
+      "status": "pass",
+      "detail": ".aof/command-registry.json vs .aof/command-registry.json"
+    },
+    {
+      "name": "command registry detail ref presence",
+      "status": "pass",
+      "detail": "docs/cli-reference.md (bundled runtime reference)"
+    },
+    {
+      "name": "routing category write",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "routing category execute",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "routing category read",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "routing category verify",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "routing category observe",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "routing top command presence",
+      "status": "pass",
+      "detail": "15 top commands declared"
+    },
+    {
+      "name": "top command command-register",
+      "status": "pass",
+      "detail": "command-register"
+    },
+    {
+      "name": "top command command-routing-audit",
+      "status": "pass",
+      "detail": "command-routing-audit"
+    },
+    {
+      "name": "top command council-exec",
+      "status": "pass",
+      "detail": "council-exec"
+    },
+    {
+      "name": "top command evidence-drill-down",
+      "status": "pass",
+      "detail": "evidence-drill-down"
+    },
+    {
+      "name": "top command init",
+      "status": "pass",
+      "detail": "init"
+    },
+    {
+      "name": "top command need-validation-benchmark",
+      "status": "pass",
+      "detail": "need-validation-benchmark"
+    },
+    {
+      "name": "top command operator-brief",
+      "status": "pass",
+      "detail": "operator-brief"
+    },
+    {
+      "name": "top command operator-progress",
+      "status": "pass",
+      "detail": "operator-progress"
+    },
+    {
+      "name": "top command organization-status",
+      "status": "pass",
+      "detail": "organization-status"
+    },
+    {
+      "name": "top command organization-verify",
+      "status": "pass",
+      "detail": "organization-verify"
+    },
+    {
+      "name": "top command release-state-audit",
+      "status": "pass",
+      "detail": "release-state-audit"
+    },
+    {
+      "name": "top command run",
+      "status": "pass",
+      "detail": "run"
+    },
+    {
+      "name": "top command situation-assess",
+      "status": "pass",
+      "detail": "situation-assess"
+    },
+    {
+      "name": "top command tree-position",
+      "status": "pass",
+      "detail": "tree-position"
+    },
+    {
+      "name": "top command upgrade",
+      "status": "pass",
+      "detail": "upgrade"
+    },
+    {
+      "name": "registry top command coverage command-register",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "registry top command coverage command-routing-audit",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "registry top command coverage council-exec",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "registry top command coverage evidence-drill-down",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "registry top command coverage init",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "registry top command coverage need-validation-benchmark",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "registry top command coverage operator-brief",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "registry top command coverage operator-progress",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "registry top command coverage organization-status",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "registry top command coverage organization-verify",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "registry top command coverage release-state-audit",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "registry top command coverage run",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "registry top command coverage situation-assess",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "registry top command coverage tree-position",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "registry top command coverage upgrade",
+      "status": "pass",
+      "detail": "present"
+    },
+    {
+      "name": "routing runtime flow presence",
+      "status": "pass",
+      "detail": "6 flow steps"
+    }
+  ],
+  "errors": []
+}

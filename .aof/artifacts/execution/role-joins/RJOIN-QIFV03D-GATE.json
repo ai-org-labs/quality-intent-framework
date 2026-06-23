@@ -1,0 +1,28 @@
+{
+  "join_type": "role-join",
+  "recorded_at": "2026-06-23T17:21:39.885Z",
+  "join_id": "RJOIN-MQQWVQJX-IX69SX",
+  "join_status": "resolved",
+  "stage": "review",
+  "expected_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-orchestrator-decision",
+  "blocking_signals": [],
+  "recommended_next_step": "Proceed with Discovery Layer design under Guardian non-checklist guardrail.",
+  "received_session_ids": [
+    "SESS-MQQWOH7W-5TIJE6"
+  ],
+  "source_task_id": "TASK-009",
+  "source_parent_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "decision_record_ref": ".aof/decisions/DEC-MQQWRX8V-2CR7HN.md",
+  "summary": "Visionary, Builder, and Guardian approve the v0.3 Discovery Layer design gate."
+}

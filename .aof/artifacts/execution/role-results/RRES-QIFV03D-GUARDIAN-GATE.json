@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-23T17:21:14.373Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MQQWOH7W-5TIJE6",
+  "status": "completed",
+  "recommendation": "approve with non-checklist guardrail",
+  "rationale": "Execution is acceptable only if Discovery Patterns remain exploratory prompts, discovery coverage is breadth-of-inquiry rather than checklist completion, and AI-suggested intents remain candidates until reviewed.",
+  "signals": [
+    "Block any mandatory fixed quality category checklist."
+  ],
+  "artifact_refs": [
+    ".aof/artifacts/execution/policy-evaluations/PER-QIFV03D-001.json"
+  ],
+  "decision_required": true,
+  "source_task_id": "TASK-009",
+  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN",
+  "source_parent_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.9
+}

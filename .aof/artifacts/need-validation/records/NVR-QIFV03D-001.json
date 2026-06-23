@@ -1,0 +1,44 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-06-24T00:00:00.000+09:00",
+  "validation_id": "NVR-QIFV03D-001",
+  "raw_need": "Consider the next version using the provided QIF Discovery Layer Design Note.",
+  "validation_status": "validated",
+  "validated_need": "QIF needs a separate Discovery Layer design for v0.3 so non-experts and AI agents can discover candidate quality intents through failure-oriented exploration without converting QIF into a checklist framework.",
+  "decision_summary": "Validated as a design and boundary-setting slice, not a schema implementation or UI project. The Discovery Layer should guide discovery strategies while QIF remains the representation of discovered quality intents.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is the real problem?",
+      "answer": "QIF can capture quality intents after discovery, but non-experts need help discovering failure boundaries and stakeholder concerns before QIF artifact generation.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must not happen?",
+      "answer": "The solution must not introduce checklist-driven quality categories or optimize for question completion.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What proves success for this slice?",
+      "answer": "A reviewed design defines discovery patterns, dynamic flow, traceability, confidence, boundaries, and acceptance criteria for v0.3 planning.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Non-experts can conduct useful discovery if guided by pattern strategies rather than fixed checklists.",
+    "Discovery strategy can evolve independently if QIF representation remains stable."
+  ],
+  "evidence_gaps": [
+    "No pilot data yet proves which Discovery Patterns produce the best candidate Quality Intents.",
+    "Semantic validity of discovered intents will still require stakeholder/expert review and governance."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV03D-001.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV03D-001.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV03D-001.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": ".aof/artifacts/need-validation/project-charters/PCH-QIFV03D-001.json",
+  "discovery_handoff_ref": ".aof/artifacts/discovery/handoffs/DHO-QIFV03D-001.json",
+  "source_task_id": "TASK-009",
+  "source_decision_record_id": "DEC-MQQWP5L8-L04DY1"
+}

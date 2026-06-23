@@ -1,0 +1,20 @@
+{
+  "claim_type": "resource-claim",
+  "recorded_at": "2026-06-23T17:20:25.316Z",
+  "claim_id": "RCL-MQQWU50K-PBM64T",
+  "subject_ref": "TASK-009",
+  "resource_ref": "resource-repository-docs",
+  "claimant_role_ref": "builder",
+  "claim_scope": "Create a design-only Discovery Layer document and AOF runtime evidence; no schema, verifier, UI, or external integration implementation.",
+  "claim_status": "approved",
+  "approval_policy_refs": [
+    "policy-no-checklist-quality-definition"
+  ],
+  "justification": "The validated charter requires a design artifact suitable for later implementation planning.",
+  "allocation_plan_ref": null,
+  "policy_evaluation_ref": null,
+  "expires_at": null,
+  "source_task_id": "TASK-009",
+  "source_parent_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN"
+}

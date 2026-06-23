@@ -1,0 +1,31 @@
+{
+  "view_type": "operator_progress",
+  "generated_at": "2026-06-23T17:30:40.027Z",
+  "current_checkpoint": {
+    "stage": "frontier-definition-needed",
+    "frontier_task_id": null,
+    "summary": "The runtime is frontier-definition-needed.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  },
+  "previous_checkpoint": {
+    "summary": "TASK-009 was the latest completed checkpoint.",
+    "artifact_ref": ".aof/tasks/done/TASK-009.json"
+  },
+  "changes_since_last_checkpoint": [
+    {
+      "kind": "completed-task",
+      "summary": "TASK-009 completed: Design QIF v0.3 Discovery Layer",
+      "artifact_ref": ".aof/tasks/done/TASK-009.json"
+    },
+    {
+      "kind": "goal-refresh",
+      "summary": "After human acceptance, implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the accepted design boundary.",
+      "artifact_ref": ".aof/goals/next-value-slice.json"
+    }
+  ],
+  "progress_answer": {
+    "what_changed": "TASK-009 completed: Design QIF v0.3 Discovery Layer After human acceptance, implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the accepted design boundary.",
+    "why_it_matters": "The runtime still needs a concrete current frontier to make progress legible.",
+    "next_checkpoint": "Open an implementation task for the current frontier: After human acceptance, implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the accepted design boundary."
+  }
+}

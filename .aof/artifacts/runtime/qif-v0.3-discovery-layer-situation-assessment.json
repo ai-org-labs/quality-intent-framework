@@ -1,0 +1,33 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-06-23T17:19:10.850Z",
+  "project_root": "<local-project-root>",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "QIF needs a separate Discovery Layer design for v0.3 so non-experts and AI agents can discover candidate quality intents through failure-oriented exploration without converting QIF into a checklist framework.",
+  "next_value_slice": "Complete AI Org Labs push after authorization is fixed.",
+  "current_runtime_stage": "implementation-ready",
+  "primary_frontier_task": {
+    "task_id": "TASK-009",
+    "title": "Design QIF v0.3 Discovery Layer",
+    "status": "open",
+    "updated_at": "2026-06-23T17:18:53.787Z",
+    "track": "v0.3",
+    "artifact_ref": ".aof/tasks/open/TASK-009.json"
+  },
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Start TASK-009: Design QIF v0.3 Discovery Layer",
+    "prioritized_task_ids": [
+      "TASK-009"
+    ],
+    "scale_direction": "Prioritize TASK-009 while keeping Mission Control, roadmap guidance, and open tasks aligned with the same frontier."
+  },
+  "recommended_action": {
+    "recommended_action": "Start TASK-009: Design QIF v0.3 Discovery Layer",
+    "rationale": "This is the best open task aligned with the current operating goal and next release frontier.",
+    "artifact_ref": ".aof/tasks/open/TASK-009.json"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "packet_type": "team-output",
+  "recorded_at": "2026-06-23T17:27:28.047Z",
+  "team_output_id": "TOUT-MQQX3773-4NRNC6",
+  "team_id": "qif-v0.3-discovery-layer-council",
+  "stage": "review",
+  "expected_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-council-review",
+  "blocking_signals": [],
+  "recommended_next_step": "Record Council approval and move to verification, runtime log update, and task closure.",
+  "joined_role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV03D-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV03D-BUILDER-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV03D-GUARDIAN-REVIEW.json"
+  ],
+  "artifact_refs": [
+    "docs/qif-v0.3-discovery-layer-design.md"
+  ],
+  "decision_required": false,
+  "summary": "The design is accepted as a v0.3 planning artifact: Discovery Patterns guide failure-oriented exploration, outputs remain candidates, and QIF representation remains stable.",
+  "source_task_id": "TASK-009",
+  "source_parent_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN"
+}

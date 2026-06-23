@@ -1,0 +1,17 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-06-24T00:00:00.000+09:00",
+  "problem_statement_id": "PST-QIFV03D-001",
+  "affected_party": "QIF maintainers, non-expert operators, AI agents, and organizations trying to discover quality intent",
+  "actual_problem": "QIF v0.2.1 can represent discovered quality intents, but it does not yet guide non-experts through discovering what stakeholders consider failure, unacceptable risk, or necessary outcomes.",
+  "why_it_matters": "Without a discovery layer, users may either fail to produce useful quality intents or fall back to fixed quality checklists, which is an explicit QIF anti-pattern.",
+  "why_now": "QIF v0.2.1 has a stable representation/runtime baseline and the next major gap is upstream discovery before QIF generation.",
+  "evidence_refs": [
+    "docs/qif-operational-framework.md",
+    "docs/qif-v0.2-discovery-application-runtime.md",
+    "docs/qif-v0.2.1-consolidation-review.md",
+    "user-provided QIF Discovery Layer Design Note"
+  ],
+  "source_task_id": "TASK-009",
+  "source_decision_record_id": "DEC-MQQWP5L8-L04DY1"
+}

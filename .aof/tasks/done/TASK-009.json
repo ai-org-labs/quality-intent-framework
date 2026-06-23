@@ -1,0 +1,22 @@
+{
+  "task_id": "TASK-009",
+  "title": "Design QIF v0.3 Discovery Layer",
+  "description": "Define a separate Discovery Layer with failure-oriented Discovery Patterns, dynamic exploration flow, traceability, confidence, and non-checklist coverage boundaries before implementation.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "assigned_session_ids": [
+    "SESS-MQQWOH7W-5TIJE6"
+  ],
+  "related_decision_record_id": "DEC-MQQWRX8V-2CR7HN",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-06-23T17:18:53.787Z",
+  "updated_at": "2026-06-23T17:30:14.411Z",
+  "assigned_at": null,
+  "done_at": "2026-06-23T17:30:14.411Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Completed v0.3 Discovery Layer design-only slice; implementation is deferred to a future task after human acceptance."
+}

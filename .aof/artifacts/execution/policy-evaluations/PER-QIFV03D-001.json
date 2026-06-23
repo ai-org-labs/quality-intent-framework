@@ -1,0 +1,26 @@
+{
+  "report_type": "policy-evaluation-report",
+  "recorded_at": "2026-06-23T17:20:01.214Z",
+  "evaluation_id": "PER-MQQWTMF2-VAZRX7",
+  "subject_ref": "TASK-009",
+  "evaluation_scope": "QIF v0.3 Discovery Layer design",
+  "policy_refs": [
+    "policy-no-checklist-quality-definition"
+  ],
+  "overall_outcome": "requires-review",
+  "results": [
+    {
+      "policy_id": "policy-no-checklist-quality-definition",
+      "effect": "require-review",
+      "outcome": "requires-review",
+      "reason": "Discovery design must not reintroduce fixed quality checklists or semantic-truth claims.",
+      "blocking": false
+    }
+  ],
+  "recommended_actions": [
+    "Proceed with design only after Guardian review checks non-checklist and verifier-boundary language."
+  ],
+  "source_task_id": "TASK-009",
+  "source_parent_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN"
+}

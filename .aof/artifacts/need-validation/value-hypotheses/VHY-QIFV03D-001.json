@@ -1,0 +1,20 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-06-24T00:00:00.000+09:00",
+  "value_hypothesis_id": "VHY-QIFV03D-001",
+  "expected_value_creation": "A separate Discovery Layer will let non-experts and AI agents elicit candidate quality intents through failure-oriented exploration while preserving QIF as the auditable representation layer.",
+  "beneficiary": "QIF users who lack senior quality engineering expertise, plus maintainers who need a stable boundary between discovery strategy and QIF artifact representation",
+  "supporting_evidence": [
+    "The user design note identifies checklist-driven quality definition as an anti-pattern.",
+    "The v0.2.1 consolidation review already recommends package composition and clearer lineage for future pilots.",
+    "Existing discovery-session packages capture expert answers after elicitation, but do not define how to choose exploratory strategies dynamically."
+  ],
+  "success_criteria": [
+    "The design defines Discovery Layer as outside QIF representation, not merged into QIF core.",
+    "Discovery Patterns are strategies for uncovering failure concerns, not mandatory checklist categories.",
+    "The design defines dynamic pattern selection, question generation, evidence collection, confidence, and QIF generation boundaries.",
+    "The design includes acceptance criteria showing how a non-expert can derive explainable candidate Quality Intents."
+  ],
+  "source_task_id": "TASK-009",
+  "source_decision_record_id": "DEC-MQQWP5L8-L04DY1"
+}

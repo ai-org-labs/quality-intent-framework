@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-23T17:26:58.450Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-MQQWOH7W-5TIJE6",
+  "status": "completed",
+  "recommendation": "Accept the design document as the current v0.3 planning artifact and defer schema/runtime implementation.",
+  "rationale": "The document defines concepts, taxonomy, dynamic discovery flow, confidence, coverage, governance, verifier boundaries, and acceptance criteria without changing v0.2.1 runtime schemas.",
+  "signals": [
+    "Implementation should begin only after this design boundary is accepted."
+  ],
+  "artifact_refs": [
+    "docs/qif-v0.3-discovery-layer-design.md"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-009",
+  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN",
+  "source_parent_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.86
+}

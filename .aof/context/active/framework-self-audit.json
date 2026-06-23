@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-06-22T15:24:30.970Z",
-  "audit_id": "FSA-QIFMIG-CLEANUP-001",
-  "scope": "public repository cleanup",
-  "summary": "Hidden AOF evidence, docs, gitignore, and active task state were cleaned for public clean-history publication.",
-  "detected_gap": "Remote publication is still blocked by AI Org Labs write authorization, but the local public tree is sanitized and verified.",
+  "recorded_at": "2026-06-23T17:29:52.652Z",
+  "audit_id": "FSA-QIFV03D-001",
+  "scope": "QIF v0.3 Discovery Layer design",
+  "summary": "The design slice produced a separate Discovery Layer proposal with discovery pattern taxonomy, dynamic discovery flow, traceability, confidence, coverage, governance, and verifier boundaries while keeping QIF representation stable.",
+  "detected_gap": "No executable v0.3 schema, package example, or verifier rule has been implemented yet; pilot evidence is also still absent.",
   "result_state": "stable",
-  "next_action": "Authenticate with an AI Org Labs authorized credential, then push main only.",
+  "next_action": "After human acceptance, open an implementation slice for Discovery Layer schemas, example packages, verifier rules, and negative checklist-regression fixtures.",
   "related_task_ids": [
-    "TASK-008"
+    "TASK-009"
   ],
-  "source_session_id": "SESS-MQPCHTJC-94FWQ8",
-  "source_decision_record_id": "DEC-MQPCJQQL-YWG68R"
+  "source_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN"
 }

@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-23T17:26:53.083Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MQQWOH7W-5TIJE6",
+  "status": "completed",
+  "recommendation": "Approve with guardrails: discovery patterns must remain exploratory strategies, not mandatory quality checklists.",
+  "rationale": "The design explicitly rejects checklist completion as quality, treats AI-suggested intents as candidates, separates semantic governance from structural verification, and defines coverage as exploration breadth rather than category completion.",
+  "signals": [
+    "Block future work that turns canonical discovery patterns into required category coverage or semantic-truth claims."
+  ],
+  "artifact_refs": [
+    "docs/qif-v0.3-discovery-layer-design.md"
+  ],
+  "decision_required": true,
+  "source_task_id": "TASK-009",
+  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN",
+  "source_parent_session_id": "SESS-MQQWOH7W-5TIJE6",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.9
+}
