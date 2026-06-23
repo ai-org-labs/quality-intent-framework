@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "After human acceptance, implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the accepted design boundary.",
-  "updated_at": "2026-06-23T17:30:28.344Z",
+  "content": "Implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the released design milestone.",
+  "updated_at": "2026-06-23T18:08:59.455Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MQQWOH7W-5TIJE6",
-  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN",
+  "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
+  "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO",
   "declared_complete_at": null
 }

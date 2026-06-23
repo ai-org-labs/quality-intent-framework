@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-23T18:05:53.323Z",
+  "role": "Visionary",
+  "stage": "review",
+  "session_id": "SESS-MQQYB7V6-YSYJNJ",
+  "status": "completed",
+  "recommendation": "Approve v0.3.0 release as a design milestone.",
+  "rationale": "The release gives the Discovery Layer design a stable public reference and supports both standalone QIF use and future AOF worker quality-check integration without requiring AOF as QIF runtime.",
+  "signals": [
+    "Release notes must emphasize design milestone scope."
+  ],
+  "artifact_refs": [
+    ".aof/artifacts/execution/actor-execution-gates/AEG-QIFV030R-001.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-010",
+  "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO",
+  "source_parent_session_id": "SESS-MQQYB7V6-YSYJNJ",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.88
+}

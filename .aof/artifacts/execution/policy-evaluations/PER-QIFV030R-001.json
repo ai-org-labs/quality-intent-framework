@@ -1,0 +1,26 @@
+{
+  "report_type": "policy-evaluation-report",
+  "recorded_at": "2026-06-23T18:04:26.773Z",
+  "evaluation_id": "PER-MQQYER6D-QMRFTZ",
+  "subject_ref": "TASK-010",
+  "evaluation_scope": "v0.3.0 design milestone release boundary",
+  "policy_refs": [
+    "policy-release-truthfulness"
+  ],
+  "overall_outcome": "requires-review",
+  "results": [
+    {
+      "policy_id": "policy-release-truthfulness",
+      "effect": "require-review",
+      "outcome": "requires-review",
+      "reason": "Release notes must not imply completed runtime schemas, UI, external integrations, or semantic-truth verification.",
+      "blocking": false
+    }
+  ],
+  "recommended_actions": [
+    "Proceed only after release notes and metadata state v0.3.0 is a Discovery Layer design milestone."
+  ],
+  "source_task_id": "TASK-010",
+  "source_parent_session_id": "SESS-MQQYB7V6-YSYJNJ",
+  "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO"
+}

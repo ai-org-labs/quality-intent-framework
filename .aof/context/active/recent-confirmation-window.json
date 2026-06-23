@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-06-23T17:29:52.667Z",
+  "updated_at": "2026-06-23T18:08:31.551Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success is judged by whether a non-expert can use discovery patterns to produce traceable candidate Quality Intents with source evidence, confidence, uncertainty, and explanation, without optimizing for checklist completion.",
-      "recorded_at": "2026-06-23T17:16:32.986Z",
+      "answer": "Success is judged by a clean v0.3.0 release: metadata and release notes accurately describe the design milestone, tests and AOF verification pass, tag v0.3.0 points to the release commit, GitHub Release v0.3.0 exists, and no claim is made that semantic truth or runtime schemas are complete.",
+      "recorded_at": "2026-06-23T18:01:57.707Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MQQWOH7W-5TIJE6",
+      "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "Validated as a design and boundary-setting slice, not a schema implementation or UI project. The Discovery Layer should guide discovery strategies while QIF remains the representation of discovered quality intents.",
-      "recorded_at": "2026-06-23T17:18:41.958Z",
+      "answer": "Validated as a release-only slice: update release metadata, verify, tag v0.3.0, push, and create GitHub Release. Runtime schemas, verifier changes, UI, external integrations, and semantic-truth claims remain out of scope.",
+      "recorded_at": "2026-06-23T18:03:36.139Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MQQWOH7W-5TIJE6",
-      "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN"
+      "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
+      "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "No executable v0.3 schema, package example, or verifier rule has been implemented yet; pilot evidence is also still absent.",
-      "recorded_at": "2026-06-23T17:29:52.667Z",
-      "expectation_state": "The design slice produced a separate Discovery Layer proposal with discovery pattern taxonomy, dynamic discovery flow, traceability, confidence, coverage, governance, and verifier boundaries while keeping QIF representation stable.",
-      "mismatch_state": "No executable v0.3 schema, package example, or verifier rule has been implemented yet; pilot evidence is also still absent.",
-      "scale_direction": "After human acceptance, open an implementation slice for Discovery Layer schemas, example packages, verifier rules, and negative checklist-regression fixtures.",
-      "source_session_id": "SESS-MQQWOH7W-5TIJE6",
-      "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN"
+      "answer": "v0.3 Discovery Layer schemas, example packages, verifier rules, negative checklist-regression fixtures, and pilot evidence remain future work.",
+      "recorded_at": "2026-06-23T18:08:31.551Z",
+      "expectation_state": "The release slice updates QIF to v0.3.0 as a Discovery Layer design milestone with package metadata, changelog, README, release notes, AOF gate evidence, and verification.",
+      "mismatch_state": "v0.3 Discovery Layer schemas, example packages, verifier rules, negative checklist-regression fixtures, and pilot evidence remain future work.",
+      "scale_direction": "After release, implement the v0.3 Discovery Layer runtime package and verifier from the accepted design boundary.",
+      "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
+      "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO"
     }
   ]
 }

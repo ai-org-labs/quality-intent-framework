@@ -4,6 +4,14 @@
 
 - No unreleased changes.
 
+## v0.3.0
+
+- Added the QIF v0.3 Discovery Layer design as a versioned design milestone.
+- Defined Discovery Layer boundaries so QIF remains a standalone Quality Intent representation and evaluation framework.
+- Added a Discovery Pattern taxonomy for failure-oriented quality intent discovery without mandatory checklist categories.
+- Defined dynamic discovery flow, candidate concerns, candidate loss boundaries, candidate Quality Intents, QIF Generation Maps, confidence, traceability, governance, and verifier boundaries.
+- Clarified that v0.3.0 does not yet implement Discovery Layer schemas, example packages, verifier rules, UI, external integrations, or semantic-truth validation.
+
 ## v0.2.1
 
 - Added a QIF v0.2.1 consolidation review covering concept inventory, entity responsibilities, runtime flow integrity, schema/docs/example/verifier alignment, verifier boundaries, package architecture, naming improvements, v0.3 pilot readiness, and v0.2.2 cleanup tasks.

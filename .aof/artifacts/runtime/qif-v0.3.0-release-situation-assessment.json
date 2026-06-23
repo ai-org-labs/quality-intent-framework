@@ -1,0 +1,33 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-06-23T18:03:55.580Z",
+  "project_root": "<local-project-root>",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "Publish QIF v0.3.0 as a design milestone for the accepted Discovery Layer boundary and taxonomy, without claiming completed v0.3 runtime implementation.",
+  "next_value_slice": "After human acceptance, implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the accepted design boundary.",
+  "current_runtime_stage": "implementation-ready",
+  "primary_frontier_task": {
+    "task_id": "TASK-010",
+    "title": "Release QIF v0.3.0",
+    "status": "open",
+    "updated_at": "2026-06-23T18:02:14.858Z",
+    "track": "v0.3",
+    "artifact_ref": ".aof/tasks/open/TASK-010.json"
+  },
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Start TASK-010: Release QIF v0.3.0",
+    "prioritized_task_ids": [
+      "TASK-010"
+    ],
+    "scale_direction": "Prioritize TASK-010 while keeping Mission Control, roadmap guidance, and open tasks aligned with the same frontier."
+  },
+  "recommended_action": {
+    "recommended_action": "Start TASK-010: Release QIF v0.3.0",
+    "rationale": "This is the best open task aligned with the current operating goal and next release frontier.",
+    "artifact_ref": ".aof/tasks/open/TASK-010.json"
+  }
+}

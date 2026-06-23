@@ -1,0 +1,28 @@
+{
+  "join_type": "role-join",
+  "recorded_at": "2026-06-23T18:06:23.377Z",
+  "join_id": "RJOIN-MQQYH95D-5R1AUJ",
+  "join_status": "open",
+  "stage": "review",
+  "expected_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-orchestrator-decision",
+  "blocking_signals": [],
+  "recommended_next_step": "Proceed with release metadata edits, verification, and publication under the design-milestone scope.",
+  "received_session_ids": [
+    "SESS-MQQYB7V6-YSYJNJ"
+  ],
+  "source_task_id": "TASK-010",
+  "source_parent_session_id": "SESS-MQQYB7V6-YSYJNJ",
+  "decision_record_ref": ".aof/decisions/DEC-MQQYDO2M-RVXRQO.json",
+  "summary": "All Council roles approve release execution with Guardian truthfulness guardrails."
+}

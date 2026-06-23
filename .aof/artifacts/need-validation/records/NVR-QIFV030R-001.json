@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-06-23T18:03:19.438Z",
+  "validation_id": "NVR-MQQYDB7Y-02DN64",
+  "raw_need": "Release and tag the next QIF version.",
+  "validation_status": "validated",
+  "validated_need": "Publish QIF v0.3.0 as a design milestone for the accepted Discovery Layer boundary and taxonomy, without claiming completed v0.3 runtime implementation.",
+  "decision_summary": "Validated as a release-only slice: update release metadata, verify, tag v0.3.0, push, and create GitHub Release. Runtime schemas, verifier changes, UI, external integrations, and semantic-truth claims remain out of scope.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is being released?",
+      "answer": "The accepted v0.3 Discovery Layer design milestone, not completed v0.3 runtime schemas.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What blocks release?",
+      "answer": "Failed tests/AOF verification or release notes that overclaim runtime implementation or semantic truth.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A v0.3.0 tag could be mistaken for completed runtime implementation unless notes are explicit."
+  ],
+  "evidence_gaps": [
+    "Pilot evidence and executable v0.3 Discovery Layer packages remain future work."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV030R-001.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV030R-001.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV030R-001.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": ".aof/artifacts/need-validation/project-charters/PCH-QIFV030R-001.json",
+  "discovery_handoff_ref": null,
+  "source_task_id": "TASK-010",
+  "source_decision_record_id": "DEC-MQQYBK4F-UBP0W9"
+}

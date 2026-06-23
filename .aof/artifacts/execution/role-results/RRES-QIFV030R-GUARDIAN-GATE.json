@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-23T18:05:52.574Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MQQYB7V6-YSYJNJ",
+  "status": "completed",
+  "recommendation": "Approve with release-truthfulness guardrail.",
+  "rationale": "v0.3.0 may be published only if release notes state that Discovery Layer schemas, verifier rules, pilot evidence, UI, and semantic-truth validation are not completed in this release.",
+  "signals": [
+    "Block publication if metadata claims completed runtime implementation or checklist-based quality coverage."
+  ],
+  "artifact_refs": [
+    ".aof/artifacts/execution/actor-execution-gates/AEG-QIFV030R-001.json"
+  ],
+  "decision_required": true,
+  "source_task_id": "TASK-010",
+  "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO",
+  "source_parent_session_id": "SESS-MQQYB7V6-YSYJNJ",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.92
+}

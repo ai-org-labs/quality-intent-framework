@@ -1,0 +1,73 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-06-23T18:04:30.003Z",
+  "packet_id": "ASP-MQQYETO3-4D7S25",
+  "source_task_id": "TASK-010",
+  "source_parent_session_id": "SESS-MQQYB7V6-YSYJNJ",
+  "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO",
+  "objective": "Prepare and publish QIF v0.3.0 design milestone release",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "qif-release-team",
+    "assignment_reason": "Builder owns release metadata edits, verification, tag, push, and GitHub Release execution.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "skill-release-management",
+    "skill-qif-boundary-review"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-release-publication",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "docs/qif-v0.3-discovery-layer-design.md",
+        ".aof/artifacts/council/qif-v0.3-discovery-layer-review-council-packet.json"
+      ],
+      "rationale": "The release target is already designed and reviewed; the remaining work is metadata, verification, and publication."
+    }
+  ],
+  "resource_refs": [
+    "resource-repo-main"
+  ],
+  "policy_refs": [
+    "policy-release-truthfulness"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "release-metadata-and-tag",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "package version, changelog, release notes, runtime log"
+    ],
+    "acceptance_criteria": [
+      "v0.3.0 tag and GitHub Release exist and accurately describe the design milestone"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "release truthfulness",
+      "evaluator_ref": "Guardian",
+      "evidence_required": "release notes and README do not claim completed runtime schemas or semantic truth",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "overclaimed-release-scope",
+      "trigger_condition": "metadata claims v0.3 runtime implementation or semantic truth is complete",
+      "consequence": "block-assignment",
+      "recovery_action": "revise release notes and metadata before tag"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I can release the design milestone cleanly.",
+    "current_action": "Update metadata, verify, commit, tag, push, and publish release.",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Submit release metadata for Council review before publication."
+  },
+  "status": "ready-for-assignment"
+}

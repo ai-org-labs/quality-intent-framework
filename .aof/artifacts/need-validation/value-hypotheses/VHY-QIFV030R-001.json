@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-06-23T18:02:54.788Z",
+  "value_hypothesis_id": "VHY-MQQYCS78-RY2C6K",
+  "expected_value_creation": "A stable v0.3.0 release gives maintainers and users an immutable Discovery Layer design baseline while preserving truthful implementation boundaries.",
+  "beneficiary": "QIF maintainers, standalone QIF users, and AOF worker quality-check integration work",
+  "supporting_evidence": [
+    "v0.3 Discovery Layer design document exists and was approved by Visionary, Builder, and Guardian review evidence.",
+    "Repository tests and AOF verification passed after the design commit."
+  ],
+  "success_criteria": [
+    "Tag v0.3.0 points to the release commit.",
+    "GitHub Release v0.3.0 exists with notes that describe a design milestone, not completed runtime schemas."
+  ],
+  "source_task_id": "TASK-010",
+  "source_decision_record_id": "DEC-MQQYBK4F-UBP0W9"
+}

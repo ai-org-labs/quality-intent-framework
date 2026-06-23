@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-06-23T18:02:54.432Z",
+  "problem_statement_id": "PST-MQQYCRXC-18EVY5",
+  "affected_party": "QIF maintainers, AI implementation agents, and standalone QIF adopters",
+  "actual_problem": "The accepted v0.3 Discovery Layer design is committed but not yet published as an immutable release/tag.",
+  "why_it_matters": "Without a versioned release, downstream work cannot cite a stable Discovery Layer design baseline and may confuse unreleased planning state with accepted scope.",
+  "why_now": "The v0.3 design slice has been reviewed, verified, committed, and pushed after the v0.2.1 public release.",
+  "evidence_refs": [
+    "docs/qif-v0.3-discovery-layer-design.md",
+    ".aof/artifacts/council/qif-v0.3-discovery-layer-review-council-packet.json"
+  ],
+  "source_task_id": "TASK-010",
+  "source_decision_record_id": "DEC-MQQYBK4F-UBP0W9"
+}

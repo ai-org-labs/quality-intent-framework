@@ -6,12 +6,13 @@ QIF does not define quality as output volume. Page count, review count, and test
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1:
+This repository contains the executable QIF baseline through v0.2.1 and the v0.3.0 Discovery Layer design milestone:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - Expert judgment specification: `docs/expert-judgment-framework.md`
 - QIF v0.2 runtime specification: `docs/qif-v0.2-discovery-application-runtime.md`
 - QIF v0.2.1 consolidation review: `docs/qif-v0.2.1-consolidation-review.md`
+- QIF v0.3 Discovery Layer design: `docs/qif-v0.3-discovery-layer-design.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - Expert judgment schema: `schemas/expert-judgment-package.schema.json`
@@ -30,6 +31,8 @@ This repository contains the executable QIF baseline through v0.2.1:
 - Local runtime verifier: `tools/validate-qif-runtime.mjs`
 - AOF runtime log: `docs/aof-runtime-log.md`
 - Changelog: `CHANGELOG.md`
+
+QIF is usable as a standalone framework. AOF evidence in this repository records the development and governance path; it is not required to use QIF.
 
 ## Verify
 

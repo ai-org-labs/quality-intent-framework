@@ -1,0 +1,20 @@
+{
+  "claim_type": "resource-claim",
+  "recorded_at": "2026-06-23T18:04:31.278Z",
+  "claim_id": "RCL-MQQYEUNI-46P0W0",
+  "subject_ref": "TASK-010",
+  "resource_ref": "resource-repo-main",
+  "claimant_role_ref": "builder",
+  "claim_scope": "repository metadata edit, release commit, annotated tag v0.3.0, push main/tag, and GitHub Release creation",
+  "claim_status": "approved",
+  "approval_policy_refs": [
+    "policy-release-truthfulness"
+  ],
+  "justification": "The release task requires repository write access and remote publication after verification.",
+  "allocation_plan_ref": null,
+  "policy_evaluation_ref": null,
+  "expires_at": null,
+  "source_task_id": "TASK-010",
+  "source_parent_session_id": "SESS-MQQYB7V6-YSYJNJ",
+  "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO"
+}

@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-06-23T17:30:44.883Z",
+  "generated_at": "2026-06-23T18:09:09.436Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MQQWOH7W-5TIJE6",
-    "report_id": "OUT-MQQX6HJU-MBW2V8",
+    "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
+    "report_id": "OUT-MQQYK9S5-F9442E",
     "result": "success",
-    "observed_at": "2026-06-23T17:30:01.433Z",
-    "note": "QIF v0.3 Discovery Layer design was produced, reviewed by Visionary/Builder/Guardian evidence, verified by repository and AOF checks, and kept separate from schema implementation.",
-    "signal_ref": "docs/qif-v0.3-discovery-layer-design.md"
+    "observed_at": "2026-06-23T18:08:44.164Z",
+    "note": "QIF v0.3.0 release metadata, release notes, AOF gate evidence, and verification are complete; annotated tag and GitHub Release publication will use the verified release commit.",
+    "signal_ref": "RELEASE-NOTES-v0.3.0.md"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV03D-001",
-    "recorded_at": "2026-06-23T17:29:52.652Z",
-    "summary": "The design slice produced a separate Discovery Layer proposal with discovery pattern taxonomy, dynamic discovery flow, traceability, confidence, coverage, governance, and verifier boundaries while keeping QIF representation stable.",
-    "detected_gap": "No executable v0.3 schema, package example, or verifier rule has been implemented yet; pilot evidence is also still absent.",
+    "audit_id": "FSA-QIFV030R-001",
+    "recorded_at": "2026-06-23T18:08:31.546Z",
+    "summary": "The release slice updates QIF to v0.3.0 as a Discovery Layer design milestone with package metadata, changelog, README, release notes, AOF gate evidence, and verification.",
+    "detected_gap": "v0.3 Discovery Layer schemas, example packages, verifier rules, negative checklist-regression fixtures, and pilot evidence remain future work.",
     "result_state": "stable",
-    "next_action": "After human acceptance, open an implementation slice for Discovery Layer schemas, example packages, verifier rules, and negative checklist-regression fixtures.",
+    "next_action": "After release, implement the v0.3 Discovery Layer runtime package and verifier from the accepted design boundary.",
     "related_task_ids": [
-      "TASK-009"
+      "TASK-010"
     ]
   },
   "current_next_value_slice": {
-    "content": "After human acceptance, implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the accepted design boundary.",
-    "updated_at": "2026-06-23T17:30:28.344Z",
+    "content": "Implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the released design milestone.",
+    "updated_at": "2026-06-23T18:08:59.455Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MQQWOH7W-5TIJE6",
-    "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN"
+    "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
+    "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "After human acceptance, open an implementation slice for Discovery Layer schemas, example packages, verifier rules, and negative checklist-regression fixtures.",
+    "proposed_focus": "After release, implement the v0.3 Discovery Layer runtime package and verifier from the accepted design boundary.",
     "related_task_ids": [
-      "TASK-009"
+      "TASK-010"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: After human acceptance, implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the accepted design boundary.",
-    "Latest self-audit next action: After human acceptance, open an implementation slice for Discovery Layer schemas, example packages, verifier rules, and negative checklist-regression fixtures.",
+    "Current next value slice: Implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the released design milestone.",
+    "Latest self-audit next action: After release, implement the v0.3 Discovery Layer runtime package and verifier from the accepted design boundary.",
     "Latest outcome result: success"
   ]
 }

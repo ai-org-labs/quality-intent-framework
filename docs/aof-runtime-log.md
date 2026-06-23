@@ -944,3 +944,102 @@ Retrospective reason:
 - Outcome `OUT-MQQX6HJU-MBW2V8` is recorded as `success`.
 - `TASK-009` is done.
 - The next value slice is explicit: after human acceptance, implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the accepted design boundary.
+
+## QIF v0.3.0 Release
+
+This repository then opened a release slice to publish the accepted v0.3 Discovery Layer design as an immutable design milestone.
+
+Runtime session:
+
+- Session: `.aof/sessions/SESS-MQQYB7V6-YSYJNJ.json`
+- Framing decision: `.aof/decisions/DEC-MQQYBK4F-UBP0W9.md`
+- Need validation decision: `.aof/decisions/DEC-MQQYDO2M-RVXRQO.md`
+- Task: `.aof/tasks/done/TASK-010.json`
+
+Need / Intent / Context:
+
+- Need: publish QIF v0.3.0 as a design milestone for the accepted Discovery Layer boundary and taxonomy.
+- Intent: update package metadata, changelog, README, release notes, verification artifacts, annotated tag, pushed main branch, and GitHub Release.
+- Context: this release does not implement v0.3 Discovery Layer schemas, verifier rules, UI, external integrations, or semantic-truth validation.
+
+Need validation artifacts:
+
+- Problem Statement: `.aof/artifacts/need-validation/problem-statements/PST-QIFV030R-001.json`
+- Value Hypothesis: `.aof/artifacts/need-validation/value-hypotheses/VHY-QIFV030R-001.json`
+- Alternative Analysis: `.aof/artifacts/need-validation/alternative-analyses/ALT-QIFV030R-001.json`
+- Need Validation Record: `.aof/artifacts/need-validation/records/NVR-QIFV030R-001.json`
+- Project Charter: `.aof/artifacts/need-validation/project-charters/PCH-QIFV030R-001.json`
+
+Direction runtime commands:
+
+- `run --project . --deep-path`
+- `answer --session .aof/sessions/SESS-MQQYB7V6-YSYJNJ.json`
+- `need-validation-advance --session .aof/sessions/SESS-MQQYB7V6-YSYJNJ.json`
+- `situation-assess --write-artifact .aof/artifacts/runtime/qif-v0.3.0-release-situation-assessment.json`
+- `council-exec --stage planning --provider mock --write-artifact .aof/artifacts/council/qif-v0.3.0-release-planning-council.json`
+
+Decision reason:
+
+- `v0.3.0` is valid because the accepted Discovery Layer design changes QIF's public planning baseline.
+- Release notes must describe a design milestone, not completed runtime implementation.
+- QIF remains standalone; AOF evidence records governance and is not required to use QIF.
+
+Execution gate artifacts:
+
+- Policy Evaluation: `.aof/artifacts/execution/policy-evaluations/PER-QIFV030R-001.json`
+- Resource Claim: `.aof/artifacts/execution/resource-claims/RCL-QIFV030R-001.json`
+- Actor Skill Packet: `.aof/artifacts/execution/actor-skill-packets/ASP-QIFV030R-001.json`
+- Actor Assignment Evaluation: `.aof/artifacts/execution/actor-assignment-evaluations/AAE-QIFV030R-001.json`
+- Actor Execution Gate: `.aof/artifacts/execution/actor-execution-gates/AEG-QIFV030R-001.json`
+
+Council gate:
+
+- Visionary: approved. The release gives the Discovery Layer design a stable public reference and keeps AOF as one consumer/governance path, not a QIF runtime requirement.
+- Builder: approved. The release is limited to metadata, release notes, verification, tag, push, and GitHub Release creation.
+- Guardian: approved with guardrails. Publication is blocked if metadata implies completed v0.3 runtime schemas, semantic-truth verification, or checklist-based quality coverage.
+
+Implemented release metadata:
+
+- Package version: `0.3.0`
+- Changelog entry: `CHANGELOG.md`
+- README baseline update: `README.md`
+- Release notes: `RELEASE-NOTES-v0.3.0.md`
+
+Verification:
+
+- Repository command: `npm test`
+- AOF command: `need-validation-benchmark --write-artifact .aof/artifacts/verification/need-validation-benchmark-qif-v0.3.0-release.json`
+- AOF command: `command-routing-audit --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.3.0-release.json`
+- AOF command: `organization-verify --project .`
+
+Verification result:
+
+- `npm test` passed.
+- Need Validation benchmark passed.
+- Command routing audit passed.
+- Organization verification passed with 153/153 checks before task closure.
+- Remote GitHub Release `v0.3.0` and remote tag `v0.3.0` were absent before publication.
+
+Self-review:
+
+- Runtime command: `self-audit-record --audit-id FSA-QIFV030R-001`
+- Artifact: `.aof/context/active/framework-self-audit.json`
+
+Retrospective:
+
+- Runtime command: `outcome-report --session .aof/sessions/SESS-MQQYB7V6-YSYJNJ.json --result success`
+- Runtime command: `task-update --task-id TASK-010 --status done`
+- Runtime command: `goal-project --goal-type next-value-slice`
+- Runtime command: `learning-loop-snapshot --project .`
+- Runtime command: `operator-progress --write-artifact .aof/artifacts/runtime/operator-progress-qif-v0.3.0-release.json`
+
+Retrospective reason:
+
+- Outcome `OUT-MQQYK9S5-F9442E` is recorded as `success`.
+- `TASK-010` is done.
+- The next value slice is explicit: implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the released design milestone.
+
+Publication target:
+
+- Tag: `v0.3.0`
+- Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.3.0`

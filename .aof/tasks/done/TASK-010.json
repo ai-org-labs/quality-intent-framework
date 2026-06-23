@@ -1,0 +1,22 @@
+{
+  "task_id": "TASK-010",
+  "title": "Release QIF v0.3.0",
+  "description": "Publish the accepted v0.3 Discovery Layer design milestone with package metadata, changelog, release notes, annotated tag, pushed main branch, and GitHub Release.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MQQYB7V6-YSYJNJ",
+  "assigned_session_ids": [
+    "SESS-MQQYB7V6-YSYJNJ"
+  ],
+  "related_decision_record_id": "DEC-MQQYDO2M-RVXRQO",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-06-23T18:02:14.858Z",
+  "updated_at": "2026-06-23T18:08:58.145Z",
+  "assigned_at": null,
+  "done_at": "2026-06-23T18:08:58.145Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Release metadata and verification completed; v0.3.0 tag and GitHub Release publication use the verified release commit."
+}

@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "QIF needs a separate Discovery Layer design for v0.3 so non-experts and AI agents can discover candidate quality intents through failure-oriented exploration without converting QIF into a checklist framework.",
-  "updated_at": "2026-06-23T17:18:41.952Z",
+  "content": "Publish QIF v0.3.0 as a design milestone for the accepted Discovery Layer boundary and taxonomy, without claiming completed v0.3 runtime implementation.",
+  "updated_at": "2026-06-23T18:03:36.120Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MQQWOH7W-5TIJE6",
-  "source_decision_record_id": "DEC-MQQWRX8V-2CR7HN",
+  "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
+  "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO",
   "declared_complete_at": null
 }

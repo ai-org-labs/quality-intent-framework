@@ -1,0 +1,42 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-06-23T18:06:26.200Z",
+  "review_packet_id": "CREV-MQQYHBBS-VBSV1S",
+  "council_id": "qif-v0.3.0-release-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve QIF v0.3.0 release execution as a Discovery Layer design milestone.",
+  "rationale": "Need validation, project charter, resource claim, policy review, and role evidence all support releasing v0.3.0 only as a versioned design baseline.",
+  "recommendation": "Proceed to metadata update, verification, release commit, annotated tag v0.3.0, push, and GitHub Release creation.",
+  "target_audience": "QIF maintainers and standalone users",
+  "expected_user_reaction": "They can cite v0.3.0 as the accepted Discovery Layer design boundary without assuming completed runtime implementation.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [
+    "Release notes must identify schemas, verifier rules, examples, and pilot evidence as future work."
+  ],
+  "organization_change_recommendations": [
+    "Keep QIF standalone and position AOF as governance evidence or one consumer, not a required QIF runtime."
+  ],
+  "diagnosis_category": "qif-v0.3.0-release-approved",
+  "diagnosis_confidence": 0.9,
+  "diagnosis_evidence_refs": [
+    ".aof/artifacts/execution/team-outputs/TOUT-QIFV030R-GATE.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [
+    ".aof/artifacts/execution/team-outputs/TOUT-QIFV030R-GATE.json"
+  ],
+  "role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV030R-VISIONARY-GATE.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV030R-BUILDER-GATE.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV030R-GUARDIAN-GATE.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/council/qif-v0.3.0-release-planning-council.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-010",
+  "source_parent_session_id": "SESS-MQQYB7V6-YSYJNJ",
+  "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO"
+}

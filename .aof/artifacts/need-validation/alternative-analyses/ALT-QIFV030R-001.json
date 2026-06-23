@@ -1,0 +1,23 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-06-23T18:02:51.264Z",
+  "alternative_analysis_id": "ALT-MQQYCPHC-9NRUWD",
+  "subject_need": "Publish the accepted QIF v0.3 Discovery Layer design milestone",
+  "alternative_solutions": [
+    "Release v0.3.0 now as a design milestone with accurate notes and no runtime-implementation claims.",
+    "Wait and release only after v0.3 schemas, examples, and verifier rules are implemented.",
+    "Keep the design only on main without a release tag."
+  ],
+  "non_solution_options": [
+    "Create a tag without release notes or verification."
+  ],
+  "defer_options": [
+    "Defer v0.3.0 until after a pilot validates Discovery Patterns."
+  ],
+  "stop_options": [
+    "Do not create the release if repository tests or AOF verification fail.",
+    "Do not create the release if notes imply completed v0.3 runtime schemas or semantic-truth verification."
+  ],
+  "source_task_id": "TASK-010",
+  "source_decision_record_id": "DEC-MQQYBK4F-UBP0W9"
+}

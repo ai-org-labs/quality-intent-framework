@@ -1,0 +1,46 @@
+{
+  "evaluation_type": "actor-assignment-evaluation",
+  "evaluation_format_version": 1,
+  "recorded_at": "2026-06-23T18:04:49.248Z",
+  "evaluation_id": "AAE-MQQYF8IB-ASYMYC",
+  "actor_skill_packet_ref": ".aof/artifacts/execution/actor-skill-packets/ASP-QIFV030R-001.json",
+  "actor_skill_packet_id": "ASP-MQQYETO3-4D7S25",
+  "source_task_id": "TASK-010",
+  "source_parent_session_id": "SESS-MQQYB7V6-YSYJNJ",
+  "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "qif-release-team",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "skill-release-management",
+    "skill-qif-boundary-review"
+  ],
+  "capability_fit_summary": {
+    "strong_count": 0,
+    "sufficient_count": 1,
+    "weak_count": 0,
+    "missing_count": 0,
+    "blocked_count": 0,
+    "evidence_ref_count": 2
+  },
+  "assignment_decision": {
+    "assignment_state": "selected",
+    "confidence_label": "medium",
+    "rationale": "Assignment has sufficient skill and capability evidence to proceed to governed execution.",
+    "recommended_action": "Proceed to resource and policy gate evaluation."
+  },
+  "missing_evidence": [],
+  "review_required": true,
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I can release the design milestone cleanly.",
+    "current_action": "Update metadata, verify, commit, tag, push, and publish release.",
+    "confidence_label": "medium",
+    "visible_state": "selected",
+    "visible_blockers": [],
+    "next_action": "Proceed to resource and policy gate evaluation."
+  }
+}
