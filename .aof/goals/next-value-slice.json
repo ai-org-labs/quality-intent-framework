@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the released design milestone.",
-  "updated_at": "2026-06-23T18:08:59.455Z",
+  "content": "Implement executable QIF pre-implementation review records, negative acceptance examples, applicability to real targets, and verifier rules while preserving QIF standalone use.",
+  "updated_at": "2026-06-24T17:05:18.651Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
-  "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO",
+  "source_session_id": "SESS-MQSAL5T6-2P3E8G",
+  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75",
   "declared_complete_at": null
 }

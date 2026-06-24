@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-24T16:36:27.695Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MQSAL5T6-2P3E8G",
+  "status": "completed",
+  "recommendation": "Approve with guardrails: QIF must remain standalone and negative acceptance must not become checklist completion.",
+  "rationale": "The risk is turning a retrospective from an AOF project into QIF core semantics or adding fixed category gates. The docs must frame patterns as exploratory, loss-boundary-driven, and domain-general.",
+  "signals": [
+    "Block if docs require AOF, encode AOF worker mechanics as QIF core, or treat negative acceptance count as quality."
+  ],
+  "artifact_refs": [
+    ".aof/artifacts/execution/actor-execution-gates/AEG-QIFV031PIR-001.json"
+  ],
+  "decision_required": true,
+  "source_task_id": "TASK-011",
+  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75",
+  "source_parent_session_id": "SESS-MQSAL5T6-2P3E8G",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.92
+}

@@ -1,0 +1,31 @@
+{
+  "view_type": "operator_progress",
+  "generated_at": "2026-06-24T17:05:18.672Z",
+  "current_checkpoint": {
+    "stage": "frontier-definition-needed",
+    "frontier_task_id": null,
+    "summary": "The runtime is frontier-definition-needed.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  },
+  "previous_checkpoint": {
+    "summary": "TASK-011 was the latest completed checkpoint.",
+    "artifact_ref": ".aof/tasks/done/TASK-011.json"
+  },
+  "changes_since_last_checkpoint": [
+    {
+      "kind": "completed-task",
+      "summary": "TASK-011 completed: Add QIF pre-implementation review guidance",
+      "artifact_ref": ".aof/tasks/done/TASK-011.json"
+    },
+    {
+      "kind": "goal-refresh",
+      "summary": "Implement executable QIF pre-implementation review records, negative acceptance examples, applicability to real targets, and verifier rules while preserving QIF standalone use.",
+      "artifact_ref": ".aof/goals/next-value-slice.json"
+    }
+  ],
+  "progress_answer": {
+    "what_changed": "TASK-011 completed: Add QIF pre-implementation review guidance Implement executable QIF pre-implementation review records, negative acceptance examples, applicability to real targets, and verifier rules while preserving QIF standalone use.",
+    "why_it_matters": "The runtime still needs a concrete current frontier to make progress legible.",
+    "next_checkpoint": "Open an implementation task for the current frontier: Implement executable QIF pre-implementation review records, negative acceptance examples, applicability to real targets, and verifier rules while preserving QIF standalone use."
+  }
+}

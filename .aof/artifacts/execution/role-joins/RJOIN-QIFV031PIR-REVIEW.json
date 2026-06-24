@@ -1,0 +1,28 @@
+{
+  "join_type": "role-join",
+  "recorded_at": "2026-06-24T17:02:46.313Z",
+  "join_id": "RJOIN-MQSBNAJS-9OV5YA",
+  "join_status": "open",
+  "stage": "review",
+  "expected_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-orchestrator-decision",
+  "blocking_signals": [],
+  "recommended_next_step": "Approve the docs-only pre-implementation review guidance and continue to verification, log update, and task closure.",
+  "received_session_ids": [
+    "SESS-MQSAL5T6-2P3E8G"
+  ],
+  "source_task_id": "TASK-011",
+  "source_parent_session_id": "SESS-MQSAL5T6-2P3E8G",
+  "decision_record_ref": ".aof/decisions/DEC-MQSAN8HN-WW8N75.json",
+  "summary": "Visionary, Builder, and Guardian approve the standalone QIF prevention guidance with guardrails against checklist regression, AOF dependency, and semantic-truth claims."
+}

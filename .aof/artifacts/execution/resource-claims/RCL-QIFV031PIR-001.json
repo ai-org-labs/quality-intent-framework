@@ -1,0 +1,20 @@
+{
+  "claim_type": "resource-claim",
+  "recorded_at": "2026-06-24T16:35:37.578Z",
+  "claim_id": "RCL-MQSAODT6-OZFSLW",
+  "subject_ref": "TASK-011",
+  "resource_ref": "resource-repo-main",
+  "claimant_role_ref": "builder",
+  "claim_scope": "docs, README, changelog, and AOF runtime log updates for pre-implementation review guidance",
+  "claim_status": "approved",
+  "approval_policy_refs": [
+    "policy-qif-standalone-boundary"
+  ],
+  "justification": "The task requires repository write access for documentation and AOF evidence only.",
+  "allocation_plan_ref": null,
+  "policy_evaluation_ref": null,
+  "expires_at": null,
+  "source_task_id": "TASK-011",
+  "source_parent_session_id": "SESS-MQSAL5T6-2P3E8G",
+  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75"
+}

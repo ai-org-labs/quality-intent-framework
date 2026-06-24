@@ -13,6 +13,8 @@ This repository contains the executable QIF baseline through v0.2.1 and the v0.3
 - QIF v0.2 runtime specification: `docs/qif-v0.2-discovery-application-runtime.md`
 - QIF v0.2.1 consolidation review: `docs/qif-v0.2.1-consolidation-review.md`
 - QIF v0.3 Discovery Layer design: `docs/qif-v0.3-discovery-layer-design.md`
+- QIF pre-implementation review: `docs/qif-pre-implementation-review.md`
+- QIF negative acceptance: `docs/qif-negative-acceptance.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - Expert judgment schema: `schemas/expert-judgment-package.schema.json`

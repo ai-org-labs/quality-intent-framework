@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-06-23T18:08:31.546Z",
-  "audit_id": "FSA-QIFV030R-001",
-  "scope": "QIF v0.3.0 release",
-  "summary": "The release slice updates QIF to v0.3.0 as a Discovery Layer design milestone with package metadata, changelog, README, release notes, AOF gate evidence, and verification.",
-  "detected_gap": "v0.3 Discovery Layer schemas, example packages, verifier rules, negative checklist-regression fixtures, and pilot evidence remain future work.",
+  "recorded_at": "2026-06-24T17:04:38.212Z",
+  "audit_id": "FSA-QIFV031PIR-001",
+  "scope": "QIF v0.3.1 pre-implementation review guidance",
+  "summary": "The slice adds standalone QIF guidance for reviewing proposed changes before implementation, defining negative acceptance, and extending Discovery Patterns for solution bias, boundary confusion, and concept comprehension.",
+  "detected_gap": "The guidance is documentation-only; executable schemas, examples, verifier rules, and pilot packages for pre-implementation review are not implemented yet.",
   "result_state": "stable",
-  "next_action": "After release, implement the v0.3 Discovery Layer runtime package and verifier from the accepted design boundary.",
+  "next_action": "Close this docs-only slice and make the next value slice an executable pre-implementation review package if requested.",
   "related_task_ids": [
-    "TASK-010"
+    "TASK-011"
   ],
-  "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
-  "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO"
+  "source_session_id": "SESS-MQSAL5T6-2P3E8G",
+  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75"
 }

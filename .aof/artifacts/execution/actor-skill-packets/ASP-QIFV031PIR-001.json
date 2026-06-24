@@ -1,0 +1,90 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-06-24T16:35:36.368Z",
+  "packet_id": "ASP-MQSAOCVK-SXQBU3",
+  "source_task_id": "TASK-011",
+  "source_parent_session_id": "SESS-MQSAL5T6-2P3E8G",
+  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75",
+  "objective": "Add QIF pre-implementation review and negative acceptance guidance",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "qif-design-team",
+    "assignment_reason": "Builder owns documentation design and repository updates for the docs-only v0.3.1 candidate.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "skill-qif-framework-design",
+    "skill-documentation"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-framework-documentation",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "docs/qif-v0.3-discovery-layer-design.md",
+        ".aof/artifacts/need-validation/records/NVR-QIFV031PIR-001.json"
+      ],
+      "rationale": "The work extends QIF design docs without changing executable schemas."
+    }
+  ],
+  "resource_refs": [
+    "resource-repo-main"
+  ],
+  "policy_refs": [
+    "policy-qif-standalone-boundary",
+    "policy-no-checklist-quality-definition"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "documentation",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "pre-implementation review workflow",
+      "negative acceptance model",
+      "data boundary and concept comprehension guidance",
+      "Discovery Layer pattern extensions"
+    ],
+    "acceptance_criteria": [
+      "Docs define a pre-implementation gate that is standalone QIF and not AOF-specific.",
+      "Docs define negative acceptance without reducing quality to checklist completion."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "standalone QIF boundary",
+      "evaluator_ref": "Guardian",
+      "evidence_required": "docs say AOF is not required and examples are domain-general",
+      "blocking": true
+    },
+    {
+      "criterion": "prevention before implementation",
+      "evaluator_ref": "Visionary",
+      "evidence_required": "workflow challenges solution bias and boundary confusion before implementation",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "aof-specific-core-semantics",
+      "trigger_condition": "docs require AOF to use QIF",
+      "consequence": "block-assignment",
+      "recovery_action": "rewrite as standalone QIF guidance"
+    },
+    {
+      "blocker_code": "checklist-regression",
+      "trigger_condition": "docs turn Discovery Patterns or negative acceptance into fixed category completion",
+      "consequence": "block-assignment",
+      "recovery_action": "restore exploratory and loss-boundary framing"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I can turn the retrospective into standalone QIF guidance.",
+    "current_action": "Write docs and integrate links without runtime schema changes.",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Submit docs for Guardian/Visionary/Builder review."
+  },
+  "status": "ready-for-assignment"
+}

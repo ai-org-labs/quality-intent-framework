@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Publish QIF v0.3.0 as a design milestone for the accepted Discovery Layer boundary and taxonomy, without claiming completed v0.3 runtime implementation.",
-  "updated_at": "2026-06-23T18:03:36.120Z",
+  "content": "QIF needs standalone pre-implementation review and negative acceptance guidance so users can block mistaken quality hypotheses before implementation, not only validate structure after implementation.",
+  "updated_at": "2026-06-24T16:34:44.037Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
-  "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO",
+  "source_session_id": "SESS-MQSAL5T6-2P3E8G",
+  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75",
   "declared_complete_at": null
 }

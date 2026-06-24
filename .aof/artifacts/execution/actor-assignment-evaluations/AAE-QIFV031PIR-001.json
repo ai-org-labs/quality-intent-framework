@@ -1,0 +1,46 @@
+{
+  "evaluation_type": "actor-assignment-evaluation",
+  "evaluation_format_version": 1,
+  "recorded_at": "2026-06-24T16:35:55.654Z",
+  "evaluation_id": "AAE-MQSAORQR-2300D4",
+  "actor_skill_packet_ref": ".aof/artifacts/execution/actor-skill-packets/ASP-QIFV031PIR-001.json",
+  "actor_skill_packet_id": "ASP-MQSAOCVK-SXQBU3",
+  "source_task_id": "TASK-011",
+  "source_parent_session_id": "SESS-MQSAL5T6-2P3E8G",
+  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "qif-design-team",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "skill-qif-framework-design",
+    "skill-documentation"
+  ],
+  "capability_fit_summary": {
+    "strong_count": 0,
+    "sufficient_count": 1,
+    "weak_count": 0,
+    "missing_count": 0,
+    "blocked_count": 0,
+    "evidence_ref_count": 2
+  },
+  "assignment_decision": {
+    "assignment_state": "selected",
+    "confidence_label": "medium",
+    "rationale": "Assignment has sufficient skill and capability evidence to proceed to governed execution.",
+    "recommended_action": "Proceed to resource and policy gate evaluation."
+  },
+  "missing_evidence": [],
+  "review_required": true,
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I can turn the retrospective into standalone QIF guidance.",
+    "current_action": "Write docs and integrate links without runtime schema changes.",
+    "confidence_label": "medium",
+    "visible_state": "selected",
+    "visible_blockers": [],
+    "next_action": "Proceed to resource and policy gate evaluation."
+  }
+}

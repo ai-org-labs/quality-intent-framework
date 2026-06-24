@@ -1,0 +1,43 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-06-24T17:03:20.649Z",
+  "review_packet_id": "CREV-MQSBO11L-7W1IS7",
+  "council_id": "qif-v0.3.1-pre-implementation-review-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve the QIF pre-implementation review and negative acceptance guidance as a docs-only v0.3.1 candidate.",
+  "rationale": "The slice operationalizes cross-project feedback by adding prevention-oriented QIF guidance before implementation, extending Discovery Patterns for solution bias, data boundary confusion, and concept comprehension, and preserving QIF as a standalone representation and evaluation framework.",
+  "recommendation": "Keep this as a documentation and design hardening commit; implement executable schemas, examples, verifier rules, release, and tag only in later explicit slices.",
+  "target_audience": "QIF maintainers, AI agents, and human reviewers using QIF before implementation",
+  "expected_user_reaction": "They can use QIF to review proposed changes before building without mistaking prompts or negative criteria for checklist completion.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [
+    "If this guidance becomes executable, model negative acceptance as loss-boundary evidence and keep discovery pattern coverage exploratory."
+  ],
+  "organization_change_recommendations": [
+    "Use pre-implementation QIF review before UI, process, or data-boundary changes that can encode mistaken assumptions."
+  ],
+  "diagnosis_category": "qif-pre-implementation-guidance-approved",
+  "diagnosis_confidence": 0.89,
+  "diagnosis_evidence_refs": [
+    "docs/qif-pre-implementation-review.md",
+    "docs/qif-negative-acceptance.md"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [
+    ".aof/artifacts/execution/team-outputs/TOUT-QIFV031PIR-REVIEW.json"
+  ],
+  "role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV031PIR-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV031PIR-BUILDER-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV031PIR-GUARDIAN-REVIEW.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/verification/need-validation-benchmark-qif-v0.3.1-pre-implementation-review.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-011",
+  "source_parent_session_id": "SESS-MQSAL5T6-2P3E8G",
+  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75"
+}

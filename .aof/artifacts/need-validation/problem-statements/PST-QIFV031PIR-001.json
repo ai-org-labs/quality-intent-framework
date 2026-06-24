@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-06-24T16:34:01.790Z",
+  "problem_statement_id": "PST-MQSAMBWE-UOYPJ6",
+  "affected_party": "QIF users, maintainers, reviewers, and AI agents applying QIF before implementation",
+  "actual_problem": "QIF guidance currently emphasizes representation, traceability, and post-implementation validation more than pre-implementation prevention of mistaken quality hypotheses.",
+  "why_it_matters": "Teams can pass structural verification while still implementing solution-biased UI, confused data boundaries, or acceptance criteria that lack negative conditions.",
+  "why_now": "A cross-project retrospective showed that existing QIF concepts could have prevented a flawed blank/sample project design if used as a pre-implementation gate.",
+  "evidence_refs": [
+    "<external-retrospective-attachment>",
+    "docs/qif-v0.3-discovery-layer-design.md"
+  ],
+  "source_task_id": "TASK-011",
+  "source_decision_record_id": "DEC-MQSALHSP-64ZDU1"
+}

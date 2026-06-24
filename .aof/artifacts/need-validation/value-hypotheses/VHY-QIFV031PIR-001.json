@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-06-24T16:34:03.072Z",
+  "value_hypothesis_id": "VHY-MQSAMCW0-N4C310",
+  "expected_value_creation": "Pre-implementation QIF guidance will help users block poor solution framing, missing negative acceptance, data-boundary confusion, and concept-comprehension failures before work is built.",
+  "beneficiary": "Standalone QIF users, repository reviewers, document reviewers, product teams, operations teams, and AI agents",
+  "supporting_evidence": [
+    "The retrospective identifies concrete failures that passed post-implementation gates but could have been caught by Loss Boundaries, negative acceptance, and pre-implementation quality review.",
+    "QIF v0.3 Discovery Layer already defines discovery patterns and candidate Quality Intents that can be extended with solution-bias, boundary-confusion, and concept-comprehension discovery."
+  ],
+  "success_criteria": [
+    "Docs define a reusable pre-implementation review workflow that is not AOF-specific.",
+    "Docs define negative acceptance and examples across UI, data, documents, operations, and agent work."
+  ],
+  "source_task_id": "TASK-011",
+  "source_decision_record_id": "DEC-MQSALHSP-64ZDU1"
+}

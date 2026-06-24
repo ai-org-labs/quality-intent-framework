@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-06-23T18:08:31.551Z",
+  "updated_at": "2026-06-24T17:04:38.228Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success is judged by a clean v0.3.0 release: metadata and release notes accurately describe the design milestone, tests and AOF verification pass, tag v0.3.0 points to the release commit, GitHub Release v0.3.0 exists, and no claim is made that semantic truth or runtime schemas are complete.",
-      "recorded_at": "2026-06-23T18:01:57.707Z",
+      "answer": "Success is judged by whether QIF can explain how to block solution-biased or boundary-confused work before implementation: documented review workflow, negative acceptance model, data boundary and concept comprehension quality intents, discovery patterns, examples, and verifier boundaries are added without making QIF depend on AOF.",
+      "recorded_at": "2026-06-24T16:33:22.797Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
+      "source_session_id": "SESS-MQSAL5T6-2P3E8G",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "Validated as a release-only slice: update release metadata, verify, tag v0.3.0, push, and create GitHub Release. Runtime schemas, verifier changes, UI, external integrations, and semantic-truth claims remain out of scope.",
-      "recorded_at": "2026-06-23T18:03:36.139Z",
+      "answer": "Validated as a docs-only v0.3.1 candidate. The chosen path adds standalone QIF guidance and Discovery Layer pattern extensions; runtime schemas, UI, external integrations, release/tagging, and AOF-specific enforcement are out of scope.",
+      "recorded_at": "2026-06-24T16:34:44.041Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
-      "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO"
+      "source_session_id": "SESS-MQSAL5T6-2P3E8G",
+      "source_decision_record_id": "DEC-MQSAN8HN-WW8N75"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "v0.3 Discovery Layer schemas, example packages, verifier rules, negative checklist-regression fixtures, and pilot evidence remain future work.",
-      "recorded_at": "2026-06-23T18:08:31.551Z",
-      "expectation_state": "The release slice updates QIF to v0.3.0 as a Discovery Layer design milestone with package metadata, changelog, README, release notes, AOF gate evidence, and verification.",
-      "mismatch_state": "v0.3 Discovery Layer schemas, example packages, verifier rules, negative checklist-regression fixtures, and pilot evidence remain future work.",
-      "scale_direction": "After release, implement the v0.3 Discovery Layer runtime package and verifier from the accepted design boundary.",
-      "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
-      "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO"
+      "answer": "The guidance is documentation-only; executable schemas, examples, verifier rules, and pilot packages for pre-implementation review are not implemented yet.",
+      "recorded_at": "2026-06-24T17:04:38.228Z",
+      "expectation_state": "The slice adds standalone QIF guidance for reviewing proposed changes before implementation, defining negative acceptance, and extending Discovery Patterns for solution bias, boundary confusion, and concept comprehension.",
+      "mismatch_state": "The guidance is documentation-only; executable schemas, examples, verifier rules, and pilot packages for pre-implementation review are not implemented yet.",
+      "scale_direction": "Close this docs-only slice and make the next value slice an executable pre-implementation review package if requested.",
+      "source_session_id": "SESS-MQSAL5T6-2P3E8G",
+      "source_decision_record_id": "DEC-MQSAN8HN-WW8N75"
     }
   ]
 }

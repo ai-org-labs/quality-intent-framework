@@ -1043,3 +1043,116 @@ Publication target:
 
 - Tag: `v0.3.0`
 - Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.3.0`
+
+## QIF v0.3.1 Pre-Implementation Review Guidance
+
+This repository then opened a docs-only slice to incorporate cross-project retrospective feedback: QIF had been useful after implementation, but the next need was to use QIF before implementation to detect solution bias, boundary confusion, concept comprehension risk, and missing negative acceptance.
+
+Runtime session:
+
+- Session: `.aof/sessions/SESS-MQSAL5T6-2P3E8G.json`
+- Initial decision: `.aof/decisions/DEC-MQSAL5TK-I88I89.md`
+- Framing decision: `.aof/decisions/DEC-MQSALHSP-64ZDU1.md`
+- Need validation decision: `.aof/decisions/DEC-MQSAN8HN-WW8N75.md`
+- Task: `.aof/tasks/done/TASK-011.json`
+
+Need / Intent / Context:
+
+- Need: make QIF usable before implementation to prevent work that satisfies structural checks while protecting the wrong loss boundary.
+- Intent: add standalone QIF guidance for pre-implementation review, negative acceptance, data boundary quality, concept comprehension, responsibility separation, and solution-bias discovery.
+- Context: QIF remains usable without AOF; this slice does not add UI, external integrations, runtime schemas, verifier changes, release metadata, tag, or GitHub Release.
+
+Need validation artifacts:
+
+- Problem Statement: `.aof/artifacts/need-validation/problem-statements/PST-QIFV031PIR-001.json`
+- Value Hypothesis: `.aof/artifacts/need-validation/value-hypotheses/VHY-QIFV031PIR-001.json`
+- Alternative Analysis: `.aof/artifacts/need-validation/alternative-analyses/ALT-QIFV031PIR-001.json`
+- Need Validation Record: `.aof/artifacts/need-validation/records/NVR-QIFV031PIR-001.json`
+- Project Charter: `.aof/artifacts/need-validation/project-charters/PCH-QIFV031PIR-001.json`
+
+Direction runtime commands:
+
+- `run --project . --deep-path`
+- `answer --session .aof/sessions/SESS-MQSAL5T6-2P3E8G.json`
+- `need-validation-advance --session .aof/sessions/SESS-MQSAL5T6-2P3E8G.json`
+- `situation-assess --write-artifact .aof/artifacts/runtime/qif-v0.3.1-pre-implementation-review-situation-assessment.json`
+- `council-exec --stage planning --provider mock --write-artifact .aof/artifacts/council/qif-v0.3.1-pre-implementation-review-planning-council.json`
+
+Direction decision:
+
+- The raw retrospective request was not used as the project.
+- The validated need is a docs-only prevention guidance slice, not a QIF representation redesign.
+- Runtime schemas, verifier implementation, UI, release, and tag were explicitly deferred.
+
+Execution gate artifacts:
+
+- Policy Evaluation: `.aof/artifacts/execution/policy-evaluations/PER-QIFV031PIR-001.json`
+- Resource Claim: `.aof/artifacts/execution/resource-claims/RCL-QIFV031PIR-001.json`
+- Actor Skill Packet: `.aof/artifacts/execution/actor-skill-packets/ASP-QIFV031PIR-001.json`
+- Actor Assignment Evaluation: `.aof/artifacts/execution/actor-assignment-evaluations/AAE-QIFV031PIR-001.json`
+- Actor Execution Gate: `.aof/artifacts/execution/actor-execution-gates/AEG-QIFV031PIR-001.json`
+
+Execution decision:
+
+- Builder execution was limited to documentation and design hardening.
+- The policy evaluation required review because the main risks were checklist regression, AOF-specific coupling, and semantic-truth overclaim.
+- Visionary, Builder, and Guardian gate evidence approved proceeding with documentation only.
+
+Implemented artifacts:
+
+- Added: `docs/qif-pre-implementation-review.md`
+- Added: `docs/qif-negative-acceptance.md`
+- Updated: `docs/qif-v0.3-discovery-layer-design.md`
+- Updated: `README.md`
+- Updated: `CHANGELOG.md`
+
+Review runtime commands:
+
+- `role-result-record` for Visionary, Builder, and Guardian review evidence.
+- `role-join-record --write-artifact .aof/artifacts/execution/role-joins/RJOIN-QIFV031PIR-REVIEW.json`
+- `team-output-record --write-artifact .aof/artifacts/execution/team-outputs/TOUT-QIFV031PIR-REVIEW.json`
+- `council-review-packet --write-artifact .aof/artifacts/council/qif-v0.3.1-pre-implementation-review-council-review-packet.json`
+
+Council judgment:
+
+- Visionary: approved. QIF can now be used upstream to discover mistaken assumptions before implementation while keeping Discovery Layer outputs candidate and auditable.
+- Builder: approved. The change is coherent as documentation-only and does not alter package version, schemas, verifier behavior, release notes, tag, or runtime execution.
+- Guardian: approved with guardrails. Negative acceptance is tied to loss boundaries, not checklist completion; QIF remains standalone; structural verification does not claim semantic truth.
+
+Verification:
+
+- Repository command: `npm test`
+- AOF command: `need-validation-benchmark --write-artifact .aof/artifacts/verification/need-validation-benchmark-qif-v0.3.1-pre-implementation-review.json`
+- AOF command: `command-routing-audit --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.3.1-pre-implementation-review.json`
+- AOF command: `organization-verify --project .`
+
+Verification result:
+
+- `npm test` passed.
+- Need Validation benchmark passed.
+- Command routing audit passed.
+- Organization verification passed with 169/169 checks before task closure.
+
+Self-review:
+
+- Runtime command: `self-audit-record --audit-id FSA-QIFV031PIR-001`
+- Artifact: `.aof/context/active/framework-self-audit.json`
+
+Self-review reason:
+
+- The docs-only slice is stable and does not pretend to be an executable v0.3.1 runtime.
+- Remaining gap: executable pre-implementation review records, negative acceptance examples, verifier rules, and pilot packages are future work.
+
+Retrospective:
+
+- Runtime command: `outcome-report --session .aof/sessions/SESS-MQSAL5T6-2P3E8G.json --result success`
+- Runtime command: `task-update --task-id TASK-011 --status done`
+- Runtime command: `goal-project --goal-type next-value-slice`
+- Runtime command: `learning-loop-snapshot --project .`
+- Runtime command: `operator-progress --write-artifact .aof/artifacts/runtime/operator-progress-qif-v0.3.1-pre-implementation-review.json`
+
+Retrospective reason:
+
+- Outcome `OUT-MQSBPZ42-JA4L60` is recorded as `success`.
+- `TASK-011` is done.
+- The next value slice is explicit: implement executable QIF pre-implementation review records, negative acceptance examples, applicability to real targets, and verifier rules while preserving QIF standalone use.

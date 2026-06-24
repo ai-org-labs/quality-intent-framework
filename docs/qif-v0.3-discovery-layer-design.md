@@ -416,6 +416,91 @@ Outputs:
 - Candidate Quality Intent;
 - Confidence signal.
 
+### 11. Solution Bias Discovery
+
+Goal: detect when the work is framed around a proposed solution before the protected loss boundary is understood.
+
+Use when:
+
+- a task title names a UI control, workflow, automation, report, or mechanism;
+- stakeholders request implementation but the underlying failure is unclear;
+- alternatives have not been considered;
+- acceptance criteria only describe the requested solution.
+
+Prompt examples:
+
+- What user problem can be stated without naming this solution?
+- What would still be bad if this solution were implemented exactly as requested?
+- What loss boundary is this solution supposed to protect?
+- What simpler boundary, data model, or operational change could solve the same problem?
+- What assumption would make this solution unnecessary?
+
+Outputs:
+
+- Assumption Under Review;
+- Candidate Concern;
+- Alternative Direction;
+- Pre-Implementation Verdict candidate.
+
+Anti-pattern warning: do not treat solution presence as evidence of quality.
+
+### 12. Boundary Confusion Discovery
+
+Goal: identify boundaries that may be hidden, merged, or confused by a proposed change.
+
+Use when:
+
+- sample, template, seed, draft, generated, approved, or user-owned data may be confused;
+- editable work surfaces and read-only projections are close together;
+- a source of truth is unclear;
+- responsibility, authority, lifecycle, or evidence state may be ambiguous.
+
+Prompt examples:
+
+- What is the source of truth?
+- What is editable, generated, read-only, sample, template, draft, or approved?
+- Which boundary would a first-time user likely misunderstand?
+- Is this boundary better represented by project files, data state, routing, authority, or UI controls?
+- What forbidden state would indicate the boundary failed?
+
+Outputs:
+
+- Boundary Under Review;
+- Candidate Loss Boundary;
+- Negative Acceptance Criterion;
+- Candidate Quality Intent.
+
+Anti-pattern warning: do not hide a data or authority boundary behind a convenience toggle.
+
+### 13. Concept Comprehension Discovery
+
+Goal: discover whether intended users can understand the concepts needed to act safely.
+
+Use when:
+
+- the target exposes domain terms, generated analysis, projections, governance records, or expert concepts;
+- a user may not know what they can edit, trust, approve, or ignore;
+- verification currently checks that UI or documents exist, but not that they are understandable;
+- junior users, non-experts, operators, or AI agents must apply the result.
+
+Prompt examples:
+
+- What does the user think they are looking at?
+- What can the user change?
+- What is only evidence, projection, analysis, template, or sample data?
+- Which visible terms require prior expert knowledge?
+- Can the target user explain the artifact or work surface in one sentence?
+- What would a junior person or AI agent likely misunderstand?
+
+Outputs:
+
+- Concept Comprehension Risk;
+- Evidence Need;
+- Negative Acceptance Criterion;
+- Candidate Quality Intent.
+
+Anti-pattern warning: do not treat rendered text, controls, or documents as proof that the concept is understood.
+
 ## Dynamic Discovery Flow
 
 The Discovery Layer should not run every pattern. It should select and sequence patterns dynamically.

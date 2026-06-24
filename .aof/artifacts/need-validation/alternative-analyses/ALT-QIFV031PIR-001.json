@@ -1,0 +1,23 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-06-24T16:34:03.527Z",
+  "alternative_analysis_id": "ALT-MQSAMD8N-GPS20O",
+  "subject_need": "Add pre-implementation QIF quality review guidance",
+  "alternative_solutions": [
+    "Add standalone docs for pre-implementation review and negative acceptance, then link them from README and the v0.3 Discovery Layer.",
+    "Immediately implement runtime schemas and verifier rules for pre-implementation review.",
+    "Only add AOF worker-specific gates and leave standalone QIF unchanged."
+  ],
+  "non_solution_options": [
+    "Treat the retrospective as project-local and make no QIF changes."
+  ],
+  "defer_options": [
+    "Wait until multiple projects provide similar retrospectives before documenting the pattern."
+  ],
+  "stop_options": [
+    "Do not create a project if the work requires UI, external integrations, or runtime schema changes in this slice.",
+    "Do not make QIF depend on AOF or encode AOF-specific worker mechanics as core QIF semantics."
+  ],
+  "source_task_id": "TASK-011",
+  "source_decision_record_id": "DEC-MQSALHSP-64ZDU1"
+}

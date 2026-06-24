@@ -1,0 +1,26 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-24T17:02:26.761Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-MQSAL5T6-2P3E8G",
+  "status": "completed",
+  "recommendation": "Accept the docs-only implementation; defer schemas, verifier changes, release, and tag to a later explicit slice.",
+  "rationale": "The implementation adds two focused guidance documents, extends the Discovery Pattern taxonomy, updates README and changelog, and avoids changing runtime package behavior.",
+  "signals": [
+    "Docs-only scope is coherent and does not introduce new package or verifier obligations."
+  ],
+  "artifact_refs": [
+    "docs/qif-pre-implementation-review.md",
+    "docs/qif-negative-acceptance.md",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-011",
+  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75",
+  "source_parent_session_id": "SESS-MQSAL5T6-2P3E8G",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.9
+}

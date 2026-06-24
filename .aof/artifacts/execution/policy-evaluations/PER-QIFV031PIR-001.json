@@ -1,0 +1,34 @@
+{
+  "report_type": "policy-evaluation-report",
+  "recorded_at": "2026-06-24T16:35:33.222Z",
+  "evaluation_id": "PER-MQSAOAG6-2QN09C",
+  "subject_ref": "TASK-011",
+  "evaluation_scope": "pre-implementation review docs boundary",
+  "policy_refs": [
+    "policy-qif-standalone-boundary",
+    "policy-no-checklist-quality-definition"
+  ],
+  "overall_outcome": "requires-review",
+  "results": [
+    {
+      "policy_id": "policy-qif-standalone-boundary",
+      "effect": "require-review",
+      "outcome": "requires-review",
+      "reason": "Docs must keep QIF standalone and avoid encoding AOF-specific worker mechanics as core QIF semantics.",
+      "blocking": false
+    },
+    {
+      "policy_id": "policy-no-checklist-quality-definition",
+      "effect": "require-review",
+      "outcome": "requires-review",
+      "reason": "Negative acceptance and pre-implementation review must not become fixed quality category checklists.",
+      "blocking": false
+    }
+  ],
+  "recommended_actions": [
+    "Proceed with docs only after Guardian review confirms standalone and non-checklist boundaries."
+  ],
+  "source_task_id": "TASK-011",
+  "source_parent_session_id": "SESS-MQSAL5T6-2P3E8G",
+  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75"
+}

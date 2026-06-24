@@ -1,0 +1,36 @@
+{
+  "packet_type": "team-output",
+  "recorded_at": "2026-06-24T17:03:02.989Z",
+  "team_output_id": "TOUT-MQSBNNF1-3XWZDD",
+  "team_id": "qif-v0.3.1-pre-implementation-review-council",
+  "stage": "review",
+  "expected_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-council-review",
+  "blocking_signals": [],
+  "recommended_next_step": "Run verification, update the AOF runtime log, and close TASK-011 without release or tag.",
+  "joined_role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV031PIR-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV031PIR-BUILDER-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV031PIR-GUARDIAN-REVIEW.json"
+  ],
+  "artifact_refs": [
+    "docs/qif-pre-implementation-review.md",
+    "docs/qif-negative-acceptance.md",
+    "docs/qif-v0.3-discovery-layer-design.md"
+  ],
+  "decision_required": false,
+  "summary": "The implementation is accepted as a v0.3.1 docs-only prevention slice: pre-implementation review, negative acceptance, and three upstream discovery patterns are documented while runtime implementation remains deferred.",
+  "source_task_id": "TASK-011",
+  "source_parent_session_id": "SESS-MQSAL5T6-2P3E8G",
+  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75"
+}

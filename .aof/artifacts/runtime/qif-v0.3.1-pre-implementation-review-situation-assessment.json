@@ -1,0 +1,33 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-06-24T16:34:56.596Z",
+  "project_root": "<local-project-root>",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "QIF needs standalone pre-implementation review and negative acceptance guidance so users can block mistaken quality hypotheses before implementation, not only validate structure after implementation.",
+  "next_value_slice": "Implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the released design milestone.",
+  "current_runtime_stage": "implementation-ready",
+  "primary_frontier_task": {
+    "task_id": "TASK-011",
+    "title": "Add QIF pre-implementation review guidance",
+    "status": "open",
+    "updated_at": "2026-06-24T16:33:37.176Z",
+    "track": "v0.3",
+    "artifact_ref": ".aof/tasks/open/TASK-011.json"
+  },
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Start TASK-011: Add QIF pre-implementation review guidance",
+    "prioritized_task_ids": [
+      "TASK-011"
+    ],
+    "scale_direction": "Prioritize TASK-011 while keeping Mission Control, roadmap guidance, and open tasks aligned with the same frontier."
+  },
+  "recommended_action": {
+    "recommended_action": "Start TASK-011: Add QIF pre-implementation review guidance",
+    "rationale": "This is the best open task aligned with the current operating goal and next release frontier.",
+    "artifact_ref": ".aof/tasks/open/TASK-011.json"
+  }
+}

@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-06-23T18:09:09.436Z",
+  "generated_at": "2026-06-24T17:05:19.120Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
-    "report_id": "OUT-MQQYK9S5-F9442E",
+    "source_session_id": "SESS-MQSAL5T6-2P3E8G",
+    "report_id": "OUT-MQSBPZ42-JA4L60",
     "result": "success",
-    "observed_at": "2026-06-23T18:08:44.164Z",
-    "note": "QIF v0.3.0 release metadata, release notes, AOF gate evidence, and verification are complete; annotated tag and GitHub Release publication will use the verified release commit.",
-    "signal_ref": "RELEASE-NOTES-v0.3.0.md"
+    "observed_at": "2026-06-24T17:04:51.446Z",
+    "note": "Docs-only QIF pre-implementation review guidance completed, reviewed by Visionary/Builder/Guardian, and verified with npm test plus AOF checks.",
+    "signal_ref": ".aof/artifacts/council/qif-v0.3.1-pre-implementation-review-council-review-packet.json"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV030R-001",
-    "recorded_at": "2026-06-23T18:08:31.546Z",
-    "summary": "The release slice updates QIF to v0.3.0 as a Discovery Layer design milestone with package metadata, changelog, README, release notes, AOF gate evidence, and verification.",
-    "detected_gap": "v0.3 Discovery Layer schemas, example packages, verifier rules, negative checklist-regression fixtures, and pilot evidence remain future work.",
+    "audit_id": "FSA-QIFV031PIR-001",
+    "recorded_at": "2026-06-24T17:04:38.212Z",
+    "summary": "The slice adds standalone QIF guidance for reviewing proposed changes before implementation, defining negative acceptance, and extending Discovery Patterns for solution bias, boundary confusion, and concept comprehension.",
+    "detected_gap": "The guidance is documentation-only; executable schemas, examples, verifier rules, and pilot packages for pre-implementation review are not implemented yet.",
     "result_state": "stable",
-    "next_action": "After release, implement the v0.3 Discovery Layer runtime package and verifier from the accepted design boundary.",
+    "next_action": "Close this docs-only slice and make the next value slice an executable pre-implementation review package if requested.",
     "related_task_ids": [
-      "TASK-010"
+      "TASK-011"
     ]
   },
   "current_next_value_slice": {
-    "content": "Implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the released design milestone.",
-    "updated_at": "2026-06-23T18:08:59.455Z",
+    "content": "Implement executable QIF pre-implementation review records, negative acceptance examples, applicability to real targets, and verifier rules while preserving QIF standalone use.",
+    "updated_at": "2026-06-24T17:05:18.651Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MQQYB7V6-YSYJNJ",
-    "source_decision_record_id": "DEC-MQQYDO2M-RVXRQO"
+    "source_session_id": "SESS-MQSAL5T6-2P3E8G",
+    "source_decision_record_id": "DEC-MQSAN8HN-WW8N75"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "After release, implement the v0.3 Discovery Layer runtime package and verifier from the accepted design boundary.",
+    "proposed_focus": "Close this docs-only slice and make the next value slice an executable pre-implementation review package if requested.",
     "related_task_ids": [
-      "TASK-010"
+      "TASK-011"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: Implement QIF v0.3 Discovery Layer schemas, examples, verifier rules, and negative checklist-regression fixtures from the released design milestone.",
-    "Latest self-audit next action: After release, implement the v0.3 Discovery Layer runtime package and verifier from the accepted design boundary.",
+    "Current next value slice: Implement executable QIF pre-implementation review records, negative acceptance examples, applicability to real targets, and verifier rules while preserving QIF standalone use.",
+    "Latest self-audit next action: Close this docs-only slice and make the next value slice an executable pre-implementation review package if requested.",
     "Latest outcome result: success"
   ]
 }

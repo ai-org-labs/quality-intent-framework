@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-011",
+  "title": "Add QIF pre-implementation review guidance",
+  "description": "Incorporate cross-project retrospective feedback as standalone QIF guidance for pre-implementation review, negative acceptance, data boundary quality, concept comprehension, and solution-bias discovery patterns.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MQSAL5T6-2P3E8G",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MQSAN8HN-WW8N75",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-06-24T16:33:37.176Z",
+  "updated_at": "2026-06-24T17:05:01.925Z",
+  "assigned_at": null,
+  "done_at": "2026-06-24T17:05:01.925Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Done as docs-only v0.3.1 candidate: pre-implementation review, negative acceptance, and Discovery Pattern extensions added; no release/tag or runtime schema changes in this slice."
+}

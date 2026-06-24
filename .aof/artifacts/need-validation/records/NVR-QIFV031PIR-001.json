@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-06-24T16:34:33.248Z",
+  "validation_id": "NVR-MQSAN068-F0LNLQ",
+  "raw_need": "Proceed with incorporating cross-project retrospective feedback.",
+  "validation_status": "validated",
+  "validated_need": "QIF needs standalone pre-implementation review and negative acceptance guidance so users can block mistaken quality hypotheses before implementation, not only validate structure after implementation.",
+  "decision_summary": "Validated as a docs-only v0.3.1 candidate. The chosen path adds standalone QIF guidance and Discovery Layer pattern extensions; runtime schemas, UI, external integrations, release/tagging, and AOF-specific enforcement are out of scope.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What failure should QIF prevent earlier?",
+      "answer": "Solution-biased work, missing negative acceptance, data-boundary confusion, and concept-comprehension failure that can pass structural validation.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must stay out of scope?",
+      "answer": "Runtime schema implementation, UI, external integrations, release/tagging, and making QIF depend on AOF.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Post-implementation structural verification was assumed sufficient to catch product assumption mistakes."
+  ],
+  "evidence_gaps": [
+    "No multi-project pilot yet proves these pre-implementation review prompts reduce rework."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV031PIR-001.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV031PIR-001.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV031PIR-001.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": ".aof/artifacts/need-validation/project-charters/PCH-QIFV031PIR-001.json",
+  "discovery_handoff_ref": null,
+  "source_task_id": "TASK-011",
+  "source_decision_record_id": "DEC-MQSALHSP-64ZDU1"
+}
