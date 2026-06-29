@@ -1,0 +1,31 @@
+{
+  "view_type": "operator_progress",
+  "generated_at": "2026-06-24T17:32:08.865Z",
+  "current_checkpoint": {
+    "stage": "frontier-definition-needed",
+    "frontier_task_id": null,
+    "summary": "The runtime is frontier-definition-needed.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  },
+  "previous_checkpoint": {
+    "summary": "TASK-012 was the latest completed checkpoint.",
+    "artifact_ref": ".aof/tasks/done/TASK-012.json"
+  },
+  "changes_since_last_checkpoint": [
+    {
+      "kind": "completed-task",
+      "summary": "TASK-012 completed: Release QIF v0.3.1 pre-implementation review guidance",
+      "artifact_ref": ".aof/tasks/done/TASK-012.json"
+    },
+    {
+      "kind": "goal-refresh",
+      "summary": "Implement executable QIF pre-implementation review records, evidence independence fields, visual verification rubric records, Living QIF Ledger examples, and verifier checks.",
+      "artifact_ref": ".aof/goals/next-value-slice.json"
+    }
+  ],
+  "progress_answer": {
+    "what_changed": "TASK-012 completed: Release QIF v0.3.1 pre-implementation review guidance Implement executable QIF pre-implementation review records, evidence independence fields, visual verification rubric records, Living QIF Ledger examples, and verifier checks.",
+    "why_it_matters": "The runtime still needs a concrete current frontier to make progress legible.",
+    "next_checkpoint": "Open an implementation task for the current frontier: Implement executable QIF pre-implementation review records, evidence independence fields, visual verification rubric records, Living QIF Ledger examples, and verifier checks."
+  }
+}

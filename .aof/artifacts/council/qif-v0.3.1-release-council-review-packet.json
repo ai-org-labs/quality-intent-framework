@@ -1,0 +1,41 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-06-24T17:30:52.935Z",
+  "review_packet_id": "CREV-MQSCNFYF-JPDKD2",
+  "council_id": "qif-v0.3.1-release-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve QIF v0.3.1 release as a docs-only patch release for pre-implementation and done-before quality gating.",
+  "rationale": "The release packages accepted guidance plus the final feedback additions: evidence independence, done-before Guardian questions, rubric-based visual verification, and Living QIF Ledger. It preserves QIF standalone use and does not claim runtime schema or semantic-truth verification.",
+  "recommendation": "Run final verification, commit, tag v0.3.1, push main and tag, and create GitHub Release v0.3.1 from RELEASE-NOTES-v0.3.1.md.",
+  "target_audience": "QIF maintainers, human reviewers, and AI agents applying QIF before implementation",
+  "expected_user_reaction": "They can treat QIF as a completion gate instead of only a post-hoc record while understanding that v0.3.1 is documentation-only.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [
+    "Implement executable pre-implementation review records and verifier rules in a later slice."
+  ],
+  "organization_change_recommendations": [
+    "Use done-before Guardian questions and evidence independence before closing high-severity work."
+  ],
+  "diagnosis_category": "qif-v0.3.1-release-approved",
+  "diagnosis_confidence": 0.9,
+  "diagnosis_evidence_refs": [
+    "RELEASE-NOTES-v0.3.1.md",
+    "docs/qif-pre-implementation-review.md"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [
+    ".aof/artifacts/execution/team-outputs/TOUT-QIFV031R-REVIEW.json"
+  ],
+  "role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV031R-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV031R-BUILDER-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV031R-GUARDIAN-REVIEW.json"
+  ],
+  "evidence_refs": [],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-012",
+  "source_parent_session_id": "SESS-QIFV031R",
+  "source_decision_record_id": "DEC-QIFV031R-001"
+}

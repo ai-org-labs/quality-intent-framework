@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-06-24T17:04:38.212Z",
-  "audit_id": "FSA-QIFV031PIR-001",
-  "scope": "QIF v0.3.1 pre-implementation review guidance",
-  "summary": "The slice adds standalone QIF guidance for reviewing proposed changes before implementation, defining negative acceptance, and extending Discovery Patterns for solution bias, boundary confusion, and concept comprehension.",
-  "detected_gap": "The guidance is documentation-only; executable schemas, examples, verifier rules, and pilot packages for pre-implementation review are not implemented yet.",
+  "recorded_at": "2026-06-24T17:31:51.398Z",
+  "audit_id": "FSA-QIFV031R-001",
+  "scope": "QIF v0.3.1 release",
+  "summary": "The release slice updates QIF to v0.3.1 as a docs-only pre-implementation review and done-before quality gate milestone with package metadata, changelog, release notes, Council review evidence, and verification.",
+  "detected_gap": "Executable pre-implementation review schemas, example packages, verifier rules, and pilot evidence remain future work.",
   "result_state": "stable",
-  "next_action": "Close this docs-only slice and make the next value slice an executable pre-implementation review package if requested.",
+  "next_action": "Publish v0.3.1 and use a later slice for executable pre-implementation review records and verifier rules.",
   "related_task_ids": [
-    "TASK-011"
+    "TASK-012"
   ],
-  "source_session_id": "SESS-MQSAL5T6-2P3E8G",
-  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75"
+  "source_session_id": "SESS-QIFV031R",
+  "source_decision_record_id": "DEC-QIFV031R-001"
 }

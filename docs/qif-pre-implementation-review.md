@@ -260,6 +260,16 @@ Evidence may include:
 
 The evidence plan should say what would fail the review, not only what would pass.
 
+Classify each evidence item by independence:
+
+| Independence | Meaning | Examples |
+| --- | --- | --- |
+| high | Observes the target through a user-visible, operator-visible, or externally reproducible path. | Open the published URL and verify the behavior; run a handoff with a substitute operator; inspect an exported report as an auditor. |
+| medium | Exercises the same behavior through a local or internal path, but still observes real output. | Local browser test; rendered document inspection; CLI verifier against the generated artifact. |
+| low | Infers correctness from code reading, symmetry, naming, screenshots without scoring, or assumed equivalent paths. | "The editor path works, so the viewer path should work"; "the component renders in the contact sheet"; "the same function name is used." |
+
+Low-independence evidence may support investigation, but it must not be the only evidence for a high-severity loss boundary.
+
 ### 8. Produce Pre-Implementation Verdict
 
 Use the verdict table above.
@@ -275,6 +285,92 @@ If the verdict is `proceed`, the implementation task should include:
 - governance trigger conditions.
 
 If the verdict is `reframe`, `split`, `defer`, or `reject`, record why.
+
+## Done-Before Guardian Questions
+
+Before a task, review, or agent run is marked done, ask three fixed questions:
+
+1. What other path, surface, role, or downstream process could still violate the same loss boundary?
+2. What other artifact depends on the same assumption that made this solution look safe?
+3. Does the change affect a public, irreversible, delegated, financial, safety, compliance, or customer-visible state?
+
+If any answer is uncertain, the verdict should not be plain `proceed`.
+
+Use:
+
+- `defer` when evidence is missing;
+- `split` when another path or surface needs separate evaluation;
+- `reframe` when the task is still solution-shaped;
+- `governance trigger` when uncertainty affects a non-negotiable or high-severity loss boundary.
+
+## Evidence Strength Rules
+
+Evidence is stronger when it is:
+
+- independent of the implementation assumption being tested;
+- observed through the same path used by the affected stakeholder;
+- reproducible by a non-expert or AI agent;
+- tied to a specific negative acceptance criterion;
+- able to detect failure, not only success.
+
+Evidence is weaker when it is:
+
+- based only on code reading;
+- based on a happy path;
+- based on analogy with a different path;
+- based on rendered existence without interpretation;
+- produced by the same agent that made the implementation decision.
+
+QIF may record weak evidence, but weak evidence should increase residual risk or trigger follow-up review when the loss boundary is severe.
+
+## Rubric-Based Visual Verification
+
+For visual, document, UI, diagram, or rendered-output work, a screenshot or exported file is not automatically evidence.
+
+Visual evidence should be scored against an explicit rubric.
+
+Minimum rubric dimensions:
+
+| Dimension | Question |
+| --- | --- |
+| grounding | Is the rendered state connected to the real target, source, or user data being evaluated? |
+| visibility | Can the affected user see the critical state or distinction? |
+| size and fit | Does text, control, diagram, or artifact content fit its container without truncation or overlap? |
+| interpretation | Can the user tell what is editable, generated, sample, projected, approved, or read-only? |
+| downstream path | Does the rendered state match what the downstream user, public URL, exported file, or operator will see? |
+
+Negative acceptance example:
+
+```text
+The review must not pass merely because a screenshot exists if the screenshot was not scored against the visual rubric tied to the protected loss boundary.
+```
+
+## Living QIF Ledger
+
+When a bug, incident, exception, review miss, or user correction is discovered, QIF should update the quality knowledge, not only fix the artifact.
+
+Record:
+
+- which Quality Intent was violated or under-specified;
+- which Loss Boundary was crossed or nearly crossed;
+- which evidence was weaker than assumed;
+- which negative acceptance criterion was missing;
+- which residual risk remains after the fix;
+- whether a new task, governance event, or Decision Pattern is required.
+
+The ledger prevents the same mistaken assumption from being rediscovered in every project.
+
+Ledger flow:
+
+```text
+Bug or miss
+-> affected Quality Intent
+-> crossed or threatened Loss Boundary
+-> evidence weakness
+-> missing negative acceptance
+-> residual risk
+-> task, governance event, or Decision Pattern update
+```
 
 ## Quality Intents
 
@@ -423,6 +519,10 @@ A future verifier may check:
 - Quality Intents link to loss boundaries;
 - negative acceptance criteria link to protected Quality Intents;
 - evidence plans include failure evidence, not only pass evidence;
+- high-severity loss boundaries are not supported only by low-independence evidence;
+- done-before Guardian questions were answered before completion;
+- visual evidence includes rubric scores when visual interpretation is part of the loss boundary;
+- bugs or review misses update the Living QIF Ledger;
 - rejected or reframed assumptions are recorded;
 - governance triggers exist for unresolved high-risk assumptions.
 
@@ -450,4 +550,3 @@ Relevant Discovery Patterns include:
 - Concept Comprehension Discovery.
 
 These patterns are strategies for exploration, not mandatory checklist categories.
-

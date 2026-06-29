@@ -1156,3 +1156,81 @@ Retrospective reason:
 - Outcome `OUT-MQSBPZ42-JA4L60` is recorded as `success`.
 - `TASK-011` is done.
 - The next value slice is explicit: implement executable QIF pre-implementation review records, negative acceptance examples, applicability to real targets, and verifier rules while preserving QIF standalone use.
+
+## QIF v0.3.1 Release
+
+This repository then opened a release slice to publish the accepted pre-implementation review guidance as a patch documentation milestone.
+
+Runtime session:
+
+- Session label: `SESS-QIFV031R`
+- Release decision label: `DEC-QIFV031R-001`
+- Task: `.aof/tasks/done/TASK-012.json`
+
+Need / Intent / Context:
+
+- Need: publish the accepted QIF pre-implementation review and done-before quality gate guidance as a stable public release.
+- Intent: update package metadata, changelog, release notes, AOF review evidence, verification artifacts, annotated tag, pushed main branch, and GitHub Release.
+- Context: this release is documentation-only. It does not add runtime schemas, example packages, verifier rule implementation, UI, external integrations, or semantic-truth validation.
+
+Direction and review runtime commands:
+
+- `task-open --title "Release QIF v0.3.1 pre-implementation review guidance"`
+- `situation-assess --write-artifact .aof/artifacts/runtime/qif-v0.3.1-release-situation-assessment.json`
+- `role-result-record` for Visionary, Builder, and Guardian review evidence.
+- `role-join-record --write-artifact .aof/artifacts/execution/role-joins/RJOIN-QIFV031R-REVIEW.json`
+- `team-output-record --write-artifact .aof/artifacts/execution/team-outputs/TOUT-QIFV031R-REVIEW.json`
+- `council-review-packet --write-artifact .aof/artifacts/council/qif-v0.3.1-release-council-review-packet.json`
+
+Council judgment:
+
+- Visionary: approved. The release makes QIF more useful as a pre-implementation and done-before gate for humans, AI agents, and hybrid teams.
+- Builder: approved. Package version, changelog, release notes, and documentation form a coherent docs-only patch release.
+- Guardian: approved with guardrails. Release notes preserve the docs-only boundary, QIF standalone use, and no semantic-truth or checklist-completion claim.
+
+Implemented release metadata:
+
+- Package version: `0.3.1`
+- Changelog entry: `CHANGELOG.md`
+- Release notes: `RELEASE-NOTES-v0.3.1.md`
+- Guidance update: `docs/qif-pre-implementation-review.md`
+- Future requirements input: `docs/qif-v0.4-quality-gate-runtime-requirements.md`
+
+Release contents:
+
+- Evidence Independence classification for high, medium, and low-independence evidence.
+- Done-Before Guardian Questions for adjacent paths, shared assumptions, and public or irreversible impact.
+- Rubric-Based Visual Verification for visual, document, UI, diagram, and rendered-output evidence.
+- Living QIF Ledger guidance for feeding bugs and review misses back into Quality Intents, Loss Boundaries, residual risks, and follow-up tasks.
+- v0.4 Quality Gate Runtime requirements for evaluation perspectives, quantitative evidence, automated evaluation detail, evidence management, evaluation timing, release gate decisions, post-release review, traceability, and reporting. Quantitative metrics are explicitly treated as evidence metadata, not quality itself.
+
+Verification:
+
+- Repository command: `npm test`
+- AOF command: `need-validation-benchmark --write-artifact .aof/artifacts/verification/need-validation-benchmark-qif-v0.3.1-release.json`
+- AOF command: `command-routing-audit --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.3.1-release.json`
+- AOF command: `organization-verify --project .`
+
+Verification result:
+
+- `npm test` passed.
+- Need Validation benchmark passed.
+- Command routing audit passed.
+- Organization verification passed with 179/179 checks before task closure.
+
+Self-review and retrospective:
+
+- Runtime command: `self-audit-record --audit-id FSA-QIFV031R-001`
+- Runtime command: `task-update --task-id TASK-012 --status done`
+- Runtime command: `learning-loop-snapshot --project .`
+- Runtime command: `operator-progress --write-artifact .aof/artifacts/runtime/operator-progress-qif-v0.3.1-release.json`
+
+Retrospective reason:
+
+- `TASK-012` is done.
+- The next value slice is explicit: implement executable QIF pre-implementation review records, evidence independence fields, visual verification rubric records, Living QIF Ledger examples, and verifier checks.
+
+Publication target:
+
+- Tag: `v0.3.1`
+- Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.3.1`

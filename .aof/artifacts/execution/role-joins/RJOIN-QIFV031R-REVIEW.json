@@ -1,0 +1,28 @@
+{
+  "join_type": "role-join",
+  "recorded_at": "2026-06-24T17:30:34.923Z",
+  "join_id": "RJOIN-MQSCN223-QMW0OK",
+  "join_status": "open",
+  "stage": "review",
+  "expected_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-orchestrator-decision",
+  "blocking_signals": [],
+  "recommended_next_step": "Verify, commit, tag v0.3.1, push, and create GitHub Release.",
+  "received_session_ids": [
+    "SESS-QIFV031R"
+  ],
+  "source_task_id": "TASK-012",
+  "source_parent_session_id": "SESS-QIFV031R",
+  "decision_record_ref": ".aof/decisions/DEC-QIFV031R-001.json",
+  "summary": "Visionary, Builder, and Guardian approve the v0.3.1 docs-only release boundary with explicit non-goals and verification requirements."
+}

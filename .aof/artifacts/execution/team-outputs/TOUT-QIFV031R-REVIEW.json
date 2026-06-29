@@ -1,0 +1,35 @@
+{
+  "packet_type": "team-output",
+  "recorded_at": "2026-06-24T17:30:33.050Z",
+  "team_output_id": "TOUT-MQSCN0M2-ZIWAR7",
+  "team_id": "qif-v0.3.1-release-council",
+  "stage": "review",
+  "expected_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-council-review",
+  "blocking_signals": [],
+  "recommended_next_step": "Proceed to repository verification, public-readiness scan, commit, tag, push, and GitHub Release creation.",
+  "joined_role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV031R-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV031R-BUILDER-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV031R-GUARDIAN-REVIEW.json"
+  ],
+  "artifact_refs": [
+    "RELEASE-NOTES-v0.3.1.md",
+    "docs/qif-pre-implementation-review.md"
+  ],
+  "decision_required": false,
+  "summary": "The v0.3.1 release is accepted as a docs-only patch release for QIF pre-implementation review and done-before quality gating.",
+  "source_task_id": "TASK-012",
+  "source_parent_session_id": "SESS-QIFV031R",
+  "source_decision_record_id": "DEC-QIFV031R-001"
+}

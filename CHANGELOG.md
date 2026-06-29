@@ -1,10 +1,12 @@
 # Changelog
 
-## Unreleased
+## v0.3.1
 
 - Added QIF pre-implementation review guidance for challenging solution bias, boundary confusion, concept comprehension, and evidence plans before implementation.
 - Added QIF negative acceptance guidance for defining forbidden states tied to Quality Intents, Loss Boundaries, Evidence, Verdicts, and Governance Triggers.
 - Extended the v0.3 Discovery Layer pattern taxonomy with Solution Bias Discovery, Boundary Confusion Discovery, and Concept Comprehension Discovery.
+- Added done-before Guardian questions, evidence independence classification, rubric-based visual verification, and Living QIF Ledger guidance for turning QIF into a completion gate rather than a post-hoc record.
+- Added v0.4 quality gate runtime requirements covering evaluation perspectives, quantitative evidence, automated evaluation detail, evidence management, evaluation timing, shift-left review, release gates, post-release review, traceability, and reports without treating metrics as quality itself.
 
 ## v0.3.0
 

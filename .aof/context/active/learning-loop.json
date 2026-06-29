@@ -2,7 +2,7 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-06-24T17:05:19.120Z",
+  "generated_at": "2026-06-24T17:32:07.703Z",
   "latest_outcome": {
     "source_session_id": "SESS-MQSAL5T6-2P3E8G",
     "report_id": "OUT-MQSBPZ42-JA4L60",
@@ -12,28 +12,28 @@
     "signal_ref": ".aof/artifacts/council/qif-v0.3.1-pre-implementation-review-council-review-packet.json"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV031PIR-001",
-    "recorded_at": "2026-06-24T17:04:38.212Z",
-    "summary": "The slice adds standalone QIF guidance for reviewing proposed changes before implementation, defining negative acceptance, and extending Discovery Patterns for solution bias, boundary confusion, and concept comprehension.",
-    "detected_gap": "The guidance is documentation-only; executable schemas, examples, verifier rules, and pilot packages for pre-implementation review are not implemented yet.",
+    "audit_id": "FSA-QIFV031R-001",
+    "recorded_at": "2026-06-24T17:31:51.398Z",
+    "summary": "The release slice updates QIF to v0.3.1 as a docs-only pre-implementation review and done-before quality gate milestone with package metadata, changelog, release notes, Council review evidence, and verification.",
+    "detected_gap": "Executable pre-implementation review schemas, example packages, verifier rules, and pilot evidence remain future work.",
     "result_state": "stable",
-    "next_action": "Close this docs-only slice and make the next value slice an executable pre-implementation review package if requested.",
+    "next_action": "Publish v0.3.1 and use a later slice for executable pre-implementation review records and verifier rules.",
     "related_task_ids": [
-      "TASK-011"
+      "TASK-012"
     ]
   },
   "current_next_value_slice": {
-    "content": "Implement executable QIF pre-implementation review records, negative acceptance examples, applicability to real targets, and verifier rules while preserving QIF standalone use.",
-    "updated_at": "2026-06-24T17:05:18.651Z",
+    "content": "Implement executable QIF pre-implementation review records, evidence independence fields, visual verification rubric records, Living QIF Ledger examples, and verifier checks.",
+    "updated_at": "2026-06-24T17:31:51.413Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MQSAL5T6-2P3E8G",
-    "source_decision_record_id": "DEC-MQSAN8HN-WW8N75"
+    "source_session_id": "SESS-QIFV031R",
+    "source_decision_record_id": "DEC-QIFV031R-001"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Close this docs-only slice and make the next value slice an executable pre-implementation review package if requested.",
+    "proposed_focus": "Publish v0.3.1 and use a later slice for executable pre-implementation review records and verifier rules.",
     "related_task_ids": [
-      "TASK-011"
+      "TASK-012"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: Implement executable QIF pre-implementation review records, negative acceptance examples, applicability to real targets, and verifier rules while preserving QIF standalone use.",
-    "Latest self-audit next action: Close this docs-only slice and make the next value slice an executable pre-implementation review package if requested.",
+    "Current next value slice: Implement executable QIF pre-implementation review records, evidence independence fields, visual verification rubric records, Living QIF Ledger examples, and verifier checks.",
+    "Latest self-audit next action: Publish v0.3.1 and use a later slice for executable pre-implementation review records and verifier rules.",
     "Latest outcome result: success"
   ]
 }

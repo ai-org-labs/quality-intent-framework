@@ -1,0 +1,25 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-24T17:30:04.976Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-QIFV031R",
+  "status": "completed",
+  "recommendation": "Proceed with v0.3.1 release after tests, scans, tag, push, and GitHub Release publication.",
+  "rationale": "The package version, changelog, release notes, and documentation updates form a coherent docs-only patch release.",
+  "signals": [
+    "Release scope is metadata, docs, verification, tag, and GitHub Release only."
+  ],
+  "artifact_refs": [
+    "package.json",
+    "CHANGELOG.md",
+    "RELEASE-NOTES-v0.3.1.md"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-012",
+  "source_decision_record_id": "DEC-QIFV031R-001",
+  "source_parent_session_id": "SESS-QIFV031R",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.9
+}

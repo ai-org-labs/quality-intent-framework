@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-012",
+  "title": "Release QIF v0.3.1 pre-implementation review guidance",
+  "description": "Publish the accepted docs-only pre-implementation review guidance, evidence independence additions, Guardian done-before questions, visual verification rubric, and Living QIF Ledger as v0.3.1.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-QIFV031R",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-QIFV031R-001",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-06-24T17:29:16.688Z",
+  "updated_at": "2026-06-24T17:31:37.970Z",
+  "assigned_at": null,
+  "done_at": "2026-06-24T17:31:37.970Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Done after v0.3.1 release metadata, final guidance additions, Council review evidence, npm test, AOF verification, and public-readiness scan preparation."
+}

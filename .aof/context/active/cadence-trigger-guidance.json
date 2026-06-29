@@ -1,7 +1,7 @@
 {
   "guidance_type": "cadence-trigger-guidance",
-  "recorded_at": "2026-06-24T17:04:38.244Z",
-  "open_task_count": 1,
+  "recorded_at": "2026-06-24T17:31:51.420Z",
+  "open_task_count": 0,
   "retire_review_candidate_ids": [],
   "trigger_state": "follow-through-recommended",
   "batching_mode": "single-action",
@@ -17,6 +17,6 @@
     }
   ],
   "summary": "Cadence guidance recommends: run alignment-pulse.",
-  "source_session_id": "SESS-MQSAL5T6-2P3E8G",
-  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75"
+  "source_session_id": "SESS-QIFV031R",
+  "source_decision_record_id": "DEC-QIFV031R-001"
 }

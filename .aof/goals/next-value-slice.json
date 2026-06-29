@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement executable QIF pre-implementation review records, negative acceptance examples, applicability to real targets, and verifier rules while preserving QIF standalone use.",
-  "updated_at": "2026-06-24T17:05:18.651Z",
+  "content": "Implement executable QIF pre-implementation review records, evidence independence fields, visual verification rubric records, Living QIF Ledger examples, and verifier checks.",
+  "updated_at": "2026-06-24T17:31:51.413Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MQSAL5T6-2P3E8G",
-  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75",
+  "source_session_id": "SESS-QIFV031R",
+  "source_decision_record_id": "DEC-QIFV031R-001",
   "declared_complete_at": null
 }

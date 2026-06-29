@@ -1,0 +1,24 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-06-24T17:30:03.194Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-QIFV031R",
+  "status": "completed",
+  "recommendation": "Approve v0.3.1 release if verification passes and release notes keep the docs-only and semantic-truth boundaries explicit.",
+  "rationale": "The release strengthens QIF as a completion gate with evidence independence, done-before questions, visual rubrics, and a Living QIF Ledger while preserving standalone use and avoiding runtime-schema claims.",
+  "signals": [
+    "No UI, external integration, verifier semantic-truth claim, or checklist-completion quality claim is introduced."
+  ],
+  "artifact_refs": [
+    "RELEASE-NOTES-v0.3.1.md",
+    "docs/qif-pre-implementation-review.md"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-012",
+  "source_decision_record_id": "DEC-QIFV031R-001",
+  "source_parent_session_id": "SESS-QIFV031R",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.9
+}
