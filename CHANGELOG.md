@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased
+## v0.3.2
 
 - Added `docs/AI_AUTHORING_GUIDE.md` so AI agents can quickly learn QIF framing, evidence, verdict, governance, and authoring conventions before evaluating or extending QIF artifacts.
+- Changed `README.md` to include the AI authoring guide in the current baseline document list.
+- Fixed: none.
 
 ## v0.3.1
 
