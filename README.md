@@ -9,6 +9,7 @@ QIF does not define quality as output volume. Page count, review count, and test
 This repository contains the executable QIF baseline through v0.2.1 and the v0.3.0 Discovery Layer design milestone:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
+- AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
 - Expert judgment specification: `docs/expert-judgment-framework.md`
 - QIF v0.2 runtime specification: `docs/qif-v0.2-discovery-application-runtime.md`
 - QIF v0.2.1 consolidation review: `docs/qif-v0.2.1-consolidation-review.md`
