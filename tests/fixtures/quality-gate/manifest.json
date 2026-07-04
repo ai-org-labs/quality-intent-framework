@@ -1,0 +1,341 @@
+{
+  "description": "QIF negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/quality-gate-cases.mjs; do not edit by hand.",
+  "positives": [
+    {
+      "validator": "tools/validate-qif.mjs",
+      "package": "examples/qif-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-expert-judgment.mjs",
+      "package": "examples/expert-judgment-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/quality-gate-package.json"
+    }
+  ],
+  "negatives": [
+    {
+      "file": "quality-gate-target-missing-domain.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target required fields",
+      "expect": "fail",
+      "errorIncludes": "must include non-empty string domain"
+    },
+    {
+      "file": "quality-gate-target-missing-stakeholders.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target stakeholder impact",
+      "expect": "fail",
+      "errorIncludes": "must include stakeholderImpact."
+    },
+    {
+      "file": "quality-gate-intent-missing-severity.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quality intent loss boundary severity",
+      "expect": "fail",
+      "errorIncludes": "must include non-empty string lossBoundarySeverity."
+    },
+    {
+      "file": "quality-gate-perspective-unsupported.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "canonical evaluation perspective",
+      "expect": "fail",
+      "errorIncludes": "uses unsupported evaluation perspective"
+    },
+    {
+      "file": "quality-gate-perspective-broken-intent-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "perspective linked intent resolves",
+      "expect": "fail",
+      "errorIncludes": "references missing quality intent"
+    },
+    {
+      "file": "quality-gate-evidence-bad-independence.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evidence independence enum",
+      "expect": "fail",
+      "errorIncludes": "independence must be high, medium, or low."
+    },
+    {
+      "file": "quality-gate-evidence-bad-polarity.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evidence polarity enum",
+      "expect": "fail",
+      "errorIncludes": "polarity must be supports, contradicts, mixed, or neutral."
+    },
+    {
+      "file": "quality-gate-quant-missing-unit.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quantitative record unit",
+      "expect": "fail",
+      "errorIncludes": "must include non-empty string unit."
+    },
+    {
+      "file": "quality-gate-quant-missing-interpretation-rule.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quantitative record interpretation rule",
+      "expect": "fail",
+      "errorIncludes": "must include non-empty string interpretationRule."
+    },
+    {
+      "file": "quality-gate-quant-value-not-number.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quantitative record numeric value",
+      "expect": "fail",
+      "errorIncludes": "value must be a number."
+    },
+    {
+      "file": "quality-gate-quant-bad-quantity-type.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quantitative record quantity type",
+      "expect": "fail",
+      "errorIncludes": "quantityType must be one of"
+    },
+    {
+      "file": "quality-gate-quant-treated-as-quality.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quantitative record stays evidence-only (metric is not quality itself)",
+      "expect": "fail",
+      "errorIncludes": "must be interpreted as evidence-only, not as quality itself."
+    },
+    {
+      "file": "quality-gate-quant-broken-evidence-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quantitative record links retained evidence",
+      "expect": "fail",
+      "errorIncludes": "references missing retained evidence"
+    },
+    {
+      "file": "quality-gate-quant-broken-intent-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quantitative record links quality intent",
+      "expect": "fail",
+      "errorIncludes": "references missing quality intent"
+    },
+    {
+      "file": "quality-gate-automated-counts-do-not-sum.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "automated counts sum to executedCount",
+      "expect": "fail",
+      "errorIncludes": "counts must sum to executedCount."
+    },
+    {
+      "file": "quality-gate-automated-passrate-not-reproducible.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "automated passRate reproduces from counts",
+      "expect": "fail",
+      "errorIncludes": "passRate must reproduce from passedCount divided by executedCount."
+    },
+    {
+      "file": "quality-gate-gate-rule-missing-required-evidence.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "gate rule required evidence types",
+      "expect": "fail",
+      "errorIncludes": "must include requiredEvidenceTypes."
+    },
+    {
+      "file": "quality-gate-decision-bad-enum.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "gate decision verdict enum",
+      "expect": "fail",
+      "errorIncludes": "decision must be Go, Conditional Go, No-Go, or Pending."
+    },
+    {
+      "file": "quality-gate-decision-missing-residual-risks.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "gate decision residual risks",
+      "expect": "fail",
+      "errorIncludes": "must include residualRisks."
+    },
+    {
+      "file": "quality-gate-verdict-confidence-not-reproducible.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "verdict confidence reproduces from evidence and policy",
+      "expect": "fail",
+      "errorIncludes": "confidence must reproduce from evidence inputs and policy"
+    },
+    {
+      "file": "quality-gate-decision-confidence-not-reproducible.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "decision confidence reproduces from verdict confidences",
+      "expect": "fail",
+      "errorIncludes": "confidence must reproduce from verdict confidences and policy"
+    },
+    {
+      "file": "quality-gate-duplicate-verdict.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "one verdict per gated intent",
+      "expect": "fail",
+      "errorIncludes": "has duplicate verdicts for quality intent"
+    },
+    {
+      "file": "quality-gate-achieved-without-support.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "achieved verdict cites supporting evidence",
+      "expect": "fail",
+      "errorIncludes": "is achieved but cites no supporting evidence."
+    },
+    {
+      "file": "quality-gate-intent-without-perspective.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "gated intent covered by an evaluation perspective",
+      "expect": "fail",
+      "errorIncludes": "gates an intent that no evaluation perspective covers."
+    },
+    {
+      "file": "quality-gate-gate-rule-intent-without-verdict.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "every intent a cited gate rule protects has a verdict",
+      "expect": "fail",
+      "errorIncludes": "records no verdict for its protected intent"
+    },
+    {
+      "file": "quality-gate-go-missing-required-evidence-type.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "Go/Conditional Go satisfies each cited rule's required evidence types",
+      "expect": "fail",
+      "errorIncludes": "lacks required evidence type"
+    },
+    {
+      "file": "quality-gate-conflict-without-governance.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "conflicting evidence forces a governance trigger",
+      "expect": "fail",
+      "errorIncludes": "must include a conflicting-evidence governance trigger when verdict evidence conflicts."
+    },
+    {
+      "file": "quality-gate-low-confidence-without-governance.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "low-confidence verdict forces a governance trigger",
+      "expect": "fail",
+      "errorIncludes": "must include a low-confidence governance trigger when a verdict confidence is low."
+    },
+    {
+      "file": "quality-gate-weak-evidence-without-governance.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "high-severity boundary on only low-independence evidence forces governance",
+      "expect": "fail",
+      "errorIncludes": "must include a weak-evidence governance trigger"
+    },
+    {
+      "file": "quality-gate-go-on-weak-evidence.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "Go blocked when high-severity boundary rests only on low-independence evidence",
+      "expect": "fail",
+      "errorIncludes": "cannot be Go when a high-severity loss boundary is supported only by low-independence evidence."
+    },
+    {
+      "file": "quality-gate-go-with-unprotected-boundary.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "Go blocked while a high-severity boundary verdict is not-achieved/inconclusive",
+      "expect": "fail",
+      "errorIncludes": "cannot be Go while a high-severity loss boundary verdict is not-achieved or inconclusive."
+    },
+    {
+      "file": "quality-gate-go-with-open-severe-trigger.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "Go blocked while a high-severity governance trigger is open",
+      "expect": "fail",
+      "errorIncludes": "cannot be Go while high-severity governance triggers remain open"
+    },
+    {
+      "file": "quality-gate-conditional-go-missing-rollback.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "Go/Conditional Go includes a rollback plan",
+      "expect": "fail",
+      "errorIncludes": "must include non-empty string rollbackPlan."
+    },
+    {
+      "file": "quality-gate-conditional-go-missing-conditions.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "Conditional Go lists explicit conditions",
+      "expect": "fail",
+      "errorIncludes": "is Conditional Go and must include explicit conditions."
+    },
+    {
+      "file": "quality-gate-conditional-go-condition-missing-owner.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "each Conditional Go condition names an owner",
+      "expect": "fail",
+      "errorIncludes": "must include non-empty string owner."
+    },
+    {
+      "file": "quality-gate-no-go-without-citation.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "No-Go cites a violated boundary or gate rule",
+      "expect": "fail",
+      "errorIncludes": "is No-Go and must cite a violated loss boundary or gate rule."
+    },
+    {
+      "file": "quality-gate-pending-without-missing-evidence.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "Pending lists the missing evidence",
+      "expect": "fail",
+      "errorIncludes": "is Pending and must list the missing evidence."
+    },
+    {
+      "file": "quality-gate-trigger-missing-required-action.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "governance trigger required fields",
+      "expect": "fail",
+      "errorIncludes": "must include non-empty string requiredAction."
+    },
+    {
+      "file": "quality-gate-trigger-not-open-without-event.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "non-open trigger links a governance event",
+      "expect": "fail",
+      "errorIncludes": "is not open and must link to a resultingGovernanceEventRef."
+    },
+    {
+      "file": "quality-gate-event-missing-decided-by.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "governance event required fields",
+      "expect": "fail",
+      "errorIncludes": "must include non-empty string decidedBy."
+    },
+    {
+      "file": "quality-gate-severe-incident-without-improvement.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "high-severity post-release incident links an improvement action",
+      "expect": "fail",
+      "errorIncludes": "records a high-severity incident and must link at least one improvement action."
+    },
+    {
+      "file": "quality-gate-improvement-not-mirrored.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "improvement action is cross-referenced by its source review",
+      "expect": "fail",
+      "errorIncludes": "that does not list it in improvementActionRefs."
+    },
+    {
+      "file": "quality-gate-improvement-broken-source-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "improvement action links its source post-release review",
+      "expect": "fail",
+      "errorIncludes": "references missing source post-release review"
+    },
+    {
+      "file": "quality-gate-traceability-broken-source.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "traceability link source resolves",
+      "expect": "fail",
+      "errorIncludes": "references missing sourceRef"
+    },
+    {
+      "file": "quality-gate-traceability-broken-target.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "traceability link target resolves",
+      "expect": "fail",
+      "errorIncludes": "references missing targetRef"
+    },
+    {
+      "file": "quality-gate-verifier-boundary-omits-semantic-truth.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "verifier boundary disclaims semantic truth",
+      "expect": "fail",
+      "errorIncludes": "must explicitly avoid claiming semantic truth."
+    }
+  ]
+}

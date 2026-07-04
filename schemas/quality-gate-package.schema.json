@@ -1,0 +1,470 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/qif/schemas/quality-gate-package.schema.json",
+  "title": "QIF Quality Gate Package",
+  "type": "object",
+  "required": [
+    "packageType",
+    "runtimeVersion",
+    "packageId",
+    "evaluationTargets",
+    "qualityIntents",
+    "evaluationPerspectives",
+    "confidencePolicies",
+    "evidenceItems",
+    "quantitativeEvidenceRecords",
+    "qualityGateRules",
+    "qualityGateDecisions",
+    "governanceTriggers",
+    "governanceEvents",
+    "verifierBoundary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "packageType": { "const": "quality-gate" },
+    "runtimeVersion": { "type": "string" },
+    "packageId": { "type": "string" },
+    "evaluationTargets": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/evaluationTarget" }
+    },
+    "qualityIntents": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/qualityIntent" }
+    },
+    "evaluationPerspectives": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/evaluationPerspective" }
+    },
+    "confidencePolicies": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/confidencePolicy" }
+    },
+    "evidenceItems": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/evidenceItem" }
+    },
+    "quantitativeEvidenceRecords": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/quantitativeEvidenceRecord" }
+    },
+    "automatedEvaluationDetails": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/automatedEvaluationDetail" }
+    },
+    "qualityGateRules": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/qualityGateRule" }
+    },
+    "qualityGateDecisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/qualityGateDecision" }
+    },
+    "postReleaseReviews": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/postReleaseReview" }
+    },
+    "improvementActions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/improvementAction" }
+    },
+    "traceabilityLinks": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/traceabilityLink" }
+    },
+    "governanceTriggers": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/governanceTrigger" }
+    },
+    "governanceEvents": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/governanceEvent" }
+    },
+    "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]+-[A-Z0-9-]+$"
+    },
+    "refArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" },
+      "minItems": 1
+    },
+    "maybeRefArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" }
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "positiveNumber": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "evaluationTarget": {
+      "type": "object",
+      "required": ["id", "title", "domain", "artifactType", "context", "stakeholderImpact", "operationalImpact"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "domain": { "type": "string" },
+        "artifactType": { "type": "string" },
+        "context": { "type": "string" },
+        "stakeholderImpact": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "operationalImpact": { "type": "string" }
+      }
+    },
+    "qualityIntent": {
+      "type": "object",
+      "required": ["id", "statement", "lossBoundary", "lossBoundarySeverity"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "statement": { "type": "string" },
+        "lossBoundary": { "type": "string" },
+        "lossBoundarySeverity": { "enum": ["low", "medium", "high", "critical"] },
+        "sourceDecisionPatternRefs": { "$ref": "#/$defs/maybeRefArray" }
+      }
+    },
+    "evaluationPerspective": {
+      "type": "object",
+      "required": ["id", "perspective", "rationale", "linkedIntentRefs"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "perspective": {
+          "enum": [
+            "functional quality",
+            "regression quality",
+            "automation",
+            "coverage",
+            "quantitative evidence",
+            "evidence traceability",
+            "continuity",
+            "shift-left",
+            "release decision",
+            "operational quality",
+            "improvement",
+            "external dependency"
+          ]
+        },
+        "rationale": { "type": "string" },
+        "linkedIntentRefs": { "$ref": "#/$defs/refArray" }
+      }
+    },
+    "confidencePolicy": {
+      "type": "object",
+      "required": ["id", "evidenceAggregationRule", "verdictAggregationRule", "reviewRunAggregationRule", "rounding"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "evidenceAggregationRule": { "enum": ["minimum-evidence-confidence", "weighted-average"] },
+        "verdictAggregationRule": { "enum": ["minimum-evidence-confidence", "weighted-average"] },
+        "reviewRunAggregationRule": { "enum": ["average-verdict-confidence", "minimum-verdict-confidence"] },
+        "rounding": { "enum": ["nearest-0.01"] }
+      }
+    },
+    "evidenceItem": {
+      "type": "object",
+      "required": ["id", "targetRef", "evidenceType", "finding", "polarity", "independence", "confidence", "weight", "evaluatorRole", "retention"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "targetRef": { "$ref": "#/$defs/id" },
+        "evidenceType": { "type": "string" },
+        "finding": { "type": "string" },
+        "polarity": { "enum": ["supports", "contradicts", "mixed", "neutral"] },
+        "independence": { "enum": ["high", "medium", "low"] },
+        "confidence": { "$ref": "#/$defs/score" },
+        "weight": { "$ref": "#/$defs/positiveNumber" },
+        "evaluatorRole": { "type": "string" },
+        "retention": { "type": "string" },
+        "artifactReference": { "type": "string" }
+      }
+    },
+    "quantitativeEvidenceRecord": {
+      "type": "object",
+      "required": [
+        "id",
+        "metricName",
+        "value",
+        "unit",
+        "quantityType",
+        "measurementMethod",
+        "targetRef",
+        "evidenceRef",
+        "interpretationRule",
+        "interpretation",
+        "linkedIntentRef"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "metricName": { "type": "string" },
+        "value": { "type": "number" },
+        "unit": { "type": "string" },
+        "quantityType": { "enum": ["how-many", "how-much", "how-long", "how-often", "impact"] },
+        "measurementMethod": { "type": "string" },
+        "targetRef": { "$ref": "#/$defs/id" },
+        "evidenceRef": { "$ref": "#/$defs/id" },
+        "interpretationRule": { "type": "string" },
+        "interpretation": { "const": "evidence-only" },
+        "knownLimitation": { "type": "string" },
+        "linkedIntentRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "automatedEvaluationDetail": {
+      "type": "object",
+      "required": ["id", "evaluationType", "executionMode", "trigger", "environment", "executedCount", "passedCount", "failedCount", "passRate", "independence", "evidenceRef"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "evaluationType": { "type": "string" },
+        "executionMode": { "enum": ["automated", "manual", "semi-automated"] },
+        "toolName": { "type": "string" },
+        "toolVersion": { "type": "string" },
+        "trigger": { "type": "string" },
+        "environment": { "type": "string" },
+        "executedCount": { "type": "number", "minimum": 0 },
+        "passedCount": { "type": "number", "minimum": 0 },
+        "failedCount": { "type": "number", "minimum": 0 },
+        "skippedCount": { "type": "number", "minimum": 0 },
+        "blockedCount": { "type": "number", "minimum": 0 },
+        "passRate": { "$ref": "#/$defs/score" },
+        "durationSeconds": { "type": "number", "minimum": 0 },
+        "independence": { "enum": ["high", "medium", "low"] },
+        "artifactReference": { "type": "string" },
+        "evidenceRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "qualityGateRule": {
+      "type": "object",
+      "required": ["id", "title", "appliesToIntentRefs", "requiredEvidenceTypes", "blockingConditions"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "appliesToIntentRefs": { "$ref": "#/$defs/refArray" },
+        "requiredEvidenceTypes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "blockingConditions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "gateIntentVerdict": {
+      "type": "object",
+      "required": ["intentRef", "decision", "confidence", "confidencePolicyRef", "evidenceRefs", "weight", "residualRisk"],
+      "additionalProperties": false,
+      "properties": {
+        "intentRef": { "$ref": "#/$defs/id" },
+        "decision": { "enum": ["achieved", "partially-achieved", "not-achieved", "inconclusive", "waived"] },
+        "confidence": { "$ref": "#/$defs/score" },
+        "confidencePolicyRef": { "$ref": "#/$defs/id" },
+        "evidenceRefs": { "$ref": "#/$defs/refArray" },
+        "weight": { "$ref": "#/$defs/positiveNumber" },
+        "residualRisk": { "type": "string" }
+      }
+    },
+    "gateCondition": {
+      "type": "object",
+      "required": ["id", "condition", "owner", "monitoring"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "condition": { "type": "string" },
+        "owner": { "type": "string" },
+        "monitoring": { "type": "string" }
+      }
+    },
+    "qualityGateDecision": {
+      "type": "object",
+      "required": [
+        "id",
+        "targetRef",
+        "gateRuleRefs",
+        "decision",
+        "intentVerdicts",
+        "confidence",
+        "confidencePolicyRef",
+        "residualRisks",
+        "governanceTriggerRefs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "targetRef": { "$ref": "#/$defs/id" },
+        "gateRuleRefs": { "$ref": "#/$defs/refArray" },
+        "decision": { "enum": ["Go", "Conditional Go", "No-Go", "Pending"] },
+        "intentVerdicts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/gateIntentVerdict" },
+          "minItems": 1
+        },
+        "confidence": { "$ref": "#/$defs/score" },
+        "confidencePolicyRef": { "$ref": "#/$defs/id" },
+        "residualRisks": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "conditions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/gateCondition" }
+        },
+        "approvalOwner": { "type": "string" },
+        "rollbackPlan": { "type": "string" },
+        "monitoringPlan": { "type": "string" },
+        "customerImpactPlan": { "type": "string" },
+        "violatedLossBoundary": { "type": "string" },
+        "violatedGateRuleRef": { "$ref": "#/$defs/id" },
+        "missingEvidence": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "governanceTriggerRefs": { "$ref": "#/$defs/maybeRefArray" }
+      }
+    },
+    "postReleaseIncident": {
+      "type": "object",
+      "required": ["id", "description", "severity", "affectedStakeholders"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "description": { "type": "string" },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "affectedStakeholders": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "postReleaseReview": {
+      "type": "object",
+      "required": ["id", "gateDecisionRef", "window", "incidents", "summary"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "gateDecisionRef": { "$ref": "#/$defs/id" },
+        "window": { "type": "string" },
+        "incidents": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/postReleaseIncident" }
+        },
+        "mttrHours": { "type": "number", "minimum": 0 },
+        "rcaComplete": { "type": "boolean" },
+        "improvementActionRefs": { "$ref": "#/$defs/maybeRefArray" },
+        "feedsQualityIntentRefs": { "$ref": "#/$defs/maybeRefArray" },
+        "summary": { "type": "string" }
+      }
+    },
+    "improvementAction": {
+      "type": "object",
+      "required": ["id", "title", "correctiveAction", "sourcePostReleaseReviewRef", "effectMeasurement", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "correctiveAction": { "type": "string" },
+        "sourcePostReleaseReviewRef": { "$ref": "#/$defs/id" },
+        "effectMeasurement": { "type": "string" },
+        "status": { "enum": ["proposed", "in-progress", "completed", "retired"] }
+      }
+    },
+    "traceabilityLink": {
+      "type": "object",
+      "required": ["id", "sourceRef", "linkType", "targetRef"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sourceRef": { "$ref": "#/$defs/id" },
+        "linkType": { "type": "string" },
+        "targetRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "governanceTrigger": {
+      "type": "object",
+      "required": [
+        "id",
+        "triggerType",
+        "reason",
+        "sourceGateDecisionRef",
+        "affectedTargetRef",
+        "severity",
+        "requiredAction",
+        "owner",
+        "status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "triggerType": { "enum": ["low-confidence", "conflicting-evidence", "weak-evidence", "boundary-violation", "waiver-needed", "post-release-incident", "other"] },
+        "reason": { "type": "string" },
+        "sourceGateDecisionRef": { "$ref": "#/$defs/id" },
+        "affectedTargetRef": { "$ref": "#/$defs/id" },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "requiredAction": { "type": "string" },
+        "owner": { "type": "string" },
+        "status": { "enum": ["open", "reviewed", "resolved"] },
+        "resultingGovernanceEventRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "governanceEvent": {
+      "type": "object",
+      "required": ["id", "sourceGovernanceTriggerRef", "decision", "decidedBy", "decisionRationale", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sourceGovernanceTriggerRef": { "$ref": "#/$defs/id" },
+        "decision": { "enum": ["accept-risk", "require-change", "waive-with-conditions", "reject", "defer"] },
+        "decidedBy": { "type": "string" },
+        "decisionRationale": { "type": "string" },
+        "status": { "enum": ["recorded", "implemented", "superseded"] }
+      }
+    },
+    "verifierBoundary": {
+      "type": "object",
+      "required": ["checks", "doesNotClaim", "semanticValidityRequires"],
+      "additionalProperties": false,
+      "properties": {
+        "checks": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "doesNotClaim": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "semanticValidityRequires": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

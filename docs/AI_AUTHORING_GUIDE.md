@@ -57,6 +57,7 @@ Use additional documents when needed:
 | Extract veteran or expert judgment | `docs/expert-judgment-framework.md` |
 | Review QIF model consistency | `docs/qif-v0.2.1-consolidation-review.md` |
 | Plan future quality gate/runtime work | `docs/qif-v0.4-quality-gate-runtime-requirements.md` |
+| Author a release gate decision (Go / Conditional Go / No-Go / Pending) | `schemas/quality-gate-package.schema.json`, `examples/quality-gate-package.json` |
 | Understand quality theory background | `docs/quality-theory-report.md` |
 
 ## Required Framing

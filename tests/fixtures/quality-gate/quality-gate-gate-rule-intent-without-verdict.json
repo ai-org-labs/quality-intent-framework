@@ -1,0 +1,450 @@
+{
+  "packageType": "quality-gate",
+  "runtimeVersion": "0.4.0",
+  "packageId": "QGPkg-001",
+  "evaluationTargets": [
+    {
+      "id": "TGT-QG-001",
+      "title": "Activation of revised customer refund-authority policy across support operations",
+      "domain": "customer-support",
+      "artifactType": "policy-activation",
+      "context": "A policy change expands frontline agent refund authority to reduce escalation delays, taking effect across all support teams at once.",
+      "stakeholderImpact": [
+        "customers",
+        "support agents",
+        "finance controllers"
+      ],
+      "operationalImpact": "Incorrect refunds could cause financial leakage, while over-strict handling could wrongly deny valid customer claims."
+    }
+  ],
+  "qualityIntents": [
+    {
+      "id": "QIN-QG-001",
+      "statement": "Expanded refund authority must not enable refunds above the approved financial limit without secondary approval.",
+      "lossBoundary": "Refunds must not exceed the policy financial limit without secondary approval.",
+      "lossBoundarySeverity": "high"
+    },
+    {
+      "id": "QIN-QG-002",
+      "statement": "Customers with valid refund claims must not be wrongly denied because of the policy change.",
+      "lossBoundary": "Valid refund claims must not be denied due to policy misconfiguration.",
+      "lossBoundarySeverity": "medium"
+    },
+    {
+      "id": "QIN-QG-003",
+      "statement": "The policy change must be reversible if leakage or complaints exceed containment thresholds.",
+      "lossBoundary": "An unsafe policy state must not persist without a demonstrated reversal path.",
+      "lossBoundarySeverity": "high"
+    }
+  ],
+  "evaluationPerspectives": [
+    {
+      "id": "EPS-QG-001",
+      "perspective": "release decision",
+      "rationale": "The activation is an all-at-once operational change that needs an explicit Go, Conditional Go, No-Go, or Pending decision.",
+      "linkedIntentRefs": [
+        "QIN-QG-001",
+        "QIN-QG-002",
+        "QIN-QG-003"
+      ]
+    },
+    {
+      "id": "EPS-QG-002",
+      "perspective": "functional quality",
+      "rationale": "Whether the refund-limit control and claim handling behave as intended under the new authority.",
+      "linkedIntentRefs": [
+        "QIN-QG-001",
+        "QIN-QG-002"
+      ]
+    },
+    {
+      "id": "EPS-QG-003",
+      "perspective": "regression quality",
+      "rationale": "Whether previously valid claims continue to be approved after the change.",
+      "linkedIntentRefs": [
+        "QIN-QG-002"
+      ]
+    },
+    {
+      "id": "EPS-QG-004",
+      "perspective": "operational quality",
+      "rationale": "Whether reversal, monitoring, and post-activation impact are covered.",
+      "linkedIntentRefs": [
+        "QIN-QG-003"
+      ]
+    }
+  ],
+  "confidencePolicies": [
+    {
+      "id": "CFP-QG-001",
+      "evidenceAggregationRule": "minimum-evidence-confidence",
+      "verdictAggregationRule": "minimum-evidence-confidence",
+      "reviewRunAggregationRule": "average-verdict-confidence",
+      "rounding": "nearest-0.01"
+    }
+  ],
+  "evidenceItems": [
+    {
+      "id": "EVD-QG-001",
+      "targetRef": "TGT-QG-001",
+      "evidenceType": "sampled-review",
+      "finding": "In a re-adjudication sample of 120 historical refund cases under the new policy, 3 would exceed the financial limit without secondary approval.",
+      "polarity": "contradicts",
+      "independence": "medium",
+      "confidence": 0.7,
+      "weight": 1,
+      "evaluatorRole": "quality-analyst",
+      "retention": "Retained in the quality evidence store for 24 months.",
+      "artifactReference": "refund-sample-readjudication-2026-07.csv"
+    },
+    {
+      "id": "EVD-QG-002",
+      "targetRef": "TGT-QG-001",
+      "evidenceType": "control-test",
+      "finding": "A control test attempted 40 over-limit refunds; the secondary-approval step blocked all 40 before completion.",
+      "polarity": "supports",
+      "independence": "high",
+      "confidence": 0.85,
+      "weight": 1,
+      "evaluatorRole": "controls-tester",
+      "retention": "Retained with the release evidence bundle for 24 months.",
+      "artifactReference": "over-limit-control-test-log.json"
+    },
+    {
+      "id": "EVD-QG-003",
+      "targetRef": "TGT-QG-001",
+      "evidenceType": "regression-sample",
+      "finding": "A regression sample of 60 previously approved valid claims were all still approved under the new policy.",
+      "polarity": "supports",
+      "independence": "medium",
+      "confidence": 0.8,
+      "weight": 1,
+      "evaluatorRole": "quality-analyst",
+      "retention": "Retained for 24 months.",
+      "artifactReference": "valid-claim-regression-sample.csv"
+    },
+    {
+      "id": "EVD-QG-004",
+      "targetRef": "TGT-QG-001",
+      "evidenceType": "reversal-rehearsal",
+      "finding": "A reversal rehearsal restored the prior policy configuration in 12 minutes with no residual refund-authority state.",
+      "polarity": "supports",
+      "independence": "medium",
+      "confidence": 0.78,
+      "weight": 1,
+      "evaluatorRole": "operations-lead",
+      "retention": "Retained for 24 months.",
+      "artifactReference": "reversal-rehearsal-notes.md"
+    },
+    {
+      "id": "EVD-QG-005",
+      "targetRef": "TGT-QG-001",
+      "evidenceType": "monitoring-configuration",
+      "finding": "Refund-leakage and complaint-rate monitoring is configured with alert thresholds, but has not yet been observed under real activation load.",
+      "polarity": "supports",
+      "independence": "low",
+      "confidence": 0.6,
+      "weight": 1,
+      "evaluatorRole": "quality-steward",
+      "retention": "Configuration retained; observations to follow after activation.",
+      "artifactReference": "monitoring-config-export.json"
+    }
+  ],
+  "quantitativeEvidenceRecords": [
+    {
+      "id": "QER-QG-001",
+      "metricName": "over-limit refund escape count in sample",
+      "value": 3,
+      "unit": "cases",
+      "quantityType": "how-many",
+      "measurementMethod": "Manual re-adjudication of 120 sampled historical refund cases under the new policy.",
+      "targetRef": "TGT-QG-001",
+      "evidenceRef": "EVD-QG-001",
+      "interpretationRule": "More than zero over-limit escapes means the secondary-approval control must demonstrably block them before a full Go.",
+      "interpretation": "evidence-only",
+      "knownLimitation": "A 120-case sample may miss rare edge cases; the count is a signal, not a quality score.",
+      "linkedIntentRef": "QIN-QG-001"
+    },
+    {
+      "id": "QER-QG-002",
+      "metricName": "over-limit control block rate",
+      "value": 1,
+      "unit": "ratio",
+      "quantityType": "how-much",
+      "measurementMethod": "Control test over 40 attempted over-limit refunds; blocked divided by attempted.",
+      "targetRef": "TGT-QG-001",
+      "evidenceRef": "EVD-QG-002",
+      "interpretationRule": "A block rate below 1.0 on over-limit refunds is a No-Go for the financial-limit boundary; 1.0 supports but does not by itself prove protection.",
+      "interpretation": "evidence-only",
+      "knownLimitation": "The test used simulated over-limit refunds, not live traffic.",
+      "linkedIntentRef": "QIN-QG-001"
+    },
+    {
+      "id": "QER-QG-003",
+      "metricName": "valid-claim retention rate",
+      "value": 1,
+      "unit": "ratio",
+      "quantityType": "how-much",
+      "measurementMethod": "Regression sample of 60 previously approved valid claims re-evaluated under the new policy.",
+      "targetRef": "TGT-QG-001",
+      "evidenceRef": "EVD-QG-003",
+      "interpretationRule": "A retention rate below 1.0 indicates valid claims are being wrongly denied and downgrades the claim-fairness verdict.",
+      "interpretation": "evidence-only",
+      "knownLimitation": "Sample cannot cover every claim category.",
+      "linkedIntentRef": "QIN-QG-002"
+    },
+    {
+      "id": "QER-QG-004",
+      "metricName": "policy reversal time",
+      "value": 12,
+      "unit": "minutes",
+      "quantityType": "how-long",
+      "measurementMethod": "Timed reversal rehearsal from decision to restored prior configuration.",
+      "targetRef": "TGT-QG-001",
+      "evidenceRef": "EVD-QG-004",
+      "interpretationRule": "Reversal must complete within the 30-minute containment target; longer reversal weakens the reversibility intent.",
+      "interpretation": "evidence-only",
+      "knownLimitation": "Rehearsal conditions may be calmer than a real incident.",
+      "linkedIntentRef": "QIN-QG-003"
+    }
+  ],
+  "automatedEvaluationDetails": [
+    {
+      "id": "AED-QG-001",
+      "evaluationType": "control",
+      "executionMode": "semi-automated",
+      "toolName": "refund-control-harness",
+      "trigger": "release-candidate",
+      "environment": "staging",
+      "executedCount": 40,
+      "passedCount": 40,
+      "failedCount": 0,
+      "passRate": 1,
+      "durationSeconds": 180,
+      "independence": "high",
+      "artifactReference": "over-limit-control-test-log.json",
+      "evidenceRef": "EVD-QG-002"
+    }
+  ],
+  "qualityGateRules": [
+    {
+      "id": "QGR-QG-001",
+      "title": "Financial-limit boundary must be control-protected before Go.",
+      "appliesToIntentRefs": [
+        "QIN-QG-001"
+      ],
+      "requiredEvidenceTypes": [
+        "control-test",
+        "sampled-review"
+      ],
+      "blockingConditions": [
+        "No-Go if the over-limit control block rate is below 1.0.",
+        "At most Conditional Go while any sampled over-limit escape remains without a compensating control."
+      ]
+    },
+    {
+      "id": "QGR-QG-002",
+      "title": "Reversibility must be demonstrated for high-severity policy changes.",
+      "appliesToIntentRefs": [
+        "QIN-QG-003"
+      ],
+      "requiredEvidenceTypes": [
+        "reversal-rehearsal"
+      ],
+      "blockingConditions": [
+        "No-Go if no reversal evidence exists.",
+        "At most Conditional Go while monitoring has not been observed under real load."
+      ]
+    },
+    {
+      "id": "QGR-QG-003",
+      "title": "Valid-claim regression must hold.",
+      "appliesToIntentRefs": [
+        "QIN-QG-002"
+      ],
+      "requiredEvidenceTypes": [
+        "regression-sample"
+      ],
+      "blockingConditions": [
+        "At most Conditional Go if the valid-claim retention rate is below 1.0."
+      ]
+    }
+  ],
+  "qualityGateDecisions": [
+    {
+      "id": "QGD-QG-001",
+      "targetRef": "TGT-QG-001",
+      "gateRuleRefs": [
+        "QGR-QG-001",
+        "QGR-QG-002",
+        "QGR-QG-003"
+      ],
+      "decision": "Conditional Go",
+      "intentVerdicts": [
+        {
+          "intentRef": "QIN-QG-001",
+          "decision": "partially-achieved",
+          "confidence": 0.7,
+          "confidencePolicyRef": "CFP-QG-001",
+          "evidenceRefs": [
+            "EVD-QG-001",
+            "EVD-QG-002"
+          ],
+          "weight": 1,
+          "residualRisk": "Three sampled cases could exceed the limit if the secondary-approval step is bypassed."
+        },
+        {
+          "intentRef": "QIN-QG-003",
+          "decision": "partially-achieved",
+          "confidence": 0.6,
+          "confidencePolicyRef": "CFP-QG-001",
+          "evidenceRefs": [
+            "EVD-QG-004",
+            "EVD-QG-005"
+          ],
+          "weight": 1,
+          "residualRisk": "Monitoring is configured but not yet observed under real activation load."
+        }
+      ],
+      "confidence": 0.7,
+      "confidencePolicyRef": "CFP-QG-001",
+      "residualRisks": [
+        "Over-limit refunds could still occur if agents bypass secondary approval.",
+        "Leakage and complaint monitoring has not been observed under real load."
+      ],
+      "conditions": [
+        {
+          "id": "COND-QG-001",
+          "condition": "The secondary-approval step must remain mandatory and non-bypassable for any refund above the financial limit.",
+          "owner": "support-operations-lead",
+          "monitoring": "Daily audit of over-limit refunds for the first 30 days after activation."
+        },
+        {
+          "id": "COND-QG-002",
+          "condition": "Leakage and complaint dashboards must be actively watched with alert thresholds during the containment window.",
+          "owner": "quality-steward",
+          "monitoring": "Alert when leakage exceeds baseline or complaints rise more than 20 percent week over week."
+        }
+      ],
+      "approvalOwner": "customer-operations-governance-board",
+      "rollbackPlan": "Revert to the prior refund-authority policy within 30 minutes using the rehearsed reversal procedure recorded in EVD-QG-004.",
+      "monitoringPlan": "Track refund leakage amount, over-limit escape count, and complaint volume across 7-day and 30-day windows.",
+      "customerImpactPlan": "Notify affected customers and reprocess any wrongly denied valid claims within five business days.",
+      "governanceTriggerRefs": [
+        "GTR-QG-001"
+      ]
+    }
+  ],
+  "postReleaseReviews": [
+    {
+      "id": "PRR-QG-001",
+      "gateDecisionRef": "QGD-QG-001",
+      "window": "7-day",
+      "incidents": [
+        {
+          "id": "INC-QG-001",
+          "description": "Two over-limit refunds were issued when an agent bypassed the secondary-approval step during a high-volume period.",
+          "severity": "high",
+          "affectedStakeholders": [
+            "finance controllers",
+            "customers"
+          ]
+        }
+      ],
+      "mttrHours": 6,
+      "rcaComplete": true,
+      "improvementActionRefs": [
+        "IMP-QG-001"
+      ],
+      "feedsQualityIntentRefs": [
+        "QIN-QG-001"
+      ],
+      "summary": "The financial-limit boundary was breached twice because secondary approval was bypassable under load, confirming the residual risk recorded at the gate."
+    }
+  ],
+  "improvementActions": [
+    {
+      "id": "IMP-QG-001",
+      "title": "Make secondary approval non-bypassable for over-limit refunds",
+      "correctiveAction": "Reconfigure the refund workflow so over-limit refunds cannot be submitted without a completed secondary approval, and add a weekly over-limit audit.",
+      "sourcePostReleaseReviewRef": "PRR-QG-001",
+      "effectMeasurement": "Over-limit escape count in the 30-day window after the fix, compared with the first 7-day window.",
+      "status": "in-progress"
+    }
+  ],
+  "traceabilityLinks": [
+    {
+      "id": "TRC-QG-001",
+      "sourceRef": "QIN-QG-001",
+      "linkType": "intent-protected-by-gate-rule",
+      "targetRef": "QGR-QG-001"
+    },
+    {
+      "id": "TRC-QG-002",
+      "sourceRef": "QGD-QG-001",
+      "linkType": "decision-evaluates-target",
+      "targetRef": "TGT-QG-001"
+    },
+    {
+      "id": "TRC-QG-003",
+      "sourceRef": "PRR-QG-001",
+      "linkType": "post-release-review-of-decision",
+      "targetRef": "QGD-QG-001"
+    },
+    {
+      "id": "TRC-QG-004",
+      "sourceRef": "IMP-QG-001",
+      "linkType": "improvement-strengthens-intent",
+      "targetRef": "QIN-QG-001"
+    }
+  ],
+  "governanceTriggers": [
+    {
+      "id": "GTR-QG-001",
+      "triggerType": "conflicting-evidence",
+      "reason": "The sampled over-limit escapes conflict with the control-test block rate, so the financial-limit protection needs accountable confirmation before the conditions are removed.",
+      "sourceGateDecisionRef": "QGD-QG-001",
+      "affectedTargetRef": "TGT-QG-001",
+      "severity": "high",
+      "requiredAction": "Confirm the compensating control and monitoring before removing the Conditional Go conditions.",
+      "owner": "customer-operations-governance-board",
+      "status": "reviewed",
+      "resultingGovernanceEventRef": "GEV-QG-001"
+    }
+  ],
+  "governanceEvents": [
+    {
+      "id": "GEV-QG-001",
+      "sourceGovernanceTriggerRef": "GTR-QG-001",
+      "decision": "waive-with-conditions",
+      "decidedBy": "customer-operations-governance-board",
+      "decisionRationale": "Activation may proceed as a Conditional Go because the over-limit control blocks simulated breaches, provided secondary approval stays mandatory and leakage is monitored during the containment window.",
+      "status": "recorded"
+    }
+  ],
+  "verifierBoundary": {
+    "checks": [
+      "structural integrity",
+      "traceability",
+      "reference resolution",
+      "quantitative records carry unit, method, and interpretation rule and stay evidence-only",
+      "gate verdict confidence reproducibility from evidence inputs and confidence policy",
+      "release decision completeness (rollback, monitoring, approval owner, residual risk, conditions)",
+      "high-severity boundaries are not supported only by low-independence evidence without governance",
+      "post-release high-severity incidents link to improvement actions",
+      "governance triggers on low confidence, conflict, or weak evidence"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "the organization chose the right quality perspectives",
+      "the metrics prove quality by themselves",
+      "a Go or Conditional Go decision is semantically correct without accountable review"
+    ],
+    "semanticValidityRequires": [
+      "expert review",
+      "stakeholder review",
+      "operational feedback",
+      "governance decision"
+    ]
+  }
+}

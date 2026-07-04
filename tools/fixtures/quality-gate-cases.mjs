@@ -1,0 +1,384 @@
+// Negative fixture cases for the quality-gate runtime verifier.
+//
+// Each case starts from the valid example package and applies one targeted
+// mutation that must make the verifier fail. The `expect` substring is the
+// evidence that the intended rule — not some unrelated rule — fired.
+//
+// Design contract (QIF Roadmap Phase 1): every distinct verifier rule in
+// validateQualityGatePackage must have at least one case here. A rule with no
+// failing case is treated as unproven. The runner also fails if any case's
+// expected error stops appearing, which catches a rule that silently breaks.
+//
+// Mutations may produce extra, incidental errors; that is acceptable. The
+// runner only asserts that the targeted `expect` substring is present, because
+// the verifier accumulates all errors rather than stopping at the first.
+
+const validator = "tools/validate-qif-runtime.mjs";
+
+function intent(pkg, id) {
+  return pkg.qualityIntents.find((entry) => entry.id === id);
+}
+function evidence(pkg, id) {
+  return pkg.evidenceItems.find((entry) => entry.id === id);
+}
+function decision(pkg) {
+  return pkg.qualityGateDecisions[0];
+}
+function verdict(pkg, intentRef) {
+  return decision(pkg).intentVerdicts.find((entry) => entry.intentRef === intentRef);
+}
+
+export const cases = [
+  // ---- Target / intent / perspective structure ----
+  {
+    id: "target-missing-domain",
+    rule: "evaluation target required fields",
+    expect: "must include non-empty string domain",
+    mutate: (pkg) => { delete pkg.evaluationTargets[0].domain; }
+  },
+  {
+    id: "target-missing-stakeholders",
+    rule: "evaluation target stakeholder impact",
+    expect: "must include stakeholderImpact.",
+    mutate: (pkg) => { pkg.evaluationTargets[0].stakeholderImpact = []; }
+  },
+  {
+    id: "intent-missing-severity",
+    rule: "quality intent loss boundary severity",
+    expect: "must include non-empty string lossBoundarySeverity.",
+    mutate: (pkg) => { delete intent(pkg, "QIN-QG-001").lossBoundarySeverity; }
+  },
+  {
+    id: "perspective-unsupported",
+    rule: "canonical evaluation perspective",
+    expect: "uses unsupported evaluation perspective",
+    mutate: (pkg) => { pkg.evaluationPerspectives[0].perspective = "vibes"; }
+  },
+  {
+    id: "perspective-broken-intent-ref",
+    rule: "perspective linked intent resolves",
+    expect: "references missing quality intent",
+    mutate: (pkg) => { pkg.evaluationPerspectives[0].linkedIntentRefs = ["QIN-NOPE-999"]; }
+  },
+
+  // ---- Evidence items ----
+  {
+    id: "evidence-bad-independence",
+    rule: "evidence independence enum",
+    expect: "independence must be high, medium, or low.",
+    mutate: (pkg) => { pkg.evidenceItems[0].independence = "vibes"; }
+  },
+  {
+    id: "evidence-bad-polarity",
+    rule: "evidence polarity enum",
+    expect: "polarity must be supports, contradicts, mixed, or neutral.",
+    mutate: (pkg) => { pkg.evidenceItems[0].polarity = "maybe"; }
+  },
+
+  // ---- Quantitative evidence records ----
+  {
+    id: "quant-missing-unit",
+    rule: "quantitative record unit",
+    expect: "must include non-empty string unit.",
+    mutate: (pkg) => { delete pkg.quantitativeEvidenceRecords[0].unit; }
+  },
+  {
+    id: "quant-missing-interpretation-rule",
+    rule: "quantitative record interpretation rule",
+    expect: "must include non-empty string interpretationRule.",
+    mutate: (pkg) => { delete pkg.quantitativeEvidenceRecords[0].interpretationRule; }
+  },
+  {
+    id: "quant-value-not-number",
+    rule: "quantitative record numeric value",
+    expect: "value must be a number.",
+    mutate: (pkg) => { pkg.quantitativeEvidenceRecords[0].value = "three"; }
+  },
+  {
+    id: "quant-bad-quantity-type",
+    rule: "quantitative record quantity type",
+    expect: "quantityType must be one of",
+    mutate: (pkg) => { pkg.quantitativeEvidenceRecords[0].quantityType = "how-shiny"; }
+  },
+  {
+    id: "quant-treated-as-quality",
+    rule: "quantitative record stays evidence-only (metric is not quality itself)",
+    expect: "must be interpreted as evidence-only, not as quality itself.",
+    mutate: (pkg) => { pkg.quantitativeEvidenceRecords[0].interpretation = "quality-itself"; }
+  },
+  {
+    id: "quant-broken-evidence-ref",
+    rule: "quantitative record links retained evidence",
+    expect: "references missing retained evidence",
+    mutate: (pkg) => { pkg.quantitativeEvidenceRecords[0].evidenceRef = "EVD-NOPE-999"; }
+  },
+  {
+    id: "quant-broken-intent-ref",
+    rule: "quantitative record links quality intent",
+    expect: "references missing quality intent",
+    mutate: (pkg) => { pkg.quantitativeEvidenceRecords[0].linkedIntentRef = "QIN-NOPE-999"; }
+  },
+
+  // ---- Automated evaluation detail ----
+  {
+    id: "automated-counts-do-not-sum",
+    rule: "automated counts sum to executedCount",
+    expect: "counts must sum to executedCount.",
+    mutate: (pkg) => { pkg.automatedEvaluationDetails[0].failedCount = 7; }
+  },
+  {
+    id: "automated-passrate-not-reproducible",
+    rule: "automated passRate reproduces from counts",
+    expect: "passRate must reproduce from passedCount divided by executedCount.",
+    mutate: (pkg) => { pkg.automatedEvaluationDetails[0].passRate = 0.5; }
+  },
+
+  // ---- Gate rules ----
+  {
+    id: "gate-rule-missing-required-evidence",
+    rule: "gate rule required evidence types",
+    expect: "must include requiredEvidenceTypes.",
+    mutate: (pkg) => { pkg.qualityGateRules[0].requiredEvidenceTypes = []; }
+  },
+
+  // ---- Gate decision: enum, confidence, verdict discipline ----
+  {
+    id: "decision-bad-enum",
+    rule: "gate decision verdict enum",
+    expect: "decision must be Go, Conditional Go, No-Go, or Pending.",
+    mutate: (pkg) => { decision(pkg).decision = "Probably"; }
+  },
+  {
+    id: "decision-missing-residual-risks",
+    rule: "gate decision residual risks",
+    expect: "must include residualRisks.",
+    mutate: (pkg) => { decision(pkg).residualRisks = []; }
+  },
+  {
+    id: "verdict-confidence-not-reproducible",
+    rule: "verdict confidence reproduces from evidence and policy",
+    expect: "confidence must reproduce from evidence inputs and policy",
+    mutate: (pkg) => { verdict(pkg, "QIN-QG-001").confidence = 0.99; }
+  },
+  {
+    id: "decision-confidence-not-reproducible",
+    rule: "decision confidence reproduces from verdict confidences",
+    expect: "confidence must reproduce from verdict confidences and policy",
+    mutate: (pkg) => { decision(pkg).confidence = 0.42; }
+  },
+  {
+    id: "duplicate-verdict",
+    rule: "one verdict per gated intent",
+    expect: "has duplicate verdicts for quality intent",
+    mutate: (pkg) => {
+      const v = verdict(pkg, "QIN-QG-002");
+      decision(pkg).intentVerdicts.push(structuredClone(v));
+    }
+  },
+  {
+    id: "achieved-without-support",
+    rule: "achieved verdict cites supporting evidence",
+    expect: "is achieved but cites no supporting evidence.",
+    mutate: (pkg) => { evidence(pkg, "EVD-QG-003").polarity = "contradicts"; }
+  },
+  {
+    id: "intent-without-perspective",
+    rule: "gated intent covered by an evaluation perspective",
+    expect: "gates an intent that no evaluation perspective covers.",
+    mutate: (pkg) => {
+      for (const p of pkg.evaluationPerspectives) {
+        p.linkedIntentRefs = p.linkedIntentRefs.filter((ref) => ref !== "QIN-QG-002");
+      }
+      pkg.evaluationPerspectives = pkg.evaluationPerspectives.filter((p) => p.linkedIntentRefs.length > 0);
+    }
+  },
+
+  // ---- Gate rule enforcement (rules are executable, not decorative) ----
+  {
+    id: "gate-rule-intent-without-verdict",
+    rule: "every intent a cited gate rule protects has a verdict",
+    expect: "records no verdict for its protected intent",
+    mutate: (pkg) => {
+      decision(pkg).intentVerdicts = decision(pkg).intentVerdicts.filter((v) => v.intentRef !== "QIN-QG-002");
+    }
+  },
+  {
+    id: "go-missing-required-evidence-type",
+    rule: "Go/Conditional Go satisfies each cited rule's required evidence types",
+    expect: "lacks required evidence type",
+    mutate: (pkg) => {
+      // Drop the control-test evidence from QIN-QG-001; keep confidence reproducible
+      // by leaving the sampled-review evidence (min of one input = its own value).
+      const v = verdict(pkg, "QIN-QG-001");
+      v.evidenceRefs = ["EVD-QG-001"];
+      v.confidence = 0.7;
+    }
+  },
+
+  // ---- Governance forcing ----
+  {
+    id: "conflict-without-governance",
+    rule: "conflicting evidence forces a governance trigger",
+    expect: "must include a conflicting-evidence governance trigger when verdict evidence conflicts.",
+    mutate: (pkg) => { decision(pkg).governanceTriggerRefs = []; }
+  },
+  {
+    id: "low-confidence-without-governance",
+    rule: "low-confidence verdict forces a governance trigger",
+    expect: "must include a low-confidence governance trigger when a verdict confidence is low.",
+    mutate: (pkg) => {
+      // State a low verdict confidence; the low-confidence rule reads the stated value.
+      verdict(pkg, "QIN-QG-003").confidence = 0.4;
+    }
+  },
+  {
+    id: "weak-evidence-without-governance",
+    rule: "high-severity boundary on only low-independence evidence forces governance",
+    expect: "must include a weak-evidence governance trigger",
+    mutate: (pkg) => {
+      // QIN-QG-003 is high severity; make both its supporting items low-independence.
+      evidence(pkg, "EVD-QG-004").independence = "low";
+    }
+  },
+  {
+    id: "go-on-weak-evidence",
+    rule: "Go blocked when high-severity boundary rests only on low-independence evidence",
+    expect: "cannot be Go when a high-severity loss boundary is supported only by low-independence evidence.",
+    mutate: (pkg) => {
+      evidence(pkg, "EVD-QG-004").independence = "low";
+      decision(pkg).decision = "Go";
+    }
+  },
+  {
+    id: "go-with-unprotected-boundary",
+    rule: "Go blocked while a high-severity boundary verdict is not-achieved/inconclusive",
+    expect: "cannot be Go while a high-severity loss boundary verdict is not-achieved or inconclusive.",
+    mutate: (pkg) => {
+      decision(pkg).decision = "Go";
+      verdict(pkg, "QIN-QG-001").decision = "not-achieved";
+    }
+  },
+  {
+    id: "go-with-open-severe-trigger",
+    rule: "Go blocked while a high-severity governance trigger is open",
+    expect: "cannot be Go while high-severity governance triggers remain open",
+    mutate: (pkg) => {
+      decision(pkg).decision = "Go";
+      const t = pkg.governanceTriggers[0];
+      t.status = "open";
+      delete t.resultingGovernanceEventRef;
+      pkg.governanceEvents = [];
+    }
+  },
+
+  // ---- Release-completeness of Go / Conditional Go ----
+  {
+    id: "conditional-go-missing-rollback",
+    rule: "Go/Conditional Go includes a rollback plan",
+    expect: "must include non-empty string rollbackPlan.",
+    mutate: (pkg) => { delete decision(pkg).rollbackPlan; }
+  },
+  {
+    id: "conditional-go-missing-conditions",
+    rule: "Conditional Go lists explicit conditions",
+    expect: "is Conditional Go and must include explicit conditions.",
+    mutate: (pkg) => { decision(pkg).conditions = []; }
+  },
+  {
+    id: "conditional-go-condition-missing-owner",
+    rule: "each Conditional Go condition names an owner",
+    expect: "must include non-empty string owner.",
+    mutate: (pkg) => { delete decision(pkg).conditions[0].owner; }
+  },
+  {
+    id: "no-go-without-citation",
+    rule: "No-Go cites a violated boundary or gate rule",
+    expect: "is No-Go and must cite a violated loss boundary or gate rule.",
+    mutate: (pkg) => { decision(pkg).decision = "No-Go"; }
+  },
+  {
+    id: "pending-without-missing-evidence",
+    rule: "Pending lists the missing evidence",
+    expect: "is Pending and must list the missing evidence.",
+    mutate: (pkg) => { decision(pkg).decision = "Pending"; }
+  },
+
+  // ---- Governance triggers and events ----
+  {
+    id: "trigger-missing-required-action",
+    rule: "governance trigger required fields",
+    expect: "must include non-empty string requiredAction.",
+    mutate: (pkg) => { delete pkg.governanceTriggers[0].requiredAction; }
+  },
+  {
+    id: "trigger-not-open-without-event",
+    rule: "non-open trigger links a governance event",
+    expect: "is not open and must link to a resultingGovernanceEventRef.",
+    mutate: (pkg) => {
+      delete pkg.governanceTriggers[0].resultingGovernanceEventRef;
+      pkg.governanceEvents = [];
+    }
+  },
+  {
+    id: "event-missing-decided-by",
+    rule: "governance event required fields",
+    expect: "must include non-empty string decidedBy.",
+    mutate: (pkg) => { delete pkg.governanceEvents[0].decidedBy; }
+  },
+
+  // ---- Post-release review, improvement, traceability ----
+  {
+    id: "severe-incident-without-improvement",
+    rule: "high-severity post-release incident links an improvement action",
+    expect: "records a high-severity incident and must link at least one improvement action.",
+    mutate: (pkg) => { pkg.postReleaseReviews[0].improvementActionRefs = []; }
+  },
+  {
+    id: "improvement-not-mirrored",
+    rule: "improvement action is cross-referenced by its source review",
+    expect: "that does not list it in improvementActionRefs.",
+    mutate: (pkg) => {
+      pkg.improvementActions.push({
+        id: "IMP-QG-999",
+        title: "Orphan action",
+        correctiveAction: "x",
+        sourcePostReleaseReviewRef: "PRR-QG-001",
+        effectMeasurement: "y",
+        status: "proposed"
+      });
+    }
+  },
+  {
+    id: "improvement-broken-source-ref",
+    rule: "improvement action links its source post-release review",
+    expect: "references missing source post-release review",
+    mutate: (pkg) => { pkg.improvementActions[0].sourcePostReleaseReviewRef = "PRR-NOPE-999"; }
+  },
+  {
+    id: "traceability-broken-source",
+    rule: "traceability link source resolves",
+    expect: "references missing sourceRef",
+    mutate: (pkg) => { pkg.traceabilityLinks[0].sourceRef = "ZZZ-NOPE-999"; }
+  },
+  {
+    id: "traceability-broken-target",
+    rule: "traceability link target resolves",
+    expect: "references missing targetRef",
+    mutate: (pkg) => { pkg.traceabilityLinks[0].targetRef = "ZZZ-NOPE-999"; }
+  },
+
+  // ---- Verifier boundary self-declaration ----
+  {
+    id: "verifier-boundary-omits-semantic-truth",
+    rule: "verifier boundary disclaims semantic truth",
+    expect: "must explicitly avoid claiming semantic truth.",
+    mutate: (pkg) => {
+      pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((c) => c !== "semantic truth");
+    }
+  }
+];
+
+export const spec = {
+  validator,
+  basePackage: "examples/quality-gate-package.json"
+};

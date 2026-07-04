@@ -8,7 +8,8 @@ const defaultPackages = [
   "examples/discovery-session-package.json",
   "examples/organizational-quality-culture-package.json",
   "examples/evaluation-target-package.json",
-  "examples/review-run-package.json"
+  "examples/review-run-package.json",
+  "examples/quality-gate-package.json"
 ];
 
 const packagePaths = process.argv.slice(2);
@@ -828,6 +829,421 @@ function validateReviewRunPackage(pkg, packagePath) {
   });
 }
 
+const CANONICAL_PERSPECTIVES = new Set([
+  "functional quality",
+  "regression quality",
+  "automation",
+  "coverage",
+  "quantitative evidence",
+  "evidence traceability",
+  "continuity",
+  "shift-left",
+  "release decision",
+  "operational quality",
+  "improvement",
+  "external dependency"
+]);
+const QUANTITY_TYPES = new Set(["how-many", "how-much", "how-long", "how-often", "impact"]);
+const GATE_DECISIONS = new Set(["Go", "Conditional Go", "No-Go", "Pending"]);
+const HIGH_SEVERITIES = new Set(["high", "critical"]);
+
+function validateQualityGatePackage(pkg, packagePath) {
+  const targets = requireArray(pkg, "evaluationTargets");
+  const qualityIntents = requireArray(pkg, "qualityIntents");
+  const perspectives = requireArray(pkg, "evaluationPerspectives");
+  const confidencePolicies = requireArray(pkg, "confidencePolicies");
+  const evidenceItems = requireArray(pkg, "evidenceItems");
+  const quantitativeRecords = requireArray(pkg, "quantitativeEvidenceRecords");
+  const automatedDetails = Array.isArray(pkg.automatedEvaluationDetails) ? pkg.automatedEvaluationDetails : [];
+  const gateRules = requireArray(pkg, "qualityGateRules");
+  const gateDecisions = requireArray(pkg, "qualityGateDecisions");
+  const postReleaseReviews = Array.isArray(pkg.postReleaseReviews) ? pkg.postReleaseReviews : [];
+  const improvementActions = Array.isArray(pkg.improvementActions) ? pkg.improvementActions : [];
+  const traceabilityLinks = Array.isArray(pkg.traceabilityLinks) ? pkg.traceabilityLinks : [];
+  const governanceTriggers = requireArray(pkg, "governanceTriggers");
+  const governanceEvents = requireArray(pkg, "governanceEvents");
+  const verifierBoundary = pkg.verifierBoundary;
+
+  const targetIndex = indexById(targets, `${packagePath}:evaluationTargets`);
+  const intentIndex = indexById(qualityIntents, `${packagePath}:qualityIntents`);
+  const perspectiveIndex = indexById(perspectives, `${packagePath}:evaluationPerspectives`);
+  const confidencePolicyIndex = indexById(confidencePolicies, `${packagePath}:confidencePolicies`);
+  const evidenceIndex = indexById(evidenceItems, `${packagePath}:evidenceItems`);
+  const quantitativeIndex = indexById(quantitativeRecords, `${packagePath}:quantitativeEvidenceRecords`);
+  const automatedIndex = indexById(automatedDetails, `${packagePath}:automatedEvaluationDetails`);
+  const gateRuleIndex = indexById(gateRules, `${packagePath}:qualityGateRules`);
+  const gateDecisionIndex = indexById(gateDecisions, `${packagePath}:qualityGateDecisions`);
+  const postReleaseIndex = indexById(postReleaseReviews, `${packagePath}:postReleaseReviews`);
+  const improvementIndex = indexById(improvementActions, `${packagePath}:improvementActions`);
+  const governanceIndex = indexById(governanceTriggers, `${packagePath}:governanceTriggers`);
+  const governanceEventIndex = indexById(governanceEvents, `${packagePath}:governanceEvents`);
+
+  // A global id index lets traceability links resolve across every entity family.
+  const globalIndex = new Map();
+  for (const family of [targetIndex, intentIndex, perspectiveIndex, confidencePolicyIndex, evidenceIndex, quantitativeIndex, automatedIndex, gateRuleIndex, gateDecisionIndex, postReleaseIndex, improvementIndex, governanceIndex, governanceEventIndex]) {
+    for (const [id, item] of family.entries()) {
+      globalIndex.set(id, item);
+    }
+  }
+
+  for (const target of targets) {
+    for (const field of ["title", "domain", "artifactType", "context", "operationalImpact"]) {
+      checkRequiredString(target, field, target.id);
+    }
+    if (!Array.isArray(target.stakeholderImpact) || target.stakeholderImpact.length === 0) {
+      errors.push(`${target.id} must include stakeholderImpact.`);
+    }
+  }
+  for (const intent of qualityIntents) {
+    checkRequiredString(intent, "statement", intent.id);
+    checkRequiredString(intent, "lossBoundary", intent.id);
+    checkRequiredString(intent, "lossBoundarySeverity", intent.id);
+  }
+  for (const perspective of perspectives) {
+    if (!CANONICAL_PERSPECTIVES.has(perspective.perspective)) {
+      errors.push(`${perspective.id} uses unsupported evaluation perspective ${perspective.perspective}.`);
+    }
+    checkRequiredString(perspective, "rationale", perspective.id);
+    checkRefs(perspective.linkedIntentRefs, intentIndex, "quality intent", perspective.id);
+  }
+  for (const policy of confidencePolicies) {
+    checkRequiredString(policy, "evidenceAggregationRule", policy.id);
+    checkRequiredString(policy, "verdictAggregationRule", policy.id);
+    checkRequiredString(policy, "reviewRunAggregationRule", policy.id);
+    checkRequiredString(policy, "rounding", policy.id);
+  }
+  for (const evidence of evidenceItems) {
+    checkRefs([evidence.targetRef], targetIndex, "evaluation target", evidence.id);
+    checkRequiredString(evidence, "evidenceType", evidence.id);
+    checkRequiredString(evidence, "finding", evidence.id);
+    checkRequiredString(evidence, "evaluatorRole", evidence.id);
+    checkRequiredString(evidence, "retention", evidence.id);
+    if (!["high", "medium", "low"].includes(evidence.independence)) {
+      errors.push(`${evidence.id} independence must be high, medium, or low.`);
+    }
+    if (!["supports", "contradicts", "mixed", "neutral"].includes(evidence.polarity)) {
+      errors.push(`${evidence.id} polarity must be supports, contradicts, mixed, or neutral.`);
+    }
+    checkScore(evidence.confidence, "confidence", evidence.id);
+    checkPositiveNumber(evidence.weight, "weight", evidence.id);
+  }
+  for (const record of quantitativeRecords) {
+    checkRequiredString(record, "metricName", record.id);
+    checkRequiredString(record, "unit", record.id);
+    checkRequiredString(record, "measurementMethod", record.id);
+    checkRequiredString(record, "interpretationRule", record.id);
+    if (typeof record.value !== "number") {
+      errors.push(`${record.id} value must be a number.`);
+    }
+    if (!QUANTITY_TYPES.has(record.quantityType)) {
+      errors.push(`${record.id} quantityType must be one of how-many, how-much, how-long, how-often, impact.`);
+    }
+    // Quantitative values are evidence metadata; they must never be treated as quality itself.
+    if (record.interpretation !== "evidence-only") {
+      errors.push(`${record.id} quantitative record must be interpreted as evidence-only, not as quality itself.`);
+    }
+    checkRefs([record.targetRef], targetIndex, "evaluation target", record.id);
+    checkRefs([record.evidenceRef], evidenceIndex, "retained evidence", record.id);
+    checkRefs([record.linkedIntentRef], intentIndex, "quality intent", record.id);
+  }
+  for (const detail of automatedDetails) {
+    checkRequiredString(detail, "evaluationType", detail.id);
+    checkRequiredString(detail, "executionMode", detail.id);
+    checkRequiredString(detail, "trigger", detail.id);
+    checkRequiredString(detail, "environment", detail.id);
+    checkRefs([detail.evidenceRef], evidenceIndex, "retained evidence", detail.id);
+    if (!["high", "medium", "low"].includes(detail.independence)) {
+      errors.push(`${detail.id} independence must be high, medium, or low.`);
+    }
+    for (const field of ["executedCount", "passedCount", "failedCount"]) {
+      if (typeof detail[field] !== "number" || detail[field] < 0) {
+        errors.push(`${detail.id} ${field} must be a non-negative number.`);
+      }
+    }
+    checkScore(detail.passRate, "passRate", detail.id);
+    // Execution counts and passRate are evidence metadata and must be reproducible, like confidence.
+    if ([detail.executedCount, detail.passedCount, detail.failedCount].every((value) => typeof value === "number")) {
+      const accounted = detail.passedCount + detail.failedCount + (detail.skippedCount ?? 0) + (detail.blockedCount ?? 0);
+      if (accounted !== detail.executedCount) {
+        errors.push(`${detail.id} passed, failed, skipped, and blocked counts must sum to executedCount.`);
+      }
+      if (detail.executedCount > 0 && typeof detail.passRate === "number" && rounded(detail.passRate) !== rounded(detail.passedCount / detail.executedCount)) {
+        errors.push(`${detail.id} passRate must reproduce from passedCount divided by executedCount.`);
+      }
+    }
+  }
+  for (const rule of gateRules) {
+    checkRequiredString(rule, "title", rule.id);
+    checkRefs(rule.appliesToIntentRefs, intentIndex, "quality intent", rule.id);
+    checkNonEmptyArray(rule, "requiredEvidenceTypes", rule.id);
+    checkNonEmptyArray(rule, "blockingConditions", rule.id);
+  }
+
+  const perspectiveCoveredIntents = new Set(perspectives.flatMap((perspective) => perspective.linkedIntentRefs ?? []));
+
+  for (const decision of gateDecisions) {
+    checkRefs([decision.targetRef], targetIndex, "evaluation target", decision.id);
+    checkRefs(decision.gateRuleRefs, gateRuleIndex, "quality gate rule", decision.id);
+    checkRefs([decision.confidencePolicyRef], confidencePolicyIndex, "confidence policy", decision.id);
+    if (!GATE_DECISIONS.has(decision.decision)) {
+      errors.push(`${decision.id} decision must be Go, Conditional Go, No-Go, or Pending.`);
+    }
+    checkScore(decision.confidence, "confidence", decision.id);
+    if (!Array.isArray(decision.residualRisks) || decision.residualRisks.length === 0) {
+      errors.push(`${decision.id} must include residualRisks.`);
+    }
+    checkMaybeRefs(decision.governanceTriggerRefs, governanceIndex, "governance trigger", decision.id);
+
+    let hasLowConfidence = false;
+    let hasConflict = false;
+    let needsWeakEvidenceGovernance = false;
+    let hasUnprotectedHighSeverity = false;
+    const verdictByIntent = new Map();
+    const computedVerdicts = [];
+    if (!Array.isArray(decision.intentVerdicts) || decision.intentVerdicts.length === 0) {
+      errors.push(`${decision.id} must include intentVerdicts.`);
+    } else {
+      for (const verdict of decision.intentVerdicts) {
+        checkRefs([verdict.intentRef], intentIndex, "quality intent", `${decision.id}/verdict`);
+        checkRefs(verdict.evidenceRefs, evidenceIndex, "evidence", `${decision.id}/verdict`);
+        checkRefs([verdict.confidencePolicyRef], confidencePolicyIndex, "confidence policy", `${decision.id}/verdict`);
+        checkScore(verdict.confidence, "confidence", `${decision.id}/verdict`);
+        checkPositiveNumber(verdict.weight, "weight", `${decision.id}/verdict`);
+        checkRequiredString(verdict, "residualRisk", `${decision.id}/verdict`);
+        const verdictPolicy = confidencePolicyIndex.get(verdict.confidencePolicyRef);
+        const verdictEvidence = (verdict.evidenceRefs ?? []).map((ref) => evidenceIndex.get(ref)).filter(Boolean);
+        if (verdictPolicy) {
+          const expected = aggregateConfidence(
+            verdictEvidence.map((item) => ({ confidence: item.confidence, weight: item.weight })),
+            verdictPolicy.verdictAggregationRule,
+            `${decision.id}/verdict/${verdict.intentRef}`
+          );
+          if (rounded(verdict.confidence) !== expected) {
+            errors.push(`${decision.id}/verdict/${verdict.intentRef} confidence must reproduce from evidence inputs and policy ${verdict.confidencePolicyRef}: ${expected}.`);
+          }
+          computedVerdicts.push({ confidence: expected, weight: verdict.weight });
+        } else {
+          computedVerdicts.push({ confidence: verdict.confidence, weight: verdict.weight });
+        }
+        if (verdict.confidence < 0.55) {
+          hasLowConfidence = true;
+        }
+        const polarities = new Set(verdictEvidence.map((item) => item.polarity));
+        if (polarities.has("supports") && (polarities.has("contradicts") || polarities.has("mixed"))) {
+          hasConflict = true;
+        }
+        if (verdictByIntent.has(verdict.intentRef)) {
+          errors.push(`${decision.id} has duplicate verdicts for quality intent ${verdict.intentRef}.`);
+        } else {
+          verdictByIntent.set(verdict.intentRef, verdict);
+        }
+        if (verdict.decision === "achieved" && !verdictEvidence.some((item) => item.polarity === "supports")) {
+          errors.push(`${decision.id}/verdict/${verdict.intentRef} is achieved but cites no supporting evidence.`);
+        }
+        if (intentIndex.has(verdict.intentRef) && !perspectiveCoveredIntents.has(verdict.intentRef)) {
+          errors.push(`${decision.id}/verdict/${verdict.intentRef} gates an intent that no evaluation perspective covers.`);
+        }
+        // A high-severity loss boundary must not be claimed achieved on low-independence evidence alone.
+        const intent = intentIndex.get(verdict.intentRef);
+        const supporting = verdictEvidence.filter((item) => item.polarity === "supports");
+        const reliesOnSupport = verdict.decision === "achieved" || verdict.decision === "partially-achieved";
+        if (intent && HIGH_SEVERITIES.has(intent.lossBoundarySeverity) && reliesOnSupport && supporting.length > 0 && supporting.every((item) => item.independence === "low")) {
+          needsWeakEvidenceGovernance = true;
+        }
+        if (intent && HIGH_SEVERITIES.has(intent.lossBoundarySeverity) && (verdict.decision === "not-achieved" || verdict.decision === "inconclusive")) {
+          hasUnprotectedHighSeverity = true;
+        }
+      }
+      const runPolicy = confidencePolicyIndex.get(decision.confidencePolicyRef);
+      if (runPolicy) {
+        const expected = aggregateConfidence(computedVerdicts, runPolicy.reviewRunAggregationRule, decision.id);
+        if (rounded(decision.confidence) !== expected) {
+          errors.push(`${decision.id} confidence must reproduce from verdict confidences and policy ${decision.confidencePolicyRef}: ${expected}.`);
+        }
+      }
+    }
+
+    const triggerTypes = new Set((decision.governanceTriggerRefs ?? []).map((ref) => governanceIndex.get(ref)?.triggerType).filter(Boolean));
+    if (hasLowConfidence && !triggerTypes.has("low-confidence")) {
+      errors.push(`${decision.id} must include a low-confidence governance trigger when a verdict confidence is low.`);
+    }
+    if (hasConflict && !triggerTypes.has("conflicting-evidence")) {
+      errors.push(`${decision.id} must include a conflicting-evidence governance trigger when verdict evidence conflicts.`);
+    }
+    if (needsWeakEvidenceGovernance) {
+      if (decision.decision === "Go") {
+        errors.push(`${decision.id} cannot be Go when a high-severity loss boundary is supported only by low-independence evidence.`);
+      }
+      if (!triggerTypes.has("weak-evidence")) {
+        errors.push(`${decision.id} must include a weak-evidence governance trigger when a high-severity loss boundary relies only on low-independence evidence.`);
+      }
+    }
+    if (hasUnprotectedHighSeverity && decision.decision === "Go") {
+      errors.push(`${decision.id} cannot be Go while a high-severity loss boundary verdict is not-achieved or inconclusive.`);
+    }
+    const openSevereTriggerIds = (decision.governanceTriggerRefs ?? [])
+      .map((ref) => governanceIndex.get(ref))
+      .filter((trigger) => trigger && trigger.status === "open" && HIGH_SEVERITIES.has(trigger.severity))
+      .map((trigger) => trigger.id);
+    if (decision.decision === "Go" && openSevereTriggerIds.length > 0) {
+      errors.push(`${decision.id} cannot be Go while high-severity governance triggers remain open: ${openSevereTriggerIds.join(", ")}.`);
+    }
+
+    // Gate rules are enforced, not decorative: every protected intent needs a verdict,
+    // and a Go or Conditional Go must satisfy each cited rule's required evidence types.
+    for (const ruleRef of decision.gateRuleRefs ?? []) {
+      const rule = gateRuleIndex.get(ruleRef);
+      if (!rule) {
+        continue;
+      }
+      for (const intentRef of rule.appliesToIntentRefs ?? []) {
+        const verdict = verdictByIntent.get(intentRef);
+        if (!verdict) {
+          errors.push(`${decision.id} cites gate rule ${ruleRef} but records no verdict for its protected intent ${intentRef}.`);
+          continue;
+        }
+        if (decision.decision === "Go" || decision.decision === "Conditional Go") {
+          const availableTypes = new Set((verdict.evidenceRefs ?? []).map((ref) => evidenceIndex.get(ref)?.evidenceType).filter(Boolean));
+          for (const requiredType of rule.requiredEvidenceTypes ?? []) {
+            if (!availableTypes.has(requiredType)) {
+              errors.push(`${decision.id} is ${decision.decision} but intent ${intentRef} lacks required evidence type ${requiredType} from gate rule ${ruleRef}; collect the evidence or record Pending.`);
+            }
+          }
+        }
+      }
+    }
+
+    // Release-completeness rules: a Go or Conditional Go must be safe to reverse and observe.
+    if (decision.decision === "Go" || decision.decision === "Conditional Go") {
+      for (const field of ["rollbackPlan", "monitoringPlan", "approvalOwner"]) {
+        checkRequiredString(decision, field, decision.id);
+      }
+    }
+    if (decision.decision === "Conditional Go") {
+      if (!Array.isArray(decision.conditions) || decision.conditions.length === 0) {
+        errors.push(`${decision.id} is Conditional Go and must include explicit conditions.`);
+      } else {
+        for (const condition of decision.conditions) {
+          for (const field of ["condition", "owner", "monitoring"]) {
+            checkRequiredString(condition, field, `${decision.id}/condition`);
+          }
+        }
+      }
+    }
+    if (decision.decision === "No-Go") {
+      const hasCitedRule = typeof decision.violatedGateRuleRef === "string" && gateRuleIndex.has(decision.violatedGateRuleRef);
+      const hasCitedBoundary = typeof decision.violatedLossBoundary === "string" && decision.violatedLossBoundary.trim() !== "";
+      if (!hasCitedRule && !hasCitedBoundary) {
+        errors.push(`${decision.id} is No-Go and must cite a violated loss boundary or gate rule.`);
+      }
+    }
+    if (decision.decision === "Pending") {
+      if (!Array.isArray(decision.missingEvidence) || decision.missingEvidence.length === 0) {
+        errors.push(`${decision.id} is Pending and must list the missing evidence.`);
+      }
+    }
+  }
+
+  for (const trigger of governanceTriggers) {
+    for (const field of ["triggerType", "reason", "requiredAction", "owner", "status"]) {
+      checkRequiredString(trigger, field, trigger.id);
+    }
+    checkRefs([trigger.sourceGateDecisionRef], gateDecisionIndex, "source gate decision", trigger.id);
+    checkRefs([trigger.affectedTargetRef], targetIndex, "affected target", trigger.id);
+    if (trigger.resultingGovernanceEventRef) {
+      checkRefs([trigger.resultingGovernanceEventRef], governanceEventIndex, "resulting governance event", trigger.id);
+      const event = governanceEventIndex.get(trigger.resultingGovernanceEventRef);
+      if (event && event.sourceGovernanceTriggerRef !== trigger.id) {
+        errors.push(`${trigger.id} resulting governance event ${event.id} points to a different trigger.`);
+      }
+    } else if (trigger.status !== "open") {
+      errors.push(`${trigger.id} is not open and must link to a resultingGovernanceEventRef.`);
+    }
+  }
+  for (const event of governanceEvents) {
+    checkRefs([event.sourceGovernanceTriggerRef], governanceIndex, "source governance trigger", event.id);
+    for (const field of ["decision", "decidedBy", "decisionRationale", "status"]) {
+      checkRequiredString(event, field, event.id);
+    }
+  }
+
+  for (const review of postReleaseReviews) {
+    checkRefs([review.gateDecisionRef], gateDecisionIndex, "gate decision", review.id);
+    checkRequiredString(review, "window", review.id);
+    checkRequiredString(review, "summary", review.id);
+    if (!Array.isArray(review.incidents)) {
+      errors.push(`${review.id} must include an incidents array.`);
+    }
+    checkMaybeRefs(review.improvementActionRefs ?? [], improvementIndex, "improvement action", review.id);
+    checkMaybeRefs(review.feedsQualityIntentRefs ?? [], intentIndex, "quality intent", review.id);
+    const hasSevereIncident = (review.incidents ?? []).some((incident) => HIGH_SEVERITIES.has(incident.severity));
+    if (hasSevereIncident && (!Array.isArray(review.improvementActionRefs) || review.improvementActionRefs.length === 0)) {
+      errors.push(`${review.id} records a high-severity incident and must link at least one improvement action.`);
+    }
+    for (const incident of review.incidents ?? []) {
+      checkRequiredString(incident, "description", `${review.id}/incident`);
+      if (!["low", "medium", "high", "critical"].includes(incident.severity)) {
+        errors.push(`${review.id}/incident ${incident.id} severity must be low, medium, high, or critical.`);
+      }
+      if (!Array.isArray(incident.affectedStakeholders) || incident.affectedStakeholders.length === 0) {
+        errors.push(`${review.id}/incident ${incident.id} must include affectedStakeholders.`);
+      }
+    }
+  }
+  for (const action of improvementActions) {
+    for (const field of ["title", "correctiveAction", "effectMeasurement", "status"]) {
+      checkRequiredString(action, field, action.id);
+    }
+    checkRefs([action.sourcePostReleaseReviewRef], postReleaseIndex, "source post-release review", action.id);
+    const sourceReview = postReleaseIndex.get(action.sourcePostReleaseReviewRef);
+    if (sourceReview && !(sourceReview.improvementActionRefs ?? []).includes(action.id)) {
+      errors.push(`${action.id} cites post-release review ${sourceReview.id} that does not list it in improvementActionRefs.`);
+    }
+  }
+  for (const link of traceabilityLinks) {
+    checkRequiredString(link, "linkType", link.id);
+    if (!globalIndex.has(link.sourceRef)) {
+      errors.push(`${link.id} references missing sourceRef: ${link.sourceRef}`);
+    }
+    if (!globalIndex.has(link.targetRef)) {
+      errors.push(`${link.id} references missing targetRef: ${link.targetRef}`);
+    }
+  }
+
+  if (!verifierBoundary || typeof verifierBoundary !== "object") {
+    errors.push(`${packagePath} must include verifierBoundary.`);
+  } else {
+    for (const field of ["checks", "doesNotClaim", "semanticValidityRequires"]) {
+      if (!Array.isArray(verifierBoundary[field]) || verifierBoundary[field].length === 0) {
+        errors.push(`${packagePath} verifierBoundary must include ${field}.`);
+      }
+    }
+    if (!new Set(verifierBoundary.doesNotClaim ?? []).has("semantic truth")) {
+      errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
+    }
+  }
+
+  results.push({
+    package: packagePath,
+    packageType: pkg.packageType,
+    counts: {
+      evaluationTargets: targets.length,
+      qualityIntents: qualityIntents.length,
+      evaluationPerspectives: perspectives.length,
+      evidenceItems: evidenceItems.length,
+      quantitativeEvidenceRecords: quantitativeRecords.length,
+      automatedEvaluationDetails: automatedDetails.length,
+      qualityGateRules: gateRules.length,
+      qualityGateDecisions: gateDecisions.length,
+      postReleaseReviews: postReleaseReviews.length,
+      improvementActions: improvementActions.length,
+      traceabilityLinks: traceabilityLinks.length,
+      governanceTriggers: governanceTriggers.length,
+      governanceEvents: governanceEvents.length
+    }
+  });
+}
+
 for (const relativePath of inputs) {
   const absolutePath = path.resolve(projectRoot, relativePath);
   const pkg = readJson(absolutePath);
@@ -849,6 +1265,9 @@ for (const relativePath of inputs) {
       break;
     case "review-run":
       validateReviewRunPackage(pkg, relativePath);
+      break;
+    case "quality-gate":
+      validateQualityGatePackage(pkg, relativePath);
       break;
     default:
       errors.push(`${relativePath} has unknown packageType ${pkg.packageType}.`);

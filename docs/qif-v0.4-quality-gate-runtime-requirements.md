@@ -1,5 +1,23 @@
 # QIF v0.4 Quality Gate Runtime Requirements
 
+## Implementation Status
+
+The v0.4.0 quality gate runtime baseline is now executable, not documentation-only.
+It is implemented as the `quality-gate` package type:
+
+- Schema: `schemas/quality-gate-package.schema.json`
+- Domain-general example: `examples/quality-gate-package.json`
+- Verifier: `tools/validate-qif-runtime.mjs` (run with `npm test`)
+
+The baseline covers Phase 1 (evaluation perspectives, quantitative evidence records,
+automated evaluation detail, evidence management, quality gate rules, and release gate
+decisions with Go / Conditional Go / No-Go / Pending verdicts) plus the Phase 2
+post-release review, improvement action, and traceability link entities.
+Phase 3 items (external connectors, monitoring integration, automated score calculation,
+risk-based timing recommendation) and the standalone Evaluation Timing Decision,
+Evidence Retention Policy, Quality Report, and Dashboard View entities remain future work.
+The requirements below are retained as the full design target.
+
 ## Mission
 
 QIF v0.4 should extend QIF from quality intent representation and review-run traceability into a domain-general quality gate runtime.
