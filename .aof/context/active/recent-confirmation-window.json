@@ -1,27 +1,7 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-06-24T17:31:51.412Z",
+  "updated_at": "2026-07-12T15:35:56.471Z",
   "entries": [
-    {
-      "question": "need validation で何が確定したか",
-      "answer": "Validated as a docs-only v0.3.1 candidate. The chosen path adds standalone QIF guidance and Discovery Layer pattern extensions; runtime schemas, UI, external integrations, release/tagging, and AOF-specific enforcement are out of scope.",
-      "recorded_at": "2026-06-24T16:34:44.041Z",
-      "expectation_state": "validated",
-      "mismatch_state": null,
-      "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MQSAL5T6-2P3E8G",
-      "source_decision_record_id": "DEC-MQSAN8HN-WW8N75"
-    },
-    {
-      "question": "framework self-audit で次に残る gap は何か",
-      "answer": "The guidance is documentation-only; executable schemas, examples, verifier rules, and pilot packages for pre-implementation review are not implemented yet.",
-      "recorded_at": "2026-06-24T17:04:38.228Z",
-      "expectation_state": "The slice adds standalone QIF guidance for reviewing proposed changes before implementation, defining negative acceptance, and extending Discovery Patterns for solution bias, boundary confusion, and concept comprehension.",
-      "mismatch_state": "The guidance is documentation-only; executable schemas, examples, verifier rules, and pilot packages for pre-implementation review are not implemented yet.",
-      "scale_direction": "Close this docs-only slice and make the next value slice an executable pre-implementation review package if requested.",
-      "source_session_id": "SESS-MQSAL5T6-2P3E8G",
-      "source_decision_record_id": "DEC-MQSAN8HN-WW8N75"
-    },
     {
       "question": "framework self-audit で次に残る gap は何か",
       "answer": "Executable pre-implementation review schemas, example packages, verifier rules, and pilot evidence remain future work.",
@@ -31,6 +11,26 @@
       "scale_direction": "Publish v0.3.1 and use a later slice for executable pre-implementation review records and verifier rules.",
       "source_session_id": "SESS-QIFV031R",
       "source_decision_record_id": "DEC-QIFV031R-001"
+    },
+    {
+      "question": "framework self-audit で次に残る gap は何か",
+      "answer": "Complete rule-by-rule fixture coverage is still open for qif-package, expert-judgment, and runtime package surfaces other than quality-gate.",
+      "recorded_at": "2026-07-07T17:36:59.594Z",
+      "expectation_state": "The implementation generalized the retained fixture runner and added selected qif-package and expert-judgment negative fixture corpora while preserving the quality-gate corpus.",
+      "mismatch_state": "Complete rule-by-rule fixture coverage is still open for qif-package, expert-judgment, and runtime package surfaces other than quality-gate.",
+      "scale_direction": "Use a follow-on v0.4.x slice to extend complete retained negative coverage to the remaining verifier surfaces.",
+      "source_session_id": "SESS-QIFV041",
+      "source_decision_record_id": null
+    },
+    {
+      "question": "まだ解くべき問題は同じか",
+      "answer": "はい。v0.4.1では最初の非quality-gate fixture拡張を完了し、次は完全な非quality-gate verifier fixture coverageを広げる。",
+      "recorded_at": "2026-07-07T17:37:13.061Z",
+      "expectation_state": "v0.4.1 is a hardening slice, not a concept redesign.",
+      "mismatch_state": "Complete fixture coverage remains open for several verifier surfaces.",
+      "scale_direction": "Use the next v0.4.x slice for complete retained negative coverage expansion.",
+      "source_session_id": "SESS-QIFV041",
+      "source_decision_record_id": null
     }
   ]
 }

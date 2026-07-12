@@ -1,0 +1,25 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-07-07T17:35:51.308Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-QIFV041-GUARDIAN-REVIEW",
+  "status": "completed",
+  "recommendation": "Accept the v0.4.1 fixture expansion after npm test, drift check, and path scan pass.",
+  "rationale": "The implementation expands retained structural fixture coverage without changing QIF semantics or claiming semantic quality truth.",
+  "signals": [
+    "npm test reports 3/3 positive checks and 58/58 negative checks."
+  ],
+  "artifact_refs": [
+    "tools/run-fixture-tests.mjs",
+    "tests/fixtures/qif-package/manifest.json",
+    "tests/fixtures/expert-judgment/manifest.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-013",
+  "source_decision_record_id": null,
+  "source_parent_session_id": "SESS-QIFV041",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.9
+}

@@ -1,7 +1,7 @@
 {
   "goal_type": "operating-goal",
   "content": "QIF needs standalone pre-implementation review and negative acceptance guidance so users can block mistaken quality hypotheses before implementation, not only validate structure after implementation.",
-  "updated_at": "2026-06-24T16:34:44.037Z",
+  "updated_at": "2026-07-12T15:35:56.471Z",
   "agreed_with_human": true,
   "source_session_id": "SESS-MQSAL5T6-2P3E8G",
   "source_decision_record_id": "DEC-MQSAN8HN-WW8N75",

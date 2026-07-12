@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-07-07T17:27:19.871Z",
+  "role": "Guardian",
+  "stage": "planning",
+  "session_id": "SESS-QIFV041-GUARDIAN",
+  "status": "completed",
+  "recommendation": "Proceed only if fixtures test structural verifier boundaries and do not imply semantic quality truth.",
+  "rationale": "The main risk is overclaiming: negative fixtures prove rule enforcement, not real-world quality validity.",
+  "signals": [
+    "No UI, no external integrations, no semantic-truth claim, no checklist-completion substitution."
+  ],
+  "artifact_refs": [
+    "docs/qif-roadmap.md"
+  ],
+  "decision_required": true,
+  "source_task_id": "TASK-013",
+  "source_decision_record_id": null,
+  "source_parent_session_id": "SESS-QIFV041",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.9
+}

@@ -1,22 +1,22 @@
 {
   "guidance_type": "cadence-trigger-guidance",
-  "recorded_at": "2026-06-24T17:31:51.420Z",
-  "open_task_count": 0,
+  "recorded_at": "2026-07-07T17:37:13.062Z",
+  "open_task_count": 1,
   "retire_review_candidate_ids": [],
-  "trigger_state": "follow-through-recommended",
-  "batching_mode": "single-action",
-  "policy_reason": "One cadence action is sufficient to restore follow-through.",
+  "trigger_state": "idle",
+  "batching_mode": "none",
+  "policy_reason": "No unresolved cadence trigger was detected.",
   "recommended_actions": [
-    "run alignment-pulse"
+    "keep normal cadence monitoring"
   ],
   "suggested_commands": [
     {
-      "action": "run alignment-pulse",
-      "command": "node ./src/cli.js alignment-pulse --project . --question \"まだ解くべき問題は同じか\" --answer \"はい\"",
-      "reason": "No active alignment-pulse artifact is present."
+      "action": "keep normal cadence monitoring",
+      "command": "No immediate cadence command is required.",
+      "reason": "Active cadence surfaces are present and there are no retire-review candidates."
     }
   ],
-  "summary": "Cadence guidance recommends: run alignment-pulse.",
-  "source_session_id": "SESS-QIFV031R",
-  "source_decision_record_id": "DEC-QIFV031R-001"
+  "summary": "Current cadence surfaces are present; continue normal cadence monitoring.",
+  "source_session_id": "SESS-QIFV041",
+  "source_decision_record_id": null
 }

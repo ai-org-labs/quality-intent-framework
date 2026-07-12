@@ -1,0 +1,31 @@
+{
+  "view_type": "operator_progress",
+  "generated_at": "2026-07-07T17:38:02.316Z",
+  "current_checkpoint": {
+    "stage": "frontier-definition-needed",
+    "frontier_task_id": null,
+    "summary": "The runtime is frontier-definition-needed.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  },
+  "previous_checkpoint": {
+    "summary": "TASK-013 was the latest completed checkpoint.",
+    "artifact_ref": ".aof/tasks/done/TASK-013.json"
+  },
+  "changes_since_last_checkpoint": [
+    {
+      "kind": "completed-task",
+      "summary": "TASK-013 completed: QIF v0.4.1 fixture coverage expansion",
+      "artifact_ref": ".aof/tasks/done/TASK-013.json"
+    },
+    {
+      "kind": "goal-refresh",
+      "summary": "Complete non-quality-gate verifier fixture coverage, then address remaining v0.4 runtime-only entities.",
+      "artifact_ref": ".aof/goals/next-value-slice.json"
+    }
+  ],
+  "progress_answer": {
+    "what_changed": "TASK-013 completed: QIF v0.4.1 fixture coverage expansion Complete non-quality-gate verifier fixture coverage, then address remaining v0.4 runtime-only entities.",
+    "why_it_matters": "The runtime still needs a concrete current frontier to make progress legible.",
+    "next_checkpoint": "Refresh roadmap guidance from the current live frontier instead of the stale alignment pulse."
+  }
+}

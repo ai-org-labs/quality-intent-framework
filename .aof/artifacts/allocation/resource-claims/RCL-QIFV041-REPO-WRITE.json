@@ -1,0 +1,18 @@
+{
+  "claim_type": "resource-claim",
+  "recorded_at": "2026-07-07T17:29:05.041Z",
+  "claim_id": "RCL-MRAXB7DC-1JQQGZ",
+  "subject_ref": "TASK-013",
+  "resource_ref": "resource-qif-repo-main",
+  "claimant_role_ref": "builder",
+  "claim_scope": "temporary local repository write access for v0.4.1 fixture hardening",
+  "claim_status": "approved",
+  "approval_policy_refs": [],
+  "justification": "The planning council approved a narrow implementation slice and local edits are required to add fixtures, runner support, docs, and runtime evidence.",
+  "allocation_plan_ref": null,
+  "policy_evaluation_ref": null,
+  "expires_at": null,
+  "source_task_id": "TASK-013",
+  "source_parent_session_id": "SESS-QIFV041",
+  "source_decision_record_id": null
+}

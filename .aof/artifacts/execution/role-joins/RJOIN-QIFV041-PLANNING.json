@@ -1,0 +1,30 @@
+{
+  "join_type": "role-join",
+  "recorded_at": "2026-07-07T17:27:37.349Z",
+  "join_id": "RJOIN-MRAX9BPH-XMP432",
+  "join_status": "open",
+  "stage": "planning",
+  "expected_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-orchestrator-decision",
+  "blocking_signals": [],
+  "recommended_next_step": "Implement the v0.4.1 fixture expansion slice with QIF/AOF evidence gates.",
+  "received_session_ids": [
+    "SESS-QIFV041-VISIONARY",
+    "SESS-QIFV041-BUILDER",
+    "SESS-QIFV041-GUARDIAN"
+  ],
+  "source_task_id": "TASK-013",
+  "source_parent_session_id": "SESS-QIFV041",
+  "decision_record_ref": null,
+  "summary": "Council roles agree: proceed with narrow fixture coverage expansion and guard against semantic-truth overclaiming."
+}

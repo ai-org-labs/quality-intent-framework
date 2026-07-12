@@ -1,5 +1,5 @@
 {
-  "description": "QIF negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/quality-gate-cases.mjs; do not edit by hand.",
+  "description": "QIF quality-gate negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/quality-gate-cases.mjs; do not edit by hand.",
   "positives": [
     {
       "validator": "tools/validate-qif.mjs",

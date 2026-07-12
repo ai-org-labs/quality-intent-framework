@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-07-07T17:25:25.319Z",
+  "problem_statement_id": "PST-MRAX6HTZ-0W4OOM",
+  "affected_party": "QIF maintainers and AI agents relying on verifier output",
+  "actual_problem": "Only the quality-gate verifier has retained negative fixture coverage, so other verifier surfaces can weaken without an obvious failing fixture.",
+  "why_it_matters": "QIF claims executable structural discipline; unfixture-tested verifier rules are harder to trust and easier to regress.",
+  "why_now": "v0.4.0 established the quality-gate fixture pattern and the roadmap names expansion as the near-term Phase 1 gap.",
+  "evidence_refs": [
+    "docs/qif-roadmap.md",
+    "tools/run-fixture-tests.mjs"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

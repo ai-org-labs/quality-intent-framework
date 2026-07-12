@@ -1,0 +1,34 @@
+{
+  "packet_type": "team-output",
+  "recorded_at": "2026-07-07T17:27:40.188Z",
+  "team_output_id": "TOUT-MRAX9DWC-311FWV",
+  "team_id": "QIF-V041-COUNCIL",
+  "stage": "planning",
+  "expected_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Visionary",
+    "Builder",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-council-review",
+  "blocking_signals": [],
+  "recommended_next_step": "Proceed to implementation with fixture coverage expansion as the selected v0.4.1 slice.",
+  "joined_role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV041-VISIONARY-PLANNING.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV041-BUILDER-PLANNING.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV041-GUARDIAN-PLANNING.json"
+  ],
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV041-001.json"
+  ],
+  "decision_required": false,
+  "summary": "Planning packet is complete: latest QIF baseline, AOF v6.9.0 runtime, constrained implementation scope, and verifier-boundary guardrails.",
+  "source_task_id": "TASK-013",
+  "source_parent_session_id": "SESS-QIFV041",
+  "source_decision_record_id": null
+}

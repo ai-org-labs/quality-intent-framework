@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-07-07T17:25:41.688Z",
+  "value_hypothesis_id": "VHY-MRAX6UGO-W0CGMI",
+  "expected_value_creation": "Verifier regression resistance increases because non-quality-gate verifier rules gain retained invalid examples that must fail in npm test.",
+  "beneficiary": "QIF users, maintainers, and AI agents applying QIF as a quality gate",
+  "supporting_evidence": [
+    "docs/qif-roadmap.md Phase 1 calls for 100 percent verifier-rule fixture coverage.",
+    "v0.4.0 quality-gate fixture suite already demonstrates the pattern with 46 retained negative checks."
+  ],
+  "success_criteria": [
+    "At least one additional verifier surface has committed negative fixtures run by npm test.",
+    "Fixture drift is detected rather than silently accepted."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

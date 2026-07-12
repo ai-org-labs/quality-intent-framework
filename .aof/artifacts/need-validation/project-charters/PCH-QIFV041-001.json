@@ -1,0 +1,23 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-07-07T17:26:33.605Z",
+  "project_charter_id": "PCH-MRAX7YIT-6OVSL4",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV041-001.json",
+  "validated_objective": "Deliver the first v0.4.1 fixture coverage expansion by generalizing retained negative fixture execution beyond quality-gate and proving it on selected existing verifier surfaces.",
+  "scope": [
+    "Add a generalized retained fixture manifest and runner support for at least qif-package and expert-judgment negative fixtures.",
+    "Keep the existing quality-gate fixture corpus and drift check intact.",
+    "Update npm test, changelog, roadmap/runtime log, and QIF/AOF evidence."
+  ],
+  "constraints": [
+    "Do not redesign QIF concepts, schemas, or semantic meaning unless required to make existing rules executable.",
+    "Do not build UI or external integrations.",
+    "Do not claim verifier success proves semantic quality truth."
+  ],
+  "expected_outcomes": [
+    "npm test fails if selected non-quality-gate verifier rules are weakened or deleted.",
+    "v0.4.1 has clear evidence that QIF Phase 1 fixture coverage expanded beyond quality-gate."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

@@ -2,7 +2,7 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-06-24T17:32:07.703Z",
+  "generated_at": "2026-07-07T17:38:02.499Z",
   "latest_outcome": {
     "source_session_id": "SESS-MQSAL5T6-2P3E8G",
     "report_id": "OUT-MQSBPZ42-JA4L60",
@@ -12,28 +12,28 @@
     "signal_ref": ".aof/artifacts/council/qif-v0.3.1-pre-implementation-review-council-review-packet.json"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV031R-001",
-    "recorded_at": "2026-06-24T17:31:51.398Z",
-    "summary": "The release slice updates QIF to v0.3.1 as a docs-only pre-implementation review and done-before quality gate milestone with package metadata, changelog, release notes, Council review evidence, and verification.",
-    "detected_gap": "Executable pre-implementation review schemas, example packages, verifier rules, and pilot evidence remain future work.",
+    "audit_id": "FSA-QIFV041-001",
+    "recorded_at": "2026-07-07T17:36:59.587Z",
+    "summary": "The implementation generalized the retained fixture runner and added selected qif-package and expert-judgment negative fixture corpora while preserving the quality-gate corpus.",
+    "detected_gap": "Complete rule-by-rule fixture coverage is still open for qif-package, expert-judgment, and runtime package surfaces other than quality-gate.",
     "result_state": "stable",
-    "next_action": "Publish v0.3.1 and use a later slice for executable pre-implementation review records and verifier rules.",
+    "next_action": "Use a follow-on v0.4.x slice to extend complete retained negative coverage to the remaining verifier surfaces.",
     "related_task_ids": [
-      "TASK-012"
+      "TASK-013"
     ]
   },
   "current_next_value_slice": {
-    "content": "Implement executable QIF pre-implementation review records, evidence independence fields, visual verification rubric records, Living QIF Ledger examples, and verifier checks.",
-    "updated_at": "2026-06-24T17:31:51.413Z",
+    "content": "Complete non-quality-gate verifier fixture coverage, then address remaining v0.4 runtime-only entities.",
+    "updated_at": "2026-07-07T17:36:59.595Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-QIFV031R",
-    "source_decision_record_id": "DEC-QIFV031R-001"
+    "source_session_id": "SESS-QIFV041",
+    "source_decision_record_id": null
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Publish v0.3.1 and use a later slice for executable pre-implementation review records and verifier rules.",
+    "proposed_focus": "Use a follow-on v0.4.x slice to extend complete retained negative coverage to the remaining verifier surfaces.",
     "related_task_ids": [
-      "TASK-012"
+      "TASK-013"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: Implement executable QIF pre-implementation review records, evidence independence fields, visual verification rubric records, Living QIF Ledger examples, and verifier checks.",
-    "Latest self-audit next action: Publish v0.3.1 and use a later slice for executable pre-implementation review records and verifier rules.",
+    "Current next value slice: Complete non-quality-gate verifier fixture coverage, then address remaining v0.4 runtime-only entities.",
+    "Latest self-audit next action: Use a follow-on v0.4.x slice to extend complete retained negative coverage to the remaining verifier surfaces.",
     "Latest outcome result: success"
   ]
 }

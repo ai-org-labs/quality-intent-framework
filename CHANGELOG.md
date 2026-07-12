@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.4.1
+
+- Expanded the retained negative fixture suite beyond `quality-gate` to include selected `qif-package` and `expert-judgment` verifier rules.
+- Added `tools/fixtures/qif-package-cases.mjs` and `tools/fixtures/expert-judgment-cases.mjs` as source-of-truth fixture generators.
+- Generalized `tools/run-fixture-tests.mjs` so one runner verifies multiple fixture corpora, drift-checks committed JSON files against their generator modules, and preserves the existing quality-gate corpus.
+- Added committed invalid fixture corpora under `tests/fixtures/qif-package/` and `tests/fixtures/expert-judgment/`.
+- Updated `npm run build-fixtures` to regenerate all retained fixture corpora.
+- Added `docs/qif-v0.4.x-release-roadmap.md` and updated README and roadmap language to record that fixture coverage now spans 58 negative checks across three verifier surfaces, while complete non-quality-gate coverage remains follow-on work.
+
 ## v0.4.0
 
 - Added an executable `quality-gate` package type that turns the v0.4 quality gate runtime requirements from documentation into a runnable baseline.

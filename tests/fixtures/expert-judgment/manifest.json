@@ -1,0 +1,61 @@
+{
+  "description": "QIF expert-judgment negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/expert-judgment-cases.mjs; do not edit by hand.",
+  "positives": [
+    {
+      "validator": "tools/validate-qif.mjs",
+      "package": "examples/qif-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-expert-judgment.mjs",
+      "package": "examples/expert-judgment-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/quality-gate-package.json"
+    }
+  ],
+  "negatives": [
+    {
+      "file": "expert-judgment-case-missing-presented-facts.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "case presented facts required",
+      "expect": "fail",
+      "errorIncludes": "CAS-SW-001 must include presentedFacts."
+    },
+    {
+      "file": "expert-judgment-cue-salience-out-of-range.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "cue salience score range",
+      "expect": "fail",
+      "errorIncludes": "CUE-SW-001 salience must be a number from 0 to 1."
+    },
+    {
+      "file": "expert-judgment-judgment-broken-case-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "expert judgment case reference resolves",
+      "expect": "fail",
+      "errorIncludes": "JDG-SW-001 references missing case"
+    },
+    {
+      "file": "expert-judgment-pattern-missing-source-judgments.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "decision pattern source judgments required",
+      "expect": "fail",
+      "errorIncludes": "PAT-EVD-001 must include at least one source judgment."
+    },
+    {
+      "file": "expert-judgment-reproduction-test-low-agreement.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "passing reproduction test agreement threshold",
+      "expect": "fail",
+      "errorIncludes": "RPT-EVD-001 is pass below acceptable agreement threshold 0.75."
+    },
+    {
+      "file": "expert-judgment-pattern-missing-applicability-boundary.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "decision pattern requires applicability boundary",
+      "expect": "fail",
+      "errorIncludes": "PAT-EVD-001 must have an applicability boundary."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-07-07T17:35:49.513Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-QIFV041-BUILDER-REVIEW",
+  "status": "completed",
+  "recommendation": "Accept the generalized fixture runner and selected qif-package/expert-judgment corpora.",
+  "rationale": "The runner now handles multiple generated corpora while preserving positive checks, drift checks, and expected-error negative checks.",
+  "signals": [
+    "npm run build-fixtures generated qif-package, expert-judgment, and quality-gate corpora."
+  ],
+  "artifact_refs": [
+    "tools/fixtures/qif-package-cases.mjs",
+    "tools/fixtures/expert-judgment-cases.mjs"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-013",
+  "source_decision_record_id": null,
+  "source_parent_session_id": "SESS-QIFV041",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.91
+}

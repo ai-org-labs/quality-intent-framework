@@ -1,0 +1,61 @@
+{
+  "description": "QIF qif-package negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/qif-package-cases.mjs; do not edit by hand.",
+  "positives": [
+    {
+      "validator": "tools/validate-qif.mjs",
+      "package": "examples/qif-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-expert-judgment.mjs",
+      "package": "examples/expert-judgment-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/quality-gate-package.json"
+    }
+  ],
+  "negatives": [
+    {
+      "file": "qif-package-mission-broken-stakeholder-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "mission stakeholder references resolve",
+      "expect": "fail",
+      "errorIncludes": "MIS-QIF-001 references missing stakeholder"
+    },
+    {
+      "file": "qif-package-intent-missing-acceptance-criteria.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "quality intent acceptance criteria required",
+      "expect": "fail",
+      "errorIncludes": "QIN-METRIC-001 must have acceptance criteria."
+    },
+    {
+      "file": "qif-package-evidence-confidence-not-reproducible.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evidence confidence reproduces from inputs",
+      "expect": "fail",
+      "errorIncludes": "EVD-METRIC-001 confidence 0.1 does not match expected 0.77."
+    },
+    {
+      "file": "qif-package-activity-count-treated-as-quality.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "activity-count indicators remain evidence-only",
+      "expect": "fail",
+      "errorIncludes": "IND-REVIEW-COUNT-001 is an activity-count indicator but is not evidence-only."
+    },
+    {
+      "file": "qif-package-verdict-confidence-not-reproducible.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "verdict confidence reproduces from evidence mean",
+      "expect": "fail",
+      "errorIncludes": "EVL-QIF-001/QIN-METRIC-001 confidence 0.1 does not match evidence mean 0.76."
+    },
+    {
+      "file": "qif-package-gate-required-artifact-missing.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "acceptance gate required artifacts exist",
+      "expect": "fail",
+      "errorIncludes": "GAT-QIF-001 required artifact does not exist"
+    }
+  ]
+}

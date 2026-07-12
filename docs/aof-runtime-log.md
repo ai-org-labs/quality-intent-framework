@@ -1234,3 +1234,79 @@ Publication target:
 
 - Tag: `v0.3.1`
 - Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.3.1`
+
+## QIF v0.4.1 Fixture Coverage Expansion
+
+Runtime session:
+
+- Session label: `SESS-QIFV041`
+- Task: `.aof/tasks/open/TASK-013.json`
+- AOF runtime: `ai-org-labs/ai-organization-framework` `v7.0.0`, executed from a clean temporary worktree
+- QIF baseline: `v0.4.0`, advanced locally to package version `0.4.1`
+
+Need / Intent / Context:
+
+- Raw need: proceed with the next QIF roadmap item using the latest QIF and AOF.
+- Validated need: improve QIF verifier regression resistance by extending retained negative fixture coverage beyond the quality-gate verifier while preserving QIF semantics and standalone use.
+- Intent: add the first v0.4.1 retained fixture expansion for selected `qif-package` and `expert-judgment` structural verifier rules.
+- Context: v0.4.0 already proved the retained fixture pattern for `quality-gate`; Phase 1 of the roadmap calls for extending that discipline across verifier surfaces.
+
+AOF runtime command evidence:
+
+- `upgrade --project .`
+- `organization-verify --project .`
+- `command-routing-audit --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.4.1-start.json`
+- `need-validation-benchmark --write-artifact .aof/artifacts/verification/need-validation-benchmark-qif-v0.4.1-start.json`
+- `situation-assess --write-artifact .aof/artifacts/runtime/qif-v0.4.1-situation-assessment.json`
+- `problem-statement-record --write-artifact .aof/artifacts/need-validation/problem-statements/PST-QIFV041-001.json`
+- `value-hypothesis-record --write-artifact .aof/artifacts/need-validation/value-hypotheses/VHY-QIFV041-001.json`
+- `alternative-analysis-record --write-artifact .aof/artifacts/need-validation/alternative-analyses/ALT-QIFV041-001.json`
+- `need-validation-record --write-artifact .aof/artifacts/need-validation/records/NVR-QIFV041-001.json`
+- `project-charter-record --write-artifact .aof/artifacts/need-validation/project-charters/PCH-QIFV041-001.json`
+- `task-open --title "QIF v0.4.1 fixture coverage expansion"`
+- `role-result-record` for Visionary, Builder, and Guardian planning judgments
+- `role-join-record --write-artifact .aof/artifacts/execution/role-joins/RJOIN-QIFV041-PLANNING.json`
+- `team-output-record --write-artifact .aof/artifacts/execution/team-outputs/TOUT-QIFV041-PLANNING.json`
+- `council-review-packet --write-artifact .aof/artifacts/council/qif-v0.4.1-planning-council-review-packet.json`
+- `policy-evaluation-report --write-artifact .aof/artifacts/allocation/policy-evaluations/PER-QIFV041-IMPLEMENTATION.json`
+- `resource-claim-record --write-artifact .aof/artifacts/allocation/resource-claims/RCL-QIFV041-REPO-WRITE.json`
+- `actor-skill-packet-record --write-artifact .aof/artifacts/execution/actor-skill-packets/ASP-QIFV041-BUILDER.json`
+
+Council judgment:
+
+- Visionary: approved. The slice advances the roadmap by making verifier claims harder to regress while keeping QIF standalone.
+- Builder: approved. The existing quality-gate fixture pattern can be generalized without schema redesign.
+- Guardian: approved with guardrails. Fixtures prove structural rule enforcement only; they do not prove semantic quality truth.
+
+Implementation judgment:
+
+- Build: a generalized retained fixture runner plus selected `qif-package` and `expert-judgment` negative corpora.
+- Do not build: UI, external integrations, new QIF concepts, broad schema redesign, or semantic-truth scoring.
+- Review evidence: `npm test` passes with 3 positive checks and 58 negative checks.
+
+Review / self-review / retrospective:
+
+- Review runtime command: `role-result-record` for Visionary, Builder, and Guardian review evidence.
+- Review runtime command: `team-output-record --write-artifact .aof/artifacts/execution/team-outputs/TOUT-QIFV041-REVIEW.json`
+- Review runtime command: `council-review-packet --write-artifact .aof/artifacts/council/qif-v0.4.1-review-council-review-packet.json`
+- Review provenance command: `review-provenance-audit --cutoff-task-id TASK-013 --write-artifact .aof/artifacts/verification/review-provenance-audit-qif-v0.4.1-final.json`
+- Self-review runtime command: `self-audit-record --audit-id FSA-QIFV041-001`
+- Retrospective runtime command: `alignment-pulse --source-session-id SESS-QIFV041`
+- Retrospective runtime command: `task-update --task-id TASK-013 --status done`
+- Retrospective runtime command: `learning-loop-snapshot --project .`
+- Retrospective runtime command: `operator-progress --write-artifact .aof/artifacts/runtime/operator-progress-qif-v0.4.1.json`
+
+Verification result:
+
+- `npm test` passed.
+- Fixture suite passed with 3/3 positive checks and 58/58 negative checks.
+- AOF command routing audit passed.
+- AOF Need Validation benchmark passed.
+- AOF organization verification passed with 197/197 checks after task closure.
+- AOF review provenance audit passed for TASK-013 with two approved Council review packets.
+- AOF was refreshed from v6.9.0 to v7.0.0 before release, and `organization-verify` passed with 201/201 checks after the upgrade.
+
+Retrospective reason:
+
+- `TASK-013` is done.
+- The next value slice is explicit: complete non-quality-gate verifier fixture coverage, then address remaining v0.4 runtime-only entities.

@@ -379,6 +379,9 @@ export const cases = [
 ];
 
 export const spec = {
+  suiteId: "quality-gate",
+  basePackage: "examples/quality-gate-package.json",
   validator,
-  basePackage: "examples/quality-gate-package.json"
+  corpusDir: "tests/fixtures/quality-gate",
+  filePrefix: "quality-gate"
 };

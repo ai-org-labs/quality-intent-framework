@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement executable QIF pre-implementation review records, evidence independence fields, visual verification rubric records, Living QIF Ledger examples, and verifier checks.",
-  "updated_at": "2026-06-24T17:31:51.413Z",
+  "content": "Complete non-quality-gate verifier fixture coverage, then address remaining v0.4 runtime-only entities.",
+  "updated_at": "2026-07-12T15:35:56.471Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-QIFV031R",
-  "source_decision_record_id": "DEC-QIFV031R-001",
+  "source_session_id": "SESS-QIFV041",
+  "source_decision_record_id": null,
   "declared_complete_at": null
 }

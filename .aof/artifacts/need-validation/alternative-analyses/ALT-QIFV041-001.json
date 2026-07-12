@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-07-07T17:25:42.316Z",
+  "alternative_analysis_id": "ALT-MRAX6UY4-GR3IFH",
+  "subject_need": "Increase QIF verifier regression resistance after v0.4.0",
+  "alternative_solutions": [
+    "Expand retained negative fixtures to qif-package first, then expert-judgment and runtime package types.",
+    "Build a generalized fixture runner that can cover multiple verifier commands while preserving the existing quality-gate corpus."
+  ],
+  "non_solution_options": [
+    "Document the gap only and rely on manual review."
+  ],
+  "defer_options": [
+    "Wait until v0.5 cross-package ledger work before expanding fixture coverage."
+  ],
+  "stop_options": [
+    "Do not proceed if the fixture runner requires a broad verifier redesign or changes QIF semantics."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

@@ -25,15 +25,22 @@ import path from "node:path";
 import process from "node:process";
 import { execFileSync } from "node:child_process";
 
+import { cases as qifPackageCases, spec as qifPackageSpec } from "./fixtures/qif-package-cases.mjs";
+import { cases as expertJudgmentCases, spec as expertJudgmentSpec } from "./fixtures/expert-judgment-cases.mjs";
 import { cases as qualityGateCases, spec as qualityGateSpec } from "./fixtures/quality-gate-cases.mjs";
 
 const projectRoot = process.cwd();
 const args = process.argv.slice(2);
 const emitIndex = args.indexOf("--emit");
-const emitDir = emitIndex >= 0 ? args[emitIndex + 1] : null;
+const emitMode = emitIndex >= 0;
+const emitDir = emitMode ? args[emitIndex + 1] : null;
 
-const CORPUS_DIR = "tests/fixtures/quality-gate";
 const REBUILD_HINT = "run `npm run build-fixtures` to regenerate the committed corpus.";
+const fixtureSuites = [
+  { ...qifPackageSpec, cases: qifPackageCases },
+  { ...expertJudgmentSpec, cases: expertJudgmentCases },
+  { ...qualityGateSpec, cases: qualityGateCases }
+];
 
 // Positive packages: valid examples that must pass their verifier.
 const positivePackages = [
@@ -49,35 +56,47 @@ function serialize(value) {
 // Single source of truth: mutate the valid base package once per case and
 // produce the exact file contents plus the manifest. Both --emit and the
 // drift check consume this, so they can never disagree.
-function buildCorpus() {
-  const base = JSON.parse(fs.readFileSync(path.resolve(projectRoot, qualityGateSpec.basePackage), "utf8"));
+function buildSuiteCorpus(suite) {
+  const base = JSON.parse(fs.readFileSync(path.resolve(projectRoot, suite.basePackage), "utf8"));
   const files = new Map();
   const negatives = [];
   const seen = new Set();
-  for (const testCase of qualityGateCases) {
+  for (const testCase of suite.cases) {
     if (seen.has(testCase.id)) {
-      throw new Error(`Duplicate fixture case id: ${testCase.id}`);
+      throw new Error(`Duplicate fixture case id in ${suite.suiteId}: ${testCase.id}`);
     }
     seen.add(testCase.id);
     const mutated = structuredClone(base);
     testCase.mutate(mutated);
-    const file = `quality-gate-${testCase.id}.json`;
+    const file = `${suite.filePrefix}-${testCase.id}.json`;
     files.set(file, serialize(mutated));
     negatives.push({
       file,
-      validator: qualityGateSpec.validator,
+      validator: suite.validator,
       rule: testCase.rule,
       expect: "fail",
       errorIncludes: testCase.expect
     });
   }
   const manifest = {
-    description: "QIF negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/quality-gate-cases.mjs; do not edit by hand.",
+    description: `QIF ${suite.suiteId} negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/${suite.filePrefix}-cases.mjs; do not edit by hand.`,
     positives: positivePackages,
     negatives
   };
   files.set("manifest.json", serialize(manifest));
   return { files, negatives };
+}
+
+function selectedSuitesForEmit() {
+  if (!emitDir) {
+    return fixtureSuites;
+  }
+  const normalized = emitDir.replace(/\/$/, "");
+  const exact = fixtureSuites.find((suite) => suite.corpusDir === normalized);
+  if (exact) {
+    return [exact];
+  }
+  return fixtureSuites;
 }
 
 function runValidator(validator, packagePath) {
@@ -94,17 +113,22 @@ function runValidator(validator, packagePath) {
 }
 
 // ---- Emit mode: (re)generate the committed corpus and exit ----
-if (emitDir) {
-  const { files } = buildCorpus();
-  const outDir = path.resolve(projectRoot, emitDir);
-  fs.rmSync(outDir, { recursive: true, force: true });
-  fs.mkdirSync(outDir, { recursive: true });
-  for (const [file, content] of files.entries()) {
-    fs.writeFileSync(path.join(outDir, file), content);
+if (emitMode) {
+  const emitted = [];
+  for (const suite of selectedSuitesForEmit()) {
+    const { files } = buildSuiteCorpus(suite);
+    const outDir = path.resolve(projectRoot, suite.corpusDir);
+    fs.rmSync(outDir, { recursive: true, force: true });
+    fs.mkdirSync(outDir, { recursive: true });
+    for (const [file, content] of files.entries()) {
+      fs.writeFileSync(path.join(outDir, file), content);
+    }
+    emitted.push({ suite: suite.suiteId, files: files.size, dir: suite.corpusDir });
   }
   console.log(JSON.stringify({
     ok: true,
-    message: `Wrote ${files.size} fixture files to ${emitDir}.`
+    message: "Wrote fixture corpus files.",
+    emitted
   }, null, 2));
   process.exit(0);
 }
@@ -123,51 +147,56 @@ for (const entry of positivePackages) {
   }
 }
 
-const { files: expectedFiles, negatives } = buildCorpus();
-const corpusPath = path.resolve(projectRoot, CORPUS_DIR);
+let totalNegatives = 0;
 
-// Drift check: committed files must be exactly what the source of truth produces.
-if (!fs.existsSync(corpusPath)) {
-  failures.push(`DRIFT committed corpus ${CORPUS_DIR} is missing; ${REBUILD_HINT}`);
-} else {
-  const onDisk = new Set(fs.readdirSync(corpusPath).filter((name) => name.endsWith(".json")));
-  for (const [file, expected] of expectedFiles.entries()) {
-    const filePath = path.join(corpusPath, file);
-    if (!fs.existsSync(filePath)) {
-      failures.push(`DRIFT committed fixture ${CORPUS_DIR}/${file} is missing; ${REBUILD_HINT}`);
+for (const suite of fixtureSuites) {
+  const { files: expectedFiles, negatives } = buildSuiteCorpus(suite);
+  totalNegatives += negatives.length;
+  const corpusPath = path.resolve(projectRoot, suite.corpusDir);
+
+  // Drift check: committed files must be exactly what the source of truth produces.
+  if (!fs.existsSync(corpusPath)) {
+    failures.push(`DRIFT committed corpus ${suite.corpusDir} is missing; ${REBUILD_HINT}`);
+  } else {
+    const onDisk = new Set(fs.readdirSync(corpusPath).filter((name) => name.endsWith(".json")));
+    for (const [file, expected] of expectedFiles.entries()) {
+      const filePath = path.join(corpusPath, file);
+      if (!fs.existsSync(filePath)) {
+        failures.push(`DRIFT committed fixture ${suite.corpusDir}/${file} is missing; ${REBUILD_HINT}`);
+        continue;
+      }
+      onDisk.delete(file);
+      if (fs.readFileSync(filePath, "utf8") !== expected) {
+        failures.push(`DRIFT committed fixture ${suite.corpusDir}/${file} differs from the source of truth; ${REBUILD_HINT}`);
+      }
+    }
+    for (const orphan of onDisk) {
+      failures.push(`DRIFT committed corpus has an unexpected file ${suite.corpusDir}/${orphan}; ${REBUILD_HINT}`);
+    }
+  }
+
+  // Negative checks: run the committed fixture and assert it is rejected as expected.
+  for (const entry of negatives) {
+    const filePath = path.join(suite.corpusDir, entry.file);
+    if (!fs.existsSync(path.resolve(projectRoot, filePath))) {
+      // Drift check above already reported the missing file.
       continue;
     }
-    onDisk.delete(file);
-    if (fs.readFileSync(filePath, "utf8") !== expected) {
-      failures.push(`DRIFT committed fixture ${CORPUS_DIR}/${file} differs from the source of truth; ${REBUILD_HINT}`);
+    const result = runValidator(entry.validator, filePath);
+    if (result.ok) {
+      failures.push(`NEGATIVE ${suite.suiteId}/${entry.file} (${entry.rule}) was expected to FAIL but the verifier passed.`);
+    } else if (!result.output.includes(entry.errorIncludes)) {
+      failures.push(`NEGATIVE ${suite.suiteId}/${entry.file} (${entry.rule}) failed, but not with the expected error.\n  expected substring: ${entry.errorIncludes}\n  actual output:\n${result.output}`);
+    } else {
+      negativePass += 1;
     }
-  }
-  for (const orphan of onDisk) {
-    failures.push(`DRIFT committed corpus has an unexpected file ${CORPUS_DIR}/${orphan}; ${REBUILD_HINT}`);
-  }
-}
-
-// Negative checks: run the committed fixture and assert it is rejected as expected.
-for (const entry of negatives) {
-  const filePath = path.join(CORPUS_DIR, entry.file);
-  if (!fs.existsSync(path.resolve(projectRoot, filePath))) {
-    // Drift check above already reported the missing file.
-    continue;
-  }
-  const result = runValidator(entry.validator, filePath);
-  if (result.ok) {
-    failures.push(`NEGATIVE ${entry.file} (${entry.rule}) was expected to FAIL but the verifier passed.`);
-  } else if (!result.output.includes(entry.errorIncludes)) {
-    failures.push(`NEGATIVE ${entry.file} (${entry.rule}) failed, but not with the expected error.\n  expected substring: ${entry.errorIncludes}\n  actual output:\n${result.output}`);
-  } else {
-    negativePass += 1;
   }
 }
 
 const summary = {
   positiveChecks: `${positivePass}/${positivePackages.length}`,
-  negativeChecks: `${negativePass}/${negatives.length}`,
-  rulesCovered: negatives.length,
+  negativeChecks: `${negativePass}/${totalNegatives}`,
+  rulesCovered: totalNegatives,
   failures
 };
 

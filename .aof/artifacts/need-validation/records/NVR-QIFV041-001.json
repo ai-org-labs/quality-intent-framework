@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-07-07T17:26:19.424Z",
+  "validation_id": "NVR-MRAX7NKW-G1872J",
+  "raw_need": "Proceed with the next QIF roadmap item using the latest QIF and AOF.",
+  "validation_status": "reframed",
+  "validated_need": "Improve QIF verifier regression resistance by extending retained negative fixture coverage beyond the quality-gate verifier while preserving QIF semantics and standalone use.",
+  "decision_summary": "The raw request was broad; roadmap and v0.4.0 evidence point to Phase 1 fixture coverage expansion as the smallest valuable next slice.",
+  "authority_action": "reframe-need",
+  "project_creation_recommendation": "hold-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is the highest-leverage near-term roadmap gap?",
+      "answer": "Extend retained negative fixture coverage beyond quality-gate.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What should not be built in this slice?",
+      "answer": "No UI, external integrations, semantic-truth claims, or core concept redesign.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "The next version should add new concepts; validation showed the safer near-term need is regression-proofing existing verifier surfaces."
+  ],
+  "evidence_gaps": [
+    "Full fixture coverage for every verifier surface is too large for one narrow slice; the first slice should prove the generalized runner on selected surfaces."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV041-001.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV041-001.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV041-001.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

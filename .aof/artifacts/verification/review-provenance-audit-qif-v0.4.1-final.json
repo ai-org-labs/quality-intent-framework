@@ -1,0 +1,157 @@
+{
+  "ok": true,
+  "artifact_type": "review-provenance-audit",
+  "generated_at": "2026-07-12T15:39:05.068Z",
+  "project_root": "/Users/mn/development/quality-intent-framework-public",
+  "cutoff_task_id": "TASK-013",
+  "audited_status_dirs": [
+    "done"
+  ],
+  "valid_review_statuses": [
+    "approved",
+    "changes-requested",
+    "blocked",
+    "deferred"
+  ],
+  "summary": {
+    "scoped_task_count": 1,
+    "review_record_count": 2,
+    "missing_review_record_count": 0,
+    "failing_check_count": 0
+  },
+  "tasks": [
+    {
+      "task_id": "TASK-013",
+      "title": "QIF v0.4.1 fixture coverage expansion",
+      "artifact_ref": ".aof/tasks/done/TASK-013.json"
+    }
+  ],
+  "review_records": [
+    {
+      "task_id": "TASK-013",
+      "review_ref": ".aof/artifacts/execution/council-reviews/qif-v0.4.1-planning-council-review-packet.json",
+      "council_id": "QIF-V041-COUNCIL",
+      "review_status": "approved",
+      "source_parent_session_id": "SESS-QIFV041",
+      "role_result_ref_count": 3,
+      "evidence_ref_count": 2
+    },
+    {
+      "task_id": "TASK-013",
+      "review_ref": ".aof/artifacts/execution/council-reviews/qif-v0.4.1-review-council-review-packet.json",
+      "council_id": "QIF-V041-COUNCIL",
+      "review_status": "approved",
+      "source_parent_session_id": "SESS-QIFV041",
+      "role_result_ref_count": 3,
+      "evidence_ref_count": 3
+    }
+  ],
+  "checks": [
+    {
+      "name": "done task discovery",
+      "status": "pass",
+      "detail": "1 done task(s) at or after TASK-013"
+    },
+    {
+      "name": "TASK-013 council review presence",
+      "status": "pass",
+      "detail": "2 review(s)"
+    },
+    {
+      "name": "TASK-013 review status validity",
+      "status": "pass",
+      "detail": "review_status=approved"
+    },
+    {
+      "name": "TASK-013 review source task matches",
+      "status": "pass",
+      "detail": "source_task_id=TASK-013, expected=TASK-013"
+    },
+    {
+      "name": "TASK-013 review parent session provenance",
+      "status": "pass",
+      "detail": "SESS-QIFV041"
+    },
+    {
+      "name": "TASK-013 review evidence is not empty",
+      "status": "pass",
+      "detail": "role_result_refs=3, evidence_refs=2"
+    },
+    {
+      "name": "TASK-013 role result ref resolves",
+      "status": "pass",
+      "detail": ".aof/artifacts/execution/role-results/RRES-QIFV041-VISIONARY-PLANNING.json"
+    },
+    {
+      "name": "TASK-013 role result ref resolves",
+      "status": "pass",
+      "detail": ".aof/artifacts/execution/role-results/RRES-QIFV041-BUILDER-PLANNING.json"
+    },
+    {
+      "name": "TASK-013 role result ref resolves",
+      "status": "pass",
+      "detail": ".aof/artifacts/execution/role-results/RRES-QIFV041-GUARDIAN-PLANNING.json"
+    },
+    {
+      "name": "TASK-013 review evidence ref resolves",
+      "status": "pass",
+      "detail": "docs/qif-roadmap.md"
+    },
+    {
+      "name": "TASK-013 review evidence ref resolves",
+      "status": "pass",
+      "detail": "tests/fixtures/quality-gate/manifest.json"
+    },
+    {
+      "name": "TASK-013 review status validity",
+      "status": "pass",
+      "detail": "review_status=approved"
+    },
+    {
+      "name": "TASK-013 review source task matches",
+      "status": "pass",
+      "detail": "source_task_id=TASK-013, expected=TASK-013"
+    },
+    {
+      "name": "TASK-013 review parent session provenance",
+      "status": "pass",
+      "detail": "SESS-QIFV041"
+    },
+    {
+      "name": "TASK-013 review evidence is not empty",
+      "status": "pass",
+      "detail": "role_result_refs=3, evidence_refs=3"
+    },
+    {
+      "name": "TASK-013 role result ref resolves",
+      "status": "pass",
+      "detail": ".aof/artifacts/execution/role-results/RRES-QIFV041-VISIONARY-REVIEW.json"
+    },
+    {
+      "name": "TASK-013 role result ref resolves",
+      "status": "pass",
+      "detail": ".aof/artifacts/execution/role-results/RRES-QIFV041-BUILDER-REVIEW.json"
+    },
+    {
+      "name": "TASK-013 role result ref resolves",
+      "status": "pass",
+      "detail": ".aof/artifacts/execution/role-results/RRES-QIFV041-GUARDIAN-REVIEW.json"
+    },
+    {
+      "name": "TASK-013 review evidence ref resolves",
+      "status": "pass",
+      "detail": "tests/fixtures/qif-package/manifest.json"
+    },
+    {
+      "name": "TASK-013 review evidence ref resolves",
+      "status": "pass",
+      "detail": "tests/fixtures/expert-judgment/manifest.json"
+    },
+    {
+      "name": "TASK-013 review evidence ref resolves",
+      "status": "pass",
+      "detail": "tests/fixtures/quality-gate/manifest.json"
+    }
+  ],
+  "errors": []
+}

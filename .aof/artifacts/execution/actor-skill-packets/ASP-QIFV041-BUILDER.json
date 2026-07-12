@@ -1,0 +1,79 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-07-07T17:29:41.434Z",
+  "packet_id": "ASP-MRAXBZGA-HUSBNR",
+  "source_task_id": "TASK-013",
+  "source_parent_session_id": "SESS-QIFV041",
+  "source_decision_record_id": null,
+  "objective": "Implement QIF v0.4.1 retained negative fixture expansion",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "QIF-V041-COUNCIL",
+    "assignment_reason": "Builder owns verifier fixture runner and package validation implementation.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "skill-node-verifier-maintenance",
+    "skill-qif-runtime-modeling"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-verifier-fixture-design",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "tools/run-fixture-tests.mjs",
+        "tools/validate-qif.mjs",
+        "tools/validate-expert-judgment.mjs"
+      ],
+      "rationale": "Existing validators and fixture runner can be extended without conceptual redesign."
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repo-main",
+    "resource-npm-test"
+  ],
+  "policy_refs": [
+    "policy-runtime-backed-answer-discipline",
+    "policy-no-semantic-truth-claim"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "fixture-suite-update",
+    "artifact_schema_ref": "tests/fixtures/quality-gate/manifest.json",
+    "required_sections": [
+      "generalized fixture manifest",
+      "negative fixtures for selected verifier surfaces",
+      "npm test integration"
+    ],
+    "acceptance_criteria": [
+      "npm test passes and reports non-quality-gate negative fixture checks.",
+      "Existing quality-gate fixture checks remain intact."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "fixtures enforce existing structural rules only",
+      "evaluator_ref": "Guardian",
+      "evidence_required": "npm test output and diff review",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "semantic-overclaim",
+      "trigger_condition": "docs or output imply structural validation proves semantic quality truth",
+      "consequence": "require-council-review",
+      "recovery_action": "rewrite boundary and rerun review"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will harden the verifier without changing what QIF means.",
+    "current_action": "Extend fixture runner and add selected retained invalid packages.",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run npm test, AOF verification, and QIF release gate review."
+  },
+  "status": "ready-for-assignment"
+}

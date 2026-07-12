@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-013",
+  "title": "QIF v0.4.1 fixture coverage expansion",
+  "description": "Extend retained negative fixture coverage beyond quality-gate using the latest QIF and AOF v6.9.0 runtime evidence.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-QIFV041",
+  "assigned_session_ids": [],
+  "related_decision_record_id": null,
+  "operating_goal_ref": ".aof/artifacts/need-validation/project-charters/PCH-QIFV041-001.json",
+  "created_at": "2026-07-07T17:26:54.659Z",
+  "updated_at": "2026-07-07T17:37:44.587Z",
+  "assigned_at": null,
+  "done_at": "2026-07-07T17:37:44.587Z",
+  "retired_at": null,
+  "last_triaged_at": "2026-07-07T17:37:13.057Z",
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "v0.4.1 fixture coverage expansion implemented and verified: npm test 3/3 positives, 58/58 negatives; AOF command routing and need validation benchmarks passed."
+}

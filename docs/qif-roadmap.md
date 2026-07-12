@@ -66,12 +66,15 @@ Deliverables:
 - Negative fixture suite: a retained `tests/fixtures/` corpus where every
   verifier rule has at least one fixture that violates it, run by `npm test`.
   A verifier rule without a failing fixture is treated as unproven.
-  Status: established for the quality gate verifier — `tests/fixtures/quality-gate/`
-  holds one retained invalid package per rule, generated from
-  `tools/fixtures/quality-gate-cases.mjs` and run with a drift check by
-  `tools/run-fixture-tests.mjs`. Remaining: extend the same suite to the
-  `qif-package`, `expert-judgment`, discovery-session, culture, evaluation-target,
-  and review-run verifier surfaces before this deliverable is complete.
+  Status: established for the quality gate verifier and expanded in v0.4.1
+  to selected `qif-package` and `expert-judgment` verifier rules. The retained
+  corpora under `tests/fixtures/qif-package/`,
+  `tests/fixtures/expert-judgment/`, and `tests/fixtures/quality-gate/` are
+  generated from `tools/fixtures/*-cases.mjs` and run with a drift check by
+  `tools/run-fixture-tests.mjs`. Remaining: extend the same suite to every
+  rule in the `qif-package`, `expert-judgment`, discovery-session, culture,
+  evaluation-target, and review-run verifier surfaces before this deliverable
+  is complete.
 - Evaluation Timing Rule and Evaluation Timing Decision entities: when
   evaluation must happen, decided by executable conditions, with recorded
   justification.
@@ -86,7 +89,9 @@ Deliverables:
 Exit evidence:
 
 - 100% of verifier rules have a violating fixture that fails. (Currently met for
-  the quality gate verifier; open for the other verifier surfaces.)
+  the quality gate verifier; v0.4.1 added the first retained fixtures for
+  `qif-package` and `expert-judgment`; open for complete coverage of those
+  surfaces and the remaining runtime package surfaces.)
 - Every candidate entity listed in the v0.4 requirements is either
   implemented or explicitly re-scoped with rationale.
 
