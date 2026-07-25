@@ -1,0 +1,20 @@
+{
+  "artifact_type": "team-output",
+  "recorded_at": "2026-07-25T05:23:00.000Z",
+  "team_output_id": "TOUT-QIFV042-REVIEW",
+  "stage": "review",
+  "summary": "Council review approved the Quality Aspect taxonomy implementation after local verification.",
+  "decision": "accept",
+  "role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV042-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV042-BUILDER-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV042-GUARDIAN-REVIEW.json"
+  ],
+  "evidence_refs": [
+    "docs/qif-quality-aspect-taxonomy.md",
+    "examples/quality-gate-package.json",
+    "tests/fixtures/quality-gate/manifest.json"
+  ],
+  "source_task_id": "TASK-014",
+  "source_parent_session_id": "SESS-QIFV042"
+}

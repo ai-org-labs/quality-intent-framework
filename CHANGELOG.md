@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.4.2
+
+- Added `docs/qif-quality-aspect-taxonomy.md`, defining canonical Quality Aspects as discovery lenses rather than checklist categories.
+- Added first-class `qualityAspects` to quality-gate packages with discovery questions, typical concerns, possible loss boundaries, evidence examples, anti-patterns, and `discovery-lens-only` interpretation.
+- Linked evaluation perspectives to quality aspects through `linkedAspectRefs`.
+- Extended the quality-gate verifier so aspects must use canonical names, remain discovery-lens-only, include required discovery metadata, resolve from perspectives, and not sit unused in a package.
+- Added `findingEvidence` metadata for AI-generated quality and security findings, covering generator, source artifact, reproducibility, reproducer, false-positive check, impact confirmation, and final status.
+- Added `trust` metadata for evidence items, covering source grounding, generator, verifiers, trust status, and freshness without replacing finding verification, confidence, or verdicts.
+- Expanded the quality-gate example to demonstrate trust metadata and functional, non-functional, usability, performance, security, UX design, accessibility, privacy, data quality, auditability, safety, customer, trust, and organizational operability lenses without treating aspect coverage as quality itself.
+- Added retained negative fixtures for unsupported aspects, aspect-as-quality misuse, missing discovery questions, unused aspects, broken perspective aspect references, and AI finding-evidence verification and trust metadata verification.
+
 ## v0.4.1
 
 - Expanded the retained negative fixture suite beyond `quality-gate` to include selected `qif-package` and `expert-judgment` verifier rules.

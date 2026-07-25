@@ -1,0 +1,36 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-07-25T05:23:00.000Z",
+  "review_packet_id": "CREV-QIFV042-REVIEW",
+  "council_id": "QIF-V042-COUNCIL",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve the v0.4.2 Quality Aspect taxonomy implementation.",
+  "rationale": "The implementation adds broad aspect coverage, links it to evaluation perspectives, and retains verifier guardrails against checklist misuse.",
+  "recommendation": "Keep v0.4.2 as the aspect taxonomy slice and leave complete core fixture coverage as the next roadmap item.",
+  "target_audience": "QIF maintainers and AI agents",
+  "expected_user_reaction": "Use Quality Aspects to discover concerns without treating aspect coverage as a verdict.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": ["Do not add semantic completeness claims to verifier output."],
+  "organization_change_recommendations": ["Run latest QIF tests and AOF checks before any release."],
+  "diagnosis_category": "runtime-model-extension",
+  "diagnosis_confidence": 0.92,
+  "diagnosis_evidence_refs": [".aof/artifacts/execution/team-outputs/TOUT-QIFV042-REVIEW.json"],
+  "human_override_signal": null,
+  "team_output_refs": [".aof/artifacts/execution/team-outputs/TOUT-QIFV042-REVIEW.json"],
+  "role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV042-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV042-BUILDER-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV042-GUARDIAN-REVIEW.json"
+  ],
+  "evidence_refs": [
+    "docs/qif-quality-aspect-taxonomy.md",
+    "examples/quality-gate-package.json",
+    "tests/fixtures/quality-gate/manifest.json"
+  ],
+  "follow_up_task_ids": ["TASK-014"],
+  "escalation_required": false,
+  "source_task_id": "TASK-014",
+  "source_parent_session_id": "SESS-QIFV042",
+  "source_decision_record_id": null
+}

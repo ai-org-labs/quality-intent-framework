@@ -1,7 +1,7 @@
 {
   "artifact_type": "need-validation-benchmark",
   "generated_at": "2026-07-12T15:39:06.143Z",
-  "project_root": "/Users/mn/development/quality-intent-framework-public",
+  "project_root": ".",
   "records_evaluated": 13,
   "benchmarks": {
     "NV-001": {

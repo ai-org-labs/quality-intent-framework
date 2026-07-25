@@ -1,0 +1,24 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-07-25T05:22:00.000Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-QIFV042-BUILDER-REVIEW",
+  "status": "completed",
+  "recommendation": "Accept after final verification.",
+  "rationale": "Schema, verifier, example, fixture generator, committed fixture corpus, docs, changelog, and package version were updated consistently.",
+  "signals": ["npm test passes with 3/3 positive checks and 69/69 negative checks."],
+  "artifact_refs": [
+    "schemas/quality-gate-package.schema.json",
+    "tools/validate-qif-runtime.mjs",
+    "tools/fixtures/quality-gate-cases.mjs",
+    "tests/fixtures/quality-gate/manifest.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-014",
+  "source_decision_record_id": null,
+  "source_parent_session_id": "SESS-QIFV042",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.93
+}

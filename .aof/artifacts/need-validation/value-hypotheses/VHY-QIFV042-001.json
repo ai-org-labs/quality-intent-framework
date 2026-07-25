@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-07-25T05:10:00.000Z",
+  "value_hypothesis_id": "VHY-QIFV042-001",
+  "expected_value_creation": "QIF review breadth increases because quality-gate packages can record canonical Quality Aspects as discovery lenses while verifier rules prevent aspect coverage from being treated as quality itself.",
+  "beneficiary": "QIF users, maintainers, reviewers, and AI agents applying QIF to broad evaluation targets",
+  "supporting_evidence": [
+    "Current quality-gate schema only supports evaluationPerspective enum values and lacks first-class aspect lenses.",
+    "User explicitly requested broader coverage across function, non-function, usability, performance, security, and UX design."
+  ],
+  "success_criteria": [
+    "Quality Gate example validates with aspect-linked perspectives.",
+    "Verifier rejects unsupported aspects, aspect-as-quality interpretation, unused aspects, and broken aspect references.",
+    "Documentation states that aspect presence is not evidence or a verdict."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

@@ -1,0 +1,19 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-07-25T05:11:00.000Z",
+  "role": "Builder",
+  "stage": "planning",
+  "session_id": "SESS-QIFV042-BUILDER-PLANNING",
+  "status": "completed",
+  "recommendation": "Implement `qualityAspects` in the quality-gate package, link perspectives to aspects, and add retained negative fixtures.",
+  "rationale": "This is the smallest executable change that makes broad aspect coverage auditable while preserving the existing Quality Gate runtime.",
+  "signals": ["Quality gate schema currently has evaluation perspectives but no aspect taxonomy."],
+  "artifact_refs": ["examples/quality-gate-package.json", "tools/validate-qif-runtime.mjs", "tools/fixtures/quality-gate-cases.mjs"],
+  "decision_required": false,
+  "source_task_id": "TASK-014",
+  "source_decision_record_id": null,
+  "source_parent_session_id": "SESS-QIFV042",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.9
+}

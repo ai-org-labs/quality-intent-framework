@@ -1,0 +1,24 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-07-25T05:10:00.000Z",
+  "alternative_analysis_id": "ALT-QIFV042-001",
+  "subject_need": "Expand QIF quality viewpoint coverage without checklist regression",
+  "alternative_solutions": [
+    "Only extend the evaluationPerspective enum with security, performance, usability, and UX labels.",
+    "Add Quality Aspects as discovery lenses with required questions, concerns, loss boundaries, evidence examples, and anti-patterns.",
+    "Defer broad aspects to a future Discovery Layer runtime."
+  ],
+  "non_solution_options": [
+    "Document broad viewpoints without schema or verifier support."
+  ],
+  "defer_options": [
+    "Wait until the Discovery Layer runtime is implemented before adding aspect support to quality-gate packages."
+  ],
+  "stop_options": [
+    "Do not make all aspects mandatory for every target.",
+    "Do not treat aspect coverage as evidence or verdict.",
+    "Do not claim structural verifier success proves semantic quality truth."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

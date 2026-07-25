@@ -60,6 +60,48 @@ export const cases = [
     expect: "references missing quality intent",
     mutate: (pkg) => { pkg.evaluationPerspectives[0].linkedIntentRefs = ["QIN-NOPE-999"]; }
   },
+  {
+    id: "aspect-unsupported",
+    rule: "canonical quality aspect",
+    expect: "uses unsupported quality aspect",
+    mutate: (pkg) => { pkg.qualityAspects[0].name = "vibes"; }
+  },
+  {
+    id: "aspect-treated-as-quality",
+    rule: "quality aspect stays discovery-lens-only",
+    expect: "quality aspect must be interpreted as discovery-lens-only, not as quality itself.",
+    mutate: (pkg) => { pkg.qualityAspects[0].interpretation = "quality-itself"; }
+  },
+  {
+    id: "aspect-missing-discovery-questions",
+    rule: "quality aspect has discovery questions",
+    expect: "must include discoveryQuestions.",
+    mutate: (pkg) => { pkg.qualityAspects[0].discoveryQuestions = []; }
+  },
+  {
+    id: "aspect-unused",
+    rule: "quality aspect is used by an evaluation perspective",
+    expect: "quality aspect is defined but not used by any evaluation perspective.",
+    mutate: (pkg) => {
+      pkg.qualityAspects.push({
+        id: "QAS-QG-UNUSED",
+        name: "safety",
+        purpose: "Unused aspect.",
+        interpretation: "discovery-lens-only",
+        discoveryQuestions: ["What harm could happen?"],
+        typicalConcerns: ["harm"],
+        possibleLossBoundaries: ["Harm must not occur."],
+        evidenceExamples: ["review"],
+        antiPatterns: ["Treating aspect presence as quality."]
+      });
+    }
+  },
+  {
+    id: "perspective-broken-aspect-ref",
+    rule: "perspective linked aspect resolves",
+    expect: "references missing quality aspect",
+    mutate: (pkg) => { pkg.evaluationPerspectives[0].linkedAspectRefs = ["QAS-NOPE-999"]; }
+  },
 
   // ---- Evidence items ----
   {
@@ -73,6 +115,42 @@ export const cases = [
     rule: "evidence polarity enum",
     expect: "polarity must be supports, contradicts, mixed, or neutral.",
     mutate: (pkg) => { pkg.evidenceItems[0].polarity = "maybe"; }
+  },
+  {
+    id: "finding-evidence-missing-final-status",
+    rule: "AI finding evidence final status is required",
+    expect: "finalStatus must be one of",
+    mutate: (pkg) => { delete pkg.evidenceItems[0].findingEvidence.finalStatus; }
+  },
+  {
+    id: "finding-evidence-reproducible-not-boolean",
+    rule: "AI finding evidence reproducible is boolean",
+    expect: "reproducible must be boolean.",
+    mutate: (pkg) => { pkg.evidenceItems[0].findingEvidence.reproducible = "yes"; }
+  },
+  {
+    id: "finding-evidence-confirmed-before-checks",
+    rule: "confirmed AI finding evidence requires reproduction, false-positive check, and impact confirmation",
+    expect: "cannot be confirmed until reproducible, falsePositiveChecked, and impactConfirmed are true.",
+    mutate: (pkg) => { pkg.evidenceItems[0].findingEvidence.falsePositiveChecked = false; }
+  },
+  {
+    id: "trust-missing-status",
+    rule: "evidence trust status is required",
+    expect: "trust status must be one of draft, verified, stale, rejected.",
+    mutate: (pkg) => { delete pkg.evidenceItems[0].trust.status; }
+  },
+  {
+    id: "trust-verified-without-source",
+    rule: "verified evidence trust requires source grounding",
+    expect: "trust verified status requires at least one source.",
+    mutate: (pkg) => { pkg.evidenceItems[0].trust.sources = []; }
+  },
+  {
+    id: "trust-verified-without-verifier",
+    rule: "verified evidence trust requires verifier",
+    expect: "trust verified status requires at least one verifier.",
+    mutate: (pkg) => { pkg.evidenceItems[0].trust.verifiedBy = []; }
   },
 
   // ---- Quantitative evidence records ----

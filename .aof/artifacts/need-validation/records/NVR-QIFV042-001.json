@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-07-25T05:10:00.000Z",
+  "validation_id": "NVR-QIFV042-001",
+  "raw_need": "Add all of the broad quality viewpoints such as functional, non-functional, usability, performance, security, and UX design.",
+  "validation_status": "validated",
+  "validated_need": "Add a non-checklist Quality Aspect taxonomy to QIF so broad quality concerns can be discovered, linked to evaluation perspectives, converted into loss boundaries and Quality Intents, and verified structurally without treating aspect coverage as quality itself.",
+  "decision_summary": "The raw request was accepted after reframing aspect coverage as discovery lenses, not mandatory checklist categories.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What failure must be prevented?",
+      "answer": "Important quality concerns are missed or reduced to fixed checklist completion.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must not be built?",
+      "answer": "Mandatory category checklists, semantic-truth scoring, UI, and external integrations.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Aspect taxonomy improves exploration only if it remains tied to concerns, loss boundaries, and evidence."
+  ],
+  "evidence_gaps": [
+    "Semantic completeness of discovered risks still requires expert and stakeholder review."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV042-001.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV042-001.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV042-001.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": ".aof/artifacts/need-validation/project-charters/PCH-QIFV042-001.json",
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

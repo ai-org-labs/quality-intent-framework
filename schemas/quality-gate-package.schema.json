@@ -9,6 +9,7 @@
     "packageId",
     "evaluationTargets",
     "qualityIntents",
+    "qualityAspects",
     "evaluationPerspectives",
     "confidencePolicies",
     "evidenceItems",
@@ -33,6 +34,11 @@
       "type": "array",
       "minItems": 1,
       "items": { "$ref": "#/$defs/qualityIntent" }
+    },
+    "qualityAspects": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/qualityAspect" }
     },
     "evaluationPerspectives": {
       "type": "array",
@@ -142,9 +148,81 @@
         "sourceDecisionPatternRefs": { "$ref": "#/$defs/maybeRefArray" }
       }
     },
+    "qualityAspect": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "purpose",
+        "interpretation",
+        "discoveryQuestions",
+        "typicalConcerns",
+        "possibleLossBoundaries",
+        "evidenceExamples",
+        "antiPatterns"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": {
+          "enum": [
+            "functional suitability",
+            "business fit",
+            "usability",
+            "ux design",
+            "accessibility",
+            "performance efficiency",
+            "scalability",
+            "availability",
+            "reliability",
+            "recoverability",
+            "security",
+            "privacy",
+            "data quality",
+            "operational quality",
+            "maintainability",
+            "changeability",
+            "auditability",
+            "compliance",
+            "safety",
+            "cost efficiency",
+            "customer impact",
+            "brand trust",
+            "organizational operability"
+          ]
+        },
+        "purpose": { "type": "string" },
+        "interpretation": { "const": "discovery-lens-only" },
+        "discoveryQuestions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "typicalConcerns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "possibleLossBoundaries": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "evidenceExamples": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "antiPatterns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
     "evaluationPerspective": {
       "type": "object",
-      "required": ["id", "perspective", "rationale", "linkedIntentRefs"],
+      "required": ["id", "perspective", "rationale", "linkedAspectRefs", "linkedIntentRefs"],
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" },
@@ -165,6 +243,7 @@
           ]
         },
         "rationale": { "type": "string" },
+        "linkedAspectRefs": { "$ref": "#/$defs/refArray" },
         "linkedIntentRefs": { "$ref": "#/$defs/refArray" }
       }
     },
@@ -195,7 +274,52 @@
         "weight": { "$ref": "#/$defs/positiveNumber" },
         "evaluatorRole": { "type": "string" },
         "retention": { "type": "string" },
-        "artifactReference": { "type": "string" }
+        "artifactReference": { "type": "string" },
+        "findingEvidence": { "$ref": "#/$defs/findingEvidence" },
+        "trust": { "$ref": "#/$defs/trust" }
+      }
+    },
+    "findingEvidence": {
+      "type": "object",
+      "required": [
+        "generatedBy",
+        "sourceArtifact",
+        "reproducible",
+        "reproducedBy",
+        "falsePositiveChecked",
+        "impactConfirmed",
+        "finalStatus"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "generatedBy": { "type": "string" },
+        "sourceArtifact": { "type": "string" },
+        "reproducible": { "type": "boolean" },
+        "reproducedBy": { "type": "string" },
+        "falsePositiveChecked": { "type": "boolean" },
+        "impactConfirmed": { "type": "boolean" },
+        "finalStatus": {
+          "enum": [
+            "candidate",
+            "confirmed",
+            "false-positive",
+            "mitigated",
+            "accepted-risk",
+            "needs-governance"
+          ]
+        }
+      }
+    },
+    "trust": {
+      "type": "object",
+      "required": ["sources", "generatedBy", "verifiedBy", "status", "staleAfter"],
+      "additionalProperties": false,
+      "properties": {
+        "sources": { "type": "array", "items": { "type": "string" } },
+        "generatedBy": { "type": "string" },
+        "verifiedBy": { "type": "array", "items": { "type": "string" } },
+        "status": { "enum": ["draft", "verified", "stale", "rejected"] },
+        "staleAfter": { "type": "string" }
       }
     },
     "quantitativeEvidenceRecord": {

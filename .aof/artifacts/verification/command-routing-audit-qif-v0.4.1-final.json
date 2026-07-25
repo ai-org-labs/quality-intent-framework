@@ -2,12 +2,12 @@
   "ok": true,
   "artifact_type": "command-routing-audit",
   "generated_at": "2026-07-12T15:39:05.034Z",
-  "project_root": "/Users/mn/development/quality-intent-framework-public",
+  "project_root": ".",
   "checks": [
     {
       "name": "command registry presence",
       "status": "pass",
-      "detail": "/Users/mn/development/quality-intent-framework-public/.aof/command-registry.json"
+      "detail": ".aof/command-registry.json"
     },
     {
       "name": "bootstrap command_registry_ref alignment",

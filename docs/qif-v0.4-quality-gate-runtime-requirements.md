@@ -94,6 +94,8 @@ Evaluation Target
 
 QIF should record which perspectives are used to evaluate a target.
 
+Evaluation perspectives describe how a review is organized. Quality Aspects describe what discovery lenses were explored inside or across those perspectives.
+
 Canonical perspectives:
 
 | Perspective | Purpose |
@@ -112,6 +114,40 @@ Canonical perspectives:
 | external dependency | Whether suppliers, services, libraries, regulators, or partner processes create quality risk. |
 
 These perspectives are not mandatory checklist categories. They are selection candidates driven by applicability rules.
+
+### 1A. Quality Aspect Taxonomy
+
+QIF should support Quality Aspects as discovery lenses for broad reviews. They are not evidence, not verdicts, and not quality achievements.
+
+Canonical aspects:
+
+| Aspect | Purpose |
+| --- | --- |
+| functional suitability | Intended behavior or service outcome. |
+| business fit | Business purpose and unacceptable tradeoffs. |
+| usability | Correct and efficient human use. |
+| ux design | End-to-end comprehension, trust, and control. |
+| accessibility | Non-exclusion of affected users. |
+| performance efficiency | Time, effort, and resource tolerance. |
+| scalability | Volume, complexity, or demand change. |
+| availability | Reachability during protected windows. |
+| reliability | Consistency under expected repeated use. |
+| recoverability | Return to a known safe state after failure. |
+| security | Authority, confidentiality, integrity, and trust boundaries. |
+| privacy | Sensitive information use, exposure, retention, and inference. |
+| data quality | Accuracy, completeness, freshness, and interpretability. |
+| operational quality | Operation, monitoring, containment, and handoff. |
+| maintainability | Future understanding, diagnosis, and preservation. |
+| changeability | Adaptation to expected change. |
+| auditability | Reconstruction of decisions, evidence, and authority. |
+| compliance | External obligations, policies, and standards. |
+| safety | Physical, operational, environmental, or severe harm. |
+| cost efficiency | Avoidable cost, effort, waste, and recovery burden. |
+| customer impact | Customer harm, unfairness, confusion, and unmet expectations. |
+| brand trust | Credibility, fairness, and trust impact. |
+| organizational operability | Staffing, training, ownership, escalation, and expert-dependency. |
+
+Each Quality Aspect must include discovery questions, typical concerns, possible loss boundaries, evidence examples, and anti-patterns. See `docs/qif-quality-aspect-taxonomy.md`.
 
 ### 2. Quantitative Evidence Records
 
@@ -195,6 +231,36 @@ Required metadata:
 - retention period;
 - sensitivity or access handling;
 - integrity or change-history policy.
+
+For AI-generated quality or security findings, QIF should record finding evidence as verification metadata:
+
+```yaml
+finding_evidence:
+  generated_by:
+  source_artifact:
+  reproducible:
+  reproduced_by:
+  false_positive_checked:
+  impact_confirmed:
+  final_status:
+```
+
+In QIF JSON quality-gate packages this is represented as `findingEvidence` on an evidence item. `finalStatus` should distinguish at least candidate, confirmed, false-positive, mitigated, accepted-risk, and needs-governance states.
+
+Finding evidence is not itself a verdict. A finding can support or contradict a Quality Intent only after it is linked to a loss boundary and cited by a verdict.
+
+For evidence or artifacts whose source trust must be tracked without duplicating finding verification, QIF should record trust metadata:
+
+```yaml
+trust:
+  sources: []
+  generated_by:
+  verified_by: []
+  status: draft
+  stale_after:
+```
+
+In QIF JSON quality-gate packages this is represented as `trust` on an evidence item, with `generatedBy`, `verifiedBy`, and `staleAfter` field names. `trust` answers whether the source and freshness of the evidence can be relied on. `findingEvidence` answers whether the specific finding was reproduced, false-positive checked, and impact confirmed.
 
 ### 5. Evaluation Timing Decisions
 
@@ -461,4 +527,3 @@ QIF v0.4 implementation should demonstrate:
 8. Residual risk, approval owner, rollback plan, and monitoring plan can be recorded.
 9. Post-release incidents, customer impact, recurrence prevention, and improvement status can be recorded.
 10. Reports or dashboards can explain their values through traceable QIF evidence and rules.
-

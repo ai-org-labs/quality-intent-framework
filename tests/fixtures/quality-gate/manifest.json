@@ -51,6 +51,41 @@
       "errorIncludes": "references missing quality intent"
     },
     {
+      "file": "quality-gate-aspect-unsupported.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "canonical quality aspect",
+      "expect": "fail",
+      "errorIncludes": "uses unsupported quality aspect"
+    },
+    {
+      "file": "quality-gate-aspect-treated-as-quality.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quality aspect stays discovery-lens-only",
+      "expect": "fail",
+      "errorIncludes": "quality aspect must be interpreted as discovery-lens-only, not as quality itself."
+    },
+    {
+      "file": "quality-gate-aspect-missing-discovery-questions.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quality aspect has discovery questions",
+      "expect": "fail",
+      "errorIncludes": "must include discoveryQuestions."
+    },
+    {
+      "file": "quality-gate-aspect-unused.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quality aspect is used by an evaluation perspective",
+      "expect": "fail",
+      "errorIncludes": "quality aspect is defined but not used by any evaluation perspective."
+    },
+    {
+      "file": "quality-gate-perspective-broken-aspect-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "perspective linked aspect resolves",
+      "expect": "fail",
+      "errorIncludes": "references missing quality aspect"
+    },
+    {
       "file": "quality-gate-evidence-bad-independence.json",
       "validator": "tools/validate-qif-runtime.mjs",
       "rule": "evidence independence enum",
@@ -63,6 +98,48 @@
       "rule": "evidence polarity enum",
       "expect": "fail",
       "errorIncludes": "polarity must be supports, contradicts, mixed, or neutral."
+    },
+    {
+      "file": "quality-gate-finding-evidence-missing-final-status.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "AI finding evidence final status is required",
+      "expect": "fail",
+      "errorIncludes": "finalStatus must be one of"
+    },
+    {
+      "file": "quality-gate-finding-evidence-reproducible-not-boolean.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "AI finding evidence reproducible is boolean",
+      "expect": "fail",
+      "errorIncludes": "reproducible must be boolean."
+    },
+    {
+      "file": "quality-gate-finding-evidence-confirmed-before-checks.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "confirmed AI finding evidence requires reproduction, false-positive check, and impact confirmation",
+      "expect": "fail",
+      "errorIncludes": "cannot be confirmed until reproducible, falsePositiveChecked, and impactConfirmed are true."
+    },
+    {
+      "file": "quality-gate-trust-missing-status.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evidence trust status is required",
+      "expect": "fail",
+      "errorIncludes": "trust status must be one of draft, verified, stale, rejected."
+    },
+    {
+      "file": "quality-gate-trust-verified-without-source.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "verified evidence trust requires source grounding",
+      "expect": "fail",
+      "errorIncludes": "trust verified status requires at least one source."
+    },
+    {
+      "file": "quality-gate-trust-verified-without-verifier.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "verified evidence trust requires verifier",
+      "expect": "fail",
+      "errorIncludes": "trust verified status requires at least one verifier."
     },
     {
       "file": "quality-gate-quant-missing-unit.json",

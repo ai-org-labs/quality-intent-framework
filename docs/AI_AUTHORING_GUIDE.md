@@ -53,6 +53,7 @@ Use additional documents when needed:
 
 | Need | Read |
 | --- | --- |
+| Avoid blind spots across functional, non-functional, usability, performance, security, UX, and organizational concerns | `docs/qif-quality-aspect-taxonomy.md` |
 | Discover quality intent from stakeholders or documents | `docs/qif-v0.3-discovery-layer-design.md` |
 | Extract veteran or expert judgment | `docs/expert-judgment-framework.md` |
 | Review QIF model consistency | `docs/qif-v0.2.1-consolidation-review.md` |
@@ -116,6 +117,8 @@ Need / Intent / Context
 -> Applicability Rules or Decisions
 -> Evidence Plan
 -> Evidence Items
+-> Finding Evidence
+-> Trust Metadata
 -> Confidence
 -> Verdict
 -> Residual Risks
@@ -219,6 +222,68 @@ They are useful only when interpreted through:
 - Evidence Method;
 - Gate Rule;
 - Residual Risk.
+
+For AI-generated quality or security findings, record finding evidence before using the finding in a verdict.
+
+External YAML-style expression:
+
+```yaml
+finding_evidence:
+  generated_by:
+  source_artifact:
+  reproducible:
+  reproduced_by:
+  false_positive_checked:
+  impact_confirmed:
+  final_status:
+```
+
+QIF JSON packages use `findingEvidence` with camelCase fields:
+
+```json
+{
+  "findingEvidence": {
+    "generatedBy": "ai-quality-security-reviewer",
+    "sourceArtifact": "scan-output.json",
+    "reproducible": true,
+    "reproducedBy": "security-reviewer",
+    "falsePositiveChecked": true,
+    "impactConfirmed": true,
+    "finalStatus": "confirmed"
+  }
+}
+```
+
+`findingEvidence` records how a finding was produced and challenged. It is not quality itself.
+
+Record trust metadata separately when an AI-generated finding, artifact, or evidence item needs source and freshness control.
+
+External YAML-style expression:
+
+```yaml
+trust:
+  sources: []
+  generated_by:
+  verified_by: []
+  status: draft
+  stale_after:
+```
+
+QIF JSON packages use `trust` with camelCase fields:
+
+```json
+{
+  "trust": {
+    "sources": ["scan-output.json", "operator-note.md"],
+    "generatedBy": "ai-quality-security-reviewer",
+    "verifiedBy": ["security-reviewer"],
+    "status": "verified",
+    "staleAfter": "2026-10-31"
+  }
+}
+```
+
+`trust` records source grounding, reviewer confirmation, status, and freshness. It does not replace `findingEvidence`, confidence, evidence polarity, or verdicts.
 
 ## Evidence Independence
 
@@ -384,4 +449,3 @@ Before finalizing your QIF output, confirm:
 - unresolved uncertainty becomes residual risk or governance;
 - the output is domain-general unless the user explicitly limits the domain;
 - verifier claims are structural, not semantic.
-

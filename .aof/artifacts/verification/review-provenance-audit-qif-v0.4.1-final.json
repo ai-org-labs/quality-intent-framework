@@ -2,7 +2,7 @@
   "ok": true,
   "artifact_type": "review-provenance-audit",
   "generated_at": "2026-07-12T15:39:05.068Z",
-  "project_root": "/Users/mn/development/quality-intent-framework-public",
+  "project_root": ".",
   "cutoff_task_id": "TASK-013",
   "audited_status_dirs": [
     "done"

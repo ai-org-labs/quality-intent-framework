@@ -1310,3 +1310,99 @@ Retrospective reason:
 
 - `TASK-013` is done.
 - The next value slice is explicit: complete non-quality-gate verifier fixture coverage, then address remaining v0.4 runtime-only entities.
+
+## QIF v0.4.2 Quality Aspect Taxonomy
+
+Runtime session:
+
+- Session label: `SESS-QIFV042`
+- Task: `.aof/tasks/done/TASK-014.json`
+- AOF runtime: `ai-org-labs/ai-organization-framework` `v9.6.0`, executed from a clean temporary worktree
+- QIF baseline: `v0.4.1`, advanced locally to package version `0.4.2`
+
+Need / Intent / Context:
+
+- Raw need: add all broad quality viewpoints such as functional, non-functional, usability, performance, security, and UX design.
+- Validated need: add a non-checklist Quality Aspect taxonomy so broad quality concerns can be discovered, linked to evaluation perspectives, converted into loss boundaries and Quality Intents, and verified structurally without treating aspect coverage as quality itself.
+- Intent: make aspect exploration executable in quality-gate packages while preserving QIF's loss-boundary and evidence discipline.
+- Context: v0.4.1 had strong retained fixture coverage but quality-gate perspectives did not first-class common aspect families such as usability, accessibility, privacy, UX design, safety, data quality, trust, or organizational operability.
+
+AOF runtime command evidence:
+
+- `organization-verify --project .`
+- `command-routing-audit --project . --write-artifact .aof/artifacts/verification/command-routing-audit-qif-quality-aspects-start.json`
+- `need-validation-benchmark --project . --write-artifact .aof/artifacts/verification/need-validation-benchmark-qif-quality-aspects-start.json`
+
+Validated artifacts:
+
+- Problem statement: `.aof/artifacts/need-validation/problem-statements/PST-QIFV042-001.json`
+- Value hypothesis: `.aof/artifacts/need-validation/value-hypotheses/VHY-QIFV042-001.json`
+- Alternative analysis: `.aof/artifacts/need-validation/alternative-analyses/ALT-QIFV042-001.json`
+- Need Validation record: `.aof/artifacts/need-validation/records/NVR-QIFV042-001.json`
+- Project Charter: `.aof/artifacts/need-validation/project-charters/PCH-QIFV042-001.json`
+
+Council judgment:
+
+- Visionary: approved. Quality Aspect coverage is needed, but aspects must guide discovery rather than replace Quality Intents or evidence.
+- Builder: approved. The smallest executable slice is adding `qualityAspects`, linking perspectives to them, and retaining negative fixtures for misuse.
+- Guardian: approved with guardrails. Do not make every aspect mandatory for every target, and do not treat aspect names as quality evidence.
+
+Implementation judgment:
+
+- Build: `qualityAspects` in quality-gate schema, canonical aspect list, aspect-linked perspectives, verifier rules, negative fixtures, example package updates, and taxonomy documentation.
+- Do not build: mandatory category checklist, semantic completeness scoring, UI, external integrations, or semantic-truth claims.
+- Review evidence: `npm test` passes with 3 positive checks and 69 negative checks.
+
+Review / self-review / retrospective:
+
+- Planning Council packet: `.aof/artifacts/council/qif-v0.4.2-planning-council-review-packet.json`
+- Review Council packet: `.aof/artifacts/council/qif-v0.4.2-review-council-review-packet.json`
+- Execution Council packet copies: `.aof/artifacts/execution/council-reviews/qif-v0.4.2-planning-council-review-packet.json`, `.aof/artifacts/execution/council-reviews/qif-v0.4.2-review-council-review-packet.json`
+- Role result evidence: `.aof/artifacts/execution/role-results/RRES-QIFV042-*-PLANNING.json`, `.aof/artifacts/execution/role-results/RRES-QIFV042-*-REVIEW.json`
+- Team output evidence: `.aof/artifacts/execution/team-outputs/TOUT-QIFV042-PLANNING.json`, `.aof/artifacts/execution/team-outputs/TOUT-QIFV042-REVIEW.json`
+
+Verification result:
+
+- `npm test` passed.
+- Runtime verifier reports `examples/quality-gate-package.json` with 23 Quality Aspects and 5 evaluation perspectives.
+- Fixture suite passed with 3/3 positive checks and 69/69 negative checks.
+- AOF v9.6.0 organization verification passed with 221/221 checks.
+- AOF command routing audit passed: `.aof/artifacts/verification/command-routing-audit-qif-quality-aspects-final.json`
+- AOF Need Validation benchmark passed: `.aof/artifacts/verification/need-validation-benchmark-qif-quality-aspects-final.json`
+- AOF review provenance audit passed for TASK-014 with two approved Council review packets: `.aof/artifacts/verification/review-provenance-audit-qif-v0.4.2-final.json`
+- findingEvidence and trust metadata added for AI quality/security findings; fixture suite now covers 69/69 negative checks.
+- AOF v9.7.0 organization verification passed with 221/221 checks after findingEvidence addition.
+- AOF v9.7.0 command routing audit passed: `.aof/artifacts/verification/command-routing-audit-qif-v0.4.2-finding-evidence-final.json`
+- AOF v9.7.0 review provenance audit passed for TASK-014: `.aof/artifacts/verification/review-provenance-audit-qif-v0.4.2-finding-evidence-final.json`
+
+Retrospective reason:
+
+- `TASK-014` is done.
+- The next value slice returns to retained verifier coverage: complete core fixture coverage after the aspect taxonomy shift.
+
+### 2026-07-28 - QIF self-evaluation using latest QIF v0.4.2
+
+Runtime command evidence:
+
+- QIF verifier: `node tools/validate-qif-runtime.mjs assessments/qif-self-evaluation-v0.4.2.json` passed.
+- QIF regression suite: `npm test` passed with 3/3 positive checks and 69/69 negative checks.
+- AOF runtime command: AOF v9.7.0 `organization-verify --project .` passed with 221/221 checks.
+- Public residue scan: no matches for old personal account markers, local absolute paths, or old repository names outside `.git`.
+
+Artifact refs:
+
+- Executable QIF self-evaluation package: `assessments/qif-self-evaluation-v0.4.2.json`
+- Human-readable self-evaluation report: `assessments/qif-self-evaluation-v0.4.2.md`
+
+Judgment:
+
+- Gate decision: Conditional Go.
+- Confidence: 0.82.
+- Achieved: concept coherence, executable baseline, and AI usability.
+- Partially achieved: release readiness, because release notes exist but the evaluated state is still local-only until push, tag, and release complete.
+- Governance triggers: `GTR-QIF-RELEASE` and `GTR-QIF-CONFLICT` remain open until publication state is resolved.
+
+Verifier boundary:
+
+- This self-evaluation proves structure, traceability, reference resolution, confidence reproducibility, and rule compliance.
+- It does not prove semantic truth, pilot success, or public release completion.

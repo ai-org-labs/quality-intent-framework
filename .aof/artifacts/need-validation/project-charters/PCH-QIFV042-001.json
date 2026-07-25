@@ -1,0 +1,26 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-07-25T05:10:00.000Z",
+  "project_charter_id": "PCH-QIFV042-001",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV042-001.json",
+  "validated_objective": "Implement QIF v0.4.2 Quality Aspect taxonomy as a non-checklist discovery lens model connected to quality-gate packages, examples, verifier rules, retained fixtures, and documentation.",
+  "scope": [
+    "Add canonical Quality Aspects for functional, non-functional, usability, UX design, accessibility, performance, scalability, availability, reliability, recoverability, security, privacy, data quality, operational quality, maintainability, changeability, auditability, compliance, safety, cost, customer impact, brand trust, and organizational operability.",
+    "Connect Quality Aspects to quality-gate evaluation perspectives.",
+    "Add verifier rules and negative fixtures that reject aspect-as-quality misuse and broken aspect traceability.",
+    "Update docs, changelog, roadmap, and AOF evidence."
+  ],
+  "constraints": [
+    "Do not make every aspect mandatory for every target.",
+    "Do not treat aspect coverage as evidence, verdict, or quality achievement.",
+    "Do not build UI or external integrations.",
+    "Do not claim verifier success proves semantic quality truth."
+  ],
+  "expected_outcomes": [
+    "Quality Gate packages can record aspect exploration breadth.",
+    "npm test rejects invalid aspect definitions and aspect traceability failures.",
+    "Documentation makes the checklist boundary explicit."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

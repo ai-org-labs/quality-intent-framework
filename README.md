@@ -6,7 +6,7 @@ QIF does not define quality as output volume. Page count, review count, and test
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline (release Go / Conditional Go / No-Go / Pending decisions with quantitative evidence, post-release review, and traceability), and the v0.4.1 retained fixture coverage expansion:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline (release Go / Conditional Go / No-Go / Pending decisions with quantitative evidence, post-release review, and traceability), the v0.4.1 retained fixture coverage expansion, and the v0.4.2 Quality Aspect taxonomy:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -17,11 +17,12 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF pre-implementation review: `docs/qif-pre-implementation-review.md`
 - QIF negative acceptance: `docs/qif-negative-acceptance.md`
 - QIF v0.4 quality gate runtime requirements: `docs/qif-v0.4-quality-gate-runtime-requirements.md`
+- QIF Quality Aspect taxonomy: `docs/qif-quality-aspect-taxonomy.md`
 - QIF long-term roadmap: `docs/qif-roadmap.md`
 - QIF v0.4.x release roadmap: `docs/qif-v0.4.x-release-roadmap.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
-- Quality gate package schema (v0.4 baseline): `schemas/quality-gate-package.schema.json`
+- Quality gate package schema: `schemas/quality-gate-package.schema.json`
 - Expert judgment schema: `schemas/expert-judgment-package.schema.json`
 - Discovery session schema: `schemas/discovery-session-package.schema.json`
 - Organizational quality culture schema: `schemas/organizational-quality-culture-package.schema.json`
@@ -33,7 +34,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - Example organizational quality culture package: `examples/organizational-quality-culture-package.json`
 - Example evaluation target package: `examples/evaluation-target-package.json`
 - Example review run package: `examples/review-run-package.json`
-- Example quality gate package (v0.4 baseline): `examples/quality-gate-package.json`
+- Example quality gate package: `examples/quality-gate-package.json`
 - Local verifier: `tools/validate-qif.mjs`
 - Local expert judgment verifier: `tools/validate-expert-judgment.mjs`
 - Local runtime verifier: `tools/validate-qif-runtime.mjs`

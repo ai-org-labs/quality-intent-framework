@@ -843,13 +843,41 @@ const CANONICAL_PERSPECTIVES = new Set([
   "improvement",
   "external dependency"
 ]);
+const CANONICAL_QUALITY_ASPECTS = new Set([
+  "functional suitability",
+  "business fit",
+  "usability",
+  "ux design",
+  "accessibility",
+  "performance efficiency",
+  "scalability",
+  "availability",
+  "reliability",
+  "recoverability",
+  "security",
+  "privacy",
+  "data quality",
+  "operational quality",
+  "maintainability",
+  "changeability",
+  "auditability",
+  "compliance",
+  "safety",
+  "cost efficiency",
+  "customer impact",
+  "brand trust",
+  "organizational operability"
+]);
 const QUANTITY_TYPES = new Set(["how-many", "how-much", "how-long", "how-often", "impact"]);
 const GATE_DECISIONS = new Set(["Go", "Conditional Go", "No-Go", "Pending"]);
 const HIGH_SEVERITIES = new Set(["high", "critical"]);
+const FINDING_FINAL_STATUSES = new Set(["candidate", "confirmed", "false-positive", "mitigated", "accepted-risk", "needs-governance"]);
+const TRUST_STATUSES = new Set(["draft", "verified", "stale", "rejected"]);
 
 function validateQualityGatePackage(pkg, packagePath) {
   const targets = requireArray(pkg, "evaluationTargets");
   const qualityIntents = requireArray(pkg, "qualityIntents");
+  const qualityAspects = requireArray(pkg, "qualityAspects");
   const perspectives = requireArray(pkg, "evaluationPerspectives");
   const confidencePolicies = requireArray(pkg, "confidencePolicies");
   const evidenceItems = requireArray(pkg, "evidenceItems");
@@ -866,6 +894,7 @@ function validateQualityGatePackage(pkg, packagePath) {
 
   const targetIndex = indexById(targets, `${packagePath}:evaluationTargets`);
   const intentIndex = indexById(qualityIntents, `${packagePath}:qualityIntents`);
+  const aspectIndex = indexById(qualityAspects, `${packagePath}:qualityAspects`);
   const perspectiveIndex = indexById(perspectives, `${packagePath}:evaluationPerspectives`);
   const confidencePolicyIndex = indexById(confidencePolicies, `${packagePath}:confidencePolicies`);
   const evidenceIndex = indexById(evidenceItems, `${packagePath}:evidenceItems`);
@@ -880,7 +909,7 @@ function validateQualityGatePackage(pkg, packagePath) {
 
   // A global id index lets traceability links resolve across every entity family.
   const globalIndex = new Map();
-  for (const family of [targetIndex, intentIndex, perspectiveIndex, confidencePolicyIndex, evidenceIndex, quantitativeIndex, automatedIndex, gateRuleIndex, gateDecisionIndex, postReleaseIndex, improvementIndex, governanceIndex, governanceEventIndex]) {
+  for (const family of [targetIndex, intentIndex, aspectIndex, perspectiveIndex, confidencePolicyIndex, evidenceIndex, quantitativeIndex, automatedIndex, gateRuleIndex, gateDecisionIndex, postReleaseIndex, improvementIndex, governanceIndex, governanceEventIndex]) {
     for (const [id, item] of family.entries()) {
       globalIndex.set(id, item);
     }
@@ -899,11 +928,29 @@ function validateQualityGatePackage(pkg, packagePath) {
     checkRequiredString(intent, "lossBoundary", intent.id);
     checkRequiredString(intent, "lossBoundarySeverity", intent.id);
   }
+  const aspectNames = new Set();
+  for (const aspect of qualityAspects) {
+    if (!CANONICAL_QUALITY_ASPECTS.has(aspect.name)) {
+      errors.push(`${aspect.id} uses unsupported quality aspect ${aspect.name}.`);
+    }
+    if (aspectNames.has(aspect.name)) {
+      errors.push(`${aspect.id} duplicates quality aspect name ${aspect.name}.`);
+    }
+    aspectNames.add(aspect.name);
+    checkRequiredString(aspect, "purpose", aspect.id);
+    if (aspect.interpretation !== "discovery-lens-only") {
+      errors.push(`${aspect.id} quality aspect must be interpreted as discovery-lens-only, not as quality itself.`);
+    }
+    for (const field of ["discoveryQuestions", "typicalConcerns", "possibleLossBoundaries", "evidenceExamples", "antiPatterns"]) {
+      checkNonEmptyArray(aspect, field, aspect.id);
+    }
+  }
   for (const perspective of perspectives) {
     if (!CANONICAL_PERSPECTIVES.has(perspective.perspective)) {
       errors.push(`${perspective.id} uses unsupported evaluation perspective ${perspective.perspective}.`);
     }
     checkRequiredString(perspective, "rationale", perspective.id);
+    checkRefs(perspective.linkedAspectRefs, aspectIndex, "quality aspect", perspective.id);
     checkRefs(perspective.linkedIntentRefs, intentIndex, "quality intent", perspective.id);
   }
   for (const policy of confidencePolicies) {
@@ -926,6 +973,47 @@ function validateQualityGatePackage(pkg, packagePath) {
     }
     checkScore(evidence.confidence, "confidence", evidence.id);
     checkPositiveNumber(evidence.weight, "weight", evidence.id);
+    if (evidence.findingEvidence !== undefined) {
+      if (typeof evidence.findingEvidence !== "object" || evidence.findingEvidence === null || Array.isArray(evidence.findingEvidence)) {
+        errors.push(`${evidence.id}/findingEvidence must be an object.`);
+        continue;
+      }
+      for (const field of ["generatedBy", "sourceArtifact", "reproducedBy"]) {
+        checkRequiredString(evidence.findingEvidence, field, `${evidence.id}/findingEvidence`);
+      }
+      for (const field of ["reproducible", "falsePositiveChecked", "impactConfirmed"]) {
+        if (typeof evidence.findingEvidence[field] !== "boolean") {
+          errors.push(`${evidence.id}/findingEvidence ${field} must be boolean.`);
+        }
+      }
+      if (!FINDING_FINAL_STATUSES.has(evidence.findingEvidence.finalStatus)) {
+        errors.push(`${evidence.id}/findingEvidence finalStatus must be one of candidate, confirmed, false-positive, mitigated, accepted-risk, needs-governance.`);
+      }
+      if (evidence.findingEvidence.finalStatus === "confirmed" && (!evidence.findingEvidence.reproducible || !evidence.findingEvidence.falsePositiveChecked || !evidence.findingEvidence.impactConfirmed)) {
+        errors.push(`${evidence.id}/findingEvidence cannot be confirmed until reproducible, falsePositiveChecked, and impactConfirmed are true.`);
+      }
+    }
+    if (evidence.trust !== undefined) {
+      if (typeof evidence.trust !== "object" || evidence.trust === null || Array.isArray(evidence.trust)) {
+        errors.push(`${evidence.id}/trust must be an object.`);
+        continue;
+      }
+      checkRequiredString(evidence.trust, "generatedBy", `${evidence.id}/trust`);
+      checkRequiredString(evidence.trust, "staleAfter", `${evidence.id}/trust`);
+      if (!Array.isArray(evidence.trust.sources)) {
+        errors.push(`${evidence.id}/trust sources must be an array.`);
+      } else if (evidence.trust.status === "verified" && evidence.trust.sources.length === 0) {
+        errors.push(`${evidence.id}/trust verified status requires at least one source.`);
+      }
+      if (!Array.isArray(evidence.trust.verifiedBy)) {
+        errors.push(`${evidence.id}/trust verifiedBy must be an array.`);
+      } else if (evidence.trust.status === "verified" && evidence.trust.verifiedBy.length === 0) {
+        errors.push(`${evidence.id}/trust verified status requires at least one verifier.`);
+      }
+      if (!TRUST_STATUSES.has(evidence.trust.status)) {
+        errors.push(`${evidence.id}/trust status must be one of draft, verified, stale, rejected.`);
+      }
+    }
   }
   for (const record of quantitativeRecords) {
     checkRequiredString(record, "metricName", record.id);
@@ -980,6 +1068,12 @@ function validateQualityGatePackage(pkg, packagePath) {
   }
 
   const perspectiveCoveredIntents = new Set(perspectives.flatMap((perspective) => perspective.linkedIntentRefs ?? []));
+  const perspectiveCoveredAspects = new Set(perspectives.flatMap((perspective) => perspective.linkedAspectRefs ?? []));
+  for (const aspect of qualityAspects) {
+    if (!perspectiveCoveredAspects.has(aspect.id)) {
+      errors.push(`${aspect.id} quality aspect is defined but not used by any evaluation perspective.`);
+    }
+  }
 
   for (const decision of gateDecisions) {
     checkRefs([decision.targetRef], targetIndex, "evaluation target", decision.id);
@@ -1229,6 +1323,7 @@ function validateQualityGatePackage(pkg, packagePath) {
     counts: {
       evaluationTargets: targets.length,
       qualityIntents: qualityIntents.length,
+      qualityAspects: qualityAspects.length,
       evaluationPerspectives: perspectives.length,
       evidenceItems: evidenceItems.length,
       quantitativeEvidenceRecords: quantitativeRecords.length,

@@ -1,0 +1,10 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-07-25T05:10:00.000Z",
+  "problem_statement_id": "PST-QIFV042-001",
+  "problem": "QIF can represent discovered quality intent, but broad reviews can still miss common quality aspect families such as usability, UX design, security, privacy, performance, accessibility, safety, data quality, and organizational operability.",
+  "affected_users": ["QIF authors", "AI agents", "reviewers", "organizations applying QIF to broad targets"],
+  "current_failure_mode": "Agents may either under-explore important quality concerns or fall back to fixed checklist categories that conflict with QIF semantics.",
+  "loss_boundary": "QIF must not treat aspect coverage as quality itself, but it must give agents a structured way to discover aspect-driven concerns and evidence needs.",
+  "source_request": "Add all of the missing broad quality viewpoints."
+}

@@ -1,0 +1,19 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-07-25T05:11:00.000Z",
+  "role": "Guardian",
+  "stage": "planning",
+  "session_id": "SESS-QIFV042-GUARDIAN-PLANNING",
+  "status": "completed",
+  "recommendation": "Block any design that makes all aspects mandatory or treats aspect names as evidence.",
+  "rationale": "The main risk is regressing into checklist behavior, which QIF explicitly rejects.",
+  "signals": ["Aspect definitions must include anti-patterns and discovery-lens-only interpretation."],
+  "artifact_refs": ["docs/AI_AUTHORING_GUIDE.md", "docs/qif-quality-aspect-taxonomy.md"],
+  "decision_required": false,
+  "source_task_id": "TASK-014",
+  "source_decision_record_id": null,
+  "source_parent_session_id": "SESS-QIFV042",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.92
+}

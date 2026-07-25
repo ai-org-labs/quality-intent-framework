@@ -34,7 +34,24 @@ Exit evidence:
 - fixture suite reports 3/3 positive checks and 58/58 negative checks;
 - AOF review provenance resolves for the implementation task.
 
-## v0.4.2 - Complete Core Fixture Coverage
+## v0.4.2 - Quality Aspect Taxonomy
+
+Intent: add broad quality aspect coverage without turning QIF into a fixed checklist.
+
+Scope:
+
+- define canonical Quality Aspects as discovery lenses;
+- connect aspects to quality-gate evaluation perspectives;
+- require discovery questions, concerns, loss boundaries, evidence examples, and anti-patterns;
+- retain verifier fixtures that reject aspect-as-quality misuse.
+
+Exit evidence:
+
+- example package validates with aspect-linked perspectives;
+- invalid aspects, unused aspects, missing discovery questions, and aspect-as-quality misuse fail verification;
+- docs state that aspect presence is not evidence or a verdict.
+
+## v0.4.3 - Complete Core Fixture Coverage
 
 Intent: finish rule-by-rule retained negative coverage for the core package verifiers.
 
@@ -49,7 +66,7 @@ Exit evidence:
 - every structural rule in `tools/validate-qif.mjs` and `tools/validate-expert-judgment.mjs` has at least one retained failing fixture;
 - deleting or weakening any covered rule breaks `npm test`.
 
-## v0.4.3 - Runtime Package Fixture Coverage
+## v0.4.4 - Runtime Package Fixture Coverage
 
 Intent: extend retained negative coverage to runtime package surfaces.
 
@@ -66,7 +83,7 @@ Exit evidence:
 - retained invalid fixtures exist for every implemented runtime verifier rule;
 - coverage gaps are recorded as explicit follow-on work, not silent omissions.
 
-## v0.4.4 - Evidence Vocabulary And Retention
+## v0.4.5 - Evidence Vocabulary And Retention
 
 Intent: make evidence naming and retention policies executable.
 
@@ -82,7 +99,7 @@ Exit evidence:
 - example package validates;
 - invalid vocabulary, retention, sensitivity, or integrity references fail local verification.
 
-## v0.4.5 - Timing And Report Discipline
+## v0.4.6 - Timing And Report Discipline
 
 Intent: make evaluation timing and reporting structurally auditable.
 
