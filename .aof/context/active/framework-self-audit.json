@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-07-07T17:36:59.587Z",
-  "audit_id": "FSA-QIFV041-001",
-  "scope": "QIF v0.4.1 fixture coverage expansion",
-  "summary": "The implementation generalized the retained fixture runner and added selected qif-package and expert-judgment negative fixture corpora while preserving the quality-gate corpus.",
-  "detected_gap": "Complete rule-by-rule fixture coverage is still open for qif-package, expert-judgment, and runtime package surfaces other than quality-gate.",
+  "recorded_at": "2026-08-10T16:14:46.834Z",
+  "audit_id": "FSA-QIFV043-001",
+  "scope": "QIF v0.4.3 release and roadmap review",
+  "summary": "The two core package verifiers now have complete retained error-branch fixture coverage, AOF v10.8.0 review and verification passed, and exact-SHA v0.4.3 is public.",
+  "detected_gap": "Discovery-session, organizational-quality-culture, evaluation-target, and review-run verifier branches do not yet have complete retained negative fixture coverage; empirical outcome calibration remains unproven.",
   "result_state": "stable",
-  "next_action": "Use a follow-on v0.4.x slice to extend complete retained negative coverage to the remaining verifier surfaces.",
+  "next_action": "Implement v0.4.4 runtime package fixture coverage without importing v0.5 ledger semantics early.",
   "related_task_ids": [
-    "TASK-013"
+    "TASK-015"
   ],
-  "source_session_id": "SESS-QIFV041",
-  "source_decision_record_id": null
+  "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
+  "source_decision_record_id": "DEC-MSNF6ZYN-80OC10"
 }

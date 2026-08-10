@@ -1482,9 +1482,28 @@ Final review and verification:
 - Guardian veto: no.
 - Need Validation benchmark: pass.
 - Command routing audit: pass.
-- Organization verification: 229/229 checks pass on the final release tree.
+- Organization verification: 231/231 checks pass after release closure.
 - Public-residue scan: no personal account, email, legacy repository, user-home,
   or temporary checkout path remains in the release tree.
 
-Publication, task closure, review-provenance audit, and retrospective are
-recorded after the exact release commit is verified and published.
+The exact release commit was then published before task closure and
+retrospective writeback.
+
+Publication and retrospective:
+
+- Verified release commit:
+  `8704f8aacf4fae76c7d7bd5b24de8c62d18e0312`.
+- Remote main: advanced to the verified release commit without divergence.
+- Annotated tag: `v0.4.3`.
+- GitHub Release:
+  `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.4.3`.
+- Outcome report: `OUT-MSNFLEY3-ZPVPSG`, result `success`.
+- Completed task: `.aof/tasks/done/TASK-015.json`.
+- Review provenance audit: pass, one approved review packet with all three role
+  results and three evidence refs.
+- Learning loop snapshot:
+  `.aof/context/active/learning-loop.json`.
+- Operator progress:
+  `.aof/artifacts/runtime/operator-progress-qif-v0.4.3.json`.
+- Next frontier: v0.4.4 retained negative fixture coverage for the remaining
+  runtime package surfaces before v0.5 ledger semantics.

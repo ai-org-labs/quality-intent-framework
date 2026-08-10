@@ -1,17 +1,7 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-08-10T16:09:19.811Z",
+  "updated_at": "2026-08-10T16:14:46.839Z",
   "entries": [
-    {
-      "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
-      "answer": "Cover the official ai-org-labs/quality-intent-framework repository: roadmap, schemas, examples, validators, retained fixtures, AOF evidence, release documentation, Git tag, and GitHub Release. The nearest implementation slice is v0.4.3 complete core fixture coverage. Out of scope are UI, hosted services, production integrations, claims of semantic truth, and starting later roadmap implementations before v0.4.3 is released.",
-      "recorded_at": "2026-08-10T16:01:53.464Z",
-      "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
-      "mismatch_state": null,
-      "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
-      "source_decision_record_id": null
-    },
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
       "answer": "Success means the roadmap names at least three future releases grounded in current primary-source AI trends, every implemented structural rule in validate-qif.mjs and validate-expert-judgment.mjs has a retained negative fixture or explicit justified rescope, npm test is green with drift checking, AOF v10.8.0 planning/review/verification evidence is green, and the exact verified commit is published as QIF v0.4.3 on ai-org-labs.",
@@ -29,6 +19,16 @@
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
+      "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
+      "source_decision_record_id": "DEC-MSNF6ZYN-80OC10"
+    },
+    {
+      "question": "framework self-audit で次に残る gap は何か",
+      "answer": "Discovery-session, organizational-quality-culture, evaluation-target, and review-run verifier branches do not yet have complete retained negative fixture coverage; empirical outcome calibration remains unproven.",
+      "recorded_at": "2026-08-10T16:14:46.839Z",
+      "expectation_state": "The two core package verifiers now have complete retained error-branch fixture coverage, AOF v10.8.0 review and verification passed, and exact-SHA v0.4.3 is public.",
+      "mismatch_state": "Discovery-session, organizational-quality-culture, evaluation-target, and review-run verifier branches do not yet have complete retained negative fixture coverage; empirical outcome calibration remains unproven.",
+      "scale_direction": "Implement v0.4.4 runtime package fixture coverage without importing v0.5 ledger semantics early.",
       "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
       "source_decision_record_id": "DEC-MSNF6ZYN-80OC10"
     }

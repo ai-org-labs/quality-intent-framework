@@ -1,7 +1,7 @@
 {
   "goal_type": "next-value-slice",
-  "content": "After v0.4.3 release, implement v0.4.4 retained negative fixture coverage for discovery-session, organizational-quality-culture, evaluation-target, and review-run verifier surfaces before adding v0.5 ledger semantics.",
-  "updated_at": "2026-08-10T16:09:48.938Z",
+  "content": "Implement v0.4.4 retained negative fixture coverage for the remaining runtime package verifier surfaces.",
+  "updated_at": "2026-08-10T16:14:46.840Z",
   "agreed_with_human": null,
   "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
   "source_decision_record_id": "DEC-MSNF6ZYN-80OC10",

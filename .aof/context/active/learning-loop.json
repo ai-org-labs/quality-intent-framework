@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-07-07T17:38:02.499Z",
+  "generated_at": "2026-08-10T16:14:46.993Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MQSAL5T6-2P3E8G",
-    "report_id": "OUT-MQSBPZ42-JA4L60",
+    "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
+    "report_id": "OUT-MSNFLEY3-ZPVPSG",
     "result": "success",
-    "observed_at": "2026-06-24T17:04:51.446Z",
-    "note": "Docs-only QIF pre-implementation review guidance completed, reviewed by Visionary/Builder/Guardian, and verified with npm test plus AOF checks.",
-    "signal_ref": ".aof/artifacts/council/qif-v0.3.1-pre-implementation-review-council-review-packet.json"
+    "observed_at": "2026-08-10T16:13:50.913Z",
+    "note": "QIF v0.4.3 passed 3/3 positive and 221/221 retained negative checks, passed AOF v10.8.0 review and verification, and was published at exact commit 8704f8aacf4fae76c7d7bd5b24de8c62d18e0312.",
+    "signal_ref": ".aof/artifacts/council/qif-v0.4.3-council-review-packet.json"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV041-001",
-    "recorded_at": "2026-07-07T17:36:59.587Z",
-    "summary": "The implementation generalized the retained fixture runner and added selected qif-package and expert-judgment negative fixture corpora while preserving the quality-gate corpus.",
-    "detected_gap": "Complete rule-by-rule fixture coverage is still open for qif-package, expert-judgment, and runtime package surfaces other than quality-gate.",
+    "audit_id": "FSA-QIFV043-001",
+    "recorded_at": "2026-08-10T16:14:46.834Z",
+    "summary": "The two core package verifiers now have complete retained error-branch fixture coverage, AOF v10.8.0 review and verification passed, and exact-SHA v0.4.3 is public.",
+    "detected_gap": "Discovery-session, organizational-quality-culture, evaluation-target, and review-run verifier branches do not yet have complete retained negative fixture coverage; empirical outcome calibration remains unproven.",
     "result_state": "stable",
-    "next_action": "Use a follow-on v0.4.x slice to extend complete retained negative coverage to the remaining verifier surfaces.",
+    "next_action": "Implement v0.4.4 runtime package fixture coverage without importing v0.5 ledger semantics early.",
     "related_task_ids": [
-      "TASK-013"
+      "TASK-015"
     ]
   },
   "current_next_value_slice": {
-    "content": "Complete non-quality-gate verifier fixture coverage, then address remaining v0.4 runtime-only entities.",
-    "updated_at": "2026-07-07T17:36:59.595Z",
+    "content": "Implement v0.4.4 retained negative fixture coverage for the remaining runtime package verifier surfaces.",
+    "updated_at": "2026-08-10T16:14:46.840Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-QIFV041",
-    "source_decision_record_id": null
+    "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
+    "source_decision_record_id": "DEC-MSNF6ZYN-80OC10"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Use a follow-on v0.4.x slice to extend complete retained negative coverage to the remaining verifier surfaces.",
+    "proposed_focus": "Implement v0.4.4 runtime package fixture coverage without importing v0.5 ledger semantics early.",
     "related_task_ids": [
-      "TASK-013"
+      "TASK-015"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: Complete non-quality-gate verifier fixture coverage, then address remaining v0.4 runtime-only entities.",
-    "Latest self-audit next action: Use a follow-on v0.4.x slice to extend complete retained negative coverage to the remaining verifier surfaces.",
+    "Current next value slice: Implement v0.4.4 retained negative fixture coverage for the remaining runtime package verifier surfaces.",
+    "Latest self-audit next action: Implement v0.4.4 runtime package fixture coverage without importing v0.5 ledger semantics early.",
     "Latest outcome result: success"
   ]
 }

@@ -1,0 +1,103 @@
+{
+  "ok": true,
+  "artifact_type": "review-provenance-audit",
+  "generated_at": "2026-08-10T16:14:06.066Z",
+  "project_root": ".",
+  "cutoff_task_id": "TASK-015",
+  "audited_status_dirs": [
+    "done"
+  ],
+  "valid_review_statuses": [
+    "approved",
+    "changes-requested",
+    "blocked",
+    "deferred"
+  ],
+  "summary": {
+    "scoped_task_count": 1,
+    "review_record_count": 1,
+    "missing_review_record_count": 0,
+    "failing_check_count": 0
+  },
+  "tasks": [
+    {
+      "task_id": "TASK-015",
+      "title": "Release QIF v0.4.3 complete core fixture coverage",
+      "artifact_ref": ".aof/tasks/done/TASK-015.json"
+    }
+  ],
+  "review_records": [
+    {
+      "task_id": "TASK-015",
+      "review_ref": ".aof/artifacts/execution/council-reviews/qif-v0.4.3-council-review-packet.json",
+      "council_id": "QIF-V043-COUNCIL",
+      "review_status": "approved",
+      "source_parent_session_id": "SESS-MSNF5VM7-NZD3Q9",
+      "role_result_ref_count": 3,
+      "evidence_ref_count": 3
+    }
+  ],
+  "checks": [
+    {
+      "name": "done task discovery",
+      "status": "pass",
+      "detail": "1 done task(s) at or after TASK-015"
+    },
+    {
+      "name": "TASK-015 council review presence",
+      "status": "pass",
+      "detail": "1 review(s)"
+    },
+    {
+      "name": "TASK-015 review status validity",
+      "status": "pass",
+      "detail": "review_status=approved"
+    },
+    {
+      "name": "TASK-015 review source task matches",
+      "status": "pass",
+      "detail": "source_task_id=TASK-015, expected=TASK-015"
+    },
+    {
+      "name": "TASK-015 review parent session provenance",
+      "status": "pass",
+      "detail": "SESS-MSNF5VM7-NZD3Q9"
+    },
+    {
+      "name": "TASK-015 review evidence is not empty",
+      "status": "pass",
+      "detail": "role_result_refs=3, evidence_refs=3"
+    },
+    {
+      "name": "TASK-015 role result ref resolves",
+      "status": "pass",
+      "detail": ".aof/artifacts/execution/role-results/RRES-QIFV043-BUILDER-REVIEW.json"
+    },
+    {
+      "name": "TASK-015 role result ref resolves",
+      "status": "pass",
+      "detail": ".aof/artifacts/execution/role-results/RRES-QIFV043-VISIONARY-REVIEW.json"
+    },
+    {
+      "name": "TASK-015 role result ref resolves",
+      "status": "pass",
+      "detail": ".aof/artifacts/execution/role-results/RRES-QIFV043-GUARDIAN-REVIEW.json"
+    },
+    {
+      "name": "TASK-015 review evidence ref resolves",
+      "status": "pass",
+      "detail": ".aof/artifacts/verification/need-validation-benchmark-qif-v0.4.3.json"
+    },
+    {
+      "name": "TASK-015 review evidence ref resolves",
+      "status": "pass",
+      "detail": ".aof/artifacts/verification/command-routing-audit-qif-v0.4.3.json"
+    },
+    {
+      "name": "TASK-015 review evidence ref resolves",
+      "status": "pass",
+      "detail": "docs/releases/v0.4.3-release-checklist.md"
+    }
+  ],
+  "errors": []
+}

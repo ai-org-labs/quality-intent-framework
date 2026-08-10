@@ -1,0 +1,31 @@
+{
+  "view_type": "operator_progress",
+  "generated_at": "2026-08-10T16:13:51.715Z",
+  "current_checkpoint": {
+    "stage": "frontier-definition-needed",
+    "frontier_task_id": null,
+    "summary": "The runtime is frontier-definition-needed.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  },
+  "previous_checkpoint": {
+    "summary": "TASK-015 was the latest completed checkpoint.",
+    "artifact_ref": ".aof/tasks/done/TASK-015.json"
+  },
+  "changes_since_last_checkpoint": [
+    {
+      "kind": "completed-task",
+      "summary": "TASK-015 completed: Release QIF v0.4.3 complete core fixture coverage",
+      "artifact_ref": ".aof/tasks/done/TASK-015.json"
+    },
+    {
+      "kind": "goal-refresh",
+      "summary": "After v0.4.3 release, implement v0.4.4 retained negative fixture coverage for discovery-session, organizational-quality-culture, evaluation-target, and review-run verifier surfaces before adding v0.5 ledger semantics.",
+      "artifact_ref": ".aof/goals/next-value-slice.json"
+    }
+  ],
+  "progress_answer": {
+    "what_changed": "TASK-015 completed: Release QIF v0.4.3 complete core fixture coverage After v0.4.3 release, implement v0.4.4 retained negative fixture coverage for discovery-session, organizational-quality-culture, evaluation-target, and review-run verifier surfaces before adding v0.5 ledger semantics.",
+    "why_it_matters": "The runtime still needs a concrete current frontier to make progress legible.",
+    "next_checkpoint": "Refresh roadmap guidance from the current live frontier instead of the stale alignment pulse."
+  }
+}
