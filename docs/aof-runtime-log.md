@@ -1406,3 +1406,85 @@ Verifier boundary:
 
 - This self-evaluation proves structure, traceability, reference resolution, confidence reproducibility, and rule compliance.
 - It does not prove semantic truth, pilot success, or public release completion.
+
+## QIF v0.4.3 Complete Core Fixture Coverage
+
+Runtime session:
+
+- Session: `.aof/sessions/SESS-MSNF5VM7-NZD3Q9.json`
+- Task: `.aof/tasks/assigned/TASK-015.json`
+- AOF runtime: `ai-org-labs/ai-organization-framework` `v10.8.0`
+- Node runtime: `v22.22.3`, inside AOF's CI-validated Node 22/24 lane
+- QIF baseline: official `ai-org-labs/quality-intent-framework` `v0.4.2`
+
+Need / Intent / Context:
+
+- Need: finish the accepted v0.4.3 frontier so every implemented error branch
+  in the two core package verifiers has retained regression evidence.
+- Intent: expand the core fixture corpora, retain an explicit rescope for the
+  one non-error warning, update the roadmap from current agentic AI evidence,
+  verify, and publish exact-SHA v0.4.3.
+- Context: no runtime package feature work, UI, hosted service, production
+  integration, semantic-truth claim, or empirical calibration claim.
+
+AOF v10.8.0 runtime evidence:
+
+- `upgrade --project .` refreshed managed-project runtime metadata to v10.8.0.
+- `situation-assess --write-artifact .aof/artifacts/runtime/qif-v0.4.3-situation-assessment.json`
+- `run --deep-path` and `answer` framed the request.
+- `problem-statement-record`, `value-hypothesis-record`,
+  `alternative-analysis-record`, `project-charter-record`, and
+  `need-validation-record` wrote the v0.4.3 validation chain.
+- `need-validation-advance` advanced the session to planning.
+- `council-exec --stage planning --required-role Builder --required-role Visionary --required-role Guardian`
+  resolved every required role to a concrete actor before execution.
+- `task-open` and `task-update` assigned TASK-015 to the session.
+- `goal-project --goal-type next-value-slice` projected v0.4.4 runtime package
+  fixture coverage as the next frontier.
+
+Planning council judgment:
+
+- Builder: proceed with rule-by-rule fixture completion using the existing
+  generator and drift-checked corpus pattern.
+- Visionary: proceed; complete verifier claims before adding later agent-facing
+  entities, while recording the trend-led direction now.
+- Guardian: proceed with no veto; retained fixtures prove structural rule
+  enforcement only and must preserve the semantic-truth boundary.
+
+Implementation evidence:
+
+- `tools/fixtures/qif-package-cases.mjs`: 68 retained failing cases.
+- `tools/fixtures/expert-judgment-cases.mjs`: 96 retained failing cases.
+- `tools/run-fixture-tests.mjs`: manifest support for explicit non-error
+  `rescopedRules`.
+- `docs/qif-v0.4.3-core-fixture-coverage.md`: coverage and claim boundary.
+- `docs/qif-roadmap.md`: 2026 agentic trend evidence and v0.5-v1.0 lead roadmap.
+- `RELEASE-NOTES-v0.4.3.md` and
+  `docs/releases/v0.4.3-release-checklist.md`: release surfaces.
+
+Verification before Council review:
+
+- `npm test`: passed.
+- Positive fixtures: 3/3.
+- Negative fixtures: 221/221.
+- Corpus drift: none.
+
+Final review and verification:
+
+- Review council execution:
+  `.aof/artifacts/council/qif-v0.4.3-review-council.json`.
+- Builder, Visionary, and Guardian role results:
+  `.aof/artifacts/execution/role-results/RRES-QIFV043-*-REVIEW.json`.
+- Team output:
+  `.aof/artifacts/execution/team-outputs/TOUT-QIFV043-REVIEW.json`.
+- Approved Council packet:
+  `.aof/artifacts/council/qif-v0.4.3-council-review-packet.json`.
+- Guardian veto: no.
+- Need Validation benchmark: pass.
+- Command routing audit: pass.
+- Organization verification: 229/229 checks pass on the final release tree.
+- Public-residue scan: no personal account, email, legacy repository, user-home,
+  or temporary checkout path remains in the release tree.
+
+Publication, task closure, review-provenance audit, and retrospective are
+recorded after the exact release commit is verified and published.

@@ -414,5 +414,6 @@
       "expect": "fail",
       "errorIncludes": "must explicitly avoid claiming semantic truth."
     }
-  ]
+  ],
+  "rescopedRules": []
 }

@@ -1,0 +1,284 @@
+{
+  "qifVersion": "0.1.0",
+  "packageId": "QIFPKG-SAMPLE-001",
+  "title": "Sample QIF Package",
+  "missions": [
+    {
+      "id": "MIS-QIF-001",
+      "statement": "Evaluate organizational quality by intent, evidence, and loss boundaries rather than activity volume.",
+      "stakeholderRefs": [
+        "STK-ORG-001",
+        "STK-AI-001"
+      ],
+      "contextRefs": [
+        "CTX-QIF-001"
+      ],
+      "status": "active"
+    }
+  ],
+  "stakeholders": null,
+  "contexts": [
+    {
+      "id": "CTX-QIF-001",
+      "scope": "First executable QIF baseline.",
+      "domain": "domain-general organizational quality",
+      "constraints": [
+        "Do not specialize to software testing.",
+        "Do not define quality by page, review, or test counts."
+      ],
+      "assumptions": [
+        "A compact schema and validator can test operational readiness.",
+        "Future real organization corpora can be added as knowledge sources."
+      ],
+      "timeHorizon": "baseline"
+    }
+  ],
+  "risks": [
+    {
+      "id": "RSK-METRIC-001",
+      "statement": "Activity-count metrics may be substituted for quality itself.",
+      "stakeholderRefs": [
+        "STK-ORG-001",
+        "STK-AI-001"
+      ],
+      "contextRefs": [
+        "CTX-QIF-001"
+      ],
+      "severity": "high",
+      "likelihood": "possible",
+      "detectability": "moderate",
+      "riskAppetite": "averse",
+      "lossBoundary": "No verdict may treat count volume as quality unless linked to a Quality Intent, risk, and evidence rationale."
+    },
+    {
+      "id": "RSK-TACIT-001",
+      "statement": "Veteran quality judgment may remain non-transferable if not externalized.",
+      "stakeholderRefs": [
+        "STK-ORG-001"
+      ],
+      "contextRefs": [
+        "CTX-QIF-001"
+      ],
+      "severity": "medium",
+      "likelihood": "likely",
+      "detectability": "hard",
+      "riskAppetite": "cautious",
+      "lossBoundary": "Tacit judgment must be represented through cases, cues, evidence, and reproducible verdict rationale."
+    }
+  ],
+  "knowledgeSources": [
+    {
+      "id": "SRC-THEORY-001",
+      "sourceType": "document",
+      "title": "Quality Theory Report",
+      "owner": "QIF project",
+      "reliability": 0.8,
+      "accessMode": "direct",
+      "extractionMethod": "concept extraction"
+    },
+    {
+      "id": "SRC-EXPERT-001",
+      "sourceType": "expertise",
+      "title": "Expert case adjudication pattern",
+      "owner": "QIF project",
+      "reliability": 0.75,
+      "accessMode": "interview",
+      "extractionMethod": "case-based judgment externalization"
+    }
+  ],
+  "qualityIntents": [
+    {
+      "id": "QIN-METRIC-001",
+      "statement": "Quality verdicts must be grounded in intent-linked evidence, not activity volume.",
+      "purpose": "Prevent metric substitution and Goodhart-style distortion.",
+      "stakeholderRefs": [
+        "STK-ORG-001",
+        "STK-AI-001"
+      ],
+      "contextRefs": [
+        "CTX-QIF-001"
+      ],
+      "riskRefs": [
+        "RSK-METRIC-001"
+      ],
+      "sourceRefs": [
+        "SRC-THEORY-001"
+      ],
+      "governanceOwner": "Guardian",
+      "status": "active",
+      "acceptanceCriteria": [
+        "Any activity-count indicator is marked evidence-only.",
+        "Every verdict cites evidence and confidence inputs."
+      ]
+    },
+    {
+      "id": "QIN-TACIT-001",
+      "statement": "Tacit quality judgment must be externalized into reproducible cases, cues, and verdict rationale.",
+      "purpose": "Make veteran-held quality knowledge usable by humans and AI agents.",
+      "stakeholderRefs": [
+        "STK-ORG-001",
+        "STK-AI-001"
+      ],
+      "contextRefs": [
+        "CTX-QIF-001"
+      ],
+      "riskRefs": [
+        "RSK-TACIT-001"
+      ],
+      "sourceRefs": [
+        "SRC-EXPERT-001"
+      ],
+      "governanceOwner": "Visionary",
+      "status": "active",
+      "acceptanceCriteria": [
+        "Expert judgment is represented as cases and cues.",
+        "Another evaluator can reproduce the verdict path."
+      ]
+    }
+  ],
+  "evidenceItems": [
+    {
+      "id": "EVD-METRIC-001",
+      "sourceRef": "SRC-THEORY-001",
+      "intentRefs": [
+        "QIN-METRIC-001"
+      ],
+      "method": "document analysis",
+      "finding": "The theory explicitly distinguishes activity counts from quality itself.",
+      "polarity": "supports",
+      "confidenceInputs": {
+        "sourceReliability": 0.8,
+        "relevance": 0.9,
+        "coverage": 0.85,
+        "recency": 0.8,
+        "independence": 0.7,
+        "contradictionPenalty": 0.05
+      },
+      "confidence": 0.77,
+      "collectedAt": "2026-06-21"
+    },
+    {
+      "id": "EVD-METRIC-002",
+      "sourceRef": "SRC-EXPERT-001",
+      "intentRefs": [
+        "QIN-METRIC-001",
+        "QIN-TACIT-001"
+      ],
+      "method": "case adjudication",
+      "finding": "A verdict is reproducible when the expert states pass, fail, conditional pass, cue, and loss boundary.",
+      "polarity": "supports",
+      "confidenceInputs": {
+        "sourceReliability": 0.75,
+        "relevance": 0.85,
+        "coverage": 0.7,
+        "recency": 0.9,
+        "independence": 0.65,
+        "contradictionPenalty": 0.02
+      },
+      "confidence": 0.75,
+      "collectedAt": "2026-06-21"
+    }
+  ],
+  "indicators": [
+    {
+      "id": "IND-REVIEW-COUNT-001",
+      "name": "Review count",
+      "metricKind": "activity-count",
+      "value": 3,
+      "unit": "reviews",
+      "interpretation": "evidence-only",
+      "linkedIntentRef": "QIN-METRIC-001",
+      "linkedRiskRef": "RSK-METRIC-001"
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "EVL-QIF-001",
+      "scope": "Baseline package verification.",
+      "evaluatedIntentRefs": [
+        "QIN-METRIC-001",
+        "QIN-TACIT-001"
+      ],
+      "evidenceRefs": [
+        "EVD-METRIC-001",
+        "EVD-METRIC-002"
+      ],
+      "confidencePolicy": {
+        "partialThreshold": 0.55,
+        "achievedThreshold": 0.75
+      },
+      "verdicts": [
+        {
+          "intentRef": "QIN-METRIC-001",
+          "decision": "achieved",
+          "confidence": 0.76,
+          "evidenceRefs": [
+            "EVD-METRIC-001",
+            "EVD-METRIC-002"
+          ],
+          "rationale": "Both theory and case adjudication evidence support the activity-count guardrail.",
+          "residualRisk": "Future packages may still misuse metrics if acceptance gates are bypassed."
+        },
+        {
+          "intentRef": "QIN-TACIT-001",
+          "decision": "partially-achieved",
+          "confidence": 0.75,
+          "evidenceRefs": [
+            "EVD-METRIC-002"
+          ],
+          "rationale": "The sample shows the externalization pattern, but a real expert corpus is still future work.",
+          "residualRisk": "The baseline uses a sample rather than a real organizational expert panel."
+        }
+      ],
+      "evaluatorRefs": [
+        "Visionary",
+        "Builder",
+        "Guardian"
+      ]
+    }
+  ],
+  "governanceEvents": [
+    {
+      "id": "GOV-QIF-001",
+      "eventType": "introduce-intent",
+      "targetRef": "QIN-METRIC-001",
+      "reason": "Prevent activity-count substitution in AI-verifiable quality decisions.",
+      "decision": "Approved for baseline.",
+      "approverRefs": [
+        "Visionary",
+        "Builder",
+        "Guardian"
+      ],
+      "evidenceRefs": [
+        "EVD-METRIC-001",
+        "EVD-METRIC-002"
+      ]
+    }
+  ],
+  "acceptanceGates": [
+    {
+      "id": "GAT-QIF-001",
+      "name": "Executable baseline gate",
+      "requiredArtifactRefs": [
+        "docs/qif-operational-framework.md",
+        "schemas/qif-package.schema.json",
+        "examples/qif-sample-package.json",
+        "tools/validate-qif.mjs"
+      ],
+      "criteria": [
+        {
+          "statement": "The package validates with the local verifier.",
+          "status": "pass"
+        },
+        {
+          "statement": "Activity-count metrics are evidence-only.",
+          "status": "pass"
+        },
+        {
+          "statement": "Verdicts are traceable to evidence.",
+          "status": "pass"
+        }
+      ]
+    }
+  ]
+}

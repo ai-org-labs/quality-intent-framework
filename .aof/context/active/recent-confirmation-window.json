@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-07-12T15:35:56.471Z",
+  "updated_at": "2026-08-10T16:09:19.811Z",
   "entries": [
     {
-      "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Executable pre-implementation review schemas, example packages, verifier rules, and pilot evidence remain future work.",
-      "recorded_at": "2026-06-24T17:31:51.412Z",
-      "expectation_state": "The release slice updates QIF to v0.3.1 as a docs-only pre-implementation review and done-before quality gate milestone with package metadata, changelog, release notes, Council review evidence, and verification.",
-      "mismatch_state": "Executable pre-implementation review schemas, example packages, verifier rules, and pilot evidence remain future work.",
-      "scale_direction": "Publish v0.3.1 and use a later slice for executable pre-implementation review records and verifier rules.",
-      "source_session_id": "SESS-QIFV031R",
-      "source_decision_record_id": "DEC-QIFV031R-001"
-    },
-    {
-      "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Complete rule-by-rule fixture coverage is still open for qif-package, expert-judgment, and runtime package surfaces other than quality-gate.",
-      "recorded_at": "2026-07-07T17:36:59.594Z",
-      "expectation_state": "The implementation generalized the retained fixture runner and added selected qif-package and expert-judgment negative fixture corpora while preserving the quality-gate corpus.",
-      "mismatch_state": "Complete rule-by-rule fixture coverage is still open for qif-package, expert-judgment, and runtime package surfaces other than quality-gate.",
-      "scale_direction": "Use a follow-on v0.4.x slice to extend complete retained negative coverage to the remaining verifier surfaces.",
-      "source_session_id": "SESS-QIFV041",
+      "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "answer": "Cover the official ai-org-labs/quality-intent-framework repository: roadmap, schemas, examples, validators, retained fixtures, AOF evidence, release documentation, Git tag, and GitHub Release. The nearest implementation slice is v0.4.3 complete core fixture coverage. Out of scope are UI, hosted services, production integrations, claims of semantic truth, and starting later roadmap implementations before v0.4.3 is released.",
+      "recorded_at": "2026-08-10T16:01:53.464Z",
+      "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
+      "mismatch_state": null,
+      "scale_direction": "complete need validation before planning",
+      "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
       "source_decision_record_id": null
     },
     {
-      "question": "まだ解くべき問題は同じか",
-      "answer": "はい。v0.4.1では最初の非quality-gate fixture拡張を完了し、次は完全な非quality-gate verifier fixture coverageを広げる。",
-      "recorded_at": "2026-07-07T17:37:13.061Z",
-      "expectation_state": "v0.4.1 is a hardening slice, not a concept redesign.",
-      "mismatch_state": "Complete fixture coverage remains open for several verifier surfaces.",
-      "scale_direction": "Use the next v0.4.x slice for complete retained negative coverage expansion.",
-      "source_session_id": "SESS-QIFV041",
+      "question": "How should improvement success be judged: which metric or end state matters most?",
+      "answer": "Success means the roadmap names at least three future releases grounded in current primary-source AI trends, every implemented structural rule in validate-qif.mjs and validate-expert-judgment.mjs has a retained negative fixture or explicit justified rescope, npm test is green with drift checking, AOF v10.8.0 planning/review/verification evidence is green, and the exact verified commit is published as QIF v0.4.3 on ai-org-labs.",
+      "recorded_at": "2026-08-10T16:01:53.465Z",
+      "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
+      "mismatch_state": null,
+      "scale_direction": "complete need validation before planning",
+      "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
       "source_decision_record_id": null
+    },
+    {
+      "question": "need validation で何が確定したか",
+      "answer": "The nearest accepted release target is v0.4.3. New agentic features are deferred until the core verifier claims are regression-proven; the roadmap is updated now so later slices address current and next-wave agent quality risks in order.",
+      "recorded_at": "2026-08-10T16:02:38.354Z",
+      "expectation_state": "reframed",
+      "mismatch_state": null,
+      "scale_direction": "advance toward planning",
+      "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
+      "source_decision_record_id": "DEC-MSNF6ZYN-80OC10"
     }
   ]
 }

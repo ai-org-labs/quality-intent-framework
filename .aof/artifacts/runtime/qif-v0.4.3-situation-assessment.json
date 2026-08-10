@@ -1,0 +1,31 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-08-10T16:01:32.177Z",
+  "project_root": ".",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "QIF needs standalone pre-implementation review and negative acceptance guidance so users can block mistaken quality hypotheses before implementation, not only validate structure after implementation.",
+  "next_value_slice": "Complete non-quality-gate verifier fixture coverage, then address remaining v0.4 runtime-only entities.",
+  "current_runtime_stage": "frontier-definition-needed",
+  "primary_frontier_task": null,
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [
+    {
+      "code": "stale-alignment-pulse",
+      "severity": "warning",
+      "summary": "The stored alignment pulse points at tasks that are no longer current open work.",
+      "artifact_ref": ".aof/context/active/alignment-pulse.json"
+    }
+  ],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Refresh roadmap guidance from the current live frontier instead of the stale alignment pulse.",
+    "prioritized_task_ids": [],
+    "scale_direction": "Define or reconcile the next frontier before expanding execution."
+  },
+  "recommended_action": {
+    "recommended_action": "Refresh roadmap guidance from the current live frontier instead of the stale alignment pulse.",
+    "rationale": "The saved alignment pulse points at tasks that are no longer current open work.",
+    "artifact_ref": ".aof/context/active/alignment-pulse.json"
+  }
+}

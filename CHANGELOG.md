@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.4.3
+
+- Completed retained negative fixture coverage for every implemented error branch in `tools/validate-qif.mjs` and `tools/validate-expert-judgment.mjs`.
+- Expanded `qif-package` retained negative checks from 6 to 68 and `expert-judgment` checks from 6 to 96.
+- Increased the standing fixture suite from 69 to 221 negative checks while preserving 3 positive checks and byte-for-byte corpus drift detection.
+- Added manifest `rescopedRules` for the intentionally non-failing review-history inference warning.
+- Added `docs/qif-v0.4.3-core-fixture-coverage.md` and `docs/releases/v0.4.3-release-checklist.md`.
+- Revalidated the long-term roadmap against 2026 primary-source trends in multi-turn agent evals, long-horizon and multi-agent work, persistent tool-using harnesses, protocol-connected tools, and outcome economics.
+- Added an explicit v0.9 Anticipatory Quality Intent Twin horizon while preserving the boundary that synthetic scenarios cannot satisfy operational verdicts.
+- Recorded the v0.4.3 development and release path with AOF v10.8.0.
+
 ## v0.4.2
 
 - Added `docs/qif-quality-aspect-taxonomy.md`, defining canonical Quality Aspects as discovery lenses rather than checklist categories.

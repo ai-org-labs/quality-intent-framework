@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-08-10T16:02:21.744Z",
+  "problem_statement_id": "PST-MSNF6N5C-GHJCTD",
+  "affected_party": "QIF maintainers and adopters relying on verifier regressions",
+  "actual_problem": "Core qif-package and expert-judgment verifier rules do not yet have complete retained negative fixtures, so a rule can be weakened without the test suite proving the loss",
+  "why_it_matters": "QIF's executable quality claims depend on verifier rules remaining regression-resistant and auditable",
+  "why_now": "v0.4.2 is released and the accepted v0.4.x roadmap names complete core fixture coverage as the immediate v0.4.3 frontier",
+  "evidence_refs": [
+    "docs/qif-v0.4.x-release-roadmap.md",
+    "docs/qif-roadmap.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MSNF61BP-7D7F8I"
+}

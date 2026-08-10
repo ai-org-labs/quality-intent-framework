@@ -26,7 +26,11 @@ import process from "node:process";
 import { execFileSync } from "node:child_process";
 
 import { cases as qifPackageCases, spec as qifPackageSpec } from "./fixtures/qif-package-cases.mjs";
-import { cases as expertJudgmentCases, spec as expertJudgmentSpec } from "./fixtures/expert-judgment-cases.mjs";
+import {
+  cases as expertJudgmentCases,
+  spec as expertJudgmentSpec,
+  warningRulesRescoped as expertJudgmentWarningRulesRescoped
+} from "./fixtures/expert-judgment-cases.mjs";
 import { cases as qualityGateCases, spec as qualityGateSpec } from "./fixtures/quality-gate-cases.mjs";
 
 const projectRoot = process.cwd();
@@ -38,7 +42,11 @@ const emitDir = emitMode ? args[emitIndex + 1] : null;
 const REBUILD_HINT = "run `npm run build-fixtures` to regenerate the committed corpus.";
 const fixtureSuites = [
   { ...qifPackageSpec, cases: qifPackageCases },
-  { ...expertJudgmentSpec, cases: expertJudgmentCases },
+  {
+    ...expertJudgmentSpec,
+    cases: expertJudgmentCases,
+    rescopedRules: expertJudgmentWarningRulesRescoped
+  },
   { ...qualityGateSpec, cases: qualityGateCases }
 ];
 
@@ -81,7 +89,8 @@ function buildSuiteCorpus(suite) {
   const manifest = {
     description: `QIF ${suite.suiteId} negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/${suite.filePrefix}-cases.mjs; do not edit by hand.`,
     positives: positivePackages,
-    negatives
+    negatives,
+    rescopedRules: suite.rescopedRules || []
   };
   files.set("manifest.json", serialize(manifest));
   return { files, negatives };

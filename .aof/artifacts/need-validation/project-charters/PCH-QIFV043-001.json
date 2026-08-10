@@ -1,0 +1,23 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-08-10T16:02:37.939Z",
+  "project_charter_id": "PCH-MSNF6ZN7-JEO3UT",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV043-001.json",
+  "validated_objective": "Release QIF v0.4.3 with complete retained negative coverage for the two core validators and a trend-informed forward roadmap",
+  "scope": [
+    "Map every implemented qif-package verifier rule to a retained negative case",
+    "Map every implemented expert-judgment verifier rule to a retained negative case",
+    "Update the roadmap with at least three explicit future releases grounded in primary-source agentic AI trends",
+    "Verify and publish the exact commit as v0.4.3"
+  ],
+  "constraints": [
+    "Do not claim semantic truth, empirical calibration, or production safety from structural fixtures",
+    "Do not implement v0.4.4 or later feature slices in this release"
+  ],
+  "expected_outcomes": [
+    "Silent weakening of either core validator is caught by npm test",
+    "The roadmap leads current eval, long-horizon agent, multi-agent, and tool-protocol trends through outcome-calibrated quality intent governance"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MSNF61BP-7D7F8I"
+}

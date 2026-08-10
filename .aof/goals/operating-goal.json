@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "QIF needs standalone pre-implementation review and negative acceptance guidance so users can block mistaken quality hypotheses before implementation, not only validate structure after implementation.",
-  "updated_at": "2026-07-12T15:35:56.471Z",
+  "content": "Complete v0.4.3 core verifier fixture coverage now, while updating the future roadmap toward outcome-grounded, long-horizon, multi-agent quality governance",
+  "updated_at": "2026-08-10T16:09:19.811Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MQSAL5T6-2P3E8G",
-  "source_decision_record_id": "DEC-MQSAN8HN-WW8N75",
+  "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
+  "source_decision_record_id": "DEC-MSNF6ZYN-80OC10",
   "declared_complete_at": null
 }

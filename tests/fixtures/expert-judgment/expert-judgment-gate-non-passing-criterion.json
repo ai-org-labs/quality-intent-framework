@@ -1,0 +1,657 @@
+{
+  "frameworkVersion": "0.1.0",
+  "packageId": "EJPKG-SAMPLE-001",
+  "title": "Sample Expert Judgment Package",
+  "stakeholders": [
+    {
+      "id": "STK-CUST-001",
+      "name": "Customer",
+      "category": "external"
+    },
+    {
+      "id": "STK-ORG-001",
+      "name": "Organization",
+      "category": "organization"
+    },
+    {
+      "id": "STK-AUD-001",
+      "name": "Auditor",
+      "category": "assurance"
+    }
+  ],
+  "knowledgeSources": [
+    {
+      "id": "SRC-INT-001",
+      "sourceType": "interview",
+      "title": "Veteran review interviews",
+      "reliability": 0.82
+    },
+    {
+      "id": "SRC-REV-001",
+      "sourceType": "review-comment",
+      "title": "Review comments and approval history",
+      "reliability": 0.74
+    },
+    {
+      "id": "SRC-AUD-001",
+      "sourceType": "audit-record",
+      "title": "Audit and incident records",
+      "reliability": 0.86
+    }
+  ],
+  "cases": [
+    {
+      "id": "CAS-SW-001",
+      "title": "Permission broadening change",
+      "domain": "software",
+      "context": "Code review for authorization logic",
+      "presentedFacts": [
+        "The change passes automated tests.",
+        "An authorization rule is broadened.",
+        "No threat rationale is attached."
+      ],
+      "availableEvidence": [
+        "diff review",
+        "test results",
+        "threat model absent"
+      ],
+      "actualOutcome": "Request was held for redesign.",
+      "stakeholderRefs": [
+        "STK-CUST-001",
+        "STK-ORG-001"
+      ],
+      "sourceRef": "SRC-INT-001"
+    },
+    {
+      "id": "CAS-OPS-001",
+      "title": "Night-shift physical check skipped",
+      "domain": "operations",
+      "context": "Operations handoff under time pressure",
+      "presentedFacts": [
+        "Dashboard indicators are normal.",
+        "The last manual inspection is stale.",
+        "Operator wants to skip local confirmation."
+      ],
+      "availableEvidence": [
+        "dashboard trends",
+        "inspection log"
+      ],
+      "actualOutcome": "Escalated and local check performed.",
+      "stakeholderRefs": [
+        "STK-ORG-001"
+      ],
+      "sourceRef": "SRC-INT-001"
+    },
+    {
+      "id": "CAS-ACC-001",
+      "title": "Revenue booking with missing fulfillment proof",
+      "domain": "accounting",
+      "context": "Quarter-end accounting review",
+      "presentedFacts": [
+        "Commercial approval exists.",
+        "Delivery confirmation is missing.",
+        "Quarter close pressure is high."
+      ],
+      "availableEvidence": [
+        "approval email",
+        "contract",
+        "missing delivery receipt"
+      ],
+      "actualOutcome": "Revenue recognition deferred.",
+      "stakeholderRefs": [
+        "STK-ORG-001",
+        "STK-AUD-001"
+      ],
+      "sourceRef": "SRC-AUD-001"
+    },
+    {
+      "id": "CAS-MTN-001",
+      "title": "Reuse worn gasket",
+      "domain": "maintenance",
+      "context": "Restart preparation after inspection",
+      "presentedFacts": [
+        "The gasket still seals at rest.",
+        "Wear is near the failure threshold.",
+        "Replacement would delay restart."
+      ],
+      "availableEvidence": [
+        "inspection photos",
+        "wear measurement",
+        "restart schedule"
+      ],
+      "actualOutcome": "Replacement required before restart.",
+      "stakeholderRefs": [
+        "STK-ORG-001"
+      ],
+      "sourceRef": "SRC-INT-001"
+    },
+    {
+      "id": "CAS-ADM-001",
+      "title": "Urgent procurement with missing approval",
+      "domain": "administration",
+      "context": "Administrative approval under onboarding urgency",
+      "presentedFacts": [
+        "Request is labeled urgent.",
+        "Budget owner approval is missing.",
+        "Onboarding start date is near."
+      ],
+      "availableEvidence": [
+        "procurement request",
+        "approval chain",
+        "onboarding schedule"
+      ],
+      "actualOutcome": "Emergency waiver path required.",
+      "stakeholderRefs": [
+        "STK-ORG-001",
+        "STK-AUD-001"
+      ],
+      "sourceRef": "SRC-REV-001"
+    },
+    {
+      "id": "CAS-SW-002",
+      "title": "Permission change with explicit threat rationale",
+      "domain": "software",
+      "context": "Code review with exception evidence",
+      "presentedFacts": [
+        "An authorization rule changes.",
+        "Threat rationale is documented.",
+        "Negative tests demonstrate denied access for excluded roles."
+      ],
+      "availableEvidence": [
+        "diff review",
+        "threat rationale",
+        "negative tests"
+      ],
+      "actualOutcome": "Approved with trace note.",
+      "stakeholderRefs": [
+        "STK-CUST-001",
+        "STK-ORG-001"
+      ],
+      "sourceRef": "SRC-REV-001"
+    }
+  ],
+  "cues": [
+    {
+      "id": "CUE-SW-001",
+      "statement": "Authorization scope changed without threat rationale",
+      "cueType": "document-gap",
+      "detectionMethod": "review diff against expected rationale",
+      "salience": 0.92,
+      "ambiguityNotes": "May be harmless only if scope reduction or equivalent negative evidence exists."
+    },
+    {
+      "id": "CUE-OPS-001",
+      "statement": "Remote dashboard is normal while local inspection evidence is stale",
+      "cueType": "missing-evidence",
+      "detectionMethod": "compare dashboard state with inspection freshness",
+      "salience": 0.84,
+      "ambiguityNotes": "Dashboard health is insufficient when field drift is plausible."
+    },
+    {
+      "id": "CUE-ACC-001",
+      "statement": "Recognition approval exists without completion evidence",
+      "cueType": "missing-evidence",
+      "detectionMethod": "match booking claim to fulfillment proof",
+      "salience": 0.9,
+      "ambiguityNotes": "Commercial certainty is not accounting completion evidence."
+    },
+    {
+      "id": "CUE-MTN-001",
+      "statement": "Component still functions but is near tolerated wear limit",
+      "cueType": "structural-risk",
+      "detectionMethod": "compare measurement to wear threshold",
+      "salience": 0.88,
+      "ambiguityNotes": "Current function can hide restart failure risk."
+    },
+    {
+      "id": "CUE-ADM-001",
+      "statement": "Urgency request is used to bypass delegated approval authority",
+      "cueType": "exception-signal",
+      "detectionMethod": "compare urgency claim to approval chain",
+      "salience": 0.81,
+      "ambiguityNotes": "Emergency path is distinct from ordinary urgency."
+    }
+  ],
+  "concerns": [
+    {
+      "id": "CON-SW-001",
+      "statement": "Unauthorized access could be normalized through under-explained changes.",
+      "harmMode": "security and trust loss",
+      "affectedParties": [
+        "users",
+        "organization"
+      ],
+      "escalationTrigger": "Access expansion lacks explicit rationale or negative evidence."
+    },
+    {
+      "id": "CON-OPS-001",
+      "statement": "Field degradation could be missed if remote signals are treated as sufficient.",
+      "harmMode": "operational failure",
+      "affectedParties": [
+        "operators",
+        "organization"
+      ],
+      "escalationTrigger": "Local condition is unknown while service continues."
+    },
+    {
+      "id": "CON-ACC-001",
+      "statement": "Financial reporting could be misstated by premature recognition.",
+      "harmMode": "audit and reporting harm",
+      "affectedParties": [
+        "organization",
+        "auditors"
+      ],
+      "escalationTrigger": "Required completion evidence is missing at booking time."
+    },
+    {
+      "id": "CON-MTN-001",
+      "statement": "Restart could depend on parts already beyond acceptable wear tolerance.",
+      "harmMode": "safety and reliability failure",
+      "affectedParties": [
+        "operators",
+        "organization"
+      ],
+      "escalationTrigger": "Component is near or beyond tolerated wear with no approved waiver."
+    },
+    {
+      "id": "CON-ADM-001",
+      "statement": "Authority and auditability could be bypassed in the name of convenience.",
+      "harmMode": "control failure",
+      "affectedParties": [
+        "organization",
+        "auditors"
+      ],
+      "escalationTrigger": "Commitment proceeds without delegated approval."
+    }
+  ],
+  "lossBoundaries": [
+    {
+      "id": "LSB-SW-001",
+      "statement": "No user may gain access they were not entitled to without explicit, reviewable rationale and evidence.",
+      "severity": "critical",
+      "irreversibility": "high",
+      "stakeholderRefs": [
+        "STK-CUST-001",
+        "STK-ORG-001"
+      ],
+      "waiverAuthority": "Security owner"
+    },
+    {
+      "id": "LSB-OPS-001",
+      "statement": "Equipment must not remain in service when local condition is materially unknown.",
+      "severity": "high",
+      "irreversibility": "medium",
+      "stakeholderRefs": [
+        "STK-ORG-001"
+      ],
+      "waiverAuthority": "Operations manager"
+    },
+    {
+      "id": "LSB-ACC-001",
+      "statement": "No revenue recognition without required completion evidence or policy-approved substitute evidence.",
+      "severity": "critical",
+      "irreversibility": "high",
+      "stakeholderRefs": [
+        "STK-ORG-001",
+        "STK-AUD-001"
+      ],
+      "waiverAuthority": "Controller"
+    },
+    {
+      "id": "LSB-MTN-001",
+      "statement": "Restart must not rely on components already beyond tolerated wear margin.",
+      "severity": "high",
+      "irreversibility": "high",
+      "stakeholderRefs": [
+        "STK-ORG-001"
+      ],
+      "waiverAuthority": "Engineering authority"
+    },
+    {
+      "id": "LSB-ADM-001",
+      "statement": "Commitments must not bypass delegated approval authority outside a documented emergency path.",
+      "severity": "medium",
+      "irreversibility": "medium",
+      "stakeholderRefs": [
+        "STK-ORG-001",
+        "STK-AUD-001"
+      ],
+      "waiverAuthority": "Administrative director"
+    }
+  ],
+  "expertJudgments": [
+    {
+      "id": "JDG-SW-001",
+      "caseRef": "CAS-SW-001",
+      "expertRole": "senior reviewer",
+      "judgment": "conditionally-acceptable",
+      "confidence": 0.88,
+      "primaryCueRefs": [
+        "CUE-SW-001"
+      ],
+      "concernRef": "CON-SW-001",
+      "lossBoundaryRef": "LSB-SW-001",
+      "acceptanceConditions": [
+        "Threat rationale is made explicit.",
+        "Negative evidence demonstrates excluded roles remain denied."
+      ],
+      "requiredEvidence": [
+        "Threat rationale",
+        "negative access tests"
+      ],
+      "waiverConditions": [
+        "None for unbounded access broadening."
+      ],
+      "similarCaseNotes": "Past incidents started with small unexplained scope broadening.",
+      "juniorMissRisk": "A junior reviewer may see green tests and miss missing rationale."
+    },
+    {
+      "id": "JDG-OPS-001",
+      "caseRef": "CAS-OPS-001",
+      "expertRole": "shift supervisor",
+      "judgment": "unacceptable",
+      "confidence": 0.83,
+      "primaryCueRefs": [
+        "CUE-OPS-001"
+      ],
+      "concernRef": "CON-OPS-001",
+      "lossBoundaryRef": "LSB-OPS-001",
+      "acceptanceConditions": [
+        "Fresh local confirmation is obtained.",
+        "Approved substitute inspection evidence exists."
+      ],
+      "requiredEvidence": [
+        "Recent physical inspection or approved substitute"
+      ],
+      "waiverConditions": [
+        "Emergency continuation only with manager authorization and compensating controls."
+      ],
+      "similarCaseNotes": "A similar dashboard-only decision once missed a local leak.",
+      "juniorMissRisk": "A junior operator may over-trust summary dashboards."
+    },
+    {
+      "id": "JDG-ACC-001",
+      "caseRef": "CAS-ACC-001",
+      "expertRole": "controller",
+      "judgment": "unacceptable",
+      "confidence": 0.91,
+      "primaryCueRefs": [
+        "CUE-ACC-001"
+      ],
+      "concernRef": "CON-ACC-001",
+      "lossBoundaryRef": "LSB-ACC-001",
+      "acceptanceConditions": [
+        "Completion evidence is received.",
+        "Policy-approved substitute proof is documented."
+      ],
+      "requiredEvidence": [
+        "Delivery confirmation or approved substitute record"
+      ],
+      "waiverConditions": [
+        "No waiver outside stated policy."
+      ],
+      "similarCaseNotes": "Close pressure repeatedly creates pressure to book early.",
+      "juniorMissRisk": "A junior accountant may confuse commercial approval with recognition readiness."
+    },
+    {
+      "id": "JDG-MTN-001",
+      "caseRef": "CAS-MTN-001",
+      "expertRole": "maintenance lead",
+      "judgment": "unacceptable",
+      "confidence": 0.86,
+      "primaryCueRefs": [
+        "CUE-MTN-001"
+      ],
+      "concernRef": "CON-MTN-001",
+      "lossBoundaryRef": "LSB-MTN-001",
+      "acceptanceConditions": [
+        "Part is replaced.",
+        "Engineering waiver and targeted evidence show restart safety."
+      ],
+      "requiredEvidence": [
+        "Wear measurement",
+        "replacement confirmation or engineering waiver"
+      ],
+      "waiverConditions": [
+        "Engineering authority approves bounded temporary use."
+      ],
+      "similarCaseNotes": "Borderline parts often fail after restart stress, not at rest.",
+      "juniorMissRisk": "A junior technician may equate present function with acceptable margin."
+    },
+    {
+      "id": "JDG-ADM-001",
+      "caseRef": "CAS-ADM-001",
+      "expertRole": "administrative manager",
+      "judgment": "conditionally-acceptable",
+      "confidence": 0.79,
+      "primaryCueRefs": [
+        "CUE-ADM-001"
+      ],
+      "concernRef": "CON-ADM-001",
+      "lossBoundaryRef": "LSB-ADM-001",
+      "acceptanceConditions": [
+        "Emergency waiver path is invoked.",
+        "Retrospective audit is scheduled."
+      ],
+      "requiredEvidence": [
+        "Emergency justification",
+        "retrospective review commitment"
+      ],
+      "waiverConditions": [
+        "Emergency authority signs within policy."
+      ],
+      "similarCaseNotes": "Urgency often gets overstated when approvals are inconvenient.",
+      "juniorMissRisk": "A junior coordinator may mistake urgency for authority."
+    }
+  ],
+  "decisionPatterns": [
+    {
+      "id": "PAT-EVD-001",
+      "title": "Missing critical evidence blocks acceptance even when surrounding signals look healthy",
+      "triggerCueRefs": [
+        "CUE-SW-001",
+        "CUE-OPS-001",
+        "CUE-ACC-001",
+        "CUE-MTN-001",
+        "CUE-ADM-001"
+      ],
+      "applicableContext": "Cases where a key risk boundary depends on evidence that is absent, stale, or bypassed despite surrounding signs of normality or urgency.",
+      "concernRef": "CON-ACC-001",
+      "lossBoundaryRef": "LSB-ACC-001",
+      "typicalDecision": "unacceptable",
+      "acceptanceConditions": [
+        "Required evidence is provided.",
+        "A policy-approved substitute evidence path exists and is documented."
+      ],
+      "evidenceRequired": [
+        "Primary evidence for the gated decision or explicit approved substitute"
+      ],
+      "exceptions": [
+        "Conditionally acceptable only through documented waiver authority and compensating controls."
+      ],
+      "counterexampleRefs": [
+        "CEX-SW-001"
+      ],
+      "sourceJudgmentRefs": [
+        "JDG-SW-001",
+        "JDG-OPS-001",
+        "JDG-ACC-001",
+        "JDG-MTN-001",
+        "JDG-ADM-001"
+      ],
+      "confidence": 0.84,
+      "reproductionTestRef": "RPT-EVD-001"
+    }
+  ],
+  "applicabilityBoundaries": [
+    {
+      "id": "APB-EVD-001",
+      "patternRef": "PAT-EVD-001",
+      "includedContexts": [
+        "review or approval depends on evidence that protects a defined loss boundary",
+        "missing evidence changes risk, not just convenience"
+      ],
+      "excludedContexts": [
+        "purely stylistic preference disagreements",
+        "cases where equivalent substitute evidence is already explicitly approved"
+      ],
+      "assumptions": [
+        "Loss boundary is explicit enough to judge.",
+        "Evaluator can inspect allowed evidence types."
+      ],
+      "invalidationSignals": [
+        "Evidence type changes by policy",
+        "context no longer exposes the same harm mode",
+        "counterexamples dominate"
+      ]
+    }
+  ],
+  "counterexamples": [
+    {
+      "id": "CEX-SW-001",
+      "caseRef": "CAS-SW-002",
+      "patternRef": "PAT-EVD-001",
+      "distinguishingFactors": [
+        "Threat rationale is explicit.",
+        "Negative tests address the excluded-role concern."
+      ],
+      "effectOnPattern": "narrow-boundary"
+    }
+  ],
+  "qualityIntentDerivations": [
+    {
+      "id": "QDR-EVD-001",
+      "patternRefs": [
+        "PAT-EVD-001"
+      ],
+      "derivedIntentStatement": "Acceptance decisions must be grounded in evidence that explicitly protects the relevant loss boundary; normal-looking surrounding signals are not sufficient substitutes.",
+      "rationale": "Across domains, experts rejected or constrained decisions when key protective evidence was missing, stale, or bypassed.",
+      "status": "validated",
+      "qifIntentRef": "QIN-EVIDENCE-BOUNDARY-001"
+    }
+  ],
+  "reproductionTests": [
+    {
+      "id": "RPT-EVD-001",
+      "patternRef": "PAT-EVD-001",
+      "evaluatorType": "ai-agent",
+      "usesUnseenCases": true,
+      "unseenCaseRefs": [
+        "CAS-SW-002",
+        "CAS-ADM-001"
+      ],
+      "expectedDecisions": [
+        {
+          "caseRef": "CAS-SW-002",
+          "decision": "conditionally-acceptable"
+        },
+        {
+          "caseRef": "CAS-ADM-001",
+          "decision": "conditionally-acceptable"
+        }
+      ],
+      "observedAgreement": 0.81,
+      "failureAnalysis": [
+        "One evaluator initially over-generalized the pattern to reject all missing-approval cases, then corrected after reading the waiver path."
+      ],
+      "result": "pass"
+    }
+  ],
+  "organizationalQualityCultures": [
+    {
+      "id": "CUL-ORG-001",
+      "name": "Boundary-protective quality culture",
+      "nonNegotiableLossBoundaryRefs": [
+        "LSB-SW-001",
+        "LSB-OPS-001",
+        "LSB-ACC-001"
+      ],
+      "preferredEvidence": [
+        "Primary evidence close to the boundary",
+        "negative evidence for excluded harms",
+        "explicit waiver records when exceptions are used"
+      ],
+      "riskAppetite": "Conservative on irreversible harm, conditional on administrative urgency when waiver authority is explicit.",
+      "escalationNorms": [
+        "Escalate when key evidence is missing but pressure is high.",
+        "Escalate when local state is unknown.",
+        "Escalate when authority bypass is proposed."
+      ],
+      "waiverPractices": [
+        "Waivers are allowed only through named authority and retrospective audit."
+      ],
+      "repeatedFears": [
+        "Silent broadening",
+        "premature recognition",
+        "hidden restart risk",
+        "convenience overriding control"
+      ],
+      "qualityTradeoffs": [
+        "Speed is secondary to boundary protection.",
+        "Urgency can modify route but not erase evidence needs."
+      ],
+      "subgroupDifferences": [
+        "Operations emphasizes field confirmation.",
+        "Accounting emphasizes documentary completion evidence.",
+        "Administration tolerates emergency paths more than software security does."
+      ],
+      "patternRefs": [
+        "PAT-EVD-001"
+      ]
+    }
+  ],
+  "reviewHistoryInferences": [
+    {
+      "id": "INF-REV-001",
+      "sourceType": "review-comments",
+      "sourceRefs": [
+        "review-comment-77",
+        "review-comment-91",
+        "approval-log-14"
+      ],
+      "inferredPatternSummary": "Comments repeatedly block acceptance when protective evidence is absent despite apparently normal progress signals.",
+      "supportingClues": [
+        "'Need explicit rationale before approval'",
+        "'dashboard alone is not enough'",
+        "'cannot book until fulfillment proof exists'"
+      ],
+      "confidence": 0.72,
+      "status": "candidate"
+    }
+  ],
+  "governanceEvents": [
+    {
+      "id": "GOV-EJF-001",
+      "eventType": "introduce-pattern",
+      "targetRef": "PAT-EVD-001",
+      "reason": "Cross-domain expert judgments revealed a stable protective pattern around missing critical evidence.",
+      "decision": "Validated for baseline use with bounded applicability."
+    }
+  ],
+  "acceptanceGates": [
+    {
+      "id": "GAT-EJF-001",
+      "name": "Expert judgment baseline gate",
+      "requiredArtifactRefs": [
+        "docs/expert-judgment-framework.md",
+        "schemas/expert-judgment-package.schema.json",
+        "examples/expert-judgment-sample-package.json",
+        "tools/validate-expert-judgment.mjs"
+      ],
+      "criteria": [
+        {
+          "statement": "Every validated pattern cites cues, concern, loss boundary, source judgments, and reproduction test.",
+          "status": "fail"
+        },
+        {
+          "statement": "Review history inference remains candidate until validated.",
+          "status": "pass"
+        },
+        {
+          "statement": "Unseen-case reproduction test passes with acceptable agreement.",
+          "status": "pass"
+        }
+      ]
+    }
+  ]
+}

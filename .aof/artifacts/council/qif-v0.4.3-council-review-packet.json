@@ -1,0 +1,42 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-08-10T16:11:42.997Z",
+  "review_packet_id": "CREV-MSNFIO7P-1YYUNK",
+  "council_id": "QIF-V043-COUNCIL",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve QIF v0.4.3 for exact-SHA publication",
+  "rationale": "Core structural verifier branches have retained negative coverage, tests and AOF audits pass, the roadmap is grounded in primary trend evidence, and Guardian records no veto.",
+  "recommendation": "commit, reverify, push, tag v0.4.3, and publish the GitHub Release",
+  "target_audience": "QIF maintainers and adopters",
+  "expected_user_reaction": "Trust structural regression claims while retaining semantic review responsibility",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "core-fixture-coverage-complete",
+  "diagnosis_confidence": 0.93,
+  "diagnosis_evidence_refs": [
+    "docs/qif-v0.4.3-core-fixture-coverage.md"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [
+    ".aof/artifacts/execution/team-outputs/TOUT-QIFV043-REVIEW.json"
+  ],
+  "role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV043-BUILDER-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV043-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV043-GUARDIAN-REVIEW.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/verification/need-validation-benchmark-qif-v0.4.3.json",
+    ".aof/artifacts/verification/command-routing-audit-qif-v0.4.3.json",
+    "docs/releases/v0.4.3-release-checklist.md"
+  ],
+  "follow_up_task_ids": [
+    "TASK-015"
+  ],
+  "escalation_required": false,
+  "source_task_id": "TASK-015",
+  "source_parent_session_id": "SESS-MSNF5VM7-NZD3Q9",
+  "source_decision_record_id": "DEC-MSNF6ZYN-80OC10"
+}

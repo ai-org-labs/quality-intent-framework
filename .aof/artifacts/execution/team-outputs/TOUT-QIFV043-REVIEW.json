@@ -1,0 +1,36 @@
+{
+  "packet_type": "team-output",
+  "recorded_at": "2026-08-10T16:11:42.859Z",
+  "team_output_id": "TOUT-MSNFIO3V-CSYDJL",
+  "team_id": "QIF-V043-COUNCIL",
+  "stage": "review",
+  "expected_roles": [
+    "Builder",
+    "Visionary",
+    "Guardian"
+  ],
+  "received_roles": [
+    "Builder",
+    "Visionary",
+    "Guardian"
+  ],
+  "missing_roles": [],
+  "aggregate_state": "ready-for-council-review",
+  "blocking_signals": [],
+  "recommended_next_step": "publish the exact verified commit as v0.4.3",
+  "joined_role_result_refs": [
+    ".aof/artifacts/execution/role-results/RRES-QIFV043-BUILDER-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV043-VISIONARY-REVIEW.json",
+    ".aof/artifacts/execution/role-results/RRES-QIFV043-GUARDIAN-REVIEW.json"
+  ],
+  "artifact_refs": [
+    "docs/qif-v0.4.3-core-fixture-coverage.md",
+    "docs/qif-roadmap.md",
+    "RELEASE-NOTES-v0.4.3.md"
+  ],
+  "decision_required": false,
+  "summary": "All required roles approve v0.4.3; 221/221 negative checks pass and Guardian records no veto.",
+  "source_task_id": "TASK-015",
+  "source_parent_session_id": "SESS-MSNF5VM7-NZD3Q9",
+  "source_decision_record_id": "DEC-MSNF6ZYN-80OC10"
+}

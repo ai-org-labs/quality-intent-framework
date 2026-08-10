@@ -53,6 +53,8 @@ Exit evidence:
 
 ## v0.4.3 - Complete Core Fixture Coverage
 
+Status: implemented for release.
+
 Intent: finish rule-by-rule retained negative coverage for the core package verifiers.
 
 Scope:
@@ -65,6 +67,15 @@ Exit evidence:
 
 - every structural rule in `tools/validate-qif.mjs` and `tools/validate-expert-judgment.mjs` has at least one retained failing fixture;
 - deleting or weakening any covered rule breaks `npm test`.
+
+Implementation evidence:
+
+- `qif-package`: 68 retained failing fixtures;
+- `expert-judgment`: 96 retained failing fixtures;
+- one intentionally non-failing expert-judgment warning is explicitly listed
+  under manifest `rescopedRules`;
+- complete standing suite: 3/3 positive and 221/221 negative checks;
+- coverage boundary: `docs/qif-v0.4.3-core-fixture-coverage.md`.
 
 ## v0.4.4 - Runtime Package Fixture Coverage
 
@@ -82,6 +93,10 @@ Exit evidence:
 
 - retained invalid fixtures exist for every implemented runtime verifier rule;
 - coverage gaps are recorded as explicit follow-on work, not silent omissions.
+
+Trend alignment: add trajectory/outcome and environment-provenance fixture
+shapes only as forward-compatible test inputs; canonical Living QIF Ledger
+semantics remain a v0.5 change.
 
 ## v0.4.5 - Evidence Vocabulary And Retention
 

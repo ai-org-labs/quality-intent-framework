@@ -1,7 +1,7 @@
 {
   "artifact_type": "command-registry",
   "registry_format_version": 1,
-  "generated_at": "2026-07-12T15:35:56.471Z",
+  "generated_at": "2026-08-10T16:09:19.811Z",
   "detail_ref": "docs/cli-reference.md",
   "commands": [
     {
@@ -541,6 +541,111 @@
       "detail_ref": "docs/cli-reference.md"
     },
     {
+      "command": "capability-coverage-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify release-critical work has required roles, skills, actor assignments, assignment evaluations, execution gates, Council review, output contract, and acceptance evidence before build.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "cutoff-task-id?",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "capability coverage audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "capability-first-release-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify a release is capability-first: product capabilities are registered, active release delta exists, release notes start with user capability, and README exposes the capability matrix.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "capability-first release audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "capability-release-delta-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a release capability delta with the one-minute value explanation, thirty-second version delta, changed capability IDs, value evidence, and product review trigger.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "release-version",
+        "release-ref",
+        "work-item-id",
+        "work-item-ref",
+        "one-minute-value-explanation",
+        "thirty-second-version-delta",
+        "new-capability-id?",
+        "updated-capability-id?",
+        "removed-capability-id?",
+        "value-evidence-ref",
+        "product-review-trigger",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "capability release delta artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
       "command": "cli-help-benchmark",
       "category": "verify",
       "safety_level": "safe_read",
@@ -691,6 +796,46 @@
       "detail_ref": "docs/cli-reference.md"
     },
     {
+      "command": "context-integrity-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a context dependency record that declares what a work item read, required, missed, and could not prove.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "work-item-id",
+        "work-item-ref",
+        "session-ref",
+        "context-pack-ref?",
+        "declared-context-ref?",
+        "required-context-ref?",
+        "missing-context-ref?",
+        "hidden-context-signal?",
+        "integrity-status",
+        "not-proven",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "context integrity artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
       "command": "context-pack",
       "category": "execute",
       "safety_level": "safe_local_write",
@@ -718,6 +863,37 @@
       ],
       "outputs": [
         "context pack artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "context-reference-integrity-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify that implementation-grade work has resolvable context, external reference integrity, and explicit hidden-context boundaries before release sign-off.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "cutoff-task-id?",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "context/reference integrity audit result"
       ],
       "detail_ref": "docs/cli-reference.md"
     },
@@ -1263,6 +1439,193 @@
       "detail_ref": "docs/cli-reference.md"
     },
     {
+      "command": "external-reference-integrity-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write freshness, availability, source-of-truth, and not-proven boundaries for an external reference used by AOF work.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "external-ref",
+        "external-ref-artifact-ref",
+        "source-system",
+        "url",
+        "relationship",
+        "source-of-truth",
+        "sync-policy",
+        "usage-purpose",
+        "freshness-status",
+        "availability-status",
+        "not-proven",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "external reference integrity artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "external-resource-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify external runtime resources and use records have resolvable refs, approved operations, required boundaries, provenance, and no hidden external-write authority.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "external resource audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "external-resource-use-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a governed use record linking an external runtime resource to a task, session, operation, approval status, outputs, risks, decisions, and not-proven boundary.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "work-item-id",
+        "work-item-ref",
+        "session-ref",
+        "resource-ref",
+        "use-purpose",
+        "operation-type",
+        "approval-status",
+        "execution-status",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "external resource use artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "external-runtime-resource-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a governed external actor/tool/provider/reference resource with source-of-truth, permission, freshness, availability, approval, side-effect, provenance, and not-proven boundaries.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "resource-kind",
+        "display-name",
+        "canonical-ref",
+        "source-system",
+        "owner-ref",
+        "source-of-truth",
+        "permission-boundary",
+        "freshness-boundary",
+        "availability-boundary",
+        "approval-boundary",
+        "side-effect-boundary",
+        "allowed-operation",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "external runtime resource artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "externalization-readiness-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify that externalized organization claims have source-of-truth, permission, freshness, availability, approval, provenance, and not-proven boundaries before release sign-off.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "externalization readiness audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
       "command": "go-no-go-visualization",
       "category": "execute",
       "safety_level": "safe_local_write",
@@ -1320,6 +1683,43 @@
       ],
       "outputs": [
         "goal project runtime result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "human-approval-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write an explicit human approval artifact with approver identity, approved scope hash, authentication method, active revocation status, and target operation linkage.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "approver-id",
+        "decision",
+        "approved-scope-hash",
+        "authentication-method",
+        "target-operation-ref",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "human approval artifact"
       ],
       "detail_ref": "docs/cli-reference.md"
     },
@@ -1507,6 +1907,106 @@
       "detail_ref": "docs/cli-reference.md"
     },
     {
+      "command": "mission-control-projection-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify that Mission Control projects requirement coverage, forecast, adoption proof, session, context, release, and Archmap evidence from canonical artifacts.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "Mission Control projection audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "multi-actor-pilot-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify multi-actor work is not claimed without core Council roles, actor roster evidence, actor handoffs, Council judgment, and Work Execution Packet closure.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "cutoff-task-id?",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "multi-actor pilot audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "multi-actor-pilot-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a bounded multi-actor pilot record that links Council roster, actor roster, actor handoffs, Council judgment, and Work Execution Packet evidence.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "work-item-id",
+        "work-item-ref",
+        "parent-orchestrator-ref",
+        "council-role",
+        "actor-roster-ref",
+        "actor-output-handoff-ref",
+        "council-judgment-ref",
+        "work-execution-packet-ref",
+        "not-proven",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "multi-actor pilot artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
       "command": "need-validation-advance",
       "category": "execute",
       "safety_level": "safe_local_write",
@@ -1629,6 +2129,84 @@
       "detail_ref": "docs/cli-reference.md"
     },
     {
+      "command": "operator-acceptance-drill-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify operator acceptance drills link approval, reproduction, rollback readiness, outcome evidence, learning update, Mission Control, decision rationale, risk, blockers, and not-proven boundaries.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "operator acceptance drill audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "operator-acceptance-drill-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write an operator acceptance and safety drill decision over the full external runtime chain before controlled provider execution advances.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "operator-ref",
+        "work-item-id",
+        "approval-ref",
+        "reproduction-ref",
+        "rollback-ref",
+        "outcome-ref",
+        "learning-ref",
+        "mission-control-ref",
+        "decision",
+        "decision-rationale",
+        "accepted-risk",
+        "blocker-summary",
+        "next-action",
+        "safety-boundary",
+        "not-proven",
+        "evidence-ref",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "operator acceptance drill artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
       "command": "operator-brief",
       "category": "read",
       "safety_level": "safe_read",
@@ -1685,6 +2263,81 @@
       ],
       "outputs": [
         "operator progress packet"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "operator-validation-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify operator validation feedback records have resolvable release/work/evidence links, clear comprehension/reproduction/acceptance outcomes, escalation for rejected or unclear feedback, and no hidden semantic truth claim.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "operator validation audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "operator-validation-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write governed operator/adopter validation feedback linked to release, work item, Mission Control, evidence refs, outcomes, governance action, provenance, and not-proven boundary.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "operator-ref",
+        "feedback-source",
+        "release-ref",
+        "work-item-id",
+        "work-item-ref",
+        "mission-control-ref",
+        "evidence-ref",
+        "understanding-outcome",
+        "reproduction-outcome",
+        "acceptance-outcome",
+        "feedback-summary",
+        "governance-action",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "operator validation artifact"
       ],
       "detail_ref": "docs/cli-reference.md"
     },
@@ -1866,6 +2519,76 @@
       "detail_ref": "docs/cli-reference.md"
     },
     {
+      "command": "parallel-lane-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify parallel work is not claimed without multiple lane evidence, a join packet, conflict/blocker semantics, Council decision, Work Execution Packet evidence, and upstream multi-actor evidence.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "cutoff-task-id?",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "parallel lane audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "parallel-lane-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a governed parallel lane pilot that links bounded lanes, lane-local evidence, join/conflict semantics, Council decision, Work Execution Packet evidence, and upstream multi-actor evidence.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "work-item-id",
+        "work-item-ref",
+        "parent-multi-actor-pilot-ref",
+        "work-execution-packet-ref",
+        "lane-json",
+        "join-decision",
+        "joined-lane-id",
+        "council-decision-ref",
+        "not-proven",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "parallel lane pilot artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
       "command": "policy-evaluation-report",
       "category": "execute",
       "safety_level": "safe_local_write",
@@ -1927,6 +2650,78 @@
       "detail_ref": "docs/cli-reference.md"
     },
     {
+      "command": "product-value-evidence-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify release value evidence exists and does not confuse internal artifacts, tests, schemas, or dashboards with user-understandable capability value.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "product value evidence audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "product-value-evidence-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write release value evidence that states what a user can now do, before/after capability, a concrete scenario, a five-minute demo, reduced work, removed cognitive load, and understanding outcome.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "release-ref",
+        "work-item-id",
+        "work-item-ref",
+        "mission-control-ref",
+        "capability-statement",
+        "before-state",
+        "after-state",
+        "scenario",
+        "five-minute-demo",
+        "capability-row-json",
+        "evidence-ref",
+        "not-proven",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "product value evidence artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
       "command": "project-charter-record",
       "category": "write",
       "safety_level": "safe_local_write",
@@ -1958,6 +2753,158 @@
       "detail_ref": "docs/cli-reference.md"
     },
     {
+      "command": "provider-adapter-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify provider adapter contracts have resolvable resource/provider refs, freshness checks, approval policy gates, escalation for write-capable modes, provenance, and no hidden external-write authority.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider adapter audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-adapter-pilot-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify provider adapter execution pilots are governed experiments rather than hidden production automation.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider adapter pilot audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-adapter-pilot-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a bounded provider adapter execution pilot record with dry-run/default-deny, approval, provenance, redaction, rollback, stop condition, and not-proven boundaries.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "adapter-ref",
+        "work-item-id",
+        "work-item-ref",
+        "session-ref",
+        "pilot-mode",
+        "approval-status",
+        "expected-external-effect",
+        "allowed-action",
+        "denied-action",
+        "redaction-boundary",
+        "rollback-plan",
+        "provenance-ref",
+        "verification-ref",
+        "stop-condition",
+        "execution-status",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider adapter pilot artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-adapter-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a governed provider adapter contract that binds an external resource to read/write authority, freshness, approval, side-effect, escalation, provenance, and not-proven boundaries.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "display-name",
+        "provider-ref",
+        "resource-ref",
+        "adapter-kind",
+        "operation-mode",
+        "read-authority-boundary",
+        "write-authority-boundary",
+        "freshness-check",
+        "approval-policy-ref",
+        "side-effect-boundary",
+        "escalation-required-for?",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider adapter artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
       "command": "provider-check",
       "category": "read",
       "safety_level": "external_write",
@@ -1983,6 +2930,787 @@
       ],
       "outputs": [
         "provider check summary"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-controlled-execution-candidate-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify controlled provider execution candidates have complete upstream evidence and remain bounded to operator go/no-go or preproduction review without authorizing production execution.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider controlled execution candidate audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-controlled-execution-candidate-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a controlled provider execution candidate that binds the approved target, approval, reproduction, rollback, outcome, learning, operator acceptance, product value, and production boundary evidence before any provider-backed action advances.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "release-ref",
+        "work-item-id",
+        "work-item-ref",
+        "mission-control-ref",
+        "approval-ref",
+        "target-operation-ref",
+        "reproduction-ref",
+        "rollback-ref",
+        "outcome-ref",
+        "learning-ref",
+        "operator-acceptance-ref",
+        "product-value-evidence-ref",
+        "production-boundary-ref",
+        "provider-scope",
+        "controlled-execution-mode",
+        "candidate-status",
+        "expected-provider-effect",
+        "external-write-authorized?",
+        "production-execution-authorized?",
+        "go-no-go-decision",
+        "credential-boundary",
+        "budget-boundary",
+        "rollback-boundary",
+        "monitoring-boundary",
+        "incident-boundary",
+        "stop-condition",
+        "provenance-ref",
+        "verification-ref",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider controlled execution candidate artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-cost-quota-boundary-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify provider cost and quota boundaries have complete upstream refs, positive limits, explicit billing and quota boundaries, stop conditions, and no hidden execution permission beyond the declared budget.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider cost quota boundary audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-cost-quota-boundary-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a provider execution cost and quota boundary record that binds provider scope, budget owner, estimated cost, actual-cost ceiling, token/call/retry limits, rate limit, quota, billing, overage policy, and stop governance before provider-backed execution advances.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "release-ref",
+        "work-item-id",
+        "work-item-ref",
+        "candidate-ref",
+        "approval-ref",
+        "incident-recovery-ref",
+        "provider-scope",
+        "budget-owner-ref",
+        "budget-period",
+        "max-estimated-cost",
+        "max-actual-cost",
+        "currency",
+        "max-tokens",
+        "max-provider-calls",
+        "max-retry-count",
+        "rate-limit-boundary",
+        "quota-boundary",
+        "billing-boundary",
+        "overage-policy",
+        "cost-status",
+        "quota-status",
+        "execution-eligibility",
+        "governance-action",
+        "stop-condition",
+        "evidence-ref",
+        "verification-ref",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider cost quota boundary artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-execution-approval-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify provider execution approval bridge records do not authorize external writes without explicit approval, bounded scope, denied dangerous operations, rollback, credentials, budget, provenance, verification, and stop conditions.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider execution approval audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-execution-approval-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a bounded provider execution approval bridge record that links pilot, adapter, human approval, scope, redaction, rollback, credential, budget, provenance, verification, and stop-condition evidence before any external write.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "pilot-ref",
+        "adapter-ref",
+        "work-item-id",
+        "work-item-ref",
+        "session-ref",
+        "approval-decision",
+        "approved-execution-mode",
+        "target-operation-ref",
+        "execution-scope",
+        "allowed-operation",
+        "denied-operation",
+        "side-effect-boundary",
+        "redaction-boundary",
+        "rollback-plan",
+        "credential-boundary",
+        "budget-boundary",
+        "credential-scope",
+        "budget-json",
+        "rollback-json",
+        "provenance-ref",
+        "verification-ref",
+        "stop-condition",
+        "production-execution-status",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider execution approval artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-execution-reproduction-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify provider execution reproduction proofs can reconstruct approved external runtime actions without implying production execution or provider truth.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider execution reproduction audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-execution-reproduction-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a provider execution reproduction proof record that reconstructs an approved external runtime action from approval, adapter, target, work item, session, input fingerprint, replay evidence, and verification refs.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "approval-ref",
+        "adapter-ref",
+        "target-operation-ref",
+        "work-item-id",
+        "work-item-ref",
+        "session-ref",
+        "replay-mode",
+        "input-fingerprint",
+        "expected-side-effect",
+        "reconstructed-step",
+        "replay-evidence-ref",
+        "verification-ref",
+        "result-status",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider execution reproduction artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-incident-recovery-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify provider incident recovery records have complete upstream refs, explicit detection and containment boundaries, stop conditions, learning linkage, and no hidden resume authority.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider incident recovery audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-incident-recovery-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a provider incident recovery drill record that binds the controlled execution candidate to detection, containment, rollback, recovery, notification, learning, and resume/stop governance evidence.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "release-ref",
+        "work-item-id",
+        "work-item-ref",
+        "candidate-ref",
+        "approval-ref",
+        "reproduction-ref",
+        "rollback-ref",
+        "outcome-ref",
+        "learning-ref",
+        "operator-acceptance-ref",
+        "production-boundary-ref",
+        "incident-scenario",
+        "detection-signal",
+        "severity",
+        "containment-action",
+        "rollback-decision",
+        "recovery-action",
+        "resume-decision",
+        "operator-notification",
+        "learning-update-ref",
+        "governance-action",
+        "recovery-status",
+        "time-to-detect-boundary",
+        "time-to-contain-boundary",
+        "data-loss-boundary",
+        "customer-impact-boundary",
+        "stop-condition",
+        "evidence-ref",
+        "verification-ref",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider incident recovery artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-learning-loop-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify provider learning-loop updates resolve to outcome evidence and record non-blocked learning decisions without hiding uncertainty.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider learning loop audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-learning-loop-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a provider learning-loop update that links an outcome to an accepted, corrected, rollback, escalation, or defer decision and next action.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "outcome-ref",
+        "learning-summary",
+        "decision",
+        "next-action",
+        "update-status",
+        "learning-ref",
+        "evidence-ref",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider learning loop artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-operation-target-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write the concrete provider operation target that approval is bound to, including provider, resource, operation, payload hash, maximum calls, and expiration.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "provider",
+        "resource",
+        "operation",
+        "payload-hash",
+        "payload-summary",
+        "maximum-calls",
+        "expires-at",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider operation target artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-outcome-evidence-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify provider outcome evidence is linked to approval, reproduction, rollback readiness, target operation, and evidence without treating observed outcome as semantic or market truth.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider outcome evidence audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-outcome-evidence-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write bounded provider outcome evidence that links approval, reproduction, rollback readiness, target operation, observed result, verification, semantic truth boundary, and not-proven boundary.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "approval-ref",
+        "reproduction-ref",
+        "rollback-ref",
+        "target-operation-ref",
+        "work-item-id",
+        "session-ref",
+        "expected-outcome",
+        "observed-result",
+        "outcome-status",
+        "evidence-ref",
+        "verification-ref",
+        "semantic-truth-boundary",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider outcome evidence artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-production-boundary-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify provider production boundary candidates have resolvable upstream evidence and explicit pre-production limits, while blocking production execution authorization in the candidate release.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider production boundary audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-production-boundary-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write the pre-production boundary candidate that binds approval, reproduction, rollback, outcome, learning, operator acceptance, product value comprehension, credentials, budget, revocation, monitoring, incident, and human go/no-go limits before production execution can be considered.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "release-ref",
+        "work-item-id",
+        "work-item-ref",
+        "mission-control-ref",
+        "approval-ref",
+        "reproduction-ref",
+        "rollback-ref",
+        "outcome-ref",
+        "learning-ref",
+        "operator-acceptance-ref",
+        "product-value-evidence-ref",
+        "provider-scope",
+        "allowed-operation-class",
+        "execution-eligibility",
+        "credential-boundary",
+        "budget-boundary",
+        "revocation-boundary",
+        "rollback-boundary",
+        "monitoring-boundary",
+        "incident-boundary",
+        "human-go-no-go-boundary",
+        "product-value-comprehension-boundary",
+        "go-no-go-status",
+        "governance-action",
+        "stop-condition",
+        "provenance-ref",
+        "verification-ref",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider production boundary artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-rollback-proof-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify rollback proof records establish rollback readiness or explicit blocking before production execution claims are trusted.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider rollback proof audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "provider-rollback-proof-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a provider rollback proof record that binds rollback readiness to an approval, reproduction proof, target operation, evidence refs, stop conditions, and not-proven boundary.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "approval-ref",
+        "reproduction-ref",
+        "target-operation-ref",
+        "rollback-operation",
+        "rollback-mode",
+        "rollback-supported",
+        "rollback-evidence-ref",
+        "verification-ref",
+        "stop-condition",
+        "result-status",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider rollback proof artifact"
       ],
       "detail_ref": "docs/cli-reference.md"
     },
@@ -2109,6 +3837,76 @@
       ],
       "outputs": [
         "active release manifest"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "requirement-coverage-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify requirement coverage and forecast claims are backed by resolvable requirement records, work links, evidence refs, coverage counts, and explicit forecast/not-proven boundaries.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "cutoff-task-id?",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "requirement coverage audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "requirement-coverage-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a bounded requirement coverage record that links requirements, work items, evidence, coverage counts, forecast boundaries, blockers, and not-proven limits.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "work-item-id",
+        "work-item-ref",
+        "coverage-status?",
+        "requirement-json",
+        "coverage-summary-json",
+        "forecast-json",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "requirement coverage artifact"
       ],
       "detail_ref": "docs/cli-reference.md"
     },
@@ -2412,6 +4210,84 @@
       ],
       "outputs": [
         "self audit record artifact"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "session-export-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify provider-neutral session export claims are backed by required event types, resolvable links, source-of-truth boundaries, redaction boundaries, release-ready boundaries, and not-proven limits.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "cutoff-task-id?",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "session export audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "session-export-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a provider-neutral session export record that links summarized session events to tasks, requirements, tests, risks, decisions, redaction boundaries, and release-ready evidence.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "work-item-id",
+        "work-item-ref",
+        "source-session-ref",
+        "provider-source-json",
+        "event-summary-json",
+        "task-ref",
+        "requirement-ref",
+        "test-evidence-ref",
+        "artifact-ref",
+        "risk-candidate",
+        "decision-candidate",
+        "release-ready-evidence-ref",
+        "redaction-boundary",
+        "release-ready-boundary",
+        "not-proven",
+        "source-task-id",
+        "source-parent-session-id",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "provider-neutral session export artifact"
       ],
       "detail_ref": "docs/cli-reference.md"
     },
@@ -3111,6 +4987,75 @@
       ],
       "outputs": [
         "viewer session"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "work-execution-packet-audit",
+      "category": "verify",
+      "safety_level": "safe_read",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Verify implementation work is not treated as executed without a bounded execution packet and resolvable handoff, lineage, verification, and stop/continue evidence.",
+      "operator_path": "integrity-and-benchmarking",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "cutoff-task-id?",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "work execution packet audit result"
+      ],
+      "detail_ref": "docs/cli-reference.md"
+    },
+    {
+      "command": "work-execution-packet-record",
+      "category": "write",
+      "safety_level": "safe_local_write",
+      "approval_policy": {
+        "default_run_permission": "preapproved",
+        "requires_per_run_approval_for": [
+          "git push",
+          "npm publish",
+          "deploy",
+          "external service write",
+          "secrets access",
+          "billing operation",
+          "destructive operation",
+          "production mutation",
+          "irreversible operation"
+        ]
+      },
+      "purpose": "Write a bounded execution packet that links task, context integrity, actor handoff, execution lineage, verification evidence, and stop/continue decision.",
+      "operator_path": "artifact-recording",
+      "top_command": false,
+      "inputs": [
+        "project",
+        "work-item-id",
+        "work-item-ref",
+        "context-integrity-ref",
+        "actor-handoff-ref",
+        "execution-lineage-ref",
+        "verification-evidence-ref",
+        "stop-continue-decision",
+        "not-proven",
+        "write-artifact?"
+      ],
+      "outputs": [
+        "work execution packet artifact"
       ],
       "detail_ref": "docs/cli-reference.md"
     },

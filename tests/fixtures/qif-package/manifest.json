@@ -16,11 +16,235 @@
   ],
   "negatives": [
     {
+      "file": "qif-package-package-missing-qif-version.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "package qifVersion required",
+      "expect": "fail",
+      "errorIncludes": "package must include non-empty string qifVersion."
+    },
+    {
+      "file": "qif-package-package-missing-package-id.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "package packageId required",
+      "expect": "fail",
+      "errorIncludes": "package must include non-empty string packageId."
+    },
+    {
+      "file": "qif-package-top-level-missions-not-array.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "top-level missions must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level missions must be an array."
+    },
+    {
+      "file": "qif-package-top-level-stakeholders-not-array.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "top-level stakeholders must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level stakeholders must be an array."
+    },
+    {
+      "file": "qif-package-top-level-contexts-not-array.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "top-level contexts must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level contexts must be an array."
+    },
+    {
+      "file": "qif-package-top-level-risks-not-array.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "top-level risks must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level risks must be an array."
+    },
+    {
+      "file": "qif-package-top-level-knowledgeSources-not-array.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "top-level knowledgeSources must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level knowledgeSources must be an array."
+    },
+    {
+      "file": "qif-package-top-level-qualityIntents-not-array.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "top-level qualityIntents must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level qualityIntents must be an array."
+    },
+    {
+      "file": "qif-package-top-level-evidenceItems-not-array.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "top-level evidenceItems must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level evidenceItems must be an array."
+    },
+    {
+      "file": "qif-package-top-level-evaluations-not-array.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "top-level evaluations must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level evaluations must be an array."
+    },
+    {
+      "file": "qif-package-top-level-governanceEvents-not-array.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "top-level governanceEvents must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level governanceEvents must be an array."
+    },
+    {
+      "file": "qif-package-top-level-acceptanceGates-not-array.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "top-level acceptanceGates must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level acceptanceGates must be an array."
+    },
+    {
+      "file": "qif-package-stakeholder-non-object-item.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "indexed entity must be an object",
+      "expect": "fail",
+      "errorIncludes": "stakeholders contains a non-object item."
+    },
+    {
+      "file": "qif-package-stakeholder-missing-id.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "indexed entity requires string id",
+      "expect": "fail",
+      "errorIncludes": "stakeholders item is missing string id."
+    },
+    {
+      "file": "qif-package-stakeholder-duplicate-id.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "indexed entity ids are unique",
+      "expect": "fail",
+      "errorIncludes": "Duplicate id STK-ORG-001 in stakeholders."
+    },
+    {
+      "file": "qif-package-mission-missing-statement.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "mission statement required",
+      "expect": "fail",
+      "errorIncludes": "MIS-QIF-001 must include non-empty string statement."
+    },
+    {
+      "file": "qif-package-mission-missing-stakeholders.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "mission stakeholder references required",
+      "expect": "fail",
+      "errorIncludes": "MIS-QIF-001 must include at least one stakeholder."
+    },
+    {
       "file": "qif-package-mission-broken-stakeholder-ref.json",
       "validator": "tools/validate-qif.mjs",
       "rule": "mission stakeholder references resolve",
       "expect": "fail",
-      "errorIncludes": "MIS-QIF-001 references missing stakeholder"
+      "errorIncludes": "MIS-QIF-001 references missing stakeholder: STK-NOPE-999"
+    },
+    {
+      "file": "qif-package-mission-missing-contexts.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "mission context references required",
+      "expect": "fail",
+      "errorIncludes": "MIS-QIF-001 must include at least one context."
+    },
+    {
+      "file": "qif-package-mission-broken-context-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "mission context references resolve",
+      "expect": "fail",
+      "errorIncludes": "MIS-QIF-001 references missing context: CTX-NOPE-999"
+    },
+    {
+      "file": "qif-package-risk-missing-statement.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "risk statement required",
+      "expect": "fail",
+      "errorIncludes": "RSK-METRIC-001 must include non-empty string statement."
+    },
+    {
+      "file": "qif-package-risk-missing-loss-boundary.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "risk loss boundary required",
+      "expect": "fail",
+      "errorIncludes": "RSK-METRIC-001 must include non-empty string lossBoundary."
+    },
+    {
+      "file": "qif-package-risk-broken-stakeholder-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "risk stakeholder references resolve",
+      "expect": "fail",
+      "errorIncludes": "RSK-METRIC-001 references missing stakeholder: STK-NOPE-999"
+    },
+    {
+      "file": "qif-package-risk-broken-context-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "risk context references resolve",
+      "expect": "fail",
+      "errorIncludes": "RSK-METRIC-001 references missing context: CTX-NOPE-999"
+    },
+    {
+      "file": "qif-package-source-missing-title.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "knowledge source title required",
+      "expect": "fail",
+      "errorIncludes": "SRC-THEORY-001 must include non-empty string title."
+    },
+    {
+      "file": "qif-package-source-reliability-out-of-range.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "knowledge source reliability score range",
+      "expect": "fail",
+      "errorIncludes": "SRC-THEORY-001 reliability must be a number from 0 to 1."
+    },
+    {
+      "file": "qif-package-intent-missing-statement.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "quality intent statement required",
+      "expect": "fail",
+      "errorIncludes": "QIN-METRIC-001 must include non-empty string statement."
+    },
+    {
+      "file": "qif-package-intent-missing-purpose.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "quality intent purpose required",
+      "expect": "fail",
+      "errorIncludes": "QIN-METRIC-001 must include non-empty string purpose."
+    },
+    {
+      "file": "qif-package-intent-active-missing-governance-owner.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "active quality intent governance owner required",
+      "expect": "fail",
+      "errorIncludes": "QIN-METRIC-001 is active but has no governance owner."
+    },
+    {
+      "file": "qif-package-intent-broken-stakeholder-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "quality intent stakeholder references resolve",
+      "expect": "fail",
+      "errorIncludes": "QIN-METRIC-001 references missing stakeholder: STK-NOPE-999"
+    },
+    {
+      "file": "qif-package-intent-broken-context-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "quality intent context references resolve",
+      "expect": "fail",
+      "errorIncludes": "QIN-METRIC-001 references missing context: CTX-NOPE-999"
+    },
+    {
+      "file": "qif-package-intent-broken-risk-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "quality intent risk references resolve",
+      "expect": "fail",
+      "errorIncludes": "QIN-METRIC-001 references missing risk: RSK-NOPE-999"
+    },
+    {
+      "file": "qif-package-intent-broken-source-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "quality intent knowledge source references resolve",
+      "expect": "fail",
+      "errorIncludes": "QIN-METRIC-001 references missing knowledge source: SRC-NOPE-999"
     },
     {
       "file": "qif-package-intent-missing-acceptance-criteria.json",
@@ -30,11 +254,95 @@
       "errorIncludes": "QIN-METRIC-001 must have acceptance criteria."
     },
     {
+      "file": "qif-package-evidence-broken-source-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evidence knowledge source reference resolves",
+      "expect": "fail",
+      "errorIncludes": "EVD-METRIC-001 references missing knowledge source: SRC-NOPE-999"
+    },
+    {
+      "file": "qif-package-evidence-broken-intent-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evidence quality intent references resolve",
+      "expect": "fail",
+      "errorIncludes": "EVD-METRIC-001 references missing quality intent: QIN-NOPE-999"
+    },
+    {
+      "file": "qif-package-evidence-missing-finding.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evidence finding required",
+      "expect": "fail",
+      "errorIncludes": "EVD-METRIC-001 must include non-empty string finding."
+    },
+    {
+      "file": "qif-package-evidence-missing-confidence-inputs.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evidence confidence inputs required",
+      "expect": "fail",
+      "errorIncludes": "EVD-METRIC-001 is missing confidenceInputs."
+    },
+    {
+      "file": "qif-package-evidence-sourceReliability-out-of-range.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evidence confidence input sourceReliability score range",
+      "expect": "fail",
+      "errorIncludes": "EVD-METRIC-001 confidenceInputs.sourceReliability must be a number from 0 to 1."
+    },
+    {
+      "file": "qif-package-evidence-relevance-out-of-range.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evidence confidence input relevance score range",
+      "expect": "fail",
+      "errorIncludes": "EVD-METRIC-001 confidenceInputs.relevance must be a number from 0 to 1."
+    },
+    {
+      "file": "qif-package-evidence-coverage-out-of-range.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evidence confidence input coverage score range",
+      "expect": "fail",
+      "errorIncludes": "EVD-METRIC-001 confidenceInputs.coverage must be a number from 0 to 1."
+    },
+    {
+      "file": "qif-package-evidence-recency-out-of-range.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evidence confidence input recency score range",
+      "expect": "fail",
+      "errorIncludes": "EVD-METRIC-001 confidenceInputs.recency must be a number from 0 to 1."
+    },
+    {
+      "file": "qif-package-evidence-independence-out-of-range.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evidence confidence input independence score range",
+      "expect": "fail",
+      "errorIncludes": "EVD-METRIC-001 confidenceInputs.independence must be a number from 0 to 1."
+    },
+    {
+      "file": "qif-package-evidence-contradictionPenalty-out-of-range.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evidence confidence input contradictionPenalty score range",
+      "expect": "fail",
+      "errorIncludes": "EVD-METRIC-001 confidenceInputs.contradictionPenalty must be a number from 0 to 1."
+    },
+    {
       "file": "qif-package-evidence-confidence-not-reproducible.json",
       "validator": "tools/validate-qif.mjs",
       "rule": "evidence confidence reproduces from inputs",
       "expect": "fail",
       "errorIncludes": "EVD-METRIC-001 confidence 0.1 does not match expected 0.77."
+    },
+    {
+      "file": "qif-package-indicator-broken-intent-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "indicator quality intent reference resolves",
+      "expect": "fail",
+      "errorIncludes": "IND-REVIEW-COUNT-001 references missing quality intent: QIN-NOPE-999"
+    },
+    {
+      "file": "qif-package-indicator-broken-risk-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "indicator risk reference resolves",
+      "expect": "fail",
+      "errorIncludes": "IND-REVIEW-COUNT-001 references missing risk: RSK-NOPE-999"
     },
     {
       "file": "qif-package-activity-count-treated-as-quality.json",
@@ -44,6 +352,76 @@
       "errorIncludes": "IND-REVIEW-COUNT-001 is an activity-count indicator but is not evidence-only."
     },
     {
+      "file": "qif-package-indicator-explicit-quality-itself.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "no indicator may claim to be quality itself",
+      "expect": "fail",
+      "errorIncludes": "IND-REVIEW-COUNT-001 treats an indicator as quality itself."
+    },
+    {
+      "file": "qif-package-evaluation-broken-intent-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evaluation quality intent references resolve",
+      "expect": "fail",
+      "errorIncludes": "EVL-QIF-001 references missing quality intent: QIN-NOPE-999"
+    },
+    {
+      "file": "qif-package-evaluation-broken-evidence-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evaluation evidence references resolve",
+      "expect": "fail",
+      "errorIncludes": "EVL-QIF-001 references missing evidence: EVD-NOPE-999"
+    },
+    {
+      "file": "qif-package-evaluation-missing-confidence-policy.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evaluation confidence policy required",
+      "expect": "fail",
+      "errorIncludes": "EVL-QIF-001 is missing confidencePolicy."
+    },
+    {
+      "file": "qif-package-evaluation-partial-threshold-out-of-range.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "partial threshold score range",
+      "expect": "fail",
+      "errorIncludes": "EVL-QIF-001 partialThreshold must be a number from 0 to 1."
+    },
+    {
+      "file": "qif-package-evaluation-achieved-threshold-out-of-range.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "achieved threshold score range",
+      "expect": "fail",
+      "errorIncludes": "EVL-QIF-001 achievedThreshold must be a number from 0 to 1."
+    },
+    {
+      "file": "qif-package-evaluation-threshold-order-invalid.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "partial threshold cannot exceed achieved threshold",
+      "expect": "fail",
+      "errorIncludes": "EVL-QIF-001 partialThreshold cannot exceed achievedThreshold."
+    },
+    {
+      "file": "qif-package-evaluation-missing-verdicts.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "evaluation verdicts required",
+      "expect": "fail",
+      "errorIncludes": "EVL-QIF-001 must include verdicts."
+    },
+    {
+      "file": "qif-package-verdict-broken-intent-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "verdict quality intent reference resolves",
+      "expect": "fail",
+      "errorIncludes": "EVL-QIF-001/QIN-NOPE-999 references missing quality intent: QIN-NOPE-999"
+    },
+    {
+      "file": "qif-package-verdict-broken-evidence-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "verdict evidence references resolve",
+      "expect": "fail",
+      "errorIncludes": "EVL-QIF-001/QIN-METRIC-001 references missing evidence: EVD-NOPE-999"
+    },
+    {
       "file": "qif-package-verdict-confidence-not-reproducible.json",
       "validator": "tools/validate-qif.mjs",
       "rule": "verdict confidence reproduces from evidence mean",
@@ -51,11 +429,68 @@
       "errorIncludes": "EVL-QIF-001/QIN-METRIC-001 confidence 0.1 does not match evidence mean 0.76."
     },
     {
+      "file": "qif-package-achieved-verdict-below-threshold.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "achieved verdict meets achieved threshold",
+      "expect": "fail",
+      "errorIncludes": "EVL-QIF-001/QIN-METRIC-001 is achieved below achievedThreshold 0.8."
+    },
+    {
+      "file": "qif-package-partial-verdict-below-threshold.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "partially achieved verdict meets partial threshold",
+      "expect": "fail",
+      "errorIncludes": "EVL-QIF-001/QIN-TACIT-001 is partially-achieved below partialThreshold 0.8."
+    },
+    {
+      "file": "qif-package-achieved-verdict-with-contradictory-evidence.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "achieved verdict cannot ignore high-confidence contradictory evidence",
+      "expect": "fail",
+      "errorIncludes": "EVL-QIF-001/QIN-METRIC-001 is achieved despite high-confidence contradictory evidence."
+    },
+    {
+      "file": "qif-package-governance-broken-target-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "governance target reference resolves",
+      "expect": "fail",
+      "errorIncludes": "GOV-QIF-001 references missing governance target NOPE-999."
+    },
+    {
+      "file": "qif-package-governance-broken-evidence-ref.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "governance evidence references resolve",
+      "expect": "fail",
+      "errorIncludes": "GOV-QIF-001 references missing evidence: EVD-NOPE-999"
+    },
+    {
+      "file": "qif-package-gate-missing-required-artifacts.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "acceptance gate required artifact references required",
+      "expect": "fail",
+      "errorIncludes": "GAT-QIF-001 must include requiredArtifactRefs."
+    },
+    {
       "file": "qif-package-gate-required-artifact-missing.json",
       "validator": "tools/validate-qif.mjs",
       "rule": "acceptance gate required artifacts exist",
       "expect": "fail",
-      "errorIncludes": "GAT-QIF-001 required artifact does not exist"
+      "errorIncludes": "GAT-QIF-001 required artifact does not exist: docs/does-not-exist.md"
+    },
+    {
+      "file": "qif-package-gate-missing-criteria.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "acceptance gate criteria required",
+      "expect": "fail",
+      "errorIncludes": "GAT-QIF-001 must include criteria."
+    },
+    {
+      "file": "qif-package-gate-non-passing-criterion.json",
+      "validator": "tools/validate-qif.mjs",
+      "rule": "acceptance gate criteria must pass",
+      "expect": "fail",
+      "errorIncludes": "GAT-QIF-001 has non-passing criteria: The package validates with the local verifier."
     }
-  ]
+  ],
+  "rescopedRules": []
 }

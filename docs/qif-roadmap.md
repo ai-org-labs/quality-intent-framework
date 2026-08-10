@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.4.0 baseline)
+## Current Position (v0.4.2 baseline; v0.4.3 frontier)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate.
@@ -43,10 +43,33 @@ and adoption surface — not pretending the limits away.
   (Go / Conditional Go / No-Go / Pending), post-release loop, traceability
   links, governance forcing.
 - Verified by structural validators run through `npm test`.
-- Weaknesses: packages are islands (no cross-package references), negative
-  verifier coverage is not a retained fixture suite, authoring cost for
-  humans and AI agents is still high, and no empirical feedback yet exists
-  on whether QIF confidence predicts real outcomes.
+- The quality-gate verifier has retained negative coverage; v0.4.3 completes
+  the same discipline for the two core package verifiers. Runtime package
+  surfaces remain the v0.4.4 frontier.
+- Weaknesses: packages are islands (no cross-package references), authoring
+  cost for humans and AI agents is still high, agent trajectories and
+  environment provenance are not first-class, and no empirical feedback yet
+  exists on whether QIF confidence predicts real outcomes.
+
+## 2026 Agentic AI Trend Check
+
+The roadmap was revalidated on 2026-08-11 against primary-source signals. The
+goal is not to chase product features. It is to identify which quality claims
+become dangerous as agents gain longer horizons, tools, parallelism, and wider
+organizational authority.
+
+| Current signal | Quality risk exposed | QIF response | Lead, not follow |
+| --- | --- | --- | --- |
+| Agent evaluation is moving from single answers to multi-turn trials, full trajectories, outcomes, multiple graders, and living suites. ([Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), [OpenAI](https://openai.com/index/trustworthy-third-party-evaluations-foundations/)) | A final answer can look correct while tool use, intermediate state, or the actual environment outcome is wrong; benchmark saturation and contamination can hide regressions. | v0.4.x fixture completeness, then v0.5 trajectory/outcome ledger and v0.7 calibration health. | Bind every verdict to outcome state, environment provenance, evaluator uncertainty, and suite health before these become audit afterthoughts. |
+| Delegated work is becoming longer-running and increasingly parallel across multiple agents and non-engineering domains. ([OpenAI](https://openai.com/index/how-agents-are-transforming-work/), [Anthropic](https://www.anthropic.com/engineering/multi-agent-research-system)) | Errors compound across handoffs; a successful aggregate result can conceal an unsafe lane, unresolved disagreement, or unowned decision. | v0.6 governed agent authoring/actions and v0.8 multi-agent judgment memory. | Treat lane-local intents, join conflicts, authority, and dissent as quality ledger entries, not orchestration logs. |
+| Agent harnesses now combine persistent runtime context, shell/computer tools, reusable skills, tracing, and protocol-connected tools such as MCP. ([OpenAI](https://openai.com/index/equip-responses-api-computer-environment/), [OpenAI](https://openai.com/index/new-tools-and-features-in-the-responses-api/)) | Quality depends on tool permissions, target operation, context freshness, runtime configuration, and rollback—not model output alone. | v0.5 provenance and v0.6 protocol-neutral action contracts. | Make an action's Quality Intent, loss boundary, evidence, permission, target, and rollback portable across harnesses and protocols. |
+| Teams are shifting from token price toward cost per accepted outcome and real-task evals. ([OpenAI](https://openai.com/index/managing-ai-investments-in-agentic-era/)) | Cheap attempts can create expensive retries and human correction; activity volume can again be mistaken for value. | v0.7 outcome calibration keeps cost/latency as evidence attached to accepted outcomes. | Calibrate quality and cost jointly without allowing either metric to substitute for the accountable verdict. |
+
+The one-step-ahead bet is Phase 6 / v0.9: an **Anticipatory Quality Intent
+Twin**. Current eval practice tests known tasks. QIF should also generate and
+govern counterfactual future contexts from intent/loss-boundary changes,
+without pretending synthetic scenarios predict reality. This moves quality
+work from regression detection toward governed pre-mortem discovery.
 
 Each phase below states its goal the QIF way: an intent, the loss boundary
 the phase protects, and the exit evidence that shows the phase is achieved.
@@ -115,6 +138,10 @@ Deliverables:
   explicit accepted-gap record with an owner.
 - Ledger index: one queryable manifest of an organization's intents,
   boundaries, open residual risks, and open governance triggers.
+- Agent Trial and Outcome records: task, trial, trajectory/transcript summary,
+  environment state, tool/action provenance, grader evidence, evaluator
+  uncertainty, and actual outcome remain linked without storing hidden
+  reasoning.
 
 Exit evidence:
 
@@ -122,6 +149,8 @@ Exit evidence:
   incident, new derived intent — validates end-to-end across 3+ separate
   package files.
 - Deleting any link in that chain makes verification fail.
+- A multi-turn agent claim fails verification when its final answer is present
+  but its claimed environment outcome or required provenance is absent.
 
 ## Phase 3 — v0.6: AI-Native Authoring and Enforcement (months)
 
@@ -141,6 +170,10 @@ Deliverables:
 - Gate-as-hook reference integration: a demonstration where an agent task
   cannot be marked release-ready unless a quality-gate package for the
   target validates. No external service required; local hook only.
+- Protocol-neutral Action Quality Contract: tool/provider, permission class,
+  target operation, expected state transition, stop condition, rollback,
+  evidence, and accountable approval are represented independently of MCP,
+  A2A, or any single agent harness.
 
 Exit evidence:
 
@@ -149,6 +182,8 @@ Exit evidence:
   package type.
 - The reference hook demonstrably blocks a release attempt lacking a valid
   gate decision, and admits one that has it.
+- The same action contract validates through two different harness adapters,
+  while an unapproved write or unresolved target fails closed.
 
 ## Phase 4 — v0.7: Empirical Calibration (6–12 months of elapsed pilot time)
 
@@ -167,6 +202,9 @@ Deliverables:
 - Calibration tooling: given N gate decisions and outcomes, compute whether
   stated confidence tracks observed escape rates (e.g., Brier score and
   a calibration table), as a report — never as an auto-verdict.
+- Evaluation Suite Health records: task origin, contamination boundary,
+  solvability review, saturation, grader calibration, trial variance, harness
+  and infrastructure configuration, and drift ownership.
 - First empirical self-test of the evidence independence hierarchy: do
   high-independence evidence items actually precede fewer escapes than
   low-independence ones? Publish the answer even if it is embarrassing.
@@ -177,8 +215,10 @@ Exit evidence:
   decision-outcome pairs, checked into the pilot record.
 - At least one framework change made *because* calibration data contradicted
   an assumption — proof the learning loop reaches the framework itself.
+- Small score differences are reported with trial and infrastructure
+  uncertainty rather than as false precision.
 
-## Phase 5 — v0.8: Organizational Memory and Reuse (in parallel with Phase 4)
+## Phase 5 — v0.8: Multi-Agent Judgment Memory and Reuse (in parallel with Phase 4)
 
 Intent: quality judgment compounds across teams and organizations instead of
 retiring with veterans.
@@ -192,6 +232,9 @@ Deliverables:
 - Portable pattern/intent libraries: decision patterns and intents packaged
   for reuse with applicability boundaries, counterexamples, and provenance
   intact; imports stay `candidate` until locally validated.
+- Governed multi-agent joins: lane-local Quality Intents, evidence, dissent,
+  conflicts, authority boundaries, and join decisions remain independently
+  inspectable even when the aggregate task succeeds.
 - A public example corpus spanning at least five domains, each example a
   full validating chain, serving simultaneously as documentation, test
   suite, and evidence for the domain-generality claim.
@@ -201,8 +244,39 @@ Exit evidence:
 - A pattern extracted in one domain is imported, applicability-checked,
   locally validated, and used in a gate decision in a different domain,
   with the whole chain verifiable.
+- Removing a dissent record or failed lane that materially affected the join
+  decision makes the multi-agent quality chain fail verification.
 
-## Phase 6 — v1.0: Standard Candidate (after calibration evidence exists)
+## Phase 6 — v0.9: Anticipatory Quality Intent Twin
+
+Intent: discover plausible future quality failures before they appear in the
+incident corpus, while keeping simulation distinct from observed truth.
+
+Loss boundary: an organization must not mistake a regression suite built from
+known history for coverage of fast-changing agent capabilities and operating
+contexts.
+
+Deliverables:
+
+- Counterfactual Context records generated from changes in authority, tools,
+  model/harness capability, stakeholder exposure, and loss boundaries.
+- Pre-mortem Scenario records linking each synthetic scenario to the intent or
+  assumption it challenges, provenance, novelty rationale, and an accountable
+  review decision.
+- Adaptive Challenge Set governance: scenarios can be promoted to retained
+  eval tasks, rejected with rationale, or held as unresolved uncertainty.
+- Strict synthetic boundary: simulated evidence can discover or challenge an
+  intent but cannot satisfy an operational verdict without observed evidence.
+
+Exit evidence:
+
+- A capability or permission change generates at least one reviewed novel
+  scenario that was absent from the historical suite and leads to a retained
+  Quality Intent, counterexample, or explicit accepted-gap record.
+- Re-labeling synthetic scenario output as observed evidence makes verification
+  fail.
+
+## Phase 7 — v1.0: Standard Candidate (after calibration evidence exists)
 
 Intent: QIF is implementable from its specification alone.
 
@@ -261,11 +335,12 @@ No phase, including post-1.0, will:
 | Phase | Version | Core question answered | Gate to next phase |
 | --- | --- | --- | --- |
 | 1 | v0.4.x | Is every documented capability executable? | Fixture-proven verifier |
-| 2 | v0.5 | Does quality knowledge survive across packages? | End-to-end cross-package chain |
-| 3 | v0.6 | Can AI agents author and be gated by QIF cheaply? | First-try valid agent authoring + working hook |
-| 4 | v0.7 | Do QIF confidence numbers mean anything empirically? | Calibration report from real pilots |
-| 5 | v0.8 | Does judgment compound across teams and domains? | Cross-domain validated pattern reuse |
-| 6 | v1.0 | Can anyone implement QIF from the spec alone? | Independent conformant implementation |
+| 2 | v0.5 | Does quality knowledge and agent outcome evidence survive across packages? | End-to-end cross-package and trial/outcome chain |
+| 3 | v0.6 | Can agents author QIF and take governed actions across harnesses? | First-try authoring + fail-closed action contract |
+| 4 | v0.7 | Do confidence and eval deltas mean anything empirically? | Calibrated outcome and suite-health reports |
+| 5 | v0.8 | Does judgment compound safely across agents, teams, and domains? | Cross-domain reuse + inspectable multi-agent joins |
+| 6 | v0.9 | Can QIF discover governed future failure hypotheses before incidents? | Reviewed counterfactual challenge promoted or resolved |
+| 7 | v1.0 | Can anyone implement QIF from the spec alone? | Independent conformant implementation |
 
 Phases 4 and 5 run in parallel; everything else is sequential. The single
 biggest schedule risk is honest: calibration requires elapsed real-world

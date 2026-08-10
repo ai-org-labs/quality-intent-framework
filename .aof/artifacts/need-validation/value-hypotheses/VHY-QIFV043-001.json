@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-08-10T16:02:21.982Z",
+  "value_hypothesis_id": "VHY-MSNF6NBY-YOMUKQ",
+  "expected_value_creation": "Every core verifier rule becomes protected by a retained failing example, making silent validation regressions detectable before release",
+  "beneficiary": "QIF maintainers, AI authoring workflows, and organizations consuming QIF packages",
+  "supporting_evidence": [
+    "The existing drift-checked fixture harness already proves this pattern for quality-gate and selected core rules",
+    "Current agent-evaluation practice emphasizes task suites, outcome checks, trace inspection, and living regression coverage"
+  ],
+  "success_criteria": [
+    "Every implemented structural rule in validate-qif.mjs and validate-expert-judgment.mjs maps to a retained negative fixture or explicit rescope rationale",
+    "npm test rejects every retained negative fixture with the expected diagnostic and passes all positive examples"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MSNF61BP-7D7F8I"
+}

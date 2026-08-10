@@ -16,11 +16,221 @@
   ],
   "negatives": [
     {
+      "file": "expert-judgment-package-missing-framework-version.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "package frameworkVersion required",
+      "expect": "fail",
+      "errorIncludes": "package must include non-empty string frameworkVersion."
+    },
+    {
+      "file": "expert-judgment-package-missing-package-id.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "package packageId required",
+      "expect": "fail",
+      "errorIncludes": "package must include non-empty string packageId."
+    },
+    {
+      "file": "expert-judgment-top-level-stakeholders-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level stakeholders must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level stakeholders must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-knowledgeSources-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level knowledgeSources must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level knowledgeSources must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-cases-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level cases must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level cases must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-expertJudgments-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level expertJudgments must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level expertJudgments must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-cues-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level cues must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level cues must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-concerns-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level concerns must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level concerns must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-lossBoundaries-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level lossBoundaries must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level lossBoundaries must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-decisionPatterns-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level decisionPatterns must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level decisionPatterns must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-applicabilityBoundaries-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level applicabilityBoundaries must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level applicabilityBoundaries must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-counterexamples-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level counterexamples must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level counterexamples must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-qualityIntentDerivations-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level qualityIntentDerivations must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level qualityIntentDerivations must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-reproductionTests-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level reproductionTests must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level reproductionTests must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-organizationalQualityCultures-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level organizationalQualityCultures must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level organizationalQualityCultures must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-reviewHistoryInferences-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level reviewHistoryInferences must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level reviewHistoryInferences must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-governanceEvents-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level governanceEvents must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level governanceEvents must be an array."
+    },
+    {
+      "file": "expert-judgment-top-level-acceptanceGates-not-array.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "top-level acceptanceGates must be an array",
+      "expect": "fail",
+      "errorIncludes": "Top-level acceptanceGates must be an array."
+    },
+    {
+      "file": "expert-judgment-stakeholder-non-object-item.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "indexed entity must be an object",
+      "expect": "fail",
+      "errorIncludes": "stakeholders contains a non-object item."
+    },
+    {
+      "file": "expert-judgment-stakeholder-missing-id.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "indexed entity requires string id",
+      "expect": "fail",
+      "errorIncludes": "stakeholders item is missing string id."
+    },
+    {
+      "file": "expert-judgment-stakeholder-duplicate-id.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "indexed entity ids are unique",
+      "expect": "fail",
+      "errorIncludes": "Duplicate id STK-CUST-001 in stakeholders."
+    },
+    {
+      "file": "expert-judgment-source-missing-title.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "knowledge source title required",
+      "expect": "fail",
+      "errorIncludes": "SRC-INT-001 must include non-empty string title."
+    },
+    {
+      "file": "expert-judgment-source-reliability-out-of-range.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "knowledge source reliability score range",
+      "expect": "fail",
+      "errorIncludes": "SRC-INT-001 reliability must be a number from 0 to 1."
+    },
+    {
+      "file": "expert-judgment-case-missing-title.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "case title required",
+      "expect": "fail",
+      "errorIncludes": "CAS-SW-001 must include non-empty string title."
+    },
+    {
+      "file": "expert-judgment-case-missing-context.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "case context required",
+      "expect": "fail",
+      "errorIncludes": "CAS-SW-001 must include non-empty string context."
+    },
+    {
+      "file": "expert-judgment-case-broken-stakeholder-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "case stakeholder references resolve",
+      "expect": "fail",
+      "errorIncludes": "CAS-SW-001 references missing stakeholder: STK-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-case-broken-source-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "case knowledge source reference resolves",
+      "expect": "fail",
+      "errorIncludes": "CAS-SW-001 references missing knowledge source: SRC-NOPE-999"
+    },
+    {
       "file": "expert-judgment-case-missing-presented-facts.json",
       "validator": "tools/validate-expert-judgment.mjs",
       "rule": "case presented facts required",
       "expect": "fail",
       "errorIncludes": "CAS-SW-001 must include presentedFacts."
+    },
+    {
+      "file": "expert-judgment-case-missing-available-evidence.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "case available evidence required",
+      "expect": "fail",
+      "errorIncludes": "CAS-SW-001 must include availableEvidence."
+    },
+    {
+      "file": "expert-judgment-cue-missing-statement.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "cue statement required",
+      "expect": "fail",
+      "errorIncludes": "CUE-SW-001 must include non-empty string statement."
+    },
+    {
+      "file": "expert-judgment-cue-missing-detection-method.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "cue detection method required",
+      "expect": "fail",
+      "errorIncludes": "CUE-SW-001 must include non-empty string detectionMethod."
     },
     {
       "file": "expert-judgment-cue-salience-out-of-range.json",
@@ -30,11 +240,144 @@
       "errorIncludes": "CUE-SW-001 salience must be a number from 0 to 1."
     },
     {
+      "file": "expert-judgment-concern-missing-statement.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "concern statement required",
+      "expect": "fail",
+      "errorIncludes": "CON-SW-001 must include non-empty string statement."
+    },
+    {
+      "file": "expert-judgment-concern-missing-harm-mode.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "concern harm mode required",
+      "expect": "fail",
+      "errorIncludes": "CON-SW-001 must include non-empty string harmMode."
+    },
+    {
+      "file": "expert-judgment-concern-missing-affected-parties.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "concern affected parties required",
+      "expect": "fail",
+      "errorIncludes": "CON-SW-001 must include affectedParties."
+    },
+    {
+      "file": "expert-judgment-loss-boundary-missing-statement.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "loss boundary statement required",
+      "expect": "fail",
+      "errorIncludes": "LSB-SW-001 must include non-empty string statement."
+    },
+    {
+      "file": "expert-judgment-loss-boundary-missing-waiver-authority.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "loss boundary waiver authority required",
+      "expect": "fail",
+      "errorIncludes": "LSB-SW-001 must include non-empty string waiverAuthority."
+    },
+    {
+      "file": "expert-judgment-loss-boundary-broken-stakeholder-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "loss boundary stakeholder references resolve",
+      "expect": "fail",
+      "errorIncludes": "LSB-SW-001 references missing stakeholder: STK-NOPE-999"
+    },
+    {
       "file": "expert-judgment-judgment-broken-case-ref.json",
       "validator": "tools/validate-expert-judgment.mjs",
       "rule": "expert judgment case reference resolves",
       "expect": "fail",
-      "errorIncludes": "JDG-SW-001 references missing case"
+      "errorIncludes": "JDG-SW-001 references missing case: CAS-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-judgment-broken-cue-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "expert judgment cue references resolve",
+      "expect": "fail",
+      "errorIncludes": "JDG-SW-001 references missing cue: CUE-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-judgment-broken-concern-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "expert judgment concern reference resolves",
+      "expect": "fail",
+      "errorIncludes": "JDG-SW-001 references missing concern: CON-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-judgment-broken-loss-boundary-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "expert judgment loss boundary reference resolves",
+      "expect": "fail",
+      "errorIncludes": "JDG-SW-001 references missing loss boundary: LSB-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-judgment-confidence-out-of-range.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "expert judgment confidence score range",
+      "expect": "fail",
+      "errorIncludes": "JDG-SW-001 confidence must be a number from 0 to 1."
+    },
+    {
+      "file": "expert-judgment-judgment-missing-acceptanceConditions.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "expert judgment acceptanceConditions required",
+      "expect": "fail",
+      "errorIncludes": "JDG-SW-001 must include acceptanceConditions."
+    },
+    {
+      "file": "expert-judgment-judgment-missing-requiredEvidence.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "expert judgment requiredEvidence required",
+      "expect": "fail",
+      "errorIncludes": "JDG-SW-001 must include requiredEvidence."
+    },
+    {
+      "file": "expert-judgment-judgment-missing-waiverConditions.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "expert judgment waiverConditions required",
+      "expect": "fail",
+      "errorIncludes": "JDG-SW-001 must include waiverConditions."
+    },
+    {
+      "file": "expert-judgment-pattern-missing-title.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "decision pattern title required",
+      "expect": "fail",
+      "errorIncludes": "PAT-EVD-001 must include non-empty string title."
+    },
+    {
+      "file": "expert-judgment-pattern-missing-applicable-context.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "decision pattern applicable context required",
+      "expect": "fail",
+      "errorIncludes": "PAT-EVD-001 must include non-empty string applicableContext."
+    },
+    {
+      "file": "expert-judgment-pattern-broken-trigger-cue-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "decision pattern trigger cue references resolve",
+      "expect": "fail",
+      "errorIncludes": "PAT-EVD-001 references missing cue: CUE-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-pattern-broken-concern-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "decision pattern concern reference resolves",
+      "expect": "fail",
+      "errorIncludes": "PAT-EVD-001 references missing concern: CON-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-pattern-broken-loss-boundary-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "decision pattern loss boundary reference resolves",
+      "expect": "fail",
+      "errorIncludes": "PAT-EVD-001 references missing loss boundary: LSB-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-pattern-broken-counterexample-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "decision pattern counterexample references resolve",
+      "expect": "fail",
+      "errorIncludes": "PAT-EVD-001 references missing counterexample: CEX-NOPE-999"
     },
     {
       "file": "expert-judgment-pattern-missing-source-judgments.json",
@@ -44,6 +387,174 @@
       "errorIncludes": "PAT-EVD-001 must include at least one source judgment."
     },
     {
+      "file": "expert-judgment-pattern-broken-reproduction-test-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "decision pattern reproduction test reference resolves",
+      "expect": "fail",
+      "errorIncludes": "PAT-EVD-001 references missing reproduction test: RPT-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-pattern-confidence-out-of-range.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "decision pattern confidence score range",
+      "expect": "fail",
+      "errorIncludes": "PAT-EVD-001 confidence must be a number from 0 to 1."
+    },
+    {
+      "file": "expert-judgment-pattern-missing-acceptanceConditions.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "decision pattern acceptanceConditions required",
+      "expect": "fail",
+      "errorIncludes": "PAT-EVD-001 must include acceptanceConditions."
+    },
+    {
+      "file": "expert-judgment-pattern-missing-evidenceRequired.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "decision pattern evidenceRequired required",
+      "expect": "fail",
+      "errorIncludes": "PAT-EVD-001 must include evidenceRequired."
+    },
+    {
+      "file": "expert-judgment-pattern-missing-exceptions.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "decision pattern exceptions required",
+      "expect": "fail",
+      "errorIncludes": "PAT-EVD-001 must include exceptions."
+    },
+    {
+      "file": "expert-judgment-applicability-broken-pattern-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "applicability boundary pattern reference resolves",
+      "expect": "fail",
+      "errorIncludes": "APB-EVD-001 references missing decision pattern: PAT-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-applicability-missing-includedContexts.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "applicability boundary includedContexts required",
+      "expect": "fail",
+      "errorIncludes": "APB-EVD-001 must include includedContexts."
+    },
+    {
+      "file": "expert-judgment-applicability-missing-excludedContexts.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "applicability boundary excludedContexts required",
+      "expect": "fail",
+      "errorIncludes": "APB-EVD-001 must include excludedContexts."
+    },
+    {
+      "file": "expert-judgment-applicability-missing-assumptions.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "applicability boundary assumptions required",
+      "expect": "fail",
+      "errorIncludes": "APB-EVD-001 must include assumptions."
+    },
+    {
+      "file": "expert-judgment-applicability-missing-invalidationSignals.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "applicability boundary invalidationSignals required",
+      "expect": "fail",
+      "errorIncludes": "APB-EVD-001 must include invalidationSignals."
+    },
+    {
+      "file": "expert-judgment-counterexample-broken-case-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "counterexample case reference resolves",
+      "expect": "fail",
+      "errorIncludes": "CEX-SW-001 references missing case: CAS-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-counterexample-broken-pattern-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "counterexample pattern reference resolves",
+      "expect": "fail",
+      "errorIncludes": "CEX-SW-001 references missing decision pattern: PAT-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-counterexample-missing-distinguishing-factors.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "counterexample distinguishing factors required",
+      "expect": "fail",
+      "errorIncludes": "CEX-SW-001 must include distinguishingFactors."
+    },
+    {
+      "file": "expert-judgment-derivation-broken-pattern-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "quality intent derivation pattern references resolve",
+      "expect": "fail",
+      "errorIncludes": "QDR-EVD-001 references missing decision pattern: PAT-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-derivation-missing-intent-statement.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "quality intent derivation statement required",
+      "expect": "fail",
+      "errorIncludes": "QDR-EVD-001 must include non-empty string derivedIntentStatement."
+    },
+    {
+      "file": "expert-judgment-derivation-missing-rationale.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "quality intent derivation rationale required",
+      "expect": "fail",
+      "errorIncludes": "QDR-EVD-001 must include non-empty string rationale."
+    },
+    {
+      "file": "expert-judgment-reproduction-test-broken-pattern-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "reproduction test pattern reference resolves",
+      "expect": "fail",
+      "errorIncludes": "RPT-EVD-001 references missing decision pattern: PAT-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-reproduction-test-seen-cases.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "reproduction test uses unseen cases",
+      "expect": "fail",
+      "errorIncludes": "RPT-EVD-001 must use unseen cases."
+    },
+    {
+      "file": "expert-judgment-reproduction-test-broken-unseen-case-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "reproduction test unseen case references resolve",
+      "expect": "fail",
+      "errorIncludes": "RPT-EVD-001 references missing unseen case: CAS-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-reproduction-test-agreement-out-of-range.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "reproduction test observed agreement score range",
+      "expect": "fail",
+      "errorIncludes": "RPT-EVD-001 observedAgreement must be a number from 0 to 1."
+    },
+    {
+      "file": "expert-judgment-reproduction-test-missing-expected-decisions.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "reproduction test expected decisions required",
+      "expect": "fail",
+      "errorIncludes": "RPT-EVD-001 must include expectedDecisions."
+    },
+    {
+      "file": "expert-judgment-reproduction-test-non-object-expected-decision.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "reproduction test expected decision must be object",
+      "expect": "fail",
+      "errorIncludes": "RPT-EVD-001 expectedDecisions contains a non-object item."
+    },
+    {
+      "file": "expert-judgment-reproduction-test-broken-expected-case-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "reproduction test expected decision case reference resolves",
+      "expect": "fail",
+      "errorIncludes": "RPT-EVD-001/expectedDecision references missing case: CAS-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-reproduction-test-missing-failure-analysis.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "reproduction test failure analysis must be an array",
+      "expect": "fail",
+      "errorIncludes": "RPT-EVD-001 must include failureAnalysis."
+    },
+    {
       "file": "expert-judgment-reproduction-test-low-agreement.json",
       "validator": "tools/validate-expert-judgment.mjs",
       "rule": "passing reproduction test agreement threshold",
@@ -51,11 +562,136 @@
       "errorIncludes": "RPT-EVD-001 is pass below acceptable agreement threshold 0.75."
     },
     {
+      "file": "expert-judgment-culture-broken-loss-boundary-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "culture loss boundary references resolve",
+      "expect": "fail",
+      "errorIncludes": "CUL-ORG-001 references missing loss boundary: LSB-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-culture-broken-pattern-ref.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "culture decision pattern references resolve",
+      "expect": "fail",
+      "errorIncludes": "CUL-ORG-001 references missing decision pattern: PAT-NOPE-999"
+    },
+    {
+      "file": "expert-judgment-culture-missing-preferredEvidence.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "culture preferredEvidence required",
+      "expect": "fail",
+      "errorIncludes": "CUL-ORG-001 must include preferredEvidence."
+    },
+    {
+      "file": "expert-judgment-culture-missing-escalationNorms.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "culture escalationNorms required",
+      "expect": "fail",
+      "errorIncludes": "CUL-ORG-001 must include escalationNorms."
+    },
+    {
+      "file": "expert-judgment-culture-missing-waiverPractices.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "culture waiverPractices required",
+      "expect": "fail",
+      "errorIncludes": "CUL-ORG-001 must include waiverPractices."
+    },
+    {
+      "file": "expert-judgment-culture-missing-repeatedFears.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "culture repeatedFears required",
+      "expect": "fail",
+      "errorIncludes": "CUL-ORG-001 must include repeatedFears."
+    },
+    {
+      "file": "expert-judgment-culture-missing-qualityTradeoffs.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "culture qualityTradeoffs required",
+      "expect": "fail",
+      "errorIncludes": "CUL-ORG-001 must include qualityTradeoffs."
+    },
+    {
+      "file": "expert-judgment-culture-missing-subgroupDifferences.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "culture subgroupDifferences required",
+      "expect": "fail",
+      "errorIncludes": "CUL-ORG-001 must include subgroupDifferences."
+    },
+    {
+      "file": "expert-judgment-culture-missing-risk-appetite.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "culture risk appetite required",
+      "expect": "fail",
+      "errorIncludes": "CUL-ORG-001 must include non-empty string riskAppetite."
+    },
+    {
+      "file": "expert-judgment-inference-missing-source-refs.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "review history inference source refs required",
+      "expect": "fail",
+      "errorIncludes": "INF-REV-001 must include sourceRefs."
+    },
+    {
+      "file": "expert-judgment-inference-missing-supporting-clues.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "review history inference supporting clues required",
+      "expect": "fail",
+      "errorIncludes": "INF-REV-001 must include supportingClues."
+    },
+    {
+      "file": "expert-judgment-inference-missing-summary.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "review history inference summary required",
+      "expect": "fail",
+      "errorIncludes": "INF-REV-001 must include non-empty string inferredPatternSummary."
+    },
+    {
+      "file": "expert-judgment-inference-confidence-out-of-range.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "review history inference confidence score range",
+      "expect": "fail",
+      "errorIncludes": "INF-REV-001 confidence must be a number from 0 to 1."
+    },
+    {
+      "file": "expert-judgment-gate-missing-required-artifacts.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "acceptance gate required artifact references required",
+      "expect": "fail",
+      "errorIncludes": "GAT-EJF-001 must include requiredArtifactRefs."
+    },
+    {
+      "file": "expert-judgment-gate-required-artifact-missing.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "acceptance gate required artifacts exist",
+      "expect": "fail",
+      "errorIncludes": "GAT-EJF-001 required artifact does not exist: docs/does-not-exist.md"
+    },
+    {
+      "file": "expert-judgment-gate-missing-criteria.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "acceptance gate criteria required",
+      "expect": "fail",
+      "errorIncludes": "GAT-EJF-001 must include criteria."
+    },
+    {
+      "file": "expert-judgment-gate-non-passing-criterion.json",
+      "validator": "tools/validate-expert-judgment.mjs",
+      "rule": "acceptance gate criteria must pass",
+      "expect": "fail",
+      "errorIncludes": "GAT-EJF-001 has non-passing criteria: Every validated pattern cites cues, concern, loss boundary, source judgments, and reproduction test."
+    },
+    {
       "file": "expert-judgment-pattern-missing-applicability-boundary.json",
       "validator": "tools/validate-expert-judgment.mjs",
       "rule": "decision pattern requires applicability boundary",
       "expect": "fail",
       "errorIncludes": "PAT-EVD-001 must have an applicability boundary."
+    }
+  ],
+  "rescopedRules": [
+    {
+      "rule": "review history inference should remain candidate until independently validated",
+      "rationale": "This branch is intentionally a warning and exits zero; it cannot be represented by a retained failing fixture without changing verifier semantics."
     }
   ]
 }
