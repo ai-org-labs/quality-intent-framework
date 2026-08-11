@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.4.4
+
+- Added first-class `evidenceTypeVocabulary` to quality-gate packages so evidence item types and gate-rule `requiredEvidenceTypes` are declared before use.
+- Extended the quality-gate verifier to reject undeclared evidence item types, undeclared gate-rule required evidence types, unused vocabulary entries, and missing vocabulary-required `trust` or `findingEvidence` metadata.
+- Updated the quality-gate example to declare sampled review, control test, regression sample, reversal rehearsal, and monitoring configuration evidence types.
+- Updated AI authoring guidance and v0.4 runtime requirements so agents treat evidence type names as governed control vocabulary, not quality itself.
+- Added retained negative fixtures covering evidence type vocabulary misuse.
+
 ## v0.4.3
 
 - Completed retained negative fixture coverage for every implemented error branch in `tools/validate-qif.mjs` and `tools/validate-expert-judgment.mjs`.

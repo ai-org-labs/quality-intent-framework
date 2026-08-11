@@ -100,6 +100,41 @@
       "errorIncludes": "polarity must be supports, contradicts, mixed, or neutral."
     },
     {
+      "file": "quality-gate-evidence-type-undeclared.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evidence item type must be declared in vocabulary",
+      "expect": "fail",
+      "errorIncludes": "uses undeclared evidenceType"
+    },
+    {
+      "file": "quality-gate-gate-rule-required-evidence-type-undeclared.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "gate rule required evidence type must be declared in vocabulary",
+      "expect": "fail",
+      "errorIncludes": "requires undeclared evidence type"
+    },
+    {
+      "file": "quality-gate-evidence-type-vocabulary-unused.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evidence type vocabulary entries must be used",
+      "expect": "fail",
+      "errorIncludes": "is declared but not used by evidence items or gate rules."
+    },
+    {
+      "file": "quality-gate-evidence-type-trust-required.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "vocabulary can require trust metadata",
+      "expect": "fail",
+      "errorIncludes": "evidenceType sampled-review requires trust metadata."
+    },
+    {
+      "file": "quality-gate-evidence-type-finding-evidence-required.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "vocabulary can require findingEvidence metadata",
+      "expect": "fail",
+      "errorIncludes": "evidenceType sampled-review requires findingEvidence metadata."
+    },
+    {
       "file": "quality-gate-finding-evidence-missing-final-status.json",
       "validator": "tools/validate-qif-runtime.mjs",
       "rule": "AI finding evidence final status is required",

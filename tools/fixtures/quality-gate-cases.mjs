@@ -117,6 +117,47 @@ export const cases = [
     mutate: (pkg) => { pkg.evidenceItems[0].polarity = "maybe"; }
   },
   {
+    id: "evidence-type-undeclared",
+    rule: "evidence item type must be declared in vocabulary",
+    expect: "uses undeclared evidenceType",
+    mutate: (pkg) => { pkg.evidenceItems[0].evidenceType = "surprise-scan"; }
+  },
+  {
+    id: "gate-rule-required-evidence-type-undeclared",
+    rule: "gate rule required evidence type must be declared in vocabulary",
+    expect: "requires undeclared evidence type",
+    mutate: (pkg) => { pkg.qualityGateRules[0].requiredEvidenceTypes.push("surprise-scan"); }
+  },
+  {
+    id: "evidence-type-vocabulary-unused",
+    rule: "evidence type vocabulary entries must be used",
+    expect: "is declared but not used by evidence items or gate rules.",
+    mutate: (pkg) => {
+      pkg.evidenceTypeVocabulary.push({
+        id: "ETV-QG-UNUSED",
+        evidenceType: "unused-review",
+        purpose: "Unused vocabulary entry.",
+        sourceCategory: "human-review",
+        expectedIndependence: "medium",
+        trustRequired: false,
+        findingEvidenceRequired: false,
+        antiPatterns: ["Decorative vocabulary."]
+      });
+    }
+  },
+  {
+    id: "evidence-type-trust-required",
+    rule: "vocabulary can require trust metadata",
+    expect: "evidenceType sampled-review requires trust metadata.",
+    mutate: (pkg) => { delete pkg.evidenceItems[0].trust; }
+  },
+  {
+    id: "evidence-type-finding-evidence-required",
+    rule: "vocabulary can require findingEvidence metadata",
+    expect: "evidenceType sampled-review requires findingEvidence metadata.",
+    mutate: (pkg) => { delete pkg.evidenceItems[0].findingEvidence; }
+  },
+  {
     id: "finding-evidence-missing-final-status",
     rule: "AI finding evidence final status is required",
     expect: "finalStatus must be one of",

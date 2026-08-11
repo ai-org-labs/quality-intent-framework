@@ -766,15 +766,6 @@
       "evaluatorRole": "quality-analyst",
       "retention": "Retained in the quality evidence store for 24 months.",
       "artifactReference": "refund-sample-readjudication-2026-07.csv",
-      "findingEvidence": {
-        "generatedBy": "ai-quality-security-reviewer",
-        "sourceArtifact": "refund-sample-readjudication-2026-07.csv",
-        "reproducible": true,
-        "reproducedBy": "quality-analyst",
-        "falsePositiveChecked": true,
-        "impactConfirmed": true,
-        "finalStatus": "confirmed"
-      },
       "trust": {
         "sources": [
           "refund-sample-readjudication-2026-07.csv",
@@ -970,11 +961,11 @@
         "QGR-QG-002",
         "QGR-QG-003"
       ],
-      "decision": "Go",
+      "decision": "Conditional Go",
       "intentVerdicts": [
         {
           "intentRef": "QIN-QG-001",
-          "decision": "not-achieved",
+          "decision": "partially-achieved",
           "confidence": 0.7,
           "confidencePolicyRef": "CFP-QG-001",
           "evidenceRefs": [

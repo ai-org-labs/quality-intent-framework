@@ -12,6 +12,7 @@
     "qualityAspects",
     "evaluationPerspectives",
     "confidencePolicies",
+    "evidenceTypeVocabulary",
     "evidenceItems",
     "quantitativeEvidenceRecords",
     "qualityGateRules",
@@ -49,6 +50,11 @@
       "type": "array",
       "minItems": 1,
       "items": { "$ref": "#/$defs/confidencePolicy" }
+    },
+    "evidenceTypeVocabulary": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/evidenceTypeVocabularyEntry" }
     },
     "evidenceItems": {
       "type": "array",
@@ -257,6 +263,25 @@
         "verdictAggregationRule": { "enum": ["minimum-evidence-confidence", "weighted-average"] },
         "reviewRunAggregationRule": { "enum": ["average-verdict-confidence", "minimum-verdict-confidence"] },
         "rounding": { "enum": ["nearest-0.01"] }
+      }
+    },
+    "evidenceTypeVocabularyEntry": {
+      "type": "object",
+      "required": ["id", "evidenceType", "purpose", "sourceCategory", "expectedIndependence", "trustRequired", "findingEvidenceRequired", "antiPatterns"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "evidenceType": { "type": "string" },
+        "purpose": { "type": "string" },
+        "sourceCategory": { "enum": ["human-review", "automated-run", "operational-record", "document", "agent-generated", "governance-record", "hybrid"] },
+        "expectedIndependence": { "enum": ["high", "medium", "low"] },
+        "trustRequired": { "type": "boolean" },
+        "findingEvidenceRequired": { "type": "boolean" },
+        "antiPatterns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
       }
     },
     "evidenceItem": {

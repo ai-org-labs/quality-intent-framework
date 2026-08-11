@@ -774,18 +774,6 @@
         "falsePositiveChecked": true,
         "impactConfirmed": true,
         "finalStatus": "confirmed"
-      },
-      "trust": {
-        "sources": [
-          "refund-sample-readjudication-2026-07.csv",
-          "policy-change-review-notes-2026-07.md"
-        ],
-        "generatedBy": "ai-quality-security-reviewer",
-        "verifiedBy": [
-          "quality-analyst"
-        ],
-        "status": "verified",
-        "staleAfter": "2026-10-31"
       }
     },
     {
@@ -970,11 +958,11 @@
         "QGR-QG-002",
         "QGR-QG-003"
       ],
-      "decision": "Go",
+      "decision": "Conditional Go",
       "intentVerdicts": [
         {
           "intentRef": "QIN-QG-001",
-          "decision": "not-achieved",
+          "decision": "partially-achieved",
           "confidence": 0.7,
           "confidencePolicyRef": "CFP-QG-001",
           "evidenceRefs": [

@@ -232,6 +232,22 @@ Required metadata:
 - sensitivity or access handling;
 - integrity or change-history policy.
 
+Quality-gate packages should declare an `evidenceTypeVocabulary` before using evidence types in evidence items or gate rules.
+
+Purpose:
+
+- prevent `requiredEvidenceTypes` from becoming ungoverned free strings;
+- make evidence expectations visible before a verdict is produced;
+- support AI-agent evidence by declaring whether `trust` and `findingEvidence` metadata are required;
+- keep evidence categories auditable without treating the category name as quality itself.
+
+Verifier behavior:
+
+- every `evidenceItems[*].evidenceType` must be declared;
+- every `qualityGateRules[*].requiredEvidenceTypes` value must be declared;
+- unused vocabulary entries are rejected unless used by evidence or a gate rule;
+- vocabulary-required `trust` or `findingEvidence` metadata must be present.
+
 For AI-generated quality or security findings, QIF should record finding evidence as verification metadata:
 
 ```yaml

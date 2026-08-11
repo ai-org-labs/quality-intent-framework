@@ -757,7 +757,7 @@
     {
       "id": "EVD-QG-001",
       "targetRef": "TGT-QG-001",
-      "evidenceType": "sampled-review",
+      "evidenceType": "surprise-scan",
       "finding": "In a re-adjudication sample of 120 historical refund cases under the new policy, 3 would exceed the financial limit without secondary approval.",
       "polarity": "contradicts",
       "independence": "medium",
@@ -970,11 +970,11 @@
         "QGR-QG-002",
         "QGR-QG-003"
       ],
-      "decision": "Go",
+      "decision": "Conditional Go",
       "intentVerdicts": [
         {
           "intentRef": "QIN-QG-001",
-          "decision": "not-achieved",
+          "decision": "partially-achieved",
           "confidence": 0.7,
           "confidencePolicyRef": "CFP-QG-001",
           "evidenceRefs": [

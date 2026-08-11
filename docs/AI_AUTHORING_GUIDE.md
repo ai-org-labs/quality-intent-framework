@@ -193,6 +193,19 @@ When asked to author a QIF package or schema change, produce:
 
 Evidence must be connected to a Quality Intent and Loss Boundary.
 
+For quality-gate packages, declare `evidenceTypeVocabulary` before writing evidence items or gate rules.
+
+Use it to define:
+
+- which evidence types are allowed;
+- what each evidence type is for;
+- expected independence;
+- whether `trust` is required;
+- whether `findingEvidence` is required;
+- anti-patterns for misuse.
+
+Do not invent a new `evidenceType` inside an evidence item or `requiredEvidenceTypes` list unless you also add it to the vocabulary. Evidence type names are control vocabulary, not quality itself.
+
 Do not write:
 
 ```text

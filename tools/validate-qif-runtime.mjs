@@ -880,6 +880,7 @@ function validateQualityGatePackage(pkg, packagePath) {
   const qualityAspects = requireArray(pkg, "qualityAspects");
   const perspectives = requireArray(pkg, "evaluationPerspectives");
   const confidencePolicies = requireArray(pkg, "confidencePolicies");
+  const evidenceTypeVocabulary = requireArray(pkg, "evidenceTypeVocabulary");
   const evidenceItems = requireArray(pkg, "evidenceItems");
   const quantitativeRecords = requireArray(pkg, "quantitativeEvidenceRecords");
   const automatedDetails = Array.isArray(pkg.automatedEvaluationDetails) ? pkg.automatedEvaluationDetails : [];
@@ -897,6 +898,7 @@ function validateQualityGatePackage(pkg, packagePath) {
   const aspectIndex = indexById(qualityAspects, `${packagePath}:qualityAspects`);
   const perspectiveIndex = indexById(perspectives, `${packagePath}:evaluationPerspectives`);
   const confidencePolicyIndex = indexById(confidencePolicies, `${packagePath}:confidencePolicies`);
+  const evidenceTypeVocabularyIndex = indexById(evidenceTypeVocabulary, `${packagePath}:evidenceTypeVocabulary`);
   const evidenceIndex = indexById(evidenceItems, `${packagePath}:evidenceItems`);
   const quantitativeIndex = indexById(quantitativeRecords, `${packagePath}:quantitativeEvidenceRecords`);
   const automatedIndex = indexById(automatedDetails, `${packagePath}:automatedEvaluationDetails`);
@@ -909,7 +911,7 @@ function validateQualityGatePackage(pkg, packagePath) {
 
   // A global id index lets traceability links resolve across every entity family.
   const globalIndex = new Map();
-  for (const family of [targetIndex, intentIndex, aspectIndex, perspectiveIndex, confidencePolicyIndex, evidenceIndex, quantitativeIndex, automatedIndex, gateRuleIndex, gateDecisionIndex, postReleaseIndex, improvementIndex, governanceIndex, governanceEventIndex]) {
+  for (const family of [targetIndex, intentIndex, aspectIndex, perspectiveIndex, confidencePolicyIndex, evidenceTypeVocabularyIndex, evidenceIndex, quantitativeIndex, automatedIndex, gateRuleIndex, gateDecisionIndex, postReleaseIndex, improvementIndex, governanceIndex, governanceEventIndex]) {
     for (const [id, item] of family.entries()) {
       globalIndex.set(id, item);
     }
@@ -959,9 +961,35 @@ function validateQualityGatePackage(pkg, packagePath) {
     checkRequiredString(policy, "reviewRunAggregationRule", policy.id);
     checkRequiredString(policy, "rounding", policy.id);
   }
+  const declaredEvidenceTypes = new Map();
+  for (const entry of evidenceTypeVocabulary) {
+    checkRequiredString(entry, "evidenceType", entry.id);
+    checkRequiredString(entry, "purpose", entry.id);
+    checkRequiredString(entry, "sourceCategory", entry.id);
+    if (declaredEvidenceTypes.has(entry.evidenceType)) {
+      errors.push(`${entry.id} duplicates evidence type ${entry.evidenceType}.`);
+    }
+    declaredEvidenceTypes.set(entry.evidenceType, entry);
+    if (!["high", "medium", "low"].includes(entry.expectedIndependence)) {
+      errors.push(`${entry.id} expectedIndependence must be high, medium, or low.`);
+    }
+    if (typeof entry.trustRequired !== "boolean") {
+      errors.push(`${entry.id} trustRequired must be boolean.`);
+    }
+    if (typeof entry.findingEvidenceRequired !== "boolean") {
+      errors.push(`${entry.id} findingEvidenceRequired must be boolean.`);
+    }
+    checkNonEmptyArray(entry, "antiPatterns", entry.id);
+  }
+  const usedEvidenceTypes = new Set();
   for (const evidence of evidenceItems) {
     checkRefs([evidence.targetRef], targetIndex, "evaluation target", evidence.id);
     checkRequiredString(evidence, "evidenceType", evidence.id);
+    usedEvidenceTypes.add(evidence.evidenceType);
+    const vocabularyEntry = declaredEvidenceTypes.get(evidence.evidenceType);
+    if (!vocabularyEntry) {
+      errors.push(`${evidence.id} uses undeclared evidenceType ${evidence.evidenceType}.`);
+    }
     checkRequiredString(evidence, "finding", evidence.id);
     checkRequiredString(evidence, "evaluatorRole", evidence.id);
     checkRequiredString(evidence, "retention", evidence.id);
@@ -1014,6 +1042,18 @@ function validateQualityGatePackage(pkg, packagePath) {
         errors.push(`${evidence.id}/trust status must be one of draft, verified, stale, rejected.`);
       }
     }
+    if (vocabularyEntry?.trustRequired && evidence.trust === undefined) {
+      errors.push(`${evidence.id} evidenceType ${evidence.evidenceType} requires trust metadata.`);
+    }
+    if (vocabularyEntry?.findingEvidenceRequired && evidence.findingEvidence === undefined) {
+      errors.push(`${evidence.id} evidenceType ${evidence.evidenceType} requires findingEvidence metadata.`);
+    }
+  }
+  for (const entry of evidenceTypeVocabulary) {
+    const requiredByGateRule = gateRules.some((rule) => (rule.requiredEvidenceTypes ?? []).includes(entry.evidenceType));
+    if (!usedEvidenceTypes.has(entry.evidenceType) && !requiredByGateRule) {
+      errors.push(`${entry.id} evidence type ${entry.evidenceType} is declared but not used by evidence items or gate rules.`);
+    }
   }
   for (const record of quantitativeRecords) {
     checkRequiredString(record, "metricName", record.id);
@@ -1065,6 +1105,11 @@ function validateQualityGatePackage(pkg, packagePath) {
     checkRefs(rule.appliesToIntentRefs, intentIndex, "quality intent", rule.id);
     checkNonEmptyArray(rule, "requiredEvidenceTypes", rule.id);
     checkNonEmptyArray(rule, "blockingConditions", rule.id);
+    for (const requiredType of rule.requiredEvidenceTypes ?? []) {
+      if (!declaredEvidenceTypes.has(requiredType)) {
+        errors.push(`${rule.id} requires undeclared evidence type ${requiredType}.`);
+      }
+    }
   }
 
   const perspectiveCoveredIntents = new Set(perspectives.flatMap((perspective) => perspective.linkedIntentRefs ?? []));
@@ -1326,6 +1371,7 @@ function validateQualityGatePackage(pkg, packagePath) {
       qualityAspects: qualityAspects.length,
       evaluationPerspectives: perspectives.length,
       evidenceItems: evidenceItems.length,
+      evidenceTypeVocabulary: evidenceTypeVocabulary.length,
       quantitativeEvidenceRecords: quantitativeRecords.length,
       automatedEvaluationDetails: automatedDetails.length,
       qualityGateRules: gateRules.length,

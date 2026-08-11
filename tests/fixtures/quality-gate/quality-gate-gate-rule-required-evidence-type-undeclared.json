@@ -926,7 +926,8 @@
       ],
       "requiredEvidenceTypes": [
         "control-test",
-        "sampled-review"
+        "sampled-review",
+        "surprise-scan"
       ],
       "blockingConditions": [
         "No-Go if the over-limit control block rate is below 1.0.",
@@ -970,11 +971,11 @@
         "QGR-QG-002",
         "QGR-QG-003"
       ],
-      "decision": "Go",
+      "decision": "Conditional Go",
       "intentVerdicts": [
         {
           "intentRef": "QIN-QG-001",
-          "decision": "not-achieved",
+          "decision": "partially-achieved",
           "confidence": 0.7,
           "confidencePolicyRef": "CFP-QG-001",
           "evidenceRefs": [

@@ -1505,5 +1505,62 @@ Publication and retrospective:
   `.aof/context/active/learning-loop.json`.
 - Operator progress:
   `.aof/artifacts/runtime/operator-progress-qif-v0.4.3.json`.
-- Next frontier: v0.4.4 retained negative fixture coverage for the remaining
-  runtime package surfaces before v0.5 ledger semantics.
+- Next frontier: v0.4.x retained negative fixture coverage for the remaining
+  runtime package surfaces and evidence vocabulary hardening before v0.5
+  ledger semantics.
+
+## QIF v0.4.4 Evidence Type Vocabulary
+
+Date: 2026-08-11
+
+Need / Intent / Context:
+
+- Need: agentic AI workflows increasingly need observable, governed evidence traces. QIF quality-gate evidence types were still free strings, which made gate-rule `requiredEvidenceTypes` too easy to mistype, invent, or use decoratively.
+- Intent: add a first-class `evidenceTypeVocabulary` to quality-gate packages so evidence item types and gate-rule required evidence types are declared before use.
+- Context: QIF v0.4.2 already had Quality Aspects, `findingEvidence`, and `trust`; the next Phase 1 roadmap gap was an evidence-type vocabulary record. Current AI development trend review found agent observability, policy-to-runtime controls, provenance, and governed agent evidence as active production concerns.
+
+Trend sources reviewed:
+
+- OpenAI, "How agents are transforming work" (2026-06-25): long-horizon delegated agent work is becoming common across technical and non-technical departments.
+- OpenAI, "How to manage AI investments in the agentic era" (2026-07-14): production workflows need evaluations, observability, trusted connectors, governance, and reusable patterns.
+- Microsoft Foundry Blog, "Build agents you can trust across any framework with open evals and a control standard" (2026-06-02): policies need to map to runtime controls and monitoring checkpoints.
+- LangChain, "State of Agent Engineering" (2026-06-12): agent observability is now table stakes; eval adoption is still catching up.
+- McKinsey, "State of AI trust in 2026" (2026): governance and agentic AI controls lag technical adoption.
+
+Council judgment:
+
+- Visionary: approve. Evidence vocabulary moves QIF toward the "accounting system for quality decisions" thesis by making agent-produced evidence comparable and auditable.
+- Builder: approve. Implement in the existing quality-gate package only; avoid new package types or UI. Enforce declared vocabulary in verifier and retained fixtures.
+- Guardian: approve with guardrails. Evidence type names must remain control vocabulary, not quality categories or checklist completion. Verifier must not claim semantic truth.
+
+What was built:
+
+- `schemas/quality-gate-package.schema.json`: added required `evidenceTypeVocabulary`.
+- `tools/validate-qif-runtime.mjs`: added checks for undeclared evidence item types, undeclared gate-rule required types, unused vocabulary entries, and vocabulary-required `trust` / `findingEvidence`.
+- `examples/quality-gate-package.json`: declared five evidence types.
+- `tools/fixtures/quality-gate-cases.mjs`: added five negative fixture cases.
+- `docs/AI_AUTHORING_GUIDE.md`, `docs/qif-v0.4-quality-gate-runtime-requirements.md`, `docs/qif-roadmap.md`, `README.md`, `CHANGELOG.md`, `RELEASE-NOTES-v0.4.4.md`.
+- `assessments/qif-self-evaluation-v0.4.4.json` and `.md`.
+
+What was not built:
+
+- No UI.
+- No external integration.
+- No semantic scoring of evidence type quality.
+- No claim that an evidence type vocabulary proves the right evidence was chosen.
+
+AOF runtime command evidence:
+
+- AOF v10.8.0 `organization-verify --project .` passed with 231/231 checks.
+- AOF v10.8.0 `command-routing-audit --project . --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.4.4-final.json` passed.
+- AOF v10.8.0 `review-provenance-audit --project . --cutoff-task-id TASK-014 --write-artifact .aof/artifacts/verification/review-provenance-audit-qif-v0.4.4-final.json` passed.
+
+QIF verification:
+
+- `npm test` passed with 3/3 positive checks and 226/226 negative checks.
+- `node tools/validate-qif-runtime.mjs assessments/qif-self-evaluation-v0.4.4.json` passed.
+
+Decision:
+
+- Proceed to v0.4.4 release after final scan, commit, tag, and GitHub release.
+- Residual risk: evidence vocabulary is implemented for quality-gate packages only; remaining package surfaces still need full retained negative coverage under Phase 1.

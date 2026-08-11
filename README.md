@@ -6,7 +6,7 @@ QIF does not define quality as output volume. Page count, review count, and test
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline (release Go / Conditional Go / No-Go / Pending decisions with quantitative evidence, post-release review, and traceability), the v0.4.1 retained fixture coverage expansion, the v0.4.2 Quality Aspect taxonomy, and the v0.4.3 complete core verifier fixture coverage release:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline (release Go / Conditional Go / No-Go / Pending decisions with quantitative evidence, post-release review, and traceability), the v0.4.1 retained fixture coverage expansion, the v0.4.2 Quality Aspect taxonomy, the v0.4.3 complete core verifier fixture coverage release, and the v0.4.4 Evidence Type Vocabulary:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -101,6 +101,8 @@ For quality gate packages (v0.4 baseline), the runtime verifier additionally che
 - each gated Quality Intent is covered by an Evaluation Perspective and has exactly one verdict
 - an achieved verdict cites at least one supporting evidence item
 - quality gate rules are enforced, not decorative: every intent a cited gate rule protects has a verdict, and a Go or Conditional Go satisfies each cited rule's required evidence types
+- evidence item types and gate-rule required evidence types resolve against `evidenceTypeVocabulary`
+- vocabulary-required `trust` and `findingEvidence` metadata is present
 - a Go or Conditional Go decision includes a rollback plan, monitoring plan, approval owner, and residual risk
 - a Conditional Go decision includes explicit conditions with owners and monitoring
 - a No-Go decision cites a violated loss boundary or gate rule

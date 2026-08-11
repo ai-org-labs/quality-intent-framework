@@ -691,6 +691,68 @@
       "rounding": "nearest-0.01"
     }
   ],
+  "evidenceTypeVocabulary": [
+    {
+      "id": "ETV-QG-SAMPLED-REVIEW",
+      "evidenceType": "sampled-review",
+      "purpose": "Record sampled human or AI-assisted review findings that may reveal escapes or regressions.",
+      "sourceCategory": "hybrid",
+      "expectedIndependence": "medium",
+      "trustRequired": true,
+      "findingEvidenceRequired": true,
+      "antiPatterns": [
+        "Treating sample size or review count as quality itself."
+      ]
+    },
+    {
+      "id": "ETV-QG-CONTROL-TEST",
+      "evidenceType": "control-test",
+      "purpose": "Record direct control behavior under representative protected scenarios.",
+      "sourceCategory": "automated-run",
+      "expectedIndependence": "high",
+      "trustRequired": false,
+      "findingEvidenceRequired": false,
+      "antiPatterns": [
+        "Treating one passing control test as proof that all operating contexts are safe."
+      ]
+    },
+    {
+      "id": "ETV-QG-REGRESSION-SAMPLE",
+      "evidenceType": "regression-sample",
+      "purpose": "Record representative checks that previously valid outcomes still remain valid.",
+      "sourceCategory": "hybrid",
+      "expectedIndependence": "medium",
+      "trustRequired": false,
+      "findingEvidenceRequired": false,
+      "antiPatterns": [
+        "Treating regression case count as quality itself."
+      ]
+    },
+    {
+      "id": "ETV-QG-REVERSAL-REHEARSAL",
+      "evidenceType": "reversal-rehearsal",
+      "purpose": "Record evidence that a risky change can return to a known safe state.",
+      "sourceCategory": "operational-record",
+      "expectedIndependence": "medium",
+      "trustRequired": false,
+      "findingEvidenceRequired": false,
+      "antiPatterns": [
+        "Treating a written rollback plan as rehearsal evidence."
+      ]
+    },
+    {
+      "id": "ETV-QG-MONITORING-CONFIGURATION",
+      "evidenceType": "monitoring-configuration",
+      "purpose": "Record monitoring configuration before real operating observations are available.",
+      "sourceCategory": "operational-record",
+      "expectedIndependence": "low",
+      "trustRequired": false,
+      "findingEvidenceRequired": false,
+      "antiPatterns": [
+        "Treating configured monitoring as proof that the system behaved safely in production."
+      ]
+    }
+  ],
   "evidenceItems": [
     {
       "id": "EVD-QG-001",
