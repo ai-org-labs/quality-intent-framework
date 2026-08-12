@@ -1627,5 +1627,12 @@ QIF verification:
 
 Decision:
 
-- Proceed to v0.4.5 release after final scan, commit, tag, and GitHub release.
+- Proceeded to v0.4.5 release after final scan, commit, tag, and GitHub release.
 - Residual risk: evaluation timing is implemented for `quality-gate` packages only; remaining runtime package surfaces still need full retained negative coverage under Phase 1.
+
+Publication:
+
+- Verified release commit: `8d4ba922f8dbb2deb5189036dd8e84ec9313e647`.
+- Annotated tag: `v0.4.5`.
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.4.5`.
+- Remote main was first advanced to the verified release commit; this post-release log records the publication outcome without moving the release tag.
