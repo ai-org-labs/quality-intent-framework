@@ -1571,3 +1571,61 @@ Publication:
 - Annotated tag: `v0.4.4`.
 - GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.4.4`.
 - Remote main was first advanced to the verified release commit; this post-release log records the publication outcome without moving the release tag.
+
+## QIF v0.4.5 Evaluation Timing Rules
+
+Date: 2026-08-12
+
+Need / Intent / Context:
+
+- Need: agentic AI workflows increasingly fail when evaluation is performed too late. QIF quality-gate packages could require evidence types, but could not structurally state when evaluation had to happen.
+- Intent: add executable `evaluationTimingRules` and `evaluationTimingDecisions` so required pre-decision evaluation cannot be silently deferred past a gate decision.
+- Context: QIF remains standalone. AOF v10.8.0 is used as development runtime evidence, not as a QIF usage dependency.
+
+Trend signals reviewed:
+
+- August 2026 reporting on rogue AI agents and sandbox escapes indicates that agent evaluations need containment, monitoring, and permission-aware timing before external action.
+- NIST 800-5 on AI agent security emphasizes adapted security practices, assessment, implementation guidance, and information sharing for agent adoption.
+- OWASP State of Agentic AI Security and Governance 2.01 frames agentic systems as requiring lifecycle governance.
+- July 2026 IETF draft work on AI agent security benchmarks separates static, dynamic, attack-defense, compliance, and quantitative evaluation across the lifecycle.
+- Gartner and PwC 2026 guidance highlights autonomy level, scope of access, role identity, task-specific permissions, and increased human oversight as agent consequence rises.
+
+Council judgment:
+
+- Visionary: approve. Timing records move QIF from evidence presence toward lifecycle-aware quality control.
+- Builder: approve. Implement only in `quality-gate` packages, reuse existing package/verifier/fixture patterns, and avoid new UI or external integrations.
+- Guardian: approve with guardrails. Timing completion is structural evidence only; verifier success does not prove that the timing choice was semantically correct.
+
+What was built:
+
+- `schemas/quality-gate-package.schema.json`: added required `evaluationTimingRules` and `evaluationTimingDecisions`.
+- `tools/validate-qif-runtime.mjs`: added timing rule and decision checks, including required-before-decision completion and governance-backed waivers.
+- `examples/quality-gate-package.json`: added pre-release boundary timing and continuous post-activation monitoring timing.
+- `tools/fixtures/quality-gate-cases.mjs`: added seven retained negative fixture cases.
+- `docs/AI_AUTHORING_GUIDE.md`, `docs/qif-v0.4-quality-gate-runtime-requirements.md`, `docs/qif-roadmap.md`, `README.md`, `CHANGELOG.md`, `RELEASE-NOTES-v0.4.5.md`.
+- `assessments/qif-self-evaluation-v0.4.5.json` and `.md`.
+
+What was not built:
+
+- No UI.
+- No external integration.
+- No semantic scoring of whether the selected timing is correct.
+- No cross-package timing ledger; that remains a later Living QIF Ledger concern.
+
+AOF runtime command evidence:
+
+- AOF latest check: `ai-org-labs/ai-organization-framework` latest tag remained `v10.8.0`.
+- AOF v10.8.0 `organization-verify --project .` passed with 231/231 checks.
+- AOF v10.8.0 `command-routing-audit --project . --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.4.5-final.json` passed.
+- AOF v10.8.0 `review-provenance-audit --project . --cutoff-task-id TASK-014 --write-artifact .aof/artifacts/verification/review-provenance-audit-qif-v0.4.5-final.json` passed.
+
+QIF verification:
+
+- `npm test` passed with 3/3 positive checks and 233/233 negative checks.
+- `node tools/validate-qif-runtime.mjs assessments/qif-self-evaluation-v0.4.5.json` passed.
+- Public residue scan found no personal account, email, legacy repository, user-home, or temporary checkout path residue outside `.git`.
+
+Decision:
+
+- Proceed to v0.4.5 release after final scan, commit, tag, and GitHub release.
+- Residual risk: evaluation timing is implemented for `quality-gate` packages only; remaining runtime package surfaces still need full retained negative coverage under Phase 1.

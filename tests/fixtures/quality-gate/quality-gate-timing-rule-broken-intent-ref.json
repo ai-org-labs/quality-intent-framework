@@ -1069,7 +1069,7 @@
       "id": "IMP-QG-001",
       "title": "Make secondary approval non-bypassable for over-limit refunds",
       "correctiveAction": "Reconfigure the refund workflow so over-limit refunds cannot be submitted without a completed secondary approval, and add a weekly over-limit audit.",
-      "sourcePostReleaseReviewRef": "PRR-NOPE-999",
+      "sourcePostReleaseReviewRef": "PRR-QG-001",
       "effectMeasurement": "Over-limit escape count in the 30-day window after the fix, compared with the first 7-day window.",
       "status": "in-progress"
     }
@@ -1154,8 +1154,7 @@
       "id": "ETR-QG-PRE-RELEASE",
       "title": "Pre-release boundary evidence timing",
       "appliesToIntentRefs": [
-        "QIN-QG-001",
-        "QIN-QG-003"
+        "QIN-NOPE-999"
       ],
       "timing": "pre-release",
       "triggerConditions": [

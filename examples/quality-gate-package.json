@@ -1,6 +1,6 @@
 {
   "packageType": "quality-gate",
-  "runtimeVersion": "0.4.0",
+  "runtimeVersion": "0.4.5",
   "packageId": "QGPkg-001",
   "evaluationTargets": [
     {
@@ -9,7 +9,11 @@
       "domain": "customer-support",
       "artifactType": "policy-activation",
       "context": "A policy change expands frontline agent refund authority to reduce escalation delays, taking effect across all support teams at once.",
-      "stakeholderImpact": ["customers", "support agents", "finance controllers"],
+      "stakeholderImpact": [
+        "customers",
+        "support agents",
+        "finance controllers"
+      ],
       "operationalImpact": "Incorrect refunds could cause financial leakage, while over-strict handling could wrongly deny valid customer claims."
     }
   ],
@@ -39,253 +43,551 @@
       "name": "functional suitability",
       "purpose": "Discover whether the target performs the intended behavior or service outcome.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["What must work for the target to be acceptable?"],
-      "typicalConcerns": ["intended behavior fails", "required outcome is incomplete"],
-      "possibleLossBoundaries": ["Required behavior must not fail on protected cases."],
-      "evidenceExamples": ["scenario result", "service outcome sample"],
-      "antiPatterns": ["Treating feature presence as proof that the intended outcome is protected."]
+      "discoveryQuestions": [
+        "What must work for the target to be acceptable?"
+      ],
+      "typicalConcerns": [
+        "intended behavior fails",
+        "required outcome is incomplete"
+      ],
+      "possibleLossBoundaries": [
+        "Required behavior must not fail on protected cases."
+      ],
+      "evidenceExamples": [
+        "scenario result",
+        "service outcome sample"
+      ],
+      "antiPatterns": [
+        "Treating feature presence as proof that the intended outcome is protected."
+      ]
     },
     {
       "id": "QAS-QG-BUSINESS",
       "name": "business fit",
       "purpose": "Discover whether the target supports the business purpose without creating unacceptable tradeoffs.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["Which business outcome would be harmed even if the mechanism works?"],
-      "typicalConcerns": ["goal misalignment", "unintended incentive", "unfair treatment"],
-      "possibleLossBoundaries": ["The business process must not create unacceptable stakeholder harm."],
-      "evidenceExamples": ["business scenario review", "stakeholder impact analysis"],
-      "antiPatterns": ["Treating revenue or throughput as quality itself."]
+      "discoveryQuestions": [
+        "Which business outcome would be harmed even if the mechanism works?"
+      ],
+      "typicalConcerns": [
+        "goal misalignment",
+        "unintended incentive",
+        "unfair treatment"
+      ],
+      "possibleLossBoundaries": [
+        "The business process must not create unacceptable stakeholder harm."
+      ],
+      "evidenceExamples": [
+        "business scenario review",
+        "stakeholder impact analysis"
+      ],
+      "antiPatterns": [
+        "Treating revenue or throughput as quality itself."
+      ]
     },
     {
       "id": "QAS-QG-USABILITY",
       "name": "usability",
       "purpose": "Discover whether intended users can complete the work correctly and efficiently.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["What would a trained but non-expert user misunderstand or miss?"],
-      "typicalConcerns": ["avoidable user error", "unclear action", "excessive cognitive load"],
-      "possibleLossBoundaries": ["Users must not be led into materially incorrect action by the target."],
-      "evidenceExamples": ["task walkthrough", "operator dry run"],
-      "antiPatterns": ["Treating attractive layout as evidence of usable operation."]
+      "discoveryQuestions": [
+        "What would a trained but non-expert user misunderstand or miss?"
+      ],
+      "typicalConcerns": [
+        "avoidable user error",
+        "unclear action",
+        "excessive cognitive load"
+      ],
+      "possibleLossBoundaries": [
+        "Users must not be led into materially incorrect action by the target."
+      ],
+      "evidenceExamples": [
+        "task walkthrough",
+        "operator dry run"
+      ],
+      "antiPatterns": [
+        "Treating attractive layout as evidence of usable operation."
+      ]
     },
     {
       "id": "QAS-QG-UXDESIGN",
       "name": "ux design",
       "purpose": "Discover whether the end-to-end experience preserves comprehension, trust, and appropriate user control.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["Where could the experience create false confidence or hide an important boundary?"],
-      "typicalConcerns": ["misleading flow", "hidden state", "unclear consequence"],
-      "possibleLossBoundaries": ["The experience must not obscure a decision consequence that users must understand."],
-      "evidenceExamples": ["journey review", "prototype walkthrough"],
-      "antiPatterns": ["Treating visual polish as proof that the experience is safe or understandable."]
+      "discoveryQuestions": [
+        "Where could the experience create false confidence or hide an important boundary?"
+      ],
+      "typicalConcerns": [
+        "misleading flow",
+        "hidden state",
+        "unclear consequence"
+      ],
+      "possibleLossBoundaries": [
+        "The experience must not obscure a decision consequence that users must understand."
+      ],
+      "evidenceExamples": [
+        "journey review",
+        "prototype walkthrough"
+      ],
+      "antiPatterns": [
+        "Treating visual polish as proof that the experience is safe or understandable."
+      ]
     },
     {
       "id": "QAS-QG-ACCESSIBILITY",
       "name": "accessibility",
       "purpose": "Discover whether affected users can access and operate the target without exclusion.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["Who cannot perceive, understand, navigate, or act on this target?"],
-      "typicalConcerns": ["excluded user group", "assistive technology failure", "language or sensory barrier"],
-      "possibleLossBoundaries": ["Eligible users must not be excluded from critical action or information."],
-      "evidenceExamples": ["accessibility review", "assistive workflow check"],
-      "antiPatterns": ["Treating accessibility as optional decoration after release."]
+      "discoveryQuestions": [
+        "Who cannot perceive, understand, navigate, or act on this target?"
+      ],
+      "typicalConcerns": [
+        "excluded user group",
+        "assistive technology failure",
+        "language or sensory barrier"
+      ],
+      "possibleLossBoundaries": [
+        "Eligible users must not be excluded from critical action or information."
+      ],
+      "evidenceExamples": [
+        "accessibility review",
+        "assistive workflow check"
+      ],
+      "antiPatterns": [
+        "Treating accessibility as optional decoration after release."
+      ]
     },
     {
       "id": "QAS-QG-PERFORMANCE",
       "name": "performance efficiency",
       "purpose": "Discover whether response time, effort, or resource use stays within acceptable boundaries.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["What delay or resource use would make the target unacceptable?"],
-      "typicalConcerns": ["slow response", "excessive manual effort", "resource exhaustion"],
-      "possibleLossBoundaries": ["Critical work must not exceed the delay or effort tolerance."],
-      "evidenceExamples": ["response-time comparison", "effort measurement"],
-      "antiPatterns": ["Treating average speed as proof that critical cases are protected."]
+      "discoveryQuestions": [
+        "What delay or resource use would make the target unacceptable?"
+      ],
+      "typicalConcerns": [
+        "slow response",
+        "excessive manual effort",
+        "resource exhaustion"
+      ],
+      "possibleLossBoundaries": [
+        "Critical work must not exceed the delay or effort tolerance."
+      ],
+      "evidenceExamples": [
+        "response-time comparison",
+        "effort measurement"
+      ],
+      "antiPatterns": [
+        "Treating average speed as proof that critical cases are protected."
+      ]
     },
     {
       "id": "QAS-QG-SCALABILITY",
       "name": "scalability",
       "purpose": "Discover whether the target still works when volume, complexity, or demand changes.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["What breaks first if volume doubles?"],
-      "typicalConcerns": ["capacity limit", "queue growth", "manual bottleneck"],
-      "possibleLossBoundaries": ["Expected growth must not make the protected process unsafe or unusable."],
-      "evidenceExamples": ["load scenario", "capacity analysis"],
-      "antiPatterns": ["Assuming today's low volume proves tomorrow's adequacy."]
+      "discoveryQuestions": [
+        "What breaks first if volume doubles?"
+      ],
+      "typicalConcerns": [
+        "capacity limit",
+        "queue growth",
+        "manual bottleneck"
+      ],
+      "possibleLossBoundaries": [
+        "Expected growth must not make the protected process unsafe or unusable."
+      ],
+      "evidenceExamples": [
+        "load scenario",
+        "capacity analysis"
+      ],
+      "antiPatterns": [
+        "Assuming today's low volume proves tomorrow's adequacy."
+      ]
     },
     {
       "id": "QAS-QG-AVAILABILITY",
       "name": "availability",
       "purpose": "Discover whether the target is reachable or usable when stakeholders need it.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["When must this be available, and what outage is unacceptable?"],
-      "typicalConcerns": ["unavailable service", "missing fallback", "unsupported critical window"],
-      "possibleLossBoundaries": ["Critical users must not lose access during protected operating windows."],
-      "evidenceExamples": ["availability plan", "fallback rehearsal"],
-      "antiPatterns": ["Treating uptime percentage alone as quality."]
+      "discoveryQuestions": [
+        "When must this be available, and what outage is unacceptable?"
+      ],
+      "typicalConcerns": [
+        "unavailable service",
+        "missing fallback",
+        "unsupported critical window"
+      ],
+      "possibleLossBoundaries": [
+        "Critical users must not lose access during protected operating windows."
+      ],
+      "evidenceExamples": [
+        "availability plan",
+        "fallback rehearsal"
+      ],
+      "antiPatterns": [
+        "Treating uptime percentage alone as quality."
+      ]
     },
     {
       "id": "QAS-QG-RELIABILITY",
       "name": "reliability",
       "purpose": "Discover whether the target behaves consistently under expected conditions.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["Which repeated use would expose inconsistency or drift?"],
-      "typicalConcerns": ["intermittent failure", "state drift", "inconsistent result"],
-      "possibleLossBoundaries": ["Repeated protected actions must not produce materially inconsistent outcomes."],
-      "evidenceExamples": ["repeatability run", "incident comparison"],
-      "antiPatterns": ["Treating one successful run as reliability proof."]
+      "discoveryQuestions": [
+        "Which repeated use would expose inconsistency or drift?"
+      ],
+      "typicalConcerns": [
+        "intermittent failure",
+        "state drift",
+        "inconsistent result"
+      ],
+      "possibleLossBoundaries": [
+        "Repeated protected actions must not produce materially inconsistent outcomes."
+      ],
+      "evidenceExamples": [
+        "repeatability run",
+        "incident comparison"
+      ],
+      "antiPatterns": [
+        "Treating one successful run as reliability proof."
+      ]
     },
     {
       "id": "QAS-QG-RECOVERABILITY",
       "name": "recoverability",
       "purpose": "Discover whether the organization can restore a safe state after failure.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["How do we return to a known safe state if this goes wrong?"],
-      "typicalConcerns": ["irreversible state", "slow rollback", "unclear ownership"],
-      "possibleLossBoundaries": ["An unsafe state must not persist without a demonstrated recovery path."],
-      "evidenceExamples": ["rollback rehearsal", "restoration evidence"],
-      "antiPatterns": ["Treating a written rollback plan as proof without rehearsal when risk is high."]
+      "discoveryQuestions": [
+        "How do we return to a known safe state if this goes wrong?"
+      ],
+      "typicalConcerns": [
+        "irreversible state",
+        "slow rollback",
+        "unclear ownership"
+      ],
+      "possibleLossBoundaries": [
+        "An unsafe state must not persist without a demonstrated recovery path."
+      ],
+      "evidenceExamples": [
+        "rollback rehearsal",
+        "restoration evidence"
+      ],
+      "antiPatterns": [
+        "Treating a written rollback plan as proof without rehearsal when risk is high."
+      ]
     },
     {
       "id": "QAS-QG-SECURITY",
       "name": "security",
       "purpose": "Discover whether authority, confidentiality, integrity, or trust boundaries are protected.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["What authority or data boundary could be crossed?"],
-      "typicalConcerns": ["unauthorized access", "privilege expansion", "tampering"],
-      "possibleLossBoundaries": ["Unauthorized parties must not gain access or authority."],
-      "evidenceExamples": ["control test", "threat review"],
-      "antiPatterns": ["Treating authentication presence as proof that authorization risk is controlled."]
+      "discoveryQuestions": [
+        "What authority or data boundary could be crossed?"
+      ],
+      "typicalConcerns": [
+        "unauthorized access",
+        "privilege expansion",
+        "tampering"
+      ],
+      "possibleLossBoundaries": [
+        "Unauthorized parties must not gain access or authority."
+      ],
+      "evidenceExamples": [
+        "control test",
+        "threat review"
+      ],
+      "antiPatterns": [
+        "Treating authentication presence as proof that authorization risk is controlled."
+      ]
     },
     {
       "id": "QAS-QG-PRIVACY",
       "name": "privacy",
       "purpose": "Discover whether personal or sensitive information is used, exposed, retained, or inferred acceptably.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["What sensitive information could be exposed or used beyond expectation?"],
-      "typicalConcerns": ["over-collection", "unintended disclosure", "excess retention"],
-      "possibleLossBoundaries": ["Sensitive information must not be exposed or retained beyond approved purpose."],
-      "evidenceExamples": ["data handling review", "retention check"],
-      "antiPatterns": ["Treating legal consent text as proof that actual data handling is acceptable."]
+      "discoveryQuestions": [
+        "What sensitive information could be exposed or used beyond expectation?"
+      ],
+      "typicalConcerns": [
+        "over-collection",
+        "unintended disclosure",
+        "excess retention"
+      ],
+      "possibleLossBoundaries": [
+        "Sensitive information must not be exposed or retained beyond approved purpose."
+      ],
+      "evidenceExamples": [
+        "data handling review",
+        "retention check"
+      ],
+      "antiPatterns": [
+        "Treating legal consent text as proof that actual data handling is acceptable."
+      ]
     },
     {
       "id": "QAS-QG-DATA",
       "name": "data quality",
       "purpose": "Discover whether data remains accurate, complete, timely, and interpretable enough for decisions.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["Which decision fails if this data is wrong, stale, or incomplete?"],
-      "typicalConcerns": ["stale data", "missing field", "ambiguous source of truth"],
-      "possibleLossBoundaries": ["Decisions must not rely on materially incorrect or stale data."],
-      "evidenceExamples": ["source reconciliation", "freshness check"],
-      "antiPatterns": ["Treating data existence as proof that data is fit for use."]
+      "discoveryQuestions": [
+        "Which decision fails if this data is wrong, stale, or incomplete?"
+      ],
+      "typicalConcerns": [
+        "stale data",
+        "missing field",
+        "ambiguous source of truth"
+      ],
+      "possibleLossBoundaries": [
+        "Decisions must not rely on materially incorrect or stale data."
+      ],
+      "evidenceExamples": [
+        "source reconciliation",
+        "freshness check"
+      ],
+      "antiPatterns": [
+        "Treating data existence as proof that data is fit for use."
+      ]
     },
     {
       "id": "QAS-QG-OPERATIONAL",
       "name": "operational quality",
       "purpose": "Discover whether the target can be operated, monitored, and handed off safely.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["Who operates this, and what would they need during an abnormal state?"],
-      "typicalConcerns": ["missing monitoring", "unclear runbook", "handoff gap"],
-      "possibleLossBoundaries": ["Operators must not be left unable to detect or contain harmful states."],
-      "evidenceExamples": ["runbook review", "operations rehearsal"],
-      "antiPatterns": ["Treating launch completion as proof of operational readiness."]
+      "discoveryQuestions": [
+        "Who operates this, and what would they need during an abnormal state?"
+      ],
+      "typicalConcerns": [
+        "missing monitoring",
+        "unclear runbook",
+        "handoff gap"
+      ],
+      "possibleLossBoundaries": [
+        "Operators must not be left unable to detect or contain harmful states."
+      ],
+      "evidenceExamples": [
+        "runbook review",
+        "operations rehearsal"
+      ],
+      "antiPatterns": [
+        "Treating launch completion as proof of operational readiness."
+      ]
     },
     {
       "id": "QAS-QG-MAINTAINABILITY",
       "name": "maintainability",
       "purpose": "Discover whether future maintainers can understand, diagnose, and preserve the target.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["What would a future maintainer be unable to understand or safely change?"],
-      "typicalConcerns": ["opaque logic", "fragile dependency", "missing rationale"],
-      "possibleLossBoundaries": ["Future maintenance must not require hidden expert-only knowledge for protected work."],
-      "evidenceExamples": ["maintainer review", "rationale trace"],
-      "antiPatterns": ["Treating low defect count as proof of maintainability."]
+      "discoveryQuestions": [
+        "What would a future maintainer be unable to understand or safely change?"
+      ],
+      "typicalConcerns": [
+        "opaque logic",
+        "fragile dependency",
+        "missing rationale"
+      ],
+      "possibleLossBoundaries": [
+        "Future maintenance must not require hidden expert-only knowledge for protected work."
+      ],
+      "evidenceExamples": [
+        "maintainer review",
+        "rationale trace"
+      ],
+      "antiPatterns": [
+        "Treating low defect count as proof of maintainability."
+      ]
     },
     {
       "id": "QAS-QG-CHANGEABILITY",
       "name": "changeability",
       "purpose": "Discover whether the target can adapt to expected change without disproportionate risk.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["Which likely change would be expensive or risky to make?"],
-      "typicalConcerns": ["hard-coded assumption", "coupled process", "change bottleneck"],
-      "possibleLossBoundaries": ["Expected changes must not require unsafe or opaque workarounds."],
-      "evidenceExamples": ["change scenario review", "impact analysis"],
-      "antiPatterns": ["Treating current correctness as proof of future adaptability."]
+      "discoveryQuestions": [
+        "Which likely change would be expensive or risky to make?"
+      ],
+      "typicalConcerns": [
+        "hard-coded assumption",
+        "coupled process",
+        "change bottleneck"
+      ],
+      "possibleLossBoundaries": [
+        "Expected changes must not require unsafe or opaque workarounds."
+      ],
+      "evidenceExamples": [
+        "change scenario review",
+        "impact analysis"
+      ],
+      "antiPatterns": [
+        "Treating current correctness as proof of future adaptability."
+      ]
     },
     {
       "id": "QAS-QG-AUDITABILITY",
       "name": "auditability",
       "purpose": "Discover whether decisions, evidence, and authority can be reconstructed later.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["Can an auditor reconstruct why this was accepted?"],
-      "typicalConcerns": ["missing rationale", "untraceable approval", "unretained evidence"],
-      "possibleLossBoundaries": ["Governed decisions must not become impossible to reconstruct."],
-      "evidenceExamples": ["traceability link", "approval record"],
-      "antiPatterns": ["Treating a passed verifier as proof of semantic correctness."]
+      "discoveryQuestions": [
+        "Can an auditor reconstruct why this was accepted?"
+      ],
+      "typicalConcerns": [
+        "missing rationale",
+        "untraceable approval",
+        "unretained evidence"
+      ],
+      "possibleLossBoundaries": [
+        "Governed decisions must not become impossible to reconstruct."
+      ],
+      "evidenceExamples": [
+        "traceability link",
+        "approval record"
+      ],
+      "antiPatterns": [
+        "Treating a passed verifier as proof of semantic correctness."
+      ]
     },
     {
       "id": "QAS-QG-COMPLIANCE",
       "name": "compliance",
       "purpose": "Discover whether external obligations, policies, or standards impose quality boundaries.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["Which rule, contract, or policy would be violated if this passes?"],
-      "typicalConcerns": ["policy breach", "regulatory exposure", "contract violation"],
-      "possibleLossBoundaries": ["The target must not violate governing obligations."],
-      "evidenceExamples": ["obligation mapping", "control review"],
-      "antiPatterns": ["Treating generic policy acknowledgement as evidence of compliance."]
+      "discoveryQuestions": [
+        "Which rule, contract, or policy would be violated if this passes?"
+      ],
+      "typicalConcerns": [
+        "policy breach",
+        "regulatory exposure",
+        "contract violation"
+      ],
+      "possibleLossBoundaries": [
+        "The target must not violate governing obligations."
+      ],
+      "evidenceExamples": [
+        "obligation mapping",
+        "control review"
+      ],
+      "antiPatterns": [
+        "Treating generic policy acknowledgement as evidence of compliance."
+      ]
     },
     {
       "id": "QAS-QG-SAFETY",
       "name": "safety",
       "purpose": "Discover whether people, equipment, environment, or critical operations could be harmed.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["What physical, operational, or severe harm could this enable?"],
-      "typicalConcerns": ["unsafe state", "uncontrolled operation", "harmful ambiguity"],
-      "possibleLossBoundaries": ["The target must not enable unacceptable safety exposure."],
-      "evidenceExamples": ["safety review", "hazard analysis"],
-      "antiPatterns": ["Treating lack of past incidents as proof of safety."]
+      "discoveryQuestions": [
+        "What physical, operational, or severe harm could this enable?"
+      ],
+      "typicalConcerns": [
+        "unsafe state",
+        "uncontrolled operation",
+        "harmful ambiguity"
+      ],
+      "possibleLossBoundaries": [
+        "The target must not enable unacceptable safety exposure."
+      ],
+      "evidenceExamples": [
+        "safety review",
+        "hazard analysis"
+      ],
+      "antiPatterns": [
+        "Treating lack of past incidents as proof of safety."
+      ]
     },
     {
       "id": "QAS-QG-COST",
       "name": "cost efficiency",
       "purpose": "Discover whether cost, effort, or waste becomes unacceptable relative to value.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["What cost or rework would make this unacceptable?"],
-      "typicalConcerns": ["waste", "excess support load", "expensive recovery"],
-      "possibleLossBoundaries": ["The target must not impose disproportionate avoidable cost on stakeholders."],
-      "evidenceExamples": ["cost-of-recovery estimate", "support load sample"],
-      "antiPatterns": ["Treating low implementation cost as proof of quality."]
+      "discoveryQuestions": [
+        "What cost or rework would make this unacceptable?"
+      ],
+      "typicalConcerns": [
+        "waste",
+        "excess support load",
+        "expensive recovery"
+      ],
+      "possibleLossBoundaries": [
+        "The target must not impose disproportionate avoidable cost on stakeholders."
+      ],
+      "evidenceExamples": [
+        "cost-of-recovery estimate",
+        "support load sample"
+      ],
+      "antiPatterns": [
+        "Treating low implementation cost as proof of quality."
+      ]
     },
     {
       "id": "QAS-QG-CUSTOMER",
       "name": "customer impact",
       "purpose": "Discover whether customers experience loss, unfairness, confusion, or unmet expectations.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["Which customer would be harmed or treated unfairly if this passes?"],
-      "typicalConcerns": ["wrong denial", "confusing outcome", "unfair exception"],
-      "possibleLossBoundaries": ["Customers must not absorb unacceptable avoidable harm."],
-      "evidenceExamples": ["customer scenario sample", "complaint-risk review"],
-      "antiPatterns": ["Treating internal process completion as proof of customer acceptability."]
+      "discoveryQuestions": [
+        "Which customer would be harmed or treated unfairly if this passes?"
+      ],
+      "typicalConcerns": [
+        "wrong denial",
+        "confusing outcome",
+        "unfair exception"
+      ],
+      "possibleLossBoundaries": [
+        "Customers must not absorb unacceptable avoidable harm."
+      ],
+      "evidenceExamples": [
+        "customer scenario sample",
+        "complaint-risk review"
+      ],
+      "antiPatterns": [
+        "Treating internal process completion as proof of customer acceptability."
+      ]
     },
     {
       "id": "QAS-QG-TRUST",
       "name": "brand trust",
       "purpose": "Discover whether the target could damage trust, credibility, or perceived fairness.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["What would make stakeholders lose trust even if the action is technically allowed?"],
-      "typicalConcerns": ["opaque decision", "perceived unfairness", "trust-eroding exception"],
-      "possibleLossBoundaries": ["The organization must not create unjustifiable trust loss."],
-      "evidenceExamples": ["stakeholder review", "communication review"],
-      "antiPatterns": ["Treating legal permissibility as proof of trust acceptability."]
+      "discoveryQuestions": [
+        "What would make stakeholders lose trust even if the action is technically allowed?"
+      ],
+      "typicalConcerns": [
+        "opaque decision",
+        "perceived unfairness",
+        "trust-eroding exception"
+      ],
+      "possibleLossBoundaries": [
+        "The organization must not create unjustifiable trust loss."
+      ],
+      "evidenceExamples": [
+        "stakeholder review",
+        "communication review"
+      ],
+      "antiPatterns": [
+        "Treating legal permissibility as proof of trust acceptability."
+      ]
     },
     {
       "id": "QAS-QG-ORG",
       "name": "organizational operability",
       "purpose": "Discover whether the organization can staff, train, govern, and sustain the target.",
       "interpretation": "discovery-lens-only",
-      "discoveryQuestions": ["What depends on expert-only knowledge or unclear ownership?"],
-      "typicalConcerns": ["training gap", "single expert dependency", "unclear escalation"],
-      "possibleLossBoundaries": ["The organization must not depend on hidden knowledge for governed operation."],
-      "evidenceExamples": ["handoff test", "training readiness review"],
-      "antiPatterns": ["Treating a veteran's approval as automatically reproducible organizational knowledge."]
+      "discoveryQuestions": [
+        "What depends on expert-only knowledge or unclear ownership?"
+      ],
+      "typicalConcerns": [
+        "training gap",
+        "single expert dependency",
+        "unclear escalation"
+      ],
+      "possibleLossBoundaries": [
+        "The organization must not depend on hidden knowledge for governed operation."
+      ],
+      "evidenceExamples": [
+        "handoff test",
+        "training readiness review"
+      ],
+      "antiPatterns": [
+        "Treating a veteran's approval as automatically reproducible organizational knowledge."
+      ]
     }
   ],
   "evaluationPerspectives": [
@@ -293,29 +595,56 @@
       "id": "EPS-QG-001",
       "perspective": "release decision",
       "rationale": "The activation is an all-at-once operational change that needs an explicit Go, Conditional Go, No-Go, or Pending decision.",
-      "linkedAspectRefs": ["QAS-QG-RECOVERABILITY", "QAS-QG-AUDITABILITY", "QAS-QG-OPERATIONAL"],
-      "linkedIntentRefs": ["QIN-QG-001", "QIN-QG-002", "QIN-QG-003"]
+      "linkedAspectRefs": [
+        "QAS-QG-RECOVERABILITY",
+        "QAS-QG-AUDITABILITY",
+        "QAS-QG-OPERATIONAL"
+      ],
+      "linkedIntentRefs": [
+        "QIN-QG-001",
+        "QIN-QG-002",
+        "QIN-QG-003"
+      ]
     },
     {
       "id": "EPS-QG-002",
       "perspective": "functional quality",
       "rationale": "Whether the refund-limit control and claim handling behave as intended under the new authority.",
-      "linkedAspectRefs": ["QAS-QG-FUNCTIONAL", "QAS-QG-SECURITY", "QAS-QG-CUSTOMER"],
-      "linkedIntentRefs": ["QIN-QG-001", "QIN-QG-002"]
+      "linkedAspectRefs": [
+        "QAS-QG-FUNCTIONAL",
+        "QAS-QG-SECURITY",
+        "QAS-QG-CUSTOMER"
+      ],
+      "linkedIntentRefs": [
+        "QIN-QG-001",
+        "QIN-QG-002"
+      ]
     },
     {
       "id": "EPS-QG-003",
       "perspective": "regression quality",
       "rationale": "Whether previously valid claims continue to be approved after the change.",
-      "linkedAspectRefs": ["QAS-QG-RELIABILITY", "QAS-QG-DATA", "QAS-QG-CUSTOMER"],
-      "linkedIntentRefs": ["QIN-QG-002"]
+      "linkedAspectRefs": [
+        "QAS-QG-RELIABILITY",
+        "QAS-QG-DATA",
+        "QAS-QG-CUSTOMER"
+      ],
+      "linkedIntentRefs": [
+        "QIN-QG-002"
+      ]
     },
     {
       "id": "EPS-QG-004",
       "perspective": "operational quality",
       "rationale": "Whether reversal, monitoring, and post-activation impact are covered.",
-      "linkedAspectRefs": ["QAS-QG-OPERATIONAL", "QAS-QG-RECOVERABILITY", "QAS-QG-COST"],
-      "linkedIntentRefs": ["QIN-QG-003"]
+      "linkedAspectRefs": [
+        "QAS-QG-OPERATIONAL",
+        "QAS-QG-RECOVERABILITY",
+        "QAS-QG-COST"
+      ],
+      "linkedIntentRefs": [
+        "QIN-QG-003"
+      ]
     },
     {
       "id": "EPS-QG-005",
@@ -346,7 +675,11 @@
         "QAS-QG-TRUST",
         "QAS-QG-ORG"
       ],
-      "linkedIntentRefs": ["QIN-QG-001", "QIN-QG-002", "QIN-QG-003"]
+      "linkedIntentRefs": [
+        "QIN-QG-001",
+        "QIN-QG-002",
+        "QIN-QG-003"
+      ]
     }
   ],
   "confidencePolicies": [
@@ -367,7 +700,9 @@
       "expectedIndependence": "medium",
       "trustRequired": true,
       "findingEvidenceRequired": true,
-      "antiPatterns": ["Treating sample size or review count as quality itself."]
+      "antiPatterns": [
+        "Treating sample size or review count as quality itself."
+      ]
     },
     {
       "id": "ETV-QG-CONTROL-TEST",
@@ -377,7 +712,9 @@
       "expectedIndependence": "high",
       "trustRequired": false,
       "findingEvidenceRequired": false,
-      "antiPatterns": ["Treating one passing control test as proof that all operating contexts are safe."]
+      "antiPatterns": [
+        "Treating one passing control test as proof that all operating contexts are safe."
+      ]
     },
     {
       "id": "ETV-QG-REGRESSION-SAMPLE",
@@ -387,7 +724,9 @@
       "expectedIndependence": "medium",
       "trustRequired": false,
       "findingEvidenceRequired": false,
-      "antiPatterns": ["Treating regression case count as quality itself."]
+      "antiPatterns": [
+        "Treating regression case count as quality itself."
+      ]
     },
     {
       "id": "ETV-QG-REVERSAL-REHEARSAL",
@@ -397,7 +736,9 @@
       "expectedIndependence": "medium",
       "trustRequired": false,
       "findingEvidenceRequired": false,
-      "antiPatterns": ["Treating a written rollback plan as rehearsal evidence."]
+      "antiPatterns": [
+        "Treating a written rollback plan as rehearsal evidence."
+      ]
     },
     {
       "id": "ETV-QG-MONITORING-CONFIGURATION",
@@ -407,7 +748,9 @@
       "expectedIndependence": "low",
       "trustRequired": false,
       "findingEvidenceRequired": false,
-      "antiPatterns": ["Treating configured monitoring as proof that the system behaved safely in production."]
+      "antiPatterns": [
+        "Treating configured monitoring as proof that the system behaved safely in production."
+      ]
     }
   ],
   "evidenceItems": [
@@ -433,9 +776,14 @@
         "finalStatus": "confirmed"
       },
       "trust": {
-        "sources": ["refund-sample-readjudication-2026-07.csv", "policy-change-review-notes-2026-07.md"],
+        "sources": [
+          "refund-sample-readjudication-2026-07.csv",
+          "policy-change-review-notes-2026-07.md"
+        ],
         "generatedBy": "ai-quality-security-reviewer",
-        "verifiedBy": ["quality-analyst"],
+        "verifiedBy": [
+          "quality-analyst"
+        ],
         "status": "verified",
         "staleAfter": "2026-10-31"
       }
@@ -511,7 +859,7 @@
     {
       "id": "QER-QG-002",
       "metricName": "over-limit control block rate",
-      "value": 1.0,
+      "value": 1,
       "unit": "ratio",
       "quantityType": "how-much",
       "measurementMethod": "Control test over 40 attempted over-limit refunds; blocked divided by attempted.",
@@ -525,7 +873,7 @@
     {
       "id": "QER-QG-003",
       "metricName": "valid-claim retention rate",
-      "value": 1.0,
+      "value": 1,
       "unit": "ratio",
       "quantityType": "how-much",
       "measurementMethod": "Regression sample of 60 previously approved valid claims re-evaluated under the new policy.",
@@ -562,7 +910,7 @@
       "executedCount": 40,
       "passedCount": 40,
       "failedCount": 0,
-      "passRate": 1.0,
+      "passRate": 1,
       "durationSeconds": 180,
       "independence": "high",
       "artifactReference": "over-limit-control-test-log.json",
@@ -573,8 +921,13 @@
     {
       "id": "QGR-QG-001",
       "title": "Financial-limit boundary must be control-protected before Go.",
-      "appliesToIntentRefs": ["QIN-QG-001"],
-      "requiredEvidenceTypes": ["control-test", "sampled-review"],
+      "appliesToIntentRefs": [
+        "QIN-QG-001"
+      ],
+      "requiredEvidenceTypes": [
+        "control-test",
+        "sampled-review"
+      ],
       "blockingConditions": [
         "No-Go if the over-limit control block rate is below 1.0.",
         "At most Conditional Go while any sampled over-limit escape remains without a compensating control."
@@ -583,8 +936,12 @@
     {
       "id": "QGR-QG-002",
       "title": "Reversibility must be demonstrated for high-severity policy changes.",
-      "appliesToIntentRefs": ["QIN-QG-003"],
-      "requiredEvidenceTypes": ["reversal-rehearsal"],
+      "appliesToIntentRefs": [
+        "QIN-QG-003"
+      ],
+      "requiredEvidenceTypes": [
+        "reversal-rehearsal"
+      ],
       "blockingConditions": [
         "No-Go if no reversal evidence exists.",
         "At most Conditional Go while monitoring has not been observed under real load."
@@ -593,8 +950,12 @@
     {
       "id": "QGR-QG-003",
       "title": "Valid-claim regression must hold.",
-      "appliesToIntentRefs": ["QIN-QG-002"],
-      "requiredEvidenceTypes": ["regression-sample"],
+      "appliesToIntentRefs": [
+        "QIN-QG-002"
+      ],
+      "requiredEvidenceTypes": [
+        "regression-sample"
+      ],
       "blockingConditions": [
         "At most Conditional Go if the valid-claim retention rate is below 1.0."
       ]
@@ -604,7 +965,11 @@
     {
       "id": "QGD-QG-001",
       "targetRef": "TGT-QG-001",
-      "gateRuleRefs": ["QGR-QG-001", "QGR-QG-002", "QGR-QG-003"],
+      "gateRuleRefs": [
+        "QGR-QG-001",
+        "QGR-QG-002",
+        "QGR-QG-003"
+      ],
       "decision": "Conditional Go",
       "intentVerdicts": [
         {
@@ -612,7 +977,10 @@
           "decision": "partially-achieved",
           "confidence": 0.7,
           "confidencePolicyRef": "CFP-QG-001",
-          "evidenceRefs": ["EVD-QG-001", "EVD-QG-002"],
+          "evidenceRefs": [
+            "EVD-QG-001",
+            "EVD-QG-002"
+          ],
           "weight": 1,
           "residualRisk": "Three sampled cases could exceed the limit if the secondary-approval step is bypassed."
         },
@@ -621,7 +989,9 @@
           "decision": "achieved",
           "confidence": 0.8,
           "confidencePolicyRef": "CFP-QG-001",
-          "evidenceRefs": ["EVD-QG-003"],
+          "evidenceRefs": [
+            "EVD-QG-003"
+          ],
           "weight": 1,
           "residualRisk": "Claim categories outside the sample remain unverified."
         },
@@ -630,7 +1000,10 @@
           "decision": "partially-achieved",
           "confidence": 0.6,
           "confidencePolicyRef": "CFP-QG-001",
-          "evidenceRefs": ["EVD-QG-004", "EVD-QG-005"],
+          "evidenceRefs": [
+            "EVD-QG-004",
+            "EVD-QG-005"
+          ],
           "weight": 1,
           "residualRisk": "Monitoring is configured but not yet observed under real activation load."
         }
@@ -659,7 +1032,9 @@
       "rollbackPlan": "Revert to the prior refund-authority policy within 30 minutes using the rehearsed reversal procedure recorded in EVD-QG-004.",
       "monitoringPlan": "Track refund leakage amount, over-limit escape count, and complaint volume across 7-day and 30-day windows.",
       "customerImpactPlan": "Notify affected customers and reprocess any wrongly denied valid claims within five business days.",
-      "governanceTriggerRefs": ["GTR-QG-001"]
+      "governanceTriggerRefs": [
+        "GTR-QG-001"
+      ]
     }
   ],
   "postReleaseReviews": [
@@ -672,13 +1047,20 @@
           "id": "INC-QG-001",
           "description": "Two over-limit refunds were issued when an agent bypassed the secondary-approval step during a high-volume period.",
           "severity": "high",
-          "affectedStakeholders": ["finance controllers", "customers"]
+          "affectedStakeholders": [
+            "finance controllers",
+            "customers"
+          ]
         }
       ],
       "mttrHours": 6,
       "rcaComplete": true,
-      "improvementActionRefs": ["IMP-QG-001"],
-      "feedsQualityIntentRefs": ["QIN-QG-001"],
+      "improvementActionRefs": [
+        "IMP-QG-001"
+      ],
+      "feedsQualityIntentRefs": [
+        "QIN-QG-001"
+      ],
       "summary": "The financial-limit boundary was breached twice because secondary approval was bypassable under load, confirming the residual risk recorded at the gate."
     }
   ],
@@ -766,5 +1148,79 @@
       "operational feedback",
       "governance decision"
     ]
-  }
+  },
+  "evaluationTimingRules": [
+    {
+      "id": "ETR-QG-PRE-RELEASE",
+      "title": "Pre-release boundary evidence timing",
+      "appliesToIntentRefs": [
+        "QIN-QG-001",
+        "QIN-QG-003"
+      ],
+      "timing": "pre-release",
+      "triggerConditions": [
+        "Gate decision includes a high-severity loss boundary.",
+        "Target changes operating authority or financial exposure."
+      ],
+      "requiredBeforeDecision": true,
+      "latestAllowedStage": "before Go or Conditional Go is recorded",
+      "antiPatterns": [
+        "Approving release first and treating later evidence collection as equivalent.",
+        "Using planned review count as proof that boundary evidence exists."
+      ]
+    },
+    {
+      "id": "ETR-QG-CONTINUOUS",
+      "title": "Continuous post-activation monitoring timing",
+      "appliesToIntentRefs": [
+        "QIN-QG-002",
+        "QIN-QG-003"
+      ],
+      "timing": "continuous",
+      "triggerConditions": [
+        "The target remains active after the release gate decision.",
+        "Operational harm can emerge after activation through volume or exception drift."
+      ],
+      "requiredBeforeDecision": false,
+      "latestAllowedStage": "active monitoring window after policy activation",
+      "antiPatterns": [
+        "Treating release approval as the end of quality evaluation.",
+        "Counting monitoring events without linking them to loss boundaries."
+      ]
+    }
+  ],
+  "evaluationTimingDecisions": [
+    {
+      "id": "ETD-QG-PRE-RELEASE",
+      "targetRef": "TGT-QG-001",
+      "timingRuleRefs": [
+        "ETR-QG-PRE-RELEASE"
+      ],
+      "selectedTiming": "pre-release",
+      "decisionRationale": "The gate protects high-severity financial and reversibility boundaries, so control and rollback evidence must exist before Conditional Go is recorded.",
+      "evidenceRefs": [
+        "EVD-QG-002",
+        "EVD-QG-004"
+      ],
+      "appliesBeforeGateDecisionRef": "QGD-QG-001",
+      "confidence": 0.82,
+      "owner": "support-operations-lead",
+      "status": "completed"
+    },
+    {
+      "id": "ETD-QG-CONTINUOUS",
+      "targetRef": "TGT-QG-001",
+      "timingRuleRefs": [
+        "ETR-QG-CONTINUOUS"
+      ],
+      "selectedTiming": "continuous",
+      "decisionRationale": "Customer-denial and rollback risks can emerge after activation, so monitoring remains active after the gate decision.",
+      "evidenceRefs": [
+        "EVD-QG-005"
+      ],
+      "confidence": 0.76,
+      "owner": "support-quality-manager",
+      "status": "scheduled"
+    }
+  ]
 }

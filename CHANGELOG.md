@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.4.5
+
+- Added first-class `evaluationTimingRules` and `evaluationTimingDecisions` to quality-gate packages.
+- Extended the quality-gate verifier so required-before-decision timing rules must have completed timing decisions before a gate decision can pass.
+- Added verifier checks for timing enum validity, linked intents, selected timing consistency, completed timing evidence, and governance-backed waivers.
+- Updated the quality-gate example with pre-release boundary evidence timing and continuous post-activation monitoring timing.
+- Added retained negative fixtures covering evaluation timing misuse.
+
 ## v0.4.4
 
 - Added first-class `evidenceTypeVocabulary` to quality-gate packages so evidence item types and gate-rule `requiredEvidenceTypes` are declared before use.

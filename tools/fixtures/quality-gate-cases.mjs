@@ -260,6 +260,54 @@ export const cases = [
     mutate: (pkg) => { pkg.qualityGateRules[0].requiredEvidenceTypes = []; }
   },
 
+  // ---- Evaluation timing rules and decisions ----
+  {
+    id: "timing-rule-broken-intent-ref",
+    rule: "evaluation timing rule linked intents resolve",
+    expect: "references missing quality intent",
+    mutate: (pkg) => { pkg.evaluationTimingRules[0].appliesToIntentRefs = ["QIN-NOPE-999"]; }
+  },
+  {
+    id: "timing-rule-bad-timing",
+    rule: "evaluation timing rule timing enum",
+    expect: "timing must be one of",
+    mutate: (pkg) => { pkg.evaluationTimingRules[0].timing = "eventually"; }
+  },
+  {
+    id: "timing-decision-bad-selected-timing",
+    rule: "evaluation timing decision selected timing matches cited rules",
+    expect: "selectedTiming continuous is not allowed by its cited timing rules.",
+    mutate: (pkg) => { pkg.evaluationTimingDecisions[0].selectedTiming = "continuous"; }
+  },
+  {
+    id: "timing-decision-missing-gate-ref",
+    rule: "required-before-decision timing decision cites gate decision",
+    expect: "cites a required-before-decision timing rule and must include appliesBeforeGateDecisionRef.",
+    mutate: (pkg) => { delete pkg.evaluationTimingDecisions[0].appliesBeforeGateDecisionRef; }
+  },
+  {
+    id: "gate-decision-missing-required-timing",
+    rule: "gate decision requires completed evaluation timing decision",
+    expect: "lacks completed evaluation timing decision for required timing rule",
+    mutate: (pkg) => { pkg.evaluationTimingDecisions[0].status = "scheduled"; }
+  },
+  {
+    id: "timing-decision-completed-without-evidence",
+    rule: "completed evaluation timing decision cites evidence",
+    expect: "is completed and must cite timing decision evidence.",
+    mutate: (pkg) => { pkg.evaluationTimingDecisions[0].evidenceRefs = []; }
+  },
+  {
+    id: "timing-decision-waived-without-governance",
+    rule: "waived evaluation timing decision requires governance",
+    expect: "must include at least one governance trigger.",
+    mutate: (pkg) => {
+      pkg.evaluationTimingDecisions[0].status = "waived";
+      pkg.evaluationTimingDecisions[0].waiverRationale = "Emergency waiver.";
+      pkg.evaluationTimingDecisions[0].governanceTriggerRefs = [];
+    }
+  },
+
   // ---- Gate decision: enum, confidence, verdict discipline ----
   {
     id: "decision-bad-enum",

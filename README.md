@@ -6,7 +6,7 @@ QIF does not define quality as output volume. Page count, review count, and test
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline (release Go / Conditional Go / No-Go / Pending decisions with quantitative evidence, post-release review, and traceability), the v0.4.1 retained fixture coverage expansion, the v0.4.2 Quality Aspect taxonomy, the v0.4.3 complete core verifier fixture coverage release, and the v0.4.4 Evidence Type Vocabulary:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline (release Go / Conditional Go / No-Go / Pending decisions with quantitative evidence, post-release review, and traceability), the v0.4.1 retained fixture coverage expansion, the v0.4.2 Quality Aspect taxonomy, the v0.4.3 complete core verifier fixture coverage release, the v0.4.4 Evidence Type Vocabulary, and the v0.4.5 Evaluation Timing Rules:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -103,6 +103,7 @@ For quality gate packages (v0.4 baseline), the runtime verifier additionally che
 - quality gate rules are enforced, not decorative: every intent a cited gate rule protects has a verdict, and a Go or Conditional Go satisfies each cited rule's required evidence types
 - evidence item types and gate-rule required evidence types resolve against `evidenceTypeVocabulary`
 - vocabulary-required `trust` and `findingEvidence` metadata is present
+- required-before-decision evaluation timing rules have completed timing decisions before gate decisions proceed
 - a Go or Conditional Go decision includes a rollback plan, monitoring plan, approval owner, and residual risk
 - a Conditional Go decision includes explicit conditions with owners and monitoring
 - a No-Go decision cites a violated loss boundary or gate rule
@@ -115,4 +116,4 @@ For quality gate packages (v0.4 baseline), the runtime verifier additionally che
 
 The verifier enforces structural integrity, traceability, reference resolution, confidence reproducibility, and rule compliance. It does not prove semantic truth; semantic validity requires expert review, reproduction tests, operational feedback, and governance.
 
-`npm test` also runs a standing negative fixture suite (`tools/run-fixture-tests.mjs`). The retained invalid corpora under `tests/fixtures/qif-package/`, `tests/fixtures/expert-judgment/`, and `tests/fixtures/quality-gate/` must each be rejected with a specific error, so a covered verifier rule that is silently weakened or deleted fails the build. The committed corpora are generated from `tools/fixtures/*-cases.mjs` by `npm run build-fixtures`; the suite fails on drift if generated source of truth and committed files disagree. v0.4.3 covers every implemented error branch in the two core package verifiers and retains 221 negative checks overall. The remaining runtime package surfaces are the v0.4.4 frontier (see `docs/qif-roadmap.md`).
+`npm test` also runs a standing negative fixture suite (`tools/run-fixture-tests.mjs`). The retained invalid corpora under `tests/fixtures/qif-package/`, `tests/fixtures/expert-judgment/`, and `tests/fixtures/quality-gate/` must each be rejected with a specific error, so a covered verifier rule that is silently weakened or deleted fails the build. The committed corpora are generated from `tools/fixtures/*-cases.mjs` by `npm run build-fixtures`; the suite fails on drift if generated source of truth and committed files disagree. v0.4.5 retains 233 negative checks overall. The remaining runtime package surfaces are the next v0.4.x frontier (see `docs/qif-roadmap.md`).

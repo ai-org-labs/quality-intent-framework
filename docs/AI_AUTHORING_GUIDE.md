@@ -174,9 +174,10 @@ When asked to define QIF check items for a requirement, produce:
 3. Quality Intents
 4. Negative Acceptance Criteria
 5. Evidence Required
-6. Applicability Conditions
-7. Exceptions or Waivers
-8. Gate Verdict Rules
+6. Evaluation Timing
+7. Applicability Conditions
+8. Exceptions or Waivers
+9. Gate Verdict Rules
 
 When asked to author a QIF package or schema change, produce:
 
@@ -205,6 +206,26 @@ Use it to define:
 - anti-patterns for misuse.
 
 Do not invent a new `evidenceType` inside an evidence item or `requiredEvidenceTypes` list unless you also add it to the vocabulary. Evidence type names are control vocabulary, not quality itself.
+
+For quality-gate packages, define evaluation timing before writing the final gate decision.
+
+Use `evaluationTimingRules` to state reusable timing logic:
+
+- which Quality Intents the timing protects;
+- whether evaluation is required before a gate decision;
+- trigger conditions;
+- latest allowed stage;
+- anti-patterns.
+
+Use `evaluationTimingDecisions` to record the target-specific timing decision:
+
+- which timing rule was selected;
+- why the timing applies;
+- what evidence proves completion;
+- which gate decision it applies before;
+- owner, confidence, and status.
+
+Do not approve a Go or Conditional Go by assuming evidence can be collected later when the cited timing rule says it is required before decision.
 
 Do not write:
 

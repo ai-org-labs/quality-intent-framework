@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.4.4 baseline)
+## Current Position (v0.4.5 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate.
@@ -45,8 +45,10 @@ and adoption surface — not pretending the limits away.
 - Verified by structural validators run through `npm test`.
 - The quality-gate verifier has retained negative coverage; v0.4.3 completes
   the same discipline for the two core package verifiers. v0.4.4 adds an
-  executable evidence-type vocabulary for quality-gate packages. Runtime
-  package surfaces remain the next v0.4.x frontier.
+  executable evidence-type vocabulary for quality-gate packages. v0.4.5 adds
+  executable evaluation timing rules and decisions so required pre-decision
+  evaluation cannot be silently deferred. Runtime package surfaces remain the
+  next v0.4.x frontier.
 - Weaknesses: packages are islands (no cross-package references), authoring
   cost for humans and AI agents is still high, agent trajectories and
   environment provenance are not first-class, and no empirical feedback yet
@@ -102,6 +104,10 @@ Deliverables:
 - Evaluation Timing Rule and Evaluation Timing Decision entities: when
   evaluation must happen, decided by executable conditions, with recorded
   justification.
+  Status: implemented for `quality-gate` packages in v0.4.5 through
+  `evaluationTimingRules` and `evaluationTimingDecisions`, including verifier
+  checks for required-before-decision completion, selected timing consistency,
+  evidence-backed completion, and governance-backed waivers.
 - Evidence Retention Policy entity: retention period, sensitivity, integrity
   policy as first-class checkable structure.
 - Quality Report entity: any reported score must decompose, by reference,

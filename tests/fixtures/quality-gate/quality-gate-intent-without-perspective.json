@@ -1,6 +1,6 @@
 {
   "packageType": "quality-gate",
-  "runtimeVersion": "0.4.0",
+  "runtimeVersion": "0.4.5",
   "packageId": "QGPkg-001",
   "evaluationTargets": [
     {
@@ -1132,5 +1132,79 @@
       "operational feedback",
       "governance decision"
     ]
-  }
+  },
+  "evaluationTimingRules": [
+    {
+      "id": "ETR-QG-PRE-RELEASE",
+      "title": "Pre-release boundary evidence timing",
+      "appliesToIntentRefs": [
+        "QIN-QG-001",
+        "QIN-QG-003"
+      ],
+      "timing": "pre-release",
+      "triggerConditions": [
+        "Gate decision includes a high-severity loss boundary.",
+        "Target changes operating authority or financial exposure."
+      ],
+      "requiredBeforeDecision": true,
+      "latestAllowedStage": "before Go or Conditional Go is recorded",
+      "antiPatterns": [
+        "Approving release first and treating later evidence collection as equivalent.",
+        "Using planned review count as proof that boundary evidence exists."
+      ]
+    },
+    {
+      "id": "ETR-QG-CONTINUOUS",
+      "title": "Continuous post-activation monitoring timing",
+      "appliesToIntentRefs": [
+        "QIN-QG-002",
+        "QIN-QG-003"
+      ],
+      "timing": "continuous",
+      "triggerConditions": [
+        "The target remains active after the release gate decision.",
+        "Operational harm can emerge after activation through volume or exception drift."
+      ],
+      "requiredBeforeDecision": false,
+      "latestAllowedStage": "active monitoring window after policy activation",
+      "antiPatterns": [
+        "Treating release approval as the end of quality evaluation.",
+        "Counting monitoring events without linking them to loss boundaries."
+      ]
+    }
+  ],
+  "evaluationTimingDecisions": [
+    {
+      "id": "ETD-QG-PRE-RELEASE",
+      "targetRef": "TGT-QG-001",
+      "timingRuleRefs": [
+        "ETR-QG-PRE-RELEASE"
+      ],
+      "selectedTiming": "pre-release",
+      "decisionRationale": "The gate protects high-severity financial and reversibility boundaries, so control and rollback evidence must exist before Conditional Go is recorded.",
+      "evidenceRefs": [
+        "EVD-QG-002",
+        "EVD-QG-004"
+      ],
+      "appliesBeforeGateDecisionRef": "QGD-QG-001",
+      "confidence": 0.82,
+      "owner": "support-operations-lead",
+      "status": "completed"
+    },
+    {
+      "id": "ETD-QG-CONTINUOUS",
+      "targetRef": "TGT-QG-001",
+      "timingRuleRefs": [
+        "ETR-QG-CONTINUOUS"
+      ],
+      "selectedTiming": "continuous",
+      "decisionRationale": "Customer-denial and rollback risks can emerge after activation, so monitoring remains active after the gate decision.",
+      "evidenceRefs": [
+        "EVD-QG-005"
+      ],
+      "confidence": 0.76,
+      "owner": "support-quality-manager",
+      "status": "scheduled"
+    }
+  ]
 }

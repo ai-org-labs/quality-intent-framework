@@ -873,6 +873,8 @@ const GATE_DECISIONS = new Set(["Go", "Conditional Go", "No-Go", "Pending"]);
 const HIGH_SEVERITIES = new Set(["high", "critical"]);
 const FINDING_FINAL_STATUSES = new Set(["candidate", "confirmed", "false-positive", "mitigated", "accepted-risk", "needs-governance"]);
 const TRUST_STATUSES = new Set(["draft", "verified", "stale", "rejected"]);
+const EVALUATION_TIMINGS = new Set(["pre-implementation", "pre-release", "post-release", "continuous", "incident-driven"]);
+const EVALUATION_TIMING_DECISION_STATUSES = new Set(["scheduled", "completed", "waived", "blocked"]);
 
 function validateQualityGatePackage(pkg, packagePath) {
   const targets = requireArray(pkg, "evaluationTargets");
@@ -880,6 +882,8 @@ function validateQualityGatePackage(pkg, packagePath) {
   const qualityAspects = requireArray(pkg, "qualityAspects");
   const perspectives = requireArray(pkg, "evaluationPerspectives");
   const confidencePolicies = requireArray(pkg, "confidencePolicies");
+  const evaluationTimingRules = requireArray(pkg, "evaluationTimingRules");
+  const evaluationTimingDecisions = requireArray(pkg, "evaluationTimingDecisions");
   const evidenceTypeVocabulary = requireArray(pkg, "evidenceTypeVocabulary");
   const evidenceItems = requireArray(pkg, "evidenceItems");
   const quantitativeRecords = requireArray(pkg, "quantitativeEvidenceRecords");
@@ -898,6 +902,8 @@ function validateQualityGatePackage(pkg, packagePath) {
   const aspectIndex = indexById(qualityAspects, `${packagePath}:qualityAspects`);
   const perspectiveIndex = indexById(perspectives, `${packagePath}:evaluationPerspectives`);
   const confidencePolicyIndex = indexById(confidencePolicies, `${packagePath}:confidencePolicies`);
+  const evaluationTimingRuleIndex = indexById(evaluationTimingRules, `${packagePath}:evaluationTimingRules`);
+  const evaluationTimingDecisionIndex = indexById(evaluationTimingDecisions, `${packagePath}:evaluationTimingDecisions`);
   const evidenceTypeVocabularyIndex = indexById(evidenceTypeVocabulary, `${packagePath}:evidenceTypeVocabulary`);
   const evidenceIndex = indexById(evidenceItems, `${packagePath}:evidenceItems`);
   const quantitativeIndex = indexById(quantitativeRecords, `${packagePath}:quantitativeEvidenceRecords`);
@@ -911,7 +917,7 @@ function validateQualityGatePackage(pkg, packagePath) {
 
   // A global id index lets traceability links resolve across every entity family.
   const globalIndex = new Map();
-  for (const family of [targetIndex, intentIndex, aspectIndex, perspectiveIndex, confidencePolicyIndex, evidenceTypeVocabularyIndex, evidenceIndex, quantitativeIndex, automatedIndex, gateRuleIndex, gateDecisionIndex, postReleaseIndex, improvementIndex, governanceIndex, governanceEventIndex]) {
+  for (const family of [targetIndex, intentIndex, aspectIndex, perspectiveIndex, confidencePolicyIndex, evaluationTimingRuleIndex, evaluationTimingDecisionIndex, evidenceTypeVocabularyIndex, evidenceIndex, quantitativeIndex, automatedIndex, gateRuleIndex, gateDecisionIndex, postReleaseIndex, improvementIndex, governanceIndex, governanceEventIndex]) {
     for (const [id, item] of family.entries()) {
       globalIndex.set(id, item);
     }
@@ -961,6 +967,19 @@ function validateQualityGatePackage(pkg, packagePath) {
     checkRequiredString(policy, "reviewRunAggregationRule", policy.id);
     checkRequiredString(policy, "rounding", policy.id);
   }
+  for (const rule of evaluationTimingRules) {
+    checkRequiredString(rule, "title", rule.id);
+    checkRefs(rule.appliesToIntentRefs, intentIndex, "quality intent", rule.id);
+    if (!EVALUATION_TIMINGS.has(rule.timing)) {
+      errors.push(`${rule.id} timing must be one of pre-implementation, pre-release, post-release, continuous, incident-driven.`);
+    }
+    checkNonEmptyArray(rule, "triggerConditions", rule.id);
+    if (typeof rule.requiredBeforeDecision !== "boolean") {
+      errors.push(`${rule.id} requiredBeforeDecision must be boolean.`);
+    }
+    checkRequiredString(rule, "latestAllowedStage", rule.id);
+    checkNonEmptyArray(rule, "antiPatterns", rule.id);
+  }
   const declaredEvidenceTypes = new Map();
   for (const entry of evidenceTypeVocabulary) {
     checkRequiredString(entry, "evidenceType", entry.id);
@@ -980,6 +999,43 @@ function validateQualityGatePackage(pkg, packagePath) {
       errors.push(`${entry.id} findingEvidenceRequired must be boolean.`);
     }
     checkNonEmptyArray(entry, "antiPatterns", entry.id);
+  }
+  for (const timingDecision of evaluationTimingDecisions) {
+    checkRefs([timingDecision.targetRef], targetIndex, "evaluation target", timingDecision.id);
+    checkRefs(timingDecision.timingRuleRefs, evaluationTimingRuleIndex, "evaluation timing rule", timingDecision.id);
+    checkMaybeRefs(timingDecision.evidenceRefs, evidenceIndex, "timing decision evidence", timingDecision.id);
+    checkRequiredString(timingDecision, "decisionRationale", timingDecision.id);
+    checkScore(timingDecision.confidence, "confidence", timingDecision.id);
+    checkRequiredString(timingDecision, "owner", timingDecision.id);
+    if (!EVALUATION_TIMINGS.has(timingDecision.selectedTiming)) {
+      errors.push(`${timingDecision.id} selectedTiming must be one of pre-implementation, pre-release, post-release, continuous, incident-driven.`);
+    }
+    if (!EVALUATION_TIMING_DECISION_STATUSES.has(timingDecision.status)) {
+      errors.push(`${timingDecision.id} status must be one of scheduled, completed, waived, blocked.`);
+    }
+    const citedRules = (timingDecision.timingRuleRefs ?? []).map((ref) => evaluationTimingRuleIndex.get(ref)).filter(Boolean);
+    if (citedRules.length > 0 && !citedRules.some((rule) => rule.timing === timingDecision.selectedTiming)) {
+      errors.push(`${timingDecision.id} selectedTiming ${timingDecision.selectedTiming} is not allowed by its cited timing rules.`);
+    }
+    if (timingDecision.appliesBeforeGateDecisionRef !== undefined) {
+      checkRefs([timingDecision.appliesBeforeGateDecisionRef], gateDecisionIndex, "gate decision", timingDecision.id);
+      const gateDecision = gateDecisionIndex.get(timingDecision.appliesBeforeGateDecisionRef);
+      if (gateDecision && gateDecision.targetRef !== timingDecision.targetRef) {
+        errors.push(`${timingDecision.id} applies before gate decision ${gateDecision.id} for a different target.`);
+      }
+    }
+    if (citedRules.some((rule) => rule.requiredBeforeDecision) && timingDecision.appliesBeforeGateDecisionRef === undefined) {
+      errors.push(`${timingDecision.id} cites a required-before-decision timing rule and must include appliesBeforeGateDecisionRef.`);
+    }
+    if (timingDecision.status === "completed" && (!Array.isArray(timingDecision.evidenceRefs) || timingDecision.evidenceRefs.length === 0)) {
+      errors.push(`${timingDecision.id} is completed and must cite timing decision evidence.`);
+    }
+    if (timingDecision.status === "waived") {
+      checkRequiredString(timingDecision, "waiverRationale", timingDecision.id);
+      checkRefs(timingDecision.governanceTriggerRefs, governanceIndex, "governance trigger", timingDecision.id);
+    } else if (timingDecision.governanceTriggerRefs !== undefined) {
+      checkMaybeRefs(timingDecision.governanceTriggerRefs, governanceIndex, "governance trigger", timingDecision.id);
+    }
   }
   const usedEvidenceTypes = new Set();
   for (const evidence of evidenceItems) {
@@ -1283,6 +1339,19 @@ function validateQualityGatePackage(pkg, packagePath) {
     }
   }
 
+  for (const gateDecision of gateDecisions) {
+    const coveredTimingRuleRefs = new Set(
+      evaluationTimingDecisions
+        .filter((timingDecision) => timingDecision.appliesBeforeGateDecisionRef === gateDecision.id && timingDecision.targetRef === gateDecision.targetRef && timingDecision.status === "completed")
+        .flatMap((timingDecision) => timingDecision.timingRuleRefs ?? [])
+    );
+    for (const rule of evaluationTimingRules) {
+      if (rule.requiredBeforeDecision && !(rule.appliesToIntentRefs ?? []).every((intentRef) => coveredTimingRuleRefs.has(rule.id) || !(gateDecision.intentVerdicts ?? []).some((verdict) => verdict.intentRef === intentRef))) {
+        errors.push(`${gateDecision.id} lacks completed evaluation timing decision for required timing rule ${rule.id}.`);
+      }
+    }
+  }
+
   for (const trigger of governanceTriggers) {
     for (const field of ["triggerType", "reason", "requiredAction", "owner", "status"]) {
       checkRequiredString(trigger, field, trigger.id);
@@ -1370,6 +1439,8 @@ function validateQualityGatePackage(pkg, packagePath) {
       qualityIntents: qualityIntents.length,
       qualityAspects: qualityAspects.length,
       evaluationPerspectives: perspectives.length,
+      evaluationTimingRules: evaluationTimingRules.length,
+      evaluationTimingDecisions: evaluationTimingDecisions.length,
       evidenceItems: evidenceItems.length,
       evidenceTypeVocabulary: evidenceTypeVocabulary.length,
       quantitativeEvidenceRecords: quantitativeRecords.length,

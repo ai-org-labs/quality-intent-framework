@@ -247,6 +247,55 @@
       "errorIncludes": "must include requiredEvidenceTypes."
     },
     {
+      "file": "quality-gate-timing-rule-broken-intent-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation timing rule linked intents resolve",
+      "expect": "fail",
+      "errorIncludes": "references missing quality intent"
+    },
+    {
+      "file": "quality-gate-timing-rule-bad-timing.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation timing rule timing enum",
+      "expect": "fail",
+      "errorIncludes": "timing must be one of"
+    },
+    {
+      "file": "quality-gate-timing-decision-bad-selected-timing.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation timing decision selected timing matches cited rules",
+      "expect": "fail",
+      "errorIncludes": "selectedTiming continuous is not allowed by its cited timing rules."
+    },
+    {
+      "file": "quality-gate-timing-decision-missing-gate-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "required-before-decision timing decision cites gate decision",
+      "expect": "fail",
+      "errorIncludes": "cites a required-before-decision timing rule and must include appliesBeforeGateDecisionRef."
+    },
+    {
+      "file": "quality-gate-gate-decision-missing-required-timing.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "gate decision requires completed evaluation timing decision",
+      "expect": "fail",
+      "errorIncludes": "lacks completed evaluation timing decision for required timing rule"
+    },
+    {
+      "file": "quality-gate-timing-decision-completed-without-evidence.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "completed evaluation timing decision cites evidence",
+      "expect": "fail",
+      "errorIncludes": "is completed and must cite timing decision evidence."
+    },
+    {
+      "file": "quality-gate-timing-decision-waived-without-governance.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "waived evaluation timing decision requires governance",
+      "expect": "fail",
+      "errorIncludes": "must include at least one governance trigger."
+    },
+    {
       "file": "quality-gate-decision-bad-enum.json",
       "validator": "tools/validate-qif-runtime.mjs",
       "rule": "gate decision verdict enum",

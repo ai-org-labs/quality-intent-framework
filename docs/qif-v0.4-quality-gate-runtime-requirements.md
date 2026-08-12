@@ -308,6 +308,25 @@ Example rules:
 | production incident occurred | RCA, corrective action, added evidence, improvement review. |
 | release candidate prepared | gate verdict, residual risk, approval, rollback, monitoring plan. |
 
+In executable quality-gate packages, this is represented by:
+
+- `evaluationTimingRules`: reusable timing logic linked to Quality Intents, with
+  timing, trigger conditions, whether the evaluation is required before a gate
+  decision, the latest allowed stage, and anti-patterns;
+- `evaluationTimingDecisions`: target-specific records explaining which timing
+  was selected, which evidence supports completion, which gate decision it
+  applies before, owner, confidence, and status.
+
+Verifier behavior:
+
+- timing rules must resolve linked Quality Intents;
+- selected timing must match at least one cited timing rule;
+- required-before-decision timing rules must have completed timing decisions
+  before a gate decision can proceed;
+- completed timing decisions must cite evidence;
+- waived timing decisions must include waiver rationale and governance trigger
+  references.
+
 ### 6. Shift-Left Evaluation
 
 QIF should evaluate whether quality was created early enough.
@@ -411,23 +430,26 @@ Scores must be explainable and traceable to Quality Intents, Loss Boundaries, ev
 
 ## Candidate Entities
 
-Future schema work should consider these entities:
+The quality-gate package currently implements:
 
 - Evaluation Perspective;
 - Quantitative Evidence Record;
 - Automated Evaluation Detail;
-- Evidence Retention Policy;
 - Evaluation Timing Rule;
 - Evaluation Timing Decision;
 - Quality Gate Rule;
 - Quality Gate Decision;
-- Release Gate Verdict;
 - Post-Release Review;
 - Traceability Link;
+- Improvement Action.
+
+Future schema work should consider these entities:
+
+- Evidence Retention Policy;
+- Release Gate Verdict as a reusable entity outside the current embedded gate verdict form;
 - Evidence Sufficiency Finding;
 - Quality Report;
-- Dashboard View;
-- Improvement Action.
+- Dashboard View.
 
 ## Workflow Requirements
 
