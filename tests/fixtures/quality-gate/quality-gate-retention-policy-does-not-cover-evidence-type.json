@@ -769,7 +769,7 @@
       "findingEvidence": {
         "generatedBy": "ai-quality-security-reviewer",
         "sourceArtifact": "refund-sample-readjudication-2026-07.csv",
-        "reproducible": "yes",
+        "reproducible": true,
         "reproducedBy": "quality-analyst",
         "falsePositiveChecked": true,
         "impactConfirmed": true,
@@ -843,7 +843,7 @@
       "evaluatorRole": "quality-steward",
       "retention": "Configuration retained; observations to follow after activation.",
       "artifactReference": "monitoring-config-export.json",
-      "retentionPolicyRef": "ERP-QG-MONITORING-EVIDENCE"
+      "retentionPolicyRef": "ERP-QG-RELEASE-EVIDENCE"
     }
   ],
   "quantitativeEvidenceRecords": [

@@ -769,7 +769,7 @@
       "findingEvidence": {
         "generatedBy": "ai-quality-security-reviewer",
         "sourceArtifact": "refund-sample-readjudication-2026-07.csv",
-        "reproducible": "yes",
+        "reproducible": true,
         "reproducedBy": "quality-analyst",
         "falsePositiveChecked": true,
         "impactConfirmed": true,
@@ -1264,6 +1264,22 @@
       "antiPatterns": [
         "Discarding monitoring configuration before post-release review.",
         "Counting monitoring events without retaining reconstructable evidence."
+      ]
+    },
+    {
+      "id": "ERP-QG-UNUSED",
+      "title": "Unused retention policy",
+      "appliesToEvidenceTypes": [
+        "control-test"
+      ],
+      "retentionPeriod": "1 month",
+      "sensitivity": "internal",
+      "integrityProtection": "checksum",
+      "accessControl": "internal-only",
+      "disposalRule": "Dispose after one month.",
+      "owner": "quality-owner",
+      "antiPatterns": [
+        "Decorative retention policy."
       ]
     }
   ]

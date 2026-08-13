@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.4.5 baseline)
+## Current Position (v0.4.6 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate.
@@ -47,8 +47,9 @@ and adoption surface — not pretending the limits away.
   the same discipline for the two core package verifiers. v0.4.4 adds an
   executable evidence-type vocabulary for quality-gate packages. v0.4.5 adds
   executable evaluation timing rules and decisions so required pre-decision
-  evaluation cannot be silently deferred. Runtime package surfaces remain the
-  next v0.4.x frontier.
+  evaluation cannot be silently deferred. v0.4.6 adds executable evidence
+  retention policies so evidence remains reconstructable and access-controlled
+  after a verdict. Runtime package surfaces remain the next v0.4.x frontier.
 - Weaknesses: packages are islands (no cross-package references), authoring
   cost for humans and AI agents is still high, agent trajectories and
   environment provenance are not first-class, and no empirical feedback yet
@@ -110,6 +111,11 @@ Deliverables:
   evidence-backed completion, and governance-backed waivers.
 - Evidence Retention Policy entity: retention period, sensitivity, integrity
   policy as first-class checkable structure.
+  Status: implemented for `quality-gate` packages in v0.4.6 through
+  `evidenceRetentionPolicies`, including verifier checks for evidence item
+  policy refs, declared evidence type coverage, sensitivity/access-control
+  consistency, restricted-evidence integrity protection, disposal ownership,
+  and unused policy declarations.
 - Quality Report entity: any reported score must decompose, by reference,
   into the verdicts and evidence it summarizes. A score that cannot be
   decomposed fails verification.

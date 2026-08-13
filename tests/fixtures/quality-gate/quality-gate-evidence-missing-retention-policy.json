@@ -769,7 +769,7 @@
       "findingEvidence": {
         "generatedBy": "ai-quality-security-reviewer",
         "sourceArtifact": "refund-sample-readjudication-2026-07.csv",
-        "reproducible": "yes",
+        "reproducible": true,
         "reproducedBy": "quality-analyst",
         "falsePositiveChecked": true,
         "impactConfirmed": true,
@@ -787,7 +787,7 @@
         "status": "verified",
         "staleAfter": "2026-10-31"
       },
-      "retentionPolicyRef": "ERP-QG-RELEASE-EVIDENCE"
+      "retentionPolicyRef": "ERP-NOPE-999"
     },
     {
       "id": "EVD-QG-002",

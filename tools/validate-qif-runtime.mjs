@@ -875,6 +875,9 @@ const FINDING_FINAL_STATUSES = new Set(["candidate", "confirmed", "false-positiv
 const TRUST_STATUSES = new Set(["draft", "verified", "stale", "rejected"]);
 const EVALUATION_TIMINGS = new Set(["pre-implementation", "pre-release", "post-release", "continuous", "incident-driven"]);
 const EVALUATION_TIMING_DECISION_STATUSES = new Set(["scheduled", "completed", "waived", "blocked"]);
+const RETENTION_SENSITIVITIES = new Set(["public", "internal", "confidential", "restricted"]);
+const RETENTION_INTEGRITY_PROTECTIONS = new Set(["none", "checksum", "signed-artifact", "immutable-log"]);
+const RETENTION_ACCESS_CONTROLS = new Set(["open", "internal-only", "need-to-know", "regulatory-controlled"]);
 
 function validateQualityGatePackage(pkg, packagePath) {
   const targets = requireArray(pkg, "evaluationTargets");
@@ -884,6 +887,7 @@ function validateQualityGatePackage(pkg, packagePath) {
   const confidencePolicies = requireArray(pkg, "confidencePolicies");
   const evaluationTimingRules = requireArray(pkg, "evaluationTimingRules");
   const evaluationTimingDecisions = requireArray(pkg, "evaluationTimingDecisions");
+  const evidenceRetentionPolicies = requireArray(pkg, "evidenceRetentionPolicies");
   const evidenceTypeVocabulary = requireArray(pkg, "evidenceTypeVocabulary");
   const evidenceItems = requireArray(pkg, "evidenceItems");
   const quantitativeRecords = requireArray(pkg, "quantitativeEvidenceRecords");
@@ -904,6 +908,7 @@ function validateQualityGatePackage(pkg, packagePath) {
   const confidencePolicyIndex = indexById(confidencePolicies, `${packagePath}:confidencePolicies`);
   const evaluationTimingRuleIndex = indexById(evaluationTimingRules, `${packagePath}:evaluationTimingRules`);
   const evaluationTimingDecisionIndex = indexById(evaluationTimingDecisions, `${packagePath}:evaluationTimingDecisions`);
+  const evidenceRetentionPolicyIndex = indexById(evidenceRetentionPolicies, `${packagePath}:evidenceRetentionPolicies`);
   const evidenceTypeVocabularyIndex = indexById(evidenceTypeVocabulary, `${packagePath}:evidenceTypeVocabulary`);
   const evidenceIndex = indexById(evidenceItems, `${packagePath}:evidenceItems`);
   const quantitativeIndex = indexById(quantitativeRecords, `${packagePath}:quantitativeEvidenceRecords`);
@@ -917,7 +922,7 @@ function validateQualityGatePackage(pkg, packagePath) {
 
   // A global id index lets traceability links resolve across every entity family.
   const globalIndex = new Map();
-  for (const family of [targetIndex, intentIndex, aspectIndex, perspectiveIndex, confidencePolicyIndex, evaluationTimingRuleIndex, evaluationTimingDecisionIndex, evidenceTypeVocabularyIndex, evidenceIndex, quantitativeIndex, automatedIndex, gateRuleIndex, gateDecisionIndex, postReleaseIndex, improvementIndex, governanceIndex, governanceEventIndex]) {
+  for (const family of [targetIndex, intentIndex, aspectIndex, perspectiveIndex, confidencePolicyIndex, evaluationTimingRuleIndex, evaluationTimingDecisionIndex, evidenceRetentionPolicyIndex, evidenceTypeVocabularyIndex, evidenceIndex, quantitativeIndex, automatedIndex, gateRuleIndex, gateDecisionIndex, postReleaseIndex, improvementIndex, governanceIndex, governanceEventIndex]) {
     for (const [id, item] of family.entries()) {
       globalIndex.set(id, item);
     }
@@ -1000,6 +1005,35 @@ function validateQualityGatePackage(pkg, packagePath) {
     }
     checkNonEmptyArray(entry, "antiPatterns", entry.id);
   }
+  const usedRetentionPolicyRefs = new Set();
+  for (const policy of evidenceRetentionPolicies) {
+    checkRequiredString(policy, "title", policy.id);
+    checkNonEmptyArray(policy, "appliesToEvidenceTypes", policy.id);
+    for (const evidenceType of policy.appliesToEvidenceTypes ?? []) {
+      if (!declaredEvidenceTypes.has(evidenceType)) {
+        errors.push(`${policy.id} applies to undeclared evidence type ${evidenceType}.`);
+      }
+    }
+    checkRequiredString(policy, "retentionPeriod", policy.id);
+    if (!RETENTION_SENSITIVITIES.has(policy.sensitivity)) {
+      errors.push(`${policy.id} sensitivity must be one of public, internal, confidential, restricted.`);
+    }
+    if (!RETENTION_INTEGRITY_PROTECTIONS.has(policy.integrityProtection)) {
+      errors.push(`${policy.id} integrityProtection must be one of none, checksum, signed-artifact, immutable-log.`);
+    }
+    if (!RETENTION_ACCESS_CONTROLS.has(policy.accessControl)) {
+      errors.push(`${policy.id} accessControl must be one of open, internal-only, need-to-know, regulatory-controlled.`);
+    }
+    checkRequiredString(policy, "disposalRule", policy.id);
+    checkRequiredString(policy, "owner", policy.id);
+    checkNonEmptyArray(policy, "antiPatterns", policy.id);
+    if ((policy.sensitivity === "confidential" || policy.sensitivity === "restricted") && (policy.accessControl === "open" || policy.accessControl === "internal-only")) {
+      errors.push(`${policy.id} ${policy.sensitivity} evidence must use need-to-know or regulatory-controlled access.`);
+    }
+    if (policy.sensitivity === "restricted" && (policy.integrityProtection === "none" || policy.integrityProtection === "checksum")) {
+      errors.push(`${policy.id} restricted evidence must use signed-artifact or immutable-log integrity protection.`);
+    }
+  }
   for (const timingDecision of evaluationTimingDecisions) {
     checkRefs([timingDecision.targetRef], targetIndex, "evaluation target", timingDecision.id);
     checkRefs(timingDecision.timingRuleRefs, evaluationTimingRuleIndex, "evaluation timing rule", timingDecision.id);
@@ -1049,6 +1083,12 @@ function validateQualityGatePackage(pkg, packagePath) {
     checkRequiredString(evidence, "finding", evidence.id);
     checkRequiredString(evidence, "evaluatorRole", evidence.id);
     checkRequiredString(evidence, "retention", evidence.id);
+    checkRefs([evidence.retentionPolicyRef], evidenceRetentionPolicyIndex, "evidence retention policy", evidence.id);
+    usedRetentionPolicyRefs.add(evidence.retentionPolicyRef);
+    const retentionPolicy = evidenceRetentionPolicyIndex.get(evidence.retentionPolicyRef);
+    if (retentionPolicy && !(retentionPolicy.appliesToEvidenceTypes ?? []).includes(evidence.evidenceType)) {
+      errors.push(`${evidence.id} evidenceType ${evidence.evidenceType} is not covered by retention policy ${retentionPolicy.id}.`);
+    }
     if (!["high", "medium", "low"].includes(evidence.independence)) {
       errors.push(`${evidence.id} independence must be high, medium, or low.`);
     }
@@ -1109,6 +1149,11 @@ function validateQualityGatePackage(pkg, packagePath) {
     const requiredByGateRule = gateRules.some((rule) => (rule.requiredEvidenceTypes ?? []).includes(entry.evidenceType));
     if (!usedEvidenceTypes.has(entry.evidenceType) && !requiredByGateRule) {
       errors.push(`${entry.id} evidence type ${entry.evidenceType} is declared but not used by evidence items or gate rules.`);
+    }
+  }
+  for (const policy of evidenceRetentionPolicies) {
+    if (!usedRetentionPolicyRefs.has(policy.id)) {
+      errors.push(`${policy.id} retention policy is declared but not used by any evidence item.`);
     }
   }
   for (const record of quantitativeRecords) {
@@ -1441,6 +1486,7 @@ function validateQualityGatePackage(pkg, packagePath) {
       evaluationPerspectives: perspectives.length,
       evaluationTimingRules: evaluationTimingRules.length,
       evaluationTimingDecisions: evaluationTimingDecisions.length,
+      evidenceRetentionPolicies: evidenceRetentionPolicies.length,
       evidenceItems: evidenceItems.length,
       evidenceTypeVocabulary: evidenceTypeVocabulary.length,
       quantitativeEvidenceRecords: quantitativeRecords.length,

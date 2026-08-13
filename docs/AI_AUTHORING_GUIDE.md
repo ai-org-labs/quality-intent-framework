@@ -207,6 +207,21 @@ Use it to define:
 
 Do not invent a new `evidenceType` inside an evidence item or `requiredEvidenceTypes` list unless you also add it to the vocabulary. Evidence type names are control vocabulary, not quality itself.
 
+For quality-gate packages, declare `evidenceRetentionPolicies` before finalizing evidence items.
+
+Use them to define:
+
+- which evidence types the policy covers;
+- retention period;
+- sensitivity;
+- integrity protection;
+- access control;
+- disposal rule;
+- owner;
+- anti-patterns.
+
+Every evidence item must cite a retention policy through `retentionPolicyRef`. Do not keep only a count or summary when the verdict depends on reconstructable evidence.
+
 For quality-gate packages, define evaluation timing before writing the final gate decision.
 
 Use `evaluationTimingRules` to state reusable timing logic:

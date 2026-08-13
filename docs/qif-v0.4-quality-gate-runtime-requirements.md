@@ -248,6 +248,28 @@ Verifier behavior:
 - unused vocabulary entries are rejected unless used by evidence or a gate rule;
 - vocabulary-required `trust` or `findingEvidence` metadata must be present.
 
+Quality-gate packages should also declare `evidenceRetentionPolicies` and cite
+one from each evidence item through `retentionPolicyRef`.
+
+Purpose:
+
+- make retained evidence reconstructable after the verdict;
+- keep sensitivity, access control, integrity protection, disposal, and owner
+  explicit;
+- prevent a package from keeping only summary counts while discarding the
+  evidence needed for audit or governance;
+- keep retention metadata separate from quality itself.
+
+Verifier behavior:
+
+- every evidence item must resolve `retentionPolicyRef`;
+- the cited policy must cover the evidence item's declared `evidenceType`;
+- retention policies must only reference declared evidence types;
+- confidential or restricted evidence must not use open access;
+- restricted evidence must use signed artifact or immutable log integrity
+  protection;
+- unused retention policies are rejected.
+
 For AI-generated quality or security findings, QIF should record finding evidence as verification metadata:
 
 ```yaml
@@ -437,6 +459,7 @@ The quality-gate package currently implements:
 - Automated Evaluation Detail;
 - Evaluation Timing Rule;
 - Evaluation Timing Decision;
+- Evidence Retention Policy;
 - Quality Gate Rule;
 - Quality Gate Decision;
 - Post-Release Review;
@@ -445,7 +468,6 @@ The quality-gate package currently implements:
 
 Future schema work should consider these entities:
 
-- Evidence Retention Policy;
 - Release Gate Verdict as a reusable entity outside the current embedded gate verdict form;
 - Evidence Sufficiency Finding;
 - Quality Report;

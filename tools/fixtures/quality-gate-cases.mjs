@@ -158,6 +158,59 @@ export const cases = [
     mutate: (pkg) => { delete pkg.evidenceItems[0].findingEvidence; }
   },
   {
+    id: "evidence-missing-retention-policy",
+    rule: "evidence item must cite retention policy",
+    expect: "references missing evidence retention policy",
+    mutate: (pkg) => { pkg.evidenceItems[0].retentionPolicyRef = "ERP-NOPE-999"; }
+  },
+  {
+    id: "retention-policy-undeclared-evidence-type",
+    rule: "retention policy evidence types resolve",
+    expect: "applies to undeclared evidence type",
+    mutate: (pkg) => { pkg.evidenceRetentionPolicies[0].appliesToEvidenceTypes.push("surprise-scan"); }
+  },
+  {
+    id: "retention-policy-does-not-cover-evidence-type",
+    rule: "evidence type must be covered by cited retention policy",
+    expect: "is not covered by retention policy",
+    mutate: (pkg) => { pkg.evidenceItems[4].retentionPolicyRef = "ERP-QG-RELEASE-EVIDENCE"; }
+  },
+  {
+    id: "retention-policy-confidential-open-access",
+    rule: "confidential retention policy requires restricted access",
+    expect: "confidential evidence must use need-to-know or regulatory-controlled access.",
+    mutate: (pkg) => { pkg.evidenceRetentionPolicies[0].accessControl = "open"; }
+  },
+  {
+    id: "retention-policy-restricted-weak-integrity",
+    rule: "restricted retention policy requires strong integrity protection",
+    expect: "restricted evidence must use signed-artifact or immutable-log integrity protection.",
+    mutate: (pkg) => {
+      pkg.evidenceRetentionPolicies[0].sensitivity = "restricted";
+      pkg.evidenceRetentionPolicies[0].integrityProtection = "checksum";
+      pkg.evidenceRetentionPolicies[0].accessControl = "regulatory-controlled";
+    }
+  },
+  {
+    id: "retention-policy-unused",
+    rule: "retention policies must be used",
+    expect: "retention policy is declared but not used by any evidence item.",
+    mutate: (pkg) => {
+      pkg.evidenceRetentionPolicies.push({
+        id: "ERP-QG-UNUSED",
+        title: "Unused retention policy",
+        appliesToEvidenceTypes: ["control-test"],
+        retentionPeriod: "1 month",
+        sensitivity: "internal",
+        integrityProtection: "checksum",
+        accessControl: "internal-only",
+        disposalRule: "Dispose after one month.",
+        owner: "quality-owner",
+        antiPatterns: ["Decorative retention policy."]
+      });
+    }
+  },
+  {
     id: "finding-evidence-missing-final-status",
     rule: "AI finding evidence final status is required",
     expect: "finalStatus must be one of",

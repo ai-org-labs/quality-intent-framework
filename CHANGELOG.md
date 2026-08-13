@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.4.6
+
+- Added first-class `evidenceRetentionPolicies` to quality-gate packages.
+- Required every quality-gate evidence item to cite a retention policy through `retentionPolicyRef`.
+- Extended the quality-gate verifier to check retention policy evidence type coverage, sensitivity, integrity protection, access control, disposal ownership, and unused policy declarations.
+- Updated the quality-gate example with release evidence and monitoring evidence retention policies.
+- Added retained negative fixtures covering retention policy misuse.
+
 ## v0.4.5
 
 - Added first-class `evaluationTimingRules` and `evaluationTimingDecisions` to quality-gate packages.

@@ -769,7 +769,7 @@
       "findingEvidence": {
         "generatedBy": "ai-quality-security-reviewer",
         "sourceArtifact": "refund-sample-readjudication-2026-07.csv",
-        "reproducible": "yes",
+        "reproducible": true,
         "reproducedBy": "quality-analyst",
         "falsePositiveChecked": true,
         "impactConfirmed": true,
@@ -1236,7 +1236,8 @@
         "sampled-review",
         "control-test",
         "regression-sample",
-        "reversal-rehearsal"
+        "reversal-rehearsal",
+        "surprise-scan"
       ],
       "retentionPeriod": "24 months after policy activation or until superseded by governance decision",
       "sensitivity": "confidential",

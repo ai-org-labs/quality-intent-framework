@@ -135,6 +135,48 @@
       "errorIncludes": "evidenceType sampled-review requires findingEvidence metadata."
     },
     {
+      "file": "quality-gate-evidence-missing-retention-policy.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evidence item must cite retention policy",
+      "expect": "fail",
+      "errorIncludes": "references missing evidence retention policy"
+    },
+    {
+      "file": "quality-gate-retention-policy-undeclared-evidence-type.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "retention policy evidence types resolve",
+      "expect": "fail",
+      "errorIncludes": "applies to undeclared evidence type"
+    },
+    {
+      "file": "quality-gate-retention-policy-does-not-cover-evidence-type.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evidence type must be covered by cited retention policy",
+      "expect": "fail",
+      "errorIncludes": "is not covered by retention policy"
+    },
+    {
+      "file": "quality-gate-retention-policy-confidential-open-access.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "confidential retention policy requires restricted access",
+      "expect": "fail",
+      "errorIncludes": "confidential evidence must use need-to-know or regulatory-controlled access."
+    },
+    {
+      "file": "quality-gate-retention-policy-restricted-weak-integrity.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "restricted retention policy requires strong integrity protection",
+      "expect": "fail",
+      "errorIncludes": "restricted evidence must use signed-artifact or immutable-log integrity protection."
+    },
+    {
+      "file": "quality-gate-retention-policy-unused.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "retention policies must be used",
+      "expect": "fail",
+      "errorIncludes": "retention policy is declared but not used by any evidence item."
+    },
+    {
       "file": "quality-gate-finding-evidence-missing-final-status.json",
       "validator": "tools/validate-qif-runtime.mjs",
       "rule": "AI finding evidence final status is required",

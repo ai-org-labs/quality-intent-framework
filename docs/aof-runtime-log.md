@@ -1636,3 +1636,61 @@ Publication:
 - Annotated tag: `v0.4.5`.
 - GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.4.5`.
 - Remote main was first advanced to the verified release commit; this post-release log records the publication outcome without moving the release tag.
+
+## QIF v0.4.6 Evidence Retention Policies
+
+Date: 2026-08-13
+
+Need / Intent / Context:
+
+- Need: agentic AI governance is shifting toward audit trails, agent identity, permission control, and reconstructable evidence. QIF quality-gate packages could cite evidence but did not structurally govern retention, sensitivity, integrity, access, disposal, or owner.
+- Intent: add executable `evidenceRetentionPolicies` so every evidence item has a declared retention and access-control policy before a quality gate verdict is accepted.
+- Context: QIF remains standalone. AOF v10.8.0 is used as development runtime evidence, not as a QIF usage dependency.
+
+Trend signals reviewed:
+
+- Express Computer reported that enterprise agentic AI governance is moving toward governance-by-design, data governance, risk-based controls, continuous monitoring, and cross-functional accountability.
+- TechRadar reported that cybersecurity for AI agents increasingly requires verifiable AI identities, auditable records, continuous monitoring, and fail-safes.
+- JumpCloud Q3 2026 IT Trends reported that AI agents are entering critical workflows faster than identity, visibility, and control foundations are maturing.
+- Okta Global CISO Insights 2026 reported concern about excessive AI access, weak agent inventory, shared credentials, broad service accounts, and board/CISO risk-alignment gaps.
+- IETF draft-han-bmwg-agent-security-benchmark-00 defined lifecycle security evaluation for AI agents across static, dynamic, attack-defense, compliance, and quantitative dimensions.
+
+Council judgment:
+
+- Visionary: approve. Retention policies move QIF from point-in-time verdicts toward durable quality accounting.
+- Builder: approve. Implement only in `quality-gate` packages, reuse existing schema/verifier/fixture conventions, and avoid UI or external integrations.
+- Guardian: approve with guardrails. Retention metadata proves reconstructability controls exist structurally; it does not prove the retained evidence is semantically sufficient.
+
+What was built:
+
+- `schemas/quality-gate-package.schema.json`: added required `evidenceRetentionPolicies` and required `evidenceItems[*].retentionPolicyRef`.
+- `tools/validate-qif-runtime.mjs`: added retention policy checks for evidence type coverage, sensitivity, integrity protection, access control, disposal ownership, and unused policy declarations.
+- `examples/quality-gate-package.json`: added release evidence and monitoring evidence retention policies.
+- `tools/fixtures/quality-gate-cases.mjs`: added six retained negative fixture cases.
+- `docs/AI_AUTHORING_GUIDE.md`, `docs/qif-v0.4-quality-gate-runtime-requirements.md`, `docs/qif-roadmap.md`, `README.md`, `CHANGELOG.md`, `RELEASE-NOTES-v0.4.6.md`.
+- `assessments/qif-self-evaluation-v0.4.6.json` and `.md`.
+
+What was not built:
+
+- No UI.
+- No external integration.
+- No semantic scoring of whether a retention period is sufficient.
+- No cross-package evidence ledger; that remains a later Living QIF Ledger concern.
+
+AOF runtime command evidence:
+
+- AOF latest check: `ai-org-labs/ai-organization-framework` latest tag remained `v10.8.0`.
+- AOF v10.8.0 `organization-verify --project .` passed with 231/231 checks.
+- AOF v10.8.0 `command-routing-audit --project . --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.4.6-final.json` passed.
+- AOF v10.8.0 `review-provenance-audit --project . --cutoff-task-id TASK-014 --write-artifact .aof/artifacts/verification/review-provenance-audit-qif-v0.4.6-final.json` passed.
+
+QIF verification:
+
+- `npm test` passed with 3/3 positive checks and 239/239 negative checks.
+- `node tools/validate-qif-runtime.mjs assessments/qif-self-evaluation-v0.4.6.json` passed.
+- Public residue scan found no personal account, email, legacy repository, user-home, or temporary checkout path residue outside `.git`.
+
+Decision:
+
+- Proceed to v0.4.6 release after final scan, commit, tag, and GitHub release.
+- Residual risk: evidence retention is implemented for `quality-gate` packages only; remaining runtime package surfaces still need full retained negative coverage under Phase 1.

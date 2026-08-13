@@ -769,7 +769,7 @@
       "findingEvidence": {
         "generatedBy": "ai-quality-security-reviewer",
         "sourceArtifact": "refund-sample-readjudication-2026-07.csv",
-        "reproducible": "yes",
+        "reproducible": true,
         "reproducedBy": "quality-analyst",
         "falsePositiveChecked": true,
         "impactConfirmed": true,
@@ -1239,9 +1239,9 @@
         "reversal-rehearsal"
       ],
       "retentionPeriod": "24 months after policy activation or until superseded by governance decision",
-      "sensitivity": "confidential",
-      "integrityProtection": "signed-artifact",
-      "accessControl": "need-to-know",
+      "sensitivity": "restricted",
+      "integrityProtection": "checksum",
+      "accessControl": "regulatory-controlled",
       "disposalRule": "Dispose only after retention period expires and no governance trigger, audit request, or post-release review remains open.",
       "owner": "support-operations-quality-owner",
       "antiPatterns": [
