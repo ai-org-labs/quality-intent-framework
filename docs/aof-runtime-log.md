@@ -1759,5 +1759,13 @@ QIF verification:
 
 Decision:
 
-- Proceed to v0.4.7 release after final scan, commit, tag, and GitHub release.
+- Proceeded to v0.4.7 release after final scan, commit, tag, and GitHub release.
 - Residual risk: Quality Reports are implemented for `quality-gate` packages only; cross-package reporting remains a later Living QIF Ledger concern.
+
+Publication:
+
+- Verified release commit: `16c5a57a36f79bf61de286a94d317a9b296f0f67`.
+- Annotated tag: `v0.4.7`.
+- Annotated tag object: `77f68865e03ceaa6036a04fca1e7f37a938dab0f`.
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.4.7`.
+- Remote main was first advanced to the verified release commit; this post-release log records the publication outcome without moving the release tag.
