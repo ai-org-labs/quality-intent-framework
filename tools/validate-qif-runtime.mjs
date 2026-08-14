@@ -878,6 +878,8 @@ const EVALUATION_TIMING_DECISION_STATUSES = new Set(["scheduled", "completed", "
 const RETENTION_SENSITIVITIES = new Set(["public", "internal", "confidential", "restricted"]);
 const RETENTION_INTEGRITY_PROTECTIONS = new Set(["none", "checksum", "signed-artifact", "immutable-log"]);
 const RETENTION_ACCESS_CONTROLS = new Set(["open", "internal-only", "need-to-know", "regulatory-controlled"]);
+const QUALITY_REPORT_STATUSES = new Set(["draft", "published", "superseded"]);
+const QUALITY_REPORT_SCORE_TYPES = new Set(["confidence-summary", "verdict-summary", "readiness-rating", "residual-risk-rating", "custom"]);
 
 function validateQualityGatePackage(pkg, packagePath) {
   const targets = requireArray(pkg, "evaluationTargets");
@@ -894,6 +896,7 @@ function validateQualityGatePackage(pkg, packagePath) {
   const automatedDetails = Array.isArray(pkg.automatedEvaluationDetails) ? pkg.automatedEvaluationDetails : [];
   const gateRules = requireArray(pkg, "qualityGateRules");
   const gateDecisions = requireArray(pkg, "qualityGateDecisions");
+  const qualityReports = requireArray(pkg, "qualityReports");
   const postReleaseReviews = Array.isArray(pkg.postReleaseReviews) ? pkg.postReleaseReviews : [];
   const improvementActions = Array.isArray(pkg.improvementActions) ? pkg.improvementActions : [];
   const traceabilityLinks = Array.isArray(pkg.traceabilityLinks) ? pkg.traceabilityLinks : [];
@@ -915,6 +918,7 @@ function validateQualityGatePackage(pkg, packagePath) {
   const automatedIndex = indexById(automatedDetails, `${packagePath}:automatedEvaluationDetails`);
   const gateRuleIndex = indexById(gateRules, `${packagePath}:qualityGateRules`);
   const gateDecisionIndex = indexById(gateDecisions, `${packagePath}:qualityGateDecisions`);
+  const qualityReportIndex = indexById(qualityReports, `${packagePath}:qualityReports`);
   const postReleaseIndex = indexById(postReleaseReviews, `${packagePath}:postReleaseReviews`);
   const improvementIndex = indexById(improvementActions, `${packagePath}:improvementActions`);
   const governanceIndex = indexById(governanceTriggers, `${packagePath}:governanceTriggers`);
@@ -922,7 +926,7 @@ function validateQualityGatePackage(pkg, packagePath) {
 
   // A global id index lets traceability links resolve across every entity family.
   const globalIndex = new Map();
-  for (const family of [targetIndex, intentIndex, aspectIndex, perspectiveIndex, confidencePolicyIndex, evaluationTimingRuleIndex, evaluationTimingDecisionIndex, evidenceRetentionPolicyIndex, evidenceTypeVocabularyIndex, evidenceIndex, quantitativeIndex, automatedIndex, gateRuleIndex, gateDecisionIndex, postReleaseIndex, improvementIndex, governanceIndex, governanceEventIndex]) {
+  for (const family of [targetIndex, intentIndex, aspectIndex, perspectiveIndex, confidencePolicyIndex, evaluationTimingRuleIndex, evaluationTimingDecisionIndex, evidenceRetentionPolicyIndex, evidenceTypeVocabularyIndex, evidenceIndex, quantitativeIndex, automatedIndex, gateRuleIndex, gateDecisionIndex, qualityReportIndex, postReleaseIndex, improvementIndex, governanceIndex, governanceEventIndex]) {
     for (const [id, item] of family.entries()) {
       globalIndex.set(id, item);
     }
@@ -1397,6 +1401,96 @@ function validateQualityGatePackage(pkg, packagePath) {
     }
   }
 
+  for (const report of qualityReports) {
+    checkRefs([report.targetRef], targetIndex, "evaluation target", report.id);
+    checkRefs(report.gateDecisionRefs, gateDecisionIndex, "gate decision", report.id);
+    for (const field of ["title", "reportPurpose", "generatedBy", "summary"]) {
+      checkRequiredString(report, field, report.id);
+    }
+    if (!QUALITY_REPORT_STATUSES.has(report.status)) {
+      errors.push(`${report.id} status must be one of draft, published, superseded.`);
+    }
+    checkNonEmptyArray(report, "limitations", report.id);
+    checkNonEmptyArray(report, "antiPatterns", report.id);
+    const reportGateDecisions = (report.gateDecisionRefs ?? []).map((ref) => gateDecisionIndex.get(ref)).filter(Boolean);
+    if (reportGateDecisions.some((decision) => decision.targetRef !== report.targetRef)) {
+      errors.push(`${report.id} cannot summarize gate decisions for a different target.`);
+    }
+    const reportVerdictIntentRefs = new Set(reportGateDecisions.flatMap((decision) => (decision.intentVerdicts ?? []).map((verdict) => verdict.intentRef)));
+    const reportVerdictEvidenceRefs = new Set(reportGateDecisions.flatMap((decision) => (decision.intentVerdicts ?? []).flatMap((verdict) => verdict.evidenceRefs ?? [])));
+    if (!Array.isArray(report.reportedScores) || report.reportedScores.length === 0) {
+      errors.push(`${report.id} must include reportedScores.`);
+    } else {
+      const scoreIds = new Set();
+      for (const score of report.reportedScores) {
+        if (scoreIds.has(score.id)) {
+          errors.push(`${report.id} has duplicate reported score ${score.id}.`);
+        }
+        scoreIds.add(score.id);
+        for (const field of ["label", "calculationNote"]) {
+          checkRequiredString(score, field, `${report.id}/score/${score.id}`);
+        }
+        if (!QUALITY_REPORT_SCORE_TYPES.has(score.scoreType)) {
+          errors.push(`${report.id}/score/${score.id} scoreType must be one of confidence-summary, verdict-summary, readiness-rating, residual-risk-rating, custom.`);
+        }
+        checkScore(score.value, "value", `${report.id}/score/${score.id}`);
+        if (score.interpretation !== "report-summary-only") {
+          errors.push(`${report.id}/score/${score.id} must be interpreted as report-summary-only, not as quality itself.`);
+        }
+        checkRefs(score.gateDecisionRefs, gateDecisionIndex, "gate decision", `${report.id}/score/${score.id}`);
+        checkRefs(score.intentRefs, intentIndex, "quality intent", `${report.id}/score/${score.id}`);
+        checkRefs(score.evidenceRefs, evidenceIndex, "evidence", `${report.id}/score/${score.id}`);
+        for (const gateDecisionRef of score.gateDecisionRefs ?? []) {
+          if (!(report.gateDecisionRefs ?? []).includes(gateDecisionRef)) {
+            errors.push(`${report.id}/score/${score.id} cites gate decision ${gateDecisionRef} outside the report gateDecisionRefs.`);
+          }
+        }
+        for (const intentRef of score.intentRefs ?? []) {
+          if (!reportVerdictIntentRefs.has(intentRef)) {
+            errors.push(`${report.id}/score/${score.id} intent ${intentRef} is not decomposed from the report's gate verdicts.`);
+          }
+        }
+        for (const evidenceRef of score.evidenceRefs ?? []) {
+          if (!reportVerdictEvidenceRefs.has(evidenceRef)) {
+            errors.push(`${report.id}/score/${score.id} evidence ${evidenceRef} is not decomposed from the report's gate verdict evidence.`);
+          }
+        }
+      }
+    }
+    if (!Array.isArray(report.sections) || report.sections.length === 0) {
+      errors.push(`${report.id} must include sections.`);
+    } else {
+      const sectionIds = new Set();
+      for (const section of report.sections) {
+        if (sectionIds.has(section.id)) {
+          errors.push(`${report.id} has duplicate section ${section.id}.`);
+        }
+        sectionIds.add(section.id);
+        for (const field of ["heading", "narrative"]) {
+          checkRequiredString(section, field, `${report.id}/section/${section.id}`);
+        }
+        checkRefs(section.gateDecisionRefs, gateDecisionIndex, "gate decision", `${report.id}/section/${section.id}`);
+        checkRefs(section.intentRefs, intentIndex, "quality intent", `${report.id}/section/${section.id}`);
+        checkRefs(section.evidenceRefs, evidenceIndex, "evidence", `${report.id}/section/${section.id}`);
+        for (const gateDecisionRef of section.gateDecisionRefs ?? []) {
+          if (!(report.gateDecisionRefs ?? []).includes(gateDecisionRef)) {
+            errors.push(`${report.id}/section/${section.id} cites gate decision ${gateDecisionRef} outside the report gateDecisionRefs.`);
+          }
+        }
+        for (const intentRef of section.intentRefs ?? []) {
+          if (!reportVerdictIntentRefs.has(intentRef)) {
+            errors.push(`${report.id}/section/${section.id} intent ${intentRef} is not decomposed from the report's gate verdicts.`);
+          }
+        }
+        for (const evidenceRef of section.evidenceRefs ?? []) {
+          if (!reportVerdictEvidenceRefs.has(evidenceRef)) {
+            errors.push(`${report.id}/section/${section.id} evidence ${evidenceRef} is not decomposed from the report's gate verdict evidence.`);
+          }
+        }
+      }
+    }
+  }
+
   for (const trigger of governanceTriggers) {
     for (const field of ["triggerType", "reason", "requiredAction", "owner", "status"]) {
       checkRequiredString(trigger, field, trigger.id);
@@ -1493,6 +1587,7 @@ function validateQualityGatePackage(pkg, packagePath) {
       automatedEvaluationDetails: automatedDetails.length,
       qualityGateRules: gateRules.length,
       qualityGateDecisions: gateDecisions.length,
+      qualityReports: qualityReports.length,
       postReleaseReviews: postReleaseReviews.length,
       improvementActions: improvementActions.length,
       traceabilityLinks: traceabilityLinks.length,

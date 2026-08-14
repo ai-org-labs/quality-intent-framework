@@ -211,6 +211,62 @@ export const cases = [
     }
   },
   {
+    id: "quality-report-missing",
+    rule: "quality reports are required",
+    expect: "package qualityReports must be an array.",
+    mutate: (pkg) => { delete pkg.qualityReports; }
+  },
+  {
+    id: "quality-report-score-treated-as-quality",
+    rule: "quality report scores stay summary-only",
+    expect: "must be interpreted as report-summary-only, not as quality itself.",
+    mutate: (pkg) => { pkg.qualityReports[0].reportedScores[0].interpretation = "quality-itself"; }
+  },
+  {
+    id: "quality-report-score-broken-gate-ref",
+    rule: "quality report score gate decision resolves",
+    expect: "references missing gate decision",
+    mutate: (pkg) => { pkg.qualityReports[0].reportedScores[0].gateDecisionRefs = ["QGD-NOPE-999"]; }
+  },
+  {
+    id: "quality-report-score-intent-not-decomposed",
+    rule: "quality report score intents decompose from gate verdicts",
+    expect: "is not decomposed from the report's gate verdicts.",
+    mutate: (pkg) => {
+      pkg.qualityIntents.push({
+        id: "QIN-QG-UNREPORTED",
+        statement: "Unreported intent.",
+        lossBoundary: "Unreported boundary.",
+        lossBoundarySeverity: "medium"
+      });
+      pkg.qualityReports[0].reportedScores[0].intentRefs = ["QIN-QG-UNREPORTED"];
+    }
+  },
+  {
+    id: "quality-report-score-evidence-not-decomposed",
+    rule: "quality report score evidence decomposes from gate verdicts",
+    expect: "is not decomposed from the report's gate verdict evidence.",
+    mutate: (pkg) => {
+      const extraEvidence = structuredClone(pkg.evidenceItems[1]);
+      extraEvidence.id = "EVD-QG-UNREPORTED";
+      extraEvidence.finding = "Valid retained evidence that is not cited by any gate verdict.";
+      pkg.evidenceItems.push(extraEvidence);
+      pkg.qualityReports[0].reportedScores[0].evidenceRefs = ["EVD-QG-UNREPORTED"];
+    }
+  },
+  {
+    id: "quality-report-section-evidence-not-decomposed",
+    rule: "quality report section evidence decomposes from gate verdicts",
+    expect: "is not decomposed from the report's gate verdict evidence.",
+    mutate: (pkg) => {
+      const extraEvidence = structuredClone(pkg.evidenceItems[1]);
+      extraEvidence.id = "EVD-QG-UNREPORTED";
+      extraEvidence.finding = "Valid retained evidence that is not cited by any gate verdict.";
+      pkg.evidenceItems.push(extraEvidence);
+      pkg.qualityReports[0].sections[0].evidenceRefs = ["EVD-QG-UNREPORTED"];
+    }
+  },
+  {
     id: "finding-evidence-missing-final-status",
     rule: "AI finding evidence final status is required",
     expect: "finalStatus must be one of",

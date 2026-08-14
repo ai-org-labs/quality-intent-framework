@@ -177,6 +177,48 @@
       "errorIncludes": "retention policy is declared but not used by any evidence item."
     },
     {
+      "file": "quality-gate-quality-report-missing.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quality reports are required",
+      "expect": "fail",
+      "errorIncludes": "package qualityReports must be an array."
+    },
+    {
+      "file": "quality-gate-quality-report-score-treated-as-quality.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quality report scores stay summary-only",
+      "expect": "fail",
+      "errorIncludes": "must be interpreted as report-summary-only, not as quality itself."
+    },
+    {
+      "file": "quality-gate-quality-report-score-broken-gate-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quality report score gate decision resolves",
+      "expect": "fail",
+      "errorIncludes": "references missing gate decision"
+    },
+    {
+      "file": "quality-gate-quality-report-score-intent-not-decomposed.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quality report score intents decompose from gate verdicts",
+      "expect": "fail",
+      "errorIncludes": "is not decomposed from the report's gate verdicts."
+    },
+    {
+      "file": "quality-gate-quality-report-score-evidence-not-decomposed.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quality report score evidence decomposes from gate verdicts",
+      "expect": "fail",
+      "errorIncludes": "is not decomposed from the report's gate verdict evidence."
+    },
+    {
+      "file": "quality-gate-quality-report-section-evidence-not-decomposed.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quality report section evidence decomposes from gate verdicts",
+      "expect": "fail",
+      "errorIncludes": "is not decomposed from the report's gate verdict evidence."
+    },
+    {
       "file": "quality-gate-finding-evidence-missing-final-status.json",
       "validator": "tools/validate-qif-runtime.mjs",
       "rule": "AI finding evidence final status is required",

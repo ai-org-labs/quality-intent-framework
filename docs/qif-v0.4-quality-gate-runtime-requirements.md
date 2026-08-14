@@ -12,10 +12,11 @@ It is implemented as the `quality-gate` package type:
 The baseline covers Phase 1 (evaluation perspectives, quantitative evidence records,
 automated evaluation detail, evidence management, quality gate rules, and release gate
 decisions with Go / Conditional Go / No-Go / Pending verdicts) plus the Phase 2
-post-release review, improvement action, and traceability link entities.
+post-release review, improvement action, traceability link, and quality report entities.
 Phase 3 items (external connectors, monitoring integration, automated score calculation,
 risk-based timing recommendation) and the standalone Evaluation Timing Decision,
-Evidence Retention Policy, Quality Report, and Dashboard View entities remain future work.
+Evidence Retention Policy, and Quality Report entities remain future work only outside
+the current `quality-gate` package implementation. Dashboard View remains future work.
 The requirements below are retained as the full design target.
 
 ## Mission
@@ -449,6 +450,11 @@ Possible report sections:
 - governance triggers.
 
 Scores must be explainable and traceable to Quality Intents, Loss Boundaries, evidence, and rules.
+In the executable `quality-gate` package, `qualityReports` are implemented as
+decomposable report views. Reported scores and report sections must cite the
+gate decisions, gated Quality Intents, and verdict evidence they summarize.
+The verifier rejects report scores that are treated as quality itself or that
+cannot be decomposed back into the referenced gate verdict evidence.
 
 ## Candidate Entities
 
@@ -460,6 +466,7 @@ The quality-gate package currently implements:
 - Evaluation Timing Rule;
 - Evaluation Timing Decision;
 - Evidence Retention Policy;
+- Quality Report;
 - Quality Gate Rule;
 - Quality Gate Decision;
 - Post-Release Review;
@@ -470,7 +477,6 @@ Future schema work should consider these entities:
 
 - Release Gate Verdict as a reusable entity outside the current embedded gate verdict form;
 - Evidence Sufficiency Finding;
-- Quality Report;
 - Dashboard View.
 
 ## Workflow Requirements

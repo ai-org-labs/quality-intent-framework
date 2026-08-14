@@ -35,6 +35,12 @@
       "statement": "The policy change must be reversible if leakage or complaints exceed containment thresholds.",
       "lossBoundary": "An unsafe policy state must not persist without a demonstrated reversal path.",
       "lossBoundarySeverity": "high"
+    },
+    {
+      "id": "QIN-QG-UNREPORTED",
+      "statement": "Unreported intent.",
+      "lossBoundary": "Unreported boundary.",
+      "lossBoundarySeverity": "medium"
     }
   ],
   "qualityAspects": [
@@ -1003,7 +1009,7 @@
         {
           "intentRef": "QIN-QG-003",
           "decision": "partially-achieved",
-          "confidence": 0.4,
+          "confidence": 0.6,
           "confidencePolicyRef": "CFP-QG-001",
           "evidenceRefs": [
             "EVD-QG-004",
@@ -1065,9 +1071,7 @@
             "QGD-QG-001"
           ],
           "intentRefs": [
-            "QIN-QG-001",
-            "QIN-QG-002",
-            "QIN-QG-003"
+            "QIN-QG-UNREPORTED"
           ],
           "evidenceRefs": [
             "EVD-QG-001",

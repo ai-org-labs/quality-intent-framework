@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.4.6 baseline)
+## Current Position (v0.4.7 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate.
@@ -49,7 +49,9 @@ and adoption surface — not pretending the limits away.
   executable evaluation timing rules and decisions so required pre-decision
   evaluation cannot be silently deferred. v0.4.6 adds executable evidence
   retention policies so evidence remains reconstructable and access-controlled
-  after a verdict. Runtime package surfaces remain the next v0.4.x frontier.
+  after a verdict. v0.4.7 adds executable Quality Reports so reported scores
+  and sections must decompose into referenced gate decisions, gated intents,
+  and verdict evidence. Runtime package surfaces remain the next v0.4.x frontier.
 - Weaknesses: packages are islands (no cross-package references), authoring
   cost for humans and AI agents is still high, agent trajectories and
   environment provenance are not first-class, and no empirical feedback yet
@@ -119,6 +121,11 @@ Deliverables:
 - Quality Report entity: any reported score must decompose, by reference,
   into the verdicts and evidence it summarizes. A score that cannot be
   decomposed fails verification.
+  Status: implemented for `quality-gate` packages in v0.4.7 through
+  `qualityReports`, including verifier checks for report target consistency,
+  score and section decomposition into gate decisions, gated Quality Intents,
+  and verdict evidence, and `report-summary-only` interpretation so report
+  scores are not treated as quality itself.
 - Evidence-type vocabulary record, so `requiredEvidenceTypes` matching is
   checked against a declared vocabulary instead of free-string luck.
   Status: implemented for `quality-gate` packages in v0.4.4 through

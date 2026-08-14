@@ -1,6 +1,6 @@
 {
   "packageType": "quality-gate",
-  "runtimeVersion": "0.4.6",
+  "runtimeVersion": "0.4.7",
   "packageId": "QGPkg-001",
   "evaluationTargets": [
     {
@@ -1023,6 +1023,75 @@
       "customerImpactPlan": "Notify affected customers and reprocess any wrongly denied valid claims within five business days.",
       "governanceTriggerRefs": [
         "GTR-QG-001"
+      ]
+    }
+  ],
+  "qualityReports": [
+    {
+      "id": "QRP-QG-001",
+      "title": "Refund authority activation quality report",
+      "targetRef": "TGT-QG-001",
+      "gateDecisionRefs": [
+        "QGD-QG-001"
+      ],
+      "reportPurpose": "Summarize the quality-gate decision for accountable release review without treating the summary score as quality itself.",
+      "generatedBy": "quality-steward",
+      "status": "published",
+      "summary": "The target is a Conditional Go because each protected intent has evidence-backed verdicts, while over-limit leakage and unobserved live monitoring remain residual risks.",
+      "reportedScores": [
+        {
+          "id": "QRS-QG-001",
+          "label": "Gate confidence summary",
+          "scoreType": "confidence-summary",
+          "value": 0.7,
+          "interpretation": "report-summary-only",
+          "gateDecisionRefs": [
+            "QGD-QG-001"
+          ],
+          "intentRefs": [
+            "QIN-QG-001",
+            "QIN-QG-002",
+            "QIN-QG-003"
+          ],
+          "evidenceRefs": [
+            "EVD-QG-001",
+            "EVD-QG-002",
+            "EVD-QG-003",
+            "EVD-QG-004",
+            "EVD-QG-005"
+          ],
+          "calculationNote": "This score reports the gate decision confidence, which is reproduced from intent verdict confidence values and the referenced confidence policy."
+        }
+      ],
+      "sections": [
+        {
+          "id": "QRPSEC-QG-001",
+          "heading": "Release verdict",
+          "narrative": "The Conditional Go depends on mandatory secondary approval, active leakage monitoring, and a rehearsed rollback path.",
+          "gateDecisionRefs": [
+            "QGD-QG-001"
+          ],
+          "intentRefs": [
+            "QIN-QG-001",
+            "QIN-QG-002",
+            "QIN-QG-003"
+          ],
+          "evidenceRefs": [
+            "EVD-QG-001",
+            "EVD-QG-002",
+            "EVD-QG-003",
+            "EVD-QG-004",
+            "EVD-QG-005"
+          ]
+        }
+      ],
+      "limitations": [
+        "The report is a decomposable summary of referenced verdicts and evidence; it does not create new semantic proof.",
+        "The score must not be interpreted independently from its cited verdict and evidence chain."
+      ],
+      "antiPatterns": [
+        "Reporting a quality score that cannot be traced back to gate verdicts and evidence.",
+        "Treating report publication as quality approval."
       ]
     }
   ],

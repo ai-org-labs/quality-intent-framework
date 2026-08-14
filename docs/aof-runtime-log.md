@@ -1702,3 +1702,62 @@ Publication:
 - Annotated tag object: `ad75eb5099c556422ddf2852c75d004a81bc98ee`.
 - GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.4.6`.
 - Remote main was first advanced to the verified release commit; this post-release log records the publication outcome without moving the release tag.
+
+## QIF v0.4.7 Quality Reports
+
+Date: 2026-08-14
+
+Need / Intent / Context:
+
+- Need: agentic AI and hybrid organizations increasingly need audit-ready quality reports, but a report score can become a new checklist-like proxy for quality if it cannot be decomposed into verdicts and evidence.
+- Intent: add executable `qualityReports` so reported scores and sections remain traceable summaries of gate decisions, gated Quality Intents, and verdict evidence.
+- Context: QIF remains standalone. AOF v11.2.0 is used as development runtime evidence, not as a QIF usage dependency. AOF `situation-assess` warned that the stored alignment pulse is stale; this release uses the current QIF roadmap as the live frontier.
+
+Trend signals reviewed:
+
+- Axios reported renewed concern about AI agents escaping test environments and the need to treat agents like insider threats with strict permissions and monitoring.
+- TechRadar reported that production agent trust depends on durable recovery, scoped access, verified identity, and runtime containment rather than demo success metrics.
+- Open Secure AI Alliance SAFE reporting discussions emphasized documenting unauthorized agent activity, confidential information exposure, and real-world system interaction.
+- NIST described agentic evaluation probes that produce machine-readable audit trails linking claims to supporting evidence.
+- Governance-as-code coverage continued to emphasize runtime controls, audit evidence, recordkeeping, and human oversight for agentic AI systems.
+
+Council judgment:
+
+- Visionary: approve. Quality Reports make QIF usable in real governance conversations without letting reports replace evidence-backed verdicts.
+- Builder: approve. Implement only inside `quality-gate` packages, reuse existing schema/verifier/fixture patterns, and avoid dashboard or UI work.
+- Guardian: approve with guardrails. Report scores must be `report-summary-only`; verifier success proves decomposition, not semantic quality truth.
+
+What was built:
+
+- `schemas/quality-gate-package.schema.json`: added required `qualityReports`, `qualityReportScore`, and `qualityReportSection`.
+- `tools/validate-qif-runtime.mjs`: added report status, score type, target consistency, score decomposition, section decomposition, and summary-only interpretation checks.
+- `examples/quality-gate-package.json`: added a published Quality Report summarizing the Conditional Go decision.
+- `tools/fixtures/quality-gate-cases.mjs`: added six retained negative fixture cases for Quality Report misuse.
+- `docs/AI_AUTHORING_GUIDE.md`, `docs/qif-v0.4-quality-gate-runtime-requirements.md`, `docs/qif-roadmap.md`, `README.md`, `CHANGELOG.md`, `RELEASE-NOTES-v0.4.7.md`.
+- `assessments/qif-self-evaluation-v0.4.7.json` and `.md`.
+
+What was not built:
+
+- No dashboard UI.
+- No external reporting connector.
+- No automated semantic quality scoring.
+- No reusable standalone report package outside `quality-gate`.
+
+AOF runtime command evidence:
+
+- AOF latest check: `ai-org-labs/ai-organization-framework` latest tag was `v11.2.0`.
+- AOF v11.2.0 `situation-assess --project .` passed and flagged stale alignment pulse as a warning.
+- AOF v11.2.0 `organization-verify --project .` passed with 231/231 checks.
+- AOF v11.2.0 `command-routing-audit --project . --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.4.7-final.json` passed.
+- AOF v11.2.0 `review-provenance-audit --project . --cutoff-task-id TASK-014 --write-artifact .aof/artifacts/verification/review-provenance-audit-qif-v0.4.7-final.json` passed.
+
+QIF verification:
+
+- `npm test` passed with 3/3 positive checks and 245/245 negative checks.
+- `node tools/validate-qif-runtime.mjs assessments/qif-self-evaluation-v0.4.7.json` passed.
+- Public residue scan found no personal account, email, legacy repository, user-home, or temporary checkout path residue outside `.git`.
+
+Decision:
+
+- Proceed to v0.4.7 release after final scan, commit, tag, and GitHub release.
+- Residual risk: Quality Reports are implemented for `quality-gate` packages only; cross-package reporting remains a later Living QIF Ledger concern.

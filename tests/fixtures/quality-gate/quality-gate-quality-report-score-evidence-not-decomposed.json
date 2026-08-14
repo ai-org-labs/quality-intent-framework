@@ -844,6 +844,20 @@
       "retention": "Configuration retained; observations to follow after activation.",
       "artifactReference": "monitoring-config-export.json",
       "retentionPolicyRef": "ERP-QG-MONITORING-EVIDENCE"
+    },
+    {
+      "id": "EVD-QG-UNREPORTED",
+      "targetRef": "TGT-QG-001",
+      "evidenceType": "control-test",
+      "finding": "Valid retained evidence that is not cited by any gate verdict.",
+      "polarity": "supports",
+      "independence": "high",
+      "confidence": 0.85,
+      "weight": 1,
+      "evaluatorRole": "controls-tester",
+      "retention": "Retained with the release evidence bundle for 24 months.",
+      "artifactReference": "over-limit-control-test-log.json",
+      "retentionPolicyRef": "ERP-QG-RELEASE-EVIDENCE"
     }
   ],
   "quantitativeEvidenceRecords": [
@@ -1003,7 +1017,7 @@
         {
           "intentRef": "QIN-QG-003",
           "decision": "partially-achieved",
-          "confidence": 0.4,
+          "confidence": 0.6,
           "confidencePolicyRef": "CFP-QG-001",
           "evidenceRefs": [
             "EVD-QG-004",
@@ -1070,11 +1084,7 @@
             "QIN-QG-003"
           ],
           "evidenceRefs": [
-            "EVD-QG-001",
-            "EVD-QG-002",
-            "EVD-QG-003",
-            "EVD-QG-004",
-            "EVD-QG-005"
+            "EVD-QG-UNREPORTED"
           ],
           "calculationNote": "This score reports the gate decision confidence, which is reproduced from intent verdict confidence values and the referenced confidence policy."
         }

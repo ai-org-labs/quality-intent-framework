@@ -20,6 +20,7 @@
     "quantitativeEvidenceRecords",
     "qualityGateRules",
     "qualityGateDecisions",
+    "qualityReports",
     "governanceTriggers",
     "governanceEvents",
     "verifierBoundary"
@@ -96,6 +97,11 @@
       "type": "array",
       "minItems": 1,
       "items": { "$ref": "#/$defs/qualityGateDecision" }
+    },
+    "qualityReports": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/qualityReport" }
     },
     "postReleaseReviews": {
       "type": "array",
@@ -590,6 +596,93 @@
           "items": { "type": "string" }
         },
         "governanceTriggerRefs": { "$ref": "#/$defs/maybeRefArray" }
+      }
+    },
+    "qualityReportScore": {
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "scoreType",
+        "value",
+        "interpretation",
+        "gateDecisionRefs",
+        "intentRefs",
+        "evidenceRefs",
+        "calculationNote"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "label": { "type": "string" },
+        "scoreType": { "enum": ["confidence-summary", "verdict-summary", "readiness-rating", "residual-risk-rating", "custom"] },
+        "value": { "$ref": "#/$defs/score" },
+        "interpretation": { "const": "report-summary-only" },
+        "gateDecisionRefs": { "$ref": "#/$defs/refArray" },
+        "intentRefs": { "$ref": "#/$defs/refArray" },
+        "evidenceRefs": { "$ref": "#/$defs/refArray" },
+        "calculationNote": { "type": "string" }
+      }
+    },
+    "qualityReportSection": {
+      "type": "object",
+      "required": ["id", "heading", "narrative", "gateDecisionRefs", "intentRefs", "evidenceRefs"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "heading": { "type": "string" },
+        "narrative": { "type": "string" },
+        "gateDecisionRefs": { "$ref": "#/$defs/refArray" },
+        "intentRefs": { "$ref": "#/$defs/refArray" },
+        "evidenceRefs": { "$ref": "#/$defs/refArray" }
+      }
+    },
+    "qualityReport": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "targetRef",
+        "gateDecisionRefs",
+        "reportPurpose",
+        "generatedBy",
+        "status",
+        "summary",
+        "reportedScores",
+        "sections",
+        "limitations",
+        "antiPatterns"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "targetRef": { "$ref": "#/$defs/id" },
+        "gateDecisionRefs": { "$ref": "#/$defs/refArray" },
+        "reportPurpose": { "type": "string" },
+        "generatedBy": { "type": "string" },
+        "status": { "enum": ["draft", "published", "superseded"] },
+        "summary": { "type": "string" },
+        "reportedScores": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/qualityReportScore" },
+          "minItems": 1
+        },
+        "sections": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/qualityReportSection" },
+          "minItems": 1
+        },
+        "limitations": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "antiPatterns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
       }
     },
     "postReleaseIncident": {

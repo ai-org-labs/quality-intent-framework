@@ -1003,7 +1003,7 @@
         {
           "intentRef": "QIN-QG-003",
           "decision": "partially-achieved",
-          "confidence": 0.4,
+          "confidence": 0.6,
           "confidencePolicyRef": "CFP-QG-001",
           "evidenceRefs": [
             "EVD-QG-004",
@@ -1062,7 +1062,7 @@
           "value": 0.7,
           "interpretation": "report-summary-only",
           "gateDecisionRefs": [
-            "QGD-QG-001"
+            "QGD-NOPE-999"
           ],
           "intentRefs": [
             "QIN-QG-001",

@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.4.7
+
+- Added first-class `qualityReports` to quality-gate packages.
+- Required Quality Report scores and sections to cite the gate decisions, Quality Intents, and verdict evidence they summarize.
+- Extended the quality-gate verifier to reject report scores that cannot be decomposed into referenced gate verdict evidence.
+- Required report scores to use `report-summary-only` interpretation so dashboard or report values are not treated as quality itself.
+- Updated the quality-gate example and retained negative fixtures for Quality Report misuse.
+
 ## v0.4.6
 
 - Added first-class `evidenceRetentionPolicies` to quality-gate packages.

@@ -222,6 +222,21 @@ Use them to define:
 
 Every evidence item must cite a retention policy through `retentionPolicyRef`. Do not keep only a count or summary when the verdict depends on reconstructable evidence.
 
+For quality-gate packages, create `qualityReports` only after the gate decision exists.
+
+Use Quality Reports to summarize, not to create new proof. Every reported score and
+report section must cite:
+
+- the `qualityGateDecision` it summarizes;
+- the Quality Intents covered by the relevant gate verdicts;
+- the evidence items cited by those verdicts;
+- a calculation or interpretation note that explains what the score means.
+
+Set reported score `interpretation` to `report-summary-only`. Do not present a
+report score, dashboard value, or readiness rating as quality itself. If a score
+cannot be decomposed into gate decisions, intents, and verdict evidence, do not
+write the score.
+
 For quality-gate packages, define evaluation timing before writing the final gate decision.
 
 Use `evaluationTimingRules` to state reusable timing logic:

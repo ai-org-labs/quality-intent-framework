@@ -1003,7 +1003,7 @@
         {
           "intentRef": "QIN-QG-003",
           "decision": "partially-achieved",
-          "confidence": 0.4,
+          "confidence": 0.6,
           "confidencePolicyRef": "CFP-QG-001",
           "evidenceRefs": [
             "EVD-QG-004",
@@ -1060,7 +1060,7 @@
           "label": "Gate confidence summary",
           "scoreType": "confidence-summary",
           "value": 0.7,
-          "interpretation": "report-summary-only",
+          "interpretation": "quality-itself",
           "gateDecisionRefs": [
             "QGD-QG-001"
           ],
