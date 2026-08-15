@@ -1,0 +1,262 @@
+{
+  "description": "QIF discovery-session negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/discovery-session-cases.mjs; do not edit by hand.",
+  "positives": [
+    {
+      "validator": "tools/validate-qif.mjs",
+      "package": "examples/qif-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-expert-judgment.mjs",
+      "package": "examples/expert-judgment-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/discovery-session-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/quality-gate-package.json"
+    }
+  ],
+  "negatives": [
+    {
+      "file": "discovery-session-top-level-experts-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level experts must be an array",
+      "expect": "fail",
+      "errorIncludes": "package experts must be an array."
+    },
+    {
+      "file": "discovery-session-top-level-cases-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level cases must be an array",
+      "expect": "fail",
+      "errorIncludes": "package cases must be an array."
+    },
+    {
+      "file": "discovery-session-top-level-questionLogEntries-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level questionLogEntries must be an array",
+      "expect": "fail",
+      "errorIncludes": "package questionLogEntries must be an array."
+    },
+    {
+      "file": "discovery-session-top-level-rawExpertAnswers-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level rawExpertAnswers must be an array",
+      "expect": "fail",
+      "errorIncludes": "package rawExpertAnswers must be an array."
+    },
+    {
+      "file": "discovery-session-top-level-expertJudgments-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level expertJudgments must be an array",
+      "expect": "fail",
+      "errorIncludes": "package expertJudgments must be an array."
+    },
+    {
+      "file": "discovery-session-top-level-cues-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level cues must be an array",
+      "expect": "fail",
+      "errorIncludes": "package cues must be an array."
+    },
+    {
+      "file": "discovery-session-top-level-concerns-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level concerns must be an array",
+      "expect": "fail",
+      "errorIncludes": "package concerns must be an array."
+    },
+    {
+      "file": "discovery-session-top-level-lossBoundaries-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level lossBoundaries must be an array",
+      "expect": "fail",
+      "errorIncludes": "package lossBoundaries must be an array."
+    },
+    {
+      "file": "discovery-session-top-level-qualityIntents-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level qualityIntents must be an array",
+      "expect": "fail",
+      "errorIncludes": "package qualityIntents must be an array."
+    },
+    {
+      "file": "discovery-session-top-level-qualityIntentDerivations-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level qualityIntentDerivations must be an array",
+      "expect": "fail",
+      "errorIncludes": "package qualityIntentDerivations must be an array."
+    },
+    {
+      "file": "discovery-session-top-level-decisionPatterns-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level decisionPatterns must be an array",
+      "expect": "fail",
+      "errorIncludes": "package decisionPatterns must be an array."
+    },
+    {
+      "file": "discovery-session-top-level-extractionSteps-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level extractionSteps must be an array",
+      "expect": "fail",
+      "errorIncludes": "package extractionSteps must be an array."
+    },
+    {
+      "file": "discovery-session-top-level-discoverySessions-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level discoverySessions must be an array",
+      "expect": "fail",
+      "errorIncludes": "package discoverySessions must be an array."
+    },
+    {
+      "file": "discovery-session-question-missing-session.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "question log entry session resolves",
+      "expect": "fail",
+      "errorIncludes": "references missing discovery session"
+    },
+    {
+      "file": "discovery-session-question-missing-text.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "question log entry text required",
+      "expect": "fail",
+      "errorIncludes": "QUE-DS-001 must include non-empty string questionText."
+    },
+    {
+      "file": "discovery-session-question-order-invalid.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "question log entry order positive integer",
+      "expect": "fail",
+      "errorIncludes": "QUE-DS-001 order must be a positive integer."
+    },
+    {
+      "file": "discovery-session-raw-answer-question-different-session.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "raw answer question belongs to same session",
+      "expect": "fail",
+      "errorIncludes": "ANS-DS-001 questionRef QUE-DS-004 belongs to a different discovery session."
+    },
+    {
+      "file": "discovery-session-raw-answer-question-different-case.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "raw answer question targets same case",
+      "expect": "fail",
+      "errorIncludes": "ANS-DS-001 questionRef QUE-DS-004 targets a different case."
+    },
+    {
+      "file": "discovery-session-raw-answer-ambiguity-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "raw answer ambiguity array",
+      "expect": "fail",
+      "errorIncludes": "ANS-DS-001 must include ambiguity array."
+    },
+    {
+      "file": "discovery-session-raw-answer-missing-sensitive-handling.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "raw answer sensitive data handling required",
+      "expect": "fail",
+      "errorIncludes": "ANS-DS-001 must include sensitiveDataHandling."
+    },
+    {
+      "file": "discovery-session-cue-broken-concern-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "cue concern resolves",
+      "expect": "fail",
+      "errorIncludes": "CUE-DS-001 references missing concern"
+    },
+    {
+      "file": "discovery-session-concern-broken-loss-boundary-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "concern loss boundary resolves",
+      "expect": "fail",
+      "errorIncludes": "CON-DS-001 references missing loss boundary"
+    },
+    {
+      "file": "discovery-session-quality-intent-broken-loss-boundary-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quality intent loss boundaries resolve",
+      "expect": "fail",
+      "errorIncludes": "QIN-DS-001 references missing loss boundary"
+    },
+    {
+      "file": "discovery-session-judgment-broken-cue-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "expert judgment cue resolves",
+      "expect": "fail",
+      "errorIncludes": "JDG-DS-001 references missing cue"
+    },
+    {
+      "file": "discovery-session-judgment-confidence-invalid.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "expert judgment confidence score",
+      "expect": "fail",
+      "errorIncludes": "JDG-DS-001 confidence must be a number from 0 to 1."
+    },
+    {
+      "file": "discovery-session-pattern-broken-source-judgment.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "decision pattern source judgments resolve",
+      "expect": "fail",
+      "errorIncludes": "PAT-DS-001 references missing source judgment"
+    },
+    {
+      "file": "discovery-session-derivation-without-pattern-or-boundary.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quality intent derivation has source pattern or boundary",
+      "expect": "fail",
+      "errorIncludes": "QID-DS-001 must reference at least one decision pattern or loss boundary."
+    },
+    {
+      "file": "discovery-session-extraction-step-raw-answer-different-session.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "extraction step raw answers belong to same session",
+      "expect": "fail",
+      "errorIncludes": "EXT-DS-001 raw expert answer ANS-DS-004 belongs to a different discovery session."
+    },
+    {
+      "file": "discovery-session-extraction-step-no-output.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "extraction step must output derived entities",
+      "expect": "fail",
+      "errorIncludes": "EXT-DS-001 must output at least one extracted or derived entity."
+    },
+    {
+      "file": "discovery-session-extraction-step-ambiguity-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "extraction step ambiguity array",
+      "expect": "fail",
+      "errorIncludes": "EXT-DS-001 must include ambiguity array."
+    },
+    {
+      "file": "discovery-session-package-cue-not-justified-by-extraction-step.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "package cues justified by extraction steps",
+      "expect": "fail",
+      "errorIncludes": "cue CUE-DS-001 is not justified by its extraction steps."
+    },
+    {
+      "file": "discovery-session-session-question-belongs-to-other-session.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "session question refs belong to session",
+      "expect": "fail",
+      "errorIncludes": "DSE-001 question log entry QUE-DS-004 belongs to a different discovery session."
+    },
+    {
+      "file": "discovery-session-session-answer-belongs-to-other-session.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "session raw answer refs belong to session",
+      "expect": "fail",
+      "errorIncludes": "DSE-001 raw expert answer ANS-DS-004 belongs to a different discovery session."
+    },
+    {
+      "file": "discovery-session-session-cue-not-covered-by-session-step.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "session extracted cues covered by session extraction steps",
+      "expect": "fail",
+      "errorIncludes": "DSE-001 cue CUE-DS-002 is not justified by its extraction steps."
+    }
+  ],
+  "rescopedRules": []
+}

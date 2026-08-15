@@ -1,0 +1,422 @@
+{
+  "packageType": "discovery-session",
+  "runtimeVersion": "0.2.1",
+  "packageId": "DSPKG-001",
+  "experts": [
+    {
+      "id": "EXP-SW-001",
+      "name": "Senior reviewer",
+      "role": "reviewer",
+      "domain": "software"
+    },
+    {
+      "id": "EXP-OPS-001",
+      "name": "Shift supervisor",
+      "role": "operator",
+      "domain": "service-operations"
+    }
+  ],
+  "cases": [
+    {
+      "id": "CAS-DS-001",
+      "title": "Permission broadening without rationale",
+      "domain": "software",
+      "context": "Code review for an authorization change",
+      "facts": [
+        "Tests pass.",
+        "Authorization scope broadens.",
+        "Threat rationale is absent."
+      ]
+    },
+    {
+      "id": "CAS-DS-002",
+      "title": "Dashboard healthy but local inspection stale",
+      "domain": "service-operations",
+      "context": "Night-shift decision about skipping field confirmation",
+      "facts": [
+        "Dashboard is normal.",
+        "Manual inspection is stale.",
+        "Service continuation is requested."
+      ]
+    }
+  ],
+  "questionLogEntries": [
+    {
+      "id": "QUE-DS-001",
+      "sessionRef": "DSE-001",
+      "questionText": "Is this case acceptable, unacceptable, or conditionally acceptable?",
+      "questionType": "acceptability",
+      "targetCaseRef": "CAS-DS-001",
+      "askedBy": "quality-interviewer",
+      "order": 1
+    },
+    {
+      "id": "QUE-DS-002",
+      "sessionRef": "DSE-001",
+      "questionText": "What changed your judgment?",
+      "questionType": "cue-probe",
+      "targetCaseRef": "CAS-DS-001",
+      "askedBy": "quality-interviewer",
+      "order": 2
+    },
+    {
+      "id": "QUE-DS-003",
+      "sessionRef": "DSE-001",
+      "questionText": "What would a junior person likely miss here?",
+      "questionType": "junior-miss-probe",
+      "targetCaseRef": "CAS-DS-001",
+      "askedBy": "quality-interviewer",
+      "order": 3
+    },
+    {
+      "id": "QUE-DS-004",
+      "sessionRef": "DSE-002",
+      "questionText": "What did you notice first?",
+      "questionType": "cue-probe",
+      "targetCaseRef": "CAS-DS-002",
+      "askedBy": "quality-interviewer",
+      "order": 1
+    },
+    {
+      "id": "QUE-DS-005",
+      "sessionRef": "DSE-002",
+      "questionText": "What failure are you trying to avoid?",
+      "questionType": "concern-probe",
+      "targetCaseRef": "CAS-DS-002",
+      "askedBy": "quality-interviewer",
+      "order": 2
+    }
+  ],
+  "rawExpertAnswers": [
+    {
+      "id": "ANS-DS-001",
+      "sessionRef": "DSE-001",
+      "expertRef": "EXP-SW-001",
+      "caseRef": "CAS-DS-001",
+      "questionRef": "QUE-DS-001",
+      "answerText": "Conditionally acceptable.",
+      "captureMode": "verbatim",
+      "ambiguity": [
+        "Condition depends on evidence that was not yet supplied."
+      ],
+      "sensitiveDataHandling": {
+        "classification": "internal",
+        "redactionState": "not-needed",
+        "handlingNotes": "No customer or employee personal data captured."
+      }
+    },
+    {
+      "id": "ANS-DS-002",
+      "sessionRef": "DSE-001",
+      "expertRef": "EXP-SW-001",
+      "caseRef": "CAS-DS-001",
+      "questionRef": "QUE-DS-002",
+      "answerText": "The missing rationale made the passing tests insufficient.",
+      "captureMode": "verbatim",
+      "ambiguity": [],
+      "sensitiveDataHandling": {
+        "classification": "internal",
+        "redactionState": "not-needed",
+        "handlingNotes": "Answer contains process reasoning only."
+      }
+    },
+    {
+      "id": "ANS-DS-003",
+      "sessionRef": "DSE-001",
+      "expertRef": "EXP-SW-001",
+      "caseRef": "CAS-DS-001",
+      "questionRef": "QUE-DS-003",
+      "answerText": "They would stop at the green test signal.",
+      "captureMode": "verbatim",
+      "ambiguity": [],
+      "sensitiveDataHandling": {
+        "classification": "internal",
+        "redactionState": "not-needed",
+        "handlingNotes": "No individual junior worker is identified."
+      }
+    },
+    {
+      "id": "ANS-DS-004",
+      "sessionRef": "DSE-002",
+      "expertRef": "EXP-OPS-001",
+      "caseRef": "CAS-DS-002",
+      "questionRef": "QUE-DS-004",
+      "answerText": "The inspection evidence was stale.",
+      "captureMode": "verbatim",
+      "ambiguity": [],
+      "sensitiveDataHandling": {
+        "classification": "internal",
+        "redactionState": "not-needed",
+        "handlingNotes": "Operational state is synthetic and not site-identifying."
+      }
+    },
+    {
+      "id": "ANS-DS-005",
+      "sessionRef": "DSE-002",
+      "expertRef": "EXP-OPS-001",
+      "caseRef": "CAS-DS-002",
+      "questionRef": "QUE-DS-005",
+      "answerText": "Running with unknown field state.",
+      "captureMode": "verbatim",
+      "ambiguity": [],
+      "sensitiveDataHandling": {
+        "classification": "internal",
+        "redactionState": "not-needed",
+        "handlingNotes": "No production site identifiers captured."
+      }
+    }
+  ],
+  "expertJudgments": [
+    {
+      "id": "JDG-DS-001",
+      "caseRef": "CAS-DS-001",
+      "expertRef": "EXP-SW-001",
+      "judgment": "conditionally-acceptable",
+      "cueRefs": [
+        "CUE-DS-001"
+      ],
+      "concernRef": "CON-DS-001",
+      "lossBoundaryRef": "LSB-DS-001",
+      "confidence": 0.88
+    },
+    {
+      "id": "JDG-DS-002",
+      "caseRef": "CAS-DS-002",
+      "expertRef": "EXP-OPS-001",
+      "judgment": "unacceptable",
+      "cueRefs": [
+        "CUE-DS-002"
+      ],
+      "concernRef": "CON-DS-002",
+      "lossBoundaryRef": "LSB-DS-002",
+      "confidence": 0.83
+    }
+  ],
+  "cues": [
+    {
+      "id": "CUE-DS-001",
+      "statement": "Scope broadens without explicit threat rationale",
+      "concernRef": "CON-DS-001"
+    },
+    {
+      "id": "CUE-DS-002",
+      "statement": "Protective local evidence is stale even though remote signals look normal",
+      "concernRef": "CON-DS-002"
+    }
+  ],
+  "concerns": [
+    {
+      "id": "CON-DS-001",
+      "statement": "Unauthorized access may be normalized through under-explained changes.",
+      "lossBoundaryRef": "LSB-DS-001"
+    },
+    {
+      "id": "CON-DS-002",
+      "statement": "Operational failure may be hidden when field state is unknown.",
+      "lossBoundaryRef": "LSB-DS-002"
+    }
+  ],
+  "lossBoundaries": [
+    {
+      "id": "LSB-DS-001",
+      "statement": "No user may gain access without explicit rationale and negative evidence.",
+      "severity": "critical"
+    },
+    {
+      "id": "LSB-DS-002",
+      "statement": "Service must not continue when local condition is materially unknown.",
+      "severity": "high"
+    }
+  ],
+  "qualityIntents": [
+    {
+      "id": "QIN-DS-001",
+      "statement": "Boundary-protective decisions must include evidence close enough to the protected harm to make acceptance reproducible.",
+      "lossBoundaryRefs": [
+        "LSB-NOPE-999"
+      ],
+      "status": "candidate"
+    }
+  ],
+  "qualityIntentDerivations": [
+    {
+      "id": "QID-DS-001",
+      "sourceDecisionPatternRefs": [
+        "PAT-DS-001"
+      ],
+      "sourceConcernRefs": [
+        "CON-DS-001",
+        "CON-DS-002"
+      ],
+      "sourceLossBoundaryRefs": [
+        "LSB-DS-001",
+        "LSB-DS-002"
+      ],
+      "derivedQualityIntentRef": "QIN-DS-001",
+      "derivationRationale": "Both expert judgments changed when positive surrounding signals lacked protective evidence near the loss boundary; culture aggregation is not required to derive this candidate intent.",
+      "confidence": 0.8,
+      "status": "candidate",
+      "reviewerRefs": [
+        "EXP-SW-001",
+        "EXP-OPS-001"
+      ]
+    }
+  ],
+  "decisionPatterns": [
+    {
+      "id": "PAT-DS-001",
+      "title": "Missing protective evidence blocks acceptance even when surrounding signals are positive",
+      "sourceJudgmentRefs": [
+        "JDG-DS-001",
+        "JDG-DS-002"
+      ],
+      "typicalDecision": "unacceptable",
+      "confidence": 0.84
+    }
+  ],
+  "extractionSteps": [
+    {
+      "id": "EXT-DS-001",
+      "sessionRef": "DSE-001",
+      "extractor": "hybrid",
+      "extractionMethod": "Map answer contrast from passing tests to missing threat rationale, then bind cue to harm and loss boundary.",
+      "rawExpertAnswerRefs": [
+        "ANS-DS-001",
+        "ANS-DS-002",
+        "ANS-DS-003"
+      ],
+      "outputCueRefs": [
+        "CUE-DS-001"
+      ],
+      "outputConcernRefs": [
+        "CON-DS-001"
+      ],
+      "outputLossBoundaryRefs": [
+        "LSB-DS-001"
+      ],
+      "outputDecisionPatternRefs": [
+        "PAT-DS-001"
+      ],
+      "outputQualityIntentDerivationRefs": [
+        "QID-DS-001"
+      ],
+      "rationale": "The expert did not reject the change because tests failed; the decisive cue was that the evidence did not address the access-expansion harm.",
+      "confidence": 0.82,
+      "ambiguity": [
+        "Needs more cases to separate authorization-specific wording from a broader protective-evidence pattern."
+      ]
+    },
+    {
+      "id": "EXT-DS-002",
+      "sessionRef": "DSE-002",
+      "extractor": "hybrid",
+      "extractionMethod": "Map first-noticed stale inspection cue to hidden field-state concern and shared protective-evidence pattern.",
+      "rawExpertAnswerRefs": [
+        "ANS-DS-004",
+        "ANS-DS-005"
+      ],
+      "outputCueRefs": [
+        "CUE-DS-002"
+      ],
+      "outputConcernRefs": [
+        "CON-DS-002"
+      ],
+      "outputLossBoundaryRefs": [
+        "LSB-DS-002"
+      ],
+      "outputDecisionPatternRefs": [
+        "PAT-DS-001"
+      ],
+      "outputQualityIntentDerivationRefs": [
+        "QID-DS-001"
+      ],
+      "rationale": "The operations expert treated stale local evidence as more important than a normal dashboard because the harm occurs in field state, not dashboard state.",
+      "confidence": 0.81,
+      "ambiguity": []
+    }
+  ],
+  "discoverySessions": [
+    {
+      "id": "DSE-001",
+      "expertRef": "EXP-SW-001",
+      "caseRefs": [
+        "CAS-DS-001"
+      ],
+      "questionLogEntryRefs": [
+        "QUE-DS-001",
+        "QUE-DS-002",
+        "QUE-DS-003"
+      ],
+      "rawExpertAnswerRefs": [
+        "ANS-DS-001",
+        "ANS-DS-002",
+        "ANS-DS-003"
+      ],
+      "judgmentRefs": [
+        "JDG-DS-001"
+      ],
+      "extractedCueRefs": [
+        "CUE-DS-001"
+      ],
+      "extractedConcernRefs": [
+        "CON-DS-001"
+      ],
+      "mappedLossBoundaryRefs": [
+        "LSB-DS-001"
+      ],
+      "derivedDecisionPatternRefs": [
+        "PAT-DS-001"
+      ],
+      "derivedQualityIntentDerivationRefs": [
+        "QID-DS-001"
+      ],
+      "extractionStepRefs": [
+        "EXT-DS-001"
+      ],
+      "confidence": 0.85,
+      "unresolvedAmbiguity": [
+        "Need more cross-domain examples before treating the pattern as universal."
+      ],
+      "sessionVerdict": "Pattern candidate is strong but still needs comparison."
+    },
+    {
+      "id": "DSE-002",
+      "expertRef": "EXP-OPS-001",
+      "caseRefs": [
+        "CAS-DS-002"
+      ],
+      "questionLogEntryRefs": [
+        "QUE-DS-004",
+        "QUE-DS-005"
+      ],
+      "rawExpertAnswerRefs": [
+        "ANS-DS-004",
+        "ANS-DS-005"
+      ],
+      "judgmentRefs": [
+        "JDG-DS-002"
+      ],
+      "extractedCueRefs": [
+        "CUE-DS-002"
+      ],
+      "extractedConcernRefs": [
+        "CON-DS-002"
+      ],
+      "mappedLossBoundaryRefs": [
+        "LSB-DS-002"
+      ],
+      "derivedDecisionPatternRefs": [
+        "PAT-DS-001"
+      ],
+      "derivedQualityIntentDerivationRefs": [
+        "QID-DS-001"
+      ],
+      "extractionStepRefs": [
+        "EXT-DS-002"
+      ],
+      "confidence": 0.82,
+      "unresolvedAmbiguity": [],
+      "sessionVerdict": "Pattern candidate is reinforced."
+    }
+  ]
+}

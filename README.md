@@ -6,7 +6,7 @@ QIF does not define quality as output volume. Page count, review count, and test
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline (release Go / Conditional Go / No-Go / Pending decisions with quantitative evidence, post-release review, and traceability), the v0.4.1 retained fixture coverage expansion, the v0.4.2 Quality Aspect taxonomy, the v0.4.3 complete core verifier fixture coverage release, the v0.4.4 Evidence Type Vocabulary, the v0.4.5 Evaluation Timing Rules, the v0.4.6 Evidence Retention Policies, and the v0.4.7 Quality Reports:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline (release Go / Conditional Go / No-Go / Pending decisions with quantitative evidence, post-release review, and traceability), the v0.4.1 retained fixture coverage expansion, the v0.4.2 Quality Aspect taxonomy, the v0.4.3 complete core verifier fixture coverage release, the v0.4.4 Evidence Type Vocabulary, the v0.4.5 Evaluation Timing Rules, the v0.4.6 Evidence Retention Policies, the v0.4.7 Quality Reports, and the v0.4.8 retained Discovery Session fixture coverage:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -41,7 +41,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - Local runtime verifier: `tools/validate-qif-runtime.mjs`
 - Negative fixture suite runner: `tools/run-fixture-tests.mjs`
 - Negative fixture case sources: `tools/fixtures/qif-package-cases.mjs`, `tools/fixtures/expert-judgment-cases.mjs`, `tools/fixtures/quality-gate-cases.mjs`
-- Retained negative fixture corpora: `tests/fixtures/qif-package/`, `tests/fixtures/expert-judgment/`, `tests/fixtures/quality-gate/`
+- Retained negative fixture corpora: `tests/fixtures/qif-package/`, `tests/fixtures/expert-judgment/`, `tests/fixtures/discovery-session/`, `tests/fixtures/quality-gate/`
 - AOF runtime log: `docs/aof-runtime-log.md`
 - Changelog: `CHANGELOG.md`
 
@@ -118,4 +118,4 @@ For quality gate packages (v0.4 baseline), the runtime verifier additionally che
 
 The verifier enforces structural integrity, traceability, reference resolution, confidence reproducibility, and rule compliance. It does not prove semantic truth; semantic validity requires expert review, reproduction tests, operational feedback, and governance.
 
-`npm test` also runs a standing negative fixture suite (`tools/run-fixture-tests.mjs`). The retained invalid corpora under `tests/fixtures/qif-package/`, `tests/fixtures/expert-judgment/`, and `tests/fixtures/quality-gate/` must each be rejected with a specific error, so a covered verifier rule that is silently weakened or deleted fails the build. The committed corpora are generated from `tools/fixtures/*-cases.mjs` by `npm run build-fixtures`; the suite fails on drift if generated source of truth and committed files disagree. v0.4.7 retains 245 negative checks overall. The remaining runtime package surfaces are the next v0.4.x frontier (see `docs/qif-roadmap.md`).
+`npm test` also runs a standing negative fixture suite (`tools/run-fixture-tests.mjs`). The retained invalid corpora under `tests/fixtures/qif-package/`, `tests/fixtures/expert-judgment/`, `tests/fixtures/discovery-session/`, and `tests/fixtures/quality-gate/` must each be rejected with a specific error, so a covered verifier rule that is silently weakened or deleted fails the build. The committed corpora are generated from `tools/fixtures/*-cases.mjs` by `npm run build-fixtures`; the suite fails on drift if generated source of truth and committed files disagree. v0.4.8 retains 279 negative checks overall and adds discovery-session runtime coverage. The remaining culture, evaluation-target, and review-run runtime package surfaces are the next v0.4.x frontier (see `docs/qif-roadmap.md`).

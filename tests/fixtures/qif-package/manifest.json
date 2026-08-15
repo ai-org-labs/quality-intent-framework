@@ -11,6 +11,10 @@
     },
     {
       "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/discovery-session-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
       "package": "examples/quality-gate-package.json"
     }
   ],

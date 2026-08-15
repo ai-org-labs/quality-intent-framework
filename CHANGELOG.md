@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.4.8
+
+- Added retained negative fixture coverage for the discovery-session runtime package surface.
+- Added `tools/fixtures/discovery-session-cases.mjs` as the source of truth for discovery-session invalid packages.
+- Extended `tools/run-fixture-tests.mjs` to include the discovery-session corpus and its positive package check.
+- Increased the standing fixture suite to 4 positive checks and 279 retained negative checks.
+- Covered raw expert answer traceability, question/session consistency, extraction-step justification, and session-local provenance regressions.
+
 ## v0.4.7
 
 - Added first-class `qualityReports` to quality-gate packages.

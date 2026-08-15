@@ -1769,3 +1769,62 @@ Publication:
 - Annotated tag object: `77f68865e03ceaa6036a04fca1e7f37a938dab0f`.
 - GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.4.7`.
 - Remote main was first advanced to the verified release commit; this post-release log records the publication outcome without moving the release tag.
+
+## QIF v0.4.8 Discovery Session Fixture Coverage
+
+Date: 2026-08-15
+
+Need / Intent / Context:
+
+- Need: QIF discovery-session packages are the bridge from expert judgment to reusable quality knowledge. Without retained negative fixtures, traceability rules for raw answers, extraction steps, and session-local provenance could silently weaken.
+- Intent: extend the standing fixture suite to the discovery-session runtime verifier surface so covered discovery rules have committed invalid packages that must fail.
+- Context: QIF remains standalone. AOF v11.3.0 is used as development runtime evidence, not as a QIF usage dependency. AOF `situation-assess` still reports the stored alignment pulse as stale; the current roadmap remains the live frontier.
+
+Trend signals reviewed:
+
+- Axios reported the SAFE proposal for documenting rogue AI agent activities, including unauthorized access and confidential information exposure.
+- TechRadar reported that production-ready agents require durable recovery, scoped access, verified identity, runtime containment, and attention to failure paths rather than demo success.
+- Oracle described agent evaluation as lifecycle evaluation of response, trajectory, tools, state changes, production behavior, and recovery.
+- Microsoft Agent Governance Toolkit post-market monitoring guidance emphasizes decision logging, audit trails, anomaly detection, incident reporting, and lifetime monitoring.
+- Governance-as-code coverage continued to emphasize runtime controls and audit evidence before, during, and after agent execution.
+
+Council judgment:
+
+- Visionary: approve. Discovery-session fixtures protect the source of QIF knowledge, not only the release-gate surface.
+- Builder: approve. Add fixture generator and runner wiring only; do not redesign discovery schemas or verifier semantics.
+- Guardian: approve with guardrails. Retained fixtures prove covered structural rules still fire; they do not prove expert interpretations are semantically correct.
+
+What was built:
+
+- `tools/fixtures/discovery-session-cases.mjs`: added retained negative cases for discovery-session verifier rules.
+- `tools/run-fixture-tests.mjs`: added discovery-session positive and negative suite execution.
+- `tests/fixtures/discovery-session/`: added committed invalid packages and manifest generated from the source-of-truth fixture cases.
+- `README.md`, `docs/qif-roadmap.md`, `CHANGELOG.md`, `RELEASE-NOTES-v0.4.8.md`.
+- `assessments/qif-self-evaluation-v0.4.8.json` and `.md`.
+
+What was not built:
+
+- No schema redesign.
+- No new discovery entity.
+- No UI.
+- No external integration.
+- No semantic validation of expert judgment.
+
+AOF runtime command evidence:
+
+- AOF latest check: `ai-org-labs/ai-organization-framework` latest tag was `v11.3.0`.
+- AOF v11.3.0 `situation-assess --project .` passed and flagged stale alignment pulse as a warning.
+- AOF v11.3.0 `organization-verify --project .` passed with 231/231 checks.
+- AOF v11.3.0 `command-routing-audit --project . --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.4.8-final.json` passed.
+- AOF v11.3.0 `review-provenance-audit --project . --cutoff-task-id TASK-014 --write-artifact .aof/artifacts/verification/review-provenance-audit-qif-v0.4.8-final.json` passed.
+
+QIF verification:
+
+- `npm test` passed with 4/4 positive checks and 279/279 negative checks.
+- `node tools/validate-qif-runtime.mjs assessments/qif-self-evaluation-v0.4.8.json` passed.
+- Public residue scan found no personal account, email, legacy repository, user-home, or temporary checkout path residue outside `.git`.
+
+Decision:
+
+- Proceed to v0.4.8 release after final scan, commit, tag, and GitHub release.
+- Residual risk: retained negative coverage remains incomplete for organizational-quality-culture, evaluation-target, and review-run runtime verifier surfaces.
