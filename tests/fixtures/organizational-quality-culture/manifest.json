@@ -1,0 +1,133 @@
+{
+  "description": "QIF organizational-quality-culture negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/organizational-quality-culture-cases.mjs; do not edit by hand.",
+  "positives": [
+    {
+      "validator": "tools/validate-qif.mjs",
+      "package": "examples/qif-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-expert-judgment.mjs",
+      "package": "examples/expert-judgment-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/discovery-session-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/organizational-quality-culture-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/quality-gate-package.json"
+    }
+  ],
+  "negatives": [
+    {
+      "file": "organizational-quality-culture-top-level-lossBoundaries-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level lossBoundaries must be an array",
+      "expect": "fail",
+      "errorIncludes": "package lossBoundaries must be an array."
+    },
+    {
+      "file": "organizational-quality-culture-top-level-decisionPatterns-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level decisionPatterns must be an array",
+      "expect": "fail",
+      "errorIncludes": "package decisionPatterns must be an array."
+    },
+    {
+      "file": "organizational-quality-culture-top-level-organizationalQualityCultures-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level organizationalQualityCultures must be an array",
+      "expect": "fail",
+      "errorIncludes": "package organizationalQualityCultures must be an array."
+    },
+    {
+      "file": "organizational-quality-culture-culture-broken-loss-boundary-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "culture non-negotiable loss boundaries resolve",
+      "expect": "fail",
+      "errorIncludes": "CUL-001 references missing loss boundary"
+    },
+    {
+      "file": "organizational-quality-culture-culture-broken-pattern-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "culture pattern refs resolve",
+      "expect": "fail",
+      "errorIncludes": "CUL-001 references missing decision pattern"
+    },
+    {
+      "file": "organizational-quality-culture-culture-missing-risk-appetite.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "culture risk appetite required",
+      "expect": "fail",
+      "errorIncludes": "CUL-001 must include non-empty string riskAppetite."
+    },
+    {
+      "file": "organizational-quality-culture-culture-not-context-only.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "culture aggregation role is context only",
+      "expect": "fail",
+      "errorIncludes": "CUL-001 must be marked as context-only."
+    },
+    {
+      "file": "organizational-quality-culture-culture-derivation-prerequisite-field-forbidden.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "culture must not be derivation prerequisite",
+      "expect": "fail",
+      "errorIncludes": "CUL-001 must not include qualityIntentDerivationPrerequisite; culture is context only."
+    },
+    {
+      "file": "organizational-quality-culture-culture-missing-recurring-fears.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "culture recurring fears required",
+      "expect": "fail",
+      "errorIncludes": "CUL-001 must include recurringFears."
+    },
+    {
+      "file": "organizational-quality-culture-culture-missing-preferred-evidence.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "culture preferred evidence required",
+      "expect": "fail",
+      "errorIncludes": "CUL-001 must include preferredEvidence."
+    },
+    {
+      "file": "organizational-quality-culture-culture-missing-escalation-norms.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "culture escalation norms required",
+      "expect": "fail",
+      "errorIncludes": "CUL-001 must include escalationNorms."
+    },
+    {
+      "file": "organizational-quality-culture-culture-missing-waiver-practices.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "culture waiver practices required",
+      "expect": "fail",
+      "errorIncludes": "CUL-001 must include waiverPractices."
+    },
+    {
+      "file": "organizational-quality-culture-culture-missing-quality-tradeoffs.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "culture quality tradeoffs required",
+      "expect": "fail",
+      "errorIncludes": "CUL-001 must include qualityTradeoffs."
+    },
+    {
+      "file": "organizational-quality-culture-culture-missing-role-differences.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "culture department or role differences required",
+      "expect": "fail",
+      "errorIncludes": "CUL-001 must include departmentOrRoleDifferences."
+    },
+    {
+      "file": "organizational-quality-culture-culture-nonprovisional-single-pattern.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "non-provisional culture grounded in multiple patterns",
+      "expect": "fail",
+      "errorIncludes": "CUL-001 must reference multiple patterns or be explicitly provisional."
+    }
+  ],
+  "rescopedRules": []
+}

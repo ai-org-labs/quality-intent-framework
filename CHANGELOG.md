@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.4.9
+
+- Added retained negative fixture coverage for the organizational-quality-culture runtime package surface.
+- Added `tools/fixtures/organizational-quality-culture-cases.mjs` as the source of truth for culture invalid packages.
+- Extended `tools/run-fixture-tests.mjs` to include the organizational-quality-culture corpus and its positive package check.
+- Increased the standing fixture suite to 5 positive checks and 294 retained negative checks.
+- Covered culture as context-only aggregation, forbidden derivation-prerequisite misuse, required culture context fields, and grounding in multiple patterns or explicit provisional status.
+
 ## v0.4.8
 
 - Added retained negative fixture coverage for the discovery-session runtime package surface.

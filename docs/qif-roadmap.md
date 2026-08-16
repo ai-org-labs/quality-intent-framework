@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.4.8 baseline)
+## Current Position (v0.4.9 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate.
@@ -52,8 +52,10 @@ and adoption surface — not pretending the limits away.
   after a verdict. v0.4.7 adds executable Quality Reports so reported scores
   and sections must decompose into referenced gate decisions, gated intents,
   and verdict evidence. v0.4.8 extends retained negative fixture coverage to
-  the discovery-session runtime verifier surface. Remaining runtime package
-  surfaces remain the next v0.4.x frontier.
+  the discovery-session runtime verifier surface. v0.4.9 extends retained
+  negative fixture coverage to the organizational-quality-culture runtime
+  verifier surface. Remaining runtime package surfaces remain the next v0.4.x
+  frontier.
 - Weaknesses: packages are islands (no cross-package references), authoring
   cost for humans and AI agents is still high, agent trajectories and
   environment provenance are not first-class, and no empirical feedback yet
@@ -100,14 +102,17 @@ Deliverables:
   Status: established for the quality gate verifier and expanded in v0.4.1
   to selected `qif-package` and `expert-judgment` verifier rules. The retained
   corpora under `tests/fixtures/qif-package/`,
-  `tests/fixtures/expert-judgment/`, `tests/fixtures/discovery-session/`, and
+  `tests/fixtures/expert-judgment/`, `tests/fixtures/discovery-session/`,
+  `tests/fixtures/organizational-quality-culture/`, and
   `tests/fixtures/quality-gate/` are generated from
   `tools/fixtures/*-cases.mjs` and run with a drift check by
   `tools/run-fixture-tests.mjs`. v0.4.8 adds retained discovery-session
   coverage for raw-answer traceability, extraction-step justification, and
-  session-local provenance. Remaining: extend the same suite to every rule in
-  the culture, evaluation-target, and review-run verifier surfaces before this
-  deliverable is complete.
+  session-local provenance. v0.4.9 adds retained organizational-quality-culture
+  coverage for context-only aggregation, non-prerequisite boundaries, grounding
+  in multiple patterns, and required culture context fields. Remaining: extend
+  the same suite to every rule in the evaluation-target and review-run verifier
+  surfaces before this deliverable is complete.
 - Evaluation Timing Rule and Evaluation Timing Decision entities: when
   evaluation must happen, decided by executable conditions, with recorded
   justification.

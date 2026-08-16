@@ -15,6 +15,10 @@
     },
     {
       "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/organizational-quality-culture-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
       "package": "examples/quality-gate-package.json"
     }
   ],

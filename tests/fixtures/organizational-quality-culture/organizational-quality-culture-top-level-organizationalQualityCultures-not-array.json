@@ -1,0 +1,30 @@
+{
+  "packageType": "organizational-quality-culture",
+  "runtimeVersion": "0.2.1",
+  "packageId": "CULPKG-001",
+  "lossBoundaries": [
+    {
+      "id": "LSB-CUL-001",
+      "statement": "No boundary-protective decision may proceed without evidence close to the protected harm."
+    },
+    {
+      "id": "LSB-CUL-002",
+      "statement": "Waivers must not erase retrospective accountability."
+    }
+  ],
+  "decisionPatterns": [
+    {
+      "id": "PAT-CUL-001",
+      "title": "Missing protective evidence blocks acceptance."
+    },
+    {
+      "id": "PAT-CUL-002",
+      "title": "Urgency changes route, not the loss boundary."
+    },
+    {
+      "id": "PAT-CUL-003",
+      "title": "Escalate when unknown field state intersects high operational impact."
+    }
+  ],
+  "organizationalQualityCultures": null
+}

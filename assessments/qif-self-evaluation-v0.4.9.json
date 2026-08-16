@@ -1,0 +1,855 @@
+{
+  "packageType": "quality-gate",
+  "runtimeVersion": "0.4.9",
+  "packageId": "QIF-SELF-EVALUATION-V049",
+  "evaluationTargets": [
+    {
+      "id": "TGT-QIF-SELF",
+      "title": "QIF v0.4.9 Organizational Quality Culture fixture coverage release candidate",
+      "domain": "quality-framework",
+      "artifactType": "repository-and-documentation-set",
+      "context": "Self-evaluation of the QIF v0.4.9 package after adding retained negative fixture coverage for the organizational-quality-culture runtime verifier surface.",
+      "stakeholderImpact": [
+        "QIF maintainers",
+        "AI agents using QIF",
+        "human reviewers",
+        "pilot adopters"
+      ],
+      "operationalImpact": "If the framework is incoherent, unverifiable, or misleading, downstream human or AI evaluations may produce unjustified quality verdicts."
+    }
+  ],
+  "qualityIntents": [
+    {
+      "id": "QIN-QIF-COHERENCE",
+      "statement": "QIF must present a coherent quality model where discovery lenses, evidence-type vocabulary, evidence, trust metadata, finding verification, confidence, verdicts, and governance have distinct responsibilities.",
+      "lossBoundary": "The framework must not collapse quality into checklist completion, activity counts, generic categories, or unreviewed AI findings.",
+      "lossBoundarySeverity": "critical"
+    },
+    {
+      "id": "QIN-QIF-EXECUTABLE",
+      "statement": "QIF must remain executable through local schemas, examples, verifier logic, and retained negative fixtures.",
+      "lossBoundary": "A release candidate must not claim runtime readiness if its own schemas, examples, or verifier fixtures fail or drift.",
+      "lossBoundarySeverity": "critical"
+    },
+    {
+      "id": "QIN-QIF-AI-USABLE",
+      "statement": "QIF must be understandable and usable by AI agents without relying on hidden maintainer knowledge.",
+      "lossBoundary": "An AI agent must not need undocumented assumptions to author, evaluate, or challenge QIF artifacts.",
+      "lossBoundarySeverity": "high"
+    },
+    {
+      "id": "QIN-QIF-RELEASE-READY",
+      "statement": "QIF must be releasable without stale release artifacts, unpublished local-only assumptions, or missing trust and provenance evidence.",
+      "lossBoundary": "A public release must not omit updated release notes or publish unverifiable local/private residue.",
+      "lossBoundarySeverity": "high"
+    }
+  ],
+  "qualityAspects": [
+    {
+      "id": "QAS-QIF-FUNCTIONAL",
+      "name": "functional suitability",
+      "purpose": "Discover whether QIF performs its intended representation and evaluation job.",
+      "interpretation": "discovery-lens-only",
+      "discoveryQuestions": [
+        "Can a real target be represented, evaluated, and governed with current QIF artifacts?"
+      ],
+      "typicalConcerns": [
+        "model role confusion",
+        "unusable package shape"
+      ],
+      "possibleLossBoundaries": [
+        "QIF must not make quality verdicts impossible to explain."
+      ],
+      "evidenceExamples": [
+        "self-evaluation package",
+        "schema validation"
+      ],
+      "antiPatterns": [
+        "Treating the presence of entities as proof that the model works."
+      ]
+    },
+    {
+      "id": "QAS-QIF-AUDITABILITY",
+      "name": "auditability",
+      "purpose": "Discover whether claims can be traced to artifacts and verifier results.",
+      "interpretation": "discovery-lens-only",
+      "discoveryQuestions": [
+        "Can every verdict cite retained evidence and an explicit verifier boundary?"
+      ],
+      "typicalConcerns": [
+        "untraceable claim",
+        "semantic truth overclaim"
+      ],
+      "possibleLossBoundaries": [
+        "QIF must not present unchecked claims as audited truth."
+      ],
+      "evidenceExamples": [
+        "npm test output",
+        "AOF organization verification",
+        "runtime log"
+      ],
+      "antiPatterns": [
+        "Equating a passing verifier with semantic correctness."
+      ]
+    },
+    {
+      "id": "QAS-QIF-MAINTAINABILITY",
+      "name": "maintainability",
+      "purpose": "Discover whether QIF can evolve without breaking retained contracts.",
+      "interpretation": "discovery-lens-only",
+      "discoveryQuestions": [
+        "Can new metadata be added without noisy rewrites or fixture drift?"
+      ],
+      "typicalConcerns": [
+        "schema drift",
+        "fixture drift",
+        "release artifact drift"
+      ],
+      "possibleLossBoundaries": [
+        "QIF changes must not silently weaken verifier coverage."
+      ],
+      "evidenceExamples": [
+        "negative fixture corpus",
+        "build-fixtures drift check"
+      ],
+      "antiPatterns": [
+        "Relying on manual memory to keep examples and schemas aligned."
+      ]
+    },
+    {
+      "id": "QAS-QIF-TRUST",
+      "name": "brand trust",
+      "purpose": "Discover whether public users can trust the release state and provenance of the framework.",
+      "interpretation": "discovery-lens-only",
+      "discoveryQuestions": [
+        "Would a user know what is verified, what is provisional, and what still needs release work?"
+      ],
+      "typicalConcerns": [
+        "stale release notes",
+        "hidden local assumptions",
+        "overstated readiness"
+      ],
+      "possibleLossBoundaries": [
+        "QIF must not publish a release that obscures what was actually verified."
+      ],
+      "evidenceExamples": [
+        "release notes",
+        "changelog",
+        "public information scan"
+      ],
+      "antiPatterns": [
+        "Treating local commit success as public release readiness."
+      ]
+    }
+  ],
+  "evaluationPerspectives": [
+    {
+      "id": "EVP-QIF-FUNCTIONAL",
+      "perspective": "functional quality",
+      "rationale": "Self-evaluation must check conceptual coherence and executable behavior.",
+      "linkedAspectRefs": [
+        "QAS-QIF-FUNCTIONAL"
+      ],
+      "linkedIntentRefs": [
+        "QIN-QIF-COHERENCE"
+      ]
+    },
+    {
+      "id": "EVP-QIF-TRACE",
+      "perspective": "evidence traceability",
+      "rationale": "QIF claims must be grounded in schemas, examples, tests, and runtime logs.",
+      "linkedAspectRefs": [
+        "QAS-QIF-AUDITABILITY"
+      ],
+      "linkedIntentRefs": [
+        "QIN-QIF-EXECUTABLE"
+      ]
+    },
+    {
+      "id": "EVP-QIF-OPS",
+      "perspective": "operational quality",
+      "rationale": "AI and human users need usable operating guidance and clear trust boundaries.",
+      "linkedAspectRefs": [
+        "QAS-QIF-MAINTAINABILITY",
+        "QAS-QIF-TRUST"
+      ],
+      "linkedIntentRefs": [
+        "QIN-QIF-AI-USABLE",
+        "QIN-QIF-RELEASE-READY"
+      ]
+    }
+  ],
+  "confidencePolicies": [
+    {
+      "id": "CFP-QIF-SELF",
+      "evidenceAggregationRule": "minimum-evidence-confidence",
+      "verdictAggregationRule": "minimum-evidence-confidence",
+      "reviewRunAggregationRule": "minimum-verdict-confidence",
+      "rounding": "nearest-0.01"
+    }
+  ],
+  "evidenceItems": [
+    {
+      "id": "EVD-QIF-TEST",
+      "targetRef": "TGT-QIF-SELF",
+      "evidenceType": "local-verifier-run",
+      "finding": "npm test passed using the current repository: runtime packages validated, fixture corpus was in sync, and retained negative checks passed after adding organizational-quality-culture fixture coverage.",
+      "polarity": "supports",
+      "independence": "high",
+      "confidence": 0.93,
+      "weight": 1,
+      "evaluatorRole": "codex-qif-self-reviewer",
+      "retention": "Retained as command result in this working session and summarized in the self-evaluation report.",
+      "artifactReference": "npm test output, 2026-08-12",
+      "trust": {
+        "sources": [
+          "package.json",
+          "tools/validate-qif-runtime.mjs",
+          "tools/run-fixture-tests.mjs",
+          "tests/fixtures/quality-gate/manifest.json"
+        ],
+        "generatedBy": "codex-qif-self-reviewer",
+        "verifiedBy": [
+          "local npm test"
+        ],
+        "status": "verified",
+        "staleAfter": "2026-09-12"
+      },
+      "retentionPolicyRef": "ERP-QIF-RELEASE-EVIDENCE"
+    },
+    {
+      "id": "EVD-QIF-AOF",
+      "targetRef": "TGT-QIF-SELF",
+      "evidenceType": "aof-runtime-verification",
+      "finding": "AOF v11.4.0 organization-verify passed with 231/231 checks for the managed-project runtime records.",
+      "polarity": "supports",
+      "independence": "medium",
+      "confidence": 0.86,
+      "weight": 1,
+      "evaluatorRole": "codex-aof-orchestrator",
+      "retention": "Retained as AOF runtime-backed verification summary in this session.",
+      "artifactReference": "AOF v11.4.0 organization-verify output, 2026-08-12",
+      "trust": {
+        "sources": [
+          ".aof/project-bootstrap.json",
+          ".aof/organization.json",
+          ".aof/context/active/project-orientation.json"
+        ],
+        "generatedBy": "aof-v11.4.0-runtime",
+        "verifiedBy": [
+          "codex-qif-self-reviewer"
+        ],
+        "status": "verified",
+        "staleAfter": "2026-09-12"
+      },
+      "retentionPolicyRef": "ERP-QIF-RELEASE-EVIDENCE"
+    },
+    {
+      "id": "EVD-QIF-DOCS",
+      "targetRef": "TGT-QIF-SELF",
+      "evidenceType": "documentation-review",
+      "finding": "AI_AUTHORING_GUIDE, qif-v0.4 quality-gate runtime docs, and the roadmap explain quality aspects, organizational-quality-culture fixture coverage, findingEvidence, trust metadata, verifier boundaries, and anti-checklist constraints.",
+      "polarity": "supports",
+      "independence": "medium",
+      "confidence": 0.82,
+      "weight": 1,
+      "evaluatorRole": "codex-qif-self-reviewer",
+      "retention": "Retained in repository documentation.",
+      "artifactReference": "docs/AI_AUTHORING_GUIDE.md; docs/qif-v0.4-quality-gate-runtime-requirements.md; docs/qif-roadmap.md",
+      "trust": {
+        "sources": [
+          "docs/AI_AUTHORING_GUIDE.md",
+          "docs/qif-v0.4-quality-gate-runtime-requirements.md",
+          "docs/qif-roadmap.md"
+        ],
+        "generatedBy": "codex-qif-self-reviewer",
+        "verifiedBy": [
+          "local documentation review"
+        ],
+        "status": "verified",
+        "staleAfter": "2026-09-12"
+      },
+      "retentionPolicyRef": "ERP-QIF-RELEASE-EVIDENCE"
+    },
+    {
+      "id": "EVD-QIF-SCAN",
+      "targetRef": "TGT-QIF-SELF",
+      "evidenceType": "public-residue-scan",
+      "finding": "Public residue scan found no matches for prior personal account identifiers, local absolute paths, or old repository names outside .git.",
+      "polarity": "supports",
+      "independence": "high",
+      "confidence": 0.91,
+      "weight": 1,
+      "evaluatorRole": "codex-qif-self-reviewer",
+      "retention": "Retained as command result in this working session.",
+      "artifactReference": "rg public residue scan, 2026-08-12",
+      "trust": {
+        "sources": [
+          "repository text excluding .git"
+        ],
+        "generatedBy": "codex-qif-self-reviewer",
+        "verifiedBy": [
+          "rg scan"
+        ],
+        "status": "verified",
+        "staleAfter": "2026-09-12"
+      },
+      "retentionPolicyRef": "ERP-QIF-RELEASE-EVIDENCE"
+    },
+    {
+      "id": "EVD-QIF-RELNOTE",
+      "targetRef": "TGT-QIF-SELF",
+      "evidenceType": "release-artifact-review",
+      "finding": "RELEASE-NOTES-v0.4.9.md exists and summarizes highlights, verification, self-evaluation, and verifier boundaries.",
+      "polarity": "supports",
+      "independence": "high",
+      "confidence": 0.9,
+      "weight": 1,
+      "evaluatorRole": "codex-qif-self-reviewer",
+      "retention": "Retained in repository file listing and self-evaluation report.",
+      "artifactReference": "RELEASE-NOTES-v0.4.9.md",
+      "trust": {
+        "sources": [
+          "RELEASE-NOTES-v0.4.9.md",
+          "CHANGELOG.md",
+          "assessments/qif-self-evaluation-v0.4.9.md"
+        ],
+        "generatedBy": "codex-qif-self-reviewer",
+        "verifiedBy": [
+          "local file listing"
+        ],
+        "status": "verified",
+        "staleAfter": "2026-09-12"
+      },
+      "retentionPolicyRef": "ERP-QIF-RELEASE-EVIDENCE"
+    },
+    {
+      "id": "EVD-QIF-UNPUBLISHED",
+      "targetRef": "TGT-QIF-SELF",
+      "evidenceType": "git-state-review",
+      "finding": "The repository is ahead of origin by one commit, so the evaluated state is local and not yet published or tagged.",
+      "polarity": "contradicts",
+      "independence": "high",
+      "confidence": 0.88,
+      "weight": 1,
+      "evaluatorRole": "codex-qif-self-reviewer",
+      "retention": "Retained as git status output in this working session.",
+      "artifactReference": "git status --short --branch, 2026-08-12",
+      "trust": {
+        "sources": [
+          "git status --short --branch"
+        ],
+        "generatedBy": "codex-qif-self-reviewer",
+        "verifiedBy": [
+          "local git status"
+        ],
+        "status": "verified",
+        "staleAfter": "2026-09-12"
+      },
+      "retentionPolicyRef": "ERP-QIF-RELEASE-EVIDENCE"
+    }
+  ],
+  "quantitativeEvidenceRecords": [
+    {
+      "id": "QER-QIF-NEGATIVE",
+      "metricName": "retained negative fixture checks",
+      "value": 294,
+      "unit": "checks",
+      "quantityType": "how-many",
+      "measurementMethod": "tools/run-fixture-tests.mjs through npm test",
+      "targetRef": "TGT-QIF-SELF",
+      "evidenceRef": "EVD-QIF-TEST",
+      "interpretationRule": "The count records retained negative fixture coverage only; it is evidence that verifier rules are exercised, not quality itself.",
+      "interpretation": "evidence-only",
+      "knownLimitation": "The count does not prove semantic correctness or pilot effectiveness.",
+      "linkedIntentRef": "QIN-QIF-EXECUTABLE"
+    },
+    {
+      "id": "QER-QIF-AOF",
+      "metricName": "AOF organization verification checks",
+      "value": 231,
+      "unit": "checks",
+      "quantityType": "how-many",
+      "measurementMethod": "AOF v11.4.0 organization-verify",
+      "targetRef": "TGT-QIF-SELF",
+      "evidenceRef": "EVD-QIF-AOF",
+      "interpretationRule": "The count is evidence of managed-project runtime integrity only; it is not quality itself.",
+      "interpretation": "evidence-only",
+      "knownLimitation": "AOF structural verification does not prove QIF semantic truth.",
+      "linkedIntentRef": "QIN-QIF-EXECUTABLE"
+    }
+  ],
+  "automatedEvaluationDetails": [
+    {
+      "id": "AED-QIF-TEST",
+      "evaluationType": "local package and fixture validation",
+      "executionMode": "automated",
+      "toolName": "npm test",
+      "toolVersion": "QIF 0.4.9",
+      "trigger": "self-evaluation before release decision",
+      "environment": "local development machine",
+      "executedCount": 299,
+      "passedCount": 299,
+      "failedCount": 0,
+      "skippedCount": 0,
+      "blockedCount": 0,
+      "passRate": 1,
+      "durationSeconds": 2.18,
+      "independence": "high",
+      "artifactReference": "npm test output, 2026-08-11",
+      "evidenceRef": "EVD-QIF-TEST"
+    }
+  ],
+  "qualityGateRules": [
+    {
+      "id": "QGR-QIF-COHERENCE",
+      "title": "Concept boundaries must remain explicit.",
+      "appliesToIntentRefs": [
+        "QIN-QIF-COHERENCE"
+      ],
+      "requiredEvidenceTypes": [
+        "documentation-review",
+        "local-verifier-run"
+      ],
+      "blockingConditions": [
+        "No-Go if QIF treats aspects, metrics, activity counts, or AI findings as quality itself."
+      ]
+    },
+    {
+      "id": "QGR-QIF-EXECUTABLE",
+      "title": "Executable baseline must pass local verification.",
+      "appliesToIntentRefs": [
+        "QIN-QIF-EXECUTABLE"
+      ],
+      "requiredEvidenceTypes": [
+        "local-verifier-run",
+        "aof-runtime-verification"
+      ],
+      "blockingConditions": [
+        "No-Go if npm test fails or the retained fixture corpus drifts."
+      ]
+    },
+    {
+      "id": "QGR-QIF-AI",
+      "title": "AI authoring guidance must be explicit enough for use without hidden assumptions.",
+      "appliesToIntentRefs": [
+        "QIN-QIF-AI-USABLE"
+      ],
+      "requiredEvidenceTypes": [
+        "documentation-review"
+      ],
+      "blockingConditions": [
+        "Pending if AI-facing usage guidance is absent or contradicts schema behavior."
+      ]
+    },
+    {
+      "id": "QGR-QIF-RELEASE",
+      "title": "Release readiness must include updated public artifacts and publication state.",
+      "appliesToIntentRefs": [
+        "QIN-QIF-RELEASE-READY"
+      ],
+      "requiredEvidenceTypes": [
+        "release-artifact-review",
+        "git-state-review",
+        "public-residue-scan"
+      ],
+      "blockingConditions": [
+        "At most Conditional Go while release notes are missing or the evaluated commit is local-only."
+      ]
+    }
+  ],
+  "qualityGateDecisions": [
+    {
+      "id": "QGD-QIF-SELF",
+      "targetRef": "TGT-QIF-SELF",
+      "gateRuleRefs": [
+        "QGR-QIF-COHERENCE",
+        "QGR-QIF-EXECUTABLE",
+        "QGR-QIF-AI",
+        "QGR-QIF-RELEASE"
+      ],
+      "decision": "Conditional Go",
+      "intentVerdicts": [
+        {
+          "intentRef": "QIN-QIF-COHERENCE",
+          "decision": "achieved",
+          "confidence": 0.82,
+          "confidencePolicyRef": "CFP-QIF-SELF",
+          "evidenceRefs": [
+            "EVD-QIF-DOCS",
+            "EVD-QIF-TEST"
+          ],
+          "weight": 1,
+          "residualRisk": "Conceptual coherence is structurally documented, including evidence type vocabulary, but semantic fitness still needs pilot feedback."
+        },
+        {
+          "intentRef": "QIN-QIF-EXECUTABLE",
+          "decision": "achieved",
+          "confidence": 0.86,
+          "confidencePolicyRef": "CFP-QIF-SELF",
+          "evidenceRefs": [
+            "EVD-QIF-TEST",
+            "EVD-QIF-AOF"
+          ],
+          "weight": 1,
+          "residualRisk": "Local verification is strong, but CI/public release verification has not been observed in this turn."
+        },
+        {
+          "intentRef": "QIN-QIF-AI-USABLE",
+          "decision": "achieved",
+          "confidence": 0.82,
+          "confidencePolicyRef": "CFP-QIF-SELF",
+          "evidenceRefs": [
+            "EVD-QIF-DOCS"
+          ],
+          "weight": 1,
+          "residualRisk": "AI guidance exists, but usability by independent agents should be tested in a pilot."
+        },
+        {
+          "intentRef": "QIN-QIF-RELEASE-READY",
+          "decision": "partially-achieved",
+          "confidence": 0.88,
+          "confidencePolicyRef": "CFP-QIF-SELF",
+          "evidenceRefs": [
+            "EVD-QIF-SCAN",
+            "EVD-QIF-RELNOTE",
+            "EVD-QIF-UNPUBLISHED"
+          ],
+          "weight": 1,
+          "residualRisk": "Release notes and public residue scan are clean, but the evaluated commit has not been pushed, tagged, or released."
+        }
+      ],
+      "confidence": 0.82,
+      "confidencePolicyRef": "CFP-QIF-SELF",
+      "residualRisks": [
+        "QIF v0.4.9 is structurally executable and release-packaged, but not yet publicly published.",
+        "Self-evaluation cannot prove semantic truth; it needs independent pilot review.",
+        "The evaluated state is local until pushed and tagged."
+      ],
+      "conditions": [
+        {
+          "id": "COND-QIF-PUBLISH",
+          "condition": "Push the evaluated commit and tag the exact verified SHA when releasing.",
+          "owner": "qif-maintainer",
+          "monitoring": "Confirm git status is clean, origin/main points at the released commit, and GitHub release v0.4.9 references the same tag."
+        }
+      ],
+      "approvalOwner": "qif-maintainer",
+      "rollbackPlan": "If release packaging is found incomplete, do not tag; keep the local commit unpublished or publish a follow-up patch with corrected release artifacts.",
+      "monitoringPlan": "After release, verify GitHub tag, release notes, npm test result, and absence of public residue.",
+      "customerImpactPlan": "Notify early pilot users that verifier success proves structure and traceability only, not semantic quality truth.",
+      "governanceTriggerRefs": [
+        "GTR-QIF-RELEASE",
+        "GTR-QIF-CONFLICT"
+      ]
+    }
+  ],
+  "postReleaseReviews": [],
+  "improvementActions": [],
+  "traceabilityLinks": [
+    {
+      "id": "TRC-QIF-001",
+      "sourceRef": "QIN-QIF-COHERENCE",
+      "linkType": "intent-protected-by-gate-rule",
+      "targetRef": "QGR-QIF-COHERENCE"
+    },
+    {
+      "id": "TRC-QIF-002",
+      "sourceRef": "QIN-QIF-EXECUTABLE",
+      "linkType": "intent-protected-by-gate-rule",
+      "targetRef": "QGR-QIF-EXECUTABLE"
+    },
+    {
+      "id": "TRC-QIF-003",
+      "sourceRef": "QIN-QIF-AI-USABLE",
+      "linkType": "intent-protected-by-gate-rule",
+      "targetRef": "QGR-QIF-AI"
+    },
+    {
+      "id": "TRC-QIF-004",
+      "sourceRef": "QIN-QIF-RELEASE-READY",
+      "linkType": "intent-protected-by-gate-rule",
+      "targetRef": "QGR-QIF-RELEASE"
+    },
+    {
+      "id": "TRC-QIF-005",
+      "sourceRef": "QGD-QIF-SELF",
+      "linkType": "decision-evaluates-target",
+      "targetRef": "TGT-QIF-SELF"
+    },
+    {
+      "id": "TRC-QIF-006",
+      "sourceRef": "GTR-QIF-RELEASE",
+      "linkType": "governance-trigger-for-decision",
+      "targetRef": "QGD-QIF-SELF"
+    },
+    {
+      "id": "TRC-QIF-007",
+      "sourceRef": "GTR-QIF-CONFLICT",
+      "linkType": "governance-trigger-for-conflicting-evidence",
+      "targetRef": "QGD-QIF-SELF"
+    }
+  ],
+  "governanceTriggers": [
+    {
+      "id": "GTR-QIF-RELEASE",
+      "triggerType": "waiver-needed",
+      "reason": "The model is executable and release-packaged enough for a Conditional Go, but the verified commit is still local-only until push, tag, and GitHub release complete.",
+      "sourceGateDecisionRef": "QGD-QIF-SELF",
+      "affectedTargetRef": "TGT-QIF-SELF",
+      "severity": "high",
+      "requiredAction": "Publish the exact evaluated commit and create the v0.4.9 tag and release before claiming public v0.4.9 release completion.",
+      "owner": "qif-maintainer",
+      "status": "open"
+    },
+    {
+      "id": "GTR-QIF-CONFLICT",
+      "triggerType": "conflicting-evidence",
+      "reason": "Release-readiness evidence contains support (clean residue scan and release notes) and one remaining contradiction (local-only commit), so the release decision must stay conditional until publication is complete.",
+      "sourceGateDecisionRef": "QGD-QIF-SELF",
+      "affectedTargetRef": "TGT-QIF-SELF",
+      "severity": "high",
+      "requiredAction": "Resolve publication-state contradiction before recording a Go decision.",
+      "owner": "qif-maintainer",
+      "status": "open"
+    }
+  ],
+  "governanceEvents": [],
+  "verifierBoundary": {
+    "checks": [
+      "structural integrity",
+      "traceability",
+      "reference resolution",
+      "confidence reproducibility from evidence and policy",
+      "quality aspect discovery-lens discipline",
+      "findingEvidence and trust metadata structure",
+      "quantitative evidence remains evidence-only",
+      "governance trigger presence for release conditions",
+      "evidence type vocabulary declaration and usage"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "pilot success",
+      "public release completion",
+      "that fixture count is quality itself"
+    ],
+    "semanticValidityRequires": [
+      "independent expert review",
+      "pilot use by another AI or human evaluator",
+      "post-release feedback",
+      "maintainer governance decision"
+    ]
+  },
+  "evidenceTypeVocabulary": [
+    {
+      "id": "ETV-QIF-LOCAL-VERIFIER",
+      "evidenceType": "local-verifier-run",
+      "purpose": "Evidence produced by running local structural verifiers and retained fixture suites.",
+      "sourceCategory": "automated-run",
+      "expectedIndependence": "high",
+      "trustRequired": true,
+      "findingEvidenceRequired": false,
+      "antiPatterns": [
+        "Treating passing local checks as semantic truth."
+      ]
+    },
+    {
+      "id": "ETV-QIF-AOF",
+      "evidenceType": "aof-runtime-verification",
+      "purpose": "Evidence produced by AOF managed-project runtime verification.",
+      "sourceCategory": "automated-run",
+      "expectedIndependence": "medium",
+      "trustRequired": true,
+      "findingEvidenceRequired": false,
+      "antiPatterns": [
+        "Treating AOF structural verification as QIF semantic validation."
+      ]
+    },
+    {
+      "id": "ETV-QIF-DOC",
+      "evidenceType": "documentation-review",
+      "purpose": "Evidence produced by reviewing public QIF documentation against implementation behavior.",
+      "sourceCategory": "human-review",
+      "expectedIndependence": "medium",
+      "trustRequired": true,
+      "findingEvidenceRequired": false,
+      "antiPatterns": [
+        "Treating documentation existence as proof of user comprehension."
+      ]
+    },
+    {
+      "id": "ETV-QIF-RESIDUE",
+      "evidenceType": "public-residue-scan",
+      "purpose": "Evidence produced by scanning public files for disallowed local or personal residue.",
+      "sourceCategory": "automated-run",
+      "expectedIndependence": "high",
+      "trustRequired": true,
+      "findingEvidenceRequired": false,
+      "antiPatterns": [
+        "Treating a clean string scan as proof of all publication safety."
+      ]
+    },
+    {
+      "id": "ETV-QIF-RELEASE",
+      "evidenceType": "release-artifact-review",
+      "purpose": "Evidence produced by reviewing release notes, changelog, and release package artifacts.",
+      "sourceCategory": "human-review",
+      "expectedIndependence": "high",
+      "trustRequired": true,
+      "findingEvidenceRequired": false,
+      "antiPatterns": [
+        "Treating a release note as proof that the release was published."
+      ]
+    },
+    {
+      "id": "ETV-QIF-GIT",
+      "evidenceType": "git-state-review",
+      "purpose": "Evidence produced by checking local and remote Git publication state.",
+      "sourceCategory": "operational-record",
+      "expectedIndependence": "high",
+      "trustRequired": true,
+      "findingEvidenceRequired": false,
+      "antiPatterns": [
+        "Treating a local commit as a published release."
+      ]
+    }
+  ],
+  "evaluationTimingRules": [
+    {
+      "id": "ETR-QIF-RELEASE-PRECHECK",
+      "title": "Release candidate verification must happen before public release claim",
+      "appliesToIntentRefs": [
+        "QIN-QIF-EXECUTABLE",
+        "QIN-QIF-RELEASE-READY"
+      ],
+      "timing": "pre-release",
+      "triggerConditions": [
+        "A public tag or GitHub Release will be created.",
+        "The package version has changed."
+      ],
+      "requiredBeforeDecision": true,
+      "latestAllowedStage": "before public release completion is claimed",
+      "antiPatterns": [
+        "Publishing first and treating later verification as equivalent.",
+        "Using commit count or fixture count as quality itself."
+      ]
+    }
+  ],
+  "evaluationTimingDecisions": [
+    {
+      "id": "ETD-QIF-RELEASE-PRECHECK",
+      "targetRef": "TGT-QIF-SELF",
+      "timingRuleRefs": [
+        "ETR-QIF-RELEASE-PRECHECK"
+      ],
+      "selectedTiming": "pre-release",
+      "decisionRationale": "The release-readiness and executable-baseline intents require local verifier, AOF verification, documentation review, and public-readiness scan evidence before the public release is claimed.",
+      "evidenceRefs": [
+        "EVD-QIF-TEST",
+        "EVD-QIF-AOF",
+        "EVD-QIF-DOCS",
+        "EVD-QIF-SCAN"
+      ],
+      "appliesBeforeGateDecisionRef": "QGD-QIF-SELF",
+      "confidence": 0.86,
+      "owner": "codex-qif-self-reviewer",
+      "status": "completed"
+    }
+  ],
+  "evidenceRetentionPolicies": [
+    {
+      "id": "ERP-QIF-RELEASE-EVIDENCE",
+      "title": "QIF release evidence retention policy",
+      "appliesToEvidenceTypes": [
+        "local-verifier-run",
+        "aof-runtime-verification",
+        "documentation-review",
+        "public-residue-scan",
+        "release-artifact-review",
+        "git-state-review"
+      ],
+      "retentionPeriod": "Retain with the released repository history and release notes for the supported life of the release line.",
+      "sensitivity": "internal",
+      "integrityProtection": "signed-artifact",
+      "accessControl": "internal-only",
+      "disposalRule": "Do not dispose while the release tag, release notes, or related governance trigger remains active.",
+      "owner": "codex-qif-self-reviewer",
+      "antiPatterns": [
+        "Keeping only pass counts without retaining the artifact references needed to reconstruct the verdict."
+      ]
+    }
+  ],
+  "qualityReports": [
+    {
+      "id": "QRP-QIF-SELF-049",
+      "title": "QIF v0.4.9 self-evaluation quality report",
+      "targetRef": "TGT-QIF-SELF",
+      "gateDecisionRefs": [
+        "QGD-QIF-SELF"
+      ],
+      "reportPurpose": "Summarize the self-evaluation gate decision without treating the report score as quality itself.",
+      "generatedBy": "codex-qif-self-reviewer",
+      "status": "published",
+      "summary": "QIF v0.4.9 is structurally executable and expands retained negative fixture coverage to the organizational-quality-culture runtime verifier surface; semantic validity still requires pilot feedback.",
+      "reportedScores": [
+        {
+          "id": "QRS-QIF-SELF-049",
+          "label": "Self-evaluation confidence summary",
+          "scoreType": "confidence-summary",
+          "value": 0.82,
+          "interpretation": "report-summary-only",
+          "gateDecisionRefs": [
+            "QGD-QIF-SELF"
+          ],
+          "intentRefs": [
+            "QIN-QIF-COHERENCE",
+            "QIN-QIF-EXECUTABLE",
+            "QIN-QIF-AI-USABLE",
+            "QIN-QIF-RELEASE-READY"
+          ],
+          "evidenceRefs": [
+            "EVD-QIF-DOCS",
+            "EVD-QIF-TEST",
+            "EVD-QIF-AOF",
+            "EVD-QIF-SCAN",
+            "EVD-QIF-RELNOTE",
+            "EVD-QIF-UNPUBLISHED"
+          ],
+          "calculationNote": "This score reports the self-evaluation gate confidence and decomposes into the cited intent verdicts and their evidence."
+        }
+      ],
+      "sections": [
+        {
+          "id": "QRPSEC-QIF-SELF-049",
+          "heading": "Release readiness",
+          "narrative": "The report summarizes documentation, executable verifier behavior, AOF runtime evidence, public-readiness scan, release artifact review, and publication risk as cited by the self-evaluation gate verdicts.",
+          "gateDecisionRefs": [
+            "QGD-QIF-SELF"
+          ],
+          "intentRefs": [
+            "QIN-QIF-COHERENCE",
+            "QIN-QIF-EXECUTABLE",
+            "QIN-QIF-AI-USABLE",
+            "QIN-QIF-RELEASE-READY"
+          ],
+          "evidenceRefs": [
+            "EVD-QIF-DOCS",
+            "EVD-QIF-TEST",
+            "EVD-QIF-AOF",
+            "EVD-QIF-SCAN",
+            "EVD-QIF-RELNOTE",
+            "EVD-QIF-UNPUBLISHED"
+          ]
+        }
+      ],
+      "limitations": [
+        "The report summarizes referenced verdicts and evidence; it does not add independent semantic proof.",
+        "The report remains valid only for the evaluated commit and release package."
+      ],
+      "antiPatterns": [
+        "Treating the report score as quality itself.",
+        "Publishing a report whose score cannot be decomposed into gate verdicts and evidence."
+      ]
+    }
+  ]
+}

@@ -32,6 +32,7 @@ import {
   warningRulesRescoped as expertJudgmentWarningRulesRescoped
 } from "./fixtures/expert-judgment-cases.mjs";
 import { cases as discoverySessionCases, spec as discoverySessionSpec } from "./fixtures/discovery-session-cases.mjs";
+import { cases as organizationalQualityCultureCases, spec as organizationalQualityCultureSpec } from "./fixtures/organizational-quality-culture-cases.mjs";
 import { cases as qualityGateCases, spec as qualityGateSpec } from "./fixtures/quality-gate-cases.mjs";
 
 const projectRoot = process.cwd();
@@ -49,6 +50,7 @@ const fixtureSuites = [
     rescopedRules: expertJudgmentWarningRulesRescoped
   },
   { ...discoverySessionSpec, cases: discoverySessionCases },
+  { ...organizationalQualityCultureSpec, cases: organizationalQualityCultureCases },
   { ...qualityGateSpec, cases: qualityGateCases }
 ];
 
@@ -57,6 +59,7 @@ const positivePackages = [
   { validator: "tools/validate-qif.mjs", package: "examples/qif-sample-package.json" },
   { validator: "tools/validate-expert-judgment.mjs", package: "examples/expert-judgment-sample-package.json" },
   { validator: "tools/validate-qif-runtime.mjs", package: "examples/discovery-session-package.json" },
+  { validator: "tools/validate-qif-runtime.mjs", package: "examples/organizational-quality-culture-package.json" },
   { validator: "tools/validate-qif-runtime.mjs", package: "examples/quality-gate-package.json" }
 ];
 

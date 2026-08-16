@@ -1836,3 +1836,63 @@ Publication:
 - Annotated tag object: `af83606eb48125cd615ab76e0f154c715aa58b1c`.
 - GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.4.8`.
 - Remote main was first advanced to the verified release commit; this post-release log records the publication outcome without moving the release tag.
+
+## QIF v0.4.9 Organizational Quality Culture Fixture Coverage
+
+Date: 2026-08-16
+
+Need / Intent / Context:
+
+- Need: Organizational Quality Culture summarizes repeated patterns, risk appetite, escalation norms, waiver practices, and role differences. If verifier coverage weakens, culture may accidentally become a prerequisite or shortcut for deriving Quality Intents.
+- Intent: extend retained fixture coverage to the `organizational-quality-culture` runtime verifier surface so culture remains context-only aggregation and covered rules fail loudly.
+- Context: QIF remains standalone. AOF v11.4.0 is used as development runtime evidence, not as a QIF usage dependency. AOF `situation-assess` still reports the stored alignment pulse as stale; the current roadmap remains the live frontier.
+
+Trend signals reviewed:
+
+- Axios reported SAFE-style rogue AI agent reporting work focused on unauthorized activity, confidential information exposure, and real-world system interaction.
+- Axios also reported that agent sandbox and cybersecurity evaluations need stronger evidence when agents can route around intended tests.
+- TechRadar reported that enterprise agent readiness depends on durable recovery, scoped access, verified identity, and runtime containment.
+- Microsoft Agent Governance Toolkit post-market monitoring guidance emphasizes decision logging, audit trails, anomaly detection, incident reporting, and lifetime monitoring.
+- NIST monitoring guidance emphasizes deployed AI system monitoring, operational feedback, and lifecycle evidence rather than one-time validation.
+- IETF agent audit trail work indicates that agent actions increasingly need standardized traceability records.
+
+Council judgment:
+
+- Visionary: approve. Culture-level summaries are important for organizational learning, but QIF must keep them as context and not as hidden prerequisites for Quality Intent derivation.
+- Builder: approve. Add retained fixture coverage and runner wiring only; do not redesign culture schemas or add new runtime concepts.
+- Guardian: approve with guardrails. Fixtures prove structural traceability and rule enforcement; they do not prove semantic truth about an organization's culture.
+
+What was built:
+
+- `tools/fixtures/organizational-quality-culture-cases.mjs`: added retained negative cases for Organizational Quality Culture verifier rules.
+- `tools/run-fixture-tests.mjs`: added Organizational Quality Culture positive and negative suite execution.
+- `tests/fixtures/organizational-quality-culture/`: added committed invalid packages and generated manifest.
+- `README.md`, `docs/qif-roadmap.md`, `CHANGELOG.md`, `RELEASE-NOTES-v0.4.9.md`.
+- `assessments/qif-self-evaluation-v0.4.9.json` and `.md`.
+
+What was not built:
+
+- No schema redesign.
+- No new culture entity.
+- No UI.
+- No external integration.
+- No semantic validation of organizational culture.
+
+AOF runtime command evidence:
+
+- AOF latest check: `ai-org-labs/ai-organization-framework` latest tag was `v11.4.0`.
+- AOF v11.4.0 `situation-assess --project .` passed and flagged stale alignment pulse as a warning.
+- AOF v11.4.0 `organization-verify --project .` passed with 231/231 checks.
+- AOF v11.4.0 `command-routing-audit --project . --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.4.9-final.json` passed.
+- AOF v11.4.0 `review-provenance-audit --project . --cutoff-task-id TASK-014 --write-artifact .aof/artifacts/verification/review-provenance-audit-qif-v0.4.9-final.json` passed.
+
+QIF verification:
+
+- `npm test` passed with 5/5 positive checks and 294/294 negative checks.
+- `node tools/validate-qif-runtime.mjs assessments/qif-self-evaluation-v0.4.9.json` passed.
+- Public residue scan found no personal account, email, legacy repository, user-home, or temporary checkout path residue outside `.git`.
+
+Decision:
+
+- Proceed to v0.4.9 release after final scan, commit, tag, and GitHub release.
+- Residual risk: retained negative coverage remains incomplete for `evaluation-target` and `review-run` runtime verifier surfaces.

@@ -1,0 +1,100 @@
+{
+  "packageType": "organizational-quality-culture",
+  "runtimeVersion": "0.2.1",
+  "packageId": "CULPKG-001",
+  "lossBoundaries": [
+    {
+      "id": "LSB-CUL-001",
+      "statement": "No boundary-protective decision may proceed without evidence close to the protected harm."
+    },
+    {
+      "id": "LSB-CUL-002",
+      "statement": "Waivers must not erase retrospective accountability."
+    }
+  ],
+  "decisionPatterns": [
+    {
+      "id": "PAT-CUL-001",
+      "title": "Missing protective evidence blocks acceptance."
+    },
+    {
+      "id": "PAT-CUL-002",
+      "title": "Urgency changes route, not the loss boundary."
+    },
+    {
+      "id": "PAT-CUL-003",
+      "title": "Escalate when unknown field state intersects high operational impact."
+    }
+  ],
+  "organizationalQualityCultures": [
+    {
+      "id": "CUL-001",
+      "name": "Boundary-protective core culture",
+      "aggregationRole": "context-only",
+      "nonNegotiableLossBoundaryRefs": [
+        "LSB-CUL-001",
+        "LSB-CUL-002"
+      ],
+      "recurringFears": [
+        "Silent broadening",
+        "unknown state under time pressure",
+        "authority bypass by urgency"
+      ],
+      "preferredEvidence": [
+        "Negative evidence for excluded harms",
+        "fresh local confirmation",
+        "documented waiver records"
+      ],
+      "riskAppetite": "Conservative on irreversible harm; conditional only through explicit waiver paths.",
+      "escalationNorms": [
+        "Escalate low-confidence conflict.",
+        "Escalate missing evidence under time pressure."
+      ],
+      "waiverPractices": [],
+      "qualityTradeoffs": [
+        "Speed may alter routing but not boundary discipline."
+      ],
+      "departmentOrRoleDifferences": [
+        "Operations emphasizes field evidence; accounting emphasizes documentary completion evidence."
+      ],
+      "patternRefs": [
+        "PAT-CUL-001",
+        "PAT-CUL-002",
+        "PAT-CUL-003"
+      ],
+      "provisional": false
+    },
+    {
+      "id": "CUL-002",
+      "name": "Customer-support exception subgroup",
+      "aggregationRole": "context-only",
+      "nonNegotiableLossBoundaryRefs": [
+        "LSB-CUL-002"
+      ],
+      "recurringFears": [
+        "Rigid policy can worsen customer harm if escalation is too slow."
+      ],
+      "preferredEvidence": [
+        "Customer impact trace",
+        "supervisor acknowledgement"
+      ],
+      "riskAppetite": "Slightly more open to temporary exception paths than engineering or accounting.",
+      "escalationNorms": [
+        "Escalate sooner when customer harm is immediate."
+      ],
+      "waiverPractices": [
+        "Temporary waiver is allowed but must be time-bounded."
+      ],
+      "qualityTradeoffs": [
+        "Customer recovery may outweigh process neatness in narrow cases."
+      ],
+      "departmentOrRoleDifferences": [
+        "Support supervisors tolerate short-lived exception paths more than finance reviewers do."
+      ],
+      "patternRefs": [
+        "PAT-CUL-002"
+      ],
+      "provisional": true
+    }
+  ]
+}
