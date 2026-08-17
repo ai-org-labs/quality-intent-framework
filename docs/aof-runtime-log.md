@@ -1963,5 +1963,13 @@ QIF verification:
 
 Decision:
 
-- Proceed to v0.4.10 release after final scan, commit, tag, and GitHub release.
+- Proceeded to v0.4.10 release after final scan, commit, tag, and GitHub release.
 - Residual risk: retained negative coverage remains incomplete for the `review-run` runtime verifier surface.
+
+Publication:
+
+- Verified release commit: `092ed14a41d17389d483bc1f68893aa0377ebef8`.
+- Annotated tag: `v0.4.10`.
+- Annotated tag object: `2fe4b12f3ba429817959103af9f83ebc7bc32500`.
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.4.10`.
+- Remote main was first advanced to the verified release commit; this post-release log records the publication outcome without moving the release tag.
