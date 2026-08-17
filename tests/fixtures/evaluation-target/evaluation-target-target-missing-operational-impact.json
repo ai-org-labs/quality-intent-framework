@@ -1,0 +1,135 @@
+{
+  "packageType": "evaluation-target",
+  "runtimeVersion": "0.2.1",
+  "packageId": "TGTPKG-001",
+  "evaluationTargets": [
+    {
+      "id": "TGT-SW-001",
+      "title": "Authorization rule change",
+      "domain": "software-development",
+      "targetType": "change set",
+      "artifactType": "code-change",
+      "context": "Code review before release branch merge",
+      "stakeholderImpact": [
+        "end users",
+        "security reviewers"
+      ],
+      "operationalImpact": "",
+      "riskSummary": "Unauthorized access could be introduced silently.",
+      "sourceEvidence": [
+        "code diff",
+        "tests",
+        "review notes"
+      ]
+    },
+    {
+      "id": "TGT-PD-001",
+      "title": "Pricing experiment launch decision",
+      "domain": "product-development",
+      "targetType": "launch decision",
+      "artifactType": "experiment-plan",
+      "context": "Pre-launch product review",
+      "stakeholderImpact": [
+        "customers",
+        "product team"
+      ],
+      "operationalImpact": "May alter customer expectations and revenue behavior",
+      "riskSummary": "Experiment may create unfair or unclear customer treatment.",
+      "sourceEvidence": [
+        "launch brief",
+        "pricing scenarios"
+      ]
+    },
+    {
+      "id": "TGT-OPS-001",
+      "title": "Night-shift continuation procedure",
+      "domain": "service-operations",
+      "targetType": "operating procedure",
+      "artifactType": "shift-decision",
+      "context": "Service continuation under stale inspection evidence",
+      "stakeholderImpact": [
+        "operators",
+        "service customers"
+      ],
+      "operationalImpact": "Live service may continue under unknown field state",
+      "riskSummary": "Operational degradation could remain hidden.",
+      "sourceEvidence": [
+        "dashboard",
+        "inspection log"
+      ]
+    },
+    {
+      "id": "TGT-ACC-001",
+      "title": "Quarter-end revenue recognition",
+      "domain": "accounting",
+      "targetType": "financial booking",
+      "artifactType": "accounting-entry",
+      "context": "Close review under time pressure",
+      "stakeholderImpact": [
+        "finance team",
+        "auditors"
+      ],
+      "operationalImpact": "Reporting accuracy is affected",
+      "riskSummary": "Revenue may be recognized prematurely.",
+      "sourceEvidence": [
+        "contracts",
+        "delivery records"
+      ]
+    },
+    {
+      "id": "TGT-ADM-001",
+      "title": "Urgent procurement request",
+      "domain": "administration",
+      "targetType": "approval decision",
+      "artifactType": "procurement-request",
+      "context": "Missing budget owner approval with urgent onboarding claim",
+      "stakeholderImpact": [
+        "operations staff",
+        "finance controls"
+      ],
+      "operationalImpact": "Commitment may bypass delegated authority",
+      "riskSummary": "Authority and auditability may be weakened.",
+      "sourceEvidence": [
+        "approval chain",
+        "request justification"
+      ]
+    },
+    {
+      "id": "TGT-MTN-001",
+      "title": "Restart with worn gasket decision",
+      "domain": "maintenance",
+      "targetType": "restart decision",
+      "artifactType": "maintenance-release",
+      "context": "Equipment restart after wear measurement near tolerance limit",
+      "stakeholderImpact": [
+        "operators",
+        "maintenance team"
+      ],
+      "operationalImpact": "Restart reliability and safety are at stake",
+      "riskSummary": "Borderline component may fail after restart stress.",
+      "sourceEvidence": [
+        "inspection photos",
+        "wear readings"
+      ]
+    },
+    {
+      "id": "TGT-SUP-001",
+      "title": "Customer refund exception handling",
+      "domain": "customer-support",
+      "targetType": "service exception",
+      "artifactType": "support-case",
+      "context": "Customer-impacting exception outside standard policy",
+      "stakeholderImpact": [
+        "customer",
+        "support lead"
+      ],
+      "operationalImpact": "Trust recovery and control exception handling are affected",
+      "riskSummary": "Unbounded exceptions may weaken consistency and fairness.",
+      "sourceEvidence": [
+        "customer record",
+        "support policy",
+        "supervisor notes"
+      ]
+    }
+  ]
+}

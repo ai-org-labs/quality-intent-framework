@@ -439,9 +439,22 @@ function validateCulturePackage(pkg, packagePath) {
 
 function validateTargetPackage(pkg, packagePath) {
   const targets = requireArray(pkg, "evaluationTargets");
+  indexById(targets, `${packagePath}:evaluationTargets`);
+  const supportedDomains = new Set([
+    "software-development",
+    "product-development",
+    "service-operations",
+    "accounting",
+    "administration",
+    "maintenance",
+    "customer-support"
+  ]);
   for (const target of targets) {
     for (const field of ["title", "domain", "targetType", "artifactType", "context", "operationalImpact", "riskSummary"]) {
       checkRequiredString(target, field, target.id);
+    }
+    if (typeof target.domain === "string" && !supportedDomains.has(target.domain)) {
+      errors.push(`${target.id} domain must be one of the supported evaluation target domains.`);
     }
     if (!Array.isArray(target.stakeholderImpact) || target.stakeholderImpact.length === 0) {
       errors.push(`${target.id} must include stakeholderImpact.`);

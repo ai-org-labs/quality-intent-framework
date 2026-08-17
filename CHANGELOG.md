@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.4.10
+
+- Added retained negative fixture coverage for the evaluation-target runtime package surface.
+- Added `tools/fixtures/evaluation-target-cases.mjs` as the source of truth for evaluation-target invalid packages.
+- Extended `tools/run-fixture-tests.mjs` to include the evaluation-target corpus and its positive package check.
+- Strengthened the runtime verifier with explicit evaluation target id uniqueness and supported-domain checks.
+- Increased the standing fixture suite to 6 positive checks and 309 retained negative checks.
+- Covered target identity, domain vocabulary, target type, artifact type, context, stakeholder impact, operational impact, risk summary, and source evidence.
+
 ## v0.4.9
 
 - Added retained negative fixture coverage for the organizational-quality-culture runtime package surface.

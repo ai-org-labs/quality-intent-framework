@@ -1,0 +1,137 @@
+{
+  "description": "QIF evaluation-target negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/evaluation-target-cases.mjs; do not edit by hand.",
+  "positives": [
+    {
+      "validator": "tools/validate-qif.mjs",
+      "package": "examples/qif-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-expert-judgment.mjs",
+      "package": "examples/expert-judgment-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/discovery-session-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/organizational-quality-culture-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/evaluation-target-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/quality-gate-package.json"
+    }
+  ],
+  "negatives": [
+    {
+      "file": "evaluation-target-top-level-evaluationTargets-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level evaluationTargets must be an array",
+      "expect": "fail",
+      "errorIncludes": "package evaluationTargets must be an array."
+    },
+    {
+      "file": "evaluation-target-target-missing-id.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target id required",
+      "expect": "fail",
+      "errorIncludes": "evaluationTargets item is missing string id."
+    },
+    {
+      "file": "evaluation-target-target-duplicate-id.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target ids are unique",
+      "expect": "fail",
+      "errorIncludes": "Duplicate id TGT-SW-001 in"
+    },
+    {
+      "file": "evaluation-target-target-missing-title.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target title required",
+      "expect": "fail",
+      "errorIncludes": "TGT-SW-001 must include non-empty string title."
+    },
+    {
+      "file": "evaluation-target-target-missing-domain.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target domain required",
+      "expect": "fail",
+      "errorIncludes": "TGT-SW-001 must include non-empty string domain."
+    },
+    {
+      "file": "evaluation-target-target-unsupported-domain.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target domain vocabulary",
+      "expect": "fail",
+      "errorIncludes": "TGT-SW-001 domain must be one of the supported evaluation target domains."
+    },
+    {
+      "file": "evaluation-target-target-missing-target-type.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target targetType required",
+      "expect": "fail",
+      "errorIncludes": "TGT-SW-001 must include non-empty string targetType."
+    },
+    {
+      "file": "evaluation-target-target-missing-artifact-type.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target artifactType required",
+      "expect": "fail",
+      "errorIncludes": "TGT-SW-001 must include non-empty string artifactType."
+    },
+    {
+      "file": "evaluation-target-target-missing-context.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target context required",
+      "expect": "fail",
+      "errorIncludes": "TGT-SW-001 must include non-empty string context."
+    },
+    {
+      "file": "evaluation-target-target-missing-stakeholder-impact.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target stakeholder impact required",
+      "expect": "fail",
+      "errorIncludes": "TGT-SW-001 must include stakeholderImpact."
+    },
+    {
+      "file": "evaluation-target-target-stakeholder-impact-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target stakeholder impact array",
+      "expect": "fail",
+      "errorIncludes": "TGT-SW-001 must include stakeholderImpact."
+    },
+    {
+      "file": "evaluation-target-target-missing-operational-impact.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target operational impact required",
+      "expect": "fail",
+      "errorIncludes": "TGT-SW-001 must include non-empty string operationalImpact."
+    },
+    {
+      "file": "evaluation-target-target-missing-risk-summary.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target risk summary required",
+      "expect": "fail",
+      "errorIncludes": "TGT-SW-001 must include non-empty string riskSummary."
+    },
+    {
+      "file": "evaluation-target-target-missing-source-evidence.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target source evidence required",
+      "expect": "fail",
+      "errorIncludes": "TGT-SW-001 must include sourceEvidence."
+    },
+    {
+      "file": "evaluation-target-target-source-evidence-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evaluation target source evidence array",
+      "expect": "fail",
+      "errorIncludes": "TGT-SW-001 must include sourceEvidence."
+    }
+  ],
+  "rescopedRules": []
+}

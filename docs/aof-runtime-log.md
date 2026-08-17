@@ -1904,3 +1904,64 @@ Publication:
 - Annotated tag object: `b45028e85527f8a46fb7fa0c69da43054b1298ae`.
 - GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.4.9`.
 - Remote main was first advanced to the verified release commit; this post-release log records the publication outcome without moving the release tag.
+
+## QIF v0.4.10 Evaluation Target Fixture Coverage
+
+Date: 2026-08-17
+
+Need / Intent / Context:
+
+- Need: Evaluation Target is the object QIF applies quality knowledge to. If this surface is weak, later applicability decisions and review runs may be grounded in underspecified or ambiguous targets.
+- Intent: extend retained fixture coverage to the `evaluation-target` runtime verifier surface and make target identity/domain checks explicit in the runtime verifier.
+- Context: QIF remains standalone. AOF v11.4.0 is used as development runtime evidence, not as a QIF usage dependency. AOF `situation-assess` still reports the stored alignment pulse as stale; the current roadmap remains the live frontier.
+
+Trend signals reviewed:
+
+- Enterprise agent governance coverage on 2026-08-17 emphasized continuous visibility, behavioral monitoring, scoped permissions, and traceable ownership for autonomous agents.
+- SAFE-style agent incident reporting continues to push structured records for unauthorized activity and confidential information exposure.
+- Agent security benchmarks increasingly measure runtime controls, approval receipts, tool poisoning, package risk, and false-positive boundaries rather than final-answer correctness alone.
+- Microsoft post-market monitoring guidance emphasizes decision logging, audit trails, anomaly detection, incident reporting, and lifetime monitoring.
+- Secure coding-agent benchmarks continue to show a gap between functional correctness and secure correctness, reinforcing that evaluation targets must preserve domain, context, and impact.
+
+Council judgment:
+
+- Visionary: approve. Evaluation Target coverage protects QIF's domain-general promise by forcing every reviewed object to carry context, stakeholders, impact, and evidence sources.
+- Builder: approve. Add fixture generator, runner wiring, and narrow verifier checks only; defer review-run fixture coverage to the next slice.
+- Guardian: approve with guardrails. Fixtures prove structural target completeness and vocabulary enforcement; they do not prove the target model captured every real-world risk.
+
+What was built:
+
+- `tools/fixtures/evaluation-target-cases.mjs`: added retained negative cases for Evaluation Target verifier rules.
+- `tools/run-fixture-tests.mjs`: added Evaluation Target positive and negative suite execution.
+- `tools/validate-qif-runtime.mjs`: added Evaluation Target id uniqueness and supported-domain checks.
+- `tests/fixtures/evaluation-target/`: added committed invalid packages and generated manifest.
+- `README.md`, `docs/qif-roadmap.md`, `CHANGELOG.md`, `RELEASE-NOTES-v0.4.10.md`.
+- `assessments/qif-self-evaluation-v0.4.10.json` and `.md`.
+
+What was not built:
+
+- No schema redesign.
+- No new target entity.
+- No review-run fixture coverage.
+- No UI.
+- No external integration.
+- No semantic validation of whether a target description is complete.
+
+AOF runtime command evidence:
+
+- AOF latest check: `ai-org-labs/ai-organization-framework` latest tag was `v11.4.0`.
+- AOF v11.4.0 `situation-assess --project .` passed and flagged stale alignment pulse as a warning.
+- AOF v11.4.0 `organization-verify --project .` passed with 231/231 checks.
+- AOF v11.4.0 `command-routing-audit --project . --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.4.10-final.json` passed.
+- AOF v11.4.0 `review-provenance-audit --project . --cutoff-task-id TASK-014 --write-artifact .aof/artifacts/verification/review-provenance-audit-qif-v0.4.10-final.json` passed.
+
+QIF verification:
+
+- `npm test` passed with 6/6 positive checks and 309/309 negative checks.
+- `node tools/validate-qif-runtime.mjs assessments/qif-self-evaluation-v0.4.10.json` passed.
+- Public residue scan found no personal account, email, legacy repository, user-home, or temporary checkout path residue outside `.git`.
+
+Decision:
+
+- Proceed to v0.4.10 release after final scan, commit, tag, and GitHub release.
+- Residual risk: retained negative coverage remains incomplete for the `review-run` runtime verifier surface.
