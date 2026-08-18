@@ -1,0 +1,426 @@
+{
+  "packageType": "review-run",
+  "runtimeVersion": "0.2.1",
+  "packageId": "RRPkg-001",
+  "evaluationTargets": [
+    {
+      "id": "TGT-RR-001",
+      "title": "Maintenance restart with borderline gasket reuse proposal",
+      "domain": "maintenance",
+      "artifactType": "restart-decision",
+      "context": "Restart approval under schedule pressure",
+      "stakeholderImpact": [
+        "operators",
+        "maintenance team",
+        "service customers"
+      ],
+      "operationalImpact": "Restart could proceed with elevated failure risk"
+    }
+  ],
+  "qualityIntents": [
+    {
+      "id": "QIN-RR-001",
+      "statement": "Restart decisions must be grounded in evidence that the component remains within tolerated wear and restart risk.",
+      "lossBoundary": "Restart must not rely on components already beyond tolerated wear margin.",
+      "derivationMode": "direct-from-decision-pattern",
+      "sourceDecisionPatternRefs": [
+        "PAT-RR-001"
+      ]
+    },
+    {
+      "id": "QIN-RR-002",
+      "statement": "Urgency may not substitute for missing protective evidence.",
+      "lossBoundary": "Schedule pressure must not erase evidence requirements for restart safety.",
+      "derivationMode": "direct-from-decision-pattern",
+      "sourceDecisionPatternRefs": [
+        "PAT-RR-001"
+      ]
+    },
+    {
+      "id": "QIN-RR-003",
+      "statement": "Administrative completeness should be confirmed before routine approval.",
+      "lossBoundary": "Routine records must not be approved with missing mandatory fields.",
+      "derivationMode": "direct-from-decision-pattern",
+      "sourceDecisionPatternRefs": [
+        "PAT-RR-002"
+      ]
+    }
+  ],
+  "decisionPatterns": [
+    {
+      "id": "PAT-RR-001",
+      "title": "Missing protective evidence blocks restart approval",
+      "applicableContext": "High operational impact with missing or weak protective evidence"
+    },
+    {
+      "id": "PAT-RR-002",
+      "title": "Routine administrative completeness check",
+      "applicableContext": "Low operational impact administrative approval where form completeness is the primary risk"
+    }
+  ],
+  "applicabilityRules": [
+    {
+      "id": "APR-RR-001",
+      "title": "Boundary-protective evidence rule",
+      "ruleScope": "Reusable selection logic for targets where missing evidence is close to a high-impact loss boundary.",
+      "matchConditions": [
+        {
+          "id": "MCH-RR-001",
+          "field": "domain",
+          "operator": "equals",
+          "expectedValues": [
+            "maintenance",
+            "operations",
+            "software",
+            "accounting",
+            "administration",
+            "customer-support"
+          ]
+        },
+        {
+          "id": "MCH-RR-002",
+          "field": "artifactType",
+          "operator": "equals",
+          "expectedValues": [
+            "restart-decision",
+            "release-decision",
+            "approval-decision",
+            "exception-decision"
+          ]
+        },
+        {
+          "id": "MCH-RR-003",
+          "field": "operationalImpact",
+          "operator": "contains-text",
+          "expectedValues": [
+            "failure",
+            "safety",
+            "service continuity",
+            "customer harm",
+            "financial misstatement"
+          ]
+        },
+        {
+          "id": "MCH-RR-004",
+          "field": "risk",
+          "operator": "intersects",
+          "expectedValues": [
+            "hidden-wear-risk",
+            "restart-failure",
+            "missing-protective-evidence"
+          ]
+        }
+      ],
+      "selectedIntentRefs": [
+        "QIN-RR-001",
+        "QIN-RR-002"
+      ],
+      "selectedDecisionPatternRefs": [
+        "PAT-RR-001"
+      ],
+      "exclusionConditions": []
+    },
+    {
+      "id": "APR-RR-002",
+      "title": "Routine administrative completeness rule",
+      "ruleScope": "Reusable selection logic for low-impact administrative records where mandatory-field completion is the main concern.",
+      "matchConditions": [
+        {
+          "id": "MCH-RR-005",
+          "field": "domain",
+          "operator": "equals",
+          "expectedValues": [
+            "administration",
+            "accounting"
+          ]
+        },
+        {
+          "id": "MCH-RR-006",
+          "field": "artifactType",
+          "operator": "equals",
+          "expectedValues": [
+            "form-approval",
+            "record-approval"
+          ]
+        },
+        {
+          "id": "MCH-RR-007",
+          "field": "operationalImpact",
+          "operator": "contains-text",
+          "expectedValues": [
+            "record completeness",
+            "routine approval"
+          ]
+        }
+      ],
+      "selectedIntentRefs": [
+        "QIN-RR-003"
+      ],
+      "selectedDecisionPatternRefs": [
+        "PAT-RR-002"
+      ],
+      "exclusionConditions": [
+        {
+          "id": "EXC-RR-001",
+          "field": "operationalImpact",
+          "operator": "contains-text",
+          "expectedValues": [
+            "restart",
+            "failure",
+            "safety"
+          ],
+          "excludedIntentRefs": [
+            "QIN-RR-003"
+          ],
+          "excludedDecisionPatternRefs": [
+            "PAT-RR-002"
+          ]
+        }
+      ]
+    }
+  ],
+  "applicabilityDecisions": [
+    {
+      "id": "APD-RR-001",
+      "targetRef": "TGT-RR-001",
+      "ruleRefs": [
+        "APR-RR-001",
+        "APR-RR-002"
+      ],
+      "matchedContext": "Restart approval under schedule pressure",
+      "matchedStakeholderRefs": [
+        "operators",
+        "maintenance team",
+        "service customers"
+      ],
+      "matchedRiskRefs": [
+        "restart-failure",
+        "hidden-wear-risk",
+        "missing-protective-evidence"
+      ],
+      "matchedDomain": "maintenance",
+      "matchedLossBoundaryRefs": [
+        "wear-margin-boundary",
+        "restart-safety-boundary"
+      ],
+      "matchedArtifactTypes": [
+        "restart-decision"
+      ],
+      "matchedOperationalImpacts": [
+        "restart reliability and safety",
+        "elevated failure risk"
+      ],
+      "selectedIntentRefs": [
+        "QIN-RR-001",
+        "QIN-RR-002"
+      ],
+      "selectedDecisionPatternRefs": [
+        "PAT-RR-001"
+      ],
+      "matchedConditionRefs": [
+        "MCH-RR-001",
+        "MCH-RR-002",
+        "MCH-RR-003",
+        "MCH-RR-004",
+        "EXC-RR-001"
+      ],
+      "excludedIntents": [
+        {
+          "intentRef": "QIN-RR-003",
+          "ruleRef": "APR-RR-002",
+          "conditionRef": "EXC-RR-001",
+          "rationale": "Routine administrative completeness cannot answer the restart safety boundary or missing waiver evidence."
+        }
+      ],
+      "excludedDecisionPatterns": [
+        {
+          "decisionPatternRef": "PAT-RR-002",
+          "ruleRef": "APR-RR-002",
+          "conditionRef": "EXC-RR-001",
+          "rationale": "A completed checklist would not resolve borderline wear or missing protective evidence."
+        }
+      ],
+      "selectionRationale": "The target exposes a restart safety boundary, uses a maintenance restart artifact, and carries schedule pressure that could bias evidence handling.",
+      "contextMismatches": [
+        "Routine administrative completeness would mismatch the target because operational restart safety, not form completeness, is the binding loss boundary."
+      ],
+      "confidence": 0.76
+    }
+  ],
+  "confidencePolicies": [
+    {
+      "id": "CFP-RR-001",
+      "evidenceAggregationRule": "minimum-evidence-confidence",
+      "verdictAggregationRule": "minimum-evidence-confidence",
+      "reviewRunAggregationRule": "average-verdict-confidence",
+      "rounding": "nearest-0.01"
+    }
+  ],
+  "evidenceItems": [
+    {
+      "id": "EVD-RR-001",
+      "targetRef": "TGT-RR-001",
+      "finding": "Wear measurement is within 3 percent of the replacement threshold.",
+      "polarity": "supports",
+      "confidence": 0.52,
+      "weight": 1
+    },
+    {
+      "id": "EVD-RR-002",
+      "targetRef": "TGT-RR-001",
+      "finding": "No engineering waiver has been issued yet.",
+      "polarity": "contradicts",
+      "confidence": 0.84,
+      "weight": 1
+    },
+    {
+      "id": "EVD-RR-003",
+      "targetRef": "TGT-RR-001",
+      "finding": "Schedule pressure is cited as the main reason to reuse the part.",
+      "polarity": "contradicts",
+      "confidence": 0.46,
+      "weight": 1
+    }
+  ],
+  "indicators": [
+    {
+      "id": "IND-RR-001",
+      "name": "Maintenance checklist completion count",
+      "metricKind": "activity-count",
+      "interpretation": "evidence-only",
+      "linkedIntentRef": "QIN-RR-001"
+    }
+  ],
+  "governanceTriggers": [
+    {
+      "id": "GTR-RR-001",
+      "triggerType": "low-confidence",
+      "reason": "Low-confidence and conflicting restart evidence requires governance review before any waiver or approval.",
+      "sourceReviewRunRef": "RRN-001",
+      "affectedTargetRef": "TGT-RR-001",
+      "severity": "high",
+      "requiredAction": "Require engineering authority to review waiver or replacement evidence before restart approval.",
+      "owner": "maintenance-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-RR-002",
+      "triggerType": "context-mismatch",
+      "reason": "A routine completeness pattern was considered but excluded because it does not address the restart safety boundary.",
+      "sourceReviewRunRef": "RRN-001",
+      "affectedTargetRef": "TGT-RR-001",
+      "severity": "medium",
+      "requiredAction": "Record the exclusion so future reviewers do not substitute checklist completion for protective evidence.",
+      "owner": "quality-steward",
+      "status": "open"
+    },
+    {
+      "id": "GTR-RR-003",
+      "triggerType": "conflicting-evidence",
+      "reason": "Wear measurement is technically inside threshold while waiver evidence is absent, producing conflicting support for restart acceptance.",
+      "sourceReviewRunRef": "RRN-001",
+      "affectedTargetRef": "TGT-RR-001",
+      "severity": "high",
+      "requiredAction": "Resolve the conflict through engineering review or replace the part.",
+      "owner": "maintenance-governance-board",
+      "status": "reviewed",
+      "resultingGovernanceEventRef": "GEV-RR-001"
+    }
+  ],
+  "governanceEvents": [
+    {
+      "id": "GEV-RR-001",
+      "sourceGovernanceTriggerRef": "GTR-RR-003",
+      "decision": "require-change",
+      "decidedBy": "maintenance-governance-board",
+      "decisionRationale": "Restart requires either replacement evidence or an engineering waiver before approval because the evidence conflict sits on a restart safety boundary.",
+      "status": "recorded"
+    }
+  ],
+  "reviewRuns": [
+    {
+      "id": "RRN-001",
+      "targetRef": "TGT-RR-001",
+      "applicabilityRuleRefs": [
+        "APR-RR-001",
+        "APR-RR-002"
+      ],
+      "applicabilityDecisionRefs": [
+        "APD-RR-001"
+      ],
+      "selectedIntentRefs": [
+        "QIN-RR-001",
+        "QIN-RR-002"
+      ],
+      "selectedDecisionPatternRefs": [
+        "PAT-RR-002"
+      ],
+      "collectedEvidenceRefs": [
+        "EVD-RR-001",
+        "EVD-RR-002",
+        "EVD-RR-003"
+      ],
+      "confidence": 0.49,
+      "confidencePolicyRef": "CFP-RR-001",
+      "verdicts": [
+        {
+          "intentRef": "QIN-RR-001",
+          "decision": "not-achieved",
+          "confidence": 0.52,
+          "confidencePolicyRef": "CFP-RR-001",
+          "evidenceRefs": [
+            "EVD-RR-001",
+            "EVD-RR-002"
+          ],
+          "weight": 1,
+          "residualRisk": "Restart failure probability remains elevated because wear is borderline and waiver evidence is absent."
+        },
+        {
+          "intentRef": "QIN-RR-002",
+          "decision": "inconclusive",
+          "confidence": 0.46,
+          "confidencePolicyRef": "CFP-RR-001",
+          "evidenceRefs": [
+            "EVD-RR-001",
+            "EVD-RR-003"
+          ],
+          "weight": 1,
+          "residualRisk": "Schedule pressure may be biasing the decision path."
+        }
+      ],
+      "residualRisks": [
+        "Borderline wear could translate into post-restart failure.",
+        "Urgency pressure may override proper evidence discipline."
+      ],
+      "recommendations": [
+        "Do not approve restart until engineering waiver or part replacement evidence exists.",
+        "Escalate to governance review because evidence conflicts and confidence is low."
+      ],
+      "governanceTriggerRefs": [
+        "GTR-RR-001",
+        "GTR-RR-002",
+        "GTR-RR-003"
+      ]
+    }
+  ],
+  "verifierBoundary": {
+    "checks": [
+      "structural integrity",
+      "traceability",
+      "reference resolution",
+      "confidence reproducibility from evidence inputs and confidence policy",
+      "rule compliance"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "expert correctness",
+      "business approval"
+    ],
+    "semanticValidityRequires": [
+      "expert review",
+      "reproduction tests",
+      "operational feedback",
+      "governance decision"
+    ]
+  }
+}

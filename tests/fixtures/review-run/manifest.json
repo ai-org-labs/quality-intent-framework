@@ -1,0 +1,505 @@
+{
+  "description": "QIF review-run negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/review-run-cases.mjs; do not edit by hand.",
+  "positives": [
+    {
+      "validator": "tools/validate-qif.mjs",
+      "package": "examples/qif-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-expert-judgment.mjs",
+      "package": "examples/expert-judgment-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/discovery-session-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/organizational-quality-culture-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/evaluation-target-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/review-run-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/quality-gate-package.json"
+    }
+  ],
+  "negatives": [
+    {
+      "file": "review-run-top-level-evaluationTargets-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level evaluationTargets must be an array",
+      "expect": "fail",
+      "errorIncludes": "package evaluationTargets must be an array."
+    },
+    {
+      "file": "review-run-top-level-qualityIntents-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level qualityIntents must be an array",
+      "expect": "fail",
+      "errorIncludes": "package qualityIntents must be an array."
+    },
+    {
+      "file": "review-run-top-level-decisionPatterns-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level decisionPatterns must be an array",
+      "expect": "fail",
+      "errorIncludes": "package decisionPatterns must be an array."
+    },
+    {
+      "file": "review-run-top-level-applicabilityRules-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level applicabilityRules must be an array",
+      "expect": "fail",
+      "errorIncludes": "package applicabilityRules must be an array."
+    },
+    {
+      "file": "review-run-top-level-applicabilityDecisions-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level applicabilityDecisions must be an array",
+      "expect": "fail",
+      "errorIncludes": "package applicabilityDecisions must be an array."
+    },
+    {
+      "file": "review-run-top-level-confidencePolicies-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level confidencePolicies must be an array",
+      "expect": "fail",
+      "errorIncludes": "package confidencePolicies must be an array."
+    },
+    {
+      "file": "review-run-top-level-evidenceItems-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level evidenceItems must be an array",
+      "expect": "fail",
+      "errorIncludes": "package evidenceItems must be an array."
+    },
+    {
+      "file": "review-run-top-level-indicators-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level indicators must be an array",
+      "expect": "fail",
+      "errorIncludes": "package indicators must be an array."
+    },
+    {
+      "file": "review-run-top-level-governanceTriggers-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level governanceTriggers must be an array",
+      "expect": "fail",
+      "errorIncludes": "package governanceTriggers must be an array."
+    },
+    {
+      "file": "review-run-top-level-governanceEvents-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level governanceEvents must be an array",
+      "expect": "fail",
+      "errorIncludes": "package governanceEvents must be an array."
+    },
+    {
+      "file": "review-run-top-level-reviewRuns-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "top-level reviewRuns must be an array",
+      "expect": "fail",
+      "errorIncludes": "package reviewRuns must be an array."
+    },
+    {
+      "file": "review-run-target-missing-stakeholder-impact.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "review target stakeholder impact required",
+      "expect": "fail",
+      "errorIncludes": "TGT-RR-001 must include stakeholderImpact."
+    },
+    {
+      "file": "review-run-intent-broken-source-pattern.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "quality intent source decision pattern resolves",
+      "expect": "fail",
+      "errorIncludes": "QIN-RR-001 references missing source decision pattern"
+    },
+    {
+      "file": "review-run-intent-direct-mode-culture-prerequisite.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "direct intent derivation must not require culture",
+      "expect": "fail",
+      "errorIncludes": "QIN-RR-001 is direct-from-decision-pattern and must not require organizational culture."
+    },
+    {
+      "file": "review-run-rule-broken-selected-intent.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability rule selected intents resolve",
+      "expect": "fail",
+      "errorIncludes": "APR-RR-001 references missing selected quality intent"
+    },
+    {
+      "file": "review-run-rule-broken-selected-pattern.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability rule selected patterns resolve",
+      "expect": "fail",
+      "errorIncludes": "APR-RR-001 references missing selected decision pattern"
+    },
+    {
+      "file": "review-run-rule-missing-match-conditions.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability rule executable match conditions required",
+      "expect": "fail",
+      "errorIncludes": "APR-RR-001 must include executable matchConditions."
+    },
+    {
+      "file": "review-run-rule-exclusion-conditions-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability rule exclusion conditions array required",
+      "expect": "fail",
+      "errorIncludes": "APR-RR-001 must include exclusionConditions array."
+    },
+    {
+      "file": "review-run-rule-condition-missing-field.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability condition field required",
+      "expect": "fail",
+      "errorIncludes": "APR-RR-001/MCH-RR-001 must include non-empty string field."
+    },
+    {
+      "file": "review-run-rule-condition-missing-expected-values.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability condition expected values required",
+      "expect": "fail",
+      "errorIncludes": "APR-RR-001/MCH-RR-001 must include expectedValues."
+    },
+    {
+      "file": "review-run-rule-duplicate-condition-id.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability condition ids are unique per rule",
+      "expect": "fail",
+      "errorIncludes": "APR-RR-001 has duplicate condition id MCH-RR-001."
+    },
+    {
+      "file": "review-run-rule-legacy-selection-logic.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability rule must be structured",
+      "expect": "fail",
+      "errorIncludes": "APR-RR-001 must use structured matchConditions/exclusionConditions instead of selectionLogic."
+    },
+    {
+      "file": "review-run-rule-target-specific-field-forbidden.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability rule must not be target-specific",
+      "expect": "fail",
+      "errorIncludes": "APR-RR-001 must be reusable selection logic, not a target-specific applicability decision."
+    },
+    {
+      "file": "review-run-decision-broken-target-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability decision target resolves",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 references missing evaluation target"
+    },
+    {
+      "file": "review-run-decision-broken-rule-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability decision rule resolves",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 references missing applicability rule"
+    },
+    {
+      "file": "review-run-decision-broken-matched-condition.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability decision matched conditions resolve",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 references missing matched applicability condition"
+    },
+    {
+      "file": "review-run-decision-selected-intent-not-selected-by-rule.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "decision selected intent justified by cited rule",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 cannot both select and exclude quality intent QIN-RR-003."
+    },
+    {
+      "file": "review-run-decision-selected-pattern-not-selected-by-rule.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "decision selected pattern justified by cited rule",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 cannot both select and exclude decision pattern PAT-RR-002."
+    },
+    {
+      "file": "review-run-decision-matched-condition-context-mismatch.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "matched condition must match target context",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 matched condition MCH-RR-003 does not match recorded target/application context."
+    },
+    {
+      "file": "review-run-decision-missing-selection-rationale.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability decision rationale required",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 must include non-empty string selectionRationale."
+    },
+    {
+      "file": "review-run-decision-confidence-invalid.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability decision confidence score",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 confidence must be a number from 0 to 1."
+    },
+    {
+      "file": "review-run-decision-missing-matched-risk-refs.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability decision matched risks required",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 must include matchedRiskRefs."
+    },
+    {
+      "file": "review-run-decision-excluded-intents-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability decision excludedIntents array required",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 must include excludedIntents array."
+    },
+    {
+      "file": "review-run-decision-excluded-patterns-not-array.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability decision excludedDecisionPatterns array required",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 must include excludedDecisionPatterns array."
+    },
+    {
+      "file": "review-run-decision-exclusion-missing-rationale.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability exclusion rationale required",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001/excludedIntent must include non-empty string rationale."
+    },
+    {
+      "file": "review-run-decision-exclusion-rule-not-used.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability exclusion rule must be cited by decision",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 excluded quality intent QIN-RR-003 cites rule APR-RR-002 that is not used by the decision."
+    },
+    {
+      "file": "review-run-decision-exclusion-missing-condition.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability exclusion condition resolves",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 excluded quality intent QIN-RR-003 cites missing exclusion condition EXC-NOPE-999."
+    },
+    {
+      "file": "review-run-decision-exclusion-condition-does-not-exclude-intent.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability exclusion condition declares excluded intent",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 exclusion condition EXC-RR-001 does not exclude intent QIN-RR-003."
+    },
+    {
+      "file": "review-run-decision-selects-and-excludes-same-intent.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "applicability decision cannot select and exclude same intent",
+      "expect": "fail",
+      "errorIncludes": "APD-RR-001 cannot both select and exclude quality intent QIN-RR-003."
+    },
+    {
+      "file": "review-run-policy-missing-verdict-aggregation-rule.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "confidence policy verdict aggregation rule required",
+      "expect": "fail",
+      "errorIncludes": "CFP-RR-001 must include non-empty string verdictAggregationRule."
+    },
+    {
+      "file": "review-run-evidence-broken-target-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evidence target resolves",
+      "expect": "fail",
+      "errorIncludes": "EVD-RR-001 references missing evaluation target"
+    },
+    {
+      "file": "review-run-evidence-missing-finding.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evidence finding required",
+      "expect": "fail",
+      "errorIncludes": "EVD-RR-001 must include non-empty string finding."
+    },
+    {
+      "file": "review-run-evidence-confidence-invalid.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evidence confidence score",
+      "expect": "fail",
+      "errorIncludes": "EVD-RR-001 confidence must be a number from 0 to 1."
+    },
+    {
+      "file": "review-run-evidence-weight-invalid.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "evidence weight positive",
+      "expect": "fail",
+      "errorIncludes": "EVD-RR-001 weight must be a positive number."
+    },
+    {
+      "file": "review-run-indicator-activity-count-quality-itself.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "activity counts must remain evidence-only",
+      "expect": "fail",
+      "errorIncludes": "IND-RR-001 is an activity-count metric but is not evidence-only."
+    },
+    {
+      "file": "review-run-governance-trigger-missing-owner.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "governance trigger owner required",
+      "expect": "fail",
+      "errorIncludes": "GTR-RR-001 must include non-empty string owner."
+    },
+    {
+      "file": "review-run-governance-trigger-broken-source-run.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "governance trigger source review run resolves",
+      "expect": "fail",
+      "errorIncludes": "GTR-RR-001 references missing source review run"
+    },
+    {
+      "file": "review-run-governance-trigger-closed-without-event.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "closed governance trigger links resulting event",
+      "expect": "fail",
+      "errorIncludes": "GTR-RR-001 is not open and must link to a resultingGovernanceEventRef."
+    },
+    {
+      "file": "review-run-governance-event-points-to-different-trigger.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "governance event backlink matches trigger",
+      "expect": "fail",
+      "errorIncludes": "GTR-RR-003 resulting governance event GEV-RR-001 points to a different trigger."
+    },
+    {
+      "file": "review-run-verifier-boundary-missing.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "verifier boundary required",
+      "expect": "fail",
+      "errorIncludes": "must include verifierBoundary."
+    },
+    {
+      "file": "review-run-verifier-boundary-claims-semantic-truth.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "verifier boundary avoids semantic truth",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming semantic truth."
+    },
+    {
+      "file": "review-run-run-broken-target-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "review run target resolves",
+      "expect": "fail",
+      "errorIncludes": "RRN-001 references missing evaluation target"
+    },
+    {
+      "file": "review-run-run-rule-not-used-by-decisions.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "review run rule justified by applicability decisions",
+      "expect": "fail",
+      "errorIncludes": "RRN-001 applicability rule APR-RR-002 is not used by its applicability decisions."
+    },
+    {
+      "file": "review-run-run-selected-intent-not-by-decision.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "review run selected intent justified by decision",
+      "expect": "fail",
+      "errorIncludes": "RRN-001 selected quality intent QIN-RR-003 is not selected by an applicability decision."
+    },
+    {
+      "file": "review-run-run-selected-intent-excluded-by-decision.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "review run selected intent cannot be excluded",
+      "expect": "fail",
+      "errorIncludes": "RRN-001 selected quality intent QIN-RR-003 was also excluded by an applicability decision."
+    },
+    {
+      "file": "review-run-run-selected-pattern-not-by-decision.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "review run selected pattern justified by decision",
+      "expect": "fail",
+      "errorIncludes": "RRN-001 selected decision pattern PAT-RR-002 is not selected by an applicability decision."
+    },
+    {
+      "file": "review-run-run-missing-verdicts.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "review run verdicts required",
+      "expect": "fail",
+      "errorIncludes": "RRN-001 must include verdicts."
+    },
+    {
+      "file": "review-run-verdict-broken-evidence-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "verdict evidence resolves",
+      "expect": "fail",
+      "errorIncludes": "RRN-001/verdict references missing evidence"
+    },
+    {
+      "file": "review-run-verdict-confidence-not-reproduced.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "verdict confidence reproduces from evidence inputs",
+      "expect": "fail",
+      "errorIncludes": "RRN-001/verdict/QIN-RR-001 confidence must reproduce from evidence inputs and policy CFP-RR-001: 0.52."
+    },
+    {
+      "file": "review-run-run-confidence-not-reproduced.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "review run confidence reproduces from verdicts",
+      "expect": "fail",
+      "errorIncludes": "RRN-001 confidence must reproduce from evidence inputs, verdict aggregation, and review-run policy CFP-RR-001: 0.49."
+    },
+    {
+      "file": "review-run-run-missing-governance-for-low-or-conflict.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "low confidence or conflicting evidence triggers governance",
+      "expect": "fail",
+      "errorIncludes": "RRN-001 must trigger governance review when confidence is low or evidence conflicts."
+    },
+    {
+      "file": "review-run-run-missing-low-confidence-trigger.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "low confidence trigger type required",
+      "expect": "fail",
+      "errorIncludes": "RRN-001 must include a low-confidence governance trigger."
+    },
+    {
+      "file": "review-run-run-missing-conflicting-evidence-trigger.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "conflicting evidence trigger type required",
+      "expect": "fail",
+      "errorIncludes": "RRN-001 must include a conflicting-evidence governance trigger."
+    },
+    {
+      "file": "review-run-run-missing-context-mismatch-trigger.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "context mismatch trigger type required",
+      "expect": "fail",
+      "errorIncludes": "RRN-001 must include a context-mismatch governance trigger when applicability decisions record context mismatches."
+    },
+    {
+      "file": "review-run-run-missing-residual-risks.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "review run residual risks required",
+      "expect": "fail",
+      "errorIncludes": "RRN-001 must include residualRisks."
+    },
+    {
+      "file": "review-run-run-missing-recommendations.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "review run recommendations required",
+      "expect": "fail",
+      "errorIncludes": "RRN-001 must include recommendations."
+    },
+    {
+      "file": "review-run-run-broken-governance-trigger-ref.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "review run governance trigger refs resolve",
+      "expect": "fail",
+      "errorIncludes": "RRN-001 references missing governance trigger"
+    }
+  ],
+  "rescopedRules": []
+}

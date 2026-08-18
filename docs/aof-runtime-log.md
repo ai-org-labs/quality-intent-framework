@@ -1973,3 +1973,63 @@ Publication:
 - Annotated tag object: `2fe4b12f3ba429817959103af9f83ebc7bc32500`.
 - GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.4.10`.
 - Remote main was first advanced to the verified release commit; this post-release log records the publication outcome without moving the release tag.
+
+## QIF v0.4.11 Review Run Fixture Coverage
+
+Date: 2026-08-18
+
+Need / Intent / Context:
+
+- Need: Review Run is the point where QIF applies selected Quality Intents and Decision Patterns to a real target, evaluates evidence, reproduces confidence, produces verdicts, and routes uncertainty to governance. If this surface weakens, QIF can appear executable while the actual verdict path is no longer auditable.
+- Intent: extend retained fixture coverage to the `review-run` runtime verifier surface and close the planned v0.4.x single-package runtime fixture frontier.
+- Context: QIF remains standalone. AOF v11.6.0 is used as development runtime evidence, not as a QIF usage dependency. AOF `situation-assess` still reports the stored alignment pulse as stale; the roadmap now moves the frontier to v0.5 Living QIF Ledger.
+
+Trend signals reviewed:
+
+- 2026 agent governance reporting continues to move from static annual review toward continuous discovery, monitoring, enforcement, and proof of compliance.
+- Agent sandbox and cyber-capability reports reinforce that agent outputs are insufficient; runtime behavior, permissions, and audit trails need explicit evidence.
+- AI coding-agent benchmarks show a persistent gap between functional correctness and secure correctness, so QIF must preserve evidence-backed verdicts instead of treating task pass/fail as quality itself.
+- Runtime security benchmarks emphasize approval receipts, blocked action records, tool poisoning, package risk, and reproducible fixture outcomes.
+- Post-market monitoring guidance emphasizes decision logging, tamper-evident audit trails, anomaly detection, incident reporting, and lifetime monitoring.
+
+Council judgment:
+
+- Visionary: approve. Review-run fixtures protect QIF's core operating claim: quality knowledge is selected for a target, evaluated against evidence, and routed to governance when confidence or context is weak.
+- Builder: approve. Add retained fixture coverage and runner wiring only; do not redesign review-run schemas or start v0.5 cross-package references in this release.
+- Guardian: approve with guardrails. Fixtures prove structural traceability, rule compliance, and confidence reproducibility; they do not prove a verdict is semantically correct.
+
+What was built:
+
+- `tools/fixtures/review-run-cases.mjs`: added retained negative cases for Review Run verifier rules.
+- `tools/run-fixture-tests.mjs`: added Review Run positive and negative suite execution.
+- `tests/fixtures/review-run/`: added committed invalid packages and generated manifest.
+- `README.md`, `docs/qif-roadmap.md`, `CHANGELOG.md`, `RELEASE-NOTES-v0.4.11.md`.
+- `assessments/qif-self-evaluation-v0.4.11.json` and `.md`.
+
+What was not built:
+
+- No schema redesign.
+- No new review-run entity.
+- No v0.5 cross-package ledger.
+- No UI.
+- No external integration.
+- No semantic validation of whether the review verdict is correct.
+
+AOF runtime command evidence:
+
+- AOF latest check: `ai-org-labs/ai-organization-framework` latest tag was `v11.6.0`.
+- AOF v11.6.0 `situation-assess --project .` passed and flagged stale alignment pulse as a warning.
+- AOF v11.6.0 `organization-verify --project .` passed with 231/231 checks.
+- AOF v11.6.0 `command-routing-audit --project . --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.4.11-final.json` passed.
+- AOF v11.6.0 `review-provenance-audit --project . --cutoff-task-id TASK-014 --write-artifact .aof/artifacts/verification/review-provenance-audit-qif-v0.4.11-final.json` passed.
+
+QIF verification:
+
+- `npm test` passed with 7/7 positive checks and 376/376 negative checks.
+- `node tools/validate-qif-runtime.mjs assessments/qif-self-evaluation-v0.4.11.json` passed.
+- Public residue scan found no personal account, email, legacy repository, user-home, or temporary checkout path residue outside `.git`.
+
+Decision:
+
+- Proceed to v0.4.11 release after final scan, commit, tag, and GitHub release.
+- Residual risk: v0.5 cross-package ledger behavior is not implemented; v0.4.x single-package retained fixture frontier is complete.

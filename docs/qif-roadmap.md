@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.4.10 baseline)
+## Current Position (v0.4.11 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate.
@@ -55,8 +55,9 @@ and adoption surface — not pretending the limits away.
   the discovery-session runtime verifier surface. v0.4.9 extends retained
   negative fixture coverage to the organizational-quality-culture runtime
   verifier surface. v0.4.10 extends retained negative fixture coverage to the
-  evaluation-target runtime verifier surface. The remaining review-run runtime
-  package surface remains the next v0.4.x frontier.
+  evaluation-target runtime verifier surface. v0.4.11 extends retained
+  negative fixture coverage to the review-run runtime verifier surface,
+  completing the planned v0.4.x runtime package fixture frontier.
 - Weaknesses: packages are islands (no cross-package references), authoring
   cost for humans and AI agents is still high, agent trajectories and
   environment provenance are not first-class, and no empirical feedback yet
@@ -105,7 +106,8 @@ Deliverables:
   corpora under `tests/fixtures/qif-package/`,
   `tests/fixtures/expert-judgment/`, `tests/fixtures/discovery-session/`,
   `tests/fixtures/organizational-quality-culture/`, and
-  `tests/fixtures/evaluation-target/`, and `tests/fixtures/quality-gate/` are generated from
+  `tests/fixtures/evaluation-target/`, `tests/fixtures/review-run/`, and
+  `tests/fixtures/quality-gate/` are generated from
   `tools/fixtures/*-cases.mjs` and run with a drift check by
   `tools/run-fixture-tests.mjs`. v0.4.8 adds retained discovery-session
   coverage for raw-answer traceability, extraction-step justification, and
@@ -113,9 +115,10 @@ Deliverables:
   coverage for context-only aggregation, non-prerequisite boundaries, grounding
   in multiple patterns, and required culture context fields. v0.4.10 adds
   retained evaluation-target coverage for target identity, domain, stakeholder
-  impact, operational impact, risk summary, and source evidence. Remaining:
-  extend the same suite to every rule in the review-run verifier surface before
-  this deliverable is complete.
+  impact, operational impact, risk summary, and source evidence. v0.4.11 adds
+  retained review-run coverage for applicability consistency, evidence-backed
+  verdicts, confidence reproduction, governance triggers, and verifier-boundary
+  honesty.
 - Evaluation Timing Rule and Evaluation Timing Decision entities: when
   evaluation must happen, decided by executable conditions, with recorded
   justification.
@@ -147,10 +150,9 @@ Deliverables:
 
 Exit evidence:
 
-- 100% of verifier rules have a violating fixture that fails. (Currently met for
-  the quality gate verifier; v0.4.1 added the first retained fixtures for
-  `qif-package` and `expert-judgment`; open for complete coverage of those
-  surfaces and the remaining runtime package surfaces.)
+- 100% of planned v0.4.x runtime package fixture surfaces have retained
+  negative coverage. The next frontier is cross-package ledger behavior in
+  v0.5, not more single-package fixture expansion.
 - Every candidate entity listed in the v0.4 requirements is either
   implemented or explicitly re-scoped with rationale.
 

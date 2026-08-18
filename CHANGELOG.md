@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.4.11
+
+- Added retained negative fixture coverage for the review-run runtime package surface.
+- Added `tools/fixtures/review-run-cases.mjs` as the source of truth for review-run invalid packages.
+- Extended `tools/run-fixture-tests.mjs` to include the review-run corpus and its positive package check.
+- Increased the standing fixture suite to 7 positive checks and 376 retained negative checks.
+- Covered review-run target selection, applicability decisions, evidence-backed verdicts, confidence reproducibility, governance triggers, activity-count boundaries, and verifier-boundary semantic-truth limits.
+- Marked the planned v0.4.x runtime package fixture frontier complete; the next roadmap frontier is v0.5 Living QIF Ledger.
+
 ## v0.4.10
 
 - Added retained negative fixture coverage for the evaluation-target runtime package surface.
