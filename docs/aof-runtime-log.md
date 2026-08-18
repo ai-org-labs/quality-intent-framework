@@ -2031,5 +2031,13 @@ QIF verification:
 
 Decision:
 
-- Proceed to v0.4.11 release after final scan, commit, tag, and GitHub release.
+- Proceeded to v0.4.11 release after final scan, commit, tag, and GitHub release.
 - Residual risk: v0.5 cross-package ledger behavior is not implemented; v0.4.x single-package retained fixture frontier is complete.
+
+Publication:
+
+- Verified release commit: `f7120c4be3b7c19a8c7353674e1371bf455b5136`.
+- Annotated tag: `v0.4.11`.
+- Annotated tag object: `cf9e9aa79f0bd97b47a660ac7b99be10e160053b`.
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.4.11`.
+- Remote main was first advanced to the verified release commit; this post-release log records the publication outcome without moving the release tag.
