@@ -2101,5 +2101,14 @@ QIF verification:
 
 Decision:
 
-- Proceed to v0.5.0 release after final scan, commit, tag, and GitHub release.
+- Proceeded to v0.5.0 release after final scan, commit, tag, and GitHub release.
+
+Publication:
+
+- Release URL: https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.5.0
+- Release published at: 2026-08-19T04:44:10Z
+- Release commit: b9e0ed1a43d6f7831b505d037055ab6ae782a4f4
+- Annotated tag object: 739e5457305e6a8168c9a670f82f1e1494c849cb
+- Tag target: b9e0ed1a43d6f7831b505d037055ab6ae782a4f4
+- Remote main advanced from 500f131 to b9e0ed1.
 - Residual risk: v0.5.0 ledger behavior is local-file and example-driven; deeper package registries, query tooling, detailed trajectory typing, and calibration remain future work.
