@@ -6,7 +6,7 @@ QIF does not define quality as output volume. Page count, review count, and test
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline (release Go / Conditional Go / No-Go / Pending decisions with quantitative evidence, post-release review, and traceability), the v0.4.1 retained fixture coverage expansion, the v0.4.2 Quality Aspect taxonomy, the v0.4.3 complete core verifier fixture coverage release, the v0.4.4 Evidence Type Vocabulary, the v0.4.5 Evaluation Timing Rules, the v0.4.6 Evidence Retention Policies, the v0.4.7 Quality Reports, the v0.4.8 retained Discovery Session fixture coverage, the v0.4.9 retained Organizational Quality Culture fixture coverage, the v0.4.10 retained Evaluation Target fixture coverage, and the v0.4.11 retained Review Run fixture coverage:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline (release Go / Conditional Go / No-Go / Pending decisions with quantitative evidence, post-release review, and traceability), the v0.4.x retained runtime fixture frontier, and the v0.5.0 Living QIF Ledger baseline for cross-package references, Quality Intent lifecycle, missed-intent feedback, and agent trial/outcome records:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -21,8 +21,10 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF long-term roadmap: `docs/qif-roadmap.md`
 - QIF v0.4.x release roadmap: `docs/qif-v0.4.x-release-roadmap.md`
 - QIF v0.4.3 core fixture coverage: `docs/qif-v0.4.3-core-fixture-coverage.md`
+- QIF v0.5 Living Ledger design: `docs/qif-v0.5-living-ledger.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
+- QIF ledger package schema: `schemas/qif-ledger-package.schema.json`
 - Quality gate package schema: `schemas/quality-gate-package.schema.json`
 - Expert judgment schema: `schemas/expert-judgment-package.schema.json`
 - Discovery session schema: `schemas/discovery-session-package.schema.json`
@@ -35,13 +37,15 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - Example organizational quality culture package: `examples/organizational-quality-culture-package.json`
 - Example evaluation target package: `examples/evaluation-target-package.json`
 - Example review run package: `examples/review-run-package.json`
+- Example QIF ledger package: `examples/qif-ledger-package.json`
 - Example quality gate package: `examples/quality-gate-package.json`
 - Local verifier: `tools/validate-qif.mjs`
 - Local expert judgment verifier: `tools/validate-expert-judgment.mjs`
 - Local runtime verifier: `tools/validate-qif-runtime.mjs`
+- Local ledger verifier: `tools/validate-qif-ledger.mjs`
 - Negative fixture suite runner: `tools/run-fixture-tests.mjs`
-- Negative fixture case sources: `tools/fixtures/qif-package-cases.mjs`, `tools/fixtures/expert-judgment-cases.mjs`, `tools/fixtures/discovery-session-cases.mjs`, `tools/fixtures/organizational-quality-culture-cases.mjs`, `tools/fixtures/evaluation-target-cases.mjs`, `tools/fixtures/review-run-cases.mjs`, `tools/fixtures/quality-gate-cases.mjs`
-- Retained negative fixture corpora: `tests/fixtures/qif-package/`, `tests/fixtures/expert-judgment/`, `tests/fixtures/discovery-session/`, `tests/fixtures/organizational-quality-culture/`, `tests/fixtures/evaluation-target/`, `tests/fixtures/review-run/`, `tests/fixtures/quality-gate/`
+- Negative fixture case sources: `tools/fixtures/qif-package-cases.mjs`, `tools/fixtures/expert-judgment-cases.mjs`, `tools/fixtures/discovery-session-cases.mjs`, `tools/fixtures/organizational-quality-culture-cases.mjs`, `tools/fixtures/evaluation-target-cases.mjs`, `tools/fixtures/review-run-cases.mjs`, `tools/fixtures/qif-ledger-cases.mjs`, `tools/fixtures/quality-gate-cases.mjs`
+- Retained negative fixture corpora: `tests/fixtures/qif-package/`, `tests/fixtures/expert-judgment/`, `tests/fixtures/discovery-session/`, `tests/fixtures/organizational-quality-culture/`, `tests/fixtures/evaluation-target/`, `tests/fixtures/review-run/`, `tests/fixtures/qif-ledger/`, `tests/fixtures/quality-gate/`
 - AOF runtime log: `docs/aof-runtime-log.md`
 - Changelog: `CHANGELOG.md`
 
@@ -91,6 +95,17 @@ The runtime verifier checks:
 - no activity-count metric is treated as quality itself
 - low-confidence, conflicting, or context-mismatched review results trigger governance review
 
+The ledger verifier checks:
+
+- package references resolve to repository-local package files
+- referenced package types match their declared package refs
+- cross-package entity references resolve, including nested post-release incidents
+- Quality Intent lifecycle records cite evidence and valid lifecycle states
+- missed-intent records close to either a new derivation or an accepted-gap rationale
+- agent trials link targets, review runs, tool/action provenance, outcomes, and outcome evidence
+- ledger indexes resolve active intents, open governance triggers, and open residual-risk carriers
+- ledger verification explicitly does not claim semantic truth
+
 For quality gate packages (v0.4 baseline), the runtime verifier additionally checks:
 
 - every Evaluation Perspective is a canonical perspective linked to Quality Intents
@@ -118,4 +133,4 @@ For quality gate packages (v0.4 baseline), the runtime verifier additionally che
 
 The verifier enforces structural integrity, traceability, reference resolution, confidence reproducibility, and rule compliance. It does not prove semantic truth; semantic validity requires expert review, reproduction tests, operational feedback, and governance.
 
-`npm test` also runs a standing negative fixture suite (`tools/run-fixture-tests.mjs`). The retained invalid corpora under `tests/fixtures/qif-package/`, `tests/fixtures/expert-judgment/`, `tests/fixtures/discovery-session/`, `tests/fixtures/organizational-quality-culture/`, `tests/fixtures/evaluation-target/`, `tests/fixtures/review-run/`, and `tests/fixtures/quality-gate/` must each be rejected with a specific error, so a covered verifier rule that is silently weakened or deleted fails the build. The committed corpora are generated from `tools/fixtures/*-cases.mjs` by `npm run build-fixtures`; the suite fails on drift if generated source of truth and committed files disagree. v0.4.11 retains 376 negative checks overall and adds review-run runtime coverage, completing the planned v0.4.x runtime package fixture frontier (see `docs/qif-roadmap.md`).
+`npm test` also runs a standing negative fixture suite (`tools/run-fixture-tests.mjs`). The retained invalid corpora under `tests/fixtures/qif-package/`, `tests/fixtures/expert-judgment/`, `tests/fixtures/discovery-session/`, `tests/fixtures/organizational-quality-culture/`, `tests/fixtures/evaluation-target/`, `tests/fixtures/review-run/`, `tests/fixtures/qif-ledger/`, and `tests/fixtures/quality-gate/` must each be rejected with a specific error, so a covered verifier rule that is silently weakened or deleted fails the build. The committed corpora are generated from `tools/fixtures/*-cases.mjs` by `npm run build-fixtures`; the suite fails on drift if generated source of truth and committed files disagree. v0.5.0 retains 392 negative checks overall and adds Living QIF Ledger cross-package coverage (see `docs/qif-roadmap.md`).

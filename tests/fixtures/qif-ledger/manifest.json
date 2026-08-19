@@ -1,0 +1,152 @@
+{
+  "description": "QIF qif-ledger negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/qif-ledger-cases.mjs; do not edit by hand.",
+  "positives": [
+    {
+      "validator": "tools/validate-qif.mjs",
+      "package": "examples/qif-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-expert-judgment.mjs",
+      "package": "examples/expert-judgment-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/discovery-session-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/organizational-quality-culture-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/evaluation-target-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/review-run-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-ledger.mjs",
+      "package": "examples/qif-ledger-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/quality-gate-package.json"
+    }
+  ],
+  "negatives": [
+    {
+      "file": "qif-ledger-packageRefs-not-array.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "packageRefs must be an array",
+      "expect": "fail",
+      "errorIncludes": "packageRefs must be an array."
+    },
+    {
+      "file": "qif-ledger-package-ref-path-missing.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "package ref path exists",
+      "expect": "fail",
+      "errorIncludes": "PKG-DISCOVERY package path does not exist"
+    },
+    {
+      "file": "qif-ledger-package-ref-wrong-type.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "package ref type matches referenced package",
+      "expect": "fail",
+      "errorIncludes": "PKG-DISCOVERY expected packageType review-run but found discovery-session."
+    },
+    {
+      "file": "qif-ledger-cross-package-ref-broken-from.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "cross package from ref resolves",
+      "expect": "fail",
+      "errorIncludes": "XREF-001/from references missing entity"
+    },
+    {
+      "file": "qif-ledger-cross-package-ref-self.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "cross package ref must not self-reference",
+      "expect": "fail",
+      "errorIncludes": "XREF-001 must not point an entity to itself."
+    },
+    {
+      "file": "qif-ledger-lifecycle-missing-evidence.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "lifecycle records require evidence",
+      "expect": "fail",
+      "errorIncludes": "QLC-001 must include evidenceRefs."
+    },
+    {
+      "file": "qif-ledger-lifecycle-broken-previous.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "lifecycle previous record resolves",
+      "expect": "fail",
+      "errorIncludes": "QLC-001 references missing previousLifecycleRecordRef QLC-NOPE-999."
+    },
+    {
+      "file": "qif-ledger-missed-intent-broken-incident.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "missed intent source incident resolves",
+      "expect": "fail",
+      "errorIncludes": "MIR-001/sourceIncident references missing entity"
+    },
+    {
+      "file": "qif-ledger-missed-intent-matched-not-active.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "matched missed-intent refs must be active",
+      "expect": "fail",
+      "errorIncludes": "MIR-001 matched intent PKG-GATE/qualityIntents/QIN-QG-001 must have an active lifecycle record."
+    },
+    {
+      "file": "qif-ledger-missed-intent-derive-without-derivation.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "derive-new-intent requires derivation ref",
+      "expect": "fail",
+      "errorIncludes": "MIR-001 outcome derive-new-intent requires newQualityIntentDerivation."
+    },
+    {
+      "file": "qif-ledger-missed-intent-accepted-gap-without-rationale.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "accepted gap requires rationale",
+      "expect": "fail",
+      "errorIncludes": "MIR-001 must include non-empty string acceptedGapRationale."
+    },
+    {
+      "file": "qif-ledger-agent-trial-hidden-reasoning.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "agent trial must not store hidden reasoning",
+      "expect": "fail",
+      "errorIncludes": "ATR-001 must not store hidden chain-of-thought as ledger evidence."
+    },
+    {
+      "file": "qif-ledger-agent-trial-missing-outcome.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "agent trial outcome resolves",
+      "expect": "fail",
+      "errorIncludes": "ATR-001 references missing outcomeRef AOC-NOPE-999."
+    },
+    {
+      "file": "qif-ledger-agent-outcome-broken-trial.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "agent outcome trial resolves",
+      "expect": "fail",
+      "errorIncludes": "AOC-001 references missing trialRef ATR-NOPE-999."
+    },
+    {
+      "file": "qif-ledger-ledger-index-closed-governance-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "ledger index open governance triggers are open",
+      "expect": "fail",
+      "errorIncludes": "ledgerIndex openGovernanceTriggerRefs must only reference open triggers."
+    },
+    {
+      "file": "qif-ledger-verifier-boundary-claims-semantic-truth.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "ledger verifier boundary avoids semantic truth",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming semantic truth."
+    }
+  ],
+  "rescopedRules": []
+}

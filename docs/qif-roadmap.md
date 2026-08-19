@@ -35,10 +35,11 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.4.11 baseline)
+## Current Position (v0.5.0 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
-  organizational-quality-culture, evaluation-target, review-run, quality-gate.
+  organizational-quality-culture, evaluation-target, review-run, quality-gate,
+  qif-ledger.
 - Reproducible confidence, enforced gate rules, release verdict discipline
   (Go / Conditional Go / No-Go / Pending), post-release loop, traceability
   links, governance forcing.
@@ -57,11 +58,14 @@ and adoption surface — not pretending the limits away.
   verifier surface. v0.4.10 extends retained negative fixture coverage to the
   evaluation-target runtime verifier surface. v0.4.11 extends retained
   negative fixture coverage to the review-run runtime verifier surface,
-  completing the planned v0.4.x runtime package fixture frontier.
-- Weaknesses: packages are islands (no cross-package references), authoring
-  cost for humans and AI agents is still high, agent trajectories and
-  environment provenance are not first-class, and no empirical feedback yet
-  exists on whether QIF confidence predicts real outcomes.
+  completing the planned v0.4.x runtime package fixture frontier. v0.5.0 adds
+  the first Living QIF Ledger runtime: package refs, cross-package entity refs,
+  Quality Intent lifecycle records, missed-intent records, agent trial/outcome
+  records, and a ledger index.
+- Weaknesses: v0.5.0 cross-package behavior is intentionally minimal and
+  example-file based; authoring cost for humans and AI agents is still high,
+  agent trajectories are summarized rather than deeply typed, and no empirical
+  feedback yet exists on whether QIF confidence predicts real outcomes.
 
 ## 2026 Agentic AI Trend Check
 
@@ -169,26 +173,40 @@ Deliverables:
 - Cross-package references with provenance: a quality-gate package may cite
   a Quality Intent derived in a discovery-session package, and the verifier
   resolves the chain across files.
+  Status: minimally implemented in v0.5.0 through `qif-ledger` `packageRefs`
+  and `crossPackageRefs`; the verifier reads referenced package files and
+  resolves entity ids across package boundaries.
 - Quality Intent lifecycle: candidate, validated, active, superseded,
   retired — with rationale and evidence required for each transition.
+  Status: minimally implemented in v0.5.0 through
+  `qualityIntentLifecycleRecords`.
 - Missed-intent records: a post-release incident that matches no active
   intent must structurally produce either a new intent derivation or an
   explicit accepted-gap record with an owner.
+  Status: minimally implemented in v0.5.0 through `missedIntentRecords`.
 - Ledger index: one queryable manifest of an organization's intents,
   boundaries, open residual risks, and open governance triggers.
+  Status: minimally implemented in v0.5.0 through `ledgerIndex`.
 - Agent Trial and Outcome records: task, trial, trajectory/transcript summary,
   environment state, tool/action provenance, grader evidence, evaluator
   uncertainty, and actual outcome remain linked without storing hidden
   reasoning.
+  Status: minimally implemented in v0.5.0 through `agentTrials` and
+  `agentOutcomes`; hidden chain-of-thought is explicitly rejected as ledger
+  evidence.
 
 Exit evidence:
 
 - A full chain — expert judgment, derived intent, gate decision, post-release
   incident, new derived intent — validates end-to-end across 3+ separate
-  package files.
-- Deleting any link in that chain makes verification fail.
+  package files. Status: partial in v0.5.0; the example ledger resolves
+  discovery-session, review-run, and quality-gate packages.
+- Deleting any link in that chain makes verification fail. Status: partial in
+  v0.5.0 through retained `qif-ledger` negative fixtures.
 - A multi-turn agent claim fails verification when its final answer is present
-  but its claimed environment outcome or required provenance is absent.
+  but its claimed environment outcome or required provenance is absent. Status:
+  partial in v0.5.0; trials must link outcome and tool/action provenance, but
+  detailed multi-turn trajectory typing remains future work.
 
 ## Phase 3 — v0.6: AI-Native Authoring and Enforcement (months)
 

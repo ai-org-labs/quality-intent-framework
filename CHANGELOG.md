@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.5.0
+
+- Added the first executable Living QIF Ledger package type.
+- Added `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json`, and `tools/validate-qif-ledger.mjs`.
+- Added cross-package package refs and entity refs that resolve against existing QIF package files.
+- Added Quality Intent lifecycle records, missed-intent records, agent trial/outcome records, and a ledger index.
+- Added `tools/fixtures/qif-ledger-cases.mjs` and retained `tests/fixtures/qif-ledger/` negative fixtures.
+- Extended `npm test` and `tools/run-fixture-tests.mjs` to include the ledger verifier.
+- Increased the standing fixture suite to 8 positive checks and 392 retained negative checks.
+- Added `docs/qif-v0.5-living-ledger.md` and updated the roadmap to move beyond v0.4.x single-package runtime closure.
+
 ## v0.4.11
 
 - Added retained negative fixture coverage for the review-run runtime package surface.

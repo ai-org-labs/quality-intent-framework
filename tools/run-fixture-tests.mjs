@@ -35,6 +35,7 @@ import { cases as discoverySessionCases, spec as discoverySessionSpec } from "./
 import { cases as organizationalQualityCultureCases, spec as organizationalQualityCultureSpec } from "./fixtures/organizational-quality-culture-cases.mjs";
 import { cases as evaluationTargetCases, spec as evaluationTargetSpec } from "./fixtures/evaluation-target-cases.mjs";
 import { cases as reviewRunCases, spec as reviewRunSpec } from "./fixtures/review-run-cases.mjs";
+import { cases as qifLedgerCases, spec as qifLedgerSpec } from "./fixtures/qif-ledger-cases.mjs";
 import { cases as qualityGateCases, spec as qualityGateSpec } from "./fixtures/quality-gate-cases.mjs";
 
 const projectRoot = process.cwd();
@@ -55,6 +56,7 @@ const fixtureSuites = [
   { ...organizationalQualityCultureSpec, cases: organizationalQualityCultureCases },
   { ...evaluationTargetSpec, cases: evaluationTargetCases },
   { ...reviewRunSpec, cases: reviewRunCases },
+  { ...qifLedgerSpec, cases: qifLedgerCases },
   { ...qualityGateSpec, cases: qualityGateCases }
 ];
 
@@ -66,6 +68,7 @@ const positivePackages = [
   { validator: "tools/validate-qif-runtime.mjs", package: "examples/organizational-quality-culture-package.json" },
   { validator: "tools/validate-qif-runtime.mjs", package: "examples/evaluation-target-package.json" },
   { validator: "tools/validate-qif-runtime.mjs", package: "examples/review-run-package.json" },
+  { validator: "tools/validate-qif-ledger.mjs", package: "examples/qif-ledger-package.json" },
   { validator: "tools/validate-qif-runtime.mjs", package: "examples/quality-gate-package.json" }
 ];
 

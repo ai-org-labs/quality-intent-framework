@@ -26,6 +26,10 @@
       "package": "examples/review-run-package.json"
     },
     {
+      "validator": "tools/validate-qif-ledger.mjs",
+      "package": "examples/qif-ledger-package.json"
+    },
+    {
       "validator": "tools/validate-qif-runtime.mjs",
       "package": "examples/quality-gate-package.json"
     }

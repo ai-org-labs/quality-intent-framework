@@ -1,0 +1,242 @@
+{
+  "packageType": "qif-ledger",
+  "runtimeVersion": "0.5.0",
+  "packageId": "LEDGERPKG-001",
+  "packageRefs": [
+    {
+      "id": "PKG-DISCOVERY",
+      "path": "examples/discovery-session-package.json",
+      "packageType": "review-run",
+      "role": "source-of-derived-quality-knowledge"
+    },
+    {
+      "id": "PKG-REVIEW",
+      "path": "examples/review-run-package.json",
+      "packageType": "review-run",
+      "role": "target-application-and-verdict"
+    },
+    {
+      "id": "PKG-GATE",
+      "path": "examples/quality-gate-package.json",
+      "packageType": "quality-gate",
+      "role": "release-gate-and-post-release-feedback"
+    }
+  ],
+  "crossPackageRefs": [
+    {
+      "id": "XREF-001",
+      "from": {
+        "packageRef": "PKG-DISCOVERY",
+        "entityType": "qualityIntentDerivations",
+        "entityRef": "QID-DS-001"
+      },
+      "to": {
+        "packageRef": "PKG-DISCOVERY",
+        "entityType": "qualityIntents",
+        "entityRef": "QIN-DS-001"
+      },
+      "purpose": "Preserve the chain from extracted expert judgment to candidate Quality Intent.",
+      "provenance": "Derived from discovery-session extraction steps and expert judgments."
+    },
+    {
+      "id": "XREF-002",
+      "from": {
+        "packageRef": "PKG-REVIEW",
+        "entityType": "reviewRuns",
+        "entityRef": "RRN-001"
+      },
+      "to": {
+        "packageRef": "PKG-REVIEW",
+        "entityType": "governanceTriggers",
+        "entityRef": "GTR-RR-001"
+      },
+      "purpose": "Preserve the route from low-confidence verdict to governance.",
+      "provenance": "Recorded by the review-run package governanceTriggerRefs."
+    },
+    {
+      "id": "XREF-003",
+      "from": {
+        "packageRef": "PKG-GATE",
+        "entityType": "postReleaseReviews",
+        "entityRef": "PRR-QG-001"
+      },
+      "to": {
+        "packageRef": "PKG-GATE",
+        "entityType": "improvementActions",
+        "entityRef": "IMP-QG-001"
+      },
+      "purpose": "Preserve the incident-to-improvement feedback loop.",
+      "provenance": "Recorded by postReleaseReview.improvementActionRefs."
+    }
+  ],
+  "qualityIntentLifecycleRecords": [
+    {
+      "id": "QLC-001",
+      "intent": {
+        "packageRef": "PKG-DISCOVERY",
+        "entityType": "qualityIntents",
+        "entityRef": "QIN-DS-001"
+      },
+      "state": "candidate",
+      "rationale": "The Quality Intent is derived from concrete expert judgments and extraction steps, but still requires reproduction on more cases before active use.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "qualityIntentDerivations",
+          "entityRef": "QID-DS-001"
+        },
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "decisionPatterns",
+          "entityRef": "PAT-DS-001"
+        }
+      ],
+      "owner": "quality-steward",
+      "status": "open"
+    },
+    {
+      "id": "QLC-002",
+      "intent": {
+        "packageRef": "PKG-GATE",
+        "entityType": "qualityIntents",
+        "entityRef": "QIN-QG-001"
+      },
+      "state": "active",
+      "rationale": "The financial-limit Quality Intent is actively used by a gate decision and has post-release feedback.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-GATE",
+          "entityType": "qualityGateDecisions",
+          "entityRef": "QGD-QG-001"
+        },
+        {
+          "packageRef": "PKG-GATE",
+          "entityType": "postReleaseReviews",
+          "entityRef": "PRR-QG-001"
+        }
+      ],
+      "owner": "support-quality-owner",
+      "status": "active"
+    }
+  ],
+  "missedIntentRecords": [
+    {
+      "id": "MIR-001",
+      "sourceIncident": {
+        "packageRef": "PKG-GATE",
+        "entityType": "incidents",
+        "entityRef": "INC-QG-001"
+      },
+      "matchedActiveIntentRefs": [
+        {
+          "packageRef": "PKG-GATE",
+          "entityType": "qualityIntents",
+          "entityRef": "QIN-QG-001"
+        }
+      ],
+      "outcome": "derive-new-intent",
+      "newQualityIntentDerivation": {
+        "packageRef": "PKG-DISCOVERY",
+        "entityType": "qualityIntentDerivations",
+        "entityRef": "QID-DS-001"
+      },
+      "owner": "quality-steward",
+      "status": "candidate-derivation-recorded"
+    }
+  ],
+  "agentTrials": [
+    {
+      "id": "ATR-001",
+      "target": {
+        "packageRef": "PKG-REVIEW",
+        "entityType": "evaluationTargets",
+        "entityRef": "TGT-RR-001"
+      },
+      "reviewRun": {
+        "packageRef": "PKG-REVIEW",
+        "entityType": "reviewRuns",
+        "entityRef": "RRN-001"
+      },
+      "trajectorySummary": "The reviewer agent selected maintenance restart intents, collected wear and waiver evidence, detected low confidence and conflicting evidence, and routed the result to governance instead of approving restart.",
+      "environmentState": "Synthetic maintenance restart scenario; no production system mutated.",
+      "toolActionProvenance": [
+        "Read review-run package",
+        "Validated evidence refs",
+        "Reproduced confidence from evidence inputs"
+      ],
+      "outcomeRef": "AOC-001",
+      "evaluatorUncertainty": "The trial proves structural path quality only; it does not prove the maintenance judgment is correct.",
+      "transcriptHandling": "summary-without-hidden-reasoning"
+    }
+  ],
+  "agentOutcomes": [
+    {
+      "id": "AOC-001",
+      "trialRef": "ATR-001",
+      "actualOutcome": "Review ended in governance escalation with low-confidence and conflicting-evidence triggers preserved.",
+      "outcomeEvidenceRefs": [
+        {
+          "packageRef": "PKG-REVIEW",
+          "entityType": "governanceTriggers",
+          "entityRef": "GTR-RR-001"
+        },
+        {
+          "packageRef": "PKG-REVIEW",
+          "entityType": "governanceTriggers",
+          "entityRef": "GTR-RR-003"
+        }
+      ],
+      "status": "recorded"
+    }
+  ],
+  "ledgerIndex": {
+    "activeQualityIntentRefs": [
+      {
+        "packageRef": "PKG-GATE",
+        "entityType": "qualityIntents",
+        "entityRef": "QIN-QG-001"
+      }
+    ],
+    "openGovernanceTriggerRefs": [
+      {
+        "packageRef": "PKG-REVIEW",
+        "entityType": "governanceTriggers",
+        "entityRef": "GTR-RR-001"
+      },
+      {
+        "packageRef": "PKG-REVIEW",
+        "entityType": "governanceTriggers",
+        "entityRef": "GTR-RR-002"
+      }
+    ],
+    "openResidualRiskRefs": [
+      {
+        "packageRef": "PKG-REVIEW",
+        "entityType": "reviewRuns",
+        "entityRef": "RRN-001"
+      }
+    ],
+    "lastUpdated": "2026-08-19",
+    "summary": "Minimal ledger index for the chain from discovery, through review and gate evidence, into post-release incident feedback."
+  },
+  "verifierBoundary": {
+    "checks": [
+      "package reference resolution",
+      "cross-package entity reference resolution",
+      "quality intent lifecycle evidence",
+      "missed intent feedback closure",
+      "agent trial outcome linkage"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "expert correctness",
+      "incident root cause correctness"
+    ],
+    "semanticValidityRequires": [
+      "expert review",
+      "operational feedback",
+      "governance decision",
+      "pilot calibration"
+    ]
+  }
+}

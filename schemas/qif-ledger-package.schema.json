@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/qif/schemas/qif-ledger-package.schema.json",
+  "title": "QIF Living Ledger Package",
+  "type": "object",
+  "required": [
+    "packageType",
+    "runtimeVersion",
+    "packageId",
+    "packageRefs",
+    "crossPackageRefs",
+    "qualityIntentLifecycleRecords",
+    "missedIntentRecords",
+    "agentTrials",
+    "agentOutcomes",
+    "ledgerIndex",
+    "verifierBoundary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "packageType": { "const": "qif-ledger" },
+    "runtimeVersion": { "type": "string" },
+    "packageId": { "type": "string" },
+    "packageRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/packageRef" }
+    },
+    "crossPackageRefs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/crossPackageRef" }
+    },
+    "qualityIntentLifecycleRecords": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/lifecycleRecord" }
+    },
+    "missedIntentRecords": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/missedIntentRecord" }
+    },
+    "agentTrials": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/agentTrial" }
+    },
+    "agentOutcomes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/agentOutcome" }
+    },
+    "ledgerIndex": { "$ref": "#/$defs/ledgerIndex" },
+    "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]+-[A-Z0-9-]+$"
+    },
+    "entityRef": {
+      "type": "object",
+      "required": ["packageRef", "entityType", "entityRef"],
+      "additionalProperties": false,
+      "properties": {
+        "packageRef": { "$ref": "#/$defs/id" },
+        "entityType": { "type": "string" },
+        "entityRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "packageRef": {
+      "type": "object",
+      "required": ["id", "path", "packageType", "role"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "path": { "type": "string" },
+        "packageType": { "type": "string" },
+        "role": { "type": "string" }
+      }
+    },
+    "crossPackageRef": {
+      "type": "object",
+      "required": ["id", "from", "to", "purpose", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "from": { "$ref": "#/$defs/entityRef" },
+        "to": { "$ref": "#/$defs/entityRef" },
+        "purpose": { "type": "string" },
+        "provenance": { "type": "string" }
+      }
+    },
+    "lifecycleRecord": {
+      "type": "object",
+      "required": ["id", "intent", "state", "rationale", "evidenceRefs", "owner", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "intent": { "$ref": "#/$defs/entityRef" },
+        "state": { "enum": ["candidate", "validated", "active", "superseded", "retired"] },
+        "previousLifecycleRecordRef": { "$ref": "#/$defs/id" },
+        "rationale": { "type": "string" },
+        "evidenceRefs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/entityRef" }
+        },
+        "owner": { "type": "string" },
+        "status": { "type": "string" }
+      }
+    },
+    "missedIntentRecord": {
+      "type": "object",
+      "required": ["id", "sourceIncident", "matchedActiveIntentRefs", "outcome", "owner", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sourceIncident": { "$ref": "#/$defs/entityRef" },
+        "matchedActiveIntentRefs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/entityRef" }
+        },
+        "outcome": { "enum": ["derive-new-intent", "accepted-gap"] },
+        "newQualityIntentDerivation": { "$ref": "#/$defs/entityRef" },
+        "acceptedGapRationale": { "type": "string" },
+        "owner": { "type": "string" },
+        "status": { "type": "string" }
+      }
+    },
+    "agentTrial": {
+      "type": "object",
+      "required": ["id", "target", "reviewRun", "trajectorySummary", "environmentState", "toolActionProvenance", "outcomeRef", "evaluatorUncertainty", "transcriptHandling"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "target": { "$ref": "#/$defs/entityRef" },
+        "reviewRun": { "$ref": "#/$defs/entityRef" },
+        "trajectorySummary": { "type": "string" },
+        "environmentState": { "type": "string" },
+        "toolActionProvenance": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "outcomeRef": { "$ref": "#/$defs/id" },
+        "evaluatorUncertainty": { "type": "string" },
+        "transcriptHandling": { "type": "string" }
+      }
+    },
+    "agentOutcome": {
+      "type": "object",
+      "required": ["id", "trialRef", "actualOutcome", "outcomeEvidenceRefs", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "trialRef": { "$ref": "#/$defs/id" },
+        "actualOutcome": { "type": "string" },
+        "outcomeEvidenceRefs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/entityRef" }
+        },
+        "status": { "type": "string" }
+      }
+    },
+    "ledgerIndex": {
+      "type": "object",
+      "required": ["activeQualityIntentRefs", "openGovernanceTriggerRefs", "openResidualRiskRefs", "lastUpdated", "summary"],
+      "additionalProperties": false,
+      "properties": {
+        "activeQualityIntentRefs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/entityRef" }
+        },
+        "openGovernanceTriggerRefs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/entityRef" }
+        },
+        "openResidualRiskRefs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/entityRef" }
+        },
+        "lastUpdated": { "type": "string" },
+        "summary": { "type": "string" }
+      }
+    },
+    "verifierBoundary": {
+      "type": "object",
+      "required": ["checks", "doesNotClaim", "semanticValidityRequires"],
+      "additionalProperties": false,
+      "properties": {
+        "checks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "doesNotClaim": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "semanticValidityRequires": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

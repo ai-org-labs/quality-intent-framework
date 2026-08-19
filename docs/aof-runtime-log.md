@@ -2041,3 +2041,65 @@ Publication:
 - Annotated tag object: `cf9e9aa79f0bd97b47a660ac7b99be10e160053b`.
 - GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.4.11`.
 - Remote main was first advanced to the verified release commit; this post-release log records the publication outcome without moving the release tag.
+
+## QIF v0.5.0 Living QIF Ledger
+
+Date: 2026-08-19
+
+Need / Intent / Context:
+
+- Need: QIF v0.4.x made individual packages executable, but quality knowledge still died inside single files. Organizations need a way to preserve the chain from discovery, review, gate decision, incident, improvement, and agent outcome across package boundaries.
+- Intent: add the first executable Living QIF Ledger with repository-local package references, cross-package entity refs, Quality Intent lifecycle records, missed-intent feedback records, agent trial/outcome records, and a ledger index.
+- Context: QIF remains standalone. AOF v11.7.0 is used as development runtime evidence, not as a QIF usage dependency. AOF `situation-assess` still reports the stored alignment pulse as stale; the current roadmap frontier is v0.5 ledger behavior.
+
+Trend signals reviewed:
+
+- Docker AI Governance reported searchable audit logs for runtime policy decisions so teams can see what agents did and what policy stopped.
+- Drata reported continuous control monitoring and evidence collection for agent actions.
+- AgentShield Benchmark and Open Agent Security Benchmark emphasized reproducible attack suites, provenance, false positives, latency, and tool-abuse coverage.
+- Pipelock and Agent Receipts ecosystem reporting continued to emphasize signed or mediator-issued action receipts as verifiable audit evidence.
+- Oracle and agent evaluation coverage emphasized trajectory, tools, state changes, recovery path, and production monitoring rather than final-answer scoring only.
+
+Council judgment:
+
+- Visionary: approve. The ledger is the correct next layer because it turns isolated QIF packages into durable organizational quality memory.
+- Builder: approve. Implement a narrow local-file ledger first; avoid remote registries, complex query engines, or broad schema redesign in v0.5.0.
+- Guardian: approve with guardrails. Ledger verification proves structural traceability and lifecycle closure, not semantic truth, root-cause correctness, or empirical calibration.
+
+What was built:
+
+- `schemas/qif-ledger-package.schema.json`: added the Living QIF Ledger schema.
+- `examples/qif-ledger-package.json`: added an executable ledger linking discovery-session, review-run, and quality-gate packages.
+- `tools/validate-qif-ledger.mjs`: added repository-local package resolution, cross-package entity resolution, lifecycle, missed-intent, agent trial/outcome, ledger index, and verifier-boundary checks.
+- `tools/fixtures/qif-ledger-cases.mjs`: added retained negative cases for ledger verifier rules.
+- `tests/fixtures/qif-ledger/`: added committed invalid packages and generated manifest.
+- `README.md`, `docs/qif-roadmap.md`, `docs/qif-v0.5-living-ledger.md`, `CHANGELOG.md`, `RELEASE-NOTES-v0.5.0.md`.
+- `assessments/qif-self-evaluation-v0.5.0.json` and `.md`.
+
+What was not built:
+
+- No remote package registry.
+- No full query CLI.
+- No cross-repository package resolution.
+- No empirical calibration.
+- No semantic validation of incident root cause or expert correctness.
+
+AOF runtime command evidence:
+
+- AOF latest check: `ai-org-labs/ai-organization-framework` latest tag was `v11.7.0`.
+- AOF v11.7.0 `situation-assess --project .` passed and flagged stale alignment pulse as a warning.
+- AOF v11.7.0 `organization-verify --project .` passed with 231/231 checks.
+- AOF v11.7.0 `command-routing-audit --project . --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.5.0-final.json` passed.
+- AOF v11.7.0 `review-provenance-audit --project . --cutoff-task-id TASK-014 --write-artifact .aof/artifacts/verification/review-provenance-audit-qif-v0.5.0-final.json` passed.
+
+QIF verification:
+
+- `npm test` passed with 8/8 positive checks and 392/392 negative checks.
+- `node tools/validate-qif-ledger.mjs examples/qif-ledger-package.json` passed.
+- `node tools/validate-qif-runtime.mjs assessments/qif-self-evaluation-v0.5.0.json` passed.
+- Public residue scan found no personal account, email, legacy repository, user-home, or temporary checkout path residue outside `.git`.
+
+Decision:
+
+- Proceed to v0.5.0 release after final scan, commit, tag, and GitHub release.
+- Residual risk: v0.5.0 ledger behavior is local-file and example-driven; deeper package registries, query tooling, detailed trajectory typing, and calibration remain future work.
