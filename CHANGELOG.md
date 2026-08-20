@@ -1,9 +1,14 @@
 # Changelog
 
-## Unreleased
+## v0.5.4
 
 - Added `docs/qif-guided-elicitation-design.md` to define how AI agents should ask answerable, plain-language, stepwise questions when users cannot yet express quality intent in QIF terms.
 - Updated the AI authoring guide and roadmap so Guided Elicitation becomes part of the Phase 3 AI-native authoring path without turning discovery into a checklist or treating question count as quality.
+- Added the executable `guided-elicitation` package type.
+- Added `schemas/guided-elicitation-package.schema.json`, `examples/guided-elicitation-package.json`, and `tools/validate-guided-elicitation.mjs`.
+- Added retained negative fixtures under `tests/fixtures/guided-elicitation/` generated from `tools/fixtures/guided-elicitation-cases.mjs`.
+- Extended `npm test` and `tools/run-fixture-tests.mjs` to include the Guided Elicitation verifier.
+- Increased the standing fixture suite to 12 positive checks and 468 retained negative checks.
 
 ## v0.5.3
 

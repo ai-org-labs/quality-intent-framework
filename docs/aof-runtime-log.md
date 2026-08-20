@@ -2,6 +2,41 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.5.4 Guided Elicitation Runtime
+
+Runtime source:
+
+- AOF latest checked: `v11.8.0` via `gh release list --repo ai-org-labs/ai-organization-framework --limit 3`
+
+Need / Intent / Context:
+
+- Need: QIF review found that Guided Elicitation was design-only and that AOF active frontier metadata still pointed to an obsolete v0.4.x fixture frontier.
+- Intent: Refresh active frontier metadata and make Guided Elicitation executable through schema, example package, verifier, retained negative fixtures, and npm integration.
+- Context: QIF v0.5.3 already validates Pilot Corpus. The next accepted quality risk is user-facing elicitation: AI agents must ask answerable, plain-language, stepwise questions without turning discovery into checklist completion.
+
+Decision reason:
+
+- Fix AOF active alignment first so future runtime-backed work is not routed by stale v0.4.x metadata.
+- Implement `guided-elicitation` as a standalone package type because it is an upstream discovery runtime, not a change to core Quality Intent semantics.
+- Preserve the boundary that raw answers, clarification, and teach-back support candidate knowledge but do not prove semantic truth.
+
+Council judgment:
+
+- Visionary: proceed; this makes QIF usable by non-experts and supports Japanese or other user-facing languages while preserving stable machine-readable schemas.
+- Builder: proceed; the slice is bounded to package/schema/example/verifier/fixtures/docs and integrates into existing `npm test`.
+- Guardian: proceed with guardrails; verifier must reject abstract QIF-term questioning, checklist drift, missing raw answers, finalized candidates without teach-back, and question count as quality.
+
+Artifacts:
+
+- Active alignment pulse: `.aof/context/active/alignment-pulse.json`
+- Schema: `schemas/guided-elicitation-package.schema.json`
+- Example: `examples/guided-elicitation-package.json`
+- Verifier: `tools/validate-guided-elicitation.mjs`
+- Fixture source: `tools/fixtures/guided-elicitation-cases.mjs`
+- Retained negative corpus: `tests/fixtures/guided-elicitation/`
+- Runtime doc: `docs/qif-v0.5.4-guided-elicitation-runtime.md`
+- Release notes: `RELEASE-NOTES-v0.5.4.md`
+
 ## Guided Elicitation Design
 
 Runtime source:

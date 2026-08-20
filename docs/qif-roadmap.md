@@ -35,12 +35,12 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.5.3 baseline)
+## Current Position (v0.5.4 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
   qif-ledger, world-model-review, world-model-calibration,
-  world-model-pilot-corpus.
+  world-model-pilot-corpus, guided-elicitation.
 - Reproducible confidence, enforced gate rules, release verdict discipline
   (Go / Conditional Go / No-Go / Pending), post-release loop, traceability
   links, governance forcing.
@@ -70,8 +70,11 @@ and adoption surface — not pretending the limits away.
   world-model gap cases, reproducing agreement/false-positive/false-negative
   rates, and forcing governance when calibration thresholds fail. v0.5.3 adds
   World Model Pilot Corpus: an executable package type for preparing real,
-  privacy-screened, unseen pilot cases before calibration.
-- Weaknesses: v0.5.3 cross-package behavior is intentionally minimal and
+  privacy-screened, unseen pilot cases before calibration. v0.5.4 adds Guided
+  Elicitation Runtime: an executable package type for plain-language,
+  stepwise, anti-checklist questioning with raw-answer traceability,
+  clarification, teach-back, and governance for low-confidence candidates.
+- Weaknesses: v0.5.4 cross-package behavior is intentionally minimal and
   example-file based; authoring cost for humans and AI agents is still high,
   Pilot Corpus now structures case ingestion but still uses example data rather
   than a live organization corpus, agent trajectories are summarized rather than deeply typed, and no
@@ -262,6 +265,10 @@ Deliverables:
 - Guided elicitation templates: plain-language explanations, stepwise probes,
   answer scaffolds, clarification moves, and teach-back checks so an AI agent
   can elicit QIF candidates from users who do not know QIF terminology.
+  Status: implemented in v0.5.4 through the `guided-elicitation` package type,
+  `tools/validate-guided-elicitation.mjs`, and retained negative fixtures
+  requiring anti-checklist questioning, raw-answer traceability, teach-back
+  confirmation, and governance for low-confidence candidates.
 - A `qif` CLI: `qif validate`, `qif new <package-type>`, `qif trace <id>`
   (walk any entity's evidence chain), `qif open-risks`.
 - Gate-as-hook reference integration: a demonstration where an agent task

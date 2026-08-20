@@ -1,0 +1,368 @@
+{
+  "packageType": "guided-elicitation",
+  "runtimeVersion": "0.5.4",
+  "packageId": "GEPKG-001",
+  "elicitationSessions": [
+    {
+      "id": "GES-001",
+      "target": "Customer support refund policy update",
+      "purpose": "Discover candidate quality knowledge from a user who does not know QIF terminology.",
+      "profileRef": "UCP-001",
+      "probeRefs": [
+        "PRB-GE-001",
+        "PRB-GE-002",
+        "PRB-GE-003",
+        "PRB-GE-004"
+      ],
+      "answerRefs": [
+        "ANS-GE-001",
+        "ANS-GE-002",
+        "ANS-GE-003",
+        "ANS-GE-004",
+        "ANS-GE-005"
+      ],
+      "clarificationMoveRefs": [
+        "CLR-GE-001"
+      ],
+      "teachBackCheckRefs": [
+        "TBK-GE-001"
+      ],
+      "derivedCandidateRefs": [
+        "DCA-GE-001",
+        "DCA-GE-002",
+        "DCA-GE-003"
+      ],
+      "stateRef": "EST-GE-001",
+      "status": "closed"
+    }
+  ],
+  "userComprehensionProfiles": [
+    {
+      "id": "UCP-001",
+      "userRef": "support-operations-lead",
+      "language": "ja",
+      "qifFamiliarity": "none",
+      "domainKnowledge": "high",
+      "preferredExplanationLevel": "plain-language",
+      "uncertaintySignals": [
+        "does-not-use-qif-terms",
+        "answers-from-operational-examples"
+      ],
+      "status": "active"
+    }
+  ],
+  "explanationUnits": [
+    {
+      "id": "EXP-GE-001",
+      "concept": "Quality Intent",
+      "plainLanguage": "何を守りたいか、何ができていれば安心と言えるか。",
+      "taskExample": "返金ルール変更で、顧客と担当者が困らない状態を守る。",
+      "prohibitedJargon": [
+        "quality intent",
+        "non-functional requirement"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "EXP-GE-002",
+      "concept": "Loss Boundary",
+      "plainLanguage": "越えてはいけない線。起きたら止める、戻す、または上長判断にする結果。",
+      "taskExample": "返金できるはずの顧客が誤って拒否される状態。",
+      "prohibitedJargon": [
+        "loss boundary",
+        "risk appetite"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "EXP-GE-003",
+      "concept": "Evidence",
+      "plainLanguage": "安心して判断するための材料。",
+      "taskExample": "新しい返金条件で、実例を使って誤拒否が起きないことを確認した記録。",
+      "prohibitedJargon": [
+        "evidence item",
+        "confidence policy"
+      ],
+      "status": "active"
+    }
+  ],
+  "questionStrategies": [
+    {
+      "id": "QST-GE-001",
+      "trigger": "User cannot name quality intent directly.",
+      "rationale": "Start from concrete unacceptable outcomes instead of QIF terminology.",
+      "antiChecklist": true,
+      "nextProbeRules": [
+        "If the user names a failure, ask who is harmed.",
+        "If the user names a harmed party, ask what evidence would make them comfortable.",
+        "If the user gives implementation details only, ask what bad outcome the detail prevents."
+      ],
+      "status": "active"
+    }
+  ],
+  "stepwiseProbes": [
+    {
+      "id": "PRB-GE-001",
+      "sessionRef": "GES-001",
+      "strategyRef": "QST-GE-001",
+      "explanationRef": "EXP-GE-002",
+      "questionText": "What are the Quality Intents?",
+      "purpose": "Find a concrete unacceptable outcome.",
+      "expectedCandidateTypes": [
+        "concern",
+        "loss-boundary"
+      ],
+      "order": 1,
+      "status": "asked"
+    },
+    {
+      "id": "PRB-GE-002",
+      "sessionRef": "GES-001",
+      "strategyRef": "QST-GE-001",
+      "explanationRef": "EXP-GE-002",
+      "questionText": "その失敗が起きた場合、誰が一番困りますか？",
+      "purpose": "Identify harmed parties.",
+      "expectedCandidateTypes": [
+        "concern",
+        "loss-boundary"
+      ],
+      "order": 2,
+      "status": "asked"
+    },
+    {
+      "id": "PRB-GE-003",
+      "sessionRef": "GES-001",
+      "strategyRef": "QST-GE-001",
+      "explanationRef": "EXP-GE-003",
+      "questionText": "何が確認できれば、この変更を出してもよいと判断できますか？",
+      "purpose": "Derive evidence requirements.",
+      "expectedCandidateTypes": [
+        "evidence-requirement"
+      ],
+      "order": 3,
+      "status": "asked"
+    },
+    {
+      "id": "PRB-GE-004",
+      "sessionRef": "GES-001",
+      "strategyRef": "QST-GE-001",
+      "explanationRef": "EXP-GE-002",
+      "questionText": "例外として許せる場合と、例外でも止めるべき場合の違いは何ですか？",
+      "purpose": "Find waiver and escalation conditions.",
+      "expectedCandidateTypes": [
+        "waiver-condition",
+        "loss-boundary"
+      ],
+      "order": 4,
+      "status": "asked"
+    }
+  ],
+  "answerScaffolds": [
+    {
+      "id": "SCF-GE-001",
+      "probeRef": "PRB-GE-001",
+      "optional": true,
+      "formats": [
+        "これは失敗です: ...",
+        "困る人は ...",
+        "安心できる条件は ..."
+      ],
+      "status": "offered"
+    }
+  ],
+  "userAnswers": [
+    {
+      "id": "ANS-GE-001",
+      "sessionRef": "GES-001",
+      "profileRef": "UCP-001",
+      "probeRef": "PRB-GE-001",
+      "answerText": "本来返金対象の顧客が、担当者の解釈違いで拒否されるのは失敗です。",
+      "captureMode": "interview",
+      "language": "ja",
+      "ambiguity": [],
+      "sensitiveDataHandling": "no-personal-data-captured",
+      "status": "captured"
+    },
+    {
+      "id": "ANS-GE-002",
+      "sessionRef": "GES-001",
+      "profileRef": "UCP-001",
+      "probeRef": "PRB-GE-002",
+      "answerText": "顧客が困ります。あと、一次対応の担当者も判断に迷って対応時間が伸びます。",
+      "captureMode": "interview",
+      "language": "ja",
+      "ambiguity": [],
+      "sensitiveDataHandling": "no-personal-data-captured",
+      "status": "captured"
+    },
+    {
+      "id": "ANS-GE-003",
+      "sessionRef": "GES-001",
+      "profileRef": "UCP-001",
+      "probeRef": "PRB-GE-003",
+      "answerText": "代表的な問い合わせ例で、担当者が同じ判断になることを見たいです。",
+      "captureMode": "interview",
+      "language": "ja",
+      "ambiguity": [
+        "representative-sample-not-defined"
+      ],
+      "sensitiveDataHandling": "no-personal-data-captured",
+      "status": "captured"
+    },
+    {
+      "id": "ANS-GE-004",
+      "sessionRef": "GES-001",
+      "profileRef": "UCP-001",
+      "probeRef": "PRB-GE-003",
+      "answerText": "代表例は、金額が小さい、期限ぎりぎり、例外申請あり、過去購入履歴ありの4種類です。",
+      "captureMode": "clarification",
+      "language": "ja",
+      "ambiguity": [],
+      "sensitiveDataHandling": "no-personal-data-captured",
+      "status": "captured"
+    },
+    {
+      "id": "ANS-GE-005",
+      "sessionRef": "GES-001",
+      "profileRef": "UCP-001",
+      "probeRef": "PRB-GE-004",
+      "answerText": "少額なら現場判断でよいですが、規約違反の疑いがある場合は上長確認にしたいです。",
+      "captureMode": "interview",
+      "language": "ja",
+      "ambiguity": [],
+      "sensitiveDataHandling": "no-personal-data-captured",
+      "status": "captured"
+    }
+  ],
+  "clarificationMoves": [
+    {
+      "id": "CLR-GE-001",
+      "answerRef": "ANS-GE-003",
+      "reasonType": "missing-context",
+      "questionText": "代表的な問い合わせ例とは、具体的にどの種類ですか？",
+      "resolved": true,
+      "resultingAnswerRefs": [
+        "ANS-GE-004"
+      ],
+      "status": "closed"
+    }
+  ],
+  "teachBackChecks": [
+    {
+      "id": "TBK-GE-001",
+      "sessionRef": "GES-001",
+      "derivedCandidateRefs": [
+        "DCA-GE-001",
+        "DCA-GE-002",
+        "DCA-GE-003"
+      ],
+      "interpretationText": "返金ルール変更では、本来返金対象の顧客を解釈違いで拒否しないこと、担当者が代表例で同じ判断をできること、規約違反疑いは上長確認にすることを守りたい、と解釈します。",
+      "userResponse": "accurate",
+      "status": "accepted"
+    }
+  ],
+  "elicitationStates": [
+    {
+      "id": "EST-GE-001",
+      "sessionRef": "GES-001",
+      "knownFacts": [
+        "Refund rejection due to interpretation variance is unacceptable.",
+        "Customers and first-line support agents are harmed.",
+        "Representative examples are needed as evidence.",
+        "Policy violation suspicion requires escalation."
+      ],
+      "unresolvedAmbiguityRefs": [],
+      "fatigueSignals": [],
+      "nextRecommendedMove": "Create candidate QIF quality intent and evidence requirement package.",
+      "status": "closed"
+    }
+  ],
+  "derivedCandidates": [
+    {
+      "id": "DCA-GE-001",
+      "sessionRef": "GES-001",
+      "candidateType": "loss-boundary",
+      "statement": "本来返金対象の顧客が担当者の解釈違いで拒否される状態を越えてはいけない線とする。",
+      "sourceAnswerRefs": [
+        "ANS-GE-001",
+        "ANS-GE-002"
+      ],
+      "sourceProbeRefs": [
+        "PRB-GE-001",
+        "PRB-GE-002"
+      ],
+      "clarificationMoveRefs": [],
+      "teachBackCheckRefs": [
+        "TBK-GE-001"
+      ],
+      "governanceTriggerRefs": [],
+      "confidence": 0.86,
+      "status": "finalized"
+    },
+    {
+      "id": "DCA-GE-002",
+      "sessionRef": "GES-001",
+      "candidateType": "evidence-requirement",
+      "statement": "代表的な問い合わせ例4種類で、担当者判断が一致する記録を必要証拠とする。",
+      "sourceAnswerRefs": [
+        "ANS-GE-003",
+        "ANS-GE-004"
+      ],
+      "sourceProbeRefs": [
+        "PRB-GE-003"
+      ],
+      "clarificationMoveRefs": [
+        "CLR-GE-001"
+      ],
+      "teachBackCheckRefs": [
+        "TBK-GE-001"
+      ],
+      "governanceTriggerRefs": [],
+      "confidence": 0.82,
+      "status": "finalized"
+    },
+    {
+      "id": "DCA-GE-003",
+      "sessionRef": "GES-001",
+      "candidateType": "waiver-condition",
+      "statement": "少額は現場判断でよいが、規約違反の疑いがある場合は上長確認を必要とする。",
+      "sourceAnswerRefs": [
+        "ANS-GE-005"
+      ],
+      "sourceProbeRefs": [
+        "PRB-GE-004"
+      ],
+      "clarificationMoveRefs": [],
+      "teachBackCheckRefs": [
+        "TBK-GE-001"
+      ],
+      "governanceTriggerRefs": [],
+      "confidence": 0.8,
+      "status": "finalized"
+    }
+  ],
+  "governanceTriggers": [],
+  "verifierBoundary": {
+    "checks": [
+      "reference resolution",
+      "plain-language explanation presence",
+      "anti-checklist strategy declaration",
+      "raw answer preservation",
+      "clarification traceability",
+      "teach-back requirement for finalized candidates",
+      "low-confidence governance routing"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "question count as quality",
+      "user consent",
+      "expert correctness"
+    ],
+    "semanticValidityRequires": [
+      "user confirmation",
+      "expert review where required",
+      "downstream QIF package validation",
+      "governance for unresolved ambiguity"
+    ]
+  }
+}

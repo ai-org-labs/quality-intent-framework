@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/qif/schemas/guided-elicitation-package.schema.json",
+  "title": "QIF Guided Elicitation Package",
+  "type": "object",
+  "required": [
+    "packageType",
+    "runtimeVersion",
+    "packageId",
+    "elicitationSessions",
+    "userComprehensionProfiles",
+    "explanationUnits",
+    "questionStrategies",
+    "stepwiseProbes",
+    "answerScaffolds",
+    "userAnswers",
+    "clarificationMoves",
+    "teachBackChecks",
+    "elicitationStates",
+    "derivedCandidates",
+    "governanceTriggers",
+    "verifierBoundary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "packageType": { "const": "guided-elicitation" },
+    "runtimeVersion": { "type": "string" },
+    "packageId": { "type": "string" },
+    "elicitationSessions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/session" } },
+    "userComprehensionProfiles": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/profile" } },
+    "explanationUnits": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/explanation" } },
+    "questionStrategies": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/strategy" } },
+    "stepwiseProbes": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/probe" } },
+    "answerScaffolds": { "type": "array", "items": { "$ref": "#/$defs/scaffold" } },
+    "userAnswers": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/answer" } },
+    "clarificationMoves": { "type": "array", "items": { "$ref": "#/$defs/clarification" } },
+    "teachBackChecks": { "type": "array", "items": { "$ref": "#/$defs/teachBack" } },
+    "elicitationStates": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/state" } },
+    "derivedCandidates": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/candidate" } },
+    "governanceTriggers": { "type": "array", "items": { "$ref": "#/$defs/governanceTrigger" } },
+    "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[A-Z]+-[A-Z0-9-]+$" },
+    "refArray": { "type": "array", "items": { "$ref": "#/$defs/id" }, "minItems": 1 },
+    "score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "profile": {
+      "type": "object",
+      "required": ["id", "userRef", "language", "qifFamiliarity", "domainKnowledge", "preferredExplanationLevel", "uncertaintySignals", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "userRef": { "type": "string" },
+        "language": { "type": "string" },
+        "qifFamiliarity": { "enum": ["none", "basic", "working", "expert"] },
+        "domainKnowledge": { "enum": ["low", "medium", "high", "unknown"] },
+        "preferredExplanationLevel": { "enum": ["plain-language", "mixed", "technical"] },
+        "uncertaintySignals": { "type": "array", "items": { "type": "string" } },
+        "status": { "enum": ["active", "retired"] }
+      }
+    },
+    "explanation": {
+      "type": "object",
+      "required": ["id", "concept", "plainLanguage", "taskExample", "prohibitedJargon", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "concept": { "type": "string" },
+        "plainLanguage": { "type": "string" },
+        "taskExample": { "type": "string" },
+        "prohibitedJargon": { "type": "array", "items": { "type": "string" } },
+        "status": { "enum": ["draft", "active", "retired"] }
+      }
+    },
+    "strategy": {
+      "type": "object",
+      "required": ["id", "trigger", "rationale", "antiChecklist", "nextProbeRules", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "trigger": { "type": "string" },
+        "rationale": { "type": "string" },
+        "antiChecklist": { "type": "boolean" },
+        "nextProbeRules": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "status": { "enum": ["draft", "active", "retired"] }
+      }
+    },
+    "probe": {
+      "type": "object",
+      "required": ["id", "sessionRef", "strategyRef", "explanationRef", "questionText", "purpose", "expectedCandidateTypes", "order", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sessionRef": { "$ref": "#/$defs/id" },
+        "strategyRef": { "$ref": "#/$defs/id" },
+        "explanationRef": { "$ref": "#/$defs/id" },
+        "questionText": { "type": "string" },
+        "purpose": { "type": "string" },
+        "expectedCandidateTypes": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "order": { "type": "integer", "minimum": 1 },
+        "status": { "enum": ["draft", "asked", "skipped", "retired"] }
+      }
+    },
+    "scaffold": {
+      "type": "object",
+      "required": ["id", "probeRef", "optional", "formats", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "probeRef": { "$ref": "#/$defs/id" },
+        "optional": { "type": "boolean" },
+        "formats": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "status": { "enum": ["draft", "offered", "used", "retired"] }
+      }
+    },
+    "answer": {
+      "type": "object",
+      "required": ["id", "sessionRef", "profileRef", "probeRef", "answerText", "captureMode", "language", "ambiguity", "sensitiveDataHandling", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sessionRef": { "$ref": "#/$defs/id" },
+        "profileRef": { "$ref": "#/$defs/id" },
+        "probeRef": { "$ref": "#/$defs/id" },
+        "answerText": { "type": "string" },
+        "captureMode": { "enum": ["interview", "clarification", "documented-response", "observation"] },
+        "language": { "type": "string" },
+        "ambiguity": { "type": "array", "items": { "type": "string" } },
+        "sensitiveDataHandling": { "type": "string" },
+        "status": { "enum": ["captured", "redacted", "retired"] }
+      }
+    },
+    "clarification": {
+      "type": "object",
+      "required": ["id", "answerRef", "reasonType", "questionText", "resolved", "resultingAnswerRefs", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "answerRef": { "$ref": "#/$defs/id" },
+        "reasonType": { "enum": ["ambiguity", "contradiction", "missing-context", "low-confidence", "comprehension-gap", "other"] },
+        "questionText": { "type": "string" },
+        "resolved": { "type": "boolean" },
+        "resultingAnswerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "status": { "enum": ["open", "closed", "retired"] }
+      }
+    },
+    "teachBack": {
+      "type": "object",
+      "required": ["id", "sessionRef", "derivedCandidateRefs", "interpretationText", "userResponse", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sessionRef": { "$ref": "#/$defs/id" },
+        "derivedCandidateRefs": { "$ref": "#/$defs/refArray" },
+        "interpretationText": { "type": "string" },
+        "userResponse": { "enum": ["accurate", "too-strong", "too-weak", "wrong", "pending"] },
+        "status": { "enum": ["draft", "accepted", "rejected", "pending"] }
+      }
+    },
+    "state": {
+      "type": "object",
+      "required": ["id", "sessionRef", "knownFacts", "unresolvedAmbiguityRefs", "fatigueSignals", "nextRecommendedMove", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sessionRef": { "$ref": "#/$defs/id" },
+        "knownFacts": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "unresolvedAmbiguityRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "fatigueSignals": { "type": "array", "items": { "type": "string" } },
+        "nextRecommendedMove": { "type": "string" },
+        "status": { "enum": ["open", "closed", "blocked"] }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "required": ["id", "sessionRef", "candidateType", "statement", "sourceAnswerRefs", "sourceProbeRefs", "clarificationMoveRefs", "teachBackCheckRefs", "governanceTriggerRefs", "confidence", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sessionRef": { "$ref": "#/$defs/id" },
+        "candidateType": { "enum": ["concern", "loss-boundary", "quality-intent", "evidence-requirement", "decision-pattern", "waiver-condition"] },
+        "statement": { "type": "string" },
+        "sourceAnswerRefs": { "$ref": "#/$defs/refArray" },
+        "sourceProbeRefs": { "$ref": "#/$defs/refArray" },
+        "clarificationMoveRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "teachBackCheckRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "confidence": { "$ref": "#/$defs/score" },
+        "status": { "enum": ["candidate", "finalized", "rejected"] }
+      }
+    },
+    "session": {
+      "type": "object",
+      "required": ["id", "target", "purpose", "profileRef", "probeRefs", "answerRefs", "clarificationMoveRefs", "teachBackCheckRefs", "derivedCandidateRefs", "stateRef", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "target": { "type": "string" },
+        "purpose": { "type": "string" },
+        "profileRef": { "$ref": "#/$defs/id" },
+        "probeRefs": { "$ref": "#/$defs/refArray" },
+        "answerRefs": { "$ref": "#/$defs/refArray" },
+        "clarificationMoveRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "teachBackCheckRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "derivedCandidateRefs": { "$ref": "#/$defs/refArray" },
+        "stateRef": { "$ref": "#/$defs/id" },
+        "status": { "enum": ["open", "closed", "blocked"] }
+      }
+    },
+    "governanceTrigger": {
+      "type": "object",
+      "required": ["id", "sourceSessionRef", "sourceDerivedCandidateRefs", "triggerType", "reason", "severity", "requiredAction", "owner", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sourceSessionRef": { "$ref": "#/$defs/id" },
+        "sourceDerivedCandidateRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "triggerType": { "enum": ["low-confidence", "unresolved-ambiguity", "coercion-risk", "checklist-drift", "comprehension-gap", "other"] },
+        "reason": { "type": "string" },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "requiredAction": { "type": "string" },
+        "owner": { "type": "string" },
+        "status": { "enum": ["open", "closed"] }
+      }
+    },
+    "verifierBoundary": {
+      "type": "object",
+      "required": ["checks", "doesNotClaim", "semanticValidityRequires"],
+      "additionalProperties": false,
+      "properties": {
+        "checks": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "doesNotClaim": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "semanticValidityRequires": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      }
+    }
+  }
+}

@@ -53,7 +53,7 @@ Use additional documents when needed:
 
 | Need | Read |
 | --- | --- |
-| Help a user who cannot yet express quality intent in QIF terms | `docs/qif-guided-elicitation-design.md` |
+| Help a user who cannot yet express quality intent in QIF terms | `docs/qif-guided-elicitation-design.md`, `docs/qif-v0.5.4-guided-elicitation-runtime.md`, `schemas/guided-elicitation-package.schema.json`, `examples/guided-elicitation-package.json` |
 | Avoid blind spots across functional, non-functional, usability, performance, security, UX, and organizational concerns | `docs/qif-quality-aspect-taxonomy.md` |
 | Discover quality intent from stakeholders or documents | `docs/qif-v0.3-discovery-layer-design.md` |
 | Extract veteran or expert judgment | `docs/expert-judgment-framework.md` |

@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Complete v0.4.3 core verifier fixture coverage now, while updating the future roadmap toward outcome-grounded, long-horizon, multi-agent quality governance",
-  "updated_at": "2026-08-10T16:09:19.811Z",
+  "content": "Continue QIF v0.5.x hardening with executable, domain-general runtimes that make AI-assisted quality discovery and evaluation traceable without treating activity counts, checklist completion, or structural verification as semantic truth.",
+  "updated_at": "2026-08-20T13:36:00.000Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
-  "source_decision_record_id": "DEC-MSNF6ZYN-80OC10",
+  "source_session_id": "SESS-QIFV054",
+  "source_decision_record_id": null,
   "declared_complete_at": null
 }

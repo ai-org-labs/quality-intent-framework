@@ -6,7 +6,7 @@ QIF does not define quality as output volume. Page count, review count, and test
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline (release Go / Conditional Go / No-Go / Pending decisions with quantitative evidence, post-release review, and traceability), the v0.4.x retained runtime fixture frontier, the v0.5.0 Living QIF Ledger baseline for cross-package references, Quality Intent lifecycle, missed-intent feedback, and agent trial/outcome records, the v0.5.1 World Model Review baseline for detecting specific conceptual-modeling gaps before AI-assisted quality verdicts, the v0.5.2 World Model Calibration baseline for measuring AI/expert agreement on unseen world-model gap cases, and the v0.5.3 World Model Pilot Corpus baseline for preparing real, privacy-screened pilot cases for calibration:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline (release Go / Conditional Go / No-Go / Pending decisions with quantitative evidence, post-release review, and traceability), the v0.4.x retained runtime fixture frontier, the v0.5.0 Living QIF Ledger baseline for cross-package references, Quality Intent lifecycle, missed-intent feedback, and agent trial/outcome records, the v0.5.1 World Model Review baseline for detecting specific conceptual-modeling gaps before AI-assisted quality verdicts, the v0.5.2 World Model Calibration baseline for measuring AI/expert agreement on unseen world-model gap cases, the v0.5.3 World Model Pilot Corpus baseline for preparing real, privacy-screened pilot cases for calibration, and the v0.5.4 Guided Elicitation Runtime for deriving candidate QIF knowledge from users who do not know QIF terminology:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -26,12 +26,14 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.5.1 World Model Review design: `docs/qif-v0.5.1-world-model-review.md`
 - QIF v0.5.2 World Model Calibration design: `docs/qif-v0.5.2-world-model-calibration.md`
 - QIF v0.5.3 World Model Pilot Corpus design: `docs/qif-v0.5.3-world-model-pilot-corpus.md`
+- QIF v0.5.4 Guided Elicitation Runtime: `docs/qif-v0.5.4-guided-elicitation-runtime.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`
 - World model review package schema: `schemas/world-model-review-package.schema.json`
 - World model calibration package schema: `schemas/world-model-calibration-package.schema.json`
 - World model pilot corpus package schema: `schemas/world-model-pilot-corpus-package.schema.json`
+- Guided elicitation package schema: `schemas/guided-elicitation-package.schema.json`
 - Quality gate package schema: `schemas/quality-gate-package.schema.json`
 - Expert judgment schema: `schemas/expert-judgment-package.schema.json`
 - Discovery session schema: `schemas/discovery-session-package.schema.json`
@@ -48,6 +50,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - Example world model review package: `examples/world-model-review-package.json`
 - Example world model calibration package: `examples/world-model-calibration-package.json`
 - Example world model pilot corpus package: `examples/world-model-pilot-corpus-package.json`
+- Example guided elicitation package: `examples/guided-elicitation-package.json`
 - Example quality gate package: `examples/quality-gate-package.json`
 - Local verifier: `tools/validate-qif.mjs`
 - Local expert judgment verifier: `tools/validate-expert-judgment.mjs`
@@ -56,9 +59,10 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - Local world model review verifier: `tools/validate-world-model-review.mjs`
 - Local world model calibration verifier: `tools/validate-world-model-calibration.mjs`
 - Local world model pilot corpus verifier: `tools/validate-world-model-pilot-corpus.mjs`
+- Local guided elicitation verifier: `tools/validate-guided-elicitation.mjs`
 - Negative fixture suite runner: `tools/run-fixture-tests.mjs`
-- Negative fixture case sources: `tools/fixtures/qif-package-cases.mjs`, `tools/fixtures/expert-judgment-cases.mjs`, `tools/fixtures/discovery-session-cases.mjs`, `tools/fixtures/organizational-quality-culture-cases.mjs`, `tools/fixtures/evaluation-target-cases.mjs`, `tools/fixtures/review-run-cases.mjs`, `tools/fixtures/qif-ledger-cases.mjs`, `tools/fixtures/world-model-review-cases.mjs`, `tools/fixtures/world-model-calibration-cases.mjs`, `tools/fixtures/world-model-pilot-corpus-cases.mjs`, `tools/fixtures/quality-gate-cases.mjs`
-- Retained negative fixture corpora: `tests/fixtures/qif-package/`, `tests/fixtures/expert-judgment/`, `tests/fixtures/discovery-session/`, `tests/fixtures/organizational-quality-culture/`, `tests/fixtures/evaluation-target/`, `tests/fixtures/review-run/`, `tests/fixtures/qif-ledger/`, `tests/fixtures/world-model-review/`, `tests/fixtures/world-model-calibration/`, `tests/fixtures/world-model-pilot-corpus/`, `tests/fixtures/quality-gate/`
+- Negative fixture case sources: `tools/fixtures/qif-package-cases.mjs`, `tools/fixtures/expert-judgment-cases.mjs`, `tools/fixtures/discovery-session-cases.mjs`, `tools/fixtures/organizational-quality-culture-cases.mjs`, `tools/fixtures/evaluation-target-cases.mjs`, `tools/fixtures/review-run-cases.mjs`, `tools/fixtures/qif-ledger-cases.mjs`, `tools/fixtures/world-model-review-cases.mjs`, `tools/fixtures/world-model-calibration-cases.mjs`, `tools/fixtures/world-model-pilot-corpus-cases.mjs`, `tools/fixtures/guided-elicitation-cases.mjs`, `tools/fixtures/quality-gate-cases.mjs`
+- Retained negative fixture corpora: `tests/fixtures/qif-package/`, `tests/fixtures/expert-judgment/`, `tests/fixtures/discovery-session/`, `tests/fixtures/organizational-quality-culture/`, `tests/fixtures/evaluation-target/`, `tests/fixtures/review-run/`, `tests/fixtures/qif-ledger/`, `tests/fixtures/world-model-review/`, `tests/fixtures/world-model-calibration/`, `tests/fixtures/world-model-pilot-corpus/`, `tests/fixtures/guided-elicitation/`, `tests/fixtures/quality-gate/`
 - AOF runtime log: `docs/aof-runtime-log.md`
 - Changelog: `CHANGELOG.md`
 
@@ -158,6 +162,20 @@ The world model pilot corpus verifier checks:
 - ingestion failures trigger governance when policy requires governance, and cannot be reported as ready
 - verifier success explicitly does not claim semantic truth, privacy-law compliance, or case representativeness
 
+The guided elicitation verifier checks:
+
+- profiles record the user's language, QIF familiarity, domain knowledge, explanation preference, and uncertainty signals
+- explanations translate QIF concepts into plain language instead of repeating jargon
+- question strategies explicitly remain anti-checklist
+- probes link to sessions, strategies, and explanations, and avoid abstract QIF terminology without plain-language framing
+- answer scaffolds are optional
+- raw user answers are preserved before interpretation
+- clarification moves link ambiguous answers to follow-up answers
+- derived candidates cite raw answers and probes
+- finalized candidates require accepted accurate teach-back checks
+- low-confidence candidates trigger governance
+- verifier success explicitly does not claim semantic truth or treat question count as quality
+
 For quality gate packages (v0.4 baseline), the runtime verifier additionally checks:
 
 - every Evaluation Perspective is a canonical perspective linked to Quality Intents
@@ -185,4 +203,4 @@ For quality gate packages (v0.4 baseline), the runtime verifier additionally che
 
 The verifier enforces structural integrity, traceability, reference resolution, confidence reproducibility, and rule compliance. It does not prove semantic truth; semantic validity requires expert review, reproduction tests, operational feedback, and governance.
 
-`npm test` also runs a standing negative fixture suite (`tools/run-fixture-tests.mjs`). The retained invalid corpora under `tests/fixtures/qif-package/`, `tests/fixtures/expert-judgment/`, `tests/fixtures/discovery-session/`, `tests/fixtures/organizational-quality-culture/`, `tests/fixtures/evaluation-target/`, `tests/fixtures/review-run/`, `tests/fixtures/qif-ledger/`, `tests/fixtures/world-model-review/`, `tests/fixtures/world-model-calibration/`, `tests/fixtures/world-model-pilot-corpus/`, and `tests/fixtures/quality-gate/` must each be rejected with a specific error, so a covered verifier rule that is silently weakened or deleted fails the build. The committed corpora are generated from `tools/fixtures/*-cases.mjs` by `npm run build-fixtures`; the suite fails on drift if generated source of truth and committed files disagree. v0.5.3 retains 451 negative checks overall and adds World Model Pilot Corpus coverage for source trust, privacy readiness, pilot sampling, normalization, expert panel quorum, and ingestion governance behavior (see `docs/qif-roadmap.md`).
+`npm test` also runs a standing negative fixture suite (`tools/run-fixture-tests.mjs`). The retained invalid corpora under `tests/fixtures/qif-package/`, `tests/fixtures/expert-judgment/`, `tests/fixtures/discovery-session/`, `tests/fixtures/organizational-quality-culture/`, `tests/fixtures/evaluation-target/`, `tests/fixtures/review-run/`, `tests/fixtures/qif-ledger/`, `tests/fixtures/world-model-review/`, `tests/fixtures/world-model-calibration/`, `tests/fixtures/world-model-pilot-corpus/`, `tests/fixtures/guided-elicitation/`, and `tests/fixtures/quality-gate/` must each be rejected with a specific error, so a covered verifier rule that is silently weakened or deleted fails the build. The committed corpora are generated from `tools/fixtures/*-cases.mjs` by `npm run build-fixtures`; the suite fails on drift if generated source of truth and committed files disagree. v0.5.4 retains 468 negative checks overall and adds Guided Elicitation coverage for plain-language explanation, anti-checklist questioning, raw-answer traceability, teach-back confirmation, and low-confidence governance behavior (see `docs/qif-roadmap.md`).

@@ -42,6 +42,10 @@
       "package": "examples/world-model-pilot-corpus-package.json"
     },
     {
+      "validator": "tools/validate-guided-elicitation.mjs",
+      "package": "examples/guided-elicitation-package.json"
+    },
+    {
       "validator": "tools/validate-qif-runtime.mjs",
       "package": "examples/quality-gate-package.json"
     }

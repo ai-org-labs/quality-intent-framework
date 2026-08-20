@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement v0.4.4 retained negative fixture coverage for the remaining runtime package verifier surfaces.",
-  "updated_at": "2026-08-10T16:14:46.840Z",
-  "agreed_with_human": null,
-  "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
-  "source_decision_record_id": "DEC-MSNF6ZYN-80OC10",
+  "content": "Implement and release QIF v0.5.4 Guided Elicitation Runtime so AI agents can derive candidate QIF knowledge through plain-language, stepwise, anti-checklist user questioning with raw-answer traceability and teach-back confirmation.",
+  "updated_at": "2026-08-20T13:35:00.000Z",
+  "agreed_with_human": true,
+  "source_session_id": "SESS-QIFV054",
+  "source_decision_record_id": null,
   "declared_complete_at": null
 }
