@@ -37,6 +37,22 @@ Artifacts:
 - Runtime doc: `docs/qif-v0.5.4-guided-elicitation-runtime.md`
 - Release notes: `RELEASE-NOTES-v0.5.4.md`
 
+Runtime verification:
+
+- `npm test`: pass, `12/12` positive checks and `468/468` retained negative checks.
+- AOF `organization-verify`: pass, `231/231` checks.
+- AOF `situation-assess`: pass with no current truth conflicts. It still recommends opening a current frontier task because the implementation task is recorded as completed.
+- JSON parse check: pass, `516` JSON files.
+- Public residue scan: pass, no legacy personal-account or local-path matches.
+
+Release outcome:
+
+- Implementation commit: `44b27794cf0c4d950f3409511a243a16ba1973ef`
+- Tag: `v0.5.4`
+- Tag target commit: `44b27794cf0c4d950f3409511a243a16ba1973ef`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.5.4`
+- Published result: released
+
 ## Guided Elicitation Design
 
 Runtime source:

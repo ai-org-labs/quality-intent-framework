@@ -18,5 +18,5 @@
   "last_triaged_at": "2026-08-20T13:30:00.000Z",
   "stale_candidate_at": null,
   "retire_candidate_at": null,
-  "triage_notes": "Guided elicitation schema, example package, verifier, negative fixture corpus, docs, roadmap, and npm test integration implemented. Release outcome will be recorded after tag and GitHub Release publication."
+  "triage_notes": "Guided elicitation schema, example package, verifier, negative fixture corpus, docs, roadmap, and npm test integration implemented. Released as v0.5.4 at commit 44b27794cf0c4d950f3409511a243a16ba1973ef."
 }
