@@ -56,6 +56,13 @@ Known residual risk:
 - AOF `situation-assess` still reports a stale alignment pulse warning from older project metadata. It did not block this release, but the next maintenance slice should refresh the stored alignment pulse and active frontier metadata.
 - The Pilot Corpus example is structurally valid but not a live organization corpus. Semantic adequacy still requires expert adjudication, privacy/legal review where applicable, downstream calibration, operational feedback, and governance.
 
+Release outcome:
+
+- Implementation commit: `326604c`
+- Tag: `v0.5.3`
+- Release URL: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.5.3`
+- Published result: `released`
+
 ## Runtime Source
 
 - AOF source: `https://github.com/ai-org-labs/ai-organization-framework/tree/v5.0.0`
