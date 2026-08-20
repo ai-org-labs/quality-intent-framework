@@ -2243,5 +2243,11 @@ QIF verification:
 
 Decision:
 
-- v0.5.2 implementation is structurally ready for commit and release.
+- v0.5.2 implementation was committed, tagged, pushed, and released.
+- Release URL: https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.5.2
+- Release published at: 2026-08-20T03:42:09Z
+- Release commit: 22345e6a53a403a9a48236c19528097410f22ea6
+- Annotated tag object: 25ffbb7bbf9efe43f659dbdca52a57c616770147
+- Tag target: 22345e6a53a403a9a48236c19528097410f22ea6
+- Remote main advanced from 1614b12 to 22345e6.
 - Residual risk: the calibration corpus is synthetic and intentionally small. The next frontier is real pilot case ingestion, expert panel adjudication, and longitudinal calibration health.
