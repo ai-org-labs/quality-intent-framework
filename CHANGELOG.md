@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.5.3
+
+- Added the executable `world-model-pilot-corpus` package type for preparing real, privacy-screened, unseen pilot cases before World Model Calibration.
+- Added `schemas/world-model-pilot-corpus-package.schema.json`, `examples/world-model-pilot-corpus-package.json`, and `tools/validate-world-model-pilot-corpus.mjs`.
+- Added first-class pilot corpus entities: Pilot Source, Privacy Control, Sampling Policy, Pilot Case, Case Normalization Step, Expert Panel, Adjudication Rubric, Ingestion Run, and Governance Trigger.
+- Required Ingestion Runs to reproduce case count, domain coverage, real-case ratio, and privacy readiness from referenced cases and privacy controls.
+- Required redaction-required pilot cases to remove sensitive data during normalization.
+- Required source trust metadata, independent expert panel quorum, adjudication criteria, and governance-on-failure behavior.
+- Added `tools/fixtures/world-model-pilot-corpus-cases.mjs` and retained `tests/fixtures/world-model-pilot-corpus/` negative fixtures.
+- Extended `npm test` and `tools/run-fixture-tests.mjs` to include the World Model Pilot Corpus verifier.
+- Increased the standing fixture suite to 11 positive checks and 451 retained negative checks.
+- Added `docs/qif-v0.5.3-world-model-pilot-corpus.md` and updated README, roadmap, and AI authoring guidance.
+
 ## v0.5.2
 
 - Added the executable `world-model-calibration` package type for measuring AI/expert agreement on World Model Gap Findings.

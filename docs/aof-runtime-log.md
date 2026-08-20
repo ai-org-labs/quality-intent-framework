@@ -2,6 +2,60 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.5.3 World Model Pilot Corpus
+
+Runtime source:
+
+- AOF latest checked: `v11.8.0` via `gh release list --repo ai-org-labs/ai-organization-framework --limit 5`
+- Runtime checkout used locally: `<local-aof-runtime-checkout>`
+- CLI entrypoint used: `node <local-aof-runtime-checkout>/src/cli.js`
+
+Need / Intent / Context:
+
+- Need: World Model Calibration requires real, unseen, privacy-screened pilot cases, but QIF did not yet structure the case ingestion layer that proves where those cases came from and whether they are safe and ready to use.
+- Intent: Add an executable `world-model-pilot-corpus` package type without redesigning QIF or turning case counts into quality.
+- Context: v0.5.2 already validates AI/expert agreement on world-model gap findings. The next value slice is the preparation layer before calibration: source trust, privacy controls, normalization, sampling, expert panel quorum, adjudication rubric, ingestion conclusion, and governance triggers.
+
+Trend and roadmap decision:
+
+- External trend check on 2026-08-20 showed agent evaluation and governance moving toward auditability, provenance, unseen cases, contamination resistance, and real-world task environments.
+- Decision: implement Pilot Corpus before longitudinal calibration health, because calibration health is weak without governed case ingestion.
+- Council judgment:
+  - Visionary: proceed; this strengthens the path from real organizational cases to QIF calibration without making QIF AOF-dependent.
+  - Builder: proceed; package, schema, example, verifier, fixtures, docs, and npm integration are bounded and executable.
+  - Guardian: proceed with boundary conditions; verifier success must not claim semantic truth, privacy-law compliance, or case representativeness.
+
+Runtime commands:
+
+- `situation-assess --project .`
+- `organization-verify --project .`
+- `command-routing-audit --project . --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.5.3-final.json`
+- `review-provenance-audit --project . --cutoff-task-id TASK-014 --write-artifact .aof/artifacts/verification/review-provenance-audit-qif-v0.5.3-final.json`
+
+Artifacts:
+
+- Command routing audit: `.aof/artifacts/verification/command-routing-audit-qif-v0.5.3-final.json`
+- Review provenance audit: `.aof/artifacts/verification/review-provenance-audit-qif-v0.5.3-final.json`
+- Schema: `schemas/world-model-pilot-corpus-package.schema.json`
+- Example: `examples/world-model-pilot-corpus-package.json`
+- Verifier: `tools/validate-world-model-pilot-corpus.mjs`
+- Fixture source: `tools/fixtures/world-model-pilot-corpus-cases.mjs`
+- Retained negative corpus: `tests/fixtures/world-model-pilot-corpus/`
+- Design doc: `docs/qif-v0.5.3-world-model-pilot-corpus.md`
+- Release notes: `RELEASE-NOTES-v0.5.3.md`
+
+Verification:
+
+- `npm test`: pass, 11/11 positive checks and 451/451 retained negative checks.
+- AOF `organization-verify`: pass, 231/231 checks.
+- AOF `command-routing-audit`: pass.
+- AOF `review-provenance-audit`: pass for scoped done tasks.
+
+Known residual risk:
+
+- AOF `situation-assess` still reports a stale alignment pulse warning from older project metadata. It did not block this release, but the next maintenance slice should refresh the stored alignment pulse and active frontier metadata.
+- The Pilot Corpus example is structurally valid but not a live organization corpus. Semantic adequacy still requires expert adjudication, privacy/legal review where applicable, downstream calibration, operational feedback, and governance.
+
 ## Runtime Source
 
 - AOF source: `https://github.com/ai-org-labs/ai-organization-framework/tree/v5.0.0`

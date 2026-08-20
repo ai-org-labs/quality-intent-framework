@@ -35,11 +35,12 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.5.2 baseline)
+## Current Position (v0.5.3 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
-  qif-ledger, world-model-review, world-model-calibration.
+  qif-ledger, world-model-review, world-model-calibration,
+  world-model-pilot-corpus.
 - Reproducible confidence, enforced gate rules, release verdict discipline
   (Go / Conditional Go / No-Go / Pending), post-release loop, traceability
   links, governance forcing.
@@ -67,17 +68,19 @@ and adoption surface — not pretending the limits away.
   before AI-assisted quality verdicts. v0.5.2 adds World Model Calibration:
   an executable package type for measuring AI/expert agreement on unseen
   world-model gap cases, reproducing agreement/false-positive/false-negative
-  rates, and forcing governance when calibration thresholds fail.
-- Weaknesses: v0.5.2 cross-package behavior is intentionally minimal and
+  rates, and forcing governance when calibration thresholds fail. v0.5.3 adds
+  World Model Pilot Corpus: an executable package type for preparing real,
+  privacy-screened, unseen pilot cases before calibration.
+- Weaknesses: v0.5.3 cross-package behavior is intentionally minimal and
   example-file based; authoring cost for humans and AI agents is still high,
-  calibration uses a small example pilot rather than a real organization case
-  corpus, agent trajectories are summarized rather than deeply typed, and no
+  Pilot Corpus now structures case ingestion but still uses example data rather
+  than a live organization corpus, agent trajectories are summarized rather than deeply typed, and no
   longitudinal empirical feedback yet exists on whether QIF confidence predicts
   real outcomes.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-08-11 against primary-source signals. The
+The roadmap was revalidated on 2026-08-20 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
@@ -219,17 +222,25 @@ Deliverables:
   type, `tools/validate-world-model-calibration.mjs`, and retained negative
   fixtures requiring reproducible agreement metrics and governance when
   thresholds fail.
+- World Model Pilot Corpus records: pilot sources, privacy controls, sampling
+  policies, pilot cases, normalization steps, expert panels, adjudication
+  rubrics, ingestion runs, and governance triggers.
+  Status: implemented in v0.5.3 through the `world-model-pilot-corpus` package
+  type, `tools/validate-world-model-pilot-corpus.mjs`, and retained negative
+  fixtures requiring reproducible corpus readiness, privacy readiness, real-case
+  ratio, independent expert quorum, and governance when ingestion thresholds
+  fail.
 
 Exit evidence:
 
 - A full chain — expert judgment, derived intent, gate decision, post-release
   incident, new derived intent — validates end-to-end across 3+ separate
-  package files. Status: partial in v0.5.2; the example ledger resolves
+  package files. Status: partial in v0.5.3; the example ledger resolves
   discovery-session, review-run, quality-gate, world-model-review, and
   world-model-calibration packages.
 - Deleting any link in that chain makes verification fail. Status: partial in
-  v0.5.2 through retained `qif-ledger`, `world-model-review`, and
-  `world-model-calibration` negative fixtures.
+  v0.5.3 through retained `qif-ledger`, `world-model-review`,
+  `world-model-calibration`, and `world-model-pilot-corpus` negative fixtures.
 - A multi-turn agent claim fails verification when its final answer is present
   but its claimed environment outcome or required provenance is absent. Status:
   partial in v0.5.0; trials must link outcome and tool/action provenance, but

@@ -1,0 +1,178 @@
+{
+  "description": "QIF world-model-pilot-corpus negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/world-model-pilot-corpus-cases.mjs; do not edit by hand.",
+  "positives": [
+    {
+      "validator": "tools/validate-qif.mjs",
+      "package": "examples/qif-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-expert-judgment.mjs",
+      "package": "examples/expert-judgment-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/discovery-session-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/organizational-quality-culture-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/evaluation-target-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/review-run-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-ledger.mjs",
+      "package": "examples/qif-ledger-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-review.mjs",
+      "package": "examples/world-model-review-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "package": "examples/world-model-calibration-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "package": "examples/world-model-pilot-corpus-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/quality-gate-package.json"
+    }
+  ],
+  "negatives": [
+    {
+      "file": "world-model-pilot-corpus-pilotSources-not-array.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "pilotSources must be an array",
+      "expect": "fail",
+      "errorIncludes": "pilotSources must be an array."
+    },
+    {
+      "file": "world-model-pilot-corpus-source-trust-verified-without-verifier.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "verified trust requires verifier",
+      "expect": "fail",
+      "errorIncludes": "SRC-WMP-001 trust verified status requires verifiedBy."
+    },
+    {
+      "file": "world-model-pilot-corpus-privacy-broken-source.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "privacy control source resolves",
+      "expect": "fail",
+      "errorIncludes": "PRV-WMP-001 references missing pilot source: SRC-NOPE-999"
+    },
+    {
+      "file": "world-model-pilot-corpus-policy-required-domains-empty.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "sampling policy requires domains",
+      "expect": "fail",
+      "errorIncludes": "SAM-WMP-001 must include requiredDomains."
+    },
+    {
+      "file": "world-model-pilot-corpus-case-broken-privacy-control.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "pilot case privacy control resolves",
+      "expect": "fail",
+      "errorIncludes": "PC-WMP-001 references missing privacy control: PRV-NOPE-999"
+    },
+    {
+      "file": "world-model-pilot-corpus-case-unseen-not-boolean.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "pilot case unseenCase is boolean",
+      "expect": "fail",
+      "errorIncludes": "PC-WMP-001 unseenCase must be boolean."
+    },
+    {
+      "file": "world-model-pilot-corpus-normalization-source-mismatch.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "normalization step source matches case source",
+      "expect": "fail",
+      "errorIncludes": "NORM-WMP-001 sourceRef must match its pilot case sourceRef."
+    },
+    {
+      "file": "world-model-pilot-corpus-normalization-sensitive-not-removed.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "redaction-required cases remove sensitive data",
+      "expect": "fail",
+      "errorIncludes": "NORM-WMP-001 must remove sensitive data for redaction-required case PC-WMP-001."
+    },
+    {
+      "file": "world-model-pilot-corpus-panel-quorum-not-independent.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "expert panel quorum is independent",
+      "expect": "fail",
+      "errorIncludes": "PAN-WMP-001 quorum must be satisfied by independent panel members."
+    },
+    {
+      "file": "world-model-pilot-corpus-rubric-criteria-empty.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "adjudication rubric has criteria",
+      "expect": "fail",
+      "errorIncludes": "RUB-WMP-001 criteria must include at least one criterion."
+    },
+    {
+      "file": "world-model-pilot-corpus-run-case-count-mismatch.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "ingestion run caseCount reproduces",
+      "expect": "fail",
+      "errorIncludes": "ING-WMP-001 caseCount must equal caseRefs length."
+    },
+    {
+      "file": "world-model-pilot-corpus-run-domain-coverage-mismatch.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "ingestion run domain coverage reproduces",
+      "expect": "fail",
+      "errorIncludes": "ING-WMP-001 domainCoverage must equal the domains of caseRefs."
+    },
+    {
+      "file": "world-model-pilot-corpus-run-real-case-ratio-mismatch.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "real case ratio reproduces",
+      "expect": "fail",
+      "errorIncludes": "ING-WMP-001 realCaseRatio must reproduce from real pilot cases: expected 1."
+    },
+    {
+      "file": "world-model-pilot-corpus-run-privacy-ready-mismatch.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "privacyReady reproduces",
+      "expect": "fail",
+      "errorIncludes": "ING-WMP-001 privacyReady must reproduce from referenced privacy controls: expected false."
+    },
+    {
+      "file": "world-model-pilot-corpus-run-synthetic-not-allowed-ready.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "synthetic cases cannot pass when policy forbids them",
+      "expect": "fail",
+      "errorIncludes": "ING-WMP-001 conclusion cannot be ready while ingestion failures exist: synthetic-case-not-allowed."
+    },
+    {
+      "file": "world-model-pilot-corpus-run-threshold-failure-without-governance.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "ingestion failures require governance",
+      "expect": "fail",
+      "errorIncludes": "ING-WMP-001 ingestion failures require governanceTriggerRefs"
+    },
+    {
+      "file": "world-model-pilot-corpus-governance-trigger-broken-run.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "governance trigger source run resolves",
+      "expect": "fail",
+      "errorIncludes": "GTR-WMP-001 references missing ingestion run: ING-NOPE-999"
+    },
+    {
+      "file": "world-model-pilot-corpus-verifier-boundary-claims-semantic-truth.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "verifier boundary avoids semantic truth",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming semantic truth."
+    }
+  ],
+  "rescopedRules": []
+}

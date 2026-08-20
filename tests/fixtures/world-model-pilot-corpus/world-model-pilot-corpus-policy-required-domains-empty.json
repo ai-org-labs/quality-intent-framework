@@ -1,0 +1,335 @@
+{
+  "packageType": "world-model-pilot-corpus",
+  "runtimeVersion": "0.5.3",
+  "packageId": "WMPKG-001",
+  "packageRefs": [
+    {
+      "id": "PKG-WMC",
+      "path": "examples/world-model-calibration-package.json",
+      "packageType": "world-model-calibration",
+      "role": "downstream-calibration-package"
+    }
+  ],
+  "pilotSources": [
+    {
+      "id": "SRC-WMP-001",
+      "sourceType": "review-history",
+      "sourceArtifact": "pilot/sanitized/software-release-review.md",
+      "domain": "software",
+      "sensitivity": "confidential",
+      "owner": "release-governance",
+      "status": "active",
+      "trust": {
+        "sources": [
+          "sanitized review export"
+        ],
+        "generatedBy": "qif-pilot-curator",
+        "verifiedBy": [
+          "release-governance"
+        ],
+        "status": "verified",
+        "staleAfter": "2026-12-31"
+      }
+    },
+    {
+      "id": "SRC-WMP-002",
+      "sourceType": "incident-report",
+      "sourceArtifact": "pilot/sanitized/maintenance-restart-incident.md",
+      "domain": "maintenance",
+      "sensitivity": "restricted",
+      "owner": "maintenance-operations",
+      "status": "active",
+      "trust": {
+        "sources": [
+          "redacted incident report"
+        ],
+        "generatedBy": "qif-pilot-curator",
+        "verifiedBy": [
+          "maintenance-operations"
+        ],
+        "status": "verified",
+        "staleAfter": "2026-12-31"
+      }
+    },
+    {
+      "id": "SRC-WMP-003",
+      "sourceType": "audit-record",
+      "sourceArtifact": "pilot/sanitized/invoice-exception-audit.md",
+      "domain": "accounting",
+      "sensitivity": "confidential",
+      "owner": "accounting-control",
+      "status": "active",
+      "trust": {
+        "sources": [
+          "sanitized audit sample"
+        ],
+        "generatedBy": "qif-pilot-curator",
+        "verifiedBy": [
+          "accounting-control"
+        ],
+        "status": "verified",
+        "staleAfter": "2026-12-31"
+      }
+    }
+  ],
+  "privacyControls": [
+    {
+      "id": "PRV-WMP-001",
+      "sourceRef": "SRC-WMP-001",
+      "classification": "confidential",
+      "redactionRequired": true,
+      "redactionState": "verified",
+      "allowedUse": "world-model-calibration",
+      "reviewer": "release-governance",
+      "status": "active"
+    },
+    {
+      "id": "PRV-WMP-002",
+      "sourceRef": "SRC-WMP-002",
+      "classification": "restricted",
+      "redactionRequired": true,
+      "redactionState": "verified",
+      "allowedUse": "world-model-calibration",
+      "reviewer": "maintenance-operations",
+      "status": "active"
+    },
+    {
+      "id": "PRV-WMP-003",
+      "sourceRef": "SRC-WMP-003",
+      "classification": "confidential",
+      "redactionRequired": true,
+      "redactionState": "verified",
+      "allowedUse": "world-model-calibration",
+      "reviewer": "accounting-control",
+      "status": "active"
+    }
+  ],
+  "samplingPolicies": [
+    {
+      "id": "SAM-WMP-001",
+      "title": "Pilot corpus readiness policy for world-model calibration",
+      "minimumCaseCount": 3,
+      "requiredDomains": [],
+      "requiresUnseenCases": true,
+      "syntheticAllowed": false,
+      "minimumRealCaseRatio": 1,
+      "sourceDiversityRequired": true,
+      "governanceOnFailure": true,
+      "status": "active"
+    }
+  ],
+  "pilotCases": [
+    {
+      "id": "PC-WMP-001",
+      "title": "Release approval wording pilot case",
+      "domain": "software",
+      "sourceRef": "SRC-WMP-001",
+      "privacyControlRef": "PRV-WMP-001",
+      "targetDescription": "A release review contains approval wording but omits the accountable approving actor and final authority boundary.",
+      "decisionContext": "Use as an unseen case for checking whether AI flags authority-boundary gaps before release verdicts.",
+      "caseKind": "real-redacted",
+      "unseenCase": true,
+      "sourceExcerptSummary": "Names, project identifiers, and ticket ids removed; approval wording and review sequence preserved.",
+      "expectedUse": "calibration-case",
+      "status": "ready"
+    },
+    {
+      "id": "PC-WMP-002",
+      "title": "Maintenance restart readiness pilot case",
+      "domain": "maintenance",
+      "sourceRef": "SRC-WMP-002",
+      "privacyControlRef": "PRV-WMP-002",
+      "targetDescription": "A restart note states ready to restart while lockout state and responsible operator are implicit.",
+      "decisionContext": "Use as an unseen case for checking whether AI detects missing state and actor definitions.",
+      "caseKind": "real-redacted",
+      "unseenCase": true,
+      "sourceExcerptSummary": "Equipment identifiers and personnel names removed; state transition ambiguity preserved.",
+      "expectedUse": "calibration-case",
+      "status": "ready"
+    },
+    {
+      "id": "PC-WMP-003",
+      "title": "Invoice exception approval pilot case",
+      "domain": "accounting",
+      "sourceRef": "SRC-WMP-003",
+      "privacyControlRef": "PRV-WMP-003",
+      "targetDescription": "An exception approval cites manager approval but omits amount authority, exception criteria, and required evidence.",
+      "decisionContext": "Use as an unseen case for checking whether AI detects approval-boundary and evidence-boundary gaps.",
+      "caseKind": "real-redacted",
+      "unseenCase": true,
+      "sourceExcerptSummary": "Vendor and amount specifics redacted; approval-limit ambiguity preserved.",
+      "expectedUse": "calibration-case",
+      "status": "ready"
+    }
+  ],
+  "caseNormalizationSteps": [
+    {
+      "id": "NORM-WMP-001",
+      "caseRef": "PC-WMP-001",
+      "sourceRef": "SRC-WMP-001",
+      "performedBy": "qif-pilot-curator",
+      "method": "redact-identifiers-preserve-decision-cues",
+      "transformationSummary": "Removed names, system identifiers, and ticket ids while preserving approval language and authority ambiguity.",
+      "preservedSignals": [
+        "approval wording",
+        "missing accountable actor",
+        "release decision context"
+      ],
+      "removedSensitiveData": true,
+      "confidence": 0.9,
+      "status": "verified"
+    },
+    {
+      "id": "NORM-WMP-002",
+      "caseRef": "PC-WMP-002",
+      "sourceRef": "SRC-WMP-002",
+      "performedBy": "qif-pilot-curator",
+      "method": "redact-identifiers-preserve-state-cues",
+      "transformationSummary": "Removed equipment and personnel identifiers while preserving lockout-state ambiguity.",
+      "preservedSignals": [
+        "restart readiness wording",
+        "implicit lockout state",
+        "missing operator boundary"
+      ],
+      "removedSensitiveData": true,
+      "confidence": 0.88,
+      "status": "verified"
+    },
+    {
+      "id": "NORM-WMP-003",
+      "caseRef": "PC-WMP-003",
+      "sourceRef": "SRC-WMP-003",
+      "performedBy": "qif-pilot-curator",
+      "method": "redact-commercial-data-preserve-control-cues",
+      "transformationSummary": "Removed vendor, amount, and account identifiers while preserving approval-limit ambiguity.",
+      "preservedSignals": [
+        "manager approval wording",
+        "missing approval limit",
+        "missing evidence boundary"
+      ],
+      "removedSensitiveData": true,
+      "confidence": 0.87,
+      "status": "verified"
+    }
+  ],
+  "expertPanels": [
+    {
+      "id": "PAN-WMP-001",
+      "name": "World model pilot adjudication panel",
+      "panelMembers": [
+        {
+          "memberId": "expert-release",
+          "role": "release approver",
+          "domain": "software",
+          "independent": true
+        },
+        {
+          "memberId": "expert-maintenance",
+          "role": "maintenance supervisor",
+          "domain": "maintenance",
+          "independent": true
+        },
+        {
+          "memberId": "expert-accounting",
+          "role": "accounting control reviewer",
+          "domain": "accounting",
+          "independent": true
+        }
+      ],
+      "quorum": 2,
+      "conflictPolicy": "Record disagreement and route unresolved conflict to governance before calibration use.",
+      "status": "active"
+    }
+  ],
+  "adjudicationRubrics": [
+    {
+      "id": "RUB-WMP-001",
+      "title": "World-model gap adjudication rubric",
+      "criteria": [
+        {
+          "id": "CR-WMP-001",
+          "description": "The case preserves the cue that should reveal the world-model gap.",
+          "scale": "pass-fail",
+          "required": true
+        },
+        {
+          "id": "CR-WMP-002",
+          "description": "The expected gap can be stated without privileged source details.",
+          "scale": "pass-fail",
+          "required": true
+        },
+        {
+          "id": "CR-WMP-003",
+          "description": "The case remains domain-general and not software-only.",
+          "scale": "pass-fail",
+          "required": true
+        }
+      ],
+      "disagreementPolicy": "Any required criterion disagreement blocks ready status until adjudicated.",
+      "status": "active"
+    }
+  ],
+  "ingestionRuns": [
+    {
+      "id": "ING-WMP-001",
+      "policyRef": "SAM-WMP-001",
+      "sourceRefs": [
+        "SRC-WMP-001",
+        "SRC-WMP-002",
+        "SRC-WMP-003"
+      ],
+      "caseRefs": [
+        "PC-WMP-001",
+        "PC-WMP-002",
+        "PC-WMP-003"
+      ],
+      "normalizationStepRefs": [
+        "NORM-WMP-001",
+        "NORM-WMP-002",
+        "NORM-WMP-003"
+      ],
+      "privacyControlRefs": [
+        "PRV-WMP-001",
+        "PRV-WMP-002",
+        "PRV-WMP-003"
+      ],
+      "expertPanelRef": "PAN-WMP-001",
+      "adjudicationRubricRef": "RUB-WMP-001",
+      "caseCount": 3,
+      "domainCoverage": [
+        "accounting",
+        "maintenance",
+        "software"
+      ],
+      "realCaseRatio": 1,
+      "privacyReady": true,
+      "conclusion": "ready",
+      "governanceTriggerRefs": [],
+      "residualRisk": "The corpus is structurally ready, but semantic adequacy still depends on expert adjudication and downstream calibration outcomes.",
+      "status": "closed"
+    }
+  ],
+  "governanceTriggers": [],
+  "verifierBoundary": {
+    "checks": [
+      "reference resolution",
+      "sampling policy reproducibility",
+      "privacy readiness reproducibility",
+      "source trust metadata presence",
+      "expert panel quorum structure",
+      "governance routing for corpus readiness failures"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "expert correctness",
+      "case representativeness",
+      "privacy-law compliance"
+    ],
+    "semanticValidityRequires": [
+      "expert adjudication",
+      "privacy or legal review where applicable",
+      "downstream calibration runs",
+      "operational feedback from pilot use"
+    ]
+  }
+}

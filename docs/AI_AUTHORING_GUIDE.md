@@ -59,6 +59,7 @@ Use additional documents when needed:
 | Review QIF model consistency | `docs/qif-v0.2.1-consolidation-review.md` |
 | Plan future quality gate/runtime work | `docs/qif-v0.4-quality-gate-runtime-requirements.md` |
 | Author a release gate decision (Go / Conditional Go / No-Go / Pending) | `schemas/quality-gate-package.schema.json`, `examples/quality-gate-package.json` |
+| Prepare real pilot cases for world-model calibration | `docs/qif-v0.5.3-world-model-pilot-corpus.md`, `schemas/world-model-pilot-corpus-package.schema.json`, `examples/world-model-pilot-corpus-package.json` |
 | Understand quality theory background | `docs/quality-theory-report.md` |
 
 ## Required Framing
@@ -149,6 +150,22 @@ Concrete Case
 -> Quality Intent Derivation
 -> Reproduction Test
 ```
+
+For world-model pilot corpus preparation, use:
+
+```text
+Pilot Source
+-> Privacy Control
+-> Pilot Case
+-> Case Normalization Step
+-> Sampling Policy
+-> Expert Panel
+-> Adjudication Rubric
+-> Ingestion Run
+-> Governance Trigger when readiness fails
+```
+
+Use this flow before calibration when the organization needs real, unseen, privacy-screened cases. Do not use it to store raw confidential material, hidden chain-of-thought, or unredacted source details.
 
 ## Output Contract
 

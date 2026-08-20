@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/qif/schemas/world-model-pilot-corpus-package.schema.json",
+  "title": "QIF World Model Pilot Corpus Package",
+  "type": "object",
+  "required": [
+    "packageType",
+    "runtimeVersion",
+    "packageId",
+    "packageRefs",
+    "pilotSources",
+    "privacyControls",
+    "samplingPolicies",
+    "pilotCases",
+    "caseNormalizationSteps",
+    "expertPanels",
+    "adjudicationRubrics",
+    "ingestionRuns",
+    "governanceTriggers",
+    "verifierBoundary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "packageType": { "const": "world-model-pilot-corpus" },
+    "runtimeVersion": { "type": "string" },
+    "packageId": { "type": "string" },
+    "packageRefs": { "type": "array", "items": { "$ref": "#/$defs/packageRef" } },
+    "pilotSources": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/pilotSource" } },
+    "privacyControls": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/privacyControl" } },
+    "samplingPolicies": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/samplingPolicy" } },
+    "pilotCases": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/pilotCase" } },
+    "caseNormalizationSteps": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/caseNormalizationStep" } },
+    "expertPanels": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/expertPanel" } },
+    "adjudicationRubrics": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/adjudicationRubric" } },
+    "ingestionRuns": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/ingestionRun" } },
+    "governanceTriggers": { "type": "array", "items": { "$ref": "#/$defs/governanceTrigger" } },
+    "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[A-Z]+-[A-Z0-9-]+$" },
+    "score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "refArray": { "type": "array", "items": { "$ref": "#/$defs/id" }, "minItems": 1 },
+    "packageRef": {
+      "type": "object",
+      "required": ["id", "path", "packageType", "role"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "path": { "type": "string" },
+        "packageType": { "type": "string" },
+        "role": { "type": "string" }
+      }
+    },
+    "trust": {
+      "type": "object",
+      "required": ["sources", "generatedBy", "verifiedBy", "status", "staleAfter"],
+      "additionalProperties": false,
+      "properties": {
+        "sources": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "generatedBy": { "type": "string" },
+        "verifiedBy": { "type": "array", "items": { "type": "string" } },
+        "status": { "enum": ["draft", "verified", "stale", "retired"] },
+        "staleAfter": { "type": "string" }
+      }
+    },
+    "pilotSource": {
+      "type": "object",
+      "required": ["id", "sourceType", "sourceArtifact", "domain", "sensitivity", "owner", "status", "trust"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sourceType": { "enum": ["document", "interview", "review-history", "incident-report", "operation-observation", "audit-record", "ticket", "customer-complaint", "other"] },
+        "sourceArtifact": { "type": "string" },
+        "domain": { "type": "string" },
+        "sensitivity": { "enum": ["public", "internal", "confidential", "restricted"] },
+        "owner": { "type": "string" },
+        "status": { "enum": ["draft", "active", "retired"] },
+        "trust": { "$ref": "#/$defs/trust" }
+      }
+    },
+    "privacyControl": {
+      "type": "object",
+      "required": ["id", "sourceRef", "classification", "redactionRequired", "redactionState", "allowedUse", "reviewer", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sourceRef": { "$ref": "#/$defs/id" },
+        "classification": { "enum": ["public", "internal", "confidential", "restricted"] },
+        "redactionRequired": { "type": "boolean" },
+        "redactionState": { "enum": ["not-required", "pending", "redacted", "verified"] },
+        "allowedUse": { "type": "string" },
+        "reviewer": { "type": "string" },
+        "status": { "enum": ["draft", "active", "retired"] }
+      }
+    },
+    "samplingPolicy": {
+      "type": "object",
+      "required": ["id", "title", "minimumCaseCount", "requiredDomains", "requiresUnseenCases", "syntheticAllowed", "minimumRealCaseRatio", "sourceDiversityRequired", "governanceOnFailure", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "minimumCaseCount": { "type": "integer", "minimum": 1 },
+        "requiredDomains": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "requiresUnseenCases": { "type": "boolean" },
+        "syntheticAllowed": { "type": "boolean" },
+        "minimumRealCaseRatio": { "$ref": "#/$defs/score" },
+        "sourceDiversityRequired": { "type": "boolean" },
+        "governanceOnFailure": { "type": "boolean" },
+        "status": { "enum": ["draft", "active", "retired"] }
+      }
+    },
+    "pilotCase": {
+      "type": "object",
+      "required": ["id", "title", "domain", "sourceRef", "privacyControlRef", "targetDescription", "decisionContext", "caseKind", "unseenCase", "sourceExcerptSummary", "expectedUse", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "domain": { "type": "string" },
+        "sourceRef": { "$ref": "#/$defs/id" },
+        "privacyControlRef": { "$ref": "#/$defs/id" },
+        "targetDescription": { "type": "string" },
+        "decisionContext": { "type": "string" },
+        "caseKind": { "enum": ["real-observed", "real-redacted", "synthetic", "derived"] },
+        "unseenCase": { "type": "boolean" },
+        "sourceExcerptSummary": { "type": "string" },
+        "expectedUse": { "type": "string" },
+        "status": { "enum": ["draft", "ready", "blocked", "retired"] }
+      }
+    },
+    "caseNormalizationStep": {
+      "type": "object",
+      "required": ["id", "caseRef", "sourceRef", "performedBy", "method", "transformationSummary", "preservedSignals", "removedSensitiveData", "confidence", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "caseRef": { "$ref": "#/$defs/id" },
+        "sourceRef": { "$ref": "#/$defs/id" },
+        "performedBy": { "type": "string" },
+        "method": { "type": "string" },
+        "transformationSummary": { "type": "string" },
+        "preservedSignals": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "removedSensitiveData": { "type": "boolean" },
+        "confidence": { "$ref": "#/$defs/score" },
+        "status": { "enum": ["draft", "verified", "blocked"] }
+      }
+    },
+    "expertPanel": {
+      "type": "object",
+      "required": ["id", "name", "panelMembers", "quorum", "conflictPolicy", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "panelMembers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["memberId", "role", "domain", "independent"],
+            "additionalProperties": false,
+            "properties": {
+              "memberId": { "type": "string" },
+              "role": { "type": "string" },
+              "domain": { "type": "string" },
+              "independent": { "type": "boolean" }
+            }
+          }
+        },
+        "quorum": { "type": "integer", "minimum": 1 },
+        "conflictPolicy": { "type": "string" },
+        "status": { "enum": ["draft", "active", "retired"] }
+      }
+    },
+    "adjudicationRubric": {
+      "type": "object",
+      "required": ["id", "title", "criteria", "disagreementPolicy", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "description", "scale", "required"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "$ref": "#/$defs/id" },
+              "description": { "type": "string" },
+              "scale": { "type": "string" },
+              "required": { "type": "boolean" }
+            }
+          }
+        },
+        "disagreementPolicy": { "type": "string" },
+        "status": { "enum": ["draft", "active", "retired"] }
+      }
+    },
+    "ingestionRun": {
+      "type": "object",
+      "required": ["id", "policyRef", "sourceRefs", "caseRefs", "normalizationStepRefs", "privacyControlRefs", "expertPanelRef", "adjudicationRubricRef", "caseCount", "domainCoverage", "realCaseRatio", "privacyReady", "conclusion", "governanceTriggerRefs", "residualRisk", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "policyRef": { "$ref": "#/$defs/id" },
+        "sourceRefs": { "$ref": "#/$defs/refArray" },
+        "caseRefs": { "$ref": "#/$defs/refArray" },
+        "normalizationStepRefs": { "$ref": "#/$defs/refArray" },
+        "privacyControlRefs": { "$ref": "#/$defs/refArray" },
+        "expertPanelRef": { "$ref": "#/$defs/id" },
+        "adjudicationRubricRef": { "$ref": "#/$defs/id" },
+        "caseCount": { "type": "integer", "minimum": 0 },
+        "domainCoverage": { "type": "array", "items": { "type": "string" } },
+        "realCaseRatio": { "$ref": "#/$defs/score" },
+        "privacyReady": { "type": "boolean" },
+        "conclusion": { "enum": ["ready", "provisional", "blocked"] },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "residualRisk": { "type": "string" },
+        "status": { "enum": ["open", "closed"] }
+      }
+    },
+    "governanceTrigger": {
+      "type": "object",
+      "required": ["id", "triggerType", "reason", "sourceIngestionRunRef", "severity", "requiredAction", "owner", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "triggerType": { "enum": ["insufficient-cases", "domain-gap", "privacy-not-ready", "synthetic-overuse", "no-quorum", "stale-source", "other"] },
+        "reason": { "type": "string" },
+        "sourceIngestionRunRef": { "$ref": "#/$defs/id" },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "requiredAction": { "type": "string" },
+        "owner": { "type": "string" },
+        "status": { "enum": ["open", "closed"] }
+      }
+    },
+    "verifierBoundary": {
+      "type": "object",
+      "required": ["checks", "doesNotClaim", "semanticValidityRequires"],
+      "additionalProperties": false,
+      "properties": {
+        "checks": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "doesNotClaim": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "semanticValidityRequires": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      }
+    }
+  }
+}
