@@ -35,11 +35,11 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.5.1 baseline)
+## Current Position (v0.5.2 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
-  qif-ledger, world-model-review.
+  qif-ledger, world-model-review, world-model-calibration.
 - Reproducible confidence, enforced gate rules, release verdict discipline
   (Go / Conditional Go / No-Go / Pending), post-release loop, traceability
   links, governance forcing.
@@ -64,12 +64,16 @@ and adoption surface — not pretending the limits away.
   records, and a ledger index. v0.5.1 adds World Model Review: an executable
   pre-verdict package type for naming exact conceptual-modeling, domain-model,
   boundary, relationship, state/event, assumption, and coordinate-system gaps
-  before AI-assisted quality verdicts.
-- Weaknesses: v0.5.1 cross-package behavior is intentionally minimal and
+  before AI-assisted quality verdicts. v0.5.2 adds World Model Calibration:
+  an executable package type for measuring AI/expert agreement on unseen
+  world-model gap cases, reproducing agreement/false-positive/false-negative
+  rates, and forcing governance when calibration thresholds fail.
+- Weaknesses: v0.5.2 cross-package behavior is intentionally minimal and
   example-file based; authoring cost for humans and AI agents is still high,
-  world-model findings are structurally specific but not semantically proven,
-  agent trajectories are summarized rather than deeply typed, and no empirical
-  feedback yet exists on whether QIF confidence predicts real outcomes.
+  calibration uses a small example pilot rather than a real organization case
+  corpus, agent trajectories are summarized rather than deeply typed, and no
+  longitudinal empirical feedback yet exists on whether QIF confidence predicts
+  real outcomes.
 
 ## 2026 Agentic AI Trend Check
 
@@ -207,16 +211,25 @@ Deliverables:
   negative fixtures requiring each finding to name the exact missing item,
   expected definition, observed problem, affected decisions, evidence, and
   resolution work.
+- World Model Calibration records: calibration policy, unseen calibration
+  cases, expert assessments, agent assessments, finding matches, calibration
+  runs, agreement score, false-positive rate, false-negative rate, and
+  governance triggers.
+  Status: implemented in v0.5.2 through the `world-model-calibration` package
+  type, `tools/validate-world-model-calibration.mjs`, and retained negative
+  fixtures requiring reproducible agreement metrics and governance when
+  thresholds fail.
 
 Exit evidence:
 
 - A full chain — expert judgment, derived intent, gate decision, post-release
   incident, new derived intent — validates end-to-end across 3+ separate
-  package files. Status: partial in v0.5.1; the example ledger resolves
-  discovery-session, review-run, quality-gate, and world-model-review packages.
+  package files. Status: partial in v0.5.2; the example ledger resolves
+  discovery-session, review-run, quality-gate, world-model-review, and
+  world-model-calibration packages.
 - Deleting any link in that chain makes verification fail. Status: partial in
-  v0.5.1 through retained `qif-ledger` and `world-model-review` negative
-  fixtures.
+  v0.5.2 through retained `qif-ledger`, `world-model-review`, and
+  `world-model-calibration` negative fixtures.
 - A multi-turn agent claim fails verification when its final answer is present
   but its claimed environment outcome or required provenance is absent. Status:
   partial in v0.5.0; trials must link outcome and tool/action provenance, but

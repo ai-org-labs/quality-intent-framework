@@ -399,6 +399,50 @@ A World Model Gap Finding must answer:
 
 World Model Review does not prove the domain model is true. It makes missing model parts explicit enough to block, downgrade, or govern a quality verdict.
 
+## World Model Calibration
+
+Use `world-model-calibration` when you need to evaluate whether AI-generated World Model Gap Findings agree with expert judgment on unseen cases.
+
+Do not claim:
+
+```text
+The AI can identify conceptual-modeling gaps because the world-model-review verifier passed.
+```
+
+The correct claim is narrower:
+
+```text
+The World Model Review package is structurally valid. Calibration must still
+show whether AI findings agree with expert findings on unseen cases.
+```
+
+A calibration package should include:
+
+- a `calibrationPolicy` with minimum cases, required domains, expert assessor count, unseen-case requirement, agreement threshold, false-positive limit, false-negative limit, and governance-on-failure behavior;
+- `calibrationCases` that were not used to author the pattern;
+- `expertAssessments` with expected findings;
+- `agentAssessments` with generated findings;
+- `findingMatches` with `exact`, `partial`, `missed`, `spurious`, or `disagreement`;
+- a `calibrationRun` with reproduced agreement, false-positive, and false-negative rates;
+- `governanceTriggers` when thresholds fail.
+
+A failed calibration run can be a valid QIF package:
+
+```json
+{
+  "agreementScore": 0.5,
+  "falseNegativeRate": 0.33,
+  "conclusion": "failed",
+  "governanceTriggerRefs": ["GTR-WMC-001", "GTR-WMC-002"]
+}
+```
+
+That means QIF is doing its job. It is preserving the difference between:
+
+- structurally valid findings;
+- calibrated findings;
+- semantically true domain knowledge.
+
 ## Evidence Independence
 
 Classify evidence strength.

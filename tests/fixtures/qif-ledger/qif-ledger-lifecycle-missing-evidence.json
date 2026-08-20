@@ -1,6 +1,6 @@
 {
   "packageType": "qif-ledger",
-  "runtimeVersion": "0.5.1",
+  "runtimeVersion": "0.5.2",
   "packageId": "LEDGERPKG-001",
   "packageRefs": [
     {
@@ -26,6 +26,12 @@
       "path": "examples/world-model-review-package.json",
       "packageType": "world-model-review",
       "role": "world-model-gap-to-quality-intent"
+    },
+    {
+      "id": "PKG-CALIB",
+      "path": "examples/world-model-calibration-package.json",
+      "packageType": "world-model-calibration",
+      "role": "world-model-gap-calibration"
     }
   ],
   "crossPackageRefs": [
@@ -88,6 +94,21 @@
       },
       "purpose": "Preserve the chain from a concrete world-model gap to a candidate Quality Intent.",
       "provenance": "Recorded by world-model-review missingItem, expectedDefinition, evidence, and resolution actions."
+    },
+    {
+      "id": "XREF-005",
+      "from": {
+        "packageRef": "PKG-CALIB",
+        "entityType": "calibrationRuns",
+        "entityRef": "CALRUN-WMC-001"
+      },
+      "to": {
+        "packageRef": "PKG-WORLD",
+        "entityType": "worldModelGapFindings",
+        "entityRef": "WMG-WM-001"
+      },
+      "purpose": "Preserve the chain from a calibration run back to the world-model gap pattern it exercises.",
+      "provenance": "Recorded by world-model-calibration case and finding-match evidence."
     }
   ],
   "qualityIntentLifecycleRecords": [
@@ -246,6 +267,16 @@
         "packageRef": "PKG-WORLD",
         "entityType": "governanceTriggers",
         "entityRef": "GTR-WM-001"
+      },
+      {
+        "packageRef": "PKG-CALIB",
+        "entityType": "governanceTriggers",
+        "entityRef": "GTR-WMC-001"
+      },
+      {
+        "packageRef": "PKG-CALIB",
+        "entityType": "governanceTriggers",
+        "entityRef": "GTR-WMC-002"
       }
     ],
     "openResidualRiskRefs": [
@@ -258,10 +289,15 @@
         "packageRef": "PKG-WORLD",
         "entityType": "worldModelGapFindings",
         "entityRef": "WMG-WM-001"
+      },
+      {
+        "packageRef": "PKG-CALIB",
+        "entityType": "calibrationRuns",
+        "entityRef": "CALRUN-WMC-001"
       }
     ],
     "lastUpdated": "2026-08-20",
-    "summary": "Minimal ledger index for the chain from discovery, world-model gaps, review and gate evidence, into post-release incident feedback."
+    "summary": "Minimal ledger index for the chain from discovery, world-model gaps, calibration runs, review and gate evidence, into post-release incident feedback."
   },
   "verifierBoundary": {
     "checks": [

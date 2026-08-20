@@ -12,6 +12,7 @@ The ledger answers:
 - Which review or gate used that intent?
 - Which incident or outcome challenged it?
 - Which world-model gap produced a candidate intent or governance trigger?
+- Which calibration run showed whether AI gap findings agree with experts?
 - Did the organization derive a new intent, accept a gap, or route work to governance?
 - Which agent trial produced an outcome, and what provenance supports it?
 
@@ -196,6 +197,7 @@ The example ledger links:
 
 - discovery-session derived Quality Intent records
 - world-model-review gap findings and candidate Quality Intents
+- world-model-calibration runs and calibration governance triggers
 - review-run governance escalation
 - quality-gate post-release incident feedback
 - a minimal agent trial and outcome record
@@ -219,3 +221,17 @@ The example preserves:
 This keeps the ledger boundary unchanged. The ledger verifies that references
 resolve and lifecycle evidence exists. It does not decide whether the world
 model itself is semantically correct.
+
+## v0.5.2 World Model Calibration Link
+
+v0.5.2 extends the ledger example and verifier entity index so a ledger can
+reference `world-model-calibration` packages.
+
+The example preserves:
+
+- the calibration run that compares expert and AI World Model Gap Findings;
+- agreement, false-positive, and false-negative residual risk through the run;
+- open governance triggers caused by threshold failure.
+
+This keeps calibration evidence connected to the living quality memory without
+letting the ledger claim semantic truth.

@@ -2183,3 +2183,65 @@ Decision:
 - Tag target: e7163b840b315efe22aa58062dda59e58bc1d375
 - Remote main advanced from eb576ba to e7163b8.
 - Residual risk: World Model Review is structurally specific but not semantically calibrated. The next quality step is pilot calibration: unseen organization cases, expert/AI agreement scoring, disagreement handling, and governance effect.
+
+## QIF v0.5.2 World Model Calibration
+
+Date: 2026-08-20
+
+Need / Intent / Context:
+
+- Need: v0.5.1 can force World Model Gap Findings to be specific, but a structurally valid finding may still disagree with domain experts. QIF needs a way to measure AI/expert agreement on unseen cases before claiming pilot readiness.
+- Intent: add an executable World Model Calibration package type that records calibration policies, unseen cases, expert assessments, agent assessments, finding matches, reproducible agreement metrics, threshold outcomes, and governance triggers.
+- Context: QIF remains standalone. AOF v11.8.0 was used as development runtime evidence. This is a calibration layer, not a semantic-truth oracle.
+
+Direction and council judgment:
+
+- Visionary: approve. Calibration closes the gap between structural specificity and real pilot trust by making disagreement measurable and governable.
+- Builder: approve. Implement a narrow package type and verifier first; use a small example pilot across software, maintenance, and accounting.
+- Guardian: approve with guardrails. A failed calibration run must be a valid package when it is explicit and governance-triggered; a failed threshold must not be reported as calibrated.
+
+What was built:
+
+- `schemas/world-model-calibration-package.schema.json`
+- `examples/world-model-calibration-package.json`
+- `tools/validate-world-model-calibration.mjs`
+- `tools/fixtures/world-model-calibration-cases.mjs`
+- `tests/fixtures/world-model-calibration/`
+- `docs/qif-v0.5.2-world-model-calibration.md`
+- `RELEASE-NOTES-v0.5.2.md`
+- README, roadmap, AI authoring guide, changelog, and Living Ledger documentation updates.
+- `examples/qif-ledger-package.json` and `tools/validate-qif-ledger.mjs` updates so ledger packages can reference calibration runs and calibration governance triggers.
+
+What was not built:
+
+- No UI.
+- No external system integration.
+- No production pilot corpus.
+- No expert panel workflow automation.
+- No semantic-truth or expert-correctness claim.
+
+Key design decision:
+
+- `CalibrationRun` can validly conclude `failed` when agreement is low or false-negative rate is high, provided governance triggers are present. This preserves the distinction between structural validity, calibration status, and semantic truth.
+
+AOF runtime command evidence:
+
+- AOF latest check: `ai-org-labs/ai-organization-framework` latest tag was `v11.8.0`.
+- AOF v11.8.0 `situation-assess --project .` passed and flagged stale alignment pulse as a warning.
+- AOF v11.8.0 `organization-verify --project .` passed with 231/231 checks.
+- AOF v11.8.0 `command-routing-audit --project . --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.5.2-final.json` passed.
+- AOF v11.8.0 `review-provenance-audit --project . --cutoff-task-id TASK-014 --write-artifact .aof/artifacts/verification/review-provenance-audit-qif-v0.5.2-final.json` passed.
+
+QIF verification:
+
+- `node tools/validate-world-model-calibration.mjs examples/world-model-calibration-package.json` passed.
+- `node tools/validate-qif-ledger.mjs examples/qif-ledger-package.json` passed with 5 package refs and calibration references.
+- `npm test` passed with 10/10 positive checks and 433/433 negative checks.
+- JSON parse check passed for package, examples, schemas, assessments, fixture manifests, and AOF verification artifacts.
+- `git diff --check` passed.
+- Public residue scan found no personal account, email, legacy repository, user-home, or temporary checkout path residue outside `.git`.
+
+Decision:
+
+- v0.5.2 implementation is structurally ready for commit and release.
+- Residual risk: the calibration corpus is synthetic and intentionally small. The next frontier is real pilot case ingestion, expert panel adjudication, and longitudinal calibration health.

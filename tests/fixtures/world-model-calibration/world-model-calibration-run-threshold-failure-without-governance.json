@@ -1,0 +1,328 @@
+{
+  "packageType": "world-model-calibration",
+  "runtimeVersion": "0.5.2",
+  "packageId": "WMCPKG-001",
+  "packageRefs": [
+    {
+      "id": "PKG-WORLD",
+      "path": "examples/world-model-review-package.json",
+      "packageType": "world-model-review",
+      "role": "source-world-model-review-package"
+    }
+  ],
+  "calibrationPolicies": [
+    {
+      "id": "CALPOL-WMC-001",
+      "title": "Pilot threshold for AI world-model gap findings",
+      "targetPackageRefs": [
+        "PKG-WORLD"
+      ],
+      "minimumCaseCount": 3,
+      "requiredDomains": [
+        "software",
+        "maintenance",
+        "accounting"
+      ],
+      "requiredExpertAssessorsPerCase": 1,
+      "requiresUnseenCases": true,
+      "agreementThreshold": 0.7,
+      "falsePositiveRateMax": 0.2,
+      "falseNegativeRateMax": 0.2,
+      "scoreRule": "exact-1-partial-0.5-miss-0",
+      "governanceOnFailure": true,
+      "status": "active"
+    }
+  ],
+  "calibrationCases": [
+    {
+      "id": "CALCASE-WMC-001",
+      "title": "Release approval wording case",
+      "domain": "software",
+      "targetDescription": "A release request uses approved without naming the approving actor or authority boundary.",
+      "sourceArtifact": "pilot/software-release-approval.md",
+      "unseenCase": true,
+      "sourceWorldModelRef": {
+        "packageRef": "PKG-WORLD",
+        "entityType": "worldModels",
+        "entityRef": "WMD-001"
+      },
+      "expectedGapObjectTypes": [
+        "Boundary"
+      ],
+      "decisionContext": "Determine whether AI may recommend final release approval."
+    },
+    {
+      "id": "CALCASE-WMC-002",
+      "title": "Maintenance lockout restart case",
+      "domain": "maintenance",
+      "targetDescription": "A restart checklist says equipment is ready but omits the lockout removal state and responsible operator.",
+      "sourceArtifact": "pilot/maintenance-restart.md",
+      "unseenCase": true,
+      "sourceWorldModelRef": {
+        "packageRef": "PKG-WORLD",
+        "entityType": "worldModels",
+        "entityRef": "WMD-001"
+      },
+      "expectedGapObjectTypes": [
+        "State",
+        "Actor"
+      ],
+      "decisionContext": "Determine whether AI may judge restart readiness."
+    },
+    {
+      "id": "CALCASE-WMC-003",
+      "title": "Invoice exception approval case",
+      "domain": "accounting",
+      "targetDescription": "An invoice exception note says manager approved, but the approval limit, exception condition, and evidence requirements are not modeled.",
+      "sourceArtifact": "pilot/invoice-exception-approval.md",
+      "unseenCase": true,
+      "sourceWorldModelRef": {
+        "packageRef": "PKG-WORLD",
+        "entityType": "worldModels",
+        "entityRef": "WMD-001"
+      },
+      "expectedGapObjectTypes": [
+        "Boundary"
+      ],
+      "decisionContext": "Determine whether AI may accept the exception as compliant."
+    }
+  ],
+  "expertAssessments": [
+    {
+      "id": "EXA-WMC-001",
+      "caseRef": "CALCASE-WMC-001",
+      "assessor": "release-governance-expert",
+      "role": "release approver",
+      "assessmentMode": "blind-review",
+      "expectedFindings": [
+        {
+          "id": "EXF-WMC-001",
+          "gapObjectType": "Boundary",
+          "missingItem": "Final approval authority boundary.",
+          "expectedDefinition": "Define who can approve the release, which approval conditions apply, what evidence must be cited, and how AI review status differs from final approval.",
+          "verdictEffect": "block-evaluation",
+          "severity": "critical",
+          "rationale": "The word approved cannot be interpreted safely without explicit accountable authority.",
+          "sourceFindingRef": {
+            "packageRef": "PKG-WORLD",
+            "entityType": "worldModelGapFindings",
+            "entityRef": "WMG-WM-001"
+          }
+        }
+      ],
+      "confidence": 0.91
+    },
+    {
+      "id": "EXA-WMC-002",
+      "caseRef": "CALCASE-WMC-002",
+      "assessor": "maintenance-operations-expert",
+      "role": "maintenance supervisor",
+      "assessmentMode": "blind-review",
+      "expectedFindings": [
+        {
+          "id": "EXF-WMC-002",
+          "gapObjectType": "State",
+          "missingItem": "Lockout removal state and accountable operator.",
+          "expectedDefinition": "Define the lockout-applied and lockout-removed states, the event that changes the state, and the operator authorized to confirm the transition.",
+          "verdictEffect": "require-governance",
+          "severity": "high",
+          "rationale": "Restart readiness cannot be judged if lockout state and accountable operator are implicit."
+        }
+      ],
+      "confidence": 0.88
+    },
+    {
+      "id": "EXA-WMC-003",
+      "caseRef": "CALCASE-WMC-003",
+      "assessor": "accounting-control-expert",
+      "role": "accounting manager",
+      "assessmentMode": "blind-review",
+      "expectedFindings": [
+        {
+          "id": "EXF-WMC-003",
+          "gapObjectType": "Boundary",
+          "missingItem": "Invoice exception approval limit and evidence boundary.",
+          "expectedDefinition": "Define approval amount limits, exception criteria, evidence required for approval, and escalation path when a manager lacks authority.",
+          "verdictEffect": "block-evaluation",
+          "severity": "high",
+          "rationale": "The AI cannot determine whether the exception is compliant from the phrase manager approved alone."
+        }
+      ],
+      "confidence": 0.86
+    }
+  ],
+  "agentAssessments": [
+    {
+      "id": "AGA-WMC-001",
+      "caseRef": "CALCASE-WMC-001",
+      "generatedBy": "ai-world-model-reviewer",
+      "modelOrAgent": "codex-qif-world-model-reviewer",
+      "assessmentMode": "blind-review",
+      "generatedFindings": [
+        {
+          "id": "AGF-WMC-001",
+          "gapObjectType": "Boundary",
+          "missingItem": "Final approval authority boundary.",
+          "expectedDefinition": "Define the approving actor, approval conditions, required evidence, delegation rules, and distinction from AI review pass status.",
+          "verdictEffect": "block-evaluation",
+          "severity": "critical",
+          "rationale": "AI review may be mistaken for final approval when authority is only implied.",
+          "sourceFindingRef": {
+            "packageRef": "PKG-WORLD",
+            "entityType": "worldModelGapFindings",
+            "entityRef": "WMG-WM-001"
+          }
+        }
+      ],
+      "confidence": 0.84,
+      "transcriptHandling": "summary-without-hidden-reasoning"
+    },
+    {
+      "id": "AGA-WMC-002",
+      "caseRef": "CALCASE-WMC-002",
+      "generatedBy": "ai-world-model-reviewer",
+      "modelOrAgent": "codex-qif-world-model-reviewer",
+      "assessmentMode": "blind-review",
+      "generatedFindings": [
+        {
+          "id": "AGF-WMC-002",
+          "gapObjectType": "Actor",
+          "missingItem": "Accountable restart operator.",
+          "expectedDefinition": "Define which operator may confirm restart readiness and who is responsible for the decision.",
+          "verdictEffect": "degrade-confidence",
+          "severity": "medium",
+          "rationale": "The checklist omits who owns restart confirmation."
+        }
+      ],
+      "confidence": 0.72,
+      "transcriptHandling": "summary-without-hidden-reasoning"
+    },
+    {
+      "id": "AGA-WMC-003",
+      "caseRef": "CALCASE-WMC-003",
+      "generatedBy": "ai-world-model-reviewer",
+      "modelOrAgent": "codex-qif-world-model-reviewer",
+      "assessmentMode": "blind-review",
+      "generatedFindings": [],
+      "confidence": 0.61,
+      "transcriptHandling": "summary-without-hidden-reasoning"
+    }
+  ],
+  "findingMatches": [
+    {
+      "id": "FMA-WMC-001",
+      "caseRef": "CALCASE-WMC-001",
+      "expertAssessmentRef": "EXA-WMC-001",
+      "agentAssessmentRef": "AGA-WMC-001",
+      "expertFindingRef": "EXF-WMC-001",
+      "agentFindingRef": "AGF-WMC-001",
+      "matchType": "exact",
+      "score": 1,
+      "rationale": "Expert and agent both identified the same final approval authority boundary gap."
+    },
+    {
+      "id": "FMA-WMC-002",
+      "caseRef": "CALCASE-WMC-002",
+      "expertAssessmentRef": "EXA-WMC-002",
+      "agentAssessmentRef": "AGA-WMC-002",
+      "expertFindingRef": "EXF-WMC-002",
+      "agentFindingRef": "AGF-WMC-002",
+      "matchType": "partial",
+      "score": 0.5,
+      "rationale": "The agent identified the accountable operator but missed the lockout state transition."
+    },
+    {
+      "id": "FMA-WMC-003",
+      "caseRef": "CALCASE-WMC-003",
+      "expertAssessmentRef": "EXA-WMC-003",
+      "agentAssessmentRef": "AGA-WMC-003",
+      "expertFindingRef": "EXF-WMC-003",
+      "matchType": "missed",
+      "score": 0,
+      "rationale": "The agent failed to identify the invoice exception approval boundary gap."
+    }
+  ],
+  "calibrationRuns": [
+    {
+      "id": "CALRUN-WMC-001",
+      "policyRef": "CALPOL-WMC-001",
+      "caseRefs": [
+        "CALCASE-WMC-001",
+        "CALCASE-WMC-002",
+        "CALCASE-WMC-003"
+      ],
+      "expertAssessmentRefs": [
+        "EXA-WMC-001",
+        "EXA-WMC-002",
+        "EXA-WMC-003"
+      ],
+      "agentAssessmentRefs": [
+        "AGA-WMC-001",
+        "AGA-WMC-002",
+        "AGA-WMC-003"
+      ],
+      "findingMatchRefs": [
+        "FMA-WMC-001",
+        "FMA-WMC-002",
+        "FMA-WMC-003"
+      ],
+      "caseCount": 3,
+      "domainCoverage": [
+        "software",
+        "maintenance",
+        "accounting"
+      ],
+      "agreementScore": 0.5,
+      "falsePositiveRate": 0,
+      "falseNegativeRate": 0.33,
+      "conclusion": "failed",
+      "governanceTriggerRefs": [],
+      "residualRisk": "World Model Gap Finding generation is structurally executable but not calibrated enough for autonomous pilot use.",
+      "status": "reviewed"
+    }
+  ],
+  "governanceTriggers": [
+    {
+      "id": "GTR-WMC-001",
+      "triggerType": "low-agreement",
+      "reason": "Agreement score 0.50 is below the required 0.70 threshold.",
+      "sourceCalibrationRunRef": "CALRUN-WMC-001",
+      "severity": "high",
+      "requiredAction": "Collect more unseen cases, inspect missed and partial matches, and update prompts or schemas before claiming semantic calibration.",
+      "owner": "qif-maintainer",
+      "status": "open"
+    },
+    {
+      "id": "GTR-WMC-002",
+      "triggerType": "high-false-negative-rate",
+      "reason": "False negative rate 0.33 exceeds the allowed 0.20 threshold.",
+      "sourceCalibrationRunRef": "CALRUN-WMC-001",
+      "severity": "high",
+      "requiredAction": "Analyze missed accounting approval-boundary cases and add calibration examples before autonomous use.",
+      "owner": "qif-maintainer",
+      "status": "open"
+    }
+  ],
+  "verifierBoundary": {
+    "checks": [
+      "package references resolve",
+      "calibration cases are unseen when policy requires unseen cases",
+      "expert and agent assessments resolve to cases",
+      "finding matches cover expected and generated findings",
+      "agreement, false-positive, and false-negative rates reproduce from finding matches",
+      "threshold failures trigger governance"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "expert correctness",
+      "domain correctness",
+      "production readiness"
+    ],
+    "semanticValidityRequires": [
+      "larger real-domain pilot corpus",
+      "independent expert panel review",
+      "operational feedback",
+      "governance decision"
+    ]
+  }
+}

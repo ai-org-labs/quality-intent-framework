@@ -1,0 +1,310 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/qif/schemas/world-model-calibration-package.schema.json",
+  "title": "QIF World Model Calibration Package",
+  "type": "object",
+  "required": [
+    "packageType",
+    "runtimeVersion",
+    "packageId",
+    "packageRefs",
+    "calibrationPolicies",
+    "calibrationCases",
+    "expertAssessments",
+    "agentAssessments",
+    "findingMatches",
+    "calibrationRuns",
+    "governanceTriggers",
+    "verifierBoundary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "packageType": { "const": "world-model-calibration" },
+    "runtimeVersion": { "type": "string" },
+    "packageId": { "type": "string" },
+    "packageRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/packageRef" }
+    },
+    "calibrationPolicies": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/calibrationPolicy" }
+    },
+    "calibrationCases": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/calibrationCase" }
+    },
+    "expertAssessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/expertAssessment" }
+    },
+    "agentAssessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/agentAssessment" }
+    },
+    "findingMatches": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/findingMatch" }
+    },
+    "calibrationRuns": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/calibrationRun" }
+    },
+    "governanceTriggers": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/governanceTrigger" }
+    },
+    "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]+-[A-Z0-9-]+$"
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "refArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" },
+      "minItems": 1
+    },
+    "packageRef": {
+      "type": "object",
+      "required": ["id", "path", "packageType", "role"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "path": { "type": "string" },
+        "packageType": { "type": "string" },
+        "role": { "type": "string" }
+      }
+    },
+    "entityRef": {
+      "type": "object",
+      "required": ["packageRef", "entityType", "entityRef"],
+      "additionalProperties": false,
+      "properties": {
+        "packageRef": { "$ref": "#/$defs/id" },
+        "entityType": { "type": "string" },
+        "entityRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "calibratedFinding": {
+      "type": "object",
+      "required": ["id", "gapObjectType", "missingItem", "expectedDefinition", "verdictEffect", "severity", "rationale"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "gapObjectType": { "enum": ["Concept", "Actor", "Boundary", "Relationship", "State", "Event", "Invariant", "CoordinateAxis", "CoordinateSystem", "Perspective", "Assumption", "DomainEntity"] },
+        "missingItem": { "type": "string" },
+        "expectedDefinition": { "type": "string" },
+        "verdictEffect": { "enum": ["block-evaluation", "degrade-confidence", "require-governance", "note-residual-risk"] },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "rationale": { "type": "string" },
+        "sourceFindingRef": { "$ref": "#/$defs/entityRef" }
+      }
+    },
+    "calibrationPolicy": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "targetPackageRefs",
+        "minimumCaseCount",
+        "requiredDomains",
+        "requiredExpertAssessorsPerCase",
+        "requiresUnseenCases",
+        "agreementThreshold",
+        "falsePositiveRateMax",
+        "falseNegativeRateMax",
+        "scoreRule",
+        "governanceOnFailure",
+        "status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "targetPackageRefs": { "$ref": "#/$defs/refArray" },
+        "minimumCaseCount": { "type": "integer", "minimum": 1 },
+        "requiredDomains": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "requiredExpertAssessorsPerCase": { "type": "integer", "minimum": 1 },
+        "requiresUnseenCases": { "type": "boolean" },
+        "agreementThreshold": { "$ref": "#/$defs/score" },
+        "falsePositiveRateMax": { "$ref": "#/$defs/score" },
+        "falseNegativeRateMax": { "$ref": "#/$defs/score" },
+        "scoreRule": { "enum": ["exact-1-partial-0.5-miss-0"] },
+        "governanceOnFailure": { "type": "boolean" },
+        "status": { "enum": ["draft", "active", "retired"] }
+      }
+    },
+    "calibrationCase": {
+      "type": "object",
+      "required": ["id", "title", "domain", "targetDescription", "sourceArtifact", "unseenCase", "sourceWorldModelRef", "expectedGapObjectTypes", "decisionContext"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "domain": { "type": "string" },
+        "targetDescription": { "type": "string" },
+        "sourceArtifact": { "type": "string" },
+        "unseenCase": { "type": "boolean" },
+        "sourceWorldModelRef": { "$ref": "#/$defs/entityRef" },
+        "expectedGapObjectTypes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "decisionContext": { "type": "string" }
+      }
+    },
+    "expertAssessment": {
+      "type": "object",
+      "required": ["id", "caseRef", "assessor", "role", "assessmentMode", "expectedFindings", "confidence"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "caseRef": { "$ref": "#/$defs/id" },
+        "assessor": { "type": "string" },
+        "role": { "type": "string" },
+        "assessmentMode": { "enum": ["blind-review", "panel-review", "adjudicated"] },
+        "expectedFindings": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/calibratedFinding" }
+        },
+        "confidence": { "$ref": "#/$defs/score" }
+      }
+    },
+    "agentAssessment": {
+      "type": "object",
+      "required": ["id", "caseRef", "generatedBy", "modelOrAgent", "assessmentMode", "generatedFindings", "confidence", "transcriptHandling"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "caseRef": { "$ref": "#/$defs/id" },
+        "generatedBy": { "type": "string" },
+        "modelOrAgent": { "type": "string" },
+        "assessmentMode": { "enum": ["blind-review", "tool-assisted-review", "retrospective-review"] },
+        "generatedFindings": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/calibratedFinding" }
+        },
+        "confidence": { "$ref": "#/$defs/score" },
+        "transcriptHandling": { "type": "string" }
+      }
+    },
+    "findingMatch": {
+      "type": "object",
+      "required": ["id", "caseRef", "expertAssessmentRef", "agentAssessmentRef", "matchType", "score", "rationale"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "caseRef": { "$ref": "#/$defs/id" },
+        "expertAssessmentRef": { "$ref": "#/$defs/id" },
+        "agentAssessmentRef": { "$ref": "#/$defs/id" },
+        "expertFindingRef": { "$ref": "#/$defs/id" },
+        "agentFindingRef": { "$ref": "#/$defs/id" },
+        "matchType": { "enum": ["exact", "partial", "missed", "spurious", "disagreement"] },
+        "score": { "$ref": "#/$defs/score" },
+        "rationale": { "type": "string" }
+      }
+    },
+    "calibrationRun": {
+      "type": "object",
+      "required": [
+        "id",
+        "policyRef",
+        "caseRefs",
+        "expertAssessmentRefs",
+        "agentAssessmentRefs",
+        "findingMatchRefs",
+        "caseCount",
+        "domainCoverage",
+        "agreementScore",
+        "falsePositiveRate",
+        "falseNegativeRate",
+        "conclusion",
+        "governanceTriggerRefs",
+        "residualRisk",
+        "status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "policyRef": { "$ref": "#/$defs/id" },
+        "caseRefs": { "$ref": "#/$defs/refArray" },
+        "expertAssessmentRefs": { "$ref": "#/$defs/refArray" },
+        "agentAssessmentRefs": { "$ref": "#/$defs/refArray" },
+        "findingMatchRefs": { "$ref": "#/$defs/refArray" },
+        "caseCount": { "type": "integer", "minimum": 0 },
+        "domainCoverage": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "agreementScore": { "$ref": "#/$defs/score" },
+        "falsePositiveRate": { "$ref": "#/$defs/score" },
+        "falseNegativeRate": { "$ref": "#/$defs/score" },
+        "conclusion": { "enum": ["calibrated", "provisional", "failed"] },
+        "governanceTriggerRefs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "residualRisk": { "type": "string" },
+        "status": { "enum": ["draft", "reviewed", "accepted", "superseded"] }
+      }
+    },
+    "governanceTrigger": {
+      "type": "object",
+      "required": ["id", "triggerType", "reason", "sourceCalibrationRunRef", "severity", "requiredAction", "owner", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "triggerType": { "enum": ["low-agreement", "high-false-positive-rate", "high-false-negative-rate", "insufficient-case-count", "domain-gap", "expert-disagreement", "other"] },
+        "reason": { "type": "string" },
+        "sourceCalibrationRunRef": { "$ref": "#/$defs/id" },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "requiredAction": { "type": "string" },
+        "owner": { "type": "string" },
+        "status": { "enum": ["open", "reviewed", "resolved"] }
+      }
+    },
+    "verifierBoundary": {
+      "type": "object",
+      "required": ["checks", "doesNotClaim", "semanticValidityRequires"],
+      "additionalProperties": false,
+      "properties": {
+        "checks": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "doesNotClaim": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "semanticValidityRequires": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

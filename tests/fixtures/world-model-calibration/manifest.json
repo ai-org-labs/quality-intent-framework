@@ -1,0 +1,195 @@
+{
+  "description": "QIF world-model-calibration negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/world-model-calibration-cases.mjs; do not edit by hand.",
+  "positives": [
+    {
+      "validator": "tools/validate-qif.mjs",
+      "package": "examples/qif-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-expert-judgment.mjs",
+      "package": "examples/expert-judgment-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/discovery-session-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/organizational-quality-culture-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/evaluation-target-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/review-run-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-ledger.mjs",
+      "package": "examples/qif-ledger-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-review.mjs",
+      "package": "examples/world-model-review-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "package": "examples/world-model-calibration-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/quality-gate-package.json"
+    }
+  ],
+  "negatives": [
+    {
+      "file": "world-model-calibration-packageRefs-not-array.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "packageRefs must be an array",
+      "expect": "fail",
+      "errorIncludes": "packageRefs must be an array."
+    },
+    {
+      "file": "world-model-calibration-package-ref-path-missing.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "package ref path exists",
+      "expect": "fail",
+      "errorIncludes": "PKG-WORLD package path does not exist"
+    },
+    {
+      "file": "world-model-calibration-package-ref-wrong-type.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "package ref type matches referenced package",
+      "expect": "fail",
+      "errorIncludes": "PKG-WORLD expected packageType qif-ledger but found world-model-review."
+    },
+    {
+      "file": "world-model-calibration-policy-missing-target-package.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "policy target package refs are required",
+      "expect": "fail",
+      "errorIncludes": "CALPOL-WMC-001 must include at least one target package."
+    },
+    {
+      "file": "world-model-calibration-case-source-world-model-broken.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "calibration case source world model ref resolves",
+      "expect": "fail",
+      "errorIncludes": "CALCASE-WMC-001/sourceWorldModelRef references missing entity"
+    },
+    {
+      "file": "world-model-calibration-expert-expected-findings-empty.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "expert assessments include expected findings",
+      "expect": "fail",
+      "errorIncludes": "EXA-WMC-001 must include expectedFindings."
+    },
+    {
+      "file": "world-model-calibration-expert-finding-duplicate-id.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "expert finding ids are unique inside assessment",
+      "expect": "fail",
+      "errorIncludes": "Duplicate id EXF-WMC-001 in EXA-WMC-001/expectedFindings:findings."
+    },
+    {
+      "file": "world-model-calibration-agent-hidden-reasoning.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "agent assessment must not store hidden reasoning",
+      "expect": "fail",
+      "errorIncludes": "AGA-WMC-001 must not store hidden chain-of-thought as calibration evidence."
+    },
+    {
+      "file": "world-model-calibration-match-missing-expert-finding.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "finding match expert finding resolves",
+      "expect": "fail",
+      "errorIncludes": "FMA-WMC-001 references missing expert finding: EXF-NOPE-999"
+    },
+    {
+      "file": "world-model-calibration-match-exact-score-wrong.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "match score reproduces from match type",
+      "expect": "fail",
+      "errorIncludes": "FMA-WMC-001 score must be 1 for matchType exact."
+    },
+    {
+      "file": "world-model-calibration-match-missed-with-agent-finding.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "missed match must not include agent finding",
+      "expect": "fail",
+      "errorIncludes": "FMA-WMC-003 missed match must not include agentFindingRef."
+    },
+    {
+      "file": "world-model-calibration-agent-generated-finding-uncovered.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "generated findings must be compared",
+      "expect": "fail",
+      "errorIncludes": "AGA-WMC-001 generated finding AGF-WMC-001 is not covered by any findingMatch."
+    },
+    {
+      "file": "world-model-calibration-run-case-count-mismatch.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "run caseCount reproduces from cases",
+      "expect": "fail",
+      "errorIncludes": "CALRUN-WMC-001 caseCount must equal caseRefs length."
+    },
+    {
+      "file": "world-model-calibration-run-domain-coverage-mismatch.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "run domainCoverage equals case domains",
+      "expect": "fail",
+      "errorIncludes": "CALRUN-WMC-001 domainCoverage must equal the domains of caseRefs."
+    },
+    {
+      "file": "world-model-calibration-run-agreement-score-mismatch.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "agreement score is reproducible",
+      "expect": "fail",
+      "errorIncludes": "CALRUN-WMC-001 agreementScore must reproduce from findingMatch scores: expected 0.5."
+    },
+    {
+      "file": "world-model-calibration-run-false-positive-rate-mismatch.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "false positive rate is reproducible",
+      "expect": "fail",
+      "errorIncludes": "CALRUN-WMC-001 falsePositiveRate must reproduce from spurious findingMatches: expected 0."
+    },
+    {
+      "file": "world-model-calibration-run-false-negative-rate-mismatch.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "false negative rate is reproducible",
+      "expect": "fail",
+      "errorIncludes": "CALRUN-WMC-001 falseNegativeRate must reproduce from missed findingMatches: expected 0.33."
+    },
+    {
+      "file": "world-model-calibration-run-threshold-failure-without-governance.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "threshold failures require governance",
+      "expect": "fail",
+      "errorIncludes": "CALRUN-WMC-001 calibration failures require governanceTriggerRefs"
+    },
+    {
+      "file": "world-model-calibration-run-calibrated-despite-failure.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "failed threshold cannot be called calibrated",
+      "expect": "fail",
+      "errorIncludes": "CALRUN-WMC-001 conclusion cannot be calibrated while calibration failures exist"
+    },
+    {
+      "file": "world-model-calibration-governance-trigger-broken-run.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "governance trigger source calibration run resolves",
+      "expect": "fail",
+      "errorIncludes": "GTR-WMC-001 references missing calibration run: CALRUN-NOPE-999"
+    },
+    {
+      "file": "world-model-calibration-verifier-boundary-claims-semantic-truth.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "calibration verifier boundary avoids semantic truth",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming semantic truth."
+    }
+  ],
+  "rescopedRules": []
+}

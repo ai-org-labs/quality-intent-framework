@@ -76,6 +76,12 @@ const entityCollections = [
   "modelEvidence",
   "worldModelGapFindings",
   "resolutionActions",
+  "calibrationPolicies",
+  "calibrationCases",
+  "expertAssessments",
+  "agentAssessments",
+  "findingMatches",
+  "calibrationRuns",
   "incidents"
 ];
 

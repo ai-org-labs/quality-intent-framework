@@ -37,6 +37,7 @@ import { cases as evaluationTargetCases, spec as evaluationTargetSpec } from "./
 import { cases as reviewRunCases, spec as reviewRunSpec } from "./fixtures/review-run-cases.mjs";
 import { cases as qifLedgerCases, spec as qifLedgerSpec } from "./fixtures/qif-ledger-cases.mjs";
 import { cases as worldModelReviewCases, spec as worldModelReviewSpec } from "./fixtures/world-model-review-cases.mjs";
+import { cases as worldModelCalibrationCases, spec as worldModelCalibrationSpec } from "./fixtures/world-model-calibration-cases.mjs";
 import { cases as qualityGateCases, spec as qualityGateSpec } from "./fixtures/quality-gate-cases.mjs";
 
 const projectRoot = process.cwd();
@@ -59,6 +60,7 @@ const fixtureSuites = [
   { ...reviewRunSpec, cases: reviewRunCases },
   { ...qifLedgerSpec, cases: qifLedgerCases },
   { ...worldModelReviewSpec, cases: worldModelReviewCases },
+  { ...worldModelCalibrationSpec, cases: worldModelCalibrationCases },
   { ...qualityGateSpec, cases: qualityGateCases }
 ];
 
@@ -72,6 +74,7 @@ const positivePackages = [
   { validator: "tools/validate-qif-runtime.mjs", package: "examples/review-run-package.json" },
   { validator: "tools/validate-qif-ledger.mjs", package: "examples/qif-ledger-package.json" },
   { validator: "tools/validate-world-model-review.mjs", package: "examples/world-model-review-package.json" },
+  { validator: "tools/validate-world-model-calibration.mjs", package: "examples/world-model-calibration-package.json" },
   { validator: "tools/validate-qif-runtime.mjs", package: "examples/quality-gate-package.json" }
 ];
 

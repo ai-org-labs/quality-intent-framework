@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.5.2
+
+- Added the executable `world-model-calibration` package type for measuring AI/expert agreement on World Model Gap Findings.
+- Added `schemas/world-model-calibration-package.schema.json`, `examples/world-model-calibration-package.json`, and `tools/validate-world-model-calibration.mjs`.
+- Added first-class calibration entities: Calibration Policy, Calibration Case, Expert Assessment, Agent Assessment, Finding Match, Calibration Run, and Governance Trigger.
+- Required Calibration Runs to reproduce case count, domain coverage, agreement score, false-positive rate, and false-negative rate from referenced cases and finding matches.
+- Required each expert expected finding and agent generated finding to be covered by a Finding Match.
+- Required threshold failures to trigger governance when the policy requires governance, and blocked failed thresholds from being reported as calibrated.
+- Extended the Living QIF Ledger example and verifier entity index so ledger packages can reference World Model Calibration packages, calibration runs, and calibration governance triggers.
+- Added `tools/fixtures/world-model-calibration-cases.mjs` and retained `tests/fixtures/world-model-calibration/` negative fixtures.
+- Extended `npm test` and `tools/run-fixture-tests.mjs` to include the World Model Calibration verifier.
+- Increased the standing fixture suite to 10 positive checks and 433 retained negative checks.
+- Added `docs/qif-v0.5.2-world-model-calibration.md` and updated README, roadmap, AI authoring guidance, and Living Ledger docs.
+
 ## v0.5.1
 
 - Added the executable `world-model-review` package type for QIF World Model Review.
