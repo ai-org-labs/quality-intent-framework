@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Added `docs/qif-guided-elicitation-design.md` to define how AI agents should ask answerable, plain-language, stepwise questions when users cannot yet express quality intent in QIF terms.
+- Updated the AI authoring guide and roadmap so Guided Elicitation becomes part of the Phase 3 AI-native authoring path without turning discovery into a checklist or treating question count as quality.
+
 ## v0.5.3
 
 - Added the executable `world-model-pilot-corpus` package type for preparing real, privacy-screened, unseen pilot cases before World Model Calibration.

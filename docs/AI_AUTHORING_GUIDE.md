@@ -53,6 +53,7 @@ Use additional documents when needed:
 
 | Need | Read |
 | --- | --- |
+| Help a user who cannot yet express quality intent in QIF terms | `docs/qif-guided-elicitation-design.md` |
 | Avoid blind spots across functional, non-functional, usability, performance, security, UX, and organizational concerns | `docs/qif-quality-aspect-taxonomy.md` |
 | Discover quality intent from stakeholders or documents | `docs/qif-v0.3-discovery-layer-design.md` |
 | Extract veteran or expert judgment | `docs/expert-judgment-framework.md` |
@@ -166,6 +167,21 @@ Pilot Source
 ```
 
 Use this flow before calibration when the organization needs real, unseen, privacy-screened cases. Do not use it to store raw confidential material, hidden chain-of-thought, or unredacted source details.
+
+For guided elicitation with a user who is not fluent in QIF terms, use:
+
+```text
+Concrete Target
+-> Plain-Language Explanation
+-> Stepwise Probe
+-> User Answer
+-> Clarification Move when needed
+-> Candidate Concern / Loss Boundary / Evidence Requirement
+-> Teach-Back Check
+-> QIF Candidate Artifact
+```
+
+Ask one answerable question at a time. If the user cannot answer, explain the concept in plain language, offer an optional answer scaffold, and preserve the ambiguity instead of forcing completion.
 
 ## Output Contract
 

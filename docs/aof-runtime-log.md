@@ -2,6 +2,37 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## Guided Elicitation Design
+
+Runtime source:
+
+- AOF latest checked: `v11.8.0` via `gh release list --repo ai-org-labs/ai-organization-framework --limit 3`
+
+Need / Intent / Context:
+
+- Need: QIF must support users who cannot yet express quality, risk, or loss boundaries in QIF terminology.
+- Intent: Define a Guided Elicitation layer that helps AI agents ask answerable, plain-language, stepwise questions and convert answers into candidate QIF knowledge.
+- Context: Existing Discovery Layer defines what kinds of quality concerns to discover. The missing element is user-facing question design, comprehension support, clarification, answer scaffolding, and teach-back confirmation.
+
+Decision reason:
+
+- Do not add a fixed checklist or mandatory questionnaire.
+- Do not treat the number of questions answered as discovery quality.
+- Add a design-level artifact first, because the executable schema should follow only after the conversational model and non-goals are stable.
+
+Council judgment:
+
+- Visionary: proceed; this broadens QIF adoption by making quality discovery usable by non-experts.
+- Builder: proceed as documentation only for this slice; no schema or verifier changes are required until templates and example sessions are defined.
+- Guardian: proceed with guardrails; raw answers, ambiguity, and teach-back must remain traceable, and the agent must not coerce users into false certainty.
+
+Artifacts:
+
+- Design: `docs/qif-guided-elicitation-design.md`
+- AI authoring guide update: `docs/AI_AUTHORING_GUIDE.md`
+- Roadmap update: `docs/qif-roadmap.md`
+- Changelog update: `CHANGELOG.md`
+
 ## v0.5.3 World Model Pilot Corpus
 
 Runtime source:

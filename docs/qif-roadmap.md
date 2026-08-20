@@ -259,6 +259,9 @@ Deliverables:
 - Machine-readable authoring templates with example requests and expected
   outputs (the executable form of the AI Authoring Guide), plus fixtures
   that score an agent's output as valid/invalid.
+- Guided elicitation templates: plain-language explanations, stepwise probes,
+  answer scaffolds, clarification moves, and teach-back checks so an AI agent
+  can elicit QIF candidates from users who do not know QIF terminology.
 - A `qif` CLI: `qif validate`, `qif new <package-type>`, `qif trace <id>`
   (walk any entity's evidence chain), `qif open-risks`.
 - Gate-as-hook reference integration: a demonstration where an agent task
@@ -274,6 +277,10 @@ Exit evidence:
 - An AI agent given only the templates (no conversation history, no guide
   prose) produces a first-try valid package for a held-out scenario in each
   package type.
+- A non-expert user can answer the first three guided elicitation prompts
+  without knowing the terms Quality Intent, Loss Boundary, or Evidence, and
+  the resulting candidates preserve raw answers, clarification history, and
+  teach-back confirmation.
 - The reference hook demonstrably blocks a release attempt lacking a valid
   gate decision, and admits one that has it.
 - The same action contract validates through two different harness adapters,
