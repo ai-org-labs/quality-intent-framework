@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.5.5
+
+- Added the executable `world-model-elicitation` package type for Level 4 requirements where the world model must be derived before it can be reviewed.
+- Added `schemas/world-model-elicitation-package.schema.json`, `examples/world-model-elicitation-package.json`, and `tools/validate-world-model-elicitation.mjs`.
+- Added first-class entities for Raw Intent, Model Hypothesis, Discriminating Question, Hypothesis Elimination, Counterexample Sequence, Invariant Candidate, Elicitation Closure Assessment, Derived World Model, Acceptance Scenario, and Quality Intent Candidate.
+- Added a cube rolling control golden case that converges from competing reference-frame hypotheses to a fixed-camera control invariant.
+- Added retained negative fixtures under `tests/fixtures/world-model-elicitation/` generated from `tools/fixtures/world-model-elicitation-cases.mjs`.
+- Extended `npm test` and `tools/run-fixture-tests.mjs` to include the World Model Elicitation verifier.
+- Increased the standing fixture suite to 13 positive checks and 491 retained negative checks.
+
 ## v0.5.4
 
 - Added `docs/qif-guided-elicitation-design.md` to define how AI agents should ask answerable, plain-language, stepwise questions when users cannot yet express quality intent in QIF terms.

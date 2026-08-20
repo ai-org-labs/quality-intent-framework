@@ -46,6 +46,10 @@
       "package": "examples/guided-elicitation-package.json"
     },
     {
+      "validator": "tools/validate-world-model-elicitation.mjs",
+      "package": "examples/world-model-elicitation-package.json"
+    },
+    {
       "validator": "tools/validate-qif-runtime.mjs",
       "package": "examples/quality-gate-package.json"
     }

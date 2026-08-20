@@ -1,0 +1,545 @@
+{
+  "packageType": "world-model-elicitation",
+  "runtimeVersion": "0.5.5",
+  "packageId": "WME-PKG-001",
+  "worldModelElicitationSessions": [
+    {
+      "id": "WME-SES-001",
+      "target": "Cube rolling control requirements",
+      "purpose": "Converge ambiguous level-4 spatial requirements into a closed world model before World Model Review.",
+      "level": "level-4",
+      "rawIntentRefs": [
+        "RIN-WME-001"
+      ],
+      "modelHypothesisRefs": [
+        "HYP-WME-001",
+        "HYP-WME-002",
+        "HYP-WME-003",
+        "HYP-WME-004"
+      ],
+      "discriminatingQuestionRefs": [
+        "DQU-WME-001"
+      ],
+      "counterexampleSequenceRefs": [
+        "CEX-WME-001",
+        "CEX-WME-002",
+        "CEX-WME-003",
+        "CEX-WME-004",
+        "CEX-WME-005"
+      ],
+      "invariantCandidateRefs": [
+        "INV-WME-001"
+      ],
+      "closureAssessmentRef": "CLO-WME-001",
+      "status": "closed"
+    }
+  ],
+  "rawIntents": [
+    {
+      "id": "RIN-WME-001",
+      "sessionRef": "WME-SES-001",
+      "statement": "The cube should roll up, down, left, right, forward, and backward in a way that feels consistent to the player.",
+      "source": "human requirement discussion",
+      "captureMode": "interview-note",
+      "ambiguitySignals": [
+        "reference frame unclear",
+        "surface transition semantics unclear",
+        "composition behavior unclear"
+      ],
+      "status": "captured"
+    }
+  ],
+  "modelHypotheses": [
+    {
+      "id": "HYP-WME-001",
+      "sessionRef": "WME-SES-001",
+      "sourceRawIntentRefs": [
+        "RIN-WME-001"
+      ],
+      "name": "Cube Local Control Frame",
+      "modelType": "coordinate-frame",
+      "assumption": "Input directions are interpreted relative to the cube's current local orientation.",
+      "predictionSummary": "After rolling upward onto a wall, backward input follows the cube's transformed local frame.",
+      "confidence": 0.25,
+      "status": "rejected"
+    },
+    {
+      "id": "HYP-WME-002",
+      "sessionRef": "WME-SES-001",
+      "sourceRawIntentRefs": [
+        "RIN-WME-001"
+      ],
+      "name": "Current Surface Control Frame",
+      "modelType": "coordinate-frame",
+      "assumption": "Input directions are interpreted relative to the surface the cube is currently contacting.",
+      "predictionSummary": "After rolling onto a wall, left/right/up/down are remapped to the wall plane.",
+      "confidence": 0.25,
+      "status": "rejected"
+    },
+    {
+      "id": "HYP-WME-003",
+      "sessionRef": "WME-SES-001",
+      "sourceRawIntentRefs": [
+        "RIN-WME-001"
+      ],
+      "name": "World XYZ Control Frame",
+      "modelType": "coordinate-frame",
+      "assumption": "Input directions are interpreted as absolute world axes.",
+      "predictionSummary": "Backward always means negative world Z even when the camera uses a different visual frame.",
+      "confidence": 0.2,
+      "status": "rejected"
+    },
+    {
+      "id": "HYP-WME-004",
+      "sessionRef": "WME-SES-001",
+      "sourceRawIntentRefs": [
+        "RIN-WME-001"
+      ],
+      "name": "Fixed Camera Control Frame",
+      "modelType": "coordinate-frame",
+      "assumption": "Input directions are interpreted from the fixed camera view and do not rotate with cube orientation or current surface.",
+      "predictionSummary": "After up then backward, backward means visually backward from the fixed camera.",
+      "confidence": 0.9,
+      "status": "selected"
+    }
+  ],
+  "discriminatingQuestions": [
+    {
+      "id": "DQU-WME-001",
+      "sessionRef": "WME-SES-001",
+      "competingHypothesisRefs": [
+        "HYP-WME-001",
+        "HYP-WME-002",
+        "HYP-WME-003",
+        "HYP-WME-004"
+      ],
+      "scenario": "The cube rolls upward once, then receives a backward input.",
+      "questionText": "After the cube moves up once, when the player presses backward, should it move backward as seen from the fixed camera, or backward relative to the cube/surface?",
+      "expectedAnswers": [
+        {
+          "id": "EXP-WME-001-A",
+          "answerPattern": "Backward from the fixed camera view.",
+          "hypothesesEliminatedRefs": [
+            "HYP-WME-001",
+            "HYP-WME-002",
+            "HYP-WME-003"
+          ]
+        },
+        {
+          "id": "EXP-WME-001-B",
+          "answerPattern": "Backward from the cube or current surface.",
+          "hypothesesEliminatedRefs": [
+            "HYP-WME-004"
+          ]
+        }
+      ],
+      "informationGain": 0.85,
+      "selectionRationale": "This question separates fixed visual control from local, surface, and absolute-axis interpretations with one short state transition.",
+      "resultingModelUpdate": "Select fixed camera control frame if answer follows visual backward.",
+      "status": "answered"
+    }
+  ],
+  "humanAnswers": [
+    {
+      "id": "HAN-WME-001",
+      "sessionRef": "WME-SES-001",
+      "rawIntentRef": "RIN-WME-001",
+      "questionRef": "DQU-WME-001",
+      "answerText": "Fixed camera. Even after moving up, backward means backward from the camera view.",
+      "captureMode": "interview",
+      "status": "captured"
+    },
+    {
+      "id": "HAN-WME-002",
+      "sessionRef": "WME-SES-001",
+      "sequenceRef": "CEX-WME-001",
+      "answerText": "Up then up should keep climbing in the same visual up direction.",
+      "captureMode": "interview",
+      "status": "captured"
+    },
+    {
+      "id": "HAN-WME-003",
+      "sessionRef": "WME-SES-001",
+      "sequenceRef": "CEX-WME-002",
+      "answerText": "Up then down should reverse along the visual path.",
+      "captureMode": "interview",
+      "status": "captured"
+    },
+    {
+      "id": "HAN-WME-004",
+      "sessionRef": "WME-SES-001",
+      "sequenceRef": "CEX-WME-003",
+      "answerText": "Up then left should move left as seen from the fixed camera, not relative to the cube face.",
+      "captureMode": "interview",
+      "status": "captured"
+    },
+    {
+      "id": "HAN-WME-005",
+      "sessionRef": "WME-SES-001",
+      "sequenceRef": "CEX-WME-004",
+      "answerText": "Down, left, then down should still use the fixed camera control directions.",
+      "captureMode": "interview",
+      "status": "captured"
+    },
+    {
+      "id": "HAN-WME-006",
+      "sessionRef": "WME-SES-001",
+      "sequenceRef": "CEX-WME-005",
+      "answerText": "Up then backward should go visually backward from the fixed camera.",
+      "captureMode": "interview",
+      "status": "captured"
+    },
+    {
+      "id": "HAN-WME-007",
+      "sessionRef": "WME-SES-001",
+      "invariantCandidateRef": "INV-WME-001",
+      "answerText": "Yes, that rule is correct: control direction is fixed to the camera and does not change with cube orientation or surface.",
+      "captureMode": "teach-back",
+      "status": "captured"
+    }
+  ],
+  "hypothesisEliminations": [
+    {
+      "id": "HEL-WME-001",
+      "sessionRef": "WME-SES-001",
+      "answerRef": "HAN-WME-001",
+      "eliminatedHypothesisRefs": [
+        "HYP-WME-001",
+        "HYP-WME-002",
+        "HYP-WME-003"
+      ],
+      "remainingHypothesisRefs": [
+        "HYP-WME-004"
+      ],
+      "rationale": "The answer explicitly chooses fixed camera backward after a prior upward move."
+    }
+  ],
+  "counterexampleSequences": [
+    {
+      "id": "CEX-WME-001",
+      "sessionRef": "WME-SES-001",
+      "targetHypothesisRefs": [
+        "HYP-WME-001",
+        "HYP-WME-002",
+        "HYP-WME-004"
+      ],
+      "explorationType": "repeat",
+      "steps": [
+        "up",
+        "up"
+      ],
+      "purpose": "Check whether repeated movement remains visually stable after surface transition.",
+      "status": "answered"
+    },
+    {
+      "id": "CEX-WME-002",
+      "sessionRef": "WME-SES-001",
+      "targetHypothesisRefs": [
+        "HYP-WME-001",
+        "HYP-WME-002",
+        "HYP-WME-004"
+      ],
+      "explorationType": "inverse",
+      "steps": [
+        "up",
+        "down"
+      ],
+      "purpose": "Check reversal semantics after the first transition.",
+      "status": "answered"
+    },
+    {
+      "id": "CEX-WME-003",
+      "sessionRef": "WME-SES-001",
+      "targetHypothesisRefs": [
+        "HYP-WME-001",
+        "HYP-WME-002",
+        "HYP-WME-004"
+      ],
+      "explorationType": "orthogonal",
+      "steps": [
+        "up",
+        "left"
+      ],
+      "purpose": "Expose whether orthogonal movement is cube-relative or camera-relative.",
+      "status": "answered"
+    },
+    {
+      "id": "CEX-WME-004",
+      "sessionRef": "WME-SES-001",
+      "targetHypothesisRefs": [
+        "HYP-WME-001",
+        "HYP-WME-002",
+        "HYP-WME-004"
+      ],
+      "explorationType": "composition",
+      "steps": [
+        "down",
+        "left",
+        "down"
+      ],
+      "purpose": "Check composed transitions across multiple surfaces.",
+      "status": "answered"
+    },
+    {
+      "id": "CEX-WME-005",
+      "sessionRef": "WME-SES-001",
+      "targetHypothesisRefs": [
+        "HYP-WME-001",
+        "HYP-WME-002",
+        "HYP-WME-003",
+        "HYP-WME-004"
+      ],
+      "explorationType": "reference-frame",
+      "steps": [
+        "up",
+        "backward"
+      ],
+      "purpose": "Expose the control reference frame directly.",
+      "status": "answered"
+    }
+  ],
+  "sequenceExpectations": [
+    {
+      "id": "SEQ-WME-001",
+      "sessionRef": "WME-SES-001",
+      "sequenceRef": "CEX-WME-001",
+      "answerRef": "HAN-WME-002",
+      "affectedHypothesisRefs": [
+        "HYP-WME-001",
+        "HYP-WME-002",
+        "HYP-WME-004"
+      ],
+      "expectedOutcome": "The cube continues visually upward.",
+      "interpretation": "Repeated control remains camera-stable.",
+      "status": "confirmed"
+    },
+    {
+      "id": "SEQ-WME-002",
+      "sessionRef": "WME-SES-001",
+      "sequenceRef": "CEX-WME-002",
+      "answerRef": "HAN-WME-003",
+      "affectedHypothesisRefs": [
+        "HYP-WME-001",
+        "HYP-WME-002",
+        "HYP-WME-004"
+      ],
+      "expectedOutcome": "The cube reverses visually downward.",
+      "interpretation": "Inverse movement is based on the fixed visual control frame.",
+      "status": "confirmed"
+    },
+    {
+      "id": "SEQ-WME-003",
+      "sessionRef": "WME-SES-001",
+      "sequenceRef": "CEX-WME-003",
+      "answerRef": "HAN-WME-004",
+      "affectedHypothesisRefs": [
+        "HYP-WME-001",
+        "HYP-WME-002",
+        "HYP-WME-004"
+      ],
+      "expectedOutcome": "The cube moves visually left.",
+      "interpretation": "Orthogonal movement is camera-relative.",
+      "status": "confirmed"
+    },
+    {
+      "id": "SEQ-WME-004",
+      "sessionRef": "WME-SES-001",
+      "sequenceRef": "CEX-WME-004",
+      "answerRef": "HAN-WME-005",
+      "affectedHypothesisRefs": [
+        "HYP-WME-001",
+        "HYP-WME-002",
+        "HYP-WME-004"
+      ],
+      "expectedOutcome": "Each step follows fixed camera controls.",
+      "interpretation": "Composed transitions do not rotate the control frame.",
+      "status": "confirmed"
+    },
+    {
+      "id": "SEQ-WME-005",
+      "sessionRef": "WME-SES-001",
+      "sequenceRef": "CEX-WME-005",
+      "answerRef": "HAN-WME-006",
+      "affectedHypothesisRefs": [
+        "HYP-WME-001",
+        "HYP-WME-002",
+        "HYP-WME-003",
+        "HYP-WME-004"
+      ],
+      "expectedOutcome": "Backward means visually backward from the fixed camera.",
+      "interpretation": "Reference frame is fixed camera control.",
+      "status": "confirmed"
+    }
+  ],
+  "invariantCandidates": [
+    {
+      "id": "INV-WME-001",
+      "sessionRef": "WME-SES-001",
+      "sourceSequenceRefs": [
+        "CEX-WME-001",
+        "CEX-WME-002",
+        "CEX-WME-003",
+        "CEX-WME-004",
+        "CEX-WME-005"
+      ],
+      "sourceAnswerRefs": [
+        "HAN-WME-002",
+        "HAN-WME-003",
+        "HAN-WME-004",
+        "HAN-WME-005",
+        "HAN-WME-006"
+      ],
+      "statement": "The control frame is fixed to the camera and does not change with physical cube orientation or current surface.",
+      "scope": "Player directional input for cube rolling transitions.",
+      "confirmationRefs": [
+        "ICF-WME-001"
+      ],
+      "confidence": 0.9,
+      "governanceTriggerRefs": [],
+      "status": "accepted"
+    }
+  ],
+  "invariantConfirmations": [
+    {
+      "id": "ICF-WME-001",
+      "sessionRef": "WME-SES-001",
+      "invariantCandidateRef": "INV-WME-001",
+      "answerRef": "HAN-WME-007",
+      "confirmationQuestion": "Can we state the rule as: the control frame is fixed to the camera and never rotates with the cube or current surface?",
+      "userResponse": "accurate",
+      "status": "accepted"
+    }
+  ],
+  "derivedWorldModels": [
+    {
+      "id": "DWM-WME-001",
+      "sessionRef": "WME-SES-001",
+      "selectedHypothesisRef": "HYP-WME-004",
+      "invariantRefs": [
+        "INV-WME-001"
+      ],
+      "title": "Fixed Camera Cube Rolling World Model",
+      "summary": "Directional inputs are interpreted from a fixed camera frame across repeated, inverse, orthogonal, reference-frame, and composed rolling transitions.",
+      "status": "ready-for-world-model-review"
+    }
+  ],
+  "acceptanceScenarios": [
+    {
+      "id": "ASC-WME-001",
+      "sessionRef": "WME-SES-001",
+      "derivedWorldModelRef": "DWM-WME-001",
+      "sourceSequenceRefs": [
+        "CEX-WME-001",
+        "CEX-WME-002",
+        "CEX-WME-003",
+        "CEX-WME-004",
+        "CEX-WME-005"
+      ],
+      "scenario": "Given any cube orientation or current surface, directional input is applied in the fixed camera frame.",
+      "expectedResult": "Up, down, left, right, forward, and backward produce visually consistent movement from the fixed camera perspective.",
+      "status": "ready"
+    }
+  ],
+  "qualityIntentCandidates": [
+    {
+      "id": "QIC-WME-001",
+      "sessionRef": "WME-SES-001",
+      "derivedWorldModelRef": "DWM-WME-001",
+      "acceptanceScenarioRefs": [],
+      "statement": "Cube control behavior must preserve fixed-camera directional consistency across surface transitions.",
+      "lossBoundary": "A player must not experience controls that change reference frame after the cube rolls onto a new surface.",
+      "confidence": 0.88,
+      "status": "candidate"
+    }
+  ],
+  "elicitationClosureAssessments": [
+    {
+      "id": "CLO-WME-001",
+      "sessionRef": "WME-SES-001",
+      "closureVerdict": "closed",
+      "unresolvedHypothesisRefs": [],
+      "closureCriteria": [
+        {
+          "criterion": "competing model hypotheses considered",
+          "status": "met",
+          "evidenceRefs": [
+            "HYP-WME-001",
+            "HYP-WME-002",
+            "HYP-WME-003",
+            "HYP-WME-004"
+          ]
+        },
+        {
+          "criterion": "discriminating question answered",
+          "status": "met",
+          "evidenceRefs": [
+            "DQU-WME-001",
+            "HAN-WME-001"
+          ]
+        },
+        {
+          "criterion": "representative counterexample sequences explored",
+          "status": "met",
+          "evidenceRefs": [
+            "CEX-WME-001",
+            "CEX-WME-002",
+            "CEX-WME-003",
+            "CEX-WME-004",
+            "CEX-WME-005"
+          ]
+        },
+        {
+          "criterion": "candidate invariant confirmed",
+          "status": "met",
+          "evidenceRefs": [
+            "INV-WME-001",
+            "ICF-WME-001"
+          ]
+        },
+        {
+          "criterion": "acceptance scenario derived",
+          "status": "met",
+          "evidenceRefs": [
+            "ASC-WME-001"
+          ]
+        }
+      ],
+      "derivedWorldModelRefs": [
+        "DWM-WME-001"
+      ],
+      "acceptanceScenarioRefs": [
+        "ASC-WME-001"
+      ],
+      "qualityIntentCandidateRefs": [
+        "QIC-WME-001"
+      ],
+      "governanceTriggerRefs": [],
+      "rationale": "All competing reference-frame hypotheses were resolved, the invariant was confirmed, and representative transition sequences were converted into an acceptance scenario.",
+      "status": "accepted"
+    }
+  ],
+  "governanceTriggers": [],
+  "verifierBoundary": {
+    "checks": [
+      "reference integrity",
+      "hypothesis competition traceability",
+      "discriminating question structure",
+      "counterexample sequence coverage",
+      "invariant confirmation evidence",
+      "closure criteria evidence"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "requirement completeness by question count",
+      "best possible question selection",
+      "user comprehension"
+    ],
+    "semanticValidityRequires": [
+      "human confirmation",
+      "expert review when domain risk requires it",
+      "World Model Review validation",
+      "implementation acceptance testing",
+      "governance for unresolved ambiguity"
+    ]
+  }
+}

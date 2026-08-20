@@ -2,6 +2,48 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.5.5 World Model Elicitation
+
+Runtime source:
+
+- AOF latest used in this workspace: `v11.8.0` via local runtime command
+
+Need / Intent / Context:
+
+- Need: QIF v0.5.1 can detect missing world-model elements, but Level 4 requirements often need the model to be elicited before it can be reviewed.
+- Intent: Add an executable `world-model-elicitation` runtime that records competing hypotheses, discriminating questions, human answers, hypothesis elimination, counterexample sequences, invariant induction, closure, derived world model, acceptance scenario, and Quality Intent candidate.
+- Context: The cube rolling case showed that prematurely selecting a Cube Local model is unsafe. The missing capability is to hold multiple plausible reference-frame models and ask questions that eliminate them.
+
+Decision reason:
+
+- Do not fold this into Guided Elicitation. Guided Elicitation helps users answer QIF-shaped questions; World Model Elicitation resolves competing domain models.
+- Do not fold this into World Model Review. Review detects gaps in a model; elicitation derives the model from ambiguous Level 4 behavior.
+- Use the cube case as a golden example because it exposes local-frame, surface-frame, world-axis, and fixed-camera hypotheses with short counterexample sequences.
+
+Council judgment:
+
+- Visionary: proceed; this upgrades QIF from gap detection toward Level 4 requirement convergence.
+- Builder: proceed; the slice is bounded to package/schema/example/verifier/fixtures/docs and integrates into existing `npm test`.
+- Guardian: proceed with guardrails; verifier must reject single-hypothesis closure, non-discriminating questions, single-step-only examples, unconfirmed invariants, unresolved closed hypotheses, and question-count completeness claims.
+
+Artifacts:
+
+- Active alignment pulse: `.aof/context/active/alignment-pulse.json`
+- Schema: `schemas/world-model-elicitation-package.schema.json`
+- Example: `examples/world-model-elicitation-package.json`
+- Verifier: `tools/validate-world-model-elicitation.mjs`
+- Fixture source: `tools/fixtures/world-model-elicitation-cases.mjs`
+- Retained negative corpus: `tests/fixtures/world-model-elicitation/`
+- Runtime doc: `docs/qif-v0.5.5-world-model-elicitation.md`
+
+Runtime verification:
+
+- `npm test`: pass, `13/13` positive checks and `491/491` retained negative checks.
+- AOF `organization-verify`: pass, `231/231` checks.
+- AOF `situation-assess`: pass with no current truth conflicts. It still recommends opening a current frontier task because the implementation task is recorded as completed.
+- JSON parse check: pass, `542` JSON files.
+- Public residue scan: pass after removing local runtime path wording.
+
 ## v0.5.4 Guided Elicitation Runtime
 
 Runtime source:

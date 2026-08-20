@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement and release QIF v0.5.4 Guided Elicitation Runtime so AI agents can derive candidate QIF knowledge through plain-language, stepwise, anti-checklist user questioning with raw-answer traceability and teach-back confirmation.",
-  "updated_at": "2026-08-20T13:35:00.000Z",
+  "content": "Implement QIF v0.5.5 World Model Elicitation so Level 4 requirements can converge from raw intent through competing hypotheses, discriminating questions, counterexample sequences, invariant confirmation, closure, derived world model, acceptance scenario, and Quality Intent candidate.",
+  "updated_at": "2026-08-20T14:30:00.000Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-QIFV054",
+  "source_session_id": "SESS-QIFV055",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-08-20T13:50:00.000Z"
+  "declared_complete_at": "2026-08-20T14:50:00.000Z"
 }

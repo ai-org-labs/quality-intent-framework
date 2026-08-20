@@ -35,12 +35,12 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.5.4 baseline)
+## Current Position (v0.5.5 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
   qif-ledger, world-model-review, world-model-calibration,
-  world-model-pilot-corpus, guided-elicitation.
+  world-model-pilot-corpus, guided-elicitation, world-model-elicitation.
 - Reproducible confidence, enforced gate rules, release verdict discipline
   (Go / Conditional Go / No-Go / Pending), post-release loop, traceability
   links, governance forcing.
@@ -74,7 +74,11 @@ and adoption surface — not pretending the limits away.
   Elicitation Runtime: an executable package type for plain-language,
   stepwise, anti-checklist questioning with raw-answer traceability,
   clarification, teach-back, and governance for low-confidence candidates.
-- Weaknesses: v0.5.4 cross-package behavior is intentionally minimal and
+  v0.5.5 adds World Model Elicitation: an executable Level 4 requirements
+  runtime for holding competing model hypotheses, generating discriminating
+  questions, exploring counterexample sequences, inducing invariants, and
+  recording closure before World Model Review.
+- Weaknesses: v0.5.5 cross-package behavior is intentionally minimal and
   example-file based; authoring cost for humans and AI agents is still high,
   Pilot Corpus now structures case ingestion but still uses example data rather
   than a live organization corpus, agent trajectories are summarized rather than deeply typed, and no
@@ -269,6 +273,14 @@ Deliverables:
   `tools/validate-guided-elicitation.mjs`, and retained negative fixtures
   requiring anti-checklist questioning, raw-answer traceability, teach-back
   confirmation, and governance for low-confidence candidates.
+- World Model Elicitation templates for Level 4 requirements: competing
+  hypotheses, discriminating questions, counterexample sequences, invariant
+  induction, closure assessment, acceptance scenarios, and Quality Intent
+  candidates.
+  Status: implemented in v0.5.5 through the `world-model-elicitation` package
+  type, `tools/validate-world-model-elicitation.mjs`, and retained negative
+  fixtures covering hypothesis competition, information-gain questions,
+  sequence exploration, invariant confirmation, and closure.
 - A `qif` CLI: `qif validate`, `qif new <package-type>`, `qif trace <id>`
   (walk any entity's evidence chain), `qif open-risks`.
 - Gate-as-hook reference integration: a demonstration where an agent task

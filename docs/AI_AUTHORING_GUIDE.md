@@ -54,6 +54,7 @@ Use additional documents when needed:
 | Need | Read |
 | --- | --- |
 | Help a user who cannot yet express quality intent in QIF terms | `docs/qif-guided-elicitation-design.md`, `docs/qif-v0.5.4-guided-elicitation-runtime.md`, `schemas/guided-elicitation-package.schema.json`, `examples/guided-elicitation-package.json` |
+| Converge a Level 4 requirement whose world model is still ambiguous | `docs/qif-v0.5.5-world-model-elicitation.md`, `schemas/world-model-elicitation-package.schema.json`, `examples/world-model-elicitation-package.json` |
 | Avoid blind spots across functional, non-functional, usability, performance, security, UX, and organizational concerns | `docs/qif-quality-aspect-taxonomy.md` |
 | Discover quality intent from stakeholders or documents | `docs/qif-v0.3-discovery-layer-design.md` |
 | Extract veteran or expert judgment | `docs/expert-judgment-framework.md` |
@@ -385,6 +386,29 @@ QIF JSON packages use `trust` with camelCase fields:
 ## World Model Review
 
 Before evaluating quality, check whether the target world is modeled well enough for humans and AI agents to mean the same thing.
+
+Use `world-model-elicitation` before `world-model-review` when the user has concrete examples but the underlying model is not settled.
+
+Do not prematurely choose one interpretation. Hold competing Model Hypotheses until a Discriminating Question or Counterexample Sequence removes them.
+
+For Level 4 requirements, write:
+
+```text
+Raw Intent
+-> competing Model Hypotheses
+-> Discriminating Question
+-> Human Answer
+-> Hypothesis Elimination
+-> Counterexample Sequences
+-> Invariant Candidate
+-> Invariant Confirmation
+-> Closure Assessment
+-> Derived World Model
+-> Acceptance Scenario
+-> Quality Intent Candidate
+```
+
+The key question is not "what is the quality intent?" The key question is "which concrete case would make two plausible world models disagree?"
 
 Use `world-model-review` when the risk is conceptual mismatch:
 
