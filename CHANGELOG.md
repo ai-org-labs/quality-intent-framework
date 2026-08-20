@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.5.1
+
+- Added the executable `world-model-review` package type for QIF World Model Review.
+- Added `schemas/world-model-review-package.schema.json`, `examples/world-model-review-package.json`, and `tools/validate-world-model-review.mjs`.
+- Added first-class World Model Review entities: World Model, Concept Definition, Domain Entity, Actor, Boundary, Relationship, State, Event, Invariant, Coordinate System, Coordinate Axis, Perspective, Assumption, Model Evidence, World Model Gap Finding, Resolution Action, and Governance Trigger.
+- Required World Model Gap Findings to name the exact missing item, expected definition, observed problem, why it matters, affected Quality Intents, affected decisions, evidence, required resolution actions, verdict effect, finding evidence, trust, and governance linkage when evaluation is blocked.
+- Extended the Living QIF Ledger example and verifier entity index so ledger packages can reference World Model Review packages and preserve the chain from a world-model gap to a candidate Quality Intent.
+- Added `tools/fixtures/world-model-review-cases.mjs` and retained `tests/fixtures/world-model-review/` negative fixtures.
+- Extended `npm test` and `tools/run-fixture-tests.mjs` to include the World Model Review verifier.
+- Increased the standing fixture suite to 9 positive checks and 412 retained negative checks.
+- Added `docs/qif-v0.5.1-world-model-review.md` and updated README, roadmap, and AI authoring guidance.
+
 ## v0.5.0
 
 - Added the first executable Living QIF Ledger package type.

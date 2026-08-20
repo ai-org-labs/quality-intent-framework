@@ -1,0 +1,184 @@
+{
+  "description": "QIF world-model-review negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/world-model-review-cases.mjs; do not edit by hand.",
+  "positives": [
+    {
+      "validator": "tools/validate-qif.mjs",
+      "package": "examples/qif-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-expert-judgment.mjs",
+      "package": "examples/expert-judgment-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/discovery-session-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/organizational-quality-culture-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/evaluation-target-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/review-run-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-ledger.mjs",
+      "package": "examples/qif-ledger-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-review.mjs",
+      "package": "examples/world-model-review-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/quality-gate-package.json"
+    }
+  ],
+  "negatives": [
+    {
+      "file": "world-model-review-worldModels-not-array.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "worldModels must be an array",
+      "expect": "fail",
+      "errorIncludes": "worldModels must be an array."
+    },
+    {
+      "file": "world-model-review-concept-missing-world-model.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "concept world model ref resolves",
+      "expect": "fail",
+      "errorIncludes": "CON-WM-001 references missing world model: WMD-NOPE-999"
+    },
+    {
+      "file": "world-model-review-domain-entity-missing-concept.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "domain entity concept ref resolves",
+      "expect": "fail",
+      "errorIncludes": "DEN-WM-001 references missing concept: CON-NOPE-999"
+    },
+    {
+      "file": "world-model-review-actor-missing-responsibility-boundary.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "actor responsibility boundary resolves",
+      "expect": "fail",
+      "errorIncludes": "ACT-WM-001 references missing responsibility boundary: BDY-NOPE-999"
+    },
+    {
+      "file": "world-model-review-relationship-broken-from-ref.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "relationship from ref resolves",
+      "expect": "fail",
+      "errorIncludes": "REL-WM-001/from references missing actors: ACT-NOPE-999"
+    },
+    {
+      "file": "world-model-review-relationship-self-ref.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "relationship must not self-reference",
+      "expect": "fail",
+      "errorIncludes": "REL-WM-001 must not relate an entity to itself."
+    },
+    {
+      "file": "world-model-review-state-definedFor-broken.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "state definedFor ref resolves",
+      "expect": "fail",
+      "errorIncludes": "STA-WM-001/definedFor references missing domainEntities: DEN-NOPE-999"
+    },
+    {
+      "file": "world-model-review-coordinate-system-missing-axis.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "coordinate system axis refs resolve",
+      "expect": "fail",
+      "errorIncludes": "COS-WM-001 references missing coordinate axis: CAX-NOPE-999"
+    },
+    {
+      "file": "world-model-review-coordinate-axis-missing-scale-definition.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "coordinate axis explains scale",
+      "expect": "fail",
+      "errorIncludes": "CAX-WM-001 must include non-empty string scaleDefinition."
+    },
+    {
+      "file": "world-model-review-assumption-broken-evidence.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "assumption source evidence resolves",
+      "expect": "fail",
+      "errorIncludes": "ASM-WM-001 references missing source evidence: EVD-NOPE-999"
+    },
+    {
+      "file": "world-model-review-model-evidence-verified-without-source.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "verified trust requires sources",
+      "expect": "fail",
+      "errorIncludes": "EVD-WM-001/trust verified status requires at least one source."
+    },
+    {
+      "file": "world-model-review-finding-missing-item-empty.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "finding must name exact missing item",
+      "expect": "fail",
+      "errorIncludes": "WMG-WM-001 must include non-empty string missingItem."
+    },
+    {
+      "file": "world-model-review-finding-missing-expected-definition.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "finding must describe expected definition",
+      "expect": "fail",
+      "errorIncludes": "WMG-WM-001 must include non-empty string expectedDefinition."
+    },
+    {
+      "file": "world-model-review-finding-without-affected-decision.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "finding must name affected decisions",
+      "expect": "fail",
+      "errorIncludes": "WMG-WM-001 must include affectedDecisionRefs."
+    },
+    {
+      "file": "world-model-review-finding-without-evidence.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "finding evidence refs are required",
+      "expect": "fail",
+      "errorIncludes": "WMG-WM-001 must include at least one evidence."
+    },
+    {
+      "file": "world-model-review-finding-block-without-governance.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "blocking findings require governance",
+      "expect": "fail",
+      "errorIncludes": "WMG-WM-001 verdictEffect block-evaluation requires governanceTriggerRefs."
+    },
+    {
+      "file": "world-model-review-resolution-action-broken-finding.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "resolution action finding ref resolves",
+      "expect": "fail",
+      "errorIncludes": "RSA-WM-001 references missing finding: WMG-NOPE-999"
+    },
+    {
+      "file": "world-model-review-governance-trigger-broken-source.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "governance trigger source finding resolves",
+      "expect": "fail",
+      "errorIncludes": "GTR-WM-001 references missing source finding: WMG-NOPE-999"
+    },
+    {
+      "file": "world-model-review-finding-confirmed-without-impact.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "confirmed finding evidence requires impact confirmation",
+      "expect": "fail",
+      "errorIncludes": "WMG-WM-001/findingEvidence cannot be confirmed until reproducible, falsePositiveChecked, and impactConfirmed are true."
+    },
+    {
+      "file": "world-model-review-verifier-boundary-claims-semantic-truth.json",
+      "validator": "tools/validate-world-model-review.mjs",
+      "rule": "world model verifier boundary avoids semantic truth",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming semantic truth."
+    }
+  ],
+  "rescopedRules": []
+}

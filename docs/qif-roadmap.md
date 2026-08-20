@@ -35,11 +35,11 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.5.0 baseline)
+## Current Position (v0.5.1 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
-  qif-ledger.
+  qif-ledger, world-model-review.
 - Reproducible confidence, enforced gate rules, release verdict discipline
   (Go / Conditional Go / No-Go / Pending), post-release loop, traceability
   links, governance forcing.
@@ -61,9 +61,13 @@ and adoption surface — not pretending the limits away.
   completing the planned v0.4.x runtime package fixture frontier. v0.5.0 adds
   the first Living QIF Ledger runtime: package refs, cross-package entity refs,
   Quality Intent lifecycle records, missed-intent records, agent trial/outcome
-  records, and a ledger index.
-- Weaknesses: v0.5.0 cross-package behavior is intentionally minimal and
+  records, and a ledger index. v0.5.1 adds World Model Review: an executable
+  pre-verdict package type for naming exact conceptual-modeling, domain-model,
+  boundary, relationship, state/event, assumption, and coordinate-system gaps
+  before AI-assisted quality verdicts.
+- Weaknesses: v0.5.1 cross-package behavior is intentionally minimal and
   example-file based; authoring cost for humans and AI agents is still high,
+  world-model findings are structurally specific but not semantically proven,
   agent trajectories are summarized rather than deeply typed, and no empirical
   feedback yet exists on whether QIF confidence predicts real outcomes.
 
@@ -194,15 +198,25 @@ Deliverables:
   Status: minimally implemented in v0.5.0 through `agentTrials` and
   `agentOutcomes`; hidden chain-of-thought is explicitly rejected as ledger
   evidence.
+- World Model Review records: conceptual model, domain entities, actors,
+  boundaries, relationships, states, events, invariants, coordinate systems,
+  assumptions, model evidence, gap findings, resolution actions, and governance
+  triggers are checkable before AI-assisted quality verdicts.
+  Status: implemented in v0.5.1 through the `world-model-review` package type,
+  `worldModelGapFindings`, `tools/validate-world-model-review.mjs`, and retained
+  negative fixtures requiring each finding to name the exact missing item,
+  expected definition, observed problem, affected decisions, evidence, and
+  resolution work.
 
 Exit evidence:
 
 - A full chain — expert judgment, derived intent, gate decision, post-release
   incident, new derived intent — validates end-to-end across 3+ separate
-  package files. Status: partial in v0.5.0; the example ledger resolves
-  discovery-session, review-run, and quality-gate packages.
+  package files. Status: partial in v0.5.1; the example ledger resolves
+  discovery-session, review-run, quality-gate, and world-model-review packages.
 - Deleting any link in that chain makes verification fail. Status: partial in
-  v0.5.0 through retained `qif-ledger` negative fixtures.
+  v0.5.1 through retained `qif-ledger` and `world-model-review` negative
+  fixtures.
 - A multi-turn agent claim fails verification when its final answer is present
   but its claimed environment outcome or required provenance is absent. Status:
   partial in v0.5.0; trials must link outcome and tool/action provenance, but

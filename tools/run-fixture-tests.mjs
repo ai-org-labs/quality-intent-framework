@@ -9,7 +9,7 @@
 //      that each covered verifier rule actually fires; a rule that is silently
 //      weakened or deleted is caught here rather than in production.
 //   3. No drift: the committed fixtures are byte-for-byte what the generating
-//      source of truth (tools/fixtures/quality-gate-cases.mjs) produces, so the
+//      source of truth (tools/fixtures/*-cases.mjs) produces, so the
 //      retained corpus can never rot out of sync with the rules it encodes.
 //
 // The committed JSON corpus is a build artifact: it exists so a second,
@@ -36,6 +36,7 @@ import { cases as organizationalQualityCultureCases, spec as organizationalQuali
 import { cases as evaluationTargetCases, spec as evaluationTargetSpec } from "./fixtures/evaluation-target-cases.mjs";
 import { cases as reviewRunCases, spec as reviewRunSpec } from "./fixtures/review-run-cases.mjs";
 import { cases as qifLedgerCases, spec as qifLedgerSpec } from "./fixtures/qif-ledger-cases.mjs";
+import { cases as worldModelReviewCases, spec as worldModelReviewSpec } from "./fixtures/world-model-review-cases.mjs";
 import { cases as qualityGateCases, spec as qualityGateSpec } from "./fixtures/quality-gate-cases.mjs";
 
 const projectRoot = process.cwd();
@@ -57,6 +58,7 @@ const fixtureSuites = [
   { ...evaluationTargetSpec, cases: evaluationTargetCases },
   { ...reviewRunSpec, cases: reviewRunCases },
   { ...qifLedgerSpec, cases: qifLedgerCases },
+  { ...worldModelReviewSpec, cases: worldModelReviewCases },
   { ...qualityGateSpec, cases: qualityGateCases }
 ];
 
@@ -69,6 +71,7 @@ const positivePackages = [
   { validator: "tools/validate-qif-runtime.mjs", package: "examples/evaluation-target-package.json" },
   { validator: "tools/validate-qif-runtime.mjs", package: "examples/review-run-package.json" },
   { validator: "tools/validate-qif-ledger.mjs", package: "examples/qif-ledger-package.json" },
+  { validator: "tools/validate-world-model-review.mjs", package: "examples/world-model-review-package.json" },
   { validator: "tools/validate-qif-runtime.mjs", package: "examples/quality-gate-package.json" }
 ];
 

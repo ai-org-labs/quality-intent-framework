@@ -349,6 +349,56 @@ QIF JSON packages use `trust` with camelCase fields:
 
 `trust` records source grounding, reviewer confirmation, status, and freshness. It does not replace `findingEvidence`, confidence, evidence polarity, or verdicts.
 
+## World Model Review
+
+Before evaluating quality, check whether the target world is modeled well enough for humans and AI agents to mean the same thing.
+
+Use `world-model-review` when the risk is conceptual mismatch:
+
+- a key term is undefined or overloaded;
+- an actor, authority, responsibility, data, time, risk, or loss boundary is missing;
+- a state such as approved, complete, active, blocked, waived, or retired is not defined;
+- a relationship between entities is implied but not modeled;
+- a coordinate axis such as severity, authority, reversibility, evidence freshness, operational impact, or confidence is missing;
+- an AI assumption is unverified but affects a verdict.
+
+Do not write only:
+
+```text
+Conceptual modeling is insufficient.
+```
+
+Write a `worldModelGapFinding` that names the exact missing part:
+
+```json
+{
+  "id": "WMG-WM-001",
+  "gapObjectType": "Boundary",
+  "missingItem": "Final approval authority boundary for the human release approver.",
+  "expectedDefinition": "Define who can approve, under which conditions, what evidence they must cite, how delegation works, and how approval differs from AI review pass status.",
+  "observedProblem": "The release request says approved but does not name the approving actor, authority scope, approval conditions, delegation rules, or audit evidence.",
+  "whyItMatters": "An AI reviewer could treat a passing review or implied approval phrase as final approval, producing a release verdict over an undefined authority model.",
+  "affectedQualityIntentRefs": ["QIN-WM-001"],
+  "affectedDecisionRefs": ["release verdict", "governance escalation"],
+  "evidenceRefs": ["EVD-WM-001"],
+  "requiredResolutionActionRefs": ["RSA-WM-001"],
+  "verdictEffect": "block-evaluation"
+}
+```
+
+A World Model Gap Finding must answer:
+
+- what exact concept, actor, boundary, relationship, state, event, invariant, coordinate axis, perspective, assumption, or domain entity is missing;
+- what definition would be sufficient;
+- what was observed instead;
+- why the gap can cause wrong judgment;
+- which Quality Intents and decisions are affected;
+- what evidence supports the finding;
+- what resolution action will close it;
+- whether evaluation must be blocked, confidence degraded, governance required, or residual risk recorded.
+
+World Model Review does not prove the domain model is true. It makes missing model parts explicit enough to block, downgrade, or govern a quality verdict.
+
 ## Evidence Independence
 
 Classify evidence strength.

@@ -1,0 +1,288 @@
+{
+  "packageType": "world-model-review",
+  "runtimeVersion": "0.5.1",
+  "packageId": "WMR-QIF-SELF-V051",
+  "worldModels": [
+    {
+      "id": "WMD-QIF-001",
+      "title": "QIF v0.5.1 world model",
+      "targetDescription": "The Quality Intent Framework repository after adding World Model Review.",
+      "scope": "Conceptual-modeling quality of QIF itself: package boundaries, verifier authority, gap finding specificity, and pilot readiness.",
+      "context": "QIF now detects exact world-model gaps, but empirical pilot agreement and calibration coordinates are not yet defined.",
+      "owner": "quality-steward",
+      "status": "draft"
+    }
+  ],
+  "conceptDefinitions": [
+    {
+      "id": "CON-QIF-001",
+      "worldModelRef": "WMD-QIF-001",
+      "term": "world model gap",
+      "definition": "A concrete missing or insufficient concept, actor, boundary, relationship, state, event, invariant, coordinate axis, perspective, assumption, or domain entity that can distort a quality verdict.",
+      "aliases": ["conceptual modeling gap"],
+      "disambiguatesConceptRefs": [],
+      "status": "reviewed"
+    },
+    {
+      "id": "CON-QIF-002",
+      "worldModelRef": "WMD-QIF-001",
+      "term": "semantic calibration",
+      "definition": "Evidence that World Model Gap Findings produced by humans or AI agree with domain experts on unseen targets at an acceptable rate.",
+      "aliases": ["pilot agreement"],
+      "disambiguatesConceptRefs": [],
+      "status": "draft"
+    }
+  ],
+  "domainEntities": [
+    {
+      "id": "DEN-QIF-001",
+      "worldModelRef": "WMD-QIF-001",
+      "name": "world-model-review package",
+      "entityType": "qif-package-type",
+      "conceptRef": "CON-QIF-001",
+      "boundaryRefs": ["BDY-QIF-001", "BDY-QIF-002"],
+      "owner": "qif-maintainer"
+    }
+  ],
+  "actors": [
+    {
+      "id": "ACT-QIF-001",
+      "worldModelRef": "WMD-QIF-001",
+      "name": "AI QIF reviewer",
+      "actorType": "ai-agent",
+      "responsibilityBoundaryRef": "BDY-QIF-001",
+      "authorityBoundaryRefs": ["BDY-QIF-002"]
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "BDY-QIF-001",
+      "worldModelRef": "WMD-QIF-001",
+      "boundaryType": "responsibility",
+      "statement": "The verifier may require structural specificity, references, evidence, trust metadata, and governance linkage.",
+      "severity": "high",
+      "status": "accepted"
+    },
+    {
+      "id": "BDY-QIF-002",
+      "worldModelRef": "WMD-QIF-001",
+      "boundaryType": "authority",
+      "statement": "The verifier must not claim semantic truth, business correctness, expert correctness, or pilot calibration.",
+      "severity": "critical",
+      "status": "accepted"
+    },
+    {
+      "id": "BDY-QIF-003",
+      "worldModelRef": "WMD-QIF-001",
+      "boundaryType": "loss",
+      "statement": "QIF must not let a structurally valid world-model finding be mistaken for empirically calibrated domain truth.",
+      "severity": "high",
+      "status": "accepted"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "REL-QIF-001",
+      "worldModelRef": "WMD-QIF-001",
+      "relationshipType": "validates-structure-of",
+      "from": { "entityType": "actors", "entityRef": "ACT-QIF-001" },
+      "to": { "entityType": "domainEntities", "entityRef": "DEN-QIF-001" },
+      "description": "The AI QIF reviewer can validate package structure and retained fixtures, but cannot validate domain truth without pilot feedback."
+    }
+  ],
+  "states": [
+    {
+      "id": "STA-QIF-001",
+      "worldModelRef": "WMD-QIF-001",
+      "name": "structurally-verifiable",
+      "definedFor": { "entityType": "domainEntities", "entityRef": "DEN-QIF-001" },
+      "entryCriteria": "Schema, example, verifier, fixtures, README, and npm test all pass.",
+      "exitCriteria": "Pilot calibration and agreement thresholds are defined and validated on real organization cases."
+    }
+  ],
+  "events": [
+    {
+      "id": "EVT-QIF-001",
+      "worldModelRef": "WMD-QIF-001",
+      "name": "world-model-review verifier added",
+      "trigger": "QIF v0.5.1 adds world-model-review schema, example, verifier, fixture corpus, docs, and ledger references.",
+      "changedStateRefs": ["STA-QIF-001"],
+      "affectedActorRefs": ["ACT-QIF-001"],
+      "boundaryRefs": ["BDY-QIF-001", "BDY-QIF-002"]
+    }
+  ],
+  "invariants": [
+    {
+      "id": "INV-QIF-001",
+      "worldModelRef": "WMD-QIF-001",
+      "statement": "A passing World Model Review verifier must not be described as semantic truth.",
+      "boundaryRefs": ["BDY-QIF-002", "BDY-QIF-003"],
+      "violationEffect": "Release notes, docs, or runtime logs must be corrected before release.",
+      "owner": "qif-maintainer"
+    }
+  ],
+  "coordinateSystems": [
+    {
+      "id": "COS-QIF-001",
+      "worldModelRef": "WMD-QIF-001",
+      "name": "QIF world-model readiness coordinates",
+      "purpose": "Separate structural specificity from empirical semantic calibration.",
+      "axisRefs": ["CAX-QIF-001", "CAX-QIF-002"],
+      "status": "insufficient"
+    }
+  ],
+  "coordinateAxes": [
+    {
+      "id": "CAX-QIF-001",
+      "worldModelRef": "WMD-QIF-001",
+      "name": "finding specificity",
+      "axisType": "confidence",
+      "scaleDefinition": "generic concern, named missing item, named missing item with expected definition, named missing item with evidence and resolution action.",
+      "missingValueHandling": "Reject findings that do not name the missing item and expected definition.",
+      "exampleValues": ["named missing item", "named missing item with evidence and resolution action"]
+    },
+    {
+      "id": "CAX-QIF-002",
+      "worldModelRef": "WMD-QIF-001",
+      "name": "semantic calibration evidence",
+      "axisType": "confidence",
+      "scaleDefinition": "none, anecdotal, pilot agreement sample, statistically tracked calibration.",
+      "missingValueHandling": "Record as residual risk and do not claim calibrated semantic correctness.",
+      "exampleValues": ["none", "pilot agreement sample"]
+    }
+  ],
+  "perspectives": [
+    {
+      "id": "PER-QIF-001",
+      "worldModelRef": "WMD-QIF-001",
+      "name": "pilot adopter perspective",
+      "stakeholderType": "adopter",
+      "concernFocus": "Can QIF identify the exact missing model part without overstating truth?",
+      "qualityIntentRefs": ["QIN-QIF-001"]
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "ASM-QIF-001",
+      "worldModelRef": "WMD-QIF-001",
+      "statement": "Retained negative fixtures are sufficient evidence for structural specificity, but not for real-domain calibration.",
+      "status": "verified",
+      "sourceEvidenceRefs": ["EVD-QIF-001"],
+      "affects": [
+        { "entityType": "coordinateAxes", "entityRef": "CAX-QIF-002" },
+        { "entityType": "qualityIntents", "entityRef": "QIN-QIF-001" }
+      ],
+      "confidence": 0.87
+    }
+  ],
+  "modelEvidence": [
+    {
+      "id": "EVD-QIF-001",
+      "worldModelRef": "WMD-QIF-001",
+      "evidenceType": "document",
+      "sourceArtifact": "npm test output and docs/qif-v0.5.1-world-model-review.md",
+      "summary": "QIF v0.5.1 has executable structural checks and retained negative fixtures for world-model-review, but no pilot agreement corpus yet.",
+      "targetRefs": [
+        { "entityType": "coordinateAxes", "entityRef": "CAX-QIF-002" },
+        { "entityType": "worldModelGapFindings", "entityRef": "WMG-QIF-001" }
+      ],
+      "confidence": 0.88,
+      "findingEvidence": {
+        "generatedBy": "codex-qif-self-reviewer",
+        "sourceArtifact": "repository state after v0.5.1 implementation",
+        "reproducible": true,
+        "reproducedBy": "local npm test",
+        "falsePositiveChecked": true,
+        "impactConfirmed": true,
+        "finalStatus": "confirmed"
+      },
+      "trust": {
+        "sources": ["package.json", "tools/validate-world-model-review.mjs", "tools/run-fixture-tests.mjs", "docs/qif-v0.5.1-world-model-review.md"],
+        "generatedBy": "codex-qif-self-reviewer",
+        "verifiedBy": ["local verifier run"],
+        "status": "verified",
+        "staleAfter": "2026-09-20"
+      }
+    }
+  ],
+  "qualityIntents": [
+    {
+      "id": "QIN-QIF-001",
+      "statement": "QIF must distinguish structurally specific World Model Gap Findings from empirically calibrated semantic truth.",
+      "lossBoundaryRef": "BDY-QIF-003",
+      "sourceGapFindingRefs": ["WMG-QIF-001"],
+      "status": "candidate"
+    }
+  ],
+  "worldModelGapFindings": [
+    {
+      "id": "WMG-QIF-001",
+      "worldModelRef": "WMD-QIF-001",
+      "gapObjectType": "CoordinateAxis",
+      "gapObjectRef": { "entityType": "coordinateAxes", "entityRef": "CAX-QIF-002" },
+      "missingItem": "Pilot agreement threshold for semantic calibration of World Model Gap Findings.",
+      "expectedDefinition": "Define how many unseen real organization cases are required, who grades agreement, what agreement score is acceptable, and how disagreements trigger governance or schema updates.",
+      "observedProblem": "QIF v0.5.1 verifies structural specificity and retained negative cases, but has no real pilot corpus or agreement threshold for whether findings match domain-expert judgment.",
+      "whyItMatters": "Users could treat a structurally valid AI-generated gap finding as calibrated domain truth even though the verifier only proves references, metadata, and finding specificity.",
+      "affectedQualityIntentRefs": ["QIN-QIF-001"],
+      "affectedDecisionRefs": ["pilot readiness", "semantic-validity claim", "governance escalation"],
+      "evidenceRefs": ["EVD-QIF-001"],
+      "requiredResolutionActionRefs": ["RSA-QIF-001"],
+      "verdictEffect": "note-residual-risk",
+      "severity": "high",
+      "confidence": 0.88,
+      "findingEvidence": {
+        "generatedBy": "codex-qif-self-reviewer",
+        "sourceArtifact": "repository state after v0.5.1 implementation",
+        "reproducible": true,
+        "reproducedBy": "local verifier run",
+        "falsePositiveChecked": true,
+        "impactConfirmed": true,
+        "finalStatus": "confirmed"
+      },
+      "trust": {
+        "sources": ["docs/qif-v0.5.1-world-model-review.md", "tools/fixtures/world-model-review-cases.mjs"],
+        "generatedBy": "codex-qif-self-reviewer",
+        "verifiedBy": ["local verifier run"],
+        "status": "verified",
+        "staleAfter": "2026-09-20"
+      },
+      "status": "open",
+      "governanceTriggerRefs": []
+    }
+  ],
+  "resolutionActions": [
+    {
+      "id": "RSA-QIF-001",
+      "findingRef": "WMG-QIF-001",
+      "actionType": "define-coordinate-axis",
+      "requiredDefinition": "Define a pilot calibration axis for World Model Gap Findings, including case count, domain mix, grader roles, agreement threshold, disagreement handling, and release-readiness effect.",
+      "owner": "qif-maintainer",
+      "status": "open",
+      "acceptanceCriteria": [
+        "Pilot package records unseen cases and expert/AI agreement results.",
+        "Agreement threshold is explicit and linked to governance.",
+        "Verifier output continues to avoid semantic-truth claims."
+      ]
+    }
+  ],
+  "governanceTriggers": [],
+  "verifierBoundary": {
+    "checks": [
+      "world-model-review self-assessment references resolve",
+      "residual gap finding names the missing calibration coordinate",
+      "semantic-truth boundary is explicit"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "business correctness",
+      "expert correctness"
+    ],
+    "semanticValidityRequires": [
+      "pilot cases",
+      "domain expert review",
+      "agreement calibration",
+      "governance decision"
+    ]
+  }
+}

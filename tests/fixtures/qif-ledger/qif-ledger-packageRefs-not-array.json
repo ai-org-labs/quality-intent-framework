@@ -1,6 +1,6 @@
 {
   "packageType": "qif-ledger",
-  "runtimeVersion": "0.5.0",
+  "runtimeVersion": "0.5.1",
   "packageId": "LEDGERPKG-001",
   "packageRefs": null,
   "crossPackageRefs": [
@@ -48,6 +48,21 @@
       },
       "purpose": "Preserve the incident-to-improvement feedback loop.",
       "provenance": "Recorded by postReleaseReview.improvementActionRefs."
+    },
+    {
+      "id": "XREF-004",
+      "from": {
+        "packageRef": "PKG-WORLD",
+        "entityType": "worldModelGapFindings",
+        "entityRef": "WMG-WM-001"
+      },
+      "to": {
+        "packageRef": "PKG-WORLD",
+        "entityType": "qualityIntents",
+        "entityRef": "QIN-WM-001"
+      },
+      "purpose": "Preserve the chain from a concrete world-model gap to a candidate Quality Intent.",
+      "provenance": "Recorded by world-model-review missingItem, expectedDefinition, evidence, and resolution actions."
     }
   ],
   "qualityIntentLifecycleRecords": [
@@ -98,6 +113,30 @@
       ],
       "owner": "support-quality-owner",
       "status": "active"
+    },
+    {
+      "id": "QLC-003",
+      "intent": {
+        "packageRef": "PKG-WORLD",
+        "entityType": "qualityIntents",
+        "entityRef": "QIN-WM-001"
+      },
+      "state": "candidate",
+      "rationale": "The Quality Intent is derived from an explicit world-model gap finding and requires stakeholder confirmation before active use.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-WORLD",
+          "entityType": "worldModelGapFindings",
+          "entityRef": "WMG-WM-001"
+        },
+        {
+          "packageRef": "PKG-WORLD",
+          "entityType": "modelEvidence",
+          "entityRef": "EVD-WM-001"
+        }
+      ],
+      "owner": "quality-steward",
+      "status": "open"
     }
   ],
   "missedIntentRecords": [
@@ -188,6 +227,11 @@
         "packageRef": "PKG-REVIEW",
         "entityType": "governanceTriggers",
         "entityRef": "GTR-RR-002"
+      },
+      {
+        "packageRef": "PKG-WORLD",
+        "entityType": "governanceTriggers",
+        "entityRef": "GTR-WM-001"
       }
     ],
     "openResidualRiskRefs": [
@@ -195,10 +239,15 @@
         "packageRef": "PKG-REVIEW",
         "entityType": "reviewRuns",
         "entityRef": "RRN-001"
+      },
+      {
+        "packageRef": "PKG-WORLD",
+        "entityType": "worldModelGapFindings",
+        "entityRef": "WMG-WM-001"
       }
     ],
-    "lastUpdated": "2026-08-19",
-    "summary": "Minimal ledger index for the chain from discovery, through review and gate evidence, into post-release incident feedback."
+    "lastUpdated": "2026-08-20",
+    "summary": "Minimal ledger index for the chain from discovery, world-model gaps, review and gate evidence, into post-release incident feedback."
   },
   "verifierBoundary": {
     "checks": [

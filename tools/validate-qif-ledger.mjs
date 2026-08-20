@@ -60,6 +60,22 @@ const entityCollections = [
   "postReleaseReviews",
   "improvementActions",
   "traceabilityLinks",
+  "worldModels",
+  "conceptDefinitions",
+  "domainEntities",
+  "actors",
+  "boundaries",
+  "relationships",
+  "states",
+  "events",
+  "invariants",
+  "coordinateSystems",
+  "coordinateAxes",
+  "perspectives",
+  "assumptions",
+  "modelEvidence",
+  "worldModelGapFindings",
+  "resolutionActions",
   "incidents"
 ];
 

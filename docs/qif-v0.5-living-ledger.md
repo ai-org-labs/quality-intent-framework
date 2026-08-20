@@ -11,6 +11,7 @@ The ledger answers:
 - Which Quality Intent came from which discovery evidence?
 - Which review or gate used that intent?
 - Which incident or outcome challenged it?
+- Which world-model gap produced a candidate intent or governance trigger?
 - Did the organization derive a new intent, accept a gap, or route work to governance?
 - Which agent trial produced an outcome, and what provenance supports it?
 
@@ -194,6 +195,7 @@ v0.5.0 adds:
 The example ledger links:
 
 - discovery-session derived Quality Intent records
+- world-model-review gap findings and candidate Quality Intents
 - review-run governance escalation
 - quality-gate post-release incident feedback
 - a minimal agent trial and outcome record
@@ -201,3 +203,19 @@ The example ledger links:
 This is the first executable cross-package layer. It is intentionally narrow:
 it proves traceability mechanics before adding broader query tooling,
 calibration, or package registries.
+
+## v0.5.1 World Model Review Link
+
+v0.5.1 extends the ledger example and verifier entity index so a ledger can
+reference `world-model-review` packages.
+
+The example preserves:
+
+- a `worldModelGapFinding` that names the exact missing conceptual part;
+- the `modelEvidence` supporting that finding;
+- the candidate `qualityIntent` derived from the gap;
+- the open `governanceTrigger` caused by the blocking gap.
+
+This keeps the ledger boundary unchanged. The ledger verifies that references
+resolve and lifecycle evidence exists. It does not decide whether the world
+model itself is semantically correct.

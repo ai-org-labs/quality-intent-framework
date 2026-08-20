@@ -1,0 +1,527 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/qif/schemas/world-model-review-package.schema.json",
+  "title": "QIF World Model Review Package",
+  "type": "object",
+  "required": [
+    "packageType",
+    "runtimeVersion",
+    "packageId",
+    "worldModels",
+    "conceptDefinitions",
+    "domainEntities",
+    "actors",
+    "boundaries",
+    "relationships",
+    "states",
+    "events",
+    "invariants",
+    "coordinateSystems",
+    "coordinateAxes",
+    "perspectives",
+    "assumptions",
+    "modelEvidence",
+    "qualityIntents",
+    "worldModelGapFindings",
+    "resolutionActions",
+    "governanceTriggers",
+    "verifierBoundary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "packageType": { "const": "world-model-review" },
+    "runtimeVersion": { "type": "string" },
+    "packageId": { "type": "string" },
+    "worldModels": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/worldModel" }
+    },
+    "conceptDefinitions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/conceptDefinition" }
+    },
+    "domainEntities": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/domainEntity" }
+    },
+    "actors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/actor" }
+    },
+    "boundaries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/boundary" }
+    },
+    "relationships": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/relationship" }
+    },
+    "states": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/state" }
+    },
+    "events": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/event" }
+    },
+    "invariants": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/invariant" }
+    },
+    "coordinateSystems": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/coordinateSystem" }
+    },
+    "coordinateAxes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/coordinateAxis" }
+    },
+    "perspectives": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/perspective" }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/assumption" }
+    },
+    "modelEvidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/modelEvidence" }
+    },
+    "qualityIntents": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/qualityIntent" }
+    },
+    "worldModelGapFindings": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/worldModelGapFinding" }
+    },
+    "resolutionActions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/resolutionAction" }
+    },
+    "governanceTriggers": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/governanceTrigger" }
+    },
+    "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]+-[A-Z0-9-]+$"
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "refArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" },
+      "minItems": 1
+    },
+    "maybeRefArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" }
+    },
+    "localEntityRef": {
+      "type": "object",
+      "required": ["entityType", "entityRef"],
+      "additionalProperties": false,
+      "properties": {
+        "entityType": {
+          "enum": [
+            "worldModels",
+            "conceptDefinitions",
+            "domainEntities",
+            "actors",
+            "boundaries",
+            "relationships",
+            "states",
+            "events",
+            "invariants",
+            "coordinateSystems",
+            "coordinateAxes",
+            "perspectives",
+            "assumptions",
+            "modelEvidence",
+            "qualityIntents",
+            "worldModelGapFindings",
+            "resolutionActions",
+            "governanceTriggers"
+          ]
+        },
+        "entityRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "worldModel": {
+      "type": "object",
+      "required": ["id", "title", "targetDescription", "scope", "context", "owner", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "targetDescription": { "type": "string" },
+        "scope": { "type": "string" },
+        "context": { "type": "string" },
+        "owner": { "type": "string" },
+        "status": { "enum": ["draft", "reviewed", "accepted", "superseded"] }
+      }
+    },
+    "conceptDefinition": {
+      "type": "object",
+      "required": ["id", "worldModelRef", "term", "definition", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "worldModelRef": { "$ref": "#/$defs/id" },
+        "term": { "type": "string" },
+        "definition": { "type": "string" },
+        "aliases": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "disambiguatesConceptRefs": { "$ref": "#/$defs/maybeRefArray" },
+        "status": { "enum": ["draft", "reviewed", "accepted", "ambiguous"] }
+      }
+    },
+    "domainEntity": {
+      "type": "object",
+      "required": ["id", "worldModelRef", "name", "entityType", "conceptRef", "boundaryRefs", "owner"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "worldModelRef": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "entityType": { "type": "string" },
+        "conceptRef": { "$ref": "#/$defs/id" },
+        "boundaryRefs": { "$ref": "#/$defs/refArray" },
+        "owner": { "type": "string" }
+      }
+    },
+    "actor": {
+      "type": "object",
+      "required": ["id", "worldModelRef", "name", "actorType", "responsibilityBoundaryRef", "authorityBoundaryRefs"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "worldModelRef": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "actorType": { "enum": ["human", "team", "organization", "ai-agent", "system", "external-party"] },
+        "responsibilityBoundaryRef": { "$ref": "#/$defs/id" },
+        "authorityBoundaryRefs": { "$ref": "#/$defs/refArray" }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "required": ["id", "worldModelRef", "boundaryType", "statement", "severity", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "worldModelRef": { "$ref": "#/$defs/id" },
+        "boundaryType": { "enum": ["scope", "responsibility", "authority", "data", "time", "risk", "loss"] },
+        "statement": { "type": "string" },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "status": { "enum": ["draft", "reviewed", "accepted", "ambiguous"] }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "required": ["id", "worldModelRef", "relationshipType", "from", "to", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "worldModelRef": { "$ref": "#/$defs/id" },
+        "relationshipType": { "type": "string" },
+        "from": { "$ref": "#/$defs/localEntityRef" },
+        "to": { "$ref": "#/$defs/localEntityRef" },
+        "description": { "type": "string" }
+      }
+    },
+    "state": {
+      "type": "object",
+      "required": ["id", "worldModelRef", "name", "definedFor", "entryCriteria", "exitCriteria"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "worldModelRef": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "definedFor": { "$ref": "#/$defs/localEntityRef" },
+        "entryCriteria": { "type": "string" },
+        "exitCriteria": { "type": "string" }
+      }
+    },
+    "event": {
+      "type": "object",
+      "required": ["id", "worldModelRef", "name", "trigger", "changedStateRefs", "affectedActorRefs", "boundaryRefs"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "worldModelRef": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "trigger": { "type": "string" },
+        "changedStateRefs": { "$ref": "#/$defs/refArray" },
+        "affectedActorRefs": { "$ref": "#/$defs/refArray" },
+        "boundaryRefs": { "$ref": "#/$defs/refArray" }
+      }
+    },
+    "invariant": {
+      "type": "object",
+      "required": ["id", "worldModelRef", "statement", "boundaryRefs", "violationEffect", "owner"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "worldModelRef": { "$ref": "#/$defs/id" },
+        "statement": { "type": "string" },
+        "boundaryRefs": { "$ref": "#/$defs/refArray" },
+        "violationEffect": { "type": "string" },
+        "owner": { "type": "string" }
+      }
+    },
+    "coordinateSystem": {
+      "type": "object",
+      "required": ["id", "worldModelRef", "name", "purpose", "axisRefs", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "worldModelRef": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "purpose": { "type": "string" },
+        "axisRefs": { "$ref": "#/$defs/refArray" },
+        "status": { "enum": ["draft", "reviewed", "accepted", "insufficient"] }
+      }
+    },
+    "coordinateAxis": {
+      "type": "object",
+      "required": ["id", "worldModelRef", "name", "axisType", "scaleDefinition", "missingValueHandling", "exampleValues"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "worldModelRef": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "axisType": { "enum": ["time", "responsibility", "risk", "impact", "reversibility", "confidence", "authority", "data-flow", "operational-state", "custom"] },
+        "scaleDefinition": { "type": "string" },
+        "missingValueHandling": { "type": "string" },
+        "exampleValues": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "perspective": {
+      "type": "object",
+      "required": ["id", "worldModelRef", "name", "stakeholderType", "concernFocus", "qualityIntentRefs"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "worldModelRef": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "stakeholderType": { "type": "string" },
+        "concernFocus": { "type": "string" },
+        "qualityIntentRefs": { "$ref": "#/$defs/refArray" }
+      }
+    },
+    "assumption": {
+      "type": "object",
+      "required": ["id", "worldModelRef", "statement", "status", "sourceEvidenceRefs", "affects", "confidence"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "worldModelRef": { "$ref": "#/$defs/id" },
+        "statement": { "type": "string" },
+        "status": { "enum": ["unverified", "verified", "rejected", "superseded"] },
+        "sourceEvidenceRefs": { "$ref": "#/$defs/refArray" },
+        "affects": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/localEntityRef" },
+          "minItems": 1
+        },
+        "confidence": { "$ref": "#/$defs/score" }
+      }
+    },
+    "findingEvidence": {
+      "type": "object",
+      "required": [
+        "generatedBy",
+        "sourceArtifact",
+        "reproducible",
+        "reproducedBy",
+        "falsePositiveChecked",
+        "impactConfirmed",
+        "finalStatus"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "generatedBy": { "type": "string" },
+        "sourceArtifact": { "type": "string" },
+        "reproducible": { "type": "boolean" },
+        "reproducedBy": { "type": "string" },
+        "falsePositiveChecked": { "type": "boolean" },
+        "impactConfirmed": { "type": "boolean" },
+        "finalStatus": { "enum": ["candidate", "confirmed", "false-positive", "mitigated", "accepted-risk", "needs-governance"] }
+      }
+    },
+    "trust": {
+      "type": "object",
+      "required": ["sources", "generatedBy", "verifiedBy", "status", "staleAfter"],
+      "additionalProperties": false,
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "generatedBy": { "type": "string" },
+        "verifiedBy": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "status": { "enum": ["draft", "verified", "stale", "rejected"] },
+        "staleAfter": { "type": "string" }
+      }
+    },
+    "modelEvidence": {
+      "type": "object",
+      "required": ["id", "worldModelRef", "evidenceType", "sourceArtifact", "summary", "targetRefs", "confidence", "trust"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "worldModelRef": { "$ref": "#/$defs/id" },
+        "evidenceType": { "enum": ["document", "interview", "review-history", "incident", "operation-observation", "policy", "audit-record", "other"] },
+        "sourceArtifact": { "type": "string" },
+        "summary": { "type": "string" },
+        "targetRefs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/localEntityRef" },
+          "minItems": 1
+        },
+        "confidence": { "$ref": "#/$defs/score" },
+        "findingEvidence": { "$ref": "#/$defs/findingEvidence" },
+        "trust": { "$ref": "#/$defs/trust" }
+      }
+    },
+    "qualityIntent": {
+      "type": "object",
+      "required": ["id", "statement", "lossBoundaryRef", "sourceGapFindingRefs", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "statement": { "type": "string" },
+        "lossBoundaryRef": { "$ref": "#/$defs/id" },
+        "sourceGapFindingRefs": { "$ref": "#/$defs/maybeRefArray" },
+        "status": { "enum": ["candidate", "active", "retired"] }
+      }
+    },
+    "worldModelGapFinding": {
+      "type": "object",
+      "required": [
+        "id",
+        "worldModelRef",
+        "gapObjectType",
+        "missingItem",
+        "expectedDefinition",
+        "observedProblem",
+        "whyItMatters",
+        "affectedQualityIntentRefs",
+        "affectedDecisionRefs",
+        "evidenceRefs",
+        "requiredResolutionActionRefs",
+        "verdictEffect",
+        "severity",
+        "confidence",
+        "findingEvidence",
+        "trust",
+        "status",
+        "governanceTriggerRefs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "worldModelRef": { "$ref": "#/$defs/id" },
+        "gapObjectType": { "enum": ["Concept", "Actor", "Boundary", "Relationship", "State", "Event", "Invariant", "CoordinateAxis", "CoordinateSystem", "Perspective", "Assumption", "DomainEntity"] },
+        "gapObjectRef": { "$ref": "#/$defs/localEntityRef" },
+        "missingItem": { "type": "string" },
+        "expectedDefinition": { "type": "string" },
+        "observedProblem": { "type": "string" },
+        "whyItMatters": { "type": "string" },
+        "affectedQualityIntentRefs": { "$ref": "#/$defs/refArray" },
+        "affectedDecisionRefs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "evidenceRefs": { "$ref": "#/$defs/refArray" },
+        "requiredResolutionActionRefs": { "$ref": "#/$defs/refArray" },
+        "verdictEffect": { "enum": ["block-evaluation", "degrade-confidence", "require-governance", "note-residual-risk"] },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "confidence": { "$ref": "#/$defs/score" },
+        "findingEvidence": { "$ref": "#/$defs/findingEvidence" },
+        "trust": { "$ref": "#/$defs/trust" },
+        "status": { "enum": ["open", "mitigated", "accepted-risk", "false-positive", "resolved"] },
+        "governanceTriggerRefs": { "$ref": "#/$defs/maybeRefArray" }
+      }
+    },
+    "resolutionAction": {
+      "type": "object",
+      "required": ["id", "findingRef", "actionType", "requiredDefinition", "owner", "status", "acceptanceCriteria"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "findingRef": { "$ref": "#/$defs/id" },
+        "actionType": { "enum": ["define-concept", "define-boundary", "define-relationship", "define-coordinate-axis", "verify-assumption", "define-state-event", "escalate-governance", "other"] },
+        "requiredDefinition": { "type": "string" },
+        "owner": { "type": "string" },
+        "status": { "enum": ["open", "in-progress", "completed", "waived"] },
+        "acceptanceCriteria": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "governanceTrigger": {
+      "type": "object",
+      "required": ["id", "triggerType", "reason", "sourceFindingRef", "severity", "requiredAction", "owner", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "triggerType": { "enum": ["world-model-gap", "ambiguous-boundary", "missing-coordinate-axis", "unverified-assumption", "conflicting-concepts", "other"] },
+        "reason": { "type": "string" },
+        "sourceFindingRef": { "$ref": "#/$defs/id" },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "requiredAction": { "type": "string" },
+        "owner": { "type": "string" },
+        "status": { "enum": ["open", "reviewed", "resolved"] },
+        "resultingGovernanceEventRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "verifierBoundary": {
+      "type": "object",
+      "required": ["checks", "doesNotClaim", "semanticValidityRequires"],
+      "additionalProperties": false,
+      "properties": {
+        "checks": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "doesNotClaim": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "semanticValidityRequires": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

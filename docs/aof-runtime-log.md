@@ -2112,3 +2112,68 @@ Publication:
 - Tag target: b9e0ed1a43d6f7831b505d037055ab6ae782a4f4
 - Remote main advanced from 500f131 to b9e0ed1.
 - Residual risk: v0.5.0 ledger behavior is local-file and example-driven; deeper package registries, query tooling, detailed trajectory typing, and calibration remain future work.
+
+## QIF v0.5.1 World Model Review
+
+Date: 2026-08-20
+
+Need / Intent / Context:
+
+- Need: AI-assisted quality evaluation can be structurally traceable but still wrong when humans and AI agents do not share the same conceptual world. QIF must be able to say exactly which concept, actor, boundary, relationship, state, event, assumption, or coordinate axis is missing before a verdict is trusted.
+- Intent: add an executable World Model Review package type that detects specific conceptual-modeling gaps, records evidence/trust, links affected Quality Intents and decisions, requires resolution actions, and escalates blocking gaps to governance.
+- Context: QIF remains standalone. AOF v11.7.0 was used as development runtime evidence. This is a narrow v0.5.1 update, not a redesign of QIF and not a generic ontology system.
+
+Direction and council judgment:
+
+- Visionary: approve. The change strengthens QIF's core purpose by moving quality evaluation earlier to the shared-world-model boundary where AI misunderstanding is most likely.
+- Builder: approve. Implement as a separate `world-model-review` package type with schema, example, verifier, fixtures, docs, and ledger reference support. Do not merge it into every existing package yet.
+- Guardian: approve with guardrails. The verifier may enforce specificity, references, metadata, and governance linkage, but must not claim semantic truth or domain correctness.
+
+What was built:
+
+- `schemas/world-model-review-package.schema.json`
+- `examples/world-model-review-package.json`
+- `tools/validate-world-model-review.mjs`
+- `tools/fixtures/world-model-review-cases.mjs`
+- `tests/fixtures/world-model-review/`
+- `docs/qif-v0.5.1-world-model-review.md`
+- `assessments/qif-world-model-review-v0.5.1.json` and `.md`
+- `RELEASE-NOTES-v0.5.1.md`
+- README, roadmap, AI authoring guide, changelog, and Living Ledger documentation updates.
+- `examples/qif-ledger-package.json` and `tools/validate-qif-ledger.mjs` updates so ledger packages can reference world-model-review entities.
+
+What was not built:
+
+- No UI.
+- No external system integration.
+- No remote package registry.
+- No semantic-truth checker.
+- No pilot calibration corpus or expert/AI agreement threshold yet.
+
+Key design decision:
+
+- `WorldModelGapFinding` is the central entity. It must include `missingItem`, `expectedDefinition`, `observedProblem`, `whyItMatters`, `affectedQualityIntentRefs`, `affectedDecisionRefs`, `evidenceRefs`, `requiredResolutionActionRefs`, `verdictEffect`, `confidence`, `findingEvidence`, `trust`, and governance linkage when evaluation is blocked.
+- This makes the finding actionable. QIF must not only say "conceptual modeling is insufficient"; it must say exactly what is missing, why it matters, which decision is unsafe, and how to close the gap.
+
+AOF runtime command evidence:
+
+- AOF latest check: `ai-org-labs/ai-organization-framework` latest tag was `v11.7.0`.
+- AOF v11.7.0 `situation-assess --project .` passed and flagged stale alignment pulse as a warning.
+- AOF v11.7.0 `organization-verify --project .` passed with 231/231 checks.
+- AOF v11.7.0 `command-routing-audit --project . --write-artifact .aof/artifacts/verification/command-routing-audit-qif-v0.5.1-final.json` passed.
+- AOF v11.7.0 `review-provenance-audit --project . --cutoff-task-id TASK-014 --write-artifact .aof/artifacts/verification/review-provenance-audit-qif-v0.5.1-final.json` passed.
+
+QIF verification:
+
+- `node tools/validate-world-model-review.mjs examples/world-model-review-package.json` passed.
+- `node tools/validate-qif-ledger.mjs examples/qif-ledger-package.json` passed with 4 package refs and world-model-review references.
+- `node tools/validate-world-model-review.mjs assessments/qif-world-model-review-v0.5.1.json` passed.
+- `npm test` passed with 9/9 positive checks and 412/412 negative checks.
+- JSON parse check passed for package, examples, schemas, assessments, fixture manifests, and AOF verification artifacts.
+- `git diff --check` passed.
+- Public residue scan found no personal account, email, legacy repository, user-home, or temporary checkout path residue outside `.git`.
+
+Decision:
+
+- v0.5.1 implementation is structurally ready for commit and release.
+- Residual risk: World Model Review is structurally specific but not semantically calibrated. The next quality step is pilot calibration: unseen organization cases, expert/AI agreement scoring, disagreement handling, and governance effect.

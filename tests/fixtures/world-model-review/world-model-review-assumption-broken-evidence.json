@@ -1,0 +1,472 @@
+{
+  "packageType": "world-model-review",
+  "runtimeVersion": "0.5.1",
+  "packageId": "WMR-PKG-001",
+  "worldModels": [
+    {
+      "id": "WMD-001",
+      "title": "AI-assisted release approval world model",
+      "targetDescription": "A mixed human and AI process that reviews whether a release candidate may be approved.",
+      "scope": "Release approval concepts, actors, authority boundaries, state transitions, and evaluation coordinates.",
+      "context": "The AI reviewer may inspect requirements, review notes, and test evidence, but must not infer approval authority from the word approved alone.",
+      "owner": "quality-steward",
+      "status": "draft"
+    }
+  ],
+  "conceptDefinitions": [
+    {
+      "id": "CON-WM-001",
+      "worldModelRef": "WMD-001",
+      "term": "approval",
+      "definition": "A state transition authorized by a named actor under explicit authority and responsibility boundaries.",
+      "aliases": [
+        "sign-off"
+      ],
+      "disambiguatesConceptRefs": [],
+      "status": "ambiguous"
+    },
+    {
+      "id": "CON-WM-002",
+      "worldModelRef": "WMD-001",
+      "term": "release candidate",
+      "definition": "A target version or artifact set submitted for a release decision before publication.",
+      "aliases": [
+        "candidate"
+      ],
+      "disambiguatesConceptRefs": [],
+      "status": "reviewed"
+    }
+  ],
+  "domainEntities": [
+    {
+      "id": "DEN-WM-001",
+      "worldModelRef": "WMD-001",
+      "name": "release candidate package",
+      "entityType": "artifact-set",
+      "conceptRef": "CON-WM-002",
+      "boundaryRefs": [
+        "BDY-WM-001",
+        "BDY-WM-004"
+      ],
+      "owner": "release-manager"
+    }
+  ],
+  "actors": [
+    {
+      "id": "ACT-WM-001",
+      "worldModelRef": "WMD-001",
+      "name": "AI quality reviewer",
+      "actorType": "ai-agent",
+      "responsibilityBoundaryRef": "BDY-WM-002",
+      "authorityBoundaryRefs": [
+        "BDY-WM-003"
+      ]
+    },
+    {
+      "id": "ACT-WM-002",
+      "worldModelRef": "WMD-001",
+      "name": "human release approver",
+      "actorType": "human",
+      "responsibilityBoundaryRef": "BDY-WM-005",
+      "authorityBoundaryRefs": [
+        "BDY-WM-006"
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "BDY-WM-001",
+      "worldModelRef": "WMD-001",
+      "boundaryType": "scope",
+      "statement": "The release candidate includes the artifacts explicitly named in the release request.",
+      "severity": "medium",
+      "status": "reviewed"
+    },
+    {
+      "id": "BDY-WM-002",
+      "worldModelRef": "WMD-001",
+      "boundaryType": "responsibility",
+      "statement": "The AI reviewer may identify evidence gaps and recommend a verdict, but must not become the accountable release approver.",
+      "severity": "high",
+      "status": "accepted"
+    },
+    {
+      "id": "BDY-WM-003",
+      "worldModelRef": "WMD-001",
+      "boundaryType": "authority",
+      "statement": "The AI reviewer cannot grant final release approval.",
+      "severity": "critical",
+      "status": "accepted"
+    },
+    {
+      "id": "BDY-WM-004",
+      "worldModelRef": "WMD-001",
+      "boundaryType": "time",
+      "statement": "Evidence older than the release candidate scope must be marked stale or revalidated.",
+      "severity": "medium",
+      "status": "reviewed"
+    },
+    {
+      "id": "BDY-WM-005",
+      "worldModelRef": "WMD-001",
+      "boundaryType": "responsibility",
+      "statement": "The human approver owns the final release decision and waiver accountability.",
+      "severity": "high",
+      "status": "reviewed"
+    },
+    {
+      "id": "BDY-WM-006",
+      "worldModelRef": "WMD-001",
+      "boundaryType": "authority",
+      "statement": "Only a named human approver may move a candidate into final approved state.",
+      "severity": "critical",
+      "status": "ambiguous"
+    },
+    {
+      "id": "BDY-WM-007",
+      "worldModelRef": "WMD-001",
+      "boundaryType": "loss",
+      "statement": "The organization must not allow AI-inferred approval to substitute for accountable human release authority.",
+      "severity": "critical",
+      "status": "accepted"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "REL-WM-001",
+      "worldModelRef": "WMD-001",
+      "relationshipType": "reviews",
+      "from": {
+        "entityType": "actors",
+        "entityRef": "ACT-WM-001"
+      },
+      "to": {
+        "entityType": "domainEntities",
+        "entityRef": "DEN-WM-001"
+      },
+      "description": "The AI quality reviewer reviews the release candidate package and produces findings."
+    },
+    {
+      "id": "REL-WM-002",
+      "worldModelRef": "WMD-001",
+      "relationshipType": "approves",
+      "from": {
+        "entityType": "actors",
+        "entityRef": "ACT-WM-002"
+      },
+      "to": {
+        "entityType": "domainEntities",
+        "entityRef": "DEN-WM-001"
+      },
+      "description": "The human approver is the only actor allowed to finalize release approval."
+    }
+  ],
+  "states": [
+    {
+      "id": "STA-WM-001",
+      "worldModelRef": "WMD-001",
+      "name": "candidate-under-review",
+      "definedFor": {
+        "entityType": "domainEntities",
+        "entityRef": "DEN-WM-001"
+      },
+      "entryCriteria": "The release request names the candidate scope and evidence set.",
+      "exitCriteria": "A review verdict and explicit approval or rejection decision are recorded."
+    },
+    {
+      "id": "STA-WM-002",
+      "worldModelRef": "WMD-001",
+      "name": "approved",
+      "definedFor": {
+        "entityType": "domainEntities",
+        "entityRef": "DEN-WM-001"
+      },
+      "entryCriteria": "A named human approver records final approval under authority boundary BDY-WM-006.",
+      "exitCriteria": "The release is published, superseded, or withdrawn."
+    }
+  ],
+  "events": [
+    {
+      "id": "EVT-WM-001",
+      "worldModelRef": "WMD-001",
+      "name": "approval recorded",
+      "trigger": "A named human approver records final release approval.",
+      "changedStateRefs": [
+        "STA-WM-002"
+      ],
+      "affectedActorRefs": [
+        "ACT-WM-002"
+      ],
+      "boundaryRefs": [
+        "BDY-WM-006",
+        "BDY-WM-007"
+      ]
+    }
+  ],
+  "invariants": [
+    {
+      "id": "INV-WM-001",
+      "worldModelRef": "WMD-001",
+      "statement": "A release candidate must not be treated as approved unless the approving actor and authority boundary are explicit.",
+      "boundaryRefs": [
+        "BDY-WM-006",
+        "BDY-WM-007"
+      ],
+      "violationEffect": "Block or escalate the release evaluation because the verdict would rest on an undefined authority model.",
+      "owner": "quality-steward"
+    }
+  ],
+  "coordinateSystems": [
+    {
+      "id": "COS-WM-001",
+      "worldModelRef": "WMD-001",
+      "name": "release decision coordinate system",
+      "purpose": "Provide shared axes for severity, authority, time freshness, reversibility, and confidence when AI and humans discuss release readiness.",
+      "axisRefs": [
+        "CAX-WM-001",
+        "CAX-WM-002",
+        "CAX-WM-003"
+      ],
+      "status": "insufficient"
+    }
+  ],
+  "coordinateAxes": [
+    {
+      "id": "CAX-WM-001",
+      "worldModelRef": "WMD-001",
+      "name": "authority explicitness",
+      "axisType": "authority",
+      "scaleDefinition": "unknown, implied, named actor, named actor with boundary, named actor with boundary and audit evidence.",
+      "missingValueHandling": "Treat unknown or implied authority as evaluation-blocking for final approval decisions.",
+      "exampleValues": [
+        "unknown",
+        "named actor with boundary"
+      ]
+    },
+    {
+      "id": "CAX-WM-002",
+      "worldModelRef": "WMD-001",
+      "name": "evidence freshness",
+      "axisType": "time",
+      "scaleDefinition": "stale, candidate-era, current, continuously monitored.",
+      "missingValueHandling": "Mark verdict confidence degraded when evidence freshness is unknown.",
+      "exampleValues": [
+        "stale",
+        "current"
+      ]
+    },
+    {
+      "id": "CAX-WM-003",
+      "worldModelRef": "WMD-001",
+      "name": "decision reversibility",
+      "axisType": "reversibility",
+      "scaleDefinition": "fully reversible, reversible with cost, partially irreversible, irreversible.",
+      "missingValueHandling": "Escalate unknown reversibility when loss boundary severity is high or critical.",
+      "exampleValues": [
+        "reversible with cost",
+        "irreversible"
+      ]
+    }
+  ],
+  "perspectives": [
+    {
+      "id": "PER-WM-001",
+      "worldModelRef": "WMD-001",
+      "name": "release governance perspective",
+      "stakeholderType": "governance",
+      "concernFocus": "Prevent AI-generated recommendations from being misread as accountable approval.",
+      "qualityIntentRefs": [
+        "QIN-WM-001"
+      ]
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "ASM-WM-001",
+      "worldModelRef": "WMD-001",
+      "statement": "The release request uses approved to mean final human approval rather than a passing review status.",
+      "status": "unverified",
+      "sourceEvidenceRefs": [
+        "EVD-NOPE-999"
+      ],
+      "affects": [
+        {
+          "entityType": "conceptDefinitions",
+          "entityRef": "CON-WM-001"
+        },
+        {
+          "entityType": "states",
+          "entityRef": "STA-WM-002"
+        }
+      ],
+      "confidence": 0.42
+    }
+  ],
+  "modelEvidence": [
+    {
+      "id": "EVD-WM-001",
+      "worldModelRef": "WMD-001",
+      "evidenceType": "document",
+      "sourceArtifact": "release-request.md",
+      "summary": "The release request uses the word approved but does not name the approving actor, authority boundary, or approval state transition.",
+      "targetRefs": [
+        {
+          "entityType": "conceptDefinitions",
+          "entityRef": "CON-WM-001"
+        },
+        {
+          "entityType": "boundaries",
+          "entityRef": "BDY-WM-006"
+        }
+      ],
+      "confidence": 0.86,
+      "findingEvidence": {
+        "generatedBy": "ai-world-model-reviewer",
+        "sourceArtifact": "release-request.md",
+        "reproducible": true,
+        "reproducedBy": "quality-steward",
+        "falsePositiveChecked": true,
+        "impactConfirmed": true,
+        "finalStatus": "confirmed"
+      },
+      "trust": {
+        "sources": [
+          "release-request.md"
+        ],
+        "generatedBy": "ai-world-model-reviewer",
+        "verifiedBy": [
+          "quality-steward"
+        ],
+        "status": "verified",
+        "staleAfter": "2026-12-31"
+      }
+    }
+  ],
+  "qualityIntents": [
+    {
+      "id": "QIN-WM-001",
+      "statement": "AI must not evaluate or recommend final approval when the approval actor, authority boundary, or approval state transition is undefined or only implied.",
+      "lossBoundaryRef": "BDY-WM-007",
+      "sourceGapFindingRefs": [
+        "WMG-WM-001"
+      ],
+      "status": "candidate"
+    }
+  ],
+  "worldModelGapFindings": [
+    {
+      "id": "WMG-WM-001",
+      "worldModelRef": "WMD-001",
+      "gapObjectType": "Boundary",
+      "gapObjectRef": {
+        "entityType": "boundaries",
+        "entityRef": "BDY-WM-006"
+      },
+      "missingItem": "Final approval authority boundary for the human release approver.",
+      "expectedDefinition": "Define who can approve, under which conditions, what evidence they must cite, how delegation works, and how approval differs from AI review pass status.",
+      "observedProblem": "The release request says approved but does not name the approving actor, authority scope, approval conditions, delegation rules, or audit evidence.",
+      "whyItMatters": "An AI reviewer could treat a passing review or implied approval phrase as final approval, producing a release verdict over an undefined authority model.",
+      "affectedQualityIntentRefs": [
+        "QIN-WM-001"
+      ],
+      "affectedDecisionRefs": [
+        "release verdict",
+        "governance escalation",
+        "waiver acceptance"
+      ],
+      "evidenceRefs": [
+        "EVD-WM-001"
+      ],
+      "requiredResolutionActionRefs": [
+        "RSA-WM-001",
+        "RSA-WM-002"
+      ],
+      "verdictEffect": "block-evaluation",
+      "severity": "critical",
+      "confidence": 0.86,
+      "findingEvidence": {
+        "generatedBy": "ai-world-model-reviewer",
+        "sourceArtifact": "release-request.md",
+        "reproducible": true,
+        "reproducedBy": "quality-steward",
+        "falsePositiveChecked": true,
+        "impactConfirmed": true,
+        "finalStatus": "confirmed"
+      },
+      "trust": {
+        "sources": [
+          "release-request.md"
+        ],
+        "generatedBy": "ai-world-model-reviewer",
+        "verifiedBy": [
+          "quality-steward"
+        ],
+        "status": "verified",
+        "staleAfter": "2026-12-31"
+      },
+      "status": "open",
+      "governanceTriggerRefs": [
+        "GTR-WM-001"
+      ]
+    }
+  ],
+  "resolutionActions": [
+    {
+      "id": "RSA-WM-001",
+      "findingRef": "WMG-WM-001",
+      "actionType": "define-boundary",
+      "requiredDefinition": "Add the named approval actor, authority scope, approval conditions, delegation rules, and required audit evidence.",
+      "owner": "release-manager",
+      "status": "open",
+      "acceptanceCriteria": [
+        "The approval authority boundary names the actor or role.",
+        "The approval state transition references required evidence.",
+        "Delegation and waiver conditions are explicitly defined."
+      ]
+    },
+    {
+      "id": "RSA-WM-002",
+      "findingRef": "WMG-WM-001",
+      "actionType": "define-coordinate-axis",
+      "requiredDefinition": "Confirm that authority explicitness is a required coordinate for release verdicts.",
+      "owner": "quality-steward",
+      "status": "open",
+      "acceptanceCriteria": [
+        "Approval verdicts record the authority explicitness coordinate.",
+        "Unknown or implied authority blocks final approval verdicts."
+      ]
+    }
+  ],
+  "governanceTriggers": [
+    {
+      "id": "GTR-WM-001",
+      "triggerType": "ambiguous-boundary",
+      "reason": "Final approval authority is ambiguous while the affected loss boundary is critical.",
+      "sourceFindingRef": "WMG-WM-001",
+      "severity": "critical",
+      "requiredAction": "Resolve the approval authority model before using AI-generated release verdicts.",
+      "owner": "release-governance-owner",
+      "status": "open"
+    }
+  ],
+  "verifierBoundary": {
+    "checks": [
+      "world model entity references resolve",
+      "gap findings name the missing item, expected definition, observed problem, why it matters, affected decisions, evidence, and resolution actions",
+      "evaluation-blocking or governance-required findings link to governance triggers",
+      "findingEvidence and trust metadata are structurally complete"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "business correctness",
+      "expert correctness",
+      "sufficiency of the actual authority model"
+    ],
+    "semanticValidityRequires": [
+      "domain expert review",
+      "stakeholder confirmation",
+      "operational feedback",
+      "governance decision"
+    ]
+  }
+}
