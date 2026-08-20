@@ -2175,5 +2175,11 @@ QIF verification:
 
 Decision:
 
-- v0.5.1 implementation is structurally ready for commit and release.
+- v0.5.1 implementation was committed, tagged, pushed, and released.
+- Release URL: https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.5.1
+- Release published at: 2026-08-20T01:48:03Z
+- Release commit: e7163b840b315efe22aa58062dda59e58bc1d375
+- Annotated tag object: 8d4f6d0ae3128223e51e3abfcecf92912804b3d7
+- Tag target: e7163b840b315efe22aa58062dda59e58bc1d375
+- Remote main advanced from eb576ba to e7163b8.
 - Residual risk: World Model Review is structurally specific but not semantically calibrated. The next quality step is pilot calibration: unseen organization cases, expert/AI agreement scoring, disagreement handling, and governance effect.
