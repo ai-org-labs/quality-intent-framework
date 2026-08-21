@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.5.5 World Model Elicitation so Level 4 requirements can converge from raw intent through competing hypotheses, discriminating questions, counterexample sequences, invariant confirmation, closure, derived world model, acceptance scenario, and Quality Intent candidate.",
-  "updated_at": "2026-08-20T14:30:00.000Z",
+  "content": "Implement and release QIF v0.6.0 Action Quality Contract so AI agent tool actions are governed through provider-neutral tool surface, execution environment, permission policy, approval gate, expected state transition, rollback plan, evidence requirement, runtime trace, action outcome, and governance trigger.",
+  "updated_at": "2026-08-21T04:35:00.000Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-QIFV055",
+  "source_session_id": "SESS-QIFV060",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-08-20T14:50:00.000Z"
+  "declared_complete_at": "2026-08-21T04:55:00.000Z"
 }

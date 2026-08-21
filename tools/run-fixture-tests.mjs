@@ -41,6 +41,7 @@ import { cases as worldModelCalibrationCases, spec as worldModelCalibrationSpec 
 import { cases as worldModelPilotCorpusCases, spec as worldModelPilotCorpusSpec } from "./fixtures/world-model-pilot-corpus-cases.mjs";
 import { cases as guidedElicitationCases, spec as guidedElicitationSpec } from "./fixtures/guided-elicitation-cases.mjs";
 import { cases as worldModelElicitationCases, spec as worldModelElicitationSpec } from "./fixtures/world-model-elicitation-cases.mjs";
+import { cases as actionQualityContractCases, spec as actionQualityContractSpec } from "./fixtures/action-quality-contract-cases.mjs";
 import { cases as qualityGateCases, spec as qualityGateSpec } from "./fixtures/quality-gate-cases.mjs";
 
 const projectRoot = process.cwd();
@@ -67,6 +68,7 @@ const fixtureSuites = [
   { ...worldModelPilotCorpusSpec, cases: worldModelPilotCorpusCases },
   { ...guidedElicitationSpec, cases: guidedElicitationCases },
   { ...worldModelElicitationSpec, cases: worldModelElicitationCases },
+  { ...actionQualityContractSpec, cases: actionQualityContractCases },
   { ...qualityGateSpec, cases: qualityGateCases }
 ];
 
@@ -84,6 +86,7 @@ const positivePackages = [
   { validator: "tools/validate-world-model-pilot-corpus.mjs", package: "examples/world-model-pilot-corpus-package.json" },
   { validator: "tools/validate-guided-elicitation.mjs", package: "examples/guided-elicitation-package.json" },
   { validator: "tools/validate-world-model-elicitation.mjs", package: "examples/world-model-elicitation-package.json" },
+  { validator: "tools/validate-action-quality-contract.mjs", package: "examples/action-quality-contract-package.json" },
   { validator: "tools/validate-qif-runtime.mjs", package: "examples/quality-gate-package.json" }
 ];
 

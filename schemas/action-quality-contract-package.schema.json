@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/qif/schemas/action-quality-contract-package.schema.json",
+  "title": "QIF Action Quality Contract Package",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "packageType",
+    "runtimeVersion",
+    "packageId",
+    "actionContracts",
+    "actionRequests",
+    "toolSurfaces",
+    "executionEnvironments",
+    "permissionPolicies",
+    "approvalGates",
+    "expectedStateTransitions",
+    "rollbackPlans",
+    "evidenceRequirements",
+    "runtimeTraces",
+    "actionOutcomes",
+    "governanceTriggers",
+    "verifierBoundary"
+  ],
+  "properties": {
+    "packageType": { "const": "action-quality-contract" },
+    "runtimeVersion": { "type": "string", "minLength": 1 },
+    "packageId": { "type": "string", "minLength": 1 },
+    "actionContracts": { "type": "array" },
+    "actionRequests": { "type": "array" },
+    "toolSurfaces": { "type": "array" },
+    "executionEnvironments": { "type": "array" },
+    "permissionPolicies": { "type": "array" },
+    "approvalGates": { "type": "array" },
+    "expectedStateTransitions": { "type": "array" },
+    "rollbackPlans": { "type": "array" },
+    "evidenceRequirements": { "type": "array" },
+    "runtimeTraces": { "type": "array" },
+    "actionOutcomes": { "type": "array" },
+    "governanceTriggers": { "type": "array" },
+    "verifierBoundary": {
+      "type": "object",
+      "required": ["checks", "doesNotClaim", "semanticValidityRequires"],
+      "properties": {
+        "checks": { "type": "array", "items": { "type": "string" } },
+        "doesNotClaim": { "type": "array", "items": { "type": "string" } },
+        "semanticValidityRequires": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

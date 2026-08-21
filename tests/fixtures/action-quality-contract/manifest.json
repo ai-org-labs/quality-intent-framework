@@ -1,0 +1,176 @@
+{
+  "description": "QIF action-quality-contract negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/action-quality-contract-cases.mjs; do not edit by hand.",
+  "positives": [
+    {
+      "validator": "tools/validate-qif.mjs",
+      "package": "examples/qif-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-expert-judgment.mjs",
+      "package": "examples/expert-judgment-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/discovery-session-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/organizational-quality-culture-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/evaluation-target-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/review-run-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-ledger.mjs",
+      "package": "examples/qif-ledger-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-review.mjs",
+      "package": "examples/world-model-review-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "package": "examples/world-model-calibration-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "package": "examples/world-model-pilot-corpus-package.json"
+    },
+    {
+      "validator": "tools/validate-guided-elicitation.mjs",
+      "package": "examples/guided-elicitation-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-elicitation.mjs",
+      "package": "examples/world-model-elicitation-package.json"
+    },
+    {
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "package": "examples/action-quality-contract-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/quality-gate-package.json"
+    }
+  ],
+  "negatives": [
+    {
+      "file": "action-quality-contract-contracts-not-array.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "actionContracts must be an array",
+      "expect": "fail",
+      "errorIncludes": "actionContracts must be an array."
+    },
+    {
+      "file": "action-quality-contract-surface-capabilities-required.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "tool surface capabilities required",
+      "expect": "fail",
+      "errorIncludes": "TLS-AQC-001 capabilities must include at least one capability."
+    },
+    {
+      "file": "action-quality-contract-environment-isolation-required.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "environment isolation boundary required",
+      "expect": "fail",
+      "errorIncludes": "ENV-AQC-001 must include non-empty string isolationBoundary."
+    },
+    {
+      "file": "action-quality-contract-policy-prohibited-operations-array.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "permission policy prohibited operations are explicit",
+      "expect": "fail",
+      "errorIncludes": "PER-AQC-001 prohibitedOperations must be an array."
+    },
+    {
+      "file": "action-quality-contract-approved-gate-needs-approved-at.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "approved gate records approval time",
+      "expect": "fail",
+      "errorIncludes": "APR-AQC-001 approved approval gate must include approvedAt."
+    },
+    {
+      "file": "action-quality-contract-transition-stop-condition-required.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "expected transition has stop condition",
+      "expect": "fail",
+      "errorIncludes": "EST-AQC-001 must include non-empty string stopCondition."
+    },
+    {
+      "file": "action-quality-contract-rollback-transition-ref-resolves.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "rollback plan links expected transition",
+      "expect": "fail",
+      "errorIncludes": "RBP-AQC-001 references missing expected state transition: EST-NOPE-999"
+    },
+    {
+      "file": "action-quality-contract-evidence-required-verdicts.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "evidence requirement states required verdicts",
+      "expect": "fail",
+      "errorIncludes": "EVR-AQC-001 requiredForVerdicts must include at least one verdict."
+    },
+    {
+      "file": "action-quality-contract-contract-tool-ref-resolves.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "contract tool surface resolves",
+      "expect": "fail",
+      "errorIncludes": "ACT-AQC-001 references missing tool surface: TLS-NOPE-999"
+    },
+    {
+      "file": "action-quality-contract-high-risk-contract-needs-approval.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "high-risk write action requires approval gate",
+      "expect": "fail",
+      "errorIncludes": "ACT-AQC-001 high-risk or write-like action contract requires approvalGateRefs."
+    },
+    {
+      "file": "action-quality-contract-request-tool-matches-contract.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "request uses contract tool surface",
+      "expect": "fail",
+      "errorIncludes": "AQR-AQC-001 requestedToolSurfaceRef must match its action contract toolSurfaceRef."
+    },
+    {
+      "file": "action-quality-contract-trace-spans-required.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "runtime trace has spans",
+      "expect": "fail",
+      "errorIncludes": "RTR-AQC-001 spans must include at least one span."
+    },
+    {
+      "file": "action-quality-contract-trace-sensitive-data-redacted.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "sensitive trace data requires redaction",
+      "expect": "fail",
+      "errorIncludes": "RTR-AQC-001 traces with sensitive data require redactionStatus redacted."
+    },
+    {
+      "file": "action-quality-contract-accepted-outcome-matches-post-state.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "accepted outcome must match expected post state",
+      "expect": "fail",
+      "errorIncludes": "AOC-AQC-001 accepted outcome actualState must equal expected postState."
+    },
+    {
+      "file": "action-quality-contract-low-confidence-outcome-governance.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "low confidence action outcome triggers governance",
+      "expect": "fail",
+      "errorIncludes": "AOC-AQC-001 low-confidence outcome requires governanceTriggerRefs."
+    },
+    {
+      "file": "action-quality-contract-boundary-avoids-tool-safety-claim.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "verifier boundary rejects tool execution safety claim",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming tool execution safety."
+    }
+  ],
+  "rescopedRules": []
+}

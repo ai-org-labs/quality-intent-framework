@@ -2,6 +2,47 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.0 Action Quality Contract
+
+Runtime source:
+
+- AOF latest used: `v11.9.0`
+- External trend check date: `2026-08-21`
+
+Need / Intent / Context:
+
+- Need: AI agents increasingly execute provider-specific tool actions through shells, computer-use tools, MCP servers, hosted tools, local runtimes, and subagents. QIF needed a provider-neutral quality boundary for those actions.
+- Intent: Add an executable `action-quality-contract` runtime that records tool surface, execution environment, permission policy, approval, expected state transition, rollback, evidence requirement, runtime trace, action outcome, and governance trigger.
+- Context: Recent agent tooling trends emphasize MCP governance, local/runtime tools, computer-use actions, and tracing. The next QIF lead position is to make action quality claims portable across harnesses.
+
+Decision reason:
+
+- Implement this before broader v0.6 authoring templates because unsafe action execution can invalidate any downstream QIF package.
+- Keep the model provider-neutral. It must work for MCP, A2A, shell tools, computer-use tools, hosted tools, and subagents without encoding one vendor's wire format.
+- Preserve verifier boundary: structure and traceability are checkable; tool execution safety is not proven by verifier success.
+
+Council judgment:
+
+- Visionary: proceed; this moves QIF from passive evaluation artifacts into AI-native action governance.
+- Builder: proceed; package/schema/example/verifier/fixtures/docs fit the existing retained fixture architecture.
+- Guardian: proceed with guardrails; high-risk or write-like actions must require approval, accepted outcomes must match expected post-state, sensitive traces must be redacted, and low-confidence outcomes must trigger governance.
+
+Artifacts:
+
+- Schema: `schemas/action-quality-contract-package.schema.json`
+- Example: `examples/action-quality-contract-package.json`
+- Verifier: `tools/validate-action-quality-contract.mjs`
+- Fixture source: `tools/fixtures/action-quality-contract-cases.mjs`
+- Retained negative corpus: `tests/fixtures/action-quality-contract/`
+- Runtime doc: `docs/qif-v0.6.0-action-quality-contract.md`
+- Release notes: `RELEASE-NOTES-v0.6.0.md`
+
+Runtime verification:
+
+- `npm test`: pass, `14/14` positive checks and `507/507` retained negative checks.
+- AOF `organization-verify` using v11.9.0: pass, `231/231` checks.
+- AOF `situation-assess` using v11.9.0: pass with no current truth conflicts. It still recommends opening a current frontier task because the implementation task is recorded as completed.
+
 ## v0.5.5 World Model Elicitation
 
 Runtime source:

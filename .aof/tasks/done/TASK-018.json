@@ -1,0 +1,22 @@
+{
+  "task_id": "TASK-018",
+  "title": "QIF v0.6.0 Action Quality Contract",
+  "description": "Add an executable provider-neutral action governance runtime for AI agent tool actions, covering tool surface, execution environment, permission policy, approval gate, expected state transition, rollback, evidence, runtime trace, outcome, and governance.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-QIFV060",
+  "assigned_session_ids": [
+    "SESS-QIFV060"
+  ],
+  "related_decision_record_id": null,
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-08-21T04:35:00.000Z",
+  "updated_at": "2026-08-21T04:55:00.000Z",
+  "assigned_at": "2026-08-21T04:35:00.000Z",
+  "done_at": "2026-08-21T04:55:00.000Z",
+  "retired_at": null,
+  "last_triaged_at": "2026-08-21T04:35:00.000Z",
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Action Quality Contract schema, example package, verifier, negative fixture corpus, docs, roadmap, release notes, and npm test integration implemented. Verified with npm test 14/14 positive and 507/507 negative checks. Release outcome will be recorded after publication."
+}

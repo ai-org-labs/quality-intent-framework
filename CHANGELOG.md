@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.6.0
+
+- Added the executable `action-quality-contract` package type for provider-neutral AI agent action governance.
+- Added `schemas/action-quality-contract-package.schema.json`, `examples/action-quality-contract-package.json`, and `tools/validate-action-quality-contract.mjs`.
+- Added first-class action entities: Tool Surface, Execution Environment, Permission Policy, Approval Gate, Expected State Transition, Rollback Plan, Evidence Requirement, Action Contract, Action Request, Runtime Trace, Action Outcome, and Governance Trigger.
+- Required high-risk or write-like action contracts to cite approval gates.
+- Required accepted action outcomes to match expected post-state and low-confidence outcomes to trigger governance.
+- Added retained negative fixtures under `tests/fixtures/action-quality-contract/`.
+- Extended `npm test` and `tools/run-fixture-tests.mjs` to include the Action Quality Contract verifier.
+
 ## v0.5.5
 
 - Added the executable `world-model-elicitation` package type for Level 4 requirements where the world model must be derived before it can be reviewed.

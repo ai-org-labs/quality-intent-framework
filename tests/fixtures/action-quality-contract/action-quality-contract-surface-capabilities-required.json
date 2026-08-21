@@ -1,0 +1,191 @@
+{
+  "packageType": "action-quality-contract",
+  "runtimeVersion": "0.6.0",
+  "packageId": "AQC-PKG-001",
+  "toolSurfaces": [
+    {
+      "id": "TLS-AQC-001",
+      "toolKind": "shell",
+      "providerNeutralName": "workspace command executor",
+      "operationClass": "local-runtime-tool",
+      "capabilities": [],
+      "status": "active"
+    }
+  ],
+  "executionEnvironments": [
+    {
+      "id": "ENV-AQC-001",
+      "environmentType": "local sandboxed workspace",
+      "isolationBoundary": "workspace-scoped command execution with explicit escalation for external effects",
+      "identityBoundary": "agent acts as automation, not as accountable approver",
+      "networkBoundary": "network disabled unless explicitly approved",
+      "status": "active"
+    }
+  ],
+  "permissionPolicies": [
+    {
+      "id": "PER-AQC-001",
+      "permissionClass": "write",
+      "allowedScope": "repository-local generated fixtures and documentation only",
+      "prohibitedOperations": [
+        "delete repository",
+        "publish release without approval",
+        "write outside workspace"
+      ],
+      "approvalRequirement": "human approval required for external push or release",
+      "status": "active"
+    }
+  ],
+  "approvalGates": [
+    {
+      "id": "APR-AQC-001",
+      "permissionPolicyRef": "PER-AQC-001",
+      "approver": "repository maintainer",
+      "approvalStatus": "approved",
+      "approvedAt": "2026-08-21T04:40:00Z",
+      "rationale": "The action is limited to local validation and generated fixture updates before release.",
+      "status": "accepted"
+    }
+  ],
+  "expectedStateTransitions": [
+    {
+      "id": "EST-AQC-001",
+      "targetRef": "QIF repository",
+      "preState": "package fixtures may be stale after schema changes",
+      "postState": "package fixtures are regenerated and npm test passes",
+      "stopCondition": "stop if npm test fails or generated fixtures drift unexpectedly",
+      "invariantRefs": [
+        "activity count is not quality",
+        "semantic truth is not inferred from verifier success"
+      ],
+      "status": "active"
+    }
+  ],
+  "rollbackPlans": [
+    {
+      "id": "RBP-AQC-001",
+      "expectedStateTransitionRef": "EST-AQC-001",
+      "rollbackAction": "revert only the generated fixture and verifier changes from this action contract",
+      "rollbackOwner": "repository maintainer",
+      "verificationMethod": "rerun npm test and git diff --check after rollback",
+      "status": "ready"
+    }
+  ],
+  "evidenceRequirements": [
+    {
+      "id": "EVR-AQC-001",
+      "evidenceType": "test-output",
+      "collectionMethod": "run npm test in repository root",
+      "retentionPolicy": "record command summary in AOF runtime log",
+      "requiredForVerdicts": [
+        "accepted",
+        "rejected"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "EVR-AQC-002",
+      "evidenceType": "trace-summary",
+      "collectionMethod": "record action request, runtime trace reference, and outcome",
+      "retentionPolicy": "store repository-local package artifact",
+      "requiredForVerdicts": [
+        "accepted",
+        "conditional"
+      ],
+      "status": "active"
+    }
+  ],
+  "actionContracts": [
+    {
+      "id": "ACT-AQC-001",
+      "toolSurfaceRef": "TLS-AQC-001",
+      "executionEnvironmentRef": "ENV-AQC-001",
+      "permissionPolicyRef": "PER-AQC-001",
+      "approvalGateRefs": [
+        "APR-AQC-001"
+      ],
+      "qualityIntentRef": "QIN-AQC-001",
+      "lossBoundary": "An AI agent must not execute a write-like tool action without explicit scope, expected state transition, rollback, evidence, and accountable approval.",
+      "riskClass": "high",
+      "expectedStateTransitionRef": "EST-AQC-001",
+      "rollbackPlanRef": "RBP-AQC-001",
+      "evidenceRequirementRefs": [
+        "EVR-AQC-001",
+        "EVR-AQC-002"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "actionRequests": [
+    {
+      "id": "AQR-AQC-001",
+      "actionContractRef": "ACT-AQC-001",
+      "requestedToolSurfaceRef": "TLS-AQC-001",
+      "requestedBy": "ai-agent",
+      "targetRef": "QIF repository",
+      "operation": "regenerate fixture corpus and run verifier suite",
+      "reason": "Schema/verifier additions require retained fixture corpus synchronization.",
+      "status": "approved-for-execution"
+    }
+  ],
+  "runtimeTraces": [
+    {
+      "id": "RTR-AQC-001",
+      "actionRequestRef": "AQR-AQC-001",
+      "actionContractRef": "ACT-AQC-001",
+      "traceProvider": "local command log",
+      "traceRef": "npm-test-and-fixture-generation-summary",
+      "spans": [
+        "npm run build-fixtures",
+        "npm test",
+        "git diff --check"
+      ],
+      "containsSensitiveData": false,
+      "redactionStatus": "not-required",
+      "status": "captured"
+    }
+  ],
+  "actionOutcomes": [
+    {
+      "id": "AOC-AQC-001",
+      "actionRequestRef": "AQR-AQC-001",
+      "actionContractRef": "ACT-AQC-001",
+      "runtimeTraceRef": "RTR-AQC-001",
+      "actualState": "package fixtures are regenerated and npm test passes",
+      "verdict": "accepted",
+      "confidence": 0.93,
+      "evidenceRequirementRefs": [
+        "EVR-AQC-001",
+        "EVR-AQC-002"
+      ],
+      "residualRisk": "The verifier proves structure and traceability, not semantic safety of the tool action.",
+      "governanceTriggerRefs": [],
+      "status": "accepted"
+    }
+  ],
+  "governanceTriggers": [],
+  "verifierBoundary": {
+    "checks": [
+      "reference integrity",
+      "permission policy linkage",
+      "approval requirement for high-risk or write-like actions",
+      "expected state transition linkage",
+      "rollback plan linkage",
+      "runtime trace evidence",
+      "outcome confidence governance"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "tool execution safety",
+      "provider security compliance",
+      "human approval correctness"
+    ],
+    "semanticValidityRequires": [
+      "human approval for external side effects",
+      "runtime sandbox enforcement",
+      "security review for sensitive tools",
+      "post-action outcome inspection"
+    ]
+  }
+}
