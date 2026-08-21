@@ -18,5 +18,5 @@
   "last_triaged_at": "2026-08-21T04:35:00.000Z",
   "stale_candidate_at": null,
   "retire_candidate_at": null,
-  "triage_notes": "Action Quality Contract schema, example package, verifier, negative fixture corpus, docs, roadmap, release notes, and npm test integration implemented. Verified with npm test 14/14 positive and 507/507 negative checks. Release outcome will be recorded after publication."
+  "triage_notes": "Action Quality Contract schema, example package, verifier, negative fixture corpus, docs, roadmap, release notes, and npm test integration implemented. Verified with npm test 14/14 positive and 507/507 negative checks. Released as v0.6.0 at commit 63efc9a0153f1f7a2c5c31f42bc5a85f3c3d601b."
 }

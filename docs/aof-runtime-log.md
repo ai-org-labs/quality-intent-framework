@@ -43,6 +43,14 @@ Runtime verification:
 - AOF `organization-verify` using v11.9.0: pass, `231/231` checks.
 - AOF `situation-assess` using v11.9.0: pass with no current truth conflicts. It still recommends opening a current frontier task because the implementation task is recorded as completed.
 
+Release outcome:
+
+- Implementation commit: `63efc9a0153f1f7a2c5c31f42bc5a85f3c3d601b`
+- Tag: `v0.6.0`
+- Tag target commit: `63efc9a0153f1f7a2c5c31f42bc5a85f3c3d601b`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.0`
+- Published result: released
+
 ## v0.5.5 World Model Elicitation
 
 Runtime source:
