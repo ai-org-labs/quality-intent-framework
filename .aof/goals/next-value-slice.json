@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement and release QIF v0.6.1 Authoring Template Runtime so AI agents can generate QIF packages from machine-readable instructions, input contracts, output contracts, validation pipelines, golden cases, scoring rubrics, conformance results, and governance triggers.",
-  "updated_at": "2026-08-22T04:35:00.000Z",
+  "content": "Implement QIF v0.6.2 Audience Explanation Contract so authoring templates require general-public wording, simple diagrams, one-question-at-a-time elicitation, and comprehension checks.",
+  "updated_at": "2026-08-22T07:15:00.000Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-QIFV061",
+  "source_session_id": "SESS-QIFV062",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-08-22T04:55:00.000Z"
+  "declared_complete_at": "2026-08-22T07:25:00.000Z"
 }

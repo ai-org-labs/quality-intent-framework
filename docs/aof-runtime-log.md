@@ -2,6 +2,45 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.2 Audience Explanation Contract
+
+Runtime source:
+
+- AOF latest used: `v12.0.0`
+- Trigger: user requirement that QIF must use words, expressions, and diagrams anyone can understand
+
+Need / Intent / Context:
+
+- Need: QIF package authoring can be structurally valid while still being incomprehensible to non-expert users.
+- Intent: Harden `authoring-template` packages with audience explanation contracts covering general-public wording, terms to avoid without explanation, simple diagrams, step-by-step questioning, and comprehension checks.
+- Context: v0.6.1 made authoring templates executable. The missing quality boundary is user comprehension.
+
+Decision reason:
+
+- Do not rely on a style guideline alone. Make explanation requirements first-class and verifier-enforced.
+- Do not claim that a diagram or comprehension check proves understanding. Treat them as required evidence structures.
+
+Council judgment:
+
+- Visionary: proceed; this improves QIF adoption by making generated artifacts understandable outside expert circles.
+- Builder: proceed; the change is a bounded extension to the existing `authoring-template` package type.
+- Guardian: proceed with guardrails; verifier success must not claim user comprehension, and diagram presence must not be treated as quality itself.
+
+Artifacts:
+
+- Schema: `schemas/authoring-template-package.schema.json`
+- Example: `examples/authoring-template-package.json`
+- Verifier: `tools/validate-authoring-template.mjs`
+- Fixture source: `tools/fixtures/authoring-template-cases.mjs`
+- Retained negative corpus: `tests/fixtures/authoring-template/`
+- Release notes: `RELEASE-NOTES-v0.6.2.md`
+
+Runtime verification:
+
+- `npm test`: pass, `15/15` positive checks and `528/528` retained negative checks.
+- AOF `organization-verify` using v12.0.0: pass, `231/231` checks.
+- AOF `situation-assess` using v12.0.0: pass with no current truth conflicts. It recommends opening a current frontier task because this implementation task is recorded as completed.
+
 ## v0.6.1 Authoring Template Runtime
 
 Runtime source:

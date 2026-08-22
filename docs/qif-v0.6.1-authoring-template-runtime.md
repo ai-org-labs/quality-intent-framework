@@ -29,6 +29,7 @@ They cannot prove:
 Authoring Template
 -> Instruction Block
 -> Input Contract
+-> Audience Explanation Contract
 -> Output Contract
 -> Validation Pipeline
 -> Golden Case
@@ -45,6 +46,7 @@ Authoring Template
 | Authoring Template | A reusable recipe for generating one QIF package type. | Linked instructions, input contract, output contract, validation pipeline, golden cases, rubric, status. | Domain truth or final quality verdict. |
 | Instruction Block | Stable authoring instructions for an AI or human. | Purpose, instruction text, prohibited claims, status. | Hidden reasoning or checklist-completion proof. |
 | Input Contract | Required shape of the user's request or source material. | Input kind, required fields, missing-input policy, status. | Assumed facts not present in the input. |
+| Audience Explanation Contract | Rules for making the generated QIF artifact understandable by a first-time user. | Audience level, plain-language requirement, terms to avoid without explanation, diagram specs, step-by-step question rule, comprehension check. | Proof that every user understood the artifact. |
 | Output Contract | Required QIF package type and entity families. | Target package type, schema ref, example ref, required entity families, status. | Runtime validation results. |
 | Validation Pipeline | Local validation command and success condition. | Output contract ref, command, success condition, negative fixtures. | Semantic approval. |
 | Golden Case | A representative authoring scenario. | Input ref, output ref, expected output summary, acceptance criteria. | Broad coverage claims from one example. |
@@ -59,6 +61,9 @@ An authoring template package must:
 
 - define every required entity family as an array;
 - resolve all references between templates, contracts, pipelines, cases, rubrics, runs, and results;
+- link each template to an audience explanation contract;
+- target general-public comprehension unless a narrower audience is explicitly governed elsewhere;
+- include at least one simple diagram spec and a comprehension check;
 - target only supported QIF package types;
 - use a local QIF validator command;
 - keep activity count, checklist completion, and structural verifier success out of the definition of quality;
@@ -76,6 +81,9 @@ When a generated package fails validation, misses required entity families, fall
 The bundled example `examples/authoring-template-package.json` defines a template for generating a `quality-gate` package from a plain-language request. It requires:
 
 - a plain-language input contract;
+- a general-public audience explanation contract;
+- a simple flow diagram showing how a request becomes a QIF package;
+- one-question-at-a-time elicitation and a user comprehension check;
 - a quality-gate output contract;
 - local runtime validation;
 - a golden case for a customer-support policy change;

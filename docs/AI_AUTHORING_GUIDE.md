@@ -186,6 +186,20 @@ Concrete Target
 
 Ask one answerable question at a time. If the user cannot answer, explain the concept in plain language, offer an optional answer scaffold, and preserve the ambiguity instead of forcing completion.
 
+When authoring QIF for a general user, always include:
+
+- words a first-time user can understand before introducing QIF terms;
+- one simple diagram or flow;
+- one question at a time;
+- a concrete example before abstract judgment;
+- a comprehension check where the user restates the protected failure in their own words.
+
+Example diagram:
+
+```text
+user request -> what must not fail -> evidence needed -> QIF package -> verdict
+```
+
 ## Output Contract
 
 When asked to evaluate something with QIF, produce these sections:

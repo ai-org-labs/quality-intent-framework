@@ -92,6 +92,48 @@
       "errorIncludes": "INC-ATP-001 requiredFields must include at least one field."
     },
     {
+      "file": "authoring-template-explanation-contracts-array.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "audience explanation contracts must be an array",
+      "expect": "fail",
+      "errorIncludes": "audienceExplanationContracts must be an array."
+    },
+    {
+      "file": "authoring-template-explanation-general-public.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "audience explanation targets general public",
+      "expect": "fail",
+      "errorIncludes": "AEC-ATP-001 audienceLevel must be general-public."
+    },
+    {
+      "file": "authoring-template-explanation-terms-required.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "audience explanation lists terms to avoid without explanation",
+      "expect": "fail",
+      "errorIncludes": "AEC-ATP-001 termsToAvoidWithoutExplanation must include at least one term."
+    },
+    {
+      "file": "authoring-template-explanation-diagram-required.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "audience explanation requires a diagram spec",
+      "expect": "fail",
+      "errorIncludes": "AEC-ATP-001 diagramSpecs must include at least one diagram spec."
+    },
+    {
+      "file": "authoring-template-explanation-diagram-flow.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "diagram text shows simple flow",
+      "expect": "fail",
+      "errorIncludes": "AEC-ATP-001 diagramText must show a simple flow using ->."
+    },
+    {
+      "file": "authoring-template-template-explanation-contract-ref-resolves.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "template links audience explanation contract",
+      "expect": "fail",
+      "errorIncludes": "ATP-001 references missing audience explanation contract: AEC-NOPE-999"
+    },
+    {
       "file": "authoring-template-output-target-package-supported.json",
       "validator": "tools/validate-authoring-template.mjs",
       "rule": "output contract targets supported package type",

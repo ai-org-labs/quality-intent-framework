@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-020",
+  "title": "QIF v0.6.2 Audience Explanation Contract",
+  "description": "Harden authoring-template packages so generated QIF artifacts must be explained with general-public wording, simple diagrams, step-by-step questions, and comprehension checks.",
+  "status": "done",
+  "source_session_id": "SESS-QIFV062",
+  "created_at": "2026-08-22T07:15:00.000Z",
+  "completed_at": "2026-08-22T07:25:00.000Z",
+  "validated_need": "QIF adoption fails if only experts can understand QIF outputs. Structural validity must be paired with an explicit explanation contract for non-expert users.",
+  "intent": "Make understandability a verifier-visible authoring requirement without claiming that verifier success proves user comprehension.",
+  "context": "v0.6.1 already defines authoring templates. This slice adds audience explanation contracts instead of creating a separate communication framework.",
+  "triage_note": "Implementation completed; release outcome will be recorded in docs/aof-runtime-log.md if released.",
+  "review_evidence": [
+    "tools/validate-authoring-template.mjs",
+    "examples/authoring-template-package.json",
+    "tests/fixtures/authoring-template/",
+    "npm test",
+    "AOF organization-verify"
+  ]
+}

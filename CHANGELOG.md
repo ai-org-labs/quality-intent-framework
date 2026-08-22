@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.6.2
+
+- Hardened the `authoring-template` package type with first-class `audienceExplanationContracts`.
+- Required authoring templates to link to an audience explanation contract.
+- Required general-public explanation targeting, terms to avoid without explanation, required expression rules, diagram specs, step-by-step question rules, and comprehension checks.
+- Required diagram specs to include a simple flow using `->`.
+- Updated the authoring template example so generated QIF artifacts must include plain-language explanation, simple diagrams, and one-question-at-a-time elicitation.
+- Added retained negative fixtures for missing explanation contracts, expert-only audience targeting, missing terms, missing diagrams, non-flow diagrams, and broken template explanation refs.
+- Increased the standing fixture suite to 15 positive checks and 528 retained negative checks.
+
 ## v0.6.1
 
 - Added the executable `authoring-template` package type for machine-readable AI authoring templates.

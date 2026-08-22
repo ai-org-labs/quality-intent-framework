@@ -3,6 +3,7 @@ const validator = "tools/validate-authoring-template.mjs";
 function template(pkg) { return pkg.authoringTemplates[0]; }
 function instruction(pkg) { return pkg.instructionBlocks[0]; }
 function input(pkg) { return pkg.inputContracts[0]; }
+function explanation(pkg) { return pkg.audienceExplanationContracts[0]; }
 function output(pkg) { return pkg.outputContracts[0]; }
 function pipeline(pkg) { return pkg.validationPipelines[0]; }
 function golden(pkg) { return pkg.goldenCases[0]; }
@@ -34,6 +35,42 @@ export const cases = [
     rule: "input contract declares required fields",
     expect: "INC-ATP-001 requiredFields must include at least one field.",
     mutate: (pkg) => { input(pkg).requiredFields = []; }
+  },
+  {
+    id: "explanation-contracts-array",
+    rule: "audience explanation contracts must be an array",
+    expect: "audienceExplanationContracts must be an array.",
+    mutate: (pkg) => { pkg.audienceExplanationContracts = null; }
+  },
+  {
+    id: "explanation-general-public",
+    rule: "audience explanation targets general public",
+    expect: "AEC-ATP-001 audienceLevel must be general-public.",
+    mutate: (pkg) => { explanation(pkg).audienceLevel = "expert-only"; }
+  },
+  {
+    id: "explanation-terms-required",
+    rule: "audience explanation lists terms to avoid without explanation",
+    expect: "AEC-ATP-001 termsToAvoidWithoutExplanation must include at least one term.",
+    mutate: (pkg) => { explanation(pkg).termsToAvoidWithoutExplanation = []; }
+  },
+  {
+    id: "explanation-diagram-required",
+    rule: "audience explanation requires a diagram spec",
+    expect: "AEC-ATP-001 diagramSpecs must include at least one diagram spec.",
+    mutate: (pkg) => { explanation(pkg).diagramSpecs = []; }
+  },
+  {
+    id: "explanation-diagram-flow",
+    rule: "diagram text shows simple flow",
+    expect: "AEC-ATP-001 diagramText must show a simple flow using ->.",
+    mutate: (pkg) => { explanation(pkg).diagramSpecs[0].diagramText = "user request becomes QIF package"; }
+  },
+  {
+    id: "template-explanation-contract-ref-resolves",
+    rule: "template links audience explanation contract",
+    expect: "ATP-001 references missing audience explanation contract: AEC-NOPE-999",
+    mutate: (pkg) => { template(pkg).audienceExplanationContractRef = "AEC-NOPE-999"; }
   },
   {
     id: "output-target-package-supported",

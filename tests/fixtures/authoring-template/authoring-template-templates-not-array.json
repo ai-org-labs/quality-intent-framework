@@ -1,6 +1,6 @@
 {
   "packageType": "authoring-template",
-  "runtimeVersion": "0.6.1",
+  "runtimeVersion": "0.6.2",
   "packageId": "ATP-PKG-001",
   "instructionBlocks": [
     {
@@ -38,6 +38,37 @@
         "available evidence"
       ],
       "missingInputPolicy": "ask a concise clarification question or record explicit unresolved ambiguity",
+      "status": "active"
+    }
+  ],
+  "audienceExplanationContracts": [
+    {
+      "id": "AEC-ATP-001",
+      "audienceLevel": "general-public",
+      "plainLanguageRequirement": "Explain QIF outputs with words a first-time user can understand. Replace framework jargon with concrete everyday phrases before using the technical term.",
+      "requiredExpressionRules": [
+        "Use short sentences.",
+        "Define each QIF term with a plain-language phrase.",
+        "Give one concrete example before asking for abstract judgment."
+      ],
+      "termsToAvoidWithoutExplanation": [
+        "quality intent",
+        "loss boundary",
+        "verdict",
+        "confidence",
+        "governance trigger"
+      ],
+      "diagramRequirement": "Include at least one simple flow or relationship diagram when explaining how input becomes a QIF artifact.",
+      "diagramSpecs": [
+        {
+          "diagramKind": "ascii-flow",
+          "title": "How a request becomes a QIF package",
+          "diagramText": "user request -> what must not fail -> evidence needed -> QIF package -> verdict",
+          "status": "active"
+        }
+      ],
+      "stepByStepQuestionRequirement": "Ask one question at a time. Start with concrete harm, then evidence, then decision owner.",
+      "comprehensionCheck": "Ask the user to restate the protected failure in their own words before finalizing a QIF artifact.",
       "status": "active"
     }
   ],
@@ -79,6 +110,9 @@
       "expectedOutputSummary": "A quality-gate package with stakeholder harm, loss boundary, evidence requirements, verdict, residual risk, and governance trigger for weak evidence.",
       "acceptanceCriteria": [
         "valid quality-gate package",
+        "plain-language explanation",
+        "simple diagram included",
+        "one-question-at-a-time elicitation",
         "no activity count treated as quality",
         "evidence-backed verdict",
         "governance for low confidence"
@@ -101,11 +135,15 @@
         },
         {
           "name": "loss-boundary clarity",
-          "weight": 0.2
+          "weight": 0.15
+        },
+        {
+          "name": "plain-language and diagram clarity",
+          "weight": 0.1
         },
         {
           "name": "verifier-boundary honesty",
-          "weight": 0.15
+          "weight": 0.1
         }
       ],
       "passThreshold": 0.85,
@@ -143,6 +181,9 @@
     "checks": [
       "reference integrity",
       "template-input-output linkage",
+      "audience explanation contract linkage",
+      "diagram requirement presence",
+      "comprehension check presence",
       "local validation command linkage",
       "rubric score threshold",
       "hidden reasoning exclusion"

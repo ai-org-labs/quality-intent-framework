@@ -103,6 +103,7 @@ function validate(pkg, packagePath) {
   const templates = array(pkg, "authoringTemplates", packagePath);
   const instructions = array(pkg, "instructionBlocks", packagePath);
   const inputContracts = array(pkg, "inputContracts", packagePath);
+  const explanationContracts = array(pkg, "audienceExplanationContracts", packagePath);
   const outputContracts = array(pkg, "outputContracts", packagePath);
   const validationPipelines = array(pkg, "validationPipelines", packagePath);
   const goldenCases = array(pkg, "goldenCases", packagePath);
@@ -114,6 +115,7 @@ function validate(pkg, packagePath) {
   const templateIndex = index(templates, `${packagePath}:authoringTemplates`);
   const instructionIndex = index(instructions, `${packagePath}:instructionBlocks`);
   const inputIndex = index(inputContracts, `${packagePath}:inputContracts`);
+  const explanationIndex = index(explanationContracts, `${packagePath}:audienceExplanationContracts`);
   const outputIndex = index(outputContracts, `${packagePath}:outputContracts`);
   const pipelineIndex = index(validationPipelines, `${packagePath}:validationPipelines`);
   const goldenIndex = index(goldenCases, `${packagePath}:goldenCases`);
@@ -136,6 +138,32 @@ function validate(pkg, packagePath) {
     for (const field of ["inputKind", "description", "missingInputPolicy", "status"]) str(input, field, input.id);
     if (!Array.isArray(input.requiredFields) || input.requiredFields.length === 0) {
       errors.push(`${input.id} requiredFields must include at least one field.`);
+    }
+  }
+
+  for (const explanation of explanationContracts) {
+    for (const field of ["audienceLevel", "plainLanguageRequirement", "diagramRequirement", "stepByStepQuestionRequirement", "comprehensionCheck", "status"]) {
+      str(explanation, field, explanation.id);
+    }
+    if (explanation.audienceLevel !== "general-public") {
+      errors.push(`${explanation.id} audienceLevel must be general-public.`);
+    }
+    if (!Array.isArray(explanation.requiredExpressionRules) || explanation.requiredExpressionRules.length === 0) {
+      errors.push(`${explanation.id} requiredExpressionRules must include at least one rule.`);
+    }
+    if (!Array.isArray(explanation.termsToAvoidWithoutExplanation) || explanation.termsToAvoidWithoutExplanation.length === 0) {
+      errors.push(`${explanation.id} termsToAvoidWithoutExplanation must include at least one term.`);
+    }
+    if (!Array.isArray(explanation.diagramSpecs) || explanation.diagramSpecs.length === 0) {
+      errors.push(`${explanation.id} diagramSpecs must include at least one diagram spec.`);
+    }
+    for (const diagram of explanation.diagramSpecs ?? []) {
+      for (const field of ["diagramKind", "title", "diagramText", "status"]) {
+        str(diagram, field, `${explanation.id} diagram spec`);
+      }
+      if (typeof diagram.diagramText === "string" && !diagram.diagramText.includes("->")) {
+        errors.push(`${explanation.id} diagramText must show a simple flow using ->.`);
+      }
     }
   }
 
@@ -184,6 +212,7 @@ function validate(pkg, packagePath) {
   for (const template of templates) {
     refs(template.instructionBlockRefs, instructionIndex, "instruction block", template.id);
     refs([template.inputContractRef], inputIndex, "input contract", template.id);
+    refs([template.audienceExplanationContractRef], explanationIndex, "audience explanation contract", template.id);
     refs([template.outputContractRef], outputIndex, "output contract", template.id);
     refs([template.validationPipelineRef], pipelineIndex, "validation pipeline", template.id);
     optionalRefs(template.goldenCaseRefs, goldenIndex, "golden case", template.id);
@@ -249,6 +278,7 @@ function validate(pkg, packagePath) {
       authoringTemplates: templates.length,
       instructionBlocks: instructions.length,
       inputContracts: inputContracts.length,
+      audienceExplanationContracts: explanationContracts.length,
       outputContracts: outputContracts.length,
       validationPipelines: validationPipelines.length,
       goldenCases: goldenCases.length,
