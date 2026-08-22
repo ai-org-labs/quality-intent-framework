@@ -9,7 +9,7 @@
   "validated_need": "A diagram is not useful evidence unless the intended audience can understand and restate what it means.",
   "intent": "Make diagram communication success auditable without treating diagram presence or sample comprehension as universal proof.",
   "context": "v0.6.2 requires audience explanation contracts and diagrams. This slice adds comprehension evidence for those diagrams.",
-  "triage_note": "Implementation completed; release outcome will be recorded in docs/aof-runtime-log.md if released.",
+  "triage_note": "Implementation completed and released as v0.6.3. Release outcome is recorded in docs/aof-runtime-log.md.",
   "review_evidence": [
     "tools/validate-authoring-template.mjs",
     "examples/authoring-template-package.json",

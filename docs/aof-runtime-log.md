@@ -41,6 +41,14 @@ Runtime verification:
 - AOF `organization-verify` using v12.0.0: pass, `231/231` checks.
 - AOF `situation-assess` using v12.0.0: pass with no current truth conflicts. It recommends opening a current frontier task because this implementation task is recorded as completed.
 
+Release outcome:
+
+- Implementation commit: `26f7639aa463a071de9c5f044bdb29d311716f10`
+- Tag: `v0.6.3`
+- Tag target commit: `26f7639aa463a071de9c5f044bdb29d311716f10`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.3`
+- Published result: released
+
 ## v0.6.2 Audience Explanation Contract
 
 Runtime source:
