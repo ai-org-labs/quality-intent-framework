@@ -2,6 +2,51 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.1 Authoring Template Runtime
+
+Runtime source:
+
+- AOF latest used: `v12.0.0`
+- External trend check date: `2026-08-22`
+
+Need / Intent / Context:
+
+- Need: AI agents need to author QIF packages from natural-language requests without relying on unstated conversation history or prose-only guidance.
+- Intent: Add an executable `authoring-template` runtime that records instructions, input contracts, output contracts, validation pipelines, golden cases, scoring rubrics, authoring runs, conformance results, and governance.
+- Context: v0.6.0 governs AI tool actions. The next v0.6.x gap is package authoring quality: generated artifacts need explicit inputs, outputs, validation, rubric scoring, and governance.
+
+Decision reason:
+
+- Implement this before a CLI or hook surface because templates define what a generator should produce and how conformance is judged.
+- Keep the package standalone and domain-general. It must support QIF package generation without assuming GitHub, Jira, Slack, software artifacts, or one AI provider.
+- Preserve verifier boundary: structure, traceability, local validation linkage, and conformance scoring are checkable; semantic quality truth and agent competence are not proven.
+
+Council judgment:
+
+- Visionary: proceed; this makes QIF more usable by AI agents and reduces the cost of producing valid QIF artifacts.
+- Builder: proceed; package/schema/example/verifier/fixtures/docs fit the existing retained fixture architecture.
+- Guardian: proceed with guardrails; instruction blocks must reject checklist-completion-as-quality claims, validation must use local QIF validators, hidden reasoning must not be stored, and failed conformance must trigger governance.
+
+Artifacts:
+
+- Schema: `schemas/authoring-template-package.schema.json`
+- Example: `examples/authoring-template-package.json`
+- Verifier: `tools/validate-authoring-template.mjs`
+- Fixture source: `tools/fixtures/authoring-template-cases.mjs`
+- Retained negative corpus: `tests/fixtures/authoring-template/`
+- Runtime doc: `docs/qif-v0.6.1-authoring-template-runtime.md`
+- Release notes: `RELEASE-NOTES-v0.6.1.md`
+
+Runtime verification:
+
+- `npm test`: pass, `15/15` positive checks and `522/522` retained negative checks.
+- AOF `organization-verify` using v12.0.0: pass, `231/231` checks.
+- AOF `situation-assess` using v12.0.0: pass with no current truth conflicts. It recommends opening a current frontier task because the implementation task is recorded as completed.
+
+Release outcome:
+
+- Pending final release publication.
+
 ## v0.6.0 Action Quality Contract
 
 Runtime source:

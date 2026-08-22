@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.6.1
+
+- Added the executable `authoring-template` package type for machine-readable AI authoring templates.
+- Added `schemas/authoring-template-package.schema.json`, `examples/authoring-template-package.json`, and `tools/validate-authoring-template.mjs`.
+- Added first-class authoring entities: Authoring Template, Instruction Block, Input Contract, Output Contract, Validation Pipeline, Golden Case, Scoring Rubric, Agent Authoring Run, Conformance Result, and Governance Trigger.
+- Required instruction blocks to reject checklist-completion-as-quality claims and declare prohibited claims.
+- Required output contracts to target supported QIF package types and validation pipelines to call local QIF validators.
+- Required agent authoring runs to avoid storing hidden reasoning.
+- Required non-pass conformance results to trigger governance.
+- Added retained negative fixtures under `tests/fixtures/authoring-template/`.
+- Extended `npm test` and `tools/run-fixture-tests.mjs` to include the Authoring Template verifier.
+- Increased the standing fixture suite to 15 positive checks and 522 retained negative checks.
+
 ## v0.6.0
 
 - Added the executable `action-quality-contract` package type for provider-neutral AI agent action governance.

@@ -6,7 +6,7 @@ QIF does not define quality as output volume. Page count, review count, and test
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, and the v0.6.0 Action Quality Contract runtime for governing AI agent tool actions through permission, approval, expected state transition, rollback, trace, evidence, outcome, and governance:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.0 Action Quality Contract runtime for governing AI agent tool actions, and the v0.6.1 Authoring Template runtime for guiding AI agents to author valid QIF packages:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -29,6 +29,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.5.4 Guided Elicitation Runtime: `docs/qif-v0.5.4-guided-elicitation-runtime.md`
 - QIF v0.5.5 World Model Elicitation Runtime: `docs/qif-v0.5.5-world-model-elicitation.md`
 - QIF v0.6.0 Action Quality Contract: `docs/qif-v0.6.0-action-quality-contract.md`
+- QIF v0.6.1 Authoring Template Runtime: `docs/qif-v0.6.1-authoring-template-runtime.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`
@@ -38,6 +39,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - Guided elicitation package schema: `schemas/guided-elicitation-package.schema.json`
 - World model elicitation package schema: `schemas/world-model-elicitation-package.schema.json`
 - Action quality contract package schema: `schemas/action-quality-contract-package.schema.json`
+- Authoring template package schema: `schemas/authoring-template-package.schema.json`
 - Quality gate package schema: `schemas/quality-gate-package.schema.json`
 - Expert judgment schema: `schemas/expert-judgment-package.schema.json`
 - Discovery session schema: `schemas/discovery-session-package.schema.json`
@@ -57,6 +59,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - Example guided elicitation package: `examples/guided-elicitation-package.json`
 - Example world model elicitation package: `examples/world-model-elicitation-package.json`
 - Example action quality contract package: `examples/action-quality-contract-package.json`
+- Example authoring template package: `examples/authoring-template-package.json`
 - Example quality gate package: `examples/quality-gate-package.json`
 - Local verifier: `tools/validate-qif.mjs`
 - Local expert judgment verifier: `tools/validate-expert-judgment.mjs`
@@ -68,9 +71,10 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - Local guided elicitation verifier: `tools/validate-guided-elicitation.mjs`
 - Local world model elicitation verifier: `tools/validate-world-model-elicitation.mjs`
 - Local action quality contract verifier: `tools/validate-action-quality-contract.mjs`
+- Local authoring template verifier: `tools/validate-authoring-template.mjs`
 - Negative fixture suite runner: `tools/run-fixture-tests.mjs`
-- Negative fixture case sources include `tools/fixtures/action-quality-contract-cases.mjs` in addition to the retained QIF, expert-judgment, runtime, ledger, world-model, guided-elicitation, and quality-gate suites.
-- Retained negative fixture corpora include `tests/fixtures/action-quality-contract/` in addition to the retained QIF, expert-judgment, runtime, ledger, world-model, guided-elicitation, and quality-gate corpora.
+- Negative fixture case sources include `tools/fixtures/authoring-template-cases.mjs` and `tools/fixtures/action-quality-contract-cases.mjs` in addition to the retained QIF, expert-judgment, runtime, ledger, world-model, guided-elicitation, and quality-gate suites.
+- Retained negative fixture corpora include `tests/fixtures/authoring-template/` and `tests/fixtures/action-quality-contract/` in addition to the retained QIF, expert-judgment, runtime, ledger, world-model, guided-elicitation, and quality-gate corpora.
 - AOF runtime log: `docs/aof-runtime-log.md`
 - Changelog: `CHANGELOG.md`
 
@@ -218,6 +222,20 @@ The action quality contract verifier checks:
 - runtime traces include spans and redact sensitive data when present
 - accepted outcomes match expected post-state
 - low-confidence outcomes trigger governance
+
+The authoring template verifier checks:
+
+- authoring templates link instruction blocks, input contracts, output contracts, validation pipelines, golden cases, and scoring rubrics
+- instruction blocks declare prohibited claims and reject checklist-completion-as-quality language
+- input contracts define required fields and missing-input policy
+- output contracts target supported QIF package types and required entity families
+- validation pipelines call local QIF validators
+- golden cases include acceptance criteria
+- scoring rubrics have reproducible weights and pass thresholds
+- agent authoring runs do not store hidden reasoning
+- conformance results link to validation pipelines and rubrics
+- non-pass conformance results trigger governance
+- verifier success explicitly does not claim semantic truth or agent authoring competence
 - verifier success explicitly does not claim semantic truth or tool execution safety
 
 For quality gate packages (v0.4 baseline), the runtime verifier additionally checks:

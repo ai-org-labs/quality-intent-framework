@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/qif/schemas/authoring-template-package.schema.json",
+  "title": "QIF Authoring Template Package",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "packageType",
+    "runtimeVersion",
+    "packageId",
+    "authoringTemplates",
+    "instructionBlocks",
+    "inputContracts",
+    "outputContracts",
+    "validationPipelines",
+    "goldenCases",
+    "scoringRubrics",
+    "agentAuthoringRuns",
+    "conformanceResults",
+    "governanceTriggers",
+    "verifierBoundary"
+  ],
+  "properties": {
+    "packageType": { "const": "authoring-template" },
+    "runtimeVersion": { "type": "string", "minLength": 1 },
+    "packageId": { "type": "string", "minLength": 1 },
+    "authoringTemplates": { "type": "array" },
+    "instructionBlocks": { "type": "array" },
+    "inputContracts": { "type": "array" },
+    "outputContracts": { "type": "array" },
+    "validationPipelines": { "type": "array" },
+    "goldenCases": { "type": "array" },
+    "scoringRubrics": { "type": "array" },
+    "agentAuthoringRuns": { "type": "array" },
+    "conformanceResults": { "type": "array" },
+    "governanceTriggers": { "type": "array" },
+    "verifierBoundary": {
+      "type": "object",
+      "required": ["checks", "doesNotClaim", "semanticValidityRequires"],
+      "properties": {
+        "checks": { "type": "array", "items": { "type": "string" } },
+        "doesNotClaim": { "type": "array", "items": { "type": "string" } },
+        "semanticValidityRequires": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

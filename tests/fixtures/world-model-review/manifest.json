@@ -54,6 +54,10 @@
       "package": "examples/action-quality-contract-package.json"
     },
     {
+      "validator": "tools/validate-authoring-template.mjs",
+      "package": "examples/authoring-template-package.json"
+    },
+    {
       "validator": "tools/validate-qif-runtime.mjs",
       "package": "examples/quality-gate-package.json"
     }

@@ -35,13 +35,13 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.0 baseline)
+## Current Position (v0.6.1 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
   qif-ledger, world-model-review, world-model-calibration,
   world-model-pilot-corpus, guided-elicitation, world-model-elicitation,
-  action-quality-contract.
+  action-quality-contract, authoring-template.
 - Reproducible confidence, enforced gate rules, release verdict discipline
   (Go / Conditional Go / No-Go / Pending), post-release loop, traceability
   links, governance forcing.
@@ -81,17 +81,21 @@ and adoption surface — not pretending the limits away.
   recording closure before World Model Review. v0.6.0 adds Action Quality
   Contract: an executable provider-neutral runtime for governing AI agent tool
   actions through permission, approval, expected state transition, rollback,
-  trace, evidence, outcome, and governance.
-- Weaknesses: v0.6.0 cross-package behavior is intentionally minimal and
-  example-file based; authoring cost for humans and AI agents is still high,
-  Pilot Corpus now structures case ingestion but still uses example data rather
-  than a live organization corpus, agent trajectories are summarized rather than deeply typed, and no
+  trace, evidence, outcome, and governance. v0.6.1 adds Authoring Template:
+  an executable runtime for machine-readable AI authoring templates that bind
+  instructions, input contracts, output contracts, validation pipelines, golden
+  cases, scoring rubrics, authoring runs, conformance results, and governance.
+- Weaknesses: v0.6.1 cross-package behavior is intentionally minimal and
+  example-file based; the first Authoring Template package covers only a
+  quality-gate generation slice, Pilot Corpus now structures case ingestion
+  but still uses example data rather than a live organization corpus, agent
+  trajectories are summarized rather than deeply typed, and no
   longitudinal empirical feedback yet exists on whether QIF confidence predicts
   real outcomes.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-08-20 against primary-source signals. The
+The roadmap was revalidated on 2026-08-22 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
@@ -102,7 +106,7 @@ organizational authority.
 | Delegated work is becoming longer-running and increasingly parallel across multiple agents and non-engineering domains. ([OpenAI](https://openai.com/index/how-agents-are-transforming-work/), [Anthropic](https://www.anthropic.com/engineering/multi-agent-research-system)) | Errors compound across handoffs; a successful aggregate result can conceal an unsafe lane, unresolved disagreement, or unowned decision. | v0.6 governed agent authoring/actions and v0.8 multi-agent judgment memory. | Treat lane-local intents, join conflicts, authority, and dissent as quality ledger entries, not orchestration logs. |
 | Agent harnesses now combine persistent runtime context, shell/computer tools, reusable skills, tracing, and protocol-connected tools such as MCP. ([OpenAI](https://openai.com/index/equip-responses-api-computer-environment/), [OpenAI](https://openai.com/index/new-tools-and-features-in-the-responses-api/)) | Quality depends on tool permissions, target operation, context freshness, runtime configuration, and rollback—not model output alone. | v0.5 provenance and v0.6 protocol-neutral action contracts. | Make an action's Quality Intent, loss boundary, evidence, permission, target, and rollback portable across harnesses and protocols. |
 | Teams are shifting from token price toward cost per accepted outcome and real-task evals. ([OpenAI](https://openai.com/index/managing-ai-investments-in-agentic-era/)) | Cheap attempts can create expensive retries and human correction; activity volume can again be mistaken for value. | v0.7 outcome calibration keeps cost/latency as evidence attached to accepted outcomes. | Calibrate quality and cost jointly without allowing either metric to substitute for the accountable verdict. |
-| Agent tool ecosystems are standardizing around MCP/A2A-style integration, computer-use tools, hosted/local shell tools, and runtime tracing. ([MCP 2026-07-28 spec](https://blog.modelcontextprotocol.io/posts/2026-07-28/), [OpenAI Agents SDK tools](https://openai.github.io/openai-agents-python/tools/), [OpenAI Agents SDK tracing](https://openai.github.io/openai-agents-js/guides/tracing/), [Cloudflare MCP governance](https://developers.cloudflare.com/agents/model-context-protocol/protocol/governance/)) | The same quality claim may be executed through different tool providers; permission, approval, environment, trace, and rollback can be lost in provider-specific logs. | v0.6.0 Action Quality Contract makes action governance provider-neutral and structurally verifiable. | Treat every AI tool action as a quality-bearing state transition before harness-specific logs become the only audit trail. |
+| Agent tool ecosystems are standardizing around MCP/A2A-style integration, computer-use tools, hosted/local shell tools, and runtime tracing. ([MCP 2026-07-28 spec](https://blog.modelcontextprotocol.io/posts/2026-07-28/), [OpenAI Agents SDK tools](https://openai.github.io/openai-agents-js/guides/tools/), [OpenAI Agents SDK tracing](https://openai.github.io/openai-agents-js/guides/tracing/), [OpenAI Agents SDK MCP guidance](https://openai.github.io/openai-agents-python/mcp/), [OpenAI prompt-injection guidance](https://openai.com/index/designing-agents-to-resist-prompt-injection/)) | The same quality claim may be executed through different tool providers; permission, approval, environment, trace, and rollback can be lost in provider-specific logs. Authoring quality also degrades when AI agents rely on unstated conversation context instead of explicit instructions, contracts, and validation. | v0.6.0 Action Quality Contract makes action governance provider-neutral and structurally verifiable. v0.6.1 Authoring Template makes AI package generation structurally verifiable. | Treat every AI tool action and generated QIF artifact as a quality-bearing state transition with explicit input, output, validation, trace, and governance. |
 
 The one-step-ahead bet is Phase 6 / v0.9: an **Anticipatory Quality Intent
 Twin**. Current eval practice tests known tasks. QIF should also generate and
@@ -271,6 +275,11 @@ Deliverables:
 - Machine-readable authoring templates with example requests and expected
   outputs (the executable form of the AI Authoring Guide), plus fixtures
   that score an agent's output as valid/invalid.
+  Status: implemented in v0.6.1 through the `authoring-template` package type,
+  `tools/validate-authoring-template.mjs`, and retained negative fixtures
+  requiring explicit instruction blocks, input/output contracts, local
+  validation pipelines, golden cases, scoring rubrics, conformance results, no
+  hidden reasoning, and governance for failed authoring.
 - Guided elicitation templates: plain-language explanations, stepwise probes,
   answer scaffolds, clarification moves, and teach-back checks so an AI agent
   can elicit QIF candidates from users who do not know QIF terminology.

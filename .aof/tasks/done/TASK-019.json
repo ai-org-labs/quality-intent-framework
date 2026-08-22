@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-019",
+  "title": "QIF v0.6.1 Authoring Template Runtime",
+  "description": "Add an executable authoring-template runtime so AI agents can generate QIF packages from explicit instructions, input/output contracts, local validation pipelines, golden cases, scoring rubrics, conformance results, and governance triggers.",
+  "status": "done",
+  "source_session_id": "SESS-QIFV061",
+  "created_at": "2026-08-22T04:35:00.000Z",
+  "completed_at": "2026-08-22T04:55:00.000Z",
+  "validated_need": "QIF needs a machine-readable authoring control layer because many future users and AI agents will produce QIF packages from natural-language requests, and prose-only guidance does not create reproducible conformance evidence.",
+  "intent": "Make AI-generated QIF package authoring structurally valid, traceable, locally verifiable, and governable without claiming semantic truth or agent competence.",
+  "context": "v0.6.0 already governs AI tool actions. The next Phase 3 gap is authoring templates that bind instructions, inputs, outputs, validation, examples, rubrics, runs, and conformance results.",
+  "triage_note": "Implementation completed; release outcome is recorded in docs/aof-runtime-log.md after tag and GitHub Release publication.",
+  "review_evidence": [
+    "tools/validate-authoring-template.mjs",
+    "examples/authoring-template-package.json",
+    "tests/fixtures/authoring-template/",
+    "npm test",
+    "AOF organization-verify"
+  ]
+}
