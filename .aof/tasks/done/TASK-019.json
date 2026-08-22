@@ -9,7 +9,7 @@
   "validated_need": "QIF needs a machine-readable authoring control layer because many future users and AI agents will produce QIF packages from natural-language requests, and prose-only guidance does not create reproducible conformance evidence.",
   "intent": "Make AI-generated QIF package authoring structurally valid, traceable, locally verifiable, and governable without claiming semantic truth or agent competence.",
   "context": "v0.6.0 already governs AI tool actions. The next Phase 3 gap is authoring templates that bind instructions, inputs, outputs, validation, examples, rubrics, runs, and conformance results.",
-  "triage_note": "Implementation completed; release outcome is recorded in docs/aof-runtime-log.md after tag and GitHub Release publication.",
+  "triage_note": "Implementation completed and released as v0.6.1. Release outcome is recorded in docs/aof-runtime-log.md.",
   "review_evidence": [
     "tools/validate-authoring-template.mjs",
     "examples/authoring-template-package.json",

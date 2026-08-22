@@ -45,7 +45,11 @@ Runtime verification:
 
 Release outcome:
 
-- Pending final release publication.
+- Implementation commit: `60c05135233f1ca0fa078f92292c287dbda08665`
+- Tag: `v0.6.1`
+- Tag target commit: `60c05135233f1ca0fa078f92292c287dbda08665`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.1`
+- Published result: released
 
 ## v0.6.0 Action Quality Contract
 
