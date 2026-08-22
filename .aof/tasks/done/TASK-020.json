@@ -9,7 +9,7 @@
   "validated_need": "QIF adoption fails if only experts can understand QIF outputs. Structural validity must be paired with an explicit explanation contract for non-expert users.",
   "intent": "Make understandability a verifier-visible authoring requirement without claiming that verifier success proves user comprehension.",
   "context": "v0.6.1 already defines authoring templates. This slice adds audience explanation contracts instead of creating a separate communication framework.",
-  "triage_note": "Implementation completed; release outcome will be recorded in docs/aof-runtime-log.md if released.",
+  "triage_note": "Implementation completed and released as v0.6.2. Release outcome is recorded in docs/aof-runtime-log.md.",
   "review_evidence": [
     "tools/validate-authoring-template.mjs",
     "examples/authoring-template-package.json",
