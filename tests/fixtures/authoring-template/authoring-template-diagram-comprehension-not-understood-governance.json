@@ -93,7 +93,7 @@
   "validationPipelines": [
     {
       "id": "VPL-ATP-001",
-      "outputContractRef": "OUC-NOPE-999",
+      "outputContractRef": "OUC-ATP-001",
       "validationCommand": "node tools/validate-qif-runtime.mjs <generated-package>",
       "successCondition": "validator exits with ok true and no errors",
       "negativeFixtureRefs": [
@@ -192,7 +192,7 @@
       "diagramSpecTitle": "How a request becomes a QIF package",
       "audienceSample": "first-time QIF user",
       "restatement": "The user request is converted into what must not fail, then evidence is gathered, then QIF records the package and verdict.",
-      "understood": true,
+      "understood": false,
       "misunderstandingSummary": "No unresolved misunderstanding in the sample evidence.",
       "revisionAction": "No revision required for this sample.",
       "governanceTriggerRefs": [],

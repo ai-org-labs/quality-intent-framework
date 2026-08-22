@@ -93,7 +93,7 @@
   "validationPipelines": [
     {
       "id": "VPL-ATP-001",
-      "outputContractRef": "OUC-NOPE-999",
+      "outputContractRef": "OUC-ATP-001",
       "validationCommand": "node tools/validate-qif-runtime.mjs <generated-package>",
       "successCondition": "validator exits with ok true and no errors",
       "negativeFixtureRefs": [
@@ -227,9 +227,7 @@
     ],
     "doesNotClaim": [
       "semantic truth",
-      "agent authoring competence",
-      "best possible template",
-      "universal user comprehension"
+      "agent authoring competence"
     ],
     "semanticValidityRequires": [
       "held-out authoring trials",

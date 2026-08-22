@@ -109,6 +109,7 @@ function validate(pkg, packagePath) {
   const goldenCases = array(pkg, "goldenCases", packagePath);
   const scoringRubrics = array(pkg, "scoringRubrics", packagePath);
   const agentAuthoringRuns = array(pkg, "agentAuthoringRuns", packagePath);
+  const diagramComprehensionEvidence = array(pkg, "diagramComprehensionEvidence", packagePath);
   const conformanceResults = array(pkg, "conformanceResults", packagePath);
   const triggers = array(pkg, "governanceTriggers", packagePath);
 
@@ -121,6 +122,7 @@ function validate(pkg, packagePath) {
   const goldenIndex = index(goldenCases, `${packagePath}:goldenCases`);
   const rubricIndex = index(scoringRubrics, `${packagePath}:scoringRubrics`);
   const runIndex = index(agentAuthoringRuns, `${packagePath}:agentAuthoringRuns`);
+  const diagramEvidenceIndex = index(diagramComprehensionEvidence, `${packagePath}:diagramComprehensionEvidence`);
   const resultIndex = index(conformanceResults, `${packagePath}:conformanceResults`);
   const triggerIndex = index(triggers, `${packagePath}:governanceTriggers`);
 
@@ -142,7 +144,7 @@ function validate(pkg, packagePath) {
   }
 
   for (const explanation of explanationContracts) {
-    for (const field of ["audienceLevel", "plainLanguageRequirement", "diagramRequirement", "stepByStepQuestionRequirement", "comprehensionCheck", "status"]) {
+    for (const field of ["audienceLevel", "plainLanguageRequirement", "diagramRequirement", "diagramComprehensionRequirement", "stepByStepQuestionRequirement", "comprehensionCheck", "status"]) {
       str(explanation, field, explanation.id);
     }
     if (explanation.audienceLevel !== "general-public") {
@@ -164,6 +166,13 @@ function validate(pkg, packagePath) {
       if (typeof diagram.diagramText === "string" && !diagram.diagramText.includes("->")) {
         errors.push(`${explanation.id} diagramText must show a simple flow using ->.`);
       }
+    }
+  }
+
+  for (const explanation of explanationContracts) {
+    const matchingEvidence = diagramComprehensionEvidence.filter((evidence) => evidence.audienceExplanationContractRef === explanation.id);
+    if (matchingEvidence.length === 0) {
+      errors.push(`${explanation.id} must have at least one diagram comprehension evidence item.`);
     }
   }
 
@@ -236,6 +245,20 @@ function validate(pkg, packagePath) {
     }
   }
 
+  for (const evidence of diagramComprehensionEvidence) {
+    refs([evidence.audienceExplanationContractRef], explanationIndex, "audience explanation contract", evidence.id);
+    optionalRefs(evidence.governanceTriggerRefs, triggerIndex, "governance trigger", evidence.id);
+    for (const field of ["diagramSpecTitle", "audienceSample", "restatement", "misunderstandingSummary", "revisionAction", "status"]) {
+      str(evidence, field, evidence.id);
+    }
+    if (typeof evidence.understood !== "boolean") {
+      errors.push(`${evidence.id} understood must be boolean.`);
+    }
+    if (evidence.understood !== true && (!Array.isArray(evidence.governanceTriggerRefs) || evidence.governanceTriggerRefs.length === 0)) {
+      errors.push(`${evidence.id} not-understood diagram comprehension evidence requires governanceTriggerRefs.`);
+    }
+  }
+
   for (const result of conformanceResults) {
     refs([result.agentAuthoringRunRef], runIndex, "agent authoring run", result.id);
     refs([result.validationPipelineRef], pipelineIndex, "validation pipeline", result.id);
@@ -269,6 +292,7 @@ function validate(pkg, packagePath) {
     }
     if (!(boundary.doesNotClaim ?? []).includes("semantic truth")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
     if (!(boundary.doesNotClaim ?? []).includes("agent authoring competence")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming agent authoring competence.`);
+    if (!(boundary.doesNotClaim ?? []).includes("universal user comprehension")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming universal user comprehension.`);
   }
 
   results.push({
@@ -284,6 +308,7 @@ function validate(pkg, packagePath) {
       goldenCases: goldenCases.length,
       scoringRubrics: scoringRubrics.length,
       agentAuthoringRuns: agentAuthoringRuns.length,
+      diagramComprehensionEvidence: diagramComprehensionEvidence.length,
       conformanceResults: conformanceResults.length,
       governanceTriggers: triggers.length
     }

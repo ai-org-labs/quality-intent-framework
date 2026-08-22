@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.3
+
+- Added first-class `diagramComprehensionEvidence` to `authoring-template` packages.
+- Required every audience explanation contract to have at least one diagram comprehension evidence item.
+- Required diagram comprehension evidence to record audience sample, restatement, misunderstanding summary, revision action, and understood status.
+- Required not-understood diagram evidence to cite governance triggers.
+- Clarified that diagram presence does not prove communication success and verifier success does not claim universal user comprehension.
+
 ## v0.6.2
 
 - Hardened the `authoring-template` package type with first-class `audienceExplanationContracts`.

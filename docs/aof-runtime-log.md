@@ -2,6 +2,45 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.3 Diagram Comprehension Evidence
+
+Runtime source:
+
+- AOF latest used: `v12.0.0`
+- Trigger: user requirement that diagrams are meaningless if they do not communicate to the audience
+
+Need / Intent / Context:
+
+- Need: QIF v0.6.2 requires diagrams, but diagram presence alone can still create false confidence.
+- Intent: Add `diagramComprehensionEvidence` so authoring templates record whether the intended audience understood the diagram, what they misunderstood, what was revised, and whether governance is required.
+- Context: This extends Audience Explanation Contract without creating a separate UX framework.
+
+Decision reason:
+
+- Treat the diagram as a communication hypothesis that must be checked with audience restatement.
+- Preserve verifier boundary: the verifier checks that evidence exists and not-understood results trigger governance; it does not prove universal comprehension.
+
+Council judgment:
+
+- Visionary: proceed; this prevents QIF from confusing visual artifact presence with communication success.
+- Builder: proceed; the change is a bounded extension to `authoring-template` schema/example/verifier/fixtures/docs.
+- Guardian: proceed with guardrails; diagrams must not become quality itself, and unresolved misunderstanding must not pass silently.
+
+Artifacts:
+
+- Schema: `schemas/authoring-template-package.schema.json`
+- Example: `examples/authoring-template-package.json`
+- Verifier: `tools/validate-authoring-template.mjs`
+- Fixture source: `tools/fixtures/authoring-template-cases.mjs`
+- Retained negative corpus: `tests/fixtures/authoring-template/`
+- Release notes: `RELEASE-NOTES-v0.6.3.md`
+
+Runtime verification:
+
+- `npm test`: pass, `15/15` positive checks and `534/534` retained negative checks.
+- AOF `organization-verify` using v12.0.0: pass, `231/231` checks.
+- AOF `situation-assess` using v12.0.0: pass with no current truth conflicts. It recommends opening a current frontier task because this implementation task is recorded as completed.
+
 ## v0.6.2 Audience Explanation Contract
 
 Runtime source:

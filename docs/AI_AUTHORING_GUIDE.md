@@ -200,6 +200,18 @@ Example diagram:
 user request -> what must not fail -> evidence needed -> QIF package -> verdict
 ```
 
+Do not stop at drawing the diagram. A diagram is useful only if the intended audience can explain what it means.
+
+After showing a diagram, ask:
+
+```text
+Can you explain this diagram back in your own words?
+Which part is unclear?
+What would you expect to happen next?
+```
+
+If the answer shows misunderstanding, revise the explanation or record unresolved ambiguity. Do not treat diagram presence as proof of understanding.
+
 ## Output Contract
 
 When asked to evaluate something with QIF, produce these sections:

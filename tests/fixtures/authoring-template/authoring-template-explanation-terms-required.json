@@ -1,6 +1,6 @@
 {
   "packageType": "authoring-template",
-  "runtimeVersion": "0.6.2",
+  "runtimeVersion": "0.6.3",
   "packageId": "ATP-PKG-001",
   "instructionBlocks": [
     {
@@ -53,6 +53,7 @@
       ],
       "termsToAvoidWithoutExplanation": [],
       "diagramRequirement": "Include at least one simple flow or relationship diagram when explaining how input becomes a QIF artifact.",
+      "diagramComprehensionRequirement": "The diagram is not accepted until the audience can restate what the diagram means and any misunderstanding has been corrected or governed.",
       "diagramSpecs": [
         {
           "diagramKind": "ascii-flow",
@@ -178,6 +179,20 @@
       "status": "completed"
     }
   ],
+  "diagramComprehensionEvidence": [
+    {
+      "id": "DCE-ATP-001",
+      "audienceExplanationContractRef": "AEC-ATP-001",
+      "diagramSpecTitle": "How a request becomes a QIF package",
+      "audienceSample": "first-time QIF user",
+      "restatement": "The user request is converted into what must not fail, then evidence is gathered, then QIF records the package and verdict.",
+      "understood": true,
+      "misunderstandingSummary": "No unresolved misunderstanding in the sample evidence.",
+      "revisionAction": "No revision required for this sample.",
+      "governanceTriggerRefs": [],
+      "status": "accepted"
+    }
+  ],
   "conformanceResults": [
     {
       "id": "CFR-ATP-001",
@@ -198,6 +213,7 @@
       "template-input-output linkage",
       "audience explanation contract linkage",
       "diagram requirement presence",
+      "diagram comprehension evidence presence",
       "comprehension check presence",
       "local validation command linkage",
       "rubric score threshold",
@@ -207,13 +223,14 @@
       "semantic truth",
       "agent authoring competence",
       "best possible template",
-      "user comprehension"
+      "universal user comprehension"
     ],
     "semanticValidityRequires": [
       "held-out authoring trials",
       "human review of generated packages",
       "downstream package validation",
-      "pilot usage feedback"
+      "pilot usage feedback",
+      "observed user comprehension feedback"
     ]
   }
 }

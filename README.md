@@ -230,6 +230,7 @@ The authoring template verifier checks:
 - instruction blocks declare prohibited claims and reject checklist-completion-as-quality language
 - input contracts define required fields and missing-input policy
 - audience explanation contracts target general-public comprehension, terms to avoid without explanation, required expression rules, simple diagrams, step-by-step questions, and comprehension checks
+- diagram comprehension evidence records whether the intended audience could restate the diagram meaning, what they misunderstood, what was revised, and whether governance is needed
 - output contracts target supported QIF package types and required entity families
 - validation pipelines call local QIF validators
 - golden cases include acceptance criteria
@@ -237,7 +238,7 @@ The authoring template verifier checks:
 - agent authoring runs do not store hidden reasoning
 - conformance results link to validation pipelines and rubrics
 - non-pass conformance results trigger governance
-- verifier success explicitly does not claim semantic truth or agent authoring competence
+- verifier success explicitly does not claim semantic truth, agent authoring competence, or universal user comprehension
 - verifier success explicitly does not claim semantic truth or tool execution safety
 
 For quality gate packages (v0.4 baseline), the runtime verifier additionally checks:

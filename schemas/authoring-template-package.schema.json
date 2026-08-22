@@ -17,6 +17,7 @@
     "goldenCases",
     "scoringRubrics",
     "agentAuthoringRuns",
+    "diagramComprehensionEvidence",
     "conformanceResults",
     "governanceTriggers",
     "verifierBoundary"
@@ -34,6 +35,7 @@
     "goldenCases": { "type": "array" },
     "scoringRubrics": { "type": "array" },
     "agentAuthoringRuns": { "type": "array" },
+    "diagramComprehensionEvidence": { "type": "array" },
     "conformanceResults": { "type": "array" },
     "governanceTriggers": { "type": "array" },
     "verifierBoundary": {

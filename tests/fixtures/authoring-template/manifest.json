@@ -134,6 +134,41 @@
       "errorIncludes": "ATP-001 references missing audience explanation contract: AEC-NOPE-999"
     },
     {
+      "file": "authoring-template-diagram-comprehension-evidence-array.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "diagram comprehension evidence must be an array",
+      "expect": "fail",
+      "errorIncludes": "diagramComprehensionEvidence must be an array."
+    },
+    {
+      "file": "authoring-template-diagram-comprehension-evidence-required.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "each explanation contract has diagram comprehension evidence",
+      "expect": "fail",
+      "errorIncludes": "AEC-ATP-001 must have at least one diagram comprehension evidence item."
+    },
+    {
+      "file": "authoring-template-diagram-comprehension-ref-resolves.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "diagram comprehension evidence links explanation contract",
+      "expect": "fail",
+      "errorIncludes": "DCE-ATP-001 references missing audience explanation contract: AEC-NOPE-999"
+    },
+    {
+      "file": "authoring-template-diagram-comprehension-understood-boolean.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "diagram comprehension understood is boolean",
+      "expect": "fail",
+      "errorIncludes": "DCE-ATP-001 understood must be boolean."
+    },
+    {
+      "file": "authoring-template-diagram-comprehension-not-understood-governance.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "not-understood diagram evidence triggers governance",
+      "expect": "fail",
+      "errorIncludes": "DCE-ATP-001 not-understood diagram comprehension evidence requires governanceTriggerRefs."
+    },
+    {
       "file": "authoring-template-output-target-package-supported.json",
       "validator": "tools/validate-authoring-template.mjs",
       "rule": "output contract targets supported package type",
@@ -209,6 +244,13 @@
       "rule": "verifier boundary avoids agent competence claim",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming agent authoring competence."
+    },
+    {
+      "file": "authoring-template-boundary-universal-comprehension.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "verifier boundary avoids universal user comprehension claim",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming universal user comprehension."
     }
   ],
   "rescopedRules": []

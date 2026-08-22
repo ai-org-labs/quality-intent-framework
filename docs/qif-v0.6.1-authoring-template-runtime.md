@@ -35,6 +35,7 @@ Authoring Template
 -> Golden Case
 -> Scoring Rubric
 -> Agent Authoring Run
+-> Diagram Comprehension Evidence
 -> Conformance Result
 -> Governance Trigger when conformance fails
 ```
@@ -52,6 +53,7 @@ Authoring Template
 | Golden Case | A representative authoring scenario. | Input ref, output ref, expected output summary, acceptance criteria. | Broad coverage claims from one example. |
 | Scoring Rubric | Human or AI grading rubric for generated output. | Weighted criteria, pass threshold, status. | Verifier result replacement. |
 | Agent Authoring Run | A concrete attempt to generate a QIF artifact. | Template ref, golden case ref, agent ref, input summary, output artifact ref, status. | Hidden chain-of-thought. |
+| Diagram Comprehension Evidence | Evidence that the intended audience understood or misunderstood a diagram. | Audience sample, diagram title, user restatement, misunderstanding summary, revision action, understood status, governance refs when not understood. | Universal proof that every user understood. |
 | Conformance Result | Recorded result of validating and scoring one authoring run. | Run ref, validation pipeline ref, rubric ref, verdict, score, governance refs when needed. | Proof of semantic correctness. |
 | Governance Trigger | Reason authoring governance is needed. | Trigger type, reason, owner, status. | Governance decision outcome. |
 
@@ -64,6 +66,8 @@ An authoring template package must:
 - link each template to an audience explanation contract;
 - target general-public comprehension unless a narrower audience is explicitly governed elsewhere;
 - include at least one simple diagram spec and a comprehension check;
+- record diagram comprehension evidence before treating the diagram as accepted;
+- route not-understood diagram evidence to governance or revision;
 - target only supported QIF package types;
 - use a local QIF validator command;
 - keep activity count, checklist completion, and structural verifier success out of the definition of quality;
@@ -84,6 +88,7 @@ The bundled example `examples/authoring-template-package.json` defines a templat
 - a general-public audience explanation contract;
 - a simple flow diagram showing how a request becomes a QIF package;
 - one-question-at-a-time elicitation and a user comprehension check;
+- evidence that a first-time user can restate what the diagram means;
 - a quality-gate output contract;
 - local runtime validation;
 - a golden case for a customer-support policy change;

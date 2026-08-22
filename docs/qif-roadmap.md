@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.2 baseline)
+## Current Position (v0.6.3 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -87,8 +87,9 @@ and adoption surface — not pretending the limits away.
   cases, scoring rubrics, authoring runs, conformance results, and governance.
   v0.6.2 hardens Authoring Template with audience explanation contracts so
   generated QIF artifacts must include general-public wording, simple diagrams,
-  step-by-step questioning, and comprehension checks.
-- Weaknesses: v0.6.2 cross-package behavior is intentionally minimal and
+  step-by-step questioning, and comprehension checks. v0.6.3 adds diagram
+  comprehension evidence so a diagram is not accepted merely because it exists.
+- Weaknesses: v0.6.3 cross-package behavior is intentionally minimal and
   example-file based; the first Authoring Template package covers only a
   quality-gate generation slice, Pilot Corpus now structures case ingestion
   but still uses example data rather than a live organization corpus, agent
@@ -278,11 +279,11 @@ Deliverables:
 - Machine-readable authoring templates with example requests and expected
   outputs (the executable form of the AI Authoring Guide), plus fixtures
   that score an agent's output as valid/invalid.
-  Status: implemented in v0.6.1 and hardened in v0.6.2 through the `authoring-template` package type,
+  Status: implemented in v0.6.1 and hardened in v0.6.2/v0.6.3 through the `authoring-template` package type,
   `tools/validate-authoring-template.mjs`, and retained negative fixtures
   requiring explicit instruction blocks, input/output contracts, local
   validation pipelines, golden cases, scoring rubrics, audience explanation
-  contracts, simple diagrams, comprehension checks, conformance results, no
+  contracts, simple diagrams, diagram comprehension evidence, comprehension checks, conformance results, no
   hidden reasoning, and governance for failed authoring.
 - Guided elicitation templates: plain-language explanations, stepwise probes,
   answer scaffolds, clarification moves, and teach-back checks so an AI agent

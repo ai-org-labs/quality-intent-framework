@@ -9,6 +9,7 @@ function pipeline(pkg) { return pkg.validationPipelines[0]; }
 function golden(pkg) { return pkg.goldenCases[0]; }
 function rubric(pkg) { return pkg.scoringRubrics[0]; }
 function run(pkg) { return pkg.agentAuthoringRuns[0]; }
+function diagramEvidence(pkg) { return pkg.diagramComprehensionEvidence[0]; }
 function result(pkg) { return pkg.conformanceResults[0]; }
 
 export const cases = [
@@ -71,6 +72,36 @@ export const cases = [
     rule: "template links audience explanation contract",
     expect: "ATP-001 references missing audience explanation contract: AEC-NOPE-999",
     mutate: (pkg) => { template(pkg).audienceExplanationContractRef = "AEC-NOPE-999"; }
+  },
+  {
+    id: "diagram-comprehension-evidence-array",
+    rule: "diagram comprehension evidence must be an array",
+    expect: "diagramComprehensionEvidence must be an array.",
+    mutate: (pkg) => { pkg.diagramComprehensionEvidence = null; }
+  },
+  {
+    id: "diagram-comprehension-evidence-required",
+    rule: "each explanation contract has diagram comprehension evidence",
+    expect: "AEC-ATP-001 must have at least one diagram comprehension evidence item.",
+    mutate: (pkg) => { pkg.diagramComprehensionEvidence = []; }
+  },
+  {
+    id: "diagram-comprehension-ref-resolves",
+    rule: "diagram comprehension evidence links explanation contract",
+    expect: "DCE-ATP-001 references missing audience explanation contract: AEC-NOPE-999",
+    mutate: (pkg) => { diagramEvidence(pkg).audienceExplanationContractRef = "AEC-NOPE-999"; }
+  },
+  {
+    id: "diagram-comprehension-understood-boolean",
+    rule: "diagram comprehension understood is boolean",
+    expect: "DCE-ATP-001 understood must be boolean.",
+    mutate: (pkg) => { diagramEvidence(pkg).understood = "yes"; }
+  },
+  {
+    id: "diagram-comprehension-not-understood-governance",
+    rule: "not-understood diagram evidence triggers governance",
+    expect: "DCE-ATP-001 not-understood diagram comprehension evidence requires governanceTriggerRefs.",
+    mutate: (pkg) => { diagramEvidence(pkg).understood = false; }
   },
   {
     id: "output-target-package-supported",
@@ -137,6 +168,12 @@ export const cases = [
     rule: "verifier boundary avoids agent competence claim",
     expect: "verifierBoundary must explicitly avoid claiming agent authoring competence.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = ["semantic truth"]; }
+  },
+  {
+    id: "boundary-universal-comprehension",
+    rule: "verifier boundary avoids universal user comprehension claim",
+    expect: "verifierBoundary must explicitly avoid claiming universal user comprehension.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = ["semantic truth", "agent authoring competence"]; }
   }
 ];
 
