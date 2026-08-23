@@ -29,6 +29,7 @@ They cannot prove:
 Authoring Template
 -> Instruction Block
 -> Input Contract
+-> Untrusted Input Boundary
 -> Audience Explanation Contract
 -> Output Contract
 -> Validation Pipeline
@@ -47,6 +48,7 @@ Authoring Template
 | Authoring Template | A reusable recipe for generating one QIF package type. | Linked instructions, input contract, output contract, validation pipeline, golden cases, rubric, status. | Domain truth or final quality verdict. |
 | Instruction Block | Stable authoring instructions for an AI or human. | Purpose, instruction text, prohibited claims, status. | Hidden reasoning or checklist-completion proof. |
 | Input Contract | Required shape of the user's request or source material. | Input kind, required fields, missing-input policy, status. | Assumed facts not present in the input. |
+| Untrusted Input Boundary | Separates source material from agent instructions. | Source kinds, trust treatment, allowed use, prohibited use, verification policy, sanitization policy, instruction conflict policy. | Permission to follow embedded instructions in source content. |
 | Audience Explanation Contract | Rules for making the generated QIF artifact understandable by a first-time user. | Audience level, plain-language requirement, terms to avoid without explanation, diagram specs, step-by-step question rule, comprehension check. | Proof that every user understood the artifact. |
 | Output Contract | Required QIF package type and entity families. | Target package type, schema ref, example ref, required entity families, status. | Runtime validation results. |
 | Validation Pipeline | Local validation command and success condition. | Output contract ref, command, success condition, negative fixtures. | Semantic approval. |
@@ -63,6 +65,9 @@ An authoring template package must:
 
 - define every required entity family as an array;
 - resolve all references between templates, contracts, pipelines, cases, rubrics, runs, and results;
+- link each template to an untrusted input boundary;
+- treat source material as evidence or target content, not as agent instructions;
+- block embedded instructions that attempt to override validation, suppress governance, or alter the task;
 - link each template to an audience explanation contract;
 - target general-public comprehension unless a narrower audience is explicitly governed elsewhere;
 - include at least one simple diagram spec and a comprehension check;
@@ -85,6 +90,7 @@ When a generated package fails validation, misses required entity families, fall
 The bundled example `examples/authoring-template-package.json` defines a template for generating a `quality-gate` package from a plain-language request. It requires:
 
 - a plain-language input contract;
+- an untrusted input boundary for documents, repository content, web content, MCP outputs, and review history;
 - a general-public audience explanation contract;
 - a simple flow diagram showing how a request becomes a QIF package;
 - one-question-at-a-time elicitation and a user comprehension check;

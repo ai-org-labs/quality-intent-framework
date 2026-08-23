@@ -89,7 +89,14 @@
       ],
       "diagramRequirement": "Include at least one simple flow or relationship diagram when explaining how input becomes a QIF artifact.",
       "diagramComprehensionRequirement": "The diagram is not accepted until the audience can restate what the diagram means and any misunderstanding has been corrected or governed.",
-      "diagramSpecs": [],
+      "diagramSpecs": [
+        {
+          "diagramKind": "ascii-flow",
+          "title": "How a request becomes a QIF package",
+          "diagramText": "user request -> what must not fail -> evidence needed -> QIF package -> verdict",
+          "status": "active"
+        }
+      ],
       "stepByStepQuestionRequirement": "Ask one question at a time. Start with concrete harm, then evidence, then decision owner.",
       "comprehensionCheck": "Ask the user to restate the protected failure in their own words before finalizing a QIF artifact.",
       "status": "active"
@@ -183,7 +190,7 @@
         "INS-ATP-002"
       ],
       "inputContractRef": "INC-ATP-001",
-      "untrustedInputBoundaryRef": "UIB-ATP-001",
+      "untrustedInputBoundaryRef": "UIB-NOPE-999",
       "audienceExplanationContractRef": "AEC-ATP-001",
       "outputContractRef": "OUC-ATP-001",
       "validationPipelineRef": "VPL-ATP-001",

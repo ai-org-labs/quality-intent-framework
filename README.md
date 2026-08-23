@@ -226,9 +226,11 @@ The action quality contract verifier checks:
 The authoring template verifier checks:
 
 - authoring templates link instruction blocks, input contracts, output contracts, validation pipelines, golden cases, and scoring rubrics
+- authoring templates link an untrusted input boundary
 - authoring templates link an audience explanation contract
 - instruction blocks declare prohibited claims and reject checklist-completion-as-quality language
 - input contracts define required fields and missing-input policy
+- untrusted input boundaries separate source material from agent instructions, block embedded instructions, and rank system/user instructions above source content
 - audience explanation contracts target general-public comprehension, terms to avoid without explanation, required expression rules, simple diagrams, step-by-step questions, and comprehension checks
 - diagram comprehension evidence records whether the intended audience could restate the diagram meaning, what they misunderstood, what was revised, and whether governance is needed
 - output contracts target supported QIF package types and required entity families

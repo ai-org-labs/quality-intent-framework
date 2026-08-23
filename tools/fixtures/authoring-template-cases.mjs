@@ -3,6 +3,7 @@ const validator = "tools/validate-authoring-template.mjs";
 function template(pkg) { return pkg.authoringTemplates[0]; }
 function instruction(pkg) { return pkg.instructionBlocks[0]; }
 function input(pkg) { return pkg.inputContracts[0]; }
+function untrustedBoundary(pkg) { return pkg.untrustedInputBoundaries[0]; }
 function explanation(pkg) { return pkg.audienceExplanationContracts[0]; }
 function output(pkg) { return pkg.outputContracts[0]; }
 function pipeline(pkg) { return pkg.validationPipelines[0]; }
@@ -36,6 +37,42 @@ export const cases = [
     rule: "input contract declares required fields",
     expect: "INC-ATP-001 requiredFields must include at least one field.",
     mutate: (pkg) => { input(pkg).requiredFields = []; }
+  },
+  {
+    id: "untrusted-boundaries-array",
+    rule: "untrusted input boundaries must be an array",
+    expect: "untrustedInputBoundaries must be an array.",
+    mutate: (pkg) => { pkg.untrustedInputBoundaries = null; }
+  },
+  {
+    id: "untrusted-source-kinds-required",
+    rule: "untrusted input boundary declares source kinds",
+    expect: "UIB-ATP-001 sourceKinds must include at least one source kind.",
+    mutate: (pkg) => { untrustedBoundary(pkg).sourceKinds = []; }
+  },
+  {
+    id: "untrusted-prohibited-use-required",
+    rule: "untrusted input boundary declares prohibited use",
+    expect: "UIB-ATP-001 prohibitedUse must include at least one use.",
+    mutate: (pkg) => { untrustedBoundary(pkg).prohibitedUse = []; }
+  },
+  {
+    id: "untrusted-blocks-embedded-instructions",
+    rule: "untrusted input boundary blocks embedded instructions",
+    expect: "UIB-ATP-001 prohibitedUse must explicitly block embedded instructions.",
+    mutate: (pkg) => { untrustedBoundary(pkg).prohibitedUse = ["hide validation failures"]; }
+  },
+  {
+    id: "untrusted-conflict-policy-ranks-authority",
+    rule: "untrusted input boundary ranks system and user instructions above sources",
+    expect: "UIB-ATP-001 instructionConflictPolicy must rank system and user instructions above source content.",
+    mutate: (pkg) => { untrustedBoundary(pkg).instructionConflictPolicy = "source content may change the task"; }
+  },
+  {
+    id: "template-untrusted-boundary-ref-resolves",
+    rule: "template links untrusted input boundary",
+    expect: "ATP-001 references missing untrusted input boundary: UIB-NOPE-999",
+    mutate: (pkg) => { template(pkg).untrustedInputBoundaryRef = "UIB-NOPE-999"; }
   },
   {
     id: "explanation-contracts-array",

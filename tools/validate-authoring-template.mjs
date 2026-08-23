@@ -103,6 +103,7 @@ function validate(pkg, packagePath) {
   const templates = array(pkg, "authoringTemplates", packagePath);
   const instructions = array(pkg, "instructionBlocks", packagePath);
   const inputContracts = array(pkg, "inputContracts", packagePath);
+  const untrustedInputBoundaries = array(pkg, "untrustedInputBoundaries", packagePath);
   const explanationContracts = array(pkg, "audienceExplanationContracts", packagePath);
   const outputContracts = array(pkg, "outputContracts", packagePath);
   const validationPipelines = array(pkg, "validationPipelines", packagePath);
@@ -116,6 +117,7 @@ function validate(pkg, packagePath) {
   const templateIndex = index(templates, `${packagePath}:authoringTemplates`);
   const instructionIndex = index(instructions, `${packagePath}:instructionBlocks`);
   const inputIndex = index(inputContracts, `${packagePath}:inputContracts`);
+  const untrustedInputBoundaryIndex = index(untrustedInputBoundaries, `${packagePath}:untrustedInputBoundaries`);
   const explanationIndex = index(explanationContracts, `${packagePath}:audienceExplanationContracts`);
   const outputIndex = index(outputContracts, `${packagePath}:outputContracts`);
   const pipelineIndex = index(validationPipelines, `${packagePath}:validationPipelines`);
@@ -140,6 +142,29 @@ function validate(pkg, packagePath) {
     for (const field of ["inputKind", "description", "missingInputPolicy", "status"]) str(input, field, input.id);
     if (!Array.isArray(input.requiredFields) || input.requiredFields.length === 0) {
       errors.push(`${input.id} requiredFields must include at least one field.`);
+    }
+  }
+
+  for (const boundary of untrustedInputBoundaries) {
+    for (const field of ["trustTreatment", "verificationRequired", "sanitizationPolicy", "instructionConflictPolicy", "status"]) {
+      str(boundary, field, boundary.id);
+    }
+    if (!Array.isArray(boundary.sourceKinds) || boundary.sourceKinds.length === 0) {
+      errors.push(`${boundary.id} sourceKinds must include at least one source kind.`);
+    }
+    if (!Array.isArray(boundary.allowedUse) || boundary.allowedUse.length === 0) {
+      errors.push(`${boundary.id} allowedUse must include at least one use.`);
+    }
+    if (!Array.isArray(boundary.prohibitedUse) || boundary.prohibitedUse.length === 0) {
+      errors.push(`${boundary.id} prohibitedUse must include at least one use.`);
+    }
+    const prohibitedText = (boundary.prohibitedUse ?? []).join(" ").toLowerCase();
+    if (!prohibitedText.includes("instruction")) {
+      errors.push(`${boundary.id} prohibitedUse must explicitly block embedded instructions.`);
+    }
+    const conflictText = String(boundary.instructionConflictPolicy ?? "").toLowerCase();
+    if (!conflictText.includes("system") || !conflictText.includes("user")) {
+      errors.push(`${boundary.id} instructionConflictPolicy must rank system and user instructions above source content.`);
     }
   }
 
@@ -221,6 +246,7 @@ function validate(pkg, packagePath) {
   for (const template of templates) {
     refs(template.instructionBlockRefs, instructionIndex, "instruction block", template.id);
     refs([template.inputContractRef], inputIndex, "input contract", template.id);
+    refs([template.untrustedInputBoundaryRef], untrustedInputBoundaryIndex, "untrusted input boundary", template.id);
     refs([template.audienceExplanationContractRef], explanationIndex, "audience explanation contract", template.id);
     refs([template.outputContractRef], outputIndex, "output contract", template.id);
     refs([template.validationPipelineRef], pipelineIndex, "validation pipeline", template.id);
@@ -302,6 +328,7 @@ function validate(pkg, packagePath) {
       authoringTemplates: templates.length,
       instructionBlocks: instructions.length,
       inputContracts: inputContracts.length,
+      untrustedInputBoundaries: untrustedInputBoundaries.length,
       audienceExplanationContracts: explanationContracts.length,
       outputContracts: outputContracts.length,
       validationPipelines: validationPipelines.length,

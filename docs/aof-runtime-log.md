@@ -2,6 +2,45 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.4 Untrusted Input Boundary
+
+Runtime source:
+
+- AOF latest used: `v12.1.0`
+- External trend check date: `2026-08-23`
+
+Need / Intent / Context:
+
+- Need: AI agents authoring QIF packages may ingest documents, repository content, web content, review history, or MCP outputs that contain embedded instructions or prompt-injection attempts.
+- Intent: Add `untrustedInputBoundaries` so authoring templates explicitly separate source material from agent instructions, block embedded instructions, and rank system/user instructions above source content.
+- Context: v0.6.1-v0.6.3 made authoring templates executable and understandable. The next risk is source trust confusion during agentic authoring.
+
+Decision reason:
+
+- Implement this before broader CLI/hook work because source trust failures can corrupt any generated QIF artifact before validation.
+- Keep this as an authoring-template boundary, not a security scanner. The verifier can prove the boundary is declared and linked; it cannot prove prompt-injection safety.
+
+Council judgment:
+
+- Visionary: proceed; this keeps QIF ahead of agentic authoring risks as MCP/tool-connected workflows expand.
+- Builder: proceed; the change is bounded to `authoring-template` schema/example/verifier/fixtures/docs.
+- Guardian: proceed with guardrails; source content must not override instructions, suppress validation, hide governance, or weaken loss boundaries.
+
+Artifacts:
+
+- Schema: `schemas/authoring-template-package.schema.json`
+- Example: `examples/authoring-template-package.json`
+- Verifier: `tools/validate-authoring-template.mjs`
+- Fixture source: `tools/fixtures/authoring-template-cases.mjs`
+- Retained negative corpus: `tests/fixtures/authoring-template/`
+- Release notes: `RELEASE-NOTES-v0.6.4.md`
+
+Runtime verification:
+
+- `npm test`: pass, `15/15` positive checks and `540/540` retained negative checks.
+- AOF `organization-verify` using v12.1.0: pass, `231/231` checks.
+- AOF `situation-assess` using v12.1.0: pass with no current truth conflicts. It recommends opening a current frontier task because this implementation task is recorded as completed.
+
 ## v0.6.3 Diagram Comprehension Evidence
 
 Runtime source:

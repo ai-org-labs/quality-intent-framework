@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.6.3 Diagram Comprehension Evidence so diagrams are accepted only with audience restatement evidence, misunderstanding handling, revision action, and governance when not understood.",
-  "updated_at": "2026-08-22T07:45:00.000Z",
+  "content": "Implement QIF v0.6.4 Untrusted Input Boundary so authoring templates separate source material from agent instructions, block embedded instructions, and rank system/user instructions above source content.",
+  "updated_at": "2026-08-23T04:45:00.000Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-QIFV063",
+  "source_session_id": "SESS-QIFV064",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-08-22T07:55:00.000Z"
+  "declared_complete_at": "2026-08-23T05:25:00.000Z"
 }

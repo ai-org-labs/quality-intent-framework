@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-022",
+  "title": "QIF v0.6.4 Untrusted Input Boundary",
+  "description": "Harden authoring-template packages so source material is separated from agent instructions, embedded instructions are blocked, and system/user instructions outrank source content.",
+  "status": "done",
+  "source_session_id": "SESS-QIFV064",
+  "created_at": "2026-08-23T04:45:00.000Z",
+  "completed_at": "2026-08-23T05:25:00.000Z",
+  "validated_need": "Agentic QIF authoring may ingest documents, repository content, web content, review history, or MCP outputs that contain embedded instructions. QIF needs a structural boundary that keeps source content from becoming agent instruction.",
+  "intent": "Make untrusted-input handling auditable without claiming that verifier success proves prompt-injection safety.",
+  "context": "v0.6.3 already requires diagram comprehension evidence. This slice addresses source trust confusion identified in current agent and MCP guidance.",
+  "triage_note": "Implementation completed and structurally verified; release outcome will be recorded in docs/aof-runtime-log.md if released.",
+  "review_evidence": [
+    "tools/validate-authoring-template.mjs",
+    "examples/authoring-template-package.json",
+    "tests/fixtures/authoring-template/",
+    "npm test",
+    "AOF organization-verify"
+  ]
+}

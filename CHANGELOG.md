@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.6.4
+
+- Added first-class `untrustedInputBoundaries` to `authoring-template` packages.
+- Required authoring templates to link to an untrusted input boundary.
+- Required source kinds, allowed use, prohibited use, verification policy, sanitization policy, and instruction conflict policy.
+- Required prohibited use to explicitly block embedded instructions.
+- Required instruction conflict policy to rank system and explicit user instructions above source content.
+- Added retained negative fixtures for missing untrusted input boundaries, missing source kinds, missing prohibited use, missing embedded-instruction blocking, weak authority ranking, and broken template refs.
+
 ## v0.6.3
 
 - Added first-class `diagramComprehensionEvidence` to `authoring-template` packages.

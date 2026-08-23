@@ -92,6 +92,48 @@
       "errorIncludes": "INC-ATP-001 requiredFields must include at least one field."
     },
     {
+      "file": "authoring-template-untrusted-boundaries-array.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "untrusted input boundaries must be an array",
+      "expect": "fail",
+      "errorIncludes": "untrustedInputBoundaries must be an array."
+    },
+    {
+      "file": "authoring-template-untrusted-source-kinds-required.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "untrusted input boundary declares source kinds",
+      "expect": "fail",
+      "errorIncludes": "UIB-ATP-001 sourceKinds must include at least one source kind."
+    },
+    {
+      "file": "authoring-template-untrusted-prohibited-use-required.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "untrusted input boundary declares prohibited use",
+      "expect": "fail",
+      "errorIncludes": "UIB-ATP-001 prohibitedUse must include at least one use."
+    },
+    {
+      "file": "authoring-template-untrusted-blocks-embedded-instructions.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "untrusted input boundary blocks embedded instructions",
+      "expect": "fail",
+      "errorIncludes": "UIB-ATP-001 prohibitedUse must explicitly block embedded instructions."
+    },
+    {
+      "file": "authoring-template-untrusted-conflict-policy-ranks-authority.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "untrusted input boundary ranks system and user instructions above sources",
+      "expect": "fail",
+      "errorIncludes": "UIB-ATP-001 instructionConflictPolicy must rank system and user instructions above source content."
+    },
+    {
+      "file": "authoring-template-template-untrusted-boundary-ref-resolves.json",
+      "validator": "tools/validate-authoring-template.mjs",
+      "rule": "template links untrusted input boundary",
+      "expect": "fail",
+      "errorIncludes": "ATP-001 references missing untrusted input boundary: UIB-NOPE-999"
+    },
+    {
       "file": "authoring-template-explanation-contracts-array.json",
       "validator": "tools/validate-authoring-template.mjs",
       "rule": "audience explanation contracts must be an array",
