@@ -41,6 +41,14 @@ Runtime verification:
 - AOF `organization-verify` using v12.1.0: pass, `231/231` checks.
 - AOF `situation-assess` using v12.1.0: pass with no current truth conflicts. It recommends opening a current frontier task because this implementation task is recorded as completed.
 
+Release outcome:
+
+- Implementation commit: `5e067f7e881dc68fba4f0aa96126ab6a3fec0864`
+- Tag: `v0.6.4`
+- Tag target commit: `5e067f7e881dc68fba4f0aa96126ab6a3fec0864`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.4`
+- Published result: released
+
 ## v0.6.3 Diagram Comprehension Evidence
 
 Runtime source:

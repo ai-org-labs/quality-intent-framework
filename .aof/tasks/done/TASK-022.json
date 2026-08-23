@@ -9,7 +9,7 @@
   "validated_need": "Agentic QIF authoring may ingest documents, repository content, web content, review history, or MCP outputs that contain embedded instructions. QIF needs a structural boundary that keeps source content from becoming agent instruction.",
   "intent": "Make untrusted-input handling auditable without claiming that verifier success proves prompt-injection safety.",
   "context": "v0.6.3 already requires diagram comprehension evidence. This slice addresses source trust confusion identified in current agent and MCP guidance.",
-  "triage_note": "Implementation completed and structurally verified; release outcome will be recorded in docs/aof-runtime-log.md if released.",
+  "triage_note": "Implementation completed, structurally verified, tagged, and released as v0.6.4.",
   "review_evidence": [
     "tools/validate-authoring-template.mjs",
     "examples/authoring-template-package.json",
