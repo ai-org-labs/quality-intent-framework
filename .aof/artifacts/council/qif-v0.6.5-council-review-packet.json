@@ -1,0 +1,36 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-08-24T04:38:25.771Z",
+  "review_packet_id": "CREV-MT6QX0X7-DX4KDK",
+  "council_id": "qif-v0.6.5-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Proceed with QIF v0.6.5 Trace Approval Evidence.",
+  "rationale": "Current agent tooling trends emphasize MCP approvals, tracing, resumable runs, and prompt-injection boundaries; QIF should make approval evidence structurally auditable before broader hook/CLI work.",
+  "recommendation": "Release v0.6.5 after npm test and repository hygiene checks pass.",
+  "target_audience": "QIF maintainers and AI agents using Action Quality Contract",
+  "expected_user_reaction": "They can see which approval evidence justified an accepted tool action.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [
+    "Add traceApprovalEvidence to action-quality-contract schema, example, verifier, fixtures, docs, and release notes."
+  ],
+  "organization_change_recommendations": [
+    "Keep verifier boundary explicit: structural approval traceability is not semantic tool safety."
+  ],
+  "diagnosis_category": "agent-action-governance",
+  "diagnosis_confidence": 0.86,
+  "diagnosis_evidence_refs": [
+    "docs/qif-roadmap.md"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "RELEASE-NOTES-v0.6.5.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-023",
+  "source_parent_session_id": "SESS-QIFV065",
+  "source_decision_record_id": null
+}

@@ -56,7 +56,7 @@
       "targetRef": "QIF repository",
       "preState": "package fixtures may be stale after schema changes",
       "postState": "package fixtures are regenerated and npm test passes",
-      "stopCondition": "",
+      "stopCondition": "stop if npm test fails or generated fixtures drift unexpectedly",
       "invariantRefs": [
         "activity count is not quality",
         "semantic truth is not inferred from verifier success"
@@ -130,6 +130,16 @@
       "operation": "regenerate fixture corpus and run verifier suite",
       "reason": "Schema/verifier additions require retained fixture corpus synchronization.",
       "status": "approved-for-execution"
+    },
+    {
+      "id": "AQR-AQC-OTHER",
+      "actionContractRef": "ACT-AQC-001",
+      "requestedToolSurfaceRef": "TLS-AQC-001",
+      "requestedBy": "ai-agent",
+      "targetRef": "QIF repository",
+      "operation": "inspect package only",
+      "reason": "Fixture mutation for mismatched trace approval evidence.",
+      "status": "approved-for-execution"
     }
   ],
   "runtimeTraces": [
@@ -152,7 +162,7 @@
   "traceApprovalEvidence": [
     {
       "id": "TAE-AQC-001",
-      "actionRequestRef": "AQR-AQC-001",
+      "actionRequestRef": "AQR-AQC-OTHER",
       "runtimeTraceRef": "RTR-AQC-001",
       "approvalGateRef": "APR-AQC-001",
       "approvalRequired": true,

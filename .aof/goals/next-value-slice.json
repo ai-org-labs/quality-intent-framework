@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.6.4 Untrusted Input Boundary so authoring templates separate source material from agent instructions, block embedded instructions, and rank system/user instructions above source content.",
-  "updated_at": "2026-08-23T04:45:00.000Z",
+  "content": "Implement QIF v0.6.5 Agent Trace Approval Evidence so action-quality-contract packages record tool-call approvals, denials, resumptions, replay binding, and trace redaction as evidence-backed structures.",
+  "updated_at": "2026-08-24T04:38:10.386Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-QIFV064",
+  "source_session_id": "SESS-QIFV065",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-08-23T05:25:00.000Z"
+  "declared_complete_at": "2026-08-24T04:38:10.386Z"
 }

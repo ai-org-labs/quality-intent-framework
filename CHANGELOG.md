@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.6.5
+
+- Added first-class `traceApprovalEvidence` to `action-quality-contract` packages.
+- Required approval-gated action requests to include trace approval evidence.
+- Required approved trace approval evidence to record approver and decision time.
+- Required replayed or resumed tool calls to remain bound to the original invocation.
+- Required accepted approval-gated outcomes to have approved trace approval evidence.
+- Added retained negative fixtures for missing approval evidence, mismatched trace/request linkage, missing approver, invalid not-required approval decisions, replay binding failure, and accepted outcomes without approved evidence.
+
 ## v0.6.4
 
 - Added first-class `untrustedInputBoundaries` to `authoring-template` packages.

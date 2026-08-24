@@ -93,6 +93,7 @@ function validate(pkg, packagePath) {
   const rollbacks = array(pkg, "rollbackPlans", packagePath);
   const evidenceRequirements = array(pkg, "evidenceRequirements", packagePath);
   const runtimeTraces = array(pkg, "runtimeTraces", packagePath);
+  const traceApprovalEvidence = array(pkg, "traceApprovalEvidence", packagePath);
   const outcomes = array(pkg, "actionOutcomes", packagePath);
   const triggers = array(pkg, "governanceTriggers", packagePath);
 
@@ -106,6 +107,7 @@ function validate(pkg, packagePath) {
   const rollbackIndex = index(rollbacks, `${packagePath}:rollbackPlans`);
   const evidenceIndex = index(evidenceRequirements, `${packagePath}:evidenceRequirements`);
   const traceIndex = index(runtimeTraces, `${packagePath}:runtimeTraces`);
+  const approvalEvidenceIndex = index(traceApprovalEvidence, `${packagePath}:traceApprovalEvidence`);
   const outcomeIndex = index(outcomes, `${packagePath}:actionOutcomes`);
   const triggerIndex = index(triggers, `${packagePath}:governanceTriggers`);
 
@@ -189,6 +191,47 @@ function validate(pkg, packagePath) {
     }
   }
 
+  const approvalEvidenceByRequest = new Map();
+  for (const evidence of traceApprovalEvidence) {
+    refs([evidence.actionRequestRef], requestIndex, "action request", evidence.id);
+    refs([evidence.runtimeTraceRef], traceIndex, "runtime trace", evidence.id);
+    optionalRefs(evidence.approvalGateRef === undefined ? undefined : [evidence.approvalGateRef], approvalIndex, "approval gate", evidence.id);
+    for (const field of ["approvalDecision", "rationale", "canonicalInvocationRef", "replayStatus", "redactionStatus", "status"]) str(evidence, field, evidence.id);
+    if (typeof evidence.approvalRequired !== "boolean") {
+      errors.push(`${evidence.id} approvalRequired must be boolean.`);
+    }
+    if (typeof evidence.boundToOriginalInvocation !== "boolean") {
+      errors.push(`${evidence.id} boundToOriginalInvocation must be boolean.`);
+    }
+    const request = requestIndex.get(evidence.actionRequestRef);
+    const trace = traceIndex.get(evidence.runtimeTraceRef);
+    if (request && trace && trace.actionRequestRef !== request.id) {
+      errors.push(`${evidence.id} runtimeTraceRef must belong to its actionRequestRef.`);
+    }
+    if (evidence.approvalRequired && evidence.approvalDecision === "approved") {
+      for (const field of ["approvalGateRef", "approvedBy", "decisionAt"]) str(evidence, field, evidence.id);
+    }
+    if (evidence.approvalRequired && evidence.approvalDecision === "not-required") {
+      errors.push(`${evidence.id} approvalDecision not-required cannot be used when approvalRequired is true.`);
+    }
+    if (["replayed", "resumed"].includes(evidence.replayStatus) && !evidence.boundToOriginalInvocation) {
+      errors.push(`${evidence.id} replayed or resumed tool call must be boundToOriginalInvocation.`);
+    }
+    if (trace?.containsSensitiveData && evidence.redactionStatus !== "redacted") {
+      errors.push(`${evidence.id} approval evidence for sensitive trace data requires redactionStatus redacted.`);
+    }
+    if (!approvalEvidenceByRequest.has(evidence.actionRequestRef)) approvalEvidenceByRequest.set(evidence.actionRequestRef, []);
+    approvalEvidenceByRequest.get(evidence.actionRequestRef).push(evidence);
+  }
+
+  for (const request of requests) {
+    const contract = contractIndex.get(request.actionContractRef);
+    if (contract && Array.isArray(contract.approvalGateRefs) && contract.approvalGateRefs.length > 0) {
+      const matches = approvalEvidenceByRequest.get(request.id) ?? [];
+      if (matches.length === 0) errors.push(`${request.id} approval-gated request requires traceApprovalEvidence.`);
+    }
+  }
+
   for (const outcome of outcomes) {
     refs([outcome.actionRequestRef], requestIndex, "action request", outcome.id);
     refs([outcome.actionContractRef], contractIndex, "action contract", outcome.id);
@@ -201,6 +244,11 @@ function validate(pkg, packagePath) {
     const transition = contract ? transitionIndex.get(contract.expectedStateTransitionRef) : null;
     if (outcome.verdict === "accepted" && transition && outcome.actualState !== transition.postState) {
       errors.push(`${outcome.id} accepted outcome actualState must equal expected postState.`);
+    }
+    const approvals = approvalEvidenceByRequest.get(outcome.actionRequestRef) ?? [];
+    const contractNeedsApproval = contract && Array.isArray(contract.approvalGateRefs) && contract.approvalGateRefs.length > 0;
+    if (outcome.verdict === "accepted" && contractNeedsApproval && !approvals.some((evidence) => evidence.approvalDecision === "approved")) {
+      errors.push(`${outcome.id} accepted outcome for approval-gated contract requires approved traceApprovalEvidence.`);
     }
     if (outcome.confidence < 0.7 && (!Array.isArray(outcome.governanceTriggerRefs) || outcome.governanceTriggerRefs.length === 0)) {
       errors.push(`${outcome.id} low-confidence outcome requires governanceTriggerRefs.`);
@@ -240,6 +288,7 @@ function validate(pkg, packagePath) {
       rollbackPlans: rollbacks.length,
       evidenceRequirements: evidenceRequirements.length,
       runtimeTraces: runtimeTraces.length,
+      traceApprovalEvidence: traceApprovalEvidence.length,
       actionOutcomes: outcomes.length,
       governanceTriggers: triggers.length
     }

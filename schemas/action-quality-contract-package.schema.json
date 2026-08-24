@@ -18,6 +18,7 @@
     "rollbackPlans",
     "evidenceRequirements",
     "runtimeTraces",
+    "traceApprovalEvidence",
     "actionOutcomes",
     "governanceTriggers",
     "verifierBoundary"
@@ -36,6 +37,7 @@
     "rollbackPlans": { "type": "array" },
     "evidenceRequirements": { "type": "array" },
     "runtimeTraces": { "type": "array" },
+    "traceApprovalEvidence": { "type": "array" },
     "actionOutcomes": { "type": "array" },
     "governanceTriggers": { "type": "array" },
     "verifierBoundary": {

@@ -56,7 +56,7 @@
       "targetRef": "QIF repository",
       "preState": "package fixtures may be stale after schema changes",
       "postState": "package fixtures are regenerated and npm test passes",
-      "stopCondition": "",
+      "stopCondition": "stop if npm test fails or generated fixtures drift unexpectedly",
       "invariantRefs": [
         "activity count is not quality",
         "semantic truth is not inferred from verifier success"
@@ -149,24 +149,7 @@
       "status": "captured"
     }
   ],
-  "traceApprovalEvidence": [
-    {
-      "id": "TAE-AQC-001",
-      "actionRequestRef": "AQR-AQC-001",
-      "runtimeTraceRef": "RTR-AQC-001",
-      "approvalGateRef": "APR-AQC-001",
-      "approvalRequired": true,
-      "approvalDecision": "approved",
-      "approvedBy": "repository maintainer",
-      "decisionAt": "2026-08-21T04:40:00Z",
-      "rationale": "The requested action is write-like but limited to repository-local fixture and verifier updates.",
-      "canonicalInvocationRef": "invoke-AQR-AQC-001-initial",
-      "replayStatus": "not-replayed",
-      "boundToOriginalInvocation": true,
-      "redactionStatus": "not-required",
-      "status": "captured"
-    }
-  ],
+  "traceApprovalEvidence": null,
   "actionOutcomes": [
     {
       "id": "AOC-AQC-001",

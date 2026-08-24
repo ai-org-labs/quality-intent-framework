@@ -10,6 +10,7 @@ function transition(pkg) { return pkg.expectedStateTransitions[0]; }
 function rollback(pkg) { return pkg.rollbackPlans[0]; }
 function evidence(pkg) { return pkg.evidenceRequirements[0]; }
 function trace(pkg) { return pkg.runtimeTraces[0]; }
+function approvalEvidence(pkg) { return pkg.traceApprovalEvidence[0]; }
 function outcome(pkg) { return pkg.actionOutcomes[0]; }
 
 export const cases = [
@@ -94,6 +95,63 @@ export const cases = [
     rule: "runtime trace has spans",
     expect: "RTR-AQC-001 spans must include at least one span.",
     mutate: (pkg) => { trace(pkg).spans = []; }
+  },
+  {
+    id: "trace-approval-evidence-array",
+    rule: "trace approval evidence must be retained",
+    expect: "traceApprovalEvidence must be an array.",
+    mutate: (pkg) => { pkg.traceApprovalEvidence = null; }
+  },
+  {
+    id: "approval-gated-request-needs-evidence",
+    rule: "approval-gated request has trace approval evidence",
+    expect: "AQR-AQC-001 approval-gated request requires traceApprovalEvidence.",
+    mutate: (pkg) => { pkg.traceApprovalEvidence = []; }
+  },
+  {
+    id: "approval-evidence-trace-belongs-to-request",
+    rule: "approval evidence trace belongs to the same request",
+    expect: "TAE-AQC-001 runtimeTraceRef must belong to its actionRequestRef.",
+    mutate: (pkg) => {
+      pkg.actionRequests.push({
+        id: "AQR-AQC-OTHER",
+        actionContractRef: "ACT-AQC-001",
+        requestedToolSurfaceRef: "TLS-AQC-001",
+        requestedBy: "ai-agent",
+        targetRef: "QIF repository",
+        operation: "inspect package only",
+        reason: "Fixture mutation for mismatched trace approval evidence.",
+        status: "approved-for-execution"
+      });
+      approvalEvidence(pkg).actionRequestRef = "AQR-AQC-OTHER";
+    }
+  },
+  {
+    id: "approved-evidence-needs-approver",
+    rule: "approved trace evidence records approver",
+    expect: "TAE-AQC-001 must include non-empty string approvedBy.",
+    mutate: (pkg) => { approvalEvidence(pkg).approvedBy = ""; }
+  },
+  {
+    id: "required-approval-cannot-be-not-required",
+    rule: "required approval cannot be marked not required",
+    expect: "TAE-AQC-001 approvalDecision not-required cannot be used when approvalRequired is true.",
+    mutate: (pkg) => { approvalEvidence(pkg).approvalDecision = "not-required"; }
+  },
+  {
+    id: "replayed-call-bound-to-original",
+    rule: "replayed tool call is bound to original invocation",
+    expect: "TAE-AQC-001 replayed or resumed tool call must be boundToOriginalInvocation.",
+    mutate: (pkg) => {
+      approvalEvidence(pkg).replayStatus = "replayed";
+      approvalEvidence(pkg).boundToOriginalInvocation = false;
+    }
+  },
+  {
+    id: "accepted-outcome-needs-approved-evidence",
+    rule: "accepted approval-gated outcome has approved evidence",
+    expect: "AOC-AQC-001 accepted outcome for approval-gated contract requires approved traceApprovalEvidence.",
+    mutate: (pkg) => { approvalEvidence(pkg).approvalDecision = "denied"; }
   },
   {
     id: "trace-sensitive-data-redacted",

@@ -1,6 +1,6 @@
 {
   "packageType": "action-quality-contract",
-  "runtimeVersion": "0.6.0",
+  "runtimeVersion": "0.6.5",
   "packageId": "AQC-PKG-001",
   "toolSurfaces": [
     {
@@ -124,6 +124,24 @@
       "status": "captured"
     }
   ],
+  "traceApprovalEvidence": [
+    {
+      "id": "TAE-AQC-001",
+      "actionRequestRef": "AQR-AQC-001",
+      "runtimeTraceRef": "RTR-AQC-001",
+      "approvalGateRef": "APR-AQC-001",
+      "approvalRequired": true,
+      "approvalDecision": "approved",
+      "approvedBy": "repository maintainer",
+      "decisionAt": "2026-08-21T04:40:00Z",
+      "rationale": "The requested action is write-like but limited to repository-local fixture and verifier updates.",
+      "canonicalInvocationRef": "invoke-AQR-AQC-001-initial",
+      "replayStatus": "not-replayed",
+      "boundToOriginalInvocation": true,
+      "redactionStatus": "not-required",
+      "status": "captured"
+    }
+  ],
   "actionOutcomes": [
     {
       "id": "AOC-AQC-001",
@@ -148,6 +166,8 @@
       "expected state transition linkage",
       "rollback plan linkage",
       "runtime trace evidence",
+      "trace approval evidence",
+      "replay binding evidence",
       "outcome confidence governance"
     ],
     "doesNotClaim": [

@@ -6,7 +6,7 @@ QIF does not define quality as output volume. Page count, review count, and test
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.0 Action Quality Contract runtime for governing AI agent tool actions, and the v0.6.x Authoring Template runtime for guiding AI agents to author valid, understandable QIF packages:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x Action Quality Contract runtime for governing AI agent tool actions with trace approval evidence, and the v0.6.x Authoring Template runtime for guiding AI agents to author valid, understandable QIF packages:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -220,6 +220,9 @@ The action quality contract verifier checks:
 - high-risk or write-like action contracts require approval gates
 - action requests use the same tool surface as their contract
 - runtime traces include spans and redact sensitive data when present
+- approval-gated requests include trace approval evidence
+- replayed or resumed tool calls remain bound to the original invocation
+- accepted approval-gated outcomes require approved trace approval evidence
 - accepted outcomes match expected post-state
 - low-confidence outcomes trigger governance
 

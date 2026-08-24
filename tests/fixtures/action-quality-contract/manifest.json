@@ -148,6 +148,55 @@
       "errorIncludes": "RTR-AQC-001 spans must include at least one span."
     },
     {
+      "file": "action-quality-contract-trace-approval-evidence-array.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "trace approval evidence must be retained",
+      "expect": "fail",
+      "errorIncludes": "traceApprovalEvidence must be an array."
+    },
+    {
+      "file": "action-quality-contract-approval-gated-request-needs-evidence.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "approval-gated request has trace approval evidence",
+      "expect": "fail",
+      "errorIncludes": "AQR-AQC-001 approval-gated request requires traceApprovalEvidence."
+    },
+    {
+      "file": "action-quality-contract-approval-evidence-trace-belongs-to-request.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "approval evidence trace belongs to the same request",
+      "expect": "fail",
+      "errorIncludes": "TAE-AQC-001 runtimeTraceRef must belong to its actionRequestRef."
+    },
+    {
+      "file": "action-quality-contract-approved-evidence-needs-approver.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "approved trace evidence records approver",
+      "expect": "fail",
+      "errorIncludes": "TAE-AQC-001 must include non-empty string approvedBy."
+    },
+    {
+      "file": "action-quality-contract-required-approval-cannot-be-not-required.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "required approval cannot be marked not required",
+      "expect": "fail",
+      "errorIncludes": "TAE-AQC-001 approvalDecision not-required cannot be used when approvalRequired is true."
+    },
+    {
+      "file": "action-quality-contract-replayed-call-bound-to-original.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "replayed tool call is bound to original invocation",
+      "expect": "fail",
+      "errorIncludes": "TAE-AQC-001 replayed or resumed tool call must be boundToOriginalInvocation."
+    },
+    {
+      "file": "action-quality-contract-accepted-outcome-needs-approved-evidence.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "accepted approval-gated outcome has approved evidence",
+      "expect": "fail",
+      "errorIncludes": "AOC-AQC-001 accepted outcome for approval-gated contract requires approved traceApprovalEvidence."
+    },
+    {
       "file": "action-quality-contract-trace-sensitive-data-redacted.json",
       "validator": "tools/validate-action-quality-contract.mjs",
       "rule": "sensitive trace data requires redaction",

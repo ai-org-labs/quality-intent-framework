@@ -2,6 +2,58 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.5 Agent Trace Approval Evidence
+
+Runtime source:
+
+- AOF source repo latest checked: `v5.0.0`
+- AOF runtime commands executed: `situation-assess`, `goal-project`, `task-open`, `task-update`, `council-review-packet`, `organization-verify`
+- External trend check date: `2026-08-24`
+- External source refs:
+  - `https://openai.github.io/openai-agents-js/guides/mcp/`
+  - `https://openai.github.io/openai-agents-python/mcp/`
+  - `https://openai.github.io/openai-agents-js/guides/tracing/`
+  - `https://openai.com/safety/prompt-injections/`
+
+Need / Intent / Context:
+
+- Need: Agentic QIF actions increasingly depend on tool-call approval, MCP approval policies, resumable runs, replay handling, trace redaction, and runtime evidence. A successful outcome is not auditable if approval cannot be tied to the exact action request and trace.
+- Intent: Add `traceApprovalEvidence` to `action-quality-contract` packages so approval-required tool calls, denials, resumptions, replays, redaction state, and accepted outcomes remain bound to evidence.
+- Context: v0.6.0 introduced Action Quality Contract, while v0.6.4 addressed untrusted source inputs for authoring. The next agentic risk is losing approval provenance across trace/resume/replay boundaries.
+
+Decision reason:
+
+- Implement this inside `action-quality-contract` rather than as a new package type because the missing concept is part of action execution evidence.
+- Do not claim tool safety. The verifier only proves traceability, reference resolution, approval evidence presence, replay binding, and rule compliance.
+
+Council judgment:
+
+- Visionary: proceed; approval evidence is becoming a core quality boundary for MCP/tool-connected agents.
+- Builder: proceed; the change is bounded to schema, example, verifier, fixtures, docs, and release notes.
+- Guardian: proceed with guardrails; accepted outcomes for approval-gated actions must not pass without approved trace approval evidence, and verifier success must not imply semantic safety.
+
+Artifacts:
+
+- Situation assessment: `.aof/artifacts/runtime/qif-v0.6.5-situation-assessment.json`
+- Council review packet: `.aof/artifacts/council/qif-v0.6.5-council-review-packet.json`
+- Task: `.aof/tasks/done/TASK-023.json`
+- Schema: `schemas/action-quality-contract-package.schema.json`
+- Example: `examples/action-quality-contract-package.json`
+- Verifier: `tools/validate-action-quality-contract.mjs`
+- Fixture source: `tools/fixtures/action-quality-contract-cases.mjs`
+- Retained negative corpus: `tests/fixtures/action-quality-contract/`
+- Release notes: `RELEASE-NOTES-v0.6.5.md`
+
+Runtime verification:
+
+- `npm test`: pass, `15/15` positive checks and `547/547` retained negative checks.
+- AOF `organization-verify` using v5.0.0: failed on existing AOF metadata compatibility, not QIF runtime code. The v5 schema rejects existing `safety_level` fields in project orientation and command registry metadata.
+- AOF `situation-assess` using v5.0.0: pass with no current truth conflicts; generated artifact sanitized for public repository use.
+
+Release outcome:
+
+- Pending release.
+
 ## v0.6.4 Untrusted Input Boundary
 
 Runtime source:

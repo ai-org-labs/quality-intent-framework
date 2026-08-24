@@ -16,6 +16,7 @@ Tool Surface
 -> Evidence Requirement
 -> Action Request
 -> Runtime Trace
+-> Trace Approval Evidence
 -> Action Outcome
 -> Governance Trigger
 ```
@@ -34,6 +35,7 @@ Tool Surface
 | Action Contract | The complete quality boundary around the action. |
 | Action Request | A specific request to execute under a contract. |
 | Runtime Trace | Trace/span reference proving what execution path occurred. |
+| Trace Approval Evidence | Evidence that an approval-required tool call was approved, denied, resumed, or replayed against the same invocation. |
 | Action Outcome | Actual state, verdict, confidence, evidence, and residual risk. |
 | Governance Trigger | Review route for unsafe, low-confidence, or policy-conflicting outcomes. |
 
@@ -52,6 +54,11 @@ Tool Surface
 - high-risk or write-like contracts require approval gates;
 - action requests use the same tool surface as their contract;
 - runtime traces include spans and redact sensitive data when present;
+- approval-gated requests include trace approval evidence;
+- approved approval evidence records approver and decision time;
+- approval-required evidence cannot be marked `not-required`;
+- replayed or resumed tool calls are bound to the original invocation;
+- accepted approval-gated outcomes require approved trace approval evidence;
 - accepted outcomes match expected post-state;
 - low-confidence outcomes trigger governance;
 - verifier boundary refuses semantic truth and tool-execution-safety claims.
@@ -66,4 +73,4 @@ Semantic and operational validity require runtime enforcement, security review f
 
 See `examples/action-quality-contract-package.json`.
 
-The example describes a provider-neutral local shell action for regenerating fixtures and running `npm test`. It records permission, approval, expected repository state, rollback, evidence, trace summary, and accepted outcome.
+The example describes a provider-neutral local shell action for regenerating fixtures and running `npm test`. It records permission, approval, expected repository state, rollback, evidence, trace summary, trace approval evidence, and accepted outcome.
