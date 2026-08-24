@@ -52,7 +52,11 @@ Runtime verification:
 
 Release outcome:
 
-- Pending release.
+- Implementation commit: `96accf88ece2840ac8c71c0c941fcc6a82ddb756`
+- Tag: `v0.6.5`
+- Tag target commit: `96accf88ece2840ac8c71c0c941fcc6a82ddb756`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.5`
+- Published result: released
 
 ## v0.6.4 Untrusted Input Boundary
 
