@@ -89,6 +89,7 @@ function validate(pkg, packagePath) {
   const environments = array(pkg, "executionEnvironments", packagePath);
   const permissionPolicies = array(pkg, "permissionPolicies", packagePath);
   const approvalGates = array(pkg, "approvalGates", packagePath);
+  const approvalPersistencePolicies = array(pkg, "approvalPersistencePolicies", packagePath);
   const transitions = array(pkg, "expectedStateTransitions", packagePath);
   const rollbacks = array(pkg, "rollbackPlans", packagePath);
   const evidenceRequirements = array(pkg, "evidenceRequirements", packagePath);
@@ -103,6 +104,7 @@ function validate(pkg, packagePath) {
   const environmentIndex = index(environments, `${packagePath}:executionEnvironments`);
   const policyIndex = index(permissionPolicies, `${packagePath}:permissionPolicies`);
   const approvalIndex = index(approvalGates, `${packagePath}:approvalGates`);
+  const persistencePolicyIndex = index(approvalPersistencePolicies, `${packagePath}:approvalPersistencePolicies`);
   const transitionIndex = index(transitions, `${packagePath}:expectedStateTransitions`);
   const rollbackIndex = index(rollbacks, `${packagePath}:rollbackPlans`);
   const evidenceIndex = index(evidenceRequirements, `${packagePath}:evidenceRequirements`);
@@ -132,6 +134,29 @@ function validate(pkg, packagePath) {
     for (const field of ["approver", "approvalStatus", "rationale", "status"]) str(gate, field, gate.id);
     if (gate.approvalStatus === "approved" && !gate.approvedAt) {
       errors.push(`${gate.id} approved approval gate must include approvedAt.`);
+    }
+  }
+
+  for (const policy of approvalPersistencePolicies) {
+    optionalRefs(policy.governanceTriggerRefs, triggerIndex, "governance trigger", policy.id);
+    for (const field of ["persistenceMode", "decisionScope", "allowedToolIdentity", "allowedServerIdentity", "maxDuration", "expiresAt", "revocationCondition", "status"]) str(policy, field, policy.id);
+    if (!Array.isArray(policy.appliesToApprovalDecisions) || policy.appliesToApprovalDecisions.length === 0) {
+      errors.push(`${policy.id} appliesToApprovalDecisions must include at least one decision.`);
+    }
+    if (typeof policy.reuseAcrossRuns !== "boolean") {
+      errors.push(`${policy.id} reuseAcrossRuns must be boolean.`);
+    }
+    if (typeof policy.requiresSameCanonicalInvocation !== "boolean") {
+      errors.push(`${policy.id} requiresSameCanonicalInvocation must be boolean.`);
+    }
+    if (policy.reuseAcrossRuns && !policy.requiresSameCanonicalInvocation) {
+      errors.push(`${policy.id} reuseAcrossRuns requires requiresSameCanonicalInvocation true.`);
+    }
+    if (policy.allowedToolIdentity === "*" || policy.allowedServerIdentity === "*") {
+      errors.push(`${policy.id} approval persistence identity scope must not be wildcard.`);
+    }
+    if (policy.persistenceMode === "always-approve" && !policy.expiresAt) {
+      errors.push(`${policy.id} always-approve persistence requires expiresAt.`);
     }
   }
 
@@ -203,6 +228,9 @@ function validate(pkg, packagePath) {
     if (typeof evidence.boundToOriginalInvocation !== "boolean") {
       errors.push(`${evidence.id} boundToOriginalInvocation must be boolean.`);
     }
+    if (typeof evidence.persistenceApplied !== "boolean") {
+      errors.push(`${evidence.id} persistenceApplied must be boolean.`);
+    }
     const request = requestIndex.get(evidence.actionRequestRef);
     const trace = traceIndex.get(evidence.runtimeTraceRef);
     if (request && trace && trace.actionRequestRef !== request.id) {
@@ -216,6 +244,16 @@ function validate(pkg, packagePath) {
     }
     if (["replayed", "resumed"].includes(evidence.replayStatus) && !evidence.boundToOriginalInvocation) {
       errors.push(`${evidence.id} replayed or resumed tool call must be boundToOriginalInvocation.`);
+    }
+    if (evidence.persistenceApplied) {
+      refs([evidence.approvalPersistencePolicyRef], persistencePolicyIndex, "approval persistence policy", evidence.id);
+      const persistencePolicy = persistencePolicyIndex.get(evidence.approvalPersistencePolicyRef);
+      if (persistencePolicy && !persistencePolicy.appliesToApprovalDecisions.includes(evidence.approvalDecision)) {
+        errors.push(`${evidence.id} approvalDecision must be allowed by its approval persistence policy.`);
+      }
+      if (persistencePolicy?.requiresSameCanonicalInvocation && !evidence.boundToOriginalInvocation) {
+        errors.push(`${evidence.id} persistence policy requires boundToOriginalInvocation.`);
+      }
     }
     if (trace?.containsSensitiveData && evidence.redactionStatus !== "redacted") {
       errors.push(`${evidence.id} approval evidence for sensitive trace data requires redactionStatus redacted.`);
@@ -284,6 +322,7 @@ function validate(pkg, packagePath) {
       executionEnvironments: environments.length,
       permissionPolicies: permissionPolicies.length,
       approvalGates: approvalGates.length,
+      approvalPersistencePolicies: approvalPersistencePolicies.length,
       expectedStateTransitions: transitions.length,
       rollbackPlans: rollbacks.length,
       evidenceRequirements: evidenceRequirements.length,

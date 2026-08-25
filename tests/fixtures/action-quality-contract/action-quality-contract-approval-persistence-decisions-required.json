@@ -55,10 +55,7 @@
       "id": "APP-AQC-001",
       "persistenceMode": "same-run-only",
       "decisionScope": "specific tool call and canonical invocation",
-      "appliesToApprovalDecisions": [
-        "approved",
-        "rejected"
-      ],
+      "appliesToApprovalDecisions": [],
       "allowedToolIdentity": "workspace command executor",
       "allowedServerIdentity": "local workspace command surface",
       "reuseAcrossRuns": false,
@@ -124,7 +121,9 @@
       "toolSurfaceRef": "TLS-AQC-001",
       "executionEnvironmentRef": "ENV-AQC-001",
       "permissionPolicyRef": "PER-AQC-001",
-      "approvalGateRefs": [],
+      "approvalGateRefs": [
+        "APR-AQC-001"
+      ],
       "qualityIntentRef": "QIN-AQC-001",
       "lossBoundary": "An AI agent must not execute a write-like tool action without explicit scope, expected state transition, rollback, evidence, and accountable approval.",
       "riskClass": "high",

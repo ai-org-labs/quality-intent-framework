@@ -1,6 +1,6 @@
 {
   "packageType": "action-quality-contract",
-  "runtimeVersion": "0.6.5",
+  "runtimeVersion": "0.6.6",
   "packageId": "AQC-PKG-001",
   "toolSurfaces": [
     {
@@ -48,6 +48,26 @@
       "approvedAt": "2026-08-21T04:40:00Z",
       "rationale": "The action is limited to local validation and generated fixture updates before release.",
       "status": "accepted"
+    }
+  ],
+  "approvalPersistencePolicies": [
+    {
+      "id": "APP-AQC-001",
+      "persistenceMode": "same-run-only",
+      "decisionScope": "specific tool call and canonical invocation",
+      "appliesToApprovalDecisions": [
+        "approved",
+        "rejected"
+      ],
+      "allowedToolIdentity": "workspace command executor",
+      "allowedServerIdentity": "local workspace command surface",
+      "reuseAcrossRuns": false,
+      "requiresSameCanonicalInvocation": true,
+      "maxDuration": "single run",
+      "expiresAt": "2026-08-21T06:40:00Z",
+      "revocationCondition": "revoke if target, arguments, tool identity, server identity, or permission policy changes",
+      "governanceTriggerRefs": [],
+      "status": "active"
     }
   ],
   "expectedStateTransitions": [
@@ -173,6 +193,8 @@
       "canonicalInvocationRef": "invoke-AQR-AQC-001-initial",
       "replayStatus": "not-replayed",
       "boundToOriginalInvocation": true,
+      "persistenceApplied": true,
+      "approvalPersistencePolicyRef": "APP-AQC-001",
       "redactionStatus": "not-required",
       "status": "captured"
     }
@@ -201,6 +223,7 @@
       "reference integrity",
       "permission policy linkage",
       "approval requirement for high-risk or write-like actions",
+      "approval persistence policy linkage",
       "expected state transition linkage",
       "rollback plan linkage",
       "runtime trace evidence",

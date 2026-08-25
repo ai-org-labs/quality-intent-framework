@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.6
+
+- Added first-class `approvalPersistencePolicies` to `action-quality-contract` packages.
+- Required approval persistence policies to declare persistence mode, decision scope, allowed decisions, tool/server identity boundaries, expiry, revocation conditions, and whether reuse across runs is permitted.
+- Required cross-run approval reuse to keep canonical invocation binding.
+- Required trace approval evidence to declare whether persistence was applied and to link to a persistence policy when it was.
+- Added retained negative fixtures for missing persistence policies, missing allowed decisions, wildcard identity scope, unsafe cross-run reuse, missing persistence refs, and policy/evidence decision mismatch.
+
 ## v0.6.5
 
 - Added first-class `traceApprovalEvidence` to `action-quality-contract` packages.

@@ -99,6 +99,34 @@
       "errorIncludes": "APR-AQC-001 approved approval gate must include approvedAt."
     },
     {
+      "file": "action-quality-contract-approval-persistence-policies-array.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "approval persistence policies are retained",
+      "expect": "fail",
+      "errorIncludes": "approvalPersistencePolicies must be an array."
+    },
+    {
+      "file": "action-quality-contract-approval-persistence-decisions-required.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "approval persistence policy names allowed decisions",
+      "expect": "fail",
+      "errorIncludes": "APP-AQC-001 appliesToApprovalDecisions must include at least one decision."
+    },
+    {
+      "file": "action-quality-contract-approval-persistence-no-wildcard-identity.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "approval persistence identity scope is bounded",
+      "expect": "fail",
+      "errorIncludes": "APP-AQC-001 approval persistence identity scope must not be wildcard."
+    },
+    {
+      "file": "action-quality-contract-approval-persistence-reuse-bound.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "cross-run approval reuse requires canonical invocation binding",
+      "expect": "fail",
+      "errorIncludes": "APP-AQC-001 reuseAcrossRuns requires requiresSameCanonicalInvocation true."
+    },
+    {
       "file": "action-quality-contract-transition-stop-condition-required.json",
       "validator": "tools/validate-action-quality-contract.mjs",
       "rule": "expected transition has stop condition",
@@ -174,6 +202,27 @@
       "rule": "approved trace evidence records approver",
       "expect": "fail",
       "errorIncludes": "TAE-AQC-001 must include non-empty string approvedBy."
+    },
+    {
+      "file": "action-quality-contract-approval-evidence-persistence-applied-boolean.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "approval evidence declares persistence application",
+      "expect": "fail",
+      "errorIncludes": "TAE-AQC-001 persistenceApplied must be boolean."
+    },
+    {
+      "file": "action-quality-contract-approval-evidence-persistence-ref-resolves.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "approval evidence persistence policy resolves",
+      "expect": "fail",
+      "errorIncludes": "TAE-AQC-001 references missing approval persistence policy: APP-NOPE-999"
+    },
+    {
+      "file": "action-quality-contract-approval-evidence-decision-allowed-by-policy.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "approval evidence decision is allowed by persistence policy",
+      "expect": "fail",
+      "errorIncludes": "TAE-AQC-001 approvalDecision must be allowed by its approval persistence policy."
     },
     {
       "file": "action-quality-contract-required-approval-cannot-be-not-required.json",

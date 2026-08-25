@@ -11,6 +11,7 @@ Tool Surface
 -> Execution Environment
 -> Permission Policy
 -> Approval Gate
+-> Approval Persistence Policy
 -> Expected State Transition
 -> Rollback Plan
 -> Evidence Requirement
@@ -29,6 +30,7 @@ Tool Surface
 | Execution Environment | Runtime isolation, identity, and network boundaries. |
 | Permission Policy | Allowed scope, prohibited operations, and approval requirement. |
 | Approval Gate | Accountable approval for high-risk or write-like actions. |
+| Approval Persistence Policy | Scope, expiry, identity boundary, and revocation rule for sticky approval or rejection decisions. |
 | Expected State Transition | The intended pre-state, post-state, stop condition, and invariants. |
 | Rollback Plan | How the action can be reversed or contained. |
 | Evidence Requirement | Evidence needed to accept, reject, or conditionally accept the action. |
@@ -48,6 +50,9 @@ Tool Surface
 - execution environments record isolation, identity, and network boundaries;
 - permission policies declare allowed scope, prohibited operations, and approval requirements;
 - approved approval gates include approval time;
+- approval persistence policies declare scope, allowed decisions, expiry, identity boundary, and revocation conditions;
+- approval persistence identity scope cannot be wildcard;
+- cross-run approval reuse requires canonical invocation binding;
 - expected transitions include stop conditions;
 - rollback plans link to expected transitions;
 - evidence requirements name verdicts they support;
@@ -56,7 +61,9 @@ Tool Surface
 - runtime traces include spans and redact sensitive data when present;
 - approval-gated requests include trace approval evidence;
 - approved approval evidence records approver and decision time;
+- approval evidence records whether persistence was applied and links to a persistence policy when it was;
 - approval-required evidence cannot be marked `not-required`;
+- approval decisions must be allowed by their persistence policy;
 - replayed or resumed tool calls are bound to the original invocation;
 - accepted approval-gated outcomes require approved trace approval evidence;
 - accepted outcomes match expected post-state;
@@ -73,4 +80,4 @@ Semantic and operational validity require runtime enforcement, security review f
 
 See `examples/action-quality-contract-package.json`.
 
-The example describes a provider-neutral local shell action for regenerating fixtures and running `npm test`. It records permission, approval, expected repository state, rollback, evidence, trace summary, trace approval evidence, and accepted outcome.
+The example describes a provider-neutral local shell action for regenerating fixtures and running `npm test`. It records permission, approval, approval persistence policy, expected repository state, rollback, evidence, trace summary, trace approval evidence, and accepted outcome.

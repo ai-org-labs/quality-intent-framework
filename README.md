@@ -214,6 +214,8 @@ The action quality contract verifier checks:
 - execution environments record isolation, identity, and network boundaries
 - permission policies declare allowed scope, prohibited operations, and approval requirements
 - approved approval gates include approval time
+- approval persistence policies declare scope, expiry, identity boundary, and revocation conditions
+- cross-run approval reuse requires canonical invocation binding
 - expected transitions include stop conditions
 - rollback plans link to expected transitions
 - evidence requirements name the verdicts they support
@@ -221,6 +223,7 @@ The action quality contract verifier checks:
 - action requests use the same tool surface as their contract
 - runtime traces include spans and redact sensitive data when present
 - approval-gated requests include trace approval evidence
+- approval evidence links to a persistence policy when sticky approval or rejection was applied
 - replayed or resumed tool calls remain bound to the original invocation
 - accepted approval-gated outcomes require approved trace approval evidence
 - accepted outcomes match expected post-state

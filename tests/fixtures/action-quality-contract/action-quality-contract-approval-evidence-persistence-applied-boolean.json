@@ -124,7 +124,9 @@
       "toolSurfaceRef": "TLS-AQC-001",
       "executionEnvironmentRef": "ENV-AQC-001",
       "permissionPolicyRef": "PER-AQC-001",
-      "approvalGateRefs": [],
+      "approvalGateRefs": [
+        "APR-AQC-001"
+      ],
       "qualityIntentRef": "QIN-AQC-001",
       "lossBoundary": "An AI agent must not execute a write-like tool action without explicit scope, expected state transition, rollback, evidence, and accountable approval.",
       "riskClass": "high",
@@ -181,7 +183,7 @@
       "canonicalInvocationRef": "invoke-AQR-AQC-001-initial",
       "replayStatus": "not-replayed",
       "boundToOriginalInvocation": true,
-      "persistenceApplied": true,
+      "persistenceApplied": "yes",
       "approvalPersistencePolicyRef": "APP-AQC-001",
       "redactionStatus": "not-required",
       "status": "captured"

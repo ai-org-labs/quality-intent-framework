@@ -6,6 +6,7 @@ function surface(pkg) { return pkg.toolSurfaces[0]; }
 function environment(pkg) { return pkg.executionEnvironments[0]; }
 function policy(pkg) { return pkg.permissionPolicies[0]; }
 function approval(pkg) { return pkg.approvalGates[0]; }
+function persistencePolicy(pkg) { return pkg.approvalPersistencePolicies[0]; }
 function transition(pkg) { return pkg.expectedStateTransitions[0]; }
 function rollback(pkg) { return pkg.rollbackPlans[0]; }
 function evidence(pkg) { return pkg.evidenceRequirements[0]; }
@@ -43,6 +44,33 @@ export const cases = [
     rule: "approved gate records approval time",
     expect: "APR-AQC-001 approved approval gate must include approvedAt.",
     mutate: (pkg) => { delete approval(pkg).approvedAt; }
+  },
+  {
+    id: "approval-persistence-policies-array",
+    rule: "approval persistence policies are retained",
+    expect: "approvalPersistencePolicies must be an array.",
+    mutate: (pkg) => { pkg.approvalPersistencePolicies = null; }
+  },
+  {
+    id: "approval-persistence-decisions-required",
+    rule: "approval persistence policy names allowed decisions",
+    expect: "APP-AQC-001 appliesToApprovalDecisions must include at least one decision.",
+    mutate: (pkg) => { persistencePolicy(pkg).appliesToApprovalDecisions = []; }
+  },
+  {
+    id: "approval-persistence-no-wildcard-identity",
+    rule: "approval persistence identity scope is bounded",
+    expect: "APP-AQC-001 approval persistence identity scope must not be wildcard.",
+    mutate: (pkg) => { persistencePolicy(pkg).allowedToolIdentity = "*"; }
+  },
+  {
+    id: "approval-persistence-reuse-bound",
+    rule: "cross-run approval reuse requires canonical invocation binding",
+    expect: "APP-AQC-001 reuseAcrossRuns requires requiresSameCanonicalInvocation true.",
+    mutate: (pkg) => {
+      persistencePolicy(pkg).reuseAcrossRuns = true;
+      persistencePolicy(pkg).requiresSameCanonicalInvocation = false;
+    }
   },
   {
     id: "transition-stop-condition-required",
@@ -131,6 +159,24 @@ export const cases = [
     rule: "approved trace evidence records approver",
     expect: "TAE-AQC-001 must include non-empty string approvedBy.",
     mutate: (pkg) => { approvalEvidence(pkg).approvedBy = ""; }
+  },
+  {
+    id: "approval-evidence-persistence-applied-boolean",
+    rule: "approval evidence declares persistence application",
+    expect: "TAE-AQC-001 persistenceApplied must be boolean.",
+    mutate: (pkg) => { approvalEvidence(pkg).persistenceApplied = "yes"; }
+  },
+  {
+    id: "approval-evidence-persistence-ref-resolves",
+    rule: "approval evidence persistence policy resolves",
+    expect: "TAE-AQC-001 references missing approval persistence policy: APP-NOPE-999",
+    mutate: (pkg) => { approvalEvidence(pkg).approvalPersistencePolicyRef = "APP-NOPE-999"; }
+  },
+  {
+    id: "approval-evidence-decision-allowed-by-policy",
+    rule: "approval evidence decision is allowed by persistence policy",
+    expect: "TAE-AQC-001 approvalDecision must be allowed by its approval persistence policy.",
+    mutate: (pkg) => { persistencePolicy(pkg).appliesToApprovalDecisions = ["rejected"]; }
   },
   {
     id: "required-approval-cannot-be-not-required",

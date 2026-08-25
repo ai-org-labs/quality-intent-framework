@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.6.5 Agent Trace Approval Evidence so action-quality-contract packages record tool-call approvals, denials, resumptions, replay binding, and trace redaction as evidence-backed structures.",
-  "updated_at": "2026-08-24T04:38:10.386Z",
+  "content": "Implement QIF v0.6.6 Approval Persistence Policy so action-quality-contract packages constrain sticky approvals, rejections, expiry, scope, and resume/replay reuse without treating approval convenience as safety.",
+  "updated_at": "2026-08-25T04:34:37.331Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-QIFV065",
+  "source_session_id": "SESS-QIFV066",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-08-24T04:38:10.386Z"
+  "declared_complete_at": "2026-08-25T04:34:37.331Z"
 }
