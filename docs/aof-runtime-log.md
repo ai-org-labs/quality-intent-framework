@@ -52,7 +52,11 @@ Runtime verification:
 
 Release outcome:
 
-- Pending release.
+- Implementation commit: `6b158c6573364f5110d19cdc675f65b09a0b9bc4`
+- Tag: `v0.6.6`
+- Tag target commit: `6b158c6573364f5110d19cdc675f65b09a0b9bc4`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.6`
+- Published result: released
 
 ## v0.6.5 Agent Trace Approval Evidence
 
