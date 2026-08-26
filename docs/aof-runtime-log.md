@@ -52,7 +52,11 @@ Runtime verification:
 
 Release outcome:
 
-- Pending release.
+- Implementation commit: `b9c1ef7a8d00b21481be64d77aea95f5f21718f6`
+- Tag: `v0.6.7`
+- Tag target commit: `b9c1ef7a8d00b21481be64d77aea95f5f21718f6`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.7`
+- Published result: released
 
 ## v0.6.6 Approval Persistence Policy
 
