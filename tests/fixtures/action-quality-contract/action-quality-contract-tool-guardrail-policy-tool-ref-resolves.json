@@ -73,7 +73,7 @@
   "toolGuardrailPolicies": [
     {
       "id": "TGP-AQC-001",
-      "toolSurfaceRef": "TLS-AQC-001",
+      "toolSurfaceRef": "TLS-NOPE-999",
       "guardrailStage": "pre-execution",
       "guardrailType": "input",
       "protectedBoundary": "tool arguments must stay inside the approved repository-local scope",
@@ -205,7 +205,7 @@
       "approvalGateRef": "APR-AQC-001",
       "approvalRequired": true,
       "approvalDecision": "approved",
-      "approvedBy": "",
+      "approvedBy": "repository maintainer",
       "decisionAt": "2026-08-21T04:40:00Z",
       "rationale": "The requested action is write-like but limited to repository-local fixture and verifier updates.",
       "canonicalInvocationRef": "invoke-AQR-AQC-001-initial",

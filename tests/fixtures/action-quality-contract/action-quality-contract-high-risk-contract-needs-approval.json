@@ -1,6 +1,6 @@
 {
   "packageType": "action-quality-contract",
-  "runtimeVersion": "0.6.6",
+  "runtimeVersion": "0.6.7",
   "packageId": "AQC-PKG-001",
   "toolSurfaces": [
     {
@@ -67,6 +67,34 @@
       "expiresAt": "2026-08-21T06:40:00Z",
       "revocationCondition": "revoke if target, arguments, tool identity, server identity, or permission policy changes",
       "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "toolGuardrailPolicies": [
+    {
+      "id": "TGP-AQC-001",
+      "toolSurfaceRef": "TLS-AQC-001",
+      "guardrailStage": "pre-execution",
+      "guardrailType": "input",
+      "protectedBoundary": "tool arguments must stay inside the approved repository-local scope",
+      "triggerCondition": "requested operation includes deletion, external publication, or writes outside approved scope",
+      "tripwireBehavior": "throwException",
+      "onTripAction": "stop before tool execution and route to governance if work remains necessary",
+      "runsBeforeToolExecution": true,
+      "sideEffectBoundary": "pre-execution guardrails reduce risk before execution but do not undo external side effects if execution still occurs elsewhere",
+      "status": "active"
+    },
+    {
+      "id": "TGP-AQC-002",
+      "toolSurfaceRef": "TLS-AQC-001",
+      "guardrailStage": "post-execution",
+      "guardrailType": "output",
+      "protectedBoundary": "tool output must not expose sensitive data or hide validation failure",
+      "triggerCondition": "output includes sensitive data, validation failure, or rejected terminal output",
+      "tripwireBehavior": "rejectContent",
+      "onTripAction": "replace or reject unsafe output and route unresolved side effects to governance",
+      "runsBeforeToolExecution": false,
+      "sideEffectBoundary": "post-execution guardrails do not undo external tool side effects or erase already stored data",
       "status": "active"
     }
   ],
@@ -187,6 +215,38 @@
       "status": "captured"
     }
   ],
+  "guardrailEvidence": [
+    {
+      "id": "GRE-AQC-001",
+      "actionRequestRef": "AQR-AQC-001",
+      "runtimeTraceRef": "RTR-AQC-001",
+      "toolGuardrailPolicyRef": "TGP-AQC-001",
+      "guardrailStage": "pre-execution",
+      "executionOrder": 1,
+      "evaluatedInputRef": "invoke-AQR-AQC-001-initial",
+      "result": "allow",
+      "tripwireTriggered": false,
+      "evidenceSummary": "Requested command sequence stayed inside approved repository-local fixture, verifier, docs, and release-note updates.",
+      "sideEffectBoundaryAcknowledged": true,
+      "governanceTriggerRefs": [],
+      "status": "captured"
+    },
+    {
+      "id": "GRE-AQC-002",
+      "actionRequestRef": "AQR-AQC-001",
+      "runtimeTraceRef": "RTR-AQC-001",
+      "toolGuardrailPolicyRef": "TGP-AQC-002",
+      "guardrailStage": "post-execution",
+      "executionOrder": 2,
+      "evaluatedInputRef": "npm-test-and-fixture-generation-summary",
+      "result": "allow",
+      "tripwireTriggered": false,
+      "evidenceSummary": "Tool output contained validation summaries without sensitive data and did not hide failing checks.",
+      "sideEffectBoundaryAcknowledged": true,
+      "governanceTriggerRefs": [],
+      "status": "captured"
+    }
+  ],
   "actionOutcomes": [
     {
       "id": "AOC-AQC-001",
@@ -212,10 +272,12 @@
       "permission policy linkage",
       "approval requirement for high-risk or write-like actions",
       "approval persistence policy linkage",
+      "tool guardrail policy linkage",
       "expected state transition linkage",
       "rollback plan linkage",
       "runtime trace evidence",
       "trace approval evidence",
+      "guardrail evidence",
       "replay binding evidence",
       "outcome confidence governance"
     ],

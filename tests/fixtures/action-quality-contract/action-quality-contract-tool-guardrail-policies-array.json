@@ -70,34 +70,7 @@
       "status": "active"
     }
   ],
-  "toolGuardrailPolicies": [
-    {
-      "id": "TGP-AQC-001",
-      "toolSurfaceRef": "TLS-AQC-001",
-      "guardrailStage": "pre-execution",
-      "guardrailType": "input",
-      "protectedBoundary": "tool arguments must stay inside the approved repository-local scope",
-      "triggerCondition": "requested operation includes deletion, external publication, or writes outside approved scope",
-      "tripwireBehavior": "throwException",
-      "onTripAction": "stop before tool execution and route to governance if work remains necessary",
-      "runsBeforeToolExecution": true,
-      "sideEffectBoundary": "pre-execution guardrails reduce risk before execution but do not undo external side effects if execution still occurs elsewhere",
-      "status": "active"
-    },
-    {
-      "id": "TGP-AQC-002",
-      "toolSurfaceRef": "TLS-AQC-001",
-      "guardrailStage": "post-execution",
-      "guardrailType": "output",
-      "protectedBoundary": "tool output must not expose sensitive data or hide validation failure",
-      "triggerCondition": "output includes sensitive data, validation failure, or rejected terminal output",
-      "tripwireBehavior": "rejectContent",
-      "onTripAction": "replace or reject unsafe output and route unresolved side effects to governance",
-      "runsBeforeToolExecution": false,
-      "sideEffectBoundary": "post-execution guardrails do not undo external tool side effects or erase already stored data",
-      "status": "active"
-    }
-  ],
+  "toolGuardrailPolicies": null,
   "expectedStateTransitions": [
     {
       "id": "EST-AQC-001",
@@ -205,7 +178,7 @@
       "approvalGateRef": "APR-AQC-001",
       "approvalRequired": true,
       "approvalDecision": "approved",
-      "approvedBy": "",
+      "approvedBy": "repository maintainer",
       "decisionAt": "2026-08-21T04:40:00Z",
       "rationale": "The requested action is write-like but limited to repository-local fixture and verifier updates.",
       "canonicalInvocationRef": "invoke-AQR-AQC-001-initial",

@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.6.7
+
+- Added first-class `toolGuardrailPolicies` and `guardrailEvidence` to `action-quality-contract` packages.
+- Required tool guardrail policies to define pre/post execution stage, input/output type, protected boundary, trigger condition, tripwire behavior, action on trip, and side-effect boundary.
+- Required high-risk or write-like action requests to include both pre-execution and post-execution guardrail evidence.
+- Required tripwire-triggered guardrail evidence to route to governance.
+- Required accepted action outcomes to have no tripped or rejected guardrail evidence.
+- Added retained negative fixtures for missing guardrail policies/evidence, broken policy refs, pre-execution ordering failure, missing side-effect boundary, missing pre/post evidence, stage mismatch, missing governance on tripwire, and accepted outcomes with rejected guardrails.
+
 ## v0.6.6
 
 - Added first-class `approvalPersistencePolicies` to `action-quality-contract` packages.

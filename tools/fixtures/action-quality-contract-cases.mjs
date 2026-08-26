@@ -7,11 +7,15 @@ function environment(pkg) { return pkg.executionEnvironments[0]; }
 function policy(pkg) { return pkg.permissionPolicies[0]; }
 function approval(pkg) { return pkg.approvalGates[0]; }
 function persistencePolicy(pkg) { return pkg.approvalPersistencePolicies[0]; }
+function guardrailPolicy(pkg) { return pkg.toolGuardrailPolicies[0]; }
+function postGuardrailPolicy(pkg) { return pkg.toolGuardrailPolicies[1]; }
 function transition(pkg) { return pkg.expectedStateTransitions[0]; }
 function rollback(pkg) { return pkg.rollbackPlans[0]; }
 function evidence(pkg) { return pkg.evidenceRequirements[0]; }
 function trace(pkg) { return pkg.runtimeTraces[0]; }
 function approvalEvidence(pkg) { return pkg.traceApprovalEvidence[0]; }
+function guardrailEvidence(pkg) { return pkg.guardrailEvidence[0]; }
+function postGuardrailEvidence(pkg) { return pkg.guardrailEvidence[1]; }
 function outcome(pkg) { return pkg.actionOutcomes[0]; }
 
 export const cases = [
@@ -73,6 +77,30 @@ export const cases = [
     }
   },
   {
+    id: "tool-guardrail-policies-array",
+    rule: "tool guardrail policies are retained",
+    expect: "toolGuardrailPolicies must be an array.",
+    mutate: (pkg) => { pkg.toolGuardrailPolicies = null; }
+  },
+  {
+    id: "tool-guardrail-policy-tool-ref-resolves",
+    rule: "tool guardrail policy links tool surface",
+    expect: "TGP-AQC-001 references missing tool surface: TLS-NOPE-999",
+    mutate: (pkg) => { guardrailPolicy(pkg).toolSurfaceRef = "TLS-NOPE-999"; }
+  },
+  {
+    id: "pre-guardrail-runs-before-tool",
+    rule: "pre-execution guardrail runs before tool execution",
+    expect: "TGP-AQC-001 pre-execution guardrail must run before tool execution.",
+    mutate: (pkg) => { guardrailPolicy(pkg).runsBeforeToolExecution = false; }
+  },
+  {
+    id: "guardrail-side-effect-boundary",
+    rule: "guardrail policy states side-effect boundary",
+    expect: "TGP-AQC-002 sideEffectBoundary must state that guardrails do not undo side effects.",
+    mutate: (pkg) => { postGuardrailPolicy(pkg).sideEffectBoundary = "post-execution guardrails inspect output"; }
+  },
+  {
     id: "transition-stop-condition-required",
     rule: "expected transition has stop condition",
     expect: "EST-AQC-001 must include non-empty string stopCondition.",
@@ -129,6 +157,54 @@ export const cases = [
     rule: "trace approval evidence must be retained",
     expect: "traceApprovalEvidence must be an array.",
     mutate: (pkg) => { pkg.traceApprovalEvidence = null; }
+  },
+  {
+    id: "guardrail-evidence-array",
+    rule: "guardrail evidence is retained",
+    expect: "guardrailEvidence must be an array.",
+    mutate: (pkg) => { pkg.guardrailEvidence = null; }
+  },
+  {
+    id: "high-risk-request-needs-pre-guardrail",
+    rule: "high-risk request has pre-execution guardrail evidence",
+    expect: "AQR-AQC-001 high-risk or write-like request requires pre-execution guardrailEvidence.",
+    mutate: (pkg) => { pkg.guardrailEvidence = [postGuardrailEvidence(pkg)]; }
+  },
+  {
+    id: "high-risk-request-needs-post-guardrail",
+    rule: "high-risk request has post-execution guardrail evidence",
+    expect: "AQR-AQC-001 high-risk or write-like request requires post-execution guardrailEvidence.",
+    mutate: (pkg) => { pkg.guardrailEvidence = [guardrailEvidence(pkg)]; }
+  },
+  {
+    id: "guardrail-evidence-policy-ref-resolves",
+    rule: "guardrail evidence links policy",
+    expect: "GRE-AQC-001 references missing tool guardrail policy: TGP-NOPE-999",
+    mutate: (pkg) => { guardrailEvidence(pkg).toolGuardrailPolicyRef = "TGP-NOPE-999"; }
+  },
+  {
+    id: "guardrail-evidence-stage-matches-policy",
+    rule: "guardrail evidence stage matches policy",
+    expect: "GRE-AQC-001 guardrailStage must match its tool guardrail policy.",
+    mutate: (pkg) => { guardrailEvidence(pkg).guardrailStage = "post-execution"; }
+  },
+  {
+    id: "post-guardrail-acknowledges-side-effect-boundary",
+    rule: "post-execution guardrail evidence acknowledges side-effect boundary",
+    expect: "GRE-AQC-002 post-execution guardrail evidence must acknowledge side effect boundary.",
+    mutate: (pkg) => { postGuardrailEvidence(pkg).sideEffectBoundaryAcknowledged = false; }
+  },
+  {
+    id: "tripwire-guardrail-governance",
+    rule: "tripwire-triggered guardrail evidence routes to governance",
+    expect: "GRE-AQC-001 tripwire-triggered guardrail evidence requires governanceTriggerRefs.",
+    mutate: (pkg) => { guardrailEvidence(pkg).tripwireTriggered = true; }
+  },
+  {
+    id: "accepted-outcome-no-rejected-guardrail",
+    rule: "accepted outcome has no tripped or rejected guardrail",
+    expect: "AOC-AQC-001 accepted outcome must not have tripped or rejected guardrail evidence.",
+    mutate: (pkg) => { postGuardrailEvidence(pkg).result = "rejectContent"; }
   },
   {
     id: "approval-gated-request-needs-evidence",

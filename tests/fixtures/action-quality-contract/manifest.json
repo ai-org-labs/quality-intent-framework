@@ -127,6 +127,34 @@
       "errorIncludes": "APP-AQC-001 reuseAcrossRuns requires requiresSameCanonicalInvocation true."
     },
     {
+      "file": "action-quality-contract-tool-guardrail-policies-array.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "tool guardrail policies are retained",
+      "expect": "fail",
+      "errorIncludes": "toolGuardrailPolicies must be an array."
+    },
+    {
+      "file": "action-quality-contract-tool-guardrail-policy-tool-ref-resolves.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "tool guardrail policy links tool surface",
+      "expect": "fail",
+      "errorIncludes": "TGP-AQC-001 references missing tool surface: TLS-NOPE-999"
+    },
+    {
+      "file": "action-quality-contract-pre-guardrail-runs-before-tool.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "pre-execution guardrail runs before tool execution",
+      "expect": "fail",
+      "errorIncludes": "TGP-AQC-001 pre-execution guardrail must run before tool execution."
+    },
+    {
+      "file": "action-quality-contract-guardrail-side-effect-boundary.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "guardrail policy states side-effect boundary",
+      "expect": "fail",
+      "errorIncludes": "TGP-AQC-002 sideEffectBoundary must state that guardrails do not undo side effects."
+    },
+    {
       "file": "action-quality-contract-transition-stop-condition-required.json",
       "validator": "tools/validate-action-quality-contract.mjs",
       "rule": "expected transition has stop condition",
@@ -181,6 +209,62 @@
       "rule": "trace approval evidence must be retained",
       "expect": "fail",
       "errorIncludes": "traceApprovalEvidence must be an array."
+    },
+    {
+      "file": "action-quality-contract-guardrail-evidence-array.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "guardrail evidence is retained",
+      "expect": "fail",
+      "errorIncludes": "guardrailEvidence must be an array."
+    },
+    {
+      "file": "action-quality-contract-high-risk-request-needs-pre-guardrail.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "high-risk request has pre-execution guardrail evidence",
+      "expect": "fail",
+      "errorIncludes": "AQR-AQC-001 high-risk or write-like request requires pre-execution guardrailEvidence."
+    },
+    {
+      "file": "action-quality-contract-high-risk-request-needs-post-guardrail.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "high-risk request has post-execution guardrail evidence",
+      "expect": "fail",
+      "errorIncludes": "AQR-AQC-001 high-risk or write-like request requires post-execution guardrailEvidence."
+    },
+    {
+      "file": "action-quality-contract-guardrail-evidence-policy-ref-resolves.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "guardrail evidence links policy",
+      "expect": "fail",
+      "errorIncludes": "GRE-AQC-001 references missing tool guardrail policy: TGP-NOPE-999"
+    },
+    {
+      "file": "action-quality-contract-guardrail-evidence-stage-matches-policy.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "guardrail evidence stage matches policy",
+      "expect": "fail",
+      "errorIncludes": "GRE-AQC-001 guardrailStage must match its tool guardrail policy."
+    },
+    {
+      "file": "action-quality-contract-post-guardrail-acknowledges-side-effect-boundary.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "post-execution guardrail evidence acknowledges side-effect boundary",
+      "expect": "fail",
+      "errorIncludes": "GRE-AQC-002 post-execution guardrail evidence must acknowledge side effect boundary."
+    },
+    {
+      "file": "action-quality-contract-tripwire-guardrail-governance.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "tripwire-triggered guardrail evidence routes to governance",
+      "expect": "fail",
+      "errorIncludes": "GRE-AQC-001 tripwire-triggered guardrail evidence requires governanceTriggerRefs."
+    },
+    {
+      "file": "action-quality-contract-accepted-outcome-no-rejected-guardrail.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "accepted outcome has no tripped or rejected guardrail",
+      "expect": "fail",
+      "errorIncludes": "AOC-AQC-001 accepted outcome must not have tripped or rejected guardrail evidence."
     },
     {
       "file": "action-quality-contract-approval-gated-request-needs-evidence.json",

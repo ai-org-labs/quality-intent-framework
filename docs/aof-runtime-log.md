@@ -2,6 +2,58 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.7 Tool Guardrail Policy
+
+Runtime source:
+
+- AOF source repo latest checked: `v5.0.0`
+- AOF runtime commands executed: `situation-assess`, `goal-project`, `task-open`, `task-update`, `council-review-packet`, `organization-verify`
+- External trend check date: `2026-08-26`
+- External source refs:
+  - `https://openai.github.io/openai-agents-js/guides/guardrails/`
+  - `https://openai.github.io/openai-agents-python/tracing/`
+  - `https://openai.github.io/openai-agents-js/guides/mcp/`
+  - `https://openai.com/index/the-next-evolution-of-the-agents-sdk/`
+
+Need / Intent / Context:
+
+- Need: Approval gates and approval persistence do not replace tool guardrails. AI tool actions need explicit pre-execution and post-execution checks, tripwire behavior, rejected-output handling, and side-effect boundary acknowledgement.
+- Intent: Add `toolGuardrailPolicies` and `guardrailEvidence` to `action-quality-contract` packages so tool guardrails are structurally linked to requests, traces, policies, outcomes, and governance.
+- Context: v0.6.5 made approval evidence traceable, and v0.6.6 bounded sticky approval/rejection persistence. The remaining gap is guardrail evidence around the actual tool execution path.
+
+Decision reason:
+
+- Implement this inside `action-quality-contract` because guardrails govern action execution, not QIF authoring or quality discovery.
+- Do not claim guardrail sufficiency. The verifier checks declarations, refs, stage matching, tripwire governance, accepted-outcome blocking, and side-effect boundary statements only.
+
+Council judgment:
+
+- Visionary: proceed; guardrails are becoming a standard agent runtime boundary and should be represented in QIF before provider-specific logs become the only evidence.
+- Builder: proceed; the change is bounded to schema, example, verifier, fixtures, docs, and release notes.
+- Guardian: proceed with guardrails; post-execution guardrails must acknowledge that they do not undo external side effects, and accepted outcomes must not pass when guardrails trip or reject.
+
+Artifacts:
+
+- Situation assessment: `.aof/artifacts/runtime/qif-v0.6.7-situation-assessment.json`
+- Council review packet: `.aof/artifacts/council/qif-v0.6.7-council-review-packet.json`
+- Task: `.aof/tasks/done/TASK-025.json`
+- Schema: `schemas/action-quality-contract-package.schema.json`
+- Example: `examples/action-quality-contract-package.json`
+- Verifier: `tools/validate-action-quality-contract.mjs`
+- Fixture source: `tools/fixtures/action-quality-contract-cases.mjs`
+- Retained negative corpus: `tests/fixtures/action-quality-contract/`
+- Release notes: `RELEASE-NOTES-v0.6.7.md`
+
+Runtime verification:
+
+- `npm test`: pass, `15/15` positive checks and `566/566` retained negative checks.
+- AOF `organization-verify` using v5.0.0: failed on existing AOF metadata compatibility, not QIF runtime code. The v5 schema rejects existing `safety_level` fields in project orientation and command registry metadata.
+- AOF `situation-assess` using v5.0.0: pass with no current truth conflicts; generated artifact sanitized for public repository use.
+
+Release outcome:
+
+- Pending release.
+
 ## v0.6.6 Approval Persistence Policy
 
 Runtime source:

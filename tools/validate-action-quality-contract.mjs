@@ -90,11 +90,13 @@ function validate(pkg, packagePath) {
   const permissionPolicies = array(pkg, "permissionPolicies", packagePath);
   const approvalGates = array(pkg, "approvalGates", packagePath);
   const approvalPersistencePolicies = array(pkg, "approvalPersistencePolicies", packagePath);
+  const toolGuardrailPolicies = array(pkg, "toolGuardrailPolicies", packagePath);
   const transitions = array(pkg, "expectedStateTransitions", packagePath);
   const rollbacks = array(pkg, "rollbackPlans", packagePath);
   const evidenceRequirements = array(pkg, "evidenceRequirements", packagePath);
   const runtimeTraces = array(pkg, "runtimeTraces", packagePath);
   const traceApprovalEvidence = array(pkg, "traceApprovalEvidence", packagePath);
+  const guardrailEvidence = array(pkg, "guardrailEvidence", packagePath);
   const outcomes = array(pkg, "actionOutcomes", packagePath);
   const triggers = array(pkg, "governanceTriggers", packagePath);
 
@@ -105,11 +107,13 @@ function validate(pkg, packagePath) {
   const policyIndex = index(permissionPolicies, `${packagePath}:permissionPolicies`);
   const approvalIndex = index(approvalGates, `${packagePath}:approvalGates`);
   const persistencePolicyIndex = index(approvalPersistencePolicies, `${packagePath}:approvalPersistencePolicies`);
+  const guardrailPolicyIndex = index(toolGuardrailPolicies, `${packagePath}:toolGuardrailPolicies`);
   const transitionIndex = index(transitions, `${packagePath}:expectedStateTransitions`);
   const rollbackIndex = index(rollbacks, `${packagePath}:rollbackPlans`);
   const evidenceIndex = index(evidenceRequirements, `${packagePath}:evidenceRequirements`);
   const traceIndex = index(runtimeTraces, `${packagePath}:runtimeTraces`);
   const approvalEvidenceIndex = index(traceApprovalEvidence, `${packagePath}:traceApprovalEvidence`);
+  const guardrailEvidenceIndex = index(guardrailEvidence, `${packagePath}:guardrailEvidence`);
   const outcomeIndex = index(outcomes, `${packagePath}:actionOutcomes`);
   const triggerIndex = index(triggers, `${packagePath}:governanceTriggers`);
 
@@ -157,6 +161,24 @@ function validate(pkg, packagePath) {
     }
     if (policy.persistenceMode === "always-approve" && !policy.expiresAt) {
       errors.push(`${policy.id} always-approve persistence requires expiresAt.`);
+    }
+  }
+
+  for (const policy of toolGuardrailPolicies) {
+    refs([policy.toolSurfaceRef], toolIndex, "tool surface", policy.id);
+    for (const field of ["guardrailStage", "guardrailType", "protectedBoundary", "triggerCondition", "tripwireBehavior", "onTripAction", "sideEffectBoundary", "status"]) str(policy, field, policy.id);
+    if (typeof policy.runsBeforeToolExecution !== "boolean") {
+      errors.push(`${policy.id} runsBeforeToolExecution must be boolean.`);
+    }
+    if (policy.guardrailStage === "pre-execution" && policy.runsBeforeToolExecution !== true) {
+      errors.push(`${policy.id} pre-execution guardrail must run before tool execution.`);
+    }
+    if (!["allow", "rejectContent", "throwException"].includes(policy.tripwireBehavior)) {
+      errors.push(`${policy.id} tripwireBehavior must be allow, rejectContent, or throwException.`);
+    }
+    const boundary = String(policy.sideEffectBoundary ?? "").toLowerCase();
+    if (!boundary.includes("not") || !boundary.includes("undo")) {
+      errors.push(`${policy.id} sideEffectBoundary must state that guardrails do not undo side effects.`);
     }
   }
 
@@ -262,11 +284,57 @@ function validate(pkg, packagePath) {
     approvalEvidenceByRequest.get(evidence.actionRequestRef).push(evidence);
   }
 
+  const guardrailEvidenceByRequest = new Map();
+  for (const evidence of guardrailEvidence) {
+    refs([evidence.actionRequestRef], requestIndex, "action request", evidence.id);
+    refs([evidence.runtimeTraceRef], traceIndex, "runtime trace", evidence.id);
+    refs([evidence.toolGuardrailPolicyRef], guardrailPolicyIndex, "tool guardrail policy", evidence.id);
+    optionalRefs(evidence.governanceTriggerRefs, triggerIndex, "governance trigger", evidence.id);
+    for (const field of ["guardrailStage", "evaluatedInputRef", "result", "evidenceSummary", "status"]) str(evidence, field, evidence.id);
+    if (typeof evidence.executionOrder !== "number" || evidence.executionOrder < 1) {
+      errors.push(`${evidence.id} executionOrder must be a positive number.`);
+    }
+    if (typeof evidence.tripwireTriggered !== "boolean") {
+      errors.push(`${evidence.id} tripwireTriggered must be boolean.`);
+    }
+    if (typeof evidence.sideEffectBoundaryAcknowledged !== "boolean") {
+      errors.push(`${evidence.id} sideEffectBoundaryAcknowledged must be boolean.`);
+    }
+    const request = requestIndex.get(evidence.actionRequestRef);
+    const trace = traceIndex.get(evidence.runtimeTraceRef);
+    const policy = guardrailPolicyIndex.get(evidence.toolGuardrailPolicyRef);
+    if (request && trace && trace.actionRequestRef !== request.id) {
+      errors.push(`${evidence.id} runtimeTraceRef must belong to its actionRequestRef.`);
+    }
+    if (policy && evidence.guardrailStage !== policy.guardrailStage) {
+      errors.push(`${evidence.id} guardrailStage must match its tool guardrail policy.`);
+    }
+    if (policy?.guardrailStage === "post-execution" && !evidence.sideEffectBoundaryAcknowledged) {
+      errors.push(`${evidence.id} post-execution guardrail evidence must acknowledge side effect boundary.`);
+    }
+    if (evidence.tripwireTriggered && (!Array.isArray(evidence.governanceTriggerRefs) || evidence.governanceTriggerRefs.length === 0)) {
+      errors.push(`${evidence.id} tripwire-triggered guardrail evidence requires governanceTriggerRefs.`);
+    }
+    if (!guardrailEvidenceByRequest.has(evidence.actionRequestRef)) guardrailEvidenceByRequest.set(evidence.actionRequestRef, []);
+    guardrailEvidenceByRequest.get(evidence.actionRequestRef).push(evidence);
+  }
+
   for (const request of requests) {
     const contract = contractIndex.get(request.actionContractRef);
     if (contract && Array.isArray(contract.approvalGateRefs) && contract.approvalGateRefs.length > 0) {
       const matches = approvalEvidenceByRequest.get(request.id) ?? [];
       if (matches.length === 0) errors.push(`${request.id} approval-gated request requires traceApprovalEvidence.`);
+    }
+    const permission = contract ? policyIndex.get(contract.permissionPolicyRef) : null;
+    const needsGuardrails = contract?.riskClass === "high" || ["write", "delete", "publish", "external-call"].includes(permission?.permissionClass);
+    if (needsGuardrails) {
+      const matchingGuardrails = guardrailEvidenceByRequest.get(request.id) ?? [];
+      if (!matchingGuardrails.some((evidence) => evidence.guardrailStage === "pre-execution")) {
+        errors.push(`${request.id} high-risk or write-like request requires pre-execution guardrailEvidence.`);
+      }
+      if (!matchingGuardrails.some((evidence) => evidence.guardrailStage === "post-execution")) {
+        errors.push(`${request.id} high-risk or write-like request requires post-execution guardrailEvidence.`);
+      }
     }
   }
 
@@ -287,6 +355,10 @@ function validate(pkg, packagePath) {
     const contractNeedsApproval = contract && Array.isArray(contract.approvalGateRefs) && contract.approvalGateRefs.length > 0;
     if (outcome.verdict === "accepted" && contractNeedsApproval && !approvals.some((evidence) => evidence.approvalDecision === "approved")) {
       errors.push(`${outcome.id} accepted outcome for approval-gated contract requires approved traceApprovalEvidence.`);
+    }
+    const guardrails = guardrailEvidenceByRequest.get(outcome.actionRequestRef) ?? [];
+    if (outcome.verdict === "accepted" && guardrails.some((evidence) => evidence.tripwireTriggered || evidence.result !== "allow")) {
+      errors.push(`${outcome.id} accepted outcome must not have tripped or rejected guardrail evidence.`);
     }
     if (outcome.confidence < 0.7 && (!Array.isArray(outcome.governanceTriggerRefs) || outcome.governanceTriggerRefs.length === 0)) {
       errors.push(`${outcome.id} low-confidence outcome requires governanceTriggerRefs.`);
@@ -323,11 +395,13 @@ function validate(pkg, packagePath) {
       permissionPolicies: permissionPolicies.length,
       approvalGates: approvalGates.length,
       approvalPersistencePolicies: approvalPersistencePolicies.length,
+      toolGuardrailPolicies: toolGuardrailPolicies.length,
       expectedStateTransitions: transitions.length,
       rollbackPlans: rollbacks.length,
       evidenceRequirements: evidenceRequirements.length,
       runtimeTraces: runtimeTraces.length,
       traceApprovalEvidence: traceApprovalEvidence.length,
+      guardrailEvidence: guardrailEvidence.length,
       actionOutcomes: outcomes.length,
       governanceTriggers: triggers.length
     }

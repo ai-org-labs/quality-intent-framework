@@ -1,0 +1,36 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-08-26T04:37:31.314Z",
+  "review_packet_id": "CREV-MT9LRK8I-EGXQ3X",
+  "council_id": "qif-v0.6.7-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Proceed with QIF v0.6.7 Tool Guardrail Policy.",
+  "rationale": "Current agent guidance emphasizes guardrails around inputs, outputs, and tool calls. QIF needs provider-neutral guardrail policy and evidence so approval does not substitute for executable checks.",
+  "recommendation": "Release v0.6.7 after npm test and repository hygiene checks pass.",
+  "target_audience": "QIF maintainers and AI agents using Action Quality Contract",
+  "expected_user_reaction": "They can see which guardrails ran before and after a tool action and whether they tripped.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [
+    "Add toolGuardrailPolicies and guardrailEvidence to action-quality-contract schema, example, verifier, fixtures, docs, and release notes."
+  ],
+  "organization_change_recommendations": [
+    "Keep verifier boundary explicit: guardrail records do not prove guardrail sufficiency or undo external side effects."
+  ],
+  "diagnosis_category": "agent-action-governance",
+  "diagnosis_confidence": 0.88,
+  "diagnosis_evidence_refs": [
+    "docs/qif-roadmap.md"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "RELEASE-NOTES-v0.6.7.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-025",
+  "source_parent_session_id": "SESS-QIFV067",
+  "source_decision_record_id": null
+}

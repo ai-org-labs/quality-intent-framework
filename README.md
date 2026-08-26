@@ -216,6 +216,8 @@ The action quality contract verifier checks:
 - approved approval gates include approval time
 - approval persistence policies declare scope, expiry, identity boundary, and revocation conditions
 - cross-run approval reuse requires canonical invocation binding
+- tool guardrail policies define pre/post execution checks, tripwire behavior, and side-effect boundaries
+- high-risk or write-like requests include both pre-execution and post-execution guardrail evidence
 - expected transitions include stop conditions
 - rollback plans link to expected transitions
 - evidence requirements name the verdicts they support
@@ -225,6 +227,8 @@ The action quality contract verifier checks:
 - approval-gated requests include trace approval evidence
 - approval evidence links to a persistence policy when sticky approval or rejection was applied
 - replayed or resumed tool calls remain bound to the original invocation
+- tripwire-triggered guardrail evidence routes to governance
+- accepted outcomes cannot have tripped or rejected guardrail evidence
 - accepted approval-gated outcomes require approved trace approval evidence
 - accepted outcomes match expected post-state
 - low-confidence outcomes trigger governance

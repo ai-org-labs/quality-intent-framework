@@ -205,7 +205,7 @@
       "approvalGateRef": "APR-AQC-001",
       "approvalRequired": true,
       "approvalDecision": "approved",
-      "approvedBy": "",
+      "approvedBy": "repository maintainer",
       "decisionAt": "2026-08-21T04:40:00Z",
       "rationale": "The requested action is write-like but limited to repository-local fixture and verifier updates.",
       "canonicalInvocationRef": "invoke-AQR-AQC-001-initial",
@@ -218,21 +218,6 @@
     }
   ],
   "guardrailEvidence": [
-    {
-      "id": "GRE-AQC-001",
-      "actionRequestRef": "AQR-AQC-001",
-      "runtimeTraceRef": "RTR-AQC-001",
-      "toolGuardrailPolicyRef": "TGP-AQC-001",
-      "guardrailStage": "pre-execution",
-      "executionOrder": 1,
-      "evaluatedInputRef": "invoke-AQR-AQC-001-initial",
-      "result": "allow",
-      "tripwireTriggered": false,
-      "evidenceSummary": "Requested command sequence stayed inside approved repository-local fixture, verifier, docs, and release-note updates.",
-      "sideEffectBoundaryAcknowledged": true,
-      "governanceTriggerRefs": [],
-      "status": "captured"
-    },
     {
       "id": "GRE-AQC-002",
       "actionRequestRef": "AQR-AQC-001",

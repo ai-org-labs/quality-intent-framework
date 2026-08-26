@@ -12,6 +12,7 @@ Tool Surface
 -> Permission Policy
 -> Approval Gate
 -> Approval Persistence Policy
+-> Tool Guardrail Policy
 -> Expected State Transition
 -> Rollback Plan
 -> Evidence Requirement
@@ -31,6 +32,7 @@ Tool Surface
 | Permission Policy | Allowed scope, prohibited operations, and approval requirement. |
 | Approval Gate | Accountable approval for high-risk or write-like actions. |
 | Approval Persistence Policy | Scope, expiry, identity boundary, and revocation rule for sticky approval or rejection decisions. |
+| Tool Guardrail Policy | Pre-execution or post-execution guardrail policy for validating tool input/output and defining tripwire behavior. |
 | Expected State Transition | The intended pre-state, post-state, stop condition, and invariants. |
 | Rollback Plan | How the action can be reversed or contained. |
 | Evidence Requirement | Evidence needed to accept, reject, or conditionally accept the action. |
@@ -38,6 +40,7 @@ Tool Surface
 | Action Request | A specific request to execute under a contract. |
 | Runtime Trace | Trace/span reference proving what execution path occurred. |
 | Trace Approval Evidence | Evidence that an approval-required tool call was approved, denied, resumed, or replayed against the same invocation. |
+| Guardrail Evidence | Evidence that a tool guardrail ran, what it evaluated, whether a tripwire triggered, and whether side-effect limits were acknowledged. |
 | Action Outcome | Actual state, verdict, confidence, evidence, and residual risk. |
 | Governance Trigger | Review route for unsafe, low-confidence, or policy-conflicting outcomes. |
 
@@ -53,6 +56,9 @@ Tool Surface
 - approval persistence policies declare scope, allowed decisions, expiry, identity boundary, and revocation conditions;
 - approval persistence identity scope cannot be wildcard;
 - cross-run approval reuse requires canonical invocation binding;
+- tool guardrail policies link tool surfaces, define pre/post execution stage, tripwire behavior, and side-effect boundary;
+- pre-execution tool guardrails must run before tool execution;
+- guardrail policies must state that guardrails do not undo side effects;
 - expected transitions include stop conditions;
 - rollback plans link to expected transitions;
 - evidence requirements name verdicts they support;
@@ -65,6 +71,10 @@ Tool Surface
 - approval-required evidence cannot be marked `not-required`;
 - approval decisions must be allowed by their persistence policy;
 - replayed or resumed tool calls are bound to the original invocation;
+- high-risk or write-like requests include both pre-execution and post-execution guardrail evidence;
+- guardrail evidence links to the request, trace, and policy, and its stage matches the policy;
+- tripwire-triggered guardrail evidence routes to governance;
+- accepted outcomes cannot have tripped or rejected guardrail evidence;
 - accepted approval-gated outcomes require approved trace approval evidence;
 - accepted outcomes match expected post-state;
 - low-confidence outcomes trigger governance;
@@ -80,4 +90,4 @@ Semantic and operational validity require runtime enforcement, security review f
 
 See `examples/action-quality-contract-package.json`.
 
-The example describes a provider-neutral local shell action for regenerating fixtures and running `npm test`. It records permission, approval, approval persistence policy, expected repository state, rollback, evidence, trace summary, trace approval evidence, and accepted outcome.
+The example describes a provider-neutral local shell action for regenerating fixtures and running `npm test`. It records permission, approval, approval persistence policy, tool guardrail policy, expected repository state, rollback, evidence, trace summary, trace approval evidence, guardrail evidence, and accepted outcome.

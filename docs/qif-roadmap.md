@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.6 baseline)
+## Current Position (v0.6.7 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -95,8 +95,10 @@ and adoption surface — not pretending the limits away.
   replays, redaction state, and accepted outcomes remain bound to traceable
   action evidence. v0.6.6 adds Approval Persistence Policy so sticky approvals
   and rejections have explicit scope, expiry, identity boundaries, revocation
-  conditions, and canonical invocation binding.
-- Weaknesses: v0.6.6 cross-package behavior is intentionally minimal and
+  conditions, and canonical invocation binding. v0.6.7 adds Tool Guardrail
+  Policy so pre-execution and post-execution tool checks, tripwire behavior,
+  rejected outputs, governance routing, and side-effect limits are traceable.
+- Weaknesses: v0.6.7 cross-package behavior is intentionally minimal and
   example-file based; the first Authoring Template package covers only a
   quality-gate generation slice, Pilot Corpus now structures case ingestion
   but still uses example data rather than a live organization corpus, agent
@@ -117,7 +119,7 @@ organizational authority.
 | Delegated work is becoming longer-running and increasingly parallel across multiple agents and non-engineering domains. ([OpenAI](https://openai.com/index/how-agents-are-transforming-work/), [Anthropic](https://www.anthropic.com/engineering/multi-agent-research-system)) | Errors compound across handoffs; a successful aggregate result can conceal an unsafe lane, unresolved disagreement, or unowned decision. | v0.6 governed agent authoring/actions and v0.8 multi-agent judgment memory. | Treat lane-local intents, join conflicts, authority, and dissent as quality ledger entries, not orchestration logs. |
 | Agent harnesses now combine persistent runtime context, shell/computer tools, reusable skills, tracing, and protocol-connected tools such as MCP. ([OpenAI](https://openai.com/index/equip-responses-api-computer-environment/), [OpenAI](https://openai.com/index/new-tools-and-features-in-the-responses-api/)) | Quality depends on tool permissions, target operation, context freshness, runtime configuration, and rollback—not model output alone. | v0.5 provenance and v0.6 protocol-neutral action contracts. | Make an action's Quality Intent, loss boundary, evidence, permission, target, and rollback portable across harnesses and protocols. |
 | Teams are shifting from token price toward cost per accepted outcome and real-task evals. ([OpenAI](https://openai.com/index/managing-ai-investments-in-agentic-era/)) | Cheap attempts can create expensive retries and human correction; activity volume can again be mistaken for value. | v0.7 outcome calibration keeps cost/latency as evidence attached to accepted outcomes. | Calibrate quality and cost jointly without allowing either metric to substitute for the accountable verdict. |
-| Agent tool ecosystems are standardizing around MCP/A2A-style integration, computer-use tools, hosted/local shell tools, runtime tracing, approval policies, and durable pause/resume workflows. ([MCP 2026-07-28 spec](https://blog.modelcontextprotocol.io/posts/2026-07-28/), [OpenAI Agents SDK tools](https://openai.github.io/openai-agents-js/guides/tools/), [OpenAI Agents SDK tracing](https://openai.github.io/openai-agents-js/guides/tracing/), [OpenAI Agents SDK MCP guidance](https://openai.github.io/openai-agents-python/mcp/), [OpenAI Agents SDK MCP approval flow](https://openai.github.io/openai-agents-js/guides/mcp/), [OpenAI Agents SDK HITL](https://openai.github.io/openai-agents-python/human_in_the_loop/), [OpenAI prompt-injection guidance](https://openai.com/index/designing-agents-to-resist-prompt-injection/), [OpenAI prompt injection overview](https://openai.com/safety/prompt-injections/)) | The same quality claim may be executed through different tool providers; permission, approval, environment, trace, rollback, sticky approval scope, and resumed/replayed tool-call binding can be lost in provider-specific logs. Authoring quality also degrades when AI agents rely on unstated conversation context instead of explicit instructions, contracts, validation, and source trust boundaries. | v0.6.0 Action Quality Contract makes action governance provider-neutral and structurally verifiable. v0.6.5 hardens it with trace approval evidence. v0.6.6 adds approval persistence policies. v0.6.1-v0.6.4 Authoring Template makes AI package generation structurally verifiable, understandable, and resistant to source-content instruction confusion. | Treat every AI tool action and generated QIF artifact as a quality-bearing state transition with explicit input, output, approval evidence, approval persistence limits, validation, trace, governance, and untrusted-input boundaries. |
+| Agent tool ecosystems are standardizing around MCP/A2A-style integration, computer-use tools, hosted/local shell tools, runtime tracing, approval policies, durable pause/resume workflows, and guardrails. ([MCP 2026-07-28 spec](https://blog.modelcontextprotocol.io/posts/2026-07-28/), [OpenAI Agents SDK tools](https://openai.github.io/openai-agents-js/guides/tools/), [OpenAI Agents SDK tracing](https://openai.github.io/openai-agents-js/guides/tracing/), [OpenAI Agents SDK guardrails](https://openai.github.io/openai-agents-js/guides/guardrails/), [OpenAI Agents SDK MCP guidance](https://openai.github.io/openai-agents-python/mcp/), [OpenAI Agents SDK MCP approval flow](https://openai.github.io/openai-agents-js/guides/mcp/), [OpenAI Agents SDK HITL](https://openai.github.io/openai-agents-python/human_in_the_loop/), [OpenAI prompt-injection guidance](https://openai.com/index/designing-agents-to-resist-prompt-injection/), [OpenAI prompt injection overview](https://openai.com/safety/prompt-injections/)) | The same quality claim may be executed through different tool providers; permission, approval, environment, trace, rollback, sticky approval scope, guardrail tripwires, side-effect limits, and resumed/replayed tool-call binding can be lost in provider-specific logs. Authoring quality also degrades when AI agents rely on unstated conversation context instead of explicit instructions, contracts, validation, and source trust boundaries. | v0.6.0 Action Quality Contract makes action governance provider-neutral and structurally verifiable. v0.6.5 hardens it with trace approval evidence. v0.6.6 adds approval persistence policies. v0.6.7 adds tool guardrail policies. v0.6.1-v0.6.4 Authoring Template makes AI package generation structurally verifiable, understandable, and resistant to source-content instruction confusion. | Treat every AI tool action and generated QIF artifact as a quality-bearing state transition with explicit input, output, approval evidence, approval persistence limits, guardrail evidence, validation, trace, governance, and untrusted-input boundaries. |
 
 The one-step-ahead bet is Phase 6 / v0.9: an **Anticipatory Quality Intent
 Twin**. Current eval practice tests known tasks. QIF should also generate and
@@ -323,7 +325,9 @@ Deliverables:
   approval-required tool calls, denial, replay/resume binding, redaction state,
   and accepted-outcome approval proof. v0.6.6 adds approval persistence policy
   for sticky approval/rejection scope, expiry, identity boundary, and
-  revocation controls.
+  revocation controls. v0.6.7 adds tool guardrail policy and evidence for
+  pre-execution checks, post-execution checks, tripwire handling, rejected
+  terminal output, side-effect boundary acknowledgement, and governance routing.
 
 Exit evidence:
 
