@@ -9,6 +9,7 @@ function approval(pkg) { return pkg.approvalGates[0]; }
 function persistencePolicy(pkg) { return pkg.approvalPersistencePolicies[0]; }
 function guardrailPolicy(pkg) { return pkg.toolGuardrailPolicies[0]; }
 function postGuardrailPolicy(pkg) { return pkg.toolGuardrailPolicies[1]; }
+function contextBoundary(pkg) { return pkg.contextMemoryBoundaries[0]; }
 function transition(pkg) { return pkg.expectedStateTransitions[0]; }
 function rollback(pkg) { return pkg.rollbackPlans[0]; }
 function evidence(pkg) { return pkg.evidenceRequirements[0]; }
@@ -16,6 +17,7 @@ function trace(pkg) { return pkg.runtimeTraces[0]; }
 function approvalEvidence(pkg) { return pkg.traceApprovalEvidence[0]; }
 function guardrailEvidence(pkg) { return pkg.guardrailEvidence[0]; }
 function postGuardrailEvidence(pkg) { return pkg.guardrailEvidence[1]; }
+function contextEvidence(pkg) { return pkg.contextMemoryEvidence[0]; }
 function outcome(pkg) { return pkg.actionOutcomes[0]; }
 
 export const cases = [
@@ -101,6 +103,24 @@ export const cases = [
     mutate: (pkg) => { postGuardrailPolicy(pkg).sideEffectBoundary = "post-execution guardrails inspect output"; }
   },
   {
+    id: "context-memory-boundaries-array",
+    rule: "context memory boundaries are retained",
+    expect: "contextMemoryBoundaries must be an array.",
+    mutate: (pkg) => { pkg.contextMemoryBoundaries = null; }
+  },
+  {
+    id: "context-memory-boundary-allowed-use",
+    rule: "context memory boundary declares allowed use",
+    expect: "CMB-AQC-001 allowedUse must include at least one use.",
+    mutate: (pkg) => { contextBoundary(pkg).allowedUse = []; }
+  },
+  {
+    id: "llm-visible-context-handles-instructions",
+    rule: "llm-visible context handles embedded instructions",
+    expect: "CMB-AQC-001 llm-visible context must explicitly handle embedded instructions.",
+    mutate: (pkg) => { contextBoundary(pkg).contaminationPolicy = "treat remembered content as source context"; }
+  },
+  {
     id: "transition-stop-condition-required",
     rule: "expected transition has stop condition",
     expect: "EST-AQC-001 must include non-empty string stopCondition.",
@@ -163,6 +183,60 @@ export const cases = [
     rule: "guardrail evidence is retained",
     expect: "guardrailEvidence must be an array.",
     mutate: (pkg) => { pkg.guardrailEvidence = null; }
+  },
+  {
+    id: "context-memory-evidence-array",
+    rule: "context memory evidence is retained",
+    expect: "contextMemoryEvidence must be an array.",
+    mutate: (pkg) => { pkg.contextMemoryEvidence = null; }
+  },
+  {
+    id: "high-risk-request-needs-context-memory",
+    rule: "high-risk request has context memory evidence",
+    expect: "AQR-AQC-001 high-risk or write-like request requires contextMemoryEvidence.",
+    mutate: (pkg) => { pkg.contextMemoryEvidence = []; }
+  },
+  {
+    id: "context-memory-evidence-boundary-ref-resolves",
+    rule: "context memory evidence links boundary",
+    expect: "CME-AQC-001 references missing context memory boundary: CMB-NOPE-999",
+    mutate: (pkg) => { contextEvidence(pkg).contextMemoryBoundaryRef = "CMB-NOPE-999"; }
+  },
+  {
+    id: "llm-visible-context-contamination-checked",
+    rule: "llm-visible context evidence checks contamination",
+    expect: "CME-AQC-001 llm-visible context evidence requires contaminationChecked true.",
+    mutate: (pkg) => { contextEvidence(pkg).contaminationChecked = false; }
+  },
+  {
+    id: "stale-context-governance",
+    rule: "stale context memory evidence routes to governance",
+    expect: "CME-AQC-001 non-current context memory evidence requires governanceTriggerRefs.",
+    mutate: (pkg) => { contextEvidence(pkg).freshnessStatus = "stale"; }
+  },
+  {
+    id: "untrusted-context-used-governance",
+    rule: "untrusted context used in decision routes to governance",
+    expect: "CME-AQC-001 untrusted context used in decision requires governanceTriggerRefs.",
+    mutate: (pkg) => { contextEvidence(pkg).trustStatus = "untrusted"; }
+  },
+  {
+    id: "accepted-outcome-no-stale-context",
+    rule: "accepted outcome does not rely on stale context",
+    expect: "AOC-AQC-001 accepted outcome must not rely on stale or untrusted context memory evidence.",
+    mutate: (pkg) => {
+      pkg.governanceTriggers.push({
+        id: "GTR-AQC-CONTEXT",
+        triggerType: "stale-context",
+        reason: "Fixture mutation marks context stale.",
+        severity: "medium",
+        requiredAction: "review context memory before acceptance",
+        owner: "repository maintainer",
+        status: "open"
+      });
+      contextEvidence(pkg).freshnessStatus = "stale";
+      contextEvidence(pkg).governanceTriggerRefs = ["GTR-AQC-CONTEXT"];
+    }
   },
   {
     id: "high-risk-request-needs-pre-guardrail",

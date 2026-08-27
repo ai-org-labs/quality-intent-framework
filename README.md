@@ -218,6 +218,8 @@ The action quality contract verifier checks:
 - cross-run approval reuse requires canonical invocation binding
 - tool guardrail policies define pre/post execution checks, tripwire behavior, and side-effect boundaries
 - high-risk or write-like requests include both pre-execution and post-execution guardrail evidence
+- context memory boundaries distinguish session history, local runtime context, agent memory, and LLM-visible context
+- high-risk or write-like requests include context memory evidence
 - expected transitions include stop conditions
 - rollback plans link to expected transitions
 - evidence requirements name the verdicts they support
@@ -229,6 +231,8 @@ The action quality contract verifier checks:
 - replayed or resumed tool calls remain bound to the original invocation
 - tripwire-triggered guardrail evidence routes to governance
 - accepted outcomes cannot have tripped or rejected guardrail evidence
+- stale or untrusted context memory evidence routes to governance
+- accepted outcomes cannot rely on stale or untrusted context memory evidence
 - accepted approval-gated outcomes require approved trace approval evidence
 - accepted outcomes match expected post-state
 - low-confidence outcomes trigger governance

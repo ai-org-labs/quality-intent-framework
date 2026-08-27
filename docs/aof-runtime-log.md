@@ -2,6 +2,65 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.8 Context Memory Boundary
+
+Runtime source:
+
+- AOF source repo latest checked: `v5.0.0`
+- AOF runtime commands executed: `situation-assess`, `goal-project`, `task-open`, `task-update`, `council-review-packet`, `organization-verify`
+- External trend check date: `2026-08-27`
+- External source refs:
+  - `https://openai.github.io/openai-agents-js/guides/sessions/`
+  - `https://openai.github.io/openai-agents-js/guides/guardrails/`
+  - `https://openai.github.io/openai-agents-python/context/`
+  - `https://openai.github.io/openai-agents-python/sessions/`
+  - `https://openai.github.io/openai-agents-python/sandbox/memory/`
+  - `https://openai.com/safety/prompt-injections/`
+
+Need / Intent / Context:
+
+- Need: Agent runtimes now mix session history, local runtime context, memory, compaction, and LLM-visible context. Stale, untrusted, or contaminated context can silently influence tool actions unless it is treated as review evidence.
+- Intent: Add `contextMemoryBoundaries` and `contextMemoryEvidence` to `action-quality-contract` packages so context source, visibility, freshness, compaction, trust, and contamination checks are auditable.
+- Context: v0.6.5 made approval evidence traceable, v0.6.6 bounded approval persistence, and v0.6.7 represented tool guardrails. The remaining gap was memory/context influence around the same action execution path.
+
+Decision reason:
+
+- Implement this inside `action-quality-contract` because context and memory evidence can affect action selection, tool invocation, outcome acceptance, and governance routing.
+- Do not create a new package type. The change is a bounded extension of action governance.
+- Do not claim remembered context is semantically true. The verifier checks structure, traceability, reference resolution, freshness/trust declarations, contamination checks, and rule compliance only.
+
+Council judgment:
+
+- Visionary: proceed; session memory and context boundaries are becoming core to agentic runtime quality.
+- Builder: proceed; the implementation is bounded to schema, example, verifier, fixtures, docs, and release notes.
+- Guardian: proceed with guardrails; accepted outcomes must not rely on stale or untrusted context memory evidence, and non-current or untrusted context must route to governance when used.
+
+Artifacts:
+
+- Situation assessment: `.aof/artifacts/runtime/qif-v0.6.8-situation-assessment.json`
+- Council review packet: `.aof/artifacts/council/qif-v0.6.8-council-review-packet.json`
+- Task: `.aof/tasks/done/TASK-026.json`
+- Schema: `schemas/action-quality-contract-package.schema.json`
+- Example: `examples/action-quality-contract-package.json`
+- Verifier: `tools/validate-action-quality-contract.mjs`
+- Fixture source: `tools/fixtures/action-quality-contract-cases.mjs`
+- Retained negative corpus: `tests/fixtures/action-quality-contract/`
+- Release notes: `RELEASE-NOTES-v0.6.8.md`
+
+Runtime verification:
+
+- `npm test`: pass, `15/15` positive checks and `576/576` retained negative checks.
+- AOF `organization-verify` using v5.0.0: failed on existing AOF metadata compatibility, not QIF runtime code. The v5 schema rejects existing `safety_level` fields in project orientation and command registry metadata.
+- AOF `situation-assess` using v5.0.0: pass with no current truth conflicts; generated artifact sanitized for public repository use.
+
+Release outcome:
+
+- Implementation commit: pending
+- Tag: pending
+- Tag target commit: pending
+- GitHub Release: pending
+- Published result: pending
+
 ## v0.6.7 Tool Guardrail Policy
 
 Runtime source:

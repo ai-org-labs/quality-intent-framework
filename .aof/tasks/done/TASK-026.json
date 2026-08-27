@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-026",
+  "title": "QIF v0.6.8 Context Memory Boundary",
+  "description": "Extend action-quality-contract packages with explicit context and memory boundaries for session history, local runtime context, agent memory, LLM-visible context, freshness, compaction, source trust, and contamination governance.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-QIFV068",
+  "assigned_session_ids": [],
+  "related_decision_record_id": null,
+  "operating_goal_ref": ".aof/goals/next-value-slice.json",
+  "created_at": "2026-08-27T04:32:48.017Z",
+  "updated_at": "2026-08-27T04:37:44.992Z",
+  "assigned_at": null,
+  "done_at": "2026-08-27T04:37:44.992Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implementation completed: action-quality-contract now has contextMemoryBoundaries, contextMemoryEvidence, verifier rules, retained fixtures, docs, and release notes. npm test passed 15/15 positive checks and 576/576 negative checks."
+}

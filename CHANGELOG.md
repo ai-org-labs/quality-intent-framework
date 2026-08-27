@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.6.8
+
+- Added first-class `contextMemoryBoundaries` and `contextMemoryEvidence` to `action-quality-contract` packages.
+- Required context memory boundaries to distinguish session history, local runtime context, agent memory, and LLM-visible context with freshness, trust, compaction, and contamination policies.
+- Required LLM-visible context boundaries and evidence to explicitly handle embedded-instruction contamination.
+- Required high-risk or write-like requests to include context memory evidence.
+- Required stale or untrusted context used in a decision to route to governance.
+- Required accepted outcomes to avoid relying on stale or untrusted context memory evidence.
+- Added retained negative fixtures for missing context boundaries/evidence, missing allowed use, missing instruction-contamination handling, unresolved refs, unchecked LLM-visible context, stale/untrusted context governance, and accepted outcomes relying on stale context.
+
 ## v0.6.7
 
 - Added first-class `toolGuardrailPolicies` and `guardrailEvidence` to `action-quality-contract` packages.

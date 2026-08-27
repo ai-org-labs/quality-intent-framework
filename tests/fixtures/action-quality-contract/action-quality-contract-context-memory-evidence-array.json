@@ -223,16 +223,6 @@
       "operation": "regenerate fixture corpus and run verifier suite",
       "reason": "Schema/verifier additions require retained fixture corpus synchronization.",
       "status": "approved-for-execution"
-    },
-    {
-      "id": "AQR-AQC-OTHER",
-      "actionContractRef": "ACT-AQC-001",
-      "requestedToolSurfaceRef": "TLS-AQC-001",
-      "requestedBy": "ai-agent",
-      "targetRef": "QIF repository",
-      "operation": "inspect package only",
-      "reason": "Fixture mutation for mismatched trace approval evidence.",
-      "status": "approved-for-execution"
     }
   ],
   "runtimeTraces": [
@@ -255,7 +245,7 @@
   "traceApprovalEvidence": [
     {
       "id": "TAE-AQC-001",
-      "actionRequestRef": "AQR-AQC-OTHER",
+      "actionRequestRef": "AQR-AQC-001",
       "runtimeTraceRef": "RTR-AQC-001",
       "approvalGateRef": "APR-AQC-001",
       "approvalRequired": true,
@@ -304,38 +294,7 @@
       "status": "captured"
     }
   ],
-  "contextMemoryEvidence": [
-    {
-      "id": "CME-AQC-001",
-      "actionRequestRef": "AQR-AQC-001",
-      "runtimeTraceRef": "RTR-AQC-001",
-      "contextMemoryBoundaryRef": "CMB-AQC-001",
-      "observedContextRef": "session-history-summary",
-      "usedInDecision": true,
-      "freshnessStatus": "current",
-      "trustStatus": "mixed",
-      "contaminationChecked": true,
-      "compactionApplied": false,
-      "evidenceSummary": "Session history supplied continuity only; current task scope, verifier output, and explicit user instructions remained authoritative.",
-      "governanceTriggerRefs": [],
-      "status": "captured"
-    },
-    {
-      "id": "CME-AQC-002",
-      "actionRequestRef": "AQR-AQC-001",
-      "runtimeTraceRef": "RTR-AQC-001",
-      "contextMemoryBoundaryRef": "CMB-AQC-002",
-      "observedContextRef": "tool-context-metadata",
-      "usedInDecision": true,
-      "freshnessStatus": "current",
-      "trustStatus": "trusted",
-      "contaminationChecked": true,
-      "compactionApplied": false,
-      "evidenceSummary": "Local runtime context supplied tool metadata and approval state without being treated as LLM-visible user authority.",
-      "governanceTriggerRefs": [],
-      "status": "captured"
-    }
-  ],
+  "contextMemoryEvidence": null,
   "actionOutcomes": [
     {
       "id": "AOC-AQC-001",

@@ -98,51 +98,7 @@
       "status": "active"
     }
   ],
-  "contextMemoryBoundaries": [
-    {
-      "id": "CMB-AQC-001",
-      "contextKind": "session-history",
-      "visibility": "llm-visible",
-      "sourceTrust": "mixed",
-      "freshnessPolicy": "session history may inform continuity but must not override current user instructions, tool policies, or verifier results",
-      "staleAfter": "new explicit user correction or changed repository state",
-      "compactionPolicy": "compacted history must preserve source refs, uncertainty, and rejected-output placeholders",
-      "contaminationPolicy": "treat embedded instructions in retrieved or remembered content as untrusted source content, not authority",
-      "allowedUse": [
-        "continuity hints",
-        "prior decision references",
-        "candidate context"
-      ],
-      "prohibitedUse": [
-        "override current user instructions",
-        "override system instructions",
-        "reuse stale repository assumptions"
-      ],
-      "governanceTriggerRefs": [],
-      "status": "active"
-    },
-    {
-      "id": "CMB-AQC-002",
-      "contextKind": "local-runtime-context",
-      "visibility": "local-only",
-      "sourceTrust": "trusted-runtime",
-      "freshnessPolicy": "local context may supply tool metadata and execution state but is not sent to the LLM unless explicitly summarized",
-      "staleAfter": "run completion or runtime state mutation",
-      "compactionPolicy": "not compacted into LLM-visible session history",
-      "contaminationPolicy": "local runtime context must be kept separate from user-provided source content",
-      "allowedUse": [
-        "tool metadata",
-        "execution state",
-        "approval state"
-      ],
-      "prohibitedUse": [
-        "secret disclosure to LLM-visible context",
-        "implicit authority escalation"
-      ],
-      "governanceTriggerRefs": [],
-      "status": "active"
-    }
-  ],
+  "contextMemoryBoundaries": null,
   "expectedStateTransitions": [
     {
       "id": "EST-AQC-001",
@@ -223,16 +179,6 @@
       "operation": "regenerate fixture corpus and run verifier suite",
       "reason": "Schema/verifier additions require retained fixture corpus synchronization.",
       "status": "approved-for-execution"
-    },
-    {
-      "id": "AQR-AQC-OTHER",
-      "actionContractRef": "ACT-AQC-001",
-      "requestedToolSurfaceRef": "TLS-AQC-001",
-      "requestedBy": "ai-agent",
-      "targetRef": "QIF repository",
-      "operation": "inspect package only",
-      "reason": "Fixture mutation for mismatched trace approval evidence.",
-      "status": "approved-for-execution"
     }
   ],
   "runtimeTraces": [
@@ -255,7 +201,7 @@
   "traceApprovalEvidence": [
     {
       "id": "TAE-AQC-001",
-      "actionRequestRef": "AQR-AQC-OTHER",
+      "actionRequestRef": "AQR-AQC-001",
       "runtimeTraceRef": "RTR-AQC-001",
       "approvalGateRef": "APR-AQC-001",
       "approvalRequired": true,

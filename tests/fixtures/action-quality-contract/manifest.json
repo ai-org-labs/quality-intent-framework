@@ -155,6 +155,27 @@
       "errorIncludes": "TGP-AQC-002 sideEffectBoundary must state that guardrails do not undo side effects."
     },
     {
+      "file": "action-quality-contract-context-memory-boundaries-array.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "context memory boundaries are retained",
+      "expect": "fail",
+      "errorIncludes": "contextMemoryBoundaries must be an array."
+    },
+    {
+      "file": "action-quality-contract-context-memory-boundary-allowed-use.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "context memory boundary declares allowed use",
+      "expect": "fail",
+      "errorIncludes": "CMB-AQC-001 allowedUse must include at least one use."
+    },
+    {
+      "file": "action-quality-contract-llm-visible-context-handles-instructions.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "llm-visible context handles embedded instructions",
+      "expect": "fail",
+      "errorIncludes": "CMB-AQC-001 llm-visible context must explicitly handle embedded instructions."
+    },
+    {
       "file": "action-quality-contract-transition-stop-condition-required.json",
       "validator": "tools/validate-action-quality-contract.mjs",
       "rule": "expected transition has stop condition",
@@ -216,6 +237,55 @@
       "rule": "guardrail evidence is retained",
       "expect": "fail",
       "errorIncludes": "guardrailEvidence must be an array."
+    },
+    {
+      "file": "action-quality-contract-context-memory-evidence-array.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "context memory evidence is retained",
+      "expect": "fail",
+      "errorIncludes": "contextMemoryEvidence must be an array."
+    },
+    {
+      "file": "action-quality-contract-high-risk-request-needs-context-memory.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "high-risk request has context memory evidence",
+      "expect": "fail",
+      "errorIncludes": "AQR-AQC-001 high-risk or write-like request requires contextMemoryEvidence."
+    },
+    {
+      "file": "action-quality-contract-context-memory-evidence-boundary-ref-resolves.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "context memory evidence links boundary",
+      "expect": "fail",
+      "errorIncludes": "CME-AQC-001 references missing context memory boundary: CMB-NOPE-999"
+    },
+    {
+      "file": "action-quality-contract-llm-visible-context-contamination-checked.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "llm-visible context evidence checks contamination",
+      "expect": "fail",
+      "errorIncludes": "CME-AQC-001 llm-visible context evidence requires contaminationChecked true."
+    },
+    {
+      "file": "action-quality-contract-stale-context-governance.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "stale context memory evidence routes to governance",
+      "expect": "fail",
+      "errorIncludes": "CME-AQC-001 non-current context memory evidence requires governanceTriggerRefs."
+    },
+    {
+      "file": "action-quality-contract-untrusted-context-used-governance.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "untrusted context used in decision routes to governance",
+      "expect": "fail",
+      "errorIncludes": "CME-AQC-001 untrusted context used in decision requires governanceTriggerRefs."
+    },
+    {
+      "file": "action-quality-contract-accepted-outcome-no-stale-context.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "accepted outcome does not rely on stale context",
+      "expect": "fail",
+      "errorIncludes": "AOC-AQC-001 accepted outcome must not rely on stale or untrusted context memory evidence."
     },
     {
       "file": "action-quality-contract-high-risk-request-needs-pre-guardrail.json",

@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.6.7 Tool Guardrail Policy so action-quality-contract packages record pre-execution and post-execution guardrails, tripwire behavior, rejected outputs, and the boundary that guardrails do not undo external side effects.",
-  "updated_at": "2026-08-26T04:37:17.120Z",
+  "content": "Implement QIF v0.6.8 Context Memory Boundary so action-quality-contract packages distinguish session history, local runtime context, agent memory, and LLM-visible context, with freshness, source trust, compaction, and contamination governance.",
+  "updated_at": "2026-08-27T04:37:53.650Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-QIFV067",
+  "source_session_id": "SESS-QIFV068",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-08-26T04:37:17.120Z"
+  "declared_complete_at": "2026-08-27T04:37:53.650Z"
 }

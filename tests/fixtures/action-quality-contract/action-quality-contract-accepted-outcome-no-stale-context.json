@@ -223,16 +223,6 @@
       "operation": "regenerate fixture corpus and run verifier suite",
       "reason": "Schema/verifier additions require retained fixture corpus synchronization.",
       "status": "approved-for-execution"
-    },
-    {
-      "id": "AQR-AQC-OTHER",
-      "actionContractRef": "ACT-AQC-001",
-      "requestedToolSurfaceRef": "TLS-AQC-001",
-      "requestedBy": "ai-agent",
-      "targetRef": "QIF repository",
-      "operation": "inspect package only",
-      "reason": "Fixture mutation for mismatched trace approval evidence.",
-      "status": "approved-for-execution"
     }
   ],
   "runtimeTraces": [
@@ -255,7 +245,7 @@
   "traceApprovalEvidence": [
     {
       "id": "TAE-AQC-001",
-      "actionRequestRef": "AQR-AQC-OTHER",
+      "actionRequestRef": "AQR-AQC-001",
       "runtimeTraceRef": "RTR-AQC-001",
       "approvalGateRef": "APR-AQC-001",
       "approvalRequired": true,
@@ -312,12 +302,14 @@
       "contextMemoryBoundaryRef": "CMB-AQC-001",
       "observedContextRef": "session-history-summary",
       "usedInDecision": true,
-      "freshnessStatus": "current",
+      "freshnessStatus": "stale",
       "trustStatus": "mixed",
       "contaminationChecked": true,
       "compactionApplied": false,
       "evidenceSummary": "Session history supplied continuity only; current task scope, verifier output, and explicit user instructions remained authoritative.",
-      "governanceTriggerRefs": [],
+      "governanceTriggerRefs": [
+        "GTR-AQC-CONTEXT"
+      ],
       "status": "captured"
     },
     {
@@ -354,7 +346,17 @@
       "status": "accepted"
     }
   ],
-  "governanceTriggers": [],
+  "governanceTriggers": [
+    {
+      "id": "GTR-AQC-CONTEXT",
+      "triggerType": "stale-context",
+      "reason": "Fixture mutation marks context stale.",
+      "severity": "medium",
+      "requiredAction": "review context memory before acceptance",
+      "owner": "repository maintainer",
+      "status": "open"
+    }
+  ],
   "verifierBoundary": {
     "checks": [
       "reference integrity",

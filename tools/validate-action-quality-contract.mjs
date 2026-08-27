@@ -91,12 +91,14 @@ function validate(pkg, packagePath) {
   const approvalGates = array(pkg, "approvalGates", packagePath);
   const approvalPersistencePolicies = array(pkg, "approvalPersistencePolicies", packagePath);
   const toolGuardrailPolicies = array(pkg, "toolGuardrailPolicies", packagePath);
+  const contextMemoryBoundaries = array(pkg, "contextMemoryBoundaries", packagePath);
   const transitions = array(pkg, "expectedStateTransitions", packagePath);
   const rollbacks = array(pkg, "rollbackPlans", packagePath);
   const evidenceRequirements = array(pkg, "evidenceRequirements", packagePath);
   const runtimeTraces = array(pkg, "runtimeTraces", packagePath);
   const traceApprovalEvidence = array(pkg, "traceApprovalEvidence", packagePath);
   const guardrailEvidence = array(pkg, "guardrailEvidence", packagePath);
+  const contextMemoryEvidence = array(pkg, "contextMemoryEvidence", packagePath);
   const outcomes = array(pkg, "actionOutcomes", packagePath);
   const triggers = array(pkg, "governanceTriggers", packagePath);
 
@@ -108,12 +110,14 @@ function validate(pkg, packagePath) {
   const approvalIndex = index(approvalGates, `${packagePath}:approvalGates`);
   const persistencePolicyIndex = index(approvalPersistencePolicies, `${packagePath}:approvalPersistencePolicies`);
   const guardrailPolicyIndex = index(toolGuardrailPolicies, `${packagePath}:toolGuardrailPolicies`);
+  const contextMemoryBoundaryIndex = index(contextMemoryBoundaries, `${packagePath}:contextMemoryBoundaries`);
   const transitionIndex = index(transitions, `${packagePath}:expectedStateTransitions`);
   const rollbackIndex = index(rollbacks, `${packagePath}:rollbackPlans`);
   const evidenceIndex = index(evidenceRequirements, `${packagePath}:evidenceRequirements`);
   const traceIndex = index(runtimeTraces, `${packagePath}:runtimeTraces`);
   const approvalEvidenceIndex = index(traceApprovalEvidence, `${packagePath}:traceApprovalEvidence`);
   const guardrailEvidenceIndex = index(guardrailEvidence, `${packagePath}:guardrailEvidence`);
+  const contextMemoryEvidenceIndex = index(contextMemoryEvidence, `${packagePath}:contextMemoryEvidence`);
   const outcomeIndex = index(outcomes, `${packagePath}:actionOutcomes`);
   const triggerIndex = index(triggers, `${packagePath}:governanceTriggers`);
 
@@ -179,6 +183,25 @@ function validate(pkg, packagePath) {
     const boundary = String(policy.sideEffectBoundary ?? "").toLowerCase();
     if (!boundary.includes("not") || !boundary.includes("undo")) {
       errors.push(`${policy.id} sideEffectBoundary must state that guardrails do not undo side effects.`);
+    }
+  }
+
+  for (const boundary of contextMemoryBoundaries) {
+    optionalRefs(boundary.governanceTriggerRefs, triggerIndex, "governance trigger", boundary.id);
+    for (const field of ["contextKind", "visibility", "sourceTrust", "freshnessPolicy", "staleAfter", "compactionPolicy", "contaminationPolicy", "status"]) str(boundary, field, boundary.id);
+    if (!Array.isArray(boundary.allowedUse) || boundary.allowedUse.length === 0) {
+      errors.push(`${boundary.id} allowedUse must include at least one use.`);
+    }
+    if (!Array.isArray(boundary.prohibitedUse) || boundary.prohibitedUse.length === 0) {
+      errors.push(`${boundary.id} prohibitedUse must include at least one use.`);
+    }
+    const contamination = String(boundary.contaminationPolicy ?? "").toLowerCase();
+    if (boundary.visibility === "llm-visible" && !contamination.includes("instruction")) {
+      errors.push(`${boundary.id} llm-visible context must explicitly handle embedded instructions.`);
+    }
+    if (boundary.visibility === "local-only" && String(boundary.compactionPolicy ?? "").toLowerCase().includes("llm-visible")) {
+      const policyText = String(boundary.compactionPolicy ?? "").toLowerCase();
+      if (!policyText.includes("not")) errors.push(`${boundary.id} local-only context must not be compacted into LLM-visible history.`);
     }
   }
 
@@ -319,6 +342,35 @@ function validate(pkg, packagePath) {
     guardrailEvidenceByRequest.get(evidence.actionRequestRef).push(evidence);
   }
 
+  const contextMemoryEvidenceByRequest = new Map();
+  for (const evidence of contextMemoryEvidence) {
+    refs([evidence.actionRequestRef], requestIndex, "action request", evidence.id);
+    refs([evidence.runtimeTraceRef], traceIndex, "runtime trace", evidence.id);
+    refs([evidence.contextMemoryBoundaryRef], contextMemoryBoundaryIndex, "context memory boundary", evidence.id);
+    optionalRefs(evidence.governanceTriggerRefs, triggerIndex, "governance trigger", evidence.id);
+    for (const field of ["observedContextRef", "freshnessStatus", "trustStatus", "evidenceSummary", "status"]) str(evidence, field, evidence.id);
+    for (const field of ["usedInDecision", "contaminationChecked", "compactionApplied"]) {
+      if (typeof evidence[field] !== "boolean") errors.push(`${evidence.id} ${field} must be boolean.`);
+    }
+    const request = requestIndex.get(evidence.actionRequestRef);
+    const trace = traceIndex.get(evidence.runtimeTraceRef);
+    const boundary = contextMemoryBoundaryIndex.get(evidence.contextMemoryBoundaryRef);
+    if (request && trace && trace.actionRequestRef !== request.id) {
+      errors.push(`${evidence.id} runtimeTraceRef must belong to its actionRequestRef.`);
+    }
+    if (boundary?.visibility === "llm-visible" && evidence.contaminationChecked !== true) {
+      errors.push(`${evidence.id} llm-visible context evidence requires contaminationChecked true.`);
+    }
+    if (evidence.freshnessStatus !== "current" && (!Array.isArray(evidence.governanceTriggerRefs) || evidence.governanceTriggerRefs.length === 0)) {
+      errors.push(`${evidence.id} non-current context memory evidence requires governanceTriggerRefs.`);
+    }
+    if (evidence.trustStatus === "untrusted" && evidence.usedInDecision && (!Array.isArray(evidence.governanceTriggerRefs) || evidence.governanceTriggerRefs.length === 0)) {
+      errors.push(`${evidence.id} untrusted context used in decision requires governanceTriggerRefs.`);
+    }
+    if (!contextMemoryEvidenceByRequest.has(evidence.actionRequestRef)) contextMemoryEvidenceByRequest.set(evidence.actionRequestRef, []);
+    contextMemoryEvidenceByRequest.get(evidence.actionRequestRef).push(evidence);
+  }
+
   for (const request of requests) {
     const contract = contractIndex.get(request.actionContractRef);
     if (contract && Array.isArray(contract.approvalGateRefs) && contract.approvalGateRefs.length > 0) {
@@ -334,6 +386,10 @@ function validate(pkg, packagePath) {
       }
       if (!matchingGuardrails.some((evidence) => evidence.guardrailStage === "post-execution")) {
         errors.push(`${request.id} high-risk or write-like request requires post-execution guardrailEvidence.`);
+      }
+      const matchingContextMemory = contextMemoryEvidenceByRequest.get(request.id) ?? [];
+      if (matchingContextMemory.length === 0) {
+        errors.push(`${request.id} high-risk or write-like request requires contextMemoryEvidence.`);
       }
     }
   }
@@ -359,6 +415,10 @@ function validate(pkg, packagePath) {
     const guardrails = guardrailEvidenceByRequest.get(outcome.actionRequestRef) ?? [];
     if (outcome.verdict === "accepted" && guardrails.some((evidence) => evidence.tripwireTriggered || evidence.result !== "allow")) {
       errors.push(`${outcome.id} accepted outcome must not have tripped or rejected guardrail evidence.`);
+    }
+    const contextEvidence = contextMemoryEvidenceByRequest.get(outcome.actionRequestRef) ?? [];
+    if (outcome.verdict === "accepted" && contextEvidence.some((evidence) => evidence.freshnessStatus !== "current" || (evidence.trustStatus === "untrusted" && evidence.usedInDecision))) {
+      errors.push(`${outcome.id} accepted outcome must not rely on stale or untrusted context memory evidence.`);
     }
     if (outcome.confidence < 0.7 && (!Array.isArray(outcome.governanceTriggerRefs) || outcome.governanceTriggerRefs.length === 0)) {
       errors.push(`${outcome.id} low-confidence outcome requires governanceTriggerRefs.`);
@@ -396,12 +456,14 @@ function validate(pkg, packagePath) {
       approvalGates: approvalGates.length,
       approvalPersistencePolicies: approvalPersistencePolicies.length,
       toolGuardrailPolicies: toolGuardrailPolicies.length,
+      contextMemoryBoundaries: contextMemoryBoundaries.length,
       expectedStateTransitions: transitions.length,
       rollbackPlans: rollbacks.length,
       evidenceRequirements: evidenceRequirements.length,
       runtimeTraces: runtimeTraces.length,
       traceApprovalEvidence: traceApprovalEvidence.length,
       guardrailEvidence: guardrailEvidence.length,
+      contextMemoryEvidence: contextMemoryEvidence.length,
       actionOutcomes: outcomes.length,
       governanceTriggers: triggers.length
     }
