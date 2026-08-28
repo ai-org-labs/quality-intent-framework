@@ -56,11 +56,11 @@ Runtime verification:
 
 Release outcome:
 
-- Implementation commit: pending
-- Tag: pending
-- Tag target commit: pending
-- GitHub Release: pending
-- Published result: pending
+- Implementation commit: `2ff1a778c612f91616c9f37d995b689dd40b1b6a`
+- Tag: `v0.6.9`
+- Tag target commit: `2ff1a778c612f91616c9f37d995b689dd40b1b6a`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.9`
+- Published result: released
 
 ## v0.6.8 Context Memory Boundary
 
