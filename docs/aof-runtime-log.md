@@ -2,6 +2,66 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.9 Agent Containment and Safe Exit Boundary
+
+Runtime source:
+
+- AOF source repo latest checked: `v5.0.0`
+- AOF runtime commands executed: `situation-assess`, `goal-project`, `task-open`, `task-update`, `council-review-packet`, `organization-verify`
+- External trend check date: `2026-08-28`
+- External source refs:
+  - `https://openai.com/index/hugging-face-incident-and-the-road-ahead/`
+  - `https://openai.github.io/openai-agents-js/guides/sessions/`
+  - `https://openai.github.io/openai-agents-js/guides/guardrails/`
+  - `https://openai.github.io/openai-agents-python/context/`
+  - `https://openai.com/safety/prompt-injections/`
+
+Need / Intent / Context:
+
+- Need: Longer-running AI agents can keep working after a context error, tool error, prompt-injection attempt, unexpected environment state, or unsafe external communication. A final successful-looking outcome must not hide containment breach, missing shutdown criteria, or unresolved incident response.
+- Intent: Add `containmentPolicies` and `containmentEvidence` to `action-quality-contract` packages so containment scope, external communication boundaries, monitoring signals, safe-exit criteria, incident response, shutdown authority, restart authority, and containment evidence are auditable.
+- Context: v0.6.5-v0.6.8 made approval evidence, approval persistence, guardrails, and context memory evidence traceable. The remaining gap is whether an agent stayed inside its allowed operational boundary and stopped or escalated when that boundary was breached.
+
+Decision reason:
+
+- Implement this inside `action-quality-contract` because containment and safe exit govern action execution, not authoring or discovery.
+- Do not build a security scanner or provider-specific incident system. The verifier checks declarations, refs, monitoring evidence, incident routing, and accepted-outcome blocking only.
+- Do not claim containment enforcement. Semantic validity requires runtime enforcement, monitor reliability review, incident response review, and accountable human restart approval.
+
+Council judgment:
+
+- Visionary: proceed; agentic quality claims need explicit safe-exit and incident boundaries before long-running tools become ordinary work infrastructure.
+- Builder: proceed; the implementation is bounded to schema, example, verifier, fixtures, docs, roadmap, and release notes.
+- Guardian: proceed with guardrails; breached containment, unauthorized external communication, or unresolved incidents must block accepted outcomes and route to governance.
+
+Artifacts:
+
+- Situation assessment: `.aof/artifacts/runtime/qif-v0.6.9-situation-assessment.json`
+- Council review packet: `.aof/artifacts/council/qif-v0.6.9-council-review-packet.json`
+- Task: `.aof/tasks/done/TASK-027.json`
+- Schema: `schemas/action-quality-contract-package.schema.json`
+- Example: `examples/action-quality-contract-package.json`
+- Verifier: `tools/validate-action-quality-contract.mjs`
+- Fixture source: `tools/fixtures/action-quality-contract-cases.mjs`
+- Retained negative corpus: `tests/fixtures/action-quality-contract/`
+- Release notes: `RELEASE-NOTES-v0.6.9.md`
+
+Runtime verification:
+
+- `node tools/validate-action-quality-contract.mjs`: pass with `containmentPolicies: 1` and `containmentEvidence: 1`.
+- `node tools/run-fixture-tests.mjs`: pass, `15/15` positive checks and `589/589` retained negative checks.
+- `npm test`: pass, `15/15` positive checks and `589/589` retained negative checks.
+- AOF `organization-verify` using v5.0.0: failed on existing AOF metadata compatibility, not QIF runtime code. The v5 schema rejects existing `safety_level` fields in project orientation and command registry metadata.
+- AOF `situation-assess` using v5.0.0: pass with no current truth conflicts; generated artifact sanitized for public repository use.
+
+Release outcome:
+
+- Implementation commit: pending
+- Tag: pending
+- Tag target commit: pending
+- GitHub Release: pending
+- Published result: pending
+
 ## v0.6.8 Context Memory Boundary
 
 Runtime source:

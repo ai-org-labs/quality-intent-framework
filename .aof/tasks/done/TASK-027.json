@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-027",
+  "title": "QIF v0.6.9 Agent Containment and Safe Exit Boundary",
+  "description": "Extend action-quality-contract packages with explicit containment scope, external communication boundary, safe-exit criteria, monitoring signals, and incident response routing for long-running AI agent actions.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-QIFV069",
+  "assigned_session_ids": [],
+  "related_decision_record_id": null,
+  "operating_goal_ref": ".aof/goals/next-value-slice.json",
+  "created_at": "2026-08-28T04:33:10.419Z",
+  "updated_at": "2026-08-28T05:17:20.577Z",
+  "assigned_at": null,
+  "done_at": "2026-08-28T05:17:20.577Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implementation completed: action-quality-contract now has containmentPolicies, containmentEvidence, verifier rules, retained fixtures, docs, roadmap, and release notes. Validator passed and fixture suite passed 15/15 positive checks and 589/589 negative checks."
+}

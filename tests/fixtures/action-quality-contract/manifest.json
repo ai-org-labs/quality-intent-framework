@@ -176,6 +176,41 @@
       "errorIncludes": "CMB-AQC-001 llm-visible context must explicitly handle embedded instructions."
     },
     {
+      "file": "action-quality-contract-containment-policies-array.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "containment policies are retained",
+      "expect": "fail",
+      "errorIncludes": "containmentPolicies must be an array."
+    },
+    {
+      "file": "action-quality-contract-containment-policy-tool-ref-resolves.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "containment policy links tool surface",
+      "expect": "fail",
+      "errorIncludes": "CTP-AQC-001 references missing tool surface: TLS-NOPE-999"
+    },
+    {
+      "file": "action-quality-contract-containment-policy-monitoring-signals.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "containment policy declares monitoring signals",
+      "expect": "fail",
+      "errorIncludes": "CTP-AQC-001 monitoringSignals must include at least one signal."
+    },
+    {
+      "file": "action-quality-contract-containment-policy-safe-exit-behavior.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "containment policy defines safe exit behavior",
+      "expect": "fail",
+      "errorIncludes": "CTP-AQC-001 safeExitCriteria must include stop or pause behavior."
+    },
+    {
+      "file": "action-quality-contract-containment-policy-governance-route.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "containment incidents route to governance",
+      "expect": "fail",
+      "errorIncludes": "CTP-AQC-001 incidentResponsePlan must route incidents to governance."
+    },
+    {
       "file": "action-quality-contract-transition-stop-condition-required.json",
       "validator": "tools/validate-action-quality-contract.mjs",
       "rule": "expected transition has stop condition",
@@ -209,6 +244,13 @@
       "rule": "high-risk write action requires approval gate",
       "expect": "fail",
       "errorIncludes": "ACT-AQC-001 high-risk or write-like action contract requires approvalGateRefs."
+    },
+    {
+      "file": "action-quality-contract-high-risk-contract-needs-containment.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "high-risk write action requires containment policy",
+      "expect": "fail",
+      "errorIncludes": "ACT-AQC-001 high-risk or write-like action contract requires containmentPolicyRefs."
     },
     {
       "file": "action-quality-contract-request-tool-matches-contract.json",
@@ -251,6 +293,55 @@
       "rule": "high-risk request has context memory evidence",
       "expect": "fail",
       "errorIncludes": "AQR-AQC-001 high-risk or write-like request requires contextMemoryEvidence."
+    },
+    {
+      "file": "action-quality-contract-containment-evidence-array.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "containment evidence is retained",
+      "expect": "fail",
+      "errorIncludes": "containmentEvidence must be an array."
+    },
+    {
+      "file": "action-quality-contract-high-risk-request-needs-containment-evidence.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "high-risk request has containment evidence",
+      "expect": "fail",
+      "errorIncludes": "AQR-AQC-001 high-risk or write-like request requires containmentEvidence."
+    },
+    {
+      "file": "action-quality-contract-containment-evidence-policy-ref-resolves.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "containment evidence links policy",
+      "expect": "fail",
+      "errorIncludes": "CTE-AQC-001 references missing containment policy: CTP-NOPE-999"
+    },
+    {
+      "file": "action-quality-contract-containment-breach-governance.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "containment breach routes to governance",
+      "expect": "fail",
+      "errorIncludes": "CTE-AQC-001 containment breach requires governanceTriggerRefs."
+    },
+    {
+      "file": "action-quality-contract-unauthorized-external-communication-governance.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "unauthorized external communication routes to governance",
+      "expect": "fail",
+      "errorIncludes": "CTE-AQC-001 unauthorized external communication requires governanceTriggerRefs."
+    },
+    {
+      "file": "action-quality-contract-safe-exit-trigger-opens-incident.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "safe-exit trigger opens incident response",
+      "expect": "fail",
+      "errorIncludes": "CTE-AQC-001 safe-exit trigger requires incidentResponseOpened true."
+    },
+    {
+      "file": "action-quality-contract-accepted-outcome-no-containment-breach.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "accepted outcome has no containment breach or unresolved incident",
+      "expect": "fail",
+      "errorIncludes": "AOC-AQC-001 accepted outcome must not rely on breached containment or unresolved incident evidence."
     },
     {
       "file": "action-quality-contract-context-memory-evidence-boundary-ref-resolves.json",

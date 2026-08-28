@@ -1,6 +1,6 @@
 {
   "packageType": "action-quality-contract",
-  "runtimeVersion": "0.6.8",
+  "runtimeVersion": "0.6.9",
   "packageId": "AQC-PKG-001",
   "toolSurfaces": [
     {
@@ -210,7 +210,10 @@
         "EVR-AQC-002"
       ],
       "governanceTriggerRefs": [],
-      "status": "active"
+      "status": "active",
+      "containmentPolicyRefs": [
+        "CTP-AQC-001"
+      ]
     }
   ],
   "actionRequests": [
@@ -365,6 +368,9 @@
       "approval persistence policy linkage",
       "tool guardrail policy linkage",
       "context memory boundary linkage",
+      "containment policy linkage",
+      "containment evidence",
+      "safe-exit and incident routing",
       "expected state transition linkage",
       "rollback plan linkage",
       "runtime trace evidence",
@@ -378,13 +384,67 @@
       "semantic truth",
       "tool execution safety",
       "provider security compliance",
-      "human approval correctness"
+      "human approval correctness",
+      "containment enforcement",
+      "incident absence"
     ],
     "semanticValidityRequires": [
       "human approval for external side effects",
       "runtime sandbox enforcement",
       "security review for sensitive tools",
-      "post-action outcome inspection"
+      "post-action outcome inspection",
+      "runtime containment enforcement",
+      "incident response review for containment alerts"
     ]
-  }
+  },
+  "containmentPolicies": [
+    {
+      "id": "CTP-AQC-001",
+      "toolSurfaceRef": "TLS-AQC-001",
+      "executionEnvironmentRef": "ENV-AQC-001",
+      "containmentScope": "repository-local fixture, verifier, documentation, and release-note changes only",
+      "allowedExternalCommunication": [
+        "npm registry metadata already present in lockfile is not contacted during validation",
+        "GitHub push or release only after explicit release approval"
+      ],
+      "prohibitedExternalCommunication": [
+        "unauthorized internet access",
+        "unapproved inter-agent messaging",
+        "credential upload",
+        "third-party service mutation outside release scope"
+      ],
+      "safeExitCriteria": "pause or stop when command output indicates containment breach, hidden external communication, unresolved approval mismatch, or unexpected state transition",
+      "monitoringSignals": [
+        "network access attempt",
+        "write outside repository",
+        "credential-like output",
+        "unexpected process escalation",
+        "unapproved release publication"
+      ],
+      "incidentResponsePlan": "open governance trigger, stop further external effects, preserve trace summary, assign owner, and require human restart approval",
+      "shutdownAuthority": "repository maintainer or configured runtime guardrail",
+      "restartAuthority": "repository maintainer after containment evidence is resolved",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "containmentEvidence": [
+    {
+      "id": "CTE-AQC-001",
+      "actionRequestRef": "AQR-AQC-001",
+      "runtimeTraceRef": "RTR-AQC-001",
+      "containmentPolicyRef": "CTP-AQC-001",
+      "monitoringObserved": "command execution remained repository-local; network and release operations required explicit approval",
+      "containmentMaintained": true,
+      "externalCommunicationObserved": "none during local validation; release publication is separately approved and logged",
+      "unauthorizedExternalCommunication": false,
+      "safeExitAssessment": "no safe-exit criterion triggered during fixture regeneration and npm test",
+      "safeExitTriggered": false,
+      "incidentResponseOpened": false,
+      "incidentStatus": "none",
+      "evidenceSummary": "No containment breach, unauthorized external communication, credential exposure, or unexpected state transition was observed in the retained trace summary.",
+      "governanceTriggerRefs": [],
+      "status": "captured"
+    }
+  ]
 }

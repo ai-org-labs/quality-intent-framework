@@ -92,6 +92,7 @@ function validate(pkg, packagePath) {
   const approvalPersistencePolicies = array(pkg, "approvalPersistencePolicies", packagePath);
   const toolGuardrailPolicies = array(pkg, "toolGuardrailPolicies", packagePath);
   const contextMemoryBoundaries = array(pkg, "contextMemoryBoundaries", packagePath);
+  const containmentPolicies = array(pkg, "containmentPolicies", packagePath);
   const transitions = array(pkg, "expectedStateTransitions", packagePath);
   const rollbacks = array(pkg, "rollbackPlans", packagePath);
   const evidenceRequirements = array(pkg, "evidenceRequirements", packagePath);
@@ -99,6 +100,7 @@ function validate(pkg, packagePath) {
   const traceApprovalEvidence = array(pkg, "traceApprovalEvidence", packagePath);
   const guardrailEvidence = array(pkg, "guardrailEvidence", packagePath);
   const contextMemoryEvidence = array(pkg, "contextMemoryEvidence", packagePath);
+  const containmentEvidence = array(pkg, "containmentEvidence", packagePath);
   const outcomes = array(pkg, "actionOutcomes", packagePath);
   const triggers = array(pkg, "governanceTriggers", packagePath);
 
@@ -111,6 +113,7 @@ function validate(pkg, packagePath) {
   const persistencePolicyIndex = index(approvalPersistencePolicies, `${packagePath}:approvalPersistencePolicies`);
   const guardrailPolicyIndex = index(toolGuardrailPolicies, `${packagePath}:toolGuardrailPolicies`);
   const contextMemoryBoundaryIndex = index(contextMemoryBoundaries, `${packagePath}:contextMemoryBoundaries`);
+  const containmentPolicyIndex = index(containmentPolicies, `${packagePath}:containmentPolicies`);
   const transitionIndex = index(transitions, `${packagePath}:expectedStateTransitions`);
   const rollbackIndex = index(rollbacks, `${packagePath}:rollbackPlans`);
   const evidenceIndex = index(evidenceRequirements, `${packagePath}:evidenceRequirements`);
@@ -118,6 +121,7 @@ function validate(pkg, packagePath) {
   const approvalEvidenceIndex = index(traceApprovalEvidence, `${packagePath}:traceApprovalEvidence`);
   const guardrailEvidenceIndex = index(guardrailEvidence, `${packagePath}:guardrailEvidence`);
   const contextMemoryEvidenceIndex = index(contextMemoryEvidence, `${packagePath}:contextMemoryEvidence`);
+  const containmentEvidenceIndex = index(containmentEvidence, `${packagePath}:containmentEvidence`);
   const outcomeIndex = index(outcomes, `${packagePath}:actionOutcomes`);
   const triggerIndex = index(triggers, `${packagePath}:governanceTriggers`);
 
@@ -205,6 +209,30 @@ function validate(pkg, packagePath) {
     }
   }
 
+  for (const policy of containmentPolicies) {
+    refs([policy.toolSurfaceRef], toolIndex, "tool surface", policy.id);
+    refs([policy.executionEnvironmentRef], environmentIndex, "execution environment", policy.id);
+    optionalRefs(policy.governanceTriggerRefs, triggerIndex, "governance trigger", policy.id);
+    for (const field of ["containmentScope", "safeExitCriteria", "incidentResponsePlan", "shutdownAuthority", "restartAuthority", "status"]) str(policy, field, policy.id);
+    if (!Array.isArray(policy.allowedExternalCommunication)) {
+      errors.push(`${policy.id} allowedExternalCommunication must be an array.`);
+    }
+    if (!Array.isArray(policy.prohibitedExternalCommunication) || policy.prohibitedExternalCommunication.length === 0) {
+      errors.push(`${policy.id} prohibitedExternalCommunication must include at least one communication boundary.`);
+    }
+    if (!Array.isArray(policy.monitoringSignals) || policy.monitoringSignals.length === 0) {
+      errors.push(`${policy.id} monitoringSignals must include at least one signal.`);
+    }
+    const safeExit = String(policy.safeExitCriteria ?? "").toLowerCase();
+    if (!safeExit.includes("stop") && !safeExit.includes("pause")) {
+      errors.push(`${policy.id} safeExitCriteria must include stop or pause behavior.`);
+    }
+    const incidentPlan = String(policy.incidentResponsePlan ?? "").toLowerCase();
+    if (!incidentPlan.includes("governance")) {
+      errors.push(`${policy.id} incidentResponsePlan must route incidents to governance.`);
+    }
+  }
+
   for (const transition of transitions) {
     for (const field of ["targetRef", "preState", "postState", "stopCondition", "status"]) str(transition, field, transition.id);
     if (!Array.isArray(transition.invariantRefs)) errors.push(`${transition.id} invariantRefs must be an array.`);
@@ -231,12 +259,44 @@ function validate(pkg, packagePath) {
     refs(contract.evidenceRequirementRefs, evidenceIndex, "evidence requirement", contract.id);
     optionalRefs(contract.approvalGateRefs, approvalIndex, "approval gate", contract.id);
     optionalRefs(contract.governanceTriggerRefs, triggerIndex, "governance trigger", contract.id);
+    optionalRefs(contract.containmentPolicyRefs, containmentPolicyIndex, "containment policy", contract.id);
     for (const field of ["qualityIntentRef", "lossBoundary", "riskClass", "status"]) str(contract, field, contract.id);
     const policy = policyIndex.get(contract.permissionPolicyRef);
     const needsApproval = contract.riskClass === "high" || ["write", "delete", "publish", "external-call"].includes(policy?.permissionClass);
     if (needsApproval && (!Array.isArray(contract.approvalGateRefs) || contract.approvalGateRefs.length === 0)) {
       errors.push(`${contract.id} high-risk or write-like action contract requires approvalGateRefs.`);
     }
+    if (needsApproval && (!Array.isArray(contract.containmentPolicyRefs) || contract.containmentPolicyRefs.length === 0)) {
+      errors.push(`${contract.id} high-risk or write-like action contract requires containmentPolicyRefs.`);
+    }
+  }
+
+  const containmentEvidenceByRequest = new Map();
+  for (const evidence of containmentEvidence) {
+    refs([evidence.actionRequestRef], requestIndex, "action request", evidence.id);
+    refs([evidence.runtimeTraceRef], traceIndex, "runtime trace", evidence.id);
+    refs([evidence.containmentPolicyRef], containmentPolicyIndex, "containment policy", evidence.id);
+    optionalRefs(evidence.governanceTriggerRefs, triggerIndex, "governance trigger", evidence.id);
+    for (const field of ["monitoringObserved", "externalCommunicationObserved", "safeExitAssessment", "incidentStatus", "evidenceSummary", "status"]) str(evidence, field, evidence.id);
+    for (const field of ["containmentMaintained", "unauthorizedExternalCommunication", "safeExitTriggered", "incidentResponseOpened"]) {
+      if (typeof evidence[field] !== "boolean") errors.push(`${evidence.id} ${field} must be boolean.`);
+    }
+    const request = requestIndex.get(evidence.actionRequestRef);
+    const trace = traceIndex.get(evidence.runtimeTraceRef);
+    if (request && trace && trace.actionRequestRef !== request.id) {
+      errors.push(`${evidence.id} runtimeTraceRef must belong to its actionRequestRef.`);
+    }
+    if (evidence.containmentMaintained === false && (!Array.isArray(evidence.governanceTriggerRefs) || evidence.governanceTriggerRefs.length === 0)) {
+      errors.push(`${evidence.id} containment breach requires governanceTriggerRefs.`);
+    }
+    if (evidence.unauthorizedExternalCommunication && (!Array.isArray(evidence.governanceTriggerRefs) || evidence.governanceTriggerRefs.length === 0)) {
+      errors.push(`${evidence.id} unauthorized external communication requires governanceTriggerRefs.`);
+    }
+    if (evidence.safeExitTriggered && !evidence.incidentResponseOpened) {
+      errors.push(`${evidence.id} safe-exit trigger requires incidentResponseOpened true.`);
+    }
+    if (!containmentEvidenceByRequest.has(evidence.actionRequestRef)) containmentEvidenceByRequest.set(evidence.actionRequestRef, []);
+    containmentEvidenceByRequest.get(evidence.actionRequestRef).push(evidence);
   }
 
   for (const request of requests) {
@@ -391,6 +451,10 @@ function validate(pkg, packagePath) {
       if (matchingContextMemory.length === 0) {
         errors.push(`${request.id} high-risk or write-like request requires contextMemoryEvidence.`);
       }
+      const matchingContainment = containmentEvidenceByRequest.get(request.id) ?? [];
+      if (matchingContainment.length === 0) {
+        errors.push(`${request.id} high-risk or write-like request requires containmentEvidence.`);
+      }
     }
   }
 
@@ -419,6 +483,10 @@ function validate(pkg, packagePath) {
     const contextEvidence = contextMemoryEvidenceByRequest.get(outcome.actionRequestRef) ?? [];
     if (outcome.verdict === "accepted" && contextEvidence.some((evidence) => evidence.freshnessStatus !== "current" || (evidence.trustStatus === "untrusted" && evidence.usedInDecision))) {
       errors.push(`${outcome.id} accepted outcome must not rely on stale or untrusted context memory evidence.`);
+    }
+    const containmentResults = containmentEvidenceByRequest.get(outcome.actionRequestRef) ?? [];
+    if (outcome.verdict === "accepted" && containmentResults.some((evidence) => !evidence.containmentMaintained || evidence.unauthorizedExternalCommunication || !["none", "resolved"].includes(evidence.incidentStatus))) {
+      errors.push(`${outcome.id} accepted outcome must not rely on breached containment or unresolved incident evidence.`);
     }
     if (outcome.confidence < 0.7 && (!Array.isArray(outcome.governanceTriggerRefs) || outcome.governanceTriggerRefs.length === 0)) {
       errors.push(`${outcome.id} low-confidence outcome requires governanceTriggerRefs.`);
@@ -457,6 +525,7 @@ function validate(pkg, packagePath) {
       approvalPersistencePolicies: approvalPersistencePolicies.length,
       toolGuardrailPolicies: toolGuardrailPolicies.length,
       contextMemoryBoundaries: contextMemoryBoundaries.length,
+      containmentPolicies: containmentPolicies.length,
       expectedStateTransitions: transitions.length,
       rollbackPlans: rollbacks.length,
       evidenceRequirements: evidenceRequirements.length,
@@ -464,6 +533,7 @@ function validate(pkg, packagePath) {
       traceApprovalEvidence: traceApprovalEvidence.length,
       guardrailEvidence: guardrailEvidence.length,
       contextMemoryEvidence: contextMemoryEvidence.length,
+      containmentEvidence: containmentEvidence.length,
       actionOutcomes: outcomes.length,
       governanceTriggers: triggers.length
     }

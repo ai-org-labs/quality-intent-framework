@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.9
+
+- Added `containmentPolicies` and `containmentEvidence` to action-quality-contract packages.
+- Added verifier rules for containment policy linkage, monitoring signals, safe-exit behavior, incident governance routing, high-risk request containment evidence, and accepted-outcome rejection when containment is breached or incidents remain unresolved.
+- Added retained negative fixtures covering containment arrays, policy refs, monitoring signals, safe-exit criteria, incident routing, unauthorized external communication, and breached-containment outcomes.
+- Updated docs, roadmap, examples, release notes, and AOF runtime artifacts for the v0.6.9 release path.
+
 ## v0.6.8
 
 - Added first-class `contextMemoryBoundaries` and `contextMemoryEvidence` to `action-quality-contract` packages.

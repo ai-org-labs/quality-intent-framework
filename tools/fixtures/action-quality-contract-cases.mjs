@@ -10,6 +10,7 @@ function persistencePolicy(pkg) { return pkg.approvalPersistencePolicies[0]; }
 function guardrailPolicy(pkg) { return pkg.toolGuardrailPolicies[0]; }
 function postGuardrailPolicy(pkg) { return pkg.toolGuardrailPolicies[1]; }
 function contextBoundary(pkg) { return pkg.contextMemoryBoundaries[0]; }
+function containmentPolicy(pkg) { return pkg.containmentPolicies[0]; }
 function transition(pkg) { return pkg.expectedStateTransitions[0]; }
 function rollback(pkg) { return pkg.rollbackPlans[0]; }
 function evidence(pkg) { return pkg.evidenceRequirements[0]; }
@@ -18,6 +19,7 @@ function approvalEvidence(pkg) { return pkg.traceApprovalEvidence[0]; }
 function guardrailEvidence(pkg) { return pkg.guardrailEvidence[0]; }
 function postGuardrailEvidence(pkg) { return pkg.guardrailEvidence[1]; }
 function contextEvidence(pkg) { return pkg.contextMemoryEvidence[0]; }
+function containmentEvidence(pkg) { return pkg.containmentEvidence[0]; }
 function outcome(pkg) { return pkg.actionOutcomes[0]; }
 
 export const cases = [
@@ -121,6 +123,36 @@ export const cases = [
     mutate: (pkg) => { contextBoundary(pkg).contaminationPolicy = "treat remembered content as source context"; }
   },
   {
+    id: "containment-policies-array",
+    rule: "containment policies are retained",
+    expect: "containmentPolicies must be an array.",
+    mutate: (pkg) => { pkg.containmentPolicies = null; }
+  },
+  {
+    id: "containment-policy-tool-ref-resolves",
+    rule: "containment policy links tool surface",
+    expect: "CTP-AQC-001 references missing tool surface: TLS-NOPE-999",
+    mutate: (pkg) => { containmentPolicy(pkg).toolSurfaceRef = "TLS-NOPE-999"; }
+  },
+  {
+    id: "containment-policy-monitoring-signals",
+    rule: "containment policy declares monitoring signals",
+    expect: "CTP-AQC-001 monitoringSignals must include at least one signal.",
+    mutate: (pkg) => { containmentPolicy(pkg).monitoringSignals = []; }
+  },
+  {
+    id: "containment-policy-safe-exit-behavior",
+    rule: "containment policy defines safe exit behavior",
+    expect: "CTP-AQC-001 safeExitCriteria must include stop or pause behavior.",
+    mutate: (pkg) => { containmentPolicy(pkg).safeExitCriteria = "continue and inspect later"; }
+  },
+  {
+    id: "containment-policy-governance-route",
+    rule: "containment incidents route to governance",
+    expect: "CTP-AQC-001 incidentResponsePlan must route incidents to governance.",
+    mutate: (pkg) => { containmentPolicy(pkg).incidentResponsePlan = "notify runtime operator only"; }
+  },
+  {
     id: "transition-stop-condition-required",
     rule: "expected transition has stop condition",
     expect: "EST-AQC-001 must include non-empty string stopCondition.",
@@ -149,6 +181,12 @@ export const cases = [
     rule: "high-risk write action requires approval gate",
     expect: "ACT-AQC-001 high-risk or write-like action contract requires approvalGateRefs.",
     mutate: (pkg) => { contract(pkg).approvalGateRefs = []; }
+  },
+  {
+    id: "high-risk-contract-needs-containment",
+    rule: "high-risk write action requires containment policy",
+    expect: "ACT-AQC-001 high-risk or write-like action contract requires containmentPolicyRefs.",
+    mutate: (pkg) => { contract(pkg).containmentPolicyRefs = []; }
   },
   {
     id: "request-tool-matches-contract",
@@ -195,6 +233,61 @@ export const cases = [
     rule: "high-risk request has context memory evidence",
     expect: "AQR-AQC-001 high-risk or write-like request requires contextMemoryEvidence.",
     mutate: (pkg) => { pkg.contextMemoryEvidence = []; }
+  },
+  {
+    id: "containment-evidence-array",
+    rule: "containment evidence is retained",
+    expect: "containmentEvidence must be an array.",
+    mutate: (pkg) => { pkg.containmentEvidence = null; }
+  },
+  {
+    id: "high-risk-request-needs-containment-evidence",
+    rule: "high-risk request has containment evidence",
+    expect: "AQR-AQC-001 high-risk or write-like request requires containmentEvidence.",
+    mutate: (pkg) => { pkg.containmentEvidence = []; }
+  },
+  {
+    id: "containment-evidence-policy-ref-resolves",
+    rule: "containment evidence links policy",
+    expect: "CTE-AQC-001 references missing containment policy: CTP-NOPE-999",
+    mutate: (pkg) => { containmentEvidence(pkg).containmentPolicyRef = "CTP-NOPE-999"; }
+  },
+  {
+    id: "containment-breach-governance",
+    rule: "containment breach routes to governance",
+    expect: "CTE-AQC-001 containment breach requires governanceTriggerRefs.",
+    mutate: (pkg) => { containmentEvidence(pkg).containmentMaintained = false; }
+  },
+  {
+    id: "unauthorized-external-communication-governance",
+    rule: "unauthorized external communication routes to governance",
+    expect: "CTE-AQC-001 unauthorized external communication requires governanceTriggerRefs.",
+    mutate: (pkg) => { containmentEvidence(pkg).unauthorizedExternalCommunication = true; }
+  },
+  {
+    id: "safe-exit-trigger-opens-incident",
+    rule: "safe-exit trigger opens incident response",
+    expect: "CTE-AQC-001 safe-exit trigger requires incidentResponseOpened true.",
+    mutate: (pkg) => { containmentEvidence(pkg).safeExitTriggered = true; }
+  },
+  {
+    id: "accepted-outcome-no-containment-breach",
+    rule: "accepted outcome has no containment breach or unresolved incident",
+    expect: "AOC-AQC-001 accepted outcome must not rely on breached containment or unresolved incident evidence.",
+    mutate: (pkg) => {
+      pkg.governanceTriggers.push({
+        id: "GTR-AQC-CONTAINMENT",
+        triggerType: "containment-breach",
+        reason: "Fixture mutation marks containment as breached.",
+        severity: "high",
+        requiredAction: "stop action and review containment evidence before acceptance",
+        owner: "repository maintainer",
+        status: "open"
+      });
+      containmentEvidence(pkg).containmentMaintained = false;
+      containmentEvidence(pkg).incidentStatus = "open";
+      containmentEvidence(pkg).governanceTriggerRefs = ["GTR-AQC-CONTAINMENT"];
+    }
   },
   {
     id: "context-memory-evidence-boundary-ref-resolves",

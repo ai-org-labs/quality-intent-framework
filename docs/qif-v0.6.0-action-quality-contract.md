@@ -100,3 +100,27 @@ Semantic and operational validity require runtime enforcement, security review f
 See `examples/action-quality-contract-package.json`.
 
 The example describes a provider-neutral local shell action for regenerating fixtures and running `npm test`. It records permission, approval, approval persistence policy, tool guardrail policy, context memory boundary, expected repository state, rollback, evidence, trace summary, trace approval evidence, guardrail evidence, context memory evidence, and accepted outcome.
+
+
+## v0.6.9 Containment and Safe Exit Boundary
+
+QIF v0.6.9 adds containment as a first-class action-quality boundary. The intent is not to prove that a sandbox, monitor, or platform is secure. The intent is to require an action package to declare what the agent is allowed to affect, what external communication is forbidden, which signals are monitored, when the run must pause or stop, and how incidents are routed to governance.
+
+New entities:
+
+- `containmentPolicies`: reusable containment scope, allowed/prohibited external communication, safe-exit criteria, monitoring signals, incident response plan, shutdown authority, restart authority, and status.
+- `containmentEvidence`: request-specific evidence that containment was maintained or breached, whether unauthorized external communication occurred, whether safe-exit triggered, whether incident response opened, and the current incident status.
+
+Verifier rules:
+
+- High-risk or write-like action contracts must reference containment policies.
+- High-risk or write-like action requests must include containment evidence.
+- Containment policies must link tool surface and execution environment, declare monitoring signals, include stop or pause behavior, and route incidents to governance.
+- Containment evidence must link request, runtime trace, and containment policy.
+- Containment breach and unauthorized external communication require governance triggers.
+- A safe-exit trigger must open incident response.
+- An accepted outcome must not rely on breached containment or unresolved incident evidence.
+
+Verifier boundary:
+
+Passing these rules proves structural containment traceability only. It does not prove sandbox enforcement, monitor reliability, incident absence, semantic safety, or provider security compliance.

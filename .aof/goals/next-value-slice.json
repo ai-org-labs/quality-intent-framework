@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.6.8 Context Memory Boundary so action-quality-contract packages distinguish session history, local runtime context, agent memory, and LLM-visible context, with freshness, source trust, compaction, and contamination governance.",
-  "updated_at": "2026-08-27T04:37:53.650Z",
+  "content": "Implement QIF v0.6.9 Agent Containment and Safe Exit Boundary so action-quality-contract packages define containment scope, external communication boundaries, safe-exit criteria, monitoring signals, and incident response routing.",
+  "updated_at": "2026-08-28T05:17:15.512Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-QIFV068",
+  "source_session_id": "SESS-QIFV069",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-08-27T04:37:53.650Z"
+  "declared_complete_at": "2026-08-28T05:17:15.512Z"
 }
