@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.10
+
+- Added `handoffPolicies` and `handoffEvidence` to action-quality-contract packages.
+- Added verifier rules for delegated-agent handoff authorization, context transfer filtering, authority scope, lifecycle evidence, high-risk request handoff evidence, and governance routing for denied or out-of-scope handoffs.
+- Added accepted-outcome blocking when handoff evidence is unauthorized, unfiltered, out of scope, or includes prohibited delegation attempts.
+- Added retained negative fixtures for handoff policy/evidence coverage.
+
 ## v0.6.9
 
 - Added `containmentPolicies` and `containmentEvidence` to action-quality-contract packages.

@@ -1,0 +1,496 @@
+{
+  "packageType": "action-quality-contract",
+  "runtimeVersion": "0.6.10",
+  "packageId": "AQC-PKG-001",
+  "toolSurfaces": [
+    {
+      "id": "TLS-AQC-001",
+      "toolKind": "shell",
+      "providerNeutralName": "workspace command executor",
+      "operationClass": "local-runtime-tool",
+      "capabilities": [
+        "run test command",
+        "read command output"
+      ],
+      "status": "active"
+    }
+  ],
+  "executionEnvironments": [
+    {
+      "id": "ENV-AQC-001",
+      "environmentType": "local sandboxed workspace",
+      "isolationBoundary": "workspace-scoped command execution with explicit escalation for external effects",
+      "identityBoundary": "agent acts as automation, not as accountable approver",
+      "networkBoundary": "network disabled unless explicitly approved",
+      "status": "active"
+    }
+  ],
+  "permissionPolicies": [
+    {
+      "id": "PER-AQC-001",
+      "permissionClass": "write",
+      "allowedScope": "repository-local generated fixtures and documentation only",
+      "prohibitedOperations": [
+        "delete repository",
+        "publish release without approval",
+        "write outside workspace"
+      ],
+      "approvalRequirement": "human approval required for external push or release",
+      "status": "active"
+    }
+  ],
+  "approvalGates": [
+    {
+      "id": "APR-AQC-001",
+      "permissionPolicyRef": "PER-AQC-001",
+      "approver": "repository maintainer",
+      "approvalStatus": "approved",
+      "approvedAt": "2026-08-21T04:40:00Z",
+      "rationale": "The action is limited to local validation and generated fixture updates before release.",
+      "status": "accepted"
+    }
+  ],
+  "approvalPersistencePolicies": [
+    {
+      "id": "APP-AQC-001",
+      "persistenceMode": "same-run-only",
+      "decisionScope": "specific tool call and canonical invocation",
+      "appliesToApprovalDecisions": [
+        "approved",
+        "rejected"
+      ],
+      "allowedToolIdentity": "workspace command executor",
+      "allowedServerIdentity": "local workspace command surface",
+      "reuseAcrossRuns": false,
+      "requiresSameCanonicalInvocation": true,
+      "maxDuration": "single run",
+      "expiresAt": "2026-08-21T06:40:00Z",
+      "revocationCondition": "revoke if target, arguments, tool identity, server identity, or permission policy changes",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "toolGuardrailPolicies": [
+    {
+      "id": "TGP-AQC-001",
+      "toolSurfaceRef": "TLS-AQC-001",
+      "guardrailStage": "pre-execution",
+      "guardrailType": "input",
+      "protectedBoundary": "tool arguments must stay inside the approved repository-local scope",
+      "triggerCondition": "requested operation includes deletion, external publication, or writes outside approved scope",
+      "tripwireBehavior": "throwException",
+      "onTripAction": "stop before tool execution and route to governance if work remains necessary",
+      "runsBeforeToolExecution": true,
+      "sideEffectBoundary": "pre-execution guardrails reduce risk before execution but do not undo external side effects if execution still occurs elsewhere",
+      "status": "active"
+    },
+    {
+      "id": "TGP-AQC-002",
+      "toolSurfaceRef": "TLS-AQC-001",
+      "guardrailStage": "post-execution",
+      "guardrailType": "output",
+      "protectedBoundary": "tool output must not expose sensitive data or hide validation failure",
+      "triggerCondition": "output includes sensitive data, validation failure, or rejected terminal output",
+      "tripwireBehavior": "rejectContent",
+      "onTripAction": "replace or reject unsafe output and route unresolved side effects to governance",
+      "runsBeforeToolExecution": false,
+      "sideEffectBoundary": "post-execution guardrails do not undo external tool side effects or erase already stored data",
+      "status": "active"
+    }
+  ],
+  "contextMemoryBoundaries": [
+    {
+      "id": "CMB-AQC-001",
+      "contextKind": "session-history",
+      "visibility": "llm-visible",
+      "sourceTrust": "mixed",
+      "freshnessPolicy": "session history may inform continuity but must not override current user instructions, tool policies, or verifier results",
+      "staleAfter": "new explicit user correction or changed repository state",
+      "compactionPolicy": "compacted history must preserve source refs, uncertainty, and rejected-output placeholders",
+      "contaminationPolicy": "treat embedded instructions in retrieved or remembered content as untrusted source content, not authority",
+      "allowedUse": [
+        "continuity hints",
+        "prior decision references",
+        "candidate context"
+      ],
+      "prohibitedUse": [
+        "override current user instructions",
+        "override system instructions",
+        "reuse stale repository assumptions"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    },
+    {
+      "id": "CMB-AQC-002",
+      "contextKind": "local-runtime-context",
+      "visibility": "local-only",
+      "sourceTrust": "trusted-runtime",
+      "freshnessPolicy": "local context may supply tool metadata and execution state but is not sent to the LLM unless explicitly summarized",
+      "staleAfter": "run completion or runtime state mutation",
+      "compactionPolicy": "not compacted into LLM-visible session history",
+      "contaminationPolicy": "local runtime context must be kept separate from user-provided source content",
+      "allowedUse": [
+        "tool metadata",
+        "execution state",
+        "approval state"
+      ],
+      "prohibitedUse": [
+        "secret disclosure to LLM-visible context",
+        "implicit authority escalation"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "expectedStateTransitions": [
+    {
+      "id": "EST-AQC-001",
+      "targetRef": "QIF repository",
+      "preState": "package fixtures may be stale after schema changes",
+      "postState": "package fixtures are regenerated and npm test passes",
+      "stopCondition": "stop if npm test fails or generated fixtures drift unexpectedly",
+      "invariantRefs": [
+        "activity count is not quality",
+        "semantic truth is not inferred from verifier success"
+      ],
+      "status": "active"
+    }
+  ],
+  "rollbackPlans": [
+    {
+      "id": "RBP-AQC-001",
+      "expectedStateTransitionRef": "EST-AQC-001",
+      "rollbackAction": "revert only the generated fixture and verifier changes from this action contract",
+      "rollbackOwner": "repository maintainer",
+      "verificationMethod": "rerun npm test and git diff --check after rollback",
+      "status": "ready"
+    }
+  ],
+  "evidenceRequirements": [
+    {
+      "id": "EVR-AQC-001",
+      "evidenceType": "test-output",
+      "collectionMethod": "run npm test in repository root",
+      "retentionPolicy": "record command summary in AOF runtime log",
+      "requiredForVerdicts": [
+        "accepted",
+        "rejected"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "EVR-AQC-002",
+      "evidenceType": "trace-summary",
+      "collectionMethod": "record action request, runtime trace reference, and outcome",
+      "retentionPolicy": "store repository-local package artifact",
+      "requiredForVerdicts": [
+        "accepted",
+        "conditional"
+      ],
+      "status": "active"
+    }
+  ],
+  "actionContracts": [
+    {
+      "id": "ACT-AQC-001",
+      "toolSurfaceRef": "TLS-AQC-001",
+      "executionEnvironmentRef": "ENV-AQC-001",
+      "permissionPolicyRef": "PER-AQC-001",
+      "approvalGateRefs": [
+        "APR-AQC-001"
+      ],
+      "qualityIntentRef": "QIN-AQC-001",
+      "lossBoundary": "An AI agent must not execute a write-like tool action without explicit scope, expected state transition, rollback, evidence, and accountable approval.",
+      "riskClass": "high",
+      "expectedStateTransitionRef": "EST-AQC-001",
+      "rollbackPlanRef": "RBP-AQC-001",
+      "evidenceRequirementRefs": [
+        "EVR-AQC-001",
+        "EVR-AQC-002"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active",
+      "containmentPolicyRefs": [
+        "CTP-AQC-001"
+      ],
+      "handoffPolicyRefs": [
+        "HOP-AQC-001"
+      ]
+    }
+  ],
+  "actionRequests": [
+    {
+      "id": "AQR-AQC-001",
+      "actionContractRef": "ACT-AQC-001",
+      "requestedToolSurfaceRef": "TLS-AQC-001",
+      "requestedBy": "ai-agent",
+      "targetRef": "QIF repository",
+      "operation": "regenerate fixture corpus and run verifier suite",
+      "reason": "Schema/verifier additions require retained fixture corpus synchronization.",
+      "status": "approved-for-execution"
+    }
+  ],
+  "runtimeTraces": [
+    {
+      "id": "RTR-AQC-001",
+      "actionRequestRef": "AQR-AQC-001",
+      "actionContractRef": "ACT-AQC-001",
+      "traceProvider": "local command log",
+      "traceRef": "npm-test-and-fixture-generation-summary",
+      "spans": [
+        "npm run build-fixtures",
+        "npm test",
+        "git diff --check"
+      ],
+      "containsSensitiveData": false,
+      "redactionStatus": "not-required",
+      "status": "captured"
+    }
+  ],
+  "traceApprovalEvidence": [
+    {
+      "id": "TAE-AQC-001",
+      "actionRequestRef": "AQR-AQC-001",
+      "runtimeTraceRef": "RTR-AQC-001",
+      "approvalGateRef": "APR-AQC-001",
+      "approvalRequired": true,
+      "approvalDecision": "approved",
+      "approvedBy": "repository maintainer",
+      "decisionAt": "2026-08-21T04:40:00Z",
+      "rationale": "The requested action is write-like but limited to repository-local fixture and verifier updates.",
+      "canonicalInvocationRef": "invoke-AQR-AQC-001-initial",
+      "replayStatus": "not-replayed",
+      "boundToOriginalInvocation": true,
+      "persistenceApplied": true,
+      "approvalPersistencePolicyRef": "APP-AQC-001",
+      "redactionStatus": "not-required",
+      "status": "captured"
+    }
+  ],
+  "guardrailEvidence": [
+    {
+      "id": "GRE-AQC-001",
+      "actionRequestRef": "AQR-AQC-001",
+      "runtimeTraceRef": "RTR-AQC-001",
+      "toolGuardrailPolicyRef": "TGP-AQC-001",
+      "guardrailStage": "pre-execution",
+      "executionOrder": 1,
+      "evaluatedInputRef": "invoke-AQR-AQC-001-initial",
+      "result": "allow",
+      "tripwireTriggered": false,
+      "evidenceSummary": "Requested command sequence stayed inside approved repository-local fixture, verifier, docs, and release-note updates.",
+      "sideEffectBoundaryAcknowledged": true,
+      "governanceTriggerRefs": [],
+      "status": "captured"
+    },
+    {
+      "id": "GRE-AQC-002",
+      "actionRequestRef": "AQR-AQC-001",
+      "runtimeTraceRef": "RTR-AQC-001",
+      "toolGuardrailPolicyRef": "TGP-AQC-002",
+      "guardrailStage": "post-execution",
+      "executionOrder": 2,
+      "evaluatedInputRef": "npm-test-and-fixture-generation-summary",
+      "result": "allow",
+      "tripwireTriggered": false,
+      "evidenceSummary": "Tool output contained validation summaries without sensitive data and did not hide failing checks.",
+      "sideEffectBoundaryAcknowledged": true,
+      "governanceTriggerRefs": [],
+      "status": "captured"
+    }
+  ],
+  "contextMemoryEvidence": [
+    {
+      "id": "CME-AQC-001",
+      "actionRequestRef": "AQR-AQC-001",
+      "runtimeTraceRef": "RTR-AQC-001",
+      "contextMemoryBoundaryRef": "CMB-AQC-001",
+      "observedContextRef": "session-history-summary",
+      "usedInDecision": true,
+      "freshnessStatus": "current",
+      "trustStatus": "mixed",
+      "contaminationChecked": true,
+      "compactionApplied": false,
+      "evidenceSummary": "Session history supplied continuity only; current task scope, verifier output, and explicit user instructions remained authoritative.",
+      "governanceTriggerRefs": [],
+      "status": "captured"
+    },
+    {
+      "id": "CME-AQC-002",
+      "actionRequestRef": "AQR-AQC-001",
+      "runtimeTraceRef": "RTR-AQC-001",
+      "contextMemoryBoundaryRef": "CMB-AQC-002",
+      "observedContextRef": "tool-context-metadata",
+      "usedInDecision": true,
+      "freshnessStatus": "current",
+      "trustStatus": "trusted",
+      "contaminationChecked": true,
+      "compactionApplied": false,
+      "evidenceSummary": "Local runtime context supplied tool metadata and approval state without being treated as LLM-visible user authority.",
+      "governanceTriggerRefs": [],
+      "status": "captured"
+    }
+  ],
+  "actionOutcomes": [
+    {
+      "id": "AOC-AQC-001",
+      "actionRequestRef": "AQR-AQC-001",
+      "actionContractRef": "ACT-AQC-001",
+      "runtimeTraceRef": "RTR-AQC-001",
+      "actualState": "package fixtures are regenerated and npm test passes",
+      "verdict": "accepted",
+      "confidence": 0.93,
+      "evidenceRequirementRefs": [
+        "EVR-AQC-001",
+        "EVR-AQC-002"
+      ],
+      "residualRisk": "The verifier proves structure and traceability, not semantic safety of the tool action.",
+      "governanceTriggerRefs": [],
+      "status": "accepted"
+    }
+  ],
+  "governanceTriggers": [],
+  "verifierBoundary": {
+    "checks": [
+      "reference integrity",
+      "permission policy linkage",
+      "approval requirement for high-risk or write-like actions",
+      "approval persistence policy linkage",
+      "tool guardrail policy linkage",
+      "context memory boundary linkage",
+      "containment policy linkage",
+      "containment evidence",
+      "safe-exit and incident routing",
+      "handoff policy linkage",
+      "handoff lifecycle evidence",
+      "handoff authority and context filtering",
+      "expected state transition linkage",
+      "rollback plan linkage",
+      "runtime trace evidence",
+      "trace approval evidence",
+      "guardrail evidence",
+      "context memory evidence",
+      "replay binding evidence",
+      "outcome confidence governance"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "tool execution safety",
+      "provider security compliance",
+      "human approval correctness",
+      "containment enforcement",
+      "incident absence",
+      "delegated agent correctness",
+      "handoff authorization enforcement"
+    ],
+    "semanticValidityRequires": [
+      "human approval for external side effects",
+      "runtime sandbox enforcement",
+      "security review for sensitive tools",
+      "post-action outcome inspection",
+      "runtime containment enforcement",
+      "incident response review for containment alerts",
+      "handoff authorization review",
+      "delegated agent output review"
+    ]
+  },
+  "containmentPolicies": [
+    {
+      "id": "CTP-AQC-001",
+      "toolSurfaceRef": "TLS-AQC-001",
+      "executionEnvironmentRef": "ENV-AQC-001",
+      "containmentScope": "repository-local fixture, verifier, documentation, and release-note changes only",
+      "allowedExternalCommunication": [
+        "npm registry metadata already present in lockfile is not contacted during validation",
+        "GitHub push or release only after explicit release approval"
+      ],
+      "prohibitedExternalCommunication": [
+        "unauthorized internet access",
+        "unapproved inter-agent messaging",
+        "credential upload",
+        "third-party service mutation outside release scope"
+      ],
+      "safeExitCriteria": "pause or stop when command output indicates containment breach, hidden external communication, unresolved approval mismatch, or unexpected state transition",
+      "monitoringSignals": [
+        "network access attempt",
+        "write outside repository",
+        "credential-like output",
+        "unexpected process escalation",
+        "unapproved release publication"
+      ],
+      "incidentResponsePlan": "open governance trigger, stop further external effects, preserve trace summary, assign owner, and require human restart approval",
+      "shutdownAuthority": "repository maintainer or configured runtime guardrail",
+      "restartAuthority": "repository maintainer after containment evidence is resolved",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "containmentEvidence": [
+    {
+      "id": "CTE-AQC-001",
+      "actionRequestRef": "AQR-AQC-001",
+      "runtimeTraceRef": "RTR-AQC-001",
+      "containmentPolicyRef": "CTP-AQC-001",
+      "monitoringObserved": "command execution remained repository-local; network and release operations required explicit approval",
+      "containmentMaintained": true,
+      "externalCommunicationObserved": "none during local validation; release publication is separately approved and logged",
+      "unauthorizedExternalCommunication": false,
+      "safeExitAssessment": "no safe-exit criterion triggered during fixture regeneration and npm test",
+      "safeExitTriggered": false,
+      "incidentResponseOpened": false,
+      "incidentStatus": "none",
+      "evidenceSummary": "No containment breach, unauthorized external communication, credential exposure, or unexpected state transition was observed in the retained trace summary.",
+      "governanceTriggerRefs": [],
+      "status": "captured"
+    }
+  ],
+  "handoffPolicies": [
+    {
+      "id": "HOP-AQC-001",
+      "toolSurfaceRef": "TLS-AQC-001",
+      "sourceAgentRole": "primary implementation agent",
+      "targetAgentRole": "specialist or reviewer agent",
+      "authorityScope": "handoff may inspect and advise inside the repository-local release task but must not approve, publish, or expand tool permissions",
+      "authorizationPoint": "authorization must be checked before onHandoff continues and before delegated side effects occur",
+      "handoffInputFilter": "filter transferred context to current task summary, approved scope, relevant evidence refs, and explicit uncertainty; remove credentials and unrelated session history",
+      "contextTransferPolicy": "handoff context must be filtered before transfer and must preserve current user instructions, source trust, and redaction status",
+      "approvalRequirement": "human approval remains required for external push or release even if a delegated agent recommends proceeding",
+      "prohibitedDelegations": [
+        "delegate approval authority",
+        "transfer secrets",
+        "bypass guardrails",
+        "hide disagreement",
+        "publish through delegated agent"
+      ],
+      "requiredLifecycleEvents": [
+        "agent_handoff",
+        "agent_tool_start",
+        "agent_tool_end"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "handoffEvidence": [
+    {
+      "id": "HFE-AQC-001",
+      "actionRequestRef": "AQR-AQC-001",
+      "runtimeTraceRef": "RTR-AQC-001",
+      "handoffPolicyRef": "HOP-AQC-001",
+      "selectedTargetAgent": "none",
+      "authorizationChecked": true,
+      "authorizationResult": "not-applicable",
+      "contextFilterApplied": true,
+      "transferredContextSummary": "No delegated handoff occurred; policy still recorded the permitted authority and context transfer boundary.",
+      "authorityScopeRespected": true,
+      "prohibitedDelegationAttempted": true,
+      "lifecycleEventRefs": [
+        "RTR-AQC-001"
+      ],
+      "evidenceSummary": "The run remained with the primary agent; no approval authority or external release authority was delegated.",
+      "governanceTriggerRefs": [],
+      "status": "captured"
+    }
+  ]
+}

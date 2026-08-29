@@ -18,6 +18,7 @@
     "toolGuardrailPolicies",
     "contextMemoryBoundaries",
     "containmentPolicies",
+    "handoffPolicies",
     "expectedStateTransitions",
     "rollbackPlans",
     "evidenceRequirements",
@@ -26,6 +27,7 @@
     "guardrailEvidence",
     "contextMemoryEvidence",
     "containmentEvidence",
+    "handoffEvidence",
     "actionOutcomes",
     "governanceTriggers",
     "verifierBoundary"
@@ -44,6 +46,7 @@
     "toolGuardrailPolicies": { "type": "array" },
     "contextMemoryBoundaries": { "type": "array" },
     "containmentPolicies": { "type": "array" },
+    "handoffPolicies": { "type": "array" },
     "expectedStateTransitions": { "type": "array" },
     "rollbackPlans": { "type": "array" },
     "evidenceRequirements": { "type": "array" },
@@ -52,6 +55,7 @@
     "guardrailEvidence": { "type": "array" },
     "contextMemoryEvidence": { "type": "array" },
     "containmentEvidence": { "type": "array" },
+    "handoffEvidence": { "type": "array" },
     "actionOutcomes": { "type": "array" },
     "governanceTriggers": { "type": "array" },
     "verifierBoundary": {

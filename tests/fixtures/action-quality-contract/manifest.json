@@ -211,6 +211,41 @@
       "errorIncludes": "CTP-AQC-001 incidentResponsePlan must route incidents to governance."
     },
     {
+      "file": "action-quality-contract-handoff-policies-array.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "handoff policies are retained",
+      "expect": "fail",
+      "errorIncludes": "handoffPolicies must be an array."
+    },
+    {
+      "file": "action-quality-contract-handoff-policy-tool-ref-resolves.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "handoff policy links tool surface",
+      "expect": "fail",
+      "errorIncludes": "HOP-AQC-001 references missing tool surface: TLS-NOPE-999"
+    },
+    {
+      "file": "action-quality-contract-handoff-policy-required-lifecycle-events.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "handoff policy declares lifecycle events",
+      "expect": "fail",
+      "errorIncludes": "HOP-AQC-001 requiredLifecycleEvents must include at least one event."
+    },
+    {
+      "file": "action-quality-contract-handoff-policy-authorization-before-side-effects.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "handoff authorization happens before delegated side effects",
+      "expect": "fail",
+      "errorIncludes": "HOP-AQC-001 authorizationPoint must require authorization before delegated side effects."
+    },
+    {
+      "file": "action-quality-contract-handoff-policy-context-filter.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "handoff context transfer is filtered",
+      "expect": "fail",
+      "errorIncludes": "HOP-AQC-001 contextTransferPolicy must require filtered handoff context."
+    },
+    {
       "file": "action-quality-contract-transition-stop-condition-required.json",
       "validator": "tools/validate-action-quality-contract.mjs",
       "rule": "expected transition has stop condition",
@@ -251,6 +286,13 @@
       "rule": "high-risk write action requires containment policy",
       "expect": "fail",
       "errorIncludes": "ACT-AQC-001 high-risk or write-like action contract requires containmentPolicyRefs."
+    },
+    {
+      "file": "action-quality-contract-high-risk-contract-needs-handoff-policy.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "high-risk write action requires handoff policy",
+      "expect": "fail",
+      "errorIncludes": "ACT-AQC-001 high-risk or write-like action contract requires handoffPolicyRefs."
     },
     {
       "file": "action-quality-contract-request-tool-matches-contract.json",
@@ -342,6 +384,62 @@
       "rule": "accepted outcome has no containment breach or unresolved incident",
       "expect": "fail",
       "errorIncludes": "AOC-AQC-001 accepted outcome must not rely on breached containment or unresolved incident evidence."
+    },
+    {
+      "file": "action-quality-contract-handoff-evidence-array.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "handoff evidence is retained",
+      "expect": "fail",
+      "errorIncludes": "handoffEvidence must be an array."
+    },
+    {
+      "file": "action-quality-contract-high-risk-request-needs-handoff-evidence.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "high-risk request has handoff evidence",
+      "expect": "fail",
+      "errorIncludes": "AQR-AQC-001 high-risk or write-like request requires handoffEvidence."
+    },
+    {
+      "file": "action-quality-contract-handoff-evidence-policy-ref-resolves.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "handoff evidence links policy",
+      "expect": "fail",
+      "errorIncludes": "HFE-AQC-001 references missing handoff policy: HOP-NOPE-999"
+    },
+    {
+      "file": "action-quality-contract-handoff-evidence-authorization-checked.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "handoff evidence records authorization check",
+      "expect": "fail",
+      "errorIncludes": "HFE-AQC-001 authorizationChecked must be true for handoff evidence."
+    },
+    {
+      "file": "action-quality-contract-denied-handoff-governance.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "denied handoff authorization routes to governance",
+      "expect": "fail",
+      "errorIncludes": "HFE-AQC-001 denied or failed handoff authorization requires governanceTriggerRefs."
+    },
+    {
+      "file": "action-quality-contract-handoff-authority-scope-breach-governance.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "handoff authority scope breach routes to governance",
+      "expect": "fail",
+      "errorIncludes": "HFE-AQC-001 handoff authority scope breach requires governanceTriggerRefs."
+    },
+    {
+      "file": "action-quality-contract-prohibited-delegation-governance.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "prohibited delegation routes to governance",
+      "expect": "fail",
+      "errorIncludes": "HFE-AQC-001 prohibited delegation attempt requires governanceTriggerRefs."
+    },
+    {
+      "file": "action-quality-contract-accepted-outcome-no-bad-handoff.json",
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "rule": "accepted outcome has authorized filtered in-scope handoff evidence",
+      "expect": "fail",
+      "errorIncludes": "AOC-AQC-001 accepted outcome must not rely on unauthorized, unfiltered, or out-of-scope handoff evidence."
     },
     {
       "file": "action-quality-contract-context-memory-evidence-boundary-ref-resolves.json",

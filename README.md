@@ -288,3 +288,6 @@ The verifier enforces structural integrity, traceability, reference resolution, 
 
 
 Action Quality Contract validation also checks containment policies, safe-exit criteria, monitoring signals, containment evidence, and incident routing for high-risk actions.
+
+
+Action Quality Contract validation also checks delegated-agent handoff policies and evidence for authorization, context filtering, authority scope, lifecycle events, and governance routing.

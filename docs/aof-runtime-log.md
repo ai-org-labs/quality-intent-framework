@@ -2,6 +2,66 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.10 Handoff Authority Boundary
+
+Runtime source:
+
+- AOF source repo latest checked: `v5.0.0`
+- AOF runtime commands executed: `situation-assess`, `goal-project`, `task-open`, `task-update`, `council-review-packet`, `organization-verify`
+- External trend check date: `2026-08-29`
+- External source refs:
+  - `https://openai.github.io/openai-agents-js/guides/agents/`
+  - `https://openai.github.io/openai-agents-js/guides/handoffs/`
+  - `https://openai.github.io/openai-agents-js/guides/tracing/`
+  - `https://openai.github.io/openai-agents-python/agents/`
+  - `https://openai.github.io/openai-agents-python/guardrails/`
+
+Need / Intent / Context:
+
+- Need: Agent handoffs can transfer authority and conversation context across agents. If authorization timing, context filtering, delegated authority, and lifecycle evidence are implicit, an accepted outcome can hide an unauthorized or over-scoped delegation.
+- Intent: Add `handoffPolicies` and `handoffEvidence` to `action-quality-contract` packages so delegated-agent authorization, handoff context filtering, authority scope, lifecycle event evidence, and governance routing are auditable.
+- Context: v0.6.5-v0.6.9 made approval evidence, approval persistence, guardrails, context memory, containment, and safe exit traceable. The remaining gap is delegation across agents: who received authority, what context moved, and whether authorization happened before delegated side effects.
+
+Decision reason:
+
+- Implement this inside `action-quality-contract` because handoff authority affects action execution, not general discovery or authoring.
+- Do not implement orchestration, model routing, or provider-specific handoff adapters. The verifier checks structure, refs, lifecycle evidence, authorization flags, context filtering, authority scope, and governance routing only.
+- Do not claim delegated-agent correctness or runtime enforcement. Semantic validity requires handoff authorization review, runtime policy enforcement, delegated output review, and human approval for external effects.
+
+Council judgment:
+
+- Visionary: proceed; multi-agent handoffs are becoming standard enough that QIF should represent delegation quality before provider traces become the only evidence.
+- Builder: proceed; the implementation is bounded to schema, example, verifier, fixtures, docs, roadmap, and release notes.
+- Guardian: proceed with guardrails; denied handoff authorization, unfiltered context transfer, authority-scope breach, or prohibited delegation must block accepted outcomes or route to governance.
+
+Artifacts:
+
+- Situation assessment: `.aof/artifacts/runtime/qif-v0.6.10-situation-assessment.json`
+- Council review packet: `.aof/artifacts/council/qif-v0.6.10-council-review-packet.json`
+- Task: `.aof/tasks/done/TASK-028.json`
+- Schema: `schemas/action-quality-contract-package.schema.json`
+- Example: `examples/action-quality-contract-package.json`
+- Verifier: `tools/validate-action-quality-contract.mjs`
+- Fixture source: `tools/fixtures/action-quality-contract-cases.mjs`
+- Retained negative corpus: `tests/fixtures/action-quality-contract/`
+- Release notes: `RELEASE-NOTES-v0.6.10.md`
+
+Runtime verification:
+
+- `node tools/validate-action-quality-contract.mjs`: pass with `handoffPolicies: 1` and `handoffEvidence: 1`.
+- `node tools/run-fixture-tests.mjs`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- `npm test`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- AOF `organization-verify` using v5.0.0: failed on existing AOF metadata compatibility, not QIF runtime code. The v5 schema rejects existing `safety_level` fields in project orientation and command registry metadata.
+- AOF `situation-assess` using v5.0.0: pass with no current truth conflicts; generated artifact sanitized for public repository use.
+
+Release outcome:
+
+- Implementation commit: pending
+- Tag: pending
+- Tag target commit: pending
+- GitHub Release: pending
+- Published result: pending
+
 ## v0.6.9 Agent Containment and Safe Exit Boundary
 
 Runtime source:

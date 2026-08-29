@@ -1,6 +1,6 @@
 {
   "packageType": "action-quality-contract",
-  "runtimeVersion": "0.6.9",
+  "runtimeVersion": "0.6.10",
   "packageId": "AQC-PKG-001",
   "toolSurfaces": [
     {
@@ -213,6 +213,9 @@
       "status": "active",
       "containmentPolicyRefs": [
         "CTP-AQC-001"
+      ],
+      "handoffPolicyRefs": [
+        "HOP-AQC-001"
       ]
     }
   ],
@@ -359,6 +362,9 @@
       "containment policy linkage",
       "containment evidence",
       "safe-exit and incident routing",
+      "handoff policy linkage",
+      "handoff lifecycle evidence",
+      "handoff authority and context filtering",
       "expected state transition linkage",
       "rollback plan linkage",
       "runtime trace evidence",
@@ -374,7 +380,9 @@
       "provider security compliance",
       "human approval correctness",
       "containment enforcement",
-      "incident absence"
+      "incident absence",
+      "delegated agent correctness",
+      "handoff authorization enforcement"
     ],
     "semanticValidityRequires": [
       "human approval for external side effects",
@@ -382,7 +390,9 @@
       "security review for sensitive tools",
       "post-action outcome inspection",
       "runtime containment enforcement",
-      "incident response review for containment alerts"
+      "incident response review for containment alerts",
+      "handoff authorization review",
+      "delegated agent output review"
     ]
   },
   "containmentPolicies": null,
@@ -401,6 +411,54 @@
       "incidentResponseOpened": false,
       "incidentStatus": "none",
       "evidenceSummary": "No containment breach, unauthorized external communication, credential exposure, or unexpected state transition was observed in the retained trace summary.",
+      "governanceTriggerRefs": [],
+      "status": "captured"
+    }
+  ],
+  "handoffPolicies": [
+    {
+      "id": "HOP-AQC-001",
+      "toolSurfaceRef": "TLS-AQC-001",
+      "sourceAgentRole": "primary implementation agent",
+      "targetAgentRole": "specialist or reviewer agent",
+      "authorityScope": "handoff may inspect and advise inside the repository-local release task but must not approve, publish, or expand tool permissions",
+      "authorizationPoint": "authorization must be checked before onHandoff continues and before delegated side effects occur",
+      "handoffInputFilter": "filter transferred context to current task summary, approved scope, relevant evidence refs, and explicit uncertainty; remove credentials and unrelated session history",
+      "contextTransferPolicy": "handoff context must be filtered before transfer and must preserve current user instructions, source trust, and redaction status",
+      "approvalRequirement": "human approval remains required for external push or release even if a delegated agent recommends proceeding",
+      "prohibitedDelegations": [
+        "delegate approval authority",
+        "transfer secrets",
+        "bypass guardrails",
+        "hide disagreement",
+        "publish through delegated agent"
+      ],
+      "requiredLifecycleEvents": [
+        "agent_handoff",
+        "agent_tool_start",
+        "agent_tool_end"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "handoffEvidence": [
+    {
+      "id": "HFE-AQC-001",
+      "actionRequestRef": "AQR-AQC-001",
+      "runtimeTraceRef": "RTR-AQC-001",
+      "handoffPolicyRef": "HOP-AQC-001",
+      "selectedTargetAgent": "none",
+      "authorizationChecked": true,
+      "authorizationResult": "not-applicable",
+      "contextFilterApplied": true,
+      "transferredContextSummary": "No delegated handoff occurred; policy still recorded the permitted authority and context transfer boundary.",
+      "authorityScopeRespected": true,
+      "prohibitedDelegationAttempted": false,
+      "lifecycleEventRefs": [
+        "RTR-AQC-001"
+      ],
+      "evidenceSummary": "The run remained with the primary agent; no approval authority or external release authority was delegated.",
       "governanceTriggerRefs": [],
       "status": "captured"
     }

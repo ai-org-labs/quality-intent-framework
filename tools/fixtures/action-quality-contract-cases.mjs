@@ -11,6 +11,7 @@ function guardrailPolicy(pkg) { return pkg.toolGuardrailPolicies[0]; }
 function postGuardrailPolicy(pkg) { return pkg.toolGuardrailPolicies[1]; }
 function contextBoundary(pkg) { return pkg.contextMemoryBoundaries[0]; }
 function containmentPolicy(pkg) { return pkg.containmentPolicies[0]; }
+function handoffPolicy(pkg) { return pkg.handoffPolicies[0]; }
 function transition(pkg) { return pkg.expectedStateTransitions[0]; }
 function rollback(pkg) { return pkg.rollbackPlans[0]; }
 function evidence(pkg) { return pkg.evidenceRequirements[0]; }
@@ -20,6 +21,7 @@ function guardrailEvidence(pkg) { return pkg.guardrailEvidence[0]; }
 function postGuardrailEvidence(pkg) { return pkg.guardrailEvidence[1]; }
 function contextEvidence(pkg) { return pkg.contextMemoryEvidence[0]; }
 function containmentEvidence(pkg) { return pkg.containmentEvidence[0]; }
+function handoffEvidence(pkg) { return pkg.handoffEvidence[0]; }
 function outcome(pkg) { return pkg.actionOutcomes[0]; }
 
 export const cases = [
@@ -153,6 +155,36 @@ export const cases = [
     mutate: (pkg) => { containmentPolicy(pkg).incidentResponsePlan = "notify runtime operator only"; }
   },
   {
+    id: "handoff-policies-array",
+    rule: "handoff policies are retained",
+    expect: "handoffPolicies must be an array.",
+    mutate: (pkg) => { pkg.handoffPolicies = null; }
+  },
+  {
+    id: "handoff-policy-tool-ref-resolves",
+    rule: "handoff policy links tool surface",
+    expect: "HOP-AQC-001 references missing tool surface: TLS-NOPE-999",
+    mutate: (pkg) => { handoffPolicy(pkg).toolSurfaceRef = "TLS-NOPE-999"; }
+  },
+  {
+    id: "handoff-policy-required-lifecycle-events",
+    rule: "handoff policy declares lifecycle events",
+    expect: "HOP-AQC-001 requiredLifecycleEvents must include at least one event.",
+    mutate: (pkg) => { handoffPolicy(pkg).requiredLifecycleEvents = []; }
+  },
+  {
+    id: "handoff-policy-authorization-before-side-effects",
+    rule: "handoff authorization happens before delegated side effects",
+    expect: "HOP-AQC-001 authorizationPoint must require authorization before delegated side effects.",
+    mutate: (pkg) => { handoffPolicy(pkg).authorizationPoint = "authorization may be checked after handoff"; }
+  },
+  {
+    id: "handoff-policy-context-filter",
+    rule: "handoff context transfer is filtered",
+    expect: "HOP-AQC-001 contextTransferPolicy must require filtered handoff context.",
+    mutate: (pkg) => { handoffPolicy(pkg).contextTransferPolicy = "transfer the conversation history to the receiving agent"; }
+  },
+  {
     id: "transition-stop-condition-required",
     rule: "expected transition has stop condition",
     expect: "EST-AQC-001 must include non-empty string stopCondition.",
@@ -187,6 +219,12 @@ export const cases = [
     rule: "high-risk write action requires containment policy",
     expect: "ACT-AQC-001 high-risk or write-like action contract requires containmentPolicyRefs.",
     mutate: (pkg) => { contract(pkg).containmentPolicyRefs = []; }
+  },
+  {
+    id: "high-risk-contract-needs-handoff-policy",
+    rule: "high-risk write action requires handoff policy",
+    expect: "ACT-AQC-001 high-risk or write-like action contract requires handoffPolicyRefs.",
+    mutate: (pkg) => { contract(pkg).handoffPolicyRefs = []; }
   },
   {
     id: "request-tool-matches-contract",
@@ -287,6 +325,66 @@ export const cases = [
       containmentEvidence(pkg).containmentMaintained = false;
       containmentEvidence(pkg).incidentStatus = "open";
       containmentEvidence(pkg).governanceTriggerRefs = ["GTR-AQC-CONTAINMENT"];
+    }
+  },
+  {
+    id: "handoff-evidence-array",
+    rule: "handoff evidence is retained",
+    expect: "handoffEvidence must be an array.",
+    mutate: (pkg) => { pkg.handoffEvidence = null; }
+  },
+  {
+    id: "high-risk-request-needs-handoff-evidence",
+    rule: "high-risk request has handoff evidence",
+    expect: "AQR-AQC-001 high-risk or write-like request requires handoffEvidence.",
+    mutate: (pkg) => { pkg.handoffEvidence = []; }
+  },
+  {
+    id: "handoff-evidence-policy-ref-resolves",
+    rule: "handoff evidence links policy",
+    expect: "HFE-AQC-001 references missing handoff policy: HOP-NOPE-999",
+    mutate: (pkg) => { handoffEvidence(pkg).handoffPolicyRef = "HOP-NOPE-999"; }
+  },
+  {
+    id: "handoff-evidence-authorization-checked",
+    rule: "handoff evidence records authorization check",
+    expect: "HFE-AQC-001 authorizationChecked must be true for handoff evidence.",
+    mutate: (pkg) => { handoffEvidence(pkg).authorizationChecked = false; }
+  },
+  {
+    id: "denied-handoff-governance",
+    rule: "denied handoff authorization routes to governance",
+    expect: "HFE-AQC-001 denied or failed handoff authorization requires governanceTriggerRefs.",
+    mutate: (pkg) => { handoffEvidence(pkg).authorizationResult = "denied"; }
+  },
+  {
+    id: "handoff-authority-scope-breach-governance",
+    rule: "handoff authority scope breach routes to governance",
+    expect: "HFE-AQC-001 handoff authority scope breach requires governanceTriggerRefs.",
+    mutate: (pkg) => { handoffEvidence(pkg).authorityScopeRespected = false; }
+  },
+  {
+    id: "prohibited-delegation-governance",
+    rule: "prohibited delegation routes to governance",
+    expect: "HFE-AQC-001 prohibited delegation attempt requires governanceTriggerRefs.",
+    mutate: (pkg) => { handoffEvidence(pkg).prohibitedDelegationAttempted = true; }
+  },
+  {
+    id: "accepted-outcome-no-bad-handoff",
+    rule: "accepted outcome has authorized filtered in-scope handoff evidence",
+    expect: "AOC-AQC-001 accepted outcome must not rely on unauthorized, unfiltered, or out-of-scope handoff evidence.",
+    mutate: (pkg) => {
+      pkg.governanceTriggers.push({
+        id: "GTR-AQC-HANDOFF",
+        triggerType: "handoff-authority-breach",
+        reason: "Fixture mutation marks handoff authority as out of scope.",
+        severity: "high",
+        requiredAction: "review delegated authority before acceptance",
+        owner: "repository maintainer",
+        status: "open"
+      });
+      handoffEvidence(pkg).authorityScopeRespected = false;
+      handoffEvidence(pkg).governanceTriggerRefs = ["GTR-AQC-HANDOFF"];
     }
   },
   {

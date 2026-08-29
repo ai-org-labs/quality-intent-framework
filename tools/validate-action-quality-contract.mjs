@@ -93,6 +93,7 @@ function validate(pkg, packagePath) {
   const toolGuardrailPolicies = array(pkg, "toolGuardrailPolicies", packagePath);
   const contextMemoryBoundaries = array(pkg, "contextMemoryBoundaries", packagePath);
   const containmentPolicies = array(pkg, "containmentPolicies", packagePath);
+  const handoffPolicies = array(pkg, "handoffPolicies", packagePath);
   const transitions = array(pkg, "expectedStateTransitions", packagePath);
   const rollbacks = array(pkg, "rollbackPlans", packagePath);
   const evidenceRequirements = array(pkg, "evidenceRequirements", packagePath);
@@ -101,6 +102,7 @@ function validate(pkg, packagePath) {
   const guardrailEvidence = array(pkg, "guardrailEvidence", packagePath);
   const contextMemoryEvidence = array(pkg, "contextMemoryEvidence", packagePath);
   const containmentEvidence = array(pkg, "containmentEvidence", packagePath);
+  const handoffEvidence = array(pkg, "handoffEvidence", packagePath);
   const outcomes = array(pkg, "actionOutcomes", packagePath);
   const triggers = array(pkg, "governanceTriggers", packagePath);
 
@@ -114,6 +116,7 @@ function validate(pkg, packagePath) {
   const guardrailPolicyIndex = index(toolGuardrailPolicies, `${packagePath}:toolGuardrailPolicies`);
   const contextMemoryBoundaryIndex = index(contextMemoryBoundaries, `${packagePath}:contextMemoryBoundaries`);
   const containmentPolicyIndex = index(containmentPolicies, `${packagePath}:containmentPolicies`);
+  const handoffPolicyIndex = index(handoffPolicies, `${packagePath}:handoffPolicies`);
   const transitionIndex = index(transitions, `${packagePath}:expectedStateTransitions`);
   const rollbackIndex = index(rollbacks, `${packagePath}:rollbackPlans`);
   const evidenceIndex = index(evidenceRequirements, `${packagePath}:evidenceRequirements`);
@@ -122,6 +125,7 @@ function validate(pkg, packagePath) {
   const guardrailEvidenceIndex = index(guardrailEvidence, `${packagePath}:guardrailEvidence`);
   const contextMemoryEvidenceIndex = index(contextMemoryEvidence, `${packagePath}:contextMemoryEvidence`);
   const containmentEvidenceIndex = index(containmentEvidence, `${packagePath}:containmentEvidence`);
+  const handoffEvidenceIndex = index(handoffEvidence, `${packagePath}:handoffEvidence`);
   const outcomeIndex = index(outcomes, `${packagePath}:actionOutcomes`);
   const triggerIndex = index(triggers, `${packagePath}:governanceTriggers`);
 
@@ -233,6 +237,26 @@ function validate(pkg, packagePath) {
     }
   }
 
+  for (const policy of handoffPolicies) {
+    refs([policy.toolSurfaceRef], toolIndex, "tool surface", policy.id);
+    optionalRefs(policy.governanceTriggerRefs, triggerIndex, "governance trigger", policy.id);
+    for (const field of ["sourceAgentRole", "targetAgentRole", "authorityScope", "authorizationPoint", "handoffInputFilter", "contextTransferPolicy", "approvalRequirement", "status"]) str(policy, field, policy.id);
+    if (!Array.isArray(policy.prohibitedDelegations) || policy.prohibitedDelegations.length === 0) {
+      errors.push(`${policy.id} prohibitedDelegations must include at least one delegation boundary.`);
+    }
+    if (!Array.isArray(policy.requiredLifecycleEvents) || policy.requiredLifecycleEvents.length === 0) {
+      errors.push(`${policy.id} requiredLifecycleEvents must include at least one event.`);
+    }
+    const authorizationPoint = String(policy.authorizationPoint ?? "").toLowerCase();
+    if (!authorizationPoint.includes("before")) {
+      errors.push(`${policy.id} authorizationPoint must require authorization before delegated side effects.`);
+    }
+    const transferPolicy = String(policy.contextTransferPolicy ?? "").toLowerCase();
+    if (!transferPolicy.includes("filter")) {
+      errors.push(`${policy.id} contextTransferPolicy must require filtered handoff context.`);
+    }
+  }
+
   for (const transition of transitions) {
     for (const field of ["targetRef", "preState", "postState", "stopCondition", "status"]) str(transition, field, transition.id);
     if (!Array.isArray(transition.invariantRefs)) errors.push(`${transition.id} invariantRefs must be an array.`);
@@ -260,6 +284,7 @@ function validate(pkg, packagePath) {
     optionalRefs(contract.approvalGateRefs, approvalIndex, "approval gate", contract.id);
     optionalRefs(contract.governanceTriggerRefs, triggerIndex, "governance trigger", contract.id);
     optionalRefs(contract.containmentPolicyRefs, containmentPolicyIndex, "containment policy", contract.id);
+    optionalRefs(contract.handoffPolicyRefs, handoffPolicyIndex, "handoff policy", contract.id);
     for (const field of ["qualityIntentRef", "lossBoundary", "riskClass", "status"]) str(contract, field, contract.id);
     const policy = policyIndex.get(contract.permissionPolicyRef);
     const needsApproval = contract.riskClass === "high" || ["write", "delete", "publish", "external-call"].includes(policy?.permissionClass);
@@ -268,6 +293,9 @@ function validate(pkg, packagePath) {
     }
     if (needsApproval && (!Array.isArray(contract.containmentPolicyRefs) || contract.containmentPolicyRefs.length === 0)) {
       errors.push(`${contract.id} high-risk or write-like action contract requires containmentPolicyRefs.`);
+    }
+    if (needsApproval && (!Array.isArray(contract.handoffPolicyRefs) || contract.handoffPolicyRefs.length === 0)) {
+      errors.push(`${contract.id} high-risk or write-like action contract requires handoffPolicyRefs.`);
     }
   }
 
@@ -297,6 +325,40 @@ function validate(pkg, packagePath) {
     }
     if (!containmentEvidenceByRequest.has(evidence.actionRequestRef)) containmentEvidenceByRequest.set(evidence.actionRequestRef, []);
     containmentEvidenceByRequest.get(evidence.actionRequestRef).push(evidence);
+  }
+
+  const handoffEvidenceByRequest = new Map();
+  for (const evidence of handoffEvidence) {
+    refs([evidence.actionRequestRef], requestIndex, "action request", evidence.id);
+    refs([evidence.runtimeTraceRef], traceIndex, "runtime trace", evidence.id);
+    refs([evidence.handoffPolicyRef], handoffPolicyIndex, "handoff policy", evidence.id);
+    optionalRefs(evidence.governanceTriggerRefs, triggerIndex, "governance trigger", evidence.id);
+    for (const field of ["selectedTargetAgent", "authorizationResult", "transferredContextSummary", "evidenceSummary", "status"]) str(evidence, field, evidence.id);
+    for (const field of ["authorizationChecked", "contextFilterApplied", "authorityScopeRespected", "prohibitedDelegationAttempted"]) {
+      if (typeof evidence[field] !== "boolean") errors.push(`${evidence.id} ${field} must be boolean.`);
+    }
+    if (!Array.isArray(evidence.lifecycleEventRefs) || evidence.lifecycleEventRefs.length === 0) {
+      errors.push(`${evidence.id} lifecycleEventRefs must include at least one event.`);
+    }
+    const request = requestIndex.get(evidence.actionRequestRef);
+    const trace = traceIndex.get(evidence.runtimeTraceRef);
+    if (request && trace && trace.actionRequestRef !== request.id) {
+      errors.push(`${evidence.id} runtimeTraceRef must belong to its actionRequestRef.`);
+    }
+    if (!evidence.authorizationChecked) {
+      errors.push(`${evidence.id} authorizationChecked must be true for handoff evidence.`);
+    }
+    if (["denied", "failed", "unauthorized"].includes(evidence.authorizationResult) && (!Array.isArray(evidence.governanceTriggerRefs) || evidence.governanceTriggerRefs.length === 0)) {
+      errors.push(`${evidence.id} denied or failed handoff authorization requires governanceTriggerRefs.`);
+    }
+    if (!evidence.authorityScopeRespected && (!Array.isArray(evidence.governanceTriggerRefs) || evidence.governanceTriggerRefs.length === 0)) {
+      errors.push(`${evidence.id} handoff authority scope breach requires governanceTriggerRefs.`);
+    }
+    if (evidence.prohibitedDelegationAttempted && (!Array.isArray(evidence.governanceTriggerRefs) || evidence.governanceTriggerRefs.length === 0)) {
+      errors.push(`${evidence.id} prohibited delegation attempt requires governanceTriggerRefs.`);
+    }
+    if (!handoffEvidenceByRequest.has(evidence.actionRequestRef)) handoffEvidenceByRequest.set(evidence.actionRequestRef, []);
+    handoffEvidenceByRequest.get(evidence.actionRequestRef).push(evidence);
   }
 
   for (const request of requests) {
@@ -455,6 +517,10 @@ function validate(pkg, packagePath) {
       if (matchingContainment.length === 0) {
         errors.push(`${request.id} high-risk or write-like request requires containmentEvidence.`);
       }
+      const matchingHandoff = handoffEvidenceByRequest.get(request.id) ?? [];
+      if (matchingHandoff.length === 0) {
+        errors.push(`${request.id} high-risk or write-like request requires handoffEvidence.`);
+      }
     }
   }
 
@@ -487,6 +553,10 @@ function validate(pkg, packagePath) {
     const containmentResults = containmentEvidenceByRequest.get(outcome.actionRequestRef) ?? [];
     if (outcome.verdict === "accepted" && containmentResults.some((evidence) => !evidence.containmentMaintained || evidence.unauthorizedExternalCommunication || !["none", "resolved"].includes(evidence.incidentStatus))) {
       errors.push(`${outcome.id} accepted outcome must not rely on breached containment or unresolved incident evidence.`);
+    }
+    const handoffResults = handoffEvidenceByRequest.get(outcome.actionRequestRef) ?? [];
+    if (outcome.verdict === "accepted" && handoffResults.some((evidence) => !evidence.authorizationChecked || !["authorized", "not-applicable"].includes(evidence.authorizationResult) || !evidence.contextFilterApplied || !evidence.authorityScopeRespected || evidence.prohibitedDelegationAttempted)) {
+      errors.push(`${outcome.id} accepted outcome must not rely on unauthorized, unfiltered, or out-of-scope handoff evidence.`);
     }
     if (outcome.confidence < 0.7 && (!Array.isArray(outcome.governanceTriggerRefs) || outcome.governanceTriggerRefs.length === 0)) {
       errors.push(`${outcome.id} low-confidence outcome requires governanceTriggerRefs.`);
@@ -526,6 +596,7 @@ function validate(pkg, packagePath) {
       toolGuardrailPolicies: toolGuardrailPolicies.length,
       contextMemoryBoundaries: contextMemoryBoundaries.length,
       containmentPolicies: containmentPolicies.length,
+      handoffPolicies: handoffPolicies.length,
       expectedStateTransitions: transitions.length,
       rollbackPlans: rollbacks.length,
       evidenceRequirements: evidenceRequirements.length,
@@ -534,6 +605,7 @@ function validate(pkg, packagePath) {
       guardrailEvidence: guardrailEvidence.length,
       contextMemoryEvidence: contextMemoryEvidence.length,
       containmentEvidence: containmentEvidence.length,
+      handoffEvidence: handoffEvidence.length,
       actionOutcomes: outcomes.length,
       governanceTriggers: triggers.length
     }

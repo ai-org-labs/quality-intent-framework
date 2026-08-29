@@ -124,3 +124,26 @@ Verifier rules:
 Verifier boundary:
 
 Passing these rules proves structural containment traceability only. It does not prove sandbox enforcement, monitor reliability, incident absence, semantic safety, or provider security compliance.
+
+
+## v0.6.10 Handoff Authority Boundary
+
+QIF v0.6.10 adds delegated-agent handoff authority as a first-class action-quality boundary. The intent is not to implement multi-agent orchestration. The intent is to make the transfer of authority, context, and lifecycle evidence explicit whenever an agent may delegate work to another agent.
+
+New entities:
+
+- `handoffPolicies`: source agent role, target agent role, delegated authority scope, authorization point, handoff input filter, context transfer policy, approval requirement, prohibited delegations, required lifecycle events, governance triggers, and status.
+- `handoffEvidence`: request-specific evidence for selected target agent, authorization result, context filtering, transferred context summary, authority scope, prohibited delegation attempts, lifecycle event references, governance triggers, and status.
+
+Verifier rules:
+
+- High-risk or write-like action contracts must reference handoff policies.
+- High-risk or write-like action requests must include handoff evidence, even when no handoff occurred.
+- Handoff policies must require authorization before delegated side effects and filtered handoff context.
+- Handoff evidence must link action request, runtime trace, and handoff policy.
+- Denied or failed handoff authorization, authority-scope breach, and prohibited delegation attempts require governance triggers.
+- Accepted outcomes must not rely on unauthorized, unfiltered, or out-of-scope handoff evidence.
+
+Verifier boundary:
+
+Passing these rules proves structural handoff traceability only. It does not prove delegated-agent correctness, runtime authorization enforcement, semantic safety, or provider security compliance.
