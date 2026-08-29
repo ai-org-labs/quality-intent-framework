@@ -56,11 +56,11 @@ Runtime verification:
 
 Release outcome:
 
-- Implementation commit: pending
-- Tag: pending
-- Tag target commit: pending
-- GitHub Release: pending
-- Published result: pending
+- Implementation commit: `9e2056184a5bfed7bbd32c7a4e2d4d09109c6f59`
+- Tag: `v0.6.10`
+- Tag target commit: `9e2056184a5bfed7bbd32c7a4e2d4d09109c6f59`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.10`
+- Published result: released
 
 ## v0.6.9 Agent Containment and Safe Exit Boundary
 
