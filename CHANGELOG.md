@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.11
+
+- Added `tools/qif.mjs` as the first minimal QIF CLI entrypoint.
+- Added `qif validate <package...>` routing so humans and AI agents do not need to know each internal validator filename.
+- Added `qif validate --all` for all example packages and `qif validate --fixtures` for retained negative fixture regression.
+- Added package `bin` metadata and npm test integration for CLI validation.
+
 ## v0.6.10
 
 - Added `handoffPolicies` and `handoffEvidence` to action-quality-contract packages.

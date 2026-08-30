@@ -291,3 +291,15 @@ Action Quality Contract validation also checks containment policies, safe-exit c
 
 
 Action Quality Contract validation also checks delegated-agent handoff policies and evidence for authorization, context filtering, authority scope, lifecycle events, and governance routing.
+
+## CLI
+
+QIF includes a minimal local CLI entrypoint for validation:
+
+```sh
+node tools/qif.mjs validate examples/action-quality-contract-package.json
+node tools/qif.mjs validate --all
+node tools/qif.mjs validate --fixtures
+```
+
+`qif validate` routes each package to the correct local verifier from its `packageType` or legacy package shape. The CLI proves structural validity only; it does not claim semantic quality truth.

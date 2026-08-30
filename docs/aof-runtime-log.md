@@ -2,6 +2,63 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.11 Validate CLI
+
+Runtime source:
+
+- AOF source repo latest checked: `v5.0.0`
+- AOF runtime commands executed: `situation-assess`, `goal-project`, `task-open`, `task-update`, `council-review-packet`, `organization-verify`
+- External trend check date: `2026-08-30`
+- External source refs:
+  - `https://openai.github.io/openai-agents-js/guides/handoffs/`
+  - `https://openai.github.io/openai-agents-js/guides/agents/`
+  - `https://openai.github.io/openai-agents-python/agents/`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+
+Need / Intent / Context:
+
+- Need: QIF validation currently requires knowing which internal validator file matches each package. That is a usability and automation boundary for humans and AI agents.
+- Intent: Add a minimal `qif validate` CLI that routes package files to existing verifiers, validates all examples, and runs retained fixture regression.
+- Context: v0.6.0-v0.6.10 hardened agent action contracts. The next useful step is not another concept boundary, but a stable operational entrypoint for applying QIF.
+
+Decision reason:
+
+- Implement only `validate` now because it is the lowest-risk CLI surface and directly supports AI/human execution.
+- Do not implement `qif new`, `qif trace`, `qif open-risks`, external integrations, or semantic evaluation in this slice.
+- Preserve the existing verifier boundary: CLI success means structural validation, not quality truth.
+
+Council judgment:
+
+- Visionary: proceed; QIF adoption needs a single executable entrypoint, not only internal validator names.
+- Builder: proceed; the implementation is bounded to CLI routing, package metadata, docs, roadmap, release notes, and npm test integration.
+- Guardian: proceed with boundary language; the CLI must not imply semantic truth or replace package-specific verifier rules.
+
+Artifacts:
+
+- Situation assessment: `.aof/artifacts/runtime/qif-v0.6.11-situation-assessment.json`
+- Council review packet: `.aof/artifacts/council/qif-v0.6.11-council-review-packet.json`
+- Task: `.aof/tasks/done/TASK-029.json`
+- CLI: `tools/qif.mjs`
+- Package metadata: `package.json`
+- Roadmap: `docs/qif-roadmap.md`
+- Release notes: `RELEASE-NOTES-v0.6.11.md`
+
+Runtime verification:
+
+- `node tools/qif.mjs validate --all`: pass.
+- `node tools/qif.mjs validate --fixtures`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- `npm test`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- AOF `organization-verify` using v5.0.0: failed on existing AOF metadata compatibility, not QIF runtime code. The v5 schema rejects existing `safety_level` fields in project orientation and command registry metadata.
+- AOF `situation-assess` using v5.0.0: pass with no current truth conflicts; generated artifact sanitized for public repository use.
+
+Release outcome:
+
+- Implementation commit: pending
+- Tag: pending
+- Tag target commit: pending
+- GitHub Release: pending
+- Published result: pending
+
 ## v0.6.10 Handoff Authority Boundary
 
 Runtime source:

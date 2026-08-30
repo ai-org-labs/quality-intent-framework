@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.6.10 Handoff Authority Boundary so action-quality-contract packages define delegated-agent handoff authorization, context transfer filtering, authority scope, lifecycle evidence, and governance routing.",
-  "updated_at": "2026-08-29T04:38:20.796Z",
+  "content": "Implement QIF v0.6.11 Validate CLI so humans and AI agents can run provider-neutral package validation without knowing each internal validator filename.",
+  "updated_at": "2026-08-30T04:34:04.562Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-QIFV0610",
+  "source_session_id": "SESS-QIFV0611",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-08-29T04:38:20.796Z"
+  "declared_complete_at": "2026-08-30T04:34:04.562Z"
 }
