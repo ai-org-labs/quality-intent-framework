@@ -53,11 +53,11 @@ Runtime verification:
 
 Release outcome:
 
-- Implementation commit: pending
-- Tag: pending
-- Tag target commit: pending
-- GitHub Release: pending
-- Published result: pending
+- Implementation commit: `9a3a0eb6f79f6e5bbb9483ee1969e7222498e1a9`
+- Tag: `v0.6.11`
+- Tag target commit: `9a3a0eb6f79f6e5bbb9483ee1969e7222498e1a9`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.11`
+- Published result: released
 
 ## v0.6.10 Handoff Authority Boundary
 
