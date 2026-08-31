@@ -48,9 +48,11 @@ function usage() {
   qif validate <package.json...>
   qif validate --all
   qif validate --fixtures
+  qif trace <entity-id> [package.json...]
+  qif trace <entity-id> --all
 
 Options:
-  --all       Validate all committed example packages through their routed validators.
+  --all       Validate or trace across all committed example packages.
   --fixtures  Run the retained negative fixture regression suite.
 `;
 }
@@ -105,33 +107,163 @@ function validate(files) {
   return 0;
 }
 
+function commandFiles(args, options = {}) {
+  const files = args.filter((arg) => !arg.startsWith("--"));
+  if (args.includes("--all") || (options.defaultToExamples && files.length === 0)) return examplePackages;
+  return files;
+}
+
+function traceFiles(args) {
+  const files = args.filter((arg) => !arg.startsWith("--"));
+  if (args.includes("--all") || files.length === 0) return examplePackages;
+  return files;
+}
+
+function isRefField(key, value) {
+  return /Ref$/.test(key) && typeof value === "string" && value.trim().length > 0;
+}
+
+function isRefsField(key, value) {
+  return /Refs$/.test(key) && Array.isArray(value) && value.some((item) => typeof item === "string" && item.trim().length > 0);
+}
+
+function findOutboundRefs(value, prefix = "") {
+  const refs = [];
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => {
+      refs.push(...findOutboundRefs(item, `${prefix}[${index}]`));
+    });
+    return refs;
+  }
+  if (!value || typeof value !== "object") return refs;
+  for (const [key, child] of Object.entries(value)) {
+    const field = prefix ? `${prefix}.${key}` : key;
+    if (isRefField(key, child)) refs.push({ field, refs: [child] });
+    if (isRefsField(key, child)) refs.push({ field, refs: child.filter((item) => typeof item === "string" && item.trim().length > 0) });
+    refs.push(...findOutboundRefs(child, field));
+  }
+  return refs;
+}
+
+function displayPath(filePath) {
+  const relative = path.relative(process.cwd(), path.resolve(filePath));
+  return relative.startsWith("..") ? filePath : relative;
+}
+
+function collectEntities(pkg, filePath) {
+  const packageType = inferPackageType(pkg, filePath);
+  const packagePath = displayPath(filePath);
+  const entities = [];
+  if (typeof pkg.id === "string") {
+    entities.push({
+      package: packagePath,
+      packageType,
+      collection: "$package",
+      id: pkg.id,
+      entity: pkg,
+      outboundRefs: findOutboundRefs(pkg)
+    });
+  }
+  for (const [collection, value] of Object.entries(pkg)) {
+    if (!Array.isArray(value)) continue;
+    value.forEach((item, index) => {
+      if (!item || typeof item !== "object" || typeof item.id !== "string" || !item.id.trim()) return;
+      entities.push({
+        package: packagePath,
+        packageType,
+        collection,
+        index,
+        id: item.id,
+        entity: item,
+        outboundRefs: findOutboundRefs(item)
+      });
+    });
+  }
+  return entities;
+}
+
+function traceEntity(query, files) {
+  const entities = [];
+  const warnings = [];
+  for (const filePath of files) {
+    try {
+      entities.push(...collectEntities(readJson(filePath), filePath));
+    } catch (error) {
+      warnings.push({ package: filePath, warning: error.message });
+    }
+  }
+  const matches = entities.filter((entity) => entity.id === query);
+  if (matches.length === 0) {
+    process.stderr.write(JSON.stringify({
+      ok: false,
+      query,
+      errors: [`No entity with id ${query} was found in the provided QIF packages.`],
+      searchedPackages: files.map(displayPath),
+      warnings
+    }, null, 2));
+    process.stderr.write("\n");
+    return 1;
+  }
+  const inboundRefs = entities.flatMap((source) => source.outboundRefs.flatMap((outboundRef) => {
+    if (!outboundRef.refs.includes(query)) return [];
+    return [{
+      package: source.package,
+      packageType: source.packageType,
+      collection: source.collection,
+      id: source.id,
+      field: outboundRef.field
+    }];
+  }));
+  console.log(JSON.stringify({
+    ok: true,
+    query,
+    matches: matches.map((match) => ({
+      package: match.package,
+      packageType: match.packageType,
+      collection: match.collection,
+      id: match.id,
+      entity: match.entity,
+      outboundRefs: match.outboundRefs,
+      inboundRefs
+    })),
+    warnings
+  }, null, 2));
+  return warnings.length > 0 ? 1 : 0;
+}
+
 function main() {
   const [command, ...args] = process.argv.slice(2);
   if (!command || command === "help" || command === "--help" || command === "-h") {
     process.stdout.write(usage());
     return 0;
   }
-  if (command !== "validate") {
-    process.stderr.write(`Unsupported command: ${command}
+  if (command === "validate") {
+    if (args.includes("--fixtures")) return runNode(["tools/run-fixture-tests.mjs"]);
+    const files = commandFiles(args);
+    if (files.length === 0) {
+      process.stderr.write(`Missing package path.
 ${usage()}`);
-    return 1;
+      return 1;
+    }
+    return validate(files);
   }
-  if (args.includes("--fixtures")) {
-    return runNode(["tools/run-fixture-tests.mjs"]);
-  }
-  const files = args.includes("--all") ? examplePackages : args.filter((arg) => !arg.startsWith("--"));
-  if (files.length === 0) {
-    process.stderr.write(`Missing package path.
+  if (command === "trace") {
+    const [query, ...traceArgs] = args.filter((arg) => !arg.startsWith("--"));
+    if (!query) {
+      process.stderr.write(`Missing entity id.
 ${usage()}`);
-    return 1;
+      return 1;
+    }
+    return traceEntity(query, traceFiles(traceArgs.concat(args.filter((arg) => arg.startsWith("--")))));
   }
-  return validate(files);
+  process.stderr.write(`Unsupported command: ${command}
+${usage()}`);
+  return 1;
 }
 
 try {
   process.exitCode = main();
 } catch (error) {
-  process.stderr.write(`${error.message}
-`);
+  process.stderr.write(`${error.message}\n`);
   process.exitCode = 1;
 }

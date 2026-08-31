@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.12
+
+- Added `qif trace <entity-id> [package...]` for local entity trace inspection.
+- Trace output now reports matching entities, outbound `*Ref` / `*Refs` links, and inbound references from other entities.
+- Added `qif trace <entity-id> --all` across committed example packages.
+- Added npm test coverage for the trace CLI while preserving the verifier boundary: trace visibility is not semantic truth.
+
 ## v0.6.11
 
 - Added `tools/qif.mjs` as the first minimal QIF CLI entrypoint.

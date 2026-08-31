@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.6.11 Validate CLI so humans and AI agents can run provider-neutral package validation without knowing each internal validator filename.",
-  "updated_at": "2026-08-30T04:34:04.562Z",
+  "content": "Implement QIF v0.6.12 Trace CLI so humans and AI agents can inspect entity evidence and reference chains from package files without knowing schema internals.",
+  "updated_at": "2026-08-31T04:34:55.764Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-QIFV0611",
+  "source_session_id": "SESS-QIFV0612",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-08-30T04:34:04.562Z"
+  "declared_complete_at": null
 }

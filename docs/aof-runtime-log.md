@@ -2,6 +2,62 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.12 Trace CLI
+
+Runtime source:
+
+- AOF source repo latest checked: `v5.0.0`
+- AOF runtime commands executed: `situation-assess`, `goal-project`, `task-open`, `task-update`, `council-review-packet`, `organization-verify`
+- External trend check date: `2026-08-31`
+- External source refs:
+  - `https://openai.github.io/openai-agents-js/guides/tracing/`
+  - `https://openai.github.io/openai-agents-js/guides/handoffs/`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+
+Need / Intent / Context:
+
+- Need: QIF packages can validate, but a human or AI agent still has to manually inspect JSON to understand why a verdict, action outcome, or quality intent exists.
+- Intent: Add a local `qif trace <entity-id>` command that exposes matching entities plus outbound and inbound references from package files.
+- Context: Current agent tooling trends emphasize tracing, handoffs, and evals. QIF should make its own decision/evidence chains inspectable before adding larger command surfaces.
+
+Decision reason:
+
+- Implement trace inspection now because it directly supports explainability and audit without changing schemas.
+- Do not implement `qif new`, `qif open-risks`, graph visualization, semantic scoring, or external integrations in this slice.
+- Preserve the verifier boundary: reference visibility is evidence of structure, not proof of semantic quality truth.
+
+Council judgment:
+
+- Visionary: proceed; QIF needs a visible path from decisions to evidence so non-experts and AI agents can inspect why a result exists.
+- Builder: proceed; the implementation is bounded to CLI traversal, docs, roadmap, release notes, and npm test integration.
+- Guardian: proceed with boundary language; trace output must not imply that linked evidence is correct or sufficient.
+
+Artifacts:
+
+- Situation assessment: `.aof/artifacts/runtime/qif-v0.6.12-situation-assessment.json`
+- Council review packet: `.aof/artifacts/council/qif-v0.6.12-council-review-packet.json`
+- Task: `.aof/tasks/done/TASK-030.json`
+- CLI: `tools/qif.mjs`
+- Package metadata: `package.json`
+- Roadmap: `docs/qif-roadmap.md`
+- Release notes: `RELEASE-NOTES-v0.6.12.md`
+
+Runtime verification:
+
+- `node tools/qif.mjs validate --all`: pass.
+- `node tools/qif.mjs trace ACT-AQC-001 examples/action-quality-contract-package.json`: pass; trace shows outbound policy/evidence refs and inbound request/trace/outcome refs.
+- `npm test`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- AOF `organization-verify` using v5.0.0: failed on existing AOF metadata compatibility, not QIF runtime code. The v5 schema rejects existing `safety_level` fields in project orientation and command registry metadata.
+- AOF `situation-assess` using v5.0.0: pass with no current truth conflicts; generated artifacts sanitized for public repository use.
+
+Release outcome:
+
+- Implementation commit: pending
+- Tag: `v0.6.12` pending
+- Tag target commit: pending
+- GitHub Release: pending
+- Published result: pending
+
 ## v0.6.11 Validate CLI
 
 Runtime source:

@@ -294,12 +294,14 @@ Action Quality Contract validation also checks delegated-agent handoff policies 
 
 ## CLI
 
-QIF includes a minimal local CLI entrypoint for validation:
+QIF includes a minimal local CLI entrypoint for validation and trace inspection:
 
 ```sh
 node tools/qif.mjs validate examples/action-quality-contract-package.json
 node tools/qif.mjs validate --all
 node tools/qif.mjs validate --fixtures
+node tools/qif.mjs trace ACT-AQC-001 examples/action-quality-contract-package.json
+node tools/qif.mjs trace ACT-AQC-001 --all
 ```
 
-`qif validate` routes each package to the correct local verifier from its `packageType` or legacy package shape. The CLI proves structural validity only; it does not claim semantic quality truth.
+`qif validate` routes each package to the correct local verifier from its `packageType` or legacy package shape. `qif trace <entity-id>` finds matching entities, outbound references, and inbound references across the provided packages or all committed examples. CLI success proves structural validity or reference visibility only; it does not claim semantic quality truth.
