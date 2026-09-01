@@ -53,11 +53,11 @@ Runtime verification:
 
 Release outcome:
 
-- Implementation commit: pending
-- Tag: `v0.6.13` pending
-- Tag target commit: pending
-- GitHub Release: pending
-- Published result: pending
+- Implementation commit: `b88b40eb08a170061e4ec9fbe20d4b26c69f17d1`
+- Tag: `v0.6.13`
+- Tag target commit: `b88b40eb08a170061e4ec9fbe20d4b26c69f17d1`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.13`
+- Published result: released
 
 ## v0.6.12 Trace CLI
 
