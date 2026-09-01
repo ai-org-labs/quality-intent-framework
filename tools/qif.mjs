@@ -50,9 +50,11 @@ function usage() {
   qif validate --fixtures
   qif trace <entity-id> [package.json...]
   qif trace <entity-id> --all
+  qif open-risks [package.json...]
+  qif open-risks --all
 
 Options:
-  --all       Validate or trace across all committed example packages.
+  --all       Validate, trace, or list open risks across all committed example packages.
   --fixtures  Run the retained negative fixture regression suite.
 `;
 }
@@ -231,6 +233,83 @@ function traceEntity(query, files) {
   return warnings.length > 0 ? 1 : 0;
 }
 
+function issueText(entity) {
+  return entity.reason || entity.triggerReason || entity.rationale || entity.summary || entity.description || entity.residualRisk || "";
+}
+
+function isClosedStatus(status) {
+  if (typeof status !== "string") return false;
+  return new Set(["closed", "resolved", "retired", "accepted", "rejected", "inactive", "obsolete", "superseded"]).has(status.toLowerCase());
+}
+
+function riskSeverity(entity) {
+  return entity.severity || entity.riskSeverity || entity.riskClass || "unspecified";
+}
+
+function collectRiskCarriers(files) {
+  const entities = [];
+  const warnings = [];
+  for (const filePath of files) {
+    try {
+      entities.push(...collectEntities(readJson(filePath), filePath));
+    } catch (error) {
+      warnings.push({ package: filePath, warning: error.message });
+    }
+  }
+  return { entities, warnings };
+}
+
+function entitySummary(entity) {
+  return {
+    package: entity.package,
+    packageType: entity.packageType,
+    collection: entity.collection,
+    id: entity.id,
+    status: entity.entity.status || "unspecified"
+  };
+}
+
+function openRisks(files) {
+  const { entities, warnings } = collectRiskCarriers(files);
+  const governanceTriggers = entities
+    .filter((entity) => entity.collection === "governanceTriggers" && !isClosedStatus(entity.entity.status))
+    .map((entity) => ({
+      ...entitySummary(entity),
+      triggerType: entity.entity.triggerType || entity.entity.type || "unspecified",
+      severity: riskSeverity(entity.entity),
+      reason: issueText(entity.entity),
+      owner: entity.entity.owner || entity.entity.assignedOwner || "unspecified"
+    }));
+  const residualRisks = entities
+    .filter((entity) => typeof entity.entity.residualRisk === "string" && entity.entity.residualRisk.trim().length > 0 && !isClosedStatus(entity.entity.status))
+    .map((entity) => ({
+      ...entitySummary(entity),
+      severity: riskSeverity(entity.entity),
+      residualRisk: entity.entity.residualRisk
+    }));
+  const lowConfidence = entities
+    .filter((entity) => typeof entity.entity.confidence === "number" && entity.entity.confidence < 0.6 && !isClosedStatus(entity.entity.status))
+    .map((entity) => ({
+      ...entitySummary(entity),
+      confidence: entity.entity.confidence,
+      severity: riskSeverity(entity.entity),
+      reason: issueText(entity.entity)
+    }));
+  const riskCount = governanceTriggers.length + residualRisks.length + lowConfidence.length;
+  console.log(JSON.stringify({
+    ok: true,
+    message: "QIF open risk extraction completed.",
+    riskCount,
+    searchedPackages: files.map(displayPath),
+    governanceTriggers,
+    residualRisks,
+    lowConfidence,
+    verifierBoundary: "open-risks reports structural risk carriers only; it does not prove semantic risk truth, business priority, or remediation sufficiency.",
+    warnings
+  }, null, 2));
+  return warnings.length > 0 ? 1 : 0;
+}
+
 function main() {
   const [command, ...args] = process.argv.slice(2);
   if (!command || command === "help" || command === "--help" || command === "-h") {
@@ -255,6 +334,9 @@ ${usage()}`);
       return 1;
     }
     return traceEntity(query, traceFiles(traceArgs.concat(args.filter((arg) => arg.startsWith("--")))));
+  }
+  if (command === "open-risks") {
+    return openRisks(commandFiles(args, { defaultToExamples: true }));
   }
   process.stderr.write(`Unsupported command: ${command}
 ${usage()}`);

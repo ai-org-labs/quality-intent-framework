@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.6.12 Trace CLI so humans and AI agents can inspect entity evidence and reference chains from package files without knowing schema internals.",
-  "updated_at": "2026-08-31T04:34:55.764Z",
+  "content": "Implement QIF v0.6.13 Open Risks CLI so humans and AI agents can list unresolved governance triggers, residual risks, and low-confidence risk carriers from QIF packages without manual JSON inspection.",
+  "updated_at": "2026-09-01T04:31:29.286Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-QIFV0612",
+  "source_session_id": "SESS-QIFV0613",
   "source_decision_record_id": null,
   "declared_complete_at": null
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.13
+
+- Added `qif open-risks [package...]` for local unresolved risk extraction.
+- Open risk output now reports unresolved governance triggers, residual-risk carriers, and low-confidence entities.
+- Added `qif open-risks --all` across committed example packages.
+- Added npm test coverage for open-risks while preserving the verifier boundary: extracted risk carriers are not semantic risk truth.
+
 ## v0.6.12
 
 - Added `qif trace <entity-id> [package...]` for local entity trace inspection.
