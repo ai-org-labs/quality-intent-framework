@@ -114,8 +114,11 @@ and adoption surface — not pretending the limits away.
   entities plus outbound and inbound references across QIF packages.
   v0.6.13 adds `qif open-risks` so unresolved governance triggers, residual
   risks, and low-confidence carriers can be listed without manual JSON inspection.
-- Weaknesses: v0.6.13 CLI behavior is intentionally structural and
-  example-file based; the first Authoring Template package covers only a
+  v0.6.14 adds `qif new <package-type>` so validated starter package shapes
+  can be generated from committed examples without manual copying.
+- Weaknesses: v0.6.14 CLI behavior is intentionally structural and
+  example-file based; starter packages still require users or AI agents to
+  replace sample content before use. The first Authoring Template package covers only a
   quality-gate generation slice, Pilot Corpus now structures case ingestion
   but still uses example data rather than a live organization corpus, agent
   trajectories are summarized rather than deeply typed, and no
@@ -327,10 +330,11 @@ Deliverables:
   sequence exploration, invariant confirmation, and closure.
 - A `qif` CLI: `qif validate`, `qif new <package-type>`, `qif trace <id>`
   (walk any entity's evidence chain), `qif open-risks`.
-  Status: first slices implemented in v0.6.11-v0.6.13 through
-  `tools/qif.mjs validate`, `qif trace <id>`, `qif open-risks`, `--all`,
-  `--fixtures`, package-type routing, reference inspection, risk-carrier
-  extraction, and npm test integration.
+  Status: first slices implemented in v0.6.11-v0.6.14 through
+  `tools/qif.mjs validate`, `qif new <package-type>`, `qif trace <id>`,
+  `qif open-risks`, `--all`, `--fixtures`, package-type routing, starter
+  package generation, reference inspection, risk-carrier extraction, and npm
+  test integration.
 - Gate-as-hook reference integration: a demonstration where an agent task
   cannot be marked release-ready unless a quality-gate package for the
   target validates. No external service required; local hook only.

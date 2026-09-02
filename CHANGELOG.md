@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.14
+
+- Added `qif new <package-type>` to emit validated starter packages from committed examples.
+- Added `qif new <package-type> --out <file>` with overwrite protection.
+- Added npm test coverage for starter-package generation.
+- Documented the boundary that generated starters preserve package shape but still require sample content replacement and validation before use.
+
 ## v0.6.13
 
 - Added `qif open-risks [package...]` for local unresolved risk extraction.

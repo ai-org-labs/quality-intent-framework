@@ -48,6 +48,7 @@ function usage() {
   qif validate <package.json...>
   qif validate --all
   qif validate --fixtures
+  qif new <package-type> [--out package.json]
   qif trace <entity-id> [package.json...]
   qif trace <entity-id> --all
   qif open-risks [package.json...]
@@ -105,6 +106,68 @@ function validate(files) {
     ok: true,
     message: "QIF CLI validation passed.",
     packages: results.map(({ filePath, type, validator }) => ({ package: filePath, packageType: type, validator }))
+  }, null, 2));
+  return 0;
+}
+
+function optionValue(args, optionName) {
+  const index = args.indexOf(optionName);
+  if (index === -1) return null;
+  const value = args[index + 1];
+  if (!value || value.startsWith("--")) throw new Error(`Missing value after ${optionName}.`);
+  return value;
+}
+
+function templateFilesByType() {
+  const templates = new Map();
+  for (const filePath of examplePackages) {
+    const pkg = readJson(filePath);
+    templates.set(inferPackageType(pkg, filePath), filePath);
+  }
+  return templates;
+}
+
+function newPackage(packageType, args) {
+  if (!packageType || packageType.startsWith("--")) {
+    process.stderr.write(`Missing package type.
+${usage()}`);
+    return 1;
+  }
+  const templates = templateFilesByType();
+  const source = templates.get(packageType);
+  if (!source) {
+    process.stderr.write(JSON.stringify({
+      ok: false,
+      errors: [`Unsupported package type ${packageType}.`],
+      supportedPackageTypes: Array.from(templates.keys()).sort()
+    }, null, 2));
+    process.stderr.write("\n");
+    return 1;
+  }
+  const template = readJson(source);
+  const rendered = `${JSON.stringify(template, null, 2)}\n`;
+  const outPath = optionValue(args, "--out");
+  if (!outPath) {
+    process.stdout.write(rendered);
+    return 0;
+  }
+  if (fs.existsSync(outPath)) {
+    process.stderr.write(JSON.stringify({
+      ok: false,
+      errors: [`Refusing to overwrite existing file ${outPath}.`],
+      sourceTemplate: displayPath(source)
+    }, null, 2));
+    process.stderr.write("\n");
+    return 1;
+  }
+  fs.writeFileSync(outPath, rendered);
+  console.log(JSON.stringify({
+    ok: true,
+    message: "QIF starter package written.",
+    packageType,
+    sourceTemplate: displayPath(source),
+    output: displayPath(outPath),
+    verifierBoundary: "new emits a validated starter shape from examples; users must still replace sample content and run qif validate before relying on it."
   }, null, 2));
   return 0;
 }
@@ -325,6 +388,10 @@ ${usage()}`);
       return 1;
     }
     return validate(files);
+  }
+  if (command === "new") {
+    const [packageType] = args.filter((arg) => !arg.startsWith("--"));
+    return newPackage(packageType, args);
   }
   if (command === "trace") {
     const [query, ...traceArgs] = args.filter((arg) => !arg.startsWith("--"));

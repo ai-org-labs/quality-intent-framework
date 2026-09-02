@@ -2,6 +2,64 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.14 New Package CLI
+
+Runtime source:
+
+- AOF source repo latest checked: `v5.0.0`
+- AOF runtime commands executed: `situation-assess`, `goal-project`, `task-open`, `task-update`, `council-review-packet`, `organization-verify`
+- External trend check date: `2026-09-02`
+- External source refs:
+  - `https://openai.github.io/openai-agents-js/guides/tracing/`
+  - `https://openai.github.io/openai-agents-js/guides/guardrails/`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+
+Need / Intent / Context:
+
+- Need: QIF can validate, trace, and list risks, but first-time users and AI agents still need to copy package shapes manually before they can start authoring.
+- Intent: Add a local `qif new <package-type>` command that emits validated starter package shapes from committed examples.
+- Context: Current agent tooling trends emphasize schema-grounded outputs, guardrails, tracing, and eval loops. QIF should reduce authoring friction while keeping verification boundaries explicit.
+
+Decision reason:
+
+- Implement starter generation now because it completes the basic CLI surface listed in the v0.6 roadmap.
+- Do not implement interactive prompting, semantic package synthesis, external integrations, or automatic content replacement in this slice.
+- Preserve the verifier boundary: generated starters provide shape, not correct organizational quality content.
+
+Council judgment:
+
+- Visionary: proceed; QIF should let non-experts and AI agents start from valid package shapes instead of blank JSON.
+- Builder: proceed; the implementation is bounded to CLI template emission, docs, roadmap, release notes, and npm test integration.
+- Guardian: proceed with boundary language and overwrite protection; generated starters must not be mistaken for complete quality knowledge.
+
+Artifacts:
+
+- Situation assessment: `.aof/artifacts/runtime/qif-v0.6.14-situation-assessment.json`
+- Council review packet: `.aof/artifacts/council/qif-v0.6.14-council-review-packet.json`
+- Task: `.aof/tasks/done/TASK-032.json`
+- CLI: `tools/qif.mjs`
+- Package metadata: `package.json`
+- Roadmap: `docs/qif-roadmap.md`
+- Release notes: `RELEASE-NOTES-v0.6.14.md`
+
+Runtime verification:
+
+- `node tools/qif.mjs validate --all`: pass.
+- `node tools/qif.mjs new review-run`: pass; emitted a validated review-run starter package to stdout.
+- `node tools/qif.mjs trace ACT-AQC-001 examples/action-quality-contract-package.json`: pass.
+- `node tools/qif.mjs open-risks examples/review-run-package.json`: pass.
+- `npm test`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- AOF `organization-verify` using v5.0.0: failed on existing AOF metadata compatibility, not QIF runtime code. The v5 schema rejects existing `safety_level` fields in project orientation and command registry metadata.
+- AOF `situation-assess` using v5.0.0: pass with no current truth conflicts; generated artifacts sanitized for public repository use.
+
+Release outcome:
+
+- Implementation commit: pending
+- Tag: `v0.6.14` pending
+- Tag target commit: pending
+- GitHub Release: pending
+- Published result: pending
+
 ## v0.6.13 Open Risks CLI
 
 Runtime source:

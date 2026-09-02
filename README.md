@@ -300,10 +300,12 @@ QIF includes a minimal local CLI entrypoint for validation and trace inspection:
 node tools/qif.mjs validate examples/action-quality-contract-package.json
 node tools/qif.mjs validate --all
 node tools/qif.mjs validate --fixtures
+node tools/qif.mjs new review-run
+node tools/qif.mjs new action-quality-contract --out local-action-contract.json
 node tools/qif.mjs trace ACT-AQC-001 examples/action-quality-contract-package.json
 node tools/qif.mjs trace ACT-AQC-001 --all
 node tools/qif.mjs open-risks examples/review-run-package.json
 node tools/qif.mjs open-risks --all
 ```
 
-`qif validate` routes each package to the correct local verifier from its `packageType` or legacy package shape. `qif trace <entity-id>` finds matching entities, outbound references, and inbound references across the provided packages or all committed examples. `qif open-risks` lists unresolved governance triggers, residual-risk carriers, and low-confidence entities. CLI success proves structural validity, reference visibility, or risk-carrier extraction only; it does not claim semantic quality truth.
+`qif validate` routes each package to the correct local verifier from its `packageType` or legacy package shape. `qif new <package-type>` emits a validated starter package from committed examples, or writes it with `--out` without overwriting an existing file. `qif trace <entity-id>` finds matching entities, outbound references, and inbound references across the provided packages or all committed examples. `qif open-risks` lists unresolved governance triggers, residual-risk carriers, and low-confidence entities. CLI success proves structural validity, starter-shape generation, reference visibility, or risk-carrier extraction only; it does not claim semantic quality truth.

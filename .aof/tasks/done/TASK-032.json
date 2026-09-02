@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-032",
+  "title": "QIF v0.6.14 New Package CLI",
+  "description": "Add qif new <package-type> [--out file] to emit or write validated starter packages from committed examples without requiring users to copy package shapes manually.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-QIFV0614",
+  "assigned_session_ids": [],
+  "related_decision_record_id": null,
+  "operating_goal_ref": ".aof/goals/next-value-slice.json",
+  "created_at": "2026-09-02T04:32:27.544Z",
+  "updated_at": "2026-09-02T04:35:43.706Z",
+  "assigned_at": null,
+  "done_at": "2026-09-02T04:35:43.706Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented qif new for validated starter package emission and overwrite-protected --out writing; verified with new, validate --all, unsupported package failure, and npm test."
+}
