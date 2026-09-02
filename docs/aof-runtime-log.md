@@ -54,11 +54,11 @@ Runtime verification:
 
 Release outcome:
 
-- Implementation commit: pending
-- Tag: `v0.6.14` pending
-- Tag target commit: pending
-- GitHub Release: pending
-- Published result: pending
+- Implementation commit: `04e6d80dbf4f092547281c9a8885b8bd58ed3c92`
+- Tag: `v0.6.14`
+- Tag target commit: `04e6d80dbf4f092547281c9a8885b8bd58ed3c92`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.14`
+- Published result: released
 
 ## v0.6.13 Open Risks CLI
 
