@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.15
+
+- Added `tools/qif-release-ready-hook.mjs` as a local release-ready reference hook.
+- The hook validates the package first, requires `packageType: quality-gate`, and accepts only accountable Go or Conditional Go quality-gate decisions.
+- Conditional Go decisions must include conditions, approval owner, rollback plan, monitoring plan, gate rules, and intent verdicts.
+- Added npm test coverage for the hook while preserving the verifier boundary: hook success is structural release-readiness, not semantic quality truth.
+
 ## v0.6.14
 
 - Added `qif new <package-type>` to emit validated starter packages from committed examples.

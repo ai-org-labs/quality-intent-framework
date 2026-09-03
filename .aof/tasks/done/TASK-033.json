@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-033",
+  "title": "QIF v0.6.15 Release Ready Hook",
+  "description": "Add a local reference hook that blocks release-ready status unless a quality-gate package validates and contains an accountable Go or Conditional Go decision with required release controls.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-QIFV0615",
+  "assigned_session_ids": [],
+  "related_decision_record_id": null,
+  "operating_goal_ref": ".aof/goals/next-value-slice.json",
+  "created_at": "2026-09-03T08:25:24.386Z",
+  "updated_at": "2026-09-03T08:28:05.856Z",
+  "assigned_at": null,
+  "done_at": "2026-09-03T08:28:05.856Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented qif-release-ready-hook for fail-closed structural release readiness from quality-gate packages; verified normal pass, wrong package fail-closed, validate --all, and npm test."
+}

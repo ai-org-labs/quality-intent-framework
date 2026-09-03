@@ -116,7 +116,7 @@ and adoption surface — not pretending the limits away.
   risks, and low-confidence carriers can be listed without manual JSON inspection.
   v0.6.14 adds `qif new <package-type>` so validated starter package shapes
   can be generated from committed examples without manual copying.
-- Weaknesses: v0.6.14 CLI behavior is intentionally structural and
+- Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
   quality-gate generation slice, Pilot Corpus now structures case ingestion
@@ -338,6 +338,9 @@ Deliverables:
 - Gate-as-hook reference integration: a demonstration where an agent task
   cannot be marked release-ready unless a quality-gate package for the
   target validates. No external service required; local hook only.
+  Status: implemented in v0.6.15 through `tools/qif-release-ready-hook.mjs`,
+  which blocks release-ready status unless a quality-gate package validates
+  and contains an accountable Go or Conditional Go decision with release controls.
 - Protocol-neutral Action Quality Contract: tool/provider, permission class,
   target operation, expected state transition, stop condition, rollback,
   evidence, and accountable approval are represented independently of MCP,

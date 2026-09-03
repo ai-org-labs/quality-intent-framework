@@ -1,10 +1,10 @@
 {
   "name": "quality-intent-framework",
-  "version": "0.6.14",
+  "version": "0.6.15",
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tools/qif.mjs validate --all && node tools/qif.mjs new review-run && node tools/qif.mjs trace ACT-AQC-001 examples/action-quality-contract-package.json && node tools/qif.mjs open-risks examples/review-run-package.json && node tools/validate-qif.mjs examples/qif-sample-package.json && node tools/validate-expert-judgment.mjs examples/expert-judgment-sample-package.json && node tools/validate-qif-runtime.mjs && node tools/validate-qif-ledger.mjs && node tools/validate-world-model-review.mjs && node tools/validate-world-model-calibration.mjs && node tools/validate-world-model-pilot-corpus.mjs && node tools/validate-guided-elicitation.mjs && node tools/validate-world-model-elicitation.mjs && node tools/validate-action-quality-contract.mjs && node tools/validate-authoring-template.mjs && node tools/run-fixture-tests.mjs",
+    "test": "node tools/qif.mjs validate --all && node tools/qif.mjs new review-run && node tools/qif.mjs trace ACT-AQC-001 examples/action-quality-contract-package.json && node tools/qif.mjs open-risks examples/review-run-package.json && node tools/qif-release-ready-hook.mjs examples/quality-gate-package.json && node tools/validate-qif.mjs examples/qif-sample-package.json && node tools/validate-expert-judgment.mjs examples/expert-judgment-sample-package.json && node tools/validate-qif-runtime.mjs && node tools/validate-qif-ledger.mjs && node tools/validate-world-model-review.mjs && node tools/validate-world-model-calibration.mjs && node tools/validate-world-model-pilot-corpus.mjs && node tools/validate-guided-elicitation.mjs && node tools/validate-world-model-elicitation.mjs && node tools/validate-action-quality-contract.mjs && node tools/validate-authoring-template.mjs && node tools/run-fixture-tests.mjs",
     "build-fixtures": "node tools/run-fixture-tests.mjs --emit"
   },
   "bin": {

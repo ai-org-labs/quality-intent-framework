@@ -2,6 +2,63 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.15 Release Ready Hook
+
+Runtime source:
+
+- AOF source repo latest checked: `v5.0.0`
+- AOF runtime commands executed: `situation-assess`, `goal-project`, `task-open`, `task-update`, `council-review-packet`, `organization-verify`
+- External trend check date: `2026-09-03`
+- External source refs:
+  - `https://openai.github.io/openai-agents-js/guides/tracing/`
+  - `https://openai.github.io/openai-agents-js/guides/guardrails/`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+
+Need / Intent / Context:
+
+- Need: QIF can validate, generate starter packages, trace entities, and list risks, but an agent workflow still needs a local forcing function that blocks release-ready status unless a quality gate exists.
+- Intent: Add a local release-ready hook that validates a quality-gate package and admits only accountable Go or Conditional Go decisions with required release controls.
+- Context: Current agent tooling trends emphasize guardrails, tracing, and eval gates. QIF should demonstrate how a local hook can turn quality-gate evidence into a release-readiness boundary without external integrations.
+
+Decision reason:
+
+- Implement the local hook now because it is the next roadmap item after the CLI entrypoints and directly supports release discipline.
+- Do not implement external GitHub hooks, CI adapters, semantic approval, or remediation planning in this slice.
+- Preserve the verifier boundary: hook success is structural release readiness, not proof of semantic quality truth.
+
+Council judgment:
+
+- Visionary: proceed; QIF should become a usable release boundary, not only a package verifier.
+- Builder: proceed; the implementation is bounded to a local script, docs, roadmap, release notes, and npm test integration.
+- Guardian: proceed with fail-closed behavior and boundary language; invalid packages and missing gate decisions must block release-ready status.
+
+Artifacts:
+
+- Situation assessment: `.aof/artifacts/runtime/qif-v0.6.15-situation-assessment.json`
+- Council review packet: `.aof/artifacts/council/qif-v0.6.15-council-review-packet.json`
+- Task: `.aof/tasks/done/TASK-033.json`
+- Hook: `tools/qif-release-ready-hook.mjs`
+- Package metadata: `package.json`
+- Roadmap: `docs/qif-roadmap.md`
+- Release notes: `RELEASE-NOTES-v0.6.15.md`
+
+Runtime verification:
+
+- `node tools/qif-release-ready-hook.mjs examples/quality-gate-package.json`: pass; release-ready true with `QGD-QG-001`.
+- `node tools/qif-release-ready-hook.mjs examples/review-run-package.json`: failed closed as expected because the package type is `review-run` and has no quality gate decision.
+- `node tools/qif.mjs validate --all`: pass.
+- `npm test`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- AOF `organization-verify` using v5.0.0: failed on existing AOF metadata compatibility, not QIF runtime code. The v5 schema rejects existing `safety_level` fields in project orientation and command registry metadata.
+- AOF `situation-assess` using v5.0.0: pass with no current truth conflicts; generated artifacts sanitized for public repository use.
+
+Release outcome:
+
+- Implementation commit: pending
+- Tag: `v0.6.15` pending
+- Tag target commit: pending
+- GitHub Release: pending
+- Published result: pending
+
 ## v0.6.14 New Package CLI
 
 Runtime source:
