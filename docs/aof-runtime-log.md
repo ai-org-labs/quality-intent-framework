@@ -54,11 +54,11 @@ Runtime verification:
 
 Release outcome:
 
-- Implementation commit: pending
-- Tag: `v0.6.17` pending
-- Tag target commit: pending
-- GitHub Release: pending
-- Published result: pending
+- Implementation commit: `223d905a3c24b0096653413088b4fe92295fcee4`
+- Tag: `v0.6.17`
+- Tag target commit: `223d905a3c24b0096653413088b4fe92295fcee4`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.17`
+- Published result: released
 
 ## v0.6.16 Release Ready Hook Fixture Hardening
 
