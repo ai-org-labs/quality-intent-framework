@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-035",
+  "title": "QIF v0.6.17 Release Ready CLI Command",
+  "description": "Expose the release-ready hook through the canonical qif CLI and verify pass and fail-closed behavior through npm test.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-QIFV0617",
+  "assigned_session_ids": [],
+  "related_decision_record_id": null,
+  "operating_goal_ref": null,
+  "created_at": "2026-09-05T04:33:28.966Z",
+  "updated_at": "2026-09-05T04:37:26.198Z",
+  "assigned_at": null,
+  "done_at": "2026-09-05T04:37:26.198Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented qif release-ready CLI command; verified CLI pass, CLI fail-closed, fixture runner, validate --all, and npm test."
+}

@@ -53,6 +53,7 @@ function usage() {
   qif trace <entity-id> --all
   qif open-risks [package.json...]
   qif open-risks --all
+  qif release-ready <quality-gate-package.json>
 
 Options:
   --all       Validate, trace, or list open risks across all committed example packages.
@@ -373,6 +374,17 @@ function openRisks(files) {
   return warnings.length > 0 ? 1 : 0;
 }
 
+function releaseReady(args) {
+  const files = args.filter((arg) => !arg.startsWith("--"));
+  const [filePath] = files;
+  if (!filePath || files.length !== 1) {
+    process.stderr.write(`release-ready requires exactly one quality-gate package path.
+${usage()}`);
+    return 1;
+  }
+  return runNode(["tools/qif-release-ready-hook.mjs", filePath]);
+}
+
 function main() {
   const [command, ...args] = process.argv.slice(2);
   if (!command || command === "help" || command === "--help" || command === "-h") {
@@ -404,6 +416,9 @@ ${usage()}`);
   }
   if (command === "open-risks") {
     return openRisks(commandFiles(args, { defaultToExamples: true }));
+  }
+  if (command === "release-ready") {
+    return releaseReady(args);
   }
   process.stderr.write(`Unsupported command: ${command}
 ${usage()}`);

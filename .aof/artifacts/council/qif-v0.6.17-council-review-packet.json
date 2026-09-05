@@ -1,0 +1,32 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-05T04:37:29.067Z",
+  "review_packet_id": "CREV-MTNW6163-ZGK4OU",
+  "council_id": "qif-runtime-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "QIF v0.6.17 Release Ready CLI Command is release-ready.",
+  "rationale": "The change exposes the existing structural release gate through the canonical qif CLI, keeps fail-closed behavior covered by fixtures, and passed CLI, validation, and npm test verification.",
+  "recommendation": "Release v0.6.17 and keep external CI adapters and semantic approval workflows for later slices.",
+  "target_audience": "QIF users and AI agents",
+  "expected_user_reaction": "Users can run release readiness through the same qif command family as validation, trace, risk extraction, and package creation.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "release-gate-cli-adoption",
+  "diagnosis_confidence": 0.89,
+  "diagnosis_evidence_refs": [
+    "RELEASE-NOTES-v0.6.17.md"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "docs/aof-runtime-log.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-035",
+  "source_parent_session_id": "SESS-QIFV0617",
+  "source_decision_record_id": null
+}

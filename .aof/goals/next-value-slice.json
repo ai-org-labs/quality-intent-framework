@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.6.16 Release Ready Hook Fixture Hardening so pass and fail-closed hook behavior are reproducible in npm test instead of relying on manual command checks.",
-  "updated_at": "2026-09-05T04:15:44.740Z",
-  "agreed_with_human": true,
-  "source_session_id": "SESS-QIFV0616",
+  "content": "Implement QIF v0.6.17 Release Ready CLI Command so humans and AI agents can run the release gate through the canonical qif CLI instead of knowing the internal hook script path.",
+  "updated_at": "2026-09-05T04:34:02.012Z",
+  "agreed_with_human": null,
+  "source_session_id": "SESS-QIFV0617",
   "source_decision_record_id": null,
   "declared_complete_at": null
 }

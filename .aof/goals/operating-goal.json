@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
   "content": "Continue QIF v0.6.x hardening with executable, domain-general runtimes that make AI-assisted quality discovery and agent actions traceable without claiming semantic truth.",
-  "updated_at": "2026-08-28T04:33:07.064Z",
-  "agreed_with_human": true,
-  "source_session_id": "SESS-QIFV069",
+  "updated_at": "2026-09-05T04:34:05.308Z",
+  "agreed_with_human": null,
+  "source_session_id": "SESS-QIFV0617",
   "source_decision_record_id": null,
   "declared_complete_at": null
 }

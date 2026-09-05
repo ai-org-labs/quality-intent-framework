@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.17
+
+- Added `qif release-ready <quality-gate-package.json>` to run the release-ready gate through the canonical CLI.
+- Updated release-ready fixture checks to exercise the CLI entrypoint for both pass and fail-closed behavior.
+- Updated `npm test` to cover the release-ready CLI command directly while preserving the verifier boundary.
+
 ## v0.6.16
 
 - Added `tools/check-release-ready-hook-fixtures.mjs` to verify release-ready hook success and fail-closed behavior.

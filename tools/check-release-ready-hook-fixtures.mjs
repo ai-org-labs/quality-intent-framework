@@ -3,7 +3,7 @@ import process from "node:process";
 import { spawnSync } from "node:child_process";
 
 function run(args) {
-  const result = spawnSync(process.execPath, ["tools/qif-release-ready-hook.mjs", ...args], {
+  const result = spawnSync(process.execPath, ["tools/qif.mjs", "release-ready", ...args], {
     cwd: process.cwd(),
     encoding: "utf8"
   });
@@ -62,6 +62,7 @@ if (failures.length > 0) {
   console.log(JSON.stringify({
     ok: true,
     message: "QIF release-ready hook fixture checks passed.",
+    entrypoint: "qif release-ready",
     checks: checks.map((check) => check.name)
   }, null, 2));
 }

@@ -2,6 +2,64 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.17 Release Ready CLI Command
+
+Runtime source:
+
+- AOF source repo latest checked: `v5.0.0`
+- AOF runtime commands executed: `situation-assess`, `goal-project`, `task-open`, `task-update`, `council-review-packet`, `organization-verify`
+- External trend check date: `2026-09-05`
+- External source refs:
+  - `https://openai.github.io/openai-agents-js/guides/tracing/`
+  - `https://openai.github.io/openai-agents-js/guides/guardrails/`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+
+Need / Intent / Context:
+
+- Need: The release-ready gate existed as an internal hook script, but humans and AI agents still had to know that script path instead of using the canonical `qif` CLI.
+- Intent: Add `qif release-ready <quality-gate-package.json>` as the stable local command surface for release gate execution.
+- Context: Current agent tooling trends emphasize traceable guardrails, repeatable eval gates, and stable command surfaces. For QIF, release-readiness should be executable through the same CLI surface as validation, trace, risk extraction, and starter generation.
+
+Decision reason:
+
+- Implement the CLI command now because v0.6.15-v0.6.16 established the hook and fixture behavior, and the remaining adoption gap is command discoverability.
+- Do not redesign quality-gate semantics, add external CI adapters, or add semantic approval in this slice.
+- Preserve the verifier boundary: CLI success proves structural release-gate readiness only, not semantic quality truth.
+
+Council judgment:
+
+- Visionary: proceed; the canonical CLI makes QIF usable as an agent-facing quality gate.
+- Builder: proceed; the implementation is bounded to CLI routing, fixture coverage, docs, release notes, and runtime log updates.
+- Guardian: proceed; fail-closed behavior remains covered through fixture execution and npm test.
+
+Artifacts:
+
+- Situation assessment: `.aof/artifacts/runtime/qif-v0.6.17-situation-assessment.json`
+- Council review packet: `.aof/artifacts/council/qif-v0.6.17-council-review-packet.json`
+- Task: `.aof/tasks/done/TASK-035.json`
+- CLI: `tools/qif.mjs`
+- Fixture runner: `tools/check-release-ready-hook-fixtures.mjs`
+- Package metadata: `package.json`
+- Roadmap: `docs/qif-roadmap.md`
+- Release notes: `RELEASE-NOTES-v0.6.17.md`
+
+Runtime verification:
+
+- `node tools/qif.mjs release-ready examples/quality-gate-package.json`: pass; release-ready true with `QGD-QG-001`.
+- `node tools/check-release-ready-hook-fixtures.mjs`: pass through `qif release-ready`, covering pass and fail-closed behavior.
+- `node tools/qif.mjs validate --all`: pass.
+- `npm test`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- AOF `organization-verify` using v5.0.0: failed on existing AOF metadata compatibility, not QIF runtime code. The v5 schema rejects existing `safety_level` fields in project orientation and command registry metadata.
+- AOF `situation-assess` using v5.0.0: pass with no current truth conflicts; generated artifacts sanitized for public repository use.
+
+Release outcome:
+
+- Implementation commit: pending
+- Tag: `v0.6.17` pending
+- Tag target commit: pending
+- GitHub Release: pending
+- Published result: pending
+
 ## v0.6.16 Release Ready Hook Fixture Hardening
 
 Runtime source:
