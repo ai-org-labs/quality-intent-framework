@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.6.15 Release Ready Hook so agent workflows can block release-ready state unless a quality-gate package validates and contains an accountable Go or Conditional Go decision.",
-  "updated_at": "2026-09-03T08:25:13.294Z",
+  "content": "Implement QIF v0.6.16 Release Ready Hook Fixture Hardening so pass and fail-closed hook behavior are reproducible in npm test instead of relying on manual command checks.",
+  "updated_at": "2026-09-05T04:15:44.740Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-QIFV0615",
+  "source_session_id": "SESS-QIFV0616",
   "source_decision_record_id": null,
   "declared_complete_at": null
 }

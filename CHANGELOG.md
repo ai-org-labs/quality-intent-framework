@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.16
+
+- Added `tools/check-release-ready-hook-fixtures.mjs` to verify release-ready hook success and fail-closed behavior.
+- Updated `npm test` so hook fail-closed behavior is reproducible instead of relying on manual command checks.
+- Preserved the hook boundary: fixture success proves structural behavior only, not semantic quality truth.
+
 ## v0.6.15
 
 - Added `tools/qif-release-ready-hook.mjs` as a local release-ready reference hook.

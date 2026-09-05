@@ -2,6 +2,63 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.16 Release Ready Hook Fixture Hardening
+
+Runtime source:
+
+- AOF source repo latest checked: `v5.0.0`
+- AOF runtime commands executed: `situation-assess`, `goal-project`, `task-open`, `task-update`, `council-review-packet`, `organization-verify`
+- External trend check date: `2026-09-04`
+- External source refs:
+  - `https://openai.github.io/openai-agents-js/guides/tracing/`
+  - `https://openai.github.io/openai-agents-js/guides/guardrails/`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+
+Need / Intent / Context:
+
+- Need: The release-ready hook had manual pass and fail-closed checks, but fail-closed behavior was not fixed into the retained npm test path.
+- Intent: Add a local fixture runner that verifies both hook success and fail-closed behavior.
+- Context: Current agent tooling trends emphasize guardrails, tracing, and eval gates. For QIF, a gate is not credible unless the blocking path is as reproducible as the passing path.
+
+Decision reason:
+
+- Implement fixture hardening now because the v0.6.15 hook's highest-risk behavior is its ability to block invalid release-ready claims.
+- Do not redesign the hook, add CI adapters, or add external integrations in this slice.
+- Preserve the verifier boundary: fixture success proves structural hook behavior, not semantic quality truth.
+
+Council judgment:
+
+- Visionary: proceed; a release gate must demonstrate both admission and refusal.
+- Builder: proceed; the implementation is bounded to one fixture runner, npm test integration, docs, release notes, and runtime log updates.
+- Guardian: proceed; fail-closed behavior is now part of the reproducible evidence path.
+
+Artifacts:
+
+- Situation assessment: `.aof/artifacts/runtime/qif-v0.6.16-situation-assessment.json`
+- Council review packet: `.aof/artifacts/council/qif-v0.6.16-council-review-packet.json`
+- Task: `.aof/tasks/done/TASK-034.json`
+- Fixture runner: `tools/check-release-ready-hook-fixtures.mjs`
+- Package metadata: `package.json`
+- Release notes: `RELEASE-NOTES-v0.6.16.md`
+
+Runtime verification:
+
+- `node tools/check-release-ready-hook-fixtures.mjs`: pass.
+- `node tools/qif-release-ready-hook.mjs examples/quality-gate-package.json`: pass.
+- `node tools/qif-release-ready-hook.mjs examples/review-run-package.json`: failed closed as expected.
+- `node tools/qif.mjs validate --all`: pass.
+- `npm test`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- AOF `organization-verify` using v5.0.0: failed on existing AOF metadata compatibility, not QIF runtime code. The v5 schema rejects existing `safety_level` fields in project orientation and command registry metadata.
+- AOF `situation-assess` using v5.0.0: pass with no current truth conflicts; generated artifacts sanitized for public repository use.
+
+Release outcome:
+
+- Implementation commit: pending
+- Tag: `v0.6.16` pending
+- Tag target commit: pending
+- GitHub Release: pending
+- Published result: pending
+
 ## v0.6.15 Release Ready Hook
 
 Runtime source:
