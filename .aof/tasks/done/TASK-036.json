@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-036",
+  "title": "QIF v0.6.18 Doctor CLI",
+  "description": "Add qif doctor as a canonical repository health check over validation, fixture regression, release readiness, and open risk visibility.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-QIFV0618",
+  "assigned_session_ids": [],
+  "related_decision_record_id": null,
+  "operating_goal_ref": null,
+  "created_at": "2026-09-06T04:32:52.514Z",
+  "updated_at": "2026-09-06T04:36:28.493Z",
+  "assigned_at": null,
+  "done_at": "2026-09-06T04:36:28.493Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented qif doctor; verified doctor default, doctor release-gate override, validate --all, and npm test."
+}

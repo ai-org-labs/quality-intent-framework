@@ -329,14 +329,17 @@ Deliverables:
   fixtures covering hypothesis competition, information-gain questions,
   sequence exploration, invariant confirmation, and closure.
 - A `qif` CLI: `qif validate`, `qif new <package-type>`, `qif trace <id>`
-  (walk any entity's evidence chain), `qif open-risks`, `qif release-ready`.
+  (walk any entity's evidence chain), `qif open-risks`, `qif release-ready`,
+  `qif doctor`.
   Status: first slices implemented in v0.6.11-v0.6.14 through
   `tools/qif.mjs validate`, `qif new <package-type>`, `qif trace <id>`,
   `qif open-risks`, `--all`, `--fixtures`, package-type routing, starter
   package generation, reference inspection, risk-carrier extraction, and npm
   test integration. v0.6.17 exposes the release-ready gate through the same
   canonical CLI so humans and AI agents do not need to know the internal hook
-  script path.
+  script path. v0.6.18 adds `qif doctor` as a one-command structural health
+  check over validation, retained fixtures, release readiness, and open-risk
+  visibility.
 - Gate-as-hook reference integration: a demonstration where an agent task
   cannot be marked release-ready unless a quality-gate package for the
   target validates. No external service required; local hook only.

@@ -54,6 +54,7 @@ function usage() {
   qif open-risks [package.json...]
   qif open-risks --all
   qif release-ready <quality-gate-package.json>
+  qif doctor [--release-gate quality-gate-package.json]
 
 Options:
   --all       Validate, trace, or list open risks across all committed example packages.
@@ -87,6 +88,20 @@ function runNode(args) {
   const result = spawnSync(process.execPath, args, { stdio: "inherit", cwd: process.cwd() });
   if (result.error) throw result.error;
   return result.status ?? 1;
+}
+
+function runNodeCaptured(args) {
+  const result = spawnSync(process.execPath, args, {
+    cwd: process.cwd(),
+    encoding: "utf8"
+  });
+  if (result.error) throw result.error;
+  return {
+    command: ["node", ...args].join(" "),
+    status: result.status ?? 1,
+    stdout: result.stdout.trim(),
+    stderr: result.stderr.trim()
+  };
 }
 
 function validateFile(filePath) {
@@ -385,6 +400,58 @@ ${usage()}`);
   return runNode(["tools/qif-release-ready-hook.mjs", filePath]);
 }
 
+function summarizeCaptured(result) {
+  const text = result.stdout || result.stderr;
+  let parsed = null;
+  try {
+    parsed = text ? JSON.parse(text) : null;
+  } catch {
+    parsed = null;
+  }
+  return {
+    command: result.command,
+    status: result.status,
+    ok: result.status === 0,
+    parsed
+  };
+}
+
+function doctor(args) {
+  const releaseGatePath = optionValue(args, "--release-gate") || "examples/quality-gate-package.json";
+  const checks = [
+    {
+      name: "validate-all",
+      blocking: true,
+      result: summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "validate", "--all"]))
+    },
+    {
+      name: "fixture-regression",
+      blocking: true,
+      result: summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "validate", "--fixtures"]))
+    },
+    {
+      name: "release-ready",
+      blocking: true,
+      result: summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "release-ready", releaseGatePath]))
+    },
+    {
+      name: "open-risk-visibility",
+      blocking: false,
+      result: summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "open-risks", "--all"]))
+    }
+  ];
+  const blockingFailures = checks.filter((check) => check.blocking && !check.result.ok);
+  console.log(JSON.stringify({
+    ok: blockingFailures.length === 0,
+    message: blockingFailures.length === 0 ? "QIF doctor checks passed." : "QIF doctor found blocking structural failures.",
+    releaseGatePackage: displayPath(releaseGatePath),
+    checks,
+    blockingFailures: blockingFailures.map((check) => check.name),
+    verifierBoundary: "doctor aggregates structural QIF checks only; it does not prove semantic quality truth, business approval correctness, operational safety, or risk remediation sufficiency."
+  }, null, 2));
+  return blockingFailures.length === 0 ? 0 : 1;
+}
+
 function main() {
   const [command, ...args] = process.argv.slice(2);
   if (!command || command === "help" || command === "--help" || command === "-h") {
@@ -419,6 +486,9 @@ ${usage()}`);
   }
   if (command === "release-ready") {
     return releaseReady(args);
+  }
+  if (command === "doctor") {
+    return doctor(args);
   }
   process.stderr.write(`Unsupported command: ${command}
 ${usage()}`);

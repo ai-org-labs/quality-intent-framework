@@ -1,0 +1,33 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-09-06T04:32:52.819Z",
+  "project_root": ".",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "Continue QIF v0.6.x hardening with executable, domain-general runtimes that make AI-assisted quality discovery and agent actions traceable without claiming semantic truth.",
+  "next_value_slice": "Implement QIF v0.6.18 Doctor CLI so humans and AI agents can run one canonical repository health check covering validation, fixture regression, release readiness, and open risk visibility without treating the result as semantic quality truth.",
+  "current_runtime_stage": "implementation-ready",
+  "primary_frontier_task": {
+    "task_id": "TASK-036",
+    "title": "QIF v0.6.18 Doctor CLI",
+    "status": "open",
+    "updated_at": "2026-09-06T04:32:52.514Z",
+    "track": "v0.6",
+    "artifact_ref": ".aof/tasks/open/TASK-036.json"
+  },
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Start TASK-036: QIF v0.6.18 Doctor CLI",
+    "prioritized_task_ids": [
+      "TASK-036"
+    ],
+    "scale_direction": "Prioritize TASK-036 while keeping Mission Control, roadmap guidance, and open tasks aligned with the same frontier."
+  },
+  "recommended_action": {
+    "recommended_action": "Start TASK-036: QIF v0.6.18 Doctor CLI",
+    "rationale": "This is the best open task aligned with the current operating goal and next release frontier.",
+    "artifact_ref": ".aof/tasks/open/TASK-036.json"
+  }
+}

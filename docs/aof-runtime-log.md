@@ -2,6 +2,63 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.18 Doctor CLI
+
+Runtime source:
+
+- AOF source repo latest checked: `v5.0.0`
+- AOF runtime commands executed: `situation-assess`, `goal-project`, `task-open`, `task-update`, `council-review-packet`, `organization-verify`
+- External trend check date: `2026-09-06`
+- External source refs:
+  - `https://openai.github.io/openai-agents-python/tracing/`
+  - `https://openai.github.io/openai-agents-python/guardrails/`
+  - `https://openai.com/index/designing-agents-to-resist-prompt-injection/`
+
+Need / Intent / Context:
+
+- Need: QIF has separate commands for validation, fixture regression, release readiness, and open-risk visibility, but humans and AI agents still need to know which checks to run together before trusting repository health.
+- Intent: Add `qif doctor` as a one-command structural health check over the current QIF repository surface.
+- Context: Current agent tooling trends emphasize traceable runs, guardrail tripwires, prompt-injection resistance, stable command surfaces, and auditable agent workflows. QIF should expose a simple health command without claiming semantic quality truth.
+
+Decision reason:
+
+- Implement doctor now because the canonical CLI already has enough primitives to compose a useful health check.
+- Do not add external CI adapters, remote integrations, semantic scoring, or automatic remediation in this slice.
+- Treat open-risk output as visibility, not as an automatic blocking failure, because unresolved risks require human governance context.
+
+Council judgment:
+
+- Visionary: proceed; a single health command improves adoption by humans and AI agents.
+- Builder: proceed; the implementation composes existing CLI checks without changing package semantics.
+- Guardian: proceed; the command blocks on structural verification and release readiness while preserving verifier-boundary language.
+
+Artifacts:
+
+- Situation assessment: `.aof/artifacts/runtime/qif-v0.6.18-situation-assessment.json`
+- Council review packet: `.aof/artifacts/council/qif-v0.6.18-council-review-packet.json`
+- Task: `.aof/tasks/done/TASK-036.json`
+- CLI: `tools/qif.mjs`
+- Package metadata: `package.json`
+- Roadmap: `docs/qif-roadmap.md`
+- Release notes: `RELEASE-NOTES-v0.6.18.md`
+
+Runtime verification:
+
+- `node tools/qif.mjs doctor`: pass; validation, fixture regression, release readiness, and open-risk visibility completed with no blocking failures.
+- `node tools/qif.mjs doctor --release-gate examples/quality-gate-package.json`: pass.
+- `node tools/qif.mjs validate --all`: pass.
+- `npm test`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- AOF `organization-verify` using v5.0.0: failed on existing AOF metadata compatibility, not QIF runtime code. The v5 schema rejects existing `safety_level` fields in project orientation and command registry metadata.
+- AOF `situation-assess` using v5.0.0: pass with no current truth conflicts; generated artifacts sanitized for public repository use.
+
+Release outcome:
+
+- Implementation commit: pending
+- Tag: `v0.6.18` pending
+- Tag target commit: pending
+- GitHub Release: pending
+- Published result: pending
+
 ## v0.6.17 Release Ready CLI Command
 
 Runtime source:

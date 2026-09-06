@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.18
+
+- Added `qif doctor` as a one-command structural health check over validation, retained fixtures, release readiness, and open-risk visibility.
+- Added `qif doctor --release-gate <quality-gate-package.json>` to evaluate a specific release gate package while keeping example defaults available.
+- Updated `npm test` to cover the doctor command and its verifier boundary.
+
 ## v0.6.17
 
 - Added `qif release-ready <quality-gate-package.json>` to run the release-ready gate through the canonical CLI.
