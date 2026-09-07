@@ -2,6 +2,63 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.19 Commands Manifest CLI
+
+Runtime source:
+
+- AOF source repo latest checked: `v5.0.0`
+- AOF runtime commands executed: `situation-assess`, `goal-project`, `task-open`, `task-update`, `council-review-packet`, `organization-verify`
+- External trend check date: `2026-09-07`
+- External source refs:
+  - `https://openai.github.io/openai-agents-python/tracing/`
+  - `https://openai.github.io/openai-agents-python/guardrails/`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+
+Need / Intent / Context:
+
+- Need: QIF has a growing local CLI surface, but humans, AI agents, and harnesses need a machine-readable way to discover command purpose, usage, arguments, blocking behavior, and verifier boundaries.
+- Intent: Add `qif commands` as a canonical command manifest endpoint.
+- Context: Current agent tooling trends emphasize traceable execution, guardrails, tool-level checks, and multi-turn evaluation. QIF should make its own command surface explicit enough for agents to call correctly without relying on hidden conversation context.
+
+Decision reason:
+
+- Implement command discovery now because `validate`, `new`, `trace`, `open-risks`, `release-ready`, and `doctor` are already stable enough to expose as a manifest.
+- Do not add remote integration, shell completion, automatic remediation, or semantic scoring in this slice.
+- Preserve the verifier boundary: command discovery describes available local command surfaces only; it does not run checks or authorize release.
+
+Council judgment:
+
+- Visionary: proceed; command manifest discovery makes QIF more usable by agent harnesses and non-expert users.
+- Builder: proceed; the implementation is bounded to the CLI manifest, npm test integration, docs, release notes, and runtime log.
+- Guardian: proceed; each command entry includes blocking behavior and explicit verifier-boundary language.
+
+Artifacts:
+
+- Situation assessment: `.aof/artifacts/runtime/qif-v0.6.19-situation-assessment.json`
+- Council review packet: `.aof/artifacts/council/qif-v0.6.19-council-review-packet.json`
+- Task: `.aof/tasks/done/TASK-037.json`
+- CLI: `tools/qif.mjs`
+- Package metadata: `package.json`
+- Roadmap: `docs/qif-roadmap.md`
+- Release notes: `RELEASE-NOTES-v0.6.19.md`
+
+Runtime verification:
+
+- `node tools/qif.mjs commands`: pass; command manifest returned usage, argument shape, blocking behavior, output descriptions, and verifier boundaries.
+- `node tools/qif.mjs doctor`: pass.
+- `node tools/qif.mjs validate --all`: pass.
+- `npm test`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- AOF `organization-verify` using v5.0.0: failed on existing AOF metadata compatibility, not QIF runtime code. The v5 schema rejects existing `safety_level` fields in project orientation and command registry metadata.
+- AOF `situation-assess` using v5.0.0: pass with no current truth conflicts; generated artifacts sanitized for public repository use.
+
+Release outcome:
+
+- Implementation commit: pending
+- Tag: `v0.6.19` pending
+- Tag target commit: pending
+- GitHub Release: pending
+- Published result: pending
+
 ## v0.6.18 Doctor CLI
 
 Runtime source:

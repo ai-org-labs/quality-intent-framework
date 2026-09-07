@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.19
+
+- Added `qif commands` to return the canonical QIF command surface as machine-readable JSON.
+- Included command purpose, usage, argument shape, blocking behavior, output description, and verifier boundary for each CLI command.
+- Updated `npm test` to cover command-manifest generation.
+
 ## v0.6.18
 
 - Added `qif doctor` as a one-command structural health check over validation, retained fixtures, release readiness, and open-risk visibility.

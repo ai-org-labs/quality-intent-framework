@@ -55,11 +55,116 @@ function usage() {
   qif open-risks --all
   qif release-ready <quality-gate-package.json>
   qif doctor [--release-gate quality-gate-package.json]
+  qif commands
 
 Options:
   --all       Validate, trace, or list open risks across all committed example packages.
   --fixtures  Run the retained negative fixture regression suite.
 `;
+}
+
+function commandManifest() {
+  return [
+    {
+      name: "validate",
+      usage: "qif validate <package.json...> | qif validate --all | qif validate --fixtures",
+      purpose: "Validate QIF package structure through the correct local verifier.",
+      arguments: [
+        { name: "package.json", required: false, repeatable: true, description: "One or more QIF package files." },
+        { name: "--all", required: false, repeatable: false, description: "Validate all committed example packages." },
+        { name: "--fixtures", required: false, repeatable: false, description: "Run retained negative fixture regression." }
+      ],
+      blocking: true,
+      output: "Verifier JSON or fixture-suite JSON.",
+      verifierBoundary: "validation proves structural integrity only; it does not prove semantic quality truth."
+    },
+    {
+      name: "new",
+      usage: "qif new <package-type> [--out package.json]",
+      purpose: "Emit a validated starter package shape from committed examples.",
+      arguments: [
+        { name: "package-type", required: true, repeatable: false, description: "Supported QIF package type." },
+        { name: "--out", required: false, repeatable: false, description: "Write output to a new file without overwriting an existing file." }
+      ],
+      blocking: false,
+      output: "Starter package JSON or write confirmation JSON.",
+      verifierBoundary: "starter generation preserves shape only; users must replace sample content and validate before relying on it."
+    },
+    {
+      name: "trace",
+      usage: "qif trace <entity-id> [package.json...] | qif trace <entity-id> --all",
+      purpose: "Find matching entities plus outbound and inbound references.",
+      arguments: [
+        { name: "entity-id", required: true, repeatable: false, description: "Entity id to inspect." },
+        { name: "package.json", required: false, repeatable: true, description: "Packages to search." },
+        { name: "--all", required: false, repeatable: false, description: "Search all committed example packages." }
+      ],
+      blocking: false,
+      output: "Trace result JSON.",
+      verifierBoundary: "trace visibility is not semantic truth."
+    },
+    {
+      name: "open-risks",
+      usage: "qif open-risks [package.json...] | qif open-risks --all",
+      purpose: "List unresolved governance triggers, residual-risk carriers, and low-confidence entities.",
+      arguments: [
+        { name: "package.json", required: false, repeatable: true, description: "Packages to search." },
+        { name: "--all", required: false, repeatable: false, description: "Search all committed example packages." }
+      ],
+      blocking: false,
+      output: "Open-risk visibility JSON.",
+      verifierBoundary: "open-risks reports structural risk carriers only; it does not prove semantic risk truth, business priority, or remediation sufficiency."
+    },
+    {
+      name: "release-ready",
+      usage: "qif release-ready <quality-gate-package.json>",
+      purpose: "Run the local release-ready gate through the canonical QIF CLI.",
+      arguments: [
+        { name: "quality-gate-package.json", required: true, repeatable: false, description: "Quality-gate package to validate and evaluate for release-ready status." }
+      ],
+      blocking: true,
+      output: "Release-ready gate JSON.",
+      verifierBoundary: "release-ready checks structural gate readiness only; it does not prove semantic quality truth, business approval correctness, or operational safety."
+    },
+    {
+      name: "doctor",
+      usage: "qif doctor [--release-gate quality-gate-package.json]",
+      purpose: "Run one repository health check over validation, retained fixtures, release readiness, and open-risk visibility.",
+      arguments: [
+        { name: "--release-gate", required: false, repeatable: false, description: "Quality-gate package used for release-ready evaluation." }
+      ],
+      blocking: true,
+      output: "Aggregated doctor JSON.",
+      verifierBoundary: "doctor aggregates structural QIF checks only; it does not prove semantic quality truth, business approval correctness, operational safety, or risk remediation sufficiency."
+    },
+    {
+      name: "commands",
+      usage: "qif commands",
+      purpose: "Return the canonical QIF CLI command manifest as machine-readable JSON.",
+      arguments: [],
+      blocking: false,
+      output: "Command manifest JSON.",
+      verifierBoundary: "commands describes available local command surfaces only; it does not execute validation or prove repository health."
+    }
+  ];
+}
+
+function commands() {
+  console.log(JSON.stringify({
+    ok: true,
+    commandSurfaceVersion: 1,
+    packageVersion: readJson("package.json").version || "unknown",
+    commands: commandManifest(),
+    examples: [
+      "node tools/qif.mjs validate --all",
+      "node tools/qif.mjs trace ACT-AQC-001 --all",
+      "node tools/qif.mjs open-risks --all",
+      "node tools/qif.mjs release-ready examples/quality-gate-package.json",
+      "node tools/qif.mjs doctor"
+    ],
+    verifierBoundary: "command manifest discovery does not execute checks, prove semantic quality truth, or authorize release."
+  }, null, 2));
+  return 0;
 }
 
 function readJson(filePath) {
@@ -489,6 +594,9 @@ ${usage()}`);
   }
   if (command === "doctor") {
     return doctor(args);
+  }
+  if (command === "commands") {
+    return commands();
   }
   process.stderr.write(`Unsupported command: ${command}
 ${usage()}`);
