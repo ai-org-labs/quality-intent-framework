@@ -53,11 +53,11 @@ Runtime verification:
 
 Release outcome:
 
-- Implementation commit: pending
-- Tag: `v0.6.19` pending
-- Tag target commit: pending
-- GitHub Release: pending
-- Published result: pending
+- Implementation commit: `c0cbc3044082324a7af69577d1fc52dcf10f0bf4`
+- Tag: `v0.6.19`
+- Tag target commit: `c0cbc3044082324a7af69577d1fc52dcf10f0bf4`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.19`
+- Published result: released
 
 ## v0.6.18 Doctor CLI
 
