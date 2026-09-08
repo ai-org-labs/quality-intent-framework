@@ -54,11 +54,11 @@ Runtime verification:
 
 Release outcome:
 
-- Implementation commit: pending
-- Tag: `v0.6.20` pending
-- Tag target commit: pending
-- GitHub Release: pending
-- Published result: pending
+- Implementation commit: `44f7f07dc3249f5e401e1acb5e7e381bb9512a94`
+- Tag: `v0.6.20`
+- Tag target commit: `44f7f07dc3249f5e401e1acb5e7e381bb9512a94`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.20`
+- Published result: released
 
 ## v0.6.19 Commands Manifest CLI
 
