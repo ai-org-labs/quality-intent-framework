@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-038",
+  "title": "QIF v0.6.20 Package Types Manifest CLI",
+  "description": "Add qif package-types so humans and AI agents can discover package purposes, templates, validators, lifecycle roles, and verifier boundaries as JSON.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-QIFV0620",
+  "assigned_session_ids": [],
+  "related_decision_record_id": null,
+  "operating_goal_ref": null,
+  "created_at": "2026-09-08T04:32:21.956Z",
+  "updated_at": "2026-09-08T04:36:41.334Z",
+  "assigned_at": null,
+  "done_at": "2026-09-08T04:36:41.334Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented qif package-types; verified package-types, commands, doctor, validate --all, and npm test."
+}

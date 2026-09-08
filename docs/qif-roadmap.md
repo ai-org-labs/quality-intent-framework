@@ -119,6 +119,9 @@ and adoption surface — not pretending the limits away.
   v0.6.19 adds `qif commands` so humans, AI agents, and harnesses can discover
   the canonical command surface, arguments, blocking behavior, and verifier
   boundaries as machine-readable JSON.
+  v0.6.20 adds `qif package-types` so supported package types, source
+  templates, validators, purposes, lifecycle roles, and verifier boundaries
+  are also discoverable as machine-readable JSON.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -333,7 +336,7 @@ Deliverables:
   sequence exploration, invariant confirmation, and closure.
 - A `qif` CLI: `qif validate`, `qif new <package-type>`, `qif trace <id>`
   (walk any entity's evidence chain), `qif open-risks`, `qif release-ready`,
-  `qif doctor`, `qif commands`.
+  `qif doctor`, `qif commands`, `qif package-types`.
   Status: first slices implemented in v0.6.11-v0.6.14 through
   `tools/qif.mjs validate`, `qif new <package-type>`, `qif trace <id>`,
   `qif open-risks`, `--all`, `--fixtures`, package-type routing, starter
@@ -343,7 +346,9 @@ Deliverables:
   script path. v0.6.18 adds `qif doctor` as a one-command structural health
   check over validation, retained fixtures, release readiness, and open-risk
   visibility. v0.6.19 adds `qif commands` as a machine-readable command
-  manifest for humans, AI agents, and harnesses.
+  manifest for humans, AI agents, and harnesses. v0.6.20 adds
+  `qif package-types` as a machine-readable catalog of supported package
+  purposes, templates, validators, lifecycle roles, and verifier boundaries.
 - Gate-as-hook reference integration: a demonstration where an agent task
   cannot be marked release-ready unless a quality-gate package for the
   target validates. No external service required; local hook only.

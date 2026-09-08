@@ -2,6 +2,64 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.20 Package Types Manifest CLI
+
+Runtime source:
+
+- AOF source repo latest checked: `v12.2.0`
+- AOF runtime commands executed: `situation-assess`, `goal-project`, `task-open`, `task-update`, `council-review-packet`, `organization-verify`
+- External trend check date: `2026-09-08`
+- External source refs:
+  - `https://openai.github.io/openai-agents-python/tracing/`
+  - `https://openai.github.io/openai-agents-python/guardrails/`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+
+Need / Intent / Context:
+
+- Need: QIF exposes command discovery through `qif commands`, but humans, AI agents, and harnesses still need machine-readable package type discovery before choosing what to author or validate.
+- Intent: Add `qif package-types` as a canonical package type catalog endpoint.
+- Context: Current agent tooling trends emphasize traceable execution, guardrails, tool-level checks, and multi-turn evaluation. QIF should make package selection explicit enough for agents to choose the correct artifact shape without relying on hidden conversation context.
+
+Decision reason:
+
+- Implement package type discovery now because command discovery exists and each supported package type already has a committed example template and validator.
+- Do not add schema export, remote registry publication, automatic package synthesis, or semantic package recommendation in this slice.
+- Preserve the verifier boundary: package type discovery describes supported shapes; it does not validate concrete content or prove semantic quality truth.
+
+Council judgment:
+
+- Visionary: proceed; package type discovery improves QIF adoption by agents and non-expert users.
+- Builder: proceed; the implementation is bounded to one CLI command, npm test integration, docs, release notes, and runtime log.
+- Guardian: proceed; each package type entry includes validator and boundary language.
+
+Artifacts:
+
+- Situation assessment: `.aof/artifacts/runtime/qif-v0.6.20-situation-assessment.json`
+- Council review packet: `.aof/artifacts/council/qif-v0.6.20-council-review-packet.json`
+- Task: `.aof/tasks/done/TASK-038.json`
+- CLI: `tools/qif.mjs`
+- Package metadata: `package.json`
+- Roadmap: `docs/qif-roadmap.md`
+- Release notes: `RELEASE-NOTES-v0.6.20.md`
+
+Runtime verification:
+
+- `node tools/qif.mjs package-types`: pass; package catalog returned purposes, lifecycle roles, templates, validators, commands, and verifier boundaries.
+- `node tools/qif.mjs commands`: pass.
+- `node tools/qif.mjs doctor`: pass.
+- `node tools/qif.mjs validate --all`: pass.
+- `npm test`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- AOF `organization-verify` using v12.2.0: pass, `231/231` checks.
+- AOF `situation-assess` using v12.2.0: pass with no current truth conflicts; generated artifacts sanitized for public repository use.
+
+Release outcome:
+
+- Implementation commit: pending
+- Tag: `v0.6.20` pending
+- Tag target commit: pending
+- GitHub Release: pending
+- Published result: pending
+
 ## v0.6.19 Commands Manifest CLI
 
 Runtime source:

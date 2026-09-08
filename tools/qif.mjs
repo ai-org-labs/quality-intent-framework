@@ -56,6 +56,7 @@ function usage() {
   qif release-ready <quality-gate-package.json>
   qif doctor [--release-gate quality-gate-package.json]
   qif commands
+  qif package-types
 
 Options:
   --all       Validate, trace, or list open risks across all committed example packages.
@@ -145,6 +146,15 @@ function commandManifest() {
       blocking: false,
       output: "Command manifest JSON.",
       verifierBoundary: "commands describes available local command surfaces only; it does not execute validation or prove repository health."
+    },
+    {
+      name: "package-types",
+      usage: "qif package-types",
+      purpose: "Return the supported QIF package type catalog as machine-readable JSON.",
+      arguments: [],
+      blocking: false,
+      output: "Package type catalog JSON.",
+      verifierBoundary: "package-types describes supported package shapes only; it does not validate a concrete package or prove semantic quality truth."
     }
   ];
 }
@@ -160,9 +170,99 @@ function commands() {
       "node tools/qif.mjs trace ACT-AQC-001 --all",
       "node tools/qif.mjs open-risks --all",
       "node tools/qif.mjs release-ready examples/quality-gate-package.json",
-      "node tools/qif.mjs doctor"
+      "node tools/qif.mjs doctor",
+      "node tools/qif.mjs package-types"
     ],
     verifierBoundary: "command manifest discovery does not execute checks, prove semantic quality truth, or authorize release."
+  }, null, 2));
+  return 0;
+}
+
+const packageTypeDescriptions = new Map([
+  ["qif-package", {
+    purpose: "Represent core discovered quality intents, risks, evidence, evaluations, governance events, and acceptance gates.",
+    lifecycleRole: "core-quality-intent-record"
+  }],
+  ["expert-judgment", {
+    purpose: "Capture expert judgment from concrete cases and derive reusable decision patterns.",
+    lifecycleRole: "tacit-knowledge-extraction"
+  }],
+  ["discovery-session", {
+    purpose: "Record raw expert answers, questions, extraction steps, cues, concerns, loss boundaries, and derived quality knowledge.",
+    lifecycleRole: "quality-intent-discovery"
+  }],
+  ["organizational-quality-culture", {
+    purpose: "Aggregate repeated decision patterns, loss boundaries, waiver practices, escalation norms, and tradeoffs as context.",
+    lifecycleRole: "quality-culture-context"
+  }],
+  ["evaluation-target", {
+    purpose: "Describe the domain-general object being evaluated, including context, stakeholders, impact, and risk summary.",
+    lifecycleRole: "target-definition"
+  }],
+  ["review-run", {
+    purpose: "Record application of selected quality intents and decision patterns to a concrete evaluation target.",
+    lifecycleRole: "quality-evaluation-run"
+  }],
+  ["quality-gate", {
+    purpose: "Make release or acceptance gate decisions traceable to quality intents, evidence, timing, retention, reports, and governance.",
+    lifecycleRole: "release-or-acceptance-gate"
+  }],
+  ["qif-ledger", {
+    purpose: "Link QIF packages across time, package boundaries, lifecycle records, missed intents, and agent outcomes.",
+    lifecycleRole: "cross-package-quality-memory"
+  }],
+  ["world-model-review", {
+    purpose: "Check conceptual model, domain model, boundaries, relationships, state, events, invariants, assumptions, and coordinate systems before verdicts.",
+    lifecycleRole: "world-model-gap-review"
+  }],
+  ["world-model-calibration", {
+    purpose: "Measure AI and expert agreement on unseen world-model gap findings and route weak calibration to governance.",
+    lifecycleRole: "world-model-evaluator-calibration"
+  }],
+  ["world-model-pilot-corpus", {
+    purpose: "Prepare privacy-screened, representative pilot cases for world-model calibration.",
+    lifecycleRole: "calibration-corpus-preparation"
+  }],
+  ["guided-elicitation", {
+    purpose: "Guide non-expert users through plain-language, stepwise, anti-checklist discovery questions and comprehension checks.",
+    lifecycleRole: "human-centered-quality-discovery"
+  }],
+  ["world-model-elicitation", {
+    purpose: "Converge Level 4 requirements through model hypotheses, discriminating questions, counterexamples, invariants, and closure.",
+    lifecycleRole: "level-4-requirements-elicitation"
+  }],
+  ["action-quality-contract", {
+    purpose: "Govern AI agent actions through permissions, approvals, traces, guardrails, context memory, containment, handoff, rollback, and outcome evidence.",
+    lifecycleRole: "agent-action-quality-control"
+  }],
+  ["authoring-template", {
+    purpose: "Define machine-readable templates for AI-generated QIF artifacts with input/output contracts, validation, golden cases, and scoring.",
+    lifecycleRole: "ai-authoring-control"
+  }]
+]);
+
+function packageTypes() {
+  const templates = templateFilesByType();
+  const packageTypes = Array.from(templates.entries()).map(([packageType, template]) => {
+    const metadata = packageTypeDescriptions.get(packageType) || {};
+    const validator = runtimeTypes.has(packageType) ? "tools/validate-qif-runtime.mjs" : validatorsByType.get(packageType);
+    return {
+      packageType,
+      purpose: metadata.purpose || "Supported QIF package type.",
+      lifecycleRole: metadata.lifecycleRole || "unspecified",
+      template: displayPath(template),
+      validator,
+      createCommand: `node tools/qif.mjs new ${packageType}`,
+      validateCommand: `node tools/qif.mjs validate ${displayPath(template)}`,
+      verifierBoundary: "package type support means the shape has a local validator and starter template; it does not prove that generated content is semantically correct."
+    };
+  }).sort((a, b) => a.packageType.localeCompare(b.packageType));
+  console.log(JSON.stringify({
+    ok: true,
+    packageTypeCatalogVersion: 1,
+    packageVersion: readJson("package.json").version || "unknown",
+    packageTypes,
+    verifierBoundary: "package type catalog discovery does not validate concrete package content, prove semantic quality truth, or authorize release."
   }, null, 2));
   return 0;
 }
@@ -597,6 +697,9 @@ ${usage()}`);
   }
   if (command === "commands") {
     return commands();
+  }
+  if (command === "package-types") {
+    return packageTypes();
   }
   process.stderr.write(`Unsupported command: ${command}
 ${usage()}`);

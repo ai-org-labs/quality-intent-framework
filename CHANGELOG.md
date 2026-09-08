@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.20
+
+- Added `qif package-types` to return supported QIF package types as machine-readable JSON.
+- Included package purpose, lifecycle role, source template, validator, creation command, validation command, and verifier boundary for each package type.
+- Updated `npm test` to cover package-type catalog generation.
+
 ## v0.6.19
 
 - Added `qif commands` to return the canonical QIF command surface as machine-readable JSON.
