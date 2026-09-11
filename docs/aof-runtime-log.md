@@ -63,7 +63,12 @@ Verification:
 
 Release:
 
-- Pending.
+- Implementation commit: `242b65a8168f7caf15d9170dc95461a611a2f4aa`
+- Tag: `v0.6.21`
+- Tag target commit: `242b65a8168f7caf15d9170dc95461a611a2f4aa`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.21`
+- Release published at: `2026-09-11T00:17:09Z`
+- Published result: released.
 
 ## v0.6.20 Package Types Manifest CLI
 
