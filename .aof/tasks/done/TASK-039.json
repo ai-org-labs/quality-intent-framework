@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-039",
+  "title": "QIF v0.6.21 Runtime Status CLI",
+  "description": "Add a read-only qif status command that aggregates package version, command/package-type catalog health, validation status, release readiness, open risk summary, roadmap frontier, trend rationale, and verifier boundary for AI and human operators.",
+  "status": "done",
+  "origin": null,
+  "orchestrator_session_id": null,
+  "assigned_session_ids": [],
+  "related_decision_record_id": null,
+  "operating_goal_ref": null,
+  "created_at": "2026-09-11T00:04:21.659Z",
+  "updated_at": "2026-09-11T00:12:26.876Z",
+  "assigned_at": null,
+  "done_at": "2026-09-11T00:12:26.876Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented qif status, updated docs/changelog/release notes/npm test, ran qif status, qif doctor, qif validate --all, npm test, and AOF organization-verify. Release pending final commit/tag/release steps."
+}

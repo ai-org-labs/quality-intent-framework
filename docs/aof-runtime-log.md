@@ -2,6 +2,69 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.21 Runtime Status CLI
+
+Date: 2026-09-11
+
+Need / Intent / Context:
+
+- Need: after `qif commands` and `qif package-types`, humans and AI agents can discover available surfaces, but still need one compact current-state packet before acting.
+- Intent: add `qif status` as a read-only CLI command that aggregates version, command surface, package type catalog, structural health, release readiness, open-risk summary, roadmap frontier, trend rationale, next recommended action, and verifier boundary.
+- Context: current agentic AI trends emphasize traceable runs, guardrails, sessions, memory, MCP-style capability discovery, and multi-turn/tool-trajectory evals. QIF should expose local quality state as a machine-readable operational packet without claiming semantic truth.
+
+Direction and council judgment:
+
+- Visionary: approve. Status discovery moves QIF from separate command discovery toward an operator packet that AI agents can read before choosing a next action.
+- Builder: approve. Implement a narrow `qif status` command by composing existing local commands instead of adding a new package type or external dependency.
+- Guardian: approve with boundary. The command may summarize validation and release readiness, but must clearly state that local structural health is not semantic quality truth, business approval correctness, operational safety, or roadmap correctness.
+
+Runtime command evidence:
+
+- AOF latest local tag check: `v12.2.0`.
+- AOF v12.2.0 `goal-project --goal-type next-value-slice` recorded the v0.6.21 Validated Need / Intent / Context in `.aof/goals/next-value-slice.json`.
+- AOF v12.2.0 `situation-assess --project . --write-artifact .aof/artifacts/runtime/qif-v0.6.21-situation-assessment.json` passed.
+- AOF v12.2.0 `task-open --project .` created `TASK-039`.
+- AOF v12.2.0 `task-update --project . --task-id TASK-039 --status done` recorded implementation completion in `.aof/tasks/done/TASK-039.json`.
+- AOF v12.2.0 `council-review-packet --project . --council-id qif-council --stage review --review-status approved` wrote `.aof/artifacts/council/qif-v0.6.21-council-review-packet.json`.
+- AOF v12.2.0 `organization-verify --project .` passed with `231/231` checks.
+- Trend references checked:
+  - `https://openai.github.io/openai-agents-python/tracing/`
+  - `https://openai.github.io/openai-agents-python/guardrails/`
+  - `https://openai.github.io/openai-agents-js/guides/sessions/`
+  - `https://openai.github.io/openai-agents-python/sandbox/memory/`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+  - `https://blog.modelcontextprotocol.io/posts/mcp-roadmap/`
+  - `https://blog.modelcontextprotocol.io/posts/2026-07-28/`
+
+What was built:
+
+- `qif status` in `tools/qif.mjs`.
+- `package.json` version update to `0.6.21`.
+- `npm test` now covers `qif status`.
+- README, roadmap, changelog, and release notes updates.
+
+What was not built:
+
+- No new package type.
+- No UI.
+- No external integrations.
+- No semantic-truth checker.
+
+Verification:
+
+- `node tools/qif.mjs status`: pass; returned package version `0.6.21`, `9` commands, `15` package types, `0` blocking signals, open-risk count `12`, and roadmap frontier `Phase 4 — v0.7: Empirical Calibration`.
+- `node tools/qif.mjs commands`: pass.
+- `node tools/qif.mjs package-types`: pass.
+- `node tools/qif.mjs doctor`: pass.
+- `node tools/qif.mjs validate --all`: pass.
+- `npm test`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- `git diff --check`: pass.
+- Public residue scan: pass after AOF artifact path normalization.
+
+Release:
+
+- Pending.
+
 ## v0.6.20 Package Types Manifest CLI
 
 Runtime source:

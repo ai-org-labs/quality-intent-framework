@@ -57,6 +57,7 @@ function usage() {
   qif doctor [--release-gate quality-gate-package.json]
   qif commands
   qif package-types
+  qif status
 
 Options:
   --all       Validate, trace, or list open risks across all committed example packages.
@@ -155,6 +156,15 @@ function commandManifest() {
       blocking: false,
       output: "Package type catalog JSON.",
       verifierBoundary: "package-types describes supported package shapes only; it does not validate a concrete package or prove semantic quality truth."
+    },
+    {
+      name: "status",
+      usage: "qif status",
+      purpose: "Return one current-state packet for humans and AI agents before acting in this repository.",
+      arguments: [],
+      blocking: false,
+      output: "Runtime status JSON with version, command surface, package catalog, structural health, open-risk summary, roadmap frontier, trend rationale, and verifier boundary.",
+      verifierBoundary: "status summarizes local structural signals only; it does not prove semantic quality truth, business approval correctness, operational safety, or roadmap correctness."
     }
   ];
 }
@@ -171,7 +181,8 @@ function commands() {
       "node tools/qif.mjs open-risks --all",
       "node tools/qif.mjs release-ready examples/quality-gate-package.json",
       "node tools/qif.mjs doctor",
-      "node tools/qif.mjs package-types"
+      "node tools/qif.mjs package-types",
+      "node tools/qif.mjs status"
     ],
     verifierBoundary: "command manifest discovery does not execute checks, prove semantic quality truth, or authorize release."
   }, null, 2));
@@ -263,6 +274,120 @@ function packageTypes() {
     packageVersion: readJson("package.json").version || "unknown",
     packageTypes,
     verifierBoundary: "package type catalog discovery does not validate concrete package content, prove semantic quality truth, or authorize release."
+  }, null, 2));
+  return 0;
+}
+
+function parsedCapturedJson(result) {
+  const text = result.stdout || result.stderr;
+  if (!text) return null;
+  try {
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
+}
+
+function firstMeaningfulLine(text) {
+  if (typeof text !== "string") return null;
+  return text.split(/\r?\n/).map((line) => line.trim()).find((line) => line.length > 0) || null;
+}
+
+function readRoadmapFrontier() {
+  const roadmapPath = "docs/qif-roadmap.md";
+  if (!fs.existsSync(roadmapPath)) {
+    return {
+      source: roadmapPath,
+      available: false,
+      summary: "Roadmap file is missing.",
+      nextRecommendedAction: "Restore or author docs/qif-roadmap.md before making roadmap claims."
+    };
+  }
+  const roadmap = fs.readFileSync(roadmapPath, "utf8");
+  const currentPosition = roadmap.match(/## Current Position[\s\S]*?(?=\n## )/);
+  const phaseMatches = Array.from(roadmap.matchAll(/## Phase [^\n]+/g)).map((match) => match[0].replace(/^## /, ""));
+  const nextPhase = phaseMatches.find((phase) => /v0\.7|calibration/i.test(phase)) || phaseMatches[0] || null;
+  const weaknessLine = firstMeaningfulLine((currentPosition?.[0] || "").split("Weaknesses:")[1] || "");
+  return {
+    source: roadmapPath,
+    available: true,
+    currentPositionVersion: readJson("package.json").version || "unknown",
+    nextPhase,
+    knownWeakness: weaknessLine,
+    futureRoadmapCount: phaseMatches.length,
+    nextRecommendedAction: "Use the roadmap frontier and qif open-risks output to select the next smallest release-quality slice."
+  };
+}
+
+function status() {
+  const packageVersion = readJson("package.json").version || "unknown";
+  const commandSurface = commandManifest();
+  const packageCatalog = Array.from(templateFilesByType().keys()).sort();
+  const validation = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "validate", "--all"]));
+  const doctorResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "doctor"]));
+  const openRiskResult = runNodeCaptured(["tools/qif.mjs", "open-risks", "--all"]);
+  const openRisksParsed = parsedCapturedJson(openRiskResult);
+  const releaseGateResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "release-ready", "examples/quality-gate-package.json"]));
+  const blockingSignals = [
+    validation.ok ? null : "validate-all failed",
+    doctorResult.ok ? null : "doctor failed",
+    releaseGateResult.ok ? null : "release-ready failed"
+  ].filter(Boolean);
+  const openRiskCount = typeof openRisksParsed?.riskCount === "number" ? openRisksParsed.riskCount : null;
+  const roadmapFrontier = readRoadmapFrontier();
+  console.log(JSON.stringify({
+    ok: blockingSignals.length === 0,
+    statusSurfaceVersion: 1,
+    packageVersion,
+    generatedAt: new Date().toISOString(),
+    commandSurface: {
+      count: commandSurface.length,
+      commands: commandSurface.map((command) => ({
+        name: command.name,
+        usage: command.usage,
+        blocking: command.blocking,
+        verifierBoundary: command.verifierBoundary
+      }))
+    },
+    packageTypes: {
+      count: packageCatalog.length,
+      packageTypes: packageCatalog
+    },
+    structuralHealth: {
+      validation,
+      doctor: doctorResult,
+      releaseReady: releaseGateResult,
+      blockingSignals
+    },
+    openRisks: {
+      command: openRiskResult.command,
+      status: openRiskResult.status,
+      ok: openRiskResult.status === 0,
+      riskCount: openRiskCount,
+      governanceTriggerCount: openRisksParsed?.governanceTriggers?.length ?? null,
+      residualRiskCount: openRisksParsed?.residualRisks?.length ?? null,
+      lowConfidenceCount: openRisksParsed?.lowConfidence?.length ?? null,
+      verifierBoundary: openRisksParsed?.verifierBoundary || "open-risk visibility is structural only."
+    },
+    roadmapFrontier,
+    trendRationale: [
+      {
+        signal: "Agent frameworks expose tracing, guardrails, sessions, and memory as operational surfaces.",
+        qifResponse: "QIF should expose compact machine-readable status before AI agents act."
+      },
+      {
+        signal: "Agent evaluation is moving toward multi-turn traces, tool trajectories, and outcome evidence.",
+        qifResponse: "QIF status should summarize validation, release readiness, open risks, and roadmap context together."
+      },
+      {
+        signal: "MCP-style ecosystems emphasize discoverable capabilities and stateless tool surfaces.",
+        qifResponse: "QIF commands, package-types, and status make local capability discovery explicit."
+      }
+    ],
+    nextRecommendedAction: blockingSignals.length > 0
+      ? "Resolve blocking structural signals before release or pilot use."
+      : roadmapFrontier.nextRecommendedAction,
+    verifierBoundary: "qif status aggregates local structural evidence and roadmap context only; it does not prove semantic quality truth, business approval correctness, operational safety, or future roadmap correctness."
   }, null, 2));
   return 0;
 }
@@ -700,6 +825,9 @@ ${usage()}`);
   }
   if (command === "package-types") {
     return packageTypes();
+  }
+  if (command === "status") {
+    return status();
   }
   process.stderr.write(`Unsupported command: ${command}
 ${usage()}`);

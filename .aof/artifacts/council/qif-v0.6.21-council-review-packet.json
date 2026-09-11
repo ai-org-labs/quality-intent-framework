@@ -1,0 +1,31 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-11T00:12:26.639Z",
+  "review_packet_id": "CREV-MTW7CARZ-0L51MX",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve QIF v0.6.21 Runtime Status CLI for release.",
+  "rationale": "Visionary: qif status improves agent and operator orientation before action. Builder: implementation composes existing local checks and catalogs instead of adding a new package type or external dependency. Guardian: verifier boundaries are explicit and status does not claim semantic quality truth, business approval correctness, operational safety, or roadmap correctness.",
+  "recommendation": "Release v0.6.21 after final structural checks, residue scan, commit, tag, and GitHub Release.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "RELEASE-NOTES-v0.6.21.md",
+    "docs/aof-runtime-log.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-039",
+  "source_parent_session_id": null,
+  "source_decision_record_id": null
+}

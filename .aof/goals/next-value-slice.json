@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.6.20 Package Types Manifest CLI so humans and AI agents can discover QIF package types, source templates, validators, purposes, lifecycle role, and verifier boundaries as machine-readable JSON.",
-  "updated_at": "2026-09-08T04:32:20.204Z",
-  "agreed_with_human": null,
-  "source_session_id": "SESS-QIFV0620",
+  "content": "Implement QIF v0.6.21 Runtime Status CLI so humans and AI agents can read one machine-readable current-state packet covering package version, commands, package types, validation health, open risks, roadmap frontier, trend rationale, and verifier boundaries without treating command success as semantic quality truth.",
+  "updated_at": "2026-09-11T00:04:45.129Z",
+  "agreed_with_human": true,
+  "source_session_id": null,
   "source_decision_record_id": null,
   "declared_complete_at": null
 }

@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.11 baseline)
+## Current Position (v0.6.21 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -122,6 +122,10 @@ and adoption surface — not pretending the limits away.
   v0.6.20 adds `qif package-types` so supported package types, source
   templates, validators, purposes, lifecycle roles, and verifier boundaries
   are also discoverable as machine-readable JSON.
+  v0.6.21 adds `qif status` so humans and AI agents can read one compact
+  current-state packet before acting: package version, command surface,
+  package type catalog, structural health, open-risk summary, roadmap
+  frontier, trend rationale, next action, and verifier boundary.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -336,7 +340,7 @@ Deliverables:
   sequence exploration, invariant confirmation, and closure.
 - A `qif` CLI: `qif validate`, `qif new <package-type>`, `qif trace <id>`
   (walk any entity's evidence chain), `qif open-risks`, `qif release-ready`,
-  `qif doctor`, `qif commands`, `qif package-types`.
+  `qif doctor`, `qif commands`, `qif package-types`, `qif status`.
   Status: first slices implemented in v0.6.11-v0.6.14 through
   `tools/qif.mjs validate`, `qif new <package-type>`, `qif trace <id>`,
   `qif open-risks`, `--all`, `--fixtures`, package-type routing, starter
@@ -349,6 +353,9 @@ Deliverables:
   manifest for humans, AI agents, and harnesses. v0.6.20 adds
   `qif package-types` as a machine-readable catalog of supported package
   purposes, templates, validators, lifecycle roles, and verifier boundaries.
+  v0.6.21 adds `qif status` as a single current-state packet that aggregates
+  local structural health, open risks, roadmap frontier, trend rationale, and
+  next recommended action without claiming semantic truth.
 - Gate-as-hook reference integration: a demonstration where an agent task
   cannot be marked release-ready unless a quality-gate package for the
   target validates. No external service required; local hook only.

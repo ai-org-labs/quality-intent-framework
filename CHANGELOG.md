@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.21
+
+- Added `qif status` to return one machine-readable current-state packet before humans or AI agents act in the repository.
+- Status output aggregates package version, command surface, package type catalog, structural health, release readiness, open-risk summary, roadmap frontier, trend rationale, next recommended action, and verifier boundary.
+- Updated `npm test` to cover status generation while preserving the boundary that status is local structural evidence, not semantic quality truth.
+
 ## v0.6.20
 
 - Added `qif package-types` to return supported QIF package types as machine-readable JSON.
