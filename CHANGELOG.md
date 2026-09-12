@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.22
+
+- Added explicit `cache` metadata to `qif commands`, `qif package-types`, and `qif status`.
+- Cache metadata includes `ttlMs`, `cacheScope`, generation time, invalidation hints, rationale, and verifier boundary for stateless agent and MCP-style clients.
+- Preserved the boundary that cache metadata is a freshness hint only; cached discovery output does not prove semantic quality truth or authorize action.
+
 ## v0.6.21
 
 - Added `qif status` to return one machine-readable current-state packet before humans or AI agents act in the repository.

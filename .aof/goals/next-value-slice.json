@@ -1,7 +1,7 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.6.21 Runtime Status CLI so humans and AI agents can read one machine-readable current-state packet covering package version, commands, package types, validation health, open risks, roadmap frontier, trend rationale, and verifier boundaries without treating command success as semantic quality truth.",
-  "updated_at": "2026-09-11T00:04:45.129Z",
+  "content": "Implement QIF v0.6.22 Cache Metadata for Machine-Readable Discovery Surfaces so qif commands, qif package-types, and qif status expose freshness, cache scope, and invalidation hints for stateless agent and MCP-style clients without treating cached command metadata as semantic quality truth.",
+  "updated_at": "2026-09-12T04:59:48.506Z",
   "agreed_with_human": true,
   "source_session_id": null,
   "source_decision_record_id": null,

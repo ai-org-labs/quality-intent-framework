@@ -174,6 +174,10 @@ function commands() {
     ok: true,
     commandSurfaceVersion: 1,
     packageVersion: readJson("package.json").version || "unknown",
+    cache: cacheMetadata("command-surface", 300000, [
+      "package.json",
+      "tools/qif.mjs"
+    ]),
     commands: commandManifest(),
     examples: [
       "node tools/qif.mjs validate --all",
@@ -272,10 +276,27 @@ function packageTypes() {
     ok: true,
     packageTypeCatalogVersion: 1,
     packageVersion: readJson("package.json").version || "unknown",
+    cache: cacheMetadata("package-type-catalog", 300000, [
+      "package.json",
+      "tools/qif.mjs",
+      "examples/*.json"
+    ]),
     packageTypes,
     verifierBoundary: "package type catalog discovery does not validate concrete package content, prove semantic quality truth, or authorize release."
   }, null, 2));
   return 0;
+}
+
+function cacheMetadata(surface, ttlMs, invalidatedBy) {
+  return {
+    surface,
+    ttlMs,
+    cacheScope: "private",
+    generatedAt: new Date().toISOString(),
+    invalidatedBy,
+    rationale: "Discovery surfaces are safe to cache briefly for local agent routing, but clients should refresh after repository, package, example, validator, or roadmap changes.",
+    verifierBoundary: "cache metadata is a freshness hint only; cached discovery output does not prove semantic quality truth or authorize action."
+  };
 }
 
 function parsedCapturedJson(result) {
@@ -340,6 +361,15 @@ function status() {
     statusSurfaceVersion: 1,
     packageVersion,
     generatedAt: new Date().toISOString(),
+    cache: cacheMetadata("runtime-status", 60000, [
+      "package.json",
+      "tools/qif.mjs",
+      "examples/*.json",
+      "tests/fixtures/**",
+      "docs/qif-roadmap.md",
+      ".aof/**",
+      "git status changes"
+    ]),
     commandSurface: {
       count: commandSurface.length,
       commands: commandSurface.map((command) => ({

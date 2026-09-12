@@ -1,0 +1,31 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-12T05:04:07.550Z",
+  "review_packet_id": "CREV-MTXX798E-DMQF8C",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve QIF v0.6.22 cache metadata for discovery surfaces.",
+  "rationale": "Visionary: cache metadata aligns QIF discovery with stateless agent clients. Builder: implementation is additive on existing JSON outputs and avoids a cache server or new package type. Guardian: cache fields are explicitly freshness hints only and do not authorize actions or claim semantic quality truth.",
+  "recommendation": "Release v0.6.22 after final residue scan, AOF verification, commit, tag, and GitHub Release.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "RELEASE-NOTES-v0.6.22.md",
+    "docs/aof-runtime-log.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-040",
+  "source_parent_session_id": null,
+  "source_decision_record_id": null
+}

@@ -2,6 +2,65 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.22 Cache Metadata for Discovery Surfaces
+
+Date: 2026-09-12
+
+Need / Intent / Context:
+
+- Need: `qif commands`, `qif package-types`, and `qif status` are now machine-readable discovery surfaces, but stateless agent clients need freshness and invalidation hints before caching them.
+- Intent: add explicit cache metadata to the discovery surfaces with TTL, private cache scope, generation time, invalidation hints, rationale, and verifier-boundary language.
+- Context: the 2026-07-28 MCP specification moves toward stateless requests and cacheable list results. OpenAI and Anthropic agent guidance continues to emphasize traces, guardrails, sessions, memory, and multi-turn outcome evaluation. QIF should make discovery freshness explicit without claiming semantic truth.
+
+Direction and council judgment:
+
+- Visionary: approve. Cache metadata makes QIF friendlier to stateless agent clients and capability discovery surfaces.
+- Builder: approve. Implement as a narrow additive field on existing JSON outputs; do not add a new package type, server, registry, or cache store.
+- Guardian: approve with boundary. Cache metadata must remain a freshness hint, not authorization, release approval, or semantic quality evidence.
+
+Runtime command evidence:
+
+- AOF latest local tag check: `v12.2.0`.
+- AOF v12.2.0 `goal-project --goal-type next-value-slice` recorded the v0.6.22 Validated Need / Intent / Context in `.aof/goals/next-value-slice.json`.
+- AOF v12.2.0 `situation-assess --project . --write-artifact .aof/artifacts/runtime/qif-v0.6.22-situation-assessment.json` passed.
+- AOF v12.2.0 `task-open --project .` created `TASK-040`.
+- Trend references checked:
+  - `https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/changelog.mdx`
+  - `https://blog.modelcontextprotocol.io/posts/2026-07-28/`
+  - `https://openai.github.io/openai-agents-python/tracing/`
+  - `https://openai.github.io/openai-agents-python/guardrails/`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+
+What was built:
+
+- `cache` metadata on `qif commands`.
+- `cache` metadata on `qif package-types`.
+- `cache` metadata on `qif status`.
+- `package.json` version update to `0.6.22`.
+- README, roadmap, changelog, and release notes updates.
+
+What was not built:
+
+- No cache server.
+- No persistent cache store.
+- No remote registry.
+- No semantic-truth checker.
+
+Verification:
+
+- `node tools/qif.mjs commands`: pass; returned package version `0.6.22`, `9` commands, and `cache.surface: command-surface`.
+- `node tools/qif.mjs package-types`: pass; returned package version `0.6.22`, `15` package types, and `cache.surface: package-type-catalog`.
+- `node tools/qif.mjs status`: pass; returned package version `0.6.22`, `cache.surface: runtime-status`, `0` blocking signals, and open-risk count `12`.
+- `npm test`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- `git diff --check`: pass.
+- JSON parse check: pass.
+- Public residue scan: pass after AOF artifact path normalization.
+- AOF `organization-verify` using v12.2.0: pass, `231/231` checks.
+
+Release:
+
+- Pending.
+
 ## v0.6.21 Runtime Status CLI
 
 Date: 2026-09-11

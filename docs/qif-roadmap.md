@@ -126,6 +126,10 @@ and adoption surface — not pretending the limits away.
   current-state packet before acting: package version, command surface,
   package type catalog, structural health, open-risk summary, roadmap
   frontier, trend rationale, next action, and verifier boundary.
+  v0.6.22 adds explicit cache metadata to `qif commands`,
+  `qif package-types`, and `qif status` so stateless agent clients can cache
+  discovery surfaces briefly with private scope, TTL, invalidation hints, and
+  boundary language.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -355,7 +359,10 @@ Deliverables:
   purposes, templates, validators, lifecycle roles, and verifier boundaries.
   v0.6.21 adds `qif status` as a single current-state packet that aggregates
   local structural health, open risks, roadmap frontier, trend rationale, and
-  next recommended action without claiming semantic truth.
+  next recommended action without claiming semantic truth. v0.6.22 adds
+  cache metadata to the machine-readable discovery surfaces so stateless
+  agent clients can avoid unnecessary re-fetching while preserving freshness
+  and verifier-boundary semantics.
 - Gate-as-hook reference integration: a demonstration where an agent task
   cannot be marked release-ready unless a quality-gate package for the
   target validates. No external service required; local hook only.
