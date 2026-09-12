@@ -59,7 +59,12 @@ Verification:
 
 Release:
 
-- Pending.
+- Implementation commit: `0235cda1ece4ec3e8496cafe5f3d313067adc6ab`
+- Tag: `v0.6.22`
+- Tag target commit: `0235cda1ece4ec3e8496cafe5f3d313067adc6ab`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.22`
+- Release published at: `2026-09-12T05:06:35Z`
+- Published result: released.
 
 ## v0.6.21 Runtime Status CLI
 
