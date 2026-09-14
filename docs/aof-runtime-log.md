@@ -63,7 +63,12 @@ Verification:
 
 Release:
 
-- Pending.
+- Implementation commit: `0c584de499f4ee4821e8ed69d4df674d8cf253fc`
+- Tag: `v0.6.23`
+- Tag target commit: `0c584de499f4ee4821e8ed69d4df674d8cf253fc`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.23`
+- Release published at: `2026-09-14T04:42:48Z`
+- Published result: released.
 
 ## v0.6.22 Cache Metadata for Discovery Surfaces
 
