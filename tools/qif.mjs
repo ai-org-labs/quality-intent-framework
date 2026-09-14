@@ -57,10 +57,12 @@ function usage() {
   qif doctor [--release-gate quality-gate-package.json]
   qif commands
   qif package-types
+  qif inventory [package.json...]
+  qif inventory --all
   qif status
 
 Options:
-  --all       Validate, trace, or list open risks across all committed example packages.
+  --all       Validate, trace, list open risks, or inventory all committed example packages.
   --fixtures  Run the retained negative fixture regression suite.
 `;
 }
@@ -158,12 +160,24 @@ function commandManifest() {
       verifierBoundary: "package-types describes supported package shapes only; it does not validate a concrete package or prove semantic quality truth."
     },
     {
+      name: "inventory",
+      usage: "qif inventory [package.json...] | qif inventory --all",
+      purpose: "Summarize QIF packages and entity collections before selecting validation, trace, review, or governance actions.",
+      arguments: [
+        { name: "package.json", required: false, repeatable: true, description: "Packages to inventory." },
+        { name: "--all", required: false, repeatable: false, description: "Inventory all committed example packages." }
+      ],
+      blocking: false,
+      output: "Package inventory JSON with package ids, package types, collection counts, entity counts, outbound reference counts, warnings, cache metadata, and verifier boundary.",
+      verifierBoundary: "inventory reports structural package contents only; it does not prove semantic quality truth, package completeness, or evidence sufficiency."
+    },
+    {
       name: "status",
       usage: "qif status",
       purpose: "Return one current-state packet for humans and AI agents before acting in this repository.",
       arguments: [],
       blocking: false,
-      output: "Runtime status JSON with version, command surface, package catalog, structural health, open-risk summary, roadmap frontier, trend rationale, and verifier boundary.",
+      output: "Runtime status JSON with version, command surface, package catalog, inventory summary, structural health, open-risk summary, roadmap frontier, trend rationale, and verifier boundary.",
       verifierBoundary: "status summarizes local structural signals only; it does not prove semantic quality truth, business approval correctness, operational safety, or roadmap correctness."
     }
   ];
@@ -186,6 +200,7 @@ function commands() {
       "node tools/qif.mjs release-ready examples/quality-gate-package.json",
       "node tools/qif.mjs doctor",
       "node tools/qif.mjs package-types",
+      "node tools/qif.mjs inventory --all",
       "node tools/qif.mjs status"
     ],
     verifierBoundary: "command manifest discovery does not execute checks, prove semantic quality truth, or authorize release."
@@ -348,10 +363,13 @@ function status() {
   const doctorResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "doctor"]));
   const openRiskResult = runNodeCaptured(["tools/qif.mjs", "open-risks", "--all"]);
   const openRisksParsed = parsedCapturedJson(openRiskResult);
+  const inventoryResult = runNodeCaptured(["tools/qif.mjs", "inventory", "--all"]);
+  const inventoryParsed = parsedCapturedJson(inventoryResult);
   const releaseGateResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "release-ready", "examples/quality-gate-package.json"]));
   const blockingSignals = [
     validation.ok ? null : "validate-all failed",
     doctorResult.ok ? null : "doctor failed",
+    inventoryResult.status === 0 ? null : "inventory failed",
     releaseGateResult.ok ? null : "release-ready failed"
   ].filter(Boolean);
   const openRiskCount = typeof openRisksParsed?.riskCount === "number" ? openRisksParsed.riskCount : null;
@@ -383,6 +401,16 @@ function status() {
       count: packageCatalog.length,
       packageTypes: packageCatalog
     },
+    inventory: {
+      command: inventoryResult.command,
+      status: inventoryResult.status,
+      ok: inventoryResult.status === 0,
+      packageCount: inventoryParsed?.packageCount ?? null,
+      entityCount: inventoryParsed?.totals?.entityCount ?? null,
+      outboundRefCount: inventoryParsed?.totals?.outboundRefCount ?? null,
+      warningCount: inventoryParsed?.warnings?.length ?? null,
+      verifierBoundary: inventoryParsed?.verifierBoundary || "inventory visibility is structural only."
+    },
     structuralHealth: {
       validation,
       doctor: doctorResult,
@@ -411,7 +439,7 @@ function status() {
       },
       {
         signal: "MCP-style ecosystems emphasize discoverable capabilities and stateless tool surfaces.",
-        qifResponse: "QIF commands, package-types, and status make local capability discovery explicit."
+        qifResponse: "QIF commands, package-types, inventory, and status make local capability and package-structure discovery explicit."
       }
     ],
     nextRecommendedAction: blockingSignals.length > 0
@@ -749,6 +777,77 @@ function openRisks(files) {
   return warnings.length > 0 ? 1 : 0;
 }
 
+function collectionCounts(pkg) {
+  const counts = {};
+  for (const [key, value] of Object.entries(pkg)) {
+    if (Array.isArray(value)) counts[key] = value.length;
+  }
+  return counts;
+}
+
+function mergeCollectionCounts(totals, counts) {
+  for (const [collection, count] of Object.entries(counts)) {
+    totals[collection] = (totals[collection] || 0) + count;
+  }
+  return totals;
+}
+
+function outboundRefCount(entities) {
+  return entities.reduce((total, entity) => {
+    return total + entity.outboundRefs.reduce((refTotal, outboundRef) => refTotal + outboundRef.refs.length, 0);
+  }, 0);
+}
+
+function inventory(files) {
+  const packages = [];
+  const warnings = [];
+  const totals = {
+    entityCount: 0,
+    outboundRefCount: 0,
+    collectionCounts: {}
+  };
+  for (const filePath of files) {
+    try {
+      const pkg = readJson(filePath);
+      const packageType = inferPackageType(pkg, filePath);
+      const entities = collectEntities(pkg, filePath);
+      const counts = collectionCounts(pkg);
+      const refs = outboundRefCount(entities);
+      totals.entityCount += entities.length;
+      totals.outboundRefCount += refs;
+      mergeCollectionCounts(totals.collectionCounts, counts);
+      packages.push({
+        package: displayPath(filePath),
+        packageId: pkg.id || pkg.packageId || null,
+        packageType,
+        collectionCounts: counts,
+        entityCount: entities.length,
+        outboundRefCount: refs
+      });
+    } catch (error) {
+      warnings.push({ package: displayPath(filePath), warning: error.message });
+    }
+  }
+  console.log(JSON.stringify({
+    ok: warnings.length === 0,
+    inventorySurfaceVersion: 1,
+    packageVersion: readJson("package.json").version || "unknown",
+    cache: cacheMetadata("package-inventory", 60000, [
+      "package.json",
+      "tools/qif.mjs",
+      "examples/*.json",
+      "schemas/*.json"
+    ]),
+    searchedPackages: files.map(displayPath),
+    packageCount: packages.length,
+    packages,
+    totals,
+    warnings,
+    verifierBoundary: "qif inventory reports structural package contents only; it does not validate packages, prove semantic quality truth, package completeness, or evidence sufficiency."
+  }, null, 2));
+  return warnings.length > 0 ? 1 : 0;
+}
+
 function releaseReady(args) {
   const files = args.filter((arg) => !arg.startsWith("--"));
   const [filePath] = files;
@@ -855,6 +954,9 @@ ${usage()}`);
   }
   if (command === "package-types") {
     return packageTypes();
+  }
+  if (command === "inventory") {
+    return inventory(commandFiles(args, { defaultToExamples: true }));
   }
   if (command === "status") {
     return status();

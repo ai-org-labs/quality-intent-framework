@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.21 baseline)
+## Current Position (v0.6.23 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -130,6 +130,10 @@ and adoption surface — not pretending the limits away.
   `qif package-types`, and `qif status` so stateless agent clients can cache
   discovery surfaces briefly with private scope, TTL, invalidation hints, and
   boundary language.
+  v0.6.23 adds `qif inventory` so humans, AI agents, and eval harnesses can
+  inspect package ids, package types, entity collection counts, entity counts,
+  outbound reference counts, warnings, cache metadata, and verifier boundaries
+  before selecting validation, trace, review, or governance actions.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -344,7 +348,8 @@ Deliverables:
   sequence exploration, invariant confirmation, and closure.
 - A `qif` CLI: `qif validate`, `qif new <package-type>`, `qif trace <id>`
   (walk any entity's evidence chain), `qif open-risks`, `qif release-ready`,
-  `qif doctor`, `qif commands`, `qif package-types`, `qif status`.
+  `qif doctor`, `qif commands`, `qif package-types`, `qif inventory`,
+  `qif status`.
   Status: first slices implemented in v0.6.11-v0.6.14 through
   `tools/qif.mjs validate`, `qif new <package-type>`, `qif trace <id>`,
   `qif open-risks`, `--all`, `--fixtures`, package-type routing, starter
@@ -362,7 +367,10 @@ Deliverables:
   next recommended action without claiming semantic truth. v0.6.22 adds
   cache metadata to the machine-readable discovery surfaces so stateless
   agent clients can avoid unnecessary re-fetching while preserving freshness
-  and verifier-boundary semantics.
+  and verifier-boundary semantics. v0.6.23 adds `qif inventory` as a
+  structural package inventory surface with package ids, package types,
+  collection counts, entity counts, outbound reference counts, warnings, cache
+  metadata, and verifier-boundary semantics.
 - Gate-as-hook reference integration: a demonstration where an agent task
   cannot be marked release-ready unless a quality-gate package for the
   target validates. No external service required; local hook only.

@@ -1,0 +1,31 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-14T04:40:29.519Z",
+  "review_packet_id": "CREV-MU0R8KEN-5B5THC",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve QIF v0.6.23 Inventory CLI for release.",
+  "rationale": "Visionary: inventory gives agents a structural map before choosing QIF actions. Builder: implementation reuses collectEntities, package parsing, outbound reference detection, and cache metadata without external dependencies. Guardian: inventory remains structural visibility only and does not claim semantic quality truth, completeness, or evidence sufficiency.",
+  "recommendation": "Release v0.6.23 after final structural checks, residue scan, commit, tag, and GitHub Release.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "RELEASE-NOTES-v0.6.23.md",
+    "docs/aof-runtime-log.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-041",
+  "source_parent_session_id": null,
+  "source_decision_record_id": null
+}

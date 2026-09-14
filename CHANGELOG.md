@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.23
+
+- Added `qif inventory` to summarize package ids, package types, entity collection counts, entity counts, and outbound reference counts across selected packages or all committed examples.
+- Included warnings, cache metadata, package totals, and verifier-boundary language so humans, AI agents, and eval harnesses can inspect structure before selecting validation, trace, review, or governance actions.
+- Updated `qif commands`, `qif status`, and `npm test` to cover inventory while preserving the boundary that inventory is structural visibility only, not semantic quality truth.
+
 ## v0.6.22
 
 - Added explicit `cache` metadata to `qif commands`, `qif package-types`, and `qif status`.

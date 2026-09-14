@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-041",
+  "title": "QIF v0.6.23 Inventory CLI",
+  "description": "Add qif inventory to summarize package ids, package types, entity collection counts, entity counts, and outbound reference counts across selected packages or all committed examples.",
+  "status": "done",
+  "origin": null,
+  "orchestrator_session_id": null,
+  "assigned_session_ids": [],
+  "related_decision_record_id": null,
+  "operating_goal_ref": null,
+  "created_at": "2026-09-14T04:32:35.880Z",
+  "updated_at": "2026-09-14T04:40:44.512Z",
+  "assigned_at": null,
+  "done_at": "2026-09-14T04:40:44.512Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented qif inventory, updated qif commands/status, README, roadmap, changelog, release notes, npm test, and AOF runtime log. Verification passed: qif inventory --all, qif commands, qif status, qif validate --all, npm test, and git diff --check. Release pending final residue scan, commit, tag, and GitHub Release."
+}
