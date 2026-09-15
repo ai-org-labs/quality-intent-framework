@@ -63,7 +63,12 @@ Verification:
 
 Release:
 
-- Pending.
+- Implementation commit: `d850258f423dfde1c6254b7b4a0bea26179cce92`
+- Tag: `v0.6.24`
+- Tag target commit: `d850258f423dfde1c6254b7b4a0bea26179cce92`
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.24`
+- Release published at: `2026-09-15T04:41:11Z`
+- Published result: released.
 
 ## v0.6.23 Package Inventory CLI
 
