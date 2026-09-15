@@ -2,6 +2,69 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.24 Review Plan CLI
+
+Date: 2026-09-15
+
+Need / Intent / Context:
+
+- Need: QIF now exposes status, inventory, command, and package-type discovery, but independent reviewers and AI evaluators still need a structural review plan that says what must be checked next and which unresolved risks need human judgment.
+- Intent: add `qif review-plan` as a read-only command that composes local status, inventory, release-ready, and open-risk signals into required checks, evidence refs, unresolved-risk prompts, release disposition, cache metadata, and verifier-boundary language.
+- Context: current AI development practice is moving toward embedded/independent evaluators, multi-turn agent evaluations, stateless MCP-style discovery, tool-use contracts, tracing, and guardrails. QIF should organize review work for humans and agents without pretending structural checks prove semantic quality truth.
+
+Direction and council judgment:
+
+- Visionary: approve. Review planning turns QIF's discovery surfaces into a reviewer-ready action packet for release, pilot, and governance work.
+- Builder: approve. Implement as a narrow CLI composition over existing `status`, `inventory`, `release-ready`, and `open-risks` commands; do not add a new package type or external service.
+- Guardian: approve with boundary. Review plans must organize structural work only; they must not claim independent reviewer agreement, business approval correctness, operational safety, or semantic truth.
+
+Runtime command evidence:
+
+- AOF latest local tag check: `v12.2.0`.
+- AOF v12.2.0 `situation-assess --project . --write-artifact .aof/artifacts/runtime/qif-v0.6.24-situation-assessment.json` passed.
+- AOF v12.2.0 `goal-project --goal-type next-value-slice` recorded the v0.6.24 Validated Need / Intent / Context in `.aof/goals/next-value-slice.json`.
+- AOF v12.2.0 `task-open --project .` created `TASK-042`.
+- Trend references checked:
+  - `https://openai.github.io/openai-agents-python/tracing/`
+  - `https://openai.github.io/openai-agents-python/guardrails/`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+  - `https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works`
+  - `https://blog.modelcontextprotocol.io/posts/mcp-roadmap/`
+  - `https://blog.modelcontextprotocol.io/posts/2026-07-28/`
+
+What was built:
+
+- `qif review-plan [--release-gate quality-gate-package.json]`.
+- Review-plan coverage in `qif commands`.
+- Review-plan coverage in `npm test`.
+- README, roadmap, changelog, release notes, and AOF runtime log updates.
+
+What was not built:
+
+- No new package type.
+- No UI.
+- No external integration.
+- No semantic-truth checker.
+- No independent-reviewer attestation mechanism.
+
+Verification:
+
+- `node tools/qif.mjs review-plan`: pass; returned package version `0.6.24`, release disposition `structurally-ready-for-review`, `5` required checks, `0` blocking failures, `7` governance prompts, and `4` low-confidence prompts.
+- `node tools/qif.mjs commands`: pass; returned package version `0.6.24` and `11` commands including `review-plan`.
+- `node tools/qif.mjs status`: pass; returned package version `0.6.24`, `11` commands, `0` blocking signals, inventory summary with `15` packages and `359` entities, and open-risk count `12`.
+- `node tools/qif.mjs validate --all`: pass.
+- `npm test`: pass, `15/15` positive checks and `603/603` retained negative checks.
+- `git diff --check`: pass.
+- AOF v12.2.0 `task-update --project . --task-id TASK-042 --status done` recorded implementation completion in `.aof/tasks/done/TASK-042.json`.
+- AOF v12.2.0 `council-review-packet --project . --council-id qif-council --stage review --review-status approved` wrote `.aof/artifacts/council/qif-v0.6.24-council-review-packet.json`.
+- AOF v12.2.0 `situation-assess --project . --write-artifact .aof/artifacts/runtime/qif-v0.6.24-post-implementation-assessment.json` passed.
+- AOF v12.2.0 `organization-verify --project .`: pass, `231/231` checks.
+- Public residue scan: pass.
+
+Release:
+
+- Pending.
+
 ## v0.6.23 Package Inventory CLI
 
 Date: 2026-09-14

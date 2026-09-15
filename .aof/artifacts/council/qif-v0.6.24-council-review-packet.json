@@ -1,0 +1,31 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-15T04:39:05.155Z",
+  "review_packet_id": "CREV-MU26MLZ7-AC8F4D",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve QIF v0.6.24 Review Plan CLI for release.",
+  "rationale": "Visionary: review-plan turns QIF discovery surfaces into a reviewer-ready action packet for release, pilot, and governance work. Builder: implementation composes existing status, inventory, release-ready, and open-risk commands without adding external dependencies or a new package type. Guardian: review-plan remains structural review organization only and does not claim semantic truth, independent reviewer agreement, business approval correctness, or operational safety.",
+  "recommendation": "Release v0.6.24 after final structural checks, residue scan, commit, tag, and GitHub Release.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "RELEASE-NOTES-v0.6.24.md",
+    "docs/aof-runtime-log.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-042",
+  "source_parent_session_id": null,
+  "source_decision_record_id": null
+}

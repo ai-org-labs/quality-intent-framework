@@ -55,6 +55,7 @@ function usage() {
   qif open-risks --all
   qif release-ready <quality-gate-package.json>
   qif doctor [--release-gate quality-gate-package.json]
+  qif review-plan [--release-gate quality-gate-package.json]
   qif commands
   qif package-types
   qif inventory [package.json...]
@@ -142,6 +143,17 @@ function commandManifest() {
       verifierBoundary: "doctor aggregates structural QIF checks only; it does not prove semantic quality truth, business approval correctness, operational safety, or risk remediation sufficiency."
     },
     {
+      name: "review-plan",
+      usage: "qif review-plan [--release-gate quality-gate-package.json]",
+      purpose: "Compose local structural signals into a reviewer-ready action plan before release, pilot, or governance work.",
+      arguments: [
+        { name: "--release-gate", required: false, repeatable: false, description: "Quality-gate package used for release-ready evaluation." }
+      ],
+      blocking: false,
+      output: "Review plan JSON with required checks, structural evidence refs, unresolved-risk prompts, release disposition, cache metadata, and verifier boundary.",
+      verifierBoundary: "review-plan organizes structural review work only; it does not prove semantic quality truth, independent reviewer agreement, business approval correctness, or operational safety."
+    },
+    {
       name: "commands",
       usage: "qif commands",
       purpose: "Return the canonical QIF CLI command manifest as machine-readable JSON.",
@@ -199,6 +211,7 @@ function commands() {
       "node tools/qif.mjs open-risks --all",
       "node tools/qif.mjs release-ready examples/quality-gate-package.json",
       "node tools/qif.mjs doctor",
+      "node tools/qif.mjs review-plan",
       "node tools/qif.mjs package-types",
       "node tools/qif.mjs inventory --all",
       "node tools/qif.mjs status"
@@ -439,7 +452,7 @@ function status() {
       },
       {
         signal: "MCP-style ecosystems emphasize discoverable capabilities and stateless tool surfaces.",
-        qifResponse: "QIF commands, package-types, inventory, and status make local capability and package-structure discovery explicit."
+        qifResponse: "QIF commands, package-types, inventory, review-plan, and status make local capability, package-structure, and reviewer-action discovery explicit."
       }
     ],
     nextRecommendedAction: blockingSignals.length > 0
@@ -911,6 +924,125 @@ function doctor(args) {
   return blockingFailures.length === 0 ? 0 : 1;
 }
 
+function reviewPlan(args) {
+  const releaseGatePath = optionValue(args, "--release-gate") || "examples/quality-gate-package.json";
+  const statusResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "status"]));
+  const inventoryResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "inventory", "--all"]));
+  const openRiskResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "open-risks", "--all"]));
+  const releaseReadyResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "release-ready", releaseGatePath]));
+  const doctorChecks = statusResult.parsed?.structuralHealth?.doctor?.parsed?.checks || [];
+  const fixtureCheck = doctorChecks.find((check) => check.name === "fixture-regression")?.result || null;
+  const openRiskParsed = openRiskResult.parsed || {};
+  const requiredChecks = [
+    {
+      name: "validate-all",
+      command: "node tools/qif.mjs validate --all",
+      blocking: true,
+      ok: statusResult.parsed?.structuralHealth?.validation?.ok === true,
+      status: statusResult.parsed?.structuralHealth?.validation?.status ?? null,
+      evidenceRef: "status.structuralHealth.validation"
+    },
+    {
+      name: "fixture-regression",
+      command: "node tools/qif.mjs validate --fixtures",
+      blocking: true,
+      ok: fixtureCheck?.ok === true,
+      status: fixtureCheck?.status ?? null,
+      evidenceRef: "status.structuralHealth.doctor.checks.fixture-regression"
+    },
+    {
+      name: "release-ready",
+      command: `node tools/qif.mjs release-ready ${releaseGatePath}`,
+      blocking: true,
+      ok: releaseReadyResult.ok,
+      status: releaseReadyResult.status,
+      evidenceRef: displayPath(releaseGatePath)
+    },
+    {
+      name: "inventory-visibility",
+      command: "node tools/qif.mjs inventory --all",
+      blocking: false,
+      ok: inventoryResult.ok,
+      status: inventoryResult.status,
+      evidenceRef: "inventory.totals"
+    },
+    {
+      name: "open-risk-visibility",
+      command: "node tools/qif.mjs open-risks --all",
+      blocking: false,
+      ok: openRiskResult.ok,
+      status: openRiskResult.status,
+      evidenceRef: "openRisks"
+    }
+  ];
+  const blockingFailures = requiredChecks.filter((check) => check.blocking && !check.ok);
+  const governancePrompts = (openRiskParsed.governanceTriggers || []).map((trigger) => ({
+    riskRef: trigger.id,
+    severity: trigger.severity || "unspecified",
+    owner: trigger.owner || "unspecified",
+    prompt: `Confirm whether ${trigger.id} remains open, has an accountable owner, and must block or condition the current release/pilot decision.`
+  }));
+  const lowConfidencePrompts = (openRiskParsed.lowConfidence || []).map((item) => ({
+    entityRef: item.id,
+    confidence: item.confidence,
+    prompt: `Confirm whether low-confidence entity ${item.id} has enough evidence for the intended decision, or should be routed to governance.`
+  }));
+  console.log(JSON.stringify({
+    ok: blockingFailures.length === 0,
+    reviewPlanVersion: 1,
+    packageVersion: readJson("package.json").version || "unknown",
+    generatedAt: new Date().toISOString(),
+    cache: cacheMetadata("review-plan", 60000, [
+      "package.json",
+      "tools/qif.mjs",
+      "examples/*.json",
+      "tests/fixtures/**",
+      "docs/qif-roadmap.md",
+      ".aof/**",
+      "git status changes"
+    ]),
+    scope: {
+      releaseGatePackage: displayPath(releaseGatePath),
+      packageCount: inventoryResult.parsed?.packageCount ?? null,
+      entityCount: inventoryResult.parsed?.totals?.entityCount ?? null,
+      outboundRefCount: inventoryResult.parsed?.totals?.outboundRefCount ?? null,
+      openRiskCount: openRiskParsed.riskCount ?? null
+    },
+    requiredChecks,
+    reviewerPrompts: {
+      governancePrompts,
+      lowConfidencePrompts,
+      semanticReviewPrompts: [
+        "Confirm that the selected Quality Intents protect the intended loss boundaries in the actual operating context.",
+        "Confirm that evidence quality is sufficient for the decision, not merely present in the package.",
+        "Confirm that unresolved governance triggers are accepted, closed, or converted into explicit release conditions."
+      ]
+    },
+    releaseDisposition: blockingFailures.length === 0 ? "structurally-ready-for-review" : "blocked-by-structural-checks",
+    blockingFailures: blockingFailures.map((check) => check.name),
+    sourceSignals: {
+      status: {
+        ok: statusResult.ok,
+        commandCount: statusResult.parsed?.commandSurface?.count ?? null,
+        verifierBoundary: statusResult.parsed?.verifierBoundary || "status is structural only."
+      },
+      inventory: {
+        ok: inventoryResult.ok,
+        warnings: inventoryResult.parsed?.warnings || [],
+        verifierBoundary: inventoryResult.parsed?.verifierBoundary || "inventory is structural only."
+      },
+      openRisks: {
+        ok: openRiskResult.ok,
+        governanceTriggerCount: openRiskParsed.governanceTriggers?.length ?? null,
+        lowConfidenceCount: openRiskParsed.lowConfidence?.length ?? null,
+        verifierBoundary: openRiskParsed.verifierBoundary || "open-risk visibility is structural only."
+      }
+    },
+    verifierBoundary: "qif review-plan organizes structural review work only. It does not prove semantic quality truth, independent reviewer agreement, business approval correctness, operational safety, or whether an unresolved risk is acceptable."
+  }, null, 2));
+  return 0;
+}
+
 function main() {
   const [command, ...args] = process.argv.slice(2);
   if (!command || command === "help" || command === "--help" || command === "-h") {
@@ -948,6 +1080,9 @@ ${usage()}`);
   }
   if (command === "doctor") {
     return doctor(args);
+  }
+  if (command === "review-plan") {
+    return reviewPlan(args);
   }
   if (command === "commands") {
     return commands();

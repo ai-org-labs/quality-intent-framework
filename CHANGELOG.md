@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.24
+
+- Added `qif review-plan` to compose status, inventory, release-ready, and open-risk signals into a reviewer-ready structural action plan.
+- Review plans include required checks, evidence refs, unresolved governance prompts, low-confidence prompts, release disposition, cache metadata, source signal summaries, and verifier-boundary language.
+- Updated `qif commands` and `npm test` to cover review-plan while preserving the boundary that review planning organizes structural work only and does not prove semantic quality truth or independent reviewer agreement.
+
 ## v0.6.23
 
 - Added `qif inventory` to summarize package ids, package types, entity collection counts, entity counts, and outbound reference counts across selected packages or all committed examples.
