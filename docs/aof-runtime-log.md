@@ -64,7 +64,12 @@ Verification:
 
 Release:
 
-- Pending.
+- Implementation commit: `bf8aff6c05c014d39e6b4cd342ec4c771324ecc9`.
+- Tag: `v0.6.25`.
+- Tag target commit: `bf8aff6c05c014d39e6b4cd342ec4c771324ecc9`.
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.25`.
+- Release published at: `2026-09-16T04:45:12Z`.
+- Published result: released.
 
 ## v0.6.24 Review Plan CLI
 
