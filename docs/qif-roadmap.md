@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.24 baseline)
+## Current Position (v0.6.25 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -139,6 +139,11 @@ and adoption surface — not pretending the limits away.
   required checks, evidence refs, unresolved-risk prompts, release disposition,
   cache metadata, and verifier-boundary language before release, pilot, or
   governance work.
+  v0.6.25 adds `qif evaluator-packet` so independent evaluators, AI agents,
+  and audit harnesses can receive one handoff packet containing command
+  discovery, package catalog summary, inventory summary, status summary,
+  review-plan summary, release-ready summary, open-risk summary, freshness,
+  required commands, evidence refs, evaluator guidance, and trust boundaries.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -353,8 +358,8 @@ Deliverables:
   sequence exploration, invariant confirmation, and closure.
 - A `qif` CLI: `qif validate`, `qif new <package-type>`, `qif trace <id>`
   (walk any entity's evidence chain), `qif open-risks`, `qif release-ready`,
-  `qif doctor`, `qif review-plan`, `qif commands`, `qif package-types`,
-  `qif inventory`, `qif status`.
+  `qif doctor`, `qif review-plan`, `qif evaluator-packet`, `qif commands`,
+  `qif package-types`, `qif inventory`, `qif status`.
   Status: first slices implemented in v0.6.11-v0.6.14 through
   `tools/qif.mjs validate`, `qif new <package-type>`, `qif trace <id>`,
   `qif open-risks`, `--all`, `--fixtures`, package-type routing, starter
@@ -378,7 +383,10 @@ Deliverables:
   metadata, and verifier-boundary semantics. v0.6.24 adds `qif review-plan`
   as a reviewer-ready structural action plan that organizes required checks,
   evidence refs, unresolved-risk prompts, and release disposition without
-  claiming semantic truth or independent reviewer agreement.
+  claiming semantic truth or independent reviewer agreement. v0.6.25 adds
+  `qif evaluator-packet` as a single handoff packet for independent reviewers,
+  AI agents, and audit harnesses without claiming semantic truth, operational
+  safety, or independent approval.
 - Gate-as-hook reference integration: a demonstration where an agent task
   cannot be marked release-ready unless a quality-gate package for the
   target validates. No external service required; local hook only.

@@ -2,6 +2,70 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.25 Evaluator Packet CLI
+
+Date: 2026-09-16
+
+Need / Intent / Context:
+
+- Need: QIF now exposes command discovery, package type discovery, inventory, status, and review-plan, but independent evaluators and AI audit harnesses still need one compact handoff packet before reviewing QIF.
+- Intent: add `qif evaluator-packet` as a read-only command that composes commands, package-types, inventory, status, review-plan, release-ready, and open-risk signals into scope, freshness, required commands, source summaries, evidence refs, evaluator guidance, and trust boundaries.
+- Context: current AI development signals emphasize embedded independent evaluators, multi-turn agent evaluation, tool-use tracing, guardrails, stateless MCP discovery, and concerns about autonomous or deceptive agent behavior. QIF should make evaluation handoff explicit without treating structural evidence as semantic truth or independent approval.
+
+Direction and council judgment:
+
+- Visionary: approve. Evaluator packets make QIF easier to hand to independent reviewers, AI agents, and audit harnesses without hidden context.
+- Builder: approve. Implement as a narrow CLI composition over existing discovery and review surfaces; do not add a package type, server, registry, or external integration.
+- Guardian: approve with boundary. Evaluator packets must package structural evidence only; they must not claim semantic truth, independent approval, business acceptance, operational safety, or risk acceptability.
+
+Runtime command evidence:
+
+- AOF latest local tag check: `v12.2.0`.
+- AOF v12.2.0 `situation-assess --project . --write-artifact .aof/artifacts/runtime/qif-v0.6.25-situation-assessment.json` passed.
+- AOF v12.2.0 `goal-project --goal-type next-value-slice` recorded the v0.6.25 Validated Need / Intent / Context in `.aof/goals/next-value-slice.json`.
+- AOF v12.2.0 `task-open --project .` created `TASK-043`.
+- Trend references checked:
+  - `https://openai.github.io/openai-agents-python/tracing/`
+  - `https://openai.github.io/openai-agents-python/guardrails/`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+  - `https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works`
+  - `https://blog.modelcontextprotocol.io/posts/mcp-roadmap/`
+  - `https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/`
+
+What was built:
+
+- `qif evaluator-packet [--release-gate quality-gate-package.json]`.
+- Evaluator-packet coverage in `qif commands`.
+- Evaluator-packet coverage in `npm test`.
+- README, roadmap, changelog, release notes, and AOF runtime log updates.
+
+What was not built:
+
+- No new package type.
+- No UI.
+- No remote registry.
+- No external integration.
+- No independent-reviewer attestation mechanism.
+- No semantic-truth checker.
+
+Verification:
+
+- `node tools/qif.mjs evaluator-packet` passed: package version `0.6.25`, command count `12`, package type count `15`, package count `15`, entity count `359`, outbound ref count `942`, failed sources `[]`, release-ready `true`, review disposition `structurally-ready-for-review`, open risk count `12`.
+- `node tools/qif.mjs commands` passed: package version `0.6.25`, command count `12`, and `evaluator-packet` present.
+- `node tools/qif.mjs status` passed: package version `0.6.25`, command count `12`, blocking signals `[]`, open risk count `12`.
+- `node tools/qif.mjs validate --all` passed.
+- `npm test` passed, including fixture regression `15/15` positive checks and `603/603` negative checks.
+- `git diff --check` passed.
+- AOF v12.2.0 `council-review-packet --stage review --review-status approved` wrote `.aof/artifacts/council/qif-v0.6.25-council-review-packet.json`.
+- AOF v12.2.0 `task-update --task-id TASK-043 --status done` moved `TASK-043` to `.aof/tasks/done/TASK-043.json`.
+- AOF v12.2.0 `situation-assess --project . --write-artifact .aof/artifacts/runtime/qif-v0.6.25-post-implementation-assessment.json` passed.
+- AOF v12.2.0 `organization-verify --project .` passed `231/231` checks.
+- Public residue scan passed for legacy personal account markers, legacy email markers, legacy repository markers, local absolute paths, temporary paths, and old working-directory names.
+
+Release:
+
+- Pending.
+
 ## v0.6.24 Review Plan CLI
 
 Date: 2026-09-15

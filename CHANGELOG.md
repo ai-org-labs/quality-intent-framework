@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.25
+
+- Added `qif evaluator-packet` to package command discovery, package type catalog, inventory, status, review-plan, release-ready, and open-risk summaries into one evaluator handoff packet.
+- Evaluator packets include scope, freshness, required commands, source signal summaries, unresolved-risk counts, evaluator guidance, evidence refs, and trust boundaries for independent reviewers, AI agents, and audit harnesses.
+- Updated `qif commands` and `npm test` to cover evaluator-packet while preserving the boundary that evaluator packets organize structural evidence only and do not prove semantic quality truth or independent approval.
+
 ## v0.6.24
 
 - Added `qif review-plan` to compose status, inventory, release-ready, and open-risk signals into a reviewer-ready structural action plan.

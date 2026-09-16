@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-043",
+  "title": "QIF v0.6.25 Evaluator Packet CLI",
+  "description": "Add qif evaluator-packet to compose local QIF discovery, status, review-plan, release-ready, and open-risk signals into one evaluator handoff packet with freshness, evidence refs, unresolved-risk prompts, required commands, and verifier-boundary language.",
+  "status": "done",
+  "origin": null,
+  "orchestrator_session_id": null,
+  "assigned_session_ids": [],
+  "related_decision_record_id": null,
+  "operating_goal_ref": null,
+  "created_at": "2026-09-16T04:33:01.048Z",
+  "updated_at": "2026-09-16T04:42:02.077Z",
+  "assigned_at": null,
+  "done_at": "2026-09-16T04:42:02.077Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented qif evaluator-packet, updated commands, npm test, README, roadmap, changelog, release notes, and AOF runtime log. Verification passed: qif evaluator-packet, qif commands, qif status, qif validate --all, npm test, and git diff --check. Release pending final residue scan, commit, tag, and GitHub Release."
+}

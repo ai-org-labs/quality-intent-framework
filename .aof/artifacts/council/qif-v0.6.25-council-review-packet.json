@@ -1,0 +1,31 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-16T04:42:02.004Z",
+  "review_packet_id": "CREV-MU3M693O-DLXAL5",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve QIF v0.6.25 Evaluator Packet CLI for release.",
+  "rationale": "Visionary: evaluator-packet makes QIF handoff-ready for independent reviewers, AI agents, and audit harnesses without hidden context. Builder: implementation composes existing commands, package-types, inventory, status, review-plan, release-ready, and open-risk signals without external dependencies or a new package type. Guardian: evaluator-packet packages structural evidence only and does not claim semantic truth, independent approval, operational safety, or risk acceptability.",
+  "recommendation": "Release v0.6.25 after final structural checks, residue scan, commit, tag, and GitHub Release.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "RELEASE-NOTES-v0.6.25.md",
+    "docs/aof-runtime-log.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-043",
+  "source_parent_session_id": null,
+  "source_decision_record_id": null
+}

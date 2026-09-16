@@ -56,6 +56,7 @@ function usage() {
   qif release-ready <quality-gate-package.json>
   qif doctor [--release-gate quality-gate-package.json]
   qif review-plan [--release-gate quality-gate-package.json]
+  qif evaluator-packet [--release-gate quality-gate-package.json]
   qif commands
   qif package-types
   qif inventory [package.json...]
@@ -154,6 +155,17 @@ function commandManifest() {
       verifierBoundary: "review-plan organizes structural review work only; it does not prove semantic quality truth, independent reviewer agreement, business approval correctness, or operational safety."
     },
     {
+      name: "evaluator-packet",
+      usage: "qif evaluator-packet [--release-gate quality-gate-package.json]",
+      purpose: "Return one handoff packet for independent evaluators, AI agents, and audit harnesses before reviewing QIF.",
+      arguments: [
+        { name: "--release-gate", required: false, repeatable: false, description: "Quality-gate package used for release-ready and review-plan evaluation." }
+      ],
+      blocking: false,
+      output: "Evaluator packet JSON with scope, freshness, command surface, package catalog summary, inventory summary, review plan summary, open-risk summary, required commands, evidence refs, trust boundaries, and verifier boundary.",
+      verifierBoundary: "evaluator-packet packages structural evidence for evaluation only; it does not prove semantic quality truth, independent approval, safety, or business acceptance."
+    },
+    {
       name: "commands",
       usage: "qif commands",
       purpose: "Return the canonical QIF CLI command manifest as machine-readable JSON.",
@@ -212,6 +224,7 @@ function commands() {
       "node tools/qif.mjs release-ready examples/quality-gate-package.json",
       "node tools/qif.mjs doctor",
       "node tools/qif.mjs review-plan",
+      "node tools/qif.mjs evaluator-packet",
       "node tools/qif.mjs package-types",
       "node tools/qif.mjs inventory --all",
       "node tools/qif.mjs status"
@@ -1043,6 +1056,156 @@ function reviewPlan(args) {
   return 0;
 }
 
+function evaluatorPacket(args) {
+  const releaseGatePath = optionValue(args, "--release-gate") || "examples/quality-gate-package.json";
+  const commandResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "commands"]));
+  const packageTypesResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "package-types"]));
+  const inventoryResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "inventory", "--all"]));
+  const statusResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "status"]));
+  const reviewPlanResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "review-plan", "--release-gate", releaseGatePath]));
+  const releaseReadyResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "release-ready", releaseGatePath]));
+  const openRiskResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "open-risks", "--all"]));
+  const openRisksParsed = openRiskResult.parsed || {};
+  const reviewPlanParsed = reviewPlanResult.parsed || {};
+  const statusParsed = statusResult.parsed || {};
+  const requiredCommands = [
+    "node tools/qif.mjs validate --all",
+    "node tools/qif.mjs validate --fixtures",
+    `node tools/qif.mjs release-ready ${releaseGatePath}`,
+    "node tools/qif.mjs review-plan",
+    "node tools/qif.mjs open-risks --all"
+  ];
+  const sourceResults = [
+    ["commands", commandResult],
+    ["package-types", packageTypesResult],
+    ["inventory", inventoryResult],
+    ["status", statusResult],
+    ["review-plan", reviewPlanResult],
+    ["release-ready", releaseReadyResult],
+    ["open-risks", openRiskResult]
+  ];
+  const failedSources = sourceResults.filter(([, result]) => !result.ok).map(([name]) => name);
+  console.log(JSON.stringify({
+    ok: failedSources.length === 0,
+    evaluatorPacketVersion: 1,
+    packageVersion: readJson("package.json").version || "unknown",
+    generatedAt: new Date().toISOString(),
+    cache: cacheMetadata("evaluator-packet", 60000, [
+      "package.json",
+      "tools/qif.mjs",
+      "examples/*.json",
+      "tests/fixtures/**",
+      "docs/qif-roadmap.md",
+      ".aof/**",
+      "git status changes"
+    ]),
+    scope: {
+      releaseGatePackage: displayPath(releaseGatePath),
+      packageCount: inventoryResult.parsed?.packageCount ?? null,
+      packageTypeCount: packageTypesResult.parsed?.packageTypes?.length ?? null,
+      commandCount: commandResult.parsed?.commands?.length ?? null,
+      entityCount: inventoryResult.parsed?.totals?.entityCount ?? null,
+      outboundRefCount: inventoryResult.parsed?.totals?.outboundRefCount ?? null
+    },
+    freshness: {
+      generatedAt: new Date().toISOString(),
+      cacheSurfaces: [
+        commandResult.parsed?.cache,
+        packageTypesResult.parsed?.cache,
+        inventoryResult.parsed?.cache,
+        statusParsed.cache,
+        reviewPlanParsed.cache
+      ].filter(Boolean),
+      refreshRequiredWhen: [
+        "package.json changes",
+        "tools/qif.mjs changes",
+        "examples/*.json changes",
+        "tests/fixtures/** changes",
+        "docs/qif-roadmap.md changes",
+        ".aof/** changes",
+        "git status changes"
+      ]
+    },
+    requiredCommands,
+    sourceSignals: {
+      commands: {
+        ok: commandResult.ok,
+        count: commandResult.parsed?.commands?.length ?? null,
+        names: (commandResult.parsed?.commands || []).map((command) => command.name),
+        verifierBoundary: commandResult.parsed?.verifierBoundary || "command discovery is structural only."
+      },
+      packageTypes: {
+        ok: packageTypesResult.ok,
+        count: packageTypesResult.parsed?.packageTypes?.length ?? null,
+        packageTypes: (packageTypesResult.parsed?.packageTypes || []).map((entry) => entry.packageType),
+        verifierBoundary: packageTypesResult.parsed?.verifierBoundary || "package-type discovery is structural only."
+      },
+      inventory: {
+        ok: inventoryResult.ok,
+        packageCount: inventoryResult.parsed?.packageCount ?? null,
+        entityCount: inventoryResult.parsed?.totals?.entityCount ?? null,
+        outboundRefCount: inventoryResult.parsed?.totals?.outboundRefCount ?? null,
+        warnings: inventoryResult.parsed?.warnings || [],
+        verifierBoundary: inventoryResult.parsed?.verifierBoundary || "inventory is structural only."
+      },
+      status: {
+        ok: statusResult.ok,
+        blockingSignals: statusParsed.structuralHealth?.blockingSignals || [],
+        openRiskCount: statusParsed.openRisks?.riskCount ?? null,
+        roadmapFrontier: statusParsed.roadmapFrontier || null,
+        verifierBoundary: statusParsed.verifierBoundary || "status is structural only."
+      },
+      reviewPlan: {
+        ok: reviewPlanResult.ok,
+        releaseDisposition: reviewPlanParsed.releaseDisposition || "unknown",
+        requiredChecks: reviewPlanParsed.requiredChecks || [],
+        governancePromptCount: reviewPlanParsed.reviewerPrompts?.governancePrompts?.length ?? null,
+        lowConfidencePromptCount: reviewPlanParsed.reviewerPrompts?.lowConfidencePrompts?.length ?? null,
+        verifierBoundary: reviewPlanParsed.verifierBoundary || "review-plan is structural only."
+      },
+      releaseReady: {
+        ok: releaseReadyResult.ok,
+        releaseReady: releaseReadyResult.parsed?.releaseReady ?? null,
+        readyDecisionRefs: releaseReadyResult.parsed?.readyDecisionRefs || [],
+        verifierBoundary: releaseReadyResult.parsed?.verifierBoundary || "release-ready is structural only."
+      },
+      openRisks: {
+        ok: openRiskResult.ok,
+        riskCount: openRisksParsed.riskCount ?? null,
+        governanceTriggerCount: openRisksParsed.governanceTriggers?.length ?? null,
+        residualRiskCount: openRisksParsed.residualRisks?.length ?? null,
+        lowConfidenceCount: openRisksParsed.lowConfidence?.length ?? null,
+        verifierBoundary: openRisksParsed.verifierBoundary || "open-risk visibility is structural only."
+      }
+    },
+    evaluatorGuidance: {
+      firstQuestions: [
+        "Which unresolved governance triggers must block or condition this decision?",
+        "Which low-confidence evidence items need expert review before acceptance?",
+        "Do the Quality Intents protect the actual loss boundaries in the target context?",
+        "Is the release-ready result only structurally ready, or semantically accepted by accountable humans?"
+      ],
+      doNotAssume: [
+        "Do not treat verifier success as semantic quality truth.",
+        "Do not treat release-ready as business approval.",
+        "Do not treat absence of structural errors as operational safety.",
+        "Do not treat this packet as independent approval."
+      ]
+    },
+    evidenceRefs: [
+      "tools/qif.mjs",
+      "package.json",
+      "examples/quality-gate-package.json",
+      "docs/qif-roadmap.md",
+      "docs/aof-runtime-log.md",
+      ".aof/goals/next-value-slice.json"
+    ],
+    failedSources,
+    verifierBoundary: "qif evaluator-packet packages structural evidence for independent or AI evaluation handoff only. It does not prove semantic quality truth, independent evaluator approval, business approval correctness, operational safety, or risk acceptability."
+  }, null, 2));
+  return failedSources.length === 0 ? 0 : 1;
+}
+
 function main() {
   const [command, ...args] = process.argv.slice(2);
   if (!command || command === "help" || command === "--help" || command === "-h") {
@@ -1083,6 +1246,9 @@ ${usage()}`);
   }
   if (command === "review-plan") {
     return reviewPlan(args);
+  }
+  if (command === "evaluator-packet") {
+    return evaluatorPacket(args);
   }
   if (command === "commands") {
     return commands();

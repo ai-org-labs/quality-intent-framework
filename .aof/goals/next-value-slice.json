@@ -1,7 +1,7 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.6.24 Review Plan CLI so humans, independent reviewers, AI agents, and eval harnesses can request a machine-readable structural review plan before release, pilot, or governance work. The plan should compose existing status, inventory, validation, fixture, release-ready, and open-risk signals into required checks, evidence refs, unresolved-risk prompts, and reviewer-boundary language without claiming semantic quality truth.",
-  "updated_at": "2026-09-15T04:32:53.261Z",
+  "content": "Implement QIF v0.6.25 Evaluator Packet CLI so humans, independent evaluators, AI agents, and audit harnesses can request a single machine-readable handoff packet before reviewing QIF. The packet should compose commands, package-types, inventory, status, review-plan, release-ready, and open-risk signals into scope, freshness, evidence refs, required commands, unresolved-risk prompts, and trust boundaries without claiming semantic quality truth or independent approval.",
+  "updated_at": "2026-09-16T04:32:59.307Z",
   "agreed_with_human": true,
   "source_session_id": null,
   "source_decision_record_id": null,
