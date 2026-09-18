@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.25 baseline)
+## Current Position (v0.6.26 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -144,6 +144,11 @@ and adoption surface — not pretending the limits away.
   discovery, package catalog summary, inventory summary, status summary,
   review-plan summary, release-ready summary, open-risk summary, freshness,
   required commands, evidence refs, evaluator guidance, and trust boundaries.
+  v0.6.26 adds `qif calibration-readiness` so humans, AI agents, and
+  evaluators can see whether existing gate, ledger, calibration, and pilot
+  evidence is ready to enter empirical calibration. It explicitly keeps
+  committed examples classified as example-only and names missing outcome
+  provenance, suite-health, uncertainty, and framework-learning evidence.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -155,7 +160,7 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-08-22 against primary-source signals. The
+The roadmap was revalidated on 2026-09-18 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
@@ -163,10 +168,13 @@ organizational authority.
 | Current signal | Quality risk exposed | QIF response | Lead, not follow |
 | --- | --- | --- | --- |
 | Agent evaluation is moving from single answers to multi-turn trials, full trajectories, outcomes, multiple graders, and living suites. ([Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), [OpenAI](https://openai.com/index/trustworthy-third-party-evaluations-foundations/)) | A final answer can look correct while tool use, intermediate state, or the actual environment outcome is wrong; benchmark saturation and contamination can hide regressions. | v0.4.x fixture completeness, then v0.5 trajectory/outcome ledger and v0.7 calibration health. | Bind every verdict to outcome state, environment provenance, evaluator uncertainty, and suite health before these become audit afterthoughts. |
+| Long-running agent platforms now coordinate subagents, persistent work, files, tools, and intermediate results over days. ([OpenAI Agents API](https://openai.com/index/introducing-the-agents-api/)) | Aggregate success can hide weak subagent evidence, stale context, or an invalid evaluation path; a higher eval score may still be methodologically incomparable. | v0.6 action and handoff controls, then v0.7 evidence-origin and calibration-readiness boundaries. | Require an explicit path from declared confidence to observed outcomes before treating an eval delta as predictive evidence. |
+| Measurement bodies are embedding adversarial evaluation probes into agent workflows and emphasizing reproducible benchmark practice and transcript review. ([NIST evaluation probes](https://www.nist.gov/programs-projects/building-evaluation-probes-agentic-ai), [NIST benchmark practice](https://www.nist.gov/news-events/news/2026/01/towards-best-practices-automated-benchmark-evaluations), [NIST transcript analysis](https://www.nist.gov/blogs/caisi-research-blog/analyzing-transcripts-ai-agent-evaluations)) | Evaluators can miss citation, tool-use, contamination, cheating, and harness failures unless the evaluation itself has traceable health evidence. | v0.6.26 calibration readiness and v0.7 Evaluation Suite Health records. | Treat evaluator health, contamination, solvability, trial variance, and infrastructure configuration as governed evidence, not background methodology. |
 | Delegated work is becoming longer-running and increasingly parallel across multiple agents and non-engineering domains. ([OpenAI](https://openai.com/index/how-agents-are-transforming-work/), [Anthropic](https://www.anthropic.com/engineering/multi-agent-research-system)) | Errors compound across handoffs; a successful aggregate result can conceal an unsafe lane, unresolved disagreement, or unowned decision. | v0.6 governed agent authoring/actions and v0.8 multi-agent judgment memory. | Treat lane-local intents, join conflicts, authority, and dissent as quality ledger entries, not orchestration logs. |
 | Agent harnesses now combine persistent runtime context, shell/computer tools, reusable skills, tracing, and protocol-connected tools such as MCP. ([OpenAI](https://openai.com/index/equip-responses-api-computer-environment/), [OpenAI](https://openai.com/index/new-tools-and-features-in-the-responses-api/)) | Quality depends on tool permissions, target operation, context freshness, runtime configuration, and rollback—not model output alone. | v0.5 provenance and v0.6 protocol-neutral action contracts. | Make an action's Quality Intent, loss boundary, evidence, permission, target, and rollback portable across harnesses and protocols. |
 | Teams are shifting from token price toward cost per accepted outcome and real-task evals. ([OpenAI](https://openai.com/index/managing-ai-investments-in-agentic-era/)) | Cheap attempts can create expensive retries and human correction; activity volume can again be mistaken for value. | v0.7 outcome calibration keeps cost/latency as evidence attached to accepted outcomes. | Calibrate quality and cost jointly without allowing either metric to substitute for the accountable verdict. |
 | Agent tool ecosystems are standardizing around MCP/A2A-style integration, computer-use tools, hosted/local shell tools, runtime tracing, approval policies, durable pause/resume workflows, guardrails, sessions, and memory. ([MCP 2026-07-28 spec](https://blog.modelcontextprotocol.io/posts/2026-07-28/), [OpenAI Agents SDK tools](https://openai.github.io/openai-agents-js/guides/tools/), [OpenAI Agents SDK tracing](https://openai.github.io/openai-agents-js/guides/tracing/), [OpenAI Agents SDK guardrails](https://openai.github.io/openai-agents-js/guides/guardrails/), [OpenAI Agents SDK sessions](https://openai.github.io/openai-agents-js/guides/sessions/), [OpenAI Agents SDK context](https://openai.github.io/openai-agents-python/context/), [OpenAI Agents SDK memory](https://openai.github.io/openai-agents-python/sandbox/memory/), [OpenAI Agents SDK MCP guidance](https://openai.github.io/openai-agents-python/mcp/), [OpenAI prompt injection overview](https://openai.com/safety/prompt-injections/)) | The same quality claim may be executed through different tool providers; permission, approval, environment, trace, rollback, sticky approval scope, guardrail tripwires, side-effect limits, session history, local context, agent memory, containment scope, external communication boundaries, safe-exit criteria, incident response, handoff authorization, context transfer filtering, delegated authority scope, and resumed/replayed tool-call binding can be lost in provider-specific logs. Authoring quality also degrades when AI agents rely on unstated conversation context instead of explicit instructions, contracts, validation, source trust boundaries, and context freshness. | v0.6.0 Action Quality Contract makes action governance provider-neutral and structurally verifiable. v0.6.5 hardens it with trace approval evidence. v0.6.6 adds approval persistence policies. v0.6.7 adds tool guardrail policies. v0.6.8 adds context memory boundaries. v0.6.9 adds containment and safe-exit boundaries. v0.6.10 adds handoff authority boundaries. v0.6.1-v0.6.4 Authoring Template makes AI package generation structurally verifiable, understandable, and resistant to source-content instruction confusion. | Treat every AI tool action and generated QIF artifact as a quality-bearing state transition with explicit input, output, approval evidence, approval persistence limits, guardrail evidence, context/memory evidence, validation, trace, governance, and untrusted-input boundaries. |
+| MCP's updated roadmap prioritizes server-initiated events, richer result types, agent identity, governance, and enterprise auditability. ([MCP roadmap](https://blog.modelcontextprotocol.io/posts/mcp-roadmap/)) | Evaluation evidence can arrive asynchronously from actors whose identity, authority, and result provenance differ; a cached or aggregated result may lose those distinctions. | v0.6 provider-neutral action evidence and v0.7 observed-outcome provenance. | Keep identity, event timing, evidence origin, and result trust attached through calibration rather than collapsing them into one score. |
 
 The one-step-ahead bet is Phase 6 / v0.9: an **Anticipatory Quality Intent
 Twin**. Current eval practice tests known tasks. QIF should also generate and
@@ -358,7 +366,8 @@ Deliverables:
   sequence exploration, invariant confirmation, and closure.
 - A `qif` CLI: `qif validate`, `qif new <package-type>`, `qif trace <id>`
   (walk any entity's evidence chain), `qif open-risks`, `qif release-ready`,
-  `qif doctor`, `qif review-plan`, `qif evaluator-packet`, `qif commands`,
+  `qif doctor`, `qif review-plan`, `qif evaluator-packet`,
+  `qif calibration-readiness`, `qif commands`,
   `qif package-types`, `qif inventory`, `qif status`.
   Status: first slices implemented in v0.6.11-v0.6.14 through
   `tools/qif.mjs validate`, `qif new <package-type>`, `qif trace <id>`,
@@ -386,7 +395,9 @@ Deliverables:
   claiming semantic truth or independent reviewer agreement. v0.6.25 adds
   `qif evaluator-packet` as a single handoff packet for independent reviewers,
   AI agents, and audit harnesses without claiming semantic truth, operational
-  safety, or independent approval.
+  safety, or independent approval. v0.6.26 adds `qif calibration-readiness` as
+  a Phase 4 preflight that reports exact missing empirical prerequisites and
+  refuses to treat committed examples as observed operational evidence.
 - Gate-as-hook reference integration: a demonstration where an agent task
   cannot be marked release-ready unless a quality-gate package for the
   target validates. No external service required; local hook only.

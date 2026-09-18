@@ -57,6 +57,7 @@ function usage() {
   qif doctor [--release-gate quality-gate-package.json]
   qif review-plan [--release-gate quality-gate-package.json]
   qif evaluator-packet [--release-gate quality-gate-package.json]
+  qif calibration-readiness [--quality-gate package.json] [--ledger package.json] [--calibration package.json] [--pilot-corpus package.json]
   qif commands
   qif package-types
   qif inventory [package.json...]
@@ -166,6 +167,20 @@ function commandManifest() {
       verifierBoundary: "evaluator-packet packages structural evidence for evaluation only; it does not prove semantic quality truth, independent approval, safety, or business acceptance."
     },
     {
+      name: "calibration-readiness",
+      usage: "qif calibration-readiness [--quality-gate package.json] [--ledger package.json] [--calibration package.json] [--pilot-corpus package.json]",
+      purpose: "Report whether QIF evidence is structurally ready to begin empirical calibration and name the exact missing prerequisites.",
+      arguments: [
+        { name: "--quality-gate", required: false, repeatable: false, description: "Quality-gate package containing decisions, confidence, and post-decision reviews." },
+        { name: "--ledger", required: false, repeatable: false, description: "QIF ledger package containing trials and outcomes." },
+        { name: "--calibration", required: false, repeatable: false, description: "Calibration package containing cases, assessments, and reproduced metrics." },
+        { name: "--pilot-corpus", required: false, repeatable: false, description: "Pilot corpus package containing domains, source kinds, and ingestion results." }
+      ],
+      blocking: false,
+      output: "Calibration-readiness JSON with input validation, evidence-origin boundary, prerequisite checks, exact blockers, next actions, and verifier boundary.",
+      verifierBoundary: "calibration-readiness checks declared structure and provenance boundaries only; it does not prove predictive validity, representativeness, semantic truth, or empirical calibration."
+    },
+    {
       name: "commands",
       usage: "qif commands",
       purpose: "Return the canonical QIF CLI command manifest as machine-readable JSON.",
@@ -225,6 +240,7 @@ function commands() {
       "node tools/qif.mjs doctor",
       "node tools/qif.mjs review-plan",
       "node tools/qif.mjs evaluator-packet",
+      "node tools/qif.mjs calibration-readiness",
       "node tools/qif.mjs package-types",
       "node tools/qif.mjs inventory --all",
       "node tools/qif.mjs status"
@@ -391,11 +407,14 @@ function status() {
   const openRisksParsed = parsedCapturedJson(openRiskResult);
   const inventoryResult = runNodeCaptured(["tools/qif.mjs", "inventory", "--all"]);
   const inventoryParsed = parsedCapturedJson(inventoryResult);
+  const calibrationReadinessResult = runNodeCaptured(["tools/qif.mjs", "calibration-readiness"]);
+  const calibrationReadinessParsed = parsedCapturedJson(calibrationReadinessResult);
   const releaseGateResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "release-ready", "examples/quality-gate-package.json"]));
   const blockingSignals = [
     validation.ok ? null : "validate-all failed",
     doctorResult.ok ? null : "doctor failed",
     inventoryResult.status === 0 ? null : "inventory failed",
+    calibrationReadinessResult.status === 0 ? null : "calibration-readiness failed",
     releaseGateResult.ok ? null : "release-ready failed"
   ].filter(Boolean);
   const openRiskCount = typeof openRisksParsed?.riskCount === "number" ? openRisksParsed.riskCount : null;
@@ -453,6 +472,16 @@ function status() {
       lowConfidenceCount: openRisksParsed?.lowConfidence?.length ?? null,
       verifierBoundary: openRisksParsed?.verifierBoundary || "open-risk visibility is structural only."
     },
+    calibrationReadiness: {
+      command: calibrationReadinessResult.command,
+      status: calibrationReadinessResult.status,
+      ok: calibrationReadinessResult.status === 0,
+      empiricalCalibrationReady: calibrationReadinessParsed?.readiness?.empiricalCalibrationReady ?? null,
+      readinessLevel: calibrationReadinessParsed?.readiness?.level ?? null,
+      blockerIds: (calibrationReadinessParsed?.readiness?.blockers || []).map((item) => item.id),
+      evidenceOrigin: calibrationReadinessParsed?.evidenceOrigin?.status ?? null,
+      verifierBoundary: calibrationReadinessParsed?.verifierBoundary || "calibration readiness is structural only."
+    },
     roadmapFrontier,
     trendRationale: [
       {
@@ -466,6 +495,10 @@ function status() {
       {
         signal: "MCP-style ecosystems emphasize discoverable capabilities and stateless tool surfaces.",
         qifResponse: "QIF commands, package-types, inventory, review-plan, and status make local capability, package-structure, and reviewer-action discovery explicit."
+      },
+      {
+        signal: "Long-running multi-agent systems and embedded evaluation probes make evidence origin, evaluator health, and uncertainty part of the quality claim.",
+        qifResponse: "QIF calibration-readiness names the missing prerequisites before confidence or eval deltas are treated as empirical evidence."
       }
     ],
     nextRecommendedAction: blockingSignals.length > 0
@@ -1065,6 +1098,7 @@ function evaluatorPacket(args) {
   const reviewPlanResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "review-plan", "--release-gate", releaseGatePath]));
   const releaseReadyResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "release-ready", releaseGatePath]));
   const openRiskResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "open-risks", "--all"]));
+  const calibrationReadinessResult = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "calibration-readiness", "--quality-gate", releaseGatePath]));
   const openRisksParsed = openRiskResult.parsed || {};
   const reviewPlanParsed = reviewPlanResult.parsed || {};
   const statusParsed = statusResult.parsed || {};
@@ -1073,6 +1107,7 @@ function evaluatorPacket(args) {
     "node tools/qif.mjs validate --fixtures",
     `node tools/qif.mjs release-ready ${releaseGatePath}`,
     "node tools/qif.mjs review-plan",
+    "node tools/qif.mjs calibration-readiness",
     "node tools/qif.mjs open-risks --all"
   ];
   const sourceResults = [
@@ -1082,6 +1117,7 @@ function evaluatorPacket(args) {
     ["status", statusResult],
     ["review-plan", reviewPlanResult],
     ["release-ready", releaseReadyResult],
+    ["calibration-readiness", calibrationReadinessResult],
     ["open-risks", openRiskResult]
   ];
   const failedSources = sourceResults.filter(([, result]) => !result.ok).map(([name]) => name);
@@ -1169,6 +1205,14 @@ function evaluatorPacket(args) {
         readyDecisionRefs: releaseReadyResult.parsed?.readyDecisionRefs || [],
         verifierBoundary: releaseReadyResult.parsed?.verifierBoundary || "release-ready is structural only."
       },
+      calibrationReadiness: {
+        ok: calibrationReadinessResult.ok,
+        empiricalCalibrationReady: calibrationReadinessResult.parsed?.readiness?.empiricalCalibrationReady ?? null,
+        readinessLevel: calibrationReadinessResult.parsed?.readiness?.level ?? null,
+        blockerIds: (calibrationReadinessResult.parsed?.readiness?.blockers || []).map((item) => item.id),
+        evidenceOrigin: calibrationReadinessResult.parsed?.evidenceOrigin?.status ?? null,
+        verifierBoundary: calibrationReadinessResult.parsed?.verifierBoundary || "calibration readiness is structural only."
+      },
       openRisks: {
         ok: openRiskResult.ok,
         riskCount: openRisksParsed.riskCount ?? null,
@@ -1204,6 +1248,157 @@ function evaluatorPacket(args) {
     verifierBoundary: "qif evaluator-packet packages structural evidence for independent or AI evaluation handoff only. It does not prove semantic quality truth, independent evaluator approval, business approval correctness, operational safety, or risk acceptability."
   }, null, 2));
   return failedSources.length === 0 ? 0 : 1;
+}
+
+function calibrationReadiness(args) {
+  const inputs = {
+    qualityGate: optionValue(args, "--quality-gate") || "examples/quality-gate-package.json",
+    ledger: optionValue(args, "--ledger") || "examples/qif-ledger-package.json",
+    calibration: optionValue(args, "--calibration") || "examples/world-model-calibration-package.json",
+    pilotCorpus: optionValue(args, "--pilot-corpus") || "examples/world-model-pilot-corpus-package.json"
+  };
+  const packages = Object.fromEntries(Object.entries(inputs).map(([name, filePath]) => [name, readJson(filePath)]));
+  const expectedTypes = {
+    qualityGate: "quality-gate",
+    ledger: "qif-ledger",
+    calibration: "world-model-calibration",
+    pilotCorpus: "world-model-pilot-corpus"
+  };
+  const validation = Object.entries(inputs).map(([name, filePath]) => {
+    const result = summarizeCaptured(runNodeCaptured(["tools/qif.mjs", "validate", filePath]));
+    return {
+      name,
+      package: displayPath(filePath),
+      expectedPackageType: expectedTypes[name],
+      actualPackageType: packages[name]?.packageType || null,
+      ok: result.ok && packages[name]?.packageType === expectedTypes[name],
+      status: result.status
+    };
+  });
+  const invalidInputs = validation.filter((entry) => !entry.ok);
+  const gateDecisions = packages.qualityGate.qualityGateDecisions || [];
+  const postReleaseReviews = packages.qualityGate.postReleaseReviews || [];
+  const linkedDecisionRefs = new Set(postReleaseReviews.map((review) => review.gateDecisionRef));
+  const decisionOutcomePairs = gateDecisions.filter((decision) => linkedDecisionRefs.has(decision.id));
+  const calibrationRuns = packages.calibration.calibrationRuns || [];
+  const pilotCases = packages.pilotCorpus.pilotCases || [];
+  const domains = new Set([
+    ...(calibrationRuns.flatMap((run) => run.domainCoverage || [])),
+    ...(pilotCases.map((item) => item.domain).filter(Boolean))
+  ]);
+  const nonSoftwareDomains = Array.from(domains).filter((domain) => domain !== "software");
+  const examplePaths = Object.values(inputs).filter((filePath) => displayPath(filePath).startsWith("examples/"));
+  const explicitObservedOrigin = Object.values(packages).every((pkg) => pkg.evidenceOrigin?.kind === "observed-operational");
+  const evidenceOrigin = explicitObservedOrigin
+    ? "declared-observed-operational"
+    : examplePaths.length > 0
+      ? "example-only"
+      : "undeclared";
+  const suiteHealthRecords = Object.values(packages).flatMap((pkg) => pkg.evaluationSuiteHealthRecords || []);
+  const trialVarianceRecords = Object.values(packages).flatMap((pkg) => pkg.trialVarianceRecords || []);
+  const frameworkLearningRecords = Object.values(packages).flatMap((pkg) => pkg.frameworkLearningRecords || []);
+  const checks = [
+    {
+      id: "CRD-STRUCTURE",
+      label: "All calibration inputs validate and have the expected package type.",
+      met: invalidInputs.length === 0,
+      evidence: validation
+    },
+    {
+      id: "CRD-ORIGIN",
+      label: "Outcome evidence explicitly declares observed operational origin.",
+      met: explicitObservedOrigin,
+      evidence: { evidenceOrigin, exampleInputs: examplePaths.map(displayPath) }
+    },
+    {
+      id: "CRD-PAIRS",
+      label: "At least one gate decision is linked to a post-decision outcome review with stated confidence.",
+      met: decisionOutcomePairs.some((decision) => typeof decision.confidence === "number"),
+      evidence: {
+        gateDecisionCount: gateDecisions.length,
+        postDecisionReviewCount: postReleaseReviews.length,
+        linkedDecisionOutcomePairCount: decisionOutcomePairs.length,
+        linkedDecisionRefs: decisionOutcomePairs.map((decision) => decision.id)
+      }
+    },
+    {
+      id: "CRD-SUITE-HEALTH",
+      label: "Evaluation suite health records cover origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership.",
+      met: suiteHealthRecords.length > 0,
+      evidence: { recordCount: suiteHealthRecords.length }
+    },
+    {
+      id: "CRD-DOMAINS",
+      label: "Calibration evidence spans at least two domains and includes a non-software domain.",
+      met: domains.size >= 2 && nonSoftwareDomains.length > 0,
+      evidence: { domains: Array.from(domains).sort(), nonSoftwareDomains: nonSoftwareDomains.sort() }
+    },
+    {
+      id: "CRD-UNCERTAINTY",
+      label: "Trial and infrastructure uncertainty is recorded instead of reporting small score differences as exact.",
+      met: trialVarianceRecords.length > 0,
+      evidence: { trialVarianceRecordCount: trialVarianceRecords.length }
+    },
+    {
+      id: "CRD-LEARNING",
+      label: "At least one framework change is linked to calibration evidence that contradicted an assumption.",
+      met: frameworkLearningRecords.length > 0,
+      evidence: { frameworkLearningRecordCount: frameworkLearningRecords.length }
+    }
+  ];
+  const blockers = checks.filter((check) => !check.met).map((check) => ({ id: check.id, missing: check.label }));
+  const structurallyValid = invalidInputs.length === 0;
+  const empiricalCalibrationReady = structurallyValid && blockers.length === 0;
+  console.log(JSON.stringify({
+    ok: structurallyValid,
+    calibrationReadinessVersion: 1,
+    packageVersion: readJson("package.json").version || "unknown",
+    generatedAt: new Date().toISOString(),
+    cache: cacheMetadata("calibration-readiness", 60000, [
+      "package.json",
+      "tools/qif.mjs",
+      ...Object.values(inputs),
+      "docs/qif-roadmap.md",
+      "git status changes"
+    ]),
+    inputs: validation,
+    evidenceOrigin: {
+      status: evidenceOrigin,
+      rationale: evidenceOrigin === "example-only"
+        ? "Committed example packages demonstrate structure but are not accepted as observed operational evidence, even when example records describe real-redacted cases."
+        : evidenceOrigin === "undeclared"
+          ? "The selected packages do not carry an explicit observed-operational evidence-origin declaration."
+          : "Every selected package explicitly declares observed-operational evidence origin."
+    },
+    readiness: {
+      empiricalCalibrationReady,
+      level: empiricalCalibrationReady ? "empirical-calibration-ready" : structurallyValid ? "structural-baseline-only" : "invalid-inputs",
+      checks,
+      blockers
+    },
+    nextActions: blockers.map((blocker) => ({
+      blockerRef: blocker.id,
+      action: ({
+        "CRD-STRUCTURE": "Repair package validation or package-type mismatches before calibration work.",
+        "CRD-ORIGIN": "Add schema-backed evidence-origin records that distinguish observed, synthetic, simulated, and example evidence.",
+        "CRD-PAIRS": "Collect gate decisions with stated confidence and link them to post-decision outcome windows.",
+        "CRD-SUITE-HEALTH": "Define Evaluation Suite Health records for task origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership.",
+        "CRD-DOMAINS": "Collect calibration evidence from at least two domains, including one non-software domain.",
+        "CRD-UNCERTAINTY": "Record repeated-trial variance and infrastructure uncertainty before comparing small score differences.",
+        "CRD-LEARNING": "Record a framework change caused by calibration evidence that contradicted an assumption."
+      })[blocker.id]
+    })),
+    sourceSummary: {
+      calibrationRunCount: calibrationRuns.length,
+      calibrationConclusions: calibrationRuns.map((run) => ({ id: run.id, conclusion: run.conclusion, caseCount: run.caseCount })),
+      pilotCaseCount: pilotCases.length,
+      pilotCaseKinds: Array.from(new Set(pilotCases.map((item) => item.caseKind).filter(Boolean))).sort(),
+      ledgerTrialCount: (packages.ledger.agentTrials || []).length,
+      ledgerOutcomeCount: (packages.ledger.agentOutcomes || []).length
+    },
+    verifierBoundary: "qif calibration-readiness checks declared structure, referenceable decision-outcome prerequisites, and evidence-origin boundaries only. It does not prove semantic truth, outcome attribution, case representativeness, predictive validity, calibration, or whether a quality decision was correct."
+  }, null, 2));
+  return structurallyValid ? 0 : 1;
 }
 
 function main() {
@@ -1249,6 +1444,9 @@ ${usage()}`);
   }
   if (command === "evaluator-packet") {
     return evaluatorPacket(args);
+  }
+  if (command === "calibration-readiness") {
+    return calibrationReadiness(args);
   }
   if (command === "commands") {
     return commands();

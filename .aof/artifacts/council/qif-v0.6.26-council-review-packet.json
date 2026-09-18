@@ -1,0 +1,32 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-18T04:47:01.039Z",
+  "review_packet_id": "CREV-MU6H8D67-K1QLY1",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve QIF v0.6.26 Calibration Readiness CLI for release.",
+  "rationale": "Visionary: the command creates an honest transition from structural QIF evidence to empirical calibration. Builder: implementation is a read-only composition over four existing package types, is exposed through status and evaluator-packet, and has a fail-closed regression. Guardian: committed examples remain example-only, empiricalCalibrationReady remains false with four exact blockers, package-type mismatch fails closed, and verifier boundaries reject semantic or predictive claims.",
+  "recommendation": "Release v0.6.26 after final residue scan, commit, push, tag, and GitHub Release.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "RELEASE-NOTES-v0.6.26.md",
+    "docs/aof-runtime-log.md",
+    "tools/check-calibration-readiness.mjs"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-044",
+  "source_parent_session_id": null,
+  "source_decision_record_id": null
+}

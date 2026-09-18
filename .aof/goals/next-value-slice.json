@@ -1,7 +1,7 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Implement QIF v0.6.25 Evaluator Packet CLI so humans, independent evaluators, AI agents, and audit harnesses can request a single machine-readable handoff packet before reviewing QIF. The packet should compose commands, package-types, inventory, status, review-plan, release-ready, and open-risk signals into scope, freshness, evidence refs, required commands, unresolved-risk prompts, and trust boundaries without claiming semantic quality truth or independent approval.",
-  "updated_at": "2026-09-16T04:32:59.307Z",
+  "content": "Implement QIF v0.6.26 Calibration Readiness CLI so humans, AI agents, and evaluators can determine whether current QIF evidence is ready to enter empirical calibration. The report must distinguish example or synthetic evidence from observed operational outcomes, identify missing decision-outcome pairs, suite-health evidence, domain diversity, uncertainty, and framework-learning evidence, and must never claim calibration from structure alone.",
+  "updated_at": "2026-09-18T04:34:28.334Z",
   "agreed_with_human": true,
   "source_session_id": null,
   "source_decision_record_id": null,

@@ -2,6 +2,66 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.26 Calibration Readiness CLI
+
+Date: 2026-09-18
+
+Need / Intent / Context:
+
+- Need: QIF can validate calibration-shaped packages, but it still needs an honest entry check that says whether current evidence is actually ready for empirical calibration and exactly what is missing.
+- Intent: add `qif calibration-readiness` as a read-only CLI that checks quality-gate, ledger, calibration, and pilot-corpus inputs for structural validity, outcome provenance, decision-outcome pairs, suite health, domain diversity, uncertainty, and framework-learning evidence.
+- Context: current agent platforms run longer, coordinate subagents, and preserve intermediate state; NIST is emphasizing embedded evaluation probes, transcript review, reproducible benchmark practice, and evaluation validity; MCP is advancing agent identity, asynchronous events, result provenance, governance, and enterprise auditability. QIF must keep example evidence, synthetic evidence, and observed operational outcomes distinct before confidence can acquire empirical meaning.
+
+Direction and council judgment:
+
+- Visionary: approve. Phase 4 needs an explicit entry gate before QIF confidence numbers can be interpreted empirically.
+- Builder: approve. Implement a narrow read-only composition over existing packages; do not add a package type or external integration in this release.
+- Guardian: approve with boundary. Committed examples remain example-only evidence, missing prerequisites must be named, and the command must not claim semantic truth, predictive validity, calibration, or decision correctness.
+
+Runtime command evidence:
+
+- AOF runtime package version check: `12.3.0`; latest local release tag: `v12.2.0`.
+- AOF `situation-assess --project . --write-artifact .aof/artifacts/runtime/qif-v0.6.26-situation-assessment.json` passed.
+- AOF `goal-project --goal-type next-value-slice` recorded the v0.6.26 Validated Need / Intent / Context in `.aof/goals/next-value-slice.json`.
+- AOF `task-open --project .` created `TASK-044`.
+- AOF `council-review-packet --stage planning --review-status approved` wrote `.aof/artifacts/council/qif-v0.6.26-planning-council-packet.json`.
+- Trend references checked:
+  - `https://openai.com/index/introducing-the-agents-api/`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+  - `https://www.nist.gov/programs-projects/building-evaluation-probes-agentic-ai`
+  - `https://www.nist.gov/news-events/news/2026/01/towards-best-practices-automated-benchmark-evaluations`
+  - `https://www.nist.gov/blogs/caisi-research-blog/analyzing-transcripts-ai-agent-evaluations`
+  - `https://blog.modelcontextprotocol.io/posts/mcp-roadmap/`
+
+What was built:
+
+- `qif calibration-readiness` with optional quality-gate, ledger, calibration, and pilot-corpus inputs.
+- Machine-readable checks, blockers, next actions, source summary, evidence-origin boundary, cache metadata, and verifier boundary.
+- A regression check that prevents committed examples from being labeled empirically calibration-ready.
+- Command discovery, npm test, README, roadmap, changelog, release notes, and AOF runtime log updates.
+
+What was not built:
+
+- No empirical calibration package type.
+- No claim that example or self-declared evidence is observed truth.
+- No Brier score or auto-verdict.
+- No external pilot integration.
+- No UI.
+
+Verification:
+
+- `node tools/qif.mjs calibration-readiness` passed: package version `0.6.26`, all four input packages structurally valid, one linked decision-outcome pair visible, three-domain structure visible, empirical calibration readiness `false`, evidence origin `example-only`, and blockers `CRD-ORIGIN`, `CRD-SUITE-HEALTH`, `CRD-UNCERTAINTY`, and `CRD-LEARNING`.
+- `node tools/check-calibration-readiness.mjs` passed, including package-type mismatch fail-closed behavior.
+- `node tools/qif.mjs status` passed: package version `0.6.26`, command count `13`, blocking signals `[]`, and calibration readiness surfaced as `structural-baseline-only`.
+- `node tools/qif.mjs evaluator-packet` passed with calibration-readiness included in required commands and source signals.
+- `node tools/qif.mjs validate --all` passed.
+- `npm test` passed, including fixture regression `15/15` positive checks and `603/603` negative checks.
+- `git diff --check` passed.
+- AOF `council-review-packet --stage review --review-status approved` wrote `.aof/artifacts/council/qif-v0.6.26-council-review-packet.json`.
+- AOF `task-update --task-id TASK-044 --status done` moved `TASK-044` to `.aof/tasks/done/TASK-044.json`.
+- AOF `situation-assess --project . --write-artifact .aof/artifacts/runtime/qif-v0.6.26-post-implementation-assessment.json` passed.
+- AOF `organization-verify --project .` passed `231/231` checks.
+
 ## v0.6.25 Evaluator Packet CLI
 
 Date: 2026-09-16

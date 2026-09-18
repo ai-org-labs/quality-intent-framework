@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.26
+
+- Added `qif calibration-readiness` to inspect quality-gate, ledger, calibration, and pilot-corpus packages before Phase 4 empirical calibration.
+- The report distinguishes committed examples from observed operational evidence and names exact missing prerequisites for decision-outcome pairs, suite health, domain coverage, uncertainty, and framework learning.
+- Added a regression check that prevents the committed example baseline from being mislabeled as empirically calibrated while preserving visibility of its existing cross-domain and post-release structure.
+
 ## v0.6.25
 
 - Added `qif evaluator-packet` to package command discovery, package type catalog, inventory, status, review-plan, release-ready, and open-risk summaries into one evaluator handoff packet.

@@ -1,0 +1,31 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-18T04:34:41.840Z",
+  "review_packet_id": "CREV-MU6GSISW-YVIVA9",
+  "council_id": "qif-council",
+  "stage": "planning",
+  "review_status": "approved",
+  "decision_summary": "Approve QIF v0.6.26 Calibration Readiness CLI as the next release slice.",
+  "rationale": "Visionary: Phase 4 needs an honest entry gate before calibration numbers can acquire meaning. Builder: implement a read-only composition over existing ledger, calibration, pilot-corpus, and roadmap evidence; do not add a package type. Guardian: default committed examples to example-only evidence, require explicit observed evidence before empirical-ready status, and keep semantic truth, predictive validity, and release approval outside the command's claims.",
+  "recommendation": "Implement calibration-readiness, tests, docs, release notes, and AOF evidence; release only after QIF and AOF verification.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "docs/qif-roadmap.md",
+    ".aof/artifacts/runtime/qif-v0.6.26-situation-assessment.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-044",
+  "source_parent_session_id": null,
+  "source_decision_record_id": null
+}
