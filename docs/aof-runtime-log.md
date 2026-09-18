@@ -62,6 +62,15 @@ Verification:
 - AOF `situation-assess --project . --write-artifact .aof/artifacts/runtime/qif-v0.6.26-post-implementation-assessment.json` passed.
 - AOF `organization-verify --project .` passed `231/231` checks.
 
+Release:
+
+- Implementation commit: `5103b6daf5fd249858dcf943197dabc95128d838`.
+- Tag: `v0.6.26`.
+- Tag target commit: `5103b6daf5fd249858dcf943197dabc95128d838`.
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.26`.
+- Release published at: `2026-09-18T04:48:26Z`.
+- Published result: released.
+
 ## v0.6.25 Evaluator Packet CLI
 
 Date: 2026-09-16
