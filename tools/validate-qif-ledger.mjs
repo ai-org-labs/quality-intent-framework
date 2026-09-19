@@ -108,6 +108,27 @@ function requireArray(pkg, key, owner = "package") {
   return pkg[key];
 }
 
+const EVIDENCE_ORIGIN_KINDS = new Set(["observed-operational", "historical-record", "simulated", "synthetic", "example"]);
+const EVIDENCE_ORIGIN_STATUSES = new Set(["draft", "verified", "stale", "retired"]);
+
+function checkEvidenceOrigins(origins, packagePath) {
+  const index = indexById(origins, `${packagePath}:evidenceOrigins`);
+  for (const origin of origins) {
+    for (const field of ["originKind", "sourceArtifact", "observationWindow", "environment", "generatedBy", "transformationSummary", "status"]) {
+      checkRequiredString(origin, field, origin.id);
+    }
+    if (!EVIDENCE_ORIGIN_KINDS.has(origin.originKind)) errors.push(`${origin.id} originKind is not supported.`);
+    if (!Array.isArray(origin.verifiedBy) || origin.verifiedBy.length === 0 || origin.verifiedBy.some((item) => typeof item !== "string" || item.trim() === "")) {
+      errors.push(`${origin.id} verifiedBy must include at least one verifier.`);
+    }
+    if (!EVIDENCE_ORIGIN_STATUSES.has(origin.status)) errors.push(`${origin.id} status is not supported.`);
+    if (["observed-operational", "historical-record"].includes(origin.originKind) && origin.status !== "verified") {
+      errors.push(`${origin.id} empirical evidence origin must have status verified.`);
+    }
+  }
+  return index;
+}
+
 function indexById(items, label) {
   const index = new Map();
   for (const item of items) {
@@ -196,12 +217,14 @@ function validateLedgerPackage(pkg, packagePath) {
   const lifecycleRecords = requireArray(pkg, "qualityIntentLifecycleRecords", packagePath);
   const missedIntentRecords = requireArray(pkg, "missedIntentRecords", packagePath);
   const agentTrials = requireArray(pkg, "agentTrials", packagePath);
+  const evidenceOrigins = requireArray(pkg, "evidenceOrigins", packagePath);
   const agentOutcomes = requireArray(pkg, "agentOutcomes", packagePath);
   const packageRefIndex = indexById(packageRefs, `${packagePath}:packageRefs`);
   const crossPackageRefIndex = indexById(crossPackageRefs, `${packagePath}:crossPackageRefs`);
   const lifecycleIndex = indexById(lifecycleRecords, `${packagePath}:qualityIntentLifecycleRecords`);
   const missedIntentIndex = indexById(missedIntentRecords, `${packagePath}:missedIntentRecords`);
   const trialIndex = indexById(agentTrials, `${packagePath}:agentTrials`);
+  const evidenceOriginIndex = checkEvidenceOrigins(evidenceOrigins, packagePath);
   const outcomeIndex = indexById(agentOutcomes, `${packagePath}:agentOutcomes`);
   void crossPackageRefIndex;
   void missedIntentIndex;
@@ -321,6 +344,9 @@ function validateLedgerPackage(pkg, packagePath) {
     }
     checkRequiredString(outcome, "actualOutcome", outcome.id);
     checkRequiredString(outcome, "status", outcome.id);
+    if (!evidenceOriginIndex.has(outcome.evidenceOriginRef)) {
+      errors.push(`${outcome.id} references missing evidence origin: ${outcome.evidenceOriginRef}`);
+    }
     if (!Array.isArray(outcome.outcomeEvidenceRefs) || outcome.outcomeEvidenceRefs.length === 0) {
       errors.push(`${outcome.id} must include outcomeEvidenceRefs.`);
     }
@@ -371,6 +397,7 @@ function validateLedgerPackage(pkg, packagePath) {
       qualityIntentLifecycleRecords: lifecycleRecords.length,
       missedIntentRecords: missedIntentRecords.length,
       agentTrials: agentTrials.length,
+      evidenceOrigins: evidenceOrigins.length,
       agentOutcomes: agentOutcomes.length
     }
   });

@@ -64,6 +64,21 @@ export const cases = [
     mutate: (pkg) => { pilotCase(pkg).privacyControlRef = "PRV-NOPE-999"; }
   },
   {
+    id: "case-broken-evidence-origin",
+    rule: "pilot cases resolve evidence origin",
+    expect: "PC-WMP-001 references missing evidence origin: EOR-NOPE-999",
+    mutate: (pkg) => { pilotCase(pkg).evidenceOriginRef = "EOR-NOPE-999"; }
+  },
+  {
+    id: "empirical-origin-not-verified",
+    rule: "empirical evidence origin is verified",
+    expect: "EOR-WMP-001 empirical evidence origin must have status verified.",
+    mutate: (pkg) => {
+      pkg.evidenceOrigins[0].originKind = "observed-operational";
+      pkg.evidenceOrigins[0].status = "stale";
+    }
+  },
+  {
     id: "case-unseen-not-boolean",
     rule: "pilot case unseenCase is boolean",
     expect: "PC-WMP-001 unseenCase must be boolean.",

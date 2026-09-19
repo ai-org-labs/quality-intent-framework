@@ -21,6 +21,9 @@ function intent(pkg, id) {
 function evidence(pkg, id) {
   return pkg.evidenceItems.find((entry) => entry.id === id);
 }
+function evidenceOrigin(pkg) {
+  return pkg.evidenceOrigins[0];
+}
 function decision(pkg) {
   return pkg.qualityGateDecisions[0];
 }
@@ -603,6 +606,21 @@ export const cases = [
   },
 
   // ---- Post-release review, improvement, traceability ----
+  {
+    id: "post-release-review-broken-evidence-origin",
+    rule: "post-release reviews resolve evidence origin",
+    expect: "PRR-QG-001 references missing evidence origin: EOR-NOPE-999",
+    mutate: (pkg) => { pkg.postReleaseReviews[0].evidenceOriginRef = "EOR-NOPE-999"; }
+  },
+  {
+    id: "empirical-origin-not-verified",
+    rule: "empirical evidence origin is verified",
+    expect: "EOR-QG-001 empirical evidence origin must have status verified.",
+    mutate: (pkg) => {
+      evidenceOrigin(pkg).originKind = "observed-operational";
+      evidenceOrigin(pkg).status = "draft";
+    }
+  },
   {
     id: "severe-incident-without-improvement",
     rule: "high-severity post-release incident links an improvement action",

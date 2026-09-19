@@ -8,6 +8,7 @@
     "runtimeVersion",
     "packageId",
     "packageRefs",
+    "evidenceOrigins",
     "calibrationPolicies",
     "calibrationCases",
     "expertAssessments",
@@ -26,6 +27,11 @@
       "type": "array",
       "minItems": 1,
       "items": { "$ref": "#/$defs/packageRef" }
+    },
+    "evidenceOrigins": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/evidenceOrigin" }
     },
     "calibrationPolicies": {
       "type": "array",
@@ -99,6 +105,22 @@
         "entityRef": { "$ref": "#/$defs/id" }
       }
     },
+    "evidenceOrigin": {
+      "type": "object",
+      "required": ["id", "originKind", "sourceArtifact", "observationWindow", "environment", "generatedBy", "verifiedBy", "transformationSummary", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "originKind": { "enum": ["observed-operational", "historical-record", "simulated", "synthetic", "example"] },
+        "sourceArtifact": { "type": "string", "minLength": 1 },
+        "observationWindow": { "type": "string", "minLength": 1 },
+        "environment": { "type": "string", "minLength": 1 },
+        "generatedBy": { "type": "string", "minLength": 1 },
+        "verifiedBy": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+        "transformationSummary": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["draft", "verified", "stale", "retired"] }
+      }
+    },
     "calibratedFinding": {
       "type": "object",
       "required": ["id", "gapObjectType", "missingItem", "expectedDefinition", "verdictEffect", "severity", "rationale"],
@@ -154,7 +176,7 @@
     },
     "calibrationCase": {
       "type": "object",
-      "required": ["id", "title", "domain", "targetDescription", "sourceArtifact", "unseenCase", "sourceWorldModelRef", "expectedGapObjectTypes", "decisionContext"],
+      "required": ["id", "title", "domain", "targetDescription", "sourceArtifact", "evidenceOriginRef", "unseenCase", "sourceWorldModelRef", "expectedGapObjectTypes", "decisionContext"],
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" },
@@ -162,6 +184,7 @@
         "domain": { "type": "string" },
         "targetDescription": { "type": "string" },
         "sourceArtifact": { "type": "string" },
+        "evidenceOriginRef": { "$ref": "#/$defs/id" },
         "unseenCase": { "type": "boolean" },
         "sourceWorldModelRef": { "$ref": "#/$defs/entityRef" },
         "expectedGapObjectTypes": {

@@ -71,6 +71,27 @@ function requireArray(pkg, key, owner = "package") {
   return pkg[key];
 }
 
+const EVIDENCE_ORIGIN_KINDS = new Set(["observed-operational", "historical-record", "simulated", "synthetic", "example"]);
+const EVIDENCE_ORIGIN_STATUSES = new Set(["draft", "verified", "stale", "retired"]);
+
+function checkEvidenceOrigins(origins, packagePath) {
+  const index = indexById(origins, `${packagePath}:evidenceOrigins`);
+  for (const origin of origins) {
+    for (const field of ["originKind", "sourceArtifact", "observationWindow", "environment", "generatedBy", "transformationSummary", "status"]) {
+      checkRequiredString(origin, field, origin.id);
+    }
+    if (!EVIDENCE_ORIGIN_KINDS.has(origin.originKind)) errors.push(`${origin.id} originKind is not supported.`);
+    if (!Array.isArray(origin.verifiedBy) || origin.verifiedBy.length === 0 || origin.verifiedBy.some((item) => typeof item !== "string" || item.trim() === "")) {
+      errors.push(`${origin.id} verifiedBy must include at least one verifier.`);
+    }
+    if (!EVIDENCE_ORIGIN_STATUSES.has(origin.status)) errors.push(`${origin.id} status is not supported.`);
+    if (["observed-operational", "historical-record"].includes(origin.originKind) && origin.status !== "verified") {
+      errors.push(`${origin.id} empirical evidence origin must have status verified.`);
+    }
+  }
+  return index;
+}
+
 function indexById(items, label) {
   const index = new Map();
   for (const item of items) {
@@ -225,6 +246,7 @@ function validateCalibrationPackage(pkg, packagePath) {
   checkRequiredString(pkg, "packageId", packagePath);
 
   const packageRefs = requireArray(pkg, "packageRefs", packagePath);
+  const evidenceOrigins = requireArray(pkg, "evidenceOrigins", packagePath);
   const policies = requireArray(pkg, "calibrationPolicies", packagePath);
   const cases = requireArray(pkg, "calibrationCases", packagePath);
   const expertAssessments = requireArray(pkg, "expertAssessments", packagePath);
@@ -234,6 +256,7 @@ function validateCalibrationPackage(pkg, packagePath) {
   const governanceTriggers = requireArray(pkg, "governanceTriggers", packagePath);
 
   const { packageRefIndex, packageIndex } = checkPackageRefs(packageRefs, packagePath);
+  const evidenceOriginIndex = checkEvidenceOrigins(evidenceOrigins, packagePath);
   const policyIndex = indexById(policies, `${packagePath}:calibrationPolicies`);
   const caseIndex = indexById(cases, `${packagePath}:calibrationCases`);
   const expertAssessmentIndex = indexById(expertAssessments, `${packagePath}:expertAssessments`);
@@ -280,6 +303,9 @@ function validateCalibrationPackage(pkg, packagePath) {
       errors.push(`${calibrationCase.id} must include expectedGapObjectTypes.`);
     }
     resolveEntity(calibrationCase.sourceWorldModelRef, packageIndex, `${calibrationCase.id}/sourceWorldModelRef`);
+    if (!evidenceOriginIndex.has(calibrationCase.evidenceOriginRef)) {
+      errors.push(`${calibrationCase.id} references missing evidence origin: ${calibrationCase.evidenceOriginRef}`);
+    }
   }
 
   const expertFindingIndexes = new Map();
@@ -520,6 +546,7 @@ function validateCalibrationPackage(pkg, packagePath) {
     packageType: pkg.packageType,
     counts: {
       packageRefs: packageRefs.length,
+      evidenceOrigins: evidenceOrigins.length,
       calibrationPolicies: policies.length,
       calibrationCases: cases.length,
       expertAssessments: expertAssessments.length,

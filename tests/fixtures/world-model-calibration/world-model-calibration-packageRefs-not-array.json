@@ -3,6 +3,21 @@
   "runtimeVersion": "0.5.2",
   "packageId": "WMCPKG-001",
   "packageRefs": null,
+  "evidenceOrigins": [
+    {
+      "id": "EOR-WMC-001",
+      "originKind": "example",
+      "sourceArtifact": "examples/world-model-calibration-package.json",
+      "observationWindow": "not-applicable-example",
+      "environment": "committed-example",
+      "generatedBy": "QIF maintainers",
+      "verifiedBy": [
+        "QIF fixture suite"
+      ],
+      "transformationSummary": "Illustrative calibration cases retained to demonstrate scoring and traceability; they are not empirical calibration evidence.",
+      "status": "verified"
+    }
+  ],
   "calibrationPolicies": [
     {
       "id": "CALPOL-WMC-001",
@@ -33,6 +48,7 @@
       "domain": "software",
       "targetDescription": "A release request uses approved without naming the approving actor or authority boundary.",
       "sourceArtifact": "pilot/software-release-approval.md",
+      "evidenceOriginRef": "EOR-WMC-001",
       "unseenCase": true,
       "sourceWorldModelRef": {
         "packageRef": "PKG-WORLD",
@@ -50,6 +66,7 @@
       "domain": "maintenance",
       "targetDescription": "A restart checklist says equipment is ready but omits the lockout removal state and responsible operator.",
       "sourceArtifact": "pilot/maintenance-restart.md",
+      "evidenceOriginRef": "EOR-WMC-001",
       "unseenCase": true,
       "sourceWorldModelRef": {
         "packageRef": "PKG-WORLD",
@@ -68,6 +85,7 @@
       "domain": "accounting",
       "targetDescription": "An invoice exception note says manager approved, but the approval limit, exception condition, and evidence requirements are not modeled.",
       "sourceArtifact": "pilot/invoice-exception-approval.md",
+      "evidenceOriginRef": "EOR-WMC-001",
       "unseenCase": true,
       "sourceWorldModelRef": {
         "packageRef": "PKG-WORLD",

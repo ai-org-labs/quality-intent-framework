@@ -41,6 +41,27 @@ function requireArray(pkg, key, owner = "package") {
   return pkg[key];
 }
 
+const EVIDENCE_ORIGIN_KINDS = new Set(["observed-operational", "historical-record", "simulated", "synthetic", "example"]);
+const EVIDENCE_ORIGIN_STATUSES = new Set(["draft", "verified", "stale", "retired"]);
+
+function checkEvidenceOrigins(origins, packagePath) {
+  const index = indexById(origins, `${packagePath}:evidenceOrigins`);
+  for (const origin of origins) {
+    for (const field of ["originKind", "sourceArtifact", "observationWindow", "environment", "generatedBy", "transformationSummary", "status"]) {
+      checkRequiredString(origin, field, origin.id);
+    }
+    if (!EVIDENCE_ORIGIN_KINDS.has(origin.originKind)) errors.push(`${origin.id} originKind is not supported.`);
+    if (!Array.isArray(origin.verifiedBy) || origin.verifiedBy.length === 0 || origin.verifiedBy.some((item) => typeof item !== "string" || item.trim() === "")) {
+      errors.push(`${origin.id} verifiedBy must include at least one verifier.`);
+    }
+    if (!EVIDENCE_ORIGIN_STATUSES.has(origin.status)) errors.push(`${origin.id} status is not supported.`);
+    if (["observed-operational", "historical-record"].includes(origin.originKind) && origin.status !== "verified") {
+      errors.push(`${origin.id} empirical evidence origin must have status verified.`);
+    }
+  }
+  return index;
+}
+
 function indexById(items, label) {
   const index = new Map();
   for (const item of items) {
@@ -145,6 +166,7 @@ function validatePilotCorpusPackage(pkg, packagePath) {
   checkRequiredString(pkg, "packageId", packagePath);
 
   const packageRefs = requireArray(pkg, "packageRefs", packagePath);
+  const evidenceOrigins = requireArray(pkg, "evidenceOrigins", packagePath);
   const pilotSources = requireArray(pkg, "pilotSources", packagePath);
   const privacyControls = requireArray(pkg, "privacyControls", packagePath);
   const samplingPolicies = requireArray(pkg, "samplingPolicies", packagePath);
@@ -156,6 +178,7 @@ function validatePilotCorpusPackage(pkg, packagePath) {
   const governanceTriggers = requireArray(pkg, "governanceTriggers", packagePath);
 
   checkPackageRefs(packageRefs, packagePath);
+  const evidenceOriginIndex = checkEvidenceOrigins(evidenceOrigins, packagePath);
   const sourceIndex = indexById(pilotSources, `${packagePath}:pilotSources`);
   const privacyIndex = indexById(privacyControls, `${packagePath}:privacyControls`);
   const policyIndex = indexById(samplingPolicies, `${packagePath}:samplingPolicies`);
@@ -203,6 +226,7 @@ function validatePilotCorpusPackage(pkg, packagePath) {
   for (const pilotCase of pilotCases) {
     checkRefs([pilotCase.sourceRef], sourceIndex, "pilot source", pilotCase.id);
     checkRefs([pilotCase.privacyControlRef], privacyIndex, "privacy control", pilotCase.id);
+    checkRefs([pilotCase.evidenceOriginRef], evidenceOriginIndex, "evidence origin", pilotCase.id);
     for (const field of ["title", "domain", "targetDescription", "decisionContext", "caseKind", "sourceExcerptSummary", "expectedUse", "status"]) {
       checkRequiredString(pilotCase, field, pilotCase.id);
     }
@@ -374,6 +398,7 @@ function validatePilotCorpusPackage(pkg, packagePath) {
     package: packagePath,
     packageType: pkg.packageType,
     counts: {
+      evidenceOrigins: evidenceOrigins.length,
       pilotSources: pilotSources.length,
       privacyControls: privacyControls.length,
       samplingPolicies: samplingPolicies.length,

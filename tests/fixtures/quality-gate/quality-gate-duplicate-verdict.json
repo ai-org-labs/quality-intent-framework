@@ -753,6 +753,21 @@
       ]
     }
   ],
+  "evidenceOrigins": [
+    {
+      "id": "EOR-QG-001",
+      "originKind": "example",
+      "sourceArtifact": "examples/quality-gate-package.json",
+      "observationWindow": "not-applicable-example",
+      "environment": "committed-example",
+      "generatedBy": "QIF maintainers",
+      "verifiedBy": [
+        "QIF fixture suite"
+      ],
+      "transformationSummary": "Illustrative post-release outcome retained to demonstrate traceability; it is not operational evidence.",
+      "status": "verified"
+    }
+  ],
   "evidenceItems": [
     {
       "id": "EVD-QG-001",
@@ -1126,6 +1141,7 @@
     {
       "id": "PRR-QG-001",
       "gateDecisionRef": "QGD-QG-001",
+      "evidenceOriginRef": "EOR-QG-001",
       "window": "7-day",
       "incidents": [
         {

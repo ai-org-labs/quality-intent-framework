@@ -1,0 +1,31 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-19T04:51:33.473Z",
+  "review_packet_id": "CREV-MU7WU21T-ZMJ39B",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Self-review confirms v0.6.27 closes the impossible CRD-ORIGIN path without promoting example evidence.",
+  "rationale": "Visionary: the new entity creates a durable empirical provenance path. Builder: all four package types resolve outcome/case origin references and the positive regression proves satisfiability. Guardian: examples remain example-only; empirical kinds require verified status; verifier language still disclaims semantic truth.",
+  "recommendation": "Proceed to final council review after public-residue and organization checks.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "tools/check-calibration-readiness.mjs",
+    "docs/qif-v0.6.27-evidence-origin.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-045",
+  "source_parent_session_id": null,
+  "source_decision_record_id": null
+}

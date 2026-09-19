@@ -589,6 +589,20 @@
       "errorIncludes": "must include non-empty string decidedBy."
     },
     {
+      "file": "quality-gate-post-release-review-broken-evidence-origin.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "post-release reviews resolve evidence origin",
+      "expect": "fail",
+      "errorIncludes": "PRR-QG-001 references missing evidence origin: EOR-NOPE-999"
+    },
+    {
+      "file": "quality-gate-empirical-origin-not-verified.json",
+      "validator": "tools/validate-qif-runtime.mjs",
+      "rule": "empirical evidence origin is verified",
+      "expect": "fail",
+      "errorIncludes": "EOR-QG-001 empirical evidence origin must have status verified."
+    },
+    {
       "file": "quality-gate-severe-incident-without-improvement.json",
       "validator": "tools/validate-qif-runtime.mjs",
       "rule": "high-severity post-release incident links an improvement action",

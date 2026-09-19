@@ -99,6 +99,20 @@
       "errorIncludes": "CALCASE-WMC-001/sourceWorldModelRef references missing entity"
     },
     {
+      "file": "world-model-calibration-case-evidence-origin-broken.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "calibration cases resolve evidence origin",
+      "expect": "fail",
+      "errorIncludes": "CALCASE-WMC-001 references missing evidence origin: EOR-NOPE-999"
+    },
+    {
+      "file": "world-model-calibration-empirical-origin-not-verified.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "empirical evidence origin is verified",
+      "expect": "fail",
+      "errorIncludes": "EOR-WMC-001 empirical evidence origin must have status verified."
+    },
+    {
       "file": "world-model-calibration-expert-expected-findings-empty.json",
       "validator": "tools/validate-world-model-calibration.mjs",
       "rule": "expert assessments include expected findings",

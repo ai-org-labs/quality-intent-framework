@@ -120,6 +120,21 @@ export const cases = [
     mutate: (pkg) => { outcome(pkg).trialRef = "ATR-NOPE-999"; }
   },
   {
+    id: "agent-outcome-broken-evidence-origin",
+    rule: "agent outcomes resolve evidence origin",
+    expect: "AOC-001 references missing evidence origin: EOR-NOPE-999",
+    mutate: (pkg) => { outcome(pkg).evidenceOriginRef = "EOR-NOPE-999"; }
+  },
+  {
+    id: "empirical-origin-not-verified",
+    rule: "empirical evidence origin is verified",
+    expect: "EOR-LEDGER-001 empirical evidence origin must have status verified.",
+    mutate: (pkg) => {
+      pkg.evidenceOrigins[0].originKind = "historical-record";
+      pkg.evidenceOrigins[0].status = "stale";
+    }
+  },
+  {
     id: "ledger-index-closed-governance-trigger",
     rule: "ledger index open governance triggers are open",
     expect: "ledgerIndex openGovernanceTriggerRefs must only reference open triggers.",

@@ -99,6 +99,20 @@
       "errorIncludes": "PC-WMP-001 references missing privacy control: PRV-NOPE-999"
     },
     {
+      "file": "world-model-pilot-corpus-case-broken-evidence-origin.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "pilot cases resolve evidence origin",
+      "expect": "fail",
+      "errorIncludes": "PC-WMP-001 references missing evidence origin: EOR-NOPE-999"
+    },
+    {
+      "file": "world-model-pilot-corpus-empirical-origin-not-verified.json",
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "rule": "empirical evidence origin is verified",
+      "expect": "fail",
+      "errorIncludes": "EOR-WMP-001 empirical evidence origin must have status verified."
+    },
+    {
       "file": "world-model-pilot-corpus-case-unseen-not-boolean.json",
       "validator": "tools/validate-world-model-pilot-corpus.mjs",
       "rule": "pilot case unseenCase is boolean",

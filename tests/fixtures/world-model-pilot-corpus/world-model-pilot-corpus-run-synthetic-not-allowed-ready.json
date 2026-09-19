@@ -10,6 +10,21 @@
       "role": "downstream-calibration-package"
     }
   ],
+  "evidenceOrigins": [
+    {
+      "id": "EOR-WMP-001",
+      "originKind": "example",
+      "sourceArtifact": "examples/world-model-pilot-corpus-package.json",
+      "observationWindow": "not-applicable-example",
+      "environment": "committed-example",
+      "generatedBy": "QIF maintainers",
+      "verifiedBy": [
+        "QIF fixture suite"
+      ],
+      "transformationSummary": "Illustrative redacted-case descriptions retained to demonstrate corpus structure; labels such as real-redacted do not make them empirical evidence.",
+      "status": "verified"
+    }
+  ],
   "pilotSources": [
     {
       "id": "SRC-WMP-001",
@@ -129,6 +144,7 @@
       "domain": "software",
       "sourceRef": "SRC-WMP-001",
       "privacyControlRef": "PRV-WMP-001",
+      "evidenceOriginRef": "EOR-WMP-001",
       "targetDescription": "A release review contains approval wording but omits the accountable approving actor and final authority boundary.",
       "decisionContext": "Use as an unseen case for checking whether AI flags authority-boundary gaps before release verdicts.",
       "caseKind": "synthetic",
@@ -143,6 +159,7 @@
       "domain": "maintenance",
       "sourceRef": "SRC-WMP-002",
       "privacyControlRef": "PRV-WMP-002",
+      "evidenceOriginRef": "EOR-WMP-001",
       "targetDescription": "A restart note states ready to restart while lockout state and responsible operator are implicit.",
       "decisionContext": "Use as an unseen case for checking whether AI detects missing state and actor definitions.",
       "caseKind": "real-redacted",
@@ -157,6 +174,7 @@
       "domain": "accounting",
       "sourceRef": "SRC-WMP-003",
       "privacyControlRef": "PRV-WMP-003",
+      "evidenceOriginRef": "EOR-WMP-001",
       "targetDescription": "An exception approval cites manager approval but omits amount authority, exception criteria, and required evidence.",
       "decisionContext": "Use as an unseen case for checking whether AI detects approval-boundary and evidence-boundary gaps.",
       "caseKind": "real-redacted",

@@ -1,0 +1,31 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-19T04:51:33.542Z",
+  "review_packet_id": "CREV-MU7WU23Q-Y3HXIY",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Final review approves QIF v0.6.27 for release.",
+  "rationale": "Visionary: provenance enables later empirical calibration. Builder: npm test passes 15 positive and 611 negative checks. Guardian: the remaining readiness blockers are explicitly retained and no empirical readiness claim is made.",
+  "recommendation": "Release v0.6.27, then make Evaluation Suite Health the next smallest Phase 4 slice.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "RELEASE-NOTES-v0.6.27.md",
+    "docs/aof-runtime-log.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-045",
+  "source_parent_session_id": null,
+  "source_decision_record_id": null
+}

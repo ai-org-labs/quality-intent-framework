@@ -893,6 +893,30 @@ const RETENTION_INTEGRITY_PROTECTIONS = new Set(["none", "checksum", "signed-art
 const RETENTION_ACCESS_CONTROLS = new Set(["open", "internal-only", "need-to-know", "regulatory-controlled"]);
 const QUALITY_REPORT_STATUSES = new Set(["draft", "published", "superseded"]);
 const QUALITY_REPORT_SCORE_TYPES = new Set(["confidence-summary", "verdict-summary", "readiness-rating", "residual-risk-rating", "custom"]);
+const EVIDENCE_ORIGIN_KINDS = new Set(["observed-operational", "historical-record", "simulated", "synthetic", "example"]);
+const EVIDENCE_ORIGIN_STATUSES = new Set(["draft", "verified", "stale", "retired"]);
+
+function checkEvidenceOrigins(origins, packagePath) {
+  const index = indexById(origins, `${packagePath}:evidenceOrigins`);
+  for (const origin of origins) {
+    for (const field of ["originKind", "sourceArtifact", "observationWindow", "environment", "generatedBy", "transformationSummary", "status"]) {
+      checkRequiredString(origin, field, origin.id);
+    }
+    if (!EVIDENCE_ORIGIN_KINDS.has(origin.originKind)) {
+      errors.push(`${origin.id} originKind is not supported.`);
+    }
+    if (!Array.isArray(origin.verifiedBy) || origin.verifiedBy.length === 0 || origin.verifiedBy.some((item) => typeof item !== "string" || item.trim() === "")) {
+      errors.push(`${origin.id} verifiedBy must include at least one verifier.`);
+    }
+    if (!EVIDENCE_ORIGIN_STATUSES.has(origin.status)) {
+      errors.push(`${origin.id} status is not supported.`);
+    }
+    if (["observed-operational", "historical-record"].includes(origin.originKind) && origin.status !== "verified") {
+      errors.push(`${origin.id} empirical evidence origin must have status verified.`);
+    }
+  }
+  return index;
+}
 
 function validateQualityGatePackage(pkg, packagePath) {
   const targets = requireArray(pkg, "evaluationTargets");
@@ -904,6 +928,7 @@ function validateQualityGatePackage(pkg, packagePath) {
   const evaluationTimingDecisions = requireArray(pkg, "evaluationTimingDecisions");
   const evidenceRetentionPolicies = requireArray(pkg, "evidenceRetentionPolicies");
   const evidenceTypeVocabulary = requireArray(pkg, "evidenceTypeVocabulary");
+  const evidenceOrigins = requireArray(pkg, "evidenceOrigins");
   const evidenceItems = requireArray(pkg, "evidenceItems");
   const quantitativeRecords = requireArray(pkg, "quantitativeEvidenceRecords");
   const automatedDetails = Array.isArray(pkg.automatedEvaluationDetails) ? pkg.automatedEvaluationDetails : [];
@@ -926,6 +951,7 @@ function validateQualityGatePackage(pkg, packagePath) {
   const evaluationTimingDecisionIndex = indexById(evaluationTimingDecisions, `${packagePath}:evaluationTimingDecisions`);
   const evidenceRetentionPolicyIndex = indexById(evidenceRetentionPolicies, `${packagePath}:evidenceRetentionPolicies`);
   const evidenceTypeVocabularyIndex = indexById(evidenceTypeVocabulary, `${packagePath}:evidenceTypeVocabulary`);
+  const evidenceOriginIndex = checkEvidenceOrigins(evidenceOrigins, packagePath);
   const evidenceIndex = indexById(evidenceItems, `${packagePath}:evidenceItems`);
   const quantitativeIndex = indexById(quantitativeRecords, `${packagePath}:quantitativeEvidenceRecords`);
   const automatedIndex = indexById(automatedDetails, `${packagePath}:automatedEvaluationDetails`);
@@ -939,7 +965,7 @@ function validateQualityGatePackage(pkg, packagePath) {
 
   // A global id index lets traceability links resolve across every entity family.
   const globalIndex = new Map();
-  for (const family of [targetIndex, intentIndex, aspectIndex, perspectiveIndex, confidencePolicyIndex, evaluationTimingRuleIndex, evaluationTimingDecisionIndex, evidenceRetentionPolicyIndex, evidenceTypeVocabularyIndex, evidenceIndex, quantitativeIndex, automatedIndex, gateRuleIndex, gateDecisionIndex, qualityReportIndex, postReleaseIndex, improvementIndex, governanceIndex, governanceEventIndex]) {
+  for (const family of [targetIndex, intentIndex, aspectIndex, perspectiveIndex, confidencePolicyIndex, evaluationTimingRuleIndex, evaluationTimingDecisionIndex, evidenceRetentionPolicyIndex, evidenceTypeVocabularyIndex, evidenceOriginIndex, evidenceIndex, quantitativeIndex, automatedIndex, gateRuleIndex, gateDecisionIndex, qualityReportIndex, postReleaseIndex, improvementIndex, governanceIndex, governanceEventIndex]) {
     for (const [id, item] of family.entries()) {
       globalIndex.set(id, item);
     }
@@ -1529,6 +1555,7 @@ function validateQualityGatePackage(pkg, packagePath) {
 
   for (const review of postReleaseReviews) {
     checkRefs([review.gateDecisionRef], gateDecisionIndex, "gate decision", review.id);
+    checkRefs([review.evidenceOriginRef], evidenceOriginIndex, "evidence origin", review.id);
     checkRequiredString(review, "window", review.id);
     checkRequiredString(review, "summary", review.id);
     if (!Array.isArray(review.incidents)) {
@@ -1594,6 +1621,7 @@ function validateQualityGatePackage(pkg, packagePath) {
       evaluationTimingRules: evaluationTimingRules.length,
       evaluationTimingDecisions: evaluationTimingDecisions.length,
       evidenceRetentionPolicies: evidenceRetentionPolicies.length,
+      evidenceOrigins: evidenceOrigins.length,
       evidenceItems: evidenceItems.length,
       evidenceTypeVocabulary: evidenceTypeVocabulary.length,
       quantitativeEvidenceRecords: quantitativeRecords.length,

@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.27
+
+- Added first-class Evidence Origin records to quality-gate, qif-ledger, world-model-calibration, and world-model-pilot-corpus packages.
+- Post-release reviews, agent outcomes, calibration cases, and pilot cases now resolve `evidenceOriginRef`; empirical origins must be verified.
+- Hardened `qif calibration-readiness` so only verified `observed-operational` or `historical-record` origins satisfy `CRD-ORIGIN`, while example, simulated, and synthetic records remain non-empirical.
+- Added regression coverage for unresolved origins, unverified empirical origins, and a positive schema-backed empirical provenance path; the retained suite now covers 611 negative cases.
+
 ## v0.6.26
 
 - Added `qif calibration-readiness` to inspect quality-gate, ledger, calibration, and pilot-corpus packages before Phase 4 empirical calibration.

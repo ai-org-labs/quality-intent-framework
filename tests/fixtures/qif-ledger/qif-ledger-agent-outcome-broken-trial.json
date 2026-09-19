@@ -235,10 +235,26 @@
       "transcriptHandling": "summary-without-hidden-reasoning"
     }
   ],
+  "evidenceOrigins": [
+    {
+      "id": "EOR-LEDGER-001",
+      "originKind": "example",
+      "sourceArtifact": "examples/qif-ledger-package.json",
+      "observationWindow": "not-applicable-example",
+      "environment": "committed-example",
+      "generatedBy": "QIF maintainers",
+      "verifiedBy": [
+        "QIF fixture suite"
+      ],
+      "transformationSummary": "Illustrative agent outcome retained to demonstrate ledger traceability; it is not operational evidence.",
+      "status": "verified"
+    }
+  ],
   "agentOutcomes": [
     {
       "id": "AOC-001",
       "trialRef": "ATR-NOPE-999",
+      "evidenceOriginRef": "EOR-LEDGER-001",
       "actualOutcome": "Review ended in governance escalation with low-confidence and conflicting-evidence triggers preserved.",
       "outcomeEvidenceRefs": [
         {

@@ -64,6 +64,7 @@ Use additional documents when needed:
 | Plan future quality gate/runtime work | `docs/qif-v0.4-quality-gate-runtime-requirements.md` |
 | Author a release gate decision (Go / Conditional Go / No-Go / Pending) | `schemas/quality-gate-package.schema.json`, `examples/quality-gate-package.json` |
 | Prepare real pilot cases for world-model calibration | `docs/qif-v0.5.3-world-model-pilot-corpus.md`, `schemas/world-model-pilot-corpus-package.schema.json`, `examples/world-model-pilot-corpus-package.json` |
+| Declare where outcomes and calibration cases came from | `docs/qif-v0.6.27-evidence-origin.md` and the relevant package schema |
 | Understand quality theory background | `docs/quality-theory-report.md` |
 
 ## Required Framing
@@ -543,6 +544,20 @@ That means QIF is doing its job. It is preserving the difference between:
 - structurally valid findings;
 - calibrated findings;
 - semantically true domain knowledge.
+
+## Evidence Origin
+
+Before using an outcome or calibration case as empirical evidence, create an
+`evidenceOrigins` record and link it with `evidenceOriginRef`. State the source,
+observation window, environment, recorder, verifier, transformations, and
+status. Use `example`, `simulated`, or `synthetic` honestly; realistic wording
+and `real-redacted` labels do not make an example operational evidence.
+
+Only `observed-operational` and `historical-record` origins with `verified`
+status can satisfy the structural `CRD-ORIGIN` readiness check. Even then,
+inspect the source and use independent review before making a semantic claim.
+Never use page counts, test counts, review counts, or other activity counts as
+proof of origin or quality.
 
 ## Evidence Independence
 

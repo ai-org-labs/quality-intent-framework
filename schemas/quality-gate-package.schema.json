@@ -16,6 +16,7 @@
     "evaluationTimingDecisions",
     "evidenceRetentionPolicies",
     "evidenceTypeVocabulary",
+    "evidenceOrigins",
     "evidenceItems",
     "quantitativeEvidenceRecords",
     "qualityGateRules",
@@ -74,6 +75,11 @@
       "type": "array",
       "minItems": 1,
       "items": { "$ref": "#/$defs/evidenceTypeVocabularyEntry" }
+    },
+    "evidenceOrigins": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/evidenceOrigin" }
     },
     "evidenceItems": {
       "type": "array",
@@ -438,6 +444,22 @@
         }
       }
     },
+    "evidenceOrigin": {
+      "type": "object",
+      "required": ["id", "originKind", "sourceArtifact", "observationWindow", "environment", "generatedBy", "verifiedBy", "transformationSummary", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "originKind": { "enum": ["observed-operational", "historical-record", "simulated", "synthetic", "example"] },
+        "sourceArtifact": { "type": "string", "minLength": 1 },
+        "observationWindow": { "type": "string", "minLength": 1 },
+        "environment": { "type": "string", "minLength": 1 },
+        "generatedBy": { "type": "string", "minLength": 1 },
+        "verifiedBy": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+        "transformationSummary": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["draft", "verified", "stale", "retired"] }
+      }
+    },
     "trust": {
       "type": "object",
       "required": ["sources", "generatedBy", "verifiedBy", "status", "staleAfter"],
@@ -702,11 +724,12 @@
     },
     "postReleaseReview": {
       "type": "object",
-      "required": ["id", "gateDecisionRef", "window", "incidents", "summary"],
+      "required": ["id", "gateDecisionRef", "evidenceOriginRef", "window", "incidents", "summary"],
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" },
         "gateDecisionRef": { "$ref": "#/$defs/id" },
+        "evidenceOriginRef": { "$ref": "#/$defs/id" },
         "window": { "type": "string" },
         "incidents": {
           "type": "array",

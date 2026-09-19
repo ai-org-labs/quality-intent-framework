@@ -1288,12 +1288,36 @@ function calibrationReadiness(args) {
   ]);
   const nonSoftwareDomains = Array.from(domains).filter((domain) => domain !== "software");
   const examplePaths = Object.values(inputs).filter((filePath) => displayPath(filePath).startsWith("examples/"));
-  const explicitObservedOrigin = Object.values(packages).every((pkg) => pkg.evidenceOrigin?.kind === "observed-operational");
-  const evidenceOrigin = explicitObservedOrigin
-    ? "declared-observed-operational"
-    : examplePaths.length > 0
+  const originTargets = [
+    ...postReleaseReviews.map((item) => ({ packageName: "qualityGate", entityType: "postReleaseReview", entityId: item.id, originRef: item.evidenceOriginRef })),
+    ...(packages.ledger.agentOutcomes || []).map((item) => ({ packageName: "ledger", entityType: "agentOutcome", entityId: item.id, originRef: item.evidenceOriginRef })),
+    ...(packages.calibration.calibrationCases || []).map((item) => ({ packageName: "calibration", entityType: "calibrationCase", entityId: item.id, originRef: item.evidenceOriginRef })),
+    ...pilotCases.map((item) => ({ packageName: "pilotCorpus", entityType: "pilotCase", entityId: item.id, originRef: item.evidenceOriginRef }))
+  ];
+  const evidenceOriginRecords = originTargets.map((target) => {
+    const origin = (packages[target.packageName].evidenceOrigins || []).find((item) => item.id === target.originRef);
+    return {
+      ...target,
+      resolved: Boolean(origin),
+      originKind: origin?.originKind || null,
+      status: origin?.status || null,
+      sourceArtifact: origin?.sourceArtifact || null,
+      observationWindow: origin?.observationWindow || null,
+      environment: origin?.environment || null,
+      verifiedBy: origin?.verifiedBy || []
+    };
+  });
+  const empiricalOriginKinds = new Set(["observed-operational", "historical-record"]);
+  const explicitEmpiricalOrigin = evidenceOriginRecords.length > 0 && evidenceOriginRecords.every((record) =>
+    record.resolved && empiricalOriginKinds.has(record.originKind) && record.status === "verified" && record.verifiedBy.length > 0
+  );
+  const evidenceOrigin = explicitEmpiricalOrigin
+    ? "verified-empirical"
+    : evidenceOriginRecords.length > 0 && evidenceOriginRecords.every((record) => record.resolved && record.originKind === "example")
       ? "example-only"
-      : "undeclared";
+      : evidenceOriginRecords.length === 0
+        ? "undeclared"
+        : "mixed-or-unverified";
   const suiteHealthRecords = Object.values(packages).flatMap((pkg) => pkg.evaluationSuiteHealthRecords || []);
   const trialVarianceRecords = Object.values(packages).flatMap((pkg) => pkg.trialVarianceRecords || []);
   const frameworkLearningRecords = Object.values(packages).flatMap((pkg) => pkg.frameworkLearningRecords || []);
@@ -1306,9 +1330,9 @@ function calibrationReadiness(args) {
     },
     {
       id: "CRD-ORIGIN",
-      label: "Outcome evidence explicitly declares observed operational origin.",
-      met: explicitObservedOrigin,
-      evidence: { evidenceOrigin, exampleInputs: examplePaths.map(displayPath) }
+      label: "Every decision outcome and calibration case resolves to a verified observed-operational or historical-record Evidence Origin.",
+      met: explicitEmpiricalOrigin,
+      evidence: { evidenceOrigin, records: evidenceOriginRecords, exampleInputs: examplePaths.map(displayPath) }
     },
     {
       id: "CRD-PAIRS",
@@ -1367,8 +1391,10 @@ function calibrationReadiness(args) {
       rationale: evidenceOrigin === "example-only"
         ? "Committed example packages demonstrate structure but are not accepted as observed operational evidence, even when example records describe real-redacted cases."
         : evidenceOrigin === "undeclared"
-          ? "The selected packages do not carry an explicit observed-operational evidence-origin declaration."
-          : "Every selected package explicitly declares observed-operational evidence origin."
+          ? "The selected packages do not contain any linked Evidence Origin records."
+          : evidenceOrigin === "mixed-or-unverified"
+            ? "One or more outcome or case records have missing, non-empirical, stale, draft, or otherwise unverified Evidence Origin records."
+            : "Every decision outcome and calibration case resolves to a verified observed-operational or historical-record Evidence Origin."
     },
     readiness: {
       empiricalCalibrationReady,
@@ -1380,7 +1406,7 @@ function calibrationReadiness(args) {
       blockerRef: blocker.id,
       action: ({
         "CRD-STRUCTURE": "Repair package validation or package-type mismatches before calibration work.",
-        "CRD-ORIGIN": "Add schema-backed evidence-origin records that distinguish observed, synthetic, simulated, and example evidence.",
+        "CRD-ORIGIN": "Link every decision outcome and calibration case to a verified Evidence Origin record; example, simulated, and synthetic origins remain non-empirical.",
         "CRD-PAIRS": "Collect gate decisions with stated confidence and link them to post-decision outcome windows.",
         "CRD-SUITE-HEALTH": "Define Evaluation Suite Health records for task origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership.",
         "CRD-DOMAINS": "Collect calibration evidence from at least two domains, including one non-software domain.",

@@ -2,6 +2,63 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.27 Evidence Origin Records
+
+Date: 2026-09-19
+
+Need / Intent / Context:
+
+- Need: v0.6.26 could report missing evidence origin, but valid packages had no schema-backed way to declare or resolve it, making `CRD-ORIGIN` impossible to satisfy.
+- Intent: add first-class Evidence Origin records and links from decision outcomes and calibration cases, while keeping example, simulated, and synthetic evidence outside empirical readiness.
+- Context: long-running agents and recent evaluation-boundary incidents increase the risk that plausible evaluation output is accepted without source, environment, observation-window, transformation, or verifier provenance.
+
+Direction and council judgment:
+
+- Visionary: approve. Provenance is the missing bridge between a structural QIF example and empirical calibration.
+- Builder: approve. Use one canonical record shape across the four existing readiness package types and deterministic reference resolution; do not add a new package type.
+- Guardian: approve with boundary. A realistic label such as `real-redacted`, a passing verifier, or an activity count must never promote example evidence to observed evidence.
+
+Runtime command evidence:
+
+- AOF runtime package version: `12.3.0`; latest local release tag: `v12.2.0`.
+- AOF `situation-assess` wrote `.aof/runtime/v0.6.27-situation.json`.
+- AOF `goal-project --goal-type next-value-slice` recorded the Validated Need / Intent / Context.
+- AOF `task-open` created `TASK-045`.
+- AOF planning `council-review-packet` wrote `.aof/runtime/v0.6.27-planning-council.json`.
+- Trend references checked:
+  - `https://openai.com/index/introducing-the-agents-api/`
+  - `https://openai.com/index/third-party-cyber-evaluations-involving-openai-models/`
+  - `https://openai.com/index/hugging-face-model-evaluation-security-incident/`
+  - `https://openai.com/index/building-self-improving-tax-agents-with-codex/`
+
+What was built:
+
+- Schema-backed Evidence Origin records in quality-gate, qif-ledger, world-model-calibration, and world-model-pilot-corpus packages.
+- Required `evidenceOriginRef` links from post-release reviews, agent outcomes, calibration cases, and pilot cases.
+- Verifier rejection of unresolved origins and empirical origins without verified status.
+- `qif calibration-readiness` origin resolution with explicit `verified-empirical`, `example-only`, `mixed-or-unverified`, and `undeclared` states.
+- Authoring guidance, a plain-language diagram, retained negative fixtures, and an empirical-origin positive regression.
+
+What was not built:
+
+- No claim that provenance establishes semantic truth, representativeness, independence, or causal attribution.
+- No live external data collection or integration.
+- No Evaluation Suite Health, trial variance, or framework-learning entities; these remain later Phase 4 slices.
+- No use of activity counts as quality or provenance proof.
+
+Verification:
+
+- Schema JSON parsing and `git diff --check` passed.
+- `node tools/qif.mjs calibration-readiness` passed at package version `0.6.27`; eight origin-bearing example records resolved, remained `example-only`, and retained blockers `CRD-ORIGIN`, `CRD-SUITE-HEALTH`, `CRD-UNCERTAINTY`, and `CRD-LEARNING`.
+- `node tools/check-calibration-readiness.mjs` passed, including package-type fail-closed behavior and a temporary verified empirical provenance path that satisfies `CRD-ORIGIN` without claiming full calibration readiness.
+- `npm test` passed all CLI and verifier checks, `15/15` positive packages, and `611/611` retained negative fixtures.
+- AOF self-review and final review packets were approved and written to `.aof/runtime/v0.6.27-self-review.json` and `.aof/runtime/v0.6.27-final-review.json`.
+- AOF retrospective judgment was recorded in `.aof/runtime/v0.6.27-retrospective.json`.
+- AOF `task-update` completed `TASK-045`; post-implementation `situation-assess` wrote `.aof/runtime/v0.6.27-post-situation.json`.
+- AOF `organization-verify --project .` passed `231/231` checks.
+
+Release evidence will be appended after publication.
+
 ## v0.6.26 Calibration Readiness CLI
 
 Date: 2026-09-18

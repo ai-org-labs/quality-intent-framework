@@ -8,6 +8,7 @@
     "runtimeVersion",
     "packageId",
     "packageRefs",
+    "evidenceOrigins",
     "pilotSources",
     "privacyControls",
     "samplingPolicies",
@@ -25,6 +26,7 @@
     "runtimeVersion": { "type": "string" },
     "packageId": { "type": "string" },
     "packageRefs": { "type": "array", "items": { "$ref": "#/$defs/packageRef" } },
+    "evidenceOrigins": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidenceOrigin" } },
     "pilotSources": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/pilotSource" } },
     "privacyControls": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/privacyControl" } },
     "samplingPolicies": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/samplingPolicy" } },
@@ -49,6 +51,22 @@
         "path": { "type": "string" },
         "packageType": { "type": "string" },
         "role": { "type": "string" }
+      }
+    },
+    "evidenceOrigin": {
+      "type": "object",
+      "required": ["id", "originKind", "sourceArtifact", "observationWindow", "environment", "generatedBy", "verifiedBy", "transformationSummary", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "originKind": { "enum": ["observed-operational", "historical-record", "simulated", "synthetic", "example"] },
+        "sourceArtifact": { "type": "string", "minLength": 1 },
+        "observationWindow": { "type": "string", "minLength": 1 },
+        "environment": { "type": "string", "minLength": 1 },
+        "generatedBy": { "type": "string", "minLength": 1 },
+        "verifiedBy": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+        "transformationSummary": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["draft", "verified", "stale", "retired"] }
       }
     },
     "trust": {
@@ -112,7 +130,7 @@
     },
     "pilotCase": {
       "type": "object",
-      "required": ["id", "title", "domain", "sourceRef", "privacyControlRef", "targetDescription", "decisionContext", "caseKind", "unseenCase", "sourceExcerptSummary", "expectedUse", "status"],
+      "required": ["id", "title", "domain", "sourceRef", "privacyControlRef", "evidenceOriginRef", "targetDescription", "decisionContext", "caseKind", "unseenCase", "sourceExcerptSummary", "expectedUse", "status"],
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" },
@@ -120,6 +138,7 @@
         "domain": { "type": "string" },
         "sourceRef": { "$ref": "#/$defs/id" },
         "privacyControlRef": { "$ref": "#/$defs/id" },
+        "evidenceOriginRef": { "$ref": "#/$defs/id" },
         "targetDescription": { "type": "string" },
         "decisionContext": { "type": "string" },
         "caseKind": { "enum": ["real-observed", "real-redacted", "synthetic", "derived"] },

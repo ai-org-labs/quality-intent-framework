@@ -70,6 +70,21 @@ export const cases = [
     mutate: (pkg) => { calibrationCase(pkg).sourceWorldModelRef.entityRef = "WMD-NOPE-999"; }
   },
   {
+    id: "case-evidence-origin-broken",
+    rule: "calibration cases resolve evidence origin",
+    expect: "CALCASE-WMC-001 references missing evidence origin: EOR-NOPE-999",
+    mutate: (pkg) => { calibrationCase(pkg).evidenceOriginRef = "EOR-NOPE-999"; }
+  },
+  {
+    id: "empirical-origin-not-verified",
+    rule: "empirical evidence origin is verified",
+    expect: "EOR-WMC-001 empirical evidence origin must have status verified.",
+    mutate: (pkg) => {
+      pkg.evidenceOrigins[0].originKind = "historical-record";
+      pkg.evidenceOrigins[0].status = "draft";
+    }
+  },
+  {
     id: "expert-expected-findings-empty",
     rule: "expert assessments include expected findings",
     expect: "EXA-WMC-001 must include expectedFindings.",
