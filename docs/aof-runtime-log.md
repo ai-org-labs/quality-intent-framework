@@ -57,7 +57,14 @@ Verification:
 - AOF `task-update` completed `TASK-045`; post-implementation `situation-assess` wrote `.aof/runtime/v0.6.27-post-situation.json`.
 - AOF `organization-verify --project .` passed `231/231` checks.
 
-Release evidence will be appended after publication.
+Release:
+
+- Implementation commit and tag target: `b5f98e74a70ee89236d44aa26ee367054c6fc50b`.
+- Annotated tag: `v0.6.27`.
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.27`.
+- Published at: `2026-09-19T04:54:45Z`; draft `false`; prerelease `false`.
+- Remote `main` and the dereferenced tag both resolved to the implementation commit at publication.
+- Post-release AOF `goal-project` set the next value slice to v0.6.28 Evaluation Suite Health records.
 
 ## v0.6.26 Calibration Readiness CLI
 

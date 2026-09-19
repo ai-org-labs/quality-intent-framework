@@ -1,7 +1,7 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Need: calibration-readiness cannot accept observed evidence because origin is neither schema-backed nor traceable. Intent: define first-class Evidence Origin records and resolvable links for decision outcomes and calibration cases, while preserving example-only boundaries. Context: QIF v0.6.26 structurally validates four package types but CRD-ORIGIN is impossible to satisfy through valid packages. Exclude suite-health, uncertainty, and framework-learning features from this release.",
-  "updated_at": "2026-09-19T04:35:09.312Z",
+  "content": "Need: QIF can now distinguish and resolve evidence origin, but calibration-readiness still cannot evaluate whether the evaluation suite itself is healthy. Intent: define schema-backed Evaluation Suite Health records for task origin, contamination, solvability, saturation, graders, harness and infrastructure configuration, and drift ownership. Context: build the smallest v0.6.28 Phase 4 slice; preserve Evidence Origin links, domain generality, and the boundary that suite metadata does not prove semantic truth.",
+  "updated_at": "2026-09-19T04:55:11.414Z",
   "agreed_with_human": true,
   "source_session_id": null,
   "source_decision_record_id": null,
