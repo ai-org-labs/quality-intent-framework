@@ -59,7 +59,14 @@ Verification:
 - AOF `task-update` completed `TASK-046`; post-implementation `situation-assess` wrote `.aof/runtime/v0.6.28-post-situation.json`.
 - AOF `organization-verify --project .` passed `231/231` checks.
 
-Release evidence will be appended after publication.
+Release:
+
+- Implementation commit and tag target: `e81a9a61bfc100a75603218bbe1ce1a47dc4d79c`.
+- Annotated tag: `v0.6.28`.
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.28`.
+- Published at: `2026-09-20T04:48:16Z`; draft `false`; prerelease `false`.
+- Remote `main` and the dereferenced tag both resolved to the implementation commit at publication.
+- Post-release AOF `goal-project` set the next value slice to v0.6.29 Trial and Infrastructure Uncertainty.
 
 ## v0.6.27 Evidence Origin Records
 

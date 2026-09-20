@@ -1,8 +1,8 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Need: calibration-readiness can resolve evidence origin but cannot determine whether the evaluation suite producing results is itself trustworthy. Intent: define schema-backed Evaluation Suite Health records covering task origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership, and make CRD-SUITE-HEALTH executable. Context: QIF v0.6.27 remains domain-general; recent evaluation incidents show environment and harness failures can invalidate results independently of model capability. Exclude trial variance and framework learning from this release.",
-  "updated_at": "2026-09-20T04:31:48.759Z",
-  "agreed_with_human": true,
+  "content": "Need: Evaluation Suite Health now governs whether a suite is trustworthy, but repeated runs can still vary and infrastructure noise can make small score differences look exact. Intent: add schema-backed trial variance and infrastructure uncertainty inputs, confidence ranges, and deterministic CRD-UNCERTAINTY readiness logic for v0.6.29. Context: remain domain-general; do not treat trial count, narrow intervals, or low variance as quality itself; keep framework learning as the following independent slice.",
+  "updated_at": "2026-09-20T04:48:28.335Z",
+  "agreed_with_human": null,
   "source_session_id": null,
   "source_decision_record_id": null,
   "declared_complete_at": null
