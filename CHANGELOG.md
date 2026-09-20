@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.28
+
+- Added first-class Evaluation Suite Health records to world-model-calibration packages.
+- Suite health covers task origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership, with bidirectional calibration-run linkage.
+- Enforced healthy-state consistency, complete solvability coverage, empirical evidence origins, governance routing for non-healthy records, and a healthy-suite prerequisite for calibrated conclusions.
+- Extended `qif calibration-readiness` with dimension-level health evidence and a positive satisfiability regression; the retained suite now covers 618 negative cases.
+
 ## v0.6.27
 
 - Added first-class Evidence Origin records to quality-gate, qif-ledger, world-model-calibration, and world-model-pilot-corpus packages.

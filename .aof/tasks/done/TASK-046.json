@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-046",
+  "title": "QIF v0.6.28 Evaluation Suite Health",
+  "description": "Add schema-backed Evaluation Suite Health records, calibration-run links, verifier rules, readiness evaluation, fixtures, examples, docs, and release evidence.",
+  "status": "done",
+  "origin": "human",
+  "orchestrator_session_id": null,
+  "assigned_session_ids": [],
+  "related_decision_record_id": null,
+  "operating_goal_ref": ".aof/goals/next-value-slice.json",
+  "created_at": "2026-09-20T04:31:48.841Z",
+  "updated_at": "2026-09-20T04:46:01.775Z",
+  "assigned_at": null,
+  "done_at": "2026-09-20T04:46:01.775Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented and verified Evaluation Suite Health across schema, verifier, readiness CLI, examples, fixtures, documentation, and release evidence. Structural health does not claim semantic validity."
+}

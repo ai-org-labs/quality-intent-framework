@@ -1,0 +1,31 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-20T04:45:52.381Z",
+  "review_packet_id": "CREV-MU9C2LJ1-2F36S9",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Final review approves QIF v0.6.28 Evaluation Suite Health for release.",
+  "rationale": "Visionary: the release closes the suite-health readiness blocker with an auditable entity. Builder: end-to-end schema, verifier, CLI, generated fixtures, documentation, and npm integration pass. Guardian: the assurance boundary is explicit, non-healthy states route to governance, and no structural result claims semantic truth, contamination absence, representativeness, or operational quality.",
+  "recommendation": "Complete TASK-046, run retrospective and post-situation assessment, verify public residue, then publish v0.6.28.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "RELEASE-NOTES-v0.6.28.md",
+    "examples/world-model-calibration-package.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-046",
+  "source_parent_session_id": null,
+  "source_decision_record_id": null
+}

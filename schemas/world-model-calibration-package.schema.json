@@ -14,6 +14,7 @@
     "expertAssessments",
     "agentAssessments",
     "findingMatches",
+    "evaluationSuiteHealthRecords",
     "calibrationRuns",
     "governanceTriggers",
     "verifierBoundary"
@@ -57,6 +58,11 @@
       "type": "array",
       "minItems": 1,
       "items": { "$ref": "#/$defs/findingMatch" }
+    },
+    "evaluationSuiteHealthRecords": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/evaluationSuiteHealthRecord" }
     },
     "calibrationRuns": {
       "type": "array",
@@ -247,6 +253,108 @@
         "rationale": { "type": "string" }
       }
     },
+    "evaluationSuiteHealthRecord": {
+      "type": "object",
+      "required": ["id", "title", "calibrationRunRef", "policyRef", "caseRefs", "taskOrigin", "contamination", "solvability", "saturation", "graders", "harness", "infrastructure", "drift", "overallStatus", "governanceTriggerRefs", "assuranceBoundary"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "calibrationRunRef": { "$ref": "#/$defs/id" },
+        "policyRef": { "$ref": "#/$defs/id" },
+        "caseRefs": { "$ref": "#/$defs/refArray" },
+        "taskOrigin": {
+          "type": "object",
+          "required": ["evidenceOriginRefs", "distributionSummary", "status"],
+          "additionalProperties": false,
+          "properties": {
+            "evidenceOriginRefs": { "$ref": "#/$defs/refArray" },
+            "distributionSummary": { "type": "string", "minLength": 1 },
+            "status": { "enum": ["verified", "provisional", "unknown"] }
+          }
+        },
+        "contamination": {
+          "type": "object",
+          "required": ["checkMethod", "finding", "status"],
+          "additionalProperties": false,
+          "properties": {
+            "checkMethod": { "type": "string", "minLength": 1 },
+            "finding": { "type": "string", "minLength": 1 },
+            "status": { "enum": ["clear", "possible", "confirmed", "unknown"] }
+          }
+        },
+        "solvability": {
+          "type": "object",
+          "required": ["reviewMethod", "reviewedCaseRefs", "unresolvedCaseRefs", "status"],
+          "additionalProperties": false,
+          "properties": {
+            "reviewMethod": { "type": "string", "minLength": 1 },
+            "reviewedCaseRefs": { "$ref": "#/$defs/refArray" },
+            "unresolvedCaseRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "status": { "enum": ["verified", "provisional", "blocked", "unknown"] }
+          }
+        },
+        "saturation": {
+          "type": "object",
+          "required": ["detectionMethod", "saturated", "rationale", "status"],
+          "additionalProperties": false,
+          "properties": {
+            "detectionMethod": { "type": "string", "minLength": 1 },
+            "saturated": { "type": "boolean" },
+            "rationale": { "type": "string", "minLength": 1 },
+            "status": { "enum": ["not-saturated", "at-risk", "saturated", "unknown"] }
+          }
+        },
+        "graders": {
+          "type": "object",
+          "required": ["expertAssessmentRefs", "agentAssessmentRefs", "calibrationMethod", "disagreementPolicy", "status"],
+          "additionalProperties": false,
+          "properties": {
+            "expertAssessmentRefs": { "$ref": "#/$defs/refArray" },
+            "agentAssessmentRefs": { "$ref": "#/$defs/refArray" },
+            "calibrationMethod": { "type": "string", "minLength": 1 },
+            "disagreementPolicy": { "type": "string", "minLength": 1 },
+            "status": { "enum": ["calibrated", "provisional", "conflicted", "unknown"] }
+          }
+        },
+        "harness": {
+          "type": "object",
+          "required": ["configuration", "reproducibilityEvidence", "status"],
+          "additionalProperties": false,
+          "properties": {
+            "configuration": { "type": "string", "minLength": 1 },
+            "reproducibilityEvidence": { "type": "string", "minLength": 1 },
+            "status": { "enum": ["reproducible", "provisional", "non-reproducible", "unknown"] }
+          }
+        },
+        "infrastructure": {
+          "type": "object",
+          "required": ["environment", "configuration", "incidentRefs", "status"],
+          "additionalProperties": false,
+          "properties": {
+            "environment": { "type": "string", "minLength": 1 },
+            "configuration": { "type": "string", "minLength": 1 },
+            "incidentRefs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+            "status": { "enum": ["stable", "degraded", "incident-open", "unknown"] }
+          }
+        },
+        "drift": {
+          "type": "object",
+          "required": ["owner", "reviewCadence", "nextReviewAt", "triggerConditions", "status"],
+          "additionalProperties": false,
+          "properties": {
+            "owner": { "type": "string", "minLength": 1 },
+            "reviewCadence": { "type": "string", "minLength": 1 },
+            "nextReviewAt": { "type": "string", "minLength": 1 },
+            "triggerConditions": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+            "status": { "enum": ["monitored", "overdue", "unowned", "unknown"] }
+          }
+        },
+        "overallStatus": { "enum": ["healthy", "provisional", "degraded", "blocked", "stale"] },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "assuranceBoundary": { "type": "string", "minLength": 1 }
+      }
+    },
     "calibrationRun": {
       "type": "object",
       "required": [
@@ -256,6 +364,7 @@
         "expertAssessmentRefs",
         "agentAssessmentRefs",
         "findingMatchRefs",
+        "suiteHealthRecordRefs",
         "caseCount",
         "domainCoverage",
         "agreementScore",
@@ -274,6 +383,7 @@
         "expertAssessmentRefs": { "$ref": "#/$defs/refArray" },
         "agentAssessmentRefs": { "$ref": "#/$defs/refArray" },
         "findingMatchRefs": { "$ref": "#/$defs/refArray" },
+        "suiteHealthRecordRefs": { "$ref": "#/$defs/refArray" },
         "caseCount": { "type": "integer", "minimum": 0 },
         "domainCoverage": {
           "type": "array",
@@ -298,7 +408,7 @@
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" },
-        "triggerType": { "enum": ["low-agreement", "high-false-positive-rate", "high-false-negative-rate", "insufficient-case-count", "domain-gap", "expert-disagreement", "other"] },
+        "triggerType": { "enum": ["low-agreement", "high-false-positive-rate", "high-false-negative-rate", "insufficient-case-count", "domain-gap", "expert-disagreement", "contamination-risk", "unsolvable-case", "suite-saturation", "grader-drift", "harness-non-reproducible", "infrastructure-instability", "drift-unowned", "other"] },
         "reason": { "type": "string" },
         "sourceCalibrationRunRef": { "$ref": "#/$defs/id" },
         "severity": { "enum": ["low", "medium", "high", "critical"] },

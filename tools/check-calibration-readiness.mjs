@@ -37,6 +37,23 @@ const empiricalInputs = [
     origin.transformationSummary = "Identifiers removed; decision cues and observed outcome retained.";
     origin.status = "verified";
   }
+  if (flag === "calibration") {
+    for (const health of pkg.evaluationSuiteHealthRecords) {
+      health.taskOrigin.status = "verified";
+      health.contamination.status = "clear";
+      health.contamination.finding = "Independent source comparison found no known overlap with authoring or grader inputs.";
+      health.solvability.status = "verified";
+      health.saturation.status = "not-saturated";
+      health.saturation.saturated = false;
+      health.graders.status = "calibrated";
+      health.harness.status = "reproducible";
+      health.infrastructure.status = "stable";
+      health.drift.status = "monitored";
+      health.overallStatus = "healthy";
+      health.governanceTriggerRefs = [];
+      health.assuranceBoundary = "Health status records reviewed suite conditions only and does not prove semantic correctness.";
+    }
+  }
   const target = path.join(empiricalDir, `${flag}.json`);
   fs.writeFileSync(target, `${JSON.stringify(pkg, null, 2)}\n`);
   return [`--${flag}`, target];
@@ -62,6 +79,7 @@ if (result.status !== 0) {
   if (empiricalResult.status !== 0) errors.push("expected schema-backed empirical Evidence Origins to validate");
   if (empiricalReport?.evidenceOrigin?.status !== "verified-empirical") errors.push("expected observed and historical Evidence Origins to be recognized as verified empirical provenance");
   if (!empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-ORIGIN")?.met) errors.push("expected CRD-ORIGIN to be structurally satisfiable");
+  if (!empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-SUITE-HEALTH")?.met) errors.push("expected CRD-SUITE-HEALTH to be structurally satisfiable");
   for (const blockerId of requiredBlockers) {
     if (!blockerIds.has(blockerId)) errors.push(`expected blocker ${blockerId}`);
   }
@@ -82,6 +100,7 @@ if (result.status !== 0) {
       empiricalCalibrationReady: report.readiness.empiricalCalibrationReady,
       invalidInputFailsClosed: invalidInputResult.status !== 0,
       empiricalOriginRecognized: empiricalReport?.evidenceOrigin?.status === "verified-empirical",
+      healthySuiteRecognized: empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-SUITE-HEALTH")?.met === true,
       blockerIds: Array.from(blockerIds).sort()
     }, null, 2));
   }

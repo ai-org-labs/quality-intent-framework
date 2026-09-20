@@ -30,6 +30,10 @@ function match(pkg, index = 0) {
   return pkg.findingMatches[index];
 }
 
+function suiteHealth(pkg) {
+  return pkg.evaluationSuiteHealthRecords[0];
+}
+
 function run(pkg) {
   return pkg.calibrationRuns[0];
 }
@@ -131,6 +135,61 @@ export const cases = [
     rule: "run caseCount reproduces from cases",
     expect: "CALRUN-WMC-001 caseCount must equal caseRefs length.",
     mutate: (pkg) => { run(pkg).caseCount = 2; }
+  },
+  {
+    id: "suite-health-broken-run-ref",
+    rule: "suite health calibration run resolves",
+    expect: "ESH-WMC-001 references missing calibration run: CALRUN-NOPE-999",
+    mutate: (pkg) => { suiteHealth(pkg).calibrationRunRef = "CALRUN-NOPE-999"; }
+  },
+  {
+    id: "suite-health-case-coverage-mismatch",
+    rule: "suite health solvability review covers every case",
+    expect: "ESH-WMC-001 solvability reviewedCaseRefs must equal caseRefs.",
+    mutate: (pkg) => { suiteHealth(pkg).solvability.reviewedCaseRefs = ["CALCASE-WMC-001"]; }
+  },
+  {
+    id: "suite-health-false-healthy-dimension",
+    rule: "healthy suite requires healthy dimensions",
+    expect: "ESH-WMC-001 overallStatus healthy conflicts with unhealthy dimensions",
+    mutate: (pkg) => { suiteHealth(pkg).overallStatus = "healthy"; }
+  },
+  {
+    id: "suite-health-example-origin-not-empirical",
+    rule: "healthy suite requires empirical origins",
+    expect: "ESH-WMC-001 overallStatus healthy requires verified observed-operational or historical-record origins.",
+    mutate: (pkg) => {
+      const health = suiteHealth(pkg);
+      health.overallStatus = "healthy";
+      health.taskOrigin.status = "verified";
+      health.contamination.status = "clear";
+      health.solvability.status = "verified";
+      health.saturation.status = "not-saturated";
+      health.graders.status = "calibrated";
+      health.governanceTriggerRefs = [];
+    }
+  },
+  {
+    id: "suite-health-provisional-without-governance",
+    rule: "non-healthy suite routes to governance",
+    expect: "ESH-WMC-001 non-healthy suite status requires governanceTriggerRefs.",
+    mutate: (pkg) => { suiteHealth(pkg).governanceTriggerRefs = []; }
+  },
+  {
+    id: "run-broken-suite-health-ref",
+    rule: "calibration run suite health refs resolve",
+    expect: "CALRUN-WMC-001 references missing evaluation suite health record: ESH-NOPE-999",
+    mutate: (pkg) => { run(pkg).suiteHealthRecordRefs = ["ESH-NOPE-999"]; }
+  },
+  {
+    id: "calibrated-run-requires-healthy-suite",
+    rule: "calibrated run requires healthy suite",
+    expect: "CALRUN-WMC-001 conclusion calibrated requires a healthy evaluation suite health record.",
+    mutate: (pkg) => {
+      policy(pkg).agreementThreshold = 0.5;
+      policy(pkg).falseNegativeRateMax = 0.33;
+      run(pkg).conclusion = "calibrated";
+    }
   },
   {
     id: "run-domain-coverage-mismatch",

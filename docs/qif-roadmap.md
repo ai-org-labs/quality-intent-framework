@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.27 baseline)
+## Current Position (v0.6.28 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -154,6 +154,10 @@ and adoption surface — not pretending the limits away.
   Readiness accepts only verified observed-operational or historical-record
   origins as empirical provenance; example, simulated, and synthetic origins
   remain non-empirical.
+  v0.6.28 adds Evaluation Suite Health records for task origin,
+  contamination, solvability, saturation, graders, harness, infrastructure,
+  and drift ownership. Calibration runs must resolve these records, and a
+  calibrated conclusion requires a structurally healthy suite.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -165,7 +169,7 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-09-19 against primary-source signals. The
+The roadmap was revalidated on 2026-09-20 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
@@ -176,6 +180,7 @@ organizational authority.
 | Long-running agent platforms now coordinate subagents, persistent work, files, tools, and intermediate results over days. ([OpenAI Agents API](https://openai.com/index/introducing-the-agents-api/)) | Aggregate success can hide weak subagent evidence, stale context, or an invalid evaluation path; a higher eval score may still be methodologically incomparable. | v0.6 action and handoff controls, then v0.7 evidence-origin and calibration-readiness boundaries. | Require an explicit path from declared confidence to observed outcomes before treating an eval delta as predictive evidence. |
 | Measurement bodies are embedding adversarial evaluation probes into agent workflows and emphasizing reproducible benchmark practice and transcript review. ([NIST evaluation probes](https://www.nist.gov/programs-projects/building-evaluation-probes-agentic-ai), [NIST benchmark practice](https://www.nist.gov/news-events/news/2026/01/towards-best-practices-automated-benchmark-evaluations), [NIST transcript analysis](https://www.nist.gov/blogs/caisi-research-blog/analyzing-transcripts-ai-agent-evaluations)) | Evaluators can miss citation, tool-use, contamination, cheating, and harness failures unless the evaluation itself has traceable health evidence. | v0.6.26 calibration readiness and v0.7 Evaluation Suite Health records. | Treat evaluator health, contamination, solvability, trial variance, and infrastructure configuration as governed evidence, not background methodology. |
 | Recent third-party evaluation incidents show that evaluation configuration and environment boundaries can fail independently of model capability. ([OpenAI cyber evaluation incident](https://openai.com/index/third-party-cyber-evaluations-involving-openai-models/), [OpenAI/Hugging Face evaluation security incident](https://openai.com/index/hugging-face-model-evaluation-security-incident/)) | A result can look authoritative while its environment, authorization, or source boundary is wrong. | v0.6.27 Evidence Origin, then v0.7 Evaluation Suite Health. | Treat source, observation window, environment, transformation, and independent verification as first-class evidence before accepting an evaluation result. |
+| Model-lifecycle reporting is moving from occasional post hoc disclosure toward systematic recording of observed concerns across training, evaluation, testing, and deployment. ([OpenAI model misalignment reporting framework](https://openai.com/index/model-misalignment-reporting-framework/)) | Evaluation anomalies can be lost when they do not immediately explain a score or trigger a release block; stale suites then retain false authority. | v0.6.28 Evaluation Suite Health and v0.7 framework-learning records. | Keep suite limitations, incidents, drift ownership, and unresolved uncertainty alive as governed records before causal explanation is complete. |
 | Delegated work is becoming longer-running and increasingly parallel across multiple agents and non-engineering domains. ([OpenAI](https://openai.com/index/how-agents-are-transforming-work/), [Anthropic](https://www.anthropic.com/engineering/multi-agent-research-system)) | Errors compound across handoffs; a successful aggregate result can conceal an unsafe lane, unresolved disagreement, or unowned decision. | v0.6 governed agent authoring/actions and v0.8 multi-agent judgment memory. | Treat lane-local intents, join conflicts, authority, and dissent as quality ledger entries, not orchestration logs. |
 | Agent harnesses now combine persistent runtime context, shell/computer tools, reusable skills, tracing, and protocol-connected tools such as MCP. ([OpenAI](https://openai.com/index/equip-responses-api-computer-environment/), [OpenAI](https://openai.com/index/new-tools-and-features-in-the-responses-api/)) | Quality depends on tool permissions, target operation, context freshness, runtime configuration, and rollback—not model output alone. | v0.5 provenance and v0.6 protocol-neutral action contracts. | Make an action's Quality Intent, loss boundary, evidence, permission, target, and rollback portable across harnesses and protocols. |
 | Teams are shifting from token price toward cost per accepted outcome and real-task evals. ([OpenAI](https://openai.com/index/managing-ai-investments-in-agentic-era/)) | Cheap attempts can create expensive retries and human correction; activity volume can again be mistaken for value. | v0.7 outcome calibration keeps cost/latency as evidence attached to accepted outcomes. | Calibrate quality and cost jointly without allowing either metric to substitute for the accountable verdict. |
@@ -406,6 +411,8 @@ Deliverables:
   refuses to treat committed examples as observed operational evidence.
   v0.6.27 makes the origin check executable through schema-backed records and
   resolvable links from outcomes and calibration cases.
+  v0.6.28 makes suite health executable through eight dimension states,
+  bidirectional run links, health consistency checks, and governance routing.
 - Gate-as-hook reference integration: a demonstration where an agent task
   cannot be marked release-ready unless a quality-gate package for the
   target validates. No external service required; local hook only.
@@ -474,6 +481,9 @@ Deliverables:
 - Evaluation Suite Health records: task origin, contamination boundary,
   solvability review, saturation, grader calibration, trial variance, harness
   and infrastructure configuration, and drift ownership.
+  Status: the suite-level structure and all dimensions except trial variance
+  are implemented in v0.6.28. Trial and infrastructure uncertainty remains the
+  next independent slice so small score differences are not presented as exact.
 - First empirical self-test of the evidence independence hierarchy: do
   high-independence evidence items actually precede fewer escapes than
   low-independence ones? Publish the answer even if it is embarrassing.

@@ -40,9 +40,9 @@
       ],
       "requiredExpertAssessorsPerCase": 1,
       "requiresUnseenCases": true,
-      "agreementThreshold": 0.7,
+      "agreementThreshold": 0.5,
       "falsePositiveRateMax": 0.2,
-      "falseNegativeRateMax": 0.2,
+      "falseNegativeRateMax": 0.33,
       "scoreRule": "exact-1-partial-0.5-miss-0",
       "governanceOnFailure": true,
       "status": "active"
@@ -235,7 +235,7 @@
       "expertFindingRef": "EXF-WMC-001",
       "agentFindingRef": "AGF-WMC-001",
       "matchType": "exact",
-      "score": 0.5,
+      "score": 1,
       "rationale": "Expert and agent both identified the same final approval authority boundary gap."
     },
     {
@@ -381,7 +381,7 @@
       "agreementScore": 0.5,
       "falsePositiveRate": 0,
       "falseNegativeRate": 0.33,
-      "conclusion": "failed",
+      "conclusion": "calibrated",
       "governanceTriggerRefs": [
         "GTR-WMC-001",
         "GTR-WMC-002"

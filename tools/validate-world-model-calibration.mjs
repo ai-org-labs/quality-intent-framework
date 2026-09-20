@@ -252,6 +252,7 @@ function validateCalibrationPackage(pkg, packagePath) {
   const expertAssessments = requireArray(pkg, "expertAssessments", packagePath);
   const agentAssessments = requireArray(pkg, "agentAssessments", packagePath);
   const findingMatches = requireArray(pkg, "findingMatches", packagePath);
+  const suiteHealthRecords = requireArray(pkg, "evaluationSuiteHealthRecords", packagePath);
   const calibrationRuns = requireArray(pkg, "calibrationRuns", packagePath);
   const governanceTriggers = requireArray(pkg, "governanceTriggers", packagePath);
 
@@ -262,6 +263,7 @@ function validateCalibrationPackage(pkg, packagePath) {
   const expertAssessmentIndex = indexById(expertAssessments, `${packagePath}:expertAssessments`);
   const agentAssessmentIndex = indexById(agentAssessments, `${packagePath}:agentAssessments`);
   const matchIndex = indexById(findingMatches, `${packagePath}:findingMatches`);
+  const suiteHealthIndex = indexById(suiteHealthRecords, `${packagePath}:evaluationSuiteHealthRecords`);
   const runIndex = indexById(calibrationRuns, `${packagePath}:calibrationRuns`);
   const triggerIndex = indexById(governanceTriggers, `${packagePath}:governanceTriggers`);
 
@@ -342,6 +344,94 @@ function validateCalibrationPackage(pkg, packagePath) {
       agentAssessmentsByCase.set(assessment.caseRef, []);
     }
     agentAssessmentsByCase.get(assessment.caseRef).push(assessment);
+  }
+
+  const healthyStatuses = {
+    taskOrigin: "verified",
+    contamination: "clear",
+    solvability: "verified",
+    saturation: "not-saturated",
+    graders: "calibrated",
+    harness: "reproducible",
+    infrastructure: "stable",
+    drift: "monitored"
+  };
+  for (const health of suiteHealthRecords) {
+    checkRequiredString(health, "title", health.id);
+    checkRequiredString(health, "overallStatus", health.id);
+    checkRequiredString(health, "assuranceBoundary", health.id);
+    checkRefs([health.calibrationRunRef], runIndex, "calibration run", health.id);
+    checkRefs([health.policyRef], policyIndex, "calibration policy", health.id);
+    checkRefs(health.caseRefs, caseIndex, "calibration case", health.id);
+
+    for (const dimension of Object.keys(healthyStatuses)) {
+      if (!health[dimension] || typeof health[dimension] !== "object") {
+        errors.push(`${health.id} must include ${dimension}.`);
+      } else {
+        checkRequiredString(health[dimension], "status", `${health.id}/${dimension}`);
+      }
+    }
+    checkRefs(health.taskOrigin?.evidenceOriginRefs, evidenceOriginIndex, "evidence origin", `${health.id}/taskOrigin`);
+    checkRequiredString(health.taskOrigin ?? {}, "distributionSummary", `${health.id}/taskOrigin`);
+    checkRequiredString(health.contamination ?? {}, "checkMethod", `${health.id}/contamination`);
+    checkRequiredString(health.contamination ?? {}, "finding", `${health.id}/contamination`);
+    checkRequiredString(health.solvability ?? {}, "reviewMethod", `${health.id}/solvability`);
+    checkRefs(health.solvability?.reviewedCaseRefs, caseIndex, "reviewed calibration case", `${health.id}/solvability`);
+    if (!Array.isArray(health.solvability?.unresolvedCaseRefs)) {
+      errors.push(`${health.id}/solvability unresolvedCaseRefs must be an array.`);
+    } else {
+      for (const ref of health.solvability.unresolvedCaseRefs) {
+        if (!caseIndex.has(ref)) errors.push(`${health.id}/solvability references missing unresolved calibration case: ${ref}`);
+      }
+    }
+    if (!sameSet(health.solvability?.reviewedCaseRefs ?? [], health.caseRefs ?? [])) {
+      errors.push(`${health.id} solvability reviewedCaseRefs must equal caseRefs.`);
+    }
+    checkRequiredString(health.saturation ?? {}, "detectionMethod", `${health.id}/saturation`);
+    checkRequiredString(health.saturation ?? {}, "rationale", `${health.id}/saturation`);
+    if (typeof health.saturation?.saturated !== "boolean") errors.push(`${health.id}/saturation saturated must be boolean.`);
+    checkRefs(health.graders?.expertAssessmentRefs, expertAssessmentIndex, "expert assessment", `${health.id}/graders`);
+    checkRefs(health.graders?.agentAssessmentRefs, agentAssessmentIndex, "agent assessment", `${health.id}/graders`);
+    checkRequiredString(health.graders ?? {}, "calibrationMethod", `${health.id}/graders`);
+    checkRequiredString(health.graders ?? {}, "disagreementPolicy", `${health.id}/graders`);
+    checkRequiredString(health.harness ?? {}, "configuration", `${health.id}/harness`);
+    checkRequiredString(health.harness ?? {}, "reproducibilityEvidence", `${health.id}/harness`);
+    checkRequiredString(health.infrastructure ?? {}, "environment", `${health.id}/infrastructure`);
+    checkRequiredString(health.infrastructure ?? {}, "configuration", `${health.id}/infrastructure`);
+    if (!Array.isArray(health.infrastructure?.incidentRefs)) errors.push(`${health.id}/infrastructure incidentRefs must be an array.`);
+    checkRequiredString(health.drift ?? {}, "owner", `${health.id}/drift`);
+    checkRequiredString(health.drift ?? {}, "reviewCadence", `${health.id}/drift`);
+    checkRequiredString(health.drift ?? {}, "nextReviewAt", `${health.id}/drift`);
+    if (!Array.isArray(health.drift?.triggerConditions) || health.drift.triggerConditions.length === 0) {
+      errors.push(`${health.id}/drift must include triggerConditions.`);
+    }
+    if (!Array.isArray(health.governanceTriggerRefs)) {
+      errors.push(`${health.id} governanceTriggerRefs must be an array.`);
+    } else {
+      for (const ref of health.governanceTriggerRefs) {
+        if (!triggerIndex.has(ref)) errors.push(`${health.id} references missing governance trigger: ${ref}`);
+      }
+    }
+
+    const unhealthyDimensions = Object.entries(healthyStatuses)
+      .filter(([dimension, expected]) => health[dimension]?.status !== expected)
+      .map(([dimension]) => dimension);
+    if (health.overallStatus === "healthy") {
+      if (unhealthyDimensions.length > 0) {
+        errors.push(`${health.id} overallStatus healthy conflicts with unhealthy dimensions: ${unhealthyDimensions.join(", ")}.`);
+      }
+      if (health.saturation?.saturated !== false || (health.solvability?.unresolvedCaseRefs ?? []).length > 0) {
+        errors.push(`${health.id} overallStatus healthy requires no saturation and no unresolved cases.`);
+      }
+      const empiricalOrigins = (health.taskOrigin?.evidenceOriginRefs ?? []).map((ref) => evidenceOriginIndex.get(ref));
+      if (empiricalOrigins.some((origin) => !origin || !["observed-operational", "historical-record"].includes(origin.originKind) || origin.status !== "verified")) {
+        errors.push(`${health.id} overallStatus healthy requires verified observed-operational or historical-record origins.`);
+      }
+      const unresolvedTriggers = (health.governanceTriggerRefs ?? []).map((ref) => triggerIndex.get(ref)).filter((trigger) => trigger?.status !== "resolved");
+      if (unresolvedTriggers.length > 0) errors.push(`${health.id} overallStatus healthy cannot retain unresolved governance triggers.`);
+    } else if ((health.governanceTriggerRefs ?? []).length === 0) {
+      errors.push(`${health.id} non-healthy suite status requires governanceTriggerRefs.`);
+    }
   }
 
   const coveredExpertFindings = new Set();
@@ -435,6 +525,7 @@ function validateCalibrationPackage(pkg, packagePath) {
     checkRefs(run.expertAssessmentRefs, expertAssessmentIndex, "expert assessment", run.id);
     checkRefs(run.agentAssessmentRefs, agentAssessmentIndex, "agent assessment", run.id);
     checkRefs(run.findingMatchRefs, matchIndex, "finding match", run.id);
+    checkRefs(run.suiteHealthRecordRefs, suiteHealthIndex, "evaluation suite health record", run.id);
     checkRequiredString(run, "conclusion", run.id);
     checkRequiredString(run, "residualRisk", run.id);
     checkRequiredString(run, "status", run.id);
@@ -446,6 +537,13 @@ function validateCalibrationPackage(pkg, packagePath) {
     const runCases = (run.caseRefs ?? []).map((ref) => caseIndex.get(ref)).filter(Boolean);
     const runMatches = (run.findingMatchRefs ?? []).map((ref) => matchIndex.get(ref)).filter(Boolean);
     const runTriggers = (run.governanceTriggerRefs ?? []).map((ref) => triggerIndex.get(ref)).filter(Boolean);
+    const runHealthRecords = (run.suiteHealthRecordRefs ?? []).map((ref) => suiteHealthIndex.get(ref)).filter(Boolean);
+
+    for (const health of runHealthRecords) {
+      if (health.calibrationRunRef !== run.id) errors.push(`${run.id} suite health record ${health.id} must reference the same calibration run.`);
+      if (health.policyRef !== run.policyRef) errors.push(`${run.id} suite health record ${health.id} must reference the same calibration policy.`);
+      if (!sameSet(health.caseRefs ?? [], run.caseRefs ?? [])) errors.push(`${run.id} suite health record ${health.id} caseRefs must equal the run caseRefs.`);
+    }
 
     if (run.caseCount !== (run.caseRefs ?? []).length) {
       errors.push(`${run.id} caseCount must equal caseRefs length.`);
@@ -515,6 +613,9 @@ function validateCalibrationPackage(pkg, packagePath) {
       if (failures.length === 0 && run.conclusion === "failed") {
         errors.push(`${run.id} conclusion failed is inconsistent with passing calibration thresholds.`);
       }
+      if (run.conclusion === "calibrated" && !runHealthRecords.some((health) => health.overallStatus === "healthy")) {
+        errors.push(`${run.id} conclusion calibrated requires a healthy evaluation suite health record.`);
+      }
     }
 
     for (const triggerRef of run.governanceTriggerRefs ?? []) {
@@ -552,6 +653,7 @@ function validateCalibrationPackage(pkg, packagePath) {
       expertAssessments: expertAssessments.length,
       agentAssessments: agentAssessments.length,
       findingMatches: findingMatches.length,
+      evaluationSuiteHealthRecords: suiteHealthRecords.length,
       calibrationRuns: calibrationRuns.length,
       governanceTriggers: governanceTriggers.length
     }

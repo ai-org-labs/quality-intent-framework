@@ -2,6 +2,65 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.28 Evaluation Suite Health
+
+Date: 2026-09-20
+
+Need / Intent / Context:
+
+- Need: Evidence Origin makes provenance resolvable, but a result can still be misleading when cases, graders, harnesses, or infrastructure are unhealthy.
+- Intent: add executable Evaluation Suite Health records covering task origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership, and make `CRD-SUITE-HEALTH` structurally satisfiable.
+- Context: evaluation incidents show environment and harness failures can invalidate results independently of model capability; systematic lifecycle reporting also requires unresolved evaluation anomalies to remain visible before their cause is fully understood.
+
+Direction and council judgment:
+
+- Visionary: approve. Evaluation validity must become a governed object before confidence can acquire empirical meaning.
+- Builder: approve. Add one record family to world-model-calibration, link calibration runs bidirectionally, and evaluate eight explicit dimensions deterministically.
+- Guardian: approve with boundary. Complete metadata, a high case count, or a passing verifier must not be treated as semantic suite validity; example and provisional records remain non-healthy.
+
+Runtime command evidence:
+
+- AOF runtime package version: `12.3.0`; latest local release tag: `v12.2.0`.
+- AOF `situation-assess` wrote `.aof/runtime/v0.6.28-situation.json`.
+- AOF `goal-project --goal-type next-value-slice` recorded the Validated Need / Intent / Context.
+- AOF `task-open` created `TASK-046`.
+- AOF planning `council-review-packet` wrote `.aof/runtime/v0.6.28-planning-council.json`.
+- Trend references checked:
+  - `https://openai.com/index/model-misalignment-reporting-framework/`
+  - `https://openai.com/index/third-party-cyber-evaluations-involving-openai-models/`
+  - `https://openai.com/index/hugging-face-model-evaluation-security-incident/`
+  - `https://openai.com/index/separating-signal-from-noise-coding-evaluations/`
+  - `https://openai.com/index/trustworthy-third-party-evaluations-foundations/`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+
+What was built:
+
+- `evaluationSuiteHealthRecords` in the world-model-calibration schema and example.
+- Eight explicit health dimensions with named healthy and non-healthy states.
+- Bidirectional run, policy, and case linkage; complete solvability coverage; empirical-origin requirements; health-governance routing; and a healthy-suite prerequisite for calibrated conclusions.
+- `qif calibration-readiness` dimension summaries and deterministic run-to-health resolution.
+- Plain-language guidance, retained negative fixtures, and a generated healthy-suite positive regression.
+
+What was not built:
+
+- No claim that structural health proves representativeness, contamination freedom, grader correctness, scientific validity, or operational quality.
+- No external evaluation service integration or UI.
+- No trial-variance or framework-learning record; these remain separate Phase 4 slices.
+- No use of activity counts as suite health.
+
+Verification:
+
+- Schema JSON parsing and `git diff --check` passed.
+- `node tools/qif.mjs calibration-readiness` passed at package version `0.6.28`; the committed example exposes all eight suite-health dimensions, remains `provisional`, and correctly retains `CRD-SUITE-HEALTH`.
+- `node tools/check-calibration-readiness.mjs` passed, including a generated healthy-suite path that satisfies `CRD-SUITE-HEALTH` without claiming semantic validity.
+- `npm test` passed all CLI and verifier checks, `15/15` positive packages, and `618/618` retained negative fixtures.
+- AOF self-review and final review packets were approved and written to `.aof/runtime/v0.6.28-self-review.json` and `.aof/runtime/v0.6.28-final-review.json`.
+- AOF retrospective judgment was recorded in `.aof/runtime/v0.6.28-retrospective.json`.
+- AOF `task-update` completed `TASK-046`; post-implementation `situation-assess` wrote `.aof/runtime/v0.6.28-post-situation.json`.
+- AOF `organization-verify --project .` passed `231/231` checks.
+
+Release evidence will be appended after publication.
+
 ## v0.6.27 Evidence Origin Records
 
 Date: 2026-09-19

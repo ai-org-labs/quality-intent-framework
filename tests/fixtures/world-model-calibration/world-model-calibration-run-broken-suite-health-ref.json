@@ -235,7 +235,7 @@
       "expertFindingRef": "EXF-WMC-001",
       "agentFindingRef": "AGF-WMC-001",
       "matchType": "exact",
-      "score": 0.5,
+      "score": 1,
       "rationale": "Expert and agent both identified the same final approval authority boundary gap."
     },
     {
@@ -370,7 +370,7 @@
         "FMA-WMC-003"
       ],
       "suiteHealthRecordRefs": [
-        "ESH-WMC-001"
+        "ESH-NOPE-999"
       ],
       "caseCount": 3,
       "domainCoverage": [

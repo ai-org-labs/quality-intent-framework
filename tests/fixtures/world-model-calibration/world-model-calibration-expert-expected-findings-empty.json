@@ -245,6 +245,91 @@
       "rationale": "The agent failed to identify the invoice exception approval boundary gap."
     }
   ],
+  "evaluationSuiteHealthRecords": [
+    {
+      "id": "ESH-WMC-001",
+      "title": "Example world-model calibration suite health",
+      "calibrationRunRef": "CALRUN-WMC-001",
+      "policyRef": "CALPOL-WMC-001",
+      "caseRefs": [
+        "CALCASE-WMC-001",
+        "CALCASE-WMC-002",
+        "CALCASE-WMC-003"
+      ],
+      "taskOrigin": {
+        "evidenceOriginRefs": [
+          "EOR-WMC-001"
+        ],
+        "distributionSummary": "Three committed example cases span software, maintenance, and accounting; they do not represent an observed population.",
+        "status": "provisional"
+      },
+      "contamination": {
+        "checkMethod": "Compare case identifiers and descriptions against authoring examples and training inputs when available.",
+        "finding": "Committed examples are public and therefore cannot establish contamination-free unseen evaluation.",
+        "status": "unknown"
+      },
+      "solvability": {
+        "reviewMethod": "Expert expected findings and source World Model Review were compared for internal consistency.",
+        "reviewedCaseRefs": [
+          "CALCASE-WMC-001",
+          "CALCASE-WMC-002",
+          "CALCASE-WMC-003"
+        ],
+        "unresolvedCaseRefs": [],
+        "status": "provisional"
+      },
+      "saturation": {
+        "detectionMethod": "Track repeated exact matches and loss of discrimination across future runs.",
+        "saturated": false,
+        "rationale": "One example run is insufficient to establish either saturation or absence of saturation.",
+        "status": "unknown"
+      },
+      "graders": {
+        "expertAssessmentRefs": [
+          "EXA-WMC-001",
+          "EXA-WMC-002",
+          "EXA-WMC-003"
+        ],
+        "agentAssessmentRefs": [
+          "AGA-WMC-001",
+          "AGA-WMC-002",
+          "AGA-WMC-003"
+        ],
+        "calibrationMethod": "Example finding matches demonstrate score reproduction only.",
+        "disagreementPolicy": "Unresolved expert or agent disagreement requires governance before calibration claims.",
+        "status": "provisional"
+      },
+      "harness": {
+        "configuration": "Local deterministic QIF verifier over committed JSON packages.",
+        "reproducibilityEvidence": "npm test reproduces structural checks and fixture outcomes.",
+        "status": "reproducible"
+      },
+      "infrastructure": {
+        "environment": "Local repository fixture environment.",
+        "configuration": "Node.js CLI with repository-pinned schemas, examples, and fixtures.",
+        "incidentRefs": [],
+        "status": "stable"
+      },
+      "drift": {
+        "owner": "qif-maintainer",
+        "reviewCadence": "Each release and before any empirical pilot.",
+        "nextReviewAt": "before-empirical-pilot",
+        "triggerConditions": [
+          "case source changes",
+          "grader changes",
+          "harness changes",
+          "infrastructure incident",
+          "unexpected score shift"
+        ],
+        "status": "monitored"
+      },
+      "overallStatus": "provisional",
+      "governanceTriggerRefs": [
+        "GTR-WMC-003"
+      ],
+      "assuranceBoundary": "This record demonstrates complete suite-health structure only; public examples do not prove contamination freedom, representativeness, solvability, grader validity, or empirical health."
+    }
+  ],
   "calibrationRuns": [
     {
       "id": "CALRUN-WMC-001",
@@ -268,6 +353,9 @@
         "FMA-WMC-001",
         "FMA-WMC-002",
         "FMA-WMC-003"
+      ],
+      "suiteHealthRecordRefs": [
+        "ESH-WMC-001"
       ],
       "caseCount": 3,
       "domainCoverage": [
@@ -307,6 +395,16 @@
       "requiredAction": "Analyze missed accounting approval-boundary cases and add calibration examples before autonomous use.",
       "owner": "qif-maintainer",
       "status": "open"
+    },
+    {
+      "id": "GTR-WMC-003",
+      "triggerType": "contamination-risk",
+      "reason": "The committed public examples cannot establish contamination-free or representative empirical evaluation.",
+      "sourceCalibrationRunRef": "CALRUN-WMC-001",
+      "severity": "medium",
+      "requiredAction": "Collect privacy-screened observed or historical pilot cases and perform documented contamination checks before marking suite health as healthy.",
+      "owner": "qif-maintainer",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -316,6 +414,7 @@
       "expert and agent assessments resolve to cases",
       "finding matches cover expected and generated findings",
       "agreement, false-positive, and false-negative rates reproduce from finding matches",
+      "evaluation suite health records cover task origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership",
       "threshold failures trigger governance"
     ],
     "doesNotClaim": [

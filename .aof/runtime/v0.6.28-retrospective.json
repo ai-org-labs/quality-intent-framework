@@ -1,0 +1,31 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-20T04:46:12.927Z",
+  "review_packet_id": "CREV-MU9C31DR-XBYKGH",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Retrospective: v0.6.28 converted a named readiness blocker into an executable record while preserving the boundary between structural assurance and semantic validity.",
+  "rationale": "Visionary: the slice advanced the calibration roadmap without broadening QIF into an evaluation service. Builder: one canonical entity and deterministic readiness rule kept the implementation narrow. Guardian: explicit negative fixtures were necessary to prevent false healthy declarations; the remaining weakness is that uncertainty across repeated trials and infrastructure variability is still unmodeled.",
+  "recommendation": "Make v0.6.29 Trial and Infrastructure Uncertainty the next slice; retain Evaluation Suite Health as a prerequisite and keep framework learning separate.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    ".aof/runtime/v0.6.28-final-review.json",
+    "docs/qif-roadmap.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-046",
+  "source_parent_session_id": null,
+  "source_decision_record_id": null
+}

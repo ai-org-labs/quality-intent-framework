@@ -169,6 +169,55 @@
       "errorIncludes": "CALRUN-WMC-001 caseCount must equal caseRefs length."
     },
     {
+      "file": "world-model-calibration-suite-health-broken-run-ref.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "suite health calibration run resolves",
+      "expect": "fail",
+      "errorIncludes": "ESH-WMC-001 references missing calibration run: CALRUN-NOPE-999"
+    },
+    {
+      "file": "world-model-calibration-suite-health-case-coverage-mismatch.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "suite health solvability review covers every case",
+      "expect": "fail",
+      "errorIncludes": "ESH-WMC-001 solvability reviewedCaseRefs must equal caseRefs."
+    },
+    {
+      "file": "world-model-calibration-suite-health-false-healthy-dimension.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "healthy suite requires healthy dimensions",
+      "expect": "fail",
+      "errorIncludes": "ESH-WMC-001 overallStatus healthy conflicts with unhealthy dimensions"
+    },
+    {
+      "file": "world-model-calibration-suite-health-example-origin-not-empirical.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "healthy suite requires empirical origins",
+      "expect": "fail",
+      "errorIncludes": "ESH-WMC-001 overallStatus healthy requires verified observed-operational or historical-record origins."
+    },
+    {
+      "file": "world-model-calibration-suite-health-provisional-without-governance.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "non-healthy suite routes to governance",
+      "expect": "fail",
+      "errorIncludes": "ESH-WMC-001 non-healthy suite status requires governanceTriggerRefs."
+    },
+    {
+      "file": "world-model-calibration-run-broken-suite-health-ref.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "calibration run suite health refs resolve",
+      "expect": "fail",
+      "errorIncludes": "CALRUN-WMC-001 references missing evaluation suite health record: ESH-NOPE-999"
+    },
+    {
+      "file": "world-model-calibration-calibrated-run-requires-healthy-suite.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "calibrated run requires healthy suite",
+      "expect": "fail",
+      "errorIncludes": "CALRUN-WMC-001 conclusion calibrated requires a healthy evaluation suite health record."
+    },
+    {
       "file": "world-model-calibration-run-domain-coverage-mismatch.json",
       "validator": "tools/validate-world-model-calibration.mjs",
       "rule": "run domainCoverage equals case domains",

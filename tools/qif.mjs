@@ -1318,7 +1318,28 @@ function calibrationReadiness(args) {
       : evidenceOriginRecords.length === 0
         ? "undeclared"
         : "mixed-or-unverified";
-  const suiteHealthRecords = Object.values(packages).flatMap((pkg) => pkg.evaluationSuiteHealthRecords || []);
+  const suiteHealthRecords = packages.calibration.evaluationSuiteHealthRecords || [];
+  const suiteHealthIndex = new Map(suiteHealthRecords.map((record) => [record.id, record]));
+  const healthySuiteStatuses = {
+    taskOrigin: "verified",
+    contamination: "clear",
+    solvability: "verified",
+    saturation: "not-saturated",
+    graders: "calibrated",
+    harness: "reproducible",
+    infrastructure: "stable",
+    drift: "monitored"
+  };
+  const suiteHealthSummaries = suiteHealthRecords.map((record) => ({
+    id: record.id,
+    calibrationRunRef: record.calibrationRunRef,
+    overallStatus: record.overallStatus,
+    dimensions: Object.fromEntries(Object.keys(healthySuiteStatuses).map((dimension) => [dimension, record[dimension]?.status || null])),
+    healthy: record.overallStatus === "healthy" && Object.entries(healthySuiteStatuses).every(([dimension, expected]) => record[dimension]?.status === expected)
+  }));
+  const allCalibrationRunsHaveHealthySuite = calibrationRuns.length > 0 && calibrationRuns.every((run) =>
+    (run.suiteHealthRecordRefs || []).some((ref) => suiteHealthSummaries.find((record) => record.id === ref)?.healthy)
+  );
   const trialVarianceRecords = Object.values(packages).flatMap((pkg) => pkg.trialVarianceRecords || []);
   const frameworkLearningRecords = Object.values(packages).flatMap((pkg) => pkg.frameworkLearningRecords || []);
   const checks = [
@@ -1347,9 +1368,18 @@ function calibrationReadiness(args) {
     },
     {
       id: "CRD-SUITE-HEALTH",
-      label: "Evaluation suite health records cover origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership.",
-      met: suiteHealthRecords.length > 0,
-      evidence: { recordCount: suiteHealthRecords.length }
+      label: "Every calibration run links a healthy Evaluation Suite Health record covering task origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership.",
+      met: allCalibrationRunsHaveHealthySuite,
+      evidence: {
+        recordCount: suiteHealthRecords.length,
+        calibrationRunCount: calibrationRuns.length,
+        records: suiteHealthSummaries,
+        linkedRecords: calibrationRuns.map((run) => ({
+          calibrationRunRef: run.id,
+          suiteHealthRecordRefs: run.suiteHealthRecordRefs || [],
+          resolvedRefs: (run.suiteHealthRecordRefs || []).filter((ref) => suiteHealthIndex.has(ref))
+        }))
+      }
     },
     {
       id: "CRD-DOMAINS",
@@ -1408,7 +1438,7 @@ function calibrationReadiness(args) {
         "CRD-STRUCTURE": "Repair package validation or package-type mismatches before calibration work.",
         "CRD-ORIGIN": "Link every decision outcome and calibration case to a verified Evidence Origin record; example, simulated, and synthetic origins remain non-empirical.",
         "CRD-PAIRS": "Collect gate decisions with stated confidence and link them to post-decision outcome windows.",
-        "CRD-SUITE-HEALTH": "Define Evaluation Suite Health records for task origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership.",
+        "CRD-SUITE-HEALTH": "Resolve every calibration run to a healthy Evaluation Suite Health record after reviewing task origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership.",
         "CRD-DOMAINS": "Collect calibration evidence from at least two domains, including one non-software domain.",
         "CRD-UNCERTAINTY": "Record repeated-trial variance and infrastructure uncertainty before comparing small score differences.",
         "CRD-LEARNING": "Record a framework change caused by calibration evidence that contradicted an assumption."

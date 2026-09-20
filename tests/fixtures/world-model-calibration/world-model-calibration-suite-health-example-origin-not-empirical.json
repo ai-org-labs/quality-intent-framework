@@ -235,7 +235,7 @@
       "expertFindingRef": "EXF-WMC-001",
       "agentFindingRef": "AGF-WMC-001",
       "matchType": "exact",
-      "score": 0.5,
+      "score": 1,
       "rationale": "Expert and agent both identified the same final approval authority boundary gap."
     },
     {
@@ -276,12 +276,12 @@
           "EOR-WMC-001"
         ],
         "distributionSummary": "Three committed example cases span software, maintenance, and accounting; they do not represent an observed population.",
-        "status": "provisional"
+        "status": "verified"
       },
       "contamination": {
         "checkMethod": "Compare case identifiers and descriptions against authoring examples and training inputs when available.",
         "finding": "Committed examples are public and therefore cannot establish contamination-free unseen evaluation.",
-        "status": "unknown"
+        "status": "clear"
       },
       "solvability": {
         "reviewMethod": "Expert expected findings and source World Model Review were compared for internal consistency.",
@@ -291,13 +291,13 @@
           "CALCASE-WMC-003"
         ],
         "unresolvedCaseRefs": [],
-        "status": "provisional"
+        "status": "verified"
       },
       "saturation": {
         "detectionMethod": "Track repeated exact matches and loss of discrimination across future runs.",
         "saturated": false,
         "rationale": "One example run is insufficient to establish either saturation or absence of saturation.",
-        "status": "unknown"
+        "status": "not-saturated"
       },
       "graders": {
         "expertAssessmentRefs": [
@@ -312,7 +312,7 @@
         ],
         "calibrationMethod": "Example finding matches demonstrate score reproduction only.",
         "disagreementPolicy": "Unresolved expert or agent disagreement requires governance before calibration claims.",
-        "status": "provisional"
+        "status": "calibrated"
       },
       "harness": {
         "configuration": "Local deterministic QIF verifier over committed JSON packages.",
@@ -338,10 +338,8 @@
         ],
         "status": "monitored"
       },
-      "overallStatus": "provisional",
-      "governanceTriggerRefs": [
-        "GTR-WMC-003"
-      ],
+      "overallStatus": "healthy",
+      "governanceTriggerRefs": [],
       "assuranceBoundary": "This record demonstrates complete suite-health structure only; public examples do not prove contamination freedom, representativeness, solvability, grader validity, or empirical health."
     }
   ],

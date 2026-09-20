@@ -65,6 +65,7 @@ Use additional documents when needed:
 | Author a release gate decision (Go / Conditional Go / No-Go / Pending) | `schemas/quality-gate-package.schema.json`, `examples/quality-gate-package.json` |
 | Prepare real pilot cases for world-model calibration | `docs/qif-v0.5.3-world-model-pilot-corpus.md`, `schemas/world-model-pilot-corpus-package.schema.json`, `examples/world-model-pilot-corpus-package.json` |
 | Declare where outcomes and calibration cases came from | `docs/qif-v0.6.27-evidence-origin.md` and the relevant package schema |
+| Determine whether an evaluation suite is fit to support its claim | `docs/qif-v0.6.28-evaluation-suite-health.md`, `schemas/world-model-calibration-package.schema.json` |
 | Understand quality theory background | `docs/quality-theory-report.md` |
 
 ## Required Framing
@@ -558,6 +559,19 @@ status can satisfy the structural `CRD-ORIGIN` readiness check. Even then,
 inspect the source and use independent review before making a semantic claim.
 Never use page counts, test counts, review counts, or other activity counts as
 proof of origin or quality.
+
+## Evaluation Suite Health
+
+Before interpreting a calibration score, inspect its linked
+`evaluationSuiteHealthRecords`. Do not ask only whether the evaluation ran.
+Ask whether case origin, contamination, solvability, saturation, graders,
+harness, infrastructure, and drift ownership are each fit for the claim.
+
+Use `healthy` only when all eight dimensions are in their healthy state, case
+coverage is complete, origins are verified observed or historical records,
+and no health governance issue remains unresolved. Use `provisional`,
+`degraded`, `blocked`, or `stale` honestly. A passing suite-health verifier
+does not prove that the suite is scientifically valid or representative.
 
 ## Evidence Independence
 
