@@ -1,7 +1,7 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Need: Evaluation Suite Health now governs whether a suite is trustworthy, but repeated runs can still vary and infrastructure noise can make small score differences look exact. Intent: add schema-backed trial variance and infrastructure uncertainty inputs, confidence ranges, and deterministic CRD-UNCERTAINTY readiness logic for v0.6.29. Context: remain domain-general; do not treat trial count, narrow intervals, or low variance as quality itself; keep framework learning as the following independent slice.",
-  "updated_at": "2026-09-20T04:48:28.335Z",
+  "content": "Need: calibration-readiness can now verify origin, suite health, and uncertainty, but it cannot prove that contradictory calibration evidence changed QIF itself rather than being archived without effect. Intent: add schema-backed Framework Learning records that link contradicted assumptions and calibration evidence to proposed, accepted, rejected, or rolled-back framework changes, with owners, decision rationale, validation evidence, and deterministic CRD-LEARNING readiness for v0.6.30. Context: remain domain-general; do not treat change count as learning or automatically accept evaluator recommendations; preserve human governance and semantic-review boundaries.",
+  "updated_at": "2026-09-21T04:55:08.140Z",
   "agreed_with_human": null,
   "source_session_id": null,
   "source_decision_record_id": null,
