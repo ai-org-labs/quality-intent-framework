@@ -1340,7 +1340,27 @@ function calibrationReadiness(args) {
   const allCalibrationRunsHaveHealthySuite = calibrationRuns.length > 0 && calibrationRuns.every((run) =>
     (run.suiteHealthRecordRefs || []).some((ref) => suiteHealthSummaries.find((record) => record.id === ref)?.healthy)
   );
-  const trialVarianceRecords = Object.values(packages).flatMap((pkg) => pkg.trialVarianceRecords || []);
+  const trialVarianceRecords = packages.calibration.trialVarianceRecords || [];
+  const trialVarianceIndex = new Map(trialVarianceRecords.map((record) => [record.id, record]));
+  const trialVarianceSummaries = trialVarianceRecords.map((record) => ({
+    id: record.id,
+    calibrationRunRef: record.calibrationRunRef,
+    metric: record.metric,
+    overallStatus: record.overallStatus,
+    trialCount: record.summary?.trialCount ?? null,
+    observedRange: record.summary?.observedRange ?? null,
+    uncertaintyLower: record.uncertaintyRange?.lower ?? null,
+    uncertaintyUpper: record.uncertaintyRange?.upper ?? null,
+    infrastructureStatus: record.infrastructureAssessment?.status ?? null,
+    exactComparisonAllowed: record.comparisonBoundary?.exactComparisonAllowed ?? null,
+    sufficient: record.overallStatus === "sufficient"
+      && ["controlled", "bounded"].includes(record.infrastructureAssessment?.status)
+      && (record.infrastructureAssessment?.potentialConfounders || []).length === 0
+      && record.comparisonBoundary?.exactComparisonAllowed === false
+  }));
+  const allCalibrationRunsHaveSufficientUncertainty = calibrationRuns.length > 0 && calibrationRuns.every((run) =>
+    (run.trialVarianceRecordRefs || []).some((ref) => trialVarianceSummaries.find((record) => record.id === ref)?.sufficient)
+  );
   const frameworkLearningRecords = Object.values(packages).flatMap((pkg) => pkg.frameworkLearningRecords || []);
   const checks = [
     {
@@ -1390,8 +1410,16 @@ function calibrationReadiness(args) {
     {
       id: "CRD-UNCERTAINTY",
       label: "Trial and infrastructure uncertainty is recorded instead of reporting small score differences as exact.",
-      met: trialVarianceRecords.length > 0,
-      evidence: { trialVarianceRecordCount: trialVarianceRecords.length }
+      met: allCalibrationRunsHaveSufficientUncertainty,
+      evidence: {
+        trialVarianceRecordCount: trialVarianceRecords.length,
+        records: trialVarianceSummaries,
+        linkedRecords: calibrationRuns.map((run) => ({
+          calibrationRunRef: run.id,
+          trialVarianceRecordRefs: run.trialVarianceRecordRefs || [],
+          resolvedRefs: (run.trialVarianceRecordRefs || []).filter((ref) => trialVarianceIndex.has(ref))
+        }))
+      }
     },
     {
       id: "CRD-LEARNING",
@@ -1440,7 +1468,7 @@ function calibrationReadiness(args) {
         "CRD-PAIRS": "Collect gate decisions with stated confidence and link them to post-decision outcome windows.",
         "CRD-SUITE-HEALTH": "Resolve every calibration run to a healthy Evaluation Suite Health record after reviewing task origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership.",
         "CRD-DOMAINS": "Collect calibration evidence from at least two domains, including one non-software domain.",
-        "CRD-UNCERTAINTY": "Record repeated-trial variance and infrastructure uncertainty before comparing small score differences.",
+        "CRD-UNCERTAINTY": "Link every calibration run to a sufficient Trial Variance record with reproducible observed ranges, bounded infrastructure uncertainty, and no exact-comparison claim.",
         "CRD-LEARNING": "Record a framework change caused by calibration evidence that contradicted an assumption."
       })[blocker.id]
     })),
@@ -1452,7 +1480,7 @@ function calibrationReadiness(args) {
       ledgerTrialCount: (packages.ledger.agentTrials || []).length,
       ledgerOutcomeCount: (packages.ledger.agentOutcomes || []).length
     },
-    verifierBoundary: "qif calibration-readiness checks declared structure, referenceable decision-outcome prerequisites, and evidence-origin boundaries only. It does not prove semantic truth, outcome attribution, case representativeness, predictive validity, calibration, or whether a quality decision was correct."
+    verifierBoundary: "qif calibration-readiness checks declared structure, referenceable decision-outcome prerequisites, evidence-origin boundaries, reproducible trial summaries, and declared infrastructure uncertainty only. It does not prove semantic truth, outcome attribution, case representativeness, trial independence, causal attribution, predictive validity, calibration, or whether a quality decision was correct."
   }, null, 2));
   return structurallyValid ? 0 : 1;
 }

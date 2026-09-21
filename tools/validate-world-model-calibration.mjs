@@ -253,6 +253,7 @@ function validateCalibrationPackage(pkg, packagePath) {
   const agentAssessments = requireArray(pkg, "agentAssessments", packagePath);
   const findingMatches = requireArray(pkg, "findingMatches", packagePath);
   const suiteHealthRecords = requireArray(pkg, "evaluationSuiteHealthRecords", packagePath);
+  const trialVarianceRecords = requireArray(pkg, "trialVarianceRecords", packagePath);
   const calibrationRuns = requireArray(pkg, "calibrationRuns", packagePath);
   const governanceTriggers = requireArray(pkg, "governanceTriggers", packagePath);
 
@@ -264,6 +265,7 @@ function validateCalibrationPackage(pkg, packagePath) {
   const agentAssessmentIndex = indexById(agentAssessments, `${packagePath}:agentAssessments`);
   const matchIndex = indexById(findingMatches, `${packagePath}:findingMatches`);
   const suiteHealthIndex = indexById(suiteHealthRecords, `${packagePath}:evaluationSuiteHealthRecords`);
+  const trialVarianceIndex = indexById(trialVarianceRecords, `${packagePath}:trialVarianceRecords`);
   const runIndex = indexById(calibrationRuns, `${packagePath}:calibrationRuns`);
   const triggerIndex = indexById(governanceTriggers, `${packagePath}:governanceTriggers`);
 
@@ -275,6 +277,9 @@ function validateCalibrationPackage(pkg, packagePath) {
     }
     if (!Number.isInteger(policy.requiredExpertAssessorsPerCase) || policy.requiredExpertAssessorsPerCase < 1) {
       errors.push(`${policy.id} requiredExpertAssessorsPerCase must be a positive integer.`);
+    }
+    if (!Number.isInteger(policy.minimumTrialCount) || policy.minimumTrialCount < 2) {
+      errors.push(`${policy.id} minimumTrialCount must be an integer of at least 2.`);
     }
     if (!Array.isArray(policy.requiredDomains) || policy.requiredDomains.length === 0) {
       errors.push(`${policy.id} must include requiredDomains.`);
@@ -434,6 +439,133 @@ function validateCalibrationPackage(pkg, packagePath) {
     }
   }
 
+  const empiricalOriginKinds = new Set(["observed-operational", "historical-record"]);
+  const supportedVarianceMetrics = new Set(["agreementScore", "falsePositiveRate", "falseNegativeRate"]);
+  const supportedVarianceStatuses = new Set(["sufficient", "provisional", "blocked", "stale"]);
+  const supportedInfrastructureStatuses = new Set(["controlled", "bounded", "unresolved", "incident-affected"]);
+  const supportedProfileStatuses = new Set(["stable", "degraded", "incident-open", "unknown"]);
+  for (const variance of trialVarianceRecords) {
+    checkRequiredString(variance, "title", variance.id);
+    checkRequiredString(variance, "metric", variance.id);
+    checkRequiredString(variance, "overallStatus", variance.id);
+    checkRequiredString(variance, "assuranceBoundary", variance.id);
+    if (!supportedVarianceMetrics.has(variance.metric)) errors.push(`${variance.id} metric is not supported.`);
+    if (!supportedVarianceStatuses.has(variance.overallStatus)) errors.push(`${variance.id} overallStatus is not supported.`);
+    checkRefs([variance.calibrationRunRef], runIndex, "calibration run", variance.id);
+    checkRefs([variance.suiteHealthRecordRef], suiteHealthIndex, "evaluation suite health record", variance.id);
+    checkRefs(variance.evidenceOriginRefs, evidenceOriginIndex, "evidence origin", variance.id);
+
+    const measurements = Array.isArray(variance.trialMeasurements) ? variance.trialMeasurements : [];
+    if (measurements.length < 2) errors.push(`${variance.id} must include at least two trialMeasurements.`);
+    const measurementIndex = indexById(measurements, `${variance.id}:trialMeasurements`);
+    const profiles = Array.isArray(variance.infrastructureProfiles) ? variance.infrastructureProfiles : [];
+    if (profiles.length === 0) errors.push(`${variance.id} must include infrastructureProfiles.`);
+    const profileIndex = indexById(profiles, `${variance.id}:infrastructureProfiles`);
+
+    for (const measurement of measurements) {
+      checkScore(measurement.value, "value", measurement.id);
+      checkRequiredString(measurement, "infrastructureProfileRef", measurement.id);
+      checkRequiredString(measurement, "observedAt", measurement.id);
+      if (!profileIndex.has(measurement.infrastructureProfileRef)) {
+        errors.push(`${measurement.id} references missing infrastructure profile: ${measurement.infrastructureProfileRef}`);
+      }
+      if (typeof measurement.included !== "boolean") errors.push(`${measurement.id} included must be boolean.`);
+      if (typeof measurement.exclusionRationale !== "string") errors.push(`${measurement.id} exclusionRationale must be a string.`);
+      if (measurement.included === false && (typeof measurement.exclusionRationale !== "string" || measurement.exclusionRationale.trim() === "")) {
+        errors.push(`${measurement.id} excluded trial requires exclusionRationale.`);
+      }
+    }
+    for (const profile of profiles) {
+      for (const field of ["environment", "runtime", "resourceEnvelope", "timeLimit", "concurrency", "status"]) {
+        checkRequiredString(profile, field, profile.id);
+      }
+      if (!supportedProfileStatuses.has(profile.status)) errors.push(`${profile.id} status is not supported.`);
+      if (!Array.isArray(profile.incidentRefs)) errors.push(`${profile.id} incidentRefs must be an array.`);
+    }
+
+    const summary = variance.summary ?? {};
+    const includedMeasurements = measurements.filter((measurement) => measurement.included === true);
+    const includedRefs = includedMeasurements.map((measurement) => measurement.id);
+    checkRefs(summary.includedTrialRefs, measurementIndex, "trial measurement", `${variance.id}/summary`);
+    if (!sameSet(summary.includedTrialRefs ?? [], includedRefs)) {
+      errors.push(`${variance.id} summary includedTrialRefs must equal included trialMeasurements.`);
+    }
+    const values = includedMeasurements.map((measurement) => measurement.value);
+    const expectedCount = values.length;
+    const expectedMean = rounded(values.reduce((sum, value) => sum + value, 0) / Math.max(expectedCount, 1));
+    const expectedMinimum = values.length > 0 ? Math.min(...values) : 0;
+    const expectedMaximum = values.length > 0 ? Math.max(...values) : 0;
+    const expectedRange = rounded(expectedMaximum - expectedMinimum);
+    if (summary.trialCount !== expectedCount) errors.push(`${variance.id} summary trialCount must reproduce from included trials: expected ${expectedCount}.`);
+    if (summary.mean !== expectedMean) errors.push(`${variance.id} summary mean must reproduce from included trials: expected ${expectedMean}.`);
+    if (summary.minimum !== expectedMinimum) errors.push(`${variance.id} summary minimum must reproduce from included trials: expected ${expectedMinimum}.`);
+    if (summary.maximum !== expectedMaximum) errors.push(`${variance.id} summary maximum must reproduce from included trials: expected ${expectedMaximum}.`);
+    if (summary.observedRange !== expectedRange) errors.push(`${variance.id} summary observedRange must reproduce from included trials: expected ${expectedRange}.`);
+
+    const infrastructure = variance.infrastructureAssessment ?? {};
+    checkRefs(infrastructure.profileRefs, profileIndex, "infrastructure profile", `${variance.id}/infrastructureAssessment`);
+    if (!sameSet(infrastructure.profileRefs ?? [], profiles.map((profile) => profile.id))) {
+      errors.push(`${variance.id} infrastructureAssessment profileRefs must equal infrastructureProfiles.`);
+    }
+    if (!Array.isArray(infrastructure.controlledVariables) || infrastructure.controlledVariables.length === 0) {
+      errors.push(`${variance.id} infrastructureAssessment must include controlledVariables.`);
+    }
+    for (const field of ["knownDifferences", "potentialConfounders"]) {
+      if (!Array.isArray(infrastructure[field])) errors.push(`${variance.id} infrastructureAssessment ${field} must be an array.`);
+    }
+    checkRequiredString(infrastructure, "status", `${variance.id}/infrastructureAssessment`);
+    if (!supportedInfrastructureStatuses.has(infrastructure.status)) errors.push(`${variance.id} infrastructureAssessment status is not supported.`);
+
+    const uncertainty = variance.uncertaintyRange ?? {};
+    if (uncertainty.rangeKind !== "observed-trial-range") errors.push(`${variance.id} uncertaintyRange rangeKind must be observed-trial-range.`);
+    if (uncertainty.calculationMethod !== "minimum-and-maximum-of-included-trials") {
+      errors.push(`${variance.id} uncertaintyRange calculationMethod must be minimum-and-maximum-of-included-trials.`);
+    }
+    if (uncertainty.lower !== expectedMinimum || uncertainty.upper !== expectedMaximum) {
+      errors.push(`${variance.id} uncertaintyRange must equal the minimum and maximum included trial values.`);
+    }
+    checkRequiredString(uncertainty, "interpretation", `${variance.id}/uncertaintyRange`);
+    const comparison = variance.comparisonBoundary ?? {};
+    checkScore(comparison.minimumMeaningfulDifference, "minimumMeaningfulDifference", `${variance.id}/comparisonBoundary`);
+    if (comparison.exactComparisonAllowed !== false) {
+      errors.push(`${variance.id} comparisonBoundary exactComparisonAllowed must be false.`);
+    }
+    checkRequiredString(comparison, "rationale", `${variance.id}/comparisonBoundary`);
+
+    if (!Array.isArray(variance.governanceTriggerRefs)) {
+      errors.push(`${variance.id} governanceTriggerRefs must be an array.`);
+    } else {
+      for (const ref of variance.governanceTriggerRefs) {
+        if (!triggerIndex.has(ref)) errors.push(`${variance.id} references missing governance trigger: ${ref}`);
+      }
+    }
+    const run = runIndex.get(variance.calibrationRunRef);
+    const health = suiteHealthIndex.get(variance.suiteHealthRecordRef);
+    if (health && health.calibrationRunRef !== variance.calibrationRunRef) {
+      errors.push(`${variance.id} suiteHealthRecordRef must belong to the same calibration run.`);
+    }
+    const variancePolicy = run ? policyIndex.get(run.policyRef) : null;
+    const empiricalOrigins = (variance.evidenceOriginRefs ?? []).map((ref) => evidenceOriginIndex.get(ref));
+    const unresolvedTriggers = (variance.governanceTriggerRefs ?? []).map((ref) => triggerIndex.get(ref)).filter((trigger) => trigger?.status !== "resolved");
+    if (variance.overallStatus === "sufficient") {
+      if (!variancePolicy || expectedCount < variancePolicy.minimumTrialCount) {
+        errors.push(`${variance.id} overallStatus sufficient requires the policy minimumTrialCount.`);
+      }
+      if (empiricalOrigins.some((origin) => !origin || !empiricalOriginKinds.has(origin.originKind) || origin.status !== "verified")) {
+        errors.push(`${variance.id} overallStatus sufficient requires verified observed-operational or historical-record origins.`);
+      }
+      if (!["controlled", "bounded"].includes(infrastructure.status) || (infrastructure.potentialConfounders ?? []).length > 0) {
+        errors.push(`${variance.id} overallStatus sufficient requires controlled or bounded infrastructure without unresolved confounders.`);
+      }
+      if (profiles.some((profile) => profile.status !== "stable")) {
+        errors.push(`${variance.id} overallStatus sufficient requires stable infrastructure profiles.`);
+      }
+      if (unresolvedTriggers.length > 0) errors.push(`${variance.id} overallStatus sufficient cannot retain unresolved governance triggers.`);
+    } else if ((variance.governanceTriggerRefs ?? []).length === 0) {
+      errors.push(`${variance.id} non-sufficient uncertainty status requires governanceTriggerRefs.`);
+    }
+  }
+
   const coveredExpertFindings = new Set();
   const coveredAgentFindings = new Set();
 
@@ -526,6 +658,7 @@ function validateCalibrationPackage(pkg, packagePath) {
     checkRefs(run.agentAssessmentRefs, agentAssessmentIndex, "agent assessment", run.id);
     checkRefs(run.findingMatchRefs, matchIndex, "finding match", run.id);
     checkRefs(run.suiteHealthRecordRefs, suiteHealthIndex, "evaluation suite health record", run.id);
+    checkRefs(run.trialVarianceRecordRefs, trialVarianceIndex, "trial variance record", run.id);
     checkRequiredString(run, "conclusion", run.id);
     checkRequiredString(run, "residualRisk", run.id);
     checkRequiredString(run, "status", run.id);
@@ -538,11 +671,18 @@ function validateCalibrationPackage(pkg, packagePath) {
     const runMatches = (run.findingMatchRefs ?? []).map((ref) => matchIndex.get(ref)).filter(Boolean);
     const runTriggers = (run.governanceTriggerRefs ?? []).map((ref) => triggerIndex.get(ref)).filter(Boolean);
     const runHealthRecords = (run.suiteHealthRecordRefs ?? []).map((ref) => suiteHealthIndex.get(ref)).filter(Boolean);
+    const runVarianceRecords = (run.trialVarianceRecordRefs ?? []).map((ref) => trialVarianceIndex.get(ref)).filter(Boolean);
 
     for (const health of runHealthRecords) {
       if (health.calibrationRunRef !== run.id) errors.push(`${run.id} suite health record ${health.id} must reference the same calibration run.`);
       if (health.policyRef !== run.policyRef) errors.push(`${run.id} suite health record ${health.id} must reference the same calibration policy.`);
       if (!sameSet(health.caseRefs ?? [], run.caseRefs ?? [])) errors.push(`${run.id} suite health record ${health.id} caseRefs must equal the run caseRefs.`);
+    }
+    for (const variance of runVarianceRecords) {
+      if (variance.calibrationRunRef !== run.id) errors.push(`${run.id} trial variance record ${variance.id} must reference the same calibration run.`);
+      if (!(run.suiteHealthRecordRefs ?? []).includes(variance.suiteHealthRecordRef)) {
+        errors.push(`${run.id} trial variance record ${variance.id} must reference one of the run suiteHealthRecordRefs.`);
+      }
     }
 
     if (run.caseCount !== (run.caseRefs ?? []).length) {
@@ -616,6 +756,9 @@ function validateCalibrationPackage(pkg, packagePath) {
       if (run.conclusion === "calibrated" && !runHealthRecords.some((health) => health.overallStatus === "healthy")) {
         errors.push(`${run.id} conclusion calibrated requires a healthy evaluation suite health record.`);
       }
+      if (run.conclusion === "calibrated" && !runVarianceRecords.some((variance) => variance.overallStatus === "sufficient")) {
+        errors.push(`${run.id} conclusion calibrated requires a sufficient trial variance record.`);
+      }
     }
 
     for (const triggerRef of run.governanceTriggerRefs ?? []) {
@@ -654,6 +797,7 @@ function validateCalibrationPackage(pkg, packagePath) {
       agentAssessments: agentAssessments.length,
       findingMatches: findingMatches.length,
       evaluationSuiteHealthRecords: suiteHealthRecords.length,
+      trialVarianceRecords: trialVarianceRecords.length,
       calibrationRuns: calibrationRuns.length,
       governanceTriggers: governanceTriggers.length
     }

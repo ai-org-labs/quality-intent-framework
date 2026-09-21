@@ -34,6 +34,10 @@ function suiteHealth(pkg) {
   return pkg.evaluationSuiteHealthRecords[0];
 }
 
+function trialVariance(pkg) {
+  return pkg.trialVarianceRecords[0];
+}
+
 function run(pkg) {
   return pkg.calibrationRuns[0];
 }
@@ -137,6 +141,12 @@ export const cases = [
     mutate: (pkg) => { run(pkg).caseCount = 2; }
   },
   {
+    id: "policy-minimum-trial-count-invalid",
+    rule: "minimum trial count requires repeated trials",
+    expect: "CALPOL-WMC-001 minimumTrialCount must be an integer of at least 2.",
+    mutate: (pkg) => { policy(pkg).minimumTrialCount = 1; }
+  },
+  {
     id: "suite-health-broken-run-ref",
     rule: "suite health calibration run resolves",
     expect: "ESH-WMC-001 references missing calibration run: CALRUN-NOPE-999",
@@ -180,6 +190,180 @@ export const cases = [
     rule: "calibration run suite health refs resolve",
     expect: "CALRUN-WMC-001 references missing evaluation suite health record: ESH-NOPE-999",
     mutate: (pkg) => { run(pkg).suiteHealthRecordRefs = ["ESH-NOPE-999"]; }
+  },
+  {
+    id: "trial-variance-broken-run-ref",
+    rule: "trial variance calibration run resolves",
+    expect: "TVR-WMC-001 references missing calibration run: CALRUN-NOPE-999",
+    mutate: (pkg) => { trialVariance(pkg).calibrationRunRef = "CALRUN-NOPE-999"; }
+  },
+  {
+    id: "trial-variance-unsupported-metric",
+    rule: "trial variance metric is supported",
+    expect: "TVR-WMC-001 metric is not supported.",
+    mutate: (pkg) => { trialVariance(pkg).metric = "quality"; }
+  },
+  {
+    id: "trial-variance-needs-repeated-measurements",
+    rule: "trial variance requires repeated measurements",
+    expect: "TVR-WMC-001 must include at least two trialMeasurements.",
+    mutate: (pkg) => {
+      const variance = trialVariance(pkg);
+      variance.trialMeasurements = [variance.trialMeasurements[0]];
+      variance.summary.includedTrialRefs = ["TVM-WMC-001"];
+      variance.summary.trialCount = 1;
+      variance.summary.mean = 0.5;
+      variance.summary.minimum = 0.5;
+      variance.summary.maximum = 0.5;
+      variance.summary.observedRange = 0;
+      variance.uncertaintyRange.lower = 0.5;
+      variance.uncertaintyRange.upper = 0.5;
+    }
+  },
+  {
+    id: "trial-variance-included-refs-mismatch",
+    rule: "summary refs equal included measurements",
+    expect: "TVR-WMC-001 summary includedTrialRefs must equal included trialMeasurements.",
+    mutate: (pkg) => { trialVariance(pkg).summary.includedTrialRefs = ["TVM-WMC-001", "TVM-WMC-002"]; }
+  },
+  {
+    id: "trial-variance-mean-mismatch",
+    rule: "trial mean reproduces from included measurements",
+    expect: "TVR-WMC-001 summary mean must reproduce from included trials: expected 0.5.",
+    mutate: (pkg) => { trialVariance(pkg).summary.mean = 0.6; }
+  },
+  {
+    id: "trial-variance-summary-count-mismatch",
+    rule: "trial count reproduces from included measurements",
+    expect: "TVR-WMC-001 summary trialCount must reproduce from included trials: expected 3.",
+    mutate: (pkg) => { trialVariance(pkg).summary.trialCount = 2; }
+  },
+  {
+    id: "trial-variance-range-mismatch",
+    rule: "uncertainty range reproduces from included measurements",
+    expect: "TVR-WMC-001 uncertaintyRange must equal the minimum and maximum included trial values.",
+    mutate: (pkg) => { trialVariance(pkg).uncertaintyRange.upper = 0.9; }
+  },
+  {
+    id: "trial-variance-broken-infrastructure-profile",
+    rule: "trial measurements resolve infrastructure profiles",
+    expect: "TVM-WMC-001 references missing infrastructure profile: INP-NOPE-999",
+    mutate: (pkg) => { trialVariance(pkg).trialMeasurements[0].infrastructureProfileRef = "INP-NOPE-999"; }
+  },
+  {
+    id: "trial-variance-profile-refs-mismatch",
+    rule: "infrastructure assessment covers every profile",
+    expect: "TVR-WMC-001 infrastructureAssessment profileRefs must equal infrastructureProfiles.",
+    mutate: (pkg) => {
+      trialVariance(pkg).infrastructureProfiles.push({
+        id: "INP-WMC-002",
+        environment: "second profile",
+        runtime: "second runtime",
+        resourceEnvelope: "second envelope",
+        timeLimit: "second limit",
+        concurrency: "second concurrency",
+        incidentRefs: [],
+        status: "stable"
+      });
+    }
+  },
+  {
+    id: "trial-variance-unsupported-profile-status",
+    rule: "infrastructure profile status is supported",
+    expect: "INP-WMC-001 status is not supported.",
+    mutate: (pkg) => { trialVariance(pkg).infrastructureProfiles[0].status = "perfect"; }
+  },
+  {
+    id: "trial-variance-unsupported-assessment-status",
+    rule: "infrastructure assessment status is supported",
+    expect: "TVR-WMC-001 infrastructureAssessment status is not supported.",
+    mutate: (pkg) => { trialVariance(pkg).infrastructureAssessment.status = "exact"; }
+  },
+  {
+    id: "trial-variance-exact-comparison-forbidden",
+    rule: "uncertainty does not allow exact comparison",
+    expect: "TVR-WMC-001 comparisonBoundary exactComparisonAllowed must be false.",
+    mutate: (pkg) => { trialVariance(pkg).comparisonBoundary.exactComparisonAllowed = true; }
+  },
+  {
+    id: "trial-variance-provisional-without-governance",
+    rule: "non-sufficient uncertainty routes to governance",
+    expect: "TVR-WMC-001 non-sufficient uncertainty status requires governanceTriggerRefs.",
+    mutate: (pkg) => { trialVariance(pkg).governanceTriggerRefs = []; }
+  },
+  {
+    id: "trial-variance-sufficient-requires-empirical-origin",
+    rule: "sufficient uncertainty requires empirical origin",
+    expect: "TVR-WMC-001 overallStatus sufficient requires verified observed-operational or historical-record origins.",
+    mutate: (pkg) => {
+      const variance = trialVariance(pkg);
+      variance.overallStatus = "sufficient";
+      variance.infrastructureAssessment.status = "controlled";
+      variance.infrastructureAssessment.potentialConfounders = [];
+      variance.governanceTriggerRefs = [];
+    }
+  },
+  {
+    id: "trial-variance-sufficient-requires-bounded-infrastructure",
+    rule: "sufficient uncertainty requires bounded infrastructure",
+    expect: "TVR-WMC-001 overallStatus sufficient requires controlled or bounded infrastructure without unresolved confounders.",
+    mutate: (pkg) => {
+      pkg.evidenceOrigins[0].originKind = "historical-record";
+      const variance = trialVariance(pkg);
+      variance.overallStatus = "sufficient";
+      variance.governanceTriggerRefs = [];
+    }
+  },
+  {
+    id: "trial-variance-sufficient-requires-stable-profile",
+    rule: "sufficient uncertainty requires stable infrastructure profiles",
+    expect: "TVR-WMC-001 overallStatus sufficient requires stable infrastructure profiles.",
+    mutate: (pkg) => {
+      pkg.evidenceOrigins[0].originKind = "historical-record";
+      const variance = trialVariance(pkg);
+      variance.overallStatus = "sufficient";
+      variance.infrastructureAssessment.status = "controlled";
+      variance.infrastructureAssessment.potentialConfounders = [];
+      variance.infrastructureProfiles[0].status = "degraded";
+      variance.governanceTriggerRefs = [];
+    }
+  },
+  {
+    id: "trial-variance-sufficient-rejects-open-governance",
+    rule: "sufficient uncertainty rejects unresolved governance",
+    expect: "TVR-WMC-001 overallStatus sufficient cannot retain unresolved governance triggers.",
+    mutate: (pkg) => {
+      pkg.evidenceOrigins[0].originKind = "historical-record";
+      const variance = trialVariance(pkg);
+      variance.overallStatus = "sufficient";
+      variance.infrastructureAssessment.status = "controlled";
+      variance.infrastructureAssessment.potentialConfounders = [];
+    }
+  },
+  {
+    id: "run-broken-trial-variance-ref",
+    rule: "calibration run trial variance refs resolve",
+    expect: "CALRUN-WMC-001 references missing trial variance record: TVR-NOPE-999",
+    mutate: (pkg) => { run(pkg).trialVarianceRecordRefs = ["TVR-NOPE-999"]; }
+  },
+  {
+    id: "calibrated-run-requires-sufficient-variance",
+    rule: "calibrated run requires sufficient trial variance",
+    expect: "CALRUN-WMC-001 conclusion calibrated requires a sufficient trial variance record.",
+    mutate: (pkg) => {
+      policy(pkg).agreementThreshold = 0.5;
+      policy(pkg).falseNegativeRateMax = 0.33;
+      pkg.evidenceOrigins[0].originKind = "historical-record";
+      const health = suiteHealth(pkg);
+      health.taskOrigin.status = "verified";
+      health.contamination.status = "clear";
+      health.solvability.status = "verified";
+      health.saturation.status = "not-saturated";
+      health.graders.status = "calibrated";
+      health.overallStatus = "healthy";
+      health.governanceTriggerRefs = [];
+      run(pkg).conclusion = "calibrated";
+    }
   },
   {
     id: "calibrated-run-requires-healthy-suite",

@@ -169,6 +169,13 @@
       "errorIncludes": "CALRUN-WMC-001 caseCount must equal caseRefs length."
     },
     {
+      "file": "world-model-calibration-policy-minimum-trial-count-invalid.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "minimum trial count requires repeated trials",
+      "expect": "fail",
+      "errorIncludes": "CALPOL-WMC-001 minimumTrialCount must be an integer of at least 2."
+    },
+    {
       "file": "world-model-calibration-suite-health-broken-run-ref.json",
       "validator": "tools/validate-world-model-calibration.mjs",
       "rule": "suite health calibration run resolves",
@@ -209,6 +216,139 @@
       "rule": "calibration run suite health refs resolve",
       "expect": "fail",
       "errorIncludes": "CALRUN-WMC-001 references missing evaluation suite health record: ESH-NOPE-999"
+    },
+    {
+      "file": "world-model-calibration-trial-variance-broken-run-ref.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "trial variance calibration run resolves",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 references missing calibration run: CALRUN-NOPE-999"
+    },
+    {
+      "file": "world-model-calibration-trial-variance-unsupported-metric.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "trial variance metric is supported",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 metric is not supported."
+    },
+    {
+      "file": "world-model-calibration-trial-variance-needs-repeated-measurements.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "trial variance requires repeated measurements",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 must include at least two trialMeasurements."
+    },
+    {
+      "file": "world-model-calibration-trial-variance-included-refs-mismatch.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "summary refs equal included measurements",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 summary includedTrialRefs must equal included trialMeasurements."
+    },
+    {
+      "file": "world-model-calibration-trial-variance-mean-mismatch.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "trial mean reproduces from included measurements",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 summary mean must reproduce from included trials: expected 0.5."
+    },
+    {
+      "file": "world-model-calibration-trial-variance-summary-count-mismatch.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "trial count reproduces from included measurements",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 summary trialCount must reproduce from included trials: expected 3."
+    },
+    {
+      "file": "world-model-calibration-trial-variance-range-mismatch.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "uncertainty range reproduces from included measurements",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 uncertaintyRange must equal the minimum and maximum included trial values."
+    },
+    {
+      "file": "world-model-calibration-trial-variance-broken-infrastructure-profile.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "trial measurements resolve infrastructure profiles",
+      "expect": "fail",
+      "errorIncludes": "TVM-WMC-001 references missing infrastructure profile: INP-NOPE-999"
+    },
+    {
+      "file": "world-model-calibration-trial-variance-profile-refs-mismatch.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "infrastructure assessment covers every profile",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 infrastructureAssessment profileRefs must equal infrastructureProfiles."
+    },
+    {
+      "file": "world-model-calibration-trial-variance-unsupported-profile-status.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "infrastructure profile status is supported",
+      "expect": "fail",
+      "errorIncludes": "INP-WMC-001 status is not supported."
+    },
+    {
+      "file": "world-model-calibration-trial-variance-unsupported-assessment-status.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "infrastructure assessment status is supported",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 infrastructureAssessment status is not supported."
+    },
+    {
+      "file": "world-model-calibration-trial-variance-exact-comparison-forbidden.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "uncertainty does not allow exact comparison",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 comparisonBoundary exactComparisonAllowed must be false."
+    },
+    {
+      "file": "world-model-calibration-trial-variance-provisional-without-governance.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "non-sufficient uncertainty routes to governance",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 non-sufficient uncertainty status requires governanceTriggerRefs."
+    },
+    {
+      "file": "world-model-calibration-trial-variance-sufficient-requires-empirical-origin.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "sufficient uncertainty requires empirical origin",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 overallStatus sufficient requires verified observed-operational or historical-record origins."
+    },
+    {
+      "file": "world-model-calibration-trial-variance-sufficient-requires-bounded-infrastructure.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "sufficient uncertainty requires bounded infrastructure",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 overallStatus sufficient requires controlled or bounded infrastructure without unresolved confounders."
+    },
+    {
+      "file": "world-model-calibration-trial-variance-sufficient-requires-stable-profile.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "sufficient uncertainty requires stable infrastructure profiles",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 overallStatus sufficient requires stable infrastructure profiles."
+    },
+    {
+      "file": "world-model-calibration-trial-variance-sufficient-rejects-open-governance.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "sufficient uncertainty rejects unresolved governance",
+      "expect": "fail",
+      "errorIncludes": "TVR-WMC-001 overallStatus sufficient cannot retain unresolved governance triggers."
+    },
+    {
+      "file": "world-model-calibration-run-broken-trial-variance-ref.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "calibration run trial variance refs resolve",
+      "expect": "fail",
+      "errorIncludes": "CALRUN-WMC-001 references missing trial variance record: TVR-NOPE-999"
+    },
+    {
+      "file": "world-model-calibration-calibrated-run-requires-sufficient-variance.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "calibrated run requires sufficient trial variance",
+      "expect": "fail",
+      "errorIncludes": "CALRUN-WMC-001 conclusion calibrated requires a sufficient trial variance record."
     },
     {
       "file": "world-model-calibration-calibrated-run-requires-healthy-suite.json",

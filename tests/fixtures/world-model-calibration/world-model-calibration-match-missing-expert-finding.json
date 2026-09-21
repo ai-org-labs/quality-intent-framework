@@ -39,6 +39,7 @@
         "accounting"
       ],
       "requiredExpertAssessorsPerCase": 1,
+      "minimumTrialCount": 3,
       "requiresUnseenCases": true,
       "agreementThreshold": 0.7,
       "falsePositiveRateMax": 0.2,
@@ -345,6 +346,99 @@
       "assuranceBoundary": "This record demonstrates complete suite-health structure only; public examples do not prove contamination freedom, representativeness, solvability, grader validity, or empirical health."
     }
   ],
+  "trialVarianceRecords": [
+    {
+      "id": "TVR-WMC-001",
+      "title": "Example agreement-score trial and infrastructure uncertainty",
+      "calibrationRunRef": "CALRUN-WMC-001",
+      "suiteHealthRecordRef": "ESH-WMC-001",
+      "evidenceOriginRefs": [
+        "EOR-WMC-001"
+      ],
+      "metric": "agreementScore",
+      "trialMeasurements": [
+        {
+          "id": "TVM-WMC-001",
+          "value": 0.5,
+          "infrastructureProfileRef": "INP-WMC-001",
+          "observedAt": "example-trial-1",
+          "included": true,
+          "exclusionRationale": ""
+        },
+        {
+          "id": "TVM-WMC-002",
+          "value": 0.67,
+          "infrastructureProfileRef": "INP-WMC-001",
+          "observedAt": "example-trial-2",
+          "included": true,
+          "exclusionRationale": ""
+        },
+        {
+          "id": "TVM-WMC-003",
+          "value": 0.33,
+          "infrastructureProfileRef": "INP-WMC-001",
+          "observedAt": "example-trial-3",
+          "included": true,
+          "exclusionRationale": ""
+        }
+      ],
+      "summary": {
+        "includedTrialRefs": [
+          "TVM-WMC-001",
+          "TVM-WMC-002",
+          "TVM-WMC-003"
+        ],
+        "trialCount": 3,
+        "mean": 0.5,
+        "minimum": 0.33,
+        "maximum": 0.67,
+        "observedRange": 0.34
+      },
+      "infrastructureProfiles": [
+        {
+          "id": "INP-WMC-001",
+          "environment": "Committed local example environment",
+          "runtime": "Node.js CLI with repository examples",
+          "resourceEnvelope": "Not measured for this illustrative record",
+          "timeLimit": "No empirical time-limit control recorded",
+          "concurrency": "Single local process",
+          "incidentRefs": [],
+          "status": "stable"
+        }
+      ],
+      "infrastructureAssessment": {
+        "profileRefs": [
+          "INP-WMC-001"
+        ],
+        "controlledVariables": [
+          "same committed package",
+          "same structural verifier"
+        ],
+        "knownDifferences": [],
+        "potentialConfounders": [
+          "illustrative values were not observed from repeated independent executions"
+        ],
+        "status": "unresolved"
+      },
+      "uncertaintyRange": {
+        "rangeKind": "observed-trial-range",
+        "lower": 0.33,
+        "upper": 0.67,
+        "calculationMethod": "minimum-and-maximum-of-included-trials",
+        "interpretation": "The range demonstrates reproducible structure only and is not a statistical confidence interval or empirical performance claim."
+      },
+      "comparisonBoundary": {
+        "minimumMeaningfulDifference": 0.1,
+        "exactComparisonAllowed": false,
+        "rationale": "A point-score difference inside or near the observed range must not be reported as an exact capability difference."
+      },
+      "overallStatus": "provisional",
+      "governanceTriggerRefs": [
+        "GTR-WMC-004"
+      ],
+      "assuranceBoundary": "Trial count, mean, and observed range are evidence about repeated measurements only; they do not prove quality, representativeness, independence, or causal attribution."
+    }
+  ],
   "calibrationRuns": [
     {
       "id": "CALRUN-WMC-001",
@@ -371,6 +465,9 @@
       ],
       "suiteHealthRecordRefs": [
         "ESH-WMC-001"
+      ],
+      "trialVarianceRecordRefs": [
+        "TVR-WMC-001"
       ],
       "caseCount": 3,
       "domainCoverage": [
@@ -420,6 +517,16 @@
       "requiredAction": "Collect privacy-screened observed or historical pilot cases and perform documented contamination checks before marking suite health as healthy.",
       "owner": "qif-maintainer",
       "status": "open"
+    },
+    {
+      "id": "GTR-WMC-004",
+      "triggerType": "trial-variance-unresolved",
+      "reason": "The committed example values are illustrative and do not establish repeated independent trials or bounded infrastructure uncertainty.",
+      "sourceCalibrationRunRef": "CALRUN-WMC-001",
+      "severity": "medium",
+      "requiredAction": "Run repeated trials under recorded infrastructure profiles, investigate incidents and confounders, and retain uncertainty ranges before comparing scores.",
+      "owner": "qif-maintainer",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -430,6 +537,9 @@
       "finding matches cover expected and generated findings",
       "agreement, false-positive, and false-negative rates reproduce from finding matches",
       "evaluation suite health records cover task origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership",
+      "trial summaries and observed uncertainty ranges reproduce from included measurements",
+      "trial measurements resolve infrastructure profiles and calibration-run links",
+      "sufficient uncertainty records use verified empirical origins and bounded infrastructure",
       "threshold failures trigger governance"
     ],
     "doesNotClaim": [

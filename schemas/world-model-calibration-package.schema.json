@@ -15,6 +15,7 @@
     "agentAssessments",
     "findingMatches",
     "evaluationSuiteHealthRecords",
+    "trialVarianceRecords",
     "calibrationRuns",
     "governanceTriggers",
     "verifierBoundary"
@@ -63,6 +64,11 @@
       "type": "array",
       "minItems": 1,
       "items": { "$ref": "#/$defs/evaluationSuiteHealthRecord" }
+    },
+    "trialVarianceRecords": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/trialVarianceRecord" }
     },
     "calibrationRuns": {
       "type": "array",
@@ -151,6 +157,7 @@
         "minimumCaseCount",
         "requiredDomains",
         "requiredExpertAssessorsPerCase",
+        "minimumTrialCount",
         "requiresUnseenCases",
         "agreementThreshold",
         "falsePositiveRateMax",
@@ -171,6 +178,7 @@
           "minItems": 1
         },
         "requiredExpertAssessorsPerCase": { "type": "integer", "minimum": 1 },
+        "minimumTrialCount": { "type": "integer", "minimum": 2 },
         "requiresUnseenCases": { "type": "boolean" },
         "agreementThreshold": { "$ref": "#/$defs/score" },
         "falsePositiveRateMax": { "$ref": "#/$defs/score" },
@@ -355,6 +363,105 @@
         "assuranceBoundary": { "type": "string", "minLength": 1 }
       }
     },
+    "trialVarianceRecord": {
+      "type": "object",
+      "required": ["id", "title", "calibrationRunRef", "suiteHealthRecordRef", "evidenceOriginRefs", "metric", "trialMeasurements", "summary", "infrastructureProfiles", "infrastructureAssessment", "uncertaintyRange", "comparisonBoundary", "overallStatus", "governanceTriggerRefs", "assuranceBoundary"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "calibrationRunRef": { "$ref": "#/$defs/id" },
+        "suiteHealthRecordRef": { "$ref": "#/$defs/id" },
+        "evidenceOriginRefs": { "$ref": "#/$defs/refArray" },
+        "metric": { "enum": ["agreementScore", "falsePositiveRate", "falseNegativeRate"] },
+        "trialMeasurements": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["id", "value", "infrastructureProfileRef", "observedAt", "included", "exclusionRationale"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "$ref": "#/$defs/id" },
+              "value": { "$ref": "#/$defs/score" },
+              "infrastructureProfileRef": { "$ref": "#/$defs/id" },
+              "observedAt": { "type": "string", "minLength": 1 },
+              "included": { "type": "boolean" },
+              "exclusionRationale": { "type": "string" }
+            }
+          }
+        },
+        "summary": {
+          "type": "object",
+          "required": ["includedTrialRefs", "trialCount", "mean", "minimum", "maximum", "observedRange"],
+          "additionalProperties": false,
+          "properties": {
+            "includedTrialRefs": { "$ref": "#/$defs/refArray" },
+            "trialCount": { "type": "integer", "minimum": 1 },
+            "mean": { "$ref": "#/$defs/score" },
+            "minimum": { "$ref": "#/$defs/score" },
+            "maximum": { "$ref": "#/$defs/score" },
+            "observedRange": { "$ref": "#/$defs/score" }
+          }
+        },
+        "infrastructureProfiles": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "environment", "runtime", "resourceEnvelope", "timeLimit", "concurrency", "incidentRefs", "status"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "$ref": "#/$defs/id" },
+              "environment": { "type": "string", "minLength": 1 },
+              "runtime": { "type": "string", "minLength": 1 },
+              "resourceEnvelope": { "type": "string", "minLength": 1 },
+              "timeLimit": { "type": "string", "minLength": 1 },
+              "concurrency": { "type": "string", "minLength": 1 },
+              "incidentRefs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+              "status": { "enum": ["stable", "degraded", "incident-open", "unknown"] }
+            }
+          }
+        },
+        "infrastructureAssessment": {
+          "type": "object",
+          "required": ["profileRefs", "controlledVariables", "knownDifferences", "potentialConfounders", "status"],
+          "additionalProperties": false,
+          "properties": {
+            "profileRefs": { "$ref": "#/$defs/refArray" },
+            "controlledVariables": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+            "knownDifferences": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+            "potentialConfounders": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+            "status": { "enum": ["controlled", "bounded", "unresolved", "incident-affected"] }
+          }
+        },
+        "uncertaintyRange": {
+          "type": "object",
+          "required": ["rangeKind", "lower", "upper", "calculationMethod", "interpretation"],
+          "additionalProperties": false,
+          "properties": {
+            "rangeKind": { "const": "observed-trial-range" },
+            "lower": { "$ref": "#/$defs/score" },
+            "upper": { "$ref": "#/$defs/score" },
+            "calculationMethod": { "const": "minimum-and-maximum-of-included-trials" },
+            "interpretation": { "type": "string", "minLength": 1 }
+          }
+        },
+        "comparisonBoundary": {
+          "type": "object",
+          "required": ["minimumMeaningfulDifference", "exactComparisonAllowed", "rationale"],
+          "additionalProperties": false,
+          "properties": {
+            "minimumMeaningfulDifference": { "$ref": "#/$defs/score" },
+            "exactComparisonAllowed": { "type": "boolean" },
+            "rationale": { "type": "string", "minLength": 1 }
+          }
+        },
+        "overallStatus": { "enum": ["sufficient", "provisional", "blocked", "stale"] },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "assuranceBoundary": { "type": "string", "minLength": 1 }
+      }
+    },
     "calibrationRun": {
       "type": "object",
       "required": [
@@ -365,6 +472,7 @@
         "agentAssessmentRefs",
         "findingMatchRefs",
         "suiteHealthRecordRefs",
+        "trialVarianceRecordRefs",
         "caseCount",
         "domainCoverage",
         "agreementScore",
@@ -384,6 +492,7 @@
         "agentAssessmentRefs": { "$ref": "#/$defs/refArray" },
         "findingMatchRefs": { "$ref": "#/$defs/refArray" },
         "suiteHealthRecordRefs": { "$ref": "#/$defs/refArray" },
+        "trialVarianceRecordRefs": { "$ref": "#/$defs/refArray" },
         "caseCount": { "type": "integer", "minimum": 0 },
         "domainCoverage": {
           "type": "array",
@@ -408,7 +517,7 @@
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" },
-        "triggerType": { "enum": ["low-agreement", "high-false-positive-rate", "high-false-negative-rate", "insufficient-case-count", "domain-gap", "expert-disagreement", "contamination-risk", "unsolvable-case", "suite-saturation", "grader-drift", "harness-non-reproducible", "infrastructure-instability", "drift-unowned", "other"] },
+        "triggerType": { "enum": ["low-agreement", "high-false-positive-rate", "high-false-negative-rate", "insufficient-case-count", "insufficient-trial-count", "domain-gap", "expert-disagreement", "contamination-risk", "unsolvable-case", "suite-saturation", "grader-drift", "harness-non-reproducible", "infrastructure-instability", "trial-variance-unresolved", "drift-unowned", "other"] },
         "reason": { "type": "string" },
         "sourceCalibrationRunRef": { "$ref": "#/$defs/id" },
         "severity": { "enum": ["low", "medium", "high", "critical"] },

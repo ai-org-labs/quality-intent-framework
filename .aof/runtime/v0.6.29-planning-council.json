@@ -1,0 +1,31 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-21T04:33:06.750Z",
+  "review_packet_id": "CREV-MUAR21FI-SGF5SM",
+  "council_id": "qif-council",
+  "stage": "planning",
+  "review_status": "approved",
+  "decision_summary": "Implement v0.6.29 as a narrow Trial and Infrastructure Uncertainty release in the calibration package.",
+  "rationale": "Visionary: quality comparisons must expose nondeterminism before confidence can earn empirical meaning. Builder: add one canonical trial-variance record linked to calibration runs and suite health, with reproducible statistics and infrastructure profiles. Guardian: trial count, low variance, narrow ranges, or a passing verifier must never become quality claims; example evidence stays provisional and unresolved confounders route to governance.",
+  "recommendation": "Proceed with schema, verifier, fixtures, example, calibration-readiness regression, authoring guidance, roadmap, and release evidence; defer framework learning.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    ".aof/runtime/v0.6.29-situation.json",
+    "docs/qif-roadmap.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-047",
+  "source_parent_session_id": null,
+  "source_decision_record_id": null
+}

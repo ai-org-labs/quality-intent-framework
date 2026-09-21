@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.29
+
+- Added first-class Trial Variance records with repeated measurements, reproducible summaries, observed uncertainty ranges, and bidirectional calibration-run linkage.
+- Added infrastructure profiles and assessments so runtime, resources, time limits, concurrency, incidents, known differences, and potential confounders remain attached to the measurement claim.
+- Enforced policy-defined minimum trials, empirical origins for sufficient status, bounded infrastructure, no exact-comparison claim, governance routing, and a sufficient-uncertainty prerequisite for calibrated conclusions.
+- Made `CRD-UNCERTAINTY` structurally satisfiable while committed examples remain provisional; the retained suite now covers 638 negative cases.
+
 ## v0.6.28
 
 - Added first-class Evaluation Suite Health records to world-model-calibration packages.

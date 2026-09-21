@@ -2,6 +2,63 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.29 Trial and Infrastructure Uncertainty
+
+Date: 2026-09-21
+
+Need / Intent / Context:
+
+- Need: Evaluation Suite Health governs whether a suite is trustworthy, but repeated runs and infrastructure differences can still make small score differences look exact.
+- Intent: add executable Trial Variance records with repeated measurements, reproducible observed ranges, infrastructure profiles, confounder status, comparison boundaries, and deterministic `CRD-UNCERTAINTY` readiness.
+- Context: agent evaluations are nondeterministic, and published infrastructure experiments show that resource configuration can move benchmark scores by more than the gap between compared systems. QIF must remain domain-general and must not treat trial count, narrow ranges, stable infrastructure, or verifier success as quality.
+
+Direction and council judgment:
+
+- Visionary: approve. Quality comparisons must expose nondeterminism before confidence can earn empirical meaning.
+- Builder: approve. Add one canonical record family to world-model-calibration, link it bidirectionally to runs and suite health, and reproduce simple observed-range arithmetic deterministically.
+- Guardian: approve with boundary. An observed range is not automatically a confidence interval; trials may not be independent, infrastructure may be causal or merely correlated, and all example evidence remains provisional.
+
+Runtime command evidence:
+
+- AOF runtime package version: `12.3.0`; latest local release tag after fetch: `v12.2.0`. The existing AOF worktree was not modified.
+- AOF `situation-assess` wrote `.aof/runtime/v0.6.29-situation.json`.
+- The prior post-release AOF `goal-project --goal-type next-value-slice` already held the Validated Need / Intent / Context for this slice.
+- AOF `task-open` created `TASK-047`.
+- AOF planning `council-review-packet` wrote `.aof/runtime/v0.6.29-planning-council.json`.
+- Trend references checked:
+  - `https://www.anthropic.com/engineering/infrastructure-noise`
+  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+  - `https://openai.com/index/model-misalignment-reporting-framework/`
+  - `https://openai.com/index/research-acceleration-view-inside-openai/`
+
+What was built:
+
+- `trialVarianceRecords` in the world-model-calibration schema and example.
+- Repeated trial measurements with included/excluded provenance and reproducible count, mean, minimum, maximum, and observed range.
+- Infrastructure profiles and assessments covering environment, runtime, resource envelope, time limit, concurrency, incidents, known differences, and potential confounders.
+- Bidirectional calibration-run linkage, policy-defined minimum trials, empirical-origin requirements for sufficient status, governance routing, and a sufficient-uncertainty prerequisite for calibrated conclusions.
+- Deterministic `CRD-UNCERTAINTY` readiness and a generated positive regression.
+
+What was not built:
+
+- No statistical confidence interval, causal inference, trial-independence proof, or semantic quality claim.
+- No external evaluation service integration or UI.
+- No framework-learning record; this remains the next Phase 4 slice.
+- No use of trial count, low variance, or narrow range as quality itself.
+
+Verification:
+
+- Schema and example JSON parsing and `git diff --check` passed.
+- `node tools/qif.mjs calibration-readiness` passed at package version `0.6.29`; the committed example exposes Trial Variance and infrastructure uncertainty, remains `provisional`, and correctly retains `CRD-UNCERTAINTY`.
+- `node tools/check-calibration-readiness.mjs` passed, including a generated empirical, healthy-suite, bounded-infrastructure path that satisfies `CRD-UNCERTAINTY` without claiming semantic validity.
+- `npm test` passed all CLI and verifier checks, `15/15` positive packages, and `638/638` retained negative fixtures.
+- AOF self-review and final review packets were approved and written to `.aof/runtime/v0.6.29-self-review.json` and `.aof/runtime/v0.6.29-final-review.json`.
+- AOF retrospective judgment was recorded in `.aof/runtime/v0.6.29-retrospective.json`.
+- AOF `task-update` completed `TASK-047`; post-implementation `situation-assess` wrote `.aof/runtime/v0.6.29-post-situation.json`.
+- AOF `organization-verify --project .` passed `231/231` checks.
+
+Release evidence will be appended after publication.
+
 ## v0.6.28 Evaluation Suite Health
 
 Date: 2026-09-20

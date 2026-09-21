@@ -53,6 +53,13 @@ const empiricalInputs = [
       health.governanceTriggerRefs = [];
       health.assuranceBoundary = "Health status records reviewed suite conditions only and does not prove semantic correctness.";
     }
+    for (const variance of pkg.trialVarianceRecords) {
+      variance.infrastructureAssessment.status = "controlled";
+      variance.infrastructureAssessment.potentialConfounders = [];
+      variance.overallStatus = "sufficient";
+      variance.governanceTriggerRefs = [];
+      variance.assuranceBoundary = "Repeated measurements and controlled infrastructure support an uncertainty range but do not prove quality, independence, or causal attribution.";
+    }
   }
   const target = path.join(empiricalDir, `${flag}.json`);
   fs.writeFileSync(target, `${JSON.stringify(pkg, null, 2)}\n`);
@@ -80,6 +87,7 @@ if (result.status !== 0) {
   if (empiricalReport?.evidenceOrigin?.status !== "verified-empirical") errors.push("expected observed and historical Evidence Origins to be recognized as verified empirical provenance");
   if (!empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-ORIGIN")?.met) errors.push("expected CRD-ORIGIN to be structurally satisfiable");
   if (!empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-SUITE-HEALTH")?.met) errors.push("expected CRD-SUITE-HEALTH to be structurally satisfiable");
+  if (!empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-UNCERTAINTY")?.met) errors.push("expected CRD-UNCERTAINTY to be structurally satisfiable");
   for (const blockerId of requiredBlockers) {
     if (!blockerIds.has(blockerId)) errors.push(`expected blocker ${blockerId}`);
   }
@@ -101,6 +109,7 @@ if (result.status !== 0) {
       invalidInputFailsClosed: invalidInputResult.status !== 0,
       empiricalOriginRecognized: empiricalReport?.evidenceOrigin?.status === "verified-empirical",
       healthySuiteRecognized: empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-SUITE-HEALTH")?.met === true,
+      boundedUncertaintyRecognized: empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-UNCERTAINTY")?.met === true,
       blockerIds: Array.from(blockerIds).sort()
     }, null, 2));
   }

@@ -66,6 +66,7 @@ Use additional documents when needed:
 | Prepare real pilot cases for world-model calibration | `docs/qif-v0.5.3-world-model-pilot-corpus.md`, `schemas/world-model-pilot-corpus-package.schema.json`, `examples/world-model-pilot-corpus-package.json` |
 | Declare where outcomes and calibration cases came from | `docs/qif-v0.6.27-evidence-origin.md` and the relevant package schema |
 | Determine whether an evaluation suite is fit to support its claim | `docs/qif-v0.6.28-evaluation-suite-health.md`, `schemas/world-model-calibration-package.schema.json` |
+| Explain repeated-trial variation and infrastructure uncertainty without false precision | `docs/qif-v0.6.29-trial-infrastructure-uncertainty.md`, `schemas/world-model-calibration-package.schema.json` |
 | Understand quality theory background | `docs/quality-theory-report.md` |
 
 ## Required Framing
@@ -572,6 +573,20 @@ coverage is complete, origins are verified observed or historical records,
 and no health governance issue remains unresolved. Use `provisional`,
 `degraded`, `blocked`, or `stale` honestly. A passing suite-health verifier
 does not prove that the suite is scientifically valid or representative.
+
+## Trial and Infrastructure Uncertainty
+
+Do not compare calibration point scores as if they were exact. Link every
+calibration run to `trialVarianceRecords` that retain the included trial
+measurements, infrastructure profile, reproduced mean and observed range,
+known differences, potential confounders, and the boundary for comparison.
+
+Use `sufficient` only for verified observed or historical origins when the
+policy trial minimum is met, infrastructure is controlled or bounded, profiles
+are stable, and no confounder or governance issue remains unresolved. Keep
+committed examples `provisional`. The observed range is not automatically a
+statistical confidence interval, and neither a large trial count nor a narrow
+range proves quality, independence, causation, or generalizability.
 
 ## Evidence Independence
 

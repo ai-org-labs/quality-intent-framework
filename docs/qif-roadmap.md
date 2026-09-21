@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.28 baseline)
+## Current Position (v0.6.29 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -158,6 +158,9 @@ and adoption surface — not pretending the limits away.
   contamination, solvability, saturation, graders, harness, infrastructure,
   and drift ownership. Calibration runs must resolve these records, and a
   calibrated conclusion requires a structurally healthy suite.
+  v0.6.29 adds Trial Variance records with repeated measurements,
+  reproducible observed ranges, infrastructure profiles, confounder status,
+  comparison boundaries, and deterministic `CRD-UNCERTAINTY` readiness.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -169,7 +172,7 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-09-20 against primary-source signals. The
+The roadmap was revalidated on 2026-09-21 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
@@ -177,6 +180,7 @@ organizational authority.
 | Current signal | Quality risk exposed | QIF response | Lead, not follow |
 | --- | --- | --- | --- |
 | Agent evaluation is moving from single answers to multi-turn trials, full trajectories, outcomes, multiple graders, and living suites. ([Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), [OpenAI](https://openai.com/index/trustworthy-third-party-evaluations-foundations/)) | A final answer can look correct while tool use, intermediate state, or the actual environment outcome is wrong; benchmark saturation and contamination can hide regressions. | v0.4.x fixture completeness, then v0.5 trajectory/outcome ledger and v0.7 calibration health. | Bind every verdict to outcome state, environment provenance, evaluator uncertainty, and suite health before these become audit afterthoughts. |
+| Infrastructure configuration can move agent benchmark scores by more than the gap between compared systems, while resource ceilings can change what the evaluation measures. ([Anthropic](https://www.anthropic.com/engineering/infrastructure-noise)) | A small score lead may reflect runtime limits, concurrency, incidents, or timing rather than the evaluated capability; one point estimate hides both trial and infrastructure uncertainty. | v0.6.29 Trial and Infrastructure Uncertainty records. | Require reproducible observed ranges, named infrastructure profiles, confounder status, and a no-exact-comparison boundary before interpreting score differences. |
 | Long-running agent platforms now coordinate subagents, persistent work, files, tools, and intermediate results over days. ([OpenAI Agents API](https://openai.com/index/introducing-the-agents-api/)) | Aggregate success can hide weak subagent evidence, stale context, or an invalid evaluation path; a higher eval score may still be methodologically incomparable. | v0.6 action and handoff controls, then v0.7 evidence-origin and calibration-readiness boundaries. | Require an explicit path from declared confidence to observed outcomes before treating an eval delta as predictive evidence. |
 | Measurement bodies are embedding adversarial evaluation probes into agent workflows and emphasizing reproducible benchmark practice and transcript review. ([NIST evaluation probes](https://www.nist.gov/programs-projects/building-evaluation-probes-agentic-ai), [NIST benchmark practice](https://www.nist.gov/news-events/news/2026/01/towards-best-practices-automated-benchmark-evaluations), [NIST transcript analysis](https://www.nist.gov/blogs/caisi-research-blog/analyzing-transcripts-ai-agent-evaluations)) | Evaluators can miss citation, tool-use, contamination, cheating, and harness failures unless the evaluation itself has traceable health evidence. | v0.6.26 calibration readiness and v0.7 Evaluation Suite Health records. | Treat evaluator health, contamination, solvability, trial variance, and infrastructure configuration as governed evidence, not background methodology. |
 | Recent third-party evaluation incidents show that evaluation configuration and environment boundaries can fail independently of model capability. ([OpenAI cyber evaluation incident](https://openai.com/index/third-party-cyber-evaluations-involving-openai-models/), [OpenAI/Hugging Face evaluation security incident](https://openai.com/index/hugging-face-model-evaluation-security-incident/)) | A result can look authoritative while its environment, authorization, or source boundary is wrong. | v0.6.27 Evidence Origin, then v0.7 Evaluation Suite Health. | Treat source, observation window, environment, transformation, and independent verification as first-class evidence before accepting an evaluation result. |
@@ -413,6 +417,9 @@ Deliverables:
   resolvable links from outcomes and calibration cases.
   v0.6.28 makes suite health executable through eight dimension states,
   bidirectional run links, health consistency checks, and governance routing.
+  v0.6.29 makes repeated-trial and infrastructure uncertainty executable
+  through reproducible observed ranges, infrastructure profiles, confounder
+  status, comparison boundaries, and governance routing.
 - Gate-as-hook reference integration: a demonstration where an agent task
   cannot be marked release-ready unless a quality-gate package for the
   target validates. No external service required; local hook only.
@@ -481,9 +488,11 @@ Deliverables:
 - Evaluation Suite Health records: task origin, contamination boundary,
   solvability review, saturation, grader calibration, trial variance, harness
   and infrastructure configuration, and drift ownership.
-  Status: the suite-level structure and all dimensions except trial variance
-  are implemented in v0.6.28. Trial and infrastructure uncertainty remains the
-  next independent slice so small score differences are not presented as exact.
+  Status: the suite-level structure and eight health dimensions are
+  implemented in v0.6.28. Trial and infrastructure uncertainty is implemented
+  in v0.6.29 with policy-defined repeated measurements, reproducible observed
+  ranges, infrastructure profiles, confounders, and comparison boundaries.
+  Framework-learning evidence remains the next independent slice.
 - First empirical self-test of the evidence independence hierarchy: do
   high-independence evidence items actually precede fewer escapes than
   low-independence ones? Publish the answer even if it is embarrassing.
