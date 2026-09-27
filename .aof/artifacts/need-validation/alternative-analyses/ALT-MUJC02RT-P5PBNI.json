@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-09-27T04:41:36.521Z",
+  "alternative_analysis_id": "ALT-MUJC02RT-P5PBNI",
+  "subject_need": "Close the framework-learning feedback loop",
+  "alternative_solutions": [
+    "Add a first-class Framework Learning Record to the existing calibration package.",
+    "Use prose-only changelog entries."
+  ],
+  "non_solution_options": [
+    "Treat the number of changes as evidence of learning."
+  ],
+  "defer_options": [
+    "Defer statistical calibration-report tooling to a later release."
+  ],
+  "stop_options": [
+    "Do not release if proposed or example-only records can satisfy CRD-LEARNING."
+  ],
+  "source_task_id": "TASK-048",
+  "source_decision_record_id": null
+}

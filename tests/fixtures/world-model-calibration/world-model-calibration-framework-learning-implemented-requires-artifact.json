@@ -1,0 +1,631 @@
+{
+  "packageType": "world-model-calibration",
+  "runtimeVersion": "0.6.30",
+  "packageId": "WMCPKG-001",
+  "packageRefs": [
+    {
+      "id": "PKG-WORLD",
+      "path": "examples/world-model-review-package.json",
+      "packageType": "world-model-review",
+      "role": "source-world-model-review-package"
+    }
+  ],
+  "evidenceOrigins": [
+    {
+      "id": "EOR-WMC-001",
+      "originKind": "historical-record",
+      "sourceArtifact": "examples/world-model-calibration-package.json",
+      "observationWindow": "not-applicable-example",
+      "environment": "committed-example",
+      "generatedBy": "QIF maintainers",
+      "verifiedBy": [
+        "QIF fixture suite"
+      ],
+      "transformationSummary": "Illustrative calibration cases retained to demonstrate scoring and traceability; they are not empirical calibration evidence.",
+      "status": "verified"
+    }
+  ],
+  "calibrationPolicies": [
+    {
+      "id": "CALPOL-WMC-001",
+      "title": "Pilot threshold for AI world-model gap findings",
+      "targetPackageRefs": [
+        "PKG-WORLD"
+      ],
+      "minimumCaseCount": 3,
+      "requiredDomains": [
+        "software",
+        "maintenance",
+        "accounting"
+      ],
+      "requiredExpertAssessorsPerCase": 1,
+      "minimumTrialCount": 3,
+      "requiresUnseenCases": true,
+      "agreementThreshold": 0.7,
+      "falsePositiveRateMax": 0.2,
+      "falseNegativeRateMax": 0.2,
+      "scoreRule": "exact-1-partial-0.5-miss-0",
+      "governanceOnFailure": true,
+      "status": "active"
+    }
+  ],
+  "calibrationCases": [
+    {
+      "id": "CALCASE-WMC-001",
+      "title": "Release approval wording case",
+      "domain": "software",
+      "targetDescription": "A release request uses approved without naming the approving actor or authority boundary.",
+      "sourceArtifact": "pilot/software-release-approval.md",
+      "evidenceOriginRef": "EOR-WMC-001",
+      "unseenCase": true,
+      "sourceWorldModelRef": {
+        "packageRef": "PKG-WORLD",
+        "entityType": "worldModels",
+        "entityRef": "WMD-001"
+      },
+      "expectedGapObjectTypes": [
+        "Boundary"
+      ],
+      "decisionContext": "Determine whether AI may recommend final release approval."
+    },
+    {
+      "id": "CALCASE-WMC-002",
+      "title": "Maintenance lockout restart case",
+      "domain": "maintenance",
+      "targetDescription": "A restart checklist says equipment is ready but omits the lockout removal state and responsible operator.",
+      "sourceArtifact": "pilot/maintenance-restart.md",
+      "evidenceOriginRef": "EOR-WMC-001",
+      "unseenCase": true,
+      "sourceWorldModelRef": {
+        "packageRef": "PKG-WORLD",
+        "entityType": "worldModels",
+        "entityRef": "WMD-001"
+      },
+      "expectedGapObjectTypes": [
+        "State",
+        "Actor"
+      ],
+      "decisionContext": "Determine whether AI may judge restart readiness."
+    },
+    {
+      "id": "CALCASE-WMC-003",
+      "title": "Invoice exception approval case",
+      "domain": "accounting",
+      "targetDescription": "An invoice exception note says manager approved, but the approval limit, exception condition, and evidence requirements are not modeled.",
+      "sourceArtifact": "pilot/invoice-exception-approval.md",
+      "evidenceOriginRef": "EOR-WMC-001",
+      "unseenCase": true,
+      "sourceWorldModelRef": {
+        "packageRef": "PKG-WORLD",
+        "entityType": "worldModels",
+        "entityRef": "WMD-001"
+      },
+      "expectedGapObjectTypes": [
+        "Boundary"
+      ],
+      "decisionContext": "Determine whether AI may accept the exception as compliant."
+    }
+  ],
+  "expertAssessments": [
+    {
+      "id": "EXA-WMC-001",
+      "caseRef": "CALCASE-WMC-001",
+      "assessor": "release-governance-expert",
+      "role": "release approver",
+      "assessmentMode": "blind-review",
+      "expectedFindings": [
+        {
+          "id": "EXF-WMC-001",
+          "gapObjectType": "Boundary",
+          "missingItem": "Final approval authority boundary.",
+          "expectedDefinition": "Define who can approve the release, which approval conditions apply, what evidence must be cited, and how AI review status differs from final approval.",
+          "verdictEffect": "block-evaluation",
+          "severity": "critical",
+          "rationale": "The word approved cannot be interpreted safely without explicit accountable authority.",
+          "sourceFindingRef": {
+            "packageRef": "PKG-WORLD",
+            "entityType": "worldModelGapFindings",
+            "entityRef": "WMG-WM-001"
+          }
+        }
+      ],
+      "confidence": 0.91
+    },
+    {
+      "id": "EXA-WMC-002",
+      "caseRef": "CALCASE-WMC-002",
+      "assessor": "maintenance-operations-expert",
+      "role": "maintenance supervisor",
+      "assessmentMode": "blind-review",
+      "expectedFindings": [
+        {
+          "id": "EXF-WMC-002",
+          "gapObjectType": "State",
+          "missingItem": "Lockout removal state and accountable operator.",
+          "expectedDefinition": "Define the lockout-applied and lockout-removed states, the event that changes the state, and the operator authorized to confirm the transition.",
+          "verdictEffect": "require-governance",
+          "severity": "high",
+          "rationale": "Restart readiness cannot be judged if lockout state and accountable operator are implicit."
+        }
+      ],
+      "confidence": 0.88
+    },
+    {
+      "id": "EXA-WMC-003",
+      "caseRef": "CALCASE-WMC-003",
+      "assessor": "accounting-control-expert",
+      "role": "accounting manager",
+      "assessmentMode": "blind-review",
+      "expectedFindings": [
+        {
+          "id": "EXF-WMC-003",
+          "gapObjectType": "Boundary",
+          "missingItem": "Invoice exception approval limit and evidence boundary.",
+          "expectedDefinition": "Define approval amount limits, exception criteria, evidence required for approval, and escalation path when a manager lacks authority.",
+          "verdictEffect": "block-evaluation",
+          "severity": "high",
+          "rationale": "The AI cannot determine whether the exception is compliant from the phrase manager approved alone."
+        }
+      ],
+      "confidence": 0.86
+    }
+  ],
+  "agentAssessments": [
+    {
+      "id": "AGA-WMC-001",
+      "caseRef": "CALCASE-WMC-001",
+      "generatedBy": "ai-world-model-reviewer",
+      "modelOrAgent": "codex-qif-world-model-reviewer",
+      "assessmentMode": "blind-review",
+      "generatedFindings": [
+        {
+          "id": "AGF-WMC-001",
+          "gapObjectType": "Boundary",
+          "missingItem": "Final approval authority boundary.",
+          "expectedDefinition": "Define the approving actor, approval conditions, required evidence, delegation rules, and distinction from AI review pass status.",
+          "verdictEffect": "block-evaluation",
+          "severity": "critical",
+          "rationale": "AI review may be mistaken for final approval when authority is only implied.",
+          "sourceFindingRef": {
+            "packageRef": "PKG-WORLD",
+            "entityType": "worldModelGapFindings",
+            "entityRef": "WMG-WM-001"
+          }
+        }
+      ],
+      "confidence": 0.84,
+      "transcriptHandling": "summary-without-hidden-reasoning"
+    },
+    {
+      "id": "AGA-WMC-002",
+      "caseRef": "CALCASE-WMC-002",
+      "generatedBy": "ai-world-model-reviewer",
+      "modelOrAgent": "codex-qif-world-model-reviewer",
+      "assessmentMode": "blind-review",
+      "generatedFindings": [
+        {
+          "id": "AGF-WMC-002",
+          "gapObjectType": "Actor",
+          "missingItem": "Accountable restart operator.",
+          "expectedDefinition": "Define which operator may confirm restart readiness and who is responsible for the decision.",
+          "verdictEffect": "degrade-confidence",
+          "severity": "medium",
+          "rationale": "The checklist omits who owns restart confirmation."
+        }
+      ],
+      "confidence": 0.72,
+      "transcriptHandling": "summary-without-hidden-reasoning"
+    },
+    {
+      "id": "AGA-WMC-003",
+      "caseRef": "CALCASE-WMC-003",
+      "generatedBy": "ai-world-model-reviewer",
+      "modelOrAgent": "codex-qif-world-model-reviewer",
+      "assessmentMode": "blind-review",
+      "generatedFindings": [],
+      "confidence": 0.61,
+      "transcriptHandling": "summary-without-hidden-reasoning"
+    }
+  ],
+  "findingMatches": [
+    {
+      "id": "FMA-WMC-001",
+      "caseRef": "CALCASE-WMC-001",
+      "expertAssessmentRef": "EXA-WMC-001",
+      "agentAssessmentRef": "AGA-WMC-001",
+      "expertFindingRef": "EXF-WMC-001",
+      "agentFindingRef": "AGF-WMC-001",
+      "matchType": "exact",
+      "score": 1,
+      "rationale": "Expert and agent both identified the same final approval authority boundary gap."
+    },
+    {
+      "id": "FMA-WMC-002",
+      "caseRef": "CALCASE-WMC-002",
+      "expertAssessmentRef": "EXA-WMC-002",
+      "agentAssessmentRef": "AGA-WMC-002",
+      "expertFindingRef": "EXF-WMC-002",
+      "agentFindingRef": "AGF-WMC-002",
+      "matchType": "partial",
+      "score": 0.5,
+      "rationale": "The agent identified the accountable operator but missed the lockout state transition."
+    },
+    {
+      "id": "FMA-WMC-003",
+      "caseRef": "CALCASE-WMC-003",
+      "expertAssessmentRef": "EXA-WMC-003",
+      "agentAssessmentRef": "AGA-WMC-003",
+      "expertFindingRef": "EXF-WMC-003",
+      "matchType": "missed",
+      "score": 0,
+      "rationale": "The agent failed to identify the invoice exception approval boundary gap."
+    }
+  ],
+  "evaluationSuiteHealthRecords": [
+    {
+      "id": "ESH-WMC-001",
+      "title": "Example world-model calibration suite health",
+      "calibrationRunRef": "CALRUN-WMC-001",
+      "policyRef": "CALPOL-WMC-001",
+      "caseRefs": [
+        "CALCASE-WMC-001",
+        "CALCASE-WMC-002",
+        "CALCASE-WMC-003"
+      ],
+      "taskOrigin": {
+        "evidenceOriginRefs": [
+          "EOR-WMC-001"
+        ],
+        "distributionSummary": "Three committed example cases span software, maintenance, and accounting; they do not represent an observed population.",
+        "status": "provisional"
+      },
+      "contamination": {
+        "checkMethod": "Compare case identifiers and descriptions against authoring examples and training inputs when available.",
+        "finding": "Committed examples are public and therefore cannot establish contamination-free unseen evaluation.",
+        "status": "unknown"
+      },
+      "solvability": {
+        "reviewMethod": "Expert expected findings and source World Model Review were compared for internal consistency.",
+        "reviewedCaseRefs": [
+          "CALCASE-WMC-001",
+          "CALCASE-WMC-002",
+          "CALCASE-WMC-003"
+        ],
+        "unresolvedCaseRefs": [],
+        "status": "provisional"
+      },
+      "saturation": {
+        "detectionMethod": "Track repeated exact matches and loss of discrimination across future runs.",
+        "saturated": false,
+        "rationale": "One example run is insufficient to establish either saturation or absence of saturation.",
+        "status": "unknown"
+      },
+      "graders": {
+        "expertAssessmentRefs": [
+          "EXA-WMC-001",
+          "EXA-WMC-002",
+          "EXA-WMC-003"
+        ],
+        "agentAssessmentRefs": [
+          "AGA-WMC-001",
+          "AGA-WMC-002",
+          "AGA-WMC-003"
+        ],
+        "calibrationMethod": "Example finding matches demonstrate score reproduction only.",
+        "disagreementPolicy": "Unresolved expert or agent disagreement requires governance before calibration claims.",
+        "status": "provisional"
+      },
+      "harness": {
+        "configuration": "Local deterministic QIF verifier over committed JSON packages.",
+        "reproducibilityEvidence": "npm test reproduces structural checks and fixture outcomes.",
+        "status": "reproducible"
+      },
+      "infrastructure": {
+        "environment": "Local repository fixture environment.",
+        "configuration": "Node.js CLI with repository-pinned schemas, examples, and fixtures.",
+        "incidentRefs": [],
+        "status": "stable"
+      },
+      "drift": {
+        "owner": "qif-maintainer",
+        "reviewCadence": "Each release and before any empirical pilot.",
+        "nextReviewAt": "before-empirical-pilot",
+        "triggerConditions": [
+          "case source changes",
+          "grader changes",
+          "harness changes",
+          "infrastructure incident",
+          "unexpected score shift"
+        ],
+        "status": "monitored"
+      },
+      "overallStatus": "provisional",
+      "governanceTriggerRefs": [
+        "GTR-WMC-003"
+      ],
+      "assuranceBoundary": "This record demonstrates complete suite-health structure only; public examples do not prove contamination freedom, representativeness, solvability, grader validity, or empirical health."
+    }
+  ],
+  "trialVarianceRecords": [
+    {
+      "id": "TVR-WMC-001",
+      "title": "Example agreement-score trial and infrastructure uncertainty",
+      "calibrationRunRef": "CALRUN-WMC-001",
+      "suiteHealthRecordRef": "ESH-WMC-001",
+      "evidenceOriginRefs": [
+        "EOR-WMC-001"
+      ],
+      "metric": "agreementScore",
+      "trialMeasurements": [
+        {
+          "id": "TVM-WMC-001",
+          "value": 0.5,
+          "infrastructureProfileRef": "INP-WMC-001",
+          "observedAt": "example-trial-1",
+          "included": true,
+          "exclusionRationale": ""
+        },
+        {
+          "id": "TVM-WMC-002",
+          "value": 0.67,
+          "infrastructureProfileRef": "INP-WMC-001",
+          "observedAt": "example-trial-2",
+          "included": true,
+          "exclusionRationale": ""
+        },
+        {
+          "id": "TVM-WMC-003",
+          "value": 0.33,
+          "infrastructureProfileRef": "INP-WMC-001",
+          "observedAt": "example-trial-3",
+          "included": true,
+          "exclusionRationale": ""
+        }
+      ],
+      "summary": {
+        "includedTrialRefs": [
+          "TVM-WMC-001",
+          "TVM-WMC-002",
+          "TVM-WMC-003"
+        ],
+        "trialCount": 3,
+        "mean": 0.5,
+        "minimum": 0.33,
+        "maximum": 0.67,
+        "observedRange": 0.34
+      },
+      "infrastructureProfiles": [
+        {
+          "id": "INP-WMC-001",
+          "environment": "Committed local example environment",
+          "runtime": "Node.js CLI with repository examples",
+          "resourceEnvelope": "Not measured for this illustrative record",
+          "timeLimit": "No empirical time-limit control recorded",
+          "concurrency": "Single local process",
+          "incidentRefs": [],
+          "status": "stable"
+        }
+      ],
+      "infrastructureAssessment": {
+        "profileRefs": [
+          "INP-WMC-001"
+        ],
+        "controlledVariables": [
+          "same committed package",
+          "same structural verifier"
+        ],
+        "knownDifferences": [],
+        "potentialConfounders": [
+          "illustrative values were not observed from repeated independent executions"
+        ],
+        "status": "unresolved"
+      },
+      "uncertaintyRange": {
+        "rangeKind": "observed-trial-range",
+        "lower": 0.33,
+        "upper": 0.67,
+        "calculationMethod": "minimum-and-maximum-of-included-trials",
+        "interpretation": "The range demonstrates reproducible structure only and is not a statistical confidence interval or empirical performance claim."
+      },
+      "comparisonBoundary": {
+        "minimumMeaningfulDifference": 0.1,
+        "exactComparisonAllowed": false,
+        "rationale": "A point-score difference inside or near the observed range must not be reported as an exact capability difference."
+      },
+      "overallStatus": "provisional",
+      "governanceTriggerRefs": [
+        "GTR-WMC-004"
+      ],
+      "assuranceBoundary": "Trial count, mean, and observed range are evidence about repeated measurements only; they do not prove quality, representativeness, independence, or causal attribution."
+    }
+  ],
+  "frameworkLearningRecords": [
+    {
+      "id": "FLR-WMC-001",
+      "title": "Example proposal to strengthen approval-boundary discovery",
+      "calibrationRunRefs": [
+        "CALRUN-WMC-001"
+      ],
+      "evidenceOriginRefs": [
+        "EOR-WMC-001"
+      ],
+      "contradictedAssumption": {
+        "statement": "A general approval-boundary prompt is sufficient across software, maintenance, and accounting cases.",
+        "priorRationale": "The prompt identified the software approval boundary in the illustrative case.",
+        "contradictionEvidenceRefs": [
+          "CALRUN-WMC-001",
+          "FMA-WMC-003"
+        ],
+        "contradictionSummary": "The illustrative accounting case was missed, so the assumption requires review; example evidence cannot establish an empirical contradiction.",
+        "status": "contradicted"
+      },
+      "proposedChange": {
+        "targetArtifact": "world-model-review approval-boundary guidance",
+        "changeType": "guidance",
+        "description": "Add domain-neutral prompts for authority limits, exception conditions, and required approval evidence.",
+        "expectedEffect": "Reduce missed approval-boundary findings without treating the evaluator recommendation as automatically correct."
+      },
+      "governanceDecision": {
+        "decision": "accepted",
+        "decidedBy": "qif-maintainer",
+        "decidedAt": "example-only",
+        "rationale": "The public example demonstrates the record shape but cannot authorize a framework change without empirical evidence and accountable review."
+      },
+      "implementation": {
+        "status": "implemented",
+        "artifactRefs": [],
+        "validationEvidenceRefs": [
+          "pilot/revalidation.json"
+        ],
+        "rollbackEvidenceRefs": []
+      },
+      "followUp": {
+        "owner": "qif-maintainer",
+        "reviewAt": "after-empirical-pilot",
+        "successCriteria": [
+          "Observed pilot evidence shows the revised guidance reduces relevant misses without unacceptable false positives."
+        ],
+        "rollbackCriteria": [
+          "Independent review finds that the revision creates material false positives or obscures applicability boundaries."
+        ]
+      },
+      "overallStatus": "implemented",
+      "governanceTriggerRefs": [
+        "GTR-WMC-005"
+      ],
+      "assuranceBoundary": "This example records a candidate learning path only; it does not prove the assumption false, the proposed change correct, or the framework improved."
+    }
+  ],
+  "calibrationRuns": [
+    {
+      "id": "CALRUN-WMC-001",
+      "policyRef": "CALPOL-WMC-001",
+      "caseRefs": [
+        "CALCASE-WMC-001",
+        "CALCASE-WMC-002",
+        "CALCASE-WMC-003"
+      ],
+      "expertAssessmentRefs": [
+        "EXA-WMC-001",
+        "EXA-WMC-002",
+        "EXA-WMC-003"
+      ],
+      "agentAssessmentRefs": [
+        "AGA-WMC-001",
+        "AGA-WMC-002",
+        "AGA-WMC-003"
+      ],
+      "findingMatchRefs": [
+        "FMA-WMC-001",
+        "FMA-WMC-002",
+        "FMA-WMC-003"
+      ],
+      "suiteHealthRecordRefs": [
+        "ESH-WMC-001"
+      ],
+      "trialVarianceRecordRefs": [
+        "TVR-WMC-001"
+      ],
+      "frameworkLearningRecordRefs": [
+        "FLR-WMC-001"
+      ],
+      "caseCount": 3,
+      "domainCoverage": [
+        "software",
+        "maintenance",
+        "accounting"
+      ],
+      "agreementScore": 0.5,
+      "falsePositiveRate": 0,
+      "falseNegativeRate": 0.33,
+      "conclusion": "failed",
+      "governanceTriggerRefs": [
+        "GTR-WMC-001",
+        "GTR-WMC-002"
+      ],
+      "residualRisk": "World Model Gap Finding generation is structurally executable but not calibrated enough for autonomous pilot use.",
+      "status": "reviewed"
+    }
+  ],
+  "governanceTriggers": [
+    {
+      "id": "GTR-WMC-001",
+      "triggerType": "low-agreement",
+      "reason": "Agreement score 0.50 is below the required 0.70 threshold.",
+      "sourceCalibrationRunRef": "CALRUN-WMC-001",
+      "severity": "high",
+      "requiredAction": "Collect more unseen cases, inspect missed and partial matches, and update prompts or schemas before claiming semantic calibration.",
+      "owner": "qif-maintainer",
+      "status": "open"
+    },
+    {
+      "id": "GTR-WMC-002",
+      "triggerType": "high-false-negative-rate",
+      "reason": "False negative rate 0.33 exceeds the allowed 0.20 threshold.",
+      "sourceCalibrationRunRef": "CALRUN-WMC-001",
+      "severity": "high",
+      "requiredAction": "Analyze missed accounting approval-boundary cases and add calibration examples before autonomous use.",
+      "owner": "qif-maintainer",
+      "status": "open"
+    },
+    {
+      "id": "GTR-WMC-003",
+      "triggerType": "contamination-risk",
+      "reason": "The committed public examples cannot establish contamination-free or representative empirical evaluation.",
+      "sourceCalibrationRunRef": "CALRUN-WMC-001",
+      "severity": "medium",
+      "requiredAction": "Collect privacy-screened observed or historical pilot cases and perform documented contamination checks before marking suite health as healthy.",
+      "owner": "qif-maintainer",
+      "status": "open"
+    },
+    {
+      "id": "GTR-WMC-004",
+      "triggerType": "trial-variance-unresolved",
+      "reason": "The committed example values are illustrative and do not establish repeated independent trials or bounded infrastructure uncertainty.",
+      "sourceCalibrationRunRef": "CALRUN-WMC-001",
+      "severity": "medium",
+      "requiredAction": "Run repeated trials under recorded infrastructure profiles, investigate incidents and confounders, and retain uncertainty ranges before comparing scores.",
+      "owner": "qif-maintainer",
+      "status": "open"
+    },
+    {
+      "id": "GTR-WMC-005",
+      "triggerType": "framework-learning-review",
+      "reason": "The proposed framework change is based on committed example evidence and has not received an accountable acceptance decision or validation.",
+      "sourceCalibrationRunRef": "CALRUN-WMC-001",
+      "severity": "medium",
+      "requiredAction": "Collect empirical contradiction evidence, obtain accountable governance, implement the accepted change, and retain validation and rollback evidence before claiming framework learning.",
+      "owner": "qif-maintainer",
+      "status": "resolved"
+    }
+  ],
+  "verifierBoundary": {
+    "checks": [
+      "package references resolve",
+      "calibration cases are unseen when policy requires unseen cases",
+      "expert and agent assessments resolve to cases",
+      "finding matches cover expected and generated findings",
+      "agreement, false-positive, and false-negative rates reproduce from finding matches",
+      "evaluation suite health records cover task origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership",
+      "trial summaries and observed uncertainty ranges reproduce from included measurements",
+      "trial measurements resolve infrastructure profiles and calibration-run links",
+      "sufficient uncertainty records use verified empirical origins and bounded infrastructure",
+      "framework learning records resolve contradiction evidence, governance, implementation, validation, and rollback boundaries",
+      "implemented learning requires verified empirical origins, accepted governance, validation evidence, and no unresolved trigger",
+      "threshold failures trigger governance"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "expert correctness",
+      "domain correctness",
+      "change count as learning",
+      "production readiness"
+    ],
+    "semanticValidityRequires": [
+      "larger real-domain pilot corpus",
+      "independent expert panel review",
+      "operational feedback",
+      "governance decision"
+    ]
+  }
+}

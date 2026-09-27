@@ -254,6 +254,7 @@ function validateCalibrationPackage(pkg, packagePath) {
   const findingMatches = requireArray(pkg, "findingMatches", packagePath);
   const suiteHealthRecords = requireArray(pkg, "evaluationSuiteHealthRecords", packagePath);
   const trialVarianceRecords = requireArray(pkg, "trialVarianceRecords", packagePath);
+  const frameworkLearningRecords = requireArray(pkg, "frameworkLearningRecords", packagePath);
   const calibrationRuns = requireArray(pkg, "calibrationRuns", packagePath);
   const governanceTriggers = requireArray(pkg, "governanceTriggers", packagePath);
 
@@ -266,6 +267,7 @@ function validateCalibrationPackage(pkg, packagePath) {
   const matchIndex = indexById(findingMatches, `${packagePath}:findingMatches`);
   const suiteHealthIndex = indexById(suiteHealthRecords, `${packagePath}:evaluationSuiteHealthRecords`);
   const trialVarianceIndex = indexById(trialVarianceRecords, `${packagePath}:trialVarianceRecords`);
+  const frameworkLearningIndex = indexById(frameworkLearningRecords, `${packagePath}:frameworkLearningRecords`);
   const runIndex = indexById(calibrationRuns, `${packagePath}:calibrationRuns`);
   const triggerIndex = indexById(governanceTriggers, `${packagePath}:governanceTriggers`);
 
@@ -566,6 +568,113 @@ function validateCalibrationPackage(pkg, packagePath) {
     }
   }
 
+  const learningEvidenceIndex = new Map([
+    ...evidenceOriginIndex,
+    ...matchIndex,
+    ...suiteHealthIndex,
+    ...trialVarianceIndex,
+    ...runIndex
+  ]);
+  const supportedLearningStatuses = new Set(["proposed", "accepted", "implemented", "rejected", "rolled-back", "stale"]);
+  const supportedAssumptionStatuses = new Set(["supported", "contradicted", "contested", "unresolved"]);
+  const supportedChangeTypes = new Set(["schema", "verifier", "guidance", "policy", "workflow", "example", "other"]);
+  const supportedDecisions = new Set(["pending", "accepted", "rejected", "deferred", "rolled-back"]);
+  const supportedImplementationStatuses = new Set(["not-started", "implemented", "not-applicable", "rolled-back"]);
+  for (const learning of frameworkLearningRecords) {
+    checkRequiredString(learning, "title", learning.id);
+    checkRequiredString(learning, "overallStatus", learning.id);
+    checkRequiredString(learning, "assuranceBoundary", learning.id);
+    if (!supportedLearningStatuses.has(learning.overallStatus)) errors.push(`${learning.id} overallStatus is not supported.`);
+    checkRefs(learning.calibrationRunRefs, runIndex, "calibration run", learning.id);
+    checkRefs(learning.evidenceOriginRefs, evidenceOriginIndex, "evidence origin", learning.id);
+
+    const assumption = learning.contradictedAssumption ?? {};
+    for (const field of ["statement", "priorRationale", "contradictionSummary", "status"]) {
+      checkRequiredString(assumption, field, `${learning.id}/contradictedAssumption`);
+    }
+    if (!supportedAssumptionStatuses.has(assumption.status)) errors.push(`${learning.id} contradictedAssumption status is not supported.`);
+    checkRefs(assumption.contradictionEvidenceRefs, learningEvidenceIndex, "contradiction evidence", `${learning.id}/contradictedAssumption`);
+
+    const change = learning.proposedChange ?? {};
+    for (const field of ["targetArtifact", "changeType", "description", "expectedEffect"]) {
+      checkRequiredString(change, field, `${learning.id}/proposedChange`);
+    }
+    if (!supportedChangeTypes.has(change.changeType)) errors.push(`${learning.id} proposedChange changeType is not supported.`);
+
+    const decision = learning.governanceDecision ?? {};
+    for (const field of ["decision", "decidedBy", "decidedAt", "rationale"]) {
+      checkRequiredString(decision, field, `${learning.id}/governanceDecision`);
+    }
+    if (!supportedDecisions.has(decision.decision)) errors.push(`${learning.id} governanceDecision decision is not supported.`);
+
+    const implementation = learning.implementation ?? {};
+    checkRequiredString(implementation, "status", `${learning.id}/implementation`);
+    if (!supportedImplementationStatuses.has(implementation.status)) errors.push(`${learning.id} implementation status is not supported.`);
+    for (const field of ["artifactRefs", "validationEvidenceRefs", "rollbackEvidenceRefs"]) {
+      if (!Array.isArray(implementation[field])) errors.push(`${learning.id} implementation ${field} must be an array.`);
+    }
+
+    const followUp = learning.followUp ?? {};
+    checkRequiredString(followUp, "owner", `${learning.id}/followUp`);
+    checkRequiredString(followUp, "reviewAt", `${learning.id}/followUp`);
+    for (const field of ["successCriteria", "rollbackCriteria"]) {
+      if (!Array.isArray(followUp[field]) || followUp[field].length === 0) {
+        errors.push(`${learning.id} followUp must include ${field}.`);
+      }
+    }
+    if (!Array.isArray(learning.governanceTriggerRefs)) {
+      errors.push(`${learning.id} governanceTriggerRefs must be an array.`);
+    } else {
+      for (const ref of learning.governanceTriggerRefs) {
+        if (!triggerIndex.has(ref)) errors.push(`${learning.id} references missing governance trigger: ${ref}`);
+      }
+    }
+
+    for (const runRef of learning.calibrationRunRefs ?? []) {
+      const linkedRun = runIndex.get(runRef);
+      if (linkedRun && !(linkedRun.frameworkLearningRecordRefs ?? []).includes(learning.id)) {
+        errors.push(`${learning.id} calibration run ${runRef} must link back through frameworkLearningRecordRefs.`);
+      }
+    }
+
+    const empiricalOrigins = (learning.evidenceOriginRefs ?? []).map((ref) => evidenceOriginIndex.get(ref));
+    const unresolvedTriggers = (learning.governanceTriggerRefs ?? []).map((ref) => triggerIndex.get(ref)).filter((item) => item?.status !== "resolved");
+    if (learning.overallStatus === "implemented") {
+      if (assumption.status !== "contradicted") errors.push(`${learning.id} implemented learning requires a contradicted assumption.`);
+      if (decision.decision !== "accepted") errors.push(`${learning.id} implemented learning requires an accepted governance decision.`);
+      if (implementation.status !== "implemented") errors.push(`${learning.id} implemented learning requires implementation status implemented.`);
+      if (!Array.isArray(implementation.artifactRefs) || implementation.artifactRefs.length === 0) errors.push(`${learning.id} implemented learning requires artifactRefs.`);
+      if (!Array.isArray(implementation.validationEvidenceRefs) || implementation.validationEvidenceRefs.length === 0) errors.push(`${learning.id} implemented learning requires validationEvidenceRefs.`);
+      if (empiricalOrigins.some((origin) => !origin || !empiricalOriginKinds.has(origin.originKind) || origin.status !== "verified")) {
+        errors.push(`${learning.id} implemented learning requires verified observed-operational or historical-record origins.`);
+      }
+      if (unresolvedTriggers.length > 0) errors.push(`${learning.id} implemented learning cannot retain unresolved governance triggers.`);
+    } else if (learning.overallStatus === "accepted") {
+      if (decision.decision !== "accepted" || implementation.status !== "not-started") {
+        errors.push(`${learning.id} accepted learning requires accepted governance and not-started implementation.`);
+      }
+      if ((learning.governanceTriggerRefs ?? []).length === 0) errors.push(`${learning.id} accepted but unimplemented learning requires governanceTriggerRefs.`);
+    } else if (learning.overallStatus === "proposed") {
+      if (!["pending", "deferred"].includes(decision.decision) || implementation.status !== "not-started") {
+        errors.push(`${learning.id} proposed learning requires pending or deferred governance and not-started implementation.`);
+      }
+      if ((learning.governanceTriggerRefs ?? []).length === 0) errors.push(`${learning.id} proposed learning requires governanceTriggerRefs.`);
+    } else if (learning.overallStatus === "rejected") {
+      if (decision.decision !== "rejected" || implementation.status !== "not-applicable") {
+        errors.push(`${learning.id} rejected learning requires rejected governance and not-applicable implementation.`);
+      }
+    } else if (learning.overallStatus === "rolled-back") {
+      if (decision.decision !== "rolled-back" || implementation.status !== "rolled-back") {
+        errors.push(`${learning.id} rolled-back learning requires rolled-back governance and implementation.`);
+      }
+      if (!Array.isArray(implementation.rollbackEvidenceRefs) || implementation.rollbackEvidenceRefs.length === 0) {
+        errors.push(`${learning.id} rolled-back learning requires rollbackEvidenceRefs.`);
+      }
+    } else if (learning.overallStatus === "stale" && (learning.governanceTriggerRefs ?? []).length === 0) {
+      errors.push(`${learning.id} stale learning requires governanceTriggerRefs.`);
+    }
+  }
+
   const coveredExpertFindings = new Set();
   const coveredAgentFindings = new Set();
 
@@ -659,6 +768,7 @@ function validateCalibrationPackage(pkg, packagePath) {
     checkRefs(run.findingMatchRefs, matchIndex, "finding match", run.id);
     checkRefs(run.suiteHealthRecordRefs, suiteHealthIndex, "evaluation suite health record", run.id);
     checkRefs(run.trialVarianceRecordRefs, trialVarianceIndex, "trial variance record", run.id);
+    checkRefs(run.frameworkLearningRecordRefs, frameworkLearningIndex, "framework learning record", run.id);
     checkRequiredString(run, "conclusion", run.id);
     checkRequiredString(run, "residualRisk", run.id);
     checkRequiredString(run, "status", run.id);
@@ -672,6 +782,7 @@ function validateCalibrationPackage(pkg, packagePath) {
     const runTriggers = (run.governanceTriggerRefs ?? []).map((ref) => triggerIndex.get(ref)).filter(Boolean);
     const runHealthRecords = (run.suiteHealthRecordRefs ?? []).map((ref) => suiteHealthIndex.get(ref)).filter(Boolean);
     const runVarianceRecords = (run.trialVarianceRecordRefs ?? []).map((ref) => trialVarianceIndex.get(ref)).filter(Boolean);
+    const runLearningRecords = (run.frameworkLearningRecordRefs ?? []).map((ref) => frameworkLearningIndex.get(ref)).filter(Boolean);
 
     for (const health of runHealthRecords) {
       if (health.calibrationRunRef !== run.id) errors.push(`${run.id} suite health record ${health.id} must reference the same calibration run.`);
@@ -682,6 +793,11 @@ function validateCalibrationPackage(pkg, packagePath) {
       if (variance.calibrationRunRef !== run.id) errors.push(`${run.id} trial variance record ${variance.id} must reference the same calibration run.`);
       if (!(run.suiteHealthRecordRefs ?? []).includes(variance.suiteHealthRecordRef)) {
         errors.push(`${run.id} trial variance record ${variance.id} must reference one of the run suiteHealthRecordRefs.`);
+      }
+    }
+    for (const learning of runLearningRecords) {
+      if (!(learning.calibrationRunRefs ?? []).includes(run.id)) {
+        errors.push(`${run.id} framework learning record ${learning.id} must reference the same calibration run.`);
       }
     }
 
@@ -783,6 +899,9 @@ function validateCalibrationPackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim ?? []).includes("semantic truth")) {
       errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
     }
+    if (!(boundary.doesNotClaim ?? []).includes("change count as learning")) {
+      errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming change count as learning.`);
+    }
   }
 
   results.push({
@@ -798,6 +917,7 @@ function validateCalibrationPackage(pkg, packagePath) {
       findingMatches: findingMatches.length,
       evaluationSuiteHealthRecords: suiteHealthRecords.length,
       trialVarianceRecords: trialVarianceRecords.length,
+      frameworkLearningRecords: frameworkLearningRecords.length,
       calibrationRuns: calibrationRuns.length,
       governanceTriggers: governanceTriggers.length
     }

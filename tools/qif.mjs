@@ -1361,7 +1361,40 @@ function calibrationReadiness(args) {
   const allCalibrationRunsHaveSufficientUncertainty = calibrationRuns.length > 0 && calibrationRuns.every((run) =>
     (run.trialVarianceRecordRefs || []).some((ref) => trialVarianceSummaries.find((record) => record.id === ref)?.sufficient)
   );
-  const frameworkLearningRecords = Object.values(packages).flatMap((pkg) => pkg.frameworkLearningRecords || []);
+  const frameworkLearningRecords = packages.calibration.frameworkLearningRecords || [];
+  const calibrationEvidenceOriginIndex = new Map((packages.calibration.evidenceOrigins || []).map((record) => [record.id, record]));
+  const calibrationGovernanceTriggerIndex = new Map((packages.calibration.governanceTriggers || []).map((record) => [record.id, record]));
+  const frameworkLearningSummaries = frameworkLearningRecords.map((record) => {
+    const origins = (record.evidenceOriginRefs || []).map((ref) => calibrationEvidenceOriginIndex.get(ref));
+    const triggers = (record.governanceTriggerRefs || []).map((ref) => calibrationGovernanceTriggerIndex.get(ref));
+    const empiricallyGrounded = origins.length > 0 && origins.every((origin) =>
+      origin && empiricalOriginKinds.has(origin.originKind) && origin.status === "verified" && (origin.verifiedBy || []).length > 0
+    );
+    const governanceResolved = triggers.every((trigger) => trigger?.status === "resolved");
+    const learningReady = record.overallStatus === "implemented"
+      && record.contradictedAssumption?.status === "contradicted"
+      && record.governanceDecision?.decision === "accepted"
+      && record.implementation?.status === "implemented"
+      && (record.implementation?.artifactRefs || []).length > 0
+      && (record.implementation?.validationEvidenceRefs || []).length > 0
+      && (record.followUp?.rollbackCriteria || []).length > 0
+      && empiricallyGrounded
+      && governanceResolved;
+    return {
+      id: record.id,
+      calibrationRunRefs: record.calibrationRunRefs || [],
+      overallStatus: record.overallStatus,
+      assumptionStatus: record.contradictedAssumption?.status || null,
+      governanceDecision: record.governanceDecision?.decision || null,
+      implementationStatus: record.implementation?.status || null,
+      evidenceOriginRefs: record.evidenceOriginRefs || [],
+      empiricallyGrounded,
+      validationEvidenceCount: (record.implementation?.validationEvidenceRefs || []).length,
+      governanceResolved,
+      learningReady
+    };
+  });
+  const qualifyingFrameworkLearningRecords = frameworkLearningSummaries.filter((record) => record.learningReady);
   const checks = [
     {
       id: "CRD-STRUCTURE",
@@ -1423,9 +1456,13 @@ function calibrationReadiness(args) {
     },
     {
       id: "CRD-LEARNING",
-      label: "At least one framework change is linked to calibration evidence that contradicted an assumption.",
-      met: frameworkLearningRecords.length > 0,
-      evidence: { frameworkLearningRecordCount: frameworkLearningRecords.length }
+      label: "At least one implemented framework change links a contradicted assumption to verified empirical calibration evidence, accepted governance, validation evidence, rollback criteria, and resolved triggers.",
+      met: qualifyingFrameworkLearningRecords.length > 0,
+      evidence: {
+        frameworkLearningRecordCount: frameworkLearningRecords.length,
+        qualifyingFrameworkLearningRecordCount: qualifyingFrameworkLearningRecords.length,
+        records: frameworkLearningSummaries
+      }
     }
   ];
   const blockers = checks.filter((check) => !check.met).map((check) => ({ id: check.id, missing: check.label }));
@@ -1433,7 +1470,7 @@ function calibrationReadiness(args) {
   const empiricalCalibrationReady = structurallyValid && blockers.length === 0;
   console.log(JSON.stringify({
     ok: structurallyValid,
-    calibrationReadinessVersion: 1,
+    calibrationReadinessVersion: 2,
     packageVersion: readJson("package.json").version || "unknown",
     generatedAt: new Date().toISOString(),
     cache: cacheMetadata("calibration-readiness", 60000, [
@@ -1469,7 +1506,7 @@ function calibrationReadiness(args) {
         "CRD-SUITE-HEALTH": "Resolve every calibration run to a healthy Evaluation Suite Health record after reviewing task origin, contamination, solvability, saturation, graders, harness, infrastructure, and drift ownership.",
         "CRD-DOMAINS": "Collect calibration evidence from at least two domains, including one non-software domain.",
         "CRD-UNCERTAINTY": "Link every calibration run to a sufficient Trial Variance record with reproducible observed ranges, bounded infrastructure uncertainty, and no exact-comparison claim.",
-        "CRD-LEARNING": "Record a framework change caused by calibration evidence that contradicted an assumption."
+        "CRD-LEARNING": "Record a framework change with a contradicted assumption, verified empirical calibration evidence, accepted accountable governance, implemented artifacts, validation evidence, rollback criteria, and resolved triggers. Change count alone is not learning."
       })[blocker.id]
     })),
     sourceSummary: {
@@ -1480,7 +1517,7 @@ function calibrationReadiness(args) {
       ledgerTrialCount: (packages.ledger.agentTrials || []).length,
       ledgerOutcomeCount: (packages.ledger.agentOutcomes || []).length
     },
-    verifierBoundary: "qif calibration-readiness checks declared structure, referenceable decision-outcome prerequisites, evidence-origin boundaries, reproducible trial summaries, and declared infrastructure uncertainty only. It does not prove semantic truth, outcome attribution, case representativeness, trial independence, causal attribution, predictive validity, calibration, or whether a quality decision was correct."
+    verifierBoundary: "qif calibration-readiness checks declared structure, referenceable decision-outcome prerequisites, evidence-origin boundaries, reproducible trial summaries, declared infrastructure uncertainty, and governed framework-learning records only. It does not prove semantic truth, outcome attribution, case representativeness, trial independence, causal attribution, predictive validity, calibration, that a framework change was beneficial, or that a quality decision was correct."
   }, null, 2));
   return structurallyValid ? 0 : 1;
 }

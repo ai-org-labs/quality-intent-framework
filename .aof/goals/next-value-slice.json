@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Need: calibration-readiness can now verify origin, suite health, and uncertainty, but it cannot prove that contradictory calibration evidence changed QIF itself rather than being archived without effect. Intent: add schema-backed Framework Learning records that link contradicted assumptions and calibration evidence to proposed, accepted, rejected, or rolled-back framework changes, with owners, decision rationale, validation evidence, and deterministic CRD-LEARNING readiness for v0.6.30. Context: remain domain-general; do not treat change count as learning or automatically accept evaluator recommendations; preserve human governance and semantic-review boundaries.",
-  "updated_at": "2026-09-21T04:55:08.140Z",
+  "content": "Need: QIF can now verify empirical origin, suite health, uncertainty, and governed framework learning, but it cannot calculate whether stated confidence tracks observed outcomes. Intent: add schema-backed Calibration Report records and deterministic tooling for decision-outcome pairs, Brier score, calibration buckets, sample and uncertainty boundaries, and governance routing for misleading or insufficient reports in v0.6.31. Context: distinguish observed, synthetic, and example data; never auto-produce a quality verdict; do not treat sample size, a low score, or report generation as quality or semantic truth.",
+  "updated_at": "2026-09-27T04:59:15.561Z",
   "agreed_with_human": null,
-  "source_session_id": null,
-  "source_decision_record_id": null,
+  "source_session_id": "SESS-MUJBW6WC-3T68J9",
+  "source_decision_record_id": "DEC-MUJC1N3M-TGO68E",
   "declared_complete_at": null
 }

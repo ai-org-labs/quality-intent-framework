@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-09-27T04:41:03.079Z",
+  "problem_statement_id": "PST-MUJBZCYV-FAUBKX",
+  "affected_party": "QIF adopters and accountable quality authorities",
+  "actual_problem": "Contradictory calibration evidence can be archived without proving that QIF changed, was deliberately rejected, or was rolled back.",
+  "why_it_matters": "A framework that records evidence but cannot close the learning loop may preserve a known false assumption.",
+  "why_now": "QIF v0.6.27 through v0.6.29 made empirical origin, suite health, and uncertainty executable; framework learning is the remaining calibration-readiness blocker.",
+  "evidence_refs": [
+    ".aof/goals/next-value-slice.json",
+    "docs/qif-roadmap.md"
+  ],
+  "source_task_id": "TASK-048",
+  "source_decision_record_id": null
+}

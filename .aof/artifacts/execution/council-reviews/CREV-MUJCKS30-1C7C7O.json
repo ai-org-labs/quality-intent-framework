@@ -1,0 +1,32 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-27T04:57:42.444Z",
+  "review_packet_id": "CREV-MUJCKS30-1C7C7O",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Final review approves QIF v0.6.30 for release.",
+  "rationale": "Visionary: the calibration feedback loop now reaches governed framework change. Builder: npm test passed 15/15 positive packages and 651/651 retained negative cases; readiness regression proves CRD-LEARNING is satisfiable while committed examples remain blocked. Guardian: public residue scan, 708 JSON parses, and git diff checks passed; verifier boundaries deny semantic truth and change-count claims.",
+  "recommendation": "Complete TASK-048, record retrospective and runtime log, then publish the exact verified commit as v0.6.30.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "RELEASE-NOTES-v0.6.30.md",
+    "tests/fixtures/world-model-calibration/manifest.json",
+    "docs/qif-v0.6.30-framework-learning-records.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-048",
+  "source_parent_session_id": "SESS-MUJBW6WC-3T68J9",
+  "source_decision_record_id": null
+}

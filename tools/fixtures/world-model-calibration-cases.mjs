@@ -38,12 +38,30 @@ function trialVariance(pkg) {
   return pkg.trialVarianceRecords[0];
 }
 
+function frameworkLearning(pkg) {
+  return pkg.frameworkLearningRecords[0];
+}
+
 function run(pkg) {
   return pkg.calibrationRuns[0];
 }
 
 function trigger(pkg) {
   return pkg.governanceTriggers[0];
+}
+
+function makeImplementedLearning(pkg) {
+  pkg.evidenceOrigins[0].originKind = "historical-record";
+  pkg.evidenceOrigins[0].status = "verified";
+  const learning = frameworkLearning(pkg);
+  learning.contradictedAssumption.status = "contradicted";
+  learning.governanceDecision.decision = "accepted";
+  learning.implementation.status = "implemented";
+  learning.implementation.artifactRefs = ["docs/revised-guidance.md"];
+  learning.implementation.validationEvidenceRefs = ["pilot/revalidation.json"];
+  learning.overallStatus = "implemented";
+  const governance = pkg.governanceTriggers.find((item) => item.id === learning.governanceTriggerRefs[0]);
+  governance.status = "resolved";
 }
 
 export const cases = [
@@ -347,6 +365,102 @@ export const cases = [
     mutate: (pkg) => { run(pkg).trialVarianceRecordRefs = ["TVR-NOPE-999"]; }
   },
   {
+    id: "framework-learning-broken-run-ref",
+    rule: "framework learning calibration runs resolve",
+    expect: "FLR-WMC-001 references missing calibration run: CALRUN-NOPE-999",
+    mutate: (pkg) => { frameworkLearning(pkg).calibrationRunRefs = ["CALRUN-NOPE-999"]; }
+  },
+  {
+    id: "framework-learning-broken-evidence-origin-ref",
+    rule: "framework learning evidence origins resolve",
+    expect: "FLR-WMC-001 references missing evidence origin: EOR-NOPE-999",
+    mutate: (pkg) => { frameworkLearning(pkg).evidenceOriginRefs = ["EOR-NOPE-999"]; }
+  },
+  {
+    id: "framework-learning-broken-contradiction-evidence-ref",
+    rule: "contradiction evidence resolves",
+    expect: "FLR-WMC-001/contradictedAssumption references missing contradiction evidence: FMA-NOPE-999",
+    mutate: (pkg) => { frameworkLearning(pkg).contradictedAssumption.contradictionEvidenceRefs = ["FMA-NOPE-999"]; }
+  },
+  {
+    id: "framework-learning-run-missing-backlink",
+    rule: "calibration runs link framework learning records bidirectionally",
+    expect: "FLR-WMC-001 calibration run CALRUN-WMC-001 must link back through frameworkLearningRecordRefs.",
+    mutate: (pkg) => { run(pkg).frameworkLearningRecordRefs = ["FLR-NOPE-999"]; }
+  },
+  {
+    id: "framework-learning-proposed-requires-governance",
+    rule: "proposed learning routes to governance",
+    expect: "FLR-WMC-001 proposed learning requires governanceTriggerRefs.",
+    mutate: (pkg) => { frameworkLearning(pkg).governanceTriggerRefs = []; }
+  },
+  {
+    id: "framework-learning-implemented-requires-empirical-origin",
+    rule: "implemented learning requires empirical provenance",
+    expect: "FLR-WMC-001 implemented learning requires verified observed-operational or historical-record origins.",
+    mutate: (pkg) => {
+      makeImplementedLearning(pkg);
+      pkg.evidenceOrigins[0].originKind = "example";
+    }
+  },
+  {
+    id: "framework-learning-implemented-requires-contradiction",
+    rule: "implemented learning requires contradicted assumption",
+    expect: "FLR-WMC-001 implemented learning requires a contradicted assumption.",
+    mutate: (pkg) => {
+      makeImplementedLearning(pkg);
+      frameworkLearning(pkg).contradictedAssumption.status = "contested";
+    }
+  },
+  {
+    id: "framework-learning-implemented-requires-accepted-governance",
+    rule: "implemented learning requires accepted governance",
+    expect: "FLR-WMC-001 implemented learning requires an accepted governance decision.",
+    mutate: (pkg) => {
+      makeImplementedLearning(pkg);
+      frameworkLearning(pkg).governanceDecision.decision = "deferred";
+    }
+  },
+  {
+    id: "framework-learning-implemented-requires-artifact",
+    rule: "implemented learning cites changed artifacts",
+    expect: "FLR-WMC-001 implemented learning requires artifactRefs.",
+    mutate: (pkg) => {
+      makeImplementedLearning(pkg);
+      frameworkLearning(pkg).implementation.artifactRefs = [];
+    }
+  },
+  {
+    id: "framework-learning-implemented-requires-validation",
+    rule: "implemented learning cites validation evidence",
+    expect: "FLR-WMC-001 implemented learning requires validationEvidenceRefs.",
+    mutate: (pkg) => {
+      makeImplementedLearning(pkg);
+      frameworkLearning(pkg).implementation.validationEvidenceRefs = [];
+    }
+  },
+  {
+    id: "framework-learning-implemented-rejects-open-governance",
+    rule: "implemented learning has no unresolved trigger",
+    expect: "FLR-WMC-001 implemented learning cannot retain unresolved governance triggers.",
+    mutate: (pkg) => {
+      makeImplementedLearning(pkg);
+      pkg.governanceTriggers.find((item) => item.id === "GTR-WMC-005").status = "open";
+    }
+  },
+  {
+    id: "framework-learning-rolled-back-requires-evidence",
+    rule: "rolled-back learning cites rollback evidence",
+    expect: "FLR-WMC-001 rolled-back learning requires rollbackEvidenceRefs.",
+    mutate: (pkg) => {
+      const learning = frameworkLearning(pkg);
+      learning.overallStatus = "rolled-back";
+      learning.governanceDecision.decision = "rolled-back";
+      learning.implementation.status = "rolled-back";
+      learning.implementation.rollbackEvidenceRefs = [];
+    }
+  },
+  {
     id: "calibrated-run-requires-sufficient-variance",
     rule: "calibrated run requires sufficient trial variance",
     expect: "CALRUN-WMC-001 conclusion calibrated requires a sufficient trial variance record.",
@@ -422,6 +536,12 @@ export const cases = [
     rule: "calibration verifier boundary avoids semantic truth",
     expect: "verifierBoundary must explicitly avoid claiming semantic truth.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = ["expert correctness"]; }
+  },
+  {
+    id: "verifier-boundary-treats-change-count-as-learning",
+    rule: "calibration verifier boundary rejects change count as learning",
+    expect: "verifierBoundary must explicitly avoid claiming change count as learning.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = ["semantic truth"]; }
   }
 ];
 

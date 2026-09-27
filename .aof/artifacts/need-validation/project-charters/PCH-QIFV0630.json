@@ -1,0 +1,25 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-09-27T04:42:37.894Z",
+  "project_charter_id": "PCH-MUJC1E4M-DG5I2Z",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV0630.json",
+  "validated_objective": "Release QIF v0.6.30 with executable Framework Learning Records and deterministic CRD-LEARNING readiness.",
+  "scope": [
+    "world-model-calibration schema and example",
+    "calibration verifier and retained negative fixtures",
+    "calibration-readiness positive regression",
+    "plain-language guidance, roadmap, changelog, AOF evidence, tag, and release"
+  ],
+  "constraints": [
+    "QIF remains standalone and domain-general.",
+    "Verifier success does not claim semantic truth.",
+    "Change counts and evaluator recommendations do not prove learning.",
+    "Committed example evidence remains non-empirical."
+  ],
+  "expected_outcomes": [
+    "A governed implemented framework change can satisfy CRD-LEARNING only from empirical contradiction and validation evidence.",
+    "Proposed, rejected, rolled-back, ungoverned, example-only, or unvalidated changes remain explainably non-ready."
+  ],
+  "source_task_id": "TASK-048",
+  "source_decision_record_id": "DEC-MUJBWTYY-WIR3R6"
+}

@@ -1,0 +1,24 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-09-27T04:59:33.377Z",
+  "project_root": ".",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "Make framework learning structurally provable by linking contradicted empirical calibration evidence to an accountable accepted, implemented, validated, and reversible QIF change, while keeping semantic judgment human-governed.",
+  "next_value_slice": "Need: QIF can now verify empirical origin, suite health, uncertainty, and governed framework learning, but it cannot calculate whether stated confidence tracks observed outcomes. Intent: add schema-backed Calibration Report records and deterministic tooling for decision-outcome pairs, Brier score, calibration buckets, sample and uncertainty boundaries, and governance routing for misleading or insufficient reports in v0.6.31. Context: distinguish observed, synthetic, and example data; never auto-produce a quality verdict; do not treat sample size, a low score, or report generation as quality or semantic truth.",
+  "current_runtime_stage": "frontier-definition-needed",
+  "primary_frontier_task": null,
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Open an implementation task for the current frontier: Need: QIF can now verify empirical origin, suite health, uncertainty, and governed framework learning, but it cannot calculate whether stated confidence tracks observed outcomes. Intent: add schema-backed Calibration Report records and deterministic tooling for decision-outcome pairs, Brier score, calibration buckets, sample and uncertainty boundaries, and governance routing for misleading or insufficient reports in v0.6.31. Context: distinguish observed, synthetic, and example data; never auto-produce a quality verdict; do not treat sample size, a low score, or report generation as quality or semantic truth.",
+    "prioritized_task_ids": [],
+    "scale_direction": "Define or reconcile the next frontier before expanding execution."
+  },
+  "recommended_action": {
+    "recommended_action": "Open an implementation task for the current frontier: Need: QIF can now verify empirical origin, suite health, uncertainty, and governed framework learning, but it cannot calculate whether stated confidence tracks observed outcomes. Intent: add schema-backed Calibration Report records and deterministic tooling for decision-outcome pairs, Brier score, calibration buckets, sample and uncertainty boundaries, and governance routing for misleading or insufficient reports in v0.6.31. Context: distinguish observed, synthetic, and example data; never auto-produce a quality verdict; do not treat sample size, a low score, or report generation as quality or semantic truth.",
+    "rationale": "No current open implementation task is aligned to the current operating goal.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  }
+}

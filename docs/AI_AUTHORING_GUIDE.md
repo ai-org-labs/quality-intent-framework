@@ -67,6 +67,7 @@ Use additional documents when needed:
 | Declare where outcomes and calibration cases came from | `docs/qif-v0.6.27-evidence-origin.md` and the relevant package schema |
 | Determine whether an evaluation suite is fit to support its claim | `docs/qif-v0.6.28-evaluation-suite-health.md`, `schemas/world-model-calibration-package.schema.json` |
 | Explain repeated-trial variation and infrastructure uncertainty without false precision | `docs/qif-v0.6.29-trial-infrastructure-uncertainty.md`, `schemas/world-model-calibration-package.schema.json` |
+| Show that contradictory calibration evidence changed the framework through accountable governance | `docs/qif-v0.6.30-framework-learning-records.md`, `schemas/world-model-calibration-package.schema.json` |
 | Understand quality theory background | `docs/quality-theory-report.md` |
 
 ## Required Framing
@@ -587,6 +588,21 @@ are stable, and no confounder or governance issue remains unresolved. Keep
 committed examples `provisional`. The observed range is not automatically a
 statistical confidence interval, and neither a large trial count nor a narrow
 range proves quality, independence, causation, or generalizability.
+
+## Framework Learning
+
+Do not treat a changelog, change count, or evaluator recommendation as proof
+that QIF learned. Use `frameworkLearningRecords` to preserve the complete path
+from the prior assumption and contradiction evidence to the proposed change,
+accountable governance decision, implementation artifacts, validation
+evidence, review owner, and rollback criteria.
+
+Use `implemented` only when the assumption is explicitly `contradicted`, the
+origins are verified observed or historical records, governance accepted the
+change, implementation and validation evidence exist, and linked governance
+triggers are resolved. Keep example-only records `proposed`. A rejected or
+rolled-back decision is still useful organizational knowledge, but it does not
+satisfy `CRD-LEARNING`.
 
 ## Evidence Independence
 

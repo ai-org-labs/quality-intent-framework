@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.29 baseline)
+## Current Position (v0.6.30 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -161,6 +161,10 @@ and adoption surface — not pretending the limits away.
   v0.6.29 adds Trial Variance records with repeated measurements,
   reproducible observed ranges, infrastructure profiles, confounder status,
   comparison boundaries, and deterministic `CRD-UNCERTAINTY` readiness.
+  v0.6.30 adds Framework Learning records that connect contradicted assumptions
+  and empirical calibration evidence to accountable governance, implemented
+  artifacts, validation evidence, rollback criteria, and deterministic
+  `CRD-LEARNING` readiness.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -172,7 +176,7 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-09-21 against primary-source signals. The
+The roadmap was revalidated on 2026-09-27 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
@@ -492,7 +496,10 @@ Deliverables:
   implemented in v0.6.28. Trial and infrastructure uncertainty is implemented
   in v0.6.29 with policy-defined repeated measurements, reproducible observed
   ranges, infrastructure profiles, confounders, and comparison boundaries.
-  Framework-learning evidence remains the next independent slice.
+  Framework-learning structure is implemented in v0.6.30: contradictory
+  empirical evidence can now be linked to a proposed, accepted, implemented,
+  rejected, or rolled-back framework change with validation and rollback
+  boundaries. Real organizational evidence remains pilot work.
 - First empirical self-test of the evidence independence hierarchy: do
   high-independence evidence items actually precede fewer escapes than
   low-independence ones? Publish the answer even if it is embarrassing.

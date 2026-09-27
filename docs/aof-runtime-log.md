@@ -2,6 +2,71 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.30 Framework Learning Records
+
+Date: 2026-09-27
+
+Need / Intent / Context:
+
+- Need: calibration-readiness could verify origin, suite health, and uncertainty, but a contradictory result could still be archived without proving that QIF changed, was deliberately rejected, or was rolled back.
+- Intent: add executable Framework Learning records linking contradicted assumptions and empirical calibration evidence to proposed, accepted, implemented, rejected, or rolled-back framework changes, with accountable governance, validation evidence, rollback criteria, and deterministic `CRD-LEARNING` readiness.
+- Context: QIF remains standalone and domain-general. A change count, evaluator recommendation, accepted proposal, or verifier pass must not become proof of learning or semantic quality truth.
+
+Need Validation and Project Charter:
+
+- AOF `run` created parent session `SESS-MUJBW6WC-3T68J9`; `answer` framed the scope and success condition.
+- `problem-statement-record`, `value-hypothesis-record`, and `alternative-analysis-record` retained the need evidence.
+- `need-validation-record` reframed the raw continuation request into `.aof/artifacts/need-validation/records/NVR-QIFV0630.json`.
+- Only after the Validated Need was recorded, `project-charter-record` created `.aof/artifacts/need-validation/project-charters/PCH-QIFV0630.json`; `need-validation-advance` promoted the session to planning.
+
+Direction and council judgment:
+
+- Visionary: approve. Contradictory calibration evidence must be able to reach and change the framework itself.
+- Builder: approve. Extend the existing world-model-calibration package with one canonical record, bidirectional run linkage, lifecycle consistency, readiness logic, and retained regressions.
+- Guardian: approve with boundary. Example evidence stays non-empirical; proposed, rejected, rolled-back, unvalidated, or governance-open records cannot satisfy `CRD-LEARNING`; a structurally ready change is not proof that the change helped.
+- Planning council artifact: `.aof/artifacts/execution/council-reviews/CREV-MUJBUTOL-OSLUHM.json`.
+- Actor skill packet: `.aof/artifacts/actor-skill-packets/ASP-MUJC2PKU-FDGPF5.json`, recording skill, capability, resource, policy, acceptance, blocker, and Guardian review evidence for `TASK-048`.
+
+Trend check:
+
+- The roadmap was rechecked against the latest available official primary-source signals through 2026-09-27.
+- OpenAI's systematic model-misalignment reporting framework supports keeping observed contradictions alive before complete causal explanation: `https://openai.com/index/model-misalignment-reporting-framework/`.
+- OpenAI's long-running Agents API raises the cost of stale or ungoverned evaluator assumptions: `https://openai.com/index/introducing-the-agents-api/`.
+- Anthropic's agent-evaluation guidance continues to support multi-trial, outcome, grader, and lifecycle evidence rather than single-score trust: `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`.
+- No newer primary-source signal changed the existing v0.7, v0.8, v0.9, and v1.0 roadmap order; the nearest independent gap remained Framework Learning.
+
+What was built:
+
+- `frameworkLearningRecords` in the world-model-calibration schema, example, verifier, inventory, and authoring guidance.
+- Traceability from a prior assumption and contradiction evidence to a proposed change, governance decision, implementation artifacts, validation evidence, follow-up ownership, success criteria, and rollback criteria.
+- Bidirectional `calibrationRunRefs` / `frameworkLearningRecordRefs` and lifecycle rules for proposed, accepted, implemented, rejected, rolled-back, and stale states.
+- `CRD-LEARNING` readiness version 2, requiring verified empirical origins, contradicted assumption status, accepted governance, implemented artifacts, validation evidence, rollback criteria, and resolved triggers.
+- A positive temporary empirical regression and 13 retained negative cases. The committed example remains proposed, example-only, and governance-open.
+- Plain-language documentation and a simple readable diagram in `docs/qif-v0.6.30-framework-learning-records.md`.
+
+What was not built:
+
+- No claim that the prior assumption was semantically false or the framework change improved quality.
+- No automatic acceptance of evaluator recommendations.
+- No use of change count, sample size, or verifier success as quality.
+- No UI, external integration, production pilot corpus, causal inference, or calibration-report statistics.
+
+Verification and review evidence:
+
+- `npm test` passed all CLI and verifier checks, `15/15` positive packages, and `651/651` retained negative fixtures.
+- `node tools/check-calibration-readiness.mjs` proved the committed example remains blocked and a temporary governed empirical implementation can satisfy `CRD-LEARNING`.
+- All 708 repository JSON files parsed; `git diff --check` passed.
+- Public residue scan found no personal account, legacy repository, email, user-home, or temporary path residue outside `.git`.
+- Self-review: `.aof/artifacts/execution/council-reviews/CREV-MUJCINTP-57ZN92.json`.
+- Final review: `.aof/artifacts/execution/council-reviews/CREV-MUJCKS30-1C7C7O.json`.
+- Retrospective: `.aof/artifacts/execution/council-reviews/CREV-MUJCM6ZG-WYQ8B1.json`.
+- AOF v12.2.0 `organization-verify --project .` passed `239/239` checks.
+- `TASK-048` completed; `.aof/runtime/v0.6.30-post-situation.json` points to the v0.6.31 frontier.
+
+Next value slice:
+
+- v0.6.31 Calibration Report records and deterministic tooling for decision-outcome pairs, Brier score, calibration buckets, sample and uncertainty boundaries, and governance routing. Reports will not auto-produce a quality verdict.
+
 ## v0.6.29 Trial and Infrastructure Uncertainty
 
 Date: 2026-09-21

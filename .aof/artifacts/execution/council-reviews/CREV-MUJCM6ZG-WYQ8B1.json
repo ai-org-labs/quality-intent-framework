@@ -1,0 +1,31 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-27T04:58:48.412Z",
+  "review_packet_id": "CREV-MUJCM6ZG-WYQ8B1",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Retrospective: v0.6.30 converted framework learning from a record count into an auditable governed state transition.",
+  "rationale": "Visionary: calibration evidence can now challenge QIF itself. Builder: extending the existing calibration package avoided a new package type and kept references executable. Guardian: requiring empirical origin, human acceptance, validation evidence, rollback criteria, and resolved triggers prevents proposals or activity volume from masquerading as learning. The remaining Phase 4 gap is a reproducible calibration report over decision-outcome pairs.",
+  "recommendation": "Make v0.6.31 Calibration Report records and tooling the next slice: compute Brier score and calibration buckets from honestly labeled decision-outcome pairs, retain uncertainty and sample boundaries, and never auto-produce a quality verdict.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    ".aof/artifacts/execution/council-reviews/CREV-MUJCKS30-1C7C7O.json",
+    "docs/qif-roadmap.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-048",
+  "source_parent_session_id": "SESS-MUJBW6WC-3T68J9",
+  "source_decision_record_id": null
+}

@@ -1,0 +1,31 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-27T04:37:31.461Z",
+  "review_packet_id": "CREV-MUJBUTOL-OSLUHM",
+  "council_id": "qif-council",
+  "stage": "planning",
+  "review_status": "approved",
+  "decision_summary": "Implement v0.6.30 as a narrow Framework Learning Records release.",
+  "rationale": "Visionary: contradictory calibration evidence must be able to change the framework. Builder: extend the calibration package with one auditable learning record and deterministic readiness rule. Guardian: a change count, evaluator recommendation, or structurally valid record must not be treated as learning; human governance, empirical provenance, validation evidence, and rollback boundaries remain mandatory.",
+  "recommendation": "Proceed with schema, verifier, retained fixtures, example, readiness regression, plain-language guidance, roadmap, and release evidence; defer calibration-report statistics.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    ".aof/runtime/v0.6.30-situation.json",
+    ".aof/goals/next-value-slice.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-048",
+  "source_parent_session_id": "SESS-MUJBW6WC-3T68J9",
+  "source_decision_record_id": null
+}

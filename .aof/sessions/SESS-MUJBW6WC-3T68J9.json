@@ -1,0 +1,161 @@
+{
+  "session_id": "SESS-MUJBW6WC-3T68J9",
+  "workflow_id": "service-design",
+  "organization_id": "civic-studio",
+  "organization": {
+    "language": "en"
+  },
+  "status": "framed",
+  "trigger": {
+    "trigger_id": "TRG-MUJBW6WC-0Z7S0I",
+    "trigger_type": "cli",
+    "received_at": "2026-09-27T04:38:35.241Z",
+    "request_payload": "Implement QIF v0.6.30 from the validated Need: make framework learning traceable from contradictory empirical calibration evidence through human governance, implementation validation, and rollback boundaries, without treating change count or verifier success as semantic quality truth."
+  },
+  "current_stage": "planning",
+  "routing_mode": "deep-path",
+  "routing_mode_history": [
+    {
+      "from_mode": null,
+      "to_mode": "deep-path",
+      "at": "2026-09-27T04:38:35.241Z",
+      "reason": "session-created"
+    }
+  ],
+  "context_snapshot_id": "CTX-MUJBWTYV-6PHMOS",
+  "open_decision_ids": [
+    "DEC-MUJC1N3M-TGO68E"
+  ],
+  "closed_decision_ids": [
+    "DEC-MUJBW6WF-CYVRWN",
+    "DEC-MUJBWTYY-WIR3R6"
+  ],
+  "stage_transitions": [
+    {
+      "from_stage": null,
+      "to_stage": "clarification",
+      "from_status": null,
+      "to_status": "waiting_user",
+      "at": "2026-09-27T04:38:35.241Z",
+      "reason": "session-created"
+    },
+    {
+      "from_stage": "clarification",
+      "to_stage": "need-validation",
+      "from_status": "waiting_user",
+      "to_status": "framed",
+      "at": "2026-09-27T04:39:05.139Z",
+      "reason": "clarification-complete"
+    },
+    {
+      "from_stage": "need-validation",
+      "to_stage": "planning",
+      "from_status": "framed",
+      "to_status": "framed",
+      "at": "2026-09-27T04:42:49.524Z",
+      "reason": "need-validation-approved"
+    }
+  ],
+  "reopen_count": 0,
+  "outcome_reports": [],
+  "clarification": {
+    "round_count": 1,
+    "dimensions": {
+      "need_clarity": "partial",
+      "intent_clarity": "partial",
+      "context_completeness": "missing",
+      "success_criteria_clarity": "missing",
+      "prohibited_conditions_clarity": "partial",
+      "governance_scope_clarity": "clear",
+      "brownfield_orientation_completeness": "clear",
+      "risk_exposure": "partial"
+    },
+    "gaps": [
+      {
+        "dimension": "need_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The underlying need is not specific enough yet."
+      },
+      {
+        "dimension": "intent_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The intended direction is not yet explicit."
+      },
+      {
+        "dimension": "context_completeness",
+        "status": "missing",
+        "trigger_class": "missing-constraint",
+        "summary": "Key constraints, scope, and current conditions are missing."
+      },
+      {
+        "dimension": "success_criteria_clarity",
+        "status": "missing",
+        "trigger_class": "missing-success-criteria",
+        "summary": "Success cannot be evaluated yet."
+      },
+      {
+        "dimension": "prohibited_conditions_clarity",
+        "status": "partial",
+        "trigger_class": "missing-prohibition",
+        "summary": "Forbidden changes or non-negotiables are not explicit."
+      }
+    ],
+    "pending_questions": [],
+    "asked_questions": [
+      "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "How should improvement success be judged: which metric or end state matters most?"
+    ],
+    "question_rationale": [],
+    "trigger_classes": [],
+    "target_fields": [],
+    "user_answers": [
+      {
+        "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+        "answer": "Cover the standalone public QIF repository's world-model-calibration package, schema, verifier, examples, readiness CLI, fixtures, authoring guidance, roadmap, AOF evidence, tag, and GitHub Release. Stay out of scope: UI, external integrations, production pilot data, automatic acceptance of evaluator recommendations, semantic-truth claims, and calibration-report statistics.",
+        "target_fields": [
+          "need",
+          "context"
+        ]
+      },
+      {
+        "question": "How should improvement success be judged: which metric or end state matters most?",
+        "answer": "Success means an implemented Framework Learning Record can satisfy CRD-LEARNING only when contradictory empirical evidence, accepted accountable governance, implemented artifact references, validation evidence, rollback criteria, and resolved governance triggers are structurally present; proposed, example-only, ungoverned, or unvalidated changes remain blocked; npm test and AOF verification pass; v0.6.30 is published.",
+        "target_fields": [
+          "success_criteria",
+          "intent"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "ask_or_assume_decision": "ask",
+    "remaining_gaps": [],
+    "unresolved_ambiguity": [],
+    "question_budget": {
+      "initial_question_budget": 2,
+      "followup_budget": 1,
+      "max_rounds": 2
+    },
+    "next_stop_condition": "need validation can proceed",
+    "clarification_summary": "runtime captured first-round clarification answers and can proceed to need validation",
+    "should_wait_for_user": false
+  },
+  "created_at": "2026-09-27T04:38:35.241Z",
+  "updated_at": "2026-09-27T04:42:49.524Z",
+  "framing": {
+    "request": "Implement QIF v0.6.30 from the validated Need: make framework learning traceable from contradictory empirical calibration evidence through human governance, implementation validation, and rollback boundaries, without treating change count or verifier success as semantic quality truth.",
+    "need": "Cover the standalone public QIF repository's world-model-calibration package, schema, verifier, examples, readiness CLI, fixtures, authoring guidance, roadmap, AOF evidence, tag, and GitHub Release. Stay out of scope: UI, external integrations, production pilot data, automatic acceptance of evaluator recommendations, semantic-truth claims, and calibration-report statistics.",
+    "intent": "Success means an implemented Framework Learning Record can satisfy CRD-LEARNING only when contradictory empirical evidence, accepted accountable governance, implemented artifact references, validation evidence, rollback criteria, and resolved governance triggers are structurally present; proposed, example-only, ungoverned, or unvalidated changes remain blocked; npm test and AOF verification pass; v0.6.30 is published.",
+    "active_context": "context: Cover the standalone public QIF repository's world-model-calibration package, schema, verifier, examples, readiness CLI, fixtures, authoring guidance, roadmap, AOF evidence, tag, and GitHub Release. Stay out of scope: UI, external integrations, production pilot data, automatic acceptance of evaluator recommendations, semantic-truth claims, and calibration-report statistics. | success: Success means an implemented Framework Learning Record can satisfy CRD-LEARNING only when contradictory empirical evidence, accepted accountable governance, implemented artifact references, validation evidence, rollback criteria, and resolved governance triggers are structurally present; proposed, example-only, ungoverned, or unvalidated changes remain blocked; npm test and AOF verification pass; v0.6.30 is published.",
+    "success_criteria": "Success means an implemented Framework Learning Record can satisfy CRD-LEARNING only when contradictory empirical evidence, accepted accountable governance, implemented artifact references, validation evidence, rollback criteria, and resolved governance triggers are structurally present; proposed, example-only, ungoverned, or unvalidated changes remain blocked; npm test and AOF verification pass; v0.6.30 is published.",
+    "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone public QIF repository's world-model-calibration package, schema, verifier, examples, readiness CLI, fixtures, authoring guidance, roadmap, AOF evidence, tag, and GitHub Release. Stay out of scope: UI, external integrations, production pilot data, automatic acceptance of evaluator recommendations, semantic-truth claims, and calibration-report statistics. / How should improvement success be judged: which metric or end state matters most? => Success means an implemented Framework Learning Record can satisfy CRD-LEARNING only when contradictory empirical evidence, accepted accountable governance, implemented artifact references, validation evidence, rollback criteria, and resolved governance triggers are structurally present; proposed, example-only, ungoverned, or unvalidated changes remain blocked; npm test and AOF verification pass; v0.6.30 is published."
+  },
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0630.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0630.json",
+    ".aof/artifacts/need-validation/problem-statements/PST-MUJBZCYV-FAUBKX.json",
+    ".aof/artifacts/need-validation/value-hypotheses/VHY-MUJC02PJ-KM2PI0.json",
+    ".aof/artifacts/need-validation/alternative-analyses/ALT-MUJC02RT-P5PBNI.json"
+  ]
+}

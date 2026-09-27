@@ -1,6 +1,6 @@
 {
   "packageType": "world-model-calibration",
-  "runtimeVersion": "0.5.2",
+  "runtimeVersion": "0.6.30",
   "packageId": "WMCPKG-001",
   "packageRefs": [
     {
@@ -439,6 +439,61 @@
       "assuranceBoundary": "Trial count, mean, and observed range are evidence about repeated measurements only; they do not prove quality, representativeness, independence, or causal attribution."
     }
   ],
+  "frameworkLearningRecords": [
+    {
+      "id": "FLR-WMC-001",
+      "title": "Example proposal to strengthen approval-boundary discovery",
+      "calibrationRunRefs": [
+        "CALRUN-WMC-001"
+      ],
+      "evidenceOriginRefs": [
+        "EOR-WMC-001"
+      ],
+      "contradictedAssumption": {
+        "statement": "A general approval-boundary prompt is sufficient across software, maintenance, and accounting cases.",
+        "priorRationale": "The prompt identified the software approval boundary in the illustrative case.",
+        "contradictionEvidenceRefs": [
+          "CALRUN-WMC-001",
+          "FMA-WMC-003"
+        ],
+        "contradictionSummary": "The illustrative accounting case was missed, so the assumption requires review; example evidence cannot establish an empirical contradiction.",
+        "status": "contested"
+      },
+      "proposedChange": {
+        "targetArtifact": "world-model-review approval-boundary guidance",
+        "changeType": "guidance",
+        "description": "Add domain-neutral prompts for authority limits, exception conditions, and required approval evidence.",
+        "expectedEffect": "Reduce missed approval-boundary findings without treating the evaluator recommendation as automatically correct."
+      },
+      "governanceDecision": {
+        "decision": "deferred",
+        "decidedBy": "qif-maintainer",
+        "decidedAt": "example-only",
+        "rationale": "The public example demonstrates the record shape but cannot authorize a framework change without empirical evidence and accountable review."
+      },
+      "implementation": {
+        "status": "not-started",
+        "artifactRefs": [],
+        "validationEvidenceRefs": [],
+        "rollbackEvidenceRefs": []
+      },
+      "followUp": {
+        "owner": "qif-maintainer",
+        "reviewAt": "after-empirical-pilot",
+        "successCriteria": [
+          "Observed pilot evidence shows the revised guidance reduces relevant misses without unacceptable false positives."
+        ],
+        "rollbackCriteria": [
+          "Independent review finds that the revision creates material false positives or obscures applicability boundaries."
+        ]
+      },
+      "overallStatus": "proposed",
+      "governanceTriggerRefs": [
+        "GTR-WMC-005"
+      ],
+      "assuranceBoundary": "This example records a candidate learning path only; it does not prove the assumption false, the proposed change correct, or the framework improved."
+    }
+  ],
   "calibrationRuns": [
     {
       "id": "CALRUN-WMC-001",
@@ -468,6 +523,9 @@
       ],
       "trialVarianceRecordRefs": [
         "TVR-WMC-001"
+      ],
+      "frameworkLearningRecordRefs": [
+        "FLR-WMC-001"
       ],
       "caseCount": 3,
       "domainCoverage": [
@@ -525,6 +583,16 @@
       "requiredAction": "Run repeated trials under recorded infrastructure profiles, investigate incidents and confounders, and retain uncertainty ranges before comparing scores.",
       "owner": "qif-maintainer",
       "status": "open"
+    },
+    {
+      "id": "GTR-WMC-005",
+      "triggerType": "framework-learning-review",
+      "reason": "The proposed framework change is based on committed example evidence and has not received an accountable acceptance decision or validation.",
+      "sourceCalibrationRunRef": "CALRUN-WMC-001",
+      "severity": "medium",
+      "requiredAction": "Collect empirical contradiction evidence, obtain accountable governance, implement the accepted change, and retain validation and rollback evidence before claiming framework learning.",
+      "owner": "qif-maintainer",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -538,12 +606,15 @@
       "trial summaries and observed uncertainty ranges reproduce from included measurements",
       "trial measurements resolve infrastructure profiles and calibration-run links",
       "sufficient uncertainty records use verified empirical origins and bounded infrastructure",
+      "framework learning records resolve contradiction evidence, governance, implementation, validation, and rollback boundaries",
+      "implemented learning requires verified empirical origins, accepted governance, validation evidence, and no unresolved trigger",
       "threshold failures trigger governance"
     ],
     "doesNotClaim": [
       "semantic truth",
       "expert correctness",
       "domain correctness",
+      "change count as learning",
       "production readiness"
     ],
     "semanticValidityRequires": [

@@ -16,6 +16,7 @@
     "findingMatches",
     "evaluationSuiteHealthRecords",
     "trialVarianceRecords",
+    "frameworkLearningRecords",
     "calibrationRuns",
     "governanceTriggers",
     "verifierBoundary"
@@ -69,6 +70,11 @@
       "type": "array",
       "minItems": 1,
       "items": { "$ref": "#/$defs/trialVarianceRecord" }
+    },
+    "frameworkLearningRecords": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/frameworkLearningRecord" }
     },
     "calibrationRuns": {
       "type": "array",
@@ -462,6 +468,76 @@
         "assuranceBoundary": { "type": "string", "minLength": 1 }
       }
     },
+    "frameworkLearningRecord": {
+      "type": "object",
+      "required": ["id", "title", "calibrationRunRefs", "evidenceOriginRefs", "contradictedAssumption", "proposedChange", "governanceDecision", "implementation", "followUp", "overallStatus", "governanceTriggerRefs", "assuranceBoundary"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "calibrationRunRefs": { "$ref": "#/$defs/refArray" },
+        "evidenceOriginRefs": { "$ref": "#/$defs/refArray" },
+        "contradictedAssumption": {
+          "type": "object",
+          "required": ["statement", "priorRationale", "contradictionEvidenceRefs", "contradictionSummary", "status"],
+          "additionalProperties": false,
+          "properties": {
+            "statement": { "type": "string", "minLength": 1 },
+            "priorRationale": { "type": "string", "minLength": 1 },
+            "contradictionEvidenceRefs": { "$ref": "#/$defs/refArray" },
+            "contradictionSummary": { "type": "string", "minLength": 1 },
+            "status": { "enum": ["supported", "contradicted", "contested", "unresolved"] }
+          }
+        },
+        "proposedChange": {
+          "type": "object",
+          "required": ["targetArtifact", "changeType", "description", "expectedEffect"],
+          "additionalProperties": false,
+          "properties": {
+            "targetArtifact": { "type": "string", "minLength": 1 },
+            "changeType": { "enum": ["schema", "verifier", "guidance", "policy", "workflow", "example", "other"] },
+            "description": { "type": "string", "minLength": 1 },
+            "expectedEffect": { "type": "string", "minLength": 1 }
+          }
+        },
+        "governanceDecision": {
+          "type": "object",
+          "required": ["decision", "decidedBy", "decidedAt", "rationale"],
+          "additionalProperties": false,
+          "properties": {
+            "decision": { "enum": ["pending", "accepted", "rejected", "deferred", "rolled-back"] },
+            "decidedBy": { "type": "string", "minLength": 1 },
+            "decidedAt": { "type": "string", "minLength": 1 },
+            "rationale": { "type": "string", "minLength": 1 }
+          }
+        },
+        "implementation": {
+          "type": "object",
+          "required": ["status", "artifactRefs", "validationEvidenceRefs", "rollbackEvidenceRefs"],
+          "additionalProperties": false,
+          "properties": {
+            "status": { "enum": ["not-started", "implemented", "not-applicable", "rolled-back"] },
+            "artifactRefs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+            "validationEvidenceRefs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+            "rollbackEvidenceRefs": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+          }
+        },
+        "followUp": {
+          "type": "object",
+          "required": ["owner", "reviewAt", "successCriteria", "rollbackCriteria"],
+          "additionalProperties": false,
+          "properties": {
+            "owner": { "type": "string", "minLength": 1 },
+            "reviewAt": { "type": "string", "minLength": 1 },
+            "successCriteria": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+            "rollbackCriteria": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 }
+          }
+        },
+        "overallStatus": { "enum": ["proposed", "accepted", "implemented", "rejected", "rolled-back", "stale"] },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "assuranceBoundary": { "type": "string", "minLength": 1 }
+      }
+    },
     "calibrationRun": {
       "type": "object",
       "required": [
@@ -473,6 +549,7 @@
         "findingMatchRefs",
         "suiteHealthRecordRefs",
         "trialVarianceRecordRefs",
+        "frameworkLearningRecordRefs",
         "caseCount",
         "domainCoverage",
         "agreementScore",
@@ -493,6 +570,7 @@
         "findingMatchRefs": { "$ref": "#/$defs/refArray" },
         "suiteHealthRecordRefs": { "$ref": "#/$defs/refArray" },
         "trialVarianceRecordRefs": { "$ref": "#/$defs/refArray" },
+        "frameworkLearningRecordRefs": { "$ref": "#/$defs/refArray" },
         "caseCount": { "type": "integer", "minimum": 0 },
         "domainCoverage": {
           "type": "array",
@@ -517,7 +595,7 @@
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" },
-        "triggerType": { "enum": ["low-agreement", "high-false-positive-rate", "high-false-negative-rate", "insufficient-case-count", "insufficient-trial-count", "domain-gap", "expert-disagreement", "contamination-risk", "unsolvable-case", "suite-saturation", "grader-drift", "harness-non-reproducible", "infrastructure-instability", "trial-variance-unresolved", "drift-unowned", "other"] },
+        "triggerType": { "enum": ["low-agreement", "high-false-positive-rate", "high-false-negative-rate", "insufficient-case-count", "insufficient-trial-count", "domain-gap", "expert-disagreement", "contamination-risk", "unsolvable-case", "suite-saturation", "grader-drift", "harness-non-reproducible", "infrastructure-instability", "trial-variance-unresolved", "framework-learning-review", "drift-unowned", "other"] },
         "reason": { "type": "string" },
         "sourceCalibrationRunRef": { "$ref": "#/$defs/id" },
         "severity": { "enum": ["low", "medium", "high", "critical"] },

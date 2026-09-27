@@ -344,6 +344,90 @@
       "errorIncludes": "CALRUN-WMC-001 references missing trial variance record: TVR-NOPE-999"
     },
     {
+      "file": "world-model-calibration-framework-learning-broken-run-ref.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "framework learning calibration runs resolve",
+      "expect": "fail",
+      "errorIncludes": "FLR-WMC-001 references missing calibration run: CALRUN-NOPE-999"
+    },
+    {
+      "file": "world-model-calibration-framework-learning-broken-evidence-origin-ref.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "framework learning evidence origins resolve",
+      "expect": "fail",
+      "errorIncludes": "FLR-WMC-001 references missing evidence origin: EOR-NOPE-999"
+    },
+    {
+      "file": "world-model-calibration-framework-learning-broken-contradiction-evidence-ref.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "contradiction evidence resolves",
+      "expect": "fail",
+      "errorIncludes": "FLR-WMC-001/contradictedAssumption references missing contradiction evidence: FMA-NOPE-999"
+    },
+    {
+      "file": "world-model-calibration-framework-learning-run-missing-backlink.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "calibration runs link framework learning records bidirectionally",
+      "expect": "fail",
+      "errorIncludes": "FLR-WMC-001 calibration run CALRUN-WMC-001 must link back through frameworkLearningRecordRefs."
+    },
+    {
+      "file": "world-model-calibration-framework-learning-proposed-requires-governance.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "proposed learning routes to governance",
+      "expect": "fail",
+      "errorIncludes": "FLR-WMC-001 proposed learning requires governanceTriggerRefs."
+    },
+    {
+      "file": "world-model-calibration-framework-learning-implemented-requires-empirical-origin.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "implemented learning requires empirical provenance",
+      "expect": "fail",
+      "errorIncludes": "FLR-WMC-001 implemented learning requires verified observed-operational or historical-record origins."
+    },
+    {
+      "file": "world-model-calibration-framework-learning-implemented-requires-contradiction.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "implemented learning requires contradicted assumption",
+      "expect": "fail",
+      "errorIncludes": "FLR-WMC-001 implemented learning requires a contradicted assumption."
+    },
+    {
+      "file": "world-model-calibration-framework-learning-implemented-requires-accepted-governance.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "implemented learning requires accepted governance",
+      "expect": "fail",
+      "errorIncludes": "FLR-WMC-001 implemented learning requires an accepted governance decision."
+    },
+    {
+      "file": "world-model-calibration-framework-learning-implemented-requires-artifact.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "implemented learning cites changed artifacts",
+      "expect": "fail",
+      "errorIncludes": "FLR-WMC-001 implemented learning requires artifactRefs."
+    },
+    {
+      "file": "world-model-calibration-framework-learning-implemented-requires-validation.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "implemented learning cites validation evidence",
+      "expect": "fail",
+      "errorIncludes": "FLR-WMC-001 implemented learning requires validationEvidenceRefs."
+    },
+    {
+      "file": "world-model-calibration-framework-learning-implemented-rejects-open-governance.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "implemented learning has no unresolved trigger",
+      "expect": "fail",
+      "errorIncludes": "FLR-WMC-001 implemented learning cannot retain unresolved governance triggers."
+    },
+    {
+      "file": "world-model-calibration-framework-learning-rolled-back-requires-evidence.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "rolled-back learning cites rollback evidence",
+      "expect": "fail",
+      "errorIncludes": "FLR-WMC-001 rolled-back learning requires rollbackEvidenceRefs."
+    },
+    {
       "file": "world-model-calibration-calibrated-run-requires-sufficient-variance.json",
       "validator": "tools/validate-world-model-calibration.mjs",
       "rule": "calibrated run requires sufficient trial variance",
@@ -412,6 +496,13 @@
       "rule": "calibration verifier boundary avoids semantic truth",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming semantic truth."
+    },
+    {
+      "file": "world-model-calibration-verifier-boundary-treats-change-count-as-learning.json",
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "rule": "calibration verifier boundary rejects change count as learning",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming change count as learning."
     }
   ],
   "rescopedRules": []

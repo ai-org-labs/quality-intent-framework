@@ -33,6 +33,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.6.27 Evidence Origin: `docs/qif-v0.6.27-evidence-origin.md`
 - QIF v0.6.28 Evaluation Suite Health: `docs/qif-v0.6.28-evaluation-suite-health.md`
 - QIF v0.6.29 Trial and Infrastructure Uncertainty: `docs/qif-v0.6.29-trial-infrastructure-uncertainty.md`
+- QIF v0.6.30 Framework Learning Records: `docs/qif-v0.6.30-framework-learning-records.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`
@@ -162,6 +163,9 @@ The world model calibration verifier checks:
 - Calibration Run case count, domain coverage, agreement score, false-positive rate, and false-negative rate reproduce from referenced cases and matches
 - threshold failures trigger governance when the policy requires governance
 - a failed threshold cannot be reported as calibrated
+- Framework Learning records link contradicted assumptions to calibration evidence, governed decisions, implemented artifacts, validation evidence, and rollback criteria
+- implemented learning requires verified empirical origins, accepted governance, and resolved triggers
+- a change count, proposal, or verifier pass cannot be treated as framework learning
 - verifier success explicitly does not claim semantic truth
 
 The world model pilot corpus verifier checks:

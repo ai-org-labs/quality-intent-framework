@@ -1,0 +1,15 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-09-27T04:41:36.439Z",
+  "value_hypothesis_id": "VHY-MUJC02PJ-KM2PI0",
+  "expected_value_creation": "QIF can distinguish governed framework learning from a mere change log.",
+  "beneficiary": "Human, AI, and hybrid organizations using QIF calibration evidence",
+  "supporting_evidence": [
+    "CRD-LEARNING is currently count-based and blocked by the committed example."
+  ],
+  "success_criteria": [
+    "Only an empirically grounded, accepted, implemented, validated change with resolved governance can satisfy CRD-LEARNING."
+  ],
+  "source_task_id": "TASK-048",
+  "source_decision_record_id": null
+}

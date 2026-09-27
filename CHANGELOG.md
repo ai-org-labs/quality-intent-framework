@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.30
+
+- Added first-class Framework Learning records that connect contradicted assumptions and empirical calibration evidence to governed framework changes.
+- Added lifecycle and consistency rules for proposed, accepted, implemented, rejected, rolled-back, and stale learning records, including validation and rollback evidence.
+- Replaced count-based `CRD-LEARNING` readiness with a deterministic governed-learning test; the committed example remains proposed and example-only.
+- Added 13 retained negative cases for learning provenance, references, governance, implementation, validation, rollback, and verifier boundaries; the retained suite now covers 651 negative cases.
+
 ## v0.6.29
 
 - Added first-class Trial Variance records with repeated measurements, reproducible summaries, observed uncertainty ranges, and bidirectional calibration-run linkage.

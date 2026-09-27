@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-09-27T04:42:01.385Z",
+  "validation_id": "NVR-MUJC0LYG-S7VLIX",
+  "raw_need": "Continue QIF development and release the nearest valuable roadmap slice.",
+  "validation_status": "reframed",
+  "validated_need": "Make framework learning structurally provable by linking contradicted empirical calibration evidence to an accountable accepted, implemented, validated, and reversible QIF change, while keeping semantic judgment human-governed.",
+  "decision_summary": "The raw continuation request is reframed into the narrow CRD-LEARNING gap; prose-only change logs and change counts are insufficient.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What environment and scope are affected?",
+      "answer": "The standalone QIF world-model-calibration package, verifier, examples, readiness CLI, fixtures, guidance, roadmap, AOF evidence, and v0.6.30 release; no UI, external integration, or production pilot data.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What end state proves value?",
+      "answer": "Only empirically grounded and human-governed implemented changes with validation and resolved triggers satisfy CRD-LEARNING.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A changelog entry alone proves organizational learning."
+  ],
+  "evidence_gaps": [
+    "No real organization calibration corpus is committed; the example must remain non-empirical."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-MUJBZCYV-FAUBKX.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-MUJC02PJ-KM2PI0.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-MUJC02RT-P5PBNI.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": "TASK-048",
+  "source_decision_record_id": "DEC-MUJBWTYY-WIR3R6"
+}

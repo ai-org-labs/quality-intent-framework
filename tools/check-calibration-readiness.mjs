@@ -60,6 +60,22 @@ const empiricalInputs = [
       variance.governanceTriggerRefs = [];
       variance.assuranceBoundary = "Repeated measurements and controlled infrastructure support an uncertainty range but do not prove quality, independence, or causal attribution.";
     }
+    for (const learning of pkg.frameworkLearningRecords) {
+      learning.contradictedAssumption.status = "contradicted";
+      learning.contradictedAssumption.contradictionSummary = "Verified historical pilot evidence reproduced the cross-domain miss and contradicted the prior sufficiency assumption.";
+      learning.governanceDecision.decision = "accepted";
+      learning.governanceDecision.decidedBy = "accountable framework council";
+      learning.governanceDecision.decidedAt = "2026-08-31";
+      learning.governanceDecision.rationale = "Independent pilot review accepted the bounded guidance change and retained rollback criteria.";
+      learning.implementation.status = "implemented";
+      learning.implementation.artifactRefs = ["docs/revised-approval-boundary-guidance.md"];
+      learning.implementation.validationEvidenceRefs = ["pilot/revalidation-run.json", "pilot/independent-review.json"];
+      learning.overallStatus = "implemented";
+      for (const triggerRef of learning.governanceTriggerRefs) {
+        const trigger = pkg.governanceTriggers.find((item) => item.id === triggerRef);
+        if (trigger) trigger.status = "resolved";
+      }
+    }
   }
   const target = path.join(empiricalDir, `${flag}.json`);
   fs.writeFileSync(target, `${JSON.stringify(pkg, null, 2)}\n`);
@@ -88,6 +104,8 @@ if (result.status !== 0) {
   if (!empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-ORIGIN")?.met) errors.push("expected CRD-ORIGIN to be structurally satisfiable");
   if (!empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-SUITE-HEALTH")?.met) errors.push("expected CRD-SUITE-HEALTH to be structurally satisfiable");
   if (!empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-UNCERTAINTY")?.met) errors.push("expected CRD-UNCERTAINTY to be structurally satisfiable");
+  if (!empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-LEARNING")?.met) errors.push("expected governed empirical Framework Learning to satisfy CRD-LEARNING");
+  if (empiricalReport?.readiness?.empiricalCalibrationReady !== true) errors.push("expected all calibration-readiness checks to be satisfiable in the temporary empirical package set");
   for (const blockerId of requiredBlockers) {
     if (!blockerIds.has(blockerId)) errors.push(`expected blocker ${blockerId}`);
   }
@@ -110,6 +128,7 @@ if (result.status !== 0) {
       empiricalOriginRecognized: empiricalReport?.evidenceOrigin?.status === "verified-empirical",
       healthySuiteRecognized: empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-SUITE-HEALTH")?.met === true,
       boundedUncertaintyRecognized: empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-UNCERTAINTY")?.met === true,
+      governedFrameworkLearningRecognized: empiricalReport?.readiness?.checks?.find((item) => item.id === "CRD-LEARNING")?.met === true,
       blockerIds: Array.from(blockerIds).sort()
     }, null, 2));
   }

@@ -1,0 +1,75 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-09-27T04:43:39.390Z",
+  "packet_id": "ASP-MUJC2PKU-FDGPF5",
+  "source_task_id": "TASK-048",
+  "source_parent_session_id": "SESS-MUJBW6WC-3T68J9",
+  "source_decision_record_id": null,
+  "objective": "Implement and verify QIF v0.6.30 Framework Learning Records",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": "qif-council",
+    "assignment_reason": "Builder owns schema, verifier, fixture, documentation, and release integration for the validated frontier.",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "skill-schema-review",
+    "skill-verifier-engineering"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "capability-qif-runtime-engineering",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "tools/validate-world-model-calibration.mjs",
+        "tools/check-calibration-readiness.mjs"
+      ],
+      "rationale": "Existing calibration schema and deterministic verifier patterns are available."
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-public-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-no-semantic-truth",
+    "policy-no-activity-count-quality"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/world-model-calibration-package.schema.json",
+    "required_sections": [
+      "frameworkLearningRecords"
+    ],
+    "acceptance_criteria": [
+      "npm test passes and CRD-LEARNING is deterministically satisfiable only from governed empirical framework change evidence"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "framework learning remains traceable, governed, and non-semantic",
+      "evaluator_ref": "guardian",
+      "evidence_required": "schema verifier fixtures and readiness regression",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "ungoverned-learning-claim",
+      "trigger_condition": "a proposed change or activity count satisfies CRD-LEARNING",
+      "consequence": "block-assignment",
+      "recovery_action": "require empirical provenance, accepted governance decision, implemented artifact, validation evidence, and resolved triggers"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will make framework learning executable without turning change volume into quality.",
+    "current_action": "Implement Framework Learning Records",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Submit implementation to Guardian review"
+  },
+  "status": "draft"
+}
