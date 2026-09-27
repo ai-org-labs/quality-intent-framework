@@ -63,6 +63,14 @@ Verification and review evidence:
 - AOF v12.2.0 `organization-verify --project .` passed `239/239` checks.
 - `TASK-048` completed; `.aof/runtime/v0.6.30-post-situation.json` points to the v0.6.31 frontier.
 
+Release:
+
+- Implementation commit and tag target: `6bbe6d3820e725a81464f2fd820c91bc89168fc2`.
+- Annotated tag object: `1edba79f491667992967eacdbcf528b0e2197849`.
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.30`.
+- Published at: `2026-09-27T05:02:15Z`; draft `false`; prerelease `false`.
+- Remote `main` and the dereferenced tag both resolved to the verified implementation commit at publication.
+
 Next value slice:
 
 - v0.6.31 Calibration Report records and deterministic tooling for decision-outcome pairs, Brier score, calibration buckets, sample and uncertainty boundaries, and governance routing. Reports will not auto-produce a quality verdict.
