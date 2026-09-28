@@ -62,7 +62,14 @@ Verification and review evidence:
 - Retrospective: `.aof/artifacts/execution/council-reviews/CREV-MUKRTVDQ-W7I661.json`.
 - AOF v12.2.0 `organization-verify --project .` passed `247/247` checks.
 - `TASK-049` completed; `.aof/runtime/v0.6.31-post-situation.json` points to the v0.6.32 frontier.
-- Release commit, tag, and GitHub Release evidence are recorded by the release completion update.
+
+Release:
+
+- Implementation commit and tag target: `a7b1fcaa42bf929616c9692103da7f0aacdac962`.
+- Annotated tag object: `021ee3d6b2f55a616de233363825b21139f87c8d`.
+- GitHub Release: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.31`.
+- Published at: `2026-09-28T04:55:19Z`; draft `false`; prerelease `false`.
+- Remote `main` and the dereferenced tag both resolved to the verified implementation commit at publication.
 
 Next value slice:
 
