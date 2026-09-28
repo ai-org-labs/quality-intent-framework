@@ -1,0 +1,161 @@
+{
+  "session_id": "SESS-MUKR5IWG-FJ9AHE",
+  "workflow_id": "service-design",
+  "organization_id": "civic-studio",
+  "organization": {
+    "language": "en"
+  },
+  "status": "framed",
+  "trigger": {
+    "trigger_id": "TRG-MUKR5IWG-IWAV94",
+    "trigger_type": "cli",
+    "received_at": "2026-09-28T04:33:31.117Z",
+    "request_payload": "QIF v0.6.31: add a standalone calibration-report package that links quality-gate decisions to observed outcomes, deterministically reproduces Brier score and calibration buckets, preserves evidence origin and uncertainty boundaries, and routes insufficient or misleading reports to governance without producing an automatic quality verdict."
+  },
+  "current_stage": "planning",
+  "routing_mode": "deep-path",
+  "routing_mode_history": [
+    {
+      "from_mode": null,
+      "to_mode": "deep-path",
+      "at": "2026-09-28T04:33:31.117Z",
+      "reason": "session-created"
+    }
+  ],
+  "context_snapshot_id": "CTX-MUKR6XZY-WT8PCO",
+  "open_decision_ids": [
+    "DEC-MUKR8MO4-V1FT4S"
+  ],
+  "closed_decision_ids": [
+    "DEC-MUKR5IWJ-OSDH2S",
+    "DEC-MUKR6Y02-9M9K13"
+  ],
+  "stage_transitions": [
+    {
+      "from_stage": null,
+      "to_stage": "clarification",
+      "from_status": null,
+      "to_status": "waiting_user",
+      "at": "2026-09-28T04:33:31.117Z",
+      "reason": "session-created"
+    },
+    {
+      "from_stage": "clarification",
+      "to_stage": "need-validation",
+      "from_status": "waiting_user",
+      "to_status": "framed",
+      "at": "2026-09-28T04:34:37.339Z",
+      "reason": "clarification-complete"
+    },
+    {
+      "from_stage": "need-validation",
+      "to_stage": "planning",
+      "from_status": "framed",
+      "to_status": "framed",
+      "at": "2026-09-28T04:35:55.975Z",
+      "reason": "need-validation-approved"
+    }
+  ],
+  "reopen_count": 0,
+  "outcome_reports": [],
+  "clarification": {
+    "round_count": 1,
+    "dimensions": {
+      "need_clarity": "partial",
+      "intent_clarity": "partial",
+      "context_completeness": "missing",
+      "success_criteria_clarity": "missing",
+      "prohibited_conditions_clarity": "partial",
+      "governance_scope_clarity": "clear",
+      "brownfield_orientation_completeness": "clear",
+      "risk_exposure": "partial"
+    },
+    "gaps": [
+      {
+        "dimension": "need_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The underlying need is not specific enough yet."
+      },
+      {
+        "dimension": "intent_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The intended direction is not yet explicit."
+      },
+      {
+        "dimension": "context_completeness",
+        "status": "missing",
+        "trigger_class": "missing-constraint",
+        "summary": "Key constraints, scope, and current conditions are missing."
+      },
+      {
+        "dimension": "success_criteria_clarity",
+        "status": "missing",
+        "trigger_class": "missing-success-criteria",
+        "summary": "Success cannot be evaluated yet."
+      },
+      {
+        "dimension": "prohibited_conditions_clarity",
+        "status": "partial",
+        "trigger_class": "missing-prohibition",
+        "summary": "Forbidden changes or non-negotiables are not explicit."
+      }
+    ],
+    "pending_questions": [],
+    "asked_questions": [
+      "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "How should improvement success be judged: which metric or end state matters most?"
+    ],
+    "question_rationale": [],
+    "trigger_classes": [],
+    "target_fields": [],
+    "user_answers": [
+      {
+        "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+        "answer": "Scope: a standalone, domain-general calibration-report package that reads declared quality-gate decision and post-release outcome references; schema, verifier, example, CLI integration, tests, docs, roadmap, and release only. Exclude UI, external integrations, automatic quality verdicts, causal claims, and production pilot data.",
+        "target_fields": [
+          "need",
+          "context"
+        ]
+      },
+      {
+        "question": "How should improvement success be judged: which metric or end state matters most?",
+        "answer": "Success: a human or AI can reproduce decision-outcome pairing, Brier score, calibration buckets, sample boundaries, evidence-origin limits, and required governance actions from portable JSON; invalid arithmetic, references, empirical claims, or verdict substitutions fail deterministically.",
+        "target_fields": [
+          "success_criteria",
+          "intent"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "ask_or_assume_decision": "ask",
+    "remaining_gaps": [],
+    "unresolved_ambiguity": [],
+    "question_budget": {
+      "initial_question_budget": 2,
+      "followup_budget": 1,
+      "max_rounds": 2
+    },
+    "next_stop_condition": "need validation can proceed",
+    "clarification_summary": "runtime captured first-round clarification answers and can proceed to need validation",
+    "should_wait_for_user": false
+  },
+  "created_at": "2026-09-28T04:33:31.117Z",
+  "updated_at": "2026-09-28T04:35:55.975Z",
+  "framing": {
+    "request": "QIF v0.6.31: add a standalone calibration-report package that links quality-gate decisions to observed outcomes, deterministically reproduces Brier score and calibration buckets, preserves evidence origin and uncertainty boundaries, and routes insufficient or misleading reports to governance without producing an automatic quality verdict.",
+    "need": "Scope: a standalone, domain-general calibration-report package that reads declared quality-gate decision and post-release outcome references; schema, verifier, example, CLI integration, tests, docs, roadmap, and release only. Exclude UI, external integrations, automatic quality verdicts, causal claims, and production pilot data.",
+    "intent": "Success: a human or AI can reproduce decision-outcome pairing, Brier score, calibration buckets, sample boundaries, evidence-origin limits, and required governance actions from portable JSON; invalid arithmetic, references, empirical claims, or verdict substitutions fail deterministically.",
+    "active_context": "context: Scope: a standalone, domain-general calibration-report package that reads declared quality-gate decision and post-release outcome references; schema, verifier, example, CLI integration, tests, docs, roadmap, and release only. Exclude UI, external integrations, automatic quality verdicts, causal claims, and production pilot data. | success: Success: a human or AI can reproduce decision-outcome pairing, Brier score, calibration buckets, sample boundaries, evidence-origin limits, and required governance actions from portable JSON; invalid arithmetic, references, empirical claims, or verdict substitutions fail deterministically.",
+    "success_criteria": "Success: a human or AI can reproduce decision-outcome pairing, Brier score, calibration buckets, sample boundaries, evidence-origin limits, and required governance actions from portable JSON; invalid arithmetic, references, empirical claims, or verdict substitutions fail deterministically.",
+    "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: a standalone, domain-general calibration-report package that reads declared quality-gate decision and post-release outcome references; schema, verifier, example, CLI integration, tests, docs, roadmap, and release only. Exclude UI, external integrations, automatic quality verdicts, causal claims, and production pilot data. / How should improvement success be judged: which metric or end state matters most? => Success: a human or AI can reproduce decision-outcome pairing, Brier score, calibration buckets, sample boundaries, evidence-origin limits, and required governance actions from portable JSON; invalid arithmetic, references, empirical claims, or verdict substitutions fail deterministically."
+  },
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0631.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0631.json",
+    ".aof/artifacts/need-validation/problem-statements/PST-QIFV0631.json",
+    ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0631.json",
+    ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0631.json"
+  ]
+}

@@ -44,6 +44,7 @@ import { cases as worldModelElicitationCases, spec as worldModelElicitationSpec 
 import { cases as actionQualityContractCases, spec as actionQualityContractSpec } from "./fixtures/action-quality-contract-cases.mjs";
 import { cases as authoringTemplateCases, spec as authoringTemplateSpec } from "./fixtures/authoring-template-cases.mjs";
 import { cases as qualityGateCases, spec as qualityGateSpec } from "./fixtures/quality-gate-cases.mjs";
+import { cases as calibrationReportCases, spec as calibrationReportSpec } from "./fixtures/calibration-report-cases.mjs";
 
 const projectRoot = process.cwd();
 const args = process.argv.slice(2);
@@ -71,7 +72,8 @@ const fixtureSuites = [
   { ...worldModelElicitationSpec, cases: worldModelElicitationCases },
   { ...actionQualityContractSpec, cases: actionQualityContractCases },
   { ...authoringTemplateSpec, cases: authoringTemplateCases },
-  { ...qualityGateSpec, cases: qualityGateCases }
+  { ...qualityGateSpec, cases: qualityGateCases },
+  { ...calibrationReportSpec, cases: calibrationReportCases }
 ];
 
 // Positive packages: valid examples that must pass their verifier.
@@ -90,7 +92,8 @@ const positivePackages = [
   { validator: "tools/validate-world-model-elicitation.mjs", package: "examples/world-model-elicitation-package.json" },
   { validator: "tools/validate-action-quality-contract.mjs", package: "examples/action-quality-contract-package.json" },
   { validator: "tools/validate-authoring-template.mjs", package: "examples/authoring-template-package.json" },
-  { validator: "tools/validate-qif-runtime.mjs", package: "examples/quality-gate-package.json" }
+  { validator: "tools/validate-qif-runtime.mjs", package: "examples/quality-gate-package.json" },
+  { validator: "tools/validate-calibration-report.mjs", package: "examples/calibration-report-package.json" }
 ];
 
 function serialize(value) {

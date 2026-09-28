@@ -1,0 +1,34 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-28T04:52:27.038Z",
+  "review_packet_id": "CREV-MUKRTVDQ-W7I661",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Retrospective: v0.6.31 made calibration arithmetic executable while exposing that confidence semantics and cohort integrity remain separate governed problems.",
+  "rationale": "Visionary: outcome accountability is now portable. Builder: a standalone package avoided destabilizing quality-gate records. Guardian: self-review caught a provenance-copy ambiguity and added resolution to the original outcome Evidence Origin; this materially improved the release before publication.",
+  "recommendation": "Make v0.6.32 Calibration Cohort Integrity the next slice so aggregate statistics cannot conceal selection bias, dependence, missingness, drift, or high-risk subgroup failure.",
+  "target_audience": "QIF maintainers and future release orchestrators",
+  "expected_user_reaction": "The next work follows directly from the limitation exposed by this release rather than adding unrelated features.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "release-retrospective",
+  "diagnosis_confidence": 0.95,
+  "diagnosis_evidence_refs": [
+    "docs/qif-v0.6.31-calibration-report.md"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    ".aof/artifacts/execution/council-reviews/CREV-MUKRQMMO-J43OOE.json",
+    ".aof/artifacts/execution/council-reviews/CREV-MUKRS52W-RS7WZK.json",
+    "tests/fixtures/calibration-report/manifest.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-049",
+  "source_parent_session_id": "SESS-MUKR5IWG-FJ9AHE",
+  "source_decision_record_id": "DEC-MUKR8MO4-V1FT4S"
+}

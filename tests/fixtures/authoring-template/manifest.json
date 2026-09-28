@@ -60,6 +60,10 @@
     {
       "validator": "tools/validate-qif-runtime.mjs",
       "package": "examples/quality-gate-package.json"
+    },
+    {
+      "validator": "tools/validate-calibration-report.mjs",
+      "package": "examples/calibration-report-package.json"
     }
   ],
   "negatives": [

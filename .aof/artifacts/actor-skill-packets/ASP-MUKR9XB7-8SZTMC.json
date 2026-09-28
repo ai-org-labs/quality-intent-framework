@@ -1,0 +1,88 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-09-28T04:36:56.419Z",
+  "packet_id": "ASP-MUKR9XB7-8SZTMC",
+  "source_task_id": "TASK-049",
+  "source_parent_session_id": "SESS-MUKR5IWG-FJ9AHE",
+  "source_decision_record_id": "DEC-MUKR8MO4-V1FT4S",
+  "objective": "Implement and verify QIF v0.6.31 Calibration Report Records",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": "qif-council",
+    "assignment_reason": "The Builder implements the portable package while Visionary and Guardian evidence constrain value and safety boundaries.",
+    "execution_mode": "council-seat"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "deterministic-verifier-design",
+    "release-engineering"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "calibration-runtime-design",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/quality-gate-package.schema.json",
+        "tools/qif.mjs",
+        "tools/run-fixture-tests.mjs"
+      ],
+      "rationale": "Existing package, verifier, fixture, and CLI patterns support a narrow composable implementation."
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-no-automatic-quality-verdict",
+    "policy-evidence-origin-and-uncertainty"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-calibration-report-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "decisionOutcomePairs",
+      "calibrationPolicies",
+      "calibrationReports",
+      "governanceTriggers"
+    ],
+    "acceptance_criteria": [
+      "Every statistic reproduces from declared decision-outcome pairs and policy.",
+      "Non-empirical or insufficient reports cannot claim calibrated status.",
+      "No report field or verifier result is treated as a quality verdict."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "arithmetic and references are deterministic",
+      "evaluator_ref": "guardian",
+      "evidence_required": "positive and negative fixture results",
+      "blocking": true
+    },
+    {
+      "criterion": "package remains domain-general and human-readable",
+      "evaluator_ref": "visionary",
+      "evidence_required": "schema, example, and documentation review",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "semantic-overclaim",
+      "trigger_condition": "a score, report, or sample count is represented as quality truth",
+      "consequence": "require-council-review",
+      "recovery_action": "restore explicit evidence and semantic review boundaries"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will make every number traceable without turning it into a verdict.",
+    "current_action": "Implement calibration report runtime",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Submit implementation and test evidence to Council review"
+  },
+  "status": "ready-for-assignment"
+}

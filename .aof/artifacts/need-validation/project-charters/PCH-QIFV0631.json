@@ -1,0 +1,24 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-09-28T04:35:29.951Z",
+  "project_charter_id": "PCH-MUKR82LB-NP5ILM",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV0631.json",
+  "validated_objective": "Release QIF v0.6.31 with a standalone executable Calibration Report package and deterministic confidence-versus-outcome calculations.",
+  "scope": [
+    "calibration-report schema and domain-general example",
+    "decision-outcome reference resolution and deterministic Brier/bucket calculation",
+    "sample, provenance, uncertainty, and governance boundaries",
+    "CLI, fixtures, tests, documentation, roadmap, runtime evidence, and GitHub release"
+  ],
+  "constraints": [
+    "Do not modify the meaning of existing quality-gate decisions.",
+    "Do not issue an automatic quality verdict or claim semantic truth.",
+    "Do not treat sample size, score, or report generation as quality."
+  ],
+  "expected_outcomes": [
+    "Humans and AI agents can reproduce every reported statistic from portable records.",
+    "Insufficient or non-empirical reports remain visibly provisional and governance-routed."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUKR6Y02-9M9K13"
+}

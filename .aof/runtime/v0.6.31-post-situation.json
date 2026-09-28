@@ -1,0 +1,24 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-09-28T04:52:39.583Z",
+  "project_root": ".",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "Provide a standalone, domain-general calibration report contract that reproducibly links declared decision confidence to observed outcomes, calculates Brier score and calibration buckets, states sample and provenance limits, and routes uncertainty or misleading claims to governance without issuing a quality verdict.",
+  "next_value_slice": "Need: v0.6.31 can calculate confidence-versus-outcome calibration, but aggregate reports can still hide selection bias, duplicate or dependent observations, missing outcomes, drift, and high-risk subgroup failure. Intent: add schema-backed Calibration Cohort records with executable inclusion/exclusion rules, duplicate and dependence boundaries, subgroup segments, prevalence and missingness summaries, drift checks, and governance routing in v0.6.32. Context: remain domain-general; do not treat cohort size, coverage percentage, balanced samples, or subgroup counts as quality or representativeness proof.",
+  "current_runtime_stage": "frontier-definition-needed",
+  "primary_frontier_task": null,
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Open an implementation task for the current frontier: Need: v0.6.31 can calculate confidence-versus-outcome calibration, but aggregate reports can still hide selection bias, duplicate or dependent observations, missing outcomes, drift, and high-risk subgroup failure. Intent: add schema-backed Calibration Cohort records with executable inclusion/exclusion rules, duplicate and dependence boundaries, subgroup segments, prevalence and missingness summaries, drift checks, and governance routing in v0.6.32. Context: remain domain-general; do not treat cohort size, coverage percentage, balanced samples, or subgroup counts as quality or representativeness proof.",
+    "prioritized_task_ids": [],
+    "scale_direction": "Define or reconcile the next frontier before expanding execution."
+  },
+  "recommended_action": {
+    "recommended_action": "Open an implementation task for the current frontier: Need: v0.6.31 can calculate confidence-versus-outcome calibration, but aggregate reports can still hide selection bias, duplicate or dependent observations, missing outcomes, drift, and high-risk subgroup failure. Intent: add schema-backed Calibration Cohort records with executable inclusion/exclusion rules, duplicate and dependence boundaries, subgroup segments, prevalence and missingness summaries, drift checks, and governance routing in v0.6.32. Context: remain domain-general; do not treat cohort size, coverage percentage, balanced samples, or subgroup counts as quality or representativeness proof.",
+    "rationale": "No current open implementation task is aligned to the current operating goal.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  }
+}

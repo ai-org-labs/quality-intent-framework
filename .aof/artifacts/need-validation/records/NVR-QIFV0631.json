@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-09-28T04:35:10.320Z",
+  "validation_id": "NVR-MUKR7NG0-BMDG2D",
+  "raw_need": "Continue QIF and release the next roadmap slice.",
+  "validation_status": "reframed",
+  "validated_need": "Provide a standalone, domain-general calibration report contract that reproducibly links declared decision confidence to observed outcomes, calculates Brier score and calibration buckets, states sample and provenance limits, and routes uncertainty or misleading claims to governance without issuing a quality verdict.",
+  "decision_summary": "The raw continuation request is reframed into the smallest release-quality capability that closes the current roadmap gap while preserving QIF semantic boundaries.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What must be in scope?",
+      "answer": "Portable schema, deterministic verifier and calculation tooling, example, negative fixtures, docs, roadmap, AOF evidence, and release.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must remain out of scope?",
+      "answer": "UI, external integrations, production claims, automatic quality verdicts, causal inference, and treating score or sample size as quality.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A low Brier score alone proves trustworthy quality judgment."
+  ],
+  "evidence_gaps": [
+    "No real production corpus is available; committed examples must be explicitly non-empirical."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV0631.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0631.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0631.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUKR6Y02-9M9K13"
+}

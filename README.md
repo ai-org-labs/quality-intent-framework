@@ -34,6 +34,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.6.28 Evaluation Suite Health: `docs/qif-v0.6.28-evaluation-suite-health.md`
 - QIF v0.6.29 Trial and Infrastructure Uncertainty: `docs/qif-v0.6.29-trial-infrastructure-uncertainty.md`
 - QIF v0.6.30 Framework Learning Records: `docs/qif-v0.6.30-framework-learning-records.md`
+- QIF v0.6.31 Calibration Report: `docs/qif-v0.6.31-calibration-report.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`
@@ -45,6 +46,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - Action quality contract package schema: `schemas/action-quality-contract-package.schema.json`
 - Authoring template package schema: `schemas/authoring-template-package.schema.json`
 - Quality gate package schema: `schemas/quality-gate-package.schema.json`
+- Calibration report package schema: `schemas/calibration-report-package.schema.json`
 - Expert judgment schema: `schemas/expert-judgment-package.schema.json`
 - Discovery session schema: `schemas/discovery-session-package.schema.json`
 - Organizational quality culture schema: `schemas/organizational-quality-culture-package.schema.json`
@@ -65,6 +67,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - Example action quality contract package: `examples/action-quality-contract-package.json`
 - Example authoring template package: `examples/authoring-template-package.json`
 - Example quality gate package: `examples/quality-gate-package.json`
+- Example calibration report package: `examples/calibration-report-package.json`
 - Local verifier: `tools/validate-qif.mjs`
 - Local expert judgment verifier: `tools/validate-expert-judgment.mjs`
 - Local runtime verifier: `tools/validate-qif-runtime.mjs`
@@ -76,6 +79,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - Local world model elicitation verifier: `tools/validate-world-model-elicitation.mjs`
 - Local action quality contract verifier: `tools/validate-action-quality-contract.mjs`
 - Local authoring template verifier: `tools/validate-authoring-template.mjs`
+- Local calibration report verifier: `tools/validate-calibration-report.mjs`
 - Negative fixture suite runner: `tools/run-fixture-tests.mjs`
 - Negative fixture case sources include `tools/fixtures/authoring-template-cases.mjs` and `tools/fixtures/action-quality-contract-cases.mjs` in addition to the retained QIF, expert-judgment, runtime, ledger, world-model, guided-elicitation, and quality-gate suites.
 - Retained negative fixture corpora include `tests/fixtures/authoring-template/` and `tests/fixtures/action-quality-contract/` in addition to the retained QIF, expert-judgment, runtime, ledger, world-model, guided-elicitation, and quality-gate corpora.

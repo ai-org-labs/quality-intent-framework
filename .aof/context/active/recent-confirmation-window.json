@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-09-27T04:42:49.527Z",
+  "updated_at": "2026-09-28T04:35:55.977Z",
   "entries": [
     {
       "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
-      "answer": "Cover the standalone public QIF repository's world-model-calibration package, schema, verifier, examples, readiness CLI, fixtures, authoring guidance, roadmap, AOF evidence, tag, and GitHub Release. Stay out of scope: UI, external integrations, production pilot data, automatic acceptance of evaluator recommendations, semantic-truth claims, and calibration-report statistics.",
-      "recorded_at": "2026-09-27T04:39:05.149Z",
+      "answer": "Scope: a standalone, domain-general calibration-report package that reads declared quality-gate decision and post-release outcome references; schema, verifier, example, CLI integration, tests, docs, roadmap, and release only. Exclude UI, external integrations, automatic quality verdicts, causal claims, and production pilot data.",
+      "recorded_at": "2026-09-28T04:34:37.350Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MUJBW6WC-3T68J9",
+      "source_session_id": "SESS-MUKR5IWG-FJ9AHE",
       "source_decision_record_id": null
     },
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means an implemented Framework Learning Record can satisfy CRD-LEARNING only when contradictory empirical evidence, accepted accountable governance, implemented artifact references, validation evidence, rollback criteria, and resolved governance triggers are structurally present; proposed, example-only, ungoverned, or unvalidated changes remain blocked; npm test and AOF verification pass; v0.6.30 is published.",
-      "recorded_at": "2026-09-27T04:39:05.151Z",
+      "answer": "Success: a human or AI can reproduce decision-outcome pairing, Brier score, calibration buckets, sample boundaries, evidence-origin limits, and required governance actions from portable JSON; invalid arithmetic, references, empirical claims, or verdict substitutions fail deterministically.",
+      "recorded_at": "2026-09-28T04:34:37.352Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MUJBW6WC-3T68J9",
+      "source_session_id": "SESS-MUKR5IWG-FJ9AHE",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The raw continuation request is reframed into the narrow CRD-LEARNING gap; prose-only change logs and change counts are insufficient.",
-      "recorded_at": "2026-09-27T04:42:49.527Z",
+      "answer": "The raw continuation request is reframed into the smallest release-quality capability that closes the current roadmap gap while preserving QIF semantic boundaries.",
+      "recorded_at": "2026-09-28T04:35:55.977Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MUJBW6WC-3T68J9",
-      "source_decision_record_id": "DEC-MUJC1N3M-TGO68E"
+      "source_session_id": "SESS-MUKR5IWG-FJ9AHE",
+      "source_decision_record_id": "DEC-MUKR8MO4-V1FT4S"
     }
   ]
 }

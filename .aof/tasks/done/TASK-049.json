@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-049",
+  "title": "Release QIF v0.6.31 Calibration Report Records",
+  "description": "Implement the validated standalone calibration-report package, deterministic calculations, fixtures, docs, AOF evidence, and exact verified release.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MUKR5IWG-FJ9AHE",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MUKR8MO4-V1FT4S",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-09-28T04:36:00.522Z",
+  "updated_at": "2026-09-28T04:51:30.081Z",
+  "assigned_at": null,
+  "done_at": "2026-09-28T04:51:30.081Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented schema, example, deterministic validator, CLI integration, 28 retained negative cases, docs, roadmap, and release evidence; 16/16 positive and 679/679 negative checks passed."
+}

@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-09-28T04:34:45.544Z",
+  "value_hypothesis_id": "VHY-MUKR74BS-4XEFNI",
+  "expected_value_creation": "Users can audit whether stated confidence corresponds to later outcomes without confusing a calibration statistic with quality itself.",
+  "beneficiary": "human reviewers, AI agents, governance owners, and organizations using QIF across domains",
+  "supporting_evidence": [
+    "Existing quality-gate packages already retain confidence and post-release reviews.",
+    "Current evaluation guidance emphasizes real outcomes, validity checks, and explicit uncertainty boundaries."
+  ],
+  "success_criteria": [
+    "Brier score and calibration buckets are reproduced from declared pairs and policy.",
+    "Insufficient, synthetic, example-only, stale, or misleading reports cannot claim empirical calibration and route to governance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUKR5IWJ-OSDH2S"
+}

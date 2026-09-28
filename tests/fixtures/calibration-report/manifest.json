@@ -1,0 +1,268 @@
+{
+  "description": "QIF calibration-report negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/calibration-report-cases.mjs; do not edit by hand.",
+  "positives": [
+    {
+      "validator": "tools/validate-qif.mjs",
+      "package": "examples/qif-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-expert-judgment.mjs",
+      "package": "examples/expert-judgment-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/discovery-session-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/organizational-quality-culture-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/evaluation-target-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/review-run-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-ledger.mjs",
+      "package": "examples/qif-ledger-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-review.mjs",
+      "package": "examples/world-model-review-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "package": "examples/world-model-calibration-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "package": "examples/world-model-pilot-corpus-package.json"
+    },
+    {
+      "validator": "tools/validate-guided-elicitation.mjs",
+      "package": "examples/guided-elicitation-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-elicitation.mjs",
+      "package": "examples/world-model-elicitation-package.json"
+    },
+    {
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "package": "examples/action-quality-contract-package.json"
+    },
+    {
+      "validator": "tools/validate-authoring-template.mjs",
+      "package": "examples/authoring-template-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/quality-gate-package.json"
+    },
+    {
+      "validator": "tools/validate-calibration-report.mjs",
+      "package": "examples/calibration-report-package.json"
+    }
+  ],
+  "negatives": [
+    {
+      "file": "calibration-report-wrong-package-type.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "package type",
+      "expect": "fail",
+      "errorIncludes": "must have packageType calibration-report."
+    },
+    {
+      "file": "calibration-report-package-path-traversal.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "repository-local package path",
+      "expect": "fail",
+      "errorIncludes": "path must be repository-relative without parent traversal."
+    },
+    {
+      "file": "calibration-report-wrong-package-role.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "package role",
+      "expect": "fail",
+      "errorIncludes": "role must be decision-outcome-source."
+    },
+    {
+      "file": "calibration-report-unsupported-origin-kind.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evidence origin kind",
+      "expect": "fail",
+      "errorIncludes": "originKind is not supported."
+    },
+    {
+      "file": "calibration-report-empirical-origin-unverified.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "empirical origin verification",
+      "expect": "fail",
+      "errorIncludes": "empirical evidence origin must have status verified."
+    },
+    {
+      "file": "calibration-report-policy-bucket-gap.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "bucket coverage",
+      "expect": "fail",
+      "errorIncludes": "buckets must be contiguous without gaps or overlap."
+    },
+    {
+      "file": "calibration-report-source-confidence-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "source confidence reproduction",
+      "expect": "fail",
+      "errorIncludes": "sourceConfidence must equal the referenced gate decision confidence."
+    },
+    {
+      "file": "calibration-report-identity-transform-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "identity transformation reproduction",
+      "expect": "fail",
+      "errorIncludes": "identity transformation must preserve sourceConfidence as forecastProbability."
+    },
+    {
+      "file": "calibration-report-transformation-reviewer-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "confidence transformation review",
+      "expect": "fail",
+      "errorIncludes": "confidenceTransformation must include reviewedBy."
+    },
+    {
+      "file": "calibration-report-confidence-meaning-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "prediction meaning alignment",
+      "expect": "fail",
+      "errorIncludes": "confidenceMeaning must match a calibration policy predictionMeaning."
+    },
+    {
+      "file": "calibration-report-outcome-value-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "outcome binary mapping",
+      "expect": "fail",
+      "errorIncludes": "protected-outcome-failed requires outcomeValue 0."
+    },
+    {
+      "file": "calibration-report-missing-gate-decision.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "gate decision reference",
+      "expect": "fail",
+      "errorIncludes": "references missing gate decision"
+    },
+    {
+      "file": "calibration-report-source-origin-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "source outcome provenance",
+      "expect": "fail",
+      "errorIncludes": "sourceEvidenceOriginRef must equal the referenced outcome review evidenceOriginRef."
+    },
+    {
+      "file": "calibration-report-outcome-rationale-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "outcome interpretation rationale",
+      "expect": "fail",
+      "errorIncludes": "must include non-empty string outcomeRationale."
+    },
+    {
+      "file": "calibration-report-observation-window-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "outcome window reproduction",
+      "expect": "fail",
+      "errorIncludes": "observationWindow must equal the referenced outcome review window."
+    },
+    {
+      "file": "calibration-report-excluded-pair-rationale-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "excluded pair rationale",
+      "expect": "fail",
+      "errorIncludes": "excluded pair must include exclusionRationale."
+    },
+    {
+      "file": "calibration-report-evidence-origin-set-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "report evidence origin closure",
+      "expect": "fail",
+      "errorIncludes": "evidenceOriginRefs must exactly match included pair evidence origins."
+    },
+    {
+      "file": "calibration-report-brier-score-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "Brier score reproduction",
+      "expect": "fail",
+      "errorIncludes": "brierScore must reproduce as 0.49."
+    },
+    {
+      "file": "calibration-report-bucket-membership-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "calibration bucket membership",
+      "expect": "fail",
+      "errorIncludes": "pairRefs do not match policy bucket membership."
+    },
+    {
+      "file": "calibration-report-bucket-mean-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "bucket mean reproduction",
+      "expect": "fail",
+      "errorIncludes": "meanForecastProbability must reproduce as 0.7."
+    },
+    {
+      "file": "calibration-report-sample-count-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "sample count reproduction",
+      "expect": "fail",
+      "errorIncludes": "uncertaintyBoundary.pairCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-sufficiency-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "data sufficiency reproduction",
+      "expect": "fail",
+      "errorIncludes": "dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "calibration-report-signal-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "calibration signal reproduction",
+      "expect": "fail",
+      "errorIncludes": "calibrationSignal must reproduce as insufficient-data."
+    },
+    {
+      "file": "calibration-report-insufficient-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "insufficient data governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient data requires an insufficient-data governance trigger."
+    },
+    {
+      "file": "calibration-report-non-empirical-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "non-empirical governance",
+      "expect": "fail",
+      "errorIncludes": "empirical evidence shortfall requires a non-empirical-evidence governance trigger."
+    },
+    {
+      "file": "calibration-report-interpretation-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evidence-only interpretation",
+      "expect": "fail",
+      "errorIncludes": "interpretation must be evidence-only-not-quality-verdict."
+    },
+    {
+      "file": "calibration-report-resolved-trigger-event-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "governance event traceability",
+      "expect": "fail",
+      "errorIncludes": "resolved trigger must include resultingGovernanceEventRef."
+    },
+    {
+      "file": "calibration-report-verifier-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "verifier semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming a calibration statistic is quality."
+    }
+  ],
+  "rescopedRules": []
+}

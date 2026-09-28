@@ -12,6 +12,7 @@ const examplePackages = [
   "examples/evaluation-target-package.json",
   "examples/review-run-package.json",
   "examples/quality-gate-package.json",
+  "examples/calibration-report-package.json",
   "examples/qif-ledger-package.json",
   "examples/world-model-review-package.json",
   "examples/world-model-calibration-package.json",
@@ -40,7 +41,8 @@ const validatorsByType = new Map([
   ["guided-elicitation", "tools/validate-guided-elicitation.mjs"],
   ["world-model-elicitation", "tools/validate-world-model-elicitation.mjs"],
   ["action-quality-contract", "tools/validate-action-quality-contract.mjs"],
-  ["authoring-template", "tools/validate-authoring-template.mjs"]
+  ["authoring-template", "tools/validate-authoring-template.mjs"],
+  ["calibration-report", "tools/validate-calibration-report.mjs"]
 ]);
 
 function usage() {
@@ -58,6 +60,7 @@ function usage() {
   qif review-plan [--release-gate quality-gate-package.json]
   qif evaluator-packet [--release-gate quality-gate-package.json]
   qif calibration-readiness [--quality-gate package.json] [--ledger package.json] [--calibration package.json] [--pilot-corpus package.json]
+  qif calibration-report [calibration-report-package.json]
   qif commands
   qif package-types
   qif inventory [package.json...]
@@ -181,6 +184,17 @@ function commandManifest() {
       verifierBoundary: "calibration-readiness checks declared structure and provenance boundaries only; it does not prove predictive validity, representativeness, semantic truth, or empirical calibration."
     },
     {
+      name: "calibration-report",
+      usage: "qif calibration-report [calibration-report-package.json]",
+      purpose: "Reproduce decision-outcome references, Brier score, calibration buckets, sample boundaries, and governance routing.",
+      arguments: [
+        { name: "calibration-report-package.json", required: false, repeatable: false, description: "Calibration Report package; defaults to the committed example." }
+      ],
+      blocking: true,
+      output: "Validated Calibration Report summary or deterministic calculation errors.",
+      verifierBoundary: "calibration-report proves declared references and arithmetic only; it does not prove probability semantics, representativeness, causality, calibration truth, or quality."
+    },
+    {
       name: "commands",
       usage: "qif commands",
       purpose: "Return the canonical QIF CLI command manifest as machine-readable JSON.",
@@ -241,6 +255,7 @@ function commands() {
       "node tools/qif.mjs review-plan",
       "node tools/qif.mjs evaluator-packet",
       "node tools/qif.mjs calibration-readiness",
+      "node tools/qif.mjs calibration-report",
       "node tools/qif.mjs package-types",
       "node tools/qif.mjs inventory --all",
       "node tools/qif.mjs status"
@@ -310,6 +325,10 @@ const packageTypeDescriptions = new Map([
   ["authoring-template", {
     purpose: "Define machine-readable templates for AI-generated QIF artifacts with input/output contracts, validation, golden cases, and scoring.",
     lifecycleRole: "ai-authoring-control"
+  }],
+  ["calibration-report", {
+    purpose: "Compare declared probability forecasts with observed outcomes through reproducible scores, buckets, sample boundaries, and governance routing.",
+    lifecycleRole: "confidence-outcome-calibration-reporting"
   }]
 ]);
 
@@ -571,6 +590,15 @@ function validate(files) {
     packages: results.map(({ filePath, type, validator }) => ({ package: filePath, packageType: type, validator }))
   }, null, 2));
   return 0;
+}
+
+function calibrationReport(args) {
+  const files = args.filter((arg) => !arg.startsWith("--"));
+  if (files.length > 1) {
+    process.stderr.write("calibration-report accepts at most one package path.\n");
+    return 1;
+  }
+  return runNode(["tools/validate-calibration-report.mjs", files[0] || "examples/calibration-report-package.json"]);
 }
 
 function optionValue(args, optionName) {
@@ -1568,6 +1596,9 @@ ${usage()}`);
   }
   if (command === "calibration-readiness") {
     return calibrationReadiness(args);
+  }
+  if (command === "calibration-report") {
+    return calibrationReport(args);
   }
   if (command === "commands") {
     return commands();

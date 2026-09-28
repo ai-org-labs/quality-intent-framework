@@ -1,0 +1,176 @@
+{
+  "packageType": "quality-gate",
+  "runtimeVersion": "0.6.31",
+  "packageId": "CRPKG-001",
+  "packageRefs": [
+    {
+      "id": "PKGREF-CR-001",
+      "path": "examples/quality-gate-package.json",
+      "packageType": "quality-gate",
+      "role": "decision-outcome-source"
+    }
+  ],
+  "evidenceOrigins": [
+    {
+      "id": "EOR-CR-001",
+      "originKind": "example",
+      "sourceArtifact": "examples/quality-gate-package.json",
+      "observationWindow": "illustrative 7-day window",
+      "environment": "committed QIF example",
+      "generatedBy": "QIF maintainers",
+      "verifiedBy": [
+        "fixture verifier"
+      ],
+      "transformationSummary": "The example gate decision and post-release review are paired only to demonstrate the portable calculation and traceability contract.",
+      "status": "verified"
+    }
+  ],
+  "calibrationPolicies": [
+    {
+      "id": "CAP-CR-001",
+      "predictionMeaning": "Probability that the quality intents protected by the referenced gate decision hold throughout the declared observation window.",
+      "outcomeMeaning": "One when the protected outcome held throughout the window; zero when at least one protected loss boundary failed.",
+      "scoreRule": "mean-squared-probability-error",
+      "roundingDecimals": 4,
+      "minimumPairCount": 20,
+      "minimumEmpiricalPairCount": 20,
+      "maximumAcceptableBrierScore": 0.2,
+      "maximumAcceptableBucketGap": 0.15,
+      "bucketDefinitions": [
+        {
+          "id": "CAB-CR-000-050",
+          "lowerInclusive": 0,
+          "upperExclusive": 0.5
+        },
+        {
+          "id": "CAB-CR-050-075",
+          "lowerInclusive": 0.5,
+          "upperExclusive": 0.75
+        },
+        {
+          "id": "CAB-CR-075-100",
+          "lowerInclusive": 0.75,
+          "upperExclusive": 1.000001
+        }
+      ],
+      "insufficientDataAction": "governance-review",
+      "status": "active"
+    }
+  ],
+  "decisionOutcomePairs": [
+    {
+      "id": "DOP-CR-001",
+      "sourcePackageRef": "PKGREF-CR-001",
+      "gateDecisionRef": "QGD-QG-001",
+      "outcomeReviewRef": "PRR-QG-001",
+      "sourceEvidenceOriginRef": "EOR-QG-001",
+      "evidenceOriginRef": "EOR-CR-001",
+      "sourceConfidence": 0.7,
+      "forecastProbability": 0.7,
+      "confidenceTransformation": {
+        "method": "identity",
+        "rationale": "The example intentionally maps the gate confidence to a forecast probability to demonstrate calculation shape; real use requires semantic review that the source confidence actually has this probabilistic meaning.",
+        "reviewedBy": [
+          "quality-governance-owner"
+        ]
+      },
+      "confidenceMeaning": "Probability that the quality intents protected by the referenced gate decision hold throughout the declared observation window.",
+      "observedOutcome": "protected-outcome-failed",
+      "outcomeValue": 0,
+      "outcomeRationale": "The referenced review records two incidents that crossed the protected financial-limit boundary during the observation window.",
+      "observationWindow": "7-day",
+      "domain": "customer-support",
+      "included": true,
+      "status": "reviewed"
+    }
+  ],
+  "calibrationReports": [
+    {
+      "id": "CAR-CR-001",
+      "title": "Illustrative confidence-versus-outcome calibration report",
+      "policyRef": "CAP-CR-001",
+      "includedPairRefs": [
+        "DOP-CR-001"
+      ],
+      "excludedPairRefs": [],
+      "evidenceOriginRefs": [
+        "EOR-CR-001"
+      ],
+      "brierScore": 0.49,
+      "buckets": [
+        {
+          "bucketRef": "CAB-CR-050-075",
+          "pairRefs": [
+            "DOP-CR-001"
+          ],
+          "pairCount": 1,
+          "meanForecastProbability": 0.7,
+          "observedSuccessRate": 0,
+          "calibrationGap": 0.7
+        }
+      ],
+      "uncertaintyBoundary": {
+        "pairCount": 1,
+        "empiricalPairCount": 0,
+        "minimumPairCount": 20,
+        "minimumEmpiricalPairCount": 20,
+        "dataSufficiency": "insufficient",
+        "limitations": [
+          "One pair cannot establish calibration.",
+          "The committed source is an example rather than observed operational or historical evidence.",
+          "Identity mapping from gate confidence to forecast probability requires domain and governance review."
+        ]
+      },
+      "calibrationSignal": "insufficient-data",
+      "interpretation": "evidence-only-not-quality-verdict",
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-002"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "governanceTriggers": [
+    {
+      "id": "GTR-CR-001",
+      "triggerType": "insufficient-data",
+      "reason": "The report contains fewer decision-outcome pairs than the active policy requires.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect additional independent decision-outcome pairs before making an empirical calibration claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-002",
+      "triggerType": "non-empirical-evidence",
+      "reason": "The only included pair is grounded in committed example data.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Replace or supplement example data with verified observed-operational or historical-record evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    }
+  ],
+  "verifierBoundary": {
+    "checks": [
+      "repository-local package and entity references resolve",
+      "source confidence, outcome link, Brier score, bucket membership, means, rates, gaps, and sample counts reproduce",
+      "evidence origin, sufficiency, and governance rules are applied consistently"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "that source confidence is a valid probability forecast",
+      "causal attribution between a decision and an outcome",
+      "case representativeness or independence",
+      "a calibration statistic is quality",
+      "an automatic quality verdict"
+    ],
+    "semanticValidityRequires": [
+      "expert review of prediction and outcome meaning",
+      "representative and independent empirical observations",
+      "review of environmental and evaluation-harness effects",
+      "accountable governance before changing quality decisions"
+    ]
+  }
+}

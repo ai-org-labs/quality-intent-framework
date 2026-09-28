@@ -35,13 +35,13 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.30 baseline)
+## Current Position (v0.6.31 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
   qif-ledger, world-model-review, world-model-calibration,
   world-model-pilot-corpus, guided-elicitation, world-model-elicitation,
-  action-quality-contract, authoring-template.
+  action-quality-contract, authoring-template, calibration-report.
 - Reproducible confidence, enforced gate rules, release verdict discipline
   (Go / Conditional Go / No-Go / Pending), post-release loop, traceability
   links, governance forcing.
@@ -164,7 +164,11 @@ and adoption surface — not pretending the limits away.
   v0.6.30 adds Framework Learning records that connect contradicted assumptions
   and empirical calibration evidence to accountable governance, implemented
   artifacts, validation evidence, rollback criteria, and deterministic
-  `CRD-LEARNING` readiness.
+  `CRD-LEARNING` readiness. v0.6.31 adds a standalone Calibration Report
+  package with reviewed confidence-to-probability meaning, decision-outcome
+  pairs, reproducible Brier score and buckets, sample and empirical-origin
+  boundaries, and governance routing. The committed report remains
+  example-only and insufficient by design.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -489,6 +493,14 @@ Deliverables:
 - Calibration tooling: given N gate decisions and outcomes, compute whether
   stated confidence tracks observed escape rates (e.g., Brier score and
   a calibration table), as a report — never as an auto-verdict.
+  Status: the portable report structure, deterministic arithmetic, sample and
+  evidence-origin boundaries, and governance routing are implemented in
+  v0.6.31. Collecting representative independent empirical pairs remains pilot
+  work.
+- Next planned slice, v0.6.32 Calibration Cohort Integrity: make inclusion and
+  exclusion rules, duplicate/dependence boundaries, subgroup segments,
+  prevalence, missingness, and drift explicit so aggregate calibration cannot
+  hide a high-risk cohort.
 - Evaluation Suite Health records: task origin, contamination boundary,
   solvability review, saturation, grader calibration, trial variance, harness
   and infrastructure configuration, and drift ownership.

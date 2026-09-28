@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.31
+
+- Added a standalone Calibration Report package linking gate decisions, reviewed probability meaning, observed outcomes, and evidence origins.
+- Added deterministic Brier score, calibration bucket, sample, empirical-origin, sufficiency, signal, and governance verification.
+- Added `qif calibration-report` and integrated the new package into command discovery, starter generation, validation, inventory, tracing, and AI authoring guidance.
+- Added 28 retained negative cases; the retained suite now covers 679 negative cases across 16 positive package types.
+
 ## v0.6.30
 
 - Added first-class Framework Learning records that connect contradicted assumptions and empirical calibration evidence to governed framework changes.

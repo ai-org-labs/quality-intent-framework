@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-09-28T04:34:41.594Z",
+  "problem_statement_id": "PST-MUKR71A2-FD8PC9",
+  "affected_party": "QIF users and AI agents making evidence-backed quality decisions",
+  "actual_problem": "QIF records confidence and later outcomes but cannot yet calculate whether confidence tracks observed outcomes or distinguish calculable calibration from semantic quality truth.",
+  "why_it_matters": "Uncalibrated confidence can create false assurance, while raw score counts cannot explain data origin, uncertainty, or when governance is required.",
+  "why_now": "v0.6.30 completed governed framework learning, and current agent-evaluation practice increasingly requires outcome-based, reproducible validity checks.",
+  "evidence_refs": [
+    ".aof/goals/next-value-slice.json",
+    ".aof/runtime/v0.6.31-situation.json"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUKR5IWJ-OSDH2S"
+}

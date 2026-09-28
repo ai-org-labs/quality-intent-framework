@@ -21,7 +21,8 @@ const supportedPackageTypes = new Set([
   "guided-elicitation",
   "world-model-elicitation",
   "action-quality-contract",
-  "authoring-template"
+  "authoring-template",
+  "calibration-report"
 ]);
 const errors = [];
 const results = [];

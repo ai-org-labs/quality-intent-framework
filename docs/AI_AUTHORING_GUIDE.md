@@ -68,6 +68,7 @@ Use additional documents when needed:
 | Determine whether an evaluation suite is fit to support its claim | `docs/qif-v0.6.28-evaluation-suite-health.md`, `schemas/world-model-calibration-package.schema.json` |
 | Explain repeated-trial variation and infrastructure uncertainty without false precision | `docs/qif-v0.6.29-trial-infrastructure-uncertainty.md`, `schemas/world-model-calibration-package.schema.json` |
 | Show that contradictory calibration evidence changed the framework through accountable governance | `docs/qif-v0.6.30-framework-learning-records.md`, `schemas/world-model-calibration-package.schema.json` |
+| Compare declared probability forecasts with later outcomes without turning a score into a quality verdict | `docs/qif-v0.6.31-calibration-report.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Understand quality theory background | `docs/quality-theory-report.md` |
 
 ## Required Framing

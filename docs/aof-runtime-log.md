@@ -2,6 +2,72 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.31 Calibration Report Records
+
+Date: 2026-09-28
+
+Need / Intent / Context:
+
+- Need: QIF retained gate confidence and later outcomes but could not calculate whether declared probability forecasts tracked those outcomes.
+- Intent: add a standalone, domain-general Calibration Report package with reproducible decision-outcome pairing, Brier score, calibration buckets, sample and empirical-origin boundaries, and governance routing.
+- Context: existing confidence is not automatically a probability forecast. Reports remain evidence-only and must not become automatic quality verdicts, causal claims, or proof from sample size.
+
+Need Validation and Project Charter:
+
+- Publicly released AOF `v12.2.0` was used from a clean checkout; the newer local `12.3.0` worktree was unreleased and was not modified.
+- `situation-assess` wrote `.aof/runtime/v0.6.31-situation.json`.
+- AOF `run` created parent session `SESS-MUKR5IWG-FJ9AHE`; `answer` fixed scope, exclusions, and success conditions.
+- `problem-statement-record`, `value-hypothesis-record`, and `alternative-analysis-record` retained the need evidence.
+- `need-validation-record` reframed the raw continuation request into `.aof/artifacts/need-validation/records/NVR-QIFV0631.json`.
+- Only after the Validated Need was recorded, `project-charter-record` created `.aof/artifacts/need-validation/project-charters/PCH-QIFV0631.json`; `need-validation-advance` promoted the session to planning.
+- `task-open` created `TASK-049`.
+
+Direction and council judgment:
+
+- Visionary: approve. QIF should make confidence accountable to observed outcomes while leaving the original gate decision intact.
+- Builder: approve. A separate composable package preserves quality-gate ownership and makes references and arithmetic deterministic.
+- Guardian: approve with boundary. Source confidence and probability meaning require explicit review; examples and synthetic data stay non-empirical; insufficient or adverse results route to governance; no score becomes quality.
+- Planning council: `.aof/artifacts/execution/council-reviews/CREV-MUKR9ES2-HZB4PY.json`.
+- Actor skill packet: `.aof/artifacts/actor-skill-packets/ASP-MUKR9XB7-8SZTMC.json`.
+
+Trend check:
+
+- Anthropic's agent-evaluation guidance distinguishes an agent's claimed answer from the environment's actual outcome and treats eval suites as maintained artifacts: `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`.
+- Anthropic's infrastructure-noise study supports keeping runtime configuration and uncertainty separate from measured agent performance: `https://www.anthropic.com/engineering/infrastructure-noise`.
+- OpenAI's third-party evaluation playbook emphasizes explicit claims, tested systems, elicitation methods, and validity checks to avoid miscalibrated conclusions: `https://openai.com/index/trustworthy-third-party-evaluations-foundations/`.
+- OpenAI's agentic investment guidance emphasizes accepted outcomes over token or activity volume: `https://openai.com/index/managing-ai-investments-in-agentic-era/`.
+
+What was built:
+
+- A standalone `calibration-report` schema, example, local verifier, CLI command, package catalog entry, starter source, inventory/trace integration, and AI authoring guidance.
+- Decision Outcome Pairs that resolve the original gate decision, post-release review, and source Evidence Origin while preserving source confidence, forecast probability, declared meaning, identity transformation rationale, reviewer, observation window, outcome value, and outcome rationale.
+- Deterministic Brier score, complete probability-bucket coverage, bucket membership, means, observed rates, calibration gaps, sample counts, empirical counts, data sufficiency, calibration signal, and governance routing.
+- A committed example that calculates Brier score `0.49` but remains `insufficient-data` because it has one example-only pair.
+- Twenty-eight retained negative cases for references, provenance, confidence meaning, arithmetic, buckets, sufficiency, signals, governance, and verifier boundaries.
+- Plain-language documentation and a simple readable diagram in `docs/qif-v0.6.31-calibration-report.md`.
+
+What was not built:
+
+- No claim that existing gate confidence is inherently a probability forecast.
+- No claim of representativeness, independence, causality, empirical calibration, or semantic quality truth.
+- No automatic quality verdict, UI, external integration, or production pilot dataset.
+
+Verification and review evidence:
+
+- `npm test` passed all CLI and verifier checks, `16/16` positive packages, and `679/679` retained negative fixtures.
+- All tracked JSON files parsed; `git diff --check` passed.
+- Public residue scan found no personal account, legacy repository, email, user-home, or temporary path residue outside `.git` after sanitizing the situation artifact.
+- Self-review: `.aof/artifacts/execution/council-reviews/CREV-MUKRQMMO-J43OOE.json`.
+- Final review: `.aof/artifacts/execution/council-reviews/CREV-MUKRS52W-RS7WZK.json`.
+- Retrospective: `.aof/artifacts/execution/council-reviews/CREV-MUKRTVDQ-W7I661.json`.
+- AOF v12.2.0 `organization-verify --project .` passed `247/247` checks.
+- `TASK-049` completed; `.aof/runtime/v0.6.31-post-situation.json` points to the v0.6.32 frontier.
+- Release commit, tag, and GitHub Release evidence are recorded by the release completion update.
+
+Next value slice:
+
+- v0.6.32 Calibration Cohort Integrity: explicit inclusion/exclusion rules, duplicate and dependence boundaries, subgroup segmentation, prevalence and missingness visibility, drift checks, and governance when an aggregate report hides a high-risk cohort.
+
 ## v0.6.30 Framework Learning Records
 
 Date: 2026-09-27

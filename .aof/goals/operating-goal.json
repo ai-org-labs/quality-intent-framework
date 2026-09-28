@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Make framework learning structurally provable by linking contradicted empirical calibration evidence to an accountable accepted, implemented, validated, and reversible QIF change, while keeping semantic judgment human-governed.",
-  "updated_at": "2026-09-27T04:42:49.525Z",
+  "content": "Provide a standalone, domain-general calibration report contract that reproducibly links declared decision confidence to observed outcomes, calculates Brier score and calibration buckets, states sample and provenance limits, and routes uncertainty or misleading claims to governance without issuing a quality verdict.",
+  "updated_at": "2026-09-28T04:35:55.976Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MUJBW6WC-3T68J9",
-  "source_decision_record_id": "DEC-MUJC1N3M-TGO68E",
+  "source_session_id": "SESS-MUKR5IWG-FJ9AHE",
+  "source_decision_record_id": "DEC-MUKR8MO4-V1FT4S",
   "declared_complete_at": null
 }

@@ -1,0 +1,36 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-28T04:51:06.296Z",
+  "review_packet_id": "CREV-MUKRS52W-RS7WZK",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Final review approves QIF v0.6.31 Calibration Report Records for release.",
+  "rationale": "Visionary: users can now explain whether declared probabilities tracked observed outcomes. Builder: all report calculations, references, fixture drift, and CLI integration pass deterministically. Guardian: source outcome provenance is resolved, source-confidence semantics remain human-reviewed, the example stays insufficient and non-empirical, and no score or report authorizes a quality verdict.",
+  "recommendation": "Complete TASK-049, record retrospective and next slice, run AOF organization verification, then publish the exact verified commit as v0.6.31.",
+  "target_audience": "release operator",
+  "expected_user_reaction": "The release provides useful calibration evidence without overstating certainty.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "release-readiness",
+  "diagnosis_confidence": 0.97,
+  "diagnosis_evidence_refs": [
+    "RELEASE-NOTES-v0.6.31.md",
+    "tests/fixtures/calibration-report/manifest.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "schemas/calibration-report-package.schema.json",
+    "examples/calibration-report-package.json",
+    "tools/validate-calibration-report.mjs",
+    "docs/aof-runtime-log.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-049",
+  "source_parent_session_id": "SESS-MUKR5IWG-FJ9AHE",
+  "source_decision_record_id": "DEC-MUKR8MO4-V1FT4S"
+}

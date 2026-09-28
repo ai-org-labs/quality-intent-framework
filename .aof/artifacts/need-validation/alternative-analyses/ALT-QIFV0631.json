@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-09-28T04:34:49.781Z",
+  "alternative_analysis_id": "ALT-MUKR77LH-KEYJB8",
+  "subject_need": "Make confidence-versus-outcome calibration executable and auditable in QIF.",
+  "alternative_solutions": [
+    "Add fields directly to quality-gate packages.",
+    "Create a standalone calibration-report package composed from quality-gate references."
+  ],
+  "non_solution_options": [
+    "Document formulas without executable verification."
+  ],
+  "defer_options": [
+    "Wait for production pilot data before defining the portable contract."
+  ],
+  "stop_options": [
+    "Do not release if arithmetic, source provenance, uncertainty boundaries, and governance routing cannot be verified without claiming semantic truth."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUKR5IWJ-OSDH2S"
+}

@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/qif/schemas/calibration-report-package.schema.json",
+  "title": "QIF Calibration Report Package",
+  "type": "object",
+  "required": [
+    "packageType",
+    "runtimeVersion",
+    "packageId",
+    "packageRefs",
+    "evidenceOrigins",
+    "calibrationPolicies",
+    "decisionOutcomePairs",
+    "calibrationReports",
+    "governanceTriggers",
+    "verifierBoundary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "packageType": { "const": "calibration-report" },
+    "runtimeVersion": { "type": "string", "minLength": 1 },
+    "packageId": { "$ref": "#/$defs/id" },
+    "packageRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/packageRef" } },
+    "evidenceOrigins": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidenceOrigin" } },
+    "calibrationPolicies": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/calibrationPolicy" } },
+    "decisionOutcomePairs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/decisionOutcomePair" } },
+    "calibrationReports": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/calibrationReport" } },
+    "governanceTriggers": { "type": "array", "items": { "$ref": "#/$defs/governanceTrigger" } },
+    "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[A-Z]+-[A-Z0-9-]+$" },
+    "score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "refArray": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+    "packageRef": {
+      "type": "object",
+      "required": ["id", "path", "packageType", "role"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "path": { "type": "string", "minLength": 1 },
+        "packageType": { "const": "quality-gate" },
+        "role": { "const": "decision-outcome-source" }
+      }
+    },
+    "evidenceOrigin": {
+      "type": "object",
+      "required": ["id", "originKind", "sourceArtifact", "observationWindow", "environment", "generatedBy", "verifiedBy", "transformationSummary", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "originKind": { "enum": ["observed-operational", "historical-record", "simulated", "synthetic", "example"] },
+        "sourceArtifact": { "type": "string", "minLength": 1 },
+        "observationWindow": { "type": "string", "minLength": 1 },
+        "environment": { "type": "string", "minLength": 1 },
+        "generatedBy": { "type": "string", "minLength": 1 },
+        "verifiedBy": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "transformationSummary": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["draft", "verified", "stale", "retired"] }
+      }
+    },
+    "bucketDefinition": {
+      "type": "object",
+      "required": ["id", "lowerInclusive", "upperExclusive"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "lowerInclusive": { "$ref": "#/$defs/score" },
+        "upperExclusive": { "type": "number", "exclusiveMinimum": 0, "maximum": 1.000001 }
+      }
+    },
+    "calibrationPolicy": {
+      "type": "object",
+      "required": ["id", "predictionMeaning", "outcomeMeaning", "scoreRule", "roundingDecimals", "minimumPairCount", "minimumEmpiricalPairCount", "maximumAcceptableBrierScore", "maximumAcceptableBucketGap", "bucketDefinitions", "insufficientDataAction", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "predictionMeaning": { "type": "string", "minLength": 1 },
+        "outcomeMeaning": { "type": "string", "minLength": 1 },
+        "scoreRule": { "const": "mean-squared-probability-error" },
+        "roundingDecimals": { "type": "integer", "minimum": 2, "maximum": 6 },
+        "minimumPairCount": { "type": "integer", "minimum": 2 },
+        "minimumEmpiricalPairCount": { "type": "integer", "minimum": 2 },
+        "maximumAcceptableBrierScore": { "$ref": "#/$defs/score" },
+        "maximumAcceptableBucketGap": { "$ref": "#/$defs/score" },
+        "bucketDefinitions": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/bucketDefinition" } },
+        "insufficientDataAction": { "const": "governance-review" },
+        "status": { "enum": ["draft", "active", "retired"] }
+      }
+    },
+    "decisionOutcomePair": {
+      "type": "object",
+      "required": ["id", "sourcePackageRef", "gateDecisionRef", "outcomeReviewRef", "sourceEvidenceOriginRef", "evidenceOriginRef", "sourceConfidence", "forecastProbability", "confidenceTransformation", "confidenceMeaning", "observedOutcome", "outcomeValue", "outcomeRationale", "observationWindow", "domain", "included", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sourcePackageRef": { "$ref": "#/$defs/id" },
+        "gateDecisionRef": { "$ref": "#/$defs/id" },
+        "outcomeReviewRef": { "$ref": "#/$defs/id" },
+        "sourceEvidenceOriginRef": { "$ref": "#/$defs/id" },
+        "evidenceOriginRef": { "$ref": "#/$defs/id" },
+        "sourceConfidence": { "$ref": "#/$defs/score" },
+        "forecastProbability": { "$ref": "#/$defs/score" },
+        "confidenceTransformation": {
+          "type": "object",
+          "required": ["method", "rationale", "reviewedBy"],
+          "additionalProperties": false,
+          "properties": {
+            "method": { "const": "identity" },
+            "rationale": { "type": "string", "minLength": 1 },
+            "reviewedBy": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+          }
+        },
+        "confidenceMeaning": { "type": "string", "minLength": 1 },
+        "observedOutcome": { "enum": ["protected-outcome-held", "protected-outcome-failed"] },
+        "outcomeValue": { "enum": [0, 1] },
+        "outcomeRationale": { "type": "string", "minLength": 1 },
+        "observationWindow": { "type": "string", "minLength": 1 },
+        "domain": { "type": "string", "minLength": 1 },
+        "included": { "type": "boolean" },
+        "exclusionRationale": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["draft", "reviewed", "retired"] }
+      }
+    },
+    "calibrationBucket": {
+      "type": "object",
+      "required": ["bucketRef", "pairRefs", "pairCount", "meanForecastProbability", "observedSuccessRate", "calibrationGap"],
+      "additionalProperties": false,
+      "properties": {
+        "bucketRef": { "$ref": "#/$defs/id" },
+        "pairRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "pairCount": { "type": "integer", "minimum": 0 },
+        "meanForecastProbability": { "$ref": "#/$defs/score" },
+        "observedSuccessRate": { "$ref": "#/$defs/score" },
+        "calibrationGap": { "$ref": "#/$defs/score" }
+      }
+    },
+    "uncertaintyBoundary": {
+      "type": "object",
+      "required": ["pairCount", "empiricalPairCount", "minimumPairCount", "minimumEmpiricalPairCount", "dataSufficiency", "limitations"],
+      "additionalProperties": false,
+      "properties": {
+        "pairCount": { "type": "integer", "minimum": 0 },
+        "empiricalPairCount": { "type": "integer", "minimum": 0 },
+        "minimumPairCount": { "type": "integer", "minimum": 2 },
+        "minimumEmpiricalPairCount": { "type": "integer", "minimum": 2 },
+        "dataSufficiency": { "enum": ["insufficient", "provisional", "sufficient"] },
+        "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "calibrationReport": {
+      "type": "object",
+      "required": ["id", "title", "policyRef", "includedPairRefs", "excludedPairRefs", "evidenceOriginRefs", "brierScore", "buckets", "uncertaintyBoundary", "calibrationSignal", "interpretation", "governanceTriggerRefs", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "policyRef": { "$ref": "#/$defs/id" },
+        "includedPairRefs": { "$ref": "#/$defs/refArray" },
+        "excludedPairRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "evidenceOriginRefs": { "$ref": "#/$defs/refArray" },
+        "brierScore": { "$ref": "#/$defs/score" },
+        "buckets": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/calibrationBucket" } },
+        "uncertaintyBoundary": { "$ref": "#/$defs/uncertaintyBoundary" },
+        "calibrationSignal": { "enum": ["insufficient-data", "descriptive-only", "possible-underconfidence", "possible-overconfidence", "mixed", "within-policy-tolerance"] },
+        "interpretation": { "const": "evidence-only-not-quality-verdict" },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "status": { "enum": ["draft", "reviewed", "retired"] }
+      }
+    },
+    "governanceTrigger": {
+      "type": "object",
+      "required": ["id", "triggerType", "reason", "sourceCalibrationReportRef", "severity", "requiredAction", "owner", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "triggerType": { "enum": ["insufficient-data", "non-empirical-evidence", "confidence-semantics-mismatch", "calculation-mismatch", "calibration-gap", "stale-evidence", "other"] },
+        "reason": { "type": "string", "minLength": 1 },
+        "sourceCalibrationReportRef": { "$ref": "#/$defs/id" },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "requiredAction": { "type": "string", "minLength": 1 },
+        "owner": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["open", "reviewed", "resolved", "retired"] },
+        "resultingGovernanceEventRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "verifierBoundary": {
+      "type": "object",
+      "required": ["checks", "doesNotClaim", "semanticValidityRequires"],
+      "additionalProperties": false,
+      "properties": {
+        "checks": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "doesNotClaim": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "semanticValidityRequires": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      }
+    }
+  }
+}
