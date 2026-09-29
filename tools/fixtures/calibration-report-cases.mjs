@@ -3,8 +3,147 @@ const validator = "tools/validate-calibration-report.mjs";
 function policy(pkg) { return pkg.calibrationPolicies[0]; }
 function pair(pkg) { return pkg.decisionOutcomePairs[0]; }
 function report(pkg) { return pkg.calibrationReports[0]; }
+function cohort(pkg) { return pkg.calibrationCohorts[0]; }
 
 export const cases = [
+  {
+    id: "cohorts-not-array",
+    rule: "calibration cohorts required",
+    expect: "package calibrationCohorts must be an array.",
+    mutate: (pkg) => { pkg.calibrationCohorts = null; }
+  },
+  {
+    id: "cohort-eligible-decision-missing",
+    rule: "eligible decision resolution",
+    expect: "eligible decision references missing gate decision",
+    mutate: (pkg) => { cohort(pkg).eligibleDecisions[0].gateDecisionRef = "QGD-NOPE-999"; }
+  },
+  {
+    id: "cohort-candidate-not-eligible",
+    rule: "candidate eligibility",
+    expect: "candidate pair DOP-CR-001 is not backed by an eligible decision.",
+    mutate: (pkg) => { cohort(pkg).eligibleDecisions = [{ sourcePackageRef: "PKGREF-CR-001", gateDecisionRef: "QGD-NOPE-999" }]; }
+  },
+  {
+    id: "cohort-rule-operator-unsupported",
+    rule: "selection rule operator",
+    expect: "operator is not supported.",
+    mutate: (pkg) => { cohort(pkg).selectionRules[0].operator = "approximately"; }
+  },
+  {
+    id: "cohort-membership-mismatch",
+    rule: "selection rule membership reproduction",
+    expect: "includedPairRefs must reproduce from selectionRules.",
+    mutate: (pkg) => { cohort(pkg).selectionRules[0].values = ["draft"]; }
+  },
+  {
+    id: "cohort-exclusion-coverage-mismatch",
+    rule: "excluded pair closure",
+    expect: "excludedPairs must exactly cover rule-excluded candidates.",
+    mutate: (pkg) => { cohort(pkg).selectionRules[0].values = ["draft"]; cohort(pkg).includedPairRefs = []; }
+  },
+  {
+    id: "cohort-missing-outcome-closure",
+    rule: "missing outcome closure",
+    expect: "missingOutcomeDecisions must exactly cover eligible decisions without a pair.",
+    mutate: (pkg) => { cohort(pkg).eligibleDecisions.push({ sourcePackageRef: "PKGREF-CR-001", gateDecisionRef: "QGD-NOPE-999" }); }
+  },
+  {
+    id: "cohort-duplicate-groups-mismatch",
+    rule: "duplicate group reproduction",
+    expect: "duplicateGroups must reproduce from duplicateKeyFields.",
+    mutate: (pkg) => {
+      const duplicate = structuredClone(pair(pkg));
+      duplicate.id = "DOP-CR-002";
+      pkg.decisionOutcomePairs.push(duplicate);
+      cohort(pkg).candidatePairRefs.push(duplicate.id);
+      cohort(pkg).includedPairRefs.push(duplicate.id);
+    }
+  },
+  {
+    id: "cohort-independence-status-mismatch",
+    rule: "independence status reproduction",
+    expect: "independence status must reproduce as clear.",
+    mutate: (pkg) => { cohort(pkg).independenceBoundary.status = "bounded"; }
+  },
+  {
+    id: "cohort-segment-coverage-mismatch",
+    rule: "segment summary closure",
+    expect: "segmentSummaries must exactly cover included segment values.",
+    mutate: (pkg) => { cohort(pkg).segmentSummaries = []; }
+  },
+  {
+    id: "cohort-segment-pairs-mismatch",
+    rule: "segment pair membership",
+    expect: "pairRefs must reproduce.",
+    mutate: (pkg) => { cohort(pkg).segmentSummaries[0].pairRefs = ["DOP-NOPE-999"]; }
+  },
+  {
+    id: "cohort-segment-prevalence-mismatch",
+    rule: "segment prevalence reproduction",
+    expect: "outcomePrevalence must reproduce as 0.",
+    mutate: (pkg) => { cohort(pkg).segmentSummaries[0].outcomePrevalence = 1; }
+  },
+  {
+    id: "cohort-segment-count-mismatch",
+    rule: "segment pair count reproduction",
+    expect: "pairCount must reproduce as 1.",
+    mutate: (pkg) => { cohort(pkg).segmentSummaries[0].pairCount = 2; }
+  },
+  {
+    id: "cohort-segment-brier-mismatch",
+    rule: "segment Brier reproduction",
+    expect: "brierScore must reproduce as 0.49.",
+    mutate: (pkg) => { cohort(pkg).segmentSummaries[0].brierScore = 0.1; }
+  },
+  {
+    id: "cohort-segment-risk-mismatch",
+    rule: "high-risk segment reproduction",
+    expect: "highRisk must reproduce as true.",
+    mutate: (pkg) => { cohort(pkg).segmentSummaries[0].highRisk = false; }
+  },
+  {
+    id: "cohort-completeness-mismatch",
+    rule: "cohort completeness reproduction",
+    expect: "completenessSummary.coverageRate must reproduce as 1.",
+    mutate: (pkg) => { cohort(pkg).completenessSummary.coverageRate = 0.5; }
+  },
+  {
+    id: "cohort-drift-status-mismatch",
+    rule: "drift baseline consistency",
+    expect: "drift without baseline must have status not-assessed.",
+    mutate: (pkg) => { cohort(pkg).driftAssessment.status = "stable"; }
+  },
+  {
+    id: "cohort-high-risk-trigger-missing",
+    rule: "high-risk segment governance",
+    expect: "adverse high-risk segment requires a high-risk-segment-gap governance trigger.",
+    mutate: (pkg) => { cohort(pkg).governanceTriggerRefs = cohort(pkg).governanceTriggerRefs.filter((id) => id !== "GTR-CR-003"); }
+  },
+  {
+    id: "cohort-insufficient-trigger-missing",
+    rule: "insufficient cohort governance",
+    expect: "insufficient included cohort requires an insufficient-data governance trigger.",
+    mutate: (pkg) => { cohort(pkg).governanceTriggerRefs = cohort(pkg).governanceTriggerRefs.filter((id) => id !== "GTR-CR-001"); }
+  },
+  {
+    id: "cohort-drift-trigger-missing",
+    rule: "unassessed drift governance",
+    expect: "unassessed drift requires a drift-not-assessed governance trigger.",
+    mutate: (pkg) => { cohort(pkg).governanceTriggerRefs = cohort(pkg).governanceTriggerRefs.filter((id) => id !== "GTR-CR-004"); }
+  },
+  {
+    id: "cohort-interpretation-overclaim",
+    rule: "cohort evidence-only interpretation",
+    expect: "interpretation must be cohort-evidence-only-not-representativeness-or-quality.",
+    mutate: (pkg) => { cohort(pkg).interpretation = "representative-quality-proof"; }
+  },
+  {
+    id: "cohort-boundary-overclaim",
+    rule: "cohort verifier boundary",
+    expect: "verifierBoundary must explicitly avoid claiming that cohort coverage, balance, or size proves representativeness.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "that cohort coverage, balance, or size proves representativeness"); }
+  },
   {
     id: "wrong-package-type",
     rule: "package type",

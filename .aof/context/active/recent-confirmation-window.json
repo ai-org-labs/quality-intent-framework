@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-09-28T04:35:55.977Z",
+  "updated_at": "2026-09-29T04:35:18.736Z",
   "entries": [
     {
       "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
-      "answer": "Scope: a standalone, domain-general calibration-report package that reads declared quality-gate decision and post-release outcome references; schema, verifier, example, CLI integration, tests, docs, roadmap, and release only. Exclude UI, external integrations, automatic quality verdicts, causal claims, and production pilot data.",
-      "recorded_at": "2026-09-28T04:34:37.350Z",
+      "answer": "Scope: extend only the standalone calibration-report package with cohort selection rules, inclusion/exclusion decisions, duplicate and dependence boundaries, segment summaries, missingness, prevalence, drift, governance, fixtures, docs, roadmap, and release. Exclude UI, external integration, production claims, causal inference, and representativeness claims.",
+      "recorded_at": "2026-09-29T04:34:07.420Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MUKR5IWG-FJ9AHE",
+      "source_session_id": "SESS-MUM6LK6J-PWX0YE",
       "source_decision_record_id": null
     },
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success: a human or AI can reproduce decision-outcome pairing, Brier score, calibration buckets, sample boundaries, evidence-origin limits, and required governance actions from portable JSON; invalid arithmetic, references, empirical claims, or verdict substitutions fail deterministically.",
-      "recorded_at": "2026-09-28T04:34:37.352Z",
+      "answer": "Success: portable JSON deterministically reproduces cohort membership, exclusions, segment arithmetic, duplicate/dependence state, missingness, prevalence, drift state, and required governance; aggregate values cannot hide a declared high-risk segment.",
+      "recorded_at": "2026-09-29T04:34:07.421Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MUKR5IWG-FJ9AHE",
+      "source_session_id": "SESS-MUM6LK6J-PWX0YE",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The raw continuation request is reframed into the smallest release-quality capability that closes the current roadmap gap while preserving QIF semantic boundaries.",
-      "recorded_at": "2026-09-28T04:35:55.977Z",
+      "answer": "The raw continuation request is reframed into the smallest capability that prevents correct aggregate arithmetic from concealing invalid cohort composition.",
+      "recorded_at": "2026-09-29T04:35:18.736Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MUKR5IWG-FJ9AHE",
-      "source_decision_record_id": "DEC-MUKR8MO4-V1FT4S"
+      "source_session_id": "SESS-MUM6LK6J-PWX0YE",
+      "source_decision_record_id": "DEC-MUM6NOLP-WPUR7H"
     }
   ]
 }

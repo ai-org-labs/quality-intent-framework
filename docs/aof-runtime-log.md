@@ -2,6 +2,72 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.32 Calibration Cohort Integrity
+
+Date: 2026-09-29
+
+Need / Intent / Context:
+
+- Need: v0.6.31 could reproduce aggregate calibration arithmetic, but the aggregate could still hide biased selection, duplicate or dependent observations, missing outcomes, drift, or failure concentrated in a high-risk segment.
+- Intent: add executable Calibration Cohort records for selection, exclusion, outcome coverage, duplicate/dependence boundaries, segments, prevalence, drift, and governance.
+- Context: QIF remains standalone and domain-general. Cohort size, coverage, class balance, and segment count are evidence, not proof of representativeness, independence, quality, or semantic truth.
+
+Need Validation and Project Charter:
+
+- Publicly released AOF `v12.2.0` was used from a clean checkout; the unreleased local `12.3.0` worktree was not modified.
+- `situation-assess` wrote `.aof/runtime/v0.6.32-situation.json`.
+- AOF `run` created parent session `SESS-MUM6LK6J-PWX0YE`; `answer` fixed scope, exclusions, and success conditions.
+- Problem, value, and alternative records precede `.aof/artifacts/need-validation/records/NVR-QIFV0632.json`.
+- Only after the Validated Need, `.aof/artifacts/need-validation/project-charters/PCH-QIFV0632.json` was created and `need-validation-advance` promoted planning.
+- `task-open` created `TASK-050`.
+
+Direction and council judgment:
+
+- Visionary: approve. Every aggregate claim should reveal the population and important segments behind it.
+- Builder: approve. Extend the existing calibration-report package and derive membership and summaries from existing decision-outcome pairs.
+- Guardian: approve with boundary. Structure cannot prove representativeness or statistical independence; unresolved dependence, missingness, drift, and high-risk segment gaps must remain governed.
+- Planning council: `.aof/artifacts/execution/council-reviews/CREV-MUM6NUNG-RPGU74.json`.
+- Actor skill packet: `.aof/artifacts/actor-skill-packets/ASP-MUM6O9LG-RBPV9M.json`.
+
+Trend check:
+
+- Anthropic recommends balanced problem sets, isolated trials, production monitoring, and continuous suite maintenance to avoid class imbalance, correlated failures, false confidence, and drift: `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`.
+- NIST AI 800-3 distinguishes model-sampling variance from benchmark-item selection variance: `https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-3.pdf`.
+- OpenAI deployment simulation explicitly compares pre-deployment rate estimates with later observed deployment rates: `https://openai.com/index/deployment-simulation/`.
+- NIST AITE emphasizes evaluation across diverse datasets, modalities, and domains: `https://www.nist.gov/news-events/news/2026/07/announcing-nists-artificial-intelligence-technology-evaluation-aite`.
+
+What was built:
+
+- `calibrationCohorts` with eligible decisions, candidate pairs, executable selection rules, included pairs, excluded-pair rationale, and missing-outcome decisions.
+- Reproduced duplicate groups from declared key fields, explicit unit of analysis, dependence risks, and clear/bounded/unresolved status.
+- Segment definitions and reproduced membership, pair count, outcome prevalence, Brier score, and high-risk designation.
+- Cohort completeness for eligible, candidate, included, excluded, missing, coverage, and prevalence values.
+- Drift baseline consistency and governance routing for insufficient cohorts, missing outcomes, duplicates, unresolved dependence, adverse high-risk segments, unassessed drift, and detected drift.
+- Twenty-two retained negative cases; the full suite now covers `701/701` negative rules across `16/16` positive packages.
+- Plain-language documentation and diagram in `docs/qif-v0.6.32-calibration-cohort-integrity.md`.
+
+What was not built:
+
+- No proof of cohort representativeness, observation independence, causal attribution, or production prevalence.
+- No use of cohort size, coverage, balance, segment count, or passing verification as quality.
+- No UI, external integration, production data, or automatic quality verdict.
+
+Verification and review evidence:
+
+- `npm test` passed all CLI and verifier checks, `16/16` positive packages, and `701/701` retained negative fixtures.
+- Self-review: `.aof/artifacts/execution/council-reviews/CREV-MUM6Y56E-JBB45B.json`.
+- Final council review: `.aof/artifacts/execution/council-reviews/CREV-MUM73DU5-6AWG7G.json`.
+- Retrospective: `.aof/artifacts/execution/council-reviews/CREV-MUM751XP-48440Q.json`.
+- `TASK-050` moved to done after verification.
+- Post-slice `situation-assess` wrote `.aof/runtime/v0.6.32-post-situation.json`; it found no truth conflict and selected v0.6.33 as the next frontier.
+- `organization-verify` initially exposed four missing lineage references on the final review and retrospective records. Those records were repaired with `TASK-050`, `SESS-MUM6LK6J-PWX0YE`, and `DEC-MUM6NOLP-WPUR7H`; the successful rerun is recorded below.
+- The corrected `organization-verify` passed `255/255` checks with no failures.
+- Release commit, tag, and GitHub Release are recorded by the release completion update.
+
+Next value slice:
+
+- v0.6.33 Consequence-Sensitive Calibration: connect calibration error and action thresholds to asymmetric loss boundaries so a low aggregate score cannot hide rare but intolerable false assurance.
+
 ## v0.6.31 Calibration Report Records
 
 Date: 2026-09-28

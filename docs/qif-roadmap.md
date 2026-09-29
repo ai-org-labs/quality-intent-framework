@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.31 baseline)
+## Current Position (v0.6.32 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -169,6 +169,11 @@ and adoption surface — not pretending the limits away.
   pairs, reproducible Brier score and buckets, sample and empirical-origin
   boundaries, and governance routing. The committed report remains
   example-only and insufficient by design.
+  v0.6.32 adds executable Calibration Cohort records for selection and
+  exclusion rules, missing outcomes, duplicate/dependence boundaries, segment
+  summaries, cohort completeness, drift, and governance. Coverage, balance,
+  cohort size, and segment counts remain evidence rather than quality or
+  representativeness proof.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -501,6 +506,11 @@ Deliverables:
   exclusion rules, duplicate/dependence boundaries, subgroup segments,
   prevalence, missingness, and drift explicit so aggregate calibration cannot
   hide a high-risk cohort.
+  Status: implemented in v0.6.32. The committed cohort remains example-only,
+  provisional, and governance-open.
+- Next planned slice, v0.6.33 Consequence-Sensitive Calibration: connect
+  calibration errors and action thresholds to asymmetric loss boundaries so a
+  low aggregate score cannot hide a rare but intolerable false assurance.
 - Evaluation Suite Health records: task origin, contamination boundary,
   solvability review, saturation, grader calibration, trial variance, harness
   and infrastructure configuration, and drift ownership.

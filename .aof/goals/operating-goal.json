@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Provide a standalone, domain-general calibration report contract that reproducibly links declared decision confidence to observed outcomes, calculates Brier score and calibration buckets, states sample and provenance limits, and routes uncertainty or misleading claims to governance without issuing a quality verdict.",
-  "updated_at": "2026-09-28T04:35:55.976Z",
+  "content": "Provide executable Calibration Cohort records that deterministically select and exclude decision-outcome pairs, expose duplicate and dependence boundaries, summarize segments, prevalence and missingness, assess drift, and route hidden high-risk cohort failures to governance without claiming representativeness or quality.",
+  "updated_at": "2026-09-29T04:35:18.735Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MUKR5IWG-FJ9AHE",
-  "source_decision_record_id": "DEC-MUKR8MO4-V1FT4S",
+  "source_session_id": "SESS-MUM6LK6J-PWX0YE",
+  "source_decision_record_id": "DEC-MUM6NOLP-WPUR7H",
   "declared_complete_at": null
 }

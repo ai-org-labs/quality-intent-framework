@@ -1,0 +1,79 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-09-29T04:35:45.940Z",
+  "packet_id": "ASP-MUM6O9LG-RBPV9M",
+  "source_task_id": "TASK-050",
+  "source_parent_session_id": "SESS-MUM6LK6J-PWX0YE",
+  "source_decision_record_id": "DEC-MUM6NOLP-WPUR7H",
+  "objective": "Implement and verify QIF v0.6.32 Calibration Cohort Integrity",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": "qif-council",
+    "assignment_reason": "Builder extends the existing package under Visionary value and Guardian claim boundaries.",
+    "execution_mode": "council-seat"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "deterministic-verifier-design",
+    "statistical-reporting-boundaries"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "calibration-cohort-integrity",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs",
+        "tools/fixtures/calibration-report-cases.mjs"
+      ],
+      "rationale": "v0.6.31 provides a narrow package and verifier surface for cohort extension."
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-no-representativeness-overclaim",
+    "policy-no-activity-count-quality"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-calibration-cohort-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "calibrationCohorts"
+    ],
+    "acceptance_criteria": [
+      "Cohort membership and exclusions reproduce from structured rules.",
+      "Segment, prevalence, missingness, duplicate, dependence, and drift records are deterministic.",
+      "High-risk segment and provisional cohort conditions route to governance."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "cohort arithmetic and references are deterministic",
+      "evaluator_ref": "guardian",
+      "evidence_required": "positive and retained negative fixtures",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "representativeness-overclaim",
+      "trigger_condition": "cohort size, coverage, or balance is represented as proof of representativeness or quality",
+      "consequence": "require-council-review",
+      "recovery_action": "restore explicit semantic and empirical boundaries"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will expose the cohort behind the aggregate.",
+    "current_action": "Implement cohort integrity records",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Submit cohort evidence to Council review"
+  },
+  "status": "ready-for-assignment"
+}

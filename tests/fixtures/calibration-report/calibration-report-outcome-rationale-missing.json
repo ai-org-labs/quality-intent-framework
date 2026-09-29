@@ -1,6 +1,6 @@
 {
   "packageType": "calibration-report",
-  "runtimeVersion": "0.6.31",
+  "runtimeVersion": "0.6.32",
   "packageId": "CRPKG-001",
   "packageRefs": [
     {
@@ -83,6 +83,101 @@
       "status": "reviewed"
     }
   ],
+  "calibrationCohorts": [
+    {
+      "id": "COH-CR-001",
+      "title": "Illustrative reviewed decision cohort",
+      "policyRef": "CAP-CR-001",
+      "eligibleDecisions": [
+        {
+          "sourcePackageRef": "PKGREF-CR-001",
+          "gateDecisionRef": "QGD-QG-001"
+        }
+      ],
+      "candidatePairRefs": [
+        "DOP-CR-001"
+      ],
+      "selectionRules": [
+        {
+          "id": "CSR-CR-001",
+          "field": "status",
+          "operator": "equals",
+          "values": [
+            "reviewed"
+          ],
+          "effect": "include",
+          "rationale": "Only reviewed decision-outcome mappings may enter the cohort."
+        }
+      ],
+      "includedPairRefs": [
+        "DOP-CR-001"
+      ],
+      "excludedPairs": [],
+      "missingOutcomeDecisions": [],
+      "independenceBoundary": {
+        "unitOfAnalysis": "One unique gate decision and post-release observation window.",
+        "duplicateKeyFields": [
+          "sourcePackageRef",
+          "gateDecisionRef",
+          "outcomeReviewRef",
+          "observationWindow"
+        ],
+        "duplicateGroups": [],
+        "dependenceRisks": [],
+        "status": "clear"
+      },
+      "segmentDefinitions": [
+        {
+          "id": "SEG-CR-DOMAIN",
+          "dimension": "domain",
+          "highRiskValues": [
+            "customer-support"
+          ],
+          "rationale": "Operational domains must remain visible because an aggregate can hide domain-specific loss-boundary failure."
+        }
+      ],
+      "segmentSummaries": [
+        {
+          "segmentRef": "SEG-CR-DOMAIN",
+          "value": "customer-support",
+          "pairRefs": [
+            "DOP-CR-001"
+          ],
+          "pairCount": 1,
+          "outcomePrevalence": 0,
+          "brierScore": 0.49,
+          "highRisk": true
+        }
+      ],
+      "completenessSummary": {
+        "eligibleDecisionCount": 1,
+        "candidatePairCount": 1,
+        "includedPairCount": 1,
+        "excludedPairCount": 0,
+        "missingOutcomeCount": 0,
+        "coverageRate": 1,
+        "outcomePrevalence": 0
+      },
+      "driftAssessment": {
+        "comparisonBasis": "No earlier comparable cohort is available in the committed example.",
+        "dimensions": [
+          "domain",
+          "outcomePrevalence",
+          "sourceEvidenceOriginKind",
+          "forecastProbability"
+        ],
+        "status": "not-assessed",
+        "rationale": "A single illustrative cohort cannot establish stability or drift."
+      },
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-003",
+        "GTR-CR-004"
+      ],
+      "interpretation": "cohort-evidence-only-not-representativeness-or-quality",
+      "status": "provisional"
+    }
+  ],
   "calibrationReports": [
     {
       "id": "CAR-CR-001",
@@ -149,19 +244,41 @@
       "requiredAction": "Replace or supplement example data with verified observed-operational or historical-record evidence.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-003",
+      "triggerType": "high-risk-segment-gap",
+      "reason": "The declared high-risk customer-support segment has Brier score 0.49, above the active policy tolerance of 0.20.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the domain-specific failure before using the aggregate report for governance decisions.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-004",
+      "triggerType": "drift-not-assessed",
+      "reason": "No comparable baseline cohort exists, so population drift has not been assessed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Establish a comparable baseline before making a longitudinal calibration claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
     "checks": [
       "repository-local package and entity references resolve",
       "source confidence, outcome link, Brier score, bucket membership, means, rates, gaps, and sample counts reproduce",
-      "evidence origin, sufficiency, and governance rules are applied consistently"
+      "evidence origin, sufficiency, and governance rules are applied consistently",
+      "cohort membership, exclusions, missing outcomes, duplicate groups, dependence state, segment summaries, and drift routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
       "that source confidence is a valid probability forecast",
       "causal attribution between a decision and an outcome",
       "case representativeness or independence",
+      "that cohort coverage, balance, or size proves representativeness",
       "a calibration statistic is quality",
       "an automatic quality verdict"
     ],

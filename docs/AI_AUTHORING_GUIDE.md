@@ -69,6 +69,7 @@ Use additional documents when needed:
 | Explain repeated-trial variation and infrastructure uncertainty without false precision | `docs/qif-v0.6.29-trial-infrastructure-uncertainty.md`, `schemas/world-model-calibration-package.schema.json` |
 | Show that contradictory calibration evidence changed the framework through accountable governance | `docs/qif-v0.6.30-framework-learning-records.md`, `schemas/world-model-calibration-package.schema.json` |
 | Compare declared probability forecasts with later outcomes without turning a score into a quality verdict | `docs/qif-v0.6.31-calibration-report.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
+| Expose selection, missing outcomes, dependence, segments, and drift behind a calibration aggregate | `docs/qif-v0.6.32-calibration-cohort-integrity.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Understand quality theory background | `docs/quality-theory-report.md` |
 
 ## Required Framing

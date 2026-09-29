@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-09-29T04:34:11.526Z",
+  "problem_statement_id": "PST-MUM6M8QU-ML7UJQ",
+  "affected_party": "QIF users and governance owners relying on calibration reports",
+  "actual_problem": "An aggregate calibration score can conceal biased selection, repeated or dependent observations, missing outcomes, drift, and failure concentrated in a high-risk cohort.",
+  "why_it_matters": "A mathematically correct aggregate can still mislead decisions when the cohort does not represent the intended claim or masks protected segments.",
+  "why_now": "v0.6.31 made calibration arithmetic executable, exposing cohort integrity as the next binding limitation; current agent-evaluation guidance emphasizes balanced datasets, isolated trials, real usage patterns, and drift maintenance.",
+  "evidence_refs": [
+    ".aof/goals/next-value-slice.json",
+    ".aof/runtime/v0.6.32-situation.json"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUM6LK6L-3IJY02"
+}

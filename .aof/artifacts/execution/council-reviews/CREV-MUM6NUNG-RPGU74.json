@@ -1,0 +1,33 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-29T04:35:26.572Z",
+  "review_packet_id": "CREV-MUM6NUNG-RPGU74",
+  "council_id": "qif-council",
+  "stage": "planning",
+  "review_status": "approved",
+  "decision_summary": "Implement v0.6.32 by extending calibration-report with executable Calibration Cohort records.",
+  "rationale": "Visionary: expose who and what an aggregate represents. Builder: derive membership and segment arithmetic from existing pairs with structured rules. Guardian: structure cannot prove representativeness or independence; unresolved dependence, drift, missingness, or high-risk segment failure must route to governance.",
+  "recommendation": "Add cohort schema, example, deterministic verifier logic, fixtures, plain-language docs, roadmap and release evidence.",
+  "target_audience": "QIF users, AI agents, reviewers, and governance owners",
+  "expected_user_reaction": "Users can see exactly what is inside and outside an aggregate calibration claim.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "aggregate-cohort-blindness",
+  "diagnosis_confidence": 0.95,
+  "diagnosis_evidence_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0632.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    ".aof/runtime/v0.6.32-situation.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0632.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-050",
+  "source_parent_session_id": "SESS-MUM6LK6J-PWX0YE",
+  "source_decision_record_id": "DEC-MUM6M5KP-58943V"
+}

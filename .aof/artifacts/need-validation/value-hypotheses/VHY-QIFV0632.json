@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-09-29T04:34:15.133Z",
+  "value_hypothesis_id": "VHY-MUM6MBJ1-8PJ4G1",
+  "expected_value_creation": "Users can audit exactly which observations formed a calibration report and see when aggregate results hide cohort-specific risk.",
+  "beneficiary": "human reviewers, AI agents, domain experts, and governance owners",
+  "supporting_evidence": [
+    "The v0.6.31 package already provides traceable decision-outcome pairs and reproducible report arithmetic.",
+    "Current evaluation practice warns about class imbalance, shared-state dependence, self-selection, real-usage mismatch, and drift."
+  ],
+  "success_criteria": [
+    "Cohort membership and exclusions reproduce from structured rules.",
+    "Duplicate, dependence, missingness, drift, and high-risk segment conditions route to governance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUM6LK6L-3IJY02"
+}

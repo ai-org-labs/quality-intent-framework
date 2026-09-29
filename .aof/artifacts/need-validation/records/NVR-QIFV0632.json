@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-09-29T04:34:40.413Z",
+  "validation_id": "NVR-MUM6MV19-H4T1S9",
+  "raw_need": "Continue QIF and release the next roadmap slice.",
+  "validation_status": "reframed",
+  "validated_need": "Provide executable Calibration Cohort records that deterministically select and exclude decision-outcome pairs, expose duplicate and dependence boundaries, summarize segments, prevalence and missingness, assess drift, and route hidden high-risk cohort failures to governance without claiming representativeness or quality.",
+  "decision_summary": "The raw continuation request is reframed into the smallest capability that prevents correct aggregate arithmetic from concealing invalid cohort composition.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What must be executable?",
+      "answer": "Selection and exclusion rules, cohort membership, duplicate/dependence boundaries, segment summaries, missingness, prevalence, drift, and governance routing.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must remain outside the claim?",
+      "answer": "Representativeness truth, independence truth, causal attribution, automatic verdicts, UI, external integration, and production pilot evidence.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A larger or balanced cohort is automatically representative."
+  ],
+  "evidence_gaps": [
+    "No production cohort exists; committed records must remain example-only and provisional."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV0632.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0632.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0632.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUM6M5KP-58943V"
+}

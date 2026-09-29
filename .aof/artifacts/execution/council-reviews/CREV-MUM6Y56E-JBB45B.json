@@ -1,0 +1,34 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-29T04:43:26.774Z",
+  "review_packet_id": "CREV-MUM6Y56E-JBB45B",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Self-review confirms v0.6.32 exposes calibration cohort construction without treating coverage, balance, cohort size, or segment count as quality or representativeness.",
+  "rationale": "Visionary: aggregate claims now reveal their population and high-risk groups. Builder: membership, exclusions, missing outcomes, duplicate keys, segment arithmetic, completeness, and drift state are reproducible. Guardian: empty included cohorts remain representable and governance-routed; structural checks still cannot prove independence or representativeness.",
+  "recommendation": "Proceed to final verification and release review after recording runtime evidence.",
+  "target_audience": "release operator and QIF governance owner",
+  "expected_user_reaction": "The aggregate can be challenged through its exact cohort rather than trusted as a single score.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "implementation-self-review",
+  "diagnosis_confidence": 0.96,
+  "diagnosis_evidence_refs": [
+    "examples/calibration-report-package.json",
+    "tools/validate-calibration-report.mjs"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "docs/qif-v0.6.32-calibration-cohort-integrity.md",
+    "tests/fixtures/calibration-report/manifest.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-050",
+  "source_parent_session_id": "SESS-MUM6LK6J-PWX0YE",
+  "source_decision_record_id": "DEC-MUM6NOLP-WPUR7H"
+}

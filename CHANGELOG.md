@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.32
+
+- Added executable Calibration Cohort records with structured selection rules, included/excluded pairs, and missing-outcome closure.
+- Added deterministic duplicate/dependence boundaries, segment summaries, completeness arithmetic, drift consistency, and governance routing.
+- Preserved the boundary that cohort size, coverage, balance, and segment counts do not prove representativeness, independence, or quality.
+- Added 22 retained negative cases; the retained suite now covers 701 negative cases across 16 positive package types.
+
 ## v0.6.31
 
 - Added a standalone Calibration Report package linking gate decisions, reviewed probability meaning, observed outcomes, and evidence origins.

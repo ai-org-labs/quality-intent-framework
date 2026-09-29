@@ -68,6 +68,160 @@
   ],
   "negatives": [
     {
+      "file": "calibration-report-cohorts-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "calibration cohorts required",
+      "expect": "fail",
+      "errorIncludes": "package calibrationCohorts must be an array."
+    },
+    {
+      "file": "calibration-report-cohort-eligible-decision-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "eligible decision resolution",
+      "expect": "fail",
+      "errorIncludes": "eligible decision references missing gate decision"
+    },
+    {
+      "file": "calibration-report-cohort-candidate-not-eligible.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "candidate eligibility",
+      "expect": "fail",
+      "errorIncludes": "candidate pair DOP-CR-001 is not backed by an eligible decision."
+    },
+    {
+      "file": "calibration-report-cohort-rule-operator-unsupported.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "selection rule operator",
+      "expect": "fail",
+      "errorIncludes": "operator is not supported."
+    },
+    {
+      "file": "calibration-report-cohort-membership-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "selection rule membership reproduction",
+      "expect": "fail",
+      "errorIncludes": "includedPairRefs must reproduce from selectionRules."
+    },
+    {
+      "file": "calibration-report-cohort-exclusion-coverage-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "excluded pair closure",
+      "expect": "fail",
+      "errorIncludes": "excludedPairs must exactly cover rule-excluded candidates."
+    },
+    {
+      "file": "calibration-report-cohort-missing-outcome-closure.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "missing outcome closure",
+      "expect": "fail",
+      "errorIncludes": "missingOutcomeDecisions must exactly cover eligible decisions without a pair."
+    },
+    {
+      "file": "calibration-report-cohort-duplicate-groups-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "duplicate group reproduction",
+      "expect": "fail",
+      "errorIncludes": "duplicateGroups must reproduce from duplicateKeyFields."
+    },
+    {
+      "file": "calibration-report-cohort-independence-status-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "independence status reproduction",
+      "expect": "fail",
+      "errorIncludes": "independence status must reproduce as clear."
+    },
+    {
+      "file": "calibration-report-cohort-segment-coverage-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "segment summary closure",
+      "expect": "fail",
+      "errorIncludes": "segmentSummaries must exactly cover included segment values."
+    },
+    {
+      "file": "calibration-report-cohort-segment-pairs-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "segment pair membership",
+      "expect": "fail",
+      "errorIncludes": "pairRefs must reproduce."
+    },
+    {
+      "file": "calibration-report-cohort-segment-prevalence-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "segment prevalence reproduction",
+      "expect": "fail",
+      "errorIncludes": "outcomePrevalence must reproduce as 0."
+    },
+    {
+      "file": "calibration-report-cohort-segment-count-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "segment pair count reproduction",
+      "expect": "fail",
+      "errorIncludes": "pairCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-cohort-segment-brier-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "segment Brier reproduction",
+      "expect": "fail",
+      "errorIncludes": "brierScore must reproduce as 0.49."
+    },
+    {
+      "file": "calibration-report-cohort-segment-risk-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "high-risk segment reproduction",
+      "expect": "fail",
+      "errorIncludes": "highRisk must reproduce as true."
+    },
+    {
+      "file": "calibration-report-cohort-completeness-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "cohort completeness reproduction",
+      "expect": "fail",
+      "errorIncludes": "completenessSummary.coverageRate must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-cohort-drift-status-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "drift baseline consistency",
+      "expect": "fail",
+      "errorIncludes": "drift without baseline must have status not-assessed."
+    },
+    {
+      "file": "calibration-report-cohort-high-risk-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "high-risk segment governance",
+      "expect": "fail",
+      "errorIncludes": "adverse high-risk segment requires a high-risk-segment-gap governance trigger."
+    },
+    {
+      "file": "calibration-report-cohort-insufficient-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "insufficient cohort governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient included cohort requires an insufficient-data governance trigger."
+    },
+    {
+      "file": "calibration-report-cohort-drift-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unassessed drift governance",
+      "expect": "fail",
+      "errorIncludes": "unassessed drift requires a drift-not-assessed governance trigger."
+    },
+    {
+      "file": "calibration-report-cohort-interpretation-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "cohort evidence-only interpretation",
+      "expect": "fail",
+      "errorIncludes": "interpretation must be cohort-evidence-only-not-representativeness-or-quality."
+    },
+    {
+      "file": "calibration-report-cohort-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "cohort verifier boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that cohort coverage, balance, or size proves representativeness."
+    },
+    {
       "file": "calibration-report-wrong-package-type.json",
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "package type",

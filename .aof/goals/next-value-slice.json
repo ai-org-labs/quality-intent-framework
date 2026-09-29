@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "Need: v0.6.31 can calculate confidence-versus-outcome calibration, but aggregate reports can still hide selection bias, duplicate or dependent observations, missing outcomes, drift, and high-risk subgroup failure. Intent: add schema-backed Calibration Cohort records with executable inclusion/exclusion rules, duplicate and dependence boundaries, subgroup segments, prevalence and missingness summaries, drift checks, and governance routing in v0.6.32. Context: remain domain-general; do not treat cohort size, coverage percentage, balanced samples, or subgroup counts as quality or representativeness proof.",
-  "updated_at": "2026-09-28T04:52:02.621Z",
+  "content": "QIF v0.6.33 Consequence-Sensitive Calibration: link forecast errors and action thresholds to asymmetric loss boundaries so acceptable aggregate calibration cannot hide rare intolerable false assurance. Keep severity and consequence weights explicit, governed, domain-general, and non-authoritative; do not monetize human harm by default or treat optimized thresholds as semantic quality truth.",
+  "updated_at": "2026-09-29T04:49:09.878Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MUKR5IWG-FJ9AHE",
-  "source_decision_record_id": "DEC-MUKR8MO4-V1FT4S",
+  "source_session_id": "SESS-MUM6LK6J-PWX0YE",
+  "source_decision_record_id": "DEC-MUM6NOLP-WPUR7H",
   "declared_complete_at": null
 }

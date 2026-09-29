@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-09-29T04:34:18.782Z",
+  "alternative_analysis_id": "ALT-MUM6MECE-LVA6EI",
+  "subject_need": "Prevent aggregate calibration reports from hiding cohort integrity failures.",
+  "alternative_solutions": [
+    "Add prose-only sampling notes to each report.",
+    "Add executable Calibration Cohort records composed from decision-outcome pairs."
+  ],
+  "non_solution_options": [
+    "Assume a larger sample is representative."
+  ],
+  "defer_options": [
+    "Wait for a production pilot before defining the cohort contract."
+  ],
+  "stop_options": [
+    "Do not release if cohort membership, subgroup arithmetic, or governance conditions cannot be reproduced without claiming representativeness truth."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUM6LK6L-3IJY02"
+}

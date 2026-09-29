@@ -11,6 +11,7 @@
     "evidenceOrigins",
     "calibrationPolicies",
     "decisionOutcomePairs",
+    "calibrationCohorts",
     "calibrationReports",
     "governanceTriggers",
     "verifierBoundary"
@@ -24,6 +25,7 @@
     "evidenceOrigins": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidenceOrigin" } },
     "calibrationPolicies": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/calibrationPolicy" } },
     "decisionOutcomePairs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/decisionOutcomePair" } },
+    "calibrationCohorts": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/calibrationCohort" } },
     "calibrationReports": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/calibrationReport" } },
     "governanceTriggers": { "type": "array", "items": { "$ref": "#/$defs/governanceTrigger" } },
     "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
@@ -135,6 +137,144 @@
         "calibrationGap": { "$ref": "#/$defs/score" }
       }
     },
+    "eligibleDecision": {
+      "type": "object",
+      "required": ["sourcePackageRef", "gateDecisionRef"],
+      "additionalProperties": false,
+      "properties": {
+        "sourcePackageRef": { "$ref": "#/$defs/id" },
+        "gateDecisionRef": { "$ref": "#/$defs/id" }
+      }
+    },
+    "missingOutcomeDecision": {
+      "type": "object",
+      "required": ["sourcePackageRef", "gateDecisionRef", "rationale"],
+      "additionalProperties": false,
+      "properties": {
+        "sourcePackageRef": { "$ref": "#/$defs/id" },
+        "gateDecisionRef": { "$ref": "#/$defs/id" },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    },
+    "selectionRule": {
+      "type": "object",
+      "required": ["id", "field", "operator", "values", "effect", "rationale"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "field": { "enum": ["domain", "observedOutcome", "status", "sourceEvidenceOriginKind"] },
+        "operator": { "enum": ["equals", "in", "not-equals"] },
+        "values": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "effect": { "enum": ["include", "exclude"] },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    },
+    "excludedPair": {
+      "type": "object",
+      "required": ["pairRef", "ruleRef", "rationale"],
+      "additionalProperties": false,
+      "properties": {
+        "pairRef": { "$ref": "#/$defs/id" },
+        "ruleRef": { "$ref": "#/$defs/id" },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    },
+    "duplicateGroup": {
+      "type": "object",
+      "required": ["key", "pairRefs"],
+      "additionalProperties": false,
+      "properties": {
+        "key": { "type": "string", "minLength": 1 },
+        "pairRefs": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/id" } }
+      }
+    },
+    "independenceBoundary": {
+      "type": "object",
+      "required": ["unitOfAnalysis", "duplicateKeyFields", "duplicateGroups", "dependenceRisks", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "unitOfAnalysis": { "type": "string", "minLength": 1 },
+        "duplicateKeyFields": { "type": "array", "minItems": 1, "items": { "enum": ["sourcePackageRef", "gateDecisionRef", "outcomeReviewRef", "observationWindow"] } },
+        "duplicateGroups": { "type": "array", "items": { "$ref": "#/$defs/duplicateGroup" } },
+        "dependenceRisks": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "status": { "enum": ["clear", "bounded", "unresolved"] }
+      }
+    },
+    "segmentDefinition": {
+      "type": "object",
+      "required": ["id", "dimension", "highRiskValues", "rationale"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "dimension": { "enum": ["domain", "observedOutcome", "sourceEvidenceOriginKind"] },
+        "highRiskValues": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    },
+    "segmentSummary": {
+      "type": "object",
+      "required": ["segmentRef", "value", "pairRefs", "pairCount", "outcomePrevalence", "brierScore", "highRisk"],
+      "additionalProperties": false,
+      "properties": {
+        "segmentRef": { "$ref": "#/$defs/id" },
+        "value": { "type": "string", "minLength": 1 },
+        "pairRefs": { "$ref": "#/$defs/refArray" },
+        "pairCount": { "type": "integer", "minimum": 1 },
+        "outcomePrevalence": { "$ref": "#/$defs/score" },
+        "brierScore": { "$ref": "#/$defs/score" },
+        "highRisk": { "type": "boolean" }
+      }
+    },
+    "cohortCompletenessSummary": {
+      "type": "object",
+      "required": ["eligibleDecisionCount", "candidatePairCount", "includedPairCount", "excludedPairCount", "missingOutcomeCount", "coverageRate", "outcomePrevalence"],
+      "additionalProperties": false,
+      "properties": {
+        "eligibleDecisionCount": { "type": "integer", "minimum": 1 },
+        "candidatePairCount": { "type": "integer", "minimum": 0 },
+        "includedPairCount": { "type": "integer", "minimum": 0 },
+        "excludedPairCount": { "type": "integer", "minimum": 0 },
+        "missingOutcomeCount": { "type": "integer", "minimum": 0 },
+        "coverageRate": { "$ref": "#/$defs/score" },
+        "outcomePrevalence": { "$ref": "#/$defs/score" }
+      }
+    },
+    "driftAssessment": {
+      "type": "object",
+      "required": ["comparisonBasis", "dimensions", "status", "rationale"],
+      "additionalProperties": false,
+      "properties": {
+        "baselineCohortRef": { "$ref": "#/$defs/id" },
+        "comparisonBasis": { "type": "string", "minLength": 1 },
+        "dimensions": { "type": "array", "minItems": 1, "items": { "enum": ["domain", "outcomePrevalence", "sourceEvidenceOriginKind", "forecastProbability"] } },
+        "status": { "enum": ["not-assessed", "stable", "drift-detected"] },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    },
+    "calibrationCohort": {
+      "type": "object",
+      "required": ["id", "title", "policyRef", "eligibleDecisions", "candidatePairRefs", "selectionRules", "includedPairRefs", "excludedPairs", "missingOutcomeDecisions", "independenceBoundary", "segmentDefinitions", "segmentSummaries", "completenessSummary", "driftAssessment", "governanceTriggerRefs", "interpretation", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "policyRef": { "$ref": "#/$defs/id" },
+        "eligibleDecisions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/eligibleDecision" } },
+        "candidatePairRefs": { "$ref": "#/$defs/refArray" },
+        "selectionRules": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/selectionRule" } },
+        "includedPairRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "excludedPairs": { "type": "array", "items": { "$ref": "#/$defs/excludedPair" } },
+        "missingOutcomeDecisions": { "type": "array", "items": { "$ref": "#/$defs/missingOutcomeDecision" } },
+        "independenceBoundary": { "$ref": "#/$defs/independenceBoundary" },
+        "segmentDefinitions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/segmentDefinition" } },
+        "segmentSummaries": { "type": "array", "items": { "$ref": "#/$defs/segmentSummary" } },
+        "completenessSummary": { "$ref": "#/$defs/cohortCompletenessSummary" },
+        "driftAssessment": { "$ref": "#/$defs/driftAssessment" },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "interpretation": { "const": "cohort-evidence-only-not-representativeness-or-quality" },
+        "status": { "enum": ["provisional", "reviewed", "retired"] }
+      }
+    },
     "uncertaintyBoundary": {
       "type": "object",
       "required": ["pairCount", "empiricalPairCount", "minimumPairCount", "minimumEmpiricalPairCount", "dataSufficiency", "limitations"],
@@ -174,7 +314,7 @@
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" },
-        "triggerType": { "enum": ["insufficient-data", "non-empirical-evidence", "confidence-semantics-mismatch", "calculation-mismatch", "calibration-gap", "stale-evidence", "other"] },
+        "triggerType": { "enum": ["insufficient-data", "non-empirical-evidence", "confidence-semantics-mismatch", "calculation-mismatch", "calibration-gap", "stale-evidence", "missing-outcomes", "duplicate-observations", "dependence-unresolved", "high-risk-segment-gap", "drift-not-assessed", "drift-detected", "other"] },
         "reason": { "type": "string", "minLength": 1 },
         "sourceCalibrationReportRef": { "$ref": "#/$defs/id" },
         "severity": { "enum": ["low", "medium", "high", "critical"] },

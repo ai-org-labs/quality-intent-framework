@@ -79,6 +79,21 @@ function sameSet(actual, expected) {
   return a.length === b.length && a.every((value, index) => value === b[index]);
 }
 
+function pairField(pair, field, loaded) {
+  if (field === "sourceEvidenceOriginKind") {
+    return loaded.get(pair.sourcePackageRef)?.origins.get(pair.sourceEvidenceOriginRef)?.originKind;
+  }
+  return pair[field];
+}
+
+function ruleMatches(rule, pair, loaded) {
+  const value = pairField(pair, rule.field, loaded);
+  if (rule.operator === "equals") return value === rule.values?.[0];
+  if (rule.operator === "in") return rule.values?.includes(value) === true;
+  if (rule.operator === "not-equals") return value !== rule.values?.[0];
+  return false;
+}
+
 function loadPackageRefs(packageRefs, packagePath) {
   const index = indexById(packageRefs, `${packagePath}:packageRefs`);
   const loaded = new Map();
@@ -121,12 +136,14 @@ function validatePackage(pkg, packagePath) {
   const origins = requiredArray(pkg, "evidenceOrigins");
   const policies = requiredArray(pkg, "calibrationPolicies");
   const pairs = requiredArray(pkg, "decisionOutcomePairs");
+  const cohorts = requiredArray(pkg, "calibrationCohorts");
   const reports = requiredArray(pkg, "calibrationReports");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
   const policyIndex = indexById(policies, `${packagePath}:calibrationPolicies`);
   const pairIndex = indexById(pairs, `${packagePath}:decisionOutcomePairs`);
+  const cohortIndex = indexById(cohorts, `${packagePath}:calibrationCohorts`);
   const reportIndex = indexById(reports, `${packagePath}:calibrationReports`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
@@ -193,6 +210,174 @@ function validatePackage(pkg, packagePath) {
     const key = `${pair.sourcePackageRef}/${pair.gateDecisionRef}/${pair.outcomeReviewRef}`;
     if (pairKeys.has(key)) errors.push(`${pair.id} duplicates decision-outcome pair ${key}.`);
     pairKeys.add(key);
+  }
+
+  for (const cohort of cohorts) {
+    for (const field of ["title", "policyRef", "interpretation", "status"]) str(cohort, field, cohort.id);
+    const policy = ref(policyIndex, cohort.policyRef, "calibration policy", cohort.id);
+    const eligible = Array.isArray(cohort.eligibleDecisions) ? cohort.eligibleDecisions : [];
+    if (eligible.length === 0) errors.push(`${cohort.id} eligibleDecisions must include at least one decision.`);
+    const eligibleKeys = new Set();
+    for (const decisionRef of eligible) {
+      str(decisionRef, "sourcePackageRef", `${cohort.id} eligible decision`);
+      str(decisionRef, "gateDecisionRef", `${cohort.id} eligible decision`);
+      const source = loaded.get(decisionRef.sourcePackageRef);
+      if (!source) errors.push(`${cohort.id} eligible decision references missing package: ${decisionRef.sourcePackageRef}`);
+      else if (!source.decisions.has(decisionRef.gateDecisionRef)) errors.push(`${cohort.id} eligible decision references missing gate decision: ${decisionRef.gateDecisionRef}`);
+      const key = `${decisionRef.sourcePackageRef}/${decisionRef.gateDecisionRef}`;
+      if (eligibleKeys.has(key)) errors.push(`${cohort.id} eligibleDecisions must not contain duplicate ${key}.`);
+      eligibleKeys.add(key);
+    }
+    const candidates = Array.isArray(cohort.candidatePairRefs)
+      ? cohort.candidatePairRefs.map((id) => ref(pairIndex, id, "candidate decision-outcome pair", cohort.id)).filter(Boolean)
+      : [];
+    if (candidates.length === 0) errors.push(`${cohort.id} candidatePairRefs must include at least one pair.`);
+    for (const pair of candidates) {
+      if (!eligibleKeys.has(`${pair.sourcePackageRef}/${pair.gateDecisionRef}`)) errors.push(`${cohort.id} candidate pair ${pair.id} is not backed by an eligible decision.`);
+    }
+    const rules = Array.isArray(cohort.selectionRules) ? cohort.selectionRules : [];
+    if (rules.length === 0) errors.push(`${cohort.id} selectionRules must include at least one rule.`);
+    const ruleIndex = indexById(rules, `${cohort.id}:selectionRules`);
+    for (const rule of rules) {
+      for (const field of ["field", "operator", "effect", "rationale"]) str(rule, field, rule.id);
+      if (!new Set(["domain", "observedOutcome", "status", "sourceEvidenceOriginKind"]).has(rule.field)) errors.push(`${rule.id} field is not supported.`);
+      if (!new Set(["equals", "in", "not-equals"]).has(rule.operator)) errors.push(`${rule.id} operator is not supported.`);
+      if (!new Set(["include", "exclude"]).has(rule.effect)) errors.push(`${rule.id} effect is not supported.`);
+      if (!Array.isArray(rule.values) || rule.values.length === 0) errors.push(`${rule.id} values must include at least one value.`);
+      if (["equals", "not-equals"].includes(rule.operator) && rule.values?.length !== 1) errors.push(`${rule.id} ${rule.operator} requires exactly one value.`);
+    }
+    const includeRules = rules.filter((rule) => rule.effect === "include");
+    const excludeRules = rules.filter((rule) => rule.effect === "exclude");
+    const expectedIncluded = [];
+    const expectedExcluded = [];
+    for (const pair of candidates) {
+      const failedInclude = includeRules.find((rule) => !ruleMatches(rule, pair, loaded));
+      const matchedExclude = excludeRules.find((rule) => ruleMatches(rule, pair, loaded));
+      if (!failedInclude && !matchedExclude) expectedIncluded.push(pair);
+      else expectedExcluded.push({ pair, rule: matchedExclude || failedInclude });
+    }
+    if (!sameSet(cohort.includedPairRefs, expectedIncluded.map((pair) => pair.id))) errors.push(`${cohort.id} includedPairRefs must reproduce from selectionRules.`);
+    const excludedPairs = Array.isArray(cohort.excludedPairs) ? cohort.excludedPairs : [];
+    if (!sameSet(excludedPairs.map((entry) => entry.pairRef), expectedExcluded.map((entry) => entry.pair.id))) errors.push(`${cohort.id} excludedPairs must exactly cover rule-excluded candidates.`);
+    for (const entry of excludedPairs) {
+      const pair = ref(pairIndex, entry.pairRef, "excluded pair", cohort.id);
+      const rule = ref(ruleIndex, entry.ruleRef, "selection rule", `${cohort.id}/${entry.pairRef}`);
+      str(entry, "rationale", `${cohort.id}/${entry.pairRef}`);
+      const expected = expectedExcluded.find((item) => item.pair.id === pair?.id);
+      if (expected && rule?.id !== expected.rule?.id) errors.push(`${cohort.id}/${entry.pairRef} ruleRef must identify the rule that excluded the pair.`);
+    }
+
+    const pairedEligibleKeys = new Set(pairs.map((pair) => `${pair.sourcePackageRef}/${pair.gateDecisionRef}`));
+    const expectedMissing = eligible.filter((item) => !pairedEligibleKeys.has(`${item.sourcePackageRef}/${item.gateDecisionRef}`));
+    const missing = Array.isArray(cohort.missingOutcomeDecisions) ? cohort.missingOutcomeDecisions : [];
+    const missingKeys = missing.map((item) => `${item.sourcePackageRef}/${item.gateDecisionRef}`);
+    if (!sameSet(missingKeys, expectedMissing.map((item) => `${item.sourcePackageRef}/${item.gateDecisionRef}`))) errors.push(`${cohort.id} missingOutcomeDecisions must exactly cover eligible decisions without a pair.`);
+    for (const item of missing) str(item, "rationale", `${cohort.id} missing outcome decision`);
+
+    const independence = cohort.independenceBoundary;
+    let expectedDuplicateGroups = [];
+    if (!independence || typeof independence !== "object") {
+      errors.push(`${cohort.id} must include independenceBoundary.`);
+    } else {
+      str(independence, "unitOfAnalysis", `${cohort.id} independenceBoundary`);
+      const fields = Array.isArray(independence.duplicateKeyFields) ? independence.duplicateKeyFields : [];
+      if (fields.length === 0) errors.push(`${cohort.id} duplicateKeyFields must include at least one field.`);
+      const grouped = new Map();
+      for (const pair of expectedIncluded) {
+        const key = fields.map((field) => String(pair[field])).join("|");
+        if (!grouped.has(key)) grouped.set(key, []);
+        grouped.get(key).push(pair.id);
+      }
+      expectedDuplicateGroups = [...grouped.entries()].filter(([, pairRefs]) => pairRefs.length > 1).map(([key, pairRefs]) => ({ key, pairRefs }));
+      const actualGroups = Array.isArray(independence.duplicateGroups) ? independence.duplicateGroups : [];
+      if (!sameSet(actualGroups.map((group) => group.key), expectedDuplicateGroups.map((group) => group.key))) errors.push(`${cohort.id} duplicateGroups must reproduce from duplicateKeyFields.`);
+      for (const expected of expectedDuplicateGroups) {
+        const actual = actualGroups.find((group) => group.key === expected.key);
+        if (actual && !sameSet(actual.pairRefs, expected.pairRefs)) errors.push(`${cohort.id} duplicate group ${expected.key} pairRefs must reproduce.`);
+      }
+      if (!Array.isArray(independence.dependenceRisks)) errors.push(`${cohort.id} dependenceRisks must be an array.`);
+      const expectedStatus = expectedDuplicateGroups.length > 0 ? "unresolved" : (independence.dependenceRisks || []).length > 0 ? "bounded" : "clear";
+      if (independence.status !== expectedStatus) errors.push(`${cohort.id} independence status must reproduce as ${expectedStatus}.`);
+    }
+
+    const definitions = Array.isArray(cohort.segmentDefinitions) ? cohort.segmentDefinitions : [];
+    if (definitions.length === 0) errors.push(`${cohort.id} segmentDefinitions must include at least one definition.`);
+    const definitionIndex = indexById(definitions, `${cohort.id}:segmentDefinitions`);
+    for (const definition of definitions) {
+      str(definition, "dimension", definition.id);
+      str(definition, "rationale", definition.id);
+      if (!Array.isArray(definition.highRiskValues)) errors.push(`${definition.id} highRiskValues must be an array.`);
+    }
+    const expectedSegments = [];
+    if (policy) {
+      for (const definition of definitions) {
+        const values = [...new Set(expectedIncluded.map((pair) => pairField(pair, definition.dimension, loaded)))].filter((value) => value !== undefined).sort();
+        for (const value of values) {
+          const segmentPairs = expectedIncluded.filter((pair) => pairField(pair, definition.dimension, loaded) === value);
+          expectedSegments.push({ definition, value, pairs: segmentPairs });
+        }
+      }
+      const summaries = Array.isArray(cohort.segmentSummaries) ? cohort.segmentSummaries : [];
+      const summaryKeys = summaries.map((summary) => `${summary.segmentRef}/${summary.value}`);
+      const expectedKeys = expectedSegments.map((segment) => `${segment.definition.id}/${segment.value}`);
+      if (!sameSet(summaryKeys, expectedKeys)) errors.push(`${cohort.id} segmentSummaries must exactly cover included segment values.`);
+      for (const expected of expectedSegments) {
+        const summary = summaries.find((item) => item.segmentRef === expected.definition.id && item.value === expected.value);
+        if (!summary) continue;
+        ref(definitionIndex, summary.segmentRef, "segment definition", cohort.id);
+        if (!sameSet(summary.pairRefs, expected.pairs.map((pair) => pair.id))) errors.push(`${cohort.id}/${summary.segmentRef}/${summary.value} pairRefs must reproduce.`);
+        if (summary.pairCount !== expected.pairs.length) errors.push(`${cohort.id}/${summary.segmentRef}/${summary.value} pairCount must reproduce as ${expected.pairs.length}.`);
+        const prevalence = round(expected.pairs.reduce((sum, pair) => sum + pair.outcomeValue, 0) / expected.pairs.length, policy.roundingDecimals);
+        const brier = round(expected.pairs.reduce((sum, pair) => sum + (pair.forecastProbability - pair.outcomeValue) ** 2, 0) / expected.pairs.length, policy.roundingDecimals);
+        if (!sameNumber(summary.outcomePrevalence, prevalence)) errors.push(`${cohort.id}/${summary.segmentRef}/${summary.value} outcomePrevalence must reproduce as ${prevalence}.`);
+        if (!sameNumber(summary.brierScore, brier)) errors.push(`${cohort.id}/${summary.segmentRef}/${summary.value} brierScore must reproduce as ${brier}.`);
+        const highRisk = expected.definition.highRiskValues.includes(expected.value);
+        if (summary.highRisk !== highRisk) errors.push(`${cohort.id}/${summary.segmentRef}/${summary.value} highRisk must reproduce as ${highRisk}.`);
+      }
+    }
+
+    const summary = cohort.completenessSummary;
+    if (!summary || typeof summary !== "object") {
+      errors.push(`${cohort.id} must include completenessSummary.`);
+    } else if (policy) {
+      const coverage = round((eligible.length - expectedMissing.length) / eligible.length, policy.roundingDecimals);
+      const prevalence = expectedIncluded.length > 0 ? round(expectedIncluded.reduce((sum, pair) => sum + pair.outcomeValue, 0) / expectedIncluded.length, policy.roundingDecimals) : 0;
+      const expectedValues = {
+        eligibleDecisionCount: eligible.length,
+        candidatePairCount: candidates.length,
+        includedPairCount: expectedIncluded.length,
+        excludedPairCount: expectedExcluded.length,
+        missingOutcomeCount: expectedMissing.length,
+        coverageRate: coverage,
+        outcomePrevalence: prevalence
+      };
+      for (const [field, value] of Object.entries(expectedValues)) if (!sameNumber(summary[field], value)) errors.push(`${cohort.id} completenessSummary.${field} must reproduce as ${value}.`);
+    }
+
+    const drift = cohort.driftAssessment;
+    if (!drift || typeof drift !== "object") {
+      errors.push(`${cohort.id} must include driftAssessment.`);
+    } else {
+      for (const field of ["comparisonBasis", "status", "rationale"]) str(drift, field, `${cohort.id} driftAssessment`);
+      if (!Array.isArray(drift.dimensions) || drift.dimensions.length === 0) errors.push(`${cohort.id} driftAssessment.dimensions must include at least one dimension.`);
+      if (!drift.baselineCohortRef && drift.status !== "not-assessed") errors.push(`${cohort.id} drift without baseline must have status not-assessed.`);
+      if (drift.baselineCohortRef) {
+        ref(cohortIndex, drift.baselineCohortRef, "baseline cohort", cohort.id);
+        if (drift.status === "not-assessed") errors.push(`${cohort.id} drift with baseline must be stable or drift-detected.`);
+      }
+    }
+
+    if (cohort.interpretation !== "cohort-evidence-only-not-representativeness-or-quality") errors.push(`${cohort.id} interpretation must be cohort-evidence-only-not-representativeness-or-quality.`);
+    if (!Array.isArray(cohort.governanceTriggerRefs)) errors.push(`${cohort.id} governanceTriggerRefs must be an array.`);
+    const triggerTypes = new Set((cohort.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", cohort.id)?.triggerType));
+    if (policy && expectedIncluded.length < policy.minimumPairCount && !triggerTypes.has("insufficient-data")) errors.push(`${cohort.id} insufficient included cohort requires an insufficient-data governance trigger.`);
+    if (expectedMissing.length > 0 && !triggerTypes.has("missing-outcomes")) errors.push(`${cohort.id} missing outcomes require a missing-outcomes governance trigger.`);
+    if (expectedDuplicateGroups.length > 0 && !triggerTypes.has("duplicate-observations")) errors.push(`${cohort.id} duplicate observations require a duplicate-observations governance trigger.`);
+    if (independence?.status === "unresolved" && !triggerTypes.has("dependence-unresolved")) errors.push(`${cohort.id} unresolved independence requires a dependence-unresolved governance trigger.`);
+    const summaries = Array.isArray(cohort.segmentSummaries) ? cohort.segmentSummaries : [];
+    if (policy && summaries.some((item) => item.highRisk === true && item.brierScore > policy.maximumAcceptableBrierScore) && !triggerTypes.has("high-risk-segment-gap")) errors.push(`${cohort.id} adverse high-risk segment requires a high-risk-segment-gap governance trigger.`);
+    if (drift?.status === "not-assessed" && !triggerTypes.has("drift-not-assessed")) errors.push(`${cohort.id} unassessed drift requires a drift-not-assessed governance trigger.`);
+    if (drift?.status === "drift-detected" && !triggerTypes.has("drift-detected")) errors.push(`${cohort.id} detected drift requires a drift-detected governance trigger.`);
   }
 
   for (const report of reports) {
@@ -291,6 +476,7 @@ function validatePackage(pkg, packagePath) {
     for (const claim of ["semantic truth", "that source confidence is a valid probability forecast", "a calibration statistic is quality", "an automatic quality verdict"]) {
       if (!(boundary.doesNotClaim || []).includes(claim)) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming ${claim}.`);
     }
+    if (!(boundary.doesNotClaim || []).includes("that cohort coverage, balance, or size proves representativeness")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that cohort coverage, balance, or size proves representativeness.`);
   }
 
   results.push({
@@ -301,6 +487,7 @@ function validatePackage(pkg, packagePath) {
       evidenceOrigins: origins.length,
       calibrationPolicies: policies.length,
       decisionOutcomePairs: pairs.length,
+      calibrationCohorts: cohorts.length,
       calibrationReports: reports.length,
       governanceTriggers: triggers.length
     }
