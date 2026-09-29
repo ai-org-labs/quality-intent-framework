@@ -62,7 +62,9 @@ Verification and review evidence:
 - Post-slice `situation-assess` wrote `.aof/runtime/v0.6.32-post-situation.json`; it found no truth conflict and selected v0.6.33 as the next frontier.
 - `organization-verify` initially exposed four missing lineage references on the final review and retrospective records. Those records were repaired with `TASK-050`, `SESS-MUM6LK6J-PWX0YE`, and `DEC-MUM6NOLP-WPUR7H`; the successful rerun is recorded below.
 - The corrected `organization-verify` passed `255/255` checks with no failures.
-- Release commit, tag, and GitHub Release are recorded by the release completion update.
+- Release commit `e779b0b2a07deb0e8d0f68b776587566599fa8b5` was pushed to `origin/main`.
+- Annotated tag `v0.6.32` resolves to the same commit locally and remotely.
+- GitHub Release `v0.6.32` was published at `2026-09-29T04:57:40Z`: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.32`.
 
 Next value slice:
 
