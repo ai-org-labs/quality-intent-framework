@@ -2,6 +2,72 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.33 Consequence-Sensitive Calibration
+
+Date: 2026-09-30
+
+Need / Intent / Context:
+
+- Need: v0.6.32 could reproduce aggregate and segmented calibration, but equally sized errors still appeared equivalent even when one was a confident action that crossed a severe loss boundary and another was a cautious delay.
+- Intent: bind reviewed action thresholds and asymmetric, policy-local governance priorities to source Quality Intent loss boundaries; reproduce proceed/defer action, false assurance, false alarm, aligned outcomes, and aggregate consequence arithmetic.
+- Context: weights are not money, objective harm magnitude, cross-policy utility, quality, or authority. The committed example is illustrative and insufficient by design.
+
+Need Validation and Project Charter:
+
+- Publicly released AOF `v12.2.0` was used from a clean checkout; the unreleased local `12.3.0` worktree was read only and not modified.
+- `situation-assess` wrote `.aof/runtime/v0.6.33-situation.json`.
+- AOF `run` created parent session `SESS-MUNM1G6J-E7NJMW`; `answer` fixed scope, exclusions, and success conditions.
+- Problem, value, and alternative records precede `.aof/artifacts/need-validation/records/NVR-QIFV0633.json`.
+- Only after the Validated Need, `.aof/artifacts/need-validation/project-charters/PCH-QIFV0633.json` was created and `need-validation-advance` promoted planning.
+- `task-open` created `TASK-051`.
+
+Direction and council judgment:
+
+- Visionary: approve. Calibration should support governed decisions at explicit loss boundaries rather than stop at average error.
+- Builder: approve. Extend the existing calibration-report package and derive action, class, and arithmetic from existing decision-outcome evidence.
+- Guardian: approve with boundary. Local weights must not become money, objective harm, cross-policy utility, quality, or automatic authority; severe false assurance and unresolved policy state route to governance.
+- Planning council: `.aof/artifacts/execution/council-reviews/CREV-MUNM5MRJ-OIWIS9.json`.
+- Actor skill packet: `.aof/artifacts/actor-skill-packets/ASP-MUNM6Z95-18FZ2K.json`.
+
+Trend check:
+
+- OpenAI Deployment Simulation separates rate calibration from targeted tail-risk analysis and notes that rare failures may not appear in aggregate samples: `https://openai.com/index/deployment-simulation/`.
+- OpenAI's trustworthy evaluation playbook warns that severity and probability both matter to valid risk claims: `https://openai.com/index/trustworthy-third-party-evaluations-foundations/`.
+- Anthropic's agent-evaluation guidance combines evaluation with production monitoring and human calibration rather than relying on one aggregate score: `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`.
+- Decision-theoretic 2026 research shows that similarly calibrated models can differ materially on overconfident errors under asymmetric loss: `https://arxiv.org/abs/2604.03216`.
+- Claim-level calibration research uses confidence to select retrieval or human review rather than treating a response-level number as sufficient authority: `https://arxiv.org/abs/2608.22483`.
+
+What was built:
+
+- Consequence Policies resolve a source Quality Intent, reproduce its exact loss boundary and severity, and declare reviewed proceed/defer thresholds.
+- False-assurance and false-alarm weights use explicit policy-local governance-priority semantics; high and critical boundaries must prioritize false assurance.
+- Decision Consequences deterministically reproduce source forecast and outcome, threshold action, consequence class, applicable weight, weighted error, and governance references.
+- Consequence Assessments reproduce class counts, total applicable weight, total weighted error, weighted-error rate, sufficiency, tolerance signal, and governance routing.
+- Governance is forced for non-active policies, severe false assurance, insufficient evidence, and exceeded consequence tolerance.
+- Thirty-four retained negative cases bring the full fixture suite to `735/735` negative rules across `16/16` positive packages.
+- Plain-language explanation and diagram are in `docs/qif-v0.6.33-consequence-sensitive-calibration.md`.
+
+What was not built:
+
+- No monetary valuation of human harm, objective utility, cross-policy comparison, threshold optimization, or automatic action authority.
+- No proof that a threshold or weight is morally, legally, statistically, or operationally correct.
+- No UI, external integration, production data, or unrelated package redesign.
+
+Verification and review evidence:
+
+- `npm test` passed all CLI and verifier checks, `16/16` positive packages, and `735/735` retained negative fixtures.
+- Self-review: `.aof/artifacts/execution/council-reviews/CREV-MUNMOYWN-X7RHUS.json`.
+- Final council review: `.aof/artifacts/execution/council-reviews/CREV-MUNMT827-0WA3UG.json`.
+- Retrospective: `.aof/artifacts/execution/council-reviews/CREV-MUNMTX1X-GZ2PD4.json`.
+- `TASK-051` moved to done after verification.
+- Post-slice `situation-assess` wrote `.aof/runtime/v0.6.33-post-situation.json`; it found no truth conflict and selected v0.6.34 as the next frontier.
+- `organization-verify` passed `263/263` checks with no failures.
+- Release commit, tag, and GitHub Release are recorded by the release completion update.
+
+Next value slice:
+
+- v0.6.34 Threshold Robustness: stress bounded threshold and local-weight alternatives so brittle decisions are visible and governed without automatic policy optimization.
+
 ## v0.6.32 Calibration Cohort Integrity
 
 Date: 2026-09-29

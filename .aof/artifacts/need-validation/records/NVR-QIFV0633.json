@@ -1,0 +1,42 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-09-30T04:35:24.341Z",
+  "validation_id": "NVR-MUNM3NLH-PXT5QW",
+  "raw_need": "Advance QIF after v0.6.32 using the current roadmap and latest AI evaluation evidence.",
+  "validation_status": "reframed",
+  "validated_need": "Add domain-general, executable consequence-sensitive calibration that links each reviewed forecast threshold to a source Quality Intent loss boundary, reproduces proceed/defer action and false-assurance/false-alarm classification, calculates governed asymmetric priority-weighted error, and routes severe errors to governance without treating weights, scores, cost, or thresholds as quality or automatic authority.",
+  "decision_summary": "The continuation request is reframed into the smallest validated gap after cohort integrity: decision consequence asymmetry inside the existing calibration-report runtime.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What exact gap remains after v0.6.32?",
+      "answer": "Aggregate and segmented calibration do not express that overconfident failure can cross a more severe loss boundary than cautious deferral.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must remain outside the claim?",
+      "answer": "No monetary valuation of human harm, objective utility, cross-domain comparability, semantic truth, or automatic deployment authority.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What proves the slice is executable?",
+      "answer": "Schema, example, deterministic verifier arithmetic and classification, retained negative fixtures, full tests, and governance forcing.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A single symmetric calibration score was implicitly assumed to be decision-relevant across loss boundaries."
+  ],
+  "evidence_gaps": [
+    "The committed example remains illustrative and cannot establish real-world consequence weights or empirical prevalence."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV0633.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0633.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0633.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUNM1QZ4-NK7THF"
+}

@@ -68,6 +68,244 @@
   ],
   "negatives": [
     {
+      "file": "calibration-report-consequence-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence policies required",
+      "expect": "fail",
+      "errorIncludes": "package consequencePolicies must be an array."
+    },
+    {
+      "file": "calibration-report-decision-consequences-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "decision consequences required",
+      "expect": "fail",
+      "errorIncludes": "package decisionConsequences must be an array."
+    },
+    {
+      "file": "calibration-report-consequence-assessments-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence assessments required",
+      "expect": "fail",
+      "errorIncludes": "package consequenceAssessments must be an array."
+    },
+    {
+      "file": "calibration-report-consequence-policy-source-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence policy source resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing source package"
+    },
+    {
+      "file": "calibration-report-consequence-policy-intent-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence policy intent resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing quality intent"
+    },
+    {
+      "file": "calibration-report-consequence-policy-boundary-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "loss boundary reproduction",
+      "expect": "fail",
+      "errorIncludes": "lossBoundary must equal the referenced quality intent lossBoundary."
+    },
+    {
+      "file": "calibration-report-consequence-policy-severity-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "loss boundary severity reproduction",
+      "expect": "fail",
+      "errorIncludes": "lossBoundarySeverity must equal the referenced quality intent severity."
+    },
+    {
+      "file": "calibration-report-consequence-policy-threshold-meaning.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence threshold meaning",
+      "expect": "fail",
+      "errorIncludes": "thresholdMeaning must be proceed-when-forecast-at-or-above-threshold."
+    },
+    {
+      "file": "calibration-report-consequence-policy-asymmetry.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "severe false assurance priority",
+      "expect": "fail",
+      "errorIncludes": "high or critical loss boundary must prioritize false assurance above false alarm."
+    },
+    {
+      "file": "calibration-report-consequence-policy-weight-semantics.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "governance weight boundary",
+      "expect": "fail",
+      "errorIncludes": "weightSemantics must remain policy-local-governance-priority-not-harm-or-money."
+    },
+    {
+      "file": "calibration-report-consequence-policy-reviewer-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence policy review",
+      "expect": "fail",
+      "errorIncludes": "reviewedBy must include at least one accountable reviewer."
+    },
+    {
+      "file": "calibration-report-consequence-policy-unreviewed-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unreviewed consequence policy governance",
+      "expect": "fail",
+      "errorIncludes": "non-active consequence policy requires a consequence-policy-unreviewed governance trigger."
+    },
+    {
+      "file": "calibration-report-decision-consequence-forecast-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "decision consequence forecast reproduction",
+      "expect": "fail",
+      "errorIncludes": "forecastProbability must equal the referenced pair forecastProbability."
+    },
+    {
+      "file": "calibration-report-decision-consequence-threshold-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "decision consequence threshold reproduction",
+      "expect": "fail",
+      "errorIncludes": "actionThreshold must equal the referenced consequence policy threshold."
+    },
+    {
+      "file": "calibration-report-decision-consequence-review-intent-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "outcome review loss boundary linkage",
+      "expect": "fail",
+      "errorIncludes": "source outcome review must identify the consequence policy quality intent."
+    },
+    {
+      "file": "calibration-report-decision-consequence-action-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "threshold action reproduction",
+      "expect": "fail",
+      "errorIncludes": "recommendedAction must reproduce as proceed."
+    },
+    {
+      "file": "calibration-report-decision-consequence-outcome-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "decision consequence outcome reproduction",
+      "expect": "fail",
+      "errorIncludes": "observedOutcome must equal the referenced pair outcome."
+    },
+    {
+      "file": "calibration-report-decision-consequence-class-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "decision consequence classification",
+      "expect": "fail",
+      "errorIncludes": "consequenceClass must reproduce as false-assurance."
+    },
+    {
+      "file": "calibration-report-decision-consequence-weight-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "applicable weight reproduction",
+      "expect": "fail",
+      "errorIncludes": "applicableWeight must reproduce as 5."
+    },
+    {
+      "file": "calibration-report-decision-consequence-error-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "weighted error reproduction",
+      "expect": "fail",
+      "errorIncludes": "weightedError must reproduce as 5."
+    },
+    {
+      "file": "calibration-report-decision-consequence-severe-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "severe false assurance governance",
+      "expect": "fail",
+      "errorIncludes": "severe false assurance requires a severe-false-assurance governance trigger."
+    },
+    {
+      "file": "calibration-report-decision-consequence-aligned-defer-classification.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "aligned defer classification",
+      "expect": "fail",
+      "errorIncludes": "consequenceClass must reproduce as aligned-defer."
+    },
+    {
+      "file": "calibration-report-decision-consequence-false-alarm-classification.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "false alarm classification",
+      "expect": "fail",
+      "errorIncludes": "consequenceClass must reproduce as false-alarm."
+    },
+    {
+      "file": "calibration-report-decision-consequence-aligned-proceed-classification.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "aligned proceed classification",
+      "expect": "fail",
+      "errorIncludes": "consequenceClass must reproduce as aligned-proceed."
+    },
+    {
+      "file": "calibration-report-consequence-assessment-count-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence assessment class counts",
+      "expect": "fail",
+      "errorIncludes": "falseAssuranceCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-consequence-assessment-weight-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence assessment applicable weight",
+      "expect": "fail",
+      "errorIncludes": "totalApplicableWeight must reproduce as 5."
+    },
+    {
+      "file": "calibration-report-consequence-assessment-error-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence assessment weighted error",
+      "expect": "fail",
+      "errorIncludes": "totalWeightedError must reproduce as 5."
+    },
+    {
+      "file": "calibration-report-consequence-assessment-rate-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence assessment weighted error rate",
+      "expect": "fail",
+      "errorIncludes": "weightedErrorRate must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-consequence-assessment-tolerance-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence assessment policy tolerance",
+      "expect": "fail",
+      "errorIncludes": "maximumAcceptableWeightedErrorRate must match the consequence policy."
+    },
+    {
+      "file": "calibration-report-consequence-assessment-signal-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence assessment signal",
+      "expect": "fail",
+      "errorIncludes": "assessmentSignal must reproduce as insufficient-data."
+    },
+    {
+      "file": "calibration-report-consequence-assessment-insufficient-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "insufficient consequence governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient consequence data requires an insufficient-data governance trigger."
+    },
+    {
+      "file": "calibration-report-consequence-assessment-threshold-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence threshold governance",
+      "expect": "fail",
+      "errorIncludes": "weighted error above policy tolerance requires a consequence-threshold-exceeded governance trigger."
+    },
+    {
+      "file": "calibration-report-consequence-assessment-interpretation-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence assessment evidence-only interpretation",
+      "expect": "fail",
+      "errorIncludes": "interpretation must be policy-local-decision-evidence-only-not-quality-or-authority."
+    },
+    {
+      "file": "calibration-report-consequence-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consequence verifier boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly bound consequence weights from money, objective harm, cross-policy utility, quality, or automatic authority."
+    },
+    {
       "file": "calibration-report-cohorts-not-array.json",
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "calibration cohorts required",

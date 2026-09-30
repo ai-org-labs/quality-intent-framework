@@ -1,0 +1,33 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-30T04:36:56.575Z",
+  "review_packet_id": "CREV-MUNM5MRJ-OIWIS9",
+  "council_id": "qif-council",
+  "stage": "planning",
+  "review_status": "approved",
+  "decision_summary": "Implement v0.6.33 by extending calibration-report with executable Consequence Policy, Decision Consequence, and Consequence Assessment records.",
+  "rationale": "Visionary: calibration should support decisions at explicit loss boundaries rather than stop at average error. Builder: the narrowest composable change derives action and consequence class from existing decision-outcome pairs and reviewed policies. Guardian: governance weights are local prioritization inputs, not money, objective harm, cross-policy utility, quality, or automatic authority; severe false assurance and unresolved policy review must route to governance.",
+  "recommendation": "Add schema, example, deterministic verifier logic, retained negative fixtures, plain-language docs, roadmap, AOF evidence, and release.",
+  "target_audience": "QIF users, AI agents, reviewers, operators, and governance owners",
+  "expected_user_reaction": "Users can see why an overconfident failure is governed differently from a cautious false alarm while retaining explicit limits.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "consequence-asymmetry-blindness",
+  "diagnosis_confidence": 0.96,
+  "diagnosis_evidence_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0633.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    ".aof/runtime/v0.6.33-situation.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0633.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-051",
+  "source_parent_session_id": "SESS-MUNM1G6J-E7NJMW",
+  "source_decision_record_id": "DEC-MUNM4CTT-R3VUO3"
+}

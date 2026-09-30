@@ -4,8 +4,246 @@ function policy(pkg) { return pkg.calibrationPolicies[0]; }
 function pair(pkg) { return pkg.decisionOutcomePairs[0]; }
 function report(pkg) { return pkg.calibrationReports[0]; }
 function cohort(pkg) { return pkg.calibrationCohorts[0]; }
+function consequencePolicy(pkg) { return pkg.consequencePolicies[0]; }
+function decisionConsequence(pkg) { return pkg.decisionConsequences[0]; }
+function consequenceAssessment(pkg) { return pkg.consequenceAssessments[0]; }
 
 export const cases = [
+  {
+    id: "consequence-policies-not-array",
+    rule: "consequence policies required",
+    expect: "package consequencePolicies must be an array.",
+    mutate: (pkg) => { pkg.consequencePolicies = null; }
+  },
+  {
+    id: "decision-consequences-not-array",
+    rule: "decision consequences required",
+    expect: "package decisionConsequences must be an array.",
+    mutate: (pkg) => { pkg.decisionConsequences = null; }
+  },
+  {
+    id: "consequence-assessments-not-array",
+    rule: "consequence assessments required",
+    expect: "package consequenceAssessments must be an array.",
+    mutate: (pkg) => { pkg.consequenceAssessments = null; }
+  },
+  {
+    id: "consequence-policy-source-missing",
+    rule: "consequence policy source resolution",
+    expect: "references missing source package",
+    mutate: (pkg) => { consequencePolicy(pkg).sourcePackageRef = "PKGREF-NOPE-999"; }
+  },
+  {
+    id: "consequence-policy-intent-missing",
+    rule: "consequence policy intent resolution",
+    expect: "references missing quality intent",
+    mutate: (pkg) => { consequencePolicy(pkg).qualityIntentRef = "QIN-NOPE-999"; }
+  },
+  {
+    id: "consequence-policy-boundary-mismatch",
+    rule: "loss boundary reproduction",
+    expect: "lossBoundary must equal the referenced quality intent lossBoundary.",
+    mutate: (pkg) => { consequencePolicy(pkg).lossBoundary = "Any convenient boundary."; }
+  },
+  {
+    id: "consequence-policy-severity-mismatch",
+    rule: "loss boundary severity reproduction",
+    expect: "lossBoundarySeverity must equal the referenced quality intent severity.",
+    mutate: (pkg) => { consequencePolicy(pkg).lossBoundarySeverity = "medium"; }
+  },
+  {
+    id: "consequence-policy-threshold-meaning",
+    rule: "consequence threshold meaning",
+    expect: "thresholdMeaning must be proceed-when-forecast-at-or-above-threshold.",
+    mutate: (pkg) => { consequencePolicy(pkg).thresholdMeaning = "higher-is-better"; }
+  },
+  {
+    id: "consequence-policy-asymmetry",
+    rule: "severe false assurance priority",
+    expect: "high or critical loss boundary must prioritize false assurance above false alarm.",
+    mutate: (pkg) => { consequencePolicy(pkg).falseAssuranceWeight = 1; }
+  },
+  {
+    id: "consequence-policy-weight-semantics",
+    rule: "governance weight boundary",
+    expect: "weightSemantics must remain policy-local-governance-priority-not-harm-or-money.",
+    mutate: (pkg) => { consequencePolicy(pkg).weightSemantics = "objective-harm-value"; }
+  },
+  {
+    id: "consequence-policy-reviewer-missing",
+    rule: "consequence policy review",
+    expect: "reviewedBy must include at least one accountable reviewer.",
+    mutate: (pkg) => { consequencePolicy(pkg).reviewedBy = []; }
+  },
+  {
+    id: "consequence-policy-unreviewed-trigger-missing",
+    rule: "unreviewed consequence policy governance",
+    expect: "non-active consequence policy requires a consequence-policy-unreviewed governance trigger.",
+    mutate: (pkg) => { consequencePolicy(pkg).status = "draft"; }
+  },
+  {
+    id: "decision-consequence-forecast-mismatch",
+    rule: "decision consequence forecast reproduction",
+    expect: "forecastProbability must equal the referenced pair forecastProbability.",
+    mutate: (pkg) => { decisionConsequence(pkg).forecastProbability = 0.6; }
+  },
+  {
+    id: "decision-consequence-threshold-mismatch",
+    rule: "decision consequence threshold reproduction",
+    expect: "actionThreshold must equal the referenced consequence policy threshold.",
+    mutate: (pkg) => { decisionConsequence(pkg).actionThreshold = 0.8; }
+  },
+  {
+    id: "decision-consequence-review-intent-mismatch",
+    rule: "outcome review loss boundary linkage",
+    expect: "source outcome review must identify the consequence policy quality intent.",
+    mutate: (pkg) => {
+      const p = consequencePolicy(pkg);
+      p.qualityIntentRef = "QIN-QG-002";
+      p.lossBoundary = "Valid refund claims must not be denied due to policy misconfiguration.";
+      p.lossBoundarySeverity = "medium";
+    }
+  },
+  {
+    id: "decision-consequence-action-mismatch",
+    rule: "threshold action reproduction",
+    expect: "recommendedAction must reproduce as proceed.",
+    mutate: (pkg) => { decisionConsequence(pkg).recommendedAction = "defer"; }
+  },
+  {
+    id: "decision-consequence-outcome-mismatch",
+    rule: "decision consequence outcome reproduction",
+    expect: "observedOutcome must equal the referenced pair outcome.",
+    mutate: (pkg) => { decisionConsequence(pkg).observedOutcome = "protected-outcome-held"; }
+  },
+  {
+    id: "decision-consequence-class-mismatch",
+    rule: "decision consequence classification",
+    expect: "consequenceClass must reproduce as false-assurance.",
+    mutate: (pkg) => { decisionConsequence(pkg).consequenceClass = "aligned-proceed"; }
+  },
+  {
+    id: "decision-consequence-weight-mismatch",
+    rule: "applicable weight reproduction",
+    expect: "applicableWeight must reproduce as 5.",
+    mutate: (pkg) => { decisionConsequence(pkg).applicableWeight = 1; }
+  },
+  {
+    id: "decision-consequence-error-mismatch",
+    rule: "weighted error reproduction",
+    expect: "weightedError must reproduce as 5.",
+    mutate: (pkg) => { decisionConsequence(pkg).weightedError = 0; }
+  },
+  {
+    id: "decision-consequence-severe-trigger-missing",
+    rule: "severe false assurance governance",
+    expect: "severe false assurance requires a severe-false-assurance governance trigger.",
+    mutate: (pkg) => { decisionConsequence(pkg).governanceTriggerRefs = []; }
+  },
+  {
+    id: "decision-consequence-aligned-defer-classification",
+    rule: "aligned defer classification",
+    expect: "consequenceClass must reproduce as aligned-defer.",
+    mutate: (pkg) => {
+      consequencePolicy(pkg).actionThreshold = 0.8;
+      const item = decisionConsequence(pkg);
+      item.actionThreshold = 0.8;
+      item.recommendedAction = "defer";
+      item.consequenceClass = "false-assurance";
+      item.weightedError = 0;
+    }
+  },
+  {
+    id: "decision-consequence-false-alarm-classification",
+    rule: "false alarm classification",
+    expect: "consequenceClass must reproduce as false-alarm.",
+    mutate: (pkg) => {
+      pair(pkg).observedOutcome = "protected-outcome-held";
+      pair(pkg).outcomeValue = 1;
+      consequencePolicy(pkg).actionThreshold = 0.8;
+      const item = decisionConsequence(pkg);
+      item.actionThreshold = 0.8;
+      item.recommendedAction = "defer";
+      item.observedOutcome = "protected-outcome-held";
+      item.consequenceClass = "aligned-defer";
+      item.applicableWeight = 1;
+      item.weightedError = 1;
+    }
+  },
+  {
+    id: "decision-consequence-aligned-proceed-classification",
+    rule: "aligned proceed classification",
+    expect: "consequenceClass must reproduce as aligned-proceed.",
+    mutate: (pkg) => {
+      pair(pkg).observedOutcome = "protected-outcome-held";
+      pair(pkg).outcomeValue = 1;
+      const item = decisionConsequence(pkg);
+      item.observedOutcome = "protected-outcome-held";
+      item.consequenceClass = "false-assurance";
+      item.applicableWeight = 1;
+      item.weightedError = 0;
+    }
+  },
+  {
+    id: "consequence-assessment-count-mismatch",
+    rule: "consequence assessment class counts",
+    expect: "falseAssuranceCount must reproduce as 1.",
+    mutate: (pkg) => { consequenceAssessment(pkg).falseAssuranceCount = 0; }
+  },
+  {
+    id: "consequence-assessment-weight-mismatch",
+    rule: "consequence assessment applicable weight",
+    expect: "totalApplicableWeight must reproduce as 5.",
+    mutate: (pkg) => { consequenceAssessment(pkg).totalApplicableWeight = 1; }
+  },
+  {
+    id: "consequence-assessment-error-mismatch",
+    rule: "consequence assessment weighted error",
+    expect: "totalWeightedError must reproduce as 5.",
+    mutate: (pkg) => { consequenceAssessment(pkg).totalWeightedError = 1; }
+  },
+  {
+    id: "consequence-assessment-rate-mismatch",
+    rule: "consequence assessment weighted error rate",
+    expect: "weightedErrorRate must reproduce as 1.",
+    mutate: (pkg) => { consequenceAssessment(pkg).weightedErrorRate = 0.2; }
+  },
+  {
+    id: "consequence-assessment-tolerance-mismatch",
+    rule: "consequence assessment policy tolerance",
+    expect: "maximumAcceptableWeightedErrorRate must match the consequence policy.",
+    mutate: (pkg) => { consequenceAssessment(pkg).maximumAcceptableWeightedErrorRate = 0.3; }
+  },
+  {
+    id: "consequence-assessment-signal-mismatch",
+    rule: "consequence assessment signal",
+    expect: "assessmentSignal must reproduce as insufficient-data.",
+    mutate: (pkg) => { consequenceAssessment(pkg).assessmentSignal = "above-policy-tolerance"; }
+  },
+  {
+    id: "consequence-assessment-insufficient-trigger-missing",
+    rule: "insufficient consequence governance",
+    expect: "insufficient consequence data requires an insufficient-data governance trigger.",
+    mutate: (pkg) => { consequenceAssessment(pkg).governanceTriggerRefs = ["GTR-CR-006"]; }
+  },
+  {
+    id: "consequence-assessment-threshold-trigger-missing",
+    rule: "consequence threshold governance",
+    expect: "weighted error above policy tolerance requires a consequence-threshold-exceeded governance trigger.",
+    mutate: (pkg) => { consequenceAssessment(pkg).governanceTriggerRefs = ["GTR-CR-001"]; }
+  },
+  {
+    id: "consequence-assessment-interpretation-overclaim",
+    rule: "consequence assessment evidence-only interpretation",
+    expect: "interpretation must be policy-local-decision-evidence-only-not-quality-or-authority.",
+    mutate: (pkg) => { consequenceAssessment(pkg).interpretation = "automatic-quality-authority"; }
+  },
+  {
+    id: "consequence-boundary-overclaim",
+    rule: "consequence verifier boundary",
+    expect: "verifierBoundary must explicitly bound consequence weights from money, objective harm, cross-policy utility, quality, or automatic authority.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "that consequence weights are money, objective harm, cross-policy utility, quality, or automatic authority"); }
+  },
   {
     id: "cohorts-not-array",
     rule: "calibration cohorts required",

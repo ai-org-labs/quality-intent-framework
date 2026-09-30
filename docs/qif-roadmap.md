@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.32 baseline)
+## Current Position (v0.6.33 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -174,6 +174,13 @@ and adoption surface — not pretending the limits away.
   summaries, cohort completeness, drift, and governance. Coverage, balance,
   cohort size, and segment counts remain evidence rather than quality or
   representativeness proof.
+  v0.6.33 adds Consequence-Sensitive Calibration: reviewed action thresholds
+  and policy-local asymmetric governance weights bind forecast errors to source
+  Quality Intent loss boundaries. Decision Consequence records reproduce
+  proceed/defer action, false assurance, false alarm, aligned outcomes, and
+  weighted error; Consequence Assessments reproduce aggregate arithmetic and
+  governance routing. Weights remain local prioritization inputs rather than
+  money, objective harm, cross-policy utility, quality, or automatic authority.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -511,6 +518,16 @@ Deliverables:
 - Next planned slice, v0.6.33 Consequence-Sensitive Calibration: connect
   calibration errors and action thresholds to asymmetric loss boundaries so a
   low aggregate score cannot hide a rare but intolerable false assurance.
+  Status: implemented in v0.6.33 through source-linked Consequence Policies,
+  deterministic Decision Consequences, aggregate Consequence Assessments, and
+  retained governance fixtures. The committed example remains illustrative,
+  insufficient, and governance-open.
+- Next planned slice, v0.6.34 Threshold Robustness: stress reviewed action
+  thresholds and local governance weights across bounded alternatives so a
+  decision that flips under a small policy change is exposed as brittle rather
+  than presented as stable. QIF will report sensitivity evidence and route
+  unresolved brittleness to governance; it will not optimize policy or grant
+  automatic authority.
 - Evaluation Suite Health records: task origin, contamination boundary,
   solvability review, saturation, grader calibration, trial variance, harness
   and infrastructure configuration, and drift ownership.

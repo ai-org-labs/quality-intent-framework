@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.6.33 Consequence-Sensitive Calibration: link forecast errors and action thresholds to asymmetric loss boundaries so acceptable aggregate calibration cannot hide rare intolerable false assurance. Keep severity and consequence weights explicit, governed, domain-general, and non-authoritative; do not monetize human harm by default or treat optimized thresholds as semantic quality truth.",
-  "updated_at": "2026-09-29T04:49:09.878Z",
+  "content": "QIF v0.6.34 Threshold Robustness: evaluate bounded, stakeholder-reviewed threshold and policy-local weight alternatives against the same decision-outcome evidence; reproduce action flips, sensitivity bands, and brittleness signals; route unresolved brittleness to governance. Do not optimize, rank, or automatically select organizational policy, and do not treat stability as quality or authority.",
+  "updated_at": "2026-09-30T04:56:05.253Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MUM6LK6J-PWX0YE",
-  "source_decision_record_id": "DEC-MUM6NOLP-WPUR7H",
+  "source_session_id": "SESS-MUNM1G6J-E7NJMW",
+  "source_decision_record_id": "DEC-MUNM4CTT-R3VUO3",
   "declared_complete_at": null
 }

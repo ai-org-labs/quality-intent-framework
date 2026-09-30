@@ -13,6 +13,9 @@
     "decisionOutcomePairs",
     "calibrationCohorts",
     "calibrationReports",
+    "consequencePolicies",
+    "decisionConsequences",
+    "consequenceAssessments",
     "governanceTriggers",
     "verifierBoundary"
   ],
@@ -27,6 +30,9 @@
     "decisionOutcomePairs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/decisionOutcomePair" } },
     "calibrationCohorts": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/calibrationCohort" } },
     "calibrationReports": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/calibrationReport" } },
+    "consequencePolicies": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/consequencePolicy" } },
+    "decisionConsequences": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/decisionConsequence" } },
+    "consequenceAssessments": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/consequenceAssessment" } },
     "governanceTriggers": { "type": "array", "items": { "$ref": "#/$defs/governanceTrigger" } },
     "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
   },
@@ -275,6 +281,73 @@
         "status": { "enum": ["provisional", "reviewed", "retired"] }
       }
     },
+    "consequencePolicy": {
+      "type": "object",
+      "required": ["id", "sourcePackageRef", "qualityIntentRef", "lossBoundary", "lossBoundarySeverity", "actionThreshold", "thresholdMeaning", "falseAssuranceWeight", "falseAlarmWeight", "weightSemantics", "roundingDecimals", "minimumPairCount", "maximumAcceptableWeightedErrorRate", "severeFalseAssuranceAction", "reviewedBy", "governanceTriggerRefs", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sourcePackageRef": { "$ref": "#/$defs/id" },
+        "qualityIntentRef": { "$ref": "#/$defs/id" },
+        "lossBoundary": { "type": "string", "minLength": 1 },
+        "lossBoundarySeverity": { "enum": ["low", "medium", "high", "critical"] },
+        "actionThreshold": { "$ref": "#/$defs/score" },
+        "thresholdMeaning": { "const": "proceed-when-forecast-at-or-above-threshold" },
+        "falseAssuranceWeight": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "falseAlarmWeight": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "weightSemantics": { "const": "policy-local-governance-priority-not-harm-or-money" },
+        "roundingDecimals": { "type": "integer", "minimum": 2, "maximum": 6 },
+        "minimumPairCount": { "type": "integer", "minimum": 2 },
+        "maximumAcceptableWeightedErrorRate": { "$ref": "#/$defs/score" },
+        "severeFalseAssuranceAction": { "const": "governance-review" },
+        "reviewedBy": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "status": { "enum": ["draft", "active", "retired"] }
+      }
+    },
+    "decisionConsequence": {
+      "type": "object",
+      "required": ["id", "pairRef", "policyRef", "forecastProbability", "actionThreshold", "recommendedAction", "observedOutcome", "consequenceClass", "applicableWeight", "weightedError", "rationale", "governanceTriggerRefs", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "pairRef": { "$ref": "#/$defs/id" },
+        "policyRef": { "$ref": "#/$defs/id" },
+        "forecastProbability": { "$ref": "#/$defs/score" },
+        "actionThreshold": { "$ref": "#/$defs/score" },
+        "recommendedAction": { "enum": ["proceed", "defer"] },
+        "observedOutcome": { "enum": ["protected-outcome-held", "protected-outcome-failed"] },
+        "consequenceClass": { "enum": ["aligned-proceed", "aligned-defer", "false-assurance", "false-alarm"] },
+        "applicableWeight": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "weightedError": { "type": "number", "minimum": 0, "maximum": 10 },
+        "rationale": { "type": "string", "minLength": 1 },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "status": { "enum": ["draft", "reviewed", "retired"] }
+      }
+    },
+    "consequenceAssessment": {
+      "type": "object",
+      "required": ["id", "title", "policyRef", "decisionConsequenceRefs", "pairCount", "falseAssuranceCount", "falseAlarmCount", "alignedCount", "totalApplicableWeight", "totalWeightedError", "weightedErrorRate", "maximumAcceptableWeightedErrorRate", "assessmentSignal", "governanceTriggerRefs", "interpretation", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "policyRef": { "$ref": "#/$defs/id" },
+        "decisionConsequenceRefs": { "$ref": "#/$defs/refArray" },
+        "pairCount": { "type": "integer", "minimum": 1 },
+        "falseAssuranceCount": { "type": "integer", "minimum": 0 },
+        "falseAlarmCount": { "type": "integer", "minimum": 0 },
+        "alignedCount": { "type": "integer", "minimum": 0 },
+        "totalApplicableWeight": { "type": "integer", "minimum": 1 },
+        "totalWeightedError": { "type": "number", "minimum": 0 },
+        "weightedErrorRate": { "$ref": "#/$defs/score" },
+        "maximumAcceptableWeightedErrorRate": { "$ref": "#/$defs/score" },
+        "assessmentSignal": { "enum": ["insufficient-data", "within-policy-tolerance", "above-policy-tolerance"] },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "interpretation": { "const": "policy-local-decision-evidence-only-not-quality-or-authority" },
+        "status": { "enum": ["draft", "reviewed", "retired"] }
+      }
+    },
     "uncertaintyBoundary": {
       "type": "object",
       "required": ["pairCount", "empiricalPairCount", "minimumPairCount", "minimumEmpiricalPairCount", "dataSufficiency", "limitations"],
@@ -314,7 +387,7 @@
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" },
-        "triggerType": { "enum": ["insufficient-data", "non-empirical-evidence", "confidence-semantics-mismatch", "calculation-mismatch", "calibration-gap", "stale-evidence", "missing-outcomes", "duplicate-observations", "dependence-unresolved", "high-risk-segment-gap", "drift-not-assessed", "drift-detected", "other"] },
+        "triggerType": { "enum": ["insufficient-data", "non-empirical-evidence", "confidence-semantics-mismatch", "calculation-mismatch", "calibration-gap", "stale-evidence", "missing-outcomes", "duplicate-observations", "dependence-unresolved", "high-risk-segment-gap", "drift-not-assessed", "drift-detected", "consequence-policy-unreviewed", "severe-false-assurance", "consequence-threshold-exceeded", "other"] },
         "reason": { "type": "string", "minLength": 1 },
         "sourceCalibrationReportRef": { "$ref": "#/$defs/id" },
         "severity": { "enum": ["low", "medium", "high", "critical"] },

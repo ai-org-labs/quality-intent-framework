@@ -1,0 +1,361 @@
+{
+  "packageType": "calibration-report",
+  "runtimeVersion": "0.6.33",
+  "packageId": "CRPKG-001",
+  "packageRefs": [
+    {
+      "id": "PKGREF-CR-001",
+      "path": "examples/quality-gate-package.json",
+      "packageType": "quality-gate",
+      "role": "decision-outcome-source"
+    }
+  ],
+  "evidenceOrigins": [
+    {
+      "id": "EOR-CR-001",
+      "originKind": "example",
+      "sourceArtifact": "examples/quality-gate-package.json",
+      "observationWindow": "illustrative 7-day window",
+      "environment": "committed QIF example",
+      "generatedBy": "QIF maintainers",
+      "verifiedBy": [
+        "fixture verifier"
+      ],
+      "transformationSummary": "The example gate decision and post-release review are paired only to demonstrate the portable calculation and traceability contract.",
+      "status": "verified"
+    }
+  ],
+  "calibrationPolicies": [
+    {
+      "id": "CAP-CR-001",
+      "predictionMeaning": "Probability that the quality intents protected by the referenced gate decision hold throughout the declared observation window.",
+      "outcomeMeaning": "One when the protected outcome held throughout the window; zero when at least one protected loss boundary failed.",
+      "scoreRule": "mean-squared-probability-error",
+      "roundingDecimals": 4,
+      "minimumPairCount": 20,
+      "minimumEmpiricalPairCount": 20,
+      "maximumAcceptableBrierScore": 0.2,
+      "maximumAcceptableBucketGap": 0.15,
+      "bucketDefinitions": [
+        {
+          "id": "CAB-CR-000-050",
+          "lowerInclusive": 0,
+          "upperExclusive": 0.5
+        },
+        {
+          "id": "CAB-CR-050-075",
+          "lowerInclusive": 0.5,
+          "upperExclusive": 0.75
+        },
+        {
+          "id": "CAB-CR-075-100",
+          "lowerInclusive": 0.75,
+          "upperExclusive": 1.000001
+        }
+      ],
+      "insufficientDataAction": "governance-review",
+      "status": "active"
+    }
+  ],
+  "decisionOutcomePairs": [
+    {
+      "id": "DOP-CR-001",
+      "sourcePackageRef": "PKGREF-CR-001",
+      "gateDecisionRef": "QGD-QG-001",
+      "outcomeReviewRef": "PRR-QG-001",
+      "sourceEvidenceOriginRef": "EOR-QG-001",
+      "evidenceOriginRef": "EOR-CR-001",
+      "sourceConfidence": 0.7,
+      "forecastProbability": 0.7,
+      "confidenceTransformation": {
+        "method": "identity",
+        "rationale": "The example intentionally maps the gate confidence to a forecast probability to demonstrate calculation shape; real use requires semantic review that the source confidence actually has this probabilistic meaning.",
+        "reviewedBy": [
+          "quality-governance-owner"
+        ]
+      },
+      "confidenceMeaning": "Probability that the quality intents protected by the referenced gate decision hold throughout the declared observation window.",
+      "observedOutcome": "protected-outcome-failed",
+      "outcomeValue": 0,
+      "outcomeRationale": "The referenced review records two incidents that crossed the protected financial-limit boundary during the observation window.",
+      "observationWindow": "7-day",
+      "domain": "customer-support",
+      "included": true,
+      "status": "reviewed"
+    }
+  ],
+  "calibrationCohorts": [
+    {
+      "id": "COH-CR-001",
+      "title": "Illustrative reviewed decision cohort",
+      "policyRef": "CAP-CR-001",
+      "eligibleDecisions": [
+        {
+          "sourcePackageRef": "PKGREF-CR-001",
+          "gateDecisionRef": "QGD-QG-001"
+        }
+      ],
+      "candidatePairRefs": [
+        "DOP-CR-001"
+      ],
+      "selectionRules": [
+        {
+          "id": "CSR-CR-001",
+          "field": "status",
+          "operator": "equals",
+          "values": [
+            "reviewed"
+          ],
+          "effect": "include",
+          "rationale": "Only reviewed decision-outcome mappings may enter the cohort."
+        }
+      ],
+      "includedPairRefs": [
+        "DOP-CR-001"
+      ],
+      "excludedPairs": [],
+      "missingOutcomeDecisions": [],
+      "independenceBoundary": {
+        "unitOfAnalysis": "One unique gate decision and post-release observation window.",
+        "duplicateKeyFields": [
+          "sourcePackageRef",
+          "gateDecisionRef",
+          "outcomeReviewRef",
+          "observationWindow"
+        ],
+        "duplicateGroups": [],
+        "dependenceRisks": [],
+        "status": "clear"
+      },
+      "segmentDefinitions": [
+        {
+          "id": "SEG-CR-DOMAIN",
+          "dimension": "domain",
+          "highRiskValues": [
+            "customer-support"
+          ],
+          "rationale": "Operational domains must remain visible because an aggregate can hide domain-specific loss-boundary failure."
+        }
+      ],
+      "segmentSummaries": [
+        {
+          "segmentRef": "SEG-CR-DOMAIN",
+          "value": "customer-support",
+          "pairRefs": [
+            "DOP-CR-001"
+          ],
+          "pairCount": 1,
+          "outcomePrevalence": 0,
+          "brierScore": 0.49,
+          "highRisk": true
+        }
+      ],
+      "completenessSummary": {
+        "eligibleDecisionCount": 1,
+        "candidatePairCount": 1,
+        "includedPairCount": 1,
+        "excludedPairCount": 0,
+        "missingOutcomeCount": 0,
+        "coverageRate": 1,
+        "outcomePrevalence": 0
+      },
+      "driftAssessment": {
+        "comparisonBasis": "No earlier comparable cohort is available in the committed example.",
+        "dimensions": [
+          "domain",
+          "outcomePrevalence",
+          "sourceEvidenceOriginKind",
+          "forecastProbability"
+        ],
+        "status": "not-assessed",
+        "rationale": "A single illustrative cohort cannot establish stability or drift."
+      },
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-003",
+        "GTR-CR-004"
+      ],
+      "interpretation": "cohort-evidence-only-not-representativeness-or-quality",
+      "status": "provisional"
+    }
+  ],
+  "calibrationReports": [
+    {
+      "id": "CAR-CR-001",
+      "title": "Illustrative confidence-versus-outcome calibration report",
+      "policyRef": "CAP-CR-001",
+      "includedPairRefs": [
+        "DOP-CR-001"
+      ],
+      "excludedPairRefs": [],
+      "evidenceOriginRefs": [
+        "EOR-CR-001"
+      ],
+      "brierScore": 0.49,
+      "buckets": [
+        {
+          "bucketRef": "CAB-CR-050-075",
+          "pairRefs": [
+            "DOP-CR-001"
+          ],
+          "pairCount": 1,
+          "meanForecastProbability": 0.7,
+          "observedSuccessRate": 0,
+          "calibrationGap": 0.7
+        }
+      ],
+      "uncertaintyBoundary": {
+        "pairCount": 1,
+        "empiricalPairCount": 0,
+        "minimumPairCount": 20,
+        "minimumEmpiricalPairCount": 20,
+        "dataSufficiency": "insufficient",
+        "limitations": [
+          "One pair cannot establish calibration.",
+          "The committed source is an example rather than observed operational or historical evidence.",
+          "Identity mapping from gate confidence to forecast probability requires domain and governance review."
+        ]
+      },
+      "calibrationSignal": "insufficient-data",
+      "interpretation": "evidence-only-not-quality-verdict",
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-002"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "consequencePolicies": null,
+  "decisionConsequences": [
+    {
+      "id": "DCR-CR-001",
+      "pairRef": "DOP-CR-001",
+      "policyRef": "CNP-CR-001",
+      "forecastProbability": 0.7,
+      "actionThreshold": 0.65,
+      "recommendedAction": "proceed",
+      "observedOutcome": "protected-outcome-failed",
+      "consequenceClass": "false-assurance",
+      "applicableWeight": 5,
+      "weightedError": 5,
+      "rationale": "The reviewed forecast crossed the local proceed threshold, but the protected financial-limit outcome failed. The weight only prioritizes governance within this policy; it is not a monetary or objective measure of harm.",
+      "governanceTriggerRefs": [
+        "GTR-CR-005"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "consequenceAssessments": [
+    {
+      "id": "CNA-CR-001",
+      "title": "Illustrative financial-limit decision consequence assessment",
+      "policyRef": "CNP-CR-001",
+      "decisionConsequenceRefs": [
+        "DCR-CR-001"
+      ],
+      "pairCount": 1,
+      "falseAssuranceCount": 1,
+      "falseAlarmCount": 0,
+      "alignedCount": 0,
+      "totalApplicableWeight": 5,
+      "totalWeightedError": 5,
+      "weightedErrorRate": 1,
+      "maximumAcceptableWeightedErrorRate": 0.2,
+      "assessmentSignal": "insufficient-data",
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-006"
+      ],
+      "interpretation": "policy-local-decision-evidence-only-not-quality-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "governanceTriggers": [
+    {
+      "id": "GTR-CR-001",
+      "triggerType": "insufficient-data",
+      "reason": "The report contains fewer decision-outcome pairs than the active policy requires.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect additional independent decision-outcome pairs before making an empirical calibration claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-002",
+      "triggerType": "non-empirical-evidence",
+      "reason": "The only included pair is grounded in committed example data.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Replace or supplement example data with verified observed-operational or historical-record evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-003",
+      "triggerType": "high-risk-segment-gap",
+      "reason": "The declared high-risk customer-support segment has Brier score 0.49, above the active policy tolerance of 0.20.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the domain-specific failure before using the aggregate report for governance decisions.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-004",
+      "triggerType": "drift-not-assessed",
+      "reason": "No comparable baseline cohort exists, so population drift has not been assessed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Establish a comparable baseline before making a longitudinal calibration claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-005",
+      "triggerType": "severe-false-assurance",
+      "reason": "The reviewed forecast recommended proceeding for a high-severity loss boundary, but the protected outcome failed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the breached loss boundary, threshold basis, and controls before relying on the same proceed recommendation again.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-006",
+      "triggerType": "consequence-threshold-exceeded",
+      "reason": "The policy-local weighted error rate is 1.0, above the declared tolerance of 0.2.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the consequence policy and collect more independent outcomes before using the threshold operationally.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    }
+  ],
+  "verifierBoundary": {
+    "checks": [
+      "repository-local package and entity references resolve",
+      "source confidence, outcome link, Brier score, bucket membership, means, rates, gaps, and sample counts reproduce",
+      "evidence origin, sufficiency, and governance rules are applied consistently",
+      "cohort membership, exclusions, missing outcomes, duplicate groups, dependence state, segment summaries, and drift routing reproduce",
+      "loss-boundary linkage, threshold action, consequence class, policy-local weight, weighted error, assessment arithmetic, and governance routing reproduce"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "that source confidence is a valid probability forecast",
+      "causal attribution between a decision and an outcome",
+      "case representativeness or independence",
+      "that cohort coverage, balance, or size proves representativeness",
+      "that consequence weights are money, objective harm, cross-policy utility, quality, or automatic authority",
+      "a calibration statistic is quality",
+      "an automatic quality verdict"
+    ],
+    "semanticValidityRequires": [
+      "expert review of prediction and outcome meaning",
+      "representative and independent empirical observations",
+      "accountable review of each threshold, loss boundary, and policy-local governance weight",
+      "review of environmental and evaluation-harness effects",
+      "accountable governance before changing quality decisions"
+    ]
+  }
+}

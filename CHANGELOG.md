@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.33
+
+- Added executable Consequence Policy records that bind reviewed action thresholds and asymmetric governance-priority weights to source Quality Intent loss boundaries.
+- Added deterministic Decision Consequence classification for aligned proceed/defer, false assurance, and false alarm outcomes.
+- Added aggregate Consequence Assessments with reproducible weighted-error arithmetic and governance routing for severe false assurance, insufficient data, unreviewed policies, and exceeded policy tolerance.
+- Preserved the boundary that weights are policy-local prioritization inputs, not money, objective harm, cross-policy utility, quality, or automatic authority.
+- Added 34 retained negative cases; the retained suite now covers 735 negative cases across 16 positive package types.
+
 ## v0.6.32
 
 - Added executable Calibration Cohort records with structured selection rules, included/excluded pairs, and missing-outcome closure.

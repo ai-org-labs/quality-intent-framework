@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-09-30T04:34:28.545Z",
+  "value_hypothesis_id": "VHY-MUNM2GJL-SHZB4J",
+  "expected_value_creation": "Make calibration decision-relevant by reproducing whether forecasts would recommend proceed or defer, distinguishing false assurance from false alarm, and routing severe asymmetric consequence to accountable governance.",
+  "beneficiary": "humans, AI agents, reviewers, operators, and governance owners using QIF across domains",
+  "supporting_evidence": [
+    "OpenAI deployment simulation distinguishes aggregate rate calibration from targeted tail-risk analysis.",
+    "Recent decision-theoretic calibration research shows similarly calibrated systems can differ materially on overconfident errors under asymmetric loss."
+  ],
+  "success_criteria": [
+    "Each consequence record resolves to a source decision-outcome pair, a source Quality Intent loss boundary, and a reviewed threshold policy.",
+    "The verifier reproduces action, error class, applied governance weight, aggregate weighted error, and required governance without claiming utility, harm magnitude, or semantic truth."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUNM1QZ4-NK7THF"
+}

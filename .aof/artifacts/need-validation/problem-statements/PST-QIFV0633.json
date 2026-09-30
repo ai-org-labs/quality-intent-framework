@@ -1,0 +1,16 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-09-30T04:34:26.031Z",
+  "problem_statement_id": "PST-MUNM2ELR-39W05Y",
+  "affected_party": "people and AI agents relying on calibration to make governed decisions",
+  "actual_problem": "A mathematically acceptable aggregate calibration score can hide an overconfident decision that crosses a severe loss boundary, because QIF v0.6.32 does not connect forecast thresholds, false assurance, false alarms, and asymmetric consequences.",
+  "why_it_matters": "Equal forecast errors can produce radically different harm; treating them symmetrically can authorize unsafe reliance or hide the case that most needs governance.",
+  "why_now": "QIF now reproduces calibration arithmetic and cohort integrity, so consequence interpretation is the nearest unclosed decision-quality boundary.",
+  "evidence_refs": [
+    "docs/qif-v0.6.32-calibration-cohort-integrity.md",
+    "docs/qif-roadmap.md",
+    "examples/calibration-report-package.json"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUNM1QZ4-NK7THF"
+}

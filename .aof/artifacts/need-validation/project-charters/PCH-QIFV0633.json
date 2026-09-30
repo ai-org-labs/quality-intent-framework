@@ -1,0 +1,23 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-09-30T04:35:45.260Z",
+  "project_charter_id": "PCH-MUNM43QK-QQGCTL",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV0633.json",
+  "validated_objective": "Release QIF v0.6.33 with consequence-sensitive calibration that makes asymmetric decision errors reproducible and governed while preserving QIF's verifier boundary.",
+  "scope": [
+    "Extend calibration-report schema with consequence policies, per-pair decision consequence records, and aggregate consequence assessments.",
+    "Reproduce source loss-boundary linkage, threshold action, false assurance and false alarm classification, applied governance-priority weight, and aggregate arithmetic.",
+    "Add governance forcing, example package, retained negative fixtures, plain-language documentation, roadmap and release evidence."
+  ],
+  "constraints": [
+    "Remain standalone, domain-general, and inside the existing calibration-report package.",
+    "Do not monetize human harm, claim objective utility, compare weights across policies, or grant automatic decision authority.",
+    "Do not add UI, external integrations, production data, or unrelated package redesign."
+  ],
+  "expected_outcomes": [
+    "Humans and AI agents can explain why two similarly sized forecast errors have different governed consequence treatment.",
+    "npm test rejects broken threshold, classification, source loss-boundary, arithmetic, boundary, and governance traces."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUNM1QZ4-NK7THF"
+}

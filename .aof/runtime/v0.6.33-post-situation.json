@@ -1,0 +1,24 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-09-30T04:56:19.251Z",
+  "project_root": ".",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "Add domain-general, executable consequence-sensitive calibration that links each reviewed forecast threshold to a source Quality Intent loss boundary, reproduces proceed/defer action and false-assurance/false-alarm classification, calculates governed asymmetric priority-weighted error, and routes severe errors to governance without treating weights, scores, cost, or thresholds as quality or automatic authority.",
+  "next_value_slice": "QIF v0.6.34 Threshold Robustness: evaluate bounded, stakeholder-reviewed threshold and policy-local weight alternatives against the same decision-outcome evidence; reproduce action flips, sensitivity bands, and brittleness signals; route unresolved brittleness to governance. Do not optimize, rank, or automatically select organizational policy, and do not treat stability as quality or authority.",
+  "current_runtime_stage": "frontier-definition-needed",
+  "primary_frontier_task": null,
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Open an implementation task for the current frontier: QIF v0.6.34 Threshold Robustness: evaluate bounded, stakeholder-reviewed threshold and policy-local weight alternatives against the same decision-outcome evidence; reproduce action flips, sensitivity bands, and brittleness signals; route unresolved brittleness to governance. Do not optimize, rank, or automatically select organizational policy, and do not treat stability as quality or authority.",
+    "prioritized_task_ids": [],
+    "scale_direction": "Define or reconcile the next frontier before expanding execution."
+  },
+  "recommended_action": {
+    "recommended_action": "Open an implementation task for the current frontier: QIF v0.6.34 Threshold Robustness: evaluate bounded, stakeholder-reviewed threshold and policy-local weight alternatives against the same decision-outcome evidence; reproduce action flips, sensitivity bands, and brittleness signals; route unresolved brittleness to governance. Do not optimize, rank, or automatically select organizational policy, and do not treat stability as quality or authority.",
+    "rationale": "No current open implementation task is aligned to the current operating goal.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  }
+}

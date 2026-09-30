@@ -1,0 +1,34 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-09-30T04:51:58.775Z",
+  "review_packet_id": "CREV-MUNMOYWN-X7RHUS",
+  "council_id": "qif-self-review-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Self-review approves v0.6.33 implementation subject to its explicit policy-local and evidence-only boundaries.",
+  "rationale": "Visionary: the records answer why a specific forecast error matters at a named loss boundary. Builder: source intent, gate decision, outcome review, threshold action, class, weight, aggregate arithmetic, and trigger references are executable. Guardian: high/critical policies require false-assurance priority; severe false assurance, policy review gaps, insufficient data, and tolerance breaches route to governance. The forecast remains gate-level, so the verifier additionally requires both the source gate decision and outcome review to identify the policy Quality Intent. Weights remain local priorities and cannot be interpreted across policies.",
+  "recommendation": "Proceed to final verification and release; carry threshold sensitivity and brittleness into v0.6.34.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "consequence-traceability-self-review",
+  "diagnosis_confidence": 0.95,
+  "diagnosis_evidence_refs": [
+    "schemas/calibration-report-package.schema.json",
+    "tools/validate-calibration-report.mjs"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "examples/calibration-report-package.json",
+    "tests/fixtures/calibration-report/manifest.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-051",
+  "source_parent_session_id": "SESS-MUNM1G6J-E7NJMW",
+  "source_decision_record_id": "DEC-MUNM4CTT-R3VUO3"
+}

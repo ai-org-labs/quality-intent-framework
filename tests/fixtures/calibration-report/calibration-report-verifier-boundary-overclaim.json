@@ -1,6 +1,6 @@
 {
   "packageType": "calibration-report",
-  "runtimeVersion": "0.6.32",
+  "runtimeVersion": "0.6.33",
   "packageId": "CRPKG-001",
   "packageRefs": [
     {
@@ -225,6 +225,73 @@
       "status": "reviewed"
     }
   ],
+  "consequencePolicies": [
+    {
+      "id": "CNP-CR-001",
+      "sourcePackageRef": "PKGREF-CR-001",
+      "qualityIntentRef": "QIN-QG-001",
+      "lossBoundary": "Refunds must not exceed the policy financial limit without secondary approval.",
+      "lossBoundarySeverity": "high",
+      "actionThreshold": 0.65,
+      "thresholdMeaning": "proceed-when-forecast-at-or-above-threshold",
+      "falseAssuranceWeight": 5,
+      "falseAlarmWeight": 1,
+      "weightSemantics": "policy-local-governance-priority-not-harm-or-money",
+      "roundingDecimals": 4,
+      "minimumPairCount": 20,
+      "maximumAcceptableWeightedErrorRate": 0.2,
+      "severeFalseAssuranceAction": "governance-review",
+      "reviewedBy": [
+        "customer-operations-governance-board"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "decisionConsequences": [
+    {
+      "id": "DCR-CR-001",
+      "pairRef": "DOP-CR-001",
+      "policyRef": "CNP-CR-001",
+      "forecastProbability": 0.7,
+      "actionThreshold": 0.65,
+      "recommendedAction": "proceed",
+      "observedOutcome": "protected-outcome-failed",
+      "consequenceClass": "false-assurance",
+      "applicableWeight": 5,
+      "weightedError": 5,
+      "rationale": "The reviewed forecast crossed the local proceed threshold, but the protected financial-limit outcome failed. The weight only prioritizes governance within this policy; it is not a monetary or objective measure of harm.",
+      "governanceTriggerRefs": [
+        "GTR-CR-005"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "consequenceAssessments": [
+    {
+      "id": "CNA-CR-001",
+      "title": "Illustrative financial-limit decision consequence assessment",
+      "policyRef": "CNP-CR-001",
+      "decisionConsequenceRefs": [
+        "DCR-CR-001"
+      ],
+      "pairCount": 1,
+      "falseAssuranceCount": 1,
+      "falseAlarmCount": 0,
+      "alignedCount": 0,
+      "totalApplicableWeight": 5,
+      "totalWeightedError": 5,
+      "weightedErrorRate": 1,
+      "maximumAcceptableWeightedErrorRate": 0.2,
+      "assessmentSignal": "insufficient-data",
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-006"
+      ],
+      "interpretation": "policy-local-decision-evidence-only-not-quality-or-authority",
+      "status": "reviewed"
+    }
+  ],
   "governanceTriggers": [
     {
       "id": "GTR-CR-001",
@@ -265,6 +332,26 @@
       "requiredAction": "Establish a comparable baseline before making a longitudinal calibration claim.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-005",
+      "triggerType": "severe-false-assurance",
+      "reason": "The reviewed forecast recommended proceeding for a high-severity loss boundary, but the protected outcome failed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the breached loss boundary, threshold basis, and controls before relying on the same proceed recommendation again.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-006",
+      "triggerType": "consequence-threshold-exceeded",
+      "reason": "The policy-local weighted error rate is 1.0, above the declared tolerance of 0.2.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the consequence policy and collect more independent outcomes before using the threshold operationally.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -272,7 +359,8 @@
       "repository-local package and entity references resolve",
       "source confidence, outcome link, Brier score, bucket membership, means, rates, gaps, and sample counts reproduce",
       "evidence origin, sufficiency, and governance rules are applied consistently",
-      "cohort membership, exclusions, missing outcomes, duplicate groups, dependence state, segment summaries, and drift routing reproduce"
+      "cohort membership, exclusions, missing outcomes, duplicate groups, dependence state, segment summaries, and drift routing reproduce",
+      "loss-boundary linkage, threshold action, consequence class, policy-local weight, weighted error, assessment arithmetic, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -280,11 +368,13 @@
       "causal attribution between a decision and an outcome",
       "case representativeness or independence",
       "that cohort coverage, balance, or size proves representativeness",
+      "that consequence weights are money, objective harm, cross-policy utility, quality, or automatic authority",
       "an automatic quality verdict"
     ],
     "semanticValidityRequires": [
       "expert review of prediction and outcome meaning",
       "representative and independent empirical observations",
+      "accountable review of each threshold, loss boundary, and policy-local governance weight",
       "review of environmental and evaluation-harness effects",
       "accountable governance before changing quality decisions"
     ]

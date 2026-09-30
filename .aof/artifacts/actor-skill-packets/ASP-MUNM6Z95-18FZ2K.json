@@ -1,0 +1,82 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-09-30T04:37:59.417Z",
+  "packet_id": "ASP-MUNM6Z95-18FZ2K",
+  "source_task_id": "TASK-051",
+  "source_parent_session_id": "SESS-MUNM1G6J-E7NJMW",
+  "source_decision_record_id": "DEC-MUNM4CTT-R3VUO3",
+  "objective": "Implement and verify QIF v0.6.33 Consequence-Sensitive Calibration",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": "qif-council",
+    "assignment_reason": "Builder extends the existing calibration-report runtime under Visionary decision relevance and Guardian non-authority boundaries.",
+    "execution_mode": "council-seat"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "deterministic-verifier-design",
+    "decision-theoretic-calibration-boundaries"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "consequence-sensitive-calibration",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs",
+        "tools/fixtures/calibration-report-cases.mjs"
+      ],
+      "rationale": "v0.6.31-v0.6.32 provide a narrow decision-outcome, arithmetic, cohort, and governance surface for consequence extension."
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-no-objective-harm-valuation",
+    "policy-no-activity-count-quality",
+    "policy-no-automatic-authority"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-consequence-sensitive-calibration-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "consequencePolicies",
+      "decisionConsequences",
+      "consequenceAssessments"
+    ],
+    "acceptance_criteria": [
+      "Loss-boundary linkage and threshold action reproduce from source records.",
+      "False assurance, false alarm, aligned action, applied local weight, and aggregate arithmetic are deterministic.",
+      "Severe false assurance, unreviewed policy, and threshold exceedance route to governance."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "consequence classifications, arithmetic, references, and claim boundaries are deterministic",
+      "evaluator_ref": "guardian",
+      "evidence_required": "positive package plus retained negative fixtures",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "objective-harm-overclaim",
+      "trigger_condition": "a weight or score is represented as money, objective harm magnitude, cross-policy utility, quality, or automatic authority",
+      "consequence": "require-council-review",
+      "recovery_action": "restore policy-local governance-priority semantics and explicit human governance"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will show which error crosses which loss boundary.",
+    "current_action": "Implement consequence-sensitive calibration records",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Submit classification and arithmetic evidence to Council review"
+  },
+  "status": "ready-for-assignment"
+}

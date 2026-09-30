@@ -121,7 +121,8 @@ function loadPackageRefs(packageRefs, packagePath) {
       decisions: indexById(pkg.qualityGateDecisions || [], `${packageRef.id}:qualityGateDecisions`),
       reviews: indexById(pkg.postReleaseReviews || [], `${packageRef.id}:postReleaseReviews`),
       origins: indexById(pkg.evidenceOrigins || [], `${packageRef.id}:evidenceOrigins`),
-      targets: indexById(pkg.evaluationTargets || [], `${packageRef.id}:evaluationTargets`)
+      targets: indexById(pkg.evaluationTargets || [], `${packageRef.id}:evaluationTargets`),
+      qualityIntents: indexById(pkg.qualityIntents || [], `${packageRef.id}:qualityIntents`)
     });
   }
   return { index, loaded };
@@ -138,6 +139,9 @@ function validatePackage(pkg, packagePath) {
   const pairs = requiredArray(pkg, "decisionOutcomePairs");
   const cohorts = requiredArray(pkg, "calibrationCohorts");
   const reports = requiredArray(pkg, "calibrationReports");
+  const consequencePolicies = requiredArray(pkg, "consequencePolicies");
+  const decisionConsequences = requiredArray(pkg, "decisionConsequences");
+  const consequenceAssessments = requiredArray(pkg, "consequenceAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -145,6 +149,9 @@ function validatePackage(pkg, packagePath) {
   const pairIndex = indexById(pairs, `${packagePath}:decisionOutcomePairs`);
   const cohortIndex = indexById(cohorts, `${packagePath}:calibrationCohorts`);
   const reportIndex = indexById(reports, `${packagePath}:calibrationReports`);
+  const consequencePolicyIndex = indexById(consequencePolicies, `${packagePath}:consequencePolicies`);
+  const decisionConsequenceIndex = indexById(decisionConsequences, `${packagePath}:decisionConsequences`);
+  const consequenceAssessmentIndex = indexById(consequenceAssessments, `${packagePath}:consequenceAssessments`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -380,6 +387,99 @@ function validatePackage(pkg, packagePath) {
     if (drift?.status === "drift-detected" && !triggerTypes.has("drift-detected")) errors.push(`${cohort.id} detected drift requires a drift-detected governance trigger.`);
   }
 
+  for (const policy of consequencePolicies) {
+    for (const field of ["sourcePackageRef", "qualityIntentRef", "lossBoundary", "lossBoundarySeverity", "thresholdMeaning", "weightSemantics", "severeFalseAssuranceAction", "status"]) str(policy, field, policy.id);
+    const source = loaded.get(policy.sourcePackageRef);
+    if (!source) errors.push(`${policy.id} references missing source package: ${policy.sourcePackageRef}`);
+    const intent = source?.qualityIntents.get(policy.qualityIntentRef);
+    if (!intent) errors.push(`${policy.id} references missing quality intent: ${policy.qualityIntentRef}`);
+    if (intent && policy.lossBoundary !== intent.lossBoundary) errors.push(`${policy.id} lossBoundary must equal the referenced quality intent lossBoundary.`);
+    if (intent && policy.lossBoundarySeverity !== intent.lossBoundarySeverity) errors.push(`${policy.id} lossBoundarySeverity must equal the referenced quality intent severity.`);
+    score(policy.actionThreshold, "actionThreshold", policy.id);
+    score(policy.maximumAcceptableWeightedErrorRate, "maximumAcceptableWeightedErrorRate", policy.id);
+    if (policy.thresholdMeaning !== "proceed-when-forecast-at-or-above-threshold") errors.push(`${policy.id} thresholdMeaning must be proceed-when-forecast-at-or-above-threshold.`);
+    if (!Number.isInteger(policy.falseAssuranceWeight) || policy.falseAssuranceWeight < 1 || policy.falseAssuranceWeight > 10) errors.push(`${policy.id} falseAssuranceWeight must be an integer from 1 to 10.`);
+    if (!Number.isInteger(policy.falseAlarmWeight) || policy.falseAlarmWeight < 1 || policy.falseAlarmWeight > 10) errors.push(`${policy.id} falseAlarmWeight must be an integer from 1 to 10.`);
+    if (["high", "critical"].includes(policy.lossBoundarySeverity) && policy.falseAssuranceWeight <= policy.falseAlarmWeight) errors.push(`${policy.id} high or critical loss boundary must prioritize false assurance above false alarm.`);
+    if (policy.weightSemantics !== "policy-local-governance-priority-not-harm-or-money") errors.push(`${policy.id} weightSemantics must remain policy-local-governance-priority-not-harm-or-money.`);
+    if (!Number.isInteger(policy.roundingDecimals) || policy.roundingDecimals < 2 || policy.roundingDecimals > 6) errors.push(`${policy.id} roundingDecimals must be an integer from 2 to 6.`);
+    if (!Number.isInteger(policy.minimumPairCount) || policy.minimumPairCount < 2) errors.push(`${policy.id} minimumPairCount must be at least 2.`);
+    if (policy.severeFalseAssuranceAction !== "governance-review") errors.push(`${policy.id} severeFalseAssuranceAction must be governance-review.`);
+    if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one accountable reviewer.`);
+    if (!Array.isArray(policy.governanceTriggerRefs)) errors.push(`${policy.id} governanceTriggerRefs must be an array.`);
+    const triggerTypes = new Set((policy.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", policy.id)?.triggerType));
+    if (policy.status !== "active" && !triggerTypes.has("consequence-policy-unreviewed")) errors.push(`${policy.id} non-active consequence policy requires a consequence-policy-unreviewed governance trigger.`);
+  }
+
+  const consequenceKeys = new Set();
+  for (const consequence of decisionConsequences) {
+    for (const field of ["pairRef", "policyRef", "recommendedAction", "observedOutcome", "consequenceClass", "rationale", "status"]) str(consequence, field, consequence.id);
+    const pair = ref(pairIndex, consequence.pairRef, "decision-outcome pair", consequence.id);
+    const policy = ref(consequencePolicyIndex, consequence.policyRef, "consequence policy", consequence.id);
+    if (!pair || !policy) continue;
+    const key = `${pair.id}/${policy.id}`;
+    if (consequenceKeys.has(key)) errors.push(`${consequence.id} duplicates decision consequence ${key}.`);
+    consequenceKeys.add(key);
+    if (pair.sourcePackageRef !== policy.sourcePackageRef) errors.push(`${consequence.id} pair and consequence policy must reference the same source package.`);
+    const source = loaded.get(pair.sourcePackageRef);
+    const decision = source?.decisions.get(pair.gateDecisionRef);
+    const review = source?.reviews.get(pair.outcomeReviewRef);
+    if (decision && !(decision.intentVerdicts || []).some((item) => item.intentRef === policy.qualityIntentRef)) errors.push(`${consequence.id} source gate decision must include the consequence policy quality intent.`);
+    if (review && !(review.feedsQualityIntentRefs || []).includes(policy.qualityIntentRef)) errors.push(`${consequence.id} source outcome review must identify the consequence policy quality intent.`);
+    if (!sameNumber(consequence.forecastProbability, pair.forecastProbability)) errors.push(`${consequence.id} forecastProbability must equal the referenced pair forecastProbability.`);
+    if (!sameNumber(consequence.actionThreshold, policy.actionThreshold)) errors.push(`${consequence.id} actionThreshold must equal the referenced consequence policy threshold.`);
+    if (consequence.observedOutcome !== pair.observedOutcome) errors.push(`${consequence.id} observedOutcome must equal the referenced pair outcome.`);
+    const expectedAction = pair.forecastProbability >= policy.actionThreshold ? "proceed" : "defer";
+    if (consequence.recommendedAction !== expectedAction) errors.push(`${consequence.id} recommendedAction must reproduce as ${expectedAction}.`);
+    let expectedClass;
+    if (expectedAction === "proceed" && pair.outcomeValue === 1) expectedClass = "aligned-proceed";
+    else if (expectedAction === "defer" && pair.outcomeValue === 0) expectedClass = "aligned-defer";
+    else if (expectedAction === "proceed") expectedClass = "false-assurance";
+    else expectedClass = "false-alarm";
+    if (consequence.consequenceClass !== expectedClass) errors.push(`${consequence.id} consequenceClass must reproduce as ${expectedClass}.`);
+    const applicableWeight = pair.outcomeValue === 0 ? policy.falseAssuranceWeight : policy.falseAlarmWeight;
+    if (consequence.applicableWeight !== applicableWeight) errors.push(`${consequence.id} applicableWeight must reproduce as ${applicableWeight}.`);
+    const expectedWeightedError = ["false-assurance", "false-alarm"].includes(expectedClass) ? applicableWeight : 0;
+    if (!sameNumber(consequence.weightedError, expectedWeightedError)) errors.push(`${consequence.id} weightedError must reproduce as ${expectedWeightedError}.`);
+    if (!Array.isArray(consequence.governanceTriggerRefs)) errors.push(`${consequence.id} governanceTriggerRefs must be an array.`);
+    const triggerTypes = new Set((consequence.governanceTriggerRefs || []).map((id) => {
+      const trigger = ref(triggerIndex, id, "governance trigger", consequence.id);
+      const sourceReport = trigger ? reportIndex.get(trigger.sourceCalibrationReportRef) : null;
+      if (trigger && sourceReport && !(sourceReport.includedPairRefs || []).includes(pair.id)) errors.push(`${trigger.id} source calibration report must include pair ${pair.id}.`);
+      return trigger?.triggerType;
+    }));
+    if (expectedClass === "false-assurance" && ["high", "critical"].includes(policy.lossBoundarySeverity) && !triggerTypes.has("severe-false-assurance")) errors.push(`${consequence.id} severe false assurance requires a severe-false-assurance governance trigger.`);
+  }
+
+  for (const assessment of consequenceAssessments) {
+    for (const field of ["title", "policyRef", "assessmentSignal", "interpretation", "status"]) str(assessment, field, assessment.id);
+    const policy = ref(consequencePolicyIndex, assessment.policyRef, "consequence policy", assessment.id);
+    const items = Array.isArray(assessment.decisionConsequenceRefs)
+      ? assessment.decisionConsequenceRefs.map((id) => ref(decisionConsequenceIndex, id, "decision consequence", assessment.id)).filter(Boolean)
+      : [];
+    if (items.length === 0) errors.push(`${assessment.id} decisionConsequenceRefs must include at least one record.`);
+    if (new Set(assessment.decisionConsequenceRefs || []).size !== (assessment.decisionConsequenceRefs || []).length) errors.push(`${assessment.id} decisionConsequenceRefs must not contain duplicates.`);
+    for (const item of items) if (item.policyRef !== assessment.policyRef) errors.push(`${assessment.id} decision consequence ${item.id} must use policy ${assessment.policyRef}.`);
+    const falseAssuranceCount = items.filter((item) => item.consequenceClass === "false-assurance").length;
+    const falseAlarmCount = items.filter((item) => item.consequenceClass === "false-alarm").length;
+    const alignedCount = items.length - falseAssuranceCount - falseAlarmCount;
+    const totalApplicableWeight = items.reduce((sum, item) => sum + item.applicableWeight, 0);
+    const totalWeightedError = items.reduce((sum, item) => sum + item.weightedError, 0);
+    const weightedErrorRate = policy && totalApplicableWeight > 0 ? round(totalWeightedError / totalApplicableWeight, policy.roundingDecimals) : 0;
+    const expectedValues = { pairCount: items.length, falseAssuranceCount, falseAlarmCount, alignedCount, totalApplicableWeight, totalWeightedError, weightedErrorRate };
+    for (const [field, value] of Object.entries(expectedValues)) if (!sameNumber(assessment[field], value)) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    if (policy && !sameNumber(assessment.maximumAcceptableWeightedErrorRate, policy.maximumAcceptableWeightedErrorRate)) errors.push(`${assessment.id} maximumAcceptableWeightedErrorRate must match the consequence policy.`);
+    const expectedSignal = policy && items.length < policy.minimumPairCount
+      ? "insufficient-data"
+      : policy && weightedErrorRate > policy.maximumAcceptableWeightedErrorRate ? "above-policy-tolerance" : "within-policy-tolerance";
+    if (assessment.assessmentSignal !== expectedSignal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${expectedSignal}.`);
+    if (assessment.interpretation !== "policy-local-decision-evidence-only-not-quality-or-authority") errors.push(`${assessment.id} interpretation must be policy-local-decision-evidence-only-not-quality-or-authority.`);
+    if (!Array.isArray(assessment.governanceTriggerRefs)) errors.push(`${assessment.id} governanceTriggerRefs must be an array.`);
+    const triggerTypes = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (expectedSignal === "insufficient-data" && !triggerTypes.has("insufficient-data")) errors.push(`${assessment.id} insufficient consequence data requires an insufficient-data governance trigger.`);
+    if (policy && weightedErrorRate > policy.maximumAcceptableWeightedErrorRate && !triggerTypes.has("consequence-threshold-exceeded")) errors.push(`${assessment.id} weighted error above policy tolerance requires a consequence-threshold-exceeded governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -477,6 +577,7 @@ function validatePackage(pkg, packagePath) {
       if (!(boundary.doesNotClaim || []).includes(claim)) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming ${claim}.`);
     }
     if (!(boundary.doesNotClaim || []).includes("that cohort coverage, balance, or size proves representativeness")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that cohort coverage, balance, or size proves representativeness.`);
+    if (!(boundary.doesNotClaim || []).includes("that consequence weights are money, objective harm, cross-policy utility, quality, or automatic authority")) errors.push(`${packagePath} verifierBoundary must explicitly bound consequence weights from money, objective harm, cross-policy utility, quality, or automatic authority.`);
   }
 
   results.push({
@@ -489,6 +590,9 @@ function validatePackage(pkg, packagePath) {
       decisionOutcomePairs: pairs.length,
       calibrationCohorts: cohorts.length,
       calibrationReports: reports.length,
+      consequencePolicies: consequencePolicies.length,
+      decisionConsequences: decisionConsequences.length,
+      consequenceAssessments: consequenceAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -508,5 +612,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, and arithmetic only; it does not prove probability semantics, representativeness, causality, calibration truth, or quality."
+  verifierBoundary: "This verifies declared structure, references, classifications, and arithmetic only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, quality, or decision authority."
 }, null, 2));

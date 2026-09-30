@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Provide executable Calibration Cohort records that deterministically select and exclude decision-outcome pairs, expose duplicate and dependence boundaries, summarize segments, prevalence and missingness, assess drift, and route hidden high-risk cohort failures to governance without claiming representativeness or quality.",
-  "updated_at": "2026-09-29T04:35:18.735Z",
+  "content": "Add domain-general, executable consequence-sensitive calibration that links each reviewed forecast threshold to a source Quality Intent loss boundary, reproduces proceed/defer action and false-assurance/false-alarm classification, calculates governed asymmetric priority-weighted error, and routes severe errors to governance without treating weights, scores, cost, or thresholds as quality or automatic authority.",
+  "updated_at": "2026-09-30T04:35:57.045Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MUM6LK6J-PWX0YE",
-  "source_decision_record_id": "DEC-MUM6NOLP-WPUR7H",
+  "source_session_id": "SESS-MUNM1G6J-E7NJMW",
+  "source_decision_record_id": "DEC-MUNM4CTT-R3VUO3",
   "declared_complete_at": null
 }

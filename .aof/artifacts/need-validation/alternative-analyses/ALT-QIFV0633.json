@@ -1,0 +1,23 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-09-30T04:34:29.201Z",
+  "alternative_analysis_id": "ALT-MUNM2H1T-C1URD2",
+  "subject_need": "Prevent acceptable aggregate calibration from hiding decision errors that cross severe loss boundaries.",
+  "alternative_solutions": [
+    "Keep only unweighted Brier score and rely on manual reviewer interpretation.",
+    "Add free-text severity comments without executable threshold or classification rules.",
+    "Create a separate consequence package rather than extending the existing calibration-report package."
+  ],
+  "non_solution_options": [
+    "Treat larger samples, more segments, or lower aggregate scores as quality."
+  ],
+  "defer_options": [
+    "Defer consequence modeling until production data exists, leaving the structural contract undefined."
+  ],
+  "stop_options": [
+    "Stop if consequence weights are presented as money, objective harm magnitude, automatic authority, or cross-domain truth.",
+    "Stop if false-assurance and false-alarm classifications cannot be deterministically reproduced from reviewed inputs."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUNM1QZ4-NK7THF"
+}
