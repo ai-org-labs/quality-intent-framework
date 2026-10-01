@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-01T04:31:51.590Z",
+  "problem_statement_id": "PST-MUP1EY3Q-U1I2G7",
+  "affected_party": "people and AI agents relying on reviewed calibration thresholds",
+  "actual_problem": "QIF v0.6.33 evaluates one declared action threshold but cannot show whether a small, plausible threshold change would flip the action or consequence class.",
+  "why_it_matters": "A brittle decision can appear stable and authoritative even though it depends on an arbitrary boundary choice.",
+  "why_now": "Consequence classification is executable, making bounded threshold sensitivity the nearest unclosed governance gap.",
+  "evidence_refs": [
+    "docs/qif-v0.6.33-consequence-sensitive-calibration.md",
+    "docs/qif-roadmap.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUP1EEF3-MALL9B"
+}

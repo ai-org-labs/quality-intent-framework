@@ -1,0 +1,23 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-01T04:31:46.958Z",
+  "alternative_analysis_id": "ALT-MUP1EUJ2-ZB6OZG",
+  "subject_need": "Reveal whether consequence decisions are brittle to plausible threshold choices.",
+  "alternative_solutions": [
+    "Keep one threshold and rely on narrative caveats.",
+    "Automatically optimize a threshold from observed outcomes.",
+    "Report an ROC-like curve without source loss boundaries or governance."
+  ],
+  "non_solution_options": [
+    "Treat a stable threshold result as quality."
+  ],
+  "defer_options": [
+    "Wait for production data while leaving the structural sensitivity contract undefined."
+  ],
+  "stop_options": [
+    "Stop if QIF ranks or automatically selects organizational policy.",
+    "Stop if alternatives use different evidence and are presented as comparable."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUP1EEF3-MALL9B"
+}

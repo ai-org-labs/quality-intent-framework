@@ -1,0 +1,32 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-01T04:41:37.637Z",
+  "review_packet_id": "CREV-MUP1RIAT-DGMTD2",
+  "council_id": "qif-self-review-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Self-review approves v0.6.34 within its evidence-only non-optimization boundary.",
+  "rationale": "Visionary: users can see exactly where an action flips. Builder: alternatives straddle baseline and the cartesian replay, classes, weights, errors, distances, flips, and signals reproduce. Guardian: identical evidence and one policy are retained; sensitivity never ranks or selects policy; insufficient and brittle results route to governance.",
+  "recommendation": "Release and carry multi-route escalation into v0.6.35.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "threshold-robustness-self-review",
+  "diagnosis_confidence": 0.96,
+  "diagnosis_evidence_refs": [
+    "tools/validate-calibration-report.mjs"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "tests/fixtures/calibration-report/manifest.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-052",
+  "source_parent_session_id": "SESS-MUP1E4AB-NONQ9J",
+  "source_decision_record_id": "DEC-MUP1FGK2-CAO1MC"
+}

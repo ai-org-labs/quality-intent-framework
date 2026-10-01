@@ -142,6 +142,7 @@ function validatePackage(pkg, packagePath) {
   const consequencePolicies = requiredArray(pkg, "consequencePolicies");
   const decisionConsequences = requiredArray(pkg, "decisionConsequences");
   const consequenceAssessments = requiredArray(pkg, "consequenceAssessments");
+  const thresholdRobustnessAnalyses = requiredArray(pkg, "thresholdRobustnessAnalyses");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -152,6 +153,7 @@ function validatePackage(pkg, packagePath) {
   const consequencePolicyIndex = indexById(consequencePolicies, `${packagePath}:consequencePolicies`);
   const decisionConsequenceIndex = indexById(decisionConsequences, `${packagePath}:decisionConsequences`);
   const consequenceAssessmentIndex = indexById(consequenceAssessments, `${packagePath}:consequenceAssessments`);
+  const thresholdRobustnessIndex = indexById(thresholdRobustnessAnalyses, `${packagePath}:thresholdRobustnessAnalyses`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -480,6 +482,88 @@ function validatePackage(pkg, packagePath) {
     if (policy && weightedErrorRate > policy.maximumAcceptableWeightedErrorRate && !triggerTypes.has("consequence-threshold-exceeded")) errors.push(`${assessment.id} weighted error above policy tolerance requires a consequence-threshold-exceeded governance trigger.`);
   }
 
+  for (const analysis of thresholdRobustnessAnalyses) {
+    for (const field of ["title", "policyRef", "interpretation", "status"]) str(analysis, field, analysis.id);
+    const policy = ref(consequencePolicyIndex, analysis.policyRef, "consequence policy", analysis.id);
+    const baselines = Array.isArray(analysis.baselineDecisionConsequenceRefs)
+      ? analysis.baselineDecisionConsequenceRefs.map((id) => ref(decisionConsequenceIndex, id, "baseline decision consequence", analysis.id)).filter(Boolean)
+      : [];
+    if (baselines.length === 0) errors.push(`${analysis.id} baselineDecisionConsequenceRefs must include at least one record.`);
+    for (const item of baselines) if (item.policyRef !== analysis.policyRef) errors.push(`${analysis.id} baseline ${item.id} must use policy ${analysis.policyRef}.`);
+    const alternatives = Array.isArray(analysis.thresholdAlternatives) ? analysis.thresholdAlternatives : [];
+    if (alternatives.length < 2) errors.push(`${analysis.id} thresholdAlternatives must include at least two alternatives.`);
+    const alternativeIndex = indexById(alternatives, `${analysis.id}:thresholdAlternatives`);
+    const thresholdValues = new Set();
+    for (const alternative of alternatives) {
+      score(alternative.threshold, "threshold", alternative.id);
+      str(alternative, "rationale", alternative.id);
+      if (!Array.isArray(alternative.reviewedBy) || alternative.reviewedBy.length === 0) errors.push(`${alternative.id} reviewedBy must include at least one reviewer.`);
+      if (policy && sameNumber(alternative.threshold, policy.actionThreshold)) errors.push(`${alternative.id} must differ from the baseline action threshold.`);
+      if (thresholdValues.has(alternative.threshold)) errors.push(`${analysis.id} threshold alternatives must not duplicate ${alternative.threshold}.`);
+      thresholdValues.add(alternative.threshold);
+    }
+    if (policy && alternatives.length > 0 && !alternatives.some((item) => item.threshold < policy.actionThreshold)) errors.push(`${analysis.id} threshold alternatives must include a value below the baseline.`);
+    if (policy && alternatives.length > 0 && !alternatives.some((item) => item.threshold > policy.actionThreshold)) errors.push(`${analysis.id} threshold alternatives must include a value above the baseline.`);
+
+    const expectedReplays = [];
+    if (policy) {
+      for (const baseline of baselines) {
+        const pair = pairIndex.get(baseline.pairRef);
+        if (!pair) continue;
+        for (const alternative of alternatives) {
+          const action = pair.forecastProbability >= alternative.threshold ? "proceed" : "defer";
+          let consequenceClass;
+          if (action === "proceed" && pair.outcomeValue === 1) consequenceClass = "aligned-proceed";
+          else if (action === "defer" && pair.outcomeValue === 0) consequenceClass = "aligned-defer";
+          else if (action === "proceed") consequenceClass = "false-assurance";
+          else consequenceClass = "false-alarm";
+          const applicableWeight = pair.outcomeValue === 0 ? policy.falseAssuranceWeight : policy.falseAlarmWeight;
+          const weightedError = ["false-assurance", "false-alarm"].includes(consequenceClass) ? applicableWeight : 0;
+          expectedReplays.push({ baseline, pair, alternative, action, consequenceClass, applicableWeight, weightedError, distance: round(Math.abs(pair.forecastProbability - alternative.threshold), policy.roundingDecimals) });
+        }
+      }
+    }
+    const replays = Array.isArray(analysis.thresholdReplays) ? analysis.thresholdReplays : [];
+    const replayKeys = replays.map((item) => `${item.alternativeRef}/${item.pairRef}`);
+    const expectedKeys = expectedReplays.map((item) => `${item.alternative.id}/${item.pair.id}`);
+    if (!sameSet(replayKeys, expectedKeys)) errors.push(`${analysis.id} thresholdReplays must exactly cover every baseline pair and alternative.`);
+    for (const expected of expectedReplays) {
+      const replay = replays.find((item) => item.alternativeRef === expected.alternative.id && item.pairRef === expected.pair.id);
+      if (!replay) continue;
+      ref(alternativeIndex, replay.alternativeRef, "threshold alternative", analysis.id);
+      if (replay.recommendedAction !== expected.action) errors.push(`${analysis.id}/${replay.alternativeRef}/${replay.pairRef} recommendedAction must reproduce as ${expected.action}.`);
+      if (replay.consequenceClass !== expected.consequenceClass) errors.push(`${analysis.id}/${replay.alternativeRef}/${replay.pairRef} consequenceClass must reproduce as ${expected.consequenceClass}.`);
+      if (replay.applicableWeight !== expected.applicableWeight) errors.push(`${analysis.id}/${replay.alternativeRef}/${replay.pairRef} applicableWeight must reproduce as ${expected.applicableWeight}.`);
+      if (!sameNumber(replay.weightedError, expected.weightedError)) errors.push(`${analysis.id}/${replay.alternativeRef}/${replay.pairRef} weightedError must reproduce as ${expected.weightedError}.`);
+      if (!sameNumber(replay.distanceFromForecast, expected.distance)) errors.push(`${analysis.id}/${replay.alternativeRef}/${replay.pairRef} distanceFromForecast must reproduce as ${expected.distance}.`);
+    }
+    const brittleness = analysis.brittlenessPolicy;
+    if (!brittleness || typeof brittleness !== "object") errors.push(`${analysis.id} must include brittlenessPolicy.`);
+    else {
+      score(brittleness.maximumActionFlipRate, "maximumActionFlipRate", `${analysis.id} brittlenessPolicy`);
+      score(brittleness.minimumBoundaryDistance, "minimumBoundaryDistance", `${analysis.id} brittlenessPolicy`);
+      str(brittleness, "rationale", `${analysis.id} brittlenessPolicy`);
+      if (!Array.isArray(brittleness.reviewedBy) || brittleness.reviewedBy.length === 0) errors.push(`${analysis.id} brittlenessPolicy reviewedBy must include at least one reviewer.`);
+    }
+    const actionFlipCount = expectedReplays.filter((item) => item.action !== item.baseline.recommendedAction).length;
+    const flippedPairRefs = [...new Set(expectedReplays.filter((item) => item.action !== item.baseline.recommendedAction).map((item) => item.pair.id))];
+    const flipRate = policy && expectedReplays.length > 0 ? round(actionFlipCount / expectedReplays.length, policy.roundingDecimals) : 0;
+    const minDistance = expectedReplays.length > 0 ? Math.min(...expectedReplays.map((item) => item.distance)) : 0;
+    const isBrittle = brittleness && (flipRate > brittleness.maximumActionFlipRate || minDistance < brittleness.minimumBoundaryDistance);
+    const insufficient = policy && baselines.length < policy.minimumPairCount;
+    const signal = insufficient && isBrittle ? "insufficient-and-brittle" : insufficient ? "insufficient-data" : isBrittle ? "brittle" : "stable";
+    const summary = analysis.robustnessSummary || {};
+    const expectedSummary = { pairCount: baselines.length, alternativeCount: alternatives.length, actionEvaluationCount: expectedReplays.length, actionFlipCount, actionFlipRate: flipRate, minimumBoundaryDistance: minDistance };
+    for (const [field, value] of Object.entries(expectedSummary)) if (!sameNumber(summary[field], value)) errors.push(`${analysis.id} robustnessSummary.${field} must reproduce as ${value}.`);
+    if (!sameSet(summary.flippedPairRefs, flippedPairRefs)) errors.push(`${analysis.id} robustnessSummary.flippedPairRefs must reproduce.`);
+    if (summary.brittlenessSignal !== signal) errors.push(`${analysis.id} robustnessSummary.brittlenessSignal must reproduce as ${signal}.`);
+    if (analysis.interpretation !== "sensitivity-evidence-only-not-policy-optimization-quality-or-authority") errors.push(`${analysis.id} interpretation must remain sensitivity-evidence-only-not-policy-optimization-quality-or-authority.`);
+    if (!Array.isArray(analysis.governanceTriggerRefs)) errors.push(`${analysis.id} governanceTriggerRefs must be an array.`);
+    const triggerTypes = new Set((analysis.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", analysis.id)?.triggerType));
+    if (insufficient && !triggerTypes.has("insufficient-data")) errors.push(`${analysis.id} insufficient robustness evidence requires an insufficient-data governance trigger.`);
+    if (isBrittle && !triggerTypes.has("threshold-brittleness")) errors.push(`${analysis.id} brittle threshold result requires a threshold-brittleness governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -578,6 +662,7 @@ function validatePackage(pkg, packagePath) {
     }
     if (!(boundary.doesNotClaim || []).includes("that cohort coverage, balance, or size proves representativeness")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that cohort coverage, balance, or size proves representativeness.`);
     if (!(boundary.doesNotClaim || []).includes("that consequence weights are money, objective harm, cross-policy utility, quality, or automatic authority")) errors.push(`${packagePath} verifierBoundary must explicitly bound consequence weights from money, objective harm, cross-policy utility, quality, or automatic authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that threshold sensitivity optimizes, ranks, selects, or authorizes policy")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming threshold sensitivity optimizes, ranks, selects, or authorizes policy.`);
   }
 
   results.push({
@@ -593,6 +678,7 @@ function validatePackage(pkg, packagePath) {
       consequencePolicies: consequencePolicies.length,
       decisionConsequences: decisionConsequences.length,
       consequenceAssessments: consequenceAssessments.length,
+      thresholdRobustnessAnalyses: thresholdRobustnessAnalyses.length,
       governanceTriggers: triggers.length
     }
   });

@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.33 baseline)
+## Current Position (v0.6.34 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -181,6 +181,10 @@ and adoption surface — not pretending the limits away.
   weighted error; Consequence Assessments reproduce aggregate arithmetic and
   governance routing. Weights remain local prioritization inputs rather than
   money, objective harm, cross-policy utility, quality, or automatic authority.
+  v0.6.34 adds Threshold Robustness Analyses that replay identical evidence
+  across bounded, reviewed alternatives, reproduce action and consequence
+  flips plus boundary distance, and govern brittle results without optimizing,
+  ranking, selecting, or authorizing policy.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -528,6 +532,14 @@ Deliverables:
   than presented as stable. QIF will report sensitivity evidence and route
   unresolved brittleness to governance; it will not optimize policy or grant
   automatic authority.
+  Status: implemented in v0.6.34 through reviewed alternatives, deterministic
+  replay, action-flip and boundary-distance arithmetic, brittleness signals,
+  and retained governance fixtures.
+- Next planned slice, v0.6.35 Selective Escalation Calibration: extend the
+  binary proceed/defer boundary into explicitly governed routes such as human
+  review or specialist escalation, while measuring route-specific outcomes
+  without treating deferral volume as quality or automatically assigning
+  authority.
 - Evaluation Suite Health records: task origin, contamination boundary,
   solvability review, saturation, grader calibration, trial variance, harness
   and infrastructure configuration, and drift ownership.

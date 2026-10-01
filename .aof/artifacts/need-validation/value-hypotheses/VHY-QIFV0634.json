@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-01T04:31:48.391Z",
+  "value_hypothesis_id": "VHY-MUP1EVMV-6F62ET",
+  "expected_value_creation": "Expose threshold brittleness by replaying the same evidence against bounded reviewed alternatives and reproducing action flips, consequence changes, boundary distance, and governance.",
+  "beneficiary": "QIF users, reviewers, operators, AI agents, and governance owners",
+  "supporting_evidence": [
+    "NIST emphasizes that evaluation claims depend on chosen estimands and assumptions.",
+    "2026 selective-prediction research shows threshold guarantees can fail under changed groups or assumptions."
+  ],
+  "success_criteria": [
+    "Every alternative is reviewed, bounded, and replayed against the same source pairs.",
+    "The verifier reproduces outcomes and brittleness without optimizing or choosing policy."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUP1EEF3-MALL9B"
+}

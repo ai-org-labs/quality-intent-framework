@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Add domain-general, executable consequence-sensitive calibration that links each reviewed forecast threshold to a source Quality Intent loss boundary, reproduces proceed/defer action and false-assurance/false-alarm classification, calculates governed asymmetric priority-weighted error, and routes severe errors to governance without treating weights, scores, cost, or thresholds as quality or automatic authority.",
-  "updated_at": "2026-09-30T04:35:57.045Z",
+  "content": "Add domain-general threshold robustness records that replay identical decision-outcome evidence across bounded stakeholder-reviewed alternatives, reproduce action and consequence flips plus boundary distance, and route declared brittleness to governance without optimizing, ranking, or selecting policy.",
+  "updated_at": "2026-10-01T04:32:15.510Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MUNM1G6J-E7NJMW",
-  "source_decision_record_id": "DEC-MUNM4CTT-R3VUO3",
+  "source_session_id": "SESS-MUP1E4AB-NONQ9J",
+  "source_decision_record_id": "DEC-MUP1FGK2-CAO1MC",
   "declared_complete_at": null
 }

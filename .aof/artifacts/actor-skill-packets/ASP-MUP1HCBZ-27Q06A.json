@@ -1,0 +1,78 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-01T04:33:43.343Z",
+  "packet_id": "ASP-MUP1HCBZ-27Q06A",
+  "source_task_id": "TASK-052",
+  "source_parent_session_id": "SESS-MUP1E4AB-NONQ9J",
+  "source_decision_record_id": "DEC-MUP1FGK2-CAO1MC",
+  "objective": "Implement and verify QIF v0.6.34 Threshold Robustness",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": "qif-council",
+    "assignment_reason": "Builder extends consequence calibration under explicit non-optimization boundaries.",
+    "execution_mode": "council-seat"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "deterministic-verifier-design",
+    "threshold-sensitivity-boundaries"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "threshold-robustness",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs"
+      ],
+      "rationale": "v0.6.33 provides deterministic consequence replay inputs."
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-no-automatic-policy-selection",
+    "policy-no-activity-count-quality"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-threshold-robustness-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "thresholdRobustnessAnalyses"
+    ],
+    "acceptance_criteria": [
+      "Alternatives are reviewed and straddle the baseline.",
+      "Outcomes, flips, distance, and summary reproduce.",
+      "Brittleness routes to governance."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "sensitivity replay and boundaries are deterministic",
+      "evaluator_ref": "guardian",
+      "evidence_required": "positive and retained negative fixtures",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "policy-optimization-overclaim",
+      "trigger_condition": "analysis ranks or selects policy",
+      "consequence": "require-council-review",
+      "recovery_action": "restore evidence-only sensitivity semantics"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will show where the decision flips.",
+    "current_action": "Implement threshold robustness",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Submit sensitivity evidence"
+  },
+  "status": "ready-for-assignment"
+}

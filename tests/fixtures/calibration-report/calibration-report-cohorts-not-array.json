@@ -1,6 +1,6 @@
 {
   "packageType": "calibration-report",
-  "runtimeVersion": "0.6.33",
+  "runtimeVersion": "0.6.34",
   "packageId": "CRPKG-001",
   "packageRefs": [
     {
@@ -198,6 +198,80 @@
       "status": "reviewed"
     }
   ],
+  "thresholdRobustnessAnalyses": [
+    {
+      "id": "TRA-CR-001",
+      "title": "Illustrative financial-limit threshold robustness",
+      "policyRef": "CNP-CR-001",
+      "baselineDecisionConsequenceRefs": [
+        "DCR-CR-001"
+      ],
+      "thresholdAlternatives": [
+        {
+          "id": "THA-CR-060",
+          "threshold": 0.6,
+          "rationale": "Reviewed lower bound for testing whether the original proceed decision remains unchanged.",
+          "reviewedBy": [
+            "customer-operations-governance-board"
+          ]
+        },
+        {
+          "id": "THA-CR-075",
+          "threshold": 0.75,
+          "rationale": "Reviewed upper bound for testing whether a modestly stricter policy changes the action.",
+          "reviewedBy": [
+            "customer-operations-governance-board"
+          ]
+        }
+      ],
+      "thresholdReplays": [
+        {
+          "alternativeRef": "THA-CR-060",
+          "pairRef": "DOP-CR-001",
+          "recommendedAction": "proceed",
+          "consequenceClass": "false-assurance",
+          "applicableWeight": 5,
+          "weightedError": 5,
+          "distanceFromForecast": 0.1
+        },
+        {
+          "alternativeRef": "THA-CR-075",
+          "pairRef": "DOP-CR-001",
+          "recommendedAction": "defer",
+          "consequenceClass": "aligned-defer",
+          "applicableWeight": 5,
+          "weightedError": 0,
+          "distanceFromForecast": 0.05
+        }
+      ],
+      "brittlenessPolicy": {
+        "maximumActionFlipRate": 0.25,
+        "minimumBoundaryDistance": 0.1,
+        "rationale": "A decision that flips across more than one quarter of reviewed alternatives or lies within 0.1 of a boundary requires governance review.",
+        "reviewedBy": [
+          "customer-operations-governance-board"
+        ]
+      },
+      "robustnessSummary": {
+        "pairCount": 1,
+        "alternativeCount": 2,
+        "actionEvaluationCount": 2,
+        "actionFlipCount": 1,
+        "flippedPairRefs": [
+          "DOP-CR-001"
+        ],
+        "actionFlipRate": 0.5,
+        "minimumBoundaryDistance": 0.05,
+        "brittlenessSignal": "insufficient-and-brittle"
+      },
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-007"
+      ],
+      "interpretation": "sensitivity-evidence-only-not-policy-optimization-quality-or-authority",
+      "status": "reviewed"
+    }
+  ],
   "governanceTriggers": [
     {
       "id": "GTR-CR-001",
@@ -258,6 +332,16 @@
       "requiredAction": "Review the consequence policy and collect more independent outcomes before using the threshold operationally.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-007",
+      "triggerType": "threshold-brittleness",
+      "reason": "One of two reviewed alternatives changes the action and the nearest tested boundary is only 0.05 from the forecast.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the threshold basis and controls before treating the baseline action as stable.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -266,7 +350,8 @@
       "source confidence, outcome link, Brier score, bucket membership, means, rates, gaps, and sample counts reproduce",
       "evidence origin, sufficiency, and governance rules are applied consistently",
       "cohort membership, exclusions, missing outcomes, duplicate groups, dependence state, segment summaries, and drift routing reproduce",
-      "loss-boundary linkage, threshold action, consequence class, policy-local weight, weighted error, assessment arithmetic, and governance routing reproduce"
+      "loss-boundary linkage, threshold action, consequence class, policy-local weight, weighted error, assessment arithmetic, and governance routing reproduce",
+      "reviewed threshold alternatives, replay actions and classes, action flips, boundary distance, brittleness summary, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -275,6 +360,7 @@
       "case representativeness or independence",
       "that cohort coverage, balance, or size proves representativeness",
       "that consequence weights are money, objective harm, cross-policy utility, quality, or automatic authority",
+      "that threshold sensitivity optimizes, ranks, selects, or authorizes policy",
       "a calibration statistic is quality",
       "an automatic quality verdict"
     ],

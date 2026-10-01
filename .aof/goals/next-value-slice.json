@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.6.34 Threshold Robustness: evaluate bounded, stakeholder-reviewed threshold and policy-local weight alternatives against the same decision-outcome evidence; reproduce action flips, sensitivity bands, and brittleness signals; route unresolved brittleness to governance. Do not optimize, rank, or automatically select organizational policy, and do not treat stability as quality or authority.",
-  "updated_at": "2026-09-30T04:56:05.253Z",
+  "content": "QIF v0.6.35 Selective Escalation Calibration: model governed proceed, defer, human-review, and specialist-escalation routes; reproduce route-specific outcomes and consequence evidence without treating route volume as quality or automatically assigning authority.",
+  "updated_at": "2026-10-01T04:42:17.171Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MUNM1G6J-E7NJMW",
-  "source_decision_record_id": "DEC-MUNM4CTT-R3VUO3",
+  "source_session_id": "SESS-MUP1E4AB-NONQ9J",
+  "source_decision_record_id": "DEC-MUP1FGK2-CAO1MC",
   "declared_complete_at": null
 }

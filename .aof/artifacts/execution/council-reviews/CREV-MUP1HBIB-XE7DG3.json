@@ -1,0 +1,32 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-01T04:33:42.275Z",
+  "review_packet_id": "CREV-MUP1HBIB-XE7DG3",
+  "council_id": "qif-council",
+  "stage": "planning",
+  "review_status": "approved",
+  "decision_summary": "Implement v0.6.34 with executable threshold robustness analyses.",
+  "rationale": "Visionary: reveal decisions that depend on a narrow policy boundary. Builder: replay identical pairs through reviewed alternatives. Guardian: sensitivity is evidence only; no optimization, ranking, policy selection, quality, or authority claim.",
+  "recommendation": "Add schema, example, verifier, fixtures, plain-language docs, roadmap, and release evidence.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "threshold-brittleness-blindness",
+  "diagnosis_confidence": 0.96,
+  "diagnosis_evidence_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0634.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0634.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-052",
+  "source_parent_session_id": "SESS-MUP1E4AB-NONQ9J",
+  "source_decision_record_id": "DEC-MUP1FGK2-CAO1MC"
+}

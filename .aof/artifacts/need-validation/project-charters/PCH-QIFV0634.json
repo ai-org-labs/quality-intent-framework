@@ -1,0 +1,21 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-01T04:32:15.359Z",
+  "project_charter_id": "PCH-MUP1FGFZ-K2C5QO",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV0634.json",
+  "validated_objective": "Release QIF v0.6.34 Threshold Robustness with reproducible bounded sensitivity and governance.",
+  "scope": [
+    "Add threshold alternatives, replay outcomes, and robustness summaries to calibration-report.",
+    "Add deterministic verifier rules, examples, fixtures, docs, roadmap, and release evidence."
+  ],
+  "constraints": [
+    "Use identical source evidence and one consequence policy per analysis.",
+    "Do not optimize, rank, select, or authorize policy."
+  ],
+  "expected_outcomes": [
+    "Users can see exactly which decisions flip under reviewed alternatives.",
+    "Brittleness is routed to accountable governance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUP1EEF3-MALL9B"
+}

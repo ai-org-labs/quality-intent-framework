@@ -1,0 +1,161 @@
+{
+  "session_id": "SESS-MUP1E4AB-NONQ9J",
+  "workflow_id": "service-design",
+  "organization_id": "civic-studio",
+  "organization": {
+    "language": "en"
+  },
+  "status": "framed",
+  "trigger": {
+    "trigger_id": "TRG-MUP1E4AB-73B9Z9",
+    "trigger_type": "cli",
+    "received_at": "2026-10-01T04:31:12.946Z",
+    "request_payload": "Advance QIF after v0.6.33 using the current roadmap and latest AI evaluation evidence."
+  },
+  "current_stage": "planning",
+  "routing_mode": "deep-path",
+  "routing_mode_history": [
+    {
+      "from_mode": null,
+      "to_mode": "deep-path",
+      "at": "2026-10-01T04:31:12.946Z",
+      "reason": "session-created"
+    }
+  ],
+  "context_snapshot_id": "CTX-MUP1EEF0-3N8SQS",
+  "open_decision_ids": [
+    "DEC-MUP1FGK2-CAO1MC"
+  ],
+  "closed_decision_ids": [
+    "DEC-MUP1E4AD-5SS94K",
+    "DEC-MUP1EEF3-MALL9B"
+  ],
+  "stage_transitions": [
+    {
+      "from_stage": null,
+      "to_stage": "clarification",
+      "from_status": null,
+      "to_status": "waiting_user",
+      "at": "2026-10-01T04:31:12.946Z",
+      "reason": "session-created"
+    },
+    {
+      "from_stage": "clarification",
+      "to_stage": "need-validation",
+      "from_status": "waiting_user",
+      "to_status": "framed",
+      "at": "2026-10-01T04:31:26.073Z",
+      "reason": "clarification-complete"
+    },
+    {
+      "from_stage": "need-validation",
+      "to_stage": "planning",
+      "from_status": "framed",
+      "to_status": "framed",
+      "at": "2026-10-01T04:32:15.508Z",
+      "reason": "need-validation-approved"
+    }
+  ],
+  "reopen_count": 0,
+  "outcome_reports": [],
+  "clarification": {
+    "round_count": 1,
+    "dimensions": {
+      "need_clarity": "partial",
+      "intent_clarity": "partial",
+      "context_completeness": "missing",
+      "success_criteria_clarity": "missing",
+      "prohibited_conditions_clarity": "partial",
+      "governance_scope_clarity": "clear",
+      "brownfield_orientation_completeness": "clear",
+      "risk_exposure": "partial"
+    },
+    "gaps": [
+      {
+        "dimension": "need_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The underlying need is not specific enough yet."
+      },
+      {
+        "dimension": "intent_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The intended direction is not yet explicit."
+      },
+      {
+        "dimension": "context_completeness",
+        "status": "missing",
+        "trigger_class": "missing-constraint",
+        "summary": "Key constraints, scope, and current conditions are missing."
+      },
+      {
+        "dimension": "success_criteria_clarity",
+        "status": "missing",
+        "trigger_class": "missing-success-criteria",
+        "summary": "Success cannot be evaluated yet."
+      },
+      {
+        "dimension": "prohibited_conditions_clarity",
+        "status": "partial",
+        "trigger_class": "missing-prohibition",
+        "summary": "Forbidden changes or non-negotiables are not explicit."
+      }
+    ],
+    "pending_questions": [],
+    "asked_questions": [
+      "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "How should improvement success be judged: which metric or end state matters most?"
+    ],
+    "question_rationale": [],
+    "trigger_classes": [],
+    "target_fields": [],
+    "user_answers": [
+      {
+        "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+        "answer": "Scope to the standalone calibration-report runtime: reviewed threshold alternatives, per-pair alternative outcomes, reproducible action flips, boundary distance, brittleness summary, governance, fixtures, docs, and release. Exclude UI, external systems, production data, threshold optimization, ranking, or automatic policy selection.",
+        "target_fields": [
+          "need",
+          "context"
+        ]
+      },
+      {
+        "question": "How should improvement success be judged: which metric or end state matters most?",
+        "answer": "Success means a human or AI can reproduce whether bounded reviewed threshold alternatives change proceed/defer action or consequence class for the same evidence, see how close forecasts are to decision boundaries, and force governance when declared brittleness limits are exceeded. Stability, counts, thresholds, and scores remain evidence, not quality or authority.",
+        "target_fields": [
+          "success_criteria",
+          "intent"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "ask_or_assume_decision": "ask",
+    "remaining_gaps": [],
+    "unresolved_ambiguity": [],
+    "question_budget": {
+      "initial_question_budget": 2,
+      "followup_budget": 1,
+      "max_rounds": 2
+    },
+    "next_stop_condition": "need validation can proceed",
+    "clarification_summary": "runtime captured first-round clarification answers and can proceed to need validation",
+    "should_wait_for_user": false
+  },
+  "created_at": "2026-10-01T04:31:12.946Z",
+  "updated_at": "2026-10-01T04:32:15.508Z",
+  "framing": {
+    "request": "Advance QIF after v0.6.33 using the current roadmap and latest AI evaluation evidence.",
+    "need": "Scope to the standalone calibration-report runtime: reviewed threshold alternatives, per-pair alternative outcomes, reproducible action flips, boundary distance, brittleness summary, governance, fixtures, docs, and release. Exclude UI, external systems, production data, threshold optimization, ranking, or automatic policy selection.",
+    "intent": "Success means a human or AI can reproduce whether bounded reviewed threshold alternatives change proceed/defer action or consequence class for the same evidence, see how close forecasts are to decision boundaries, and force governance when declared brittleness limits are exceeded. Stability, counts, thresholds, and scores remain evidence, not quality or authority.",
+    "active_context": "context: Scope to the standalone calibration-report runtime: reviewed threshold alternatives, per-pair alternative outcomes, reproducible action flips, boundary distance, brittleness summary, governance, fixtures, docs, and release. Exclude UI, external systems, production data, threshold optimization, ranking, or automatic policy selection. | success: Success means a human or AI can reproduce whether bounded reviewed threshold alternatives change proceed/defer action or consequence class for the same evidence, see how close forecasts are to decision boundaries, and force governance when declared brittleness limits are exceeded. Stability, counts, thresholds, and scores remain evidence, not quality or authority.",
+    "success_criteria": "Success means a human or AI can reproduce whether bounded reviewed threshold alternatives change proceed/defer action or consequence class for the same evidence, see how close forecasts are to decision boundaries, and force governance when declared brittleness limits are exceeded. Stability, counts, thresholds, and scores remain evidence, not quality or authority.",
+    "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope to the standalone calibration-report runtime: reviewed threshold alternatives, per-pair alternative outcomes, reproducible action flips, boundary distance, brittleness summary, governance, fixtures, docs, and release. Exclude UI, external systems, production data, threshold optimization, ranking, or automatic policy selection. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce whether bounded reviewed threshold alternatives change proceed/defer action or consequence class for the same evidence, see how close forecasts are to decision boundaries, and force governance when declared brittleness limits are exceeded. Stability, counts, thresholds, and scores remain evidence, not quality or authority."
+  },
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0634.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0634.json",
+    ".aof/artifacts/need-validation/problem-statements/PST-QIFV0634.json",
+    ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0634.json",
+    ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0634.json"
+  ]
+}

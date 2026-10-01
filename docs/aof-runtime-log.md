@@ -2,6 +2,24 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.34 Threshold Robustness
+
+Date: 2026-10-01
+
+- Need / Intent / Context: v0.6.33 made one threshold executable but could not reveal policy brittleness. v0.6.34 replays identical evidence across bounded reviewed alternatives and governs action flips; it never optimizes, ranks, selects, or authorizes policy, and stability is not quality.
+- Latest public AOF `v12.2.0` was used from a clean checkout; the dirty unreleased local `12.3.0` worktree was not modified.
+- Need Validation preceded Charter: `.aof/artifacts/need-validation/records/NVR-QIFV0634.json` then `.aof/artifacts/need-validation/project-charters/PCH-QIFV0634.json` in parent session `SESS-MUP1E4AB-NONQ9J`; task `TASK-052` records execution.
+- Council: Visionary approved exposing boundary-dependent decisions; Builder selected deterministic same-evidence replay; Guardian prohibited optimization and authority claims. Planning evidence: `.aof/artifacts/execution/council-reviews/CREV-MUP1HBIB-XE7DG3.json`.
+- Actor packet `.aof/artifacts/actor-skill-packets/ASP-MUP1HCBZ-27Q06A.json` records schema/verifier skills, repository/runtime resources, non-optimization policy, acceptance criteria, and review evidence.
+- Trend evidence: NIST AI 800-3 links evaluation conclusions to chosen estimands and assumptions (`https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-3.pdf`); NIST CARAT work explores operational consequences of compliance-threshold choices (`https://www.nist.gov/careers/associate-positions/1919511`); selective-risk research shows threshold guarantees can fail when exchangeability breaks (`https://arxiv.org/abs/2606.15153`); OpenAI requires explicit claims and validity evidence (`https://openai.com/index/trustworthy-third-party-evaluations-foundations/`).
+- Built: reviewed alternatives straddling baseline, pair-by-alternative replay, action and consequence classification, applicable weight, weighted error, boundary distance, action flips, brittleness policy/summary, and governance.
+- Not built: threshold optimization, policy ranking/selection, production claims, UI, or external integration.
+- Verification: calibration verifier and retained fixtures pass `16/16` positive and `753/753` negative rules.
+- Next: v0.6.35 Selective Escalation Calibration adds governed human/specialist routes without treating deferral volume as quality.
+- Self-review `.aof/artifacts/execution/council-reviews/CREV-MUP1RIAT-DGMTD2.json`, final review `CREV-MUP1RZFK-7LVM90`, and retrospective `CREV-MUP1RZFS-5S2D87` approved the release with explicit boundaries.
+- `TASK-052` is done; post-slice `.aof/runtime/v0.6.34-post-situation.json` found no truth conflict and selected v0.6.35.
+- `organization-verify` passed `271/271` checks. Commit, tag, and release are appended below.
+
 ## v0.6.33 Consequence-Sensitive Calibration
 
 Date: 2026-09-30

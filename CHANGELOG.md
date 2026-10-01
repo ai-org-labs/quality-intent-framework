@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.34
+
+- Added executable Threshold Robustness Analyses with reviewed alternatives that straddle a baseline action threshold.
+- Added deterministic replay of identical decision-outcome evidence, including action, consequence class, applicable weight, weighted error, and forecast-to-boundary distance.
+- Added reproducible action-flip and brittleness summaries with governance for insufficient or brittle evidence.
+- Preserved the boundary that sensitivity analysis does not optimize, rank, select, or authorize policy and that stability is not quality.
+- Added 18 retained negative cases; the retained suite now covers 753 negative cases across 16 positive package types.
+
 ## v0.6.33
 
 - Added executable Consequence Policy records that bind reviewed action thresholds and asymmetric governance-priority weights to source Quality Intent loss boundaries.

@@ -68,6 +68,132 @@
   ],
   "negatives": [
     {
+      "file": "calibration-report-threshold-robustness-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "threshold robustness required",
+      "expect": "fail",
+      "errorIncludes": "package thresholdRobustnessAnalyses must be an array."
+    },
+    {
+      "file": "calibration-report-threshold-alternative-duplicate.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unique alternatives",
+      "expect": "fail",
+      "errorIncludes": "threshold alternatives must not duplicate 0.6."
+    },
+    {
+      "file": "calibration-report-threshold-alternative-no-lower.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "lower alternative",
+      "expect": "fail",
+      "errorIncludes": "threshold alternatives must include a value below the baseline."
+    },
+    {
+      "file": "calibration-report-threshold-alternative-no-upper.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "upper alternative",
+      "expect": "fail",
+      "errorIncludes": "threshold alternatives must include a value above the baseline."
+    },
+    {
+      "file": "calibration-report-threshold-alternative-reviewer-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "alternative review",
+      "expect": "fail",
+      "errorIncludes": "reviewedBy must include at least one reviewer."
+    },
+    {
+      "file": "calibration-report-threshold-replay-coverage-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "replay cartesian closure",
+      "expect": "fail",
+      "errorIncludes": "thresholdReplays must exactly cover every baseline pair and alternative."
+    },
+    {
+      "file": "calibration-report-threshold-replay-action-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "alternative action reproduction",
+      "expect": "fail",
+      "errorIncludes": "recommendedAction must reproduce as proceed."
+    },
+    {
+      "file": "calibration-report-threshold-replay-class-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "alternative consequence reproduction",
+      "expect": "fail",
+      "errorIncludes": "consequenceClass must reproduce as false-assurance."
+    },
+    {
+      "file": "calibration-report-threshold-replay-weight-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "alternative weight reproduction",
+      "expect": "fail",
+      "errorIncludes": "applicableWeight must reproduce as 5."
+    },
+    {
+      "file": "calibration-report-threshold-replay-error-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "alternative error reproduction",
+      "expect": "fail",
+      "errorIncludes": "weightedError must reproduce as 5."
+    },
+    {
+      "file": "calibration-report-threshold-replay-distance-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "boundary distance reproduction",
+      "expect": "fail",
+      "errorIncludes": "distanceFromForecast must reproduce as 0.1."
+    },
+    {
+      "file": "calibration-report-threshold-summary-flip-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "action flip reproduction",
+      "expect": "fail",
+      "errorIncludes": "robustnessSummary.actionFlipCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-threshold-summary-pairs-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "flipped pair reproduction",
+      "expect": "fail",
+      "errorIncludes": "robustnessSummary.flippedPairRefs must reproduce."
+    },
+    {
+      "file": "calibration-report-threshold-summary-signal-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "brittleness signal reproduction",
+      "expect": "fail",
+      "errorIncludes": "brittlenessSignal must reproduce as insufficient-and-brittle."
+    },
+    {
+      "file": "calibration-report-threshold-insufficient-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "insufficient robustness governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient robustness evidence requires an insufficient-data governance trigger."
+    },
+    {
+      "file": "calibration-report-threshold-brittleness-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "brittleness governance",
+      "expect": "fail",
+      "errorIncludes": "brittle threshold result requires a threshold-brittleness governance trigger."
+    },
+    {
+      "file": "calibration-report-threshold-interpretation-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "sensitivity evidence boundary",
+      "expect": "fail",
+      "errorIncludes": "interpretation must remain sensitivity-evidence-only-not-policy-optimization-quality-or-authority."
+    },
+    {
+      "file": "calibration-report-threshold-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "threshold verifier boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming threshold sensitivity optimizes, ranks, selects, or authorizes policy."
+    },
+    {
       "file": "calibration-report-consequence-policies-not-array.json",
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "consequence policies required",

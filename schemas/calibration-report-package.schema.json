@@ -16,6 +16,7 @@
     "consequencePolicies",
     "decisionConsequences",
     "consequenceAssessments",
+    "thresholdRobustnessAnalyses",
     "governanceTriggers",
     "verifierBoundary"
   ],
@@ -33,6 +34,7 @@
     "consequencePolicies": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/consequencePolicy" } },
     "decisionConsequences": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/decisionConsequence" } },
     "consequenceAssessments": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/consequenceAssessment" } },
+    "thresholdRobustnessAnalyses": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/thresholdRobustnessAnalysis" } },
     "governanceTriggers": { "type": "array", "items": { "$ref": "#/$defs/governanceTrigger" } },
     "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
   },
@@ -348,6 +350,75 @@
         "status": { "enum": ["draft", "reviewed", "retired"] }
       }
     },
+    "thresholdAlternative": {
+      "type": "object",
+      "required": ["id", "threshold", "rationale", "reviewedBy"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "threshold": { "$ref": "#/$defs/score" },
+        "rationale": { "type": "string", "minLength": 1 },
+        "reviewedBy": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "thresholdReplay": {
+      "type": "object",
+      "required": ["alternativeRef", "pairRef", "recommendedAction", "consequenceClass", "applicableWeight", "weightedError", "distanceFromForecast"],
+      "additionalProperties": false,
+      "properties": {
+        "alternativeRef": { "$ref": "#/$defs/id" },
+        "pairRef": { "$ref": "#/$defs/id" },
+        "recommendedAction": { "enum": ["proceed", "defer"] },
+        "consequenceClass": { "enum": ["aligned-proceed", "aligned-defer", "false-assurance", "false-alarm"] },
+        "applicableWeight": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "weightedError": { "type": "number", "minimum": 0, "maximum": 10 },
+        "distanceFromForecast": { "$ref": "#/$defs/score" }
+      }
+    },
+    "brittlenessPolicy": {
+      "type": "object",
+      "required": ["maximumActionFlipRate", "minimumBoundaryDistance", "rationale", "reviewedBy"],
+      "additionalProperties": false,
+      "properties": {
+        "maximumActionFlipRate": { "$ref": "#/$defs/score" },
+        "minimumBoundaryDistance": { "$ref": "#/$defs/score" },
+        "rationale": { "type": "string", "minLength": 1 },
+        "reviewedBy": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "robustnessSummary": {
+      "type": "object",
+      "required": ["pairCount", "alternativeCount", "actionEvaluationCount", "actionFlipCount", "flippedPairRefs", "actionFlipRate", "minimumBoundaryDistance", "brittlenessSignal"],
+      "additionalProperties": false,
+      "properties": {
+        "pairCount": { "type": "integer", "minimum": 1 },
+        "alternativeCount": { "type": "integer", "minimum": 2 },
+        "actionEvaluationCount": { "type": "integer", "minimum": 2 },
+        "actionFlipCount": { "type": "integer", "minimum": 0 },
+        "flippedPairRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "actionFlipRate": { "$ref": "#/$defs/score" },
+        "minimumBoundaryDistance": { "$ref": "#/$defs/score" },
+        "brittlenessSignal": { "enum": ["stable", "brittle", "insufficient-data", "insufficient-and-brittle"] }
+      }
+    },
+    "thresholdRobustnessAnalysis": {
+      "type": "object",
+      "required": ["id", "title", "policyRef", "baselineDecisionConsequenceRefs", "thresholdAlternatives", "thresholdReplays", "brittlenessPolicy", "robustnessSummary", "governanceTriggerRefs", "interpretation", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "policyRef": { "$ref": "#/$defs/id" },
+        "baselineDecisionConsequenceRefs": { "$ref": "#/$defs/refArray" },
+        "thresholdAlternatives": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/thresholdAlternative" } },
+        "thresholdReplays": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/thresholdReplay" } },
+        "brittlenessPolicy": { "$ref": "#/$defs/brittlenessPolicy" },
+        "robustnessSummary": { "$ref": "#/$defs/robustnessSummary" },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "interpretation": { "const": "sensitivity-evidence-only-not-policy-optimization-quality-or-authority" },
+        "status": { "enum": ["draft", "reviewed", "retired"] }
+      }
+    },
     "uncertaintyBoundary": {
       "type": "object",
       "required": ["pairCount", "empiricalPairCount", "minimumPairCount", "minimumEmpiricalPairCount", "dataSufficiency", "limitations"],
@@ -387,7 +458,7 @@
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" },
-        "triggerType": { "enum": ["insufficient-data", "non-empirical-evidence", "confidence-semantics-mismatch", "calculation-mismatch", "calibration-gap", "stale-evidence", "missing-outcomes", "duplicate-observations", "dependence-unresolved", "high-risk-segment-gap", "drift-not-assessed", "drift-detected", "consequence-policy-unreviewed", "severe-false-assurance", "consequence-threshold-exceeded", "other"] },
+        "triggerType": { "enum": ["insufficient-data", "non-empirical-evidence", "confidence-semantics-mismatch", "calculation-mismatch", "calibration-gap", "stale-evidence", "missing-outcomes", "duplicate-observations", "dependence-unresolved", "high-risk-segment-gap", "drift-not-assessed", "drift-detected", "consequence-policy-unreviewed", "severe-false-assurance", "consequence-threshold-exceeded", "threshold-brittleness", "other"] },
         "reason": { "type": "string", "minLength": 1 },
         "sourceCalibrationReportRef": { "$ref": "#/$defs/id" },
         "severity": { "enum": ["low", "medium", "high", "critical"] },

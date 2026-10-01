@@ -7,8 +7,27 @@ function cohort(pkg) { return pkg.calibrationCohorts[0]; }
 function consequencePolicy(pkg) { return pkg.consequencePolicies[0]; }
 function decisionConsequence(pkg) { return pkg.decisionConsequences[0]; }
 function consequenceAssessment(pkg) { return pkg.consequenceAssessments[0]; }
+function robustness(pkg) { return pkg.thresholdRobustnessAnalyses[0]; }
 
 export const cases = [
+  { id: "threshold-robustness-not-array", rule: "threshold robustness required", expect: "package thresholdRobustnessAnalyses must be an array.", mutate: (pkg) => { pkg.thresholdRobustnessAnalyses = null; } },
+  { id: "threshold-alternative-duplicate", rule: "unique alternatives", expect: "threshold alternatives must not duplicate 0.6.", mutate: (pkg) => { robustness(pkg).thresholdAlternatives[1].threshold = 0.6; } },
+  { id: "threshold-alternative-no-lower", rule: "lower alternative", expect: "threshold alternatives must include a value below the baseline.", mutate: (pkg) => { robustness(pkg).thresholdAlternatives[0].threshold = 0.7; } },
+  { id: "threshold-alternative-no-upper", rule: "upper alternative", expect: "threshold alternatives must include a value above the baseline.", mutate: (pkg) => { robustness(pkg).thresholdAlternatives[1].threshold = 0.64; } },
+  { id: "threshold-alternative-reviewer-missing", rule: "alternative review", expect: "reviewedBy must include at least one reviewer.", mutate: (pkg) => { robustness(pkg).thresholdAlternatives[0].reviewedBy = []; } },
+  { id: "threshold-replay-coverage-mismatch", rule: "replay cartesian closure", expect: "thresholdReplays must exactly cover every baseline pair and alternative.", mutate: (pkg) => { robustness(pkg).thresholdReplays.pop(); } },
+  { id: "threshold-replay-action-mismatch", rule: "alternative action reproduction", expect: "recommendedAction must reproduce as proceed.", mutate: (pkg) => { robustness(pkg).thresholdReplays[0].recommendedAction = "defer"; } },
+  { id: "threshold-replay-class-mismatch", rule: "alternative consequence reproduction", expect: "consequenceClass must reproduce as false-assurance.", mutate: (pkg) => { robustness(pkg).thresholdReplays[0].consequenceClass = "aligned-proceed"; } },
+  { id: "threshold-replay-weight-mismatch", rule: "alternative weight reproduction", expect: "applicableWeight must reproduce as 5.", mutate: (pkg) => { robustness(pkg).thresholdReplays[0].applicableWeight = 1; } },
+  { id: "threshold-replay-error-mismatch", rule: "alternative error reproduction", expect: "weightedError must reproduce as 5.", mutate: (pkg) => { robustness(pkg).thresholdReplays[0].weightedError = 0; } },
+  { id: "threshold-replay-distance-mismatch", rule: "boundary distance reproduction", expect: "distanceFromForecast must reproduce as 0.1.", mutate: (pkg) => { robustness(pkg).thresholdReplays[0].distanceFromForecast = 0.2; } },
+  { id: "threshold-summary-flip-mismatch", rule: "action flip reproduction", expect: "robustnessSummary.actionFlipCount must reproduce as 1.", mutate: (pkg) => { robustness(pkg).robustnessSummary.actionFlipCount = 0; } },
+  { id: "threshold-summary-pairs-mismatch", rule: "flipped pair reproduction", expect: "robustnessSummary.flippedPairRefs must reproduce.", mutate: (pkg) => { robustness(pkg).robustnessSummary.flippedPairRefs = []; } },
+  { id: "threshold-summary-signal-mismatch", rule: "brittleness signal reproduction", expect: "brittlenessSignal must reproduce as insufficient-and-brittle.", mutate: (pkg) => { robustness(pkg).robustnessSummary.brittlenessSignal = "stable"; } },
+  { id: "threshold-insufficient-trigger-missing", rule: "insufficient robustness governance", expect: "insufficient robustness evidence requires an insufficient-data governance trigger.", mutate: (pkg) => { robustness(pkg).governanceTriggerRefs = ["GTR-CR-007"]; } },
+  { id: "threshold-brittleness-trigger-missing", rule: "brittleness governance", expect: "brittle threshold result requires a threshold-brittleness governance trigger.", mutate: (pkg) => { robustness(pkg).governanceTriggerRefs = ["GTR-CR-001"]; } },
+  { id: "threshold-interpretation-overclaim", rule: "sensitivity evidence boundary", expect: "interpretation must remain sensitivity-evidence-only-not-policy-optimization-quality-or-authority.", mutate: (pkg) => { robustness(pkg).interpretation = "optimal-policy-selected"; } },
+  { id: "threshold-boundary-overclaim", rule: "threshold verifier boundary", expect: "verifierBoundary must explicitly avoid claiming threshold sensitivity optimizes, ranks, selects, or authorizes policy.", mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "that threshold sensitivity optimizes, ranks, selects, or authorizes policy"); } },
   {
     id: "consequence-policies-not-array",
     rule: "consequence policies required",

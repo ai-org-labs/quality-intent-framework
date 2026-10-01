@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-01T04:32:15.216Z",
+  "validation_id": "NVR-MUP1FGC0-6SV0DH",
+  "raw_need": "Advance QIF after v0.6.33 using the current roadmap and latest AI evaluation evidence.",
+  "validation_status": "reframed",
+  "validated_need": "Add domain-general threshold robustness records that replay identical decision-outcome evidence across bounded stakeholder-reviewed alternatives, reproduce action and consequence flips plus boundary distance, and route declared brittleness to governance without optimizing, ranking, or selecting policy.",
+  "decision_summary": "The continuation request is reframed into the smallest gap after consequence calibration: threshold sensitivity and brittleness.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What changes?",
+      "answer": "Only reviewed threshold alternatives; source pairs and consequence policy stay fixed.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What is forbidden?",
+      "answer": "Automatic optimization, policy ranking, cross-policy comparison, and authority claims.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "One reviewed threshold was assumed stable enough to represent the decision."
+  ],
+  "evidence_gaps": [
+    "Example data cannot establish real-world threshold robustness."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV0634.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0634.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0634.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUP1EEF3-MALL9B"
+}

@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-09-30T04:35:57.047Z",
+  "updated_at": "2026-10-01T04:32:15.511Z",
   "entries": [
     {
       "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
-      "answer": "Scope the redesign to the standalone calibration-report runtime: policies, decision-outcome pairs, cohort records, consequence classification, aggregate consequence assessment, verifier rules, examples, fixtures, docs, and release evidence. Keep other package types, UI, external integrations, production data, and automatic deployment authority out of scope.",
-      "recorded_at": "2026-09-30T04:33:55.411Z",
+      "answer": "Scope to the standalone calibration-report runtime: reviewed threshold alternatives, per-pair alternative outcomes, reproducible action flips, boundary distance, brittleness summary, governance, fixtures, docs, and release. Exclude UI, external systems, production data, threshold optimization, ranking, or automatic policy selection.",
+      "recorded_at": "2026-10-01T04:31:26.083Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MUNM1G6J-E7NJMW",
+      "source_session_id": "SESS-MUP1E4AB-NONQ9J",
       "source_decision_record_id": null
     },
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means another human or AI can reproduce how each forecast crosses a governed action threshold, classify false assurance versus false alarm against an explicit loss boundary, reproduce consequence-weighted arithmetic, and force governance when a severe false-assurance boundary is crossed. Counts, monetary values, weights, thresholds, and scores remain evidence, never quality or semantic truth.",
-      "recorded_at": "2026-09-30T04:33:55.413Z",
+      "answer": "Success means a human or AI can reproduce whether bounded reviewed threshold alternatives change proceed/defer action or consequence class for the same evidence, see how close forecasts are to decision boundaries, and force governance when declared brittleness limits are exceeded. Stability, counts, thresholds, and scores remain evidence, not quality or authority.",
+      "recorded_at": "2026-10-01T04:31:26.084Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MUNM1G6J-E7NJMW",
+      "source_session_id": "SESS-MUP1E4AB-NONQ9J",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The continuation request is reframed into the smallest validated gap after cohort integrity: decision consequence asymmetry inside the existing calibration-report runtime.",
-      "recorded_at": "2026-09-30T04:35:57.047Z",
+      "answer": "The continuation request is reframed into the smallest gap after consequence calibration: threshold sensitivity and brittleness.",
+      "recorded_at": "2026-10-01T04:32:15.511Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MUNM1G6J-E7NJMW",
-      "source_decision_record_id": "DEC-MUNM4CTT-R3VUO3"
+      "source_session_id": "SESS-MUP1E4AB-NONQ9J",
+      "source_decision_record_id": "DEC-MUP1FGK2-CAO1MC"
     }
   ]
 }
