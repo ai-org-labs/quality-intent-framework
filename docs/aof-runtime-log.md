@@ -18,7 +18,9 @@ Date: 2026-10-01
 - Next: v0.6.35 Selective Escalation Calibration adds governed human/specialist routes without treating deferral volume as quality.
 - Self-review `.aof/artifacts/execution/council-reviews/CREV-MUP1RIAT-DGMTD2.json`, final review `CREV-MUP1RZFK-7LVM90`, and retrospective `CREV-MUP1RZFS-5S2D87` approved the release with explicit boundaries.
 - `TASK-052` is done; post-slice `.aof/runtime/v0.6.34-post-situation.json` found no truth conflict and selected v0.6.35.
-- `organization-verify` passed `271/271` checks. Commit, tag, and release are appended below.
+- `organization-verify` passed `271/271` checks.
+- Release commit `0b80d9831196388fd2a055021f443dfc9fbbd5f9` was pushed to `origin/main`; annotated tag `v0.6.34` resolves to the same commit.
+- GitHub Release `v0.6.34` was published at `2026-10-01T04:44:22Z`: `https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.34`.
 
 ## v0.6.33 Consequence-Sensitive Calibration
 
