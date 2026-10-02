@@ -1,0 +1,33 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-02T05:02:03.113Z",
+  "review_packet_id": "CREV-MUQHXMJT-AZSRSN",
+  "council_id": "qif-final-review-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Final review approves QIF v0.6.35 for release.",
+  "rationale": "All declared schema, reference, interval, route, evidence, summary, and governance rules pass. The example remains explicitly example-only and insufficient, so no semantic, causal, competence, or production efficacy claim is made.",
+  "recommendation": "Publish v0.6.35 and retain v0.6.36 as the next resolution-and-timeliness slice.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "release-readiness",
+  "diagnosis_confidence": 0.97,
+  "diagnosis_evidence_refs": [
+    "RELEASE-NOTES-v0.6.35.md"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "docs/qif-v0.6.35-selective-escalation-calibration.md",
+    "tests/fixtures/calibration-report/manifest.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-053",
+  "source_parent_session_id": "SESS-MUQH2DHK-PUKAUZ",
+  "source_decision_record_id": "DEC-MUQH8SZ9-G5RGFM"
+}

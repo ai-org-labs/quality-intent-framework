@@ -1,0 +1,82 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-02T04:44:30.093Z",
+  "packet_id": "ASP-MUQHB219-VAX1I0",
+  "source_task_id": "TASK-053",
+  "source_parent_session_id": "SESS-MUQH2DHK-PUKAUZ",
+  "source_decision_record_id": "DEC-MUQH8SZ9-G5RGFM",
+  "objective": "Implement and verify QIF v0.6.35 Selective Escalation Calibration",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": "qif-council",
+    "assignment_reason": "Builder extends existing calibration evidence into governed routes under Visionary and Guardian boundaries.",
+    "execution_mode": "council-seat"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "deterministic-verifier-design",
+    "selective-escalation-boundaries"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "selective-escalation-calibration",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs",
+        "docs/qif-v0.6.34-threshold-robustness.md"
+      ],
+      "rationale": "Existing pair, consequence, and threshold records provide deterministic inputs for route calibration."
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-no-automatic-authority",
+    "policy-no-activity-count-quality",
+    "policy-no-causal-claims"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-selective-escalation-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "selectiveEscalationPolicies",
+      "selectiveEscalationDecisions",
+      "selectiveEscalationAssessments"
+    ],
+    "acceptance_criteria": [
+      "Rules deterministically select one governed route for each included pair.",
+      "Recommended and actual routes, authority, execution evidence, and outcome class resolve.",
+      "Mismatch, unresolved authority, failed escalation, unverified evidence, and insufficient data route to governance."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "routing arithmetic and evidence boundaries are deterministic",
+      "evaluator_ref": "guardian",
+      "evidence_required": "positive package validation and retained negative fixtures",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "implicit-authority-or-quality-claim",
+      "trigger_condition": "route policy assigns authority automatically or treats route count as quality",
+      "consequence": "require-council-review",
+      "recovery_action": "restore explicit authority resolution and evidence-only count semantics"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will make every escalation route explainable.",
+    "current_action": "Implement selective escalation calibration",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Submit route evidence and governance behavior"
+  },
+  "status": "draft"
+}

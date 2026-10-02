@@ -2,6 +2,24 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.35 Selective Escalation Calibration
+
+Date: 2026-10-02
+
+- Need / Intent / Context: v0.6.34 exposed threshold brittleness but still reduced routing to proceed or defer. v0.6.35 adds reviewed proceed, defer, human-review, and specialist-escalation routes; actual execution evidence; route outcomes; and governance. It does not assign authority, infer causality or competence, surveil employees, or treat route counts as quality.
+- Latest public AOF v12.2.0 was used from clean checkout commit fc7599b; the dirty unreleased local 12.3.0 worktree was not modified.
+- Need Validation preceded Charter: .aof/artifacts/need-validation/records/NVR-QIFV0635.json then .aof/artifacts/need-validation/project-charters/PCH-QIFV0635.json in parent session SESS-MUQH2DHK-PUKAUZ; task TASK-053 records execution.
+- Council: Visionary approved an explicit boundary between automated confidence and accountable judgment; Builder extended the existing calibration-report rather than adding a package; Guardian required named authority, execution evidence, non-causal outcome language, and anti-surveillance/count boundaries. Evidence: .aof/runtime/v0.6.35-planning-review.json.
+- Actor packet .aof/artifacts/actor-skill-packets/ASP-MUQHB219-VAX1I0.json records schema/verifier skills, repository/runtime resources, no-automatic-authority and no-causal-claim policies, acceptance criteria, and Guardian review evidence.
+- Trend evidence: OpenAI's evaluation audit escalates disagreement and low-confidence cases to further review (https://openai.com/index/separating-signal-from-noise-coding-evaluations/); OpenAI's AI scorecard distinguishes ready, correction, and escalation outcomes (https://openai.com/index/a-scorecard-for-the-ai-age/); Anthropic frames trustworthy agents as checking in where human intent or preference is required (https://www.anthropic.com/research/trustworthy-agents); 2026 selective-deferral research studies calibrated specialist routing (https://arxiv.org/abs/2608.10885).
+- Built: four governed route definitions, contiguous score intervals, deterministic selected rule and route, recommended-versus-actual route comparison, named authority, route execution evidence, route-specific outcome class, per-route summaries, evidence sufficiency, and governance.
+- Not built: route optimization, authority assignment, employee scoring, causal attribution, staffing decisions, UI, external integration, or production efficacy claims.
+- Verification: calibration verifier and retained fixtures pass 16/16 positive and 781/781 negative rules.
+- Next: v0.6.36 Escalation Resolution and Timeliness records route disposition, timeout, redirection, and availability evidence without treating speed or throughput as quality.
+- Self-review CREV-MUQHXMFQ-9OP0CW, final review CREV-MUQHXMJT-AZSRSN, and retrospective CREV-MUQHXMNL-V62LT2 approved the release with explicit semantic, causal, authority, and employee-evaluation boundaries.
+- TASK-053 is done; .aof/runtime/v0.6.35-post-situation.json found no truth conflict and selected v0.6.36.
+- organization-verify passed 277/277 checks.
+
 ## v0.6.34 Threshold Robustness
 
 Date: 2026-10-01

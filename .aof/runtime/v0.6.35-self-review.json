@@ -1,0 +1,286 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-10-02T05:01:24.764Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MUQH2DHK-PUKAUZ",
+    "stage": "review",
+    "executionId": "CRUN-MUQHWSYH-RCWRRO",
+    "executionStatus": "prepared",
+    "invokedModel": false,
+    "seatCount": 2,
+    "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01)",
+    "lastCouncilExecutionId": "CRUN-MUQHWSYH-RCWRRO",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUQH2DHK-PUKAUZ",
+              "decision_id": "DEC-MUQH8SZ9-G5RGFM",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: governed proceed, defer, human-review, and specialist-escalation route policies; target-specific route decisions; route execution evidence; reproducible route outcome summaries; governance, schemas, verifier, examples, retained fixtures, documentation, and release evidence. Exclude UI, external integrations, production claims, automatic authority assignment, staff surveillance, causal attribution, and changes to unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which governed route was recommended for each existing decision-outcome pair, compare it with the route actually executed, resolve the accountable authority and execution evidence, reproduce per-route held/failed outcomes, and route mismatch, unresolved authority, failed escalated outcomes, insufficient data, or unverified evidence to governance. Route volume, escalation frequency, scores, and counts remain evidence, never quality, competence, or semantic truth.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: governed proceed, defer, human-review, and specialist-escalation route policies; target-specific route decisions; route execution evidence; reproducible route outcome summaries; governance, schemas, verifier, examples, retained fixtures, documentation, and release evidence. Exclude UI, external integrations, production claims, automatic authority assignment, staff surveillance, causal attribution, and changes to unrelated package types. | success: Success means a human or AI can reproduce which governed route was recommended for each existing decision-outcome pair, compare it with the route actually executed, resolve the accountable authority and execution evidence, reproduce per-route held/failed outcomes, and route mismatch, unresolved authority, failed escalated outcomes, insufficient data, or unverified evidence to governance. Route volume, escalation frequency, scores, and counts remain evidence, never quality, competence, or semantic truth.",
+              "context_snapshot_id": "CTX-MUQH40W9-GFAYY0",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: governed proceed, defer, human-review, and specialist-escalation route policies; target-specific route decisions; route execution evidence; reproducible route outcome summaries; governance, schemas, verifier, examples, retained fixtures, documentation, and release evidence. Exclude UI, external integrations, production claims, automatic authority assignment, staff surveillance, causal attribution, and changes to unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which governed route was recommended for each existing decision-outcome pair, compare it with the route actually executed, resolve the accountable authority and execution evidence, reproduce per-route held/failed outcomes, and route mismatch, unresolved authority, failed escalated outcomes, insufficient data, or unverified evidence to governance. Route volume, escalation frequency, scores, and counts remain evidence, never quality, competence, or semantic truth."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.34 using the current roadmap and latest AI evaluation evidence. Build and release v0.6.35 Selective Escalation Calibration.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0635.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0635.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0635.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0635.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0635.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUQH8SZ9-G5RGFM"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUQH2DHK-PUKAUZ",
+              "decision_id": "DEC-MUQH8SZ9-G5RGFM",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: governed proceed, defer, human-review, and specialist-escalation route policies; target-specific route decisions; route execution evidence; reproducible route outcome summaries; governance, schemas, verifier, examples, retained fixtures, documentation, and release evidence. Exclude UI, external integrations, production claims, automatic authority assignment, staff surveillance, causal attribution, and changes to unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which governed route was recommended for each existing decision-outcome pair, compare it with the route actually executed, resolve the accountable authority and execution evidence, reproduce per-route held/failed outcomes, and route mismatch, unresolved authority, failed escalated outcomes, insufficient data, or unverified evidence to governance. Route volume, escalation frequency, scores, and counts remain evidence, never quality, competence, or semantic truth.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: governed proceed, defer, human-review, and specialist-escalation route policies; target-specific route decisions; route execution evidence; reproducible route outcome summaries; governance, schemas, verifier, examples, retained fixtures, documentation, and release evidence. Exclude UI, external integrations, production claims, automatic authority assignment, staff surveillance, causal attribution, and changes to unrelated package types. | success: Success means a human or AI can reproduce which governed route was recommended for each existing decision-outcome pair, compare it with the route actually executed, resolve the accountable authority and execution evidence, reproduce per-route held/failed outcomes, and route mismatch, unresolved authority, failed escalated outcomes, insufficient data, or unverified evidence to governance. Route volume, escalation frequency, scores, and counts remain evidence, never quality, competence, or semantic truth.",
+              "context_snapshot_id": "CTX-MUQH40W9-GFAYY0",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: governed proceed, defer, human-review, and specialist-escalation route policies; target-specific route decisions; route execution evidence; reproducible route outcome summaries; governance, schemas, verifier, examples, retained fixtures, documentation, and release evidence. Exclude UI, external integrations, production claims, automatic authority assignment, staff surveillance, causal attribution, and changes to unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which governed route was recommended for each existing decision-outcome pair, compare it with the route actually executed, resolve the accountable authority and execution evidence, reproduce per-route held/failed outcomes, and route mismatch, unresolved authority, failed escalated outcomes, insufficient data, or unverified evidence to governance. Route volume, escalation frequency, scores, and counts remain evidence, never quality, competence, or semantic truth."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.34 using the current roadmap and latest AI evaluation evidence. Build and release v0.6.35 Selective Escalation Calibration.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0635.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0635.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0635.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0635.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0635.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUQH8SZ9-G5RGFM"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MUQHWSYH-RCWRRO",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "prepared",
+      "started_at": "2026-10-02T05:01:24.758Z",
+      "completed_at": "2026-10-02T05:01:24.758Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01)",
+      "steps": [
+        {
+          "step_id": "CRUN-MUQHWSYH-RCWRRO-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUQH2DHK-PUKAUZ",
+              "decision_id": "DEC-MUQH8SZ9-G5RGFM",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: governed proceed, defer, human-review, and specialist-escalation route policies; target-specific route decisions; route execution evidence; reproducible route outcome summaries; governance, schemas, verifier, examples, retained fixtures, documentation, and release evidence. Exclude UI, external integrations, production claims, automatic authority assignment, staff surveillance, causal attribution, and changes to unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which governed route was recommended for each existing decision-outcome pair, compare it with the route actually executed, resolve the accountable authority and execution evidence, reproduce per-route held/failed outcomes, and route mismatch, unresolved authority, failed escalated outcomes, insufficient data, or unverified evidence to governance. Route volume, escalation frequency, scores, and counts remain evidence, never quality, competence, or semantic truth.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: governed proceed, defer, human-review, and specialist-escalation route policies; target-specific route decisions; route execution evidence; reproducible route outcome summaries; governance, schemas, verifier, examples, retained fixtures, documentation, and release evidence. Exclude UI, external integrations, production claims, automatic authority assignment, staff surveillance, causal attribution, and changes to unrelated package types. | success: Success means a human or AI can reproduce which governed route was recommended for each existing decision-outcome pair, compare it with the route actually executed, resolve the accountable authority and execution evidence, reproduce per-route held/failed outcomes, and route mismatch, unresolved authority, failed escalated outcomes, insufficient data, or unverified evidence to governance. Route volume, escalation frequency, scores, and counts remain evidence, never quality, competence, or semantic truth.",
+              "context_snapshot_id": "CTX-MUQH40W9-GFAYY0",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: governed proceed, defer, human-review, and specialist-escalation route policies; target-specific route decisions; route execution evidence; reproducible route outcome summaries; governance, schemas, verifier, examples, retained fixtures, documentation, and release evidence. Exclude UI, external integrations, production claims, automatic authority assignment, staff surveillance, causal attribution, and changes to unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which governed route was recommended for each existing decision-outcome pair, compare it with the route actually executed, resolve the accountable authority and execution evidence, reproduce per-route held/failed outcomes, and route mismatch, unresolved authority, failed escalated outcomes, insufficient data, or unverified evidence to governance. Route volume, escalation frequency, scores, and counts remain evidence, never quality, competence, or semantic truth."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.34 using the current roadmap and latest AI evaluation evidence. Build and release v0.6.35 Selective Escalation Calibration.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0635.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0635.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0635.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0635.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0635.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUQH8SZ9-G5RGFM"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MUQHWSYH-RCWRRO-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUQH2DHK-PUKAUZ",
+              "decision_id": "DEC-MUQH8SZ9-G5RGFM",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: governed proceed, defer, human-review, and specialist-escalation route policies; target-specific route decisions; route execution evidence; reproducible route outcome summaries; governance, schemas, verifier, examples, retained fixtures, documentation, and release evidence. Exclude UI, external integrations, production claims, automatic authority assignment, staff surveillance, causal attribution, and changes to unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which governed route was recommended for each existing decision-outcome pair, compare it with the route actually executed, resolve the accountable authority and execution evidence, reproduce per-route held/failed outcomes, and route mismatch, unresolved authority, failed escalated outcomes, insufficient data, or unverified evidence to governance. Route volume, escalation frequency, scores, and counts remain evidence, never quality, competence, or semantic truth.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: governed proceed, defer, human-review, and specialist-escalation route policies; target-specific route decisions; route execution evidence; reproducible route outcome summaries; governance, schemas, verifier, examples, retained fixtures, documentation, and release evidence. Exclude UI, external integrations, production claims, automatic authority assignment, staff surveillance, causal attribution, and changes to unrelated package types. | success: Success means a human or AI can reproduce which governed route was recommended for each existing decision-outcome pair, compare it with the route actually executed, resolve the accountable authority and execution evidence, reproduce per-route held/failed outcomes, and route mismatch, unresolved authority, failed escalated outcomes, insufficient data, or unverified evidence to governance. Route volume, escalation frequency, scores, and counts remain evidence, never quality, competence, or semantic truth.",
+              "context_snapshot_id": "CTX-MUQH40W9-GFAYY0",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: governed proceed, defer, human-review, and specialist-escalation route policies; target-specific route decisions; route execution evidence; reproducible route outcome summaries; governance, schemas, verifier, examples, retained fixtures, documentation, and release evidence. Exclude UI, external integrations, production claims, automatic authority assignment, staff surveillance, causal attribution, and changes to unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which governed route was recommended for each existing decision-outcome pair, compare it with the route actually executed, resolve the accountable authority and execution evidence, reproduce per-route held/failed outcomes, and route mismatch, unresolved authority, failed escalated outcomes, insufficient data, or unverified evidence to governance. Route volume, escalation frequency, scores, and counts remain evidence, never quality, competence, or semantic truth."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.34 using the current roadmap and latest AI evaluation evidence. Build and release v0.6.35 Selective Escalation Calibration.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0635.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0635.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0635.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0635.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0635.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUQH8SZ9-G5RGFM"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

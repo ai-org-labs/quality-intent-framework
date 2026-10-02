@@ -1,0 +1,32 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-02T05:02:02.966Z",
+  "review_packet_id": "CREV-MUQHXMFQ-9OP0CW",
+  "council_id": "qif-self-review-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Self-review approves v0.6.35 within its evidence-only, non-causal, non-authority boundary.",
+  "rationale": "Visionary: the route is explainable from score rule to accountable handoff. Builder: policy intervals, decisions, evidence, outcome classes, and summaries reproduce. Guardian: route volume is not quality; failed outcomes are not causal blame; authority and unverified evidence remain governed.",
+  "recommendation": "Proceed to final verification and release.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "selective-escalation-self-review",
+  "diagnosis_confidence": 0.96,
+  "diagnosis_evidence_refs": [
+    "tools/validate-calibration-report.mjs"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "tests/fixtures/calibration-report/manifest.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-053",
+  "source_parent_session_id": "SESS-MUQH2DHK-PUKAUZ",
+  "source_decision_record_id": "DEC-MUQH8SZ9-G5RGFM"
+}

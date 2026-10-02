@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-02T04:41:57.468Z",
+  "problem_statement_id": "PST-MUQH7S9N-WUV4RE",
+  "affected_party": "Humans, AI agents, and hybrid organizations relying on calibrated QIF decisions",
+  "actual_problem": "QIF can classify proceed or defer outcomes, but cannot represent governed human-review or specialist-escalation routes, their accountable authority, or their execution evidence.",
+  "why_it_matters": "Binary routing hides where judgment or specialist capability is required and can turn a probability threshold into implicit authority.",
+  "why_now": "v0.6.34 exposed threshold brittleness; the next safe capability is explicit selective escalation before any policy optimization.",
+  "evidence_refs": [
+    "docs/qif-v0.6.34-threshold-robustness.md",
+    ".aof/goals/next-value-slice.json"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUQH40WC-8XUSC1"
+}

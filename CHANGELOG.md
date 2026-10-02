@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.35
+
+- Added executable Selective Escalation Policies with governed proceed, defer, human-review, and specialist-escalation routes plus contiguous routing rules.
+- Added deterministic Selective Escalation Decisions linking recommended and actual routes, accountable authority, execution evidence, observed outcomes, and route-specific outcome classes.
+- Added aggregate Selective Escalation Assessments with per-route held/failed summaries, evidence sufficiency, route deviation, unresolved authority, and governance routing.
+- Preserved the boundary that route volume, escalation frequency, and outcomes do not prove quality, competence, causality, blame, or authority.
+- Added 28 retained negative cases; the retained suite now covers 781 negative cases across 16 positive package types.
+
 ## v0.6.34
 
 - Added executable Threshold Robustness Analyses with reviewed alternatives that straddle a baseline action threshold.

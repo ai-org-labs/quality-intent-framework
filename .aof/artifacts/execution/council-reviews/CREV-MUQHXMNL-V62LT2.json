@@ -1,0 +1,32 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-02T05:02:03.249Z",
+  "review_packet_id": "CREV-MUQHXMNL-V62LT2",
+  "council_id": "qif-retrospective-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "v0.6.35 retrospective: selective escalation is now traceable without turning routing into authority or reviewer scoring.",
+  "rationale": "Reusing calibration-report kept the slice coherent and made the distinction between policy recommendation, actual route, authority, execution evidence, and later outcome explicit. The remaining gap is whether escalation resolves, redirects, or times out within its response boundary.",
+  "recommendation": "Implement Escalation Resolution and Timeliness in v0.6.36, then calibrate disagreement and policy drift.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "release-retrospective",
+  "diagnosis_confidence": 0.95,
+  "diagnosis_evidence_refs": [
+    "docs/qif-v0.6.35-selective-escalation-calibration.md"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [],
+  "evidence_refs": [
+    "RELEASE-NOTES-v0.6.35.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-053",
+  "source_parent_session_id": "SESS-MUQH2DHK-PUKAUZ",
+  "source_decision_record_id": "DEC-MUQH8SZ9-G5RGFM"
+}

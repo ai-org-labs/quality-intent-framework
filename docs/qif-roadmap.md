@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.34 baseline)
+## Current Position (v0.6.35 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -185,6 +185,12 @@ and adoption surface — not pretending the limits away.
   across bounded, reviewed alternatives, reproduce action and consequence
   flips plus boundary distance, and govern brittle results without optimizing,
   ranking, selecting, or authorizing policy.
+  v0.6.35 adds Selective Escalation Calibration with reviewed proceed, defer,
+  human-review, and specialist-escalation routes; deterministic route
+  selection; actual execution evidence; route-specific outcomes; and
+  governance for mismatch, unresolved authority, unverified evidence, failed
+  escalated outcomes, and insufficient data. Route volume is workload evidence,
+  not quality, competence, causality, blame, or authority.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -196,13 +202,14 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-09-27 against primary-source signals. The
+The roadmap was revalidated on 2026-10-02 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
 
 | Current signal | Quality risk exposed | QIF response | Lead, not follow |
 | --- | --- | --- | --- |
+| Evaluation and operations are moving toward selective human or specialist review for low-confidence, disputed, novel, or high-impact cases rather than reviewing everything. ([OpenAI evaluation audit](https://openai.com/index/separating-signal-from-noise-coding-evaluations/), [OpenAI AI scorecard](https://openai.com/index/a-scorecard-for-the-ai-age/), [Anthropic trustworthy agents](https://www.anthropic.com/research/trustworthy-agents), [ConfTriage](https://arxiv.org/abs/2608.10885)) | A deferral count can be mistaken for safety, an escalation route can lack real authority or capability, and a later outcome can be misused as causal proof or employee-performance evidence. | v0.6.35 Selective Escalation Calibration, followed by v0.6.36 resolution and timeliness evidence. | Keep policy, actual route, authority, capability, execution evidence, outcome, disagreement, and response timing separate before optimizing any routing policy. |
 | Agent evaluation is moving from single answers to multi-turn trials, full trajectories, outcomes, multiple graders, and living suites. ([Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), [OpenAI](https://openai.com/index/trustworthy-third-party-evaluations-foundations/)) | A final answer can look correct while tool use, intermediate state, or the actual environment outcome is wrong; benchmark saturation and contamination can hide regressions. | v0.4.x fixture completeness, then v0.5 trajectory/outcome ledger and v0.7 calibration health. | Bind every verdict to outcome state, environment provenance, evaluator uncertainty, and suite health before these become audit afterthoughts. |
 | Infrastructure configuration can move agent benchmark scores by more than the gap between compared systems, while resource ceilings can change what the evaluation measures. ([Anthropic](https://www.anthropic.com/engineering/infrastructure-noise)) | A small score lead may reflect runtime limits, concurrency, incidents, or timing rather than the evaluated capability; one point estimate hides both trial and infrastructure uncertainty. | v0.6.29 Trial and Infrastructure Uncertainty records. | Require reproducible observed ranges, named infrastructure profiles, confounder status, and a no-exact-comparison boundary before interpreting score differences. |
 | Long-running agent platforms now coordinate subagents, persistent work, files, tools, and intermediate results over days. ([OpenAI Agents API](https://openai.com/index/introducing-the-agents-api/)) | Aggregate success can hide weak subagent evidence, stale context, or an invalid evaluation path; a higher eval score may still be methodologically incomparable. | v0.6 action and handoff controls, then v0.7 evidence-origin and calibration-readiness boundaries. | Require an explicit path from declared confidence to observed outcomes before treating an eval delta as predictive evidence. |
@@ -540,6 +547,21 @@ Deliverables:
   review or specialist escalation, while measuring route-specific outcomes
   without treating deferral volume as quality or automatically assigning
   authority.
+  Status: implemented in v0.6.35 through four-route policies, contiguous
+  routing rules, recommended-versus-actual route decisions, execution evidence,
+  route outcome summaries, and governance. The committed example remains
+  illustrative and insufficient.
+- Next planned slice, v0.6.36 Escalation Resolution and Timeliness: record
+  whether the routed reviewer or specialist accepted, rejected, redirected, or
+  timed out; preserve response-time and availability evidence without treating
+  speed or throughput as quality.
+- Next planned slice, v0.6.37 Reviewer Disagreement Calibration: preserve
+  independent judgments, disagreement reasons, overrides, and adjudication
+  outcomes without treating majority vote, seniority, or agreement rate as
+  semantic truth.
+- Next planned slice, v0.6.38 Route Policy Drift and Revalidation: compare
+  policy versions, changed authority or capability boundaries, stale routes,
+  and post-change outcomes without automatically updating or authorizing policy.
 - Evaluation Suite Health records: task origin, contamination boundary,
   solvability review, saturation, grader calibration, trial variance, harness
   and infrastructure configuration, and drift ownership.

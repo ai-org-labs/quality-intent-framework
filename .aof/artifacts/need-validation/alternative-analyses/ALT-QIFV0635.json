@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-02T04:41:57.744Z",
+  "alternative_analysis_id": "ALT-MUQH7SHC-8U2WFO",
+  "subject_need": "Represent and verify selective escalation after threshold robustness",
+  "alternative_solutions": [
+    "Extend calibration-report with reusable route policies, pair-level route decisions, execution evidence, aggregate assessments, and governance",
+    "Create a separate escalation package and cross-package references"
+  ],
+  "non_solution_options": [
+    "Document escalation guidance without executable schema or verifier"
+  ],
+  "defer_options": [
+    "Keep binary proceed/defer until production data exists"
+  ],
+  "stop_options": [
+    "Do not add escalation if authority or evidence cannot remain explicit"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUQH40WC-8XUSC1"
+}

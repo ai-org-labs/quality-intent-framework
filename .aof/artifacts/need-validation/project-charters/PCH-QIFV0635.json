@@ -1,0 +1,21 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-02T04:42:44.901Z",
+  "project_charter_id": "PCH-MUQH8SV9-CRQ0KI",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV0635.json",
+  "validated_objective": "Release QIF v0.6.35 Selective Escalation Calibration with reproducible governed routing and explicit evidence boundaries.",
+  "scope": [
+    "Extend calibration-report with reusable route policies, pair-level route decisions, route execution evidence, route assessments, governance, and verifier boundaries.",
+    "Add deterministic verifier rules, retained negative fixtures, examples, plain-language docs, roadmap, changelog, runtime log, and release evidence."
+  ],
+  "constraints": [
+    "Keep QIF standalone and domain-general.",
+    "Do not infer authority, causality, competence, quality, or semantic truth from route selection, execution, outcome, or count."
+  ],
+  "expected_outcomes": [
+    "Users can reproduce why a route was selected and whether actual execution matched the governed policy.",
+    "Unresolved authority, mismatch, failed escalated outcomes, unverified evidence, and insufficient samples become visible governance work."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUQH40WC-8XUSC1"
+}

@@ -68,6 +68,202 @@
   ],
   "negatives": [
     {
+      "file": "calibration-report-escalation-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "selective escalation policies required",
+      "expect": "fail",
+      "errorIncludes": "package selectiveEscalationPolicies must be an array."
+    },
+    {
+      "file": "calibration-report-escalation-decisions-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "selective escalation decisions required",
+      "expect": "fail",
+      "errorIncludes": "package selectiveEscalationDecisions must be an array."
+    },
+    {
+      "file": "calibration-report-escalation-assessments-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "selective escalation assessments required",
+      "expect": "fail",
+      "errorIncludes": "package selectiveEscalationAssessments must be an array."
+    },
+    {
+      "file": "calibration-report-escalation-route-types-incomplete.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "all governed route types required",
+      "expect": "fail",
+      "errorIncludes": "routes must define proceed, defer, human-review, and specialist-escalation exactly once."
+    },
+    {
+      "file": "calibration-report-escalation-rule-gap.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "routing interval closure",
+      "expect": "fail",
+      "errorIncludes": "routingRules must be contiguous without gaps or overlap."
+    },
+    {
+      "file": "calibration-report-escalation-rule-end.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "routing interval upper closure",
+      "expect": "fail",
+      "errorIncludes": "routingRules must end at 1.000001 so probability 1 is included."
+    },
+    {
+      "file": "calibration-report-escalation-route-unreachable.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "every route reachable",
+      "expect": "fail",
+      "errorIncludes": "routingRules must make every declared route reachable exactly once."
+    },
+    {
+      "file": "calibration-report-escalation-route-volume-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route volume evidence boundary",
+      "expect": "fail",
+      "errorIncludes": "routeVolumeInterpretation must be workload-evidence-only-not-quality-competence-or-authority."
+    },
+    {
+      "file": "calibration-report-escalation-policy-unreviewed-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route policy governance",
+      "expect": "fail",
+      "errorIncludes": "non-active route policy requires a route-policy-unreviewed governance trigger."
+    },
+    {
+      "file": "calibration-report-escalation-decision-forecast-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "forecast reproduction",
+      "expect": "fail",
+      "errorIncludes": "forecastProbability must equal the referenced pair forecastProbability."
+    },
+    {
+      "file": "calibration-report-escalation-decision-rule-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "selected rule reproduction",
+      "expect": "fail",
+      "errorIncludes": "selectedRuleRef must reproduce as SRR-CR-050-075."
+    },
+    {
+      "file": "calibration-report-escalation-decision-route-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "recommended route reproduction",
+      "expect": "fail",
+      "errorIncludes": "recommendedRouteRef must reproduce as SER-CR-HUMAN."
+    },
+    {
+      "file": "calibration-report-escalation-decision-actual-route-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "actual route resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing actual escalation route"
+    },
+    {
+      "file": "calibration-report-escalation-decision-deviation-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route deviation reproduction",
+      "expect": "fail",
+      "errorIncludes": "routeDeviation must reproduce as true."
+    },
+    {
+      "file": "calibration-report-escalation-decision-authority-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "actual route authority",
+      "expect": "fail",
+      "errorIncludes": "authorityRef must equal the declared actual-route authorityRef."
+    },
+    {
+      "file": "calibration-report-escalation-decision-outcome-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route outcome reproduction",
+      "expect": "fail",
+      "errorIncludes": "observedOutcome must equal the referenced pair outcome."
+    },
+    {
+      "file": "calibration-report-escalation-decision-class-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route outcome classification",
+      "expect": "fail",
+      "errorIncludes": "routeOutcomeClass must reproduce as human-review-outcome-failed."
+    },
+    {
+      "file": "calibration-report-escalation-evidence-verifier-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route evidence verification",
+      "expect": "fail",
+      "errorIncludes": "routeExecutionEvidence verifiedBy must include at least one verifier."
+    },
+    {
+      "file": "calibration-report-escalation-evidence-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unverified route evidence governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified route evidence requires a route-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-escalation-failed-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "failed escalation governance",
+      "expect": "fail",
+      "errorIncludes": "failed escalated outcome requires an escalated-outcome-failed governance trigger."
+    },
+    {
+      "file": "calibration-report-escalation-assessment-route-coverage.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route summary closure",
+      "expect": "fail",
+      "errorIncludes": "routeSummaries must exactly cover policy routes."
+    },
+    {
+      "file": "calibration-report-escalation-assessment-summary-refs.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route summary membership",
+      "expect": "fail",
+      "errorIncludes": "decisionRefs must reproduce."
+    },
+    {
+      "file": "calibration-report-escalation-assessment-summary-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route summary count",
+      "expect": "fail",
+      "errorIncludes": "decisionCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-escalation-assessment-verified-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "verified execution count",
+      "expect": "fail",
+      "errorIncludes": "verifiedExecutionCount must reproduce as 0."
+    },
+    {
+      "file": "calibration-report-escalation-assessment-sufficiency.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route evidence sufficiency",
+      "expect": "fail",
+      "errorIncludes": "dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "calibration-report-escalation-assessment-signal.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route assessment signal",
+      "expect": "fail",
+      "errorIncludes": "assessmentSignal must reproduce as insufficient-data."
+    },
+    {
+      "file": "calibration-report-escalation-assessment-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "insufficient route evidence governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient route evidence requires an insufficient-data governance trigger."
+    },
+    {
+      "file": "calibration-report-escalation-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "selective escalation verifier boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming route volume, escalation frequency, or route outcome proves quality, competence, causality, or authority."
+    },
+    {
       "file": "calibration-report-threshold-robustness-not-array.json",
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "threshold robustness required",

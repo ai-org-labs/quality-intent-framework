@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.6.35 Selective Escalation Calibration: model governed proceed, defer, human-review, and specialist-escalation routes; reproduce route-specific outcomes and consequence evidence without treating route volume as quality or automatically assigning authority.",
-  "updated_at": "2026-10-01T04:42:17.171Z",
-  "agreed_with_human": null,
-  "source_session_id": "SESS-MUP1E4AB-NONQ9J",
-  "source_decision_record_id": "DEC-MUP1FGK2-CAO1MC",
+  "content": "QIF v0.6.36 Escalation Resolution and Timeliness: record accepted, rejected, redirected, and timed-out route dispositions plus response-time and availability evidence without treating speed or throughput as quality.",
+  "updated_at": "2026-10-02T04:59:29.324Z",
+  "agreed_with_human": true,
+  "source_session_id": "SESS-MUQH2DHK-PUKAUZ",
+  "source_decision_record_id": "DEC-MUQH8SZ9-G5RGFM",
   "declared_complete_at": null
 }

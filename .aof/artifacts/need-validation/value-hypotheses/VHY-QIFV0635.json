@@ -1,0 +1,19 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-02T04:41:57.609Z",
+  "value_hypothesis_id": "VHY-MUQH7SDL-PWYCGA",
+  "expected_value_creation": "Make route recommendations, execution, authority, evidence, outcomes, and governance reproducible without treating escalation as quality.",
+  "beneficiary": "QIF evaluators, accountable reviewers, domain specialists, and affected stakeholders",
+  "supporting_evidence": [
+    "v0.6.34 threshold replay shows decisions can flip near reviewed boundaries",
+    "Current AI evaluation practice emphasizes calibrated human oversight and claim boundaries"
+  ],
+  "success_criteria": [
+    "Route selection is deterministic from explicit rules",
+    "Actual route, authority, execution evidence, and route-specific outcome class are traceable",
+    "Mismatch, unresolved authority, failed escalation, unverified evidence, and insufficient data trigger governance",
+    "Counts and route volume are explicitly non-quality evidence"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUQH40WC-8XUSC1"
+}

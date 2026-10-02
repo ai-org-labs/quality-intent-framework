@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-01T04:32:15.511Z",
+  "updated_at": "2026-10-02T05:01:24.912Z",
   "entries": [
     {
-      "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
-      "answer": "Scope to the standalone calibration-report runtime: reviewed threshold alternatives, per-pair alternative outcomes, reproducible action flips, boundary distance, brittleness summary, governance, fixtures, docs, and release. Exclude UI, external systems, production data, threshold optimization, ranking, or automatic policy selection.",
-      "recorded_at": "2026-10-01T04:31:26.083Z",
-      "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
-      "mismatch_state": null,
-      "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MUP1E4AB-NONQ9J",
-      "source_decision_record_id": null
-    },
-    {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means a human or AI can reproduce whether bounded reviewed threshold alternatives change proceed/defer action or consequence class for the same evidence, see how close forecasts are to decision boundaries, and force governance when declared brittleness limits are exceeded. Stability, counts, thresholds, and scores remain evidence, not quality or authority.",
-      "recorded_at": "2026-10-01T04:31:26.084Z",
+      "answer": "Success means a human or AI can reproduce which governed route was recommended for each existing decision-outcome pair, compare it with the route actually executed, resolve the accountable authority and execution evidence, reproduce per-route held/failed outcomes, and route mismatch, unresolved authority, failed escalated outcomes, insufficient data, or unverified evidence to governance. Route volume, escalation frequency, scores, and counts remain evidence, never quality, competence, or semantic truth.",
+      "recorded_at": "2026-10-02T04:39:02.034Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MUP1E4AB-NONQ9J",
+      "source_session_id": "SESS-MUQH2DHK-PUKAUZ",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The continuation request is reframed into the smallest gap after consequence calibration: threshold sensitivity and brittleness.",
-      "recorded_at": "2026-10-01T04:32:15.511Z",
+      "answer": "The continuation request is reframed into the smallest gap after threshold robustness: explicit, evidence-backed, governed selective escalation.",
+      "recorded_at": "2026-10-02T04:42:45.049Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MUP1E4AB-NONQ9J",
-      "source_decision_record_id": "DEC-MUP1FGK2-CAO1MC"
+      "source_session_id": "SESS-MUQH2DHK-PUKAUZ",
+      "source_decision_record_id": "DEC-MUQH8SZ9-G5RGFM"
+    },
+    {
+      "question": "council approval で何が決まったか",
+      "answer": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Visionary(strategy-lead-01) -> Builder(design-builder-01) -> Guardian(risk-reviewer-01)",
+      "recorded_at": "2026-10-02T05:01:24.912Z",
+      "expectation_state": null,
+      "mismatch_state": null,
+      "scale_direction": "wait for human escalation resolution before continuing",
+      "source_session_id": "SESS-MUQH2DHK-PUKAUZ",
+      "source_decision_record_id": "DEC-MUQH8SZ9-G5RGFM"
     }
   ]
 }

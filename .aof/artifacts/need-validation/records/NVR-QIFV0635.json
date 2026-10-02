@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-02T04:42:44.759Z",
+  "validation_id": "NVR-MUQH8SRB-HVFH3H",
+  "raw_need": "Advance QIF after v0.6.34 using the current roadmap and latest AI evaluation evidence.",
+  "validation_status": "reframed",
+  "validated_need": "Add domain-general selective escalation calibration that deterministically routes existing decision-outcome evidence among proceed, defer, human review, and specialist escalation; records accountable authority and route execution evidence; reproduces route-specific outcomes; and forces governance without treating route volume as quality or assigning authority automatically.",
+  "decision_summary": "The continuation request is reframed into the smallest gap after threshold robustness: explicit, evidence-backed, governed selective escalation.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What must become reproducible?",
+      "answer": "Recommended route, actual route, authority, execution evidence, route outcome class, aggregate route summary, and governance reasons.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What is forbidden?",
+      "answer": "Automatic authority, causal attribution, employee surveillance, quality claims from route counts, threshold optimization, UI, and external integration.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A route recommendation was previously represented as a binary proceed or defer action."
+  ],
+  "evidence_gaps": [
+    "Illustrative example evidence cannot prove real-world route efficacy or authority correctness."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV0635.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0635.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0635.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUQH40WC-8XUSC1"
+}

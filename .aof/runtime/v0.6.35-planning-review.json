@@ -1,0 +1,38 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-02T04:58:34.207Z",
+  "review_packet_id": "CREV-MUQHT5CV-G1ZP86",
+  "council_id": "qif-council",
+  "stage": "planning",
+  "review_status": "approved",
+  "decision_summary": "Visionary, Builder, and Guardian approve v0.6.35 Selective Escalation Calibration with explicit authority and evidence-only boundaries.",
+  "rationale": "The slice fills the binary routing gap using existing calibration inputs, while Guardian conditions prevent automatic authority, causal blame, surveillance, and count-based quality claims.",
+  "recommendation": "Implement and release the narrow calibration-report extension after full fixture and AOF verification.",
+  "target_audience": "QIF users, AI agents, accountable reviewers, and governance owners",
+  "expected_user_reaction": "Users can explain why a case was routed and what evidence remains unresolved.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [
+    "Add policy, decision, assessment, example, verifier, fixtures, plain-language guide, and roadmap."
+  ],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "missing-governed-escalation-route",
+  "diagnosis_confidence": 0.93,
+  "diagnosis_evidence_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0635.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [
+    ".aof/runtime/v0.6.35-planning-visionary.json",
+    ".aof/runtime/v0.6.35-planning-builder.json",
+    ".aof/runtime/v0.6.35-planning-guardian.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/actor-skill-packets/ASP-MUQHB219-VAX1I0.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-053",
+  "source_parent_session_id": "SESS-MUQH2DHK-PUKAUZ",
+  "source_decision_record_id": "DEC-MUQH8SZ9-G5RGFM"
+}

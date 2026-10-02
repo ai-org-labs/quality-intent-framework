@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-053",
+  "title": "Release QIF v0.6.35 Selective Escalation Calibration",
+  "description": "Implement governed route policies, route decisions, execution evidence, route assessments, verifier rules, fixtures, docs, and release evidence.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MUQH2DHK-PUKAUZ",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MUQH8SZ9-G5RGFM",
+  "operating_goal_ref": "v0.6.35-selective-escalation",
+  "created_at": "2026-10-02T04:42:58.535Z",
+  "updated_at": "2026-10-02T05:06:01.736Z",
+  "assigned_at": null,
+  "done_at": "2026-10-02T05:06:01.736Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented and verified QIF v0.6.35: 16/16 positive, 781/781 negative, AOF organization 277/277; approved by self-review, final review, and retrospective."
+}

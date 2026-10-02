@@ -143,6 +143,9 @@ function validatePackage(pkg, packagePath) {
   const decisionConsequences = requiredArray(pkg, "decisionConsequences");
   const consequenceAssessments = requiredArray(pkg, "consequenceAssessments");
   const thresholdRobustnessAnalyses = requiredArray(pkg, "thresholdRobustnessAnalyses");
+  const selectiveEscalationPolicies = requiredArray(pkg, "selectiveEscalationPolicies");
+  const selectiveEscalationDecisions = requiredArray(pkg, "selectiveEscalationDecisions");
+  const selectiveEscalationAssessments = requiredArray(pkg, "selectiveEscalationAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -154,6 +157,9 @@ function validatePackage(pkg, packagePath) {
   const decisionConsequenceIndex = indexById(decisionConsequences, `${packagePath}:decisionConsequences`);
   const consequenceAssessmentIndex = indexById(consequenceAssessments, `${packagePath}:consequenceAssessments`);
   const thresholdRobustnessIndex = indexById(thresholdRobustnessAnalyses, `${packagePath}:thresholdRobustnessAnalyses`);
+  const escalationPolicyIndex = indexById(selectiveEscalationPolicies, `${packagePath}:selectiveEscalationPolicies`);
+  const escalationDecisionIndex = indexById(selectiveEscalationDecisions, `${packagePath}:selectiveEscalationDecisions`);
+  const escalationAssessmentIndex = indexById(selectiveEscalationAssessments, `${packagePath}:selectiveEscalationAssessments`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -564,6 +570,116 @@ function validatePackage(pkg, packagePath) {
     if (isBrittle && !triggerTypes.has("threshold-brittleness")) errors.push(`${analysis.id} brittle threshold result requires a threshold-brittleness governance trigger.`);
   }
 
+  const requiredRouteTypes = ["proceed", "defer", "human-review", "specialist-escalation"];
+  for (const policy of selectiveEscalationPolicies) {
+    const consequencePolicy = ref(consequencePolicyIndex, policy.consequencePolicyRef, "consequence policy", policy.id);
+    const routes = Array.isArray(policy.routes) ? policy.routes : [];
+    const routeIndex = indexById(routes, `${policy.id}:routes`);
+    const routeTypes = routes.map((route) => route.routeType);
+    if (!sameSet(routeTypes, requiredRouteTypes)) errors.push(`${policy.id} routes must define proceed, defer, human-review, and specialist-escalation exactly once.`);
+    for (const route of routes) {
+      for (const field of ["routeType", "authorityRef", "capabilityRequirement", "responseTimeBoundary", "status"]) str(route, field, route.id);
+      if (!Array.isArray(route.evidenceRequired) || route.evidenceRequired.length === 0) errors.push(`${route.id} evidenceRequired must include at least one item.`);
+    }
+    const rules = Array.isArray(policy.routingRules) ? [...policy.routingRules].sort((a, b) => a.lowerInclusive - b.lowerInclusive) : [];
+    if (rules.length < 4) errors.push(`${policy.id} routingRules must include at least four rules.`);
+    const ruleIndex = indexById(rules, `${policy.id}:routingRules`);
+    for (const [index, rule] of rules.entries()) {
+      score(rule.lowerInclusive, "lowerInclusive", rule.id);
+      if (typeof rule.upperExclusive !== "number" || rule.upperExclusive <= rule.lowerInclusive || rule.upperExclusive > 1.000001) errors.push(`${rule.id} upperExclusive must be greater than lowerInclusive and no more than 1.000001.`);
+      ref(routeIndex, rule.routeRef, "escalation route", rule.id);
+      str(rule, "rationale", rule.id);
+      if (index === 0 && rule.lowerInclusive !== 0) errors.push(`${policy.id} routingRules must start at 0.`);
+      if (index > 0 && !sameNumber(rule.lowerInclusive, rules[index - 1].upperExclusive)) errors.push(`${policy.id} routingRules must be contiguous without gaps or overlap.`);
+    }
+    if (rules.length > 0 && !sameNumber(rules.at(-1).upperExclusive, 1.000001)) errors.push(`${policy.id} routingRules must end at 1.000001 so probability 1 is included.`);
+    if (!sameSet(rules.map((rule) => rule.routeRef), routes.map((route) => route.id))) errors.push(`${policy.id} routingRules must make every declared route reachable exactly once.`);
+    if (!Number.isInteger(policy.minimumPairCount) || policy.minimumPairCount < 2) errors.push(`${policy.id} minimumPairCount must be at least 2.`);
+    if (!Number.isInteger(policy.minimumVerifiedExecutionCount) || policy.minimumVerifiedExecutionCount < 2) errors.push(`${policy.id} minimumVerifiedExecutionCount must be at least 2.`);
+    if (policy.routeVolumeInterpretation !== "workload-evidence-only-not-quality-competence-or-authority") errors.push(`${policy.id} routeVolumeInterpretation must be workload-evidence-only-not-quality-competence-or-authority.`);
+    if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one accountable reviewer.`);
+    if (!Array.isArray(policy.governanceTriggerRefs)) errors.push(`${policy.id} governanceTriggerRefs must be an array.`);
+    const triggerTypes = new Set((policy.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", policy.id)?.triggerType));
+    if (policy.status !== "active" && !triggerTypes.has("route-policy-unreviewed")) errors.push(`${policy.id} non-active route policy requires a route-policy-unreviewed governance trigger.`);
+    if (!consequencePolicy) continue;
+    if (policy.status === "active" && routes.some((route) => route.status !== "active")) errors.push(`${policy.id} active policy requires every route to be active.`);
+    policy.__routeIndex = routeIndex;
+    policy.__ruleIndex = ruleIndex;
+  }
+
+  const escalationKeys = new Set();
+  for (const decision of selectiveEscalationDecisions) {
+    for (const field of ["pairRef", "policyRef", "selectedRuleRef", "recommendedRouteRef", "actualRouteRef", "authorityRef", "observedOutcome", "routeOutcomeClass", "rationale", "status"]) str(decision, field, decision.id);
+    const pair = ref(pairIndex, decision.pairRef, "decision-outcome pair", decision.id);
+    const policy = ref(escalationPolicyIndex, decision.policyRef, "selective escalation policy", decision.id);
+    if (!pair || !policy) continue;
+    const key = `${pair.id}/${policy.id}`;
+    if (escalationKeys.has(key)) errors.push(`${decision.id} duplicates selective escalation decision ${key}.`);
+    escalationKeys.add(key);
+    if (!sameNumber(decision.forecastProbability, pair.forecastProbability)) errors.push(`${decision.id} forecastProbability must equal the referenced pair forecastProbability.`);
+    const matchingRules = (policy.routingRules || []).filter((rule) => pair.forecastProbability >= rule.lowerInclusive && pair.forecastProbability < rule.upperExclusive);
+    if (matchingRules.length !== 1) errors.push(`${decision.id} forecastProbability must match exactly one routing rule.`);
+    const expectedRule = matchingRules[0];
+    if (expectedRule && decision.selectedRuleRef !== expectedRule.id) errors.push(`${decision.id} selectedRuleRef must reproduce as ${expectedRule.id}.`);
+    if (expectedRule && decision.recommendedRouteRef !== expectedRule.routeRef) errors.push(`${decision.id} recommendedRouteRef must reproduce as ${expectedRule.routeRef}.`);
+    const actualRoute = policy.__routeIndex?.get(decision.actualRouteRef);
+    if (!actualRoute) errors.push(`${decision.id} references missing actual escalation route: ${decision.actualRouteRef}`);
+    const expectedDeviation = decision.actualRouteRef !== decision.recommendedRouteRef;
+    if (decision.routeDeviation !== expectedDeviation) errors.push(`${decision.id} routeDeviation must reproduce as ${expectedDeviation}.`);
+    if (actualRoute && decision.authorityRef !== actualRoute.authorityRef) errors.push(`${decision.id} authorityRef must equal the declared actual-route authorityRef.`);
+    if (decision.observedOutcome !== pair.observedOutcome) errors.push(`${decision.id} observedOutcome must equal the referenced pair outcome.`);
+    const outcomeSuffix = pair.outcomeValue === 1 ? "held" : "failed";
+    const expectedClass = actualRoute ? `${actualRoute.routeType}-outcome-${outcomeSuffix}` : null;
+    if (expectedClass && decision.routeOutcomeClass !== expectedClass) errors.push(`${decision.id} routeOutcomeClass must reproduce as ${expectedClass}.`);
+    const evidence = decision.routeExecutionEvidence;
+    if (!evidence || typeof evidence !== "object") errors.push(`${decision.id} must include routeExecutionEvidence.`);
+    else {
+      for (const field of ["sourceArtifact", "executedBy", "observationWindow", "resultSummary", "status"]) str(evidence, field, `${decision.id} routeExecutionEvidence`);
+      if (!Array.isArray(evidence.verifiedBy) || evidence.verifiedBy.length === 0) errors.push(`${decision.id} routeExecutionEvidence verifiedBy must include at least one verifier.`);
+    }
+    if (!Array.isArray(decision.governanceTriggerRefs)) errors.push(`${decision.id} governanceTriggerRefs must be an array.`);
+    const triggerTypes = new Set((decision.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", decision.id)?.triggerType));
+    if (expectedDeviation && !triggerTypes.has("route-deviation")) errors.push(`${decision.id} route deviation requires a route-deviation governance trigger.`);
+    if (decision.authorityResolved !== true && !triggerTypes.has("route-authority-unresolved")) errors.push(`${decision.id} unresolved authority requires a route-authority-unresolved governance trigger.`);
+    if (evidence?.status !== "verified" && !triggerTypes.has("route-evidence-unverified")) errors.push(`${decision.id} non-verified route evidence requires a route-evidence-unverified governance trigger.`);
+    if (actualRoute && ["human-review", "specialist-escalation"].includes(actualRoute.routeType) && pair.outcomeValue === 0 && !triggerTypes.has("escalated-outcome-failed")) errors.push(`${decision.id} failed escalated outcome requires an escalated-outcome-failed governance trigger.`);
+  }
+
+  for (const assessment of selectiveEscalationAssessments) {
+    for (const field of ["title", "policyRef", "dataSufficiency", "assessmentSignal", "interpretation", "status"]) str(assessment, field, assessment.id);
+    const policy = ref(escalationPolicyIndex, assessment.policyRef, "selective escalation policy", assessment.id);
+    const decisions = Array.isArray(assessment.decisionRefs)
+      ? assessment.decisionRefs.map((id) => ref(escalationDecisionIndex, id, "selective escalation decision", assessment.id)).filter(Boolean)
+      : [];
+    if (decisions.length === 0) errors.push(`${assessment.id} decisionRefs must include at least one record.`);
+    if (new Set(assessment.decisionRefs || []).size !== (assessment.decisionRefs || []).length) errors.push(`${assessment.id} decisionRefs must not contain duplicates.`);
+    for (const decision of decisions) if (decision.policyRef !== assessment.policyRef) errors.push(`${assessment.id} decision ${decision.id} must use policy ${assessment.policyRef}.`);
+    const summaries = Array.isArray(assessment.routeSummaries) ? assessment.routeSummaries : [];
+    if (policy && !sameSet(summaries.map((item) => item.routeRef), policy.routes.map((route) => route.id))) errors.push(`${assessment.id} routeSummaries must exactly cover policy routes.`);
+    for (const summary of summaries) {
+      const route = policy?.__routeIndex?.get(summary.routeRef);
+      if (!route) errors.push(`${assessment.id} route summary references missing route: ${summary.routeRef}`);
+      const routeDecisions = decisions.filter((decision) => decision.actualRouteRef === summary.routeRef);
+      const heldCount = routeDecisions.filter((decision) => decision.observedOutcome === "protected-outcome-held").length;
+      const failedCount = routeDecisions.length - heldCount;
+      if (!sameSet(summary.decisionRefs, routeDecisions.map((decision) => decision.id))) errors.push(`${assessment.id}/${summary.routeRef} decisionRefs must reproduce.`);
+      for (const [field, value] of Object.entries({ decisionCount: routeDecisions.length, heldCount, failedCount })) if (!sameNumber(summary[field], value)) errors.push(`${assessment.id}/${summary.routeRef} ${field} must reproduce as ${value}.`);
+    }
+    const verifiedExecutionCount = decisions.filter((decision) => decision.routeExecutionEvidence?.status === "verified").length;
+    const routeDeviationCount = decisions.filter((decision) => decision.routeDeviation === true).length;
+    const unresolvedAuthorityCount = decisions.filter((decision) => decision.authorityResolved !== true).length;
+    for (const [field, value] of Object.entries({ pairCount: decisions.length, verifiedExecutionCount, routeDeviationCount, unresolvedAuthorityCount })) if (!sameNumber(assessment[field], value)) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const dataSufficiency = policy && decisions.length >= policy.minimumPairCount && verifiedExecutionCount >= policy.minimumVerifiedExecutionCount ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== dataSufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${dataSufficiency}.`);
+    const hasAlert = decisions.some((decision) => decision.routeDeviation || !decision.authorityResolved || decision.routeExecutionEvidence?.status !== "verified" || decision.routeOutcomeClass.endsWith("-outcome-failed"));
+    const signal = dataSufficiency === "insufficient" ? "insufficient-data" : hasAlert ? "governance-required" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (assessment.interpretation !== "route-outcome-evidence-only-not-quality-causality-competence-or-authority") errors.push(`${assessment.id} interpretation must be route-outcome-evidence-only-not-quality-causality-competence-or-authority.`);
+    if (!Array.isArray(assessment.governanceTriggerRefs)) errors.push(`${assessment.id} governanceTriggerRefs must be an array.`);
+    const triggerTypes = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (dataSufficiency === "insufficient" && !triggerTypes.has("insufficient-data")) errors.push(`${assessment.id} insufficient route evidence requires an insufficient-data governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -663,6 +779,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that cohort coverage, balance, or size proves representativeness")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that cohort coverage, balance, or size proves representativeness.`);
     if (!(boundary.doesNotClaim || []).includes("that consequence weights are money, objective harm, cross-policy utility, quality, or automatic authority")) errors.push(`${packagePath} verifierBoundary must explicitly bound consequence weights from money, objective harm, cross-policy utility, quality, or automatic authority.`);
     if (!(boundary.doesNotClaim || []).includes("that threshold sensitivity optimizes, ranks, selects, or authorizes policy")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming threshold sensitivity optimizes, ranks, selects, or authorizes policy.`);
+    if (!(boundary.doesNotClaim || []).includes("that route volume, escalation frequency, or route outcome proves quality, competence, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming route volume, escalation frequency, or route outcome proves quality, competence, causality, or authority.`);
   }
 
   results.push({
@@ -679,6 +796,9 @@ function validatePackage(pkg, packagePath) {
       decisionConsequences: decisionConsequences.length,
       consequenceAssessments: consequenceAssessments.length,
       thresholdRobustnessAnalyses: thresholdRobustnessAnalyses.length,
+      selectiveEscalationPolicies: selectiveEscalationPolicies.length,
+      selectiveEscalationDecisions: selectiveEscalationDecisions.length,
+      selectiveEscalationAssessments: selectiveEscalationAssessments.length,
       governanceTriggers: triggers.length
     }
   });
