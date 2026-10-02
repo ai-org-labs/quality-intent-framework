@@ -1,7 +1,7 @@
 {
   "goal_type": "next-value-slice",
   "content": "QIF v0.6.36 Escalation Resolution and Timeliness: record accepted, rejected, redirected, and timed-out route dispositions plus response-time and availability evidence without treating speed or throughput as quality.",
-  "updated_at": "2026-10-02T04:59:29.324Z",
+  "updated_at": "2026-10-02T05:07:59.004Z",
   "agreed_with_human": true,
   "source_session_id": "SESS-MUQH2DHK-PUKAUZ",
   "source_decision_record_id": "DEC-MUQH8SZ9-G5RGFM",

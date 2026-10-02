@@ -19,6 +19,9 @@ Date: 2026-10-02
 - Self-review CREV-MUQHXMFQ-9OP0CW, final review CREV-MUQHXMJT-AZSRSN, and retrospective CREV-MUQHXMNL-V62LT2 approved the release with explicit semantic, causal, authority, and employee-evaluation boundaries.
 - TASK-053 is done; .aof/runtime/v0.6.35-post-situation.json found no truth conflict and selected v0.6.36.
 - organization-verify passed 277/277 checks.
+- Release commit 323cae8 was pushed to origin/main; annotated tag v0.6.35 resolves to the same commit.
+- GitHub Release v0.6.35 was published at https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.35.
+- AOF outcome report OUT-MUQI4VE8-O8LFC1 records successful verification, tag, and release publication.
 
 ## v0.6.34 Threshold Robustness
 
