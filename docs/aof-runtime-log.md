@@ -19,6 +19,9 @@ Date: 2026-10-03
 - Review: AOF `council-exec --stage review` and `.aof/runtime/v0.6.36-final-review.json` approved release after Visionary, Builder, and Guardian evidence review.
 - Retrospective: AOF `learning-loop-snapshot` wrote `.aof/context/active/learning-loop.json` and preserved v0.6.37 as the next value slice.
 - AOF organization verification passed `277/277`; `TASK-054` is done and `.aof/runtime/v0.6.36-post-situation.json` found no truth conflict.
+- Release commit `41f3c3e` was pushed to `origin/main`; annotated tag `v0.6.36` resolves to that release commit.
+- GitHub Release `v0.6.36` was published at https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.36.
+- AOF outcome `OUT-MURX7VN1-RLFN8N` records successful publication and preserves v0.6.37 as the next value slice.
 - Next: v0.6.37 Reviewer Disagreement Calibration preserves independent judgments, reasons, overrides, and adjudication without treating majority, seniority, or agreement rate as truth.
 
 ## v0.6.35 Selective Escalation Calibration

@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
   "content": "QIF v0.6.37 Reviewer Disagreement Calibration: preserve independent judgments, disagreement reasons, overrides, and adjudication outcomes without treating majority vote, seniority, or agreement rate as semantic truth.",
-  "updated_at": "2026-10-03T04:52:26.294Z",
+  "updated_at": "2026-10-03T04:57:41.874Z",
   "agreed_with_human": null,
-  "source_session_id": null,
+  "source_session_id": "SESS-MURWENX6-QSP40V",
   "source_decision_record_id": null,
-  "declared_complete_at": null
+  "declared_complete_at": "2026-10-03T04:57:41.874Z"
 }
