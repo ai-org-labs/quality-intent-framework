@@ -186,13 +186,13 @@ function commandManifest() {
     {
       name: "calibration-report",
       usage: "qif calibration-report [calibration-report-package.json]",
-      purpose: "Reproduce decision-outcome references, Brier score, calibration buckets, sample boundaries, and governance routing.",
+      purpose: "Reproduce decision-outcome references, calibration arithmetic, escalation routing and resolution timing, evidence boundaries, and governance routing.",
       arguments: [
         { name: "calibration-report-package.json", required: false, repeatable: false, description: "Calibration Report package; defaults to the committed example." }
       ],
       blocking: true,
       output: "Validated Calibration Report summary or deterministic calculation errors.",
-      verifierBoundary: "calibration-report proves declared references and arithmetic only; it does not prove probability semantics, representativeness, causality, calibration truth, or quality."
+      verifierBoundary: "calibration-report proves declared references, classifications, timing arithmetic, and policy conformance only; it does not prove probability semantics, representativeness, causality, calibration truth, resolution quality, reviewer competence, service availability, or authority."
     },
     {
       name: "commands",

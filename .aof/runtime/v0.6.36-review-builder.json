@@ -1,0 +1,22 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-03T04:53:08.487Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-MURWENX6-QSP40V",
+  "status": "completed",
+  "recommendation": "Approve release: schema, example, verifier, CLI surface, documentation, and 32 new negative fixtures align.",
+  "rationale": "npm test passed 16/16 positive and 813/813 negative cases; elapsed-time, policy, disposition, evidence, assessment, and governance calculations reproduce.",
+  "signals": [],
+  "artifact_refs": [
+    "schemas/calibration-report-package.schema.json",
+    "tools/validate-calibration-report.mjs"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-054",
+  "source_decision_record_id": "DEC-MURWGR4M-RN6GJK",
+  "source_parent_session_id": "SESS-MURWENX6-QSP40V",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": null
+}

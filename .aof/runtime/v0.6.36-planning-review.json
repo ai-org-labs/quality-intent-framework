@@ -1,0 +1,38 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-03T04:38:59.328Z",
+  "review_packet_id": "CREV-MURWJTHC-1RM68C",
+  "council_id": "qif-council",
+  "stage": "planning",
+  "review_status": "approved",
+  "decision_summary": "Visionary, Builder, and Guardian approve v0.6.36 Escalation Resolution and Timeliness with operational-evidence-only boundaries.",
+  "rationale": "The slice closes the unresolved escalation lifecycle gap by extending existing route decisions, while Guardian conditions prevent speed, volume, or disposition from becoming quality, competence, authority, surveillance, or causal claims.",
+  "recommendation": "Implement and release the narrow calibration-report extension after full fixture and AOF verification.",
+  "target_audience": "QIF users, AI agents, accountable reviewers, domain specialists, operators, and affected stakeholders",
+  "expected_user_reaction": "Users can tell whether an escalation actually resolved, on what evidence, and why governance remains open.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [
+    "Add resolution policy, resolution, assessment, example, verifier, fixtures, plain-language guide, roadmap, and release evidence."
+  ],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "missing-escalation-resolution-evidence",
+  "diagnosis_confidence": 0.94,
+  "diagnosis_evidence_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0636.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [
+    ".aof/runtime/v0.6.36-planning-visionary.json",
+    ".aof/runtime/v0.6.36-planning-builder.json",
+    ".aof/runtime/v0.6.36-planning-guardian.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/actor-skill-packets/ASP-MURWJDFV-YSG2DQ.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-054",
+  "source_parent_session_id": "SESS-MURWENX6-QSP40V",
+  "source_decision_record_id": "DEC-MURWGR4M-RN6GJK"
+}

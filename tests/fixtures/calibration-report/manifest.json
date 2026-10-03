@@ -68,6 +68,230 @@
   ],
   "negatives": [
     {
+      "file": "calibration-report-resolution-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "resolution policies required",
+      "expect": "fail",
+      "errorIncludes": "package escalationResolutionPolicies must be an array."
+    },
+    {
+      "file": "calibration-report-resolutions-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "escalation resolutions required",
+      "expect": "fail",
+      "errorIncludes": "package escalationResolutions must be an array."
+    },
+    {
+      "file": "calibration-report-resolution-assessments-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "resolution assessments required",
+      "expect": "fail",
+      "errorIncludes": "package escalationResolutionAssessments must be an array."
+    },
+    {
+      "file": "calibration-report-resolution-policy-route-coverage.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "resolution route closure",
+      "expect": "fail",
+      "errorIncludes": "routeRequirements must exactly cover selective escalation policy routes."
+    },
+    {
+      "file": "calibration-report-resolution-policy-route-duplicate.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "resolution route uniqueness",
+      "expect": "fail",
+      "errorIncludes": "routeRequirements must not duplicate routeRef values."
+    },
+    {
+      "file": "calibration-report-resolution-policy-route-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "resolution route resolution",
+      "expect": "fail",
+      "errorIncludes": "route requirement references missing escalation route"
+    },
+    {
+      "file": "calibration-report-resolution-policy-redirect-self.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "redirect source exclusion",
+      "expect": "fail",
+      "errorIncludes": "redirectRouteRefs must not include the source route."
+    },
+    {
+      "file": "calibration-report-resolution-policy-limit-invalid.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "positive response limit",
+      "expect": "fail",
+      "errorIncludes": "responseTimeLimitMinutes must be a positive integer."
+    },
+    {
+      "file": "calibration-report-resolution-policy-interpretation-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "timeliness evidence boundary",
+      "expect": "fail",
+      "errorIncludes": "timelinessInterpretation must be response-time-and-availability-evidence-only-not-quality-competence-or-authority."
+    },
+    {
+      "file": "calibration-report-resolution-policy-unreviewed-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "resolution policy governance",
+      "expect": "fail",
+      "errorIncludes": "non-active resolution policy requires a resolution-policy-unreviewed governance trigger."
+    },
+    {
+      "file": "calibration-report-resolution-decision-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "resolution decision reference",
+      "expect": "fail",
+      "errorIncludes": "references missing selective escalation decision"
+    },
+    {
+      "file": "calibration-report-resolution-policy-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "resolution policy reference",
+      "expect": "fail",
+      "errorIncludes": "references missing escalation resolution policy"
+    },
+    {
+      "file": "calibration-report-resolution-route-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "actual route consistency",
+      "expect": "fail",
+      "errorIncludes": "routeRef must equal the referenced decision actualRouteRef."
+    },
+    {
+      "file": "calibration-report-resolution-limit-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route response limit",
+      "expect": "fail",
+      "errorIncludes": "responseTimeLimitMinutes must match its route requirement."
+    },
+    {
+      "file": "calibration-report-resolution-elapsed-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "elapsed time reproduction",
+      "expect": "fail",
+      "errorIncludes": "elapsedMinutes must reproduce as 90."
+    },
+    {
+      "file": "calibration-report-resolution-within-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "timeliness reproduction",
+      "expect": "fail",
+      "errorIncludes": "withinResponseTime must reproduce as false."
+    },
+    {
+      "file": "calibration-report-resolution-timeout-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "timeout governance",
+      "expect": "fail",
+      "errorIncludes": "timed-out resolution requires a resolution-timeout governance trigger."
+    },
+    {
+      "file": "calibration-report-resolution-late-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "late resolution governance",
+      "expect": "fail",
+      "errorIncludes": "late resolution requires a resolution-time-exceeded governance trigger."
+    },
+    {
+      "file": "calibration-report-resolution-availability-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "availability governance",
+      "expect": "fail",
+      "errorIncludes": "unmet availability requires a resolution-availability-unmet governance trigger."
+    },
+    {
+      "file": "calibration-report-resolution-evidence-verifier-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "resolution evidence verification",
+      "expect": "fail",
+      "errorIncludes": "resolutionEvidence verifiedBy must include at least one verifier."
+    },
+    {
+      "file": "calibration-report-resolution-evidence-trigger-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unverified resolution governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified resolution evidence requires a resolution-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-resolution-redirect-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "redirect target required",
+      "expect": "fail",
+      "errorIncludes": "redirected disposition requires redirectedRouteRef."
+    },
+    {
+      "file": "calibration-report-resolution-outcome-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "resolution outcome traceability",
+      "expect": "fail",
+      "errorIncludes": "observedOutcome must equal the referenced decision observedOutcome."
+    },
+    {
+      "file": "calibration-report-resolution-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "resolution count reproduction",
+      "expect": "fail",
+      "errorIncludes": "resolutionCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-resolution-assessment-disposition.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "disposition count reproduction",
+      "expect": "fail",
+      "errorIncludes": "dispositionCounts.timedOut must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-resolution-assessment-late.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "late count reproduction",
+      "expect": "fail",
+      "errorIncludes": "lateCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-resolution-assessment-verified.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "verified resolution count",
+      "expect": "fail",
+      "errorIncludes": "verifiedResolutionCount must reproduce as 0."
+    },
+    {
+      "file": "calibration-report-resolution-assessment-unavailable.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "availability count reproduction",
+      "expect": "fail",
+      "errorIncludes": "unavailableCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-resolution-assessment-sufficiency.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "resolution evidence sufficiency",
+      "expect": "fail",
+      "errorIncludes": "dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "calibration-report-resolution-assessment-signal.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "resolution assessment signal",
+      "expect": "fail",
+      "errorIncludes": "assessmentSignal must reproduce as insufficient-data."
+    },
+    {
+      "file": "calibration-report-resolution-assessment-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "insufficient resolution governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient resolution evidence requires an insufficient-data governance trigger."
+    },
+    {
+      "file": "calibration-report-resolution-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "resolution verifier boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming resolution speed, volume, disposition, or reviewer availability proves quality, competence, causality, or authority."
+    },
+    {
       "file": "calibration-report-escalation-policies-not-array.json",
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "selective escalation policies required",

@@ -1,0 +1,37 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-03T04:53:53.543Z",
+  "review_packet_id": "CREV-MURX2ZGN-8QUNTS",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "QIF v0.6.36 is approved for release with illustrative-evidence limitations explicit.",
+  "rationale": "The implementation aligns schema, example, verifier, fixtures, authoring guidance, roadmap, and runtime evidence; all structural tests pass and Guardian boundaries prevent operational metrics from becoming quality or blame claims.",
+  "recommendation": "Commit, tag, push, and publish v0.6.36; then begin v0.6.37 Reviewer Disagreement Calibration.",
+  "target_audience": "QIF users, AI agents, accountable reviewers, domain specialists, operators, and affected stakeholders",
+  "expected_user_reaction": "Users can reproduce what happened after escalation and see unresolved timing or availability risk routed to governance.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "release-ready-with-illustrative-evidence",
+  "diagnosis_confidence": 0.96,
+  "diagnosis_evidence_refs": [
+    ".aof/context/active/framework-self-audit.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [
+    ".aof/runtime/v0.6.36-review-visionary.json",
+    ".aof/runtime/v0.6.36-review-builder.json",
+    ".aof/runtime/v0.6.36-review-guardian.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/actor-skill-packets/ASP-MURWJDFV-YSG2DQ.json",
+    "RELEASE-NOTES-v0.6.36.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-054",
+  "source_parent_session_id": "SESS-MURWENX6-QSP40V",
+  "source_decision_record_id": "DEC-MURWGR4M-RN6GJK"
+}

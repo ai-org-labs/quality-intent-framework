@@ -1,0 +1,21 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-03T04:38:14.161Z",
+  "role": "Builder",
+  "stage": "planning",
+  "session_id": "SESS-MURWENX6-QSP40V",
+  "status": "completed",
+  "recommendation": "Extend calibration-report with three first-class entities and deterministic verifier rules.",
+  "rationale": "The existing selective escalation decision already supplies route and authority context, so package extension minimizes duplication and preserves reference integrity.",
+  "signals": [],
+  "artifact_refs": [
+    "schemas/calibration-report-package.schema.json"
+  ],
+  "decision_required": false,
+  "source_task_id": null,
+  "source_decision_record_id": null,
+  "source_parent_session_id": null,
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": null
+}

@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-03T04:35:43.159Z",
+  "problem_statement_id": "PST-MURWFM47-2P5G4J",
+  "affected_party": "QIF evaluators, accountable reviewers, domain specialists, operators, and affected stakeholders",
+  "actual_problem": "Selective escalation decisions can be recorded, but the runtime cannot yet show whether an escalation was accepted, rejected, redirected, or timed out, whether required capacity was available, or whether response-time expectations were met.",
+  "why_it_matters": "An escalation recommendation without resolution evidence can create false assurance, hide unavailable authority or capability, and leave consequential uncertainty unresolved.",
+  "why_now": "QIF v0.6.35 introduced governed selective escalation, while current AI oversight practice explicitly measures review latency, escalation disposition, and human review availability.",
+  "evidence_refs": [
+    "docs/qif-v0.6.35-selective-escalation-calibration.md",
+    ".aof/runtime/v0.6.36-situation.json"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MURWEZQN-WP3RHO"
+}

@@ -2,40 +2,40 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-08-10T16:14:46.993Z",
+  "generated_at": "2026-10-03T04:54:06.816Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
-    "report_id": "OUT-MSNFLEY3-ZPVPSG",
+    "source_session_id": "SESS-MUQH2DHK-PUKAUZ",
+    "report_id": "OUT-MUQI4VE8-O8LFC1",
     "result": "success",
-    "observed_at": "2026-08-10T16:13:50.913Z",
-    "note": "QIF v0.4.3 passed 3/3 positive and 221/221 retained negative checks, passed AOF v10.8.0 review and verification, and was published at exact commit 8704f8aacf4fae76c7d7bd5b24de8c62d18e0312.",
-    "signal_ref": ".aof/artifacts/council/qif-v0.4.3-council-review-packet.json"
+    "observed_at": "2026-10-02T05:07:41.165Z",
+    "note": "QIF v0.6.35 was verified, pushed, tagged, and published as a GitHub Release. Selective escalation is structurally executable with explicit semantic and authority boundaries.",
+    "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.35"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV043-001",
-    "recorded_at": "2026-08-10T16:14:46.834Z",
-    "summary": "The two core package verifiers now have complete retained error-branch fixture coverage, AOF v10.8.0 review and verification passed, and exact-SHA v0.4.3 is public.",
-    "detected_gap": "Discovery-session, organizational-quality-culture, evaluation-target, and review-run verifier branches do not yet have complete retained negative fixture coverage; empirical outcome calibration remains unproven.",
+    "audit_id": "QIF-V0636-SELF-REVIEW",
+    "recorded_at": "2026-10-03T04:52:26.285Z",
+    "summary": "All 16 positive package checks, 813 retained negative checks, timing arithmetic, governance routing, public-identity scan, and diff checks passed; verifier claims remain structural.",
+    "detected_gap": "The committed resolution evidence is illustrative and insufficient; real organizational reviewer availability and response-time evidence remains pilot work.",
     "result_state": "stable",
-    "next_action": "Implement v0.4.4 runtime package fixture coverage without importing v0.5 ledger semantics early.",
+    "next_action": "Complete council review and release v0.6.36, then preserve independent reviewer disagreement in v0.6.37.",
     "related_task_ids": [
-      "TASK-015"
+      "TASK-054"
     ]
   },
   "current_next_value_slice": {
-    "content": "Implement v0.4.4 retained negative fixture coverage for the remaining runtime package verifier surfaces.",
-    "updated_at": "2026-08-10T16:14:46.840Z",
+    "content": "QIF v0.6.37 Reviewer Disagreement Calibration: preserve independent judgments, disagreement reasons, overrides, and adjudication outcomes without treating majority vote, seniority, or agreement rate as semantic truth.",
+    "updated_at": "2026-10-03T04:52:26.294Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MSNF5VM7-NZD3Q9",
-    "source_decision_record_id": "DEC-MSNF6ZYN-80OC10"
+    "source_session_id": null,
+    "source_decision_record_id": null
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Implement v0.4.4 runtime package fixture coverage without importing v0.5 ledger semantics early.",
+    "proposed_focus": "Complete council review and release v0.6.36, then preserve independent reviewer disagreement in v0.6.37.",
     "related_task_ids": [
-      "TASK-015"
+      "TASK-054"
     ],
-    "open_task_count": 0
+    "open_task_count": 1
   },
   "learning_state": {
     "has_outcome_evidence": true,
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: Implement v0.4.4 retained negative fixture coverage for the remaining runtime package verifier surfaces.",
-    "Latest self-audit next action: Implement v0.4.4 runtime package fixture coverage without importing v0.5 ledger semantics early.",
+    "Current next value slice: QIF v0.6.37 Reviewer Disagreement Calibration: preserve independent judgments, disagreement reasons, overrides, and adjudication outcomes without treating majority vote, seniority, or agreement rate as semantic truth.",
+    "Latest self-audit next action: Complete council review and release v0.6.36, then preserve independent reviewer disagreement in v0.6.37.",
     "Latest outcome result: success"
   ]
 }

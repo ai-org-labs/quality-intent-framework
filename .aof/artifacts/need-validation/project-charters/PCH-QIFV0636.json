@@ -1,0 +1,23 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-03T04:36:23.802Z",
+  "project_charter_id": "PCH-MURWGHH6-SISN5J",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV0636.json",
+  "validated_objective": "Release QIF v0.6.36 with executable, auditable escalation resolution and timeliness records grounded in v0.6.35 route decisions.",
+  "scope": [
+    "Escalation resolution policy, resolution, and assessment entities in calibration-report",
+    "Schema, verifier, retained negative fixtures, example, documentation, authoring guidance, changelog, roadmap, and runtime log",
+    "AOF council, self-review, final review, retrospective, verification, release, and outcome evidence"
+  ],
+  "constraints": [
+    "Remain standalone and domain-general",
+    "Do not add UI or external integrations",
+    "Do not treat response time, throughput, count, or disposition as quality, competence, authority, causality, or semantic truth"
+  ],
+  "expected_outcomes": [
+    "Users can explain how an escalation resolved, whether timing and availability matched policy, and why governance was triggered",
+    "npm test and AOF organization verification pass before a tagged GitHub release"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MURWEZQN-WP3RHO"
+}

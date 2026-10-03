@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.36
+
+- Added executable Escalation Resolution Policies covering disposition, response-time limits, availability requirements, timeout action, and valid redirects for every governed route.
+- Added deterministic Escalation Resolutions linking route decisions to accepted, rejected, redirected, or timed-out dispositions with reproducible timestamp arithmetic and evidence status.
+- Added Escalation Resolution Assessments with reproducible disposition, timeliness, verification, availability, sufficiency, signal, and governance summaries.
+- Preserved the boundary that response time, resolution volume, disposition, and reviewer availability do not prove quality, competence, causality, blame, authority, or semantic truth.
+- Added 32 retained negative cases; the retained suite now covers 813 negative cases across 16 positive package types.
+
 ## v0.6.35
 
 - Added executable Selective Escalation Policies with governed proceed, defer, human-review, and specialist-escalation routes plus contiguous routing rules.

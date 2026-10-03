@@ -39,6 +39,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.6.33 Consequence-Sensitive Calibration: `docs/qif-v0.6.33-consequence-sensitive-calibration.md`
 - QIF v0.6.34 Threshold Robustness: `docs/qif-v0.6.34-threshold-robustness.md`
 - QIF v0.6.35 Selective Escalation Calibration: `docs/qif-v0.6.35-selective-escalation-calibration.md`
+- QIF v0.6.36 Escalation Resolution and Timeliness: `docs/qif-v0.6.36-escalation-resolution-timeliness.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`

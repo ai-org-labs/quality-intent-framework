@@ -1,6 +1,6 @@
 {
   "packageType": "calibration-report",
-  "runtimeVersion": "0.6.35",
+  "runtimeVersion": "0.6.36",
   "packageId": "CRPKG-001",
   "packageRefs": [
     {
@@ -542,6 +542,150 @@
       "status": "reviewed"
     }
   ],
+  "escalationResolutionPolicies": [
+    {
+      "id": "ERP-CR-001",
+      "selectiveEscalationPolicyRef": "SEP-CR-001",
+      "routeRequirements": [
+        {
+          "routeRef": "SER-CR-DEFER",
+          "allowedDispositions": [
+            "accepted",
+            "rejected",
+            "redirected",
+            "timed-out"
+          ],
+          "responseTimeLimitMinutes": 240,
+          "availabilityRequirement": "A governance owner must be reachable before the current decision window closes.",
+          "timeoutAction": "governance-review",
+          "redirectRouteRefs": [
+            "SER-CR-HUMAN",
+            "SER-CR-SPECIALIST"
+          ]
+        },
+        {
+          "routeRef": "SER-CR-SPECIALIST",
+          "allowedDispositions": [
+            "accepted",
+            "rejected",
+            "redirected",
+            "timed-out"
+          ],
+          "responseTimeLimitMinutes": 120,
+          "availabilityRequirement": "A currently competent specialist must accept the review before authorization.",
+          "timeoutAction": "defer",
+          "redirectRouteRefs": [
+            "SER-CR-DEFER",
+            "SER-CR-HUMAN"
+          ]
+        },
+        {
+          "routeRef": "SER-CR-HUMAN",
+          "allowedDispositions": [
+            "accepted",
+            "rejected",
+            "redirected",
+            "timed-out"
+          ],
+          "responseTimeLimitMinutes": 60,
+          "availabilityRequirement": "An accountable reviewer must acknowledge the case within the declared response window.",
+          "timeoutAction": "governance-review",
+          "redirectRouteRefs": [
+            "SER-CR-DEFER",
+            "SER-CR-SPECIALIST"
+          ]
+        },
+        {
+          "routeRef": "SER-CR-PROCEED",
+          "allowedDispositions": [
+            "accepted",
+            "rejected",
+            "redirected",
+            "timed-out"
+          ],
+          "responseTimeLimitMinutes": 30,
+          "availabilityRequirement": "The named authority must be available to record residual-risk acceptance before action.",
+          "timeoutAction": "defer",
+          "redirectRouteRefs": [
+            "SER-CR-DEFER",
+            "SER-CR-HUMAN"
+          ]
+        }
+      ],
+      "minimumResolutionCount": 20,
+      "minimumVerifiedResolutionCount": 20,
+      "timelinessInterpretation": "response-time-and-availability-evidence-only-not-quality-competence-or-authority",
+      "reviewedBy": [
+        "customer-operations-governance-board"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "escalationResolutions": [
+    {
+      "id": "ERS-CR-001",
+      "selectiveEscalationDecisionRef": "SED-CR-001",
+      "policyRef": "ERP-CR-001",
+      "routeRef": "SER-CR-HUMAN",
+      "disposition": "timed-out",
+      "startedAt": "2026-01-15T09:00:00.000Z",
+      "resolvedAt": "2026-01-15T10:30:00.000Z",
+      "elapsedMinutes": 90,
+      "responseTimeLimitMinutes": 60,
+      "withinResponseTime": false,
+      "availabilityObserved": "partially-available",
+      "resolutionEvidence": {
+        "sourceArtifact": "examples/calibration-report-package.json",
+        "resolvedBy": "illustrative governance coordinator",
+        "resultSummary": "The example route was acknowledged but no accountable disposition was recorded before the policy limit. This demonstrates timeout traceability, not reviewer quality or blame.",
+        "verifiedBy": [
+          "fixture verifier"
+        ],
+        "status": "example-only"
+      },
+      "observedOutcome": "protected-outcome-failed",
+      "governanceTriggerRefs": [
+        "GTR-CR-010",
+        "GTR-CR-011",
+        "GTR-CR-012",
+        "GTR-CR-013"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "escalationResolutionAssessments": [
+    {
+      "id": "ERA-CR-001",
+      "title": "Illustrative escalation resolution and timeliness assessment",
+      "policyRef": "ERP-CR-001",
+      "resolutionRefs": [
+        "ERS-CR-001"
+      ],
+      "resolutionCount": 1,
+      "dispositionCounts": {
+        "accepted": 0,
+        "rejected": 0,
+        "redirected": 0,
+        "timedOut": 1
+      },
+      "timelyCount": 0,
+      "lateCount": 1,
+      "verifiedResolutionCount": 0,
+      "unavailableCount": 1,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-010",
+        "GTR-CR-011",
+        "GTR-CR-012",
+        "GTR-CR-013"
+      ],
+      "interpretation": "resolution-and-timeliness-evidence-only-not-quality-causality-competence-or-authority",
+      "status": "reviewed"
+    }
+  ],
   "governanceTriggers": [
     {
       "id": "GTR-CR-001",
@@ -632,6 +776,46 @@
       "requiredAction": "Review the route policy, supplied evidence, authority boundary, and downstream controls without treating the event as reviewer-performance proof.",
       "owner": "customer-operations-governance-board",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-010",
+      "triggerType": "resolution-time-exceeded",
+      "reason": "The illustrative human-review route remained unresolved for 90 minutes against a 60-minute policy limit.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review route capacity and the unresolved protected decision without interpreting elapsed time as quality or competence.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-011",
+      "triggerType": "resolution-timeout",
+      "reason": "No accepted, rejected, or redirected disposition was recorded before the declared timeout boundary.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Apply the policy timeout action and decide whether the underlying case must remain deferred.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-012",
+      "triggerType": "resolution-evidence-unverified",
+      "reason": "The resolution record is committed example evidence rather than verified operational or historical evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified resolution evidence before making an operational timeliness claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-013",
+      "triggerType": "resolution-availability-unmet",
+      "reason": "Only partial reviewer availability was observed for a route that requires an accountable reviewer within the response window.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Confirm accountable capacity or redirect the case through a reviewed route before relying on escalation availability.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -642,7 +826,8 @@
       "cohort membership, exclusions, missing outcomes, duplicate groups, dependence state, segment summaries, and drift routing reproduce",
       "loss-boundary linkage, threshold action, consequence class, policy-local weight, weighted error, assessment arithmetic, and governance routing reproduce",
       "reviewed threshold alternatives, replay actions and classes, action flips, boundary distance, brittleness summary, and governance routing reproduce",
-      "route definitions, score intervals, selected and actual routes, authority, execution evidence, route outcomes, assessment summaries, and governance routing reproduce"
+      "route definitions, score intervals, selected and actual routes, authority, execution evidence, route outcomes, assessment summaries, and governance routing reproduce",
+      "resolution policy coverage, disposition, elapsed time, response-time conformance, availability, evidence status, assessment summaries, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -653,6 +838,7 @@
       "that consequence weights are money, objective harm, cross-policy utility, quality, or automatic authority",
       "that threshold sensitivity optimizes, ranks, selects, or authorizes policy",
       "that route volume, escalation frequency, or route outcome proves quality, competence, causality, or authority",
+      "that resolution speed, volume, disposition, or reviewer availability proves quality, competence, causality, or authority",
       "a calibration statistic is quality",
       "an automatic quality verdict"
     ],
@@ -661,6 +847,7 @@
       "representative and independent empirical observations",
       "accountable review of each threshold, loss boundary, and policy-local governance weight",
       "accountable validation of route authority, specialist capability, execution evidence, and operational response-time boundaries",
+      "accountable review of resolution policy, actual disposition, reviewer availability, and timeout consequences",
       "review of environmental and evaluation-harness effects",
       "accountable governance before changing quality decisions"
     ]

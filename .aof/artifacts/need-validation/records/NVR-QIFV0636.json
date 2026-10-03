@@ -1,0 +1,35 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-03T04:36:05.710Z",
+  "validation_id": "NVR-MURWG3IM-EDA9PQ",
+  "raw_need": "Continue QIF development and release the next roadmap slice.",
+  "validation_status": "reframed",
+  "validated_need": "Extend QIF's existing selective escalation model so each route can be resolved as accepted, rejected, redirected, or timed out with reproducible response-time, availability, evidence-status, and governance records, while preserving the boundary that operational speed and volume are not quality.",
+  "decision_summary": "The broad continuation request is reframed into the smallest domain-general gap after v0.6.35: auditable escalation resolution and timeliness. Extending calibration-report is simpler than a new package and preserves traceability to route decisions.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What should v0.6.36 own?",
+      "answer": "Resolution policy, actual disposition, elapsed-time and availability evidence, assessment, governance, verifier, examples, fixtures, docs, and release evidence.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must it not claim?",
+      "answer": "It must not infer quality, competence, authority, causality, harm magnitude, or semantic truth from speed, counts, disposition, or verifier success.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A configured escalation route was previously assumed to imply a timely and available resolution path."
+  ],
+  "evidence_gaps": [],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV0636.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0636.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0636.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MURWEZQN-WP3RHO"
+}

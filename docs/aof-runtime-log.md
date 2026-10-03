@@ -2,6 +2,25 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.36 Escalation Resolution and Timeliness
+
+Date: 2026-10-03
+
+- Need / Intent / Context: v0.6.35 could select and observe a governed route but could not show whether the route was accepted, rejected, redirected, or timed out. v0.6.36 adds resolution policy, actual disposition, timestamp arithmetic, availability, evidence status, assessment, and governance. It does not turn speed, count, disposition, or availability into quality, competence, authority, causality, blame, or surveillance.
+- Latest public AOF v12.2.0 was used from clean checkout commit fc7599b; the dirty unreleased local 12.3.0 worktree was not modified.
+- Need Validation preceded Charter: `.aof/artifacts/need-validation/records/NVR-QIFV0636.json` then `.aof/artifacts/need-validation/project-charters/PCH-QIFV0636.json` in parent session `SESS-MURWENX6-QSP40V`; task `TASK-054` records execution.
+- Council: Visionary approved closing the route-to-resolution gap; Builder extended the existing calibration-report rather than adding a package; Guardian required operational-evidence-only, anti-surveillance, anti-blame, availability, timeout, and verifier-boundary controls. Evidence: `.aof/runtime/v0.6.36-planning-review.json`.
+- Actor packet `.aof/artifacts/actor-skill-packets/ASP-MURWJDFV-YSG2DQ.json` records schema/verifier skills, repository/runtime resources, no-automatic-authority, no-count-quality, no-causal-claim, and no-surveillance policies, plus blocking Guardian review evidence.
+- Trend evidence: Anthropic now reports oversight coverage, review latency, and blocking/escalation rate as separate measures (https://www.anthropic.com/institute/measuring-pace-of-ai-development); the NIST AI RMF Playbook recommends documenting response times, response types, escalations, and accountable go/no-go decisions (https://airc.nist.gov/docs/AI_RMF_Playbook.pdf); OpenAI Presence treats policies, guardrails, escalation rules, production sessions, and quality signals as distinct operational controls (https://openai.com/index/introducing-openai-presence/).
+- Judgment: response timing and availability belong in QIF because they determine whether a selected governance route actually resolves. They remain policy-conformance evidence, not a quality verdict.
+- Implementation: `calibration-report` now carries `EscalationResolutionPolicy`, `EscalationResolution`, and `EscalationResolutionAssessment` records; the verifier reproduces route coverage, disposition, timestamps, elapsed minutes, response-time conformance, availability, evidence status, summaries, and governance.
+- Verification: targeted positive validation and the full retained calibration-report fixture suite passed at `16/16` positive and `813/813` negative before whole-repository verification.
+- Self-review: AOF `self-audit-record` wrote `.aof/context/active/framework-self-audit.json`; the residual gap is real organizational response-time and reviewer-availability evidence.
+- Review: AOF `council-exec --stage review` and `.aof/runtime/v0.6.36-final-review.json` approved release after Visionary, Builder, and Guardian evidence review.
+- Retrospective: AOF `learning-loop-snapshot` wrote `.aof/context/active/learning-loop.json` and preserved v0.6.37 as the next value slice.
+- AOF organization verification passed `277/277`; `TASK-054` is done and `.aof/runtime/v0.6.36-post-situation.json` found no truth conflict.
+- Next: v0.6.37 Reviewer Disagreement Calibration preserves independent judgments, reasons, overrides, and adjudication without treating majority, seniority, or agreement rate as truth.
+
 ## v0.6.35 Selective Escalation Calibration
 
 Date: 2026-10-02

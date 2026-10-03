@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-03T04:35:42.111Z",
+  "alternative_analysis_id": "ALT-MURWFLB3-ACQE02",
+  "subject_need": "Make selective escalation resolution auditable and operationally actionable.",
+  "alternative_solutions": [
+    "Extend the existing calibration-report package with resolution policy, resolution, and resolution assessment records.",
+    "Create a new package dedicated to escalation operations."
+  ],
+  "non_solution_options": [
+    "Document recommended response times in prose without executable schema or verifier rules."
+  ],
+  "defer_options": [
+    "Keep v0.6.35 route selection only and accept that route completion cannot be audited."
+  ],
+  "stop_options": [
+    "Stop if the model would imply response speed or escalation volume is quality.",
+    "Stop if the verifier would claim semantic truth, authority, competence, harm, or causal effectiveness."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MURWEZQN-WP3RHO"
+}

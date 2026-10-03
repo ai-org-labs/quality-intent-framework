@@ -1,0 +1,83 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-03T04:38:38.539Z",
+  "packet_id": "ASP-MURWJDFV-YSG2DQ",
+  "source_task_id": "TASK-054",
+  "source_parent_session_id": "SESS-MURWENX6-QSP40V",
+  "source_decision_record_id": "DEC-MURWGR4M-RN6GJK",
+  "objective": "Implement and verify QIF v0.6.36 Escalation Resolution and Timeliness",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": "qif-council",
+    "assignment_reason": "Builder extends governed selective escalation into auditable resolution under Visionary scope and Guardian evidence boundaries.",
+    "execution_mode": "council-seat"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "deterministic-verifier-design",
+    "escalation-resolution-boundaries"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "escalation-resolution-modeling",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs",
+        "docs/qif-v0.6.35-selective-escalation-calibration.md"
+      ],
+      "rationale": "Existing route policies and decisions provide deterministic inputs for resolution policy, elapsed-time, availability, and governance checks."
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-no-automatic-authority",
+    "policy-no-activity-count-quality",
+    "policy-no-causal-claims",
+    "policy-no-employee-surveillance"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-escalation-resolution-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "escalationResolutionPolicies",
+      "escalationResolutions",
+      "escalationResolutionAssessments"
+    ],
+    "acceptance_criteria": [
+      "Every resolution resolves to one selective escalation decision, policy, and actual route.",
+      "Elapsed time, timeliness, disposition, availability, evidence status, and assessment summaries are reproducible.",
+      "Timeout, lateness, unavailability, invalid redirect, unverified evidence, and insufficient data route to governance."
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "resolution arithmetic and evidence boundaries are deterministic",
+      "evaluator_ref": "guardian",
+      "evidence_required": "positive package validation and retained negative fixtures",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "speed-or-count-as-quality",
+      "trigger_condition": "response time, resolution volume, or disposition is treated as quality, competence, authority, or causal proof",
+      "consequence": "require-council-review",
+      "recovery_action": "restore operational-evidence-only semantics and explicit governance"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will show how each escalation actually resolved.",
+    "current_action": "Implement escalation resolution and timeliness",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Submit resolution evidence and verifier results"
+  },
+  "status": "draft"
+}

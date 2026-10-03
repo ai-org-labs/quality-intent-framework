@@ -146,6 +146,9 @@ function validatePackage(pkg, packagePath) {
   const selectiveEscalationPolicies = requiredArray(pkg, "selectiveEscalationPolicies");
   const selectiveEscalationDecisions = requiredArray(pkg, "selectiveEscalationDecisions");
   const selectiveEscalationAssessments = requiredArray(pkg, "selectiveEscalationAssessments");
+  const escalationResolutionPolicies = requiredArray(pkg, "escalationResolutionPolicies");
+  const escalationResolutions = requiredArray(pkg, "escalationResolutions");
+  const escalationResolutionAssessments = requiredArray(pkg, "escalationResolutionAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -160,6 +163,9 @@ function validatePackage(pkg, packagePath) {
   const escalationPolicyIndex = indexById(selectiveEscalationPolicies, `${packagePath}:selectiveEscalationPolicies`);
   const escalationDecisionIndex = indexById(selectiveEscalationDecisions, `${packagePath}:selectiveEscalationDecisions`);
   const escalationAssessmentIndex = indexById(selectiveEscalationAssessments, `${packagePath}:selectiveEscalationAssessments`);
+  const resolutionPolicyIndex = indexById(escalationResolutionPolicies, `${packagePath}:escalationResolutionPolicies`);
+  const resolutionIndex = indexById(escalationResolutions, `${packagePath}:escalationResolutions`);
+  const resolutionAssessmentIndex = indexById(escalationResolutionAssessments, `${packagePath}:escalationResolutionAssessments`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -680,6 +686,119 @@ function validatePackage(pkg, packagePath) {
     if (dataSufficiency === "insufficient" && !triggerTypes.has("insufficient-data")) errors.push(`${assessment.id} insufficient route evidence requires an insufficient-data governance trigger.`);
   }
 
+  for (const policy of escalationResolutionPolicies) {
+    const escalationPolicy = ref(escalationPolicyIndex, policy.selectiveEscalationPolicyRef, "selective escalation policy", policy.id);
+    const requirements = Array.isArray(policy.routeRequirements) ? policy.routeRequirements : [];
+    const requirementRoutes = requirements.map((requirement) => requirement.routeRef);
+    if (escalationPolicy && !sameSet(requirementRoutes, escalationPolicy.routes.map((route) => route.id))) errors.push(`${policy.id} routeRequirements must exactly cover selective escalation policy routes.`);
+    if (new Set(requirementRoutes).size !== requirementRoutes.length) errors.push(`${policy.id} routeRequirements must not duplicate routeRef values.`);
+    const requirementIndex = new Map();
+    for (const requirement of requirements) {
+      const route = escalationPolicy?.__routeIndex?.get(requirement.routeRef);
+      if (!route) errors.push(`${policy.id} route requirement references missing escalation route: ${requirement.routeRef}`);
+      else requirementIndex.set(requirement.routeRef, requirement);
+      const dispositions = requirement.allowedDispositions || [];
+      if (!Array.isArray(requirement.allowedDispositions) || dispositions.length === 0) errors.push(`${policy.id}/${requirement.routeRef} allowedDispositions must include at least one disposition.`);
+      if (new Set(dispositions).size !== dispositions.length) errors.push(`${policy.id}/${requirement.routeRef} allowedDispositions must not contain duplicates.`);
+      if (!Number.isInteger(requirement.responseTimeLimitMinutes) || requirement.responseTimeLimitMinutes < 1) errors.push(`${policy.id}/${requirement.routeRef} responseTimeLimitMinutes must be a positive integer.`);
+      str(requirement, "availabilityRequirement", `${policy.id}/${requirement.routeRef}`);
+      str(requirement, "timeoutAction", `${policy.id}/${requirement.routeRef}`);
+      if (!Array.isArray(requirement.redirectRouteRefs)) errors.push(`${policy.id}/${requirement.routeRef} redirectRouteRefs must be an array.`);
+      for (const redirectRef of requirement.redirectRouteRefs || []) {
+        if (!escalationPolicy?.__routeIndex?.has(redirectRef)) errors.push(`${policy.id}/${requirement.routeRef} redirectRouteRefs references missing escalation route: ${redirectRef}`);
+        if (redirectRef === requirement.routeRef) errors.push(`${policy.id}/${requirement.routeRef} redirectRouteRefs must not include the source route.`);
+      }
+    }
+    if (!Number.isInteger(policy.minimumResolutionCount) || policy.minimumResolutionCount < 2) errors.push(`${policy.id} minimumResolutionCount must be at least 2.`);
+    if (!Number.isInteger(policy.minimumVerifiedResolutionCount) || policy.minimumVerifiedResolutionCount < 2) errors.push(`${policy.id} minimumVerifiedResolutionCount must be at least 2.`);
+    if (policy.timelinessInterpretation !== "response-time-and-availability-evidence-only-not-quality-competence-or-authority") errors.push(`${policy.id} timelinessInterpretation must be response-time-and-availability-evidence-only-not-quality-competence-or-authority.`);
+    if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one accountable reviewer.`);
+    if (!Array.isArray(policy.governanceTriggerRefs)) errors.push(`${policy.id} governanceTriggerRefs must be an array.`);
+    const triggerTypes = new Set((policy.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", policy.id)?.triggerType));
+    if (policy.status !== "active" && !triggerTypes.has("resolution-policy-unreviewed")) errors.push(`${policy.id} non-active resolution policy requires a resolution-policy-unreviewed governance trigger.`);
+    if (policy.status === "active" && escalationPolicy?.status !== "active") errors.push(`${policy.id} active resolution policy requires an active selective escalation policy.`);
+    policy.__escalationPolicy = escalationPolicy;
+    policy.__requirementIndex = requirementIndex;
+  }
+
+  const resolutionKeys = new Set();
+  for (const resolution of escalationResolutions) {
+    for (const field of ["selectiveEscalationDecisionRef", "policyRef", "routeRef", "disposition", "startedAt", "resolvedAt", "availabilityObserved", "observedOutcome", "status"]) str(resolution, field, resolution.id);
+    const decision = ref(escalationDecisionIndex, resolution.selectiveEscalationDecisionRef, "selective escalation decision", resolution.id);
+    const policy = ref(resolutionPolicyIndex, resolution.policyRef, "escalation resolution policy", resolution.id);
+    if (!decision || !policy) continue;
+    const key = `${decision.id}/${policy.id}`;
+    if (resolutionKeys.has(key)) errors.push(`${resolution.id} duplicates escalation resolution ${key}.`);
+    resolutionKeys.add(key);
+    if (policy.selectiveEscalationPolicyRef !== decision.policyRef) errors.push(`${resolution.id} policyRef must govern the decision selective escalation policy.`);
+    if (resolution.routeRef !== decision.actualRouteRef) errors.push(`${resolution.id} routeRef must equal the referenced decision actualRouteRef.`);
+    const requirement = policy.__requirementIndex?.get(resolution.routeRef);
+    if (!requirement) errors.push(`${resolution.id} routeRef has no resolution requirement.`);
+    if (requirement && !(requirement.allowedDispositions || []).includes(resolution.disposition)) errors.push(`${resolution.id} disposition is not allowed by its route requirement.`);
+    if (requirement && resolution.responseTimeLimitMinutes !== requirement.responseTimeLimitMinutes) errors.push(`${resolution.id} responseTimeLimitMinutes must match its route requirement.`);
+    const started = Date.parse(resolution.startedAt);
+    const resolved = Date.parse(resolution.resolvedAt);
+    if (!Number.isFinite(started) || !Number.isFinite(resolved)) errors.push(`${resolution.id} startedAt and resolvedAt must be valid date-time values.`);
+    else {
+      if (resolved < started) errors.push(`${resolution.id} resolvedAt must not precede startedAt.`);
+      const expectedElapsed = Math.round((resolved - started) / 60000);
+      if (resolution.elapsedMinutes !== expectedElapsed) errors.push(`${resolution.id} elapsedMinutes must reproduce as ${expectedElapsed}.`);
+      const expectedWithin = expectedElapsed <= resolution.responseTimeLimitMinutes;
+      if (resolution.withinResponseTime !== expectedWithin) errors.push(`${resolution.id} withinResponseTime must reproduce as ${expectedWithin}.`);
+    }
+    if (resolution.disposition === "timed-out" && resolution.withinResponseTime !== false) errors.push(`${resolution.id} timed-out disposition requires withinResponseTime false.`);
+    if (resolution.disposition === "redirected") {
+      if (!resolution.redirectedRouteRef) errors.push(`${resolution.id} redirected disposition requires redirectedRouteRef.`);
+      else if (!(requirement?.redirectRouteRefs || []).includes(resolution.redirectedRouteRef)) errors.push(`${resolution.id} redirectedRouteRef is not allowed by its route requirement.`);
+    } else if (resolution.redirectedRouteRef) errors.push(`${resolution.id} non-redirected disposition must not include redirectedRouteRef.`);
+    if (resolution.observedOutcome !== decision.observedOutcome) errors.push(`${resolution.id} observedOutcome must equal the referenced decision observedOutcome.`);
+    const evidence = resolution.resolutionEvidence;
+    if (!evidence || typeof evidence !== "object") errors.push(`${resolution.id} must include resolutionEvidence.`);
+    else {
+      for (const field of ["sourceArtifact", "resolvedBy", "resultSummary", "status"]) str(evidence, field, `${resolution.id} resolutionEvidence`);
+      if (!Array.isArray(evidence.verifiedBy) || evidence.verifiedBy.length === 0) errors.push(`${resolution.id} resolutionEvidence verifiedBy must include at least one verifier.`);
+    }
+    if (!Array.isArray(resolution.governanceTriggerRefs)) errors.push(`${resolution.id} governanceTriggerRefs must be an array.`);
+    const triggerTypes = new Set((resolution.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", resolution.id)?.triggerType));
+    if (resolution.withinResponseTime === false && !triggerTypes.has("resolution-time-exceeded")) errors.push(`${resolution.id} late resolution requires a resolution-time-exceeded governance trigger.`);
+    if (resolution.disposition === "timed-out" && !triggerTypes.has("resolution-timeout")) errors.push(`${resolution.id} timed-out resolution requires a resolution-timeout governance trigger.`);
+    if (resolution.availabilityObserved !== "available" && !triggerTypes.has("resolution-availability-unmet")) errors.push(`${resolution.id} unmet availability requires a resolution-availability-unmet governance trigger.`);
+    if (evidence?.status !== "verified" && !triggerTypes.has("resolution-evidence-unverified")) errors.push(`${resolution.id} non-verified resolution evidence requires a resolution-evidence-unverified governance trigger.`);
+    if (resolution.disposition === "redirected" && resolution.redirectedRouteRef && !(requirement?.redirectRouteRefs || []).includes(resolution.redirectedRouteRef) && !triggerTypes.has("resolution-redirect-invalid")) errors.push(`${resolution.id} invalid redirect requires a resolution-redirect-invalid governance trigger.`);
+  }
+
+  for (const assessment of escalationResolutionAssessments) {
+    for (const field of ["title", "policyRef", "dataSufficiency", "assessmentSignal", "interpretation", "status"]) str(assessment, field, assessment.id);
+    const policy = ref(resolutionPolicyIndex, assessment.policyRef, "escalation resolution policy", assessment.id);
+    const resolutions = Array.isArray(assessment.resolutionRefs)
+      ? assessment.resolutionRefs.map((id) => ref(resolutionIndex, id, "escalation resolution", assessment.id)).filter(Boolean)
+      : [];
+    if (resolutions.length === 0) errors.push(`${assessment.id} resolutionRefs must include at least one record.`);
+    if (new Set(assessment.resolutionRefs || []).size !== (assessment.resolutionRefs || []).length) errors.push(`${assessment.id} resolutionRefs must not contain duplicates.`);
+    for (const resolution of resolutions) if (resolution.policyRef !== assessment.policyRef) errors.push(`${assessment.id} resolution ${resolution.id} must use policy ${assessment.policyRef}.`);
+    const counts = {
+      accepted: resolutions.filter((item) => item.disposition === "accepted").length,
+      rejected: resolutions.filter((item) => item.disposition === "rejected").length,
+      redirected: resolutions.filter((item) => item.disposition === "redirected").length,
+      timedOut: resolutions.filter((item) => item.disposition === "timed-out").length
+    };
+    for (const [field, value] of Object.entries(counts)) if (!sameNumber(assessment.dispositionCounts?.[field], value)) errors.push(`${assessment.id} dispositionCounts.${field} must reproduce as ${value}.`);
+    const timelyCount = resolutions.filter((item) => item.withinResponseTime === true).length;
+    const lateCount = resolutions.length - timelyCount;
+    const verifiedResolutionCount = resolutions.filter((item) => item.resolutionEvidence?.status === "verified").length;
+    const unavailableCount = resolutions.filter((item) => item.availabilityObserved !== "available").length;
+    for (const [field, value] of Object.entries({ resolutionCount: resolutions.length, timelyCount, lateCount, verifiedResolutionCount, unavailableCount })) if (!sameNumber(assessment[field], value)) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const dataSufficiency = policy && resolutions.length >= policy.minimumResolutionCount && verifiedResolutionCount >= policy.minimumVerifiedResolutionCount ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== dataSufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${dataSufficiency}.`);
+    const hasAlert = resolutions.some((item) => !item.withinResponseTime || item.disposition === "timed-out" || item.availabilityObserved !== "available" || item.resolutionEvidence?.status !== "verified");
+    const signal = dataSufficiency === "insufficient" ? "insufficient-data" : hasAlert ? "governance-required" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (assessment.interpretation !== "resolution-and-timeliness-evidence-only-not-quality-causality-competence-or-authority") errors.push(`${assessment.id} interpretation must be resolution-and-timeliness-evidence-only-not-quality-causality-competence-or-authority.`);
+    if (!Array.isArray(assessment.governanceTriggerRefs)) errors.push(`${assessment.id} governanceTriggerRefs must be an array.`);
+    const triggerTypes = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (dataSufficiency === "insufficient" && !triggerTypes.has("insufficient-data")) errors.push(`${assessment.id} insufficient resolution evidence requires an insufficient-data governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -780,6 +899,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that consequence weights are money, objective harm, cross-policy utility, quality, or automatic authority")) errors.push(`${packagePath} verifierBoundary must explicitly bound consequence weights from money, objective harm, cross-policy utility, quality, or automatic authority.`);
     if (!(boundary.doesNotClaim || []).includes("that threshold sensitivity optimizes, ranks, selects, or authorizes policy")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming threshold sensitivity optimizes, ranks, selects, or authorizes policy.`);
     if (!(boundary.doesNotClaim || []).includes("that route volume, escalation frequency, or route outcome proves quality, competence, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming route volume, escalation frequency, or route outcome proves quality, competence, causality, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that resolution speed, volume, disposition, or reviewer availability proves quality, competence, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming resolution speed, volume, disposition, or reviewer availability proves quality, competence, causality, or authority.`);
   }
 
   results.push({
@@ -799,6 +919,9 @@ function validatePackage(pkg, packagePath) {
       selectiveEscalationPolicies: selectiveEscalationPolicies.length,
       selectiveEscalationDecisions: selectiveEscalationDecisions.length,
       selectiveEscalationAssessments: selectiveEscalationAssessments.length,
+      escalationResolutionPolicies: escalationResolutionPolicies.length,
+      escalationResolutions: escalationResolutions.length,
+      escalationResolutionAssessments: escalationResolutionAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -818,5 +941,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, and arithmetic only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, quality, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, and policy conformance only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, resolution quality, reviewer competence, service availability, or decision authority."
 }, null, 2));
