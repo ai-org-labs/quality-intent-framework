@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-03T04:52:26.292Z",
+  "updated_at": "2026-10-04T04:58:13.131Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means a human or AI can trace each resolution to a selective escalation decision and governed route, reproduce elapsed time and policy conformance, distinguish disposition from quality, verify evidence status and availability, and route timeout, lateness, invalid redirect, unavailable capacity, unresolved authority, insufficient data, or unverified evidence to governance. Response time, resolution count, and throughput remain operational evidence, never quality, competence, authority, or semantic truth.",
-      "recorded_at": "2026-10-03T04:35:14.164Z",
+      "answer": "Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority.",
+      "recorded_at": "2026-10-04T04:33:57.613Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MURWENX6-QSP40V",
+      "source_session_id": "SESS-MUTBSTHE-NWLTNY",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The broad continuation request is reframed into the smallest domain-general gap after v0.6.35: auditable escalation resolution and timeliness. Extending calibration-report is simpler than a new package and preserves traceability to route decisions.",
-      "recorded_at": "2026-10-03T04:36:36.316Z",
+      "answer": "The broad continuation request is reframed into the smallest gap after v0.6.36: preserve disagreement instead of collapsing resolution evidence into one authoritative result. Extending calibration-report preserves the existing decision-to-resolution chain.",
+      "recorded_at": "2026-10-04T04:35:23.761Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MURWENX6-QSP40V",
-      "source_decision_record_id": "DEC-MURWGR4M-RN6GJK"
+      "source_session_id": "SESS-MUTBSTHE-NWLTNY",
+      "source_decision_record_id": "DEC-MUTBV1T7-OODSGT"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "The committed resolution evidence is illustrative and insufficient; real organizational reviewer availability and response-time evidence remains pilot work.",
-      "recorded_at": "2026-10-03T04:52:26.292Z",
-      "expectation_state": "All 16 positive package checks, 813 retained negative checks, timing arithmetic, governance routing, public-identity scan, and diff checks passed; verifier claims remain structural.",
-      "mismatch_state": "The committed resolution evidence is illustrative and insufficient; real organizational reviewer availability and response-time evidence remains pilot work.",
-      "scale_direction": "Complete council review and release v0.6.36, then preserve independent reviewer disagreement in v0.6.37.",
-      "source_session_id": null,
-      "source_decision_record_id": null
+      "answer": "The committed reviewer judgments and adjudication are illustrative and insufficient; real independent reviewer evidence, accountable adjudicator authority, and operational feedback remain pilot work.",
+      "recorded_at": "2026-10-04T04:58:13.131Z",
+      "expectation_state": "All 16 positive package checks, 847 retained negative checks, disagreement grouping, adjudication traceability, governance routing, JSON parsing, public-identity scan, and diff checks passed; verifier claims remain structural.",
+      "mismatch_state": "The committed reviewer judgments and adjudication are illustrative and insufficient; real independent reviewer evidence, accountable adjudicator authority, and operational feedback remain pilot work.",
+      "scale_direction": "Complete Council review and release v0.6.37, then implement route-policy drift and revalidation in v0.6.38.",
+      "source_session_id": "SESS-MUTBSTHE-NWLTNY",
+      "source_decision_record_id": "DEC-MUTBV1T7-OODSGT"
     }
   ]
 }

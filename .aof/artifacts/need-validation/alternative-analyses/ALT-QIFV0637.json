@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-04T04:34:26.574Z",
+  "alternative_analysis_id": "ALT-MUTBTTOU-S7EKRY",
+  "subject_need": "Preserve and govern reviewer disagreement after escalation resolution.",
+  "alternative_solutions": [
+    "Extend calibration-report with disagreement policy, independent judgment, disagreement, adjudication, and assessment entities.",
+    "Create a separate reviewer-governance package."
+  ],
+  "non_solution_options": [
+    "Store only the final majority result or adjudicator decision."
+  ],
+  "defer_options": [
+    "Keep disagreement in free-text governance notes without executable traceability."
+  ],
+  "stop_options": [
+    "Stop if majority, seniority, or agreement rate automatically becomes truth or authority.",
+    "Stop if original dissent can be deleted, rewritten, or used for employee surveillance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUTBT7C7-0J8X38"
+}

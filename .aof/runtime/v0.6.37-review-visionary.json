@@ -1,0 +1,21 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-04T04:59:36.749Z",
+  "role": "Visionary",
+  "stage": "review",
+  "session_id": "SESS-MUTBSTHE-NWLTNY",
+  "status": "completed",
+  "recommendation": "Release v0.6.37 and keep the next frontier focused on policy drift rather than consensus optimization.",
+  "rationale": "The release converts disagreement into durable evidence and sets up governed learning without silently changing policy.",
+  "signals": [],
+  "artifact_refs": [
+    "docs/qif-v0.6.37-reviewer-disagreement-calibration.md"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-055",
+  "source_decision_record_id": "DEC-MUTBV1T7-OODSGT",
+  "source_parent_session_id": "SESS-MUTBSTHE-NWLTNY",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.95
+}

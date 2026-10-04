@@ -1,6 +1,6 @@
 {
   "packageType": "calibration-report",
-  "runtimeVersion": "0.6.36",
+  "runtimeVersion": "0.6.37",
   "packageId": "CRPKG-001",
   "packageRefs": [
     {
@@ -693,6 +693,162 @@
       "status": "reviewed"
     }
   ],
+  "reviewerDisagreementPolicies": [
+    {
+      "id": "RDP-CR-001",
+      "escalationResolutionPolicyRef": "ERP-CR-001",
+      "minimumIndependentJudgments": 2,
+      "minimumDisagreementCaseCount": 10,
+      "independenceDimensions": [
+        "role",
+        "reporting-line"
+      ],
+      "detectionRule": "preserve-exact-verdict-rationale-evidence-and-confidence",
+      "adjudicationModes": [
+        "clarify-rubric",
+        "request-evidence",
+        "accept-plurality",
+        "select-judgment",
+        "new-judgment",
+        "defer"
+      ],
+      "aggregationBoundary": "no-automatic-majority-seniority-agreement-or-confidence-authority",
+      "reviewedBy": [
+        "customer-operations-governance-board"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "reviewerJudgments": [
+    {
+      "id": "RJG-CR-001",
+      "escalationResolutionRef": "ERS-CR-001",
+      "policyRef": "RDP-CR-001",
+      "reviewerRef": "illustrative-operations-reviewer",
+      "reviewerRole": "operations",
+      "independenceGroup": "operations-line",
+      "verdict": "timed-out",
+      "rationale": "The declared response window elapsed without an accountable disposition, so the operational resolution state is timed out.",
+      "evidenceRefs": [
+        "ERS-CR-001",
+        "examples/calibration-report-package.json"
+      ],
+      "confidence": 0.8,
+      "submittedAt": "2026-01-15T10:40:00.000Z",
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-014"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "RJG-CR-002",
+      "escalationResolutionRef": "ERS-CR-001",
+      "policyRef": "RDP-CR-001",
+      "reviewerRef": "illustrative-customer-impact-reviewer",
+      "reviewerRole": "customer-impact",
+      "independenceGroup": "customer-impact-line",
+      "verdict": "deferred",
+      "rationale": "The customer-impact decision remains unresolved and no valid alternate authority accepted it, so the protected action should stay deferred rather than be treated as a completed timeout disposition.",
+      "evidenceRefs": [
+        "ERS-CR-001",
+        "SED-CR-001"
+      ],
+      "confidence": 0.72,
+      "submittedAt": "2026-01-15T10:45:00.000Z",
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-014"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "reviewerDisagreements": [
+    {
+      "id": "RDG-CR-001",
+      "policyRef": "RDP-CR-001",
+      "escalationResolutionRef": "ERS-CR-001",
+      "judgmentRefs": [
+        "RJG-CR-001",
+        "RJG-CR-002"
+      ],
+      "disagreementDimensions": [
+        "verdict",
+        "rationale"
+      ],
+      "verdictGroups": [
+        {
+          "verdict": "timed-out",
+          "judgmentRefs": [
+            "RJG-CR-001"
+          ]
+        },
+        {
+          "verdict": "deferred",
+          "judgmentRefs": [
+            "RJG-CR-002"
+          ]
+        }
+      ],
+      "focalIssues": [
+        "Whether timeout is the final decision state or only an operational event while the protected action remains deferred."
+      ],
+      "dissentPreserved": true,
+      "disagreementStatus": "adjudicated",
+      "adjudicationOutcomeRef": "ADJ-CR-001",
+      "governanceTriggerRefs": [],
+      "status": "reviewed"
+    }
+  ],
+  "adjudicationOutcomes": [
+    {
+      "id": "ADJ-CR-001",
+      "disagreementRef": "RDG-CR-001",
+      "adjudicatorRef": "illustrative-governance-board",
+      "adjudicatorAuthorityRef": "customer-operations-governance-charter",
+      "adjudicatorIndependenceGroup": "governance-line",
+      "adjudicationMode": "new-judgment",
+      "supersededJudgmentRefs": [],
+      "finalDisposition": "deferred",
+      "rationale": "Record the response-window breach as timed-out evidence while keeping the protected action deferred until an accountable authority resolves the underlying case. Neither source judgment is erased.",
+      "evidenceRefs": [
+        "RDG-CR-001",
+        "ERP-CR-001"
+      ],
+      "originalJudgmentsPreserved": true,
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-015"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "reviewerDisagreementAssessments": [
+    {
+      "id": "RDA-CR-001",
+      "title": "Illustrative reviewer disagreement and adjudication assessment",
+      "policyRef": "RDP-CR-001",
+      "disagreementRefs": [
+        "RDG-CR-001"
+      ],
+      "disagreementCaseCount": 1,
+      "independentCaseCount": 1,
+      "adjudicatedCount": 1,
+      "unresolvedCount": 0,
+      "preservedDissentCount": 1,
+      "verifiedAdjudicationCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-014",
+        "GTR-CR-015"
+      ],
+      "interpretation": "disagreement-and-adjudication-evidence-only-not-truth-quality-competence-or-authority",
+      "status": "reviewed"
+    }
+  ],
   "governanceTriggers": [
     {
       "id": "GTR-CR-001",
@@ -823,6 +979,26 @@
       "requiredAction": "Confirm accountable capacity or redirect the case through a reviewed route before relying on escalation availability.",
       "owner": "customer-operations-governance-board",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-014",
+      "triggerType": "reviewer-evidence-unverified",
+      "reason": "The independent reviewer judgments are illustrative records rather than verified operational judgments.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently captured reviewer judgments before making an empirical disagreement claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-015",
+      "triggerType": "adjudication-evidence-unverified",
+      "reason": "The adjudication outcome is example-only and does not establish operational authority or semantic correctness.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Obtain accountable adjudication evidence and verify the authority boundary before operational use.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -834,7 +1010,8 @@
       "loss-boundary linkage, threshold action, consequence class, policy-local weight, weighted error, assessment arithmetic, and governance routing reproduce",
       "reviewed threshold alternatives, replay actions and classes, action flips, boundary distance, brittleness summary, and governance routing reproduce",
       "route definitions, score intervals, selected and actual routes, authority, execution evidence, route outcomes, assessment summaries, and governance routing reproduce",
-      "resolution policy coverage, disposition, elapsed time, response-time conformance, availability, evidence status, assessment summaries, and governance routing reproduce"
+      "resolution policy coverage, disposition, elapsed time, response-time conformance, availability, evidence status, assessment summaries, and governance routing reproduce",
+      "reviewer independence, exact verdict grouping, disagreement dimensions, preserved dissent, adjudication linkage, override references, assessment summaries, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -845,6 +1022,7 @@
       "that consequence weights are money, objective harm, cross-policy utility, quality, or automatic authority",
       "that route volume, escalation frequency, or route outcome proves quality, competence, causality, or authority",
       "that resolution speed, volume, disposition, or reviewer availability proves quality, competence, causality, or authority",
+      "that reviewer agreement, majority, seniority, confidence, or adjudication proves semantic truth, quality, competence, or authority",
       "a calibration statistic is quality",
       "an automatic quality verdict"
     ],
@@ -854,6 +1032,7 @@
       "accountable review of each threshold, loss boundary, and policy-local governance weight",
       "accountable validation of route authority, specialist capability, execution evidence, and operational response-time boundaries",
       "accountable review of resolution policy, actual disposition, reviewer availability, and timeout consequences",
+      "independent review of disagreement meaning, evidence access, adjudicator authority, and preserved dissent",
       "review of environmental and evaluation-harness effects",
       "accountable governance before changing quality decisions"
     ]

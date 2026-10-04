@@ -149,6 +149,11 @@ function validatePackage(pkg, packagePath) {
   const escalationResolutionPolicies = requiredArray(pkg, "escalationResolutionPolicies");
   const escalationResolutions = requiredArray(pkg, "escalationResolutions");
   const escalationResolutionAssessments = requiredArray(pkg, "escalationResolutionAssessments");
+  const reviewerDisagreementPolicies = requiredArray(pkg, "reviewerDisagreementPolicies");
+  const reviewerJudgments = requiredArray(pkg, "reviewerJudgments");
+  const reviewerDisagreements = requiredArray(pkg, "reviewerDisagreements");
+  const adjudicationOutcomes = requiredArray(pkg, "adjudicationOutcomes");
+  const reviewerDisagreementAssessments = requiredArray(pkg, "reviewerDisagreementAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -166,6 +171,11 @@ function validatePackage(pkg, packagePath) {
   const resolutionPolicyIndex = indexById(escalationResolutionPolicies, `${packagePath}:escalationResolutionPolicies`);
   const resolutionIndex = indexById(escalationResolutions, `${packagePath}:escalationResolutions`);
   const resolutionAssessmentIndex = indexById(escalationResolutionAssessments, `${packagePath}:escalationResolutionAssessments`);
+  const reviewerPolicyIndex = indexById(reviewerDisagreementPolicies, `${packagePath}:reviewerDisagreementPolicies`);
+  const reviewerJudgmentIndex = indexById(reviewerJudgments, `${packagePath}:reviewerJudgments`);
+  const reviewerDisagreementIndex = indexById(reviewerDisagreements, `${packagePath}:reviewerDisagreements`);
+  const adjudicationIndex = indexById(adjudicationOutcomes, `${packagePath}:adjudicationOutcomes`);
+  const reviewerAssessmentIndex = indexById(reviewerDisagreementAssessments, `${packagePath}:reviewerDisagreementAssessments`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -799,6 +809,114 @@ function validatePackage(pkg, packagePath) {
     if (dataSufficiency === "insufficient" && !triggerTypes.has("insufficient-data")) errors.push(`${assessment.id} insufficient resolution evidence requires an insufficient-data governance trigger.`);
   }
 
+  for (const policy of reviewerDisagreementPolicies) {
+    const resolutionPolicy = ref(resolutionPolicyIndex, policy.escalationResolutionPolicyRef, "escalation resolution policy", policy.id);
+    for (const field of ["detectionRule", "aggregationBoundary", "status"]) str(policy, field, policy.id);
+    if (!Number.isInteger(policy.minimumIndependentJudgments) || policy.minimumIndependentJudgments < 2) errors.push(`${policy.id} minimumIndependentJudgments must be at least 2.`);
+    if (!Number.isInteger(policy.minimumDisagreementCaseCount) || policy.minimumDisagreementCaseCount < 2) errors.push(`${policy.id} minimumDisagreementCaseCount must be at least 2.`);
+    if (!Array.isArray(policy.independenceDimensions) || policy.independenceDimensions.length === 0) errors.push(`${policy.id} independenceDimensions must include at least one dimension.`);
+    if (!Array.isArray(policy.adjudicationModes) || policy.adjudicationModes.length === 0) errors.push(`${policy.id} adjudicationModes must include at least one mode.`);
+    if (policy.detectionRule !== "preserve-exact-verdict-rationale-evidence-and-confidence") errors.push(`${policy.id} detectionRule must preserve exact verdict, rationale, evidence, and confidence.`);
+    if (policy.aggregationBoundary !== "no-automatic-majority-seniority-agreement-or-confidence-authority") errors.push(`${policy.id} aggregationBoundary must forbid automatic majority, seniority, agreement, or confidence authority.`);
+    if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one accountable reviewer.`);
+    const triggerTypes = new Set((policy.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", policy.id)?.triggerType));
+    if (policy.status !== "active" && !triggerTypes.has("reviewer-policy-unreviewed")) errors.push(`${policy.id} non-active reviewer disagreement policy requires a reviewer-policy-unreviewed governance trigger.`);
+    if (policy.status === "active" && resolutionPolicy?.status !== "active") errors.push(`${policy.id} active reviewer disagreement policy requires an active escalation resolution policy.`);
+  }
+
+  for (const judgment of reviewerJudgments) {
+    for (const field of ["escalationResolutionRef", "policyRef", "reviewerRef", "reviewerRole", "independenceGroup", "verdict", "rationale", "submittedAt", "evidenceStatus", "status"]) str(judgment, field, judgment.id);
+    const resolution = ref(resolutionIndex, judgment.escalationResolutionRef, "escalation resolution", judgment.id);
+    const policy = ref(reviewerPolicyIndex, judgment.policyRef, "reviewer disagreement policy", judgment.id);
+    if (resolution && policy) {
+      const resolutionPolicy = resolutionPolicyIndex.get(resolution.policyRef);
+      if (policy.escalationResolutionPolicyRef !== resolutionPolicy?.id) errors.push(`${judgment.id} policyRef must govern the referenced escalation resolution policy.`);
+    }
+    if (!Array.isArray(judgment.evidenceRefs) || judgment.evidenceRefs.length === 0) errors.push(`${judgment.id} evidenceRefs must include at least one item.`);
+    score(judgment.confidence, "confidence", judgment.id);
+    if (!Number.isFinite(Date.parse(judgment.submittedAt))) errors.push(`${judgment.id} submittedAt must be a valid date-time.`);
+    const triggerTypes = new Set((judgment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", judgment.id)?.triggerType));
+    if (judgment.evidenceStatus !== "verified" && !triggerTypes.has("reviewer-evidence-unverified")) errors.push(`${judgment.id} non-verified reviewer evidence requires a reviewer-evidence-unverified governance trigger.`);
+    if (judgment.overrideRef) {
+      const outcome = ref(adjudicationIndex, judgment.overrideRef, "adjudication outcome", judgment.id);
+      const disagreement = outcome && reviewerDisagreementIndex.get(outcome.disagreementRef);
+      if (disagreement && !(disagreement.judgmentRefs || []).includes(judgment.id)) errors.push(`${judgment.id} overrideRef must resolve to an adjudication of that judgment.`);
+    }
+  }
+
+  for (const disagreement of reviewerDisagreements) {
+    for (const field of ["policyRef", "escalationResolutionRef", "disagreementStatus", "status"]) str(disagreement, field, disagreement.id);
+    const policy = ref(reviewerPolicyIndex, disagreement.policyRef, "reviewer disagreement policy", disagreement.id);
+    ref(resolutionIndex, disagreement.escalationResolutionRef, "escalation resolution", disagreement.id);
+    const judgments = Array.isArray(disagreement.judgmentRefs) ? disagreement.judgmentRefs.map((id) => ref(reviewerJudgmentIndex, id, "reviewer judgment", disagreement.id)).filter(Boolean) : [];
+    if (judgments.length < (policy?.minimumIndependentJudgments || 2)) errors.push(`${disagreement.id} judgmentRefs must satisfy minimumIndependentJudgments.`);
+    if (new Set(disagreement.judgmentRefs || []).size !== (disagreement.judgmentRefs || []).length) errors.push(`${disagreement.id} judgmentRefs must not contain duplicates.`);
+    for (const judgment of judgments) {
+      if (judgment.policyRef !== disagreement.policyRef) errors.push(`${disagreement.id} judgment ${judgment.id} must use policy ${disagreement.policyRef}.`);
+      if (judgment.escalationResolutionRef !== disagreement.escalationResolutionRef) errors.push(`${disagreement.id} judgment ${judgment.id} must review resolution ${disagreement.escalationResolutionRef}.`);
+    }
+    const uniqueReviewers = new Set(judgments.map((item) => item.reviewerRef));
+    if (uniqueReviewers.size !== judgments.length) errors.push(`${disagreement.id} must not reuse a reviewerRef within one disagreement case.`);
+    const independenceGroups = new Set(judgments.map((item) => item.independenceGroup));
+    const triggerTypes = new Set((disagreement.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", disagreement.id)?.triggerType));
+    if (independenceGroups.size < (policy?.minimumIndependentJudgments || 2) && !triggerTypes.has("reviewer-independence-unresolved")) errors.push(`${disagreement.id} unresolved reviewer independence requires a reviewer-independence-unresolved governance trigger.`);
+    const verdicts = new Set(judgments.map((item) => item.verdict));
+    if (verdicts.size > 1 && !(disagreement.disagreementDimensions || []).includes("verdict")) errors.push(`${disagreement.id} disagreementDimensions must include verdict when verdicts differ.`);
+    const rationales = new Set(judgments.map((item) => item.rationale));
+    if (rationales.size > 1 && !(disagreement.disagreementDimensions || []).includes("rationale")) errors.push(`${disagreement.id} disagreementDimensions must include rationale when rationales differ.`);
+    const grouped = new Map();
+    for (const judgment of judgments) grouped.set(judgment.verdict, [...(grouped.get(judgment.verdict) || []), judgment.id]);
+    const verdictGroups = disagreement.verdictGroups || [];
+    if (!sameSet(verdictGroups.map((item) => item.verdict), [...grouped.keys()])) errors.push(`${disagreement.id} verdictGroups must exactly reproduce reviewer verdicts.`);
+    for (const group of verdictGroups) if (!sameSet(group.judgmentRefs, grouped.get(group.verdict) || [])) errors.push(`${disagreement.id}/${group.verdict} judgmentRefs must reproduce verdict membership.`);
+    if (!Array.isArray(disagreement.focalIssues) || disagreement.focalIssues.length === 0) errors.push(`${disagreement.id} focalIssues must include at least one issue.`);
+    if (disagreement.dissentPreserved !== true && !triggerTypes.has("dissent-not-preserved")) errors.push(`${disagreement.id} unpreserved dissent requires a dissent-not-preserved governance trigger.`);
+    if (disagreement.disagreementStatus === "adjudicated") {
+      if (!disagreement.adjudicationOutcomeRef) errors.push(`${disagreement.id} adjudicated disagreement requires adjudicationOutcomeRef.`);
+      else ref(adjudicationIndex, disagreement.adjudicationOutcomeRef, "adjudication outcome", disagreement.id);
+    } else if (disagreement.adjudicationOutcomeRef) errors.push(`${disagreement.id} non-adjudicated disagreement must not include adjudicationOutcomeRef.`);
+    if (disagreement.disagreementStatus === "open" && !triggerTypes.has("reviewer-disagreement-unresolved")) errors.push(`${disagreement.id} open disagreement requires a reviewer-disagreement-unresolved governance trigger.`);
+  }
+
+  for (const outcome of adjudicationOutcomes) {
+    for (const field of ["disagreementRef", "adjudicatorRef", "adjudicatorAuthorityRef", "adjudicatorIndependenceGroup", "adjudicationMode", "finalDisposition", "rationale", "evidenceStatus", "status"]) str(outcome, field, outcome.id);
+    const disagreement = ref(reviewerDisagreementIndex, outcome.disagreementRef, "reviewer disagreement", outcome.id);
+    const policy = disagreement && reviewerPolicyIndex.get(disagreement.policyRef);
+    if (disagreement?.adjudicationOutcomeRef !== outcome.id) errors.push(`${outcome.id} disagreement must point back to this adjudication outcome.`);
+    if (policy && !(policy.adjudicationModes || []).includes(outcome.adjudicationMode)) errors.push(`${outcome.id} adjudicationMode is not allowed by policy ${policy.id}.`);
+    if (outcome.adjudicationMode === "select-judgment" && !outcome.selectedJudgmentRef) errors.push(`${outcome.id} select-judgment mode requires selectedJudgmentRef.`);
+    if (outcome.selectedJudgmentRef && !(disagreement?.judgmentRefs || []).includes(outcome.selectedJudgmentRef)) errors.push(`${outcome.id} selectedJudgmentRef must belong to the disagreement.`);
+    for (const judgmentRef of outcome.supersededJudgmentRefs || []) if (!(disagreement?.judgmentRefs || []).includes(judgmentRef)) errors.push(`${outcome.id} supersededJudgmentRefs must belong to the disagreement.`);
+    if (outcome.originalJudgmentsPreserved !== true) errors.push(`${outcome.id} originalJudgmentsPreserved must be true.`);
+    if (!Array.isArray(outcome.evidenceRefs) || outcome.evidenceRefs.length === 0) errors.push(`${outcome.id} evidenceRefs must include at least one item.`);
+    const sourceGroups = new Set((disagreement?.judgmentRefs || []).map((id) => reviewerJudgmentIndex.get(id)?.independenceGroup));
+    const triggerTypes = new Set((outcome.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", outcome.id)?.triggerType));
+    if (sourceGroups.has(outcome.adjudicatorIndependenceGroup) && !triggerTypes.has("adjudicator-conflict")) errors.push(`${outcome.id} adjudicator conflict requires an adjudicator-conflict governance trigger.`);
+    if (outcome.evidenceStatus !== "verified" && !triggerTypes.has("adjudication-evidence-unverified")) errors.push(`${outcome.id} non-verified adjudication evidence requires an adjudication-evidence-unverified governance trigger.`);
+  }
+
+  for (const assessment of reviewerDisagreementAssessments) {
+    for (const field of ["title", "policyRef", "dataSufficiency", "assessmentSignal", "interpretation", "status"]) str(assessment, field, assessment.id);
+    const policy = ref(reviewerPolicyIndex, assessment.policyRef, "reviewer disagreement policy", assessment.id);
+    const disagreements = Array.isArray(assessment.disagreementRefs) ? assessment.disagreementRefs.map((id) => ref(reviewerDisagreementIndex, id, "reviewer disagreement", assessment.id)).filter(Boolean) : [];
+    if (disagreements.length === 0) errors.push(`${assessment.id} disagreementRefs must include at least one record.`);
+    for (const disagreement of disagreements) if (disagreement.policyRef !== assessment.policyRef) errors.push(`${assessment.id} disagreement ${disagreement.id} must use policy ${assessment.policyRef}.`);
+    const independentCaseCount = disagreements.filter((item) => new Set((item.judgmentRefs || []).map((id) => reviewerJudgmentIndex.get(id)?.independenceGroup)).size >= (policy?.minimumIndependentJudgments || 2)).length;
+    const adjudicatedCount = disagreements.filter((item) => item.disagreementStatus === "adjudicated").length;
+    const unresolvedCount = disagreements.filter((item) => item.disagreementStatus === "open").length;
+    const preservedDissentCount = disagreements.filter((item) => item.dissentPreserved === true).length;
+    const verifiedAdjudicationCount = disagreements.filter((item) => adjudicationIndex.get(item.adjudicationOutcomeRef)?.evidenceStatus === "verified").length;
+    for (const [field, value] of Object.entries({ disagreementCaseCount: disagreements.length, independentCaseCount, adjudicatedCount, unresolvedCount, preservedDissentCount, verifiedAdjudicationCount })) if (!sameNumber(assessment[field], value)) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const dataSufficiency = policy && disagreements.length >= policy.minimumDisagreementCaseCount ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== dataSufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${dataSufficiency}.`);
+    const hasAlert = unresolvedCount > 0 || preservedDissentCount < disagreements.length || independentCaseCount < disagreements.length || verifiedAdjudicationCount < adjudicatedCount;
+    const signal = dataSufficiency === "insufficient" ? "insufficient-data" : hasAlert ? "governance-required" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (assessment.interpretation !== "disagreement-and-adjudication-evidence-only-not-truth-quality-competence-or-authority") errors.push(`${assessment.id} interpretation must remain disagreement-and-adjudication-evidence-only-not-truth-quality-competence-or-authority.`);
+    const triggerTypes = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (dataSufficiency === "insufficient" && !triggerTypes.has("insufficient-data")) errors.push(`${assessment.id} insufficient disagreement evidence requires an insufficient-data governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -900,6 +1018,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that threshold sensitivity optimizes, ranks, selects, or authorizes policy")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming threshold sensitivity optimizes, ranks, selects, or authorizes policy.`);
     if (!(boundary.doesNotClaim || []).includes("that route volume, escalation frequency, or route outcome proves quality, competence, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming route volume, escalation frequency, or route outcome proves quality, competence, causality, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that resolution speed, volume, disposition, or reviewer availability proves quality, competence, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming resolution speed, volume, disposition, or reviewer availability proves quality, competence, causality, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that reviewer agreement, majority, seniority, confidence, or adjudication proves semantic truth, quality, competence, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming reviewer agreement, majority, seniority, confidence, or adjudication proves semantic truth, quality, competence, or authority.`);
   }
 
   results.push({
@@ -922,6 +1041,11 @@ function validatePackage(pkg, packagePath) {
       escalationResolutionPolicies: escalationResolutionPolicies.length,
       escalationResolutions: escalationResolutions.length,
       escalationResolutionAssessments: escalationResolutionAssessments.length,
+      reviewerDisagreementPolicies: reviewerDisagreementPolicies.length,
+      reviewerJudgments: reviewerJudgments.length,
+      reviewerDisagreements: reviewerDisagreements.length,
+      adjudicationOutcomes: adjudicationOutcomes.length,
+      reviewerDisagreementAssessments: reviewerDisagreementAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -941,5 +1065,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, and policy conformance only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, resolution quality, reviewer competence, service availability, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, and policy conformance only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, resolution quality, reviewer competence, semantic correctness, service availability, or decision authority."
 }, null, 2));

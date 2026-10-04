@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.36 baseline)
+## Current Position (v0.6.37 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -196,6 +196,11 @@ and adoption surface — not pretending the limits away.
   availability and evidence status, aggregate assessment, and governance.
   Response speed, resolution volume, and disposition remain operational
   evidence, not quality, competence, causality, blame, or authority.
+  v0.6.37 adds Reviewer Disagreement Calibration with independent judgments,
+  exact verdict groups and disagreement dimensions, adjudicator authority and
+  independence, preserved dissent, reproducible assessment, and governance.
+  Agreement, majority, seniority, confidence, and adjudication remain evidence,
+  not semantic truth, quality, competence, blame, or authority.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -570,9 +575,17 @@ Deliverables:
   independent judgments, disagreement reasons, overrides, and adjudication
   outcomes without treating majority vote, seniority, or agreement rate as
   semantic truth.
+  Status: implemented in v0.6.37 through reviewer disagreement policies,
+  independent judgments, exact verdict grouping, adjudication outcomes,
+  preserved dissent, deterministic assessment, and retained governance
+  fixtures. The committed example remains illustrative and insufficient.
 - Next planned slice, v0.6.38 Route Policy Drift and Revalidation: compare
   policy versions, changed authority or capability boundaries, stale routes,
   and post-change outcomes without automatically updating or authorizing policy.
+- Next planned slice, v0.6.39 Adjudication Feedback and Rubric Revision:
+  convert repeated, evidence-backed disagreement into governed candidate rubric
+  changes while keeping rejected alternatives and preventing silent policy
+  mutation.
 - Evaluation Suite Health records: task origin, contamination boundary,
   solvability review, saturation, grader calibration, trial variance, harness
   and infrastructure configuration, and drift ownership.

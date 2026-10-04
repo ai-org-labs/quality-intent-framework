@@ -1,0 +1,37 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-04T05:00:10.325Z",
+  "review_packet_id": "CREV-MUTCQWUT-KJEV1D",
+  "council_id": "qif-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "QIF v0.6.37 is approved for release with illustrative-evidence and anti-ranking limitations explicit.",
+  "rationale": "Schema, example, verifier, 34 new negative fixtures, plain-language documentation, roadmap, and runtime evidence align; original judgments and dissent are preserved, adjudication is traceable, and all structural tests pass.",
+  "recommendation": "Commit, tag, push, and publish v0.6.37; then begin v0.6.38 Route Policy Drift and Revalidation.",
+  "target_audience": "QIF users, AI agents, accountable reviewers, domain specialists, operators, and affected stakeholders",
+  "expected_user_reaction": "Users can inspect who disagreed, why, on what evidence, how adjudication changed action, and what remains uncertain.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "release-ready-with-illustrative-disagreement-evidence",
+  "diagnosis_confidence": 0.97,
+  "diagnosis_evidence_refs": [
+    ".aof/context/active/framework-self-audit.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [
+    ".aof/runtime/v0.6.37-review-visionary.json",
+    ".aof/runtime/v0.6.37-review-builder.json",
+    ".aof/runtime/v0.6.37-review-guardian.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/actor-skill-packets/ASP-MUTC2MSY-JV7Z57.json",
+    "RELEASE-NOTES-v0.6.37.md"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-055",
+  "source_parent_session_id": "SESS-MUTBSTHE-NWLTNY",
+  "source_decision_record_id": "DEC-MUTBV1T7-OODSGT"
+}

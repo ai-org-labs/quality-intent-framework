@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-04T04:59:48.856Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MUTBSTHE-NWLTNY",
+  "status": "completed",
+  "recommendation": "Approve with illustrative-evidence limitation and anti-ranking boundary explicit.",
+  "rationale": "Original judgments remain visible, adjudicator independence is checked, nonverified evidence stays governance-open, and agreement or adjudication cannot become truth or employee-performance evidence.",
+  "signals": [
+    "Real independent reviewer evidence remains required before empirical claims."
+  ],
+  "artifact_refs": [
+    ".aof/context/active/framework-self-audit.json"
+  ],
+  "decision_required": true,
+  "source_task_id": "TASK-055",
+  "source_decision_record_id": "DEC-MUTBV1T7-OODSGT",
+  "source_parent_session_id": "SESS-MUTBSTHE-NWLTNY",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.98
+}

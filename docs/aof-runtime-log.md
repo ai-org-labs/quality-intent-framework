@@ -2,6 +2,22 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.37 Reviewer Disagreement Calibration
+
+Date: 2026-10-04
+
+- Need / Intent / Context: v0.6.36 records one operational resolution but could not preserve independent interpretations of that same case or explain adjudication. v0.6.37 records reviewer judgments, exact disagreement, accountable adjudication, preserved dissent, reproducible assessment, and governance without turning majority, seniority, confidence, or agreement into truth.
+- Latest public AOF v12.2.0 was confirmed through the public release list and used from clean checkout commit `fc7599b`; the dirty unreleased local 12.3.0 worktree was not modified.
+- Need Validation preceded Charter: `.aof/artifacts/need-validation/records/NVR-QIFV0637.json` then `.aof/artifacts/need-validation/project-charters/PCH-QIFV0637.json` in parent session `SESS-MUTBSTHE-NWLTNY`; task `TASK-055` records execution.
+- Council: Visionary required disagreement as durable evidence; Builder selected a narrow calibration-report extension; Guardian required preserved originals, independence checks, explicit adjudication, anti-ranking, anti-surveillance, and verifier boundaries. Evidence: `.aof/runtime/v0.6.37-planning-review.json`.
+- Actor packet `.aof/artifacts/actor-skill-packets/ASP-MUTC2MSY-JV7Z57.json` records schema and deterministic-verifier skills, QIF repository and AOF runtime resources, dissent-preservation policies, acceptance criteria, and blocking review evidence.
+- Trend evidence: JuryFlow treats claim-level disagreement as a useful signal instead of discarding it through majority voting (https://arxiv.org/abs/2609.40103); a 2026 human-AI evaluation study reports weaker agreement on subjective dimensions (https://www.frontiersin.org/journals/research-metrics-and-analytics/articles/10.3389/frma.2026.1807672/full); OpenAI Auto-review keeps review evidence and reproducibility distinct from final authority (https://alignment.openai.com/auto-review/).
+- Judgment: disagreement belongs in QIF as first-class evidence because consensus can erase uncertainty, minority loss-boundary concerns, and different evidence access. Adjudication may govern action but does not prove semantic truth.
+- Implementation: `calibration-report` now carries `ReviewerDisagreementPolicy`, `ReviewerJudgment`, `ReviewerDisagreement`, `AdjudicationOutcome`, and `ReviewerDisagreementAssessment`; the verifier reproduces independence, verdict groups, disagreement dimensions, preserved dissent, adjudication linkage, counts, sufficiency, signal, and governance.
+- Verification: targeted validation and the full retained fixture suite passed at `16/16` positive and `847/847` negative before AOF review.
+- Remaining boundary: the committed judgments and adjudication are illustrative and insufficient. Real independent review evidence, accountable authority, and operational feedback remain pilot work.
+- Next: v0.6.38 Route Policy Drift and Revalidation, followed by v0.6.39 Adjudication Feedback and Rubric Revision and the v0.7 empirical calibration phase.
+
 ## v0.6.36 Escalation Resolution and Timeliness
 
 Date: 2026-10-03

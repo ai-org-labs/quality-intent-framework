@@ -1,0 +1,22 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-04T04:59:43.436Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-MUTBSTHE-NWLTNY",
+  "status": "completed",
+  "recommendation": "Approve schema, example, verifier, fixtures, documentation, and release integration.",
+  "rationale": "All new entity families resolve through the existing escalation chain, deterministic summaries reproduce, and 847 retained negative checks pass.",
+  "signals": [],
+  "artifact_refs": [
+    "schemas/calibration-report-package.schema.json",
+    "tools/validate-calibration-report.mjs"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-055",
+  "source_decision_record_id": "DEC-MUTBV1T7-OODSGT",
+  "source_parent_session_id": "SESS-MUTBSTHE-NWLTNY",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.98
+}

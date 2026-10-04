@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-04T04:34:27.552Z",
+  "problem_statement_id": "PST-MUTBTUG0-QDRCD6",
+  "affected_party": "QIF evaluators, accountable reviewers, domain specialists, affected stakeholders, and governance owners",
+  "actual_problem": "QIF records a routed review outcome but cannot yet preserve independent reviewer judgments, exact reasons for disagreement, overrides, or adjudication without collapsing them into one result.",
+  "why_it_matters": "Majority vote or seniority can hide a valid dissent, unclear rubric, evidence conflict, role boundary, or stakeholder loss boundary and create false confidence in a final verdict.",
+  "why_now": "v0.6.36 completes escalation resolution, while current evaluation research shows human-AI and inter-agent agreement varies by criterion and emerging systems use disagreement as a targeted human-review signal rather than noise.",
+  "evidence_refs": [
+    "docs/qif-v0.6.36-escalation-resolution-timeliness.md",
+    ".aof/runtime/v0.6.37-situation.json"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUTBT7C7-0J8X38"
+}

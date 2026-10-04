@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-04T04:40:45.628Z",
+  "role": "Guardian",
+  "stage": "planning",
+  "session_id": "SESS-MUTBSTHE-NWLTNY",
+  "status": "completed",
+  "recommendation": "Approve only with preserved originals, independence checks, explicit overrides, governance triggers, and anti-ranking boundaries.",
+  "rationale": "Majority, seniority, agreement, confidence, or adjudicator status must not silently become semantic truth, employee scoring, or automatic authority.",
+  "signals": [
+    "Keep every original judgment and dissent rationale after adjudication."
+  ],
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0637.json"
+  ],
+  "decision_required": true,
+  "source_task_id": "TASK-055",
+  "source_decision_record_id": "DEC-MUTBV1T7-OODSGT",
+  "source_parent_session_id": "SESS-MUTBSTHE-NWLTNY",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.97
+}

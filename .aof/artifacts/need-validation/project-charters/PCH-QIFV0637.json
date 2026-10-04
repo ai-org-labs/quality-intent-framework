@@ -1,0 +1,23 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-04T04:35:11.361Z",
+  "project_charter_id": "PCH-MUTBUS8X-MPC6HB",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV0637.json",
+  "validated_objective": "Release QIF v0.6.37 with executable reviewer disagreement and adjudication records grounded in v0.6.36 escalation resolutions.",
+  "scope": [
+    "Disagreement policy, independent reviewer judgments, disagreement, adjudication outcome, and assessment entities",
+    "Schema, verifier, retained negative fixtures, example, documentation, authoring guidance, changelog, roadmap, and runtime log",
+    "AOF council, actor packet, self-review, final review, retrospective, verification, release, and outcome evidence"
+  ],
+  "constraints": [
+    "Remain standalone and domain-general",
+    "Do not add UI or external integrations",
+    "Do not treat majority, seniority, agreement rate, confidence, or adjudication as truth, quality, competence, or automatic authority"
+  ],
+  "expected_outcomes": [
+    "Users can preserve dissent and explain exactly how and why a final disposition was adjudicated",
+    "npm test and AOF organization verification pass before a tagged GitHub release"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUTBT7C7-0J8X38"
+}

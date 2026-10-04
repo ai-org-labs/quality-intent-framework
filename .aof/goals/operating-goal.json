@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Extend QIF's existing selective escalation model so each route can be resolved as accepted, rejected, redirected, or timed out with reproducible response-time, availability, evidence-status, and governance records, while preserving the boundary that operational speed and volume are not quality.",
-  "updated_at": "2026-10-03T04:36:36.314Z",
+  "content": "Extend QIF's existing escalation lifecycle so independent reviewer judgments, exact disagreement dimensions, overrides, and adjudication remain reproducible and governance-bound without treating majority, seniority, or agreement rate as semantic truth.",
+  "updated_at": "2026-10-04T04:35:23.759Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MURWENX6-QSP40V",
-  "source_decision_record_id": "DEC-MURWGR4M-RN6GJK",
+  "source_session_id": "SESS-MUTBSTHE-NWLTNY",
+  "source_decision_record_id": "DEC-MUTBV1T7-OODSGT",
   "declared_complete_at": null
 }

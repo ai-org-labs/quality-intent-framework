@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.37
+
+- Added executable Reviewer Disagreement Policies, independent Reviewer Judgments, exact disagreement dimensions, and verdict-group reproduction.
+- Added Adjudication Outcomes that preserve original judgments, identify adjudicator authority and independence, and record whether plurality was accepted, evidence was requested, one judgment was selected, or a new disposition was made.
+- Added Reviewer Disagreement Assessments with reproducible independence, adjudication, unresolved-case, dissent-preservation, verification, sufficiency, signal, and governance summaries.
+- Preserved the boundary that agreement, majority, seniority, confidence, and adjudication do not prove semantic truth, quality, competence, or authority and must not become employee scoring.
+- Added 34 retained negative cases; the retained suite now covers 847 negative cases across 16 positive package types.
+
 ## v0.6.36
 
 - Added executable Escalation Resolution Policies covering disposition, response-time limits, availability requirements, timeout action, and valid redirects for every governed route.

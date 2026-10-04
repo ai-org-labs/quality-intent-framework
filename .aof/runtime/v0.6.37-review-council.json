@@ -1,0 +1,320 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-10-04T04:58:29.251Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MUTBSTHE-NWLTNY",
+    "stage": "review",
+    "executionId": "CRUN-MUTCOQV2-LAM8VF",
+    "executionStatus": "completed",
+    "invokedModel": true,
+    "seatCount": 2,
+    "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+    "lastCouncilExecutionId": "CRUN-MUTCOQV2-LAM8VF",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUTBSTHE-NWLTNY",
+              "decision_id": "DEC-MUTBV1T7-OODSGT",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types. | success: Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority.",
+              "context_snapshot_id": "CTX-MUTBT7C3-EGGY1N",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.36 using the latest released AOF and current reviewer-disagreement evidence. Build and release v0.6.37 Reviewer Disagreement Calibration.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0637.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0637.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0637.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0637.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0637.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUTBV1T7-OODSGT"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUTBSTHE-NWLTNY",
+              "decision_id": "DEC-MUTBV1T7-OODSGT",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types. | success: Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority.",
+              "context_snapshot_id": "CTX-MUTBT7C3-EGGY1N",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.36 using the latest released AOF and current reviewer-disagreement evidence. Build and release v0.6.37 Reviewer Disagreement Calibration.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0637.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0637.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0637.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0637.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0637.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUTBV1T7-OODSGT"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MUTCOQV2-LAM8VF",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "completed",
+      "started_at": "2026-10-04T04:58:29.242Z",
+      "completed_at": "2026-10-04T04:58:29.246Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MUTCOQV2-LAM8VF-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUTBSTHE-NWLTNY",
+              "decision_id": "DEC-MUTBV1T7-OODSGT",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types. | success: Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority.",
+              "context_snapshot_id": "CTX-MUTBT7C3-EGGY1N",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.36 using the latest released AOF and current reviewer-disagreement evidence. Build and release v0.6.37 Reviewer Disagreement Calibration.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0637.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0637.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0637.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0637.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0637.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUTBV1T7-OODSGT"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-04T04:58:29.246Z",
+          "completed_at": "2026-10-04T04:58:29.246Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-04T04:58:29.246Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian review response: focus on Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types. and align to Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority..",
+            "output_summary": "DECISION: proceed VETO: no Guardian review response: focus on Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Advance QIF after v0.6.36 using the latest released AOF and current reviewer-disagreement evidence. Build and release v0.6.37 Reviewer Disagreement Calibration.\nNeed: Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types.\nIntent: Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority.\nActive Context: context: Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types. | success: Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MUTCOQV2-LAM8VF-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUTBSTHE-NWLTNY",
+              "decision_id": "DEC-MUTBV1T7-OODSGT",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types. | success: Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority.",
+              "context_snapshot_id": "CTX-MUTBT7C3-EGGY1N",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.36 using the latest released AOF and current reviewer-disagreement evidence. Build and release v0.6.37 Reviewer Disagreement Calibration.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0637.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0637.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0637.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0637.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0637.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUTBV1T7-OODSGT"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-04T04:58:29.246Z",
+          "completed_at": "2026-10-04T04:58:29.246Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-04T04:58:29.246Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder review response: focus on Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types. and align to Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority..",
+            "output_summary": "DECISION: proceed VETO: no Builder review response: focus on Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Advance QIF after v0.6.36 using the latest released AOF and current reviewer-disagreement evidence. Build and release v0.6.37 Reviewer Disagreement Calibration.\nNeed: Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types.\nIntent: Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority.\nActive Context: context: Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types. | success: Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: disagreement policies; independent reviewer judgments; explicit disagreement records; accountable adjudication outcomes; aggregate disagreement assessments; governance triggers; schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic majority or seniority authority, forced consensus, hidden dissent, causal claims, and changes to unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority."
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

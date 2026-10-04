@@ -1,0 +1,35 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-04T04:34:52.517Z",
+  "validation_id": "NVR-MUTBUDPH-8TSH4P",
+  "raw_need": "Continue QIF development and release the next roadmap slice.",
+  "validation_status": "reframed",
+  "validated_need": "Extend QIF's existing escalation lifecycle so independent reviewer judgments, exact disagreement dimensions, overrides, and adjudication remain reproducible and governance-bound without treating majority, seniority, or agreement rate as semantic truth.",
+  "decision_summary": "The broad continuation request is reframed into the smallest gap after v0.6.36: preserve disagreement instead of collapsing resolution evidence into one authoritative result. Extending calibration-report preserves the existing decision-to-resolution chain.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What should v0.6.37 own?",
+      "answer": "Disagreement policy, independent judgments, disagreement dimensions, adjudication, override traceability, assessment, governance, verifier, examples, fixtures, docs, and release evidence.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must it not claim?",
+      "answer": "It must not treat majority, agreement, seniority, confidence, adjudication, or verifier success as semantic truth, quality, competence, or automatic authority.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A final reviewed disposition was previously assumed to represent the reviewers without preserving dissent."
+  ],
+  "evidence_gaps": [],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV0637.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0637.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0637.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUTBT7C7-0J8X38"
+}

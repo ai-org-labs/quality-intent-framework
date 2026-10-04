@@ -1,0 +1,38 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-04T04:41:40.951Z",
+  "review_packet_id": "CREV-MUTC34UV-6XZZG7",
+  "council_id": "qif-council",
+  "stage": "planning",
+  "review_status": "approved",
+  "decision_summary": "Visionary, Builder, and Guardian approve v0.6.37 Reviewer Disagreement Calibration with dissent-preservation boundaries.",
+  "rationale": "The slice makes independent judgments, exact disagreement dimensions, adjudication authority, overrides, and unresolved plurality auditable without treating agreement, majority, seniority, confidence, or adjudication as semantic truth.",
+  "recommendation": "Implement the narrow calibration-report extension and release only after retained negative fixtures, full QIF verification, self-review, and retrospective.",
+  "target_audience": "QIF users, AI agents, accountable reviewers, domain specialists, operators, and affected stakeholders",
+  "expected_user_reaction": "Users can see where reviewers disagree, what each reviewer observed, how adjudication changed the operational disposition, and what remains uncertain.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [
+    "Add reviewer disagreement policy, judgments, disagreement records, adjudication outcomes, assessments, examples, verifier rules, fixtures, plain-language documentation, roadmap, and release evidence."
+  ],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "missing-disagreement-adjudication-traceability",
+  "diagnosis_confidence": 0.96,
+  "diagnosis_evidence_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0637.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [
+    ".aof/runtime/v0.6.37-planning-visionary.json",
+    ".aof/runtime/v0.6.37-planning-builder.json",
+    ".aof/runtime/v0.6.37-planning-guardian.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/actor-skill-packets/ASP-MUTC2MSY-JV7Z57.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-055",
+  "source_parent_session_id": "SESS-MUTBSTHE-NWLTNY",
+  "source_decision_record_id": "DEC-MUTBV1T7-OODSGT"
+}

@@ -1,0 +1,81 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-04T04:41:17.554Z",
+  "packet_id": "ASP-MUTC2MSY-JV7Z57",
+  "source_task_id": "TASK-055",
+  "source_parent_session_id": "SESS-MUTBSTHE-NWLTNY",
+  "source_decision_record_id": "DEC-MUTBV1T7-OODSGT",
+  "objective": "Implement QIF v0.6.37 Reviewer Disagreement Calibration",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, verifier, fixtures, documentation, release evidence, and governance traceability.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "deterministic-verifier-design",
+    "disagreement-preservation-boundaries"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-qif-runtime-extension",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs"
+      ],
+      "rationale": "existing calibration runtime and fixture harness support a narrow extension"
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-public-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-no-automatic-majority-authority",
+    "policy-no-count-quality",
+    "policy-no-employee-surveillance",
+    "policy-preserve-dissent"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "reviewer-disagreement-policy",
+      "reviewer-judgments",
+      "adjudication-outcomes"
+    ],
+    "acceptance_criteria": [
+      "all judgments, disagreements, adjudications, and assessments are traceable and reproducible",
+      "negative fixtures fail the exact violated rule"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "original judgments and dissent remain preserved",
+      "evaluator_ref": "guardian",
+      "evidence_required": "schema, verifier, example, and fixture evidence",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "silent-consensus",
+      "trigger_condition": "implementation collapses independent judgments into majority, seniority, confidence, or adjudicator truth",
+      "consequence": "block-assignment",
+      "recovery_action": "restore original judgments and route uncertainty to governance"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I preserve disagreement before I summarize it.",
+    "current_action": "Implement reviewer disagreement calibration",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Submit full fixtures and council review"
+  },
+  "status": "ready-for-assignment"
+}

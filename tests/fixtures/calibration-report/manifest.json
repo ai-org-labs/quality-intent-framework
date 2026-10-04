@@ -68,6 +68,244 @@
   ],
   "negatives": [
     {
+      "file": "calibration-report-reviewer-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reviewer disagreement policies required",
+      "expect": "fail",
+      "errorIncludes": "package reviewerDisagreementPolicies must be an array."
+    },
+    {
+      "file": "calibration-report-reviewer-judgments-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reviewer judgments required",
+      "expect": "fail",
+      "errorIncludes": "package reviewerJudgments must be an array."
+    },
+    {
+      "file": "calibration-report-reviewer-disagreements-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reviewer disagreements required",
+      "expect": "fail",
+      "errorIncludes": "package reviewerDisagreements must be an array."
+    },
+    {
+      "file": "calibration-report-adjudications-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "adjudication outcomes required",
+      "expect": "fail",
+      "errorIncludes": "package adjudicationOutcomes must be an array."
+    },
+    {
+      "file": "calibration-report-reviewer-assessments-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reviewer disagreement assessments required",
+      "expect": "fail",
+      "errorIncludes": "package reviewerDisagreementAssessments must be an array."
+    },
+    {
+      "file": "calibration-report-reviewer-policy-resolution-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reviewer policy source resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing escalation resolution policy"
+    },
+    {
+      "file": "calibration-report-reviewer-policy-minimum.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "minimum independent judgments",
+      "expect": "fail",
+      "errorIncludes": "minimumIndependentJudgments must be at least 2."
+    },
+    {
+      "file": "calibration-report-reviewer-policy-detection.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "exact disagreement preservation",
+      "expect": "fail",
+      "errorIncludes": "detectionRule must preserve exact verdict, rationale, evidence, and confidence."
+    },
+    {
+      "file": "calibration-report-reviewer-policy-aggregation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "anti-majority authority boundary",
+      "expect": "fail",
+      "errorIncludes": "aggregationBoundary must forbid automatic majority, seniority, agreement, or confidence authority."
+    },
+    {
+      "file": "calibration-report-reviewer-policy-unreviewed.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reviewer policy governance",
+      "expect": "fail",
+      "errorIncludes": "non-active reviewer disagreement policy requires a reviewer-policy-unreviewed governance trigger."
+    },
+    {
+      "file": "calibration-report-reviewer-judgment-resolution-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reviewer judgment case traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing escalation resolution"
+    },
+    {
+      "file": "calibration-report-reviewer-judgment-policy-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reviewer judgment policy traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing reviewer disagreement policy"
+    },
+    {
+      "file": "calibration-report-reviewer-judgment-evidence-empty.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reviewer judgment evidence",
+      "expect": "fail",
+      "errorIncludes": "evidenceRefs must include at least one item."
+    },
+    {
+      "file": "calibration-report-reviewer-judgment-unverified-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reviewer evidence governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified reviewer evidence requires a reviewer-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-disagreement-minimum.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "minimum judgments per disagreement",
+      "expect": "fail",
+      "errorIncludes": "judgmentRefs must satisfy minimumIndependentJudgments."
+    },
+    {
+      "file": "calibration-report-disagreement-reviewer-reuse.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reviewer independence identity",
+      "expect": "fail",
+      "errorIncludes": "must not reuse a reviewerRef within one disagreement case."
+    },
+    {
+      "file": "calibration-report-disagreement-independence-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reviewer independence governance",
+      "expect": "fail",
+      "errorIncludes": "unresolved reviewer independence requires a reviewer-independence-unresolved governance trigger."
+    },
+    {
+      "file": "calibration-report-disagreement-verdict-dimension.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "verdict disagreement declaration",
+      "expect": "fail",
+      "errorIncludes": "disagreementDimensions must include verdict when verdicts differ."
+    },
+    {
+      "file": "calibration-report-disagreement-rationale-dimension.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "rationale disagreement declaration",
+      "expect": "fail",
+      "errorIncludes": "disagreementDimensions must include rationale when rationales differ."
+    },
+    {
+      "file": "calibration-report-disagreement-verdict-groups.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "verdict group closure",
+      "expect": "fail",
+      "errorIncludes": "verdictGroups must exactly reproduce reviewer verdicts."
+    },
+    {
+      "file": "calibration-report-disagreement-group-membership.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "verdict group membership",
+      "expect": "fail",
+      "errorIncludes": "timed-out judgmentRefs must reproduce verdict membership."
+    },
+    {
+      "file": "calibration-report-disagreement-adjudication-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "adjudication reference required",
+      "expect": "fail",
+      "errorIncludes": "adjudicated disagreement requires adjudicationOutcomeRef."
+    },
+    {
+      "file": "calibration-report-adjudication-backlink.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "adjudication backlink",
+      "expect": "fail",
+      "errorIncludes": "disagreement must point back to this adjudication outcome."
+    },
+    {
+      "file": "calibration-report-adjudication-selected-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "selected judgment required",
+      "expect": "fail",
+      "errorIncludes": "select-judgment mode requires selectedJudgmentRef."
+    },
+    {
+      "file": "calibration-report-adjudication-originals.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "original judgments preserved",
+      "expect": "fail",
+      "errorIncludes": "originalJudgmentsPreserved must be true."
+    },
+    {
+      "file": "calibration-report-adjudication-conflict-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "adjudicator conflict governance",
+      "expect": "fail",
+      "errorIncludes": "adjudicator conflict requires an adjudicator-conflict governance trigger."
+    },
+    {
+      "file": "calibration-report-adjudication-unverified-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "adjudication evidence governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified adjudication evidence requires an adjudication-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-reviewer-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "disagreement case count reproduction",
+      "expect": "fail",
+      "errorIncludes": "disagreementCaseCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-reviewer-assessment-independent.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "independent case count reproduction",
+      "expect": "fail",
+      "errorIncludes": "independentCaseCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-reviewer-assessment-adjudicated.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "adjudicated count reproduction",
+      "expect": "fail",
+      "errorIncludes": "adjudicatedCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-reviewer-assessment-verified.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "verified adjudication count reproduction",
+      "expect": "fail",
+      "errorIncludes": "verifiedAdjudicationCount must reproduce as 0."
+    },
+    {
+      "file": "calibration-report-reviewer-assessment-sufficiency.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reviewer evidence sufficiency",
+      "expect": "fail",
+      "errorIncludes": "dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "calibration-report-reviewer-assessment-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "insufficient disagreement governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient disagreement evidence requires an insufficient-data governance trigger."
+    },
+    {
+      "file": "calibration-report-reviewer-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reviewer semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming reviewer agreement, majority, seniority, confidence, or adjudication proves semantic truth, quality, competence, or authority."
+    },
+    {
       "file": "calibration-report-resolution-policies-not-array.json",
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "resolution policies required",

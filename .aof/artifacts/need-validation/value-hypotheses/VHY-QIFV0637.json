@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-04T04:34:28.300Z",
+  "value_hypothesis_id": "VHY-MUTBTV0S-C01PI2",
+  "expected_value_creation": "Make reviewer disagreement, dissent, override, and adjudication reproducible without treating agreement, majority, or seniority as truth.",
+  "beneficiary": "QIF evaluators, independent reviewers, affected stakeholders, and governance owners",
+  "supporting_evidence": [
+    "QIF v0.6.36 already preserves route and resolution evidence.",
+    "Recent research reports lower human-AI agreement on subjective dimensions and proposes claim-level disagreement as a human-in-the-loop review signal."
+  ],
+  "success_criteria": [
+    "Every disagreement preserves at least two independent source judgments with verdict, rationale, evidence, and confidence.",
+    "Adjudication records authority, independence, selected or new disposition, preserved originals, and rationale.",
+    "Low independence, unresolved conflict, unsupported override, conflict of interest, insufficient data, or unverified evidence trigger governance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUTBT7C7-0J8X38"
+}
