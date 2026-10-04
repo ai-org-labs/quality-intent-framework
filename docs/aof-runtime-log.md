@@ -15,7 +15,14 @@ Date: 2026-10-04
 - Judgment: disagreement belongs in QIF as first-class evidence because consensus can erase uncertainty, minority loss-boundary concerns, and different evidence access. Adjudication may govern action but does not prove semantic truth.
 - Implementation: `calibration-report` now carries `ReviewerDisagreementPolicy`, `ReviewerJudgment`, `ReviewerDisagreement`, `AdjudicationOutcome`, and `ReviewerDisagreementAssessment`; the verifier reproduces independence, verdict groups, disagreement dimensions, preserved dissent, adjudication linkage, counts, sufficiency, signal, and governance.
 - Verification: targeted validation and the full retained fixture suite passed at `16/16` positive and `847/847` negative before AOF review.
+- Self-review: AOF `self-audit-record` wrote `.aof/context/active/framework-self-audit.json`; the residual gap is real independent reviewer and adjudication evidence.
+- Review: AOF `council-exec --stage review` and `.aof/runtime/v0.6.37-final-review.json` approved release after Visionary, Builder, and Guardian evidence review.
+- Retrospective: AOF `learning-loop-snapshot` wrote `.aof/context/active/learning-loop.json` and preserved v0.6.38 as the next value slice.
+- AOF organization verification passed `277/277`; `TASK-055` is done and `.aof/runtime/v0.6.37-post-situation.json` found no truth conflict.
 - Remaining boundary: the committed judgments and adjudication are illustrative and insufficient. Real independent review evidence, accountable authority, and operational feedback remain pilot work.
+- Release commit `7cce9b6` was pushed to `origin/main`; annotated tag `v0.6.37` resolves to that release commit.
+- GitHub Release `v0.6.37` was published at https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.37.
+- AOF outcome `OUT-MUTCUS1E-TQ1PSH` records successful publication and preserves v0.6.38 as the next value slice.
 - Next: v0.6.38 Route Policy Drift and Revalidation, followed by v0.6.39 Adjudication Feedback and Rubric Revision and the v0.7 empirical calibration phase.
 
 ## v0.6.36 Escalation Resolution and Timeliness

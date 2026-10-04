@@ -2,14 +2,14 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-04T05:00:26.875Z",
+  "generated_at": "2026-10-04T05:04:16.857Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MURWENX6-QSP40V",
-    "report_id": "OUT-MURX7VN1-RLFN8N",
+    "source_session_id": "SESS-MUTBSTHE-NWLTNY",
+    "report_id": "OUT-MUTCUS1E-TQ1PSH",
     "result": "success",
-    "observed_at": "2026-10-03T04:57:41.865Z",
-    "note": "QIF v0.6.36 was verified, pushed, tagged, and published as a GitHub Release. Escalation resolution and timeliness are structurally executable with explicit operational-evidence and semantic boundaries.",
-    "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.36"
+    "observed_at": "2026-10-04T05:03:10.703Z",
+    "note": "QIF v0.6.37 was verified, pushed, tagged, and published. Reviewer disagreement and adjudication are structurally executable with preserved dissent and explicit semantic boundaries.",
+    "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.37"
   },
   "latest_self_audit": {
     "audit_id": "QIF-V0637-SELF-REVIEW",
@@ -24,7 +24,7 @@
   },
   "current_next_value_slice": {
     "content": "QIF v0.6.38 Route Policy Drift and Revalidation",
-    "updated_at": "2026-10-04T04:58:13.132Z",
+    "updated_at": "2026-10-04T05:03:41.382Z",
     "declared_complete_at": null,
     "source_session_id": "SESS-MUTBSTHE-NWLTNY",
     "source_decision_record_id": "DEC-MUTBV1T7-OODSGT"
@@ -35,7 +35,7 @@
     "related_task_ids": [
       "TASK-055"
     ],
-    "open_task_count": 1
+    "open_task_count": 0
   },
   "learning_state": {
     "has_outcome_evidence": true,
