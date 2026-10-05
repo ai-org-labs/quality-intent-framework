@@ -1,0 +1,82 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-05T04:35:46.951Z",
+  "packet_id": "ASP-MUURBEDJ-SZW5IU",
+  "source_task_id": "TASK-056",
+  "source_parent_session_id": "SESS-MUUR7ETV-1HP9P1",
+  "source_decision_record_id": "DEC-MUUR9DYL-UE7DY7",
+  "objective": "Implement QIF v0.6.38 Route Policy Drift and Revalidation",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, verifier, fixtures, documentation, release evidence, and immutable policy lineage.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "deterministic-verifier-design",
+    "policy-lineage-governance"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-qif-runtime-extension",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs"
+      ],
+      "rationale": "existing route, resolution, and disagreement entities support a narrow drift extension"
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-public-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-no-automatic-policy-mutation",
+    "policy-preserve-historical-authority",
+    "policy-no-count-quality",
+    "policy-no-employee-surveillance"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "route-policy-snapshots",
+      "route-policy-changes",
+      "drift-assessments",
+      "revalidation-outcomes"
+    ],
+    "acceptance_criteria": [
+      "policy versions, exact changes, affected decisions, staleness, and revalidation outcomes are reproducible",
+      "negative fixtures fail exact violated rules"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "historical policy and decision links remain immutable",
+      "evaluator_ref": "guardian",
+      "evidence_required": "schema, verifier, example, and fixture evidence",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "retroactive-policy-authority",
+      "trigger_condition": "implementation rewrites historical decisions to the latest policy or mutates policy automatically",
+      "consequence": "block-assignment",
+      "recovery_action": "restore immutable snapshots and explicit revalidation"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I compare policy versions without rewriting history.",
+    "current_action": "Implement route-policy drift and revalidation",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Submit full fixtures and Council review"
+  },
+  "status": "ready-for-assignment"
+}

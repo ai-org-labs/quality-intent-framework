@@ -19,8 +19,43 @@ function reviewerJudgment(pkg, index = 0) { return pkg.reviewerJudgments[index];
 function disagreement(pkg) { return pkg.reviewerDisagreements[0]; }
 function adjudication(pkg) { return pkg.adjudicationOutcomes[0]; }
 function disagreementAssessment(pkg) { return pkg.reviewerDisagreementAssessments[0]; }
+function routeSnapshot(pkg, index = 0) { return pkg.routePolicySnapshots[index]; }
+function routeChange(pkg) { return pkg.routePolicyChanges[0]; }
+function driftAssessment(pkg) { return pkg.routePolicyDriftAssessments[0]; }
+function revalidationOutcome(pkg) { return pkg.routePolicyRevalidationOutcomes[0]; }
+function revalidationAssessment(pkg) { return pkg.routePolicyRevalidationAssessments[0]; }
 
 export const cases = [
+  { id: "route-snapshots-not-array", rule: "route-policy snapshots required", expect: "package routePolicySnapshots must be an array.", mutate: (pkg) => { pkg.routePolicySnapshots = null; } },
+  { id: "route-changes-not-array", rule: "route-policy changes required", expect: "package routePolicyChanges must be an array.", mutate: (pkg) => { pkg.routePolicyChanges = null; } },
+  { id: "route-drift-not-array", rule: "route-policy drift assessments required", expect: "package routePolicyDriftAssessments must be an array.", mutate: (pkg) => { pkg.routePolicyDriftAssessments = null; } },
+  { id: "route-revalidation-outcomes-not-array", rule: "route-policy revalidation outcomes required", expect: "package routePolicyRevalidationOutcomes must be an array.", mutate: (pkg) => { pkg.routePolicyRevalidationOutcomes = null; } },
+  { id: "route-revalidation-assessments-not-array", rule: "route-policy revalidation assessments required", expect: "package routePolicyRevalidationAssessments must be an array.", mutate: (pkg) => { pkg.routePolicyRevalidationAssessments = null; } },
+  { id: "route-snapshot-policy-missing", rule: "snapshot policy reference", expect: "references missing selective escalation policy", mutate: (pkg) => { routeSnapshot(pkg).policyRef = "SEP-NOPE-999"; } },
+  { id: "route-snapshot-history-boundary", rule: "immutable history boundary", expect: "historyBoundary must preserve immutable history without retroactive authority.", mutate: (pkg) => { routeSnapshot(pkg).historyBoundary = "latest-policy-overwrites-history"; } },
+  { id: "route-snapshot-current-duplicate", rule: "single current policy snapshot", expect: "must have exactly one current route-policy snapshot.", mutate: (pkg) => { routeSnapshot(pkg).snapshotRole = "current"; delete routeSnapshot(pkg).effectiveTo; } },
+  { id: "route-snapshot-version-duplicate", rule: "unique policy versions", expect: "route-policy snapshot versions must be unique.", mutate: (pkg) => { routeSnapshot(pkg, 1).version = routeSnapshot(pkg).version; } },
+  { id: "route-snapshot-current-authority-mismatch", rule: "current policy fidelity", expect: "authorityRef must match the current policy.", mutate: (pkg) => { routeSnapshot(pkg, 1).routes.find((item) => item.routeRef === "SER-CR-HUMAN").authorityRef = "old-authority"; } },
+  { id: "route-change-version-order", rule: "monotonic policy version", expect: "current snapshot version must be greater than previous snapshot version.", mutate: (pkg) => { routeSnapshot(pkg, 1).version = 0; } },
+  { id: "route-change-continuity", rule: "continuous policy transition", expect: "effectiveAt and snapshot boundaries must form a continuous transition.", mutate: (pkg) => { routeChange(pkg).effectiveAt = "2026-10-02T00:00:00Z"; } },
+  { id: "route-change-dimensions", rule: "change dimension reproduction", expect: "changedDimensions must reproduce snapshot differences.", mutate: (pkg) => { routeChange(pkg).changedDimensions = ["evidence"]; } },
+  { id: "route-change-detail", rule: "exact change detail reproduction", expect: "change detail authority/SER-CR-HUMAN does not reproduce snapshot values.", mutate: (pkg) => { routeChange(pkg).changes.find((item) => item.dimension === "authority").currentValue = "wrong-authority"; } },
+  { id: "route-change-automatic-mutation", rule: "human-governed policy mutation", expect: "automaticMutation must be false.", mutate: (pkg) => { routeChange(pkg).automaticMutation = true; } },
+  { id: "route-drift-decision-missing", rule: "drift decision traceability", expect: "references missing selective escalation decision", mutate: (pkg) => { driftAssessment(pkg).decisionImpacts[0].decisionRef = "SED-NOPE-999"; } },
+  { id: "route-drift-snapshot-mismatch", rule: "drift snapshot lineage", expect: "snapshot refs must match the policy change.", mutate: (pkg) => { driftAssessment(pkg).decisionImpacts[0].currentSnapshotRef = "RPS-CR-001"; } },
+  { id: "route-drift-dimensions", rule: "affected dimension reproduction", expect: "affectedDimensions must reproduce changes to the decision route.", mutate: (pkg) => { driftAssessment(pkg).decisionImpacts[0].affectedDimensions = ["evidence"]; } },
+  { id: "route-drift-material-staleness", rule: "material drift revalidation", expect: "material impact must be stale and require revalidation.", mutate: (pkg) => { driftAssessment(pkg).decisionImpacts[0].staleness = "current"; } },
+  { id: "route-drift-count", rule: "drift count reproduction", expect: "materialImpactCount must reproduce as 1.", mutate: (pkg) => { driftAssessment(pkg).materialImpactCount = 0; } },
+  { id: "route-drift-trigger", rule: "stale decision governance", expect: "stale material decisions require a policy-decision-stale governance trigger.", mutate: (pkg) => { driftAssessment(pkg).governanceTriggerRefs = []; } },
+  { id: "route-revalidation-impact-missing", rule: "revalidation impact traceability", expect: "must resolve a decision impact in its drift assessment.", mutate: (pkg) => { revalidationOutcome(pkg).decisionRef = "SED-NOPE-999"; } },
+  { id: "route-revalidation-route-missing", rule: "current route resolution", expect: "resultingRouteRef must resolve in the current snapshot.", mutate: (pkg) => { revalidationOutcome(pkg).resultingRouteRef = "SER-NOPE-999"; } },
+  { id: "route-revalidation-authority", rule: "current authority reproduction", expect: "resultingAuthorityRef must match the current snapshot route authority.", mutate: (pkg) => { revalidationOutcome(pkg).resultingAuthorityRef = "old-authority"; } },
+  { id: "route-revalidation-history", rule: "prior decision preservation", expect: "priorDecisionPreserved must be true.", mutate: (pkg) => { revalidationOutcome(pkg).priorDecisionPreserved = false; } },
+  { id: "route-revalidation-evidence-trigger", rule: "unverified revalidation governance", expect: "non-verified revalidation evidence requires a revalidation-evidence-unverified governance trigger.", mutate: (pkg) => { revalidationOutcome(pkg).governanceTriggerRefs = []; } },
+  { id: "route-revalidation-count", rule: "revalidation count reproduction", expect: "requiredCount must reproduce as 1.", mutate: (pkg) => { revalidationAssessment(pkg).requiredCount = 0; } },
+  { id: "route-revalidation-sufficiency", rule: "revalidation sufficiency reproduction", expect: "dataSufficiency must reproduce as insufficient.", mutate: (pkg) => { revalidationAssessment(pkg).dataSufficiency = "sufficient"; } },
+  { id: "route-revalidation-signal", rule: "revalidation signal reproduction", expect: "assessmentSignal must reproduce as insufficient-data.", mutate: (pkg) => { revalidationAssessment(pkg).assessmentSignal = "revalidated"; } },
+  { id: "route-policy-boundary-overclaim", rule: "route-policy semantic boundary", expect: "verifierBoundary must explicitly avoid claiming that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority.", mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority"); } },
   { id: "reviewer-policies-not-array", rule: "reviewer disagreement policies required", expect: "package reviewerDisagreementPolicies must be an array.", mutate: (pkg) => { pkg.reviewerDisagreementPolicies = null; } },
   { id: "reviewer-judgments-not-array", rule: "reviewer judgments required", expect: "package reviewerJudgments must be an array.", mutate: (pkg) => { pkg.reviewerJudgments = null; } },
   { id: "reviewer-disagreements-not-array", rule: "reviewer disagreements required", expect: "package reviewerDisagreements must be an array.", mutate: (pkg) => { pkg.reviewerDisagreements = null; } },

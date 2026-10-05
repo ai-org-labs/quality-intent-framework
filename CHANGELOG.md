@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.38
+
+- Added versioned Route Policy Snapshots that preserve the policy authority in force at each decision boundary.
+- Added Route Policy Changes with reproducible authority, capability, evidence, response-time, route, and threshold differences.
+- Added Route Policy Drift Assessments and Revalidation Outcomes so stale decisions are identified and reviewed without rewriting history.
+- Added aggregate Revalidation Assessments, governance triggers, verifier boundaries, and retained negative fixtures.
+- Kept policy age, change count, drift count, and revalidation volume as evidence only, never quality, safety, causality, or authority.
+
 ## v0.6.37
 
 - Added executable Reviewer Disagreement Policies, independent Reviewer Judgments, exact disagreement dimensions, and verdict-group reproduction.

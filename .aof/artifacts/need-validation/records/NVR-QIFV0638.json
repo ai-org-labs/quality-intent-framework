@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-05T04:33:55.479Z",
+  "validation_id": "NVR-MUUR90D3-80FM48",
+  "raw_need": "Continue QIF and release the nearest roadmap slice.",
+  "validation_status": "reframed",
+  "validated_need": "Extend the existing calibration-report lifecycle with versioned route-policy snapshots, explicit change records, target-specific drift assessments, governed revalidation outcomes, and stale-policy handling, while preserving historical policy context and forbidding automatic policy mutation or retroactive authority.",
+  "decision_summary": "The raw continuation request is reframed into the smallest lifecycle gap after v0.6.37: decisions and adjudications remain traceable, but the policy version that governed them can become stale after authority, capability, threshold, or evidence requirements change.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is in scope?",
+      "answer": "A narrow calibration-report extension for versioned route policies, drift assessments, revalidation outcomes, governance, fixtures, docs, and release evidence.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What proves success?",
+      "answer": "Historical policy version, exact changed dimensions, affected decisions, staleness, required revalidation, outcome, and governance are reproducible without treating counts or age as quality.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "The newest route policy was assumed to remain valid for decisions made under older authority, capability, threshold, or evidence boundaries."
+  ],
+  "evidence_gaps": [
+    "The committed examples are illustrative; real longitudinal policy changes and outcomes remain pilot evidence."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV0638.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0638.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0638.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUUR7WIS-0TUXPY"
+}

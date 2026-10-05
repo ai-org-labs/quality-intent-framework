@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-05T04:33:31.536Z",
+  "problem_statement_id": "PST-MUUR8HW0-FG1G4I",
+  "affected_party": "QIF users, AI agents, accountable reviewers, operators, and affected stakeholders",
+  "actual_problem": "A route policy can change after decisions were made, but QIF cannot yet show which historical decisions are stale, what changed, or whether revalidation restored applicability.",
+  "why_it_matters": "Without versioned policy lineage, a once-valid route can retain obsolete thresholds, authority, capability, or evidence requirements and appear current.",
+  "why_now": "v0.6.35 through v0.6.37 make route selection, resolution, disagreement, and adjudication executable; policy drift is now the smallest missing lifecycle link.",
+  "evidence_refs": [
+    "docs/qif-roadmap.md",
+    "https://airc.nist.gov/airmf-resources/playbook/measure/"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUUR7WIS-0TUXPY"
+}

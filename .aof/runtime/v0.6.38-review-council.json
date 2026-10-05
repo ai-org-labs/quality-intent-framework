@@ -1,0 +1,286 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-10-05T04:43:28.936Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MUUR7ETV-1HP9P1",
+    "stage": "review",
+    "executionId": "CRUN-MUURLAUA-PUNB15",
+    "executionStatus": "prepared",
+    "invokedModel": false,
+    "seatCount": 2,
+    "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01)",
+    "lastCouncilExecutionId": "CRUN-MUURLAUA-PUNB15",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUUR7ETV-1HP9P1",
+              "decision_id": "DEC-MUUR9DYL-UE7DY7",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: versioned route-policy snapshots; policy-change records; target-specific drift assessments; revalidation requirements and outcomes; stale-policy governance; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, automatic policy mutation, employee scoring, causality claims, operational guarantees, and changes to unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which route-policy version governed an earlier decision, what authority, capability, threshold, or evidence requirement changed, which decisions became stale or materially affected, what revalidation was required and observed, and why governance remains open or closes. Change count, policy age, and revalidation volume remain evidence, never quality, authority, safety, causality, or semantic truth.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: versioned route-policy snapshots; policy-change records; target-specific drift assessments; revalidation requirements and outcomes; stale-policy governance; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, automatic policy mutation, employee scoring, causality claims, operational guarantees, and changes to unrelated package types. | success: Success means a human or AI can reproduce which route-policy version governed an earlier decision, what authority, capability, threshold, or evidence requirement changed, which decisions became stale or materially affected, what revalidation was required and observed, and why governance remains open or closes. Change count, policy age, and revalidation volume remain evidence, never quality, authority, safety, causality, or semantic truth.",
+              "context_snapshot_id": "CTX-MUUR7WIP-180UDY",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: versioned route-policy snapshots; policy-change records; target-specific drift assessments; revalidation requirements and outcomes; stale-policy governance; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, automatic policy mutation, employee scoring, causality claims, operational guarantees, and changes to unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which route-policy version governed an earlier decision, what authority, capability, threshold, or evidence requirement changed, which decisions became stale or materially affected, what revalidation was required and observed, and why governance remains open or closes. Change count, policy age, and revalidation volume remain evidence, never quality, authority, safety, causality, or semantic truth."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.37 using the latest released AOF and current policy-drift evidence. Build and release v0.6.38 Route Policy Drift and Revalidation.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0638.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0638.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0638.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0638.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0638.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUUR9DYL-UE7DY7"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUUR7ETV-1HP9P1",
+              "decision_id": "DEC-MUUR9DYL-UE7DY7",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: versioned route-policy snapshots; policy-change records; target-specific drift assessments; revalidation requirements and outcomes; stale-policy governance; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, automatic policy mutation, employee scoring, causality claims, operational guarantees, and changes to unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which route-policy version governed an earlier decision, what authority, capability, threshold, or evidence requirement changed, which decisions became stale or materially affected, what revalidation was required and observed, and why governance remains open or closes. Change count, policy age, and revalidation volume remain evidence, never quality, authority, safety, causality, or semantic truth.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: versioned route-policy snapshots; policy-change records; target-specific drift assessments; revalidation requirements and outcomes; stale-policy governance; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, automatic policy mutation, employee scoring, causality claims, operational guarantees, and changes to unrelated package types. | success: Success means a human or AI can reproduce which route-policy version governed an earlier decision, what authority, capability, threshold, or evidence requirement changed, which decisions became stale or materially affected, what revalidation was required and observed, and why governance remains open or closes. Change count, policy age, and revalidation volume remain evidence, never quality, authority, safety, causality, or semantic truth.",
+              "context_snapshot_id": "CTX-MUUR7WIP-180UDY",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: versioned route-policy snapshots; policy-change records; target-specific drift assessments; revalidation requirements and outcomes; stale-policy governance; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, automatic policy mutation, employee scoring, causality claims, operational guarantees, and changes to unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which route-policy version governed an earlier decision, what authority, capability, threshold, or evidence requirement changed, which decisions became stale or materially affected, what revalidation was required and observed, and why governance remains open or closes. Change count, policy age, and revalidation volume remain evidence, never quality, authority, safety, causality, or semantic truth."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.37 using the latest released AOF and current policy-drift evidence. Build and release v0.6.38 Route Policy Drift and Revalidation.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0638.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0638.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0638.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0638.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0638.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUUR9DYL-UE7DY7"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MUURLAUA-PUNB15",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "prepared",
+      "started_at": "2026-10-05T04:43:28.926Z",
+      "completed_at": "2026-10-05T04:43:28.926Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01)",
+      "steps": [
+        {
+          "step_id": "CRUN-MUURLAUA-PUNB15-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUUR7ETV-1HP9P1",
+              "decision_id": "DEC-MUUR9DYL-UE7DY7",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: versioned route-policy snapshots; policy-change records; target-specific drift assessments; revalidation requirements and outcomes; stale-policy governance; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, automatic policy mutation, employee scoring, causality claims, operational guarantees, and changes to unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which route-policy version governed an earlier decision, what authority, capability, threshold, or evidence requirement changed, which decisions became stale or materially affected, what revalidation was required and observed, and why governance remains open or closes. Change count, policy age, and revalidation volume remain evidence, never quality, authority, safety, causality, or semantic truth.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: versioned route-policy snapshots; policy-change records; target-specific drift assessments; revalidation requirements and outcomes; stale-policy governance; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, automatic policy mutation, employee scoring, causality claims, operational guarantees, and changes to unrelated package types. | success: Success means a human or AI can reproduce which route-policy version governed an earlier decision, what authority, capability, threshold, or evidence requirement changed, which decisions became stale or materially affected, what revalidation was required and observed, and why governance remains open or closes. Change count, policy age, and revalidation volume remain evidence, never quality, authority, safety, causality, or semantic truth.",
+              "context_snapshot_id": "CTX-MUUR7WIP-180UDY",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: versioned route-policy snapshots; policy-change records; target-specific drift assessments; revalidation requirements and outcomes; stale-policy governance; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, automatic policy mutation, employee scoring, causality claims, operational guarantees, and changes to unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which route-policy version governed an earlier decision, what authority, capability, threshold, or evidence requirement changed, which decisions became stale or materially affected, what revalidation was required and observed, and why governance remains open or closes. Change count, policy age, and revalidation volume remain evidence, never quality, authority, safety, causality, or semantic truth."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.37 using the latest released AOF and current policy-drift evidence. Build and release v0.6.38 Route Policy Drift and Revalidation.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0638.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0638.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0638.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0638.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0638.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUUR9DYL-UE7DY7"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MUURLAUA-PUNB15-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUUR7ETV-1HP9P1",
+              "decision_id": "DEC-MUUR9DYL-UE7DY7",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: versioned route-policy snapshots; policy-change records; target-specific drift assessments; revalidation requirements and outcomes; stale-policy governance; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, automatic policy mutation, employee scoring, causality claims, operational guarantees, and changes to unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which route-policy version governed an earlier decision, what authority, capability, threshold, or evidence requirement changed, which decisions became stale or materially affected, what revalidation was required and observed, and why governance remains open or closes. Change count, policy age, and revalidation volume remain evidence, never quality, authority, safety, causality, or semantic truth.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: versioned route-policy snapshots; policy-change records; target-specific drift assessments; revalidation requirements and outcomes; stale-policy governance; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, automatic policy mutation, employee scoring, causality claims, operational guarantees, and changes to unrelated package types. | success: Success means a human or AI can reproduce which route-policy version governed an earlier decision, what authority, capability, threshold, or evidence requirement changed, which decisions became stale or materially affected, what revalidation was required and observed, and why governance remains open or closes. Change count, policy age, and revalidation volume remain evidence, never quality, authority, safety, causality, or semantic truth.",
+              "context_snapshot_id": "CTX-MUUR7WIP-180UDY",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: versioned route-policy snapshots; policy-change records; target-specific drift assessments; revalidation requirements and outcomes; stale-policy governance; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, automatic policy mutation, employee scoring, causality claims, operational guarantees, and changes to unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which route-policy version governed an earlier decision, what authority, capability, threshold, or evidence requirement changed, which decisions became stale or materially affected, what revalidation was required and observed, and why governance remains open or closes. Change count, policy age, and revalidation volume remain evidence, never quality, authority, safety, causality, or semantic truth."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.37 using the latest released AOF and current policy-drift evidence. Build and release v0.6.38 Route Policy Drift and Revalidation.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0638.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0638.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0638.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0638.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0638.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUUR9DYL-UE7DY7"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

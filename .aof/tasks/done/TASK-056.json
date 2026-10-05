@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-056",
+  "title": "Release QIF v0.6.38 Route Policy Drift and Revalidation",
+  "description": "Implement versioned route-policy snapshots, policy changes, drift assessments, revalidation outcomes, verifier rules, fixtures, docs, and release evidence.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MUUR7ETV-1HP9P1",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MUUR9DYL-UE7DY7",
+  "operating_goal_ref": "v0.6.38-route-policy-drift",
+  "created_at": "2026-10-05T04:34:25.424Z",
+  "updated_at": "2026-10-05T04:45:31.565Z",
+  "assigned_at": null,
+  "done_at": "2026-10-05T04:45:31.565Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "v0.6.38 schema, verifier, example, 877 negative fixtures, docs, self-review, Council review, and pre-release verification complete."
+}

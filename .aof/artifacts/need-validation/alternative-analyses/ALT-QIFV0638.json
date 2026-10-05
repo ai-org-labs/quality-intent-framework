@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-05T04:33:40.260Z",
+  "alternative_analysis_id": "ALT-MUUR8OMC-PGQ9EE",
+  "subject_need": "Preserve route-policy validity as policies and contexts change.",
+  "alternative_solutions": [
+    "Extend calibration-report with versioned policy snapshots, policy changes, drift assessments, and revalidation outcomes.",
+    "Record only free-text changelog notes and rely on human memory."
+  ],
+  "non_solution_options": [
+    "Treat latest policy as retroactively applicable to all historical decisions."
+  ],
+  "defer_options": [
+    "Wait for a production pilot, leaving the current lifecycle structurally incomplete."
+  ],
+  "stop_options": [
+    "Do not create a new package or automatic policy optimizer."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUUR7WIS-0TUXPY"
+}

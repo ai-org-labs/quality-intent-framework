@@ -1,0 +1,23 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-05T04:34:08.366Z",
+  "project_charter_id": "PCH-MUUR9AB2-FHX9XU",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV0638.json",
+  "validated_objective": "Release QIF v0.6.38 Route Policy Drift and Revalidation as a narrow, executable calibration-report extension.",
+  "scope": [
+    "versioned route-policy snapshots and exact change dimensions",
+    "target-specific drift assessments and affected decision closure",
+    "governed revalidation requirements and outcomes",
+    "schemas, verifier, examples, retained fixtures, plain-language docs, roadmap, and release evidence"
+  ],
+  "constraints": [
+    "no UI or external integration",
+    "no automatic policy mutation, retroactive authority, employee scoring, causal inference, or semantic-truth claim"
+  ],
+  "expected_outcomes": [
+    "Users can reproduce which policy governed a decision, what changed, and why revalidation is required.",
+    "Materially affected decisions cannot appear current without a governed revalidation outcome."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUUR7WIS-0TUXPY"
+}

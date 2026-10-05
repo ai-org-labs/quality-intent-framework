@@ -2,6 +2,26 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.38 Route Policy Drift and Revalidation
+
+Date: 2026-10-05
+
+- Need / Intent / Context: v0.6.37 preserves decisions and adjudication but could not show which route-policy version governed a decision, what later changed, or whether the decision became stale. v0.6.38 adds immutable snapshots, reproducible changes, affected-decision assessment, revalidation, and governance without retroactive policy authority.
+- Latest public AOF v12.2.0 was confirmed and used from clean checkout commit `fc7599b`; the dirty unreleased local 12.3.0 worktree was not modified.
+- Need Validation preceded Charter: `.aof/artifacts/need-validation/records/NVR-QIFV0638.json` then `.aof/artifacts/need-validation/project-charters/PCH-QIFV0638.json` in parent session `SESS-MUUR7ETV-1HP9P1`; task `TASK-056` records execution.
+- Council: Visionary required policy lineage to remain explainable over time; Builder selected a narrow extension of the calibration-report package; Guardian required immutable history, explicit authority, no automatic mutation, no count-as-quality inference, and governance for stale or unverified results. Evidence: `.aof/runtime/v0.6.38-planning-review.json`.
+- Actor packet `.aof/artifacts/actor-skill-packets/ASP-MUURBEDJ-SZW5IU.json` records schema, verifier, and policy-lineage capabilities, QIF/AOF resources, policies, acceptance criteria, and review evidence.
+- Trend evidence: NIST AI RMF Measure treats drift as departure from original assumptions and limitations and requires production monitoring and intervention (https://airc.nist.gov/airmf-resources/playbook/measure/); runtime-governance research models decisions as path-dependent under evolving organizational state (https://arxiv.org/abs/2603.16586); OpenAI agent evaluation guidance treats routing changes as a source of regression evidence (https://developers.openai.com/api/docs/guides/agent-evals).
+- Judgment: QIF must preserve the policy authority in force at the original decision and separately record the effect of later policy changes. Revalidation may govern current action, but it cannot rewrite history or prove semantic truth.
+- Implementation: `calibration-report` now carries `RoutePolicySnapshot`, `RoutePolicyChange`, `RoutePolicyDriftAssessment`, `RoutePolicyRevalidationOutcome`, and `RoutePolicyRevalidationAssessment`; the verifier reproduces current-policy fidelity, exact changes, affected dimensions, staleness, counts, signals, evidence boundaries, and governance.
+- Verification: targeted validation and the full retained fixture suite passed at `16/16` positive and `877/877` negative before AOF review.
+- Self-review: AOF `self-audit-record` wrote `.aof/context/active/framework-self-audit.json`; the residual gap is real authority, operational evidence, causality, and semantic validation.
+- Review: AOF `council-exec --stage review`, three `role-result-record` judgments, and `.aof/runtime/v0.6.38-final-review.json` approved release after Visionary, Builder, and Guardian evidence review.
+- Retrospective: AOF `learning-loop-snapshot` wrote `.aof/context/active/learning-loop.json` and preserved v0.6.39 as the next value slice.
+- AOF organization verification passed `277/277` before release.
+- Remaining boundary: the committed policy change and revalidation are illustrative and insufficient. Real authority, operational evidence, causal interpretation, and semantic validity remain governance and pilot work.
+- Next: v0.6.39 Adjudication Feedback and Rubric Revision, v0.6.40 Policy Counterfactual Replay, then the v0.7 empirical calibration phase.
+
 ## v0.6.37 Reviewer Disagreement Calibration
 
 Date: 2026-10-04

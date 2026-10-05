@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-04T04:58:13.131Z",
+  "updated_at": "2026-10-05T04:43:15.813Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means a human or AI can reproduce which independent reviewers judged the same case, preserve each verdict, rationale, evidence and confidence, identify exact disagreement dimensions, trace any override or adjudication without deleting originals, and route low independence, unresolved conflict, unsupported override, adjudicator conflict, insufficient data, or unverified evidence to governance. Agreement rate and majority count remain evidence, never semantic truth, quality, competence, or authority.",
-      "recorded_at": "2026-10-04T04:33:57.613Z",
+      "answer": "Success means a human or AI can reproduce which route-policy version governed an earlier decision, what authority, capability, threshold, or evidence requirement changed, which decisions became stale or materially affected, what revalidation was required and observed, and why governance remains open or closes. Change count, policy age, and revalidation volume remain evidence, never quality, authority, safety, causality, or semantic truth.",
+      "recorded_at": "2026-10-05T04:33:03.849Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MUTBSTHE-NWLTNY",
+      "source_session_id": "SESS-MUUR7ETV-1HP9P1",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The broad continuation request is reframed into the smallest gap after v0.6.36: preserve disagreement instead of collapsing resolution evidence into one authoritative result. Extending calibration-report preserves the existing decision-to-resolution chain.",
-      "recorded_at": "2026-10-04T04:35:23.761Z",
+      "answer": "The raw continuation request is reframed into the smallest lifecycle gap after v0.6.37: decisions and adjudications remain traceable, but the policy version that governed them can become stale after authority, capability, threshold, or evidence requirements change.",
+      "recorded_at": "2026-10-05T04:34:13.106Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MUTBSTHE-NWLTNY",
-      "source_decision_record_id": "DEC-MUTBV1T7-OODSGT"
+      "source_session_id": "SESS-MUUR7ETV-1HP9P1",
+      "source_decision_record_id": "DEC-MUUR9DYL-UE7DY7"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "The committed reviewer judgments and adjudication are illustrative and insufficient; real independent reviewer evidence, accountable adjudicator authority, and operational feedback remain pilot work.",
-      "recorded_at": "2026-10-04T04:58:13.131Z",
-      "expectation_state": "All 16 positive package checks, 847 retained negative checks, disagreement grouping, adjudication traceability, governance routing, JSON parsing, public-identity scan, and diff checks passed; verifier claims remain structural.",
-      "mismatch_state": "The committed reviewer judgments and adjudication are illustrative and insufficient; real independent reviewer evidence, accountable adjudicator authority, and operational feedback remain pilot work.",
-      "scale_direction": "Complete Council review and release v0.6.37, then implement route-policy drift and revalidation in v0.6.38.",
-      "source_session_id": "SESS-MUTBSTHE-NWLTNY",
-      "source_decision_record_id": "DEC-MUTBV1T7-OODSGT"
+      "answer": "Committed change and revalidation evidence remains illustrative; semantic validity, actual authority, and causal claims require governance and pilot evidence.",
+      "recorded_at": "2026-10-05T04:43:15.813Z",
+      "expectation_state": "Route-policy lineage and revalidation are structurally reproducible and full QIF tests pass.",
+      "mismatch_state": "Committed change and revalidation evidence remains illustrative; semantic validity, actual authority, and causal claims require governance and pilot evidence.",
+      "scale_direction": "Run Council review and release v0.6.38, then implement v0.6.39.",
+      "source_session_id": "SESS-MUUR7ETV-1HP9P1",
+      "source_decision_record_id": "DEC-MUUR9DYL-UE7DY7"
     }
   ]
 }

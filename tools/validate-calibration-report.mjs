@@ -79,6 +79,10 @@ function sameSet(actual, expected) {
   return a.length === b.length && a.every((value, index) => value === b[index]);
 }
 
+function sameValue(actual, expected) {
+  return JSON.stringify(actual) === JSON.stringify(expected);
+}
+
 function pairField(pair, field, loaded) {
   if (field === "sourceEvidenceOriginKind") {
     return loaded.get(pair.sourcePackageRef)?.origins.get(pair.sourceEvidenceOriginRef)?.originKind;
@@ -154,6 +158,11 @@ function validatePackage(pkg, packagePath) {
   const reviewerDisagreements = requiredArray(pkg, "reviewerDisagreements");
   const adjudicationOutcomes = requiredArray(pkg, "adjudicationOutcomes");
   const reviewerDisagreementAssessments = requiredArray(pkg, "reviewerDisagreementAssessments");
+  const routePolicySnapshots = requiredArray(pkg, "routePolicySnapshots");
+  const routePolicyChanges = requiredArray(pkg, "routePolicyChanges");
+  const routePolicyDriftAssessments = requiredArray(pkg, "routePolicyDriftAssessments");
+  const routePolicyRevalidationOutcomes = requiredArray(pkg, "routePolicyRevalidationOutcomes");
+  const routePolicyRevalidationAssessments = requiredArray(pkg, "routePolicyRevalidationAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -176,6 +185,11 @@ function validatePackage(pkg, packagePath) {
   const reviewerDisagreementIndex = indexById(reviewerDisagreements, `${packagePath}:reviewerDisagreements`);
   const adjudicationIndex = indexById(adjudicationOutcomes, `${packagePath}:adjudicationOutcomes`);
   const reviewerAssessmentIndex = indexById(reviewerDisagreementAssessments, `${packagePath}:reviewerDisagreementAssessments`);
+  const routePolicySnapshotIndex = indexById(routePolicySnapshots, `${packagePath}:routePolicySnapshots`);
+  const routePolicyChangeIndex = indexById(routePolicyChanges, `${packagePath}:routePolicyChanges`);
+  const routePolicyDriftIndex = indexById(routePolicyDriftAssessments, `${packagePath}:routePolicyDriftAssessments`);
+  const routePolicyRevalidationIndex = indexById(routePolicyRevalidationOutcomes, `${packagePath}:routePolicyRevalidationOutcomes`);
+  const routePolicyRevalidationAssessmentIndex = indexById(routePolicyRevalidationAssessments, `${packagePath}:routePolicyRevalidationAssessments`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -917,6 +931,163 @@ function validatePackage(pkg, packagePath) {
     if (dataSufficiency === "insufficient" && !triggerTypes.has("insufficient-data")) errors.push(`${assessment.id} insufficient disagreement evidence requires an insufficient-data governance trigger.`);
   }
 
+  const snapshotsByPolicy = new Map();
+  for (const snapshot of routePolicySnapshots) {
+    for (const field of ["policyRef", "snapshotRole", "capturedAt", "effectiveFrom", "historyBoundary", "status"]) str(snapshot, field, snapshot.id);
+    const policy = ref(escalationPolicyIndex, snapshot.policyRef, "selective escalation policy", snapshot.id);
+    if (!Number.isInteger(snapshot.version) || snapshot.version < 1) errors.push(`${snapshot.id} version must be a positive integer.`);
+    if (!Number.isFinite(Date.parse(snapshot.capturedAt)) || !Number.isFinite(Date.parse(snapshot.effectiveFrom))) errors.push(`${snapshot.id} capturedAt and effectiveFrom must be valid date-time values.`);
+    if (snapshot.effectiveTo && Date.parse(snapshot.effectiveTo) <= Date.parse(snapshot.effectiveFrom)) errors.push(`${snapshot.id} effectiveTo must follow effectiveFrom.`);
+    if (snapshot.snapshotRole === "baseline" && !snapshot.effectiveTo) errors.push(`${snapshot.id} baseline snapshot requires effectiveTo.`);
+    if (snapshot.snapshotRole === "current" && snapshot.effectiveTo) errors.push(`${snapshot.id} current snapshot must not include effectiveTo.`);
+    if (snapshot.historyBoundary !== "immutable-snapshot-not-retroactive-policy-authority") errors.push(`${snapshot.id} historyBoundary must preserve immutable history without retroactive authority.`);
+    if (!Array.isArray(snapshot.approvedBy) || snapshot.approvedBy.length === 0) errors.push(`${snapshot.id} approvedBy must include at least one authority.`);
+    if (!Array.isArray(snapshot.evidenceRefs) || snapshot.evidenceRefs.length === 0) errors.push(`${snapshot.id} evidenceRefs must include at least one item.`);
+    const triggerTypes = new Set((snapshot.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", snapshot.id)?.triggerType));
+    if ((snapshot.status === "draft" || snapshot.approvedBy?.length === 0) && !triggerTypes.has("policy-snapshot-unapproved")) errors.push(`${snapshot.id} unapproved snapshot requires a policy-snapshot-unapproved governance trigger.`);
+    const routeRefs = (snapshot.routes || []).map((item) => item.routeRef);
+    const ruleRefs = (snapshot.routingRules || []).map((item) => item.ruleRef);
+    if (new Set(routeRefs).size !== routeRefs.length) errors.push(`${snapshot.id} routes must not duplicate routeRef values.`);
+    if (new Set(ruleRefs).size !== ruleRefs.length) errors.push(`${snapshot.id} routingRules must not duplicate ruleRef values.`);
+    for (const rule of snapshot.routingRules || []) if (!routeRefs.includes(rule.routeRef)) errors.push(`${snapshot.id}/${rule.ruleRef} references missing snapshot route ${rule.routeRef}.`);
+    snapshotsByPolicy.set(snapshot.policyRef, [...(snapshotsByPolicy.get(snapshot.policyRef) || []), snapshot]);
+    if (snapshot.snapshotRole === "current" && policy) {
+      if (!sameSet(routeRefs, policy.routes.map((item) => item.id))) errors.push(`${snapshot.id} current routes must exactly match the referenced policy routes.`);
+      if (!sameSet(ruleRefs, policy.routingRules.map((item) => item.id))) errors.push(`${snapshot.id} current routingRules must exactly match the referenced policy rules.`);
+      for (const source of policy.routes) {
+        const item = (snapshot.routes || []).find((route) => route.routeRef === source.id);
+        if (!item) continue;
+        for (const [field, expected] of Object.entries({ routeType: source.routeType, authorityRef: source.authorityRef, capabilityRequirement: source.capabilityRequirement, responseTimeBoundary: source.responseTimeBoundary, status: source.status })) if (!sameValue(item[field], expected)) errors.push(`${snapshot.id}/${source.id} ${field} must match the current policy.`);
+        if (!sameValue(item.evidenceRequired, source.evidenceRequired)) errors.push(`${snapshot.id}/${source.id} evidenceRequired must match the current policy.`);
+      }
+      for (const source of policy.routingRules) {
+        const item = (snapshot.routingRules || []).find((rule) => rule.ruleRef === source.id);
+        if (!item) continue;
+        for (const field of ["lowerInclusive", "upperExclusive", "routeRef"]) if (!sameValue(item[field], source[field])) errors.push(`${snapshot.id}/${source.id} ${field} must match the current policy.`);
+      }
+    }
+  }
+  for (const [policyRef, snapshots] of snapshotsByPolicy) {
+    if (snapshots.filter((item) => item.snapshotRole === "current").length !== 1) errors.push(`${policyRef} must have exactly one current route-policy snapshot.`);
+    const versions = snapshots.map((item) => item.version);
+    if (new Set(versions).size !== versions.length) errors.push(`${policyRef} route-policy snapshot versions must be unique.`);
+  }
+
+  function deriveChanges(previous, current) {
+    const changes = [];
+    const previousRoutes = new Map((previous?.routes || []).map((item) => [item.routeRef, item]));
+    const currentRoutes = new Map((current?.routes || []).map((item) => [item.routeRef, item]));
+    for (const routeRef of new Set([...previousRoutes.keys(), ...currentRoutes.keys()])) {
+      const before = previousRoutes.get(routeRef);
+      const after = currentRoutes.get(routeRef);
+      if (!before || !after || before.routeType !== after.routeType || before.status !== after.status) changes.push({ dimension: "route", routeRef, previousValue: before || null, currentValue: after || null });
+      if (!before || !after) continue;
+      for (const [dimension, field] of [["authority", "authorityRef"], ["capability", "capabilityRequirement"], ["evidence", "evidenceRequired"], ["response-time", "responseTimeBoundary"]]) {
+        if (!sameValue(before[field], after[field])) changes.push({ dimension, routeRef, previousValue: before[field], currentValue: after[field] });
+      }
+    }
+    const previousRules = new Map((previous?.routingRules || []).map((item) => [item.ruleRef, item]));
+    const currentRules = new Map((current?.routingRules || []).map((item) => [item.ruleRef, item]));
+    for (const ruleRef of new Set([...previousRules.keys(), ...currentRules.keys()])) {
+      const before = previousRules.get(ruleRef);
+      const after = currentRules.get(ruleRef);
+      if (!sameValue(before, after)) changes.push({ dimension: "threshold", routeRef: after?.routeRef || before?.routeRef, previousValue: before || null, currentValue: after || null });
+    }
+    return changes;
+  }
+
+  for (const change of routePolicyChanges) {
+    for (const field of ["previousSnapshotRef", "currentSnapshotRef", "effectiveAt", "authorizedBy", "status"]) str(change, field, change.id);
+    const previous = ref(routePolicySnapshotIndex, change.previousSnapshotRef, "previous route-policy snapshot", change.id);
+    const current = ref(routePolicySnapshotIndex, change.currentSnapshotRef, "current route-policy snapshot", change.id);
+    if (previous && current) {
+      if (previous.policyRef !== current.policyRef) errors.push(`${change.id} snapshots must reference the same policy.`);
+      if (current.version <= previous.version) errors.push(`${change.id} current snapshot version must be greater than previous snapshot version.`);
+      if (change.effectiveAt !== current.effectiveFrom || previous.effectiveTo !== current.effectiveFrom) errors.push(`${change.id} effectiveAt and snapshot boundaries must form a continuous transition.`);
+      const expected = deriveChanges(previous, current);
+      if (!sameSet(change.changedDimensions, expected.map((item) => item.dimension))) errors.push(`${change.id} changedDimensions must reproduce snapshot differences.`);
+      if ((change.changes || []).length !== expected.length) errors.push(`${change.id} changes must reproduce every snapshot difference.`);
+      for (const item of change.changes || []) {
+        const match = expected.find((candidate) => candidate.dimension === item.dimension && candidate.routeRef === item.routeRef && sameValue(candidate.previousValue, item.previousValue) && sameValue(candidate.currentValue, item.currentValue));
+        if (!match) errors.push(`${change.id} change detail ${item.dimension}/${item.routeRef} does not reproduce snapshot values.`);
+        str(item, "rationale", `${change.id}/${item.dimension}/${item.routeRef}`);
+      }
+    }
+    if (change.automaticMutation !== false) errors.push(`${change.id} automaticMutation must be false.`);
+    if (!Array.isArray(change.evidenceRefs) || change.evidenceRefs.length === 0) errors.push(`${change.id} evidenceRefs must include at least one item.`);
+    const triggerTypes = new Set((change.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", change.id)?.triggerType));
+    if (change.status !== "approved" && !triggerTypes.has("policy-change-unauthorized")) errors.push(`${change.id} non-approved change requires a policy-change-unauthorized governance trigger.`);
+  }
+
+  for (const assessment of routePolicyDriftAssessments) {
+    for (const field of ["changeRef", "assessedAt", "interpretation", "status"]) str(assessment, field, assessment.id);
+    const change = ref(routePolicyChangeIndex, assessment.changeRef, "route-policy change", assessment.id);
+    const impacts = assessment.decisionImpacts || [];
+    if (!Array.isArray(assessment.decisionImpacts) || impacts.length === 0) errors.push(`${assessment.id} decisionImpacts must include at least one decision.`);
+    for (const impact of impacts) {
+      const decision = ref(escalationDecisionIndex, impact.decisionRef, "selective escalation decision", assessment.id);
+      const previous = ref(routePolicySnapshotIndex, impact.originalSnapshotRef, "original route-policy snapshot", assessment.id);
+      const current = ref(routePolicySnapshotIndex, impact.currentSnapshotRef, "current route-policy snapshot", assessment.id);
+      if (change && (impact.originalSnapshotRef !== change.previousSnapshotRef || impact.currentSnapshotRef !== change.currentSnapshotRef)) errors.push(`${assessment.id}/${impact.decisionRef} snapshot refs must match the policy change.`);
+      const expectedDimensions = (change?.changes || []).filter((item) => !decision || item.routeRef === decision.actualRouteRef).map((item) => item.dimension);
+      if (!sameSet(impact.affectedDimensions, expectedDimensions)) errors.push(`${assessment.id}/${impact.decisionRef} affectedDimensions must reproduce changes to the decision route.`);
+      if (impact.materiality === "material" && (impact.staleness !== "stale" || impact.revalidationRequired !== true)) errors.push(`${assessment.id}/${impact.decisionRef} material impact must be stale and require revalidation.`);
+      if (impact.materiality === "non-material" && (impact.staleness !== "current" || impact.revalidationRequired !== false)) errors.push(`${assessment.id}/${impact.decisionRef} non-material impact must remain current without revalidation.`);
+      if (previous && decision && previous.policyRef !== decision.policyRef) errors.push(`${assessment.id}/${impact.decisionRef} original snapshot must govern the decision policy.`);
+      if (current && decision && current.policyRef !== decision.policyRef) errors.push(`${assessment.id}/${impact.decisionRef} current snapshot must govern the decision policy.`);
+      str(impact, "rationale", `${assessment.id}/${impact.decisionRef}`);
+    }
+    const materialImpactCount = impacts.filter((item) => item.materiality === "material").length;
+    const staleDecisionCount = impacts.filter((item) => item.staleness === "stale").length;
+    for (const [field, value] of Object.entries({ impactCount: impacts.length, materialImpactCount, staleDecisionCount })) if (!sameNumber(assessment[field], value)) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    if (assessment.interpretation !== "policy-drift-evidence-only-not-quality-safety-causality-or-authority") errors.push(`${assessment.id} interpretation must remain policy-drift-evidence-only-not-quality-safety-causality-or-authority.`);
+    const triggerTypes = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (materialImpactCount > 0 && !triggerTypes.has("policy-decision-stale")) errors.push(`${assessment.id} stale material decisions require a policy-decision-stale governance trigger.`);
+  }
+
+  for (const outcome of routePolicyRevalidationOutcomes) {
+    for (const field of ["driftAssessmentRef", "decisionRef", "previousSnapshotRef", "currentSnapshotRef", "reviewedAt", "reviewerRef", "outcome", "resultingRouteRef", "resultingAuthorityRef", "rationale", "evidenceStatus", "status"]) str(outcome, field, outcome.id);
+    const assessment = ref(routePolicyDriftIndex, outcome.driftAssessmentRef, "route-policy drift assessment", outcome.id);
+    const decision = ref(escalationDecisionIndex, outcome.decisionRef, "selective escalation decision", outcome.id);
+    const impact = assessment?.decisionImpacts?.find((item) => item.decisionRef === outcome.decisionRef);
+    if (!impact) errors.push(`${outcome.id} must resolve a decision impact in its drift assessment.`);
+    if (impact && (outcome.previousSnapshotRef !== impact.originalSnapshotRef || outcome.currentSnapshotRef !== impact.currentSnapshotRef)) errors.push(`${outcome.id} snapshot refs must match the decision impact.`);
+    const current = ref(routePolicySnapshotIndex, outcome.currentSnapshotRef, "current route-policy snapshot", outcome.id);
+    const route = current?.routes?.find((item) => item.routeRef === outcome.resultingRouteRef);
+    if (!route) errors.push(`${outcome.id} resultingRouteRef must resolve in the current snapshot.`);
+    else if (outcome.resultingAuthorityRef !== route.authorityRef) errors.push(`${outcome.id} resultingAuthorityRef must match the current snapshot route authority.`);
+    if (outcome.priorDecisionPreserved !== true) errors.push(`${outcome.id} priorDecisionPreserved must be true.`);
+    if (!Array.isArray(outcome.evidenceRefs) || outcome.evidenceRefs.length === 0) errors.push(`${outcome.id} evidenceRefs must include at least one item.`);
+    const triggerTypes = new Set((outcome.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", outcome.id)?.triggerType));
+    if (outcome.outcome === "unresolved" && !triggerTypes.has("revalidation-unresolved")) errors.push(`${outcome.id} unresolved revalidation requires a revalidation-unresolved governance trigger.`);
+    if (outcome.evidenceStatus !== "verified" && !triggerTypes.has("revalidation-evidence-unverified")) errors.push(`${outcome.id} non-verified revalidation evidence requires a revalidation-evidence-unverified governance trigger.`);
+    if (decision && current && current.policyRef !== decision.policyRef) errors.push(`${outcome.id} current snapshot must govern the decision policy.`);
+  }
+
+  for (const assessment of routePolicyRevalidationAssessments) {
+    for (const field of ["title", "dataSufficiency", "assessmentSignal", "interpretation", "status"]) str(assessment, field, assessment.id);
+    const drift = (assessment.driftAssessmentRefs || []).map((id) => ref(routePolicyDriftIndex, id, "route-policy drift assessment", assessment.id)).filter(Boolean);
+    const outcomes = (assessment.outcomeRefs || []).map((id) => ref(routePolicyRevalidationIndex, id, "route-policy revalidation outcome", assessment.id)).filter(Boolean);
+    const requiredImpacts = drift.flatMap((item) => item.decisionImpacts || []).filter((item) => item.revalidationRequired === true);
+    const requiredCount = requiredImpacts.length;
+    const completedCount = outcomes.filter((item) => item.outcome !== "unresolved").length;
+    const verifiedCount = outcomes.filter((item) => item.evidenceStatus === "verified").length;
+    const unresolvedCount = outcomes.filter((item) => item.outcome === "unresolved").length;
+    const outcomeDecisionRefs = new Set(outcomes.map((item) => item.decisionRef));
+    const staleWithoutOutcomeCount = requiredImpacts.filter((item) => !outcomeDecisionRefs.has(item.decisionRef)).length;
+    for (const [field, value] of Object.entries({ requiredCount, completedCount, verifiedCount, unresolvedCount, staleWithoutOutcomeCount })) if (!sameNumber(assessment[field], value)) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    if (!Number.isInteger(assessment.minimumRevalidationCount) || assessment.minimumRevalidationCount < 2) errors.push(`${assessment.id} minimumRevalidationCount must be at least 2.`);
+    const dataSufficiency = completedCount >= assessment.minimumRevalidationCount && verifiedCount >= assessment.minimumRevalidationCount ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== dataSufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${dataSufficiency}.`);
+    const signal = dataSufficiency === "insufficient" ? "insufficient-data" : unresolvedCount > 0 || staleWithoutOutcomeCount > 0 ? "governance-required" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (!Array.isArray(assessment.reviewedBy) || assessment.reviewedBy.length === 0) errors.push(`${assessment.id} reviewedBy must include at least one authority.`);
+    if (assessment.interpretation !== "revalidation-evidence-only-not-current-quality-safety-causality-or-authority") errors.push(`${assessment.id} interpretation must remain revalidation-evidence-only-not-current-quality-safety-causality-or-authority.`);
+    const triggerTypes = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (dataSufficiency === "insufficient" && !triggerTypes.has("insufficient-data")) errors.push(`${assessment.id} insufficient revalidation evidence requires an insufficient-data governance trigger.`);
+    if (staleWithoutOutcomeCount > 0 && !triggerTypes.has("revalidation-missing")) errors.push(`${assessment.id} stale decisions without outcomes require a revalidation-missing governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -1019,6 +1190,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that route volume, escalation frequency, or route outcome proves quality, competence, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming route volume, escalation frequency, or route outcome proves quality, competence, causality, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that resolution speed, volume, disposition, or reviewer availability proves quality, competence, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming resolution speed, volume, disposition, or reviewer availability proves quality, competence, causality, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that reviewer agreement, majority, seniority, confidence, or adjudication proves semantic truth, quality, competence, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming reviewer agreement, majority, seniority, confidence, or adjudication proves semantic truth, quality, competence, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority.`);
   }
 
   results.push({
@@ -1046,6 +1218,11 @@ function validatePackage(pkg, packagePath) {
       reviewerDisagreements: reviewerDisagreements.length,
       adjudicationOutcomes: adjudicationOutcomes.length,
       reviewerDisagreementAssessments: reviewerDisagreementAssessments.length,
+      routePolicySnapshots: routePolicySnapshots.length,
+      routePolicyChanges: routePolicyChanges.length,
+      routePolicyDriftAssessments: routePolicyDriftAssessments.length,
+      routePolicyRevalidationOutcomes: routePolicyRevalidationOutcomes.length,
+      routePolicyRevalidationAssessments: routePolicyRevalidationAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -1065,5 +1242,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, and policy conformance only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, resolution quality, reviewer competence, semantic correctness, service availability, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, route-policy lineage, drift and revalidation traceability, and policy conformance only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, resolution quality, reviewer competence, semantic correctness, service availability, current quality, safety, or decision authority."
 }, null, 2));

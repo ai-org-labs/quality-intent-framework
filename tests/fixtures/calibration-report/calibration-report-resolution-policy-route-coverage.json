@@ -1,6 +1,6 @@
 {
   "packageType": "calibration-report",
-  "runtimeVersion": "0.6.37",
+  "runtimeVersion": "0.6.38",
   "packageId": "CRPKG-001",
   "packageRefs": [
     {
@@ -833,6 +833,325 @@
       "status": "reviewed"
     }
   ],
+  "routePolicySnapshots": [
+    {
+      "id": "RPS-CR-001",
+      "policyRef": "SEP-CR-001",
+      "version": 1,
+      "snapshotRole": "baseline",
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "effectiveTo": "2026-01-15T00:00:00.000Z",
+      "routes": [
+        {
+          "routeRef": "SER-CR-DEFER",
+          "routeType": "defer",
+          "authorityRef": "quality-governance-owner",
+          "capabilityRequirement": "Authority to pause the evaluated action and request stronger evidence.",
+          "evidenceRequired": [
+            "Reason for deferral",
+            "next evidence needed"
+          ],
+          "responseTimeBoundary": "Review before the decision window expires.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-SPECIALIST",
+          "routeType": "specialist-escalation",
+          "authorityRef": "financial-policy-specialist",
+          "capabilityRequirement": "Current specialist competence for the financial-limit loss boundary.",
+          "evidenceRequired": [
+            "Specialist identity and scope",
+            "review finding",
+            "decision rationale"
+          ],
+          "responseTimeBoundary": "Complete specialist review before financial authorization.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-HUMAN",
+          "routeType": "human-review",
+          "authorityRef": "customer-operations-reviewer",
+          "capabilityRequirement": "Accountable review of the declared loss boundary and current evidence.",
+          "evidenceRequired": [
+            "Reviewer identity",
+            "recorded disposition"
+          ],
+          "responseTimeBoundary": "Complete review within one business day.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-PROCEED",
+          "routeType": "proceed",
+          "authorityRef": "customer-operations-governance-board",
+          "capabilityRequirement": "Authority to accept the declared residual risk within this policy.",
+          "evidenceRequired": [
+            "Gate decision",
+            "residual-risk acknowledgement"
+          ],
+          "responseTimeBoundary": "Record authorization before action.",
+          "status": "active"
+        }
+      ],
+      "routingRules": [
+        {
+          "ruleRef": "SRR-CR-000-025",
+          "lowerInclusive": 0,
+          "upperExclusive": 0.25,
+          "routeRef": "SER-CR-DEFER"
+        },
+        {
+          "ruleRef": "SRR-CR-025-050",
+          "lowerInclusive": 0.25,
+          "upperExclusive": 0.5,
+          "routeRef": "SER-CR-SPECIALIST"
+        },
+        {
+          "ruleRef": "SRR-CR-050-075",
+          "lowerInclusive": 0.5,
+          "upperExclusive": 0.75,
+          "routeRef": "SER-CR-HUMAN"
+        },
+        {
+          "ruleRef": "SRR-CR-075-100",
+          "lowerInclusive": 0.75,
+          "upperExclusive": 1.000001,
+          "routeRef": "SER-CR-PROCEED"
+        }
+      ],
+      "approvedBy": [
+        "customer-operations-governance-board"
+      ],
+      "evidenceRefs": [
+        "examples/calibration-report-package.json"
+      ],
+      "historyBoundary": "immutable-snapshot-not-retroactive-policy-authority",
+      "status": "superseded"
+    },
+    {
+      "id": "RPS-CR-002",
+      "policyRef": "SEP-CR-001",
+      "version": 2,
+      "snapshotRole": "current",
+      "capturedAt": "2026-01-15T00:00:00.000Z",
+      "effectiveFrom": "2026-01-15T00:00:00.000Z",
+      "routes": [
+        {
+          "routeRef": "SER-CR-DEFER",
+          "routeType": "defer",
+          "authorityRef": "quality-governance-owner",
+          "capabilityRequirement": "Authority to pause the evaluated action and request stronger evidence.",
+          "evidenceRequired": [
+            "Reason for deferral",
+            "next evidence needed"
+          ],
+          "responseTimeBoundary": "Review before the decision window expires.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-SPECIALIST",
+          "routeType": "specialist-escalation",
+          "authorityRef": "financial-policy-specialist",
+          "capabilityRequirement": "Current specialist competence for the financial-limit loss boundary.",
+          "evidenceRequired": [
+            "Specialist identity and scope",
+            "review finding",
+            "decision rationale"
+          ],
+          "responseTimeBoundary": "Complete specialist review before financial authorization.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-HUMAN",
+          "routeType": "human-review",
+          "authorityRef": "customer-operations-governance-board",
+          "capabilityRequirement": "Accountable review of the declared loss boundary and current evidence.",
+          "evidenceRequired": [
+            "Reviewer identity",
+            "reviewed evidence",
+            "recorded disposition"
+          ],
+          "responseTimeBoundary": "Complete review within one business day.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-PROCEED",
+          "routeType": "proceed",
+          "authorityRef": "customer-operations-governance-board",
+          "capabilityRequirement": "Authority to accept the declared residual risk within this policy.",
+          "evidenceRequired": [
+            "Gate decision",
+            "residual-risk acknowledgement"
+          ],
+          "responseTimeBoundary": "Record authorization before action.",
+          "status": "active"
+        }
+      ],
+      "routingRules": [
+        {
+          "ruleRef": "SRR-CR-000-025",
+          "lowerInclusive": 0,
+          "upperExclusive": 0.25,
+          "routeRef": "SER-CR-DEFER"
+        },
+        {
+          "ruleRef": "SRR-CR-025-050",
+          "lowerInclusive": 0.25,
+          "upperExclusive": 0.5,
+          "routeRef": "SER-CR-SPECIALIST"
+        },
+        {
+          "ruleRef": "SRR-CR-050-075",
+          "lowerInclusive": 0.5,
+          "upperExclusive": 0.75,
+          "routeRef": "SER-CR-HUMAN"
+        },
+        {
+          "ruleRef": "SRR-CR-075-100",
+          "lowerInclusive": 0.75,
+          "upperExclusive": 1.000001,
+          "routeRef": "SER-CR-PROCEED"
+        }
+      ],
+      "approvedBy": [
+        "customer-operations-governance-board"
+      ],
+      "evidenceRefs": [
+        "SEP-CR-001",
+        "examples/calibration-report-package.json"
+      ],
+      "historyBoundary": "immutable-snapshot-not-retroactive-policy-authority",
+      "status": "active"
+    }
+  ],
+  "routePolicyChanges": [
+    {
+      "id": "RPC-CR-001",
+      "previousSnapshotRef": "RPS-CR-001",
+      "currentSnapshotRef": "RPS-CR-002",
+      "effectiveAt": "2026-01-15T00:00:00.000Z",
+      "changedDimensions": [
+        "authority",
+        "evidence"
+      ],
+      "changes": [
+        {
+          "dimension": "authority",
+          "routeRef": "SER-CR-HUMAN",
+          "previousValue": "customer-operations-reviewer",
+          "currentValue": "customer-operations-governance-board",
+          "rationale": "The loss boundary now requires collective governance authority."
+        },
+        {
+          "dimension": "evidence",
+          "routeRef": "SER-CR-HUMAN",
+          "previousValue": [
+            "Reviewer identity",
+            "recorded disposition"
+          ],
+          "currentValue": [
+            "Reviewer identity",
+            "reviewed evidence",
+            "recorded disposition"
+          ],
+          "rationale": "The reviewed evidence must remain explicit in the decision record."
+        }
+      ],
+      "authorizedBy": "customer-operations-governance-board",
+      "evidenceRefs": [
+        "RPS-CR-001",
+        "RPS-CR-002"
+      ],
+      "automaticMutation": false,
+      "governanceTriggerRefs": [],
+      "status": "approved"
+    }
+  ],
+  "routePolicyDriftAssessments": [
+    {
+      "id": "RDA-CR-DRIFT-001",
+      "changeRef": "RPC-CR-001",
+      "assessedAt": "2026-01-15T11:00:00.000Z",
+      "decisionImpacts": [
+        {
+          "decisionRef": "SED-CR-001",
+          "originalSnapshotRef": "RPS-CR-001",
+          "currentSnapshotRef": "RPS-CR-002",
+          "affectedDimensions": [
+            "authority",
+            "evidence"
+          ],
+          "materiality": "material",
+          "staleness": "stale",
+          "revalidationRequired": true,
+          "rationale": "The human-review route used an authority and evidence contract that the approved current policy replaced. The historical decision remains unchanged but cannot be treated as current without revalidation."
+        }
+      ],
+      "impactCount": 1,
+      "materialImpactCount": 1,
+      "staleDecisionCount": 1,
+      "governanceTriggerRefs": [
+        "GTR-CR-016"
+      ],
+      "interpretation": "policy-drift-evidence-only-not-quality-safety-causality-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "routePolicyRevalidationOutcomes": [
+    {
+      "id": "RRO-CR-001",
+      "driftAssessmentRef": "RDA-CR-DRIFT-001",
+      "decisionRef": "SED-CR-001",
+      "previousSnapshotRef": "RPS-CR-001",
+      "currentSnapshotRef": "RPS-CR-002",
+      "reviewedAt": "2026-01-15T12:00:00.000Z",
+      "reviewerRef": "illustrative-governance-board",
+      "evidenceRefs": [
+        "SED-CR-001",
+        "RPC-CR-001",
+        "RPS-CR-002"
+      ],
+      "outcome": "conditional",
+      "resultingRouteRef": "SER-CR-HUMAN",
+      "resultingAuthorityRef": "customer-operations-governance-board",
+      "rationale": "The route remains human review, but the decision is conditionally valid only after the current governance authority reviews the evidence explicitly.",
+      "evidenceStatus": "example-only",
+      "priorDecisionPreserved": true,
+      "governanceTriggerRefs": [
+        "GTR-CR-017"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "routePolicyRevalidationAssessments": [
+    {
+      "id": "RRA-CR-001",
+      "title": "Illustrative route-policy drift and revalidation assessment",
+      "driftAssessmentRefs": [
+        "RDA-CR-DRIFT-001"
+      ],
+      "outcomeRefs": [
+        "RRO-CR-001"
+      ],
+      "minimumRevalidationCount": 10,
+      "requiredCount": 1,
+      "completedCount": 1,
+      "verifiedCount": 0,
+      "unresolvedCount": 0,
+      "staleWithoutOutcomeCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "customer-operations-governance-board"
+      ],
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-017"
+      ],
+      "interpretation": "revalidation-evidence-only-not-current-quality-safety-causality-or-authority",
+      "status": "reviewed"
+    }
+  ],
   "governanceTriggers": [
     {
       "id": "GTR-CR-001",
@@ -983,6 +1302,26 @@
       "requiredAction": "Obtain accountable adjudication evidence and verify the authority boundary before operational use.",
       "owner": "customer-operations-governance-board",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-016",
+      "triggerType": "policy-decision-stale",
+      "reason": "The illustrative decision used a superseded authority and evidence contract and requires explicit revalidation.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Preserve the historical decision and complete revalidation against the current policy snapshot before treating it as current.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-017",
+      "triggerType": "revalidation-evidence-unverified",
+      "reason": "The revalidation outcome is example-only and does not establish operational validity or authority.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified revalidation evidence before relying on the current-policy decision claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -995,7 +1334,8 @@
       "reviewed threshold alternatives, replay actions and classes, action flips, boundary distance, brittleness summary, and governance routing reproduce",
       "route definitions, score intervals, selected and actual routes, authority, execution evidence, route outcomes, assessment summaries, and governance routing reproduce",
       "resolution policy coverage, disposition, elapsed time, response-time conformance, availability, evidence status, assessment summaries, and governance routing reproduce",
-      "reviewer independence, exact verdict grouping, disagreement dimensions, preserved dissent, adjudication linkage, override references, assessment summaries, and governance routing reproduce"
+      "reviewer independence, exact verdict grouping, disagreement dimensions, preserved dissent, adjudication linkage, override references, assessment summaries, and governance routing reproduce",
+      "policy snapshot lineage, current-policy fidelity, exact change dimensions, decision impacts, staleness, revalidation outcomes, assessment summaries, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -1008,6 +1348,7 @@
       "that route volume, escalation frequency, or route outcome proves quality, competence, causality, or authority",
       "that resolution speed, volume, disposition, or reviewer availability proves quality, competence, causality, or authority",
       "that reviewer agreement, majority, seniority, confidence, or adjudication proves semantic truth, quality, competence, or authority",
+      "that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority",
       "a calibration statistic is quality",
       "an automatic quality verdict"
     ],
@@ -1018,6 +1359,7 @@
       "accountable validation of route authority, specialist capability, execution evidence, and operational response-time boundaries",
       "accountable review of resolution policy, actual disposition, reviewer availability, and timeout consequences",
       "independent review of disagreement meaning, evidence access, adjudicator authority, and preserved dissent",
+      "accountable review of policy-change authority, materiality, affected decisions, and revalidation evidence",
       "review of environmental and evaluation-harness effects",
       "accountable governance before changing quality decisions"
     ]

@@ -2,7 +2,7 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-04T05:04:16.857Z",
+  "generated_at": "2026-10-05T04:44:46.440Z",
   "latest_outcome": {
     "source_session_id": "SESS-MUTBSTHE-NWLTNY",
     "report_id": "OUT-MUTCUS1E-TQ1PSH",
@@ -12,30 +12,30 @@
     "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.37"
   },
   "latest_self_audit": {
-    "audit_id": "QIF-V0637-SELF-REVIEW",
-    "recorded_at": "2026-10-04T04:58:13.124Z",
-    "summary": "All 16 positive package checks, 847 retained negative checks, disagreement grouping, adjudication traceability, governance routing, JSON parsing, public-identity scan, and diff checks passed; verifier claims remain structural.",
-    "detected_gap": "The committed reviewer judgments and adjudication are illustrative and insufficient; real independent reviewer evidence, accountable adjudicator authority, and operational feedback remain pilot work.",
+    "audit_id": "FSA-QIFV0638-001",
+    "recorded_at": "2026-10-05T04:43:15.804Z",
+    "summary": "Route-policy lineage and revalidation are structurally reproducible and full QIF tests pass.",
+    "detected_gap": "Committed change and revalidation evidence remains illustrative; semantic validity, actual authority, and causal claims require governance and pilot evidence.",
     "result_state": "stable",
-    "next_action": "Complete Council review and release v0.6.37, then implement route-policy drift and revalidation in v0.6.38.",
+    "next_action": "Run Council review and release v0.6.38, then implement v0.6.39.",
     "related_task_ids": [
-      "TASK-055"
+      "TASK-056"
     ]
   },
   "current_next_value_slice": {
-    "content": "QIF v0.6.38 Route Policy Drift and Revalidation",
-    "updated_at": "2026-10-04T05:03:41.382Z",
+    "content": "v0.6.39 Adjudication Feedback and Rubric Revision",
+    "updated_at": "2026-10-05T04:43:15.815Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MUTBSTHE-NWLTNY",
-    "source_decision_record_id": "DEC-MUTBV1T7-OODSGT"
+    "source_session_id": "SESS-MUUR7ETV-1HP9P1",
+    "source_decision_record_id": "DEC-MUUR9DYL-UE7DY7"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Complete Council review and release v0.6.37, then implement route-policy drift and revalidation in v0.6.38.",
+    "proposed_focus": "Run Council review and release v0.6.38, then implement v0.6.39.",
     "related_task_ids": [
-      "TASK-055"
+      "TASK-056"
     ],
-    "open_task_count": 0
+    "open_task_count": 1
   },
   "learning_state": {
     "has_outcome_evidence": true,
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: QIF v0.6.38 Route Policy Drift and Revalidation",
-    "Latest self-audit next action: Complete Council review and release v0.6.37, then implement route-policy drift and revalidation in v0.6.38.",
+    "Current next value slice: v0.6.39 Adjudication Feedback and Rubric Revision",
+    "Latest self-audit next action: Run Council review and release v0.6.38, then implement v0.6.39.",
     "Latest outcome result: success"
   ]
 }

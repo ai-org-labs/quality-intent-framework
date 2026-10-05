@@ -68,6 +68,216 @@
   ],
   "negatives": [
     {
+      "file": "calibration-report-route-snapshots-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route-policy snapshots required",
+      "expect": "fail",
+      "errorIncludes": "package routePolicySnapshots must be an array."
+    },
+    {
+      "file": "calibration-report-route-changes-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route-policy changes required",
+      "expect": "fail",
+      "errorIncludes": "package routePolicyChanges must be an array."
+    },
+    {
+      "file": "calibration-report-route-drift-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route-policy drift assessments required",
+      "expect": "fail",
+      "errorIncludes": "package routePolicyDriftAssessments must be an array."
+    },
+    {
+      "file": "calibration-report-route-revalidation-outcomes-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route-policy revalidation outcomes required",
+      "expect": "fail",
+      "errorIncludes": "package routePolicyRevalidationOutcomes must be an array."
+    },
+    {
+      "file": "calibration-report-route-revalidation-assessments-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route-policy revalidation assessments required",
+      "expect": "fail",
+      "errorIncludes": "package routePolicyRevalidationAssessments must be an array."
+    },
+    {
+      "file": "calibration-report-route-snapshot-policy-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "snapshot policy reference",
+      "expect": "fail",
+      "errorIncludes": "references missing selective escalation policy"
+    },
+    {
+      "file": "calibration-report-route-snapshot-history-boundary.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "immutable history boundary",
+      "expect": "fail",
+      "errorIncludes": "historyBoundary must preserve immutable history without retroactive authority."
+    },
+    {
+      "file": "calibration-report-route-snapshot-current-duplicate.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "single current policy snapshot",
+      "expect": "fail",
+      "errorIncludes": "must have exactly one current route-policy snapshot."
+    },
+    {
+      "file": "calibration-report-route-snapshot-version-duplicate.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unique policy versions",
+      "expect": "fail",
+      "errorIncludes": "route-policy snapshot versions must be unique."
+    },
+    {
+      "file": "calibration-report-route-snapshot-current-authority-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "current policy fidelity",
+      "expect": "fail",
+      "errorIncludes": "authorityRef must match the current policy."
+    },
+    {
+      "file": "calibration-report-route-change-version-order.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "monotonic policy version",
+      "expect": "fail",
+      "errorIncludes": "current snapshot version must be greater than previous snapshot version."
+    },
+    {
+      "file": "calibration-report-route-change-continuity.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "continuous policy transition",
+      "expect": "fail",
+      "errorIncludes": "effectiveAt and snapshot boundaries must form a continuous transition."
+    },
+    {
+      "file": "calibration-report-route-change-dimensions.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "change dimension reproduction",
+      "expect": "fail",
+      "errorIncludes": "changedDimensions must reproduce snapshot differences."
+    },
+    {
+      "file": "calibration-report-route-change-detail.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "exact change detail reproduction",
+      "expect": "fail",
+      "errorIncludes": "change detail authority/SER-CR-HUMAN does not reproduce snapshot values."
+    },
+    {
+      "file": "calibration-report-route-change-automatic-mutation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "human-governed policy mutation",
+      "expect": "fail",
+      "errorIncludes": "automaticMutation must be false."
+    },
+    {
+      "file": "calibration-report-route-drift-decision-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "drift decision traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing selective escalation decision"
+    },
+    {
+      "file": "calibration-report-route-drift-snapshot-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "drift snapshot lineage",
+      "expect": "fail",
+      "errorIncludes": "snapshot refs must match the policy change."
+    },
+    {
+      "file": "calibration-report-route-drift-dimensions.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "affected dimension reproduction",
+      "expect": "fail",
+      "errorIncludes": "affectedDimensions must reproduce changes to the decision route."
+    },
+    {
+      "file": "calibration-report-route-drift-material-staleness.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "material drift revalidation",
+      "expect": "fail",
+      "errorIncludes": "material impact must be stale and require revalidation."
+    },
+    {
+      "file": "calibration-report-route-drift-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "drift count reproduction",
+      "expect": "fail",
+      "errorIncludes": "materialImpactCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-route-drift-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "stale decision governance",
+      "expect": "fail",
+      "errorIncludes": "stale material decisions require a policy-decision-stale governance trigger."
+    },
+    {
+      "file": "calibration-report-route-revalidation-impact-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "revalidation impact traceability",
+      "expect": "fail",
+      "errorIncludes": "must resolve a decision impact in its drift assessment."
+    },
+    {
+      "file": "calibration-report-route-revalidation-route-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "current route resolution",
+      "expect": "fail",
+      "errorIncludes": "resultingRouteRef must resolve in the current snapshot."
+    },
+    {
+      "file": "calibration-report-route-revalidation-authority.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "current authority reproduction",
+      "expect": "fail",
+      "errorIncludes": "resultingAuthorityRef must match the current snapshot route authority."
+    },
+    {
+      "file": "calibration-report-route-revalidation-history.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "prior decision preservation",
+      "expect": "fail",
+      "errorIncludes": "priorDecisionPreserved must be true."
+    },
+    {
+      "file": "calibration-report-route-revalidation-evidence-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unverified revalidation governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified revalidation evidence requires a revalidation-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-route-revalidation-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "revalidation count reproduction",
+      "expect": "fail",
+      "errorIncludes": "requiredCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-route-revalidation-sufficiency.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "revalidation sufficiency reproduction",
+      "expect": "fail",
+      "errorIncludes": "dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "calibration-report-route-revalidation-signal.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "revalidation signal reproduction",
+      "expect": "fail",
+      "errorIncludes": "assessmentSignal must reproduce as insufficient-data."
+    },
+    {
+      "file": "calibration-report-route-policy-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "route-policy semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority."
+    },
+    {
       "file": "calibration-report-reviewer-policies-not-array.json",
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "reviewer disagreement policies required",

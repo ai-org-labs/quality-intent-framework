@@ -75,6 +75,7 @@ Use additional documents when needed:
 | Route a calibrated decision to proceed, defer, human review, or a specialist without implying automatic authority | `docs/qif-v0.6.35-selective-escalation-calibration.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Record whether an escalation was accepted, rejected, redirected, or timed out without treating speed as quality | `docs/qif-v0.6.36-escalation-resolution-timeliness.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Preserve conflicting reviewer judgments and explain adjudication without treating consensus as truth | `docs/qif-v0.6.37-reviewer-disagreement-calibration.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
+| Show which route policy governed a decision, what later changed, and whether the decision must be revalidated | `docs/qif-v0.6.38-route-policy-drift-revalidation.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Understand quality theory background | `docs/quality-theory-report.md` |
 
 ## Required Framing

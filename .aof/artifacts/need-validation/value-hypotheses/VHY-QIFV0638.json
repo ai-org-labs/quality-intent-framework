@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-05T04:33:35.891Z",
+  "value_hypothesis_id": "VHY-MUUR8L8Z-K5PT4G",
+  "expected_value_creation": "Make policy changes, affected historical decisions, staleness, revalidation requirements, and outcomes reproducible without automatically authorizing a new policy.",
+  "beneficiary": "QIF users, AI agents, accountable governance owners, operators, and affected stakeholders",
+  "supporting_evidence": [
+    "NIST treats production drift as divergence from original assumptions and limitations requiring monitoring and intervention.",
+    "Recent agent governance work treats path-dependent policies and evolving organizational state as runtime governance concerns."
+  ],
+  "success_criteria": [
+    "Every drift assessment resolves old and new policy snapshots and exact changed dimensions.",
+    "Every materially affected decision receives a governed revalidation outcome or remains explicitly stale."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUUR7WIS-0TUXPY"
+}

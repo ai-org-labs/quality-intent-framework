@@ -1,0 +1,38 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-05T04:35:58.336Z",
+  "review_packet_id": "CREV-MUURBN5S-Z94P4Z",
+  "council_id": "qif-council",
+  "stage": "planning",
+  "review_status": "approved",
+  "decision_summary": "Visionary, Builder, and Guardian approve v0.6.38 Route Policy Drift and Revalidation with immutable-history boundaries.",
+  "rationale": "The slice closes policy-version drift after decision and adjudication while preserving historical authority, forbidding automatic mutation, and routing stale or uncertain applicability to governance.",
+  "recommendation": "Implement the narrow calibration-report extension and release only after retained negative fixtures, full QIF verification, self-review, and retrospective.",
+  "target_audience": "QIF users, AI agents, accountable reviewers, operators, governance owners, and affected stakeholders",
+  "expected_user_reaction": "Users can see which policy governed a decision, exactly what changed, whether the decision became stale, and what revalidation did.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [
+    "Add route-policy snapshots, policy changes, drift assessments, revalidation outcomes and assessments, examples, verifier rules, fixtures, plain-language docs, roadmap, and release evidence."
+  ],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "missing-policy-drift-revalidation-lineage",
+  "diagnosis_confidence": 0.96,
+  "diagnosis_evidence_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0638.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [
+    ".aof/runtime/v0.6.38-planning-visionary.json",
+    ".aof/runtime/v0.6.38-planning-builder.json",
+    ".aof/runtime/v0.6.38-planning-guardian.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/actor-skill-packets/ASP-MUURBEDJ-SZW5IU.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-056",
+  "source_parent_session_id": "SESS-MUUR7ETV-1HP9P1",
+  "source_decision_record_id": "DEC-MUUR9DYL-UE7DY7"
+}

@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-05T04:35:33.261Z",
+  "role": "Guardian",
+  "stage": "planning",
+  "session_id": "SESS-MUUR7ETV-1HP9P1",
+  "status": "completed",
+  "recommendation": "Approve only with immutable history, no automatic mutation, explicit materiality, stale-decision governance, and evidence-only age/count boundaries.",
+  "rationale": "A latest-policy-wins design could erase historical authority and silently legitimize decisions under a policy that did not govern them.",
+  "signals": [
+    "Never rewrite historical decisions to point at the newest policy snapshot."
+  ],
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0638.json"
+  ],
+  "decision_required": true,
+  "source_task_id": "TASK-056",
+  "source_decision_record_id": "DEC-MUUR9DYL-UE7DY7",
+  "source_parent_session_id": "SESS-MUUR7ETV-1HP9P1",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.98
+}

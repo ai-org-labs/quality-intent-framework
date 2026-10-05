@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.37 baseline)
+## Current Position (v0.6.38 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -582,10 +582,22 @@ Deliverables:
 - Next planned slice, v0.6.38 Route Policy Drift and Revalidation: compare
   policy versions, changed authority or capability boundaries, stale routes,
   and post-change outcomes without automatically updating or authorizing policy.
+  Status: implemented in v0.6.38 through immutable policy snapshots,
+  reproducible change records, decision-specific drift assessment, explicit
+  revalidation outcomes, aggregate sufficiency signals, and retained
+  governance fixtures. Historical decisions remain governed by their original
+  snapshot; the current policy does not rewrite prior authority.
 - Next planned slice, v0.6.39 Adjudication Feedback and Rubric Revision:
   convert repeated, evidence-backed disagreement into governed candidate rubric
   changes while keeping rejected alternatives and preventing silent policy
   mutation.
+- Next planned slice, v0.6.40 Policy Counterfactual Replay: replay preserved
+  decisions against reviewed candidate policies to expose changed routes and
+  loss-boundary consequences without optimizing, selecting, or authorizing a
+  policy automatically.
+- Next planned phase, v0.7 Empirical Calibration: replace illustrative
+  calibration evidence with governed pilot outcomes, suite-health records, and
+  framework-learning evidence while preserving uncertainty boundaries.
 - Evaluation Suite Health records: task origin, contamination boundary,
   solvability review, saturation, grader calibration, trial variance, harness
   and infrastructure configuration, and drift ownership.

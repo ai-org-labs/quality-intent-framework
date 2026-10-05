@@ -1,0 +1,21 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-05T04:35:29.277Z",
+  "role": "Builder",
+  "stage": "planning",
+  "session_id": "SESS-MUUR7ETV-1HP9P1",
+  "status": "completed",
+  "recommendation": "Extend calibration-report with policy snapshots, change records, drift assessments, revalidation outcomes, and aggregate assessment.",
+  "rationale": "The existing route decisions and reviewer lifecycle provide stable references; extension avoids duplicating a new package or rewriting prior evidence.",
+  "signals": [],
+  "artifact_refs": [
+    "schemas/calibration-report-package.schema.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-056",
+  "source_decision_record_id": "DEC-MUUR9DYL-UE7DY7",
+  "source_parent_session_id": "SESS-MUUR7ETV-1HP9P1",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.96
+}

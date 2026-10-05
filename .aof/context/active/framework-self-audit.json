@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-04T04:58:13.124Z",
-  "audit_id": "QIF-V0637-SELF-REVIEW",
-  "scope": "QIF v0.6.37 schema, verifier, example, fixtures, docs, and release readiness",
-  "summary": "All 16 positive package checks, 847 retained negative checks, disagreement grouping, adjudication traceability, governance routing, JSON parsing, public-identity scan, and diff checks passed; verifier claims remain structural.",
-  "detected_gap": "The committed reviewer judgments and adjudication are illustrative and insufficient; real independent reviewer evidence, accountable adjudicator authority, and operational feedback remain pilot work.",
+  "recorded_at": "2026-10-05T04:43:15.804Z",
+  "audit_id": "FSA-QIFV0638-001",
+  "scope": "QIF v0.6.38 schema, verifier, example, fixtures, docs, and release readiness",
+  "summary": "Route-policy lineage and revalidation are structurally reproducible and full QIF tests pass.",
+  "detected_gap": "Committed change and revalidation evidence remains illustrative; semantic validity, actual authority, and causal claims require governance and pilot evidence.",
   "result_state": "stable",
-  "next_action": "Complete Council review and release v0.6.37, then implement route-policy drift and revalidation in v0.6.38.",
+  "next_action": "Run Council review and release v0.6.38, then implement v0.6.39.",
   "related_task_ids": [
-    "TASK-055"
+    "TASK-056"
   ],
-  "source_session_id": "SESS-MUTBSTHE-NWLTNY",
-  "source_decision_record_id": "DEC-MUTBV1T7-OODSGT"
+  "source_session_id": "SESS-MUUR7ETV-1HP9P1",
+  "source_decision_record_id": "DEC-MUUR9DYL-UE7DY7"
 }
