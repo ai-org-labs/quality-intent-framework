@@ -2,14 +2,14 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-05T04:44:46.440Z",
+  "generated_at": "2026-10-05T04:47:33.243Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MUTBSTHE-NWLTNY",
-    "report_id": "OUT-MUTCUS1E-TQ1PSH",
+    "source_session_id": "SESS-MUUR7ETV-1HP9P1",
+    "report_id": "OUT-MUURPRYD-X3ZVE4",
     "result": "success",
-    "observed_at": "2026-10-04T05:03:10.703Z",
-    "note": "QIF v0.6.37 was verified, pushed, tagged, and published. Reviewer disagreement and adjudication are structurally executable with preserved dissent and explicit semantic boundaries.",
-    "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.37"
+    "observed_at": "2026-10-05T04:46:57.730Z",
+    "note": "QIF v0.6.38 was verified, pushed, tagged, and published. Route-policy snapshots, drift, and revalidation are structurally executable with immutable-history and semantic boundaries.",
+    "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.38"
   },
   "latest_self_audit": {
     "audit_id": "FSA-QIFV0638-001",
@@ -24,7 +24,7 @@
   },
   "current_next_value_slice": {
     "content": "v0.6.39 Adjudication Feedback and Rubric Revision",
-    "updated_at": "2026-10-05T04:43:15.815Z",
+    "updated_at": "2026-10-05T04:47:14.904Z",
     "declared_complete_at": null,
     "source_session_id": "SESS-MUUR7ETV-1HP9P1",
     "source_decision_record_id": "DEC-MUUR9DYL-UE7DY7"
@@ -35,7 +35,7 @@
     "related_task_ids": [
       "TASK-056"
     ],
-    "open_task_count": 1
+    "open_task_count": 0
   },
   "learning_state": {
     "has_outcome_evidence": true,
