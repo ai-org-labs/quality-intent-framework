@@ -1,7 +1,7 @@
 {
   "artifact_type": "situation-assessment",
   "generated_at": "2026-10-05T04:45:42.552Z",
-  "project_root": "/Users/mn/development/quality-intent-framework-public",
+  "project_root": ".",
   "active_release_version": null,
   "active_release_track": null,
   "operating_goal": "Extend the existing calibration-report lifecycle with versioned route-policy snapshots, explicit change records, target-specific drift assessments, governed revalidation outcomes, and stale-policy handling, while preserving historical policy context and forbidding automatic policy mutation or retroactive authority.",

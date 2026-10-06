@@ -2,7 +2,7 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-05T04:47:33.243Z",
+  "generated_at": "2026-10-06T04:42:12.874Z",
   "latest_outcome": {
     "source_session_id": "SESS-MUUR7ETV-1HP9P1",
     "report_id": "OUT-MUURPRYD-X3ZVE4",
@@ -12,30 +12,30 @@
     "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.38"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV0638-001",
-    "recorded_at": "2026-10-05T04:43:15.804Z",
-    "summary": "Route-policy lineage and revalidation are structurally reproducible and full QIF tests pass.",
-    "detected_gap": "Committed change and revalidation evidence remains illustrative; semantic validity, actual authority, and causal claims require governance and pilot evidence.",
+    "audit_id": "FSA-QIFV0639-001",
+    "recorded_at": "2026-10-06T04:40:56.158Z",
+    "summary": "QIF v0.6.39 adds an auditable adjudication-feedback-to-rubric-revision lifecycle with preserved alternatives, accountable decisions, implementation replay, rollback, and learning sufficiency boundaries.",
+    "detected_gap": "Committed feedback and revision evidence remains illustrative, unverified, and replay-incomplete; semantic improvement, fairness, actual authority, and causal claims require independent pilot evidence and governance.",
     "result_state": "stable",
-    "next_action": "Run Council review and release v0.6.38, then implement v0.6.39.",
+    "next_action": "Run Council review and release v0.6.39, then implement v0.6.40.",
     "related_task_ids": [
-      "TASK-056"
+      "TASK-057"
     ]
   },
   "current_next_value_slice": {
-    "content": "v0.6.39 Adjudication Feedback and Rubric Revision",
-    "updated_at": "2026-10-05T04:47:14.904Z",
+    "content": "v0.6.40 Policy Counterfactual Replay",
+    "updated_at": "2026-10-06T04:40:56.166Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MUUR7ETV-1HP9P1",
-    "source_decision_record_id": "DEC-MUUR9DYL-UE7DY7"
+    "source_session_id": "SESS-MUW6MTEN-OCC7U1",
+    "source_decision_record_id": "DEC-MUW6OT3B-489AUU"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Run Council review and release v0.6.38, then implement v0.6.39.",
+    "proposed_focus": "Run Council review and release v0.6.39, then implement v0.6.40.",
     "related_task_ids": [
-      "TASK-056"
+      "TASK-057"
     ],
-    "open_task_count": 0
+    "open_task_count": 1
   },
   "learning_state": {
     "has_outcome_evidence": true,
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: v0.6.39 Adjudication Feedback and Rubric Revision",
-    "Latest self-audit next action: Run Council review and release v0.6.38, then implement v0.6.39.",
+    "Current next value slice: v0.6.40 Policy Counterfactual Replay",
+    "Latest self-audit next action: Run Council review and release v0.6.39, then implement v0.6.40.",
     "Latest outcome result: success"
   ]
 }

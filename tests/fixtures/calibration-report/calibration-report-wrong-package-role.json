@@ -1,6 +1,6 @@
 {
   "packageType": "calibration-report",
-  "runtimeVersion": "0.6.38",
+  "runtimeVersion": "0.6.39",
   "packageId": "CRPKG-001",
   "packageRefs": [
     {
@@ -703,7 +703,7 @@
         "role",
         "reporting-line"
       ],
-      "detectionRule": "preserve-exact-verdict-rationale-evidence-and-confidence",
+      "detectionRule": "preserve-exact-verdict-rationale-evidence-confidence-and-separate-operational-event-from-protected-decision-state",
       "adjudicationModes": [
         "clarify-rubric",
         "request-evidence",
@@ -1168,6 +1168,163 @@
       "status": "reviewed"
     }
   ],
+  "adjudicationFeedbackObservations": [
+    {
+      "id": "AFO-CR-001",
+      "disagreementRefs": [
+        "RDG-CR-001"
+      ],
+      "adjudicationOutcomeRefs": [
+        "ADJ-CR-001"
+      ],
+      "observedAmbiguity": "The rubric preserved exact verdicts but did not explicitly distinguish an operational timeout event from the protected decision state that remains deferred.",
+      "affectedPolicyRef": "RDP-CR-001",
+      "affectedClausePaths": [
+        "detectionRule"
+      ],
+      "evidenceRefs": [
+        "RDG-CR-001",
+        "ADJ-CR-001"
+      ],
+      "evidenceStatus": "example-only",
+      "feedbackBoundary": "candidate-input-not-rubric-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-018"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "rubricRevisionCandidates": [
+    {
+      "id": "RRC-CR-001",
+      "feedbackObservationRefs": [
+        "AFO-CR-001"
+      ],
+      "policyRef": "RDP-CR-001",
+      "clausePath": "detectionRule",
+      "currentValue": "preserve-exact-verdict-rationale-evidence-and-confidence",
+      "proposedValue": "preserve-exact-verdict-rationale-evidence-confidence-and-separate-operational-event-from-protected-decision-state",
+      "changeRationale": "The adjudicated case exposed two valid observations that should not be collapsed into one verdict label.",
+      "alternativeRevisions": [
+        {
+          "id": "RRA-CR-ALT-001",
+          "proposedValue": "preserve-exact-verdict-rationale-evidence-confidence-and-separate-operational-event-from-protected-decision-state",
+          "rationale": "Add the smallest explicit distinction revealed by the adjudication while preserving the existing exact-record rule.",
+          "disposition": "selected",
+          "dispositionRationale": "Selected for bounded implementation and replay because it addresses the observed ambiguity without changing adjudication authority."
+        },
+        {
+          "id": "RRA-CR-ALT-002",
+          "proposedValue": "treat-timeout-as-final-verdict",
+          "rationale": "Collapse timeout into the final decision for simpler reporting.",
+          "disposition": "rejected",
+          "dispositionRationale": "Rejected because it erases the protected decision state and contradicts the preserved adjudication rationale."
+        },
+        {
+          "id": "RRA-CR-ALT-003",
+          "proposedValue": "add-a-new-event-state-taxonomy",
+          "rationale": "Introduce a broader event-state taxonomy across all reviewer policies.",
+          "disposition": "deferred",
+          "dispositionRationale": "Deferred because one illustrative case is insufficient evidence for a cross-policy taxonomy."
+        }
+      ],
+      "dissentRefs": [
+        "RJG-CR-001",
+        "RJG-CR-002"
+      ],
+      "impactDimensions": [
+        "verdict",
+        "rationale"
+      ],
+      "replayDisagreementRefs": [
+        "RDG-CR-001"
+      ],
+      "automaticMutation": false,
+      "governanceTriggerRefs": [],
+      "status": "decided"
+    }
+  ],
+  "rubricRevisionDecisions": [
+    {
+      "id": "RRD-CR-001",
+      "candidateRef": "RRC-CR-001",
+      "decision": "approved",
+      "selectedAlternativeRef": "RRA-CR-ALT-001",
+      "reviewerRefs": [
+        "illustrative-governance-board",
+        "quality-governance-owner"
+      ],
+      "authorizedBy": "customer-operations-governance-board",
+      "decidedAt": "2026-01-16T10:00:00.000Z",
+      "rationale": "Approve a bounded clarification while retaining the rejected and deferred alternatives and requiring replay before empirical use.",
+      "evidenceRefs": [
+        "AFO-CR-001",
+        "ADJ-CR-001"
+      ],
+      "dissentPreserved": true,
+      "implementationRequired": true,
+      "governanceTriggerRefs": [],
+      "status": "reviewed"
+    }
+  ],
+  "rubricRevisionImplementations": [
+    {
+      "id": "RRI-CR-001",
+      "decisionRef": "RRD-CR-001",
+      "policyRef": "RDP-CR-001",
+      "clausePath": "detectionRule",
+      "previousValue": "preserve-exact-verdict-rationale-evidence-and-confidence",
+      "implementedValue": "preserve-exact-verdict-rationale-evidence-confidence-and-separate-operational-event-from-protected-decision-state",
+      "implementedAt": "2026-01-16T11:00:00.000Z",
+      "implementedBy": "illustrative-policy-maintainer",
+      "evidenceRefs": [
+        "RRD-CR-001",
+        "RRC-CR-001"
+      ],
+      "replayDisagreementRefs": [
+        "RDG-CR-001"
+      ],
+      "replayStatus": "pending",
+      "rollbackPlan": "Restore the previous detection rule, preserve this implementation record, and reopen the candidate if replay exposes loss-boundary regression or new ambiguity.",
+      "historicalJudgmentsPreserved": true,
+      "automaticMutation": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-019"
+      ],
+      "status": "implemented"
+    }
+  ],
+  "rubricRevisionAssessments": [
+    {
+      "id": "RRA-CR-LEARN-001",
+      "title": "Illustrative adjudication feedback and rubric revision assessment",
+      "candidateRefs": [
+        "RRC-CR-001"
+      ],
+      "decisionRefs": [
+        "RRD-CR-001"
+      ],
+      "implementationRefs": [
+        "RRI-CR-001"
+      ],
+      "candidateCount": 1,
+      "approvedCount": 1,
+      "rejectedCount": 0,
+      "deferredCount": 0,
+      "implementedCount": 1,
+      "completedReplayCount": 0,
+      "verifiedFeedbackCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "governanceTriggerRefs": [
+        "GTR-CR-018",
+        "GTR-CR-019",
+        "GTR-CR-020"
+      ],
+      "interpretation": "rubric-learning-evidence-only-not-quality-truth-competence-causality-or-authority",
+      "status": "reviewed"
+    }
+  ],
   "governanceTriggers": [
     {
       "id": "GTR-CR-001",
@@ -1338,6 +1495,36 @@
       "requiredAction": "Collect independently verified revalidation evidence before relying on the current-policy decision claim.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-018",
+      "triggerType": "rubric-feedback-unverified",
+      "reason": "The adjudication feedback is grounded in committed example records rather than verified operational adjudication evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified disagreement and adjudication evidence before treating the feedback as empirical rubric-learning evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-019",
+      "triggerType": "rubric-replay-incomplete",
+      "reason": "The selected revision has been recorded but the required preserved disagreement replay is still pending.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Replay the preserved disagreement and inspect both expected and counterexample behavior before operational use.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-020",
+      "triggerType": "rubric-learning-insufficient",
+      "reason": "One example-only feedback observation cannot establish that the rubric revision improves semantic validity.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independent cases, completed replay evidence, and accountable review before making an improvement claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -1351,7 +1538,8 @@
       "route definitions, score intervals, selected and actual routes, authority, execution evidence, route outcomes, assessment summaries, and governance routing reproduce",
       "resolution policy coverage, disposition, elapsed time, response-time conformance, availability, evidence status, assessment summaries, and governance routing reproduce",
       "reviewer independence, exact verdict grouping, disagreement dimensions, preserved dissent, adjudication linkage, override references, assessment summaries, and governance routing reproduce",
-      "policy snapshot lineage, current-policy fidelity, exact change dimensions, decision impacts, staleness, revalidation outcomes, assessment summaries, and governance routing reproduce"
+      "policy snapshot lineage, current-policy fidelity, exact change dimensions, decision impacts, staleness, revalidation outcomes, assessment summaries, and governance routing reproduce",
+      "adjudication feedback lineage, affected clauses, revision alternatives, decision authority, implementation fidelity, replay status, rollback preservation, assessment summaries, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -1365,6 +1553,7 @@
       "that resolution speed, volume, disposition, or reviewer availability proves quality, competence, causality, or authority",
       "that reviewer agreement, majority, seniority, confidence, or adjudication proves semantic truth, quality, competence, or authority",
       "that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority",
+      "that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority",
       "a calibration statistic is quality",
       "an automatic quality verdict"
     ],
@@ -1376,6 +1565,7 @@
       "accountable review of resolution policy, actual disposition, reviewer availability, and timeout consequences",
       "independent review of disagreement meaning, evidence access, adjudicator authority, and preserved dissent",
       "accountable review of policy-change authority, materiality, affected decisions, and revalidation evidence",
+      "independent review of rubric feedback, proposed wording, rejected alternatives, replay outcomes, implementation authority, and rollback evidence",
       "review of environmental and evaluation-harness effects",
       "accountable governance before changing quality decisions"
     ]

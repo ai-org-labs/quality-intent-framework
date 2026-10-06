@@ -1,0 +1,83 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-06T04:34:21.001Z",
+  "packet_id": "ASP-MUW6PEQ1-4R1RPA",
+  "source_task_id": "TASK-057",
+  "source_parent_session_id": "SESS-MUW6MTEN-OCC7U1",
+  "source_decision_record_id": "DEC-MUW6OT3B-489AUU",
+  "objective": "Implement QIF v0.6.39 Adjudication Feedback and Rubric Revision",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, verifier, fixtures, documentation, release evidence, and reversible rubric-learning lineage.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "deterministic-verifier-design",
+    "rubric-governance"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-qif-runtime-extension",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs"
+      ],
+      "rationale": "existing disagreement, adjudication, drift, and governance entities support a narrow rubric-learning extension"
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-public-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-no-automatic-rubric-mutation",
+    "policy-preserve-rejected-alternatives",
+    "policy-no-count-quality",
+    "policy-no-employee-surveillance"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "adjudication-feedback",
+      "rubric-revision-candidates",
+      "rubric-revision-decisions",
+      "rubric-revision-implementations",
+      "rubric-revision-assessments"
+    ],
+    "acceptance_criteria": [
+      "source disagreement, exact clauses, alternatives, decision authority, replay scope, implementation, and rollback are reproducible",
+      "negative fixtures fail exact violated rules"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "rubric history, rejected alternatives, dissent, and rollback remain preserved",
+      "evaluator_ref": "guardian",
+      "evidence_required": "schema, verifier, example, and fixture evidence",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "silent-rubric-mutation",
+      "trigger_condition": "implementation changes rubric authority automatically, hides rejected alternatives, or rewrites historical judgments",
+      "consequence": "block-assignment",
+      "recovery_action": "restore candidate-decision-implementation separation and immutable history"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I turn adjudication feedback into reviewable changes without changing rules silently.",
+    "current_action": "Implement governed rubric revision",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Submit full fixtures and Council review"
+  },
+  "status": "ready-for-assignment"
+}

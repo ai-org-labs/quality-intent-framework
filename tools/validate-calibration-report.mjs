@@ -163,6 +163,11 @@ function validatePackage(pkg, packagePath) {
   const routePolicyDriftAssessments = requiredArray(pkg, "routePolicyDriftAssessments");
   const routePolicyRevalidationOutcomes = requiredArray(pkg, "routePolicyRevalidationOutcomes");
   const routePolicyRevalidationAssessments = requiredArray(pkg, "routePolicyRevalidationAssessments");
+  const adjudicationFeedbackObservations = requiredArray(pkg, "adjudicationFeedbackObservations");
+  const rubricRevisionCandidates = requiredArray(pkg, "rubricRevisionCandidates");
+  const rubricRevisionDecisions = requiredArray(pkg, "rubricRevisionDecisions");
+  const rubricRevisionImplementations = requiredArray(pkg, "rubricRevisionImplementations");
+  const rubricRevisionAssessments = requiredArray(pkg, "rubricRevisionAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -190,6 +195,11 @@ function validatePackage(pkg, packagePath) {
   const routePolicyDriftIndex = indexById(routePolicyDriftAssessments, `${packagePath}:routePolicyDriftAssessments`);
   const routePolicyRevalidationIndex = indexById(routePolicyRevalidationOutcomes, `${packagePath}:routePolicyRevalidationOutcomes`);
   const routePolicyRevalidationAssessmentIndex = indexById(routePolicyRevalidationAssessments, `${packagePath}:routePolicyRevalidationAssessments`);
+  const feedbackObservationIndex = indexById(adjudicationFeedbackObservations, `${packagePath}:adjudicationFeedbackObservations`);
+  const rubricCandidateIndex = indexById(rubricRevisionCandidates, `${packagePath}:rubricRevisionCandidates`);
+  const rubricDecisionIndex = indexById(rubricRevisionDecisions, `${packagePath}:rubricRevisionDecisions`);
+  const rubricImplementationIndex = indexById(rubricRevisionImplementations, `${packagePath}:rubricRevisionImplementations`);
+  const rubricAssessmentIndex = indexById(rubricRevisionAssessments, `${packagePath}:rubricRevisionAssessments`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -830,7 +840,7 @@ function validatePackage(pkg, packagePath) {
     if (!Number.isInteger(policy.minimumDisagreementCaseCount) || policy.minimumDisagreementCaseCount < 2) errors.push(`${policy.id} minimumDisagreementCaseCount must be at least 2.`);
     if (!Array.isArray(policy.independenceDimensions) || policy.independenceDimensions.length === 0) errors.push(`${policy.id} independenceDimensions must include at least one dimension.`);
     if (!Array.isArray(policy.adjudicationModes) || policy.adjudicationModes.length === 0) errors.push(`${policy.id} adjudicationModes must include at least one mode.`);
-    if (policy.detectionRule !== "preserve-exact-verdict-rationale-evidence-and-confidence") errors.push(`${policy.id} detectionRule must preserve exact verdict, rationale, evidence, and confidence.`);
+    if (!["preserve-exact-verdict-rationale-evidence-and-confidence", "preserve-exact-verdict-rationale-evidence-confidence-and-separate-operational-event-from-protected-decision-state"].includes(policy.detectionRule)) errors.push(`${policy.id} detectionRule must preserve exact verdict, rationale, evidence, and confidence.`);
     if (policy.aggregationBoundary !== "no-automatic-majority-seniority-agreement-or-confidence-authority") errors.push(`${policy.id} aggregationBoundary must forbid automatic majority, seniority, agreement, or confidence authority.`);
     if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one accountable reviewer.`);
     const triggerTypes = new Set((policy.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", policy.id)?.triggerType));
@@ -1088,6 +1098,110 @@ function validatePackage(pkg, packagePath) {
     if (staleWithoutOutcomeCount > 0 && !triggerTypes.has("revalidation-missing")) errors.push(`${assessment.id} stale decisions without outcomes require a revalidation-missing governance trigger.`);
   }
 
+  for (const observation of adjudicationFeedbackObservations) {
+    for (const field of ["observedAmbiguity", "affectedPolicyRef", "evidenceStatus", "feedbackBoundary", "status"]) str(observation, field, observation.id);
+    const policy = ref(reviewerPolicyIndex, observation.affectedPolicyRef, "reviewer disagreement policy", observation.id);
+    const disagreements = (observation.disagreementRefs || []).map((id) => ref(reviewerDisagreementIndex, id, "reviewer disagreement", observation.id)).filter(Boolean);
+    const outcomes = (observation.adjudicationOutcomeRefs || []).map((id) => ref(adjudicationIndex, id, "adjudication outcome", observation.id)).filter(Boolean);
+    if (disagreements.length === 0 || outcomes.length === 0) errors.push(`${observation.id} must reference at least one disagreement and adjudication outcome.`);
+    for (const disagreement of disagreements) if (disagreement.policyRef !== observation.affectedPolicyRef) errors.push(`${observation.id} disagreement ${disagreement.id} must use affected policy ${observation.affectedPolicyRef}.`);
+    for (const outcome of outcomes) if (!observation.disagreementRefs?.includes(outcome.disagreementRef)) errors.push(`${observation.id} adjudication ${outcome.id} must resolve one of its source disagreements.`);
+    if (!Array.isArray(observation.affectedClausePaths) || observation.affectedClausePaths.length === 0) errors.push(`${observation.id} affectedClausePaths must include at least one clause.`);
+    for (const clausePath of observation.affectedClausePaths || []) if (policy && !Object.hasOwn(policy, clausePath)) errors.push(`${observation.id} affected clause ${clausePath} does not exist on policy ${policy.id}.`);
+    if (!Array.isArray(observation.evidenceRefs) || observation.evidenceRefs.length === 0) errors.push(`${observation.id} evidenceRefs must include at least one item.`);
+    if (observation.feedbackBoundary !== "candidate-input-not-rubric-authority") errors.push(`${observation.id} feedbackBoundary must remain candidate-input-not-rubric-authority.`);
+    const triggerTypes = new Set((observation.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", observation.id)?.triggerType));
+    if (observation.evidenceStatus !== "verified" && !triggerTypes.has("rubric-feedback-unverified")) errors.push(`${observation.id} non-verified feedback requires a rubric-feedback-unverified governance trigger.`);
+  }
+
+  for (const candidate of rubricRevisionCandidates) {
+    for (const field of ["policyRef", "clausePath", "changeRationale", "status"]) str(candidate, field, candidate.id);
+    const policy = ref(reviewerPolicyIndex, candidate.policyRef, "reviewer disagreement policy", candidate.id);
+    const observations = (candidate.feedbackObservationRefs || []).map((id) => ref(feedbackObservationIndex, id, "adjudication feedback observation", candidate.id)).filter(Boolean);
+    if (observations.length === 0) errors.push(`${candidate.id} feedbackObservationRefs must include at least one observation.`);
+    for (const observation of observations) {
+      if (observation.affectedPolicyRef !== candidate.policyRef) errors.push(`${candidate.id} feedback observation ${observation.id} must affect policy ${candidate.policyRef}.`);
+      if (!(observation.affectedClausePaths || []).includes(candidate.clausePath)) errors.push(`${candidate.id} clausePath must be declared by feedback observation ${observation.id}.`);
+    }
+    if (policy && !Object.hasOwn(policy, candidate.clausePath)) errors.push(`${candidate.id} clausePath ${candidate.clausePath} does not exist on policy ${policy.id}.`);
+    const alternatives = candidate.alternativeRevisions || [];
+    if (alternatives.length < 2) errors.push(`${candidate.id} must preserve at least two revision alternatives.`);
+    if (new Set(alternatives.map((item) => item.id)).size !== alternatives.length) errors.push(`${candidate.id} alternativeRevisions ids must be unique.`);
+    const selected = alternatives.filter((item) => item.disposition === "selected");
+    if (selected.length !== 1) errors.push(`${candidate.id} must have exactly one selected alternative.`);
+    if (selected[0] && !sameValue(selected[0].proposedValue, candidate.proposedValue)) errors.push(`${candidate.id} proposedValue must equal the selected alternative value.`);
+    if (!alternatives.some((item) => item.disposition === "rejected") || !alternatives.some((item) => item.disposition === "deferred")) errors.push(`${candidate.id} must preserve both rejected and deferred alternatives.`);
+    for (const alternative of alternatives) for (const field of ["rationale", "disposition", "dispositionRationale"]) str(alternative, field, `${candidate.id}/${alternative.id}`);
+    const sourceDisagreementRefs = new Set(observations.flatMap((item) => item.disagreementRefs || []));
+    for (const replayRef of candidate.replayDisagreementRefs || []) {
+      ref(reviewerDisagreementIndex, replayRef, "replay disagreement", candidate.id);
+      if (!sourceDisagreementRefs.has(replayRef)) errors.push(`${candidate.id} replayDisagreementRefs must come from source feedback disagreements.`);
+    }
+    for (const dissentRef of candidate.dissentRefs || []) {
+      ref(reviewerJudgmentIndex, dissentRef, "dissent judgment", candidate.id);
+      const belongs = [...sourceDisagreementRefs].some((id) => reviewerDisagreementIndex.get(id)?.judgmentRefs?.includes(dissentRef));
+      if (!belongs) errors.push(`${candidate.id} dissentRef ${dissentRef} must belong to a source disagreement.`);
+    }
+    if (candidate.automaticMutation !== false) errors.push(`${candidate.id} automaticMutation must be false.`);
+    const triggerTypes = new Set((candidate.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", candidate.id)?.triggerType));
+    if (["proposed", "under-review"].includes(candidate.status) && !triggerTypes.has("rubric-candidate-unreviewed")) errors.push(`${candidate.id} undecided candidate requires a rubric-candidate-unreviewed governance trigger.`);
+  }
+
+  for (const decision of rubricRevisionDecisions) {
+    for (const field of ["candidateRef", "decision", "selectedAlternativeRef", "authorizedBy", "decidedAt", "rationale", "status"]) str(decision, field, decision.id);
+    const candidate = ref(rubricCandidateIndex, decision.candidateRef, "rubric revision candidate", decision.id);
+    const selected = candidate?.alternativeRevisions?.find((item) => item.id === decision.selectedAlternativeRef);
+    if (!selected) errors.push(`${decision.id} selectedAlternativeRef must resolve in its candidate.`);
+    else if (selected.disposition !== "selected") errors.push(`${decision.id} selectedAlternativeRef must identify the selected candidate alternative.`);
+    if (!Array.isArray(decision.reviewerRefs) || decision.reviewerRefs.length === 0) errors.push(`${decision.id} reviewerRefs must include at least one reviewer.`);
+    if (!Array.isArray(decision.evidenceRefs) || decision.evidenceRefs.length === 0) errors.push(`${decision.id} evidenceRefs must include at least one item.`);
+    if (decision.dissentPreserved !== true) errors.push(`${decision.id} dissentPreserved must be true.`);
+    if ((decision.decision === "approved") !== (decision.implementationRequired === true)) errors.push(`${decision.id} implementationRequired must be true exactly when decision is approved.`);
+    const triggerTypes = new Set((decision.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", decision.id)?.triggerType));
+    if (decision.decision === "approved" && !decision.authorizedBy && !triggerTypes.has("rubric-decision-unauthorized")) errors.push(`${decision.id} unauthorized approval requires a rubric-decision-unauthorized governance trigger.`);
+  }
+
+  for (const implementation of rubricRevisionImplementations) {
+    for (const field of ["decisionRef", "policyRef", "clausePath", "implementedAt", "implementedBy", "replayStatus", "rollbackPlan", "status"]) str(implementation, field, implementation.id);
+    const decision = ref(rubricDecisionIndex, implementation.decisionRef, "rubric revision decision", implementation.id);
+    const candidate = decision && rubricCandidateIndex.get(decision.candidateRef);
+    const policy = ref(reviewerPolicyIndex, implementation.policyRef, "reviewer disagreement policy", implementation.id);
+    const selected = candidate?.alternativeRevisions?.find((item) => item.id === decision?.selectedAlternativeRef);
+    if (decision?.decision !== "approved" || decision?.implementationRequired !== true) errors.push(`${implementation.id} must implement an approved decision that requires implementation.`);
+    if (candidate && (candidate.policyRef !== implementation.policyRef || candidate.clausePath !== implementation.clausePath)) errors.push(`${implementation.id} policyRef and clausePath must match its candidate.`);
+    if (candidate && !sameValue(implementation.previousValue, candidate.currentValue)) errors.push(`${implementation.id} previousValue must reproduce the candidate currentValue.`);
+    if (selected && !sameValue(implementation.implementedValue, selected.proposedValue)) errors.push(`${implementation.id} implementedValue must reproduce the selected alternative.`);
+    if (implementation.status === "implemented" && policy && !sameValue(policy[implementation.clausePath], implementation.implementedValue)) errors.push(`${implementation.id} implementedValue must match the active policy clause.`);
+    if (!sameSet(implementation.replayDisagreementRefs, candidate?.replayDisagreementRefs || [])) errors.push(`${implementation.id} replayDisagreementRefs must match the candidate replay scope.`);
+    if (implementation.historicalJudgmentsPreserved !== true) errors.push(`${implementation.id} historicalJudgmentsPreserved must be true.`);
+    if (implementation.automaticMutation !== false) errors.push(`${implementation.id} automaticMutation must be false.`);
+    if (!Array.isArray(implementation.evidenceRefs) || implementation.evidenceRefs.length === 0) errors.push(`${implementation.id} evidenceRefs must include at least one item.`);
+    const triggerTypes = new Set((implementation.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", implementation.id)?.triggerType));
+    if (implementation.replayStatus !== "completed" && !triggerTypes.has("rubric-replay-incomplete")) errors.push(`${implementation.id} incomplete replay requires a rubric-replay-incomplete governance trigger.`);
+  }
+
+  for (const assessment of rubricRevisionAssessments) {
+    for (const field of ["title", "dataSufficiency", "assessmentSignal", "interpretation", "status"]) str(assessment, field, assessment.id);
+    const candidates = (assessment.candidateRefs || []).map((id) => ref(rubricCandidateIndex, id, "rubric revision candidate", assessment.id)).filter(Boolean);
+    const decisions = (assessment.decisionRefs || []).map((id) => ref(rubricDecisionIndex, id, "rubric revision decision", assessment.id)).filter(Boolean);
+    const implementations = (assessment.implementationRefs || []).map((id) => ref(rubricImplementationIndex, id, "rubric revision implementation", assessment.id)).filter(Boolean);
+    const approvedCount = decisions.filter((item) => item.decision === "approved").length;
+    const rejectedCount = decisions.filter((item) => item.decision === "rejected").length;
+    const deferredCount = decisions.filter((item) => ["deferred", "needs-more-evidence"].includes(item.decision)).length;
+    const implementedCount = implementations.filter((item) => item.status === "implemented").length;
+    const completedReplayCount = implementations.filter((item) => item.replayStatus === "completed").length;
+    const feedbackRefs = new Set(candidates.flatMap((item) => item.feedbackObservationRefs || []));
+    const verifiedFeedbackCount = [...feedbackRefs].filter((id) => feedbackObservationIndex.get(id)?.evidenceStatus === "verified").length;
+    for (const [field, value] of Object.entries({ candidateCount: candidates.length, approvedCount, rejectedCount, deferredCount, implementedCount, completedReplayCount, verifiedFeedbackCount })) if (!sameNumber(assessment[field], value)) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const dataSufficiency = candidates.length >= 2 && verifiedFeedbackCount === feedbackRefs.size && completedReplayCount === implementedCount ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== dataSufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${dataSufficiency}.`);
+    const signal = dataSufficiency === "insufficient" ? "insufficient-data" : implementations.some((item) => item.replayStatus !== "completed") ? "governance-required" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (assessment.interpretation !== "rubric-learning-evidence-only-not-quality-truth-competence-causality-or-authority") errors.push(`${assessment.id} interpretation must remain rubric-learning-evidence-only-not-quality-truth-competence-causality-or-authority.`);
+    const triggerTypes = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (dataSufficiency === "insufficient" && !triggerTypes.has("rubric-learning-insufficient")) errors.push(`${assessment.id} insufficient rubric-learning evidence requires a rubric-learning-insufficient governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -1191,6 +1305,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that resolution speed, volume, disposition, or reviewer availability proves quality, competence, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming resolution speed, volume, disposition, or reviewer availability proves quality, competence, causality, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that reviewer agreement, majority, seniority, confidence, or adjudication proves semantic truth, quality, competence, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming reviewer agreement, majority, seniority, confidence, or adjudication proves semantic truth, quality, competence, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority.`);
   }
 
   results.push({
@@ -1223,6 +1338,11 @@ function validatePackage(pkg, packagePath) {
       routePolicyDriftAssessments: routePolicyDriftAssessments.length,
       routePolicyRevalidationOutcomes: routePolicyRevalidationOutcomes.length,
       routePolicyRevalidationAssessments: routePolicyRevalidationAssessments.length,
+      adjudicationFeedbackObservations: adjudicationFeedbackObservations.length,
+      rubricRevisionCandidates: rubricRevisionCandidates.length,
+      rubricRevisionDecisions: rubricRevisionDecisions.length,
+      rubricRevisionImplementations: rubricRevisionImplementations.length,
+      rubricRevisionAssessments: rubricRevisionAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -1242,5 +1362,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, route-policy lineage, drift and revalidation traceability, and policy conformance only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, resolution quality, reviewer competence, semantic correctness, service availability, current quality, safety, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, replay state, rollback preservation, and policy conformance only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, resolution quality, rubric improvement, reviewer competence, semantic correctness, service availability, current quality, safety, or decision authority."
 }, null, 2));

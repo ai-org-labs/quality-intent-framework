@@ -1,7 +1,7 @@
 {
   "artifact_type": "situation-assessment",
   "generated_at": "2026-10-02T04:37:11.895Z",
-  "project_root": "/Users/mn/development/quality-intent-framework-public",
+  "project_root": ".",
   "active_release_version": null,
   "active_release_track": null,
   "operating_goal": "Add domain-general threshold robustness records that replay identical decision-outcome evidence across bounded stakeholder-reviewed alternatives, reproduce action and consequence flips plus boundary distance, and route declared brittleness to governance without optimizing, ranking, or selecting policy.",

@@ -2,6 +2,26 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.39 Adjudication Feedback and Rubric Revision
+
+Date: 2026-10-06
+
+- Need / Intent / Context: v0.6.37 preserves disagreement and adjudication and v0.6.38 preserves policy drift, but adjudicated ambiguity could not become a reviewable rubric change without manual interpretation or silent mutation. v0.6.39 adds feedback, exact revisions, alternatives, decisions, implementation, replay, rollback, assessment, and governance while keeping QIF standalone.
+- Latest public AOF v12.2.0 was confirmed through the public release list and used from clean checkout commit `fc7599b`.
+- Need Validation preceded Charter: `.aof/artifacts/need-validation/records/NVR-QIFV0639.json` then `.aof/artifacts/need-validation/project-charters/PCH-QIFV0639.json` in parent session `SESS-MUW6MTEN-OCC7U1`; task `TASK-057` records execution.
+- Council direction: Visionary requires a learning loop that does not erase uncertainty; Builder selected a narrow calibration-report extension; Guardian requires preserved alternatives and dissent, explicit authority, replay, rollback, no automatic mutation, anti-surveillance, and verifier boundaries. Runtime evidence starts at `.aof/runtime/v0.6.39-planning-council.json`.
+- Actor packet `.aof/artifacts/actor-skill-packets/ASP-QIFV0639.json` records schema, verifier, and rubric-governance skills; QIF/AOF resources; no-automatic-mutation, alternative-preservation, no-count-quality, and anti-surveillance policies; acceptance criteria; and blocking Guardian review evidence.
+- Trend evidence: OpenAI's grader guidance describes rubric prompts as iterative and recommends adding discovered edge cases to grader evals (https://developers.openai.com/api/docs/guides/graders); NIST's 2026 ARIA planning manual combines model, red-team, and user testing for customized evaluations (https://www.nist.gov/publications/aria-evaluation-planning-manual-elements-aria-style-ai-evaluations); Anthropic reports that tighter rubrics and abstention can change judge errors without eliminating motivated mislabeling (https://alignment.anthropic.com/2026/agentic-misalignment-summer-2026/).
+- Judgment: adjudication feedback may justify a candidate, not a rule change. A revision requires exact wording, preserved alternatives and dissent, accountable authority, implementation evidence, replay, and rollback; verifier success cannot prove semantic improvement.
+- Implementation: `calibration-report` now carries `AdjudicationFeedbackObservation`, `RubricRevisionCandidate`, `RubricRevisionDecision`, `RubricRevisionImplementation`, and `RubricRevisionAssessment`; the verifier reproduces source lineage, affected clauses, alternatives, decisions, implementation fidelity, replay scope and state, counts, signals, boundaries, and governance.
+- Verification: targeted validation and the full retained fixture suite passed at `16/16` positive and `917/917` negative before AOF review.
+- Self-review: AOF `self-audit-record` wrote `.aof/context/active/framework-self-audit.json`; it records illustrative evidence, incomplete replay, and unresolved semantic, fairness, authority, and causal claims as the remaining gap.
+- Review: AOF `council-exec --stage review`, Visionary/Builder/Guardian role results, and `.aof/runtime/v0.6.39-final-review.json` approved release with explicit no-automatic-mutation and anti-surveillance boundaries.
+- Retrospective: AOF `learning-loop-snapshot` wrote `.aof/context/active/learning-loop.json` and preserved v0.6.40 as the next value slice.
+- AOF organization verification passed `277/277`; `TASK-057` is done and `.aof/runtime/v0.6.39-post-situation.json` found no truth conflict.
+- Remaining boundary: the committed feedback and revision are illustrative, unverified, and replay-incomplete. Real independent cases, authority, replay outcomes, fairness review, and operational feedback remain pilot and governance work.
+- Next: v0.6.40 Policy Counterfactual Replay, v0.6.41 Judge Consequence and Abstention Robustness, then the v0.7 empirical calibration phase.
+
 ## v0.6.38 Route Policy Drift and Revalidation
 
 Date: 2026-10-05

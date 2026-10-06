@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-06T04:33:01.910Z",
+  "alternative_analysis_id": "ALT-MUW6NPP2-6RGPAX",
+  "subject_need": "Create a governed learning path from adjudicated disagreement to rubric revision",
+  "alternative_solutions": [
+    "Extend calibration-report with feedback observations, rubric revision candidates, decisions, implementations, assessments, and governance.",
+    "Create a separate rubric-learning package with duplicated adjudication references.",
+    "Document recommendations only without executable schemas or verification."
+  ],
+  "non_solution_options": [
+    "Let graders or agents rewrite rubric text automatically from aggregate feedback."
+  ],
+  "defer_options": [
+    "Wait for real pilot evidence before defining the structural lifecycle."
+  ],
+  "stop_options": [
+    "Do not create the project if it requires automatic mutation, erases rejected alternatives, ranks employees, or claims improved semantic truth from structural validation."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUW6N108-LAN2DJ"
+}

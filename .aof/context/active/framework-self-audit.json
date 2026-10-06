@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-05T04:43:15.804Z",
-  "audit_id": "FSA-QIFV0638-001",
-  "scope": "QIF v0.6.38 schema, verifier, example, fixtures, docs, and release readiness",
-  "summary": "Route-policy lineage and revalidation are structurally reproducible and full QIF tests pass.",
-  "detected_gap": "Committed change and revalidation evidence remains illustrative; semantic validity, actual authority, and causal claims require governance and pilot evidence.",
+  "recorded_at": "2026-10-06T04:40:56.158Z",
+  "audit_id": "FSA-QIFV0639-001",
+  "scope": "QIF v0.6.39 schema, verifier, example, fixtures, docs, and release readiness",
+  "summary": "QIF v0.6.39 adds an auditable adjudication-feedback-to-rubric-revision lifecycle with preserved alternatives, accountable decisions, implementation replay, rollback, and learning sufficiency boundaries.",
+  "detected_gap": "Committed feedback and revision evidence remains illustrative, unverified, and replay-incomplete; semantic improvement, fairness, actual authority, and causal claims require independent pilot evidence and governance.",
   "result_state": "stable",
-  "next_action": "Run Council review and release v0.6.38, then implement v0.6.39.",
+  "next_action": "Run Council review and release v0.6.39, then implement v0.6.40.",
   "related_task_ids": [
-    "TASK-056"
+    "TASK-057"
   ],
-  "source_session_id": "SESS-MUUR7ETV-1HP9P1",
-  "source_decision_record_id": "DEC-MUUR9DYL-UE7DY7"
+  "source_session_id": "SESS-MUW6MTEN-OCC7U1",
+  "source_decision_record_id": "DEC-MUW6OT3B-489AUU"
 }

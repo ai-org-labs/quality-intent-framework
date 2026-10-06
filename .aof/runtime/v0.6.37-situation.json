@@ -1,7 +1,7 @@
 {
   "artifact_type": "situation-assessment",
   "generated_at": "2026-10-04T04:33:22.374Z",
-  "project_root": "/Users/mn/development/quality-intent-framework-public",
+  "project_root": ".",
   "active_release_version": null,
   "active_release_track": null,
   "operating_goal": "Extend QIF's existing selective escalation model so each route can be resolved as accepted, rejected, redirected, or timed out with reproducible response-time, availability, evidence-status, and governance records, while preserving the boundary that operational speed and volume are not quality.",

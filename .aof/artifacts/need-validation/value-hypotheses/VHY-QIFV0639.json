@@ -1,0 +1,20 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-06T04:32:52.268Z",
+  "value_hypothesis_id": "VHY-MUW6NI98-Q08GK8",
+  "expected_value_creation": "Turn repeated, adjudicated ambiguity into an explicit candidate rubric change whose source, wording, alternatives, impact, authorization, replay requirement, implementation, and rollback remain auditable.",
+  "beneficiary": "QIF users and affected stakeholders who need evaluator criteria to improve without hidden mutation or false consensus",
+  "supporting_evidence": [
+    "OpenAI describes grader prompts as iterative and recommends adding discovered edge cases to grader evals.",
+    "NIST ARIA and TEVV guidance require customized evaluation using model, red-team, and user evidence rather than one static rubric.",
+    "Recent research shows expert rubrics can suppress visible disagreement without resolving interpretation and that judge behavior can depend on rubric wording and downstream consequence."
+  ],
+  "success_criteria": [
+    "Every revision candidate links to adjudicated disagreement and exact affected rubric clauses.",
+    "Rejected and deferred alternatives, dissent, reviewers, and authority remain preserved.",
+    "Implemented revisions require approval, replay scope, evidence, and rollback plan; no automatic mutation is allowed.",
+    "The verifier reproduces lifecycle, references, counts, state transitions, and governance without claiming semantic improvement."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUW6N108-LAN2DJ"
+}

@@ -1,0 +1,36 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-06T04:40:09.607Z",
+  "review_packet_id": "CREV-MUW6WVPJ-59ZQ8E",
+  "council_id": "qif-council",
+  "stage": "planning",
+  "review_status": "approved",
+  "decision_summary": "QIF v0.6.39 will implement a bounded adjudication-feedback-to-rubric-revision lifecycle.",
+  "rationale": "Visionary, Builder, and Guardian agree on a narrow calibration-report extension that separates feedback, candidate, decision, implementation, and assessment while preserving history, alternatives, dissent, replay, rollback, and semantic boundaries.",
+  "recommendation": "Implement the chartered schema, verifier, example, fixtures, documentation, and release evidence.",
+  "target_audience": "QIF users, AI agents, accountable adjudicators, evaluators, and affected stakeholders",
+  "expected_user_reaction": "Users can understand why a rubric changed and inspect what was rejected, deferred, replayed, and left uncertain.",
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": "bounded-rubric-learning-plan",
+  "diagnosis_confidence": 0.97,
+  "diagnosis_evidence_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0639.json"
+  ],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [
+    ".aof/runtime/v0.6.39-planning-visionary.json",
+    ".aof/runtime/v0.6.39-planning-builder.json",
+    ".aof/runtime/v0.6.39-planning-guardian.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/actor-skill-packets/ASP-QIFV0639.json"
+  ],
+  "follow_up_task_ids": [],
+  "escalation_required": false,
+  "source_task_id": "TASK-057",
+  "source_parent_session_id": "SESS-MUW6MTEN-OCC7U1",
+  "source_decision_record_id": "DEC-MUW6OT3B-489AUU"
+}

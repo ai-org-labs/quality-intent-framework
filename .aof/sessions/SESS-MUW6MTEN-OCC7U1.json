@@ -1,0 +1,505 @@
+{
+  "session_id": "SESS-MUW6MTEN-OCC7U1",
+  "workflow_id": "service-design",
+  "organization_id": "civic-studio",
+  "organization": {
+    "language": "en"
+  },
+  "status": "framed",
+  "trigger": {
+    "trigger_id": "TRG-MUW6MTEN-9XMKQZ",
+    "trigger_type": "cli",
+    "received_at": "2026-10-06T04:32:20.059Z",
+    "request_payload": "Advance QIF after v0.6.38 using the latest released AOF and current evaluation evidence. Build and release v0.6.39 Adjudication Feedback and Rubric Revision. First frame Need, Intent, and Context; validate the need before chartering; use Visionary, Builder, and Guardian judgment; preserve rejected alternatives; forbid silent or automatic rubric mutation; and keep QIF standalone."
+  },
+  "current_stage": "planning",
+  "routing_mode": "deep-path",
+  "routing_mode_history": [
+    {
+      "from_mode": null,
+      "to_mode": "deep-path",
+      "at": "2026-10-06T04:32:20.059Z",
+      "reason": "session-created"
+    }
+  ],
+  "context_snapshot_id": "CTX-MUW6N105-WKZTDY",
+  "open_decision_ids": [
+    "DEC-MUW6OT3B-489AUU"
+  ],
+  "closed_decision_ids": [
+    "DEC-MUW6MTEP-OBFKP7",
+    "DEC-MUW6N108-LAN2DJ"
+  ],
+  "stage_transitions": [
+    {
+      "from_stage": null,
+      "to_stage": "clarification",
+      "from_status": null,
+      "to_status": "waiting_user",
+      "at": "2026-10-06T04:32:20.059Z",
+      "reason": "session-created"
+    },
+    {
+      "from_stage": "clarification",
+      "to_stage": "need-validation",
+      "from_status": "waiting_user",
+      "to_status": "framed",
+      "at": "2026-10-06T04:32:29.908Z",
+      "reason": "clarification-complete"
+    },
+    {
+      "from_stage": "need-validation",
+      "to_stage": "planning",
+      "from_status": "framed",
+      "to_status": "framed",
+      "at": "2026-10-06T04:33:52.969Z",
+      "reason": "need-validation-approved"
+    }
+  ],
+  "reopen_count": 0,
+  "outcome_reports": [],
+  "clarification": {
+    "round_count": 1,
+    "dimensions": {
+      "need_clarity": "partial",
+      "intent_clarity": "partial",
+      "context_completeness": "missing",
+      "success_criteria_clarity": "missing",
+      "prohibited_conditions_clarity": "partial",
+      "governance_scope_clarity": "clear",
+      "brownfield_orientation_completeness": "clear",
+      "risk_exposure": "partial"
+    },
+    "gaps": [
+      {
+        "dimension": "need_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The underlying need is not specific enough yet."
+      },
+      {
+        "dimension": "intent_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The intended direction is not yet explicit."
+      },
+      {
+        "dimension": "context_completeness",
+        "status": "missing",
+        "trigger_class": "missing-constraint",
+        "summary": "Key constraints, scope, and current conditions are missing."
+      },
+      {
+        "dimension": "success_criteria_clarity",
+        "status": "missing",
+        "trigger_class": "missing-success-criteria",
+        "summary": "Success cannot be evaluated yet."
+      },
+      {
+        "dimension": "prohibited_conditions_clarity",
+        "status": "partial",
+        "trigger_class": "missing-prohibition",
+        "summary": "Forbidden changes or non-negotiables are not explicit."
+      }
+    ],
+    "pending_questions": [],
+    "asked_questions": [
+      "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "How should improvement success be judged: which metric or end state matters most?"
+    ],
+    "question_rationale": [],
+    "trigger_classes": [],
+    "target_fields": [],
+    "user_answers": [
+      {
+        "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+        "answer": "Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types.",
+        "target_fields": [
+          "need",
+          "context"
+        ]
+      },
+      {
+        "question": "How should improvement success be judged: which metric or end state matters most?",
+        "answer": "Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+        "target_fields": [
+          "success_criteria",
+          "intent"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "ask_or_assume_decision": "ask",
+    "remaining_gaps": [],
+    "unresolved_ambiguity": [],
+    "question_budget": {
+      "initial_question_budget": 2,
+      "followup_budget": 1,
+      "max_rounds": 2
+    },
+    "next_stop_condition": "need validation can proceed",
+    "clarification_summary": "runtime captured first-round clarification answers and can proceed to need validation",
+    "should_wait_for_user": false
+  },
+  "created_at": "2026-10-06T04:32:20.059Z",
+  "updated_at": "2026-10-06T04:41:02.191Z",
+  "framing": {
+    "request": "Advance QIF after v0.6.38 using the latest released AOF and current evaluation evidence. Build and release v0.6.39 Adjudication Feedback and Rubric Revision. First frame Need, Intent, and Context; validate the need before chartering; use Visionary, Builder, and Guardian judgment; preserve rejected alternatives; forbid silent or automatic rubric mutation; and keep QIF standalone.",
+    "need": "Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types.",
+    "intent": "Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+    "active_context": "context: Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types. | success: Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+    "success_criteria": "Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+    "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority."
+  },
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0639.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0639.json",
+    ".aof/artifacts/need-validation/problem-statements/PST-QIFV0639.json",
+    ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0639.json",
+    ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0639.json"
+  ],
+  "council_execution_runs": [
+    {
+      "execution_id": "CRUN-MUW6P02K-RQXHN0",
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Builder",
+        "Visionary",
+        "Guardian"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "status": "prepared",
+      "started_at": "2026-10-06T04:34:02.011Z",
+      "completed_at": "2026-10-06T04:34:02.011Z",
+      "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Builder(design-builder-01) -> Visionary(strategy-lead-01) -> Guardian(risk-reviewer-01)",
+      "steps": [
+        {
+          "step_id": "CRUN-MUW6P02K-RQXHN0-STEP-01",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Builder planning call for actor design-builder-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUW6MTEN-OCC7U1",
+              "decision_id": "DEC-MUW6OT3B-489AUU",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types. | success: Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+              "context_snapshot_id": "CTX-MUW6N105-WKZTDY",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.38 using the latest released AOF and current evaluation evidence. Build and release v0.6.39 Adjudication Feedback and Rubric Revision. First frame Need, Intent, and Context; validate the need before chartering; use Visionary, Builder, and Guardian judgment; preserve rejected alternatives; forbid silent or automatic rubric mutation; and keep QIF standalone.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0639.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0639.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0639.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0639.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0639.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUW6OT3B-489AUU"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MUW6P02K-RQXHN0-STEP-02",
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Visionary planning call for actor strategy-lead-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUW6MTEN-OCC7U1",
+              "decision_id": "DEC-MUW6OT3B-489AUU",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types. | success: Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+              "context_snapshot_id": "CTX-MUW6N105-WKZTDY",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.38 using the latest released AOF and current evaluation evidence. Build and release v0.6.39 Adjudication Feedback and Rubric Revision. First frame Need, Intent, and Context; validate the need before chartering; use Visionary, Builder, and Guardian judgment; preserve rejected alternatives; forbid silent or automatic rubric mutation; and keep QIF standalone.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0639.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0639.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0639.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0639.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0639.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUW6OT3B-489AUU"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MUW6P02K-RQXHN0-STEP-03",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Guardian planning call for actor risk-reviewer-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUW6MTEN-OCC7U1",
+              "decision_id": "DEC-MUW6OT3B-489AUU",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types. | success: Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+              "context_snapshot_id": "CTX-MUW6N105-WKZTDY",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.38 using the latest released AOF and current evaluation evidence. Build and release v0.6.39 Adjudication Feedback and Rubric Revision. First frame Need, Intent, and Context; validate the need before chartering; use Visionary, Builder, and Guardian judgment; preserve rejected alternatives; forbid silent or automatic rubric mutation; and keep QIF standalone.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0639.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0639.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0639.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0639.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0639.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUW6OT3B-489AUU"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "execution_id": "CRUN-MUW6Y0A7-K3UBP1",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "prepared",
+      "started_at": "2026-10-06T04:41:02.191Z",
+      "completed_at": "2026-10-06T04:41:02.191Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01)",
+      "steps": [
+        {
+          "step_id": "CRUN-MUW6Y0A7-K3UBP1-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUW6MTEN-OCC7U1",
+              "decision_id": "DEC-MUW6OT3B-489AUU",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types. | success: Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+              "context_snapshot_id": "CTX-MUW6N105-WKZTDY",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.38 using the latest released AOF and current evaluation evidence. Build and release v0.6.39 Adjudication Feedback and Rubric Revision. First frame Need, Intent, and Context; validate the need before chartering; use Visionary, Builder, and Guardian judgment; preserve rejected alternatives; forbid silent or automatic rubric mutation; and keep QIF standalone.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0639.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0639.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0639.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0639.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0639.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUW6OT3B-489AUU"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MUW6Y0A7-K3UBP1-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUW6MTEN-OCC7U1",
+              "decision_id": "DEC-MUW6OT3B-489AUU",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types.",
+              "intent": "Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+              "active_context": "context: Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types. | success: Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+              "context_snapshot_id": "CTX-MUW6N105-WKZTDY",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope the standalone, domain-general calibration-report runtime: feedback observations grounded in adjudicated disagreements; rubric revision candidates with exact proposed edits and source evidence; preserved alternatives and dissent; impact assessment; approval, rejection, implementation, rollback, and governance records; schemas, verifier, examples, fixtures, plain-language docs, roadmap, and release evidence. Exclude UI, external integrations, employee scoring, automatic prompt or policy mutation, optimization claims, causal claims, operational guarantees, and unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority."
+            },
+            "task": {
+              "request": "Advance QIF after v0.6.38 using the latest released AOF and current evaluation evidence. Build and release v0.6.39 Adjudication Feedback and Rubric Revision. First frame Need, Intent, and Context; validate the need before chartering; use Visionary, Builder, and Guardian judgment; preserve rejected alternatives; forbid silent or automatic rubric mutation; and keep QIF standalone.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0639.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0639.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0639.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0639.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0639.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUW6OT3B-489AUU"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "last_council_execution_id": "CRUN-MUW6Y0A7-K3UBP1"
+}

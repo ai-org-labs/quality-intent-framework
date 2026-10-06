@@ -1,7 +1,7 @@
 {
   "artifact_type": "situation-assessment",
   "generated_at": "2026-10-02T05:06:01.887Z",
-  "project_root": "/Users/mn/development/quality-intent-framework-public",
+  "project_root": ".",
   "active_release_version": null,
   "active_release_track": null,
   "operating_goal": "Add domain-general selective escalation calibration that deterministically routes existing decision-outcome evidence among proceed, defer, human review, and specialist escalation; records accountable authority and route execution evidence; reproduces route-specific outcomes; and forces governance without treating route volume as quality or assigning authority automatically.",

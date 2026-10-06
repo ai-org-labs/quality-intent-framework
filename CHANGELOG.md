@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.39
+
+- Added adjudication feedback observations that preserve the disagreement, adjudication, affected rubric clause, evidence status, and non-authority boundary.
+- Added rubric revision candidates with exact prior and proposed values, replay scope, dissent, and selected, rejected, and deferred alternatives.
+- Added governed revision decisions and implementation records with authority, evidence, immutable history, explicit replay state, and rollback plans.
+- Added reproducible rubric-learning assessments, governance triggers, verifier boundaries, and retained negative fixtures.
+- Kept feedback volume, revision acceptance, replay count, and score changes as evidence only, never quality, truth, competence, causality, or authority.
+
 ## v0.6.38
 
 - Added versioned Route Policy Snapshots that preserve the policy authority in force at each decision boundary.

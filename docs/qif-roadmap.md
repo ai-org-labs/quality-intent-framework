@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.38 baseline)
+## Current Position (v0.6.39 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -591,10 +591,19 @@ Deliverables:
   convert repeated, evidence-backed disagreement into governed candidate rubric
   changes while keeping rejected alternatives and preventing silent policy
   mutation.
+  Status: implemented in v0.6.39 through feedback observations, exact clause
+  revisions, selected/rejected/deferred alternatives, accountable decisions,
+  replay-scoped implementation, rollback plans, aggregate assessment, and
+  retained governance fixtures. The committed evidence remains illustrative
+  and replay-incomplete.
 - Next planned slice, v0.6.40 Policy Counterfactual Replay: replay preserved
   decisions against reviewed candidate policies to expose changed routes and
   loss-boundary consequences without optimizing, selecting, or authorizing a
   policy automatically.
+- Next planned slice, v0.6.41 Judge Consequence and Abstention Robustness:
+  test whether identical evidence receives different judgments when downstream
+  use, consequence framing, or an abstain option changes, while keeping refusal,
+  malformed output, and incorrect classification distinct.
 - Next planned phase, v0.7 Empirical Calibration: replace illustrative
   calibration evidence with governed pilot outcomes, suite-health records, and
   framework-learning evidence while preserving uncertainty boundaries.

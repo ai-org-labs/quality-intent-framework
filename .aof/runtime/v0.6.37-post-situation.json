@@ -1,7 +1,7 @@
 {
   "artifact_type": "situation-assessment",
   "generated_at": "2026-10-04T05:01:12.846Z",
-  "project_root": "/Users/mn/development/quality-intent-framework-public",
+  "project_root": ".",
   "active_release_version": null,
   "active_release_track": null,
   "operating_goal": "Extend QIF's existing escalation lifecycle so independent reviewer judgments, exact disagreement dimensions, overrides, and adjudication remain reproducible and governance-bound without treating majority, seniority, or agreement rate as semantic truth.",

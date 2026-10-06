@@ -1,0 +1,16 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-06T04:32:39.397Z",
+  "problem_statement_id": "PST-MUW6N8BP-4S8NHQ",
+  "affected_party": "QIF authors, accountable adjudicators, evaluators, AI agents, and affected stakeholders",
+  "actual_problem": "QIF preserves disagreement and adjudication, but repeated adjudication findings cannot yet become an explicit, reviewable rubric revision without manual interpretation or silent mutation.",
+  "why_it_matters": "Without a governed feedback path, known ambiguity repeats, rejected alternatives disappear, evaluator behavior changes without trace, and rubric edits may gain false authority.",
+  "why_now": "v0.6.37 records disagreement and v0.6.38 preserves policy drift; rubric feedback is the smallest missing learning link before counterfactual replay and empirical calibration.",
+  "evidence_refs": [
+    "docs/qif-v0.6.37-reviewer-disagreement-calibration.md",
+    "docs/qif-v0.6.38-route-policy-drift-revalidation.md",
+    "docs/qif-roadmap.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUW6N108-LAN2DJ"
+}

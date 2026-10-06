@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-06T04:33:13.916Z",
+  "validation_id": "NVR-MUW6NYYK-QC61FD",
+  "raw_need": "Continue QIF and release the nearest roadmap slice.",
+  "validation_status": "reframed",
+  "validated_need": "Add the smallest standalone, domain-general learning loop that converts evidence-backed adjudication feedback into explicit rubric revision candidates and governed decisions while preserving alternatives, dissent, historical rubric authority, replay requirements, and rollback.",
+  "decision_summary": "The raw continuation request is reframed into the smallest lifecycle gap after v0.6.38: disagreement and policy drift are traceable, but rubric ambiguity cannot yet become a reviewed, reversible change without manual or silent mutation.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What should v0.6.39 own?",
+      "answer": "Feedback observations, exact rubric revision candidates, alternatives, impact assessments, approval or rejection decisions, implementation and rollback records, aggregate assessment, verifier rules, examples, fixtures, docs, and release evidence inside calibration-report.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must remain outside verifier authority?",
+      "answer": "Semantic truth, actual improvement, causality, evaluator competence, employee ranking, automatic mutation, and operational authorization.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Repeated adjudication was assumed to justify a rubric change; it only justifies a candidate that must be reviewed and tested."
+  ],
+  "evidence_gaps": [
+    "The committed example will remain illustrative until real independent adjudication, replay, and operational outcome evidence exists."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV0639.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0639.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0639.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUW6N108-LAN2DJ"
+}

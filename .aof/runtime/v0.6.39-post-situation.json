@@ -1,0 +1,24 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-10-06T04:42:20.964Z",
+  "project_root": ".",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "Add the smallest standalone, domain-general learning loop that converts evidence-backed adjudication feedback into explicit rubric revision candidates and governed decisions while preserving alternatives, dissent, historical rubric authority, replay requirements, and rollback.",
+  "next_value_slice": "v0.6.40 Policy Counterfactual Replay",
+  "current_runtime_stage": "frontier-definition-needed",
+  "primary_frontier_task": null,
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Open an implementation task for the current frontier: v0.6.40 Policy Counterfactual Replay",
+    "prioritized_task_ids": [],
+    "scale_direction": "Define or reconcile the next frontier before expanding execution."
+  },
+  "recommended_action": {
+    "recommended_action": "Open an implementation task for the current frontier: v0.6.40 Policy Counterfactual Replay",
+    "rationale": "No current open implementation task is aligned to the current operating goal.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  }
+}

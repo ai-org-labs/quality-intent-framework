@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-05T04:43:15.813Z",
+  "updated_at": "2026-10-06T04:40:56.165Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means a human or AI can reproduce which route-policy version governed an earlier decision, what authority, capability, threshold, or evidence requirement changed, which decisions became stale or materially affected, what revalidation was required and observed, and why governance remains open or closes. Change count, policy age, and revalidation volume remain evidence, never quality, authority, safety, causality, or semantic truth.",
-      "recorded_at": "2026-10-05T04:33:03.849Z",
+      "answer": "Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
+      "recorded_at": "2026-10-06T04:32:29.916Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MUUR7ETV-1HP9P1",
+      "source_session_id": "SESS-MUW6MTEN-OCC7U1",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The raw continuation request is reframed into the smallest lifecycle gap after v0.6.37: decisions and adjudications remain traceable, but the policy version that governed them can become stale after authority, capability, threshold, or evidence requirements change.",
-      "recorded_at": "2026-10-05T04:34:13.106Z",
+      "answer": "The raw continuation request is reframed into the smallest lifecycle gap after v0.6.38: disagreement and policy drift are traceable, but rubric ambiguity cannot yet become a reviewed, reversible change without manual or silent mutation.",
+      "recorded_at": "2026-10-06T04:33:52.971Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MUUR7ETV-1HP9P1",
-      "source_decision_record_id": "DEC-MUUR9DYL-UE7DY7"
+      "source_session_id": "SESS-MUW6MTEN-OCC7U1",
+      "source_decision_record_id": "DEC-MUW6OT3B-489AUU"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Committed change and revalidation evidence remains illustrative; semantic validity, actual authority, and causal claims require governance and pilot evidence.",
-      "recorded_at": "2026-10-05T04:43:15.813Z",
-      "expectation_state": "Route-policy lineage and revalidation are structurally reproducible and full QIF tests pass.",
-      "mismatch_state": "Committed change and revalidation evidence remains illustrative; semantic validity, actual authority, and causal claims require governance and pilot evidence.",
-      "scale_direction": "Run Council review and release v0.6.38, then implement v0.6.39.",
-      "source_session_id": "SESS-MUUR7ETV-1HP9P1",
-      "source_decision_record_id": "DEC-MUUR9DYL-UE7DY7"
+      "answer": "Committed feedback and revision evidence remains illustrative, unverified, and replay-incomplete; semantic improvement, fairness, actual authority, and causal claims require independent pilot evidence and governance.",
+      "recorded_at": "2026-10-06T04:40:56.165Z",
+      "expectation_state": "QIF v0.6.39 adds an auditable adjudication-feedback-to-rubric-revision lifecycle with preserved alternatives, accountable decisions, implementation replay, rollback, and learning sufficiency boundaries.",
+      "mismatch_state": "Committed feedback and revision evidence remains illustrative, unverified, and replay-incomplete; semantic improvement, fairness, actual authority, and causal claims require independent pilot evidence and governance.",
+      "scale_direction": "Run Council review and release v0.6.39, then implement v0.6.40.",
+      "source_session_id": "SESS-MUW6MTEN-OCC7U1",
+      "source_decision_record_id": "DEC-MUW6OT3B-489AUU"
     }
   ]
 }

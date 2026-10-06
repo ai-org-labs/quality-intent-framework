@@ -68,6 +68,286 @@
   ],
   "negatives": [
     {
+      "file": "calibration-report-feedback-observations-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "adjudication feedback required",
+      "expect": "fail",
+      "errorIncludes": "package adjudicationFeedbackObservations must be an array."
+    },
+    {
+      "file": "calibration-report-rubric-candidates-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "rubric candidates required",
+      "expect": "fail",
+      "errorIncludes": "package rubricRevisionCandidates must be an array."
+    },
+    {
+      "file": "calibration-report-rubric-decisions-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "rubric decisions required",
+      "expect": "fail",
+      "errorIncludes": "package rubricRevisionDecisions must be an array."
+    },
+    {
+      "file": "calibration-report-rubric-implementations-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "rubric implementations required",
+      "expect": "fail",
+      "errorIncludes": "package rubricRevisionImplementations must be an array."
+    },
+    {
+      "file": "calibration-report-rubric-assessments-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "rubric assessments required",
+      "expect": "fail",
+      "errorIncludes": "package rubricRevisionAssessments must be an array."
+    },
+    {
+      "file": "calibration-report-feedback-policy-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "feedback policy traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing reviewer disagreement policy"
+    },
+    {
+      "file": "calibration-report-feedback-disagreement-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "feedback disagreement traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing reviewer disagreement"
+    },
+    {
+      "file": "calibration-report-feedback-adjudication-link.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "feedback adjudication closure",
+      "expect": "fail",
+      "errorIncludes": "must resolve one of its source disagreements."
+    },
+    {
+      "file": "calibration-report-feedback-clause-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "affected clause resolution",
+      "expect": "fail",
+      "errorIncludes": "affected clause missingClause does not exist"
+    },
+    {
+      "file": "calibration-report-feedback-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "feedback authority boundary",
+      "expect": "fail",
+      "errorIncludes": "feedbackBoundary must remain candidate-input-not-rubric-authority."
+    },
+    {
+      "file": "calibration-report-feedback-unverified-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "feedback evidence governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified feedback requires a rubric-feedback-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-candidate-observation-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "candidate feedback traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing adjudication feedback observation"
+    },
+    {
+      "file": "calibration-report-candidate-clause-not-declared.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "candidate clause feedback closure",
+      "expect": "fail",
+      "errorIncludes": "clausePath must be declared by feedback observation"
+    },
+    {
+      "file": "calibration-report-candidate-alternative-minimum.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "alternative preservation",
+      "expect": "fail",
+      "errorIncludes": "must preserve at least two revision alternatives."
+    },
+    {
+      "file": "calibration-report-candidate-selected-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "single selected alternative",
+      "expect": "fail",
+      "errorIncludes": "must have exactly one selected alternative."
+    },
+    {
+      "file": "calibration-report-candidate-selected-value.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "selected value reproduction",
+      "expect": "fail",
+      "errorIncludes": "proposedValue must equal the selected alternative value."
+    },
+    {
+      "file": "calibration-report-candidate-rejected-preservation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "rejected alternative preservation",
+      "expect": "fail",
+      "errorIncludes": "must preserve both rejected and deferred alternatives."
+    },
+    {
+      "file": "calibration-report-candidate-replay-scope.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "replay source closure",
+      "expect": "fail",
+      "errorIncludes": "replayDisagreementRefs must come from source feedback disagreements."
+    },
+    {
+      "file": "calibration-report-candidate-dissent-source.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "dissent source closure",
+      "expect": "fail",
+      "errorIncludes": "dissentRef RJG-NOPE-999 must belong to a source disagreement."
+    },
+    {
+      "file": "calibration-report-candidate-automatic-mutation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no automatic rubric mutation",
+      "expect": "fail",
+      "errorIncludes": "automaticMutation must be false."
+    },
+    {
+      "file": "calibration-report-decision-candidate-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "decision candidate traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing rubric revision candidate"
+    },
+    {
+      "file": "calibration-report-decision-selected-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "decision selected alternative",
+      "expect": "fail",
+      "errorIncludes": "selectedAlternativeRef must resolve in its candidate."
+    },
+    {
+      "file": "calibration-report-decision-dissent-not-preserved.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "decision dissent preservation",
+      "expect": "fail",
+      "errorIncludes": "dissentPreserved must be true."
+    },
+    {
+      "file": "calibration-report-decision-implementation-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "decision implementation requirement",
+      "expect": "fail",
+      "errorIncludes": "implementationRequired must be true exactly when decision is approved."
+    },
+    {
+      "file": "calibration-report-implementation-decision-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "implementation decision traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing rubric revision decision"
+    },
+    {
+      "file": "calibration-report-implementation-previous-value.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "implementation previous value reproduction",
+      "expect": "fail",
+      "errorIncludes": "previousValue must reproduce the candidate currentValue."
+    },
+    {
+      "file": "calibration-report-implementation-selected-value.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "implementation selected value reproduction",
+      "expect": "fail",
+      "errorIncludes": "implementedValue must reproduce the selected alternative."
+    },
+    {
+      "file": "calibration-report-implementation-policy-fidelity.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "active policy clause fidelity",
+      "expect": "fail",
+      "errorIncludes": "implementedValue must match the active policy clause."
+    },
+    {
+      "file": "calibration-report-implementation-replay-scope.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "implementation replay closure",
+      "expect": "fail",
+      "errorIncludes": "replayDisagreementRefs must match the candidate replay scope."
+    },
+    {
+      "file": "calibration-report-implementation-history.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "historical judgment preservation",
+      "expect": "fail",
+      "errorIncludes": "historicalJudgmentsPreserved must be true."
+    },
+    {
+      "file": "calibration-report-implementation-automatic-mutation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "implementation mutation boundary",
+      "expect": "fail",
+      "errorIncludes": "automaticMutation must be false."
+    },
+    {
+      "file": "calibration-report-implementation-replay-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "incomplete replay governance",
+      "expect": "fail",
+      "errorIncludes": "incomplete replay requires a rubric-replay-incomplete governance trigger."
+    },
+    {
+      "file": "calibration-report-rubric-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "rubric candidate count reproduction",
+      "expect": "fail",
+      "errorIncludes": "candidateCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-rubric-assessment-implemented.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "implemented count reproduction",
+      "expect": "fail",
+      "errorIncludes": "implementedCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-rubric-assessment-replay.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "completed replay count reproduction",
+      "expect": "fail",
+      "errorIncludes": "completedReplayCount must reproduce as 0."
+    },
+    {
+      "file": "calibration-report-rubric-assessment-verified.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "verified feedback count reproduction",
+      "expect": "fail",
+      "errorIncludes": "verifiedFeedbackCount must reproduce as 0."
+    },
+    {
+      "file": "calibration-report-rubric-assessment-sufficiency.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "rubric evidence sufficiency",
+      "expect": "fail",
+      "errorIncludes": "dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "calibration-report-rubric-assessment-signal.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "rubric assessment signal",
+      "expect": "fail",
+      "errorIncludes": "assessmentSignal must reproduce as insufficient-data."
+    },
+    {
+      "file": "calibration-report-rubric-assessment-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "insufficient rubric governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient rubric-learning evidence requires a rubric-learning-insufficient governance trigger."
+    },
+    {
+      "file": "calibration-report-rubric-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "rubric semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority."
+    },
+    {
       "file": "calibration-report-route-snapshots-not-array.json",
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "route-policy snapshots required",

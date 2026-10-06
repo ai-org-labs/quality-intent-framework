@@ -1,0 +1,25 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-06T04:33:23.617Z",
+  "project_charter_id": "PCH-MUW6O6G1-SN5EH5",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV0639.json",
+  "validated_objective": "Release QIF v0.6.39 with an executable, auditable, reversible adjudication-feedback-to-rubric-revision lifecycle.",
+  "scope": [
+    "Extend calibration-report with feedback observations grounded in adjudication.",
+    "Represent exact rubric clauses, proposed wording, alternatives, dissent, impact, decisions, implementation, replay, rollback, and aggregate assessment.",
+    "Add deterministic verifier rules, example records, retained negative fixtures, plain-language docs, roadmap, and release evidence."
+  ],
+  "constraints": [
+    "Do not build UI or external integrations.",
+    "Do not mutate rubrics automatically or retroactively rewrite historical decisions.",
+    "Do not infer truth, quality, competence, causality, or authority from feedback volume, agreement, acceptance rate, or score changes.",
+    "Do not use the records for employee surveillance or ranking."
+  ],
+  "expected_outcomes": [
+    "A human or AI can trace a rubric revision from source disagreement through decision and implementation or rejection.",
+    "Rejected alternatives and dissent remain visible and rollback remains possible.",
+    "Structural validation remains explicitly separate from semantic validity."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUW6N108-LAN2DJ"
+}

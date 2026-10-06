@@ -400,7 +400,7 @@
     "projectMemory": {
       "confirmationResult": {
         "ok": true,
-        "windowPath": "/Users/mn/development/quality-intent-framework-public/.aof/context/active/recent-confirmation-window.json",
+        "windowPath": "./.aof/context/active/recent-confirmation-window.json",
         "question": "council approval で何が決まったか"
       }
     }

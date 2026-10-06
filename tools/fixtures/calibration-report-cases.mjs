@@ -24,8 +24,53 @@ function routeChange(pkg) { return pkg.routePolicyChanges[0]; }
 function driftAssessment(pkg) { return pkg.routePolicyDriftAssessments[0]; }
 function revalidationOutcome(pkg) { return pkg.routePolicyRevalidationOutcomes[0]; }
 function revalidationAssessment(pkg) { return pkg.routePolicyRevalidationAssessments[0]; }
+function feedbackObservation(pkg) { return pkg.adjudicationFeedbackObservations[0]; }
+function rubricCandidate(pkg) { return pkg.rubricRevisionCandidates[0]; }
+function rubricDecision(pkg) { return pkg.rubricRevisionDecisions[0]; }
+function rubricImplementation(pkg) { return pkg.rubricRevisionImplementations[0]; }
+function rubricAssessment(pkg) { return pkg.rubricRevisionAssessments[0]; }
 
 export const cases = [
+  { id: "feedback-observations-not-array", rule: "adjudication feedback required", expect: "package adjudicationFeedbackObservations must be an array.", mutate: (pkg) => { pkg.adjudicationFeedbackObservations = null; } },
+  { id: "rubric-candidates-not-array", rule: "rubric candidates required", expect: "package rubricRevisionCandidates must be an array.", mutate: (pkg) => { pkg.rubricRevisionCandidates = null; } },
+  { id: "rubric-decisions-not-array", rule: "rubric decisions required", expect: "package rubricRevisionDecisions must be an array.", mutate: (pkg) => { pkg.rubricRevisionDecisions = null; } },
+  { id: "rubric-implementations-not-array", rule: "rubric implementations required", expect: "package rubricRevisionImplementations must be an array.", mutate: (pkg) => { pkg.rubricRevisionImplementations = null; } },
+  { id: "rubric-assessments-not-array", rule: "rubric assessments required", expect: "package rubricRevisionAssessments must be an array.", mutate: (pkg) => { pkg.rubricRevisionAssessments = null; } },
+  { id: "feedback-policy-missing", rule: "feedback policy traceability", expect: "references missing reviewer disagreement policy", mutate: (pkg) => { feedbackObservation(pkg).affectedPolicyRef = "RDP-NOPE-999"; } },
+  { id: "feedback-disagreement-missing", rule: "feedback disagreement traceability", expect: "references missing reviewer disagreement", mutate: (pkg) => { feedbackObservation(pkg).disagreementRefs = ["RDG-NOPE-999"]; } },
+  { id: "feedback-adjudication-link", rule: "feedback adjudication closure", expect: "must resolve one of its source disagreements.", mutate: (pkg) => { feedbackObservation(pkg).disagreementRefs = ["RDG-NOPE-999"]; } },
+  { id: "feedback-clause-missing", rule: "affected clause resolution", expect: "affected clause missingClause does not exist", mutate: (pkg) => { feedbackObservation(pkg).affectedClausePaths = ["missingClause"]; } },
+  { id: "feedback-boundary-overclaim", rule: "feedback authority boundary", expect: "feedbackBoundary must remain candidate-input-not-rubric-authority.", mutate: (pkg) => { feedbackObservation(pkg).feedbackBoundary = "automatic-rubric-authority"; } },
+  { id: "feedback-unverified-trigger", rule: "feedback evidence governance", expect: "non-verified feedback requires a rubric-feedback-unverified governance trigger.", mutate: (pkg) => { feedbackObservation(pkg).governanceTriggerRefs = []; } },
+  { id: "candidate-observation-missing", rule: "candidate feedback traceability", expect: "references missing adjudication feedback observation", mutate: (pkg) => { rubricCandidate(pkg).feedbackObservationRefs = ["AFO-NOPE-999"]; } },
+  { id: "candidate-clause-not-declared", rule: "candidate clause feedback closure", expect: "clausePath must be declared by feedback observation", mutate: (pkg) => { rubricCandidate(pkg).clausePath = "aggregationBoundary"; } },
+  { id: "candidate-alternative-minimum", rule: "alternative preservation", expect: "must preserve at least two revision alternatives.", mutate: (pkg) => { rubricCandidate(pkg).alternativeRevisions = [rubricCandidate(pkg).alternativeRevisions[0]]; } },
+  { id: "candidate-selected-count", rule: "single selected alternative", expect: "must have exactly one selected alternative.", mutate: (pkg) => { rubricCandidate(pkg).alternativeRevisions[1].disposition = "selected"; } },
+  { id: "candidate-selected-value", rule: "selected value reproduction", expect: "proposedValue must equal the selected alternative value.", mutate: (pkg) => { rubricCandidate(pkg).proposedValue = "different-value"; } },
+  { id: "candidate-rejected-preservation", rule: "rejected alternative preservation", expect: "must preserve both rejected and deferred alternatives.", mutate: (pkg) => { rubricCandidate(pkg).alternativeRevisions[1].disposition = "deferred"; } },
+  { id: "candidate-replay-scope", rule: "replay source closure", expect: "replayDisagreementRefs must come from source feedback disagreements.", mutate: (pkg) => { rubricCandidate(pkg).replayDisagreementRefs = ["RDG-NOPE-999"]; } },
+  { id: "candidate-dissent-source", rule: "dissent source closure", expect: "dissentRef RJG-NOPE-999 must belong to a source disagreement.", mutate: (pkg) => { rubricCandidate(pkg).dissentRefs = ["RJG-NOPE-999"]; } },
+  { id: "candidate-automatic-mutation", rule: "no automatic rubric mutation", expect: "automaticMutation must be false.", mutate: (pkg) => { rubricCandidate(pkg).automaticMutation = true; } },
+  { id: "decision-candidate-missing", rule: "decision candidate traceability", expect: "references missing rubric revision candidate", mutate: (pkg) => { rubricDecision(pkg).candidateRef = "RRC-NOPE-999"; } },
+  { id: "decision-selected-missing", rule: "decision selected alternative", expect: "selectedAlternativeRef must resolve in its candidate.", mutate: (pkg) => { rubricDecision(pkg).selectedAlternativeRef = "RRA-NOPE-999"; } },
+  { id: "decision-dissent-not-preserved", rule: "decision dissent preservation", expect: "dissentPreserved must be true.", mutate: (pkg) => { rubricDecision(pkg).dissentPreserved = false; } },
+  { id: "decision-implementation-mismatch", rule: "decision implementation requirement", expect: "implementationRequired must be true exactly when decision is approved.", mutate: (pkg) => { rubricDecision(pkg).implementationRequired = false; } },
+  { id: "implementation-decision-missing", rule: "implementation decision traceability", expect: "references missing rubric revision decision", mutate: (pkg) => { rubricImplementation(pkg).decisionRef = "RRD-NOPE-999"; } },
+  { id: "implementation-previous-value", rule: "implementation previous value reproduction", expect: "previousValue must reproduce the candidate currentValue.", mutate: (pkg) => { rubricImplementation(pkg).previousValue = "wrong-previous"; } },
+  { id: "implementation-selected-value", rule: "implementation selected value reproduction", expect: "implementedValue must reproduce the selected alternative.", mutate: (pkg) => { rubricImplementation(pkg).implementedValue = "wrong-current"; } },
+  { id: "implementation-policy-fidelity", rule: "active policy clause fidelity", expect: "implementedValue must match the active policy clause.", mutate: (pkg) => { reviewerPolicy(pkg).detectionRule = "preserve-exact-verdict-rationale-evidence-and-confidence"; } },
+  { id: "implementation-replay-scope", rule: "implementation replay closure", expect: "replayDisagreementRefs must match the candidate replay scope.", mutate: (pkg) => { rubricImplementation(pkg).replayDisagreementRefs = ["RDG-NOPE-999"]; } },
+  { id: "implementation-history", rule: "historical judgment preservation", expect: "historicalJudgmentsPreserved must be true.", mutate: (pkg) => { rubricImplementation(pkg).historicalJudgmentsPreserved = false; } },
+  { id: "implementation-automatic-mutation", rule: "implementation mutation boundary", expect: "automaticMutation must be false.", mutate: (pkg) => { rubricImplementation(pkg).automaticMutation = true; } },
+  { id: "implementation-replay-trigger", rule: "incomplete replay governance", expect: "incomplete replay requires a rubric-replay-incomplete governance trigger.", mutate: (pkg) => { rubricImplementation(pkg).governanceTriggerRefs = []; } },
+  { id: "rubric-assessment-count", rule: "rubric candidate count reproduction", expect: "candidateCount must reproduce as 1.", mutate: (pkg) => { rubricAssessment(pkg).candidateCount = 2; } },
+  { id: "rubric-assessment-implemented", rule: "implemented count reproduction", expect: "implementedCount must reproduce as 1.", mutate: (pkg) => { rubricAssessment(pkg).implementedCount = 0; } },
+  { id: "rubric-assessment-replay", rule: "completed replay count reproduction", expect: "completedReplayCount must reproduce as 0.", mutate: (pkg) => { rubricAssessment(pkg).completedReplayCount = 1; } },
+  { id: "rubric-assessment-verified", rule: "verified feedback count reproduction", expect: "verifiedFeedbackCount must reproduce as 0.", mutate: (pkg) => { rubricAssessment(pkg).verifiedFeedbackCount = 1; } },
+  { id: "rubric-assessment-sufficiency", rule: "rubric evidence sufficiency", expect: "dataSufficiency must reproduce as insufficient.", mutate: (pkg) => { rubricAssessment(pkg).dataSufficiency = "sufficient"; } },
+  { id: "rubric-assessment-signal", rule: "rubric assessment signal", expect: "assessmentSignal must reproduce as insufficient-data.", mutate: (pkg) => { rubricAssessment(pkg).assessmentSignal = "observed-no-structural-alerts"; } },
+  { id: "rubric-assessment-trigger", rule: "insufficient rubric governance", expect: "insufficient rubric-learning evidence requires a rubric-learning-insufficient governance trigger.", mutate: (pkg) => { rubricAssessment(pkg).governanceTriggerRefs = ["GTR-CR-018", "GTR-CR-019"]; } },
+  { id: "rubric-boundary-overclaim", rule: "rubric semantic boundary", expect: "verifierBoundary must explicitly avoid claiming that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority.", mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority"); } },
   { id: "route-snapshots-not-array", rule: "route-policy snapshots required", expect: "package routePolicySnapshots must be an array.", mutate: (pkg) => { pkg.routePolicySnapshots = null; } },
   { id: "route-changes-not-array", rule: "route-policy changes required", expect: "package routePolicyChanges must be an array.", mutate: (pkg) => { pkg.routePolicyChanges = null; } },
   { id: "route-drift-not-array", rule: "route-policy drift assessments required", expect: "package routePolicyDriftAssessments must be an array.", mutate: (pkg) => { pkg.routePolicyDriftAssessments = null; } },

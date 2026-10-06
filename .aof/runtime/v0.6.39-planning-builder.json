@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-06T04:39:34.406Z",
+  "role": "Builder",
+  "stage": "planning",
+  "session_id": "SESS-MUW6MTEN-OCC7U1",
+  "status": "completed",
+  "recommendation": "Extend calibration-report with five linked rubric-learning records and deterministic fixture coverage.",
+  "rationale": "The existing disagreement, adjudication, policy, evidence, and governance indexes support a coherent narrow extension without a new package type.",
+  "signals": [
+    "Exact old/new clause values and implementation fidelity must reproduce."
+  ],
+  "artifact_refs": [
+    "schemas/calibration-report-package.schema.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-057",
+  "source_decision_record_id": "DEC-MUW6OT3B-489AUU",
+  "source_parent_session_id": "SESS-MUW6MTEN-OCC7U1",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.98
+}
