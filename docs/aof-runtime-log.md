@@ -20,6 +20,9 @@ Date: 2026-10-06
 - Retrospective: AOF `learning-loop-snapshot` wrote `.aof/context/active/learning-loop.json` and preserved v0.6.40 as the next value slice.
 - AOF organization verification passed `277/277`; `TASK-057` is done and `.aof/runtime/v0.6.39-post-situation.json` found no truth conflict.
 - Remaining boundary: the committed feedback and revision are illustrative, unverified, and replay-incomplete. Real independent cases, authority, replay outcomes, fairness review, and operational feedback remain pilot and governance work.
+- Release commit `4fe22bd` was pushed to `origin/main`; annotated tag `v0.6.39` resolves to that release commit.
+- GitHub Release `v0.6.39` was published at https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.39.
+- AOF outcome `OUT-MUW73R7T-AH7Q5E` records successful publication and preserves v0.6.40 as the next value slice.
 - Next: v0.6.40 Policy Counterfactual Replay, v0.6.41 Judge Consequence and Abstention Robustness, then the v0.7 empirical calibration phase.
 
 ## v0.6.38 Route Policy Drift and Revalidation
