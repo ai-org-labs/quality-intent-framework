@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.40
+
+- Added reviewed, explicitly non-authoritative Policy Counterfactual Variants with exact baseline-to-candidate route-policy changes.
+- Added deterministic Policy Counterfactual Replays that preserve the original decision and reproduce identical evidence, baseline and candidate rule selection, and route changes.
+- Added hypothetical loss-boundary impact records linked back to source Quality Intents and consequence policies, with mandatory governance for severe, uncertain, or unverified cases.
+- Added aggregate Counterfactual Assessments, verifier boundaries, governance triggers, and 55 retained negative fixtures; the retained suite now covers 972 negative cases across 16 positive package types.
+- Kept replay count, route-change rate, and hypothesized impact direction as evidence only, never observed outcome, policy quality, optimality, causality, competence, selection, authorization, or authority.
+
 ## v0.6.39
 
 - Added adjudication feedback observations that preserve the disagreement, adjudication, affected rubric clause, evidence status, and non-authority boundary.

@@ -168,6 +168,9 @@ function validatePackage(pkg, packagePath) {
   const rubricRevisionDecisions = requiredArray(pkg, "rubricRevisionDecisions");
   const rubricRevisionImplementations = requiredArray(pkg, "rubricRevisionImplementations");
   const rubricRevisionAssessments = requiredArray(pkg, "rubricRevisionAssessments");
+  const policyCounterfactualVariants = requiredArray(pkg, "policyCounterfactualVariants");
+  const policyCounterfactualReplays = requiredArray(pkg, "policyCounterfactualReplays");
+  const policyCounterfactualAssessments = requiredArray(pkg, "policyCounterfactualAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -200,6 +203,9 @@ function validatePackage(pkg, packagePath) {
   const rubricDecisionIndex = indexById(rubricRevisionDecisions, `${packagePath}:rubricRevisionDecisions`);
   const rubricImplementationIndex = indexById(rubricRevisionImplementations, `${packagePath}:rubricRevisionImplementations`);
   const rubricAssessmentIndex = indexById(rubricRevisionAssessments, `${packagePath}:rubricRevisionAssessments`);
+  const counterfactualVariantIndex = indexById(policyCounterfactualVariants, `${packagePath}:policyCounterfactualVariants`);
+  const counterfactualReplayIndex = indexById(policyCounterfactualReplays, `${packagePath}:policyCounterfactualReplays`);
+  const counterfactualAssessmentIndex = indexById(policyCounterfactualAssessments, `${packagePath}:policyCounterfactualAssessments`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -1202,6 +1208,150 @@ function validatePackage(pkg, packagePath) {
     if (dataSufficiency === "insufficient" && !triggerTypes.has("rubric-learning-insufficient")) errors.push(`${assessment.id} insufficient rubric-learning evidence requires a rubric-learning-insufficient governance trigger.`);
   }
 
+  for (const variant of policyCounterfactualVariants) {
+    for (const field of ["title", "baselineSnapshotRef", "authorizationBoundary", "status"]) str(variant, field, variant.id);
+    const baseline = ref(routePolicySnapshotIndex, variant.baselineSnapshotRef, "baseline route-policy snapshot", variant.id);
+    const routes = Array.isArray(variant.routes) ? variant.routes : [];
+    const routeIndex = indexById(routes.map((item) => ({ ...item, id: item.routeRef })), `${variant.id}:routes`);
+    const rules = Array.isArray(variant.routingRules) ? [...variant.routingRules].sort((a, b) => a.lowerInclusive - b.lowerInclusive) : [];
+    const ruleIndex = indexById(rules.map((item) => ({ ...item, id: item.ruleRef })), `${variant.id}:routingRules`);
+    if (!baseline) continue;
+    if (!sameSet(routes.map((item) => item.routeRef), baseline.routes.map((item) => item.routeRef))) errors.push(`${variant.id} routes must exactly cover the baseline snapshot routes.`);
+    if (rules.length < 4) errors.push(`${variant.id} routingRules must include at least four rules.`);
+    for (const [index, rule] of rules.entries()) {
+      score(rule.lowerInclusive, "lowerInclusive", `${variant.id}/${rule.ruleRef}`);
+      if (typeof rule.upperExclusive !== "number" || rule.upperExclusive <= rule.lowerInclusive || rule.upperExclusive > 1.000001) errors.push(`${variant.id}/${rule.ruleRef} upperExclusive must be greater than lowerInclusive and no more than 1.000001.`);
+      if (!routeIndex.has(rule.routeRef)) errors.push(`${variant.id}/${rule.ruleRef} references missing candidate route ${rule.routeRef}.`);
+      if (index === 0 && rule.lowerInclusive !== 0) errors.push(`${variant.id} routingRules must start at 0.`);
+      if (index > 0 && !sameNumber(rule.lowerInclusive, rules[index - 1].upperExclusive)) errors.push(`${variant.id} routingRules must be contiguous without gaps or overlap.`);
+    }
+    if (rules.length > 0 && !sameNumber(rules.at(-1).upperExclusive, 1.000001)) errors.push(`${variant.id} routingRules must end at 1.000001 so probability 1 is included.`);
+    if (!sameSet(rules.map((item) => item.routeRef), routes.map((item) => item.routeRef))) errors.push(`${variant.id} routingRules must make every candidate route reachable exactly once.`);
+
+    const dimensions = new Set();
+    for (const sourceRoute of baseline.routes || []) {
+      const candidateRoute = routes.find((item) => item.routeRef === sourceRoute.routeRef);
+      if (!candidateRoute) continue;
+      if (candidateRoute.routeType !== sourceRoute.routeType) dimensions.add("route");
+      if (candidateRoute.authorityRef !== sourceRoute.authorityRef) dimensions.add("authority");
+      if (candidateRoute.capabilityRequirement !== sourceRoute.capabilityRequirement) dimensions.add("capability");
+      if (!sameValue(candidateRoute.evidenceRequired, sourceRoute.evidenceRequired)) dimensions.add("evidence");
+      if (candidateRoute.responseTimeBoundary !== sourceRoute.responseTimeBoundary) dimensions.add("response-time");
+    }
+    for (const sourceRule of baseline.routingRules || []) {
+      const candidateRule = rules.find((item) => item.routeRef === sourceRule.routeRef);
+      if (!candidateRule || candidateRule.routeRef !== sourceRule.routeRef) dimensions.add("route");
+      if (candidateRule && (!sameNumber(candidateRule.lowerInclusive, sourceRule.lowerInclusive) || !sameNumber(candidateRule.upperExclusive, sourceRule.upperExclusive))) dimensions.add("threshold");
+    }
+    if (!sameSet(variant.changedDimensions, [...dimensions])) errors.push(`${variant.id} changedDimensions must reproduce baseline-to-candidate differences.`);
+    if (!Array.isArray(variant.changes) || variant.changes.length === 0) errors.push(`${variant.id} changes must include exact candidate edits.`);
+    if (!sameSet((variant.changes || []).map((item) => item.dimension), [...dimensions])) errors.push(`${variant.id} changes must cover every changed dimension.`);
+    for (const change of variant.changes || []) {
+      const sourceRoute = (baseline.routes || []).find((item) => item.routeRef === change.routeRef);
+      const candidateRoute = routes.find((item) => item.routeRef === change.routeRef);
+      const sourceRule = (baseline.routingRules || []).find((item) => item.routeRef === change.routeRef);
+      const candidateRule = rules.find((item) => item.routeRef === change.routeRef);
+      let previousValue;
+      let currentValue;
+      if (change.dimension === "threshold") {
+        previousValue = sourceRule && { lowerInclusive: sourceRule.lowerInclusive, upperExclusive: sourceRule.upperExclusive };
+        currentValue = candidateRule && { lowerInclusive: candidateRule.lowerInclusive, upperExclusive: candidateRule.upperExclusive };
+      } else if (change.dimension === "authority") {
+        previousValue = sourceRoute?.authorityRef;
+        currentValue = candidateRoute?.authorityRef;
+      } else if (change.dimension === "capability") {
+        previousValue = sourceRoute?.capabilityRequirement;
+        currentValue = candidateRoute?.capabilityRequirement;
+      } else if (change.dimension === "evidence") {
+        previousValue = sourceRoute?.evidenceRequired;
+        currentValue = candidateRoute?.evidenceRequired;
+      } else if (change.dimension === "route") {
+        previousValue = sourceRoute?.routeType;
+        currentValue = candidateRoute?.routeType;
+      } else if (change.dimension === "response-time") {
+        previousValue = sourceRoute?.responseTimeBoundary;
+        currentValue = candidateRoute?.responseTimeBoundary;
+      }
+      if (!sameValue(change.previousValue, previousValue) || !sameValue(change.currentValue, currentValue)) errors.push(`${variant.id} change detail ${change.dimension}/${change.routeRef} does not reproduce baseline and candidate values.`);
+    }
+    if (!Array.isArray(variant.reviewedBy) || variant.reviewedBy.length === 0) errors.push(`${variant.id} reviewedBy must include at least one accountable reviewer.`);
+    if (!Array.isArray(variant.evidenceRefs) || variant.evidenceRefs.length === 0) errors.push(`${variant.id} evidenceRefs must include at least one item.`);
+    if (variant.authorizationBoundary !== "reviewed-candidate-only-not-selected-authorized-or-active") errors.push(`${variant.id} authorizationBoundary must remain reviewed-candidate-only-not-selected-authorized-or-active.`);
+    if (variant.automaticSelection !== false || variant.automaticMutation !== false) errors.push(`${variant.id} automaticSelection and automaticMutation must be false.`);
+    const triggerTypes = new Set((variant.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", variant.id)?.triggerType));
+    if (variant.status !== "reviewed" && !triggerTypes.has("counterfactual-variant-unreviewed")) errors.push(`${variant.id} non-reviewed candidate requires a counterfactual-variant-unreviewed governance trigger.`);
+    variant.__routeIndex = routeIndex;
+    variant.__ruleIndex = ruleIndex;
+  }
+
+  for (const replay of policyCounterfactualReplays) {
+    for (const field of ["variantRef", "decisionRef", "pairRef", "baselineSnapshotRef", "replayedAt", "replayedBy", "baselineRuleRef", "baselineRouteRef", "counterfactualRuleRef", "counterfactualRouteRef", "evidenceStatus", "counterfactualBoundary", "status"]) str(replay, field, replay.id);
+    const variant = ref(counterfactualVariantIndex, replay.variantRef, "policy counterfactual variant", replay.id);
+    const decision = ref(escalationDecisionIndex, replay.decisionRef, "selective escalation decision", replay.id);
+    const pair = ref(pairIndex, replay.pairRef, "decision-outcome pair", replay.id);
+    const baseline = ref(routePolicySnapshotIndex, replay.baselineSnapshotRef, "baseline route-policy snapshot", replay.id);
+    if (!variant || !decision || !pair || !baseline) continue;
+    if (variant.baselineSnapshotRef !== replay.baselineSnapshotRef) errors.push(`${replay.id} baselineSnapshotRef must match its variant.`);
+    if (decision.pairRef !== replay.pairRef) errors.push(`${replay.id} pairRef must match the preserved decision pairRef.`);
+    const evidence = replay.evidenceSnapshot || {};
+    for (const [field, value] of Object.entries({ pairRef: pair.id, forecastProbability: pair.forecastProbability, sourceEvidenceOriginRef: pair.sourceEvidenceOriginRef, evidenceOriginRef: pair.evidenceOriginRef, observationWindow: pair.observationWindow })) {
+      if (!sameValue(evidence[field], value)) errors.push(`${replay.id} evidenceSnapshot.${field} must reproduce the unchanged pair value.`);
+    }
+    const baselineRules = (baseline.routingRules || []).filter((rule) => pair.forecastProbability >= rule.lowerInclusive && pair.forecastProbability < rule.upperExclusive);
+    if (baselineRules.length !== 1) errors.push(`${replay.id} forecastProbability must match exactly one baseline routing rule.`);
+    const baselineRule = baselineRules[0];
+    if (baselineRule && replay.baselineRuleRef !== baselineRule.ruleRef) errors.push(`${replay.id} baselineRuleRef must reproduce as ${baselineRule.ruleRef}.`);
+    if (baselineRule && replay.baselineRouteRef !== baselineRule.routeRef) errors.push(`${replay.id} baselineRouteRef must reproduce as ${baselineRule.routeRef}.`);
+    if (replay.baselineRuleRef !== decision.selectedRuleRef || replay.baselineRouteRef !== decision.recommendedRouteRef) errors.push(`${replay.id} baseline policy output must match the preserved decision recommendation.`);
+    const counterfactualRules = (variant.routingRules || []).filter((rule) => pair.forecastProbability >= rule.lowerInclusive && pair.forecastProbability < rule.upperExclusive);
+    if (counterfactualRules.length !== 1) errors.push(`${replay.id} forecastProbability must match exactly one counterfactual routing rule.`);
+    const counterfactualRule = counterfactualRules[0];
+    if (counterfactualRule && replay.counterfactualRuleRef !== counterfactualRule.ruleRef) errors.push(`${replay.id} counterfactualRuleRef must reproduce as ${counterfactualRule.ruleRef}.`);
+    if (counterfactualRule && replay.counterfactualRouteRef !== counterfactualRule.routeRef) errors.push(`${replay.id} counterfactualRouteRef must reproduce as ${counterfactualRule.routeRef}.`);
+    const routeChanged = replay.baselineRouteRef !== replay.counterfactualRouteRef;
+    if (replay.routeChanged !== routeChanged) errors.push(`${replay.id} routeChanged must reproduce as ${routeChanged}.`);
+    const impacts = Array.isArray(replay.lossBoundaryImpacts) ? replay.lossBoundaryImpacts : [];
+    if (impacts.length === 0) errors.push(`${replay.id} lossBoundaryImpacts must include at least one explicit impact hypothesis.`);
+    for (const impact of impacts) {
+      const consequencePolicy = ref(consequencePolicyIndex, impact.consequencePolicyRef, "consequence policy", replay.id);
+      if (!consequencePolicy) continue;
+      const qualityIntent = loaded.get(consequencePolicy.sourcePackageRef)?.qualityIntents.get(consequencePolicy.qualityIntentRef);
+      if (impact.qualityIntentRef !== consequencePolicy.qualityIntentRef || !qualityIntent) errors.push(`${replay.id} impact qualityIntentRef must resolve through its consequence policy.`);
+      if (impact.lossBoundary !== consequencePolicy.lossBoundary || impact.lossBoundary !== qualityIntent?.lossBoundary) errors.push(`${replay.id} impact lossBoundary must reproduce the consequence policy and Quality Intent.`);
+      if (impact.severity !== consequencePolicy.lossBoundarySeverity || impact.severity !== qualityIntent?.lossBoundarySeverity) errors.push(`${replay.id} impact severity must reproduce the consequence policy and Quality Intent.`);
+      if (!Array.isArray(impact.evidenceRefs) || impact.evidenceRefs.length === 0) errors.push(`${replay.id} impact evidenceRefs must include at least one item.`);
+      if (impact.hypothesisStatus !== "counterfactual-not-observed") errors.push(`${replay.id} impact hypothesisStatus must remain counterfactual-not-observed.`);
+    }
+    if (replay.baselineDecisionPreserved !== true) errors.push(`${replay.id} baselineDecisionPreserved must be true.`);
+    if (replay.counterfactualBoundary !== "hypothesis-evidence-not-observed-outcome-policy-selection-or-authority") errors.push(`${replay.id} counterfactualBoundary must remain hypothesis-evidence-not-observed-outcome-policy-selection-or-authority.`);
+    const triggerTypes = new Set((replay.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", replay.id)?.triggerType));
+    if (routeChanged && !triggerTypes.has("counterfactual-route-change")) errors.push(`${replay.id} route change requires a counterfactual-route-change governance trigger.`);
+    const severeImpact = impacts.some((impact) => ["high", "critical"].includes(impact.severity) && ["increased-exposure", "tradeoff", "uncertain"].includes(impact.direction));
+    if (severeImpact && !triggerTypes.has("counterfactual-loss-boundary-review")) errors.push(`${replay.id} severe or uncertain loss-boundary impact requires a counterfactual-loss-boundary-review governance trigger.`);
+    if (replay.evidenceStatus !== "verified" && !triggerTypes.has("counterfactual-evidence-unverified")) errors.push(`${replay.id} non-verified replay evidence requires a counterfactual-evidence-unverified governance trigger.`);
+  }
+
+  for (const assessment of policyCounterfactualAssessments) {
+    for (const field of ["title", "dataSufficiency", "assessmentSignal", "interpretation", "status"]) str(assessment, field, assessment.id);
+    const variants = (assessment.variantRefs || []).map((id) => ref(counterfactualVariantIndex, id, "policy counterfactual variant", assessment.id)).filter(Boolean);
+    const replays = (assessment.replayRefs || []).map((id) => ref(counterfactualReplayIndex, id, "policy counterfactual replay", assessment.id)).filter(Boolean);
+    if (!Number.isInteger(assessment.minimumReplayCount) || assessment.minimumReplayCount < 2) errors.push(`${assessment.id} minimumReplayCount must be at least 2.`);
+    for (const replay of replays) if (!assessment.variantRefs?.includes(replay.variantRef)) errors.push(`${assessment.id} replay ${replay.id} must use an assessed variant.`);
+    const routeChangeCount = replays.filter((item) => item.routeChanged === true).length;
+    const impacts = replays.flatMap((item) => item.lossBoundaryImpacts || []);
+    const severeImpactCount = impacts.filter((impact) => ["high", "critical"].includes(impact.severity) && ["increased-exposure", "tradeoff", "uncertain"].includes(impact.direction)).length;
+    const verifiedReplayCount = replays.filter((item) => item.evidenceStatus === "verified").length;
+    for (const [field, value] of Object.entries({ variantCount: variants.length, replayCount: replays.length, routeChangeCount, lossBoundaryImpactCount: impacts.length, severeImpactCount, verifiedReplayCount })) if (!sameNumber(assessment[field], value)) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const dataSufficiency = replays.length >= assessment.minimumReplayCount && verifiedReplayCount === replays.length && variants.every((item) => item.status === "reviewed") ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== dataSufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${dataSufficiency}.`);
+    const signal = dataSufficiency === "insufficient" ? "insufficient-data" : routeChangeCount > 0 || severeImpactCount > 0 ? "governance-required" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (!Array.isArray(assessment.reviewedBy) || assessment.reviewedBy.length === 0) errors.push(`${assessment.id} reviewedBy must include at least one accountable reviewer.`);
+    if (assessment.interpretation !== "counterfactual-replay-evidence-only-not-observed-outcome-quality-optimality-causality-or-authority") errors.push(`${assessment.id} interpretation must remain counterfactual-replay-evidence-only-not-observed-outcome-quality-optimality-causality-or-authority.`);
+    const triggerTypes = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (dataSufficiency === "insufficient" && !triggerTypes.has("counterfactual-assessment-insufficient")) errors.push(`${assessment.id} insufficient counterfactual evidence requires a counterfactual-assessment-insufficient governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -1306,6 +1456,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that reviewer agreement, majority, seniority, confidence, or adjudication proves semantic truth, quality, competence, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming reviewer agreement, majority, seniority, confidence, or adjudication proves semantic truth, quality, competence, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that counterfactual replay count, route-change rate, or hypothesized loss-boundary direction proves observed outcome, policy quality, optimality, causality, competence, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that counterfactual replay count, route-change rate, or hypothesized loss-boundary direction proves observed outcome, policy quality, optimality, causality, competence, selection, authorization, or authority.`);
   }
 
   results.push({
@@ -1343,6 +1494,9 @@ function validatePackage(pkg, packagePath) {
       rubricRevisionDecisions: rubricRevisionDecisions.length,
       rubricRevisionImplementations: rubricRevisionImplementations.length,
       rubricRevisionAssessments: rubricRevisionAssessments.length,
+      policyCounterfactualVariants: policyCounterfactualVariants.length,
+      policyCounterfactualReplays: policyCounterfactualReplays.length,
+      policyCounterfactualAssessments: policyCounterfactualAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -1362,5 +1516,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, replay state, rollback preservation, and policy conformance only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, resolution quality, rubric improvement, reviewer competence, semantic correctness, service availability, current quality, safety, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, rollback preservation, and policy conformance only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, resolution quality, rubric or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, policy selection, or decision authority."
 }, null, 2));

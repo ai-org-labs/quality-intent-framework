@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Add the smallest standalone, domain-general learning loop that converts evidence-backed adjudication feedback into explicit rubric revision candidates and governed decisions while preserving alternatives, dissent, historical rubric authority, replay requirements, and rollback.",
-  "updated_at": "2026-10-06T04:33:52.969Z",
+  "content": "Add the smallest standalone calibration-report lifecycle that compares preserved decisions under an unchanged baseline and a reviewed, non-authoritative counterfactual route-policy variant, reproduces route changes, records hypothetical loss-boundary impacts, and forces governance without optimizing or authorizing policy.",
+  "updated_at": "2026-10-07T04:35:39.777Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MUW6MTEN-OCC7U1",
-  "source_decision_record_id": "DEC-MUW6OT3B-489AUU",
+  "source_session_id": "SESS-MUXM5BRR-QQAG9C",
+  "source_decision_record_id": "DEC-MUXM6Y67-XJICLS",
   "declared_complete_at": null
 }

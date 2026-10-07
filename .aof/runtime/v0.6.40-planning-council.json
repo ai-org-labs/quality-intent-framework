@@ -1,0 +1,404 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-10-07T04:36:03.856Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MUXM5BRR-QQAG9C",
+    "stage": "planning",
+    "executionId": "CRUN-MUXM7GR2-ESR8H5",
+    "executionStatus": "prepared",
+    "invokedModel": false,
+    "seatCount": 3,
+    "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Builder(design-builder-01) -> Visionary(strategy-lead-01) -> Guardian(risk-reviewer-01)",
+    "lastCouncilExecutionId": "CRUN-MUXM7GR2-ESR8H5",
+    "escalation": null,
+    "plan": {
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "required_roles": [
+        "Builder",
+        "Visionary",
+        "Guardian"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUXM5BRR-QQAG9C",
+              "decision_id": "DEC-MUXM6Y67-XJICLS",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types.",
+              "intent": "Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority.",
+              "active_context": "context: Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types. | success: Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority.",
+              "context_snapshot_id": "CTX-MUXM5LDV-PAPMP2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority."
+            },
+            "task": {
+              "request": "Advance standalone QIF after v0.6.39 using AOF v12.2.0 and current evaluation evidence. Build and release v0.6.40 Policy Counterfactual Replay: replay preserved decisions against reviewed candidate route policies to expose changed routes and hypothetical loss-boundary consequences without optimizing, ranking, selecting, authorizing, or mutating policy automatically. Complete Need Validation before Charter, use Visionary/Builder/Guardian judgment, preserve baseline evidence and counterfactual uncertainty, and keep QIF domain-general.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0640.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0640.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0640.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0640.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0640.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUXM6Y67-XJICLS"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUXM5BRR-QQAG9C",
+              "decision_id": "DEC-MUXM6Y67-XJICLS",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types.",
+              "intent": "Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority.",
+              "active_context": "context: Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types. | success: Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority.",
+              "context_snapshot_id": "CTX-MUXM5LDV-PAPMP2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority."
+            },
+            "task": {
+              "request": "Advance standalone QIF after v0.6.39 using AOF v12.2.0 and current evaluation evidence. Build and release v0.6.40 Policy Counterfactual Replay: replay preserved decisions against reviewed candidate route policies to expose changed routes and hypothetical loss-boundary consequences without optimizing, ranking, selecting, authorizing, or mutating policy automatically. Complete Need Validation before Charter, use Visionary/Builder/Guardian judgment, preserve baseline evidence and counterfactual uncertainty, and keep QIF domain-general.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0640.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0640.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0640.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0640.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0640.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUXM6Y67-XJICLS"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUXM5BRR-QQAG9C",
+              "decision_id": "DEC-MUXM6Y67-XJICLS",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types.",
+              "intent": "Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority.",
+              "active_context": "context: Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types. | success: Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority.",
+              "context_snapshot_id": "CTX-MUXM5LDV-PAPMP2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority."
+            },
+            "task": {
+              "request": "Advance standalone QIF after v0.6.39 using AOF v12.2.0 and current evaluation evidence. Build and release v0.6.40 Policy Counterfactual Replay: replay preserved decisions against reviewed candidate route policies to expose changed routes and hypothetical loss-boundary consequences without optimizing, ranking, selecting, authorizing, or mutating policy automatically. Complete Need Validation before Charter, use Visionary/Builder/Guardian judgment, preserve baseline evidence and counterfactual uncertainty, and keep QIF domain-general.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0640.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0640.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0640.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0640.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0640.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUXM6Y67-XJICLS"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MUXM7GR2-ESR8H5",
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Builder",
+        "Visionary",
+        "Guardian"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "status": "prepared",
+      "started_at": "2026-10-07T04:36:03.853Z",
+      "completed_at": "2026-10-07T04:36:03.853Z",
+      "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Builder(design-builder-01) -> Visionary(strategy-lead-01) -> Guardian(risk-reviewer-01)",
+      "steps": [
+        {
+          "step_id": "CRUN-MUXM7GR2-ESR8H5-STEP-01",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Builder planning call for actor design-builder-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUXM5BRR-QQAG9C",
+              "decision_id": "DEC-MUXM6Y67-XJICLS",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types.",
+              "intent": "Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority.",
+              "active_context": "context: Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types. | success: Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority.",
+              "context_snapshot_id": "CTX-MUXM5LDV-PAPMP2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority."
+            },
+            "task": {
+              "request": "Advance standalone QIF after v0.6.39 using AOF v12.2.0 and current evaluation evidence. Build and release v0.6.40 Policy Counterfactual Replay: replay preserved decisions against reviewed candidate route policies to expose changed routes and hypothetical loss-boundary consequences without optimizing, ranking, selecting, authorizing, or mutating policy automatically. Complete Need Validation before Charter, use Visionary/Builder/Guardian judgment, preserve baseline evidence and counterfactual uncertainty, and keep QIF domain-general.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0640.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0640.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0640.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0640.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0640.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUXM6Y67-XJICLS"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MUXM7GR2-ESR8H5-STEP-02",
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Visionary planning call for actor strategy-lead-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUXM5BRR-QQAG9C",
+              "decision_id": "DEC-MUXM6Y67-XJICLS",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types.",
+              "intent": "Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority.",
+              "active_context": "context: Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types. | success: Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority.",
+              "context_snapshot_id": "CTX-MUXM5LDV-PAPMP2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority."
+            },
+            "task": {
+              "request": "Advance standalone QIF after v0.6.39 using AOF v12.2.0 and current evaluation evidence. Build and release v0.6.40 Policy Counterfactual Replay: replay preserved decisions against reviewed candidate route policies to expose changed routes and hypothetical loss-boundary consequences without optimizing, ranking, selecting, authorizing, or mutating policy automatically. Complete Need Validation before Charter, use Visionary/Builder/Guardian judgment, preserve baseline evidence and counterfactual uncertainty, and keep QIF domain-general.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0640.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0640.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0640.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0640.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0640.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUXM6Y67-XJICLS"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MUXM7GR2-ESR8H5-STEP-03",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Guardian planning call for actor risk-reviewer-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MUXM5BRR-QQAG9C",
+              "decision_id": "DEC-MUXM6Y67-XJICLS",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types.",
+              "intent": "Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority.",
+              "active_context": "context: Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types. | success: Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority.",
+              "context_snapshot_id": "CTX-MUXM5LDV-PAPMP2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the standalone, domain-general calibration-report runtime: reviewed counterfactual route-policy variants, deterministic same-evidence replay of preserved decisions, explicit route-change and hypothetical loss-boundary impact records, aggregate sufficiency and governance, schemas, verifier, examples, fixtures, plain-language documentation, roadmap, and release evidence. Exclude UI, external integrations, policy optimization or ranking, automatic policy selection or authorization, automatic mutation, causal claims, employee scoring, operational guarantees, and unrelated package types. / How should improvement success be judged: which metric or end state matters most? => Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority."
+            },
+            "task": {
+              "request": "Advance standalone QIF after v0.6.39 using AOF v12.2.0 and current evaluation evidence. Build and release v0.6.40 Policy Counterfactual Replay: replay preserved decisions against reviewed candidate route policies to expose changed routes and hypothetical loss-boundary consequences without optimizing, ranking, selecting, authorizing, or mutating policy automatically. Complete Need Validation before Charter, use Visionary/Builder/Guardian judgment, preserve baseline evidence and counterfactual uncertainty, and keep QIF domain-general.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0640.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0640.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0640.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0640.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0640.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MUXM6Y67-XJICLS"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

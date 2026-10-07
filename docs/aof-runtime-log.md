@@ -2,6 +2,26 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.40 Policy Counterfactual Replay
+
+Date: 2026-10-07
+
+- Need / Intent / Context: v0.6.39 can govern rubric revision but cannot show how the same preserved evidence would route under a reviewed candidate route policy before authorization. v0.6.40 adds exact candidate variants, deterministic same-evidence replay, hypothetical loss-boundary impacts, aggregate assessment, and governance while keeping QIF standalone.
+- Latest public AOF v12.2.0 was confirmed through the public release list and used from clean checkout commit `fc7599b`.
+- Need Validation preceded Charter: `.aof/artifacts/need-validation/records/NVR-QIFV0640.json` then `.aof/artifacts/need-validation/project-charters/PCH-QIFV0640.json` in parent session `SESS-MUXM5BRR-QQAG9C`; task `TASK-058` records execution.
+- Council direction: Visionary requires a pre-authorization learning step; Builder selected three calibration-report entities; Guardian requires identical evidence, immutable baseline decisions, candidate-only authority, hypothetical impact labels, governance, no automatic policy action, and anti-surveillance. Evidence: `.aof/runtime/v0.6.40-planning-review.json`.
+- Actor packet `.aof/artifacts/actor-skill-packets/ASP-QIFV0640.json` records schema, deterministic-verifier, and counterfactual-evaluation skills; QIF/AOF resources; identical-evidence, hypothesis, no-optimization, no-mutation, no-count-quality, and anti-surveillance policies; acceptance criteria; and blocking Guardian review evidence.
+- Trend evidence: Anthropic CHIVE evaluates behavior explanations through counterfactual edits and measured outcomes without treating explanations as ground truth (https://alignment.anthropic.com/2026/chive/); OpenAI agent eval guidance recommends repeatable datasets and trace grading for routing changes (https://developers.openai.com/api/docs/guides/agent-evals); NIST AITE uses blind sequestered data to reduce contamination (https://www.nist.gov/news-events/news/2026/07/announcing-nists-artificial-intelligence-technology-evaluation-aite); NIST TEVV-Athlon emphasizes customized assessment against organizational goals (https://www.nist.gov/artificial-intelligence/ai-research/tevv-athlon-framework-evaluating-ai-systems).
+- Judgment: a counterfactual route change is evidence for review, not proof of a better policy or a real outcome. QIF must preserve the original decision, keep evidence identical, label loss-boundary effects as hypotheses, and leave selection and authority to governance.
+- Implementation: `calibration-report` now carries `PolicyCounterfactualVariant`, `PolicyCounterfactualReplay`, and `PolicyCounterfactualAssessment`; the verifier reproduces exact changes, route closure, evidence identity, baseline and candidate routing, loss-boundary linkage, counts, sufficiency, boundaries, and governance.
+- Verification: targeted validation and the full retained fixture suite passed at `16/16` positive and `972/972` negative before AOF review.
+- Self-review: AOF `self-audit-record` wrote `.aof/context/active/framework-self-audit.json`; it records illustrative, unverified, and non-sequestered evidence plus unresolved policy-gaming, contamination, representativeness, observed-outcome, semantic-validity, and authority risks.
+- Review: AOF `council-exec --stage review`, Visionary/Builder/Guardian role results, and `.aof/runtime/v0.6.40-final-review.json` approved release with identical-evidence, hypothetical-impact, no-automatic-selection, no-automatic-mutation, and anti-surveillance boundaries.
+- Retrospective: AOF `learning-loop-snapshot` wrote `.aof/context/active/learning-loop.json` and preserves v0.6.41 as the next value slice.
+- AOF organization verification passed `277/277`; `TASK-058` is done and `.aof/runtime/v0.6.40-post-situation.json` found no truth conflict.
+- Remaining boundary: the committed variant and replay are illustrative, unverified, and not sequestered. Real blind cases, observed outcomes, contamination review, evaluator-affordance review, and policy authority remain pilot and governance work.
+- Next: v0.6.41 Judge Consequence and Abstention Robustness, v0.6.42 Sequestered Replay and Policy-Gaming Detection, then v0.7 Empirical Calibration.
+
 ## v0.6.39 Adjudication Feedback and Rubric Revision
 
 Date: 2026-10-06

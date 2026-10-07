@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-07T04:35:05.601Z",
+  "alternative_analysis_id": "ALT-MUXM67SX-USTJNI",
+  "subject_need": "Expose how reviewed candidate route policies would affect preserved decisions before policy authorization.",
+  "alternative_solutions": [
+    "Add policy counterfactual variants, deterministic same-evidence replays, hypothetical loss-boundary impacts, aggregate assessment, and governance to calibration-report.",
+    "Reuse threshold robustness only, accepting that it cannot represent route authority, capability, evidence, or response-time changes.",
+    "Perform prose-only manual review outside QIF, accepting weak reproducibility and traceability."
+  ],
+  "non_solution_options": [
+    "Automatically optimize or select the candidate policy with the best replay result."
+  ],
+  "defer_options": [
+    "Wait for real empirical outcomes before defining the structural replay contract."
+  ],
+  "stop_options": [
+    "Do not create the project if replay cannot preserve identical evidence, baseline authority, hypothetical status, and no-automatic-selection boundaries."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUXM5LDY-DGKE6W"
+}

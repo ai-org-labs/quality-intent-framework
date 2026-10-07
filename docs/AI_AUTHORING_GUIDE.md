@@ -77,6 +77,7 @@ Use additional documents when needed:
 | Preserve conflicting reviewer judgments and explain adjudication without treating consensus as truth | `docs/qif-v0.6.37-reviewer-disagreement-calibration.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Show which route policy governed a decision, what later changed, and whether the decision must be revalidated | `docs/qif-v0.6.38-route-policy-drift-revalidation.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Turn adjudicated ambiguity into a reviewable, reversible rubric change without silently changing the rules | `docs/qif-v0.6.39-adjudication-feedback-rubric-revision.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
+| Compare the same preserved decision under a reviewed candidate route policy without selecting or authorizing that policy | `docs/qif-v0.6.40-policy-counterfactual-replay.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Understand quality theory background | `docs/quality-theory-report.md` |
 
 ## Required Framing

@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-06T04:40:56.165Z",
+  "updated_at": "2026-10-07T04:44:59.873Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means a human or AI can reproduce which adjudicated disagreements produced feedback, which rubric clause is challenged, what exact revision and alternatives were considered, who reviewed and authorized the decision, what evidence supports implementation or rejection, which cases must be replayed, and whether rollback remains possible. Feedback volume, agreement, acceptance rate, and score change remain evidence, never quality, truth, competence, causality, or authority.",
-      "recorded_at": "2026-10-06T04:32:29.916Z",
+      "answer": "Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority.",
+      "recorded_at": "2026-10-07T04:34:36.553Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MUW6MTEN-OCC7U1",
+      "source_session_id": "SESS-MUXM5BRR-QQAG9C",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The raw continuation request is reframed into the smallest lifecycle gap after v0.6.38: disagreement and policy drift are traceable, but rubric ambiguity cannot yet become a reviewed, reversible change without manual or silent mutation.",
-      "recorded_at": "2026-10-06T04:33:52.971Z",
+      "answer": "The broad continuation request is reframed into the missing pre-authorization evidence contract between governed revision candidates and policy decisions; threshold-only replay and prose-only review are insufficient.",
+      "recorded_at": "2026-10-07T04:35:39.778Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MUW6MTEN-OCC7U1",
-      "source_decision_record_id": "DEC-MUW6OT3B-489AUU"
+      "source_session_id": "SESS-MUXM5BRR-QQAG9C",
+      "source_decision_record_id": "DEC-MUXM6Y67-XJICLS"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Committed feedback and revision evidence remains illustrative, unverified, and replay-incomplete; semantic improvement, fairness, actual authority, and causal claims require independent pilot evidence and governance.",
-      "recorded_at": "2026-10-06T04:40:56.165Z",
-      "expectation_state": "QIF v0.6.39 adds an auditable adjudication-feedback-to-rubric-revision lifecycle with preserved alternatives, accountable decisions, implementation replay, rollback, and learning sufficiency boundaries.",
-      "mismatch_state": "Committed feedback and revision evidence remains illustrative, unverified, and replay-incomplete; semantic improvement, fairness, actual authority, and causal claims require independent pilot evidence and governance.",
-      "scale_direction": "Run Council review and release v0.6.39, then implement v0.6.40.",
-      "source_session_id": "SESS-MUW6MTEN-OCC7U1",
-      "source_decision_record_id": "DEC-MUW6OT3B-489AUU"
+      "answer": "The committed variant and replay are illustrative, unverified, and not sequestered; policy-gaming resistance, contamination controls, representative cases, observed outcomes, semantic validity, and actual authorization remain unresolved.",
+      "recorded_at": "2026-10-07T04:44:59.873Z",
+      "expectation_state": "QIF v0.6.40 adds reviewed non-authoritative route-policy variants, deterministic same-evidence replay, explicit baseline and candidate routing, hypothetical loss-boundary impacts, aggregate assessment, and governance.",
+      "mismatch_state": "The committed variant and replay are illustrative, unverified, and not sequestered; policy-gaming resistance, contamination controls, representative cases, observed outcomes, semantic validity, and actual authorization remain unresolved.",
+      "scale_direction": "Run Council review and release v0.6.40, then implement v0.6.41 Judge Consequence and Abstention Robustness.",
+      "source_session_id": "SESS-MUXM5BRR-QQAG9C",
+      "source_decision_record_id": "DEC-MUXM6Y67-XJICLS"
     }
   ]
 }

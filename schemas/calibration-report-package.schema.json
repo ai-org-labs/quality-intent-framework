@@ -38,6 +38,9 @@
     "rubricRevisionDecisions",
     "rubricRevisionImplementations",
     "rubricRevisionAssessments",
+    "policyCounterfactualVariants",
+    "policyCounterfactualReplays",
+    "policyCounterfactualAssessments",
     "governanceTriggers",
     "verifierBoundary"
   ],
@@ -77,6 +80,9 @@
     "rubricRevisionDecisions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/rubricRevisionDecision" } },
     "rubricRevisionImplementations": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/rubricRevisionImplementation" } },
     "rubricRevisionAssessments": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/rubricRevisionAssessment" } },
+    "policyCounterfactualVariants": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/policyCounterfactualVariant" } },
+    "policyCounterfactualReplays": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/policyCounterfactualReplay" } },
+    "policyCounterfactualAssessments": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/policyCounterfactualAssessment" } },
     "governanceTriggers": { "type": "array", "items": { "$ref": "#/$defs/governanceTrigger" } },
     "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
   },
@@ -1053,6 +1059,104 @@
         "status": { "enum": ["draft", "reviewed", "retired"] }
       }
     },
+    "policyCounterfactualVariant": {
+      "type": "object",
+      "required": ["id", "title", "baselineSnapshotRef", "changedDimensions", "changes", "routes", "routingRules", "reviewedBy", "evidenceRefs", "authorizationBoundary", "automaticSelection", "automaticMutation", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "baselineSnapshotRef": { "$ref": "#/$defs/id" },
+        "changedDimensions": { "type": "array", "minItems": 1, "items": { "enum": ["threshold", "authority", "capability", "evidence", "route", "response-time"] } },
+        "changes": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/policyChangeDetail" } },
+        "routes": { "type": "array", "minItems": 4, "items": { "$ref": "#/$defs/snapshotRoute" } },
+        "routingRules": { "type": "array", "minItems": 4, "items": { "$ref": "#/$defs/snapshotRoutingRule" } },
+        "reviewedBy": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "evidenceRefs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "authorizationBoundary": { "const": "reviewed-candidate-only-not-selected-authorized-or-active" },
+        "automaticSelection": { "const": false },
+        "automaticMutation": { "const": false },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "status": { "enum": ["draft", "reviewed", "rejected", "retired"] }
+      }
+    },
+    "counterfactualEvidenceSnapshot": {
+      "type": "object",
+      "required": ["pairRef", "forecastProbability", "sourceEvidenceOriginRef", "evidenceOriginRef", "observationWindow"],
+      "additionalProperties": false,
+      "properties": {
+        "pairRef": { "$ref": "#/$defs/id" },
+        "forecastProbability": { "$ref": "#/$defs/score" },
+        "sourceEvidenceOriginRef": { "$ref": "#/$defs/id" },
+        "evidenceOriginRef": { "$ref": "#/$defs/id" },
+        "observationWindow": { "type": "string", "minLength": 1 }
+      }
+    },
+    "counterfactualLossBoundaryImpact": {
+      "type": "object",
+      "required": ["consequencePolicyRef", "qualityIntentRef", "lossBoundary", "severity", "direction", "rationale", "evidenceRefs", "hypothesisStatus"],
+      "additionalProperties": false,
+      "properties": {
+        "consequencePolicyRef": { "$ref": "#/$defs/id" },
+        "qualityIntentRef": { "$ref": "#/$defs/id" },
+        "lossBoundary": { "type": "string", "minLength": 1 },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "direction": { "enum": ["increased-exposure", "reduced-exposure", "tradeoff", "unchanged", "uncertain"] },
+        "rationale": { "type": "string", "minLength": 1 },
+        "evidenceRefs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "hypothesisStatus": { "const": "counterfactual-not-observed" }
+      }
+    },
+    "policyCounterfactualReplay": {
+      "type": "object",
+      "required": ["id", "variantRef", "decisionRef", "pairRef", "baselineSnapshotRef", "replayedAt", "replayedBy", "evidenceSnapshot", "baselineRuleRef", "baselineRouteRef", "counterfactualRuleRef", "counterfactualRouteRef", "routeChanged", "lossBoundaryImpacts", "evidenceStatus", "baselineDecisionPreserved", "counterfactualBoundary", "governanceTriggerRefs", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "variantRef": { "$ref": "#/$defs/id" },
+        "decisionRef": { "$ref": "#/$defs/id" },
+        "pairRef": { "$ref": "#/$defs/id" },
+        "baselineSnapshotRef": { "$ref": "#/$defs/id" },
+        "replayedAt": { "type": "string", "format": "date-time" },
+        "replayedBy": { "type": "string", "minLength": 1 },
+        "evidenceSnapshot": { "$ref": "#/$defs/counterfactualEvidenceSnapshot" },
+        "baselineRuleRef": { "$ref": "#/$defs/id" },
+        "baselineRouteRef": { "$ref": "#/$defs/id" },
+        "counterfactualRuleRef": { "$ref": "#/$defs/id" },
+        "counterfactualRouteRef": { "$ref": "#/$defs/id" },
+        "routeChanged": { "type": "boolean" },
+        "lossBoundaryImpacts": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/counterfactualLossBoundaryImpact" } },
+        "evidenceStatus": { "enum": ["verified", "unverified", "example-only"] },
+        "baselineDecisionPreserved": { "const": true },
+        "counterfactualBoundary": { "const": "hypothesis-evidence-not-observed-outcome-policy-selection-or-authority" },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "status": { "enum": ["draft", "reviewed", "retired"] }
+      }
+    },
+    "policyCounterfactualAssessment": {
+      "type": "object",
+      "required": ["id", "title", "variantRefs", "replayRefs", "minimumReplayCount", "variantCount", "replayCount", "routeChangeCount", "lossBoundaryImpactCount", "severeImpactCount", "verifiedReplayCount", "dataSufficiency", "assessmentSignal", "reviewedBy", "governanceTriggerRefs", "interpretation", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "variantRefs": { "$ref": "#/$defs/refArray" },
+        "replayRefs": { "$ref": "#/$defs/refArray" },
+        "minimumReplayCount": { "type": "integer", "minimum": 2 },
+        "variantCount": { "type": "integer", "minimum": 1 },
+        "replayCount": { "type": "integer", "minimum": 1 },
+        "routeChangeCount": { "type": "integer", "minimum": 0 },
+        "lossBoundaryImpactCount": { "type": "integer", "minimum": 0 },
+        "severeImpactCount": { "type": "integer", "minimum": 0 },
+        "verifiedReplayCount": { "type": "integer", "minimum": 0 },
+        "dataSufficiency": { "enum": ["insufficient", "sufficient"] },
+        "assessmentSignal": { "enum": ["insufficient-data", "governance-required", "observed-no-structural-alerts"] },
+        "reviewedBy": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "interpretation": { "const": "counterfactual-replay-evidence-only-not-observed-outcome-quality-optimality-causality-or-authority" },
+        "status": { "enum": ["draft", "reviewed", "retired"] }
+      }
+    },
     "uncertaintyBoundary": {
       "type": "object",
       "required": ["pairCount", "empiricalPairCount", "minimumPairCount", "minimumEmpiricalPairCount", "dataSufficiency", "limitations"],
@@ -1092,7 +1196,7 @@
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" },
-        "triggerType": { "enum": ["insufficient-data", "non-empirical-evidence", "confidence-semantics-mismatch", "calculation-mismatch", "calibration-gap", "stale-evidence", "missing-outcomes", "duplicate-observations", "dependence-unresolved", "high-risk-segment-gap", "drift-not-assessed", "drift-detected", "consequence-policy-unreviewed", "severe-false-assurance", "consequence-threshold-exceeded", "threshold-brittleness", "route-policy-unreviewed", "route-deviation", "route-authority-unresolved", "route-evidence-unverified", "escalated-outcome-failed", "resolution-policy-unreviewed", "resolution-time-exceeded", "resolution-timeout", "resolution-evidence-unverified", "resolution-availability-unmet", "resolution-redirect-invalid", "reviewer-policy-unreviewed", "reviewer-independence-unresolved", "reviewer-evidence-unverified", "reviewer-disagreement-unresolved", "dissent-not-preserved", "adjudicator-conflict", "adjudication-evidence-unverified", "unsupported-override", "policy-snapshot-unapproved", "policy-change-unauthorized", "policy-drift-material", "policy-decision-stale", "revalidation-missing", "revalidation-unresolved", "revalidation-evidence-unverified", "rubric-feedback-unverified", "rubric-candidate-unreviewed", "rubric-decision-unauthorized", "rubric-replay-incomplete", "rubric-implementation-mismatch", "rubric-learning-insufficient", "other"] },
+        "triggerType": { "enum": ["insufficient-data", "non-empirical-evidence", "confidence-semantics-mismatch", "calculation-mismatch", "calibration-gap", "stale-evidence", "missing-outcomes", "duplicate-observations", "dependence-unresolved", "high-risk-segment-gap", "drift-not-assessed", "drift-detected", "consequence-policy-unreviewed", "severe-false-assurance", "consequence-threshold-exceeded", "threshold-brittleness", "route-policy-unreviewed", "route-deviation", "route-authority-unresolved", "route-evidence-unverified", "escalated-outcome-failed", "resolution-policy-unreviewed", "resolution-time-exceeded", "resolution-timeout", "resolution-evidence-unverified", "resolution-availability-unmet", "resolution-redirect-invalid", "reviewer-policy-unreviewed", "reviewer-independence-unresolved", "reviewer-evidence-unverified", "reviewer-disagreement-unresolved", "dissent-not-preserved", "adjudicator-conflict", "adjudication-evidence-unverified", "unsupported-override", "policy-snapshot-unapproved", "policy-change-unauthorized", "policy-drift-material", "policy-decision-stale", "revalidation-missing", "revalidation-unresolved", "revalidation-evidence-unverified", "rubric-feedback-unverified", "rubric-candidate-unreviewed", "rubric-decision-unauthorized", "rubric-replay-incomplete", "rubric-implementation-mismatch", "rubric-learning-insufficient", "counterfactual-variant-unreviewed", "counterfactual-route-change", "counterfactual-loss-boundary-review", "counterfactual-evidence-unverified", "counterfactual-assessment-insufficient", "other"] },
         "reason": { "type": "string", "minLength": 1 },
         "sourceCalibrationReportRef": { "$ref": "#/$defs/id" },
         "severity": { "enum": ["low", "medium", "high", "critical"] },

@@ -1,6 +1,6 @@
 {
   "packageType": "calibration-report",
-  "runtimeVersion": "0.6.39",
+  "runtimeVersion": "0.6.40",
   "packageId": "CRPKG-001",
   "packageRefs": [
     {
@@ -1301,6 +1301,203 @@
       "status": "reviewed"
     }
   ],
+  "policyCounterfactualVariants": [
+    {
+      "id": "PCV-CR-001",
+      "title": "Illustrative lower proceed-threshold route-policy variant",
+      "baselineSnapshotRef": "RPS-CR-002",
+      "changedDimensions": [
+        "threshold"
+      ],
+      "changes": [
+        {
+          "dimension": "threshold",
+          "routeRef": "SER-CR-PROCEED",
+          "previousValue": {
+            "lowerInclusive": 0.75,
+            "upperExclusive": 1.000001
+          },
+          "currentValue": {
+            "lowerInclusive": 0.65,
+            "upperExclusive": 1.000001
+          },
+          "rationale": "Test whether a reviewed lower proceed boundary would reroute preserved cases; this is a candidate experiment, not a recommendation."
+        }
+      ],
+      "routes": [
+        {
+          "routeRef": "SER-CR-DEFER",
+          "routeType": "defer",
+          "authorityRef": "quality-governance-owner",
+          "capabilityRequirement": "Authority to pause the evaluated action and request stronger evidence.",
+          "evidenceRequired": [
+            "Reason for deferral",
+            "next evidence needed"
+          ],
+          "responseTimeBoundary": "Review before the decision window expires.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-SPECIALIST",
+          "routeType": "specialist-escalation",
+          "authorityRef": "financial-policy-specialist",
+          "capabilityRequirement": "Current specialist competence for the financial-limit loss boundary.",
+          "evidenceRequired": [
+            "Specialist identity and scope",
+            "review finding",
+            "decision rationale"
+          ],
+          "responseTimeBoundary": "Complete specialist review before financial authorization.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-HUMAN",
+          "routeType": "human-review",
+          "authorityRef": "customer-operations-governance-board",
+          "capabilityRequirement": "Accountable review of the declared loss boundary and current evidence.",
+          "evidenceRequired": [
+            "Reviewer identity",
+            "reviewed evidence",
+            "recorded disposition"
+          ],
+          "responseTimeBoundary": "Complete review within one business day.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-PROCEED",
+          "routeType": "proceed",
+          "authorityRef": "customer-operations-governance-board",
+          "capabilityRequirement": "Authority to accept the declared residual risk within this policy.",
+          "evidenceRequired": [
+            "Gate decision",
+            "residual-risk acknowledgement"
+          ],
+          "responseTimeBoundary": "Record authorization before action.",
+          "status": "active"
+        }
+      ],
+      "routingRules": [
+        {
+          "ruleRef": "PCVR-CR-000-025",
+          "lowerInclusive": 0,
+          "upperExclusive": 0.25,
+          "routeRef": "SER-CR-DEFER"
+        },
+        {
+          "ruleRef": "PCVR-CR-025-050",
+          "lowerInclusive": 0.25,
+          "upperExclusive": 0.5,
+          "routeRef": "SER-CR-SPECIALIST"
+        },
+        {
+          "ruleRef": "PCVR-CR-050-065",
+          "lowerInclusive": 0.5,
+          "upperExclusive": 0.65,
+          "routeRef": "SER-CR-HUMAN"
+        },
+        {
+          "ruleRef": "PCVR-CR-065-100",
+          "lowerInclusive": 0.65,
+          "upperExclusive": 1.000001,
+          "routeRef": "SER-CR-PROCEED"
+        }
+      ],
+      "reviewedBy": [
+        "customer-operations-governance-board",
+        "quality-governance-owner"
+      ],
+      "evidenceRefs": [
+        "RPS-CR-002",
+        "DOP-CR-001",
+        "CNP-CR-001"
+      ],
+      "authorizationBoundary": "reviewed-candidate-only-not-selected-authorized-or-active",
+      "automaticSelection": false,
+      "automaticMutation": false,
+      "governanceTriggerRefs": [],
+      "status": "reviewed"
+    }
+  ],
+  "policyCounterfactualReplays": [
+    {
+      "id": "PCR-CR-001",
+      "variantRef": "PCV-CR-001",
+      "decisionRef": "SED-CR-001",
+      "pairRef": "DOP-CR-001",
+      "baselineSnapshotRef": "RPS-CR-002",
+      "replayedAt": "2026-01-17T10:00:00.000Z",
+      "replayedBy": "illustrative-policy-replay-harness",
+      "evidenceSnapshot": {
+        "pairRef": "DOP-CR-001",
+        "forecastProbability": 0.7,
+        "sourceEvidenceOriginRef": "EOR-QG-001",
+        "evidenceOriginRef": "EOR-CR-001",
+        "observationWindow": "7-day"
+      },
+      "baselineRuleRef": "SRR-CR-050-075",
+      "baselineRouteRef": "SER-CR-HUMAN",
+      "counterfactualRuleRef": "PCVR-CR-065-100",
+      "counterfactualRouteRef": "SER-CR-PROCEED",
+      "routeChanged": true,
+      "lossBoundaryImpacts": [
+        {
+          "consequencePolicyRef": "CNP-CR-001",
+          "qualityIntentRef": "QIN-QG-001",
+          "lossBoundary": "Refunds must not exceed the policy financial limit without secondary approval.",
+          "severity": "high",
+          "direction": "increased-exposure",
+          "rationale": "The candidate would replace accountable human review with a proceed recommendation for the preserved 0.70 forecast. This suggests possible exposure but does not establish what would have happened.",
+          "evidenceRefs": [
+            "DOP-CR-001",
+            "SED-CR-001",
+            "PCV-CR-001"
+          ],
+          "hypothesisStatus": "counterfactual-not-observed"
+        }
+      ],
+      "evidenceStatus": "example-only",
+      "baselineDecisionPreserved": true,
+      "counterfactualBoundary": "hypothesis-evidence-not-observed-outcome-policy-selection-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-021",
+        "GTR-CR-022",
+        "GTR-CR-023"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "policyCounterfactualAssessments": [
+    {
+      "id": "PCA-CR-001",
+      "title": "Illustrative policy counterfactual replay assessment",
+      "variantRefs": [
+        "PCV-CR-001"
+      ],
+      "replayRefs": [
+        "PCR-CR-001"
+      ],
+      "minimumReplayCount": 10,
+      "variantCount": 1,
+      "replayCount": 1,
+      "routeChangeCount": 1,
+      "lossBoundaryImpactCount": 1,
+      "severeImpactCount": 1,
+      "verifiedReplayCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "customer-operations-governance-board"
+      ],
+      "governanceTriggerRefs": [
+        "GTR-CR-021",
+        "GTR-CR-022",
+        "GTR-CR-023",
+        "GTR-CR-024"
+      ],
+      "interpretation": "counterfactual-replay-evidence-only-not-observed-outcome-quality-optimality-causality-or-authority",
+      "status": "reviewed"
+    }
+  ],
   "governanceTriggers": [
     {
       "id": "GTR-CR-001",
@@ -1501,6 +1698,46 @@
       "requiredAction": "Collect independent cases, completed replay evidence, and accountable review before making an improvement claim.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-021",
+      "triggerType": "counterfactual-evidence-unverified",
+      "reason": "The replay uses committed example evidence rather than independently verified operational or historical evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Repeat the replay on independently governed evidence before using it to inform an operational policy decision.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-022",
+      "triggerType": "counterfactual-route-change",
+      "reason": "The reviewed candidate reroutes the preserved case from human review to proceed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the exact rule change, preserved evidence, and authority implications before any policy authorization.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-023",
+      "triggerType": "counterfactual-loss-boundary-review",
+      "reason": "The route change may increase exposure to a high-severity financial-limit loss boundary, but the impact remains hypothetical.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Require accountable loss-boundary review and additional counterexamples without treating the hypothetical impact as an observed outcome.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-024",
+      "triggerType": "counterfactual-assessment-insufficient",
+      "reason": "One example-only replay cannot establish policy robustness, improvement, or acceptable tradeoffs.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Replay additional independent and boundary-focused cases before making a policy decision.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -1515,7 +1752,8 @@
       "resolution policy coverage, disposition, elapsed time, response-time conformance, availability, evidence status, assessment summaries, and governance routing reproduce",
       "reviewer independence, exact verdict grouping, disagreement dimensions, preserved dissent, adjudication linkage, override references, assessment summaries, and governance routing reproduce",
       "policy snapshot lineage, current-policy fidelity, exact change dimensions, decision impacts, staleness, revalidation outcomes, assessment summaries, and governance routing reproduce",
-      "adjudication feedback lineage, affected clauses, revision alternatives, decision authority, implementation fidelity, replay status, rollback preservation, assessment summaries, and governance routing reproduce"
+      "adjudication feedback lineage, affected clauses, revision alternatives, decision authority, implementation fidelity, replay status, rollback preservation, assessment summaries, and governance routing reproduce",
+      "counterfactual variant changes, identical evidence snapshots, baseline and candidate rule and route selection, route changes, loss-boundary linkage, assessment summaries, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -1530,6 +1768,7 @@
       "that reviewer agreement, majority, seniority, confidence, or adjudication proves semantic truth, quality, competence, or authority",
       "that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority",
       "that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority",
+      "that counterfactual replay count, route-change rate, or hypothesized loss-boundary direction proves observed outcome, policy quality, optimality, causality, competence, selection, authorization, or authority",
       "a calibration statistic is quality",
       "an automatic quality verdict"
     ],
@@ -1542,6 +1781,7 @@
       "independent review of disagreement meaning, evidence access, adjudicator authority, and preserved dissent",
       "accountable review of policy-change authority, materiality, affected decisions, and revalidation evidence",
       "independent review of rubric feedback, proposed wording, rejected alternatives, replay outcomes, implementation authority, and rollback evidence",
+      "accountable review of counterfactual policy changes, identical evidence, hypothetical loss-boundary impacts, policy authority, and representative replay cases",
       "review of environmental and evaluation-harness effects",
       "accountable governance before changing quality decisions"
     ]

@@ -1,0 +1,20 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-07T04:35:01.888Z",
+  "value_hypothesis_id": "VHY-MUXM64XS-A402MG",
+  "expected_value_creation": "Make candidate policy effects inspectable before authorization by deterministically replaying unchanged evidence and preserving hypothetical loss-boundary uncertainty.",
+  "beneficiary": "QIF evaluators, accountable policy owners, affected stakeholders, and human/AI review organizations",
+  "supporting_evidence": [
+    "v0.6.39 already preserves candidate revisions, exact changes, decisions, replay scope, and rollback boundaries.",
+    "Anthropic CHIVE evaluates explanations through counterfactual edits and measured outcomes while not treating explanations as ground truth.",
+    "OpenAI agent eval guidance recommends repeatable datasets and trace grading to compare prompt or routing changes."
+  ],
+  "success_criteria": [
+    "Every counterfactual variant is reviewed, explicitly non-authoritative, and traceable to a baseline policy snapshot.",
+    "Every replay reuses the same evidence input and deterministically reproduces baseline and counterfactual rule and route outputs.",
+    "Every loss-boundary consequence is labeled hypothetical and routed to governance when severe, uncertain, unverified, or incomplete.",
+    "The verifier rejects optimization, ranking, automatic selection, automatic authorization, mutation, and semantic-truth claims."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUXM5LDY-DGKE6W"
+}

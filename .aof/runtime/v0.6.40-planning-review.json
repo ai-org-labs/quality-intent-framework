@@ -1,0 +1,37 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-07T04:36:34.166Z",
+  "review_packet_id": "CREV-MUXM8452-D0IWM7",
+  "council_id": "qif-v0.6.40-planning-council",
+  "stage": "planning",
+  "review_status": "approved",
+  "decision_summary": "Approve the narrow three-entity Policy Counterfactual Replay design for implementation.",
+  "rationale": "Visionary confirms roadmap value, Builder reuses the existing calibration-report and route-policy model, and Guardian requires identical evidence, immutable baseline authority, hypothetical impact labeling, governance, and no optimization or automatic policy action.",
+  "recommendation": "Implement schema, verifier, example, fixtures, documentation, roadmap, and release evidence, then run full self-review and Council review.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [
+    ".aof/runtime/v0.6.40-planning-visionary.json",
+    ".aof/runtime/v0.6.40-planning-builder.json",
+    ".aof/runtime/v0.6.40-planning-guardian.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0640.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0640.json"
+  ],
+  "follow_up_task_ids": [
+    "TASK-058"
+  ],
+  "escalation_required": false,
+  "source_task_id": "TASK-058",
+  "source_parent_session_id": "SESS-MUXM5BRR-QQAG9C",
+  "source_decision_record_id": "DEC-MUXM6Y67-XJICLS"
+}

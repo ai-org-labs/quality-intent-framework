@@ -1,0 +1,26 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-07T04:35:31.108Z",
+  "project_charter_id": "PCH-MUXM6RHG-7N3K60",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV0640.json",
+  "validated_objective": "Release QIF v0.6.40 with an executable, auditable, domain-general policy counterfactual replay lifecycle.",
+  "scope": [
+    "reviewed non-authoritative counterfactual route-policy variants",
+    "same-evidence deterministic replay of preserved decisions",
+    "baseline and counterfactual rule and route reproduction",
+    "hypothetical loss-boundary impact records and governance",
+    "schema, verifier, example, retained fixtures, plain-language docs, roadmap, AOF evidence, tag, and GitHub release"
+  ],
+  "constraints": [
+    "No UI or external integration",
+    "No policy optimization, ranking, selection, authorization, or automatic mutation",
+    "No conversion of replay counts, route changes, or hypothetical impacts into quality, truth, causality, competence, or authority",
+    "No employee surveillance or blame assignment"
+  ],
+  "expected_outcomes": [
+    "Humans and AI can reproduce what changed under each candidate policy while preserving the original decision and identical evidence.",
+    "Uncertain or severe hypothetical loss-boundary effects become explicit governance work before authorization."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUXM5LDY-DGKE6W"
+}

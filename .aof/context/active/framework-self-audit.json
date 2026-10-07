@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-06T04:40:56.158Z",
-  "audit_id": "FSA-QIFV0639-001",
-  "scope": "QIF v0.6.39 schema, verifier, example, fixtures, docs, and release readiness",
-  "summary": "QIF v0.6.39 adds an auditable adjudication-feedback-to-rubric-revision lifecycle with preserved alternatives, accountable decisions, implementation replay, rollback, and learning sufficiency boundaries.",
-  "detected_gap": "Committed feedback and revision evidence remains illustrative, unverified, and replay-incomplete; semantic improvement, fairness, actual authority, and causal claims require independent pilot evidence and governance.",
+  "recorded_at": "2026-10-07T04:44:59.867Z",
+  "audit_id": "FSA-QIFV0640-001",
+  "scope": "QIF v0.6.40 schema, verifier, example, fixtures, docs, roadmap, and release readiness",
+  "summary": "QIF v0.6.40 adds reviewed non-authoritative route-policy variants, deterministic same-evidence replay, explicit baseline and candidate routing, hypothetical loss-boundary impacts, aggregate assessment, and governance.",
+  "detected_gap": "The committed variant and replay are illustrative, unverified, and not sequestered; policy-gaming resistance, contamination controls, representative cases, observed outcomes, semantic validity, and actual authorization remain unresolved.",
   "result_state": "stable",
-  "next_action": "Run Council review and release v0.6.39, then implement v0.6.40.",
+  "next_action": "Run Council review and release v0.6.40, then implement v0.6.41 Judge Consequence and Abstention Robustness.",
   "related_task_ids": [
-    "TASK-057"
+    "TASK-058"
   ],
-  "source_session_id": "SESS-MUW6MTEN-OCC7U1",
-  "source_decision_record_id": "DEC-MUW6OT3B-489AUU"
+  "source_session_id": "SESS-MUXM5BRR-QQAG9C",
+  "source_decision_record_id": "DEC-MUXM6Y67-XJICLS"
 }

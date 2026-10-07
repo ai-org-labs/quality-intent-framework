@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-058",
+  "title": "Release QIF v0.6.40 Policy Counterfactual Replay",
+  "description": "Implement reviewed non-authoritative policy variants, same-evidence deterministic replays, hypothetical loss-boundary impacts, aggregate assessment, verifier rules, fixtures, docs, AOF evidence, and release.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MUXM5BRR-QQAG9C",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MUXM6Y67-XJICLS",
+  "operating_goal_ref": "v0.6.40-policy-counterfactual-replay",
+  "created_at": "2026-10-07T04:35:55.893Z",
+  "updated_at": "2026-10-07T04:46:01.299Z",
+  "assigned_at": null,
+  "done_at": "2026-10-07T04:46:01.299Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented v0.6.40 policy counterfactual replay; 16/16 positive and 972/972 negative fixtures pass; Council approved with identical-evidence, hypothetical-impact, no-optimization, authority, and anti-surveillance boundaries."
+}

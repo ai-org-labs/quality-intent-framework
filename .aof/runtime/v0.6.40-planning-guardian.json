@@ -1,0 +1,22 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-07T04:36:24.411Z",
+  "role": "Guardian",
+  "stage": "planning",
+  "session_id": "SESS-MUXM5BRR-QQAG9C",
+  "status": "completed",
+  "recommendation": "Proceed only with strict counterfactual and authority boundaries.",
+  "rationale": "The baseline decision and evidence must remain immutable; variants must be reviewed and non-authoritative; replay must use identical evidence; impacts must remain hypothetical; severe or uncertain impacts must trigger governance; counts or route changes cannot imply optimality, quality, causality, competence, or authority; employee surveillance and automatic mutation remain prohibited.",
+  "signals": [],
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0640.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0640.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-058",
+  "source_decision_record_id": "DEC-MUXM6Y67-XJICLS",
+  "source_parent_session_id": null,
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.94
+}

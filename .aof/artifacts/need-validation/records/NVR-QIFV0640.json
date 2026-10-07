@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-07T04:35:20.582Z",
+  "validation_id": "NVR-MUXM6JD2-Y5ZYSE",
+  "raw_need": "Implement the next QIF roadmap slice and release it.",
+  "validation_status": "reframed",
+  "validated_need": "Add the smallest standalone calibration-report lifecycle that compares preserved decisions under an unchanged baseline and a reviewed, non-authoritative counterfactual route-policy variant, reproduces route changes, records hypothetical loss-boundary impacts, and forces governance without optimizing or authorizing policy.",
+  "decision_summary": "The broad continuation request is reframed into the missing pre-authorization evidence contract between governed revision candidates and policy decisions; threshold-only replay and prose-only review are insufficient.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What exact decision gap remains after v0.6.39?",
+      "answer": "A policy owner cannot deterministically inspect how the same preserved evidence would route under a reviewed candidate route policy before authorization.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must the replay never claim?",
+      "answer": "It must not optimize, rank, select, authorize, or mutate policy, and hypothetical loss-boundary impacts must not be treated as observed outcomes or semantic truth.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A route change is not inherently an improvement and can trade one loss boundary against another."
+  ],
+  "evidence_gaps": [
+    "Committed replay inputs remain illustrative; real blind or sequestered cases and observed downstream outcomes remain v0.7 pilot work."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV0640.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0640.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0640.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUXM5LDY-DGKE6W"
+}

@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.6.40 Policy Counterfactual Replay",
-  "updated_at": "2026-10-06T04:45:38.062Z",
+  "content": "v0.6.41 Judge Consequence and Abstention Robustness",
+  "updated_at": "2026-10-07T04:44:59.874Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MUW6MTEN-OCC7U1",
-  "source_decision_record_id": "DEC-MUW6OT3B-489AUU",
+  "source_session_id": "SESS-MUXM5BRR-QQAG9C",
+  "source_decision_record_id": "DEC-MUXM6Y67-XJICLS",
   "declared_complete_at": null
 }

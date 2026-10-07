@@ -2,7 +2,7 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-06T04:45:40.324Z",
+  "generated_at": "2026-10-07T04:45:52.276Z",
   "latest_outcome": {
     "source_session_id": "SESS-MUW6MTEN-OCC7U1",
     "report_id": "OUT-MUW73R7T-AH7Q5E",
@@ -12,30 +12,30 @@
     "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.39"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV0639-001",
-    "recorded_at": "2026-10-06T04:40:56.158Z",
-    "summary": "QIF v0.6.39 adds an auditable adjudication-feedback-to-rubric-revision lifecycle with preserved alternatives, accountable decisions, implementation replay, rollback, and learning sufficiency boundaries.",
-    "detected_gap": "Committed feedback and revision evidence remains illustrative, unverified, and replay-incomplete; semantic improvement, fairness, actual authority, and causal claims require independent pilot evidence and governance.",
+    "audit_id": "FSA-QIFV0640-001",
+    "recorded_at": "2026-10-07T04:44:59.867Z",
+    "summary": "QIF v0.6.40 adds reviewed non-authoritative route-policy variants, deterministic same-evidence replay, explicit baseline and candidate routing, hypothetical loss-boundary impacts, aggregate assessment, and governance.",
+    "detected_gap": "The committed variant and replay are illustrative, unverified, and not sequestered; policy-gaming resistance, contamination controls, representative cases, observed outcomes, semantic validity, and actual authorization remain unresolved.",
     "result_state": "stable",
-    "next_action": "Run Council review and release v0.6.39, then implement v0.6.40.",
+    "next_action": "Run Council review and release v0.6.40, then implement v0.6.41 Judge Consequence and Abstention Robustness.",
     "related_task_ids": [
-      "TASK-057"
+      "TASK-058"
     ]
   },
   "current_next_value_slice": {
-    "content": "v0.6.40 Policy Counterfactual Replay",
-    "updated_at": "2026-10-06T04:45:38.062Z",
+    "content": "v0.6.41 Judge Consequence and Abstention Robustness",
+    "updated_at": "2026-10-07T04:44:59.874Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MUW6MTEN-OCC7U1",
-    "source_decision_record_id": "DEC-MUW6OT3B-489AUU"
+    "source_session_id": "SESS-MUXM5BRR-QQAG9C",
+    "source_decision_record_id": "DEC-MUXM6Y67-XJICLS"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Run Council review and release v0.6.39, then implement v0.6.40.",
+    "proposed_focus": "Run Council review and release v0.6.40, then implement v0.6.41 Judge Consequence and Abstention Robustness.",
     "related_task_ids": [
-      "TASK-057"
+      "TASK-058"
     ],
-    "open_task_count": 0
+    "open_task_count": 1
   },
   "learning_state": {
     "has_outcome_evidence": true,
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: v0.6.40 Policy Counterfactual Replay",
-    "Latest self-audit next action: Run Council review and release v0.6.39, then implement v0.6.40.",
+    "Current next value slice: v0.6.41 Judge Consequence and Abstention Robustness",
+    "Latest self-audit next action: Run Council review and release v0.6.40, then implement v0.6.41 Judge Consequence and Abstention Robustness.",
     "Latest outcome result: success"
   ]
 }

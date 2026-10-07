@@ -68,6 +68,391 @@
   ],
   "negatives": [
     {
+      "file": "calibration-report-counterfactual-variants-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual variants required",
+      "expect": "fail",
+      "errorIncludes": "package policyCounterfactualVariants must be an array."
+    },
+    {
+      "file": "calibration-report-counterfactual-replays-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual replays required",
+      "expect": "fail",
+      "errorIncludes": "package policyCounterfactualReplays must be an array."
+    },
+    {
+      "file": "calibration-report-counterfactual-assessments-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual assessments required",
+      "expect": "fail",
+      "errorIncludes": "package policyCounterfactualAssessments must be an array."
+    },
+    {
+      "file": "calibration-report-counterfactual-variant-baseline-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual baseline traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing baseline route-policy snapshot"
+    },
+    {
+      "file": "calibration-report-counterfactual-variant-route-coverage.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual route coverage",
+      "expect": "fail",
+      "errorIncludes": "routes must exactly cover the baseline snapshot routes."
+    },
+    {
+      "file": "calibration-report-counterfactual-variant-rule-gap.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual rule continuity",
+      "expect": "fail",
+      "errorIncludes": "routingRules must be contiguous without gaps or overlap."
+    },
+    {
+      "file": "calibration-report-counterfactual-variant-rule-end.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual rule closure",
+      "expect": "fail",
+      "errorIncludes": "routingRules must end at 1.000001"
+    },
+    {
+      "file": "calibration-report-counterfactual-variant-route-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual route resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing candidate route"
+    },
+    {
+      "file": "calibration-report-counterfactual-variant-dimensions.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual change dimensions",
+      "expect": "fail",
+      "errorIncludes": "changedDimensions must reproduce baseline-to-candidate differences."
+    },
+    {
+      "file": "calibration-report-counterfactual-variant-change-coverage.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual exact change coverage",
+      "expect": "fail",
+      "errorIncludes": "changes must cover every changed dimension."
+    },
+    {
+      "file": "calibration-report-counterfactual-variant-change-detail.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual exact change reproduction",
+      "expect": "fail",
+      "errorIncludes": "change detail threshold/SER-CR-PROCEED does not reproduce baseline and candidate values."
+    },
+    {
+      "file": "calibration-report-counterfactual-variant-reviewer.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual candidate review",
+      "expect": "fail",
+      "errorIncludes": "reviewedBy must include at least one accountable reviewer."
+    },
+    {
+      "file": "calibration-report-counterfactual-variant-evidence.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual candidate evidence",
+      "expect": "fail",
+      "errorIncludes": "evidenceRefs must include at least one item."
+    },
+    {
+      "file": "calibration-report-counterfactual-variant-boundary.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual candidate authority boundary",
+      "expect": "fail",
+      "errorIncludes": "authorizationBoundary must remain reviewed-candidate-only-not-selected-authorized-or-active."
+    },
+    {
+      "file": "calibration-report-counterfactual-variant-selection.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no automatic candidate selection",
+      "expect": "fail",
+      "errorIncludes": "automaticSelection and automaticMutation must be false."
+    },
+    {
+      "file": "calibration-report-counterfactual-variant-mutation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no automatic candidate mutation",
+      "expect": "fail",
+      "errorIncludes": "automaticSelection and automaticMutation must be false."
+    },
+    {
+      "file": "calibration-report-counterfactual-variant-unreviewed-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unreviewed candidate governance",
+      "expect": "fail",
+      "errorIncludes": "non-reviewed candidate requires a counterfactual-variant-unreviewed governance trigger."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-variant-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual variant resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing policy counterfactual variant"
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-decision-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual decision traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing selective escalation decision"
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-pair-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual pair traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing decision-outcome pair"
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-snapshot-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual baseline lineage",
+      "expect": "fail",
+      "errorIncludes": "baselineSnapshotRef must match its variant."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-pair-mismatch.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual preserved decision closure",
+      "expect": "fail",
+      "errorIncludes": "pairRef must match the preserved decision pairRef."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-evidence-forecast.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "identical evidence forecast",
+      "expect": "fail",
+      "errorIncludes": "evidenceSnapshot.forecastProbability must reproduce the unchanged pair value."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-evidence-origin.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "identical evidence origin",
+      "expect": "fail",
+      "errorIncludes": "evidenceSnapshot.evidenceOriginRef must reproduce the unchanged pair value."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-baseline-rule.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "baseline rule reproduction",
+      "expect": "fail",
+      "errorIncludes": "baselineRuleRef must reproduce as SRR-CR-050-075."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-baseline-route.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "baseline route reproduction",
+      "expect": "fail",
+      "errorIncludes": "baselineRouteRef must reproduce as SER-CR-HUMAN."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-counter-rule.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual rule reproduction",
+      "expect": "fail",
+      "errorIncludes": "counterfactualRuleRef must reproduce as PCVR-CR-065-100."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-counter-route.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual route reproduction",
+      "expect": "fail",
+      "errorIncludes": "counterfactualRouteRef must reproduce as SER-CR-PROCEED."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-route-changed.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual route-change reproduction",
+      "expect": "fail",
+      "errorIncludes": "routeChanged must reproduce as true."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-impact-empty.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual impact required",
+      "expect": "fail",
+      "errorIncludes": "lossBoundaryImpacts must include at least one explicit impact hypothesis."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-impact-policy.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual consequence policy",
+      "expect": "fail",
+      "errorIncludes": "references missing consequence policy"
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-impact-intent.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual intent linkage",
+      "expect": "fail",
+      "errorIncludes": "impact qualityIntentRef must resolve through its consequence policy."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-impact-boundary.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual loss boundary reproduction",
+      "expect": "fail",
+      "errorIncludes": "impact lossBoundary must reproduce the consequence policy and Quality Intent."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-impact-severity.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual severity reproduction",
+      "expect": "fail",
+      "errorIncludes": "impact severity must reproduce the consequence policy and Quality Intent."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-impact-evidence.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual impact evidence",
+      "expect": "fail",
+      "errorIncludes": "impact evidenceRefs must include at least one item."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-impact-status.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual hypothetical status",
+      "expect": "fail",
+      "errorIncludes": "impact hypothesisStatus must remain counterfactual-not-observed."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-baseline-preserved.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual baseline preservation",
+      "expect": "fail",
+      "errorIncludes": "baselineDecisionPreserved must be true."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-boundary.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual interpretation boundary",
+      "expect": "fail",
+      "errorIncludes": "counterfactualBoundary must remain hypothesis-evidence-not-observed-outcome-policy-selection-or-authority."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-route-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual route-change governance",
+      "expect": "fail",
+      "errorIncludes": "route change requires a counterfactual-route-change governance trigger."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-loss-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual loss-boundary governance",
+      "expect": "fail",
+      "errorIncludes": "severe or uncertain loss-boundary impact requires a counterfactual-loss-boundary-review governance trigger."
+    },
+    {
+      "file": "calibration-report-counterfactual-replay-evidence-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual evidence governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified replay evidence requires a counterfactual-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-counterfactual-assessment-variant-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual assessment variant resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing policy counterfactual variant"
+    },
+    {
+      "file": "calibration-report-counterfactual-assessment-replay-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual assessment replay resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing policy counterfactual replay"
+    },
+    {
+      "file": "calibration-report-counterfactual-assessment-minimum.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual assessment minimum",
+      "expect": "fail",
+      "errorIncludes": "minimumReplayCount must be at least 2."
+    },
+    {
+      "file": "calibration-report-counterfactual-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual replay count reproduction",
+      "expect": "fail",
+      "errorIncludes": "replayCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-counterfactual-assessment-route-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual route-change count",
+      "expect": "fail",
+      "errorIncludes": "routeChangeCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-counterfactual-assessment-impact-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual impact count",
+      "expect": "fail",
+      "errorIncludes": "lossBoundaryImpactCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-counterfactual-assessment-severe-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual severe impact count",
+      "expect": "fail",
+      "errorIncludes": "severeImpactCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-counterfactual-assessment-verified-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual verified replay count",
+      "expect": "fail",
+      "errorIncludes": "verifiedReplayCount must reproduce as 0."
+    },
+    {
+      "file": "calibration-report-counterfactual-assessment-sufficiency.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual data sufficiency",
+      "expect": "fail",
+      "errorIncludes": "dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "calibration-report-counterfactual-assessment-signal.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual assessment signal",
+      "expect": "fail",
+      "errorIncludes": "assessmentSignal must reproduce as insufficient-data."
+    },
+    {
+      "file": "calibration-report-counterfactual-assessment-reviewer.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual assessment review",
+      "expect": "fail",
+      "errorIncludes": "reviewedBy must include at least one accountable reviewer."
+    },
+    {
+      "file": "calibration-report-counterfactual-assessment-interpretation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual assessment boundary",
+      "expect": "fail",
+      "errorIncludes": "interpretation must remain counterfactual-replay-evidence-only-not-observed-outcome-quality-optimality-causality-or-authority."
+    },
+    {
+      "file": "calibration-report-counterfactual-assessment-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual insufficient governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient counterfactual evidence requires a counterfactual-assessment-insufficient governance trigger."
+    },
+    {
+      "file": "calibration-report-counterfactual-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "counterfactual semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that counterfactual replay count, route-change rate, or hypothesized loss-boundary direction proves observed outcome, policy quality, optimality, causality, competence, selection, authorization, or authority."
+    },
+    {
       "file": "calibration-report-feedback-observations-not-array.json",
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "adjudication feedback required",

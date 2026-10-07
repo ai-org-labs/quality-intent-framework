@@ -1,0 +1,22 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-07T04:36:20.194Z",
+  "role": "Builder",
+  "stage": "planning",
+  "session_id": "SESS-MUXM5BRR-QQAG9C",
+  "status": "completed",
+  "recommendation": "Extend calibration-report with three entities: PolicyCounterfactualVariant, PolicyCounterfactualReplay, and PolicyCounterfactualAssessment.",
+  "rationale": "Reuse route-policy snapshots, routing-rule interval validation, selective escalation decisions, decision outcome pairs, consequence policies, Quality Intent loss boundaries, governance triggers, retained fixture generation, and existing CLI integration.",
+  "signals": [],
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0640.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0640.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-058",
+  "source_decision_record_id": "DEC-MUXM6Y67-XJICLS",
+  "source_parent_session_id": null,
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.94
+}

@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-07T04:45:29.508Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MUXM5BRR-QQAG9C",
+  "status": "completed",
+  "recommendation": "Approve with explicit counterfactual, authority, and anti-surveillance limits.",
+  "rationale": "The implementation preserves identical evidence and baseline decisions, keeps variants candidate-only, labels impacts hypothetical, routes route changes and severe or unverified evidence to governance, and rejects optimization, selection, authorization, automatic mutation, semantic truth, and employee scoring claims.",
+  "signals": [],
+  "artifact_refs": [
+    ".aof/artifacts/actor-skill-packets/ASP-QIFV0640.json",
+    "RELEASE-NOTES-v0.6.40.md",
+    "docs/qif-v0.6.40-policy-counterfactual-replay.md"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-058",
+  "source_decision_record_id": "DEC-MUXM6Y67-XJICLS",
+  "source_parent_session_id": null,
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.94
+}

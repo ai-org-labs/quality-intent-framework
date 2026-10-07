@@ -1,0 +1,17 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-07T04:34:58.318Z",
+  "problem_statement_id": "PST-MUXM626M-H860JQ",
+  "affected_party": "QIF evaluators, policy owners, and stakeholders protected by loss boundaries",
+  "actual_problem": "QIF records reviewed rubric revisions and route-policy snapshots, but cannot replay the same preserved decision evidence against a candidate route policy before authorization to reveal route changes and hypothetical loss-boundary tradeoffs.",
+  "why_it_matters": "A policy owner may approve a plausible change without seeing which prior decisions would route differently or which protected outcomes could be exposed, while a naive replay could falsely imply optimality or authority.",
+  "why_now": "v0.6.39 established governed revision candidates and replay scope; current counterfactual-evaluation practice emphasizes same-input experiments, explicit labels, blind evidence, and trace-level comparison.",
+  "evidence_refs": [
+    "docs/qif-roadmap.md",
+    "RELEASE-NOTES-v0.6.39.md",
+    "https://alignment.anthropic.com/2026/chive/",
+    "https://developers.openai.com/api/docs/guides/agent-evals"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUXM5LDY-DGKE6W"
+}

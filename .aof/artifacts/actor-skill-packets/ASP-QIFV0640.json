@@ -1,0 +1,85 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-07T04:36:59.002Z",
+  "packet_id": "ASP-MUXM8NAY-Z9NPPW",
+  "source_task_id": "TASK-058",
+  "source_parent_session_id": "SESS-MUXM5BRR-QQAG9C",
+  "source_decision_record_id": "DEC-MUXM6Y67-XJICLS",
+  "objective": "Implement QIF v0.6.40 Policy Counterfactual Replay",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, deterministic replay verifier, fixtures, plain-language docs, AOF evidence, and release packaging.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "deterministic-verifier-design",
+    "counterfactual-evaluation"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-qif-policy-counterfactual-replay",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs",
+        "examples/calibration-report-package.json"
+      ],
+      "rationale": "existing immutable route-policy snapshots, selective escalation decisions, outcome pairs, loss boundaries, governance, and fixture generator support a narrow replay extension"
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-public-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-identical-evidence-replay",
+    "policy-counterfactual-not-observed-truth",
+    "policy-no-policy-optimization-or-authority",
+    "policy-no-automatic-mutation",
+    "policy-no-count-quality",
+    "policy-no-employee-surveillance"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "policy-counterfactual-variants",
+      "policy-counterfactual-replays",
+      "policy-counterfactual-assessments"
+    ],
+    "acceptance_criteria": [
+      "baseline snapshot, preserved decision, identical evidence, candidate rules, selected rule and route, route change, and hypothetical loss-boundary impact are reproducible",
+      "severe, uncertain, incomplete, or unverified replay evidence triggers governance",
+      "negative fixtures reject optimization, authority, mutation, evidence substitution, and overclaiming"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "counterfactual replay preserves baseline authority and labels loss-boundary impacts as hypothetical",
+      "evaluator_ref": "guardian",
+      "evidence_required": "schema, verifier, example, full fixtures, and release notes",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "counterfactual-authority-overreach",
+      "trigger_condition": "replay optimizes, ranks, selects, authorizes, mutates, or treats hypothetical impact as observed truth",
+      "consequence": "block-assignment",
+      "recovery_action": "restore candidate-only authority, identical evidence, hypothetical labeling, and governance"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I compare policy paths without pretending the replay chose the policy.",
+    "current_action": "Implement same-evidence policy replay",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run full fixtures and Council review"
+  },
+  "status": "draft"
+}
