@@ -2,14 +2,14 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-07T04:45:52.276Z",
+  "generated_at": "2026-10-07T04:48:10.778Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MUW6MTEN-OCC7U1",
-    "report_id": "OUT-MUW73R7T-AH7Q5E",
+    "source_session_id": "SESS-MUXM5BRR-QQAG9C",
+    "report_id": "OUT-MUXMMVZF-5HKBG9",
     "result": "success",
-    "observed_at": "2026-10-06T04:45:30.373Z",
-    "note": "QIF v0.6.39 was verified, pushed, tagged, and published. Adjudication feedback now becomes explicit, reviewed, reversible rubric revision evidence without automatic mutation or semantic-truth claims.",
-    "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.39"
+    "observed_at": "2026-10-07T04:48:03.431Z",
+    "note": "QIF v0.6.40 was verified, pushed, tagged, and published. Policy counterfactual replay preserves identical evidence, immutable baseline decisions, hypothetical loss-boundary impacts, governance authority, and verifier boundaries.",
+    "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.40"
   },
   "latest_self_audit": {
     "audit_id": "FSA-QIFV0640-001",
@@ -24,7 +24,7 @@
   },
   "current_next_value_slice": {
     "content": "v0.6.41 Judge Consequence and Abstention Robustness",
-    "updated_at": "2026-10-07T04:44:59.874Z",
+    "updated_at": "2026-10-07T04:48:10.632Z",
     "declared_complete_at": null,
     "source_session_id": "SESS-MUXM5BRR-QQAG9C",
     "source_decision_record_id": "DEC-MUXM6Y67-XJICLS"
@@ -35,7 +35,7 @@
     "related_task_ids": [
       "TASK-058"
     ],
-    "open_task_count": 1
+    "open_task_count": 0
   },
   "learning_state": {
     "has_outcome_evidence": true,

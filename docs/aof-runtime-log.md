@@ -20,6 +20,9 @@ Date: 2026-10-07
 - Retrospective: AOF `learning-loop-snapshot` wrote `.aof/context/active/learning-loop.json` and preserves v0.6.41 as the next value slice.
 - AOF organization verification passed `277/277`; `TASK-058` is done and `.aof/runtime/v0.6.40-post-situation.json` found no truth conflict.
 - Remaining boundary: the committed variant and replay are illustrative, unverified, and not sequestered. Real blind cases, observed outcomes, contamination review, evaluator-affordance review, and policy authority remain pilot and governance work.
+- Release commit `0a7176c` was pushed to `origin/main`; annotated tag `v0.6.40` resolves to that release commit.
+- GitHub Release `v0.6.40` was published at https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.40.
+- AOF outcome `OUT-MUXMMVZF-5HKBG9` records successful publication and preserves v0.6.41 as the next value slice.
 - Next: v0.6.41 Judge Consequence and Abstention Robustness, v0.6.42 Sequestered Replay and Policy-Gaming Detection, then v0.7 Empirical Calibration.
 
 ## v0.6.39 Adjudication Feedback and Rubric Revision
