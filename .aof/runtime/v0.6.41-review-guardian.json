@@ -1,0 +1,19 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-08T04:45:02.000Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MUZ1J0XW-8EHIM9",
+  "status": "completed",
+  "recommendation": "Approve with retained illustrative-evidence and non-authority boundaries.",
+  "rationale": "The verifier enforces evidence identity, exact condition differences, six-way output separation, accountable abstention evidence, no hidden reasoning collection, no automatic judge action, governance triggers, and explicit semantic limits. Real expected-label validity, causality, representativeness, contamination, competence, and authority remain unresolved and visible.",
+  "signals": [],
+  "artifact_refs": [".aof/context/active/framework-self-audit.json", "examples/calibration-report-package.json", "tools/validate-calibration-report.mjs"],
+  "decision_required": false,
+  "source_task_id": "TASK-059",
+  "source_decision_record_id": "DEC-MUZ1L4Q3-9G1VV2",
+  "source_parent_session_id": null,
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.95
+}

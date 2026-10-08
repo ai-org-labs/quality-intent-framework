@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-08T04:34:08.563Z",
+  "validation_id": "NVR-MUZ1KUGJ-FMHVIX",
+  "raw_need": "Implement the next QIF roadmap slice and release it.",
+  "validation_status": "reframed",
+  "validated_need": "Add the smallest standalone calibration-report lifecycle that holds case evidence constant while varying downstream-use framing, consequence framing, and abstain availability; classifies each judge output into semantically distinct outcomes; reproduces sensitivity and abstention measures; and forces governance without automatically selecting, replacing, authorizing, or mutating a judge or policy.",
+  "decision_summary": "The broad continuation request is reframed into the missing judge-robustness contract after policy counterfactual replay; aggregate accuracy and prose-only review cannot expose consequence-conditioned judgment or distinguish abstention from failure.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What exact measurement gap remains after v0.6.40?",
+      "answer": "QIF cannot reproduce whether the same evidence receives a different judge outcome when downstream use, consequence framing, or abstain availability changes.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "Which outcomes must remain distinct?",
+      "answer": "Correct classification, incorrect classification, justified abstention, unjustified abstention, refusal, and malformed output must never collapse into one failure or success count.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A stable or correct label in one prompt condition was assumed to represent robust judgment."
+  ],
+  "evidence_gaps": [
+    "The committed trials will remain illustrative; representative blind cases, human adjudication, real judge calls, contamination controls, and operational outcomes remain pilot work."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV0641.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0641.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0641.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUZ1JW2B-HFOE35"
+}

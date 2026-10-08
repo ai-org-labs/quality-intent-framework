@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Add the smallest standalone calibration-report lifecycle that compares preserved decisions under an unchanged baseline and a reviewed, non-authoritative counterfactual route-policy variant, reproduces route changes, records hypothetical loss-boundary impacts, and forces governance without optimizing or authorizing policy.",
-  "updated_at": "2026-10-07T04:35:39.777Z",
+  "content": "Add the smallest standalone calibration-report lifecycle that holds case evidence constant while varying downstream-use framing, consequence framing, and abstain availability; classifies each judge output into semantically distinct outcomes; reproduces sensitivity and abstention measures; and forces governance without automatically selecting, replacing, authorizing, or mutating a judge or policy.",
+  "updated_at": "2026-10-08T04:34:21.869Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MUXM5BRR-QQAG9C",
-  "source_decision_record_id": "DEC-MUXM6Y67-XJICLS",
+  "source_session_id": "SESS-MUZ1J0XW-8EHIM9",
+  "source_decision_record_id": "DEC-MUZ1L4Q3-9G1VV2",
   "declared_complete_at": null
 }

@@ -1,0 +1,17 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-08T04:33:54.029Z",
+  "problem_statement_id": "PST-MUZ1KJ8T-GC21HF",
+  "affected_party": "QIF evaluators, judge-policy owners, and stakeholders affected by automated or hybrid judgments",
+  "actual_problem": "QIF can replay policy routes, but cannot determine whether a judge changes its classification when identical evidence is paired with different downstream-use or consequence framing, nor whether an available abstain route produces justified uncertainty rather than refusal or malformed output.",
+  "why_it_matters": "A judge may appear accurate while allowing anticipated downstream effects to distort measurement, and aggregate accuracy can hide whether abstention is useful, excessive, or confused with failure.",
+  "why_now": "v0.6.40 established identical-evidence counterfactual replay; current evidence shows consequential framing can induce motivated mislabeling and that abstain options do not eliminate incorrect labels.",
+  "evidence_refs": [
+    "docs/qif-roadmap.md",
+    "https://alignment.anthropic.com/2026/agentic-misalignment-summer-2026/",
+    "https://alignment.openai.com/measuring-reward-seeking/",
+    "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUZ1JW2B-HFOE35"
+}

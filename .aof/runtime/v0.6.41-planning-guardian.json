@@ -1,0 +1,19 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-08T04:36:02.000Z",
+  "role": "Guardian",
+  "stage": "planning",
+  "session_id": "SESS-MUZ1J0XW-8EHIM9",
+  "status": "completed",
+  "recommendation": "Proceed only with strict evidence, taxonomy, privacy, authority, and anti-surveillance boundaries.",
+  "rationale": "Case evidence must remain identical; correct, incorrect, justified abstention, unjustified abstention, refusal, and malformed output must remain distinct; hidden reasoning must not be collected; counts cannot imply truth or competence; no judge selection, replacement, authorization, or policy mutation may be automatic.",
+  "signals": [],
+  "artifact_refs": [".aof/artifacts/need-validation/records/NVR-QIFV0641.json", ".aof/artifacts/need-validation/project-charters/PCH-QIFV0641.json"],
+  "decision_required": false,
+  "source_task_id": "TASK-059",
+  "source_decision_record_id": "DEC-MUZ1L4Q3-9G1VV2",
+  "source_parent_session_id": null,
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.95
+}

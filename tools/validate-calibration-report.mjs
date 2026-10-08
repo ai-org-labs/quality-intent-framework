@@ -171,6 +171,9 @@ function validatePackage(pkg, packagePath) {
   const policyCounterfactualVariants = requiredArray(pkg, "policyCounterfactualVariants");
   const policyCounterfactualReplays = requiredArray(pkg, "policyCounterfactualReplays");
   const policyCounterfactualAssessments = requiredArray(pkg, "policyCounterfactualAssessments");
+  const judgeConditionVariants = requiredArray(pkg, "judgeConditionVariants");
+  const judgeRobustnessTrials = requiredArray(pkg, "judgeRobustnessTrials");
+  const judgeRobustnessAssessments = requiredArray(pkg, "judgeRobustnessAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -206,6 +209,9 @@ function validatePackage(pkg, packagePath) {
   const counterfactualVariantIndex = indexById(policyCounterfactualVariants, `${packagePath}:policyCounterfactualVariants`);
   const counterfactualReplayIndex = indexById(policyCounterfactualReplays, `${packagePath}:policyCounterfactualReplays`);
   const counterfactualAssessmentIndex = indexById(policyCounterfactualAssessments, `${packagePath}:policyCounterfactualAssessments`);
+  const judgeConditionVariantIndex = indexById(judgeConditionVariants, `${packagePath}:judgeConditionVariants`);
+  const judgeRobustnessTrialIndex = indexById(judgeRobustnessTrials, `${packagePath}:judgeRobustnessTrials`);
+  const judgeRobustnessAssessmentIndex = indexById(judgeRobustnessAssessments, `${packagePath}:judgeRobustnessAssessments`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -1352,6 +1358,123 @@ function validatePackage(pkg, packagePath) {
     if (dataSufficiency === "insufficient" && !triggerTypes.has("counterfactual-assessment-insufficient")) errors.push(`${assessment.id} insufficient counterfactual evidence requires a counterfactual-assessment-insufficient governance trigger.`);
   }
 
+  for (const variant of judgeConditionVariants) {
+    for (const field of ["title", "conditionGroupRef", "pairRef", "conditionRole", "downstreamUse", "consequenceFraming", "promptDelta", "evidenceStatus", "authorizationBoundary", "status"]) str(variant, field, variant.id);
+    const pair = ref(pairIndex, variant.pairRef, "decision-outcome pair", variant.id);
+    const snapshot = variant.evidenceSnapshot || {};
+    if (pair) {
+      for (const [field, value] of Object.entries({ pairRef: pair.id, sourcePackageRef: pair.sourcePackageRef, sourceEvidenceOriginRef: pair.sourceEvidenceOriginRef, evidenceOriginRef: pair.evidenceOriginRef, observationWindow: pair.observationWindow })) {
+        if (!sameValue(snapshot[field], value)) errors.push(`${variant.id} evidenceSnapshot.${field} must reproduce the unchanged pair value.`);
+      }
+    }
+    str(snapshot, "evidenceDigest", `${variant.id} evidenceSnapshot`);
+    if (variant.conditionRole === "baseline") {
+      if (variant.baselineVariantRef !== null) errors.push(`${variant.id} baseline condition must use null baselineVariantRef.`);
+      if (!sameSet(variant.changedDimensions, [])) errors.push(`${variant.id} baseline condition changedDimensions must be empty.`);
+    } else {
+      const baseline = ref(judgeConditionVariantIndex, variant.baselineVariantRef, "baseline judge condition variant", variant.id);
+      if (baseline) {
+        if (baseline.conditionRole !== "baseline") errors.push(`${variant.id} baselineVariantRef must resolve to a baseline condition.`);
+        if (baseline.conditionGroupRef !== variant.conditionGroupRef || baseline.pairRef !== variant.pairRef) errors.push(`${variant.id} must share conditionGroupRef and pairRef with its baseline.`);
+        if (!sameValue(baseline.evidenceSnapshot, variant.evidenceSnapshot)) errors.push(`${variant.id} evidenceSnapshot must be identical to its baseline condition.`);
+        const dimensions = [];
+        if (baseline.downstreamUse !== variant.downstreamUse) dimensions.push("downstream-use");
+        if (baseline.consequenceFraming !== variant.consequenceFraming) dimensions.push("consequence-framing");
+        if (baseline.abstainAvailable !== variant.abstainAvailable) dimensions.push("abstain-availability");
+        if (!sameSet(variant.changedDimensions, dimensions)) errors.push(`${variant.id} changedDimensions must reproduce the exact baseline-to-comparison condition differences.`);
+      }
+    }
+    if (!Array.isArray(variant.reviewedBy) || variant.reviewedBy.length === 0) errors.push(`${variant.id} reviewedBy must include at least one accountable reviewer.`);
+    if (!Array.isArray(variant.evidenceRefs) || variant.evidenceRefs.length === 0) errors.push(`${variant.id} evidenceRefs must include at least one item.`);
+    if (variant.authorizationBoundary !== "measurement-condition-only-not-judge-selection-replacement-authorization-or-policy-mutation") errors.push(`${variant.id} authorizationBoundary must remain measurement-condition-only-not-judge-selection-replacement-authorization-or-policy-mutation.`);
+    if (variant.hiddenReasoningCollected !== false) errors.push(`${variant.id} hiddenReasoningCollected must be false.`);
+    if (variant.automaticSelection !== false || variant.automaticMutation !== false) errors.push(`${variant.id} automaticSelection and automaticMutation must be false.`);
+    const triggerTypes = new Set((variant.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", variant.id)?.triggerType));
+    if (variant.status !== "reviewed" && !triggerTypes.has("judge-condition-unreviewed")) errors.push(`${variant.id} non-reviewed judge condition requires a judge-condition-unreviewed governance trigger.`);
+    if (variant.evidenceStatus !== "verified" && !triggerTypes.has("judge-evidence-unverified")) errors.push(`${variant.id} non-verified judge condition evidence requires a judge-evidence-unverified governance trigger.`);
+  }
+
+  for (const trial of judgeRobustnessTrials) {
+    for (const field of ["variantRef", "conditionGroupRef", "pairRef", "expectedLabel", "outputClass", "responseSummary", "executedAt", "executedBy", "evidenceStatus", "status"]) str(trial, field, trial.id);
+    const variant = ref(judgeConditionVariantIndex, trial.variantRef, "judge condition variant", trial.id);
+    const pair = ref(pairIndex, trial.pairRef, "decision-outcome pair", trial.id);
+    if (variant && (trial.conditionGroupRef !== variant.conditionGroupRef || trial.pairRef !== variant.pairRef)) errors.push(`${trial.id} conditionGroupRef and pairRef must match its judge condition variant.`);
+    if (!pair) continue;
+    const abstention = trial.abstentionReview || {};
+    const classified = ["correct-classification", "incorrect-classification"].includes(trial.outputClass);
+    const abstained = ["justified-abstention", "unjustified-abstention"].includes(trial.outputClass);
+    const invalid = ["refusal", "malformed-output"].includes(trial.outputClass);
+    if (classified) {
+      if (typeof trial.returnedLabel !== "string" || trial.returnedLabel.trim() === "") errors.push(`${trial.id} classification output requires a returnedLabel.`);
+      const expectedCorrect = trial.returnedLabel === trial.expectedLabel;
+      if (trial.outputClass !== (expectedCorrect ? "correct-classification" : "incorrect-classification")) errors.push(`${trial.id} outputClass must reproduce returnedLabel agreement with expectedLabel.`);
+      if (trial.classificationCorrect !== expectedCorrect) errors.push(`${trial.id} classificationCorrect must reproduce as ${expectedCorrect}.`);
+      if (abstention.applicable !== false || abstention.justified !== null) errors.push(`${trial.id} classification output must use a non-applicable abstention review.`);
+    } else {
+      if (trial.returnedLabel !== null) errors.push(`${trial.id} non-classification output must use null returnedLabel.`);
+      if (trial.classificationCorrect !== null) errors.push(`${trial.id} non-classification output must use null classificationCorrect.`);
+    }
+    if (abstained) {
+      const expectedJustified = trial.outputClass === "justified-abstention";
+      if (variant?.abstainAvailable !== true) errors.push(`${trial.id} abstention output requires an abstain-available condition.`);
+      if (abstention.applicable !== true || abstention.justified !== expectedJustified) errors.push(`${trial.id} abstentionReview must reproduce as ${expectedJustified ? "justified" : "unjustified"}.`);
+      if (!Array.isArray(abstention.reviewerRefs) || abstention.reviewerRefs.length === 0 || !Array.isArray(abstention.evidenceRefs) || abstention.evidenceRefs.length === 0) errors.push(`${trial.id} abstention review requires reviewers and evidence.`);
+    }
+    if (invalid && (abstention.applicable !== false || abstention.justified !== null)) errors.push(`${trial.id} refusal or malformed output must not be recorded as abstention.`);
+    if (trial.hiddenReasoningCollected !== false) errors.push(`${trial.id} hiddenReasoningCollected must be false.`);
+    const triggerTypes = new Set((trial.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", trial.id)?.triggerType));
+    if (trial.evidenceStatus !== "verified" && !triggerTypes.has("judge-evidence-unverified")) errors.push(`${trial.id} non-verified judge trial evidence requires a judge-evidence-unverified governance trigger.`);
+    if (trial.outputClass === "unjustified-abstention" && !triggerTypes.has("judge-abstention-review")) errors.push(`${trial.id} unjustified abstention requires a judge-abstention-review governance trigger.`);
+    if (invalid && !triggerTypes.has("judge-output-invalid")) errors.push(`${trial.id} refusal or malformed output requires a judge-output-invalid governance trigger.`);
+  }
+
+  for (const assessment of judgeRobustnessAssessments) {
+    for (const field of ["title", "dataSufficiency", "assessmentSignal", "interpretation", "status"]) str(assessment, field, assessment.id);
+    const variants = (assessment.variantRefs || []).map((id) => ref(judgeConditionVariantIndex, id, "judge condition variant", assessment.id)).filter(Boolean);
+    const trials = (assessment.trialRefs || []).map((id) => ref(judgeRobustnessTrialIndex, id, "judge robustness trial", assessment.id)).filter(Boolean);
+    if (!Number.isInteger(assessment.minimumTrialCount) || assessment.minimumTrialCount < 2) errors.push(`${assessment.id} minimumTrialCount must be at least 2.`);
+    for (const trial of trials) if (!assessment.variantRefs?.includes(trial.variantRef)) errors.push(`${assessment.id} trial ${trial.id} must use an assessed variant.`);
+    const groups = new Map();
+    for (const trial of trials) {
+      if (!groups.has(trial.conditionGroupRef)) groups.set(trial.conditionGroupRef, []);
+      groups.get(trial.conditionGroupRef).push(trial);
+    }
+    const variantSet = new Set(variants.map((item) => item.id));
+    const completeGroups = [...groups.values()].filter((items) => sameSet(items.map((item) => item.variantRef), [...variantSet]));
+    const signature = (trial) => `${trial.outputClass}:${trial.returnedLabel ?? "null"}`;
+    const conditionSensitiveGroupCount = completeGroups.filter((items) => new Set(items.map(signature)).size > 1).length;
+    const counts = Object.fromEntries(["correct-classification", "incorrect-classification", "justified-abstention", "unjustified-abstention", "refusal", "malformed-output"].map((kind) => [kind, trials.filter((item) => item.outputClass === kind).length]));
+    const verifiedTrialCount = trials.filter((item) => item.evidenceStatus === "verified").length;
+    const expected = {
+      variantCount: variants.length,
+      trialCount: trials.length,
+      completeConditionGroupCount: completeGroups.length,
+      correctClassificationCount: counts["correct-classification"],
+      incorrectClassificationCount: counts["incorrect-classification"],
+      justifiedAbstentionCount: counts["justified-abstention"],
+      unjustifiedAbstentionCount: counts["unjustified-abstention"],
+      refusalCount: counts.refusal,
+      malformedOutputCount: counts["malformed-output"],
+      conditionSensitiveGroupCount,
+      verifiedTrialCount
+    };
+    for (const [field, value] of Object.entries(expected)) if (!sameNumber(assessment[field], value)) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const allGroupsComplete = groups.size > 0 && completeGroups.length === groups.size;
+    const dataSufficiency = trials.length >= assessment.minimumTrialCount && verifiedTrialCount === trials.length && variants.every((item) => item.status === "reviewed" && item.evidenceStatus === "verified") && allGroupsComplete ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== dataSufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${dataSufficiency}.`);
+    const hasAbstentionAlert = counts["unjustified-abstention"] > 0 || counts.refusal > 0 || counts["malformed-output"] > 0;
+    const signal = dataSufficiency === "insufficient" ? "insufficient-data" : conditionSensitiveGroupCount > 0 ? "consequence-sensitivity-observed" : hasAbstentionAlert ? "abstention-alert" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (!Array.isArray(assessment.reviewedBy) || assessment.reviewedBy.length === 0) errors.push(`${assessment.id} reviewedBy must include at least one accountable reviewer.`);
+    if (assessment.automaticSelection !== false) errors.push(`${assessment.id} automaticSelection must be false.`);
+    if (assessment.interpretation !== "judge-robustness-evidence-only-not-semantic-truth-quality-competence-optimality-selection-authorization-or-authority") errors.push(`${assessment.id} interpretation must remain judge-robustness-evidence-only-not-semantic-truth-quality-competence-optimality-selection-authorization-or-authority.`);
+    const triggerTypes = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (dataSufficiency === "insufficient" && !triggerTypes.has("judge-assessment-insufficient")) errors.push(`${assessment.id} insufficient judge robustness evidence requires a judge-assessment-insufficient governance trigger.`);
+    if (conditionSensitiveGroupCount > 0 && !triggerTypes.has("judge-consequence-sensitive")) errors.push(`${assessment.id} condition-sensitive judge results require a judge-consequence-sensitive governance trigger.`);
+    if (counts["unjustified-abstention"] > 0 && !triggerTypes.has("judge-abstention-review")) errors.push(`${assessment.id} unjustified abstention requires a judge-abstention-review governance trigger.`);
+    if ((counts.refusal > 0 || counts["malformed-output"] > 0) && !triggerTypes.has("judge-output-invalid")) errors.push(`${assessment.id} invalid judge outputs require a judge-output-invalid governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -1457,6 +1580,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that counterfactual replay count, route-change rate, or hypothesized loss-boundary direction proves observed outcome, policy quality, optimality, causality, competence, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that counterfactual replay count, route-change rate, or hypothesized loss-boundary direction proves observed outcome, policy quality, optimality, causality, competence, selection, authorization, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that judge accuracy, stability, abstention, refusal, malformed-output, or condition-sensitivity counts prove semantic truth, quality, competence, optimality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that judge accuracy, stability, abstention, refusal, malformed-output, or condition-sensitivity counts prove semantic truth, quality, competence, optimality, selection, authorization, or authority.`);
   }
 
   results.push({
@@ -1497,6 +1621,9 @@ function validatePackage(pkg, packagePath) {
       policyCounterfactualVariants: policyCounterfactualVariants.length,
       policyCounterfactualReplays: policyCounterfactualReplays.length,
       policyCounterfactualAssessments: policyCounterfactualAssessments.length,
+      judgeConditionVariants: judgeConditionVariants.length,
+      judgeRobustnessTrials: judgeRobustnessTrials.length,
+      judgeRobustnessAssessments: judgeRobustnessAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -1516,5 +1643,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, rollback preservation, and policy conformance only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, resolution quality, rubric or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, policy selection, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, robustness summaries, rollback preservation, and policy conformance only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, resolution quality, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, judge or policy selection, or decision authority."
 }, null, 2));

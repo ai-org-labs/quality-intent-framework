@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-059",
+  "title": "Release QIF v0.6.41 Judge Consequence and Abstention Robustness",
+  "description": "Implement controlled judge-condition variants, identical-evidence trials, explicit output taxonomy, deterministic robustness assessment, governance, verifier rules, fixtures, docs, AOF evidence, and release.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MUZ1J0XW-8EHIM9",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MUZ1L4Q3-9G1VV2",
+  "operating_goal_ref": "v0.6.41-judge-consequence-abstention",
+  "created_at": "2026-10-08T04:34:52.813Z",
+  "updated_at": "2026-10-08T04:45:20.572Z",
+  "assigned_at": null,
+  "done_at": "2026-10-08T04:45:20.572Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented v0.6.41 judge consequence and abstention robustness; 16/16 positive and 1025/1025 negative fixtures pass; Council approved with identical-evidence, six-way taxonomy, abstention-review, privacy, no-selection, authority, and anti-surveillance boundaries."
+}

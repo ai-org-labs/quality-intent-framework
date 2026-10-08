@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.40 baseline)
+## Current Position (v0.6.41 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -609,10 +609,19 @@ Deliverables:
   test whether identical evidence receives different judgments when downstream
   use, consequence framing, or an abstain option changes, while keeping refusal,
   malformed output, and incorrect classification distinct.
+  Status: implemented in v0.6.41 through reviewed judge-condition variants,
+  identical-evidence trial groups, explicit six-way output classification,
+  accountable abstention review, condition-sensitivity assessment, governance,
+  and retained negative fixtures. The committed trials remain illustrative and
+  cannot establish judge competence, semantic truth, or selection authority.
 - Next planned slice, v0.6.42 Sequestered Replay and Policy-Gaming Detection:
   define blind-case access boundaries, contamination evidence, evaluator
   affordances, transcript inspection, and loophole findings so a candidate
   policy cannot appear better merely by exploiting the replay harness.
+- Next planned slice, v0.6.43 Cross-Judge Correlated Error and Adjudication Calibration:
+  distinguish independent confirmation from shared model-family, rubric,
+  retrieval, and prompt failures; preserve human disagreement and abstention;
+  and prevent an ensemble majority from becoming semantic truth or authority.
 - Next planned phase, v0.7 Empirical Calibration: replace illustrative
   calibration evidence with governed pilot outcomes, suite-health records, and
   framework-learning evidence while preserving uncertainty boundaries.

@@ -1,0 +1,85 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-08T04:35:03.164Z",
+  "packet_id": "ASP-MUZ1M0L8-YF2ZKE",
+  "source_task_id": "TASK-059",
+  "source_parent_session_id": "SESS-MUZ1J0XW-8EHIM9",
+  "source_decision_record_id": "DEC-MUZ1L4Q3-9G1VV2",
+  "objective": "Implement QIF v0.6.41 Judge Consequence and Abstention Robustness",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, deterministic verifier, fixtures, plain-language docs, AOF evidence, and release packaging.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "deterministic-verifier-design",
+    "judge-robustness-evaluation"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-qif-judge-robustness",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs",
+        "examples/calibration-report-package.json"
+      ],
+      "rationale": "existing counterfactual replay, decision-outcome pairs, reviewer policy, evidence origin, governance, and retained fixtures support a narrow judge-condition extension"
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-public-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-identical-evidence-trials",
+    "policy-output-taxonomy-separation",
+    "policy-no-judge-selection-or-authority",
+    "policy-no-hidden-chain-of-thought",
+    "policy-no-count-quality",
+    "policy-no-employee-surveillance"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "judge-condition-variants",
+      "judge-robustness-trials",
+      "judge-robustness-assessments"
+    ],
+    "acceptance_criteria": [
+      "identical evidence, exact condition differences, expected labels, output categories, correctness, abstention justification, sensitivity, and aggregate counts are reproducible",
+      "sensitive, insufficient, unverified, or unjustifiably abstaining results trigger governance",
+      "negative fixtures reject outcome collapse, evidence substitution, hidden reasoning, automatic replacement, authority, mutation, and overclaiming"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "judge robustness preserves identical evidence and distinguishes classification, abstention, refusal, and malformed output",
+      "evaluator_ref": "guardian",
+      "evidence_required": "schema, verifier, example, full fixtures, and release notes",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "judge-robustness-overreach",
+      "trigger_condition": "assessment collapses outcomes, changes evidence, collects hidden chain-of-thought, selects or replaces a judge, mutates policy, or claims semantic truth",
+      "consequence": "block-assignment",
+      "recovery_action": "restore evidence identity, output taxonomy, non-authority, privacy, and governance"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I test the judge without letting the test become the judge.",
+    "current_action": "Implement controlled judge robustness trials",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run full fixtures and Council review"
+  },
+  "status": "draft"
+}

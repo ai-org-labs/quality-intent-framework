@@ -2,7 +2,7 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-07T04:48:10.778Z",
+  "generated_at": "2026-10-08T04:45:20.724Z",
   "latest_outcome": {
     "source_session_id": "SESS-MUXM5BRR-QQAG9C",
     "report_id": "OUT-MUXMMVZF-5HKBG9",
@@ -12,28 +12,28 @@
     "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.40"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV0640-001",
-    "recorded_at": "2026-10-07T04:44:59.867Z",
-    "summary": "QIF v0.6.40 adds reviewed non-authoritative route-policy variants, deterministic same-evidence replay, explicit baseline and candidate routing, hypothetical loss-boundary impacts, aggregate assessment, and governance.",
-    "detected_gap": "The committed variant and replay are illustrative, unverified, and not sequestered; policy-gaming resistance, contamination controls, representative cases, observed outcomes, semantic validity, and actual authorization remain unresolved.",
+    "audit_id": "FSA-QIFV0641-001",
+    "recorded_at": "2026-10-08T04:44:44.878Z",
+    "summary": "QIF v0.6.41 adds reviewed judge-condition variants, identical-evidence trial groups, explicit six-way output classification, accountable abstention review, aggregate sensitivity assessment, governance, and semantic boundaries.",
+    "detected_gap": "The committed conditions and trials are illustrative, unverified, and not sequestered; expected-label validity, real repeated judge calls, contamination, policy-gaming, representative cases, statistical uncertainty, correlated evaluator error, semantic validity, and actual authorization remain unresolved.",
     "result_state": "stable",
-    "next_action": "Run Council review and release v0.6.40, then implement v0.6.41 Judge Consequence and Abstention Robustness.",
+    "next_action": "Run Council review and release v0.6.41, then implement v0.6.42 Sequestered Replay and Policy-Gaming Detection.",
     "related_task_ids": [
-      "TASK-058"
+      "TASK-059"
     ]
   },
   "current_next_value_slice": {
-    "content": "v0.6.41 Judge Consequence and Abstention Robustness",
-    "updated_at": "2026-10-07T04:48:10.632Z",
+    "content": "v0.6.42 Sequestered Replay and Policy-Gaming Detection",
+    "updated_at": "2026-10-08T04:44:44.886Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MUXM5BRR-QQAG9C",
-    "source_decision_record_id": "DEC-MUXM6Y67-XJICLS"
+    "source_session_id": "SESS-MUZ1J0XW-8EHIM9",
+    "source_decision_record_id": "DEC-MUZ1L4Q3-9G1VV2"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Run Council review and release v0.6.40, then implement v0.6.41 Judge Consequence and Abstention Robustness.",
+    "proposed_focus": "Run Council review and release v0.6.41, then implement v0.6.42 Sequestered Replay and Policy-Gaming Detection.",
     "related_task_ids": [
-      "TASK-058"
+      "TASK-059"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: v0.6.41 Judge Consequence and Abstention Robustness",
-    "Latest self-audit next action: Run Council review and release v0.6.40, then implement v0.6.41 Judge Consequence and Abstention Robustness.",
+    "Current next value slice: v0.6.42 Sequestered Replay and Policy-Gaming Detection",
+    "Latest self-audit next action: Run Council review and release v0.6.41, then implement v0.6.42 Sequestered Replay and Policy-Gaming Detection.",
     "Latest outcome result: success"
   ]
 }

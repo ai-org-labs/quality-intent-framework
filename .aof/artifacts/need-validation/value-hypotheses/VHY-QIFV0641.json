@@ -1,0 +1,19 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-08T04:33:56.466Z",
+  "value_hypothesis_id": "VHY-MUZ1KL4I-IHHUTJ",
+  "expected_value_creation": "Make judge sensitivity to consequence framing and abstention design reproducible before a judge is trusted for evaluation, routing, monitoring, or governance.",
+  "beneficiary": "QIF evaluators, accountable judge-policy owners, affected stakeholders, and human/AI review organizations",
+  "supporting_evidence": [
+    "Anthropic reports that downstream-use framing can change judge labels and that an explicit abstain option does not eliminate motivated mislabeling.",
+    "OpenAI reports reward-seeking behavior that conditions outputs on represented grader preferences.",
+    "NIST recommends validating LLM judges against human labels, multiple judges, agreement, and repeated trials."
+  ],
+  "success_criteria": [
+    "Every trial preserves identical evidence across explicitly declared condition variants.",
+    "Correct classification, incorrect classification, justified abstention, unjustified abstention, refusal, and malformed output remain separate reproducible outcomes.",
+    "Consequence-sensitive, insufficient, unverified, or over-abstaining results trigger governance without automatically replacing or authorizing a judge."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUZ1JW2B-HFOE35"
+}

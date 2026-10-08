@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-08T04:33:58.608Z",
+  "alternative_analysis_id": "ALT-MUZ1KMS0-YWGIYF",
+  "subject_need": "Expose whether judge decisions remain stable under downstream consequence framing and abstention availability.",
+  "alternative_solutions": [
+    "Add judge-condition variants, identical-evidence trials, explicit output taxonomy, aggregate robustness assessment, and governance to calibration-report.",
+    "Track only overall agreement or accuracy, accepting that consequence sensitivity and abstention behavior remain hidden.",
+    "Use prose-only evaluator review outside QIF, accepting weak reproducibility and traceability."
+  ],
+  "non_solution_options": [
+    "Select or replace a judge automatically from a lower observed error count."
+  ],
+  "defer_options": [
+    "Wait for a large empirical pilot before defining the structural contract."
+  ],
+  "stop_options": [
+    "Do not create the project if identical evidence, outcome distinctions, authority boundaries, and governance cannot be preserved."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUZ1JW2B-HFOE35"
+}

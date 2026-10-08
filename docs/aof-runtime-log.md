@@ -2,6 +2,26 @@
 
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
+## v0.6.41 Judge Consequence and Abstention Robustness
+
+Date: 2026-10-08
+
+- Need / Intent / Context: v0.6.40 can replay route policies but cannot show whether the same evidence receives a different judge outcome when downstream use, consequence framing, or abstain availability changes. v0.6.41 adds controlled variants, six-way output classification, abstention review, aggregate assessment, and governance while keeping QIF standalone.
+- Latest public AOF v12.2.0 was confirmed through the public release list and used from clean checkout commit `fc7599b`.
+- Need Validation preceded Charter: `.aof/artifacts/need-validation/records/NVR-QIFV0641.json` then `.aof/artifacts/need-validation/project-charters/PCH-QIFV0641.json` in parent session `SESS-MUZ1J0XW-8EHIM9`; task `TASK-059` records execution.
+- Council direction: Visionary requires judging evidence separately from anticipated downstream use; Builder selected three calibration-report entities; Guardian requires identical evidence, explicit output taxonomy, accountable abstention review, no hidden reasoning collection, no automatic judge action, governance, and anti-surveillance. Evidence starts at `.aof/runtime/v0.6.41-planning-council.json`.
+- Actor packet `.aof/artifacts/actor-skill-packets/ASP-QIFV0641.json` records schema, deterministic-verifier, and judge-robustness skills; QIF/AOF resources; evidence-identity, taxonomy, privacy, no-selection, no-count-quality, and anti-surveillance policies; acceptance criteria; and blocking Guardian review evidence.
+- Trend evidence: Anthropic reports motivated judge mislabeling under downstream consequences and residual error when abstention is available (https://alignment.anthropic.com/2026/agentic-misalignment-summer-2026/); OpenAI reports reward-seeking conditioned on represented grader preferences (https://alignment.openai.com/measuring-reward-seeking/); NIST automated-evaluation guidance recommends repeated trials, human comparison, multiple judges, and agreement measurement (https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf); Anthropic TASTE preserves legitimate expert disagreement in hard-to-verify judgments (https://alignment.anthropic.com/2026/taste/).
+- Judgment: an answer change under controlled framing is review evidence, not causal proof or a judge-selection decision. QIF must preserve identical evidence, keep classification, abstention, refusal, and malformed output distinct, and leave semantic validity and authority to accountable governance.
+- Implementation: `calibration-report` now carries `JudgeConditionVariant`, `JudgeRobustnessTrial`, and `JudgeRobustnessAssessment`; the verifier reproduces evidence identity, condition differences, labels, output classes, abstention review, counts, complete groups, sensitivity, sufficiency, boundaries, and governance.
+- Verification: targeted validation and the full retained fixture suite passed at `16/16` positive and `1025/1025` negative before AOF review.
+- Self-review: AOF `self-audit-record` wrote `.aof/context/active/framework-self-audit.json`; it records illustrative, unverified, non-sequestered evidence plus unresolved expected-label, repeated-trial, contamination, policy-gaming, representativeness, uncertainty, correlated-error, semantic-validity, and authority risks.
+- Review: AOF `council-exec --stage review`, Visionary/Builder/Guardian role results, and `.aof/runtime/v0.6.41-final-review.json` approved release with evidence-identity, six-way taxonomy, abstention-review, privacy, no-automatic-selection, non-authority, and anti-surveillance boundaries.
+- Retrospective: AOF `learning-loop-snapshot` wrote `.aof/context/active/learning-loop.json` and preserves v0.6.42 as the next value slice.
+- AOF organization verification passed `277/277`; `TASK-059` is done and `.aof/runtime/v0.6.41-post-situation.json` found no truth conflict.
+- Remaining boundary: the committed variants and trials are illustrative, unverified, and not sequestered. Real judge calls, blind representative cases, human adjudication, contamination review, statistical inference, semantic validity, and actual authority remain pilot and governance work.
+- Next: v0.6.42 Sequestered Replay and Policy-Gaming Detection, v0.6.43 Cross-Judge Correlated Error and Adjudication Calibration, then v0.7 Empirical Calibration.
+
 ## v0.6.40 Policy Counterfactual Replay
 
 Date: 2026-10-07

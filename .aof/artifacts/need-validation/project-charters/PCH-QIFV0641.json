@@ -1,0 +1,25 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-08T04:34:16.571Z",
+  "project_charter_id": "PCH-MUZ1L0MZ-945KVG",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV0641.json",
+  "validated_objective": "Release QIF v0.6.41 with an executable, auditable, domain-general judge consequence and abstention robustness lifecycle.",
+  "scope": [
+    "reviewed judge-condition variants for downstream use, consequence framing, and abstain availability",
+    "identical-evidence trial groups with explicit expected labels and output taxonomy",
+    "deterministic sensitivity and abstention robustness assessment with governance",
+    "schema, verifier, example, retained fixtures, plain-language docs, roadmap, AOF evidence, tag, and GitHub release"
+  ],
+  "constraints": [
+    "No UI or external integration",
+    "No hidden chain-of-thought collection, judge optimization or ranking, automatic judge replacement, authorization, or policy/rubric mutation",
+    "No conversion of accuracy, abstention, refusal, malformed-output, or sensitivity counts into quality, truth, competence, optimality, or authority",
+    "No employee surveillance or blame assignment"
+  ],
+  "expected_outcomes": [
+    "Humans and AI can reproduce whether identical evidence receives stable and correctly typed outcomes under controlled consequence and abstention conditions.",
+    "Consequence-sensitive, insufficient, unverified, or unjustifiably abstaining behavior becomes explicit governance work before judge reliance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MUZ1JW2B-HFOE35"
+}

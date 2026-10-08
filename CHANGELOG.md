@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.41
+
+- Added reviewed Judge Condition Variants that keep case evidence identical while declaring exact downstream-use, consequence-framing, and abstain-availability differences.
+- Added Judge Robustness Trials that keep correct classification, incorrect classification, justified abstention, unjustified abstention, refusal, and malformed output separate.
+- Added reproducible condition-sensitivity and abstention assessments with evidence sufficiency, accountable review, and governance triggers.
+- Added 53 retained negative fixtures; the retained suite now covers 1,025 negative cases across 16 positive package types.
+- Kept accuracy, stability, abstention, refusal, malformed-output, and condition-sensitivity counts as evidence only, never semantic truth, quality, competence, optimality, selection, authorization, or authority.
+
 ## v0.6.40
 
 - Added reviewed, explicitly non-authoritative Policy Counterfactual Variants with exact baseline-to-candidate route-policy changes.

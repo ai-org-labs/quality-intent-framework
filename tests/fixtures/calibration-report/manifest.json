@@ -68,6 +68,377 @@
   ],
   "negatives": [
     {
+      "file": "calibration-report-judge-variants-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge condition variants required",
+      "expect": "fail",
+      "errorIncludes": "package judgeConditionVariants must be an array."
+    },
+    {
+      "file": "calibration-report-judge-trials-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge robustness trials required",
+      "expect": "fail",
+      "errorIncludes": "package judgeRobustnessTrials must be an array."
+    },
+    {
+      "file": "calibration-report-judge-assessments-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge robustness assessments required",
+      "expect": "fail",
+      "errorIncludes": "package judgeRobustnessAssessments must be an array."
+    },
+    {
+      "file": "calibration-report-judge-variant-pair-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge condition pair traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing decision-outcome pair"
+    },
+    {
+      "file": "calibration-report-judge-variant-snapshot-source.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge evidence source identity",
+      "expect": "fail",
+      "errorIncludes": "evidenceSnapshot.sourcePackageRef must reproduce the unchanged pair value."
+    },
+    {
+      "file": "calibration-report-judge-variant-snapshot-digest.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge evidence digest",
+      "expect": "fail",
+      "errorIncludes": "evidenceSnapshot must include non-empty string evidenceDigest."
+    },
+    {
+      "file": "calibration-report-judge-baseline-ref.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge baseline self-boundary",
+      "expect": "fail",
+      "errorIncludes": "baseline condition must use null baselineVariantRef."
+    },
+    {
+      "file": "calibration-report-judge-baseline-dimensions.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge baseline dimensions",
+      "expect": "fail",
+      "errorIncludes": "baseline condition changedDimensions must be empty."
+    },
+    {
+      "file": "calibration-report-judge-comparison-baseline-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge comparison baseline traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing baseline judge condition variant"
+    },
+    {
+      "file": "calibration-report-judge-comparison-baseline-role.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge comparison baseline role",
+      "expect": "fail",
+      "errorIncludes": "baselineVariantRef must resolve to a baseline condition."
+    },
+    {
+      "file": "calibration-report-judge-comparison-group.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge condition group closure",
+      "expect": "fail",
+      "errorIncludes": "must share conditionGroupRef and pairRef with its baseline."
+    },
+    {
+      "file": "calibration-report-judge-comparison-evidence.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "identical judge evidence",
+      "expect": "fail",
+      "errorIncludes": "evidenceSnapshot must be identical to its baseline condition."
+    },
+    {
+      "file": "calibration-report-judge-comparison-dimensions.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge condition difference reproduction",
+      "expect": "fail",
+      "errorIncludes": "changedDimensions must reproduce the exact baseline-to-comparison condition differences."
+    },
+    {
+      "file": "calibration-report-judge-variant-reviewer.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge condition review",
+      "expect": "fail",
+      "errorIncludes": "reviewedBy must include at least one accountable reviewer."
+    },
+    {
+      "file": "calibration-report-judge-variant-evidence.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge condition evidence",
+      "expect": "fail",
+      "errorIncludes": "evidenceRefs must include at least one item."
+    },
+    {
+      "file": "calibration-report-judge-variant-boundary.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge condition authority boundary",
+      "expect": "fail",
+      "errorIncludes": "authorizationBoundary must remain measurement-condition-only-not-judge-selection-replacement-authorization-or-policy-mutation."
+    },
+    {
+      "file": "calibration-report-judge-variant-hidden-reasoning.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge privacy boundary",
+      "expect": "fail",
+      "errorIncludes": "hiddenReasoningCollected must be false."
+    },
+    {
+      "file": "calibration-report-judge-variant-selection.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no automatic judge selection",
+      "expect": "fail",
+      "errorIncludes": "automaticSelection and automaticMutation must be false."
+    },
+    {
+      "file": "calibration-report-judge-variant-mutation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no automatic judge mutation",
+      "expect": "fail",
+      "errorIncludes": "automaticSelection and automaticMutation must be false."
+    },
+    {
+      "file": "calibration-report-judge-variant-unreviewed-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unreviewed judge condition governance",
+      "expect": "fail",
+      "errorIncludes": "non-reviewed judge condition requires a judge-condition-unreviewed governance trigger."
+    },
+    {
+      "file": "calibration-report-judge-variant-evidence-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge condition evidence governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified judge condition evidence requires a judge-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-judge-trial-variant-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge trial variant traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing judge condition variant"
+    },
+    {
+      "file": "calibration-report-judge-trial-group.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge trial condition closure",
+      "expect": "fail",
+      "errorIncludes": "conditionGroupRef and pairRef must match its judge condition variant."
+    },
+    {
+      "file": "calibration-report-judge-trial-returned-label.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge label agreement",
+      "expect": "fail",
+      "errorIncludes": "outputClass must reproduce returnedLabel agreement with expectedLabel."
+    },
+    {
+      "file": "calibration-report-judge-trial-correctness.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge classification correctness",
+      "expect": "fail",
+      "errorIncludes": "classificationCorrect must reproduce as true."
+    },
+    {
+      "file": "calibration-report-judge-trial-classification-abstention.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "classification is not abstention",
+      "expect": "fail",
+      "errorIncludes": "classification output must use a non-applicable abstention review."
+    },
+    {
+      "file": "calibration-report-judge-trial-nonclassification-label.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "non-classification label boundary",
+      "expect": "fail",
+      "errorIncludes": "non-classification output must use null returnedLabel."
+    },
+    {
+      "file": "calibration-report-judge-trial-abstain-unavailable.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "abstain availability",
+      "expect": "fail",
+      "errorIncludes": "abstention output requires an abstain-available condition."
+    },
+    {
+      "file": "calibration-report-judge-trial-abstention-justification.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "abstention justification reproduction",
+      "expect": "fail",
+      "errorIncludes": "abstentionReview must reproduce as unjustified."
+    },
+    {
+      "file": "calibration-report-judge-trial-abstention-evidence.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "abstention review evidence",
+      "expect": "fail",
+      "errorIncludes": "abstention review requires reviewers and evidence."
+    },
+    {
+      "file": "calibration-report-judge-trial-refusal-boundary.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "refusal is not abstention",
+      "expect": "fail",
+      "errorIncludes": "refusal or malformed output must not be recorded as abstention."
+    },
+    {
+      "file": "calibration-report-judge-trial-hidden-reasoning.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "trial privacy boundary",
+      "expect": "fail",
+      "errorIncludes": "hiddenReasoningCollected must be false."
+    },
+    {
+      "file": "calibration-report-judge-trial-evidence-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge trial evidence governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified judge trial evidence requires a judge-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-judge-trial-abstention-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unjustified abstention governance",
+      "expect": "fail",
+      "errorIncludes": "unjustified abstention requires a judge-abstention-review governance trigger."
+    },
+    {
+      "file": "calibration-report-judge-trial-invalid-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "invalid judge output governance",
+      "expect": "fail",
+      "errorIncludes": "refusal or malformed output requires a judge-output-invalid governance trigger."
+    },
+    {
+      "file": "calibration-report-judge-assessment-variant-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge assessment variant resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing judge condition variant"
+    },
+    {
+      "file": "calibration-report-judge-assessment-trial-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge assessment trial resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing judge robustness trial"
+    },
+    {
+      "file": "calibration-report-judge-assessment-minimum.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge assessment minimum",
+      "expect": "fail",
+      "errorIncludes": "minimumTrialCount must be at least 2."
+    },
+    {
+      "file": "calibration-report-judge-assessment-variant-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge variant count reproduction",
+      "expect": "fail",
+      "errorIncludes": "variantCount must reproduce as 2."
+    },
+    {
+      "file": "calibration-report-judge-assessment-trial-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge trial count reproduction",
+      "expect": "fail",
+      "errorIncludes": "trialCount must reproduce as 2."
+    },
+    {
+      "file": "calibration-report-judge-assessment-complete-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "complete condition group reproduction",
+      "expect": "fail",
+      "errorIncludes": "completeConditionGroupCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-judge-assessment-class-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge output count reproduction",
+      "expect": "fail",
+      "errorIncludes": "correctClassificationCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-judge-assessment-sensitive-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "condition sensitivity reproduction",
+      "expect": "fail",
+      "errorIncludes": "conditionSensitiveGroupCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-judge-assessment-verified-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "verified judge trial count",
+      "expect": "fail",
+      "errorIncludes": "verifiedTrialCount must reproduce as 0."
+    },
+    {
+      "file": "calibration-report-judge-assessment-sufficiency.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge assessment sufficiency",
+      "expect": "fail",
+      "errorIncludes": "dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "calibration-report-judge-assessment-signal.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge assessment signal",
+      "expect": "fail",
+      "errorIncludes": "assessmentSignal must reproduce as insufficient-data."
+    },
+    {
+      "file": "calibration-report-judge-assessment-reviewer.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge assessment review",
+      "expect": "fail",
+      "errorIncludes": "reviewedBy must include at least one accountable reviewer."
+    },
+    {
+      "file": "calibration-report-judge-assessment-selection.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no automatic judge selection from assessment",
+      "expect": "fail",
+      "errorIncludes": "automaticSelection must be false."
+    },
+    {
+      "file": "calibration-report-judge-assessment-interpretation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge robustness interpretation boundary",
+      "expect": "fail",
+      "errorIncludes": "interpretation must remain judge-robustness-evidence-only-not-semantic-truth-quality-competence-optimality-selection-authorization-or-authority."
+    },
+    {
+      "file": "calibration-report-judge-assessment-insufficient-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "insufficient judge evidence governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient judge robustness evidence requires a judge-assessment-insufficient governance trigger."
+    },
+    {
+      "file": "calibration-report-judge-assessment-sensitive-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "condition sensitivity governance",
+      "expect": "fail",
+      "errorIncludes": "condition-sensitive judge results require a judge-consequence-sensitive governance trigger."
+    },
+    {
+      "file": "calibration-report-judge-assessment-abstention-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "assessment abstention governance",
+      "expect": "fail",
+      "errorIncludes": "unjustified abstention requires a judge-abstention-review governance trigger."
+    },
+    {
+      "file": "calibration-report-judge-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge robustness semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that judge accuracy, stability, abstention, refusal, malformed-output, or condition-sensitivity counts prove semantic truth, quality, competence, optimality, selection, authorization, or authority."
+    },
+    {
       "file": "calibration-report-counterfactual-variants-not-array.json",
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "counterfactual variants required",

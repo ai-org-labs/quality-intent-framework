@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-07T04:44:59.873Z",
+  "updated_at": "2026-10-08T04:44:44.884Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means a human or AI can reproduce the baseline policy and decision, the exact reviewed counterfactual change, the unchanged evidence input, the baseline and counterfactual rule/route outputs, whether the route changed, which loss boundaries may be affected, why the impact remains hypothetical, what governance is required, and who retains policy authority. Replay count, route-change rate, apparent protection gain, and score differences remain evidence, never quality, truth, causality, competence, optimality, or authority.",
-      "recorded_at": "2026-10-07T04:34:36.553Z",
+      "answer": "Success means a human or AI can reproduce the unchanged evidence, exact judge-condition differences, expected label, returned output category, classification correctness, abstention justification, consequence sensitivity, aggregate counts, sufficiency, and governance route. A decline is not malformed output; an abstention is not automatically correct; a correct label under one framing is not proof of robust judgment; counts and lower error rates remain evidence, never quality, semantic truth, competence, optimality, or authority.",
+      "recorded_at": "2026-10-08T04:33:23.991Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MUXM5BRR-QQAG9C",
+      "source_session_id": "SESS-MUZ1J0XW-8EHIM9",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The broad continuation request is reframed into the missing pre-authorization evidence contract between governed revision candidates and policy decisions; threshold-only replay and prose-only review are insufficient.",
-      "recorded_at": "2026-10-07T04:35:39.778Z",
+      "answer": "The broad continuation request is reframed into the missing judge-robustness contract after policy counterfactual replay; aggregate accuracy and prose-only review cannot expose consequence-conditioned judgment or distinguish abstention from failure.",
+      "recorded_at": "2026-10-08T04:34:21.870Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MUXM5BRR-QQAG9C",
-      "source_decision_record_id": "DEC-MUXM6Y67-XJICLS"
+      "source_session_id": "SESS-MUZ1J0XW-8EHIM9",
+      "source_decision_record_id": "DEC-MUZ1L4Q3-9G1VV2"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "The committed variant and replay are illustrative, unverified, and not sequestered; policy-gaming resistance, contamination controls, representative cases, observed outcomes, semantic validity, and actual authorization remain unresolved.",
-      "recorded_at": "2026-10-07T04:44:59.873Z",
-      "expectation_state": "QIF v0.6.40 adds reviewed non-authoritative route-policy variants, deterministic same-evidence replay, explicit baseline and candidate routing, hypothetical loss-boundary impacts, aggregate assessment, and governance.",
-      "mismatch_state": "The committed variant and replay are illustrative, unverified, and not sequestered; policy-gaming resistance, contamination controls, representative cases, observed outcomes, semantic validity, and actual authorization remain unresolved.",
-      "scale_direction": "Run Council review and release v0.6.40, then implement v0.6.41 Judge Consequence and Abstention Robustness.",
-      "source_session_id": "SESS-MUXM5BRR-QQAG9C",
-      "source_decision_record_id": "DEC-MUXM6Y67-XJICLS"
+      "answer": "The committed conditions and trials are illustrative, unverified, and not sequestered; expected-label validity, real repeated judge calls, contamination, policy-gaming, representative cases, statistical uncertainty, correlated evaluator error, semantic validity, and actual authorization remain unresolved.",
+      "recorded_at": "2026-10-08T04:44:44.884Z",
+      "expectation_state": "QIF v0.6.41 adds reviewed judge-condition variants, identical-evidence trial groups, explicit six-way output classification, accountable abstention review, aggregate sensitivity assessment, governance, and semantic boundaries.",
+      "mismatch_state": "The committed conditions and trials are illustrative, unverified, and not sequestered; expected-label validity, real repeated judge calls, contamination, policy-gaming, representative cases, statistical uncertainty, correlated evaluator error, semantic validity, and actual authorization remain unresolved.",
+      "scale_direction": "Run Council review and release v0.6.41, then implement v0.6.42 Sequestered Replay and Policy-Gaming Detection.",
+      "source_session_id": "SESS-MUZ1J0XW-8EHIM9",
+      "source_decision_record_id": "DEC-MUZ1L4Q3-9G1VV2"
     }
   ]
 }

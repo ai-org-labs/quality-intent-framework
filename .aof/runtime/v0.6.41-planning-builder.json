@@ -1,0 +1,19 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-08T04:36:01.000Z",
+  "role": "Builder",
+  "stage": "planning",
+  "session_id": "SESS-MUZ1J0XW-8EHIM9",
+  "status": "completed",
+  "recommendation": "Extend calibration-report with JudgeConditionVariant, JudgeRobustnessTrial, and JudgeRobustnessAssessment.",
+  "rationale": "Reuse decision-outcome pairs, evidence provenance, reviewer and governance records, retained fixture generation, and the counterfactual same-evidence pattern while adding an explicit six-way output taxonomy.",
+  "signals": [],
+  "artifact_refs": [".aof/artifacts/need-validation/records/NVR-QIFV0641.json", ".aof/artifacts/need-validation/project-charters/PCH-QIFV0641.json"],
+  "decision_required": false,
+  "source_task_id": "TASK-059",
+  "source_decision_record_id": "DEC-MUZ1L4Q3-9G1VV2",
+  "source_parent_session_id": null,
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.95
+}

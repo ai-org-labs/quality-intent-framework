@@ -1,0 +1,19 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-08T04:45:00.000Z",
+  "role": "Visionary",
+  "stage": "review",
+  "session_id": "SESS-MUZ1J0XW-8EHIM9",
+  "status": "completed",
+  "recommendation": "Approve v0.6.41 for release and continue to sequestered replay.",
+  "rationale": "The implementation turns evaluator trust into inspectable evidence and leaves the larger contamination and gaming problem explicit for v0.6.42.",
+  "signals": [],
+  "artifact_refs": ["docs/qif-v0.6.41-judge-consequence-abstention-robustness.md", "examples/calibration-report-package.json"],
+  "decision_required": false,
+  "source_task_id": "TASK-059",
+  "source_decision_record_id": "DEC-MUZ1L4Q3-9G1VV2",
+  "source_parent_session_id": null,
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.93
+}
