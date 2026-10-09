@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.42
+
+- Added reviewed Sequestered Replay Protocols for hidden items, reveal stages, access roles, allowed affordances, access logs, and externalized transcript evidence.
+- Added Sequestered Replay Runs that distinguish confirmed blindness, known exposure, and unknown state while preserving observed affordances, contamination findings, and grader-loophole findings.
+- Added reproducible Policy-Gaming Assessments with evidence sufficiency and governance for exposure, contamination, uninspected transcripts, loopholes, and unverified evidence.
+- Added 39 retained negative fixtures; the retained suite now covers 1,064 negative cases across 16 positive package types.
+- Kept blind-run counts, transcript inspection, findings, and absence of detected gaming as evidence only, never contamination freedom, honesty, quality, competence, optimality, selection, authorization, or authority.
+
 ## v0.6.41
 
 - Added reviewed Judge Condition Variants that keep case evidence identical while declaring exact downstream-use, consequence-framing, and abstain-availability differences.

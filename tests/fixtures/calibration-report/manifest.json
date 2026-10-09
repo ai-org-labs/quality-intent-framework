@@ -68,6 +68,279 @@
   ],
   "negatives": [
     {
+      "file": "calibration-report-sequestered-protocols-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "sequestered protocols required",
+      "expect": "fail",
+      "errorIncludes": "package sequesteredReplayProtocols must be an array."
+    },
+    {
+      "file": "calibration-report-sequestered-runs-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "sequestered runs required",
+      "expect": "fail",
+      "errorIncludes": "package sequesteredReplayRuns must be an array."
+    },
+    {
+      "file": "calibration-report-gaming-assessments-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "policy gaming assessments required",
+      "expect": "fail",
+      "errorIncludes": "package policyGamingAssessments must be an array."
+    },
+    {
+      "file": "calibration-report-sequestered-trial-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "protocol trial traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing judge robustness trial"
+    },
+    {
+      "file": "calibration-report-sequestered-item-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "sequestered item minimum",
+      "expect": "fail",
+      "errorIncludes": "sequesteredItems must include at least two items."
+    },
+    {
+      "file": "calibration-report-sequestered-item-exposure.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "pre-execution sequestering",
+      "expect": "fail",
+      "errorIncludes": "every sequestered item must remain sequesteredBeforeExecution."
+    },
+    {
+      "file": "calibration-report-sequestered-item-evidence.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "sequestered access evidence",
+      "expect": "fail",
+      "errorIncludes": "each sequestered item requires access roles and evidence."
+    },
+    {
+      "file": "calibration-report-sequestered-required-types.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "label and grader sequestering",
+      "expect": "fail",
+      "errorIncludes": "must sequester expected-label and grader-implementation."
+    },
+    {
+      "file": "calibration-report-sequestered-affordance-duplicate.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "affordance identity",
+      "expect": "fail",
+      "errorIncludes": "affordances must not duplicate id EAF-CR-LOCAL."
+    },
+    {
+      "file": "calibration-report-sequestered-log-required.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "access log requirement",
+      "expect": "fail",
+      "errorIncludes": "must require access logs and externalized transcripts."
+    },
+    {
+      "file": "calibration-report-sequestered-hidden-reasoning.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "protocol privacy boundary",
+      "expect": "fail",
+      "errorIncludes": "hiddenReasoningCollected must be false."
+    },
+    {
+      "file": "calibration-report-sequestered-auto-selection.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no automatic selection",
+      "expect": "fail",
+      "errorIncludes": "automaticSelection and automaticMutation must be false."
+    },
+    {
+      "file": "calibration-report-sequestered-unreviewed-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "protocol review governance",
+      "expect": "fail",
+      "errorIncludes": "non-reviewed protocol requires a sequestered-protocol-unreviewed governance trigger."
+    },
+    {
+      "file": "calibration-report-sequestered-protocol-evidence-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "protocol evidence governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified protocol evidence requires a sequestered-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-sequestered-run-protocol-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "run protocol traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing sequestered replay protocol"
+    },
+    {
+      "file": "calibration-report-sequestered-run-trial-set.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "run trial closure",
+      "expect": "fail",
+      "errorIncludes": "trialRefs must exactly match its protocol trialRefs."
+    },
+    {
+      "file": "calibration-report-sequestered-run-logs.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "run evidence",
+      "expect": "fail",
+      "errorIncludes": "requires access logs and externalized transcript evidence."
+    },
+    {
+      "file": "calibration-report-sequestered-run-affordance-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "observed affordance resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing protocol affordance"
+    },
+    {
+      "file": "calibration-report-sequestered-run-confirmed-with-example.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "confirmed blind evidence",
+      "expect": "fail",
+      "errorIncludes": "confirmed-blind requires verified access evidence and no prohibited observed affordance."
+    },
+    {
+      "file": "calibration-report-sequestered-run-hidden-reasoning.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "run privacy boundary",
+      "expect": "fail",
+      "errorIncludes": "hiddenReasoningCollected must be false."
+    },
+    {
+      "file": "calibration-report-sequestered-run-boundary.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluation validity boundary",
+      "expect": "fail",
+      "errorIncludes": "resultBoundary must remain evaluation-validity-evidence-only-not-contamination-freedom-honesty-competence-quality-selection-authorization-or-authority."
+    },
+    {
+      "file": "calibration-report-sequestered-finding-evidence.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "finding evidence",
+      "expect": "fail",
+      "errorIncludes": "requires evidenceRefs."
+    },
+    {
+      "file": "calibration-report-sequestered-access-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "blindness governance",
+      "expect": "fail",
+      "errorIncludes": "exposed, unknown, or prohibited-affordance execution requires a sequestered-access-boundary-breached governance trigger."
+    },
+    {
+      "file": "calibration-report-sequestered-transcript-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "transcript governance",
+      "expect": "fail",
+      "errorIncludes": "uninspected or incomplete transcript requires a sequestered-transcript-uninspected governance trigger."
+    },
+    {
+      "file": "calibration-report-sequestered-contamination-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "contamination governance",
+      "expect": "fail",
+      "errorIncludes": "contamination alert requires a sequestered-contamination-alert governance trigger."
+    },
+    {
+      "file": "calibration-report-sequestered-loophole-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "loophole governance",
+      "expect": "fail",
+      "errorIncludes": "loophole alert requires a sequestered-loophole-alert governance trigger."
+    },
+    {
+      "file": "calibration-report-sequestered-run-evidence-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "run evidence governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified replay evidence requires a sequestered-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-gaming-assessment-run-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "assessment run traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing sequestered replay run"
+    },
+    {
+      "file": "calibration-report-gaming-assessment-minimum.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "assessment minimum",
+      "expect": "fail",
+      "errorIncludes": "minimumRunCount must be at least 2."
+    },
+    {
+      "file": "calibration-report-gaming-assessment-run-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "run count reproduction",
+      "expect": "fail",
+      "errorIncludes": "runCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-gaming-assessment-blind-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "blind count reproduction",
+      "expect": "fail",
+      "errorIncludes": "confirmedBlindRunCount must reproduce as 0."
+    },
+    {
+      "file": "calibration-report-gaming-assessment-alert-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "gaming alert reproduction",
+      "expect": "fail",
+      "errorIncludes": "loopholeAlertCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-gaming-assessment-sufficiency.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "gaming sufficiency reproduction",
+      "expect": "fail",
+      "errorIncludes": "dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "calibration-report-gaming-assessment-signal.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "gaming signal reproduction",
+      "expect": "fail",
+      "errorIncludes": "assessmentSignal must reproduce as insufficient-data."
+    },
+    {
+      "file": "calibration-report-gaming-assessment-reviewer.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "gaming assessment review",
+      "expect": "fail",
+      "errorIncludes": "reviewedBy must include at least one accountable reviewer."
+    },
+    {
+      "file": "calibration-report-gaming-assessment-selection.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no automatic gaming selection",
+      "expect": "fail",
+      "errorIncludes": "automaticSelection must be false."
+    },
+    {
+      "file": "calibration-report-gaming-assessment-interpretation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "gaming interpretation boundary",
+      "expect": "fail",
+      "errorIncludes": "interpretation must remain sequestered-replay-evidence-only-not-contamination-freedom-honesty-competence-quality-optimality-selection-authorization-or-authority."
+    },
+    {
+      "file": "calibration-report-gaming-assessment-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "insufficient gaming governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient policy-gaming evidence requires a policy-gaming-assessment-insufficient governance trigger."
+    },
+    {
+      "file": "calibration-report-gaming-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "gaming semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that sequestered replay evidence proves contamination freedom, honesty, quality, competence, optimality, selection, authorization, or authority."
+    },
+    {
       "file": "calibration-report-judge-variants-not-array.json",
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "judge condition variants required",

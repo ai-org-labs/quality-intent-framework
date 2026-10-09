@@ -1,0 +1,84 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-09T04:35:19.991Z",
+  "packet_id": "ASP-MV0H288N-2DN5LQ",
+  "source_task_id": "TASK-060",
+  "source_parent_session_id": "SESS-MV0GZ8F0-Z4KWNM",
+  "source_decision_record_id": "DEC-MV0H140Y-EXMYB0",
+  "objective": "Implement QIF v0.6.42 Sequestered Replay and Policy-Gaming Detection",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, deterministic verifier, fixtures, plain-language documentation, AOF evidence, and release packaging.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "deterministic-verifier-design",
+    "evaluation-integrity"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-qif-sequestered-replay",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs",
+        "examples/calibration-report-package.json"
+      ],
+      "rationale": "existing judge trials, evidence provenance, governance triggers, and retained fixtures support a narrow sequestered replay extension"
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-public-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-sequestered-access",
+    "policy-externalized-evidence-only",
+    "policy-no-automatic-authority",
+    "policy-no-count-quality",
+    "policy-no-employee-surveillance"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "sequestered-replay-protocols",
+      "sequestered-replay-runs",
+      "policy-gaming-assessments"
+    ],
+    "acceptance_criteria": [
+      "hidden material, reveal stage, access evidence, allowed and observed affordances, transcript inspection, contamination findings, loophole findings, and aggregate counts are reproducible",
+      "exposed, contaminated, uninspected, loophole-affected, insufficient, or unverified results trigger governance",
+      "negative fixtures reject hidden reasoning collection, automatic authority, blame, and contamination-freedom overclaiming"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "sequestered replay preserves evaluation validity boundaries",
+      "evaluator_ref": "guardian",
+      "evidence_required": "schema, verifier, example, full fixtures, tests, and release notes",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "sequestered-replay-overreach",
+      "trigger_condition": "implementation infers blindness without evidence, collects hidden reasoning, grants authority, or claims absence of gaming",
+      "consequence": "block-assignment",
+      "recovery_action": "restore access evidence, privacy, non-authority, and governance boundaries"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I check the test conditions before trusting the score.",
+    "current_action": "Implement sequestered replay and policy-gaming detection",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run full fixtures and Council review"
+  },
+  "status": "draft"
+}

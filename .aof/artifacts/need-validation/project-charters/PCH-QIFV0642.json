@@ -1,0 +1,24 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-09T04:34:22.564Z",
+  "project_charter_id": "PCH-MV0H0ZXG-OS4630",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV0642.json",
+  "validated_objective": "Release QIF v0.6.42 with an executable, auditable, domain-general sequestered replay and policy-gaming detection lifecycle.",
+  "scope": [
+    "reviewed sequestered replay protocol defining hidden material, reveal stage, access roles, and allowed evaluation affordances",
+    "replay run evidence for blindness, observed affordances, externalized transcript inspection, contamination checks, and grader-loophole findings",
+    "deterministic policy-gaming assessment and governance triggers",
+    "schema, verifier, example, retained fixtures, plain-language docs, roadmap, AOF evidence, tag, and GitHub release"
+  ],
+  "constraints": [
+    "No UI or external integration",
+    "No hidden chain-of-thought collection, automatic actor selection, ranking, replacement, authorization, policy mutation, or blame assignment",
+    "No claim that sequestering, transcript review, low finding count, or no detected gaming proves contamination freedom, honesty, competence, quality, or authority"
+  ],
+  "expected_outcomes": [
+    "Humans and AI can reproduce whether a replay was plausibly blind, stayed within declared affordances, and produced reviewable contamination or loophole evidence.",
+    "Exposure, contamination, uninspected behavior, loopholes, and insufficient evidence become explicit governance work before evaluation reliance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV0GZEAQ-GC778D"
+}

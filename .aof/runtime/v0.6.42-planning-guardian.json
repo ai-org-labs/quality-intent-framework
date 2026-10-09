@@ -1,0 +1,22 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-09T04:35:02.076Z",
+  "role": "Guardian",
+  "stage": "planning",
+  "session_id": "SESS-MV0GZ8F0-Z4KWNM",
+  "status": "completed",
+  "recommendation": "Proceed only with strict access, affordance, privacy, evidence, governance, and non-authority boundaries.",
+  "rationale": "Blindness must require access evidence; prohibited observed affordances, contamination, loopholes, missing transcript inspection, or unverified evidence must trigger governance; hidden reasoning is not required; absence of findings cannot prove freedom from gaming.",
+  "signals": [],
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0642.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0642.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-060",
+  "source_decision_record_id": "DEC-MV0H140Y-EXMYB0",
+  "source_parent_session_id": "SESS-MV0GZ8F0-Z4KWNM",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.96
+}

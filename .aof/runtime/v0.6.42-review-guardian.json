@@ -1,0 +1,22 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-09T04:43:34.004Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MV0GZ8F0-Z4KWNM",
+  "status": "completed",
+  "recommendation": "Approve with the documented example-only and semantic-validity boundaries.",
+  "rationale": "Unsupported blindness, missing evidence, prohibited affordances, contamination or loophole alerts, uninspected transcripts, hidden reasoning, automatic selection, and overclaiming are rejected or governed. Absence of detected gaming is not treated as proof.",
+  "signals": [],
+  "artifact_refs": [
+    "examples/calibration-report-package.json",
+    "RELEASE-NOTES-v0.6.42.md"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-060",
+  "source_decision_record_id": "DEC-MV0H140Y-EXMYB0",
+  "source_parent_session_id": "SESS-MV0GZ8F0-Z4KWNM",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.97
+}

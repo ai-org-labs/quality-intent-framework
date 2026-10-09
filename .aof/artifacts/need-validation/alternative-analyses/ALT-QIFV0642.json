@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-09T04:34:01.121Z",
+  "alternative_analysis_id": "ALT-MV0H0JDT-8YNGVL",
+  "subject_need": "Protect evaluation validity from answer exposure, contamination, prohibited affordances, and grader loopholes.",
+  "alternative_solutions": [
+    "Add first-class sequestered replay protocols, replay runs, and policy-gaming assessments to calibration-report with deterministic governance.",
+    "Rely on a private benchmark label without access logs, affordance declarations, or transcript evidence, accepting unverifiable blindness.",
+    "Use prose-only reviewer notes, accepting weak reference resolution and irreproducible aggregate claims."
+  ],
+  "non_solution_options": [
+    "Treat high score, no detected issue, or hidden chain-of-thought inspection as proof of contamination freedom or actor honesty."
+  ],
+  "defer_options": [
+    "Wait for a production pilot before defining the structural evidence contract."
+  ],
+  "stop_options": [
+    "Do not create the project if sequestered access boundaries, privacy, externalized evidence, non-authority, and governance cannot be preserved."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV0GZEAQ-GC778D"
+}

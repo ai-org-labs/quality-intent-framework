@@ -45,6 +45,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.6.39 Adjudication Feedback and Rubric Revision: `docs/qif-v0.6.39-adjudication-feedback-rubric-revision.md`
 - QIF v0.6.40 Policy Counterfactual Replay: `docs/qif-v0.6.40-policy-counterfactual-replay.md`
 - QIF v0.6.41 Judge Consequence and Abstention Robustness: `docs/qif-v0.6.41-judge-consequence-abstention-robustness.md`
+- QIF v0.6.42 Sequestered Replay and Policy-Gaming Detection: `docs/qif-v0.6.42-sequestered-replay-policy-gaming.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`

@@ -1,0 +1,39 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-09T04:43:42.788Z",
+  "review_packet_id": "CREV-MV0HD078-N9GGV5",
+  "council_id": "qif-v0.6.42-final-council",
+  "stage": "review",
+  "review_status": "approved",
+  "decision_summary": "Approve QIF v0.6.42 for release.",
+  "rationale": "Visionary confirms roadmap value, Builder confirms executable structure and complete retained tests, and Guardian confirms privacy, governance, non-authority, and semantic-validity boundaries.",
+  "recommendation": "Publish v0.6.42, retain the example-only residual risk, and proceed to v0.6.43 cross-judge correlated-error calibration.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [
+    ".aof/runtime/v0.6.42-review-visionary.json",
+    ".aof/runtime/v0.6.42-review-builder.json",
+    ".aof/runtime/v0.6.42-review-guardian.json"
+  ],
+  "evidence_refs": [
+    "schemas/calibration-report-package.schema.json",
+    "tools/validate-calibration-report.mjs",
+    "tests/fixtures/calibration-report/manifest.json",
+    "docs/qif-v0.6.42-sequestered-replay-policy-gaming.md"
+  ],
+  "follow_up_task_ids": [
+    "TASK-060"
+  ],
+  "escalation_required": false,
+  "source_task_id": "TASK-060",
+  "source_parent_session_id": "SESS-MV0GZ8F0-Z4KWNM",
+  "source_decision_record_id": "DEC-MV0H140Y-EXMYB0"
+}

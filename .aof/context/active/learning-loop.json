@@ -2,7 +2,7 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-08T04:46:24.651Z",
+  "generated_at": "2026-10-09T04:44:15.474Z",
   "latest_outcome": {
     "source_session_id": "SESS-MUZ1J0XW-8EHIM9",
     "report_id": "OUT-MUZ20GZK-ELC0SZ",
@@ -12,28 +12,28 @@
     "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.41"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV0641-001",
-    "recorded_at": "2026-10-08T04:44:44.878Z",
-    "summary": "QIF v0.6.41 adds reviewed judge-condition variants, identical-evidence trial groups, explicit six-way output classification, accountable abstention review, aggregate sensitivity assessment, governance, and semantic boundaries.",
-    "detected_gap": "The committed conditions and trials are illustrative, unverified, and not sequestered; expected-label validity, real repeated judge calls, contamination, policy-gaming, representative cases, statistical uncertainty, correlated evaluator error, semantic validity, and actual authorization remain unresolved.",
+    "audit_id": "FSA-QIFV0642",
+    "recorded_at": "2026-10-09T04:43:14.412Z",
+    "summary": "Schema, example, verifier, 39 retained negative fixtures, plain-language documentation, roadmap, and release notes implement the approved three-entity sequestered replay lifecycle; npm test passes 16/16 positive and 1064/1064 negative checks.",
+    "detected_gap": "The committed run is example-only with unknown blindness; independent sequestered infrastructure, secret cases, live actor execution, adversarial review, and representative empirical evidence remain outside this release.",
     "result_state": "stable",
-    "next_action": "Run Council review and release v0.6.41, then implement v0.6.42 Sequestered Replay and Policy-Gaming Detection.",
+    "next_action": "Run Council review and organization verification, publish v0.6.42, then begin v0.6.43 cross-judge correlated-error design.",
     "related_task_ids": [
-      "TASK-059"
+      "TASK-060"
     ]
   },
   "current_next_value_slice": {
-    "content": "v0.6.42 Sequestered Replay and Policy-Gaming Detection",
-    "updated_at": "2026-10-08T04:46:24.503Z",
+    "content": "QIF v0.6.43 Cross-Judge Correlated Error and Adjudication Calibration",
+    "updated_at": "2026-10-09T04:43:14.420Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MUZ1J0XW-8EHIM9",
-    "source_decision_record_id": "DEC-MUZ1L4Q3-9G1VV2"
+    "source_session_id": "SESS-MV0GZ8F0-Z4KWNM",
+    "source_decision_record_id": "DEC-MV0H140Y-EXMYB0"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Run Council review and release v0.6.41, then implement v0.6.42 Sequestered Replay and Policy-Gaming Detection.",
+    "proposed_focus": "Run Council review and organization verification, publish v0.6.42, then begin v0.6.43 cross-judge correlated-error design.",
     "related_task_ids": [
-      "TASK-059"
+      "TASK-060"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: v0.6.42 Sequestered Replay and Policy-Gaming Detection",
-    "Latest self-audit next action: Run Council review and release v0.6.41, then implement v0.6.42 Sequestered Replay and Policy-Gaming Detection.",
+    "Current next value slice: QIF v0.6.43 Cross-Judge Correlated Error and Adjudication Calibration",
+    "Latest self-audit next action: Run Council review and organization verification, publish v0.6.42, then begin v0.6.43 cross-judge correlated-error design.",
     "Latest outcome result: success"
   ]
 }

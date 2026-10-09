@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-09T04:43:32.119Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-MV0GZ8F0-Z4KWNM",
+  "status": "completed",
+  "recommendation": "Approve the implementation and retained verifier suite.",
+  "rationale": "The three entities have distinct ownership, all references and counts reproduce, 16 positive packages and 1064 negative fixtures pass, and future roadmap contains v0.6.43, v0.6.44, and v0.7.",
+  "signals": [],
+  "artifact_refs": [
+    "schemas/calibration-report-package.schema.json",
+    "tools/validate-calibration-report.mjs",
+    "tests/fixtures/calibration-report/manifest.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-060",
+  "source_decision_record_id": "DEC-MV0H140Y-EXMYB0",
+  "source_parent_session_id": "SESS-MV0GZ8F0-Z4KWNM",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.97
+}

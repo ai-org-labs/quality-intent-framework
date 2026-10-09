@@ -4654,3 +4654,72 @@ Decision:
 - Tag target: 22345e6a53a403a9a48236c19528097410f22ea6
 - Remote main advanced from 1614b12 to 22345e6.
 - Residual risk: the calibration corpus is synthetic and intentionally small. The next frontier is real pilot case ingestion, expert panel adjudication, and longitudinal calibration health.
+## QIF v0.6.42 Sequestered Replay and Policy-Gaming Detection
+
+Date: 2026-10-09
+
+Need / Intent / Context:
+
+- Need: reproducible judge arithmetic is insufficient when evaluation answers,
+  labels, grader details, metadata, or forbidden tools may be available before
+  execution.
+- Intent: record a reviewed sequestering protocol, actual replay conditions,
+  externalized action evidence, contamination and loophole findings, and a
+  reproducible policy-gaming assessment.
+- Context: this is a narrow `calibration-report` extension. UI, external
+  integrations, hidden chain-of-thought collection, automatic actor selection,
+  policy mutation, blame, and semantic-truth claims remain out of scope.
+
+AOF runtime and artifacts:
+
+- Latest public AOF check: `v12.2.0`; runtime source commit `fc7599b`.
+- Session: `SESS-MV0GZ8F0-Z4KWNM`; task: `TASK-060`; decision:
+  `DEC-MV0H140Y-EXMYB0`.
+- Need Validation chain:
+  `.aof/artifacts/need-validation/problem-statements/PST-QIFV0642.json`,
+  `.aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0642.json`,
+  `.aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0642.json`,
+  `.aof/artifacts/need-validation/records/NVR-QIFV0642.json`.
+- Project Charter was created only after the Validated Need:
+  `.aof/artifacts/need-validation/project-charters/PCH-QIFV0642.json`.
+- Execution evidence:
+  `.aof/artifacts/actor-skill-packets/ASP-QIFV0642.json`.
+- Planning and review each ran `council-exec`; canonical Visionary, Builder,
+  Guardian role results and review packets are under `.aof/runtime/v0.6.42-*`.
+- `self-audit-record` recorded the example-only, unknown-blindness residual
+  risk and projected v0.6.43 as the next value slice.
+
+Council decision:
+
+- Visionary: approve. Evaluation conditions now become part of the quality
+  claim rather than invisible benchmark setup.
+- Builder: approve. The protocol, run, and assessment have separate ownership,
+  deterministic references and counts, and retained negative coverage.
+- Guardian: approve with boundaries. Blindness requires access evidence;
+  prohibited affordances, contamination, loopholes, missing transcript review,
+  and unverified evidence require governance. Hidden reasoning is not required,
+  and absence of detected gaming proves neither cleanliness nor honesty.
+
+Implementation and evidence:
+
+- Added `SequesteredReplayProtocol`, `SequesteredReplayRun`, and
+  `PolicyGamingAssessment` to the calibration-report schema, example, and
+  verifier.
+- Added explicit hidden-item reveal stages, access roles, allowed and observed
+  affordances, access logs, externalized transcripts, contamination findings,
+  loophole findings, privacy boundaries, and governance triggers.
+- Added 39 retained negative fixtures. `npm test` passed 16/16 positive checks
+  and 1,064/1,064 negative checks.
+- Roadmap trend evidence used NIST sequestered evaluation and evaluation-
+  cheating guidance plus current OpenAI reward-hacking and metagaming research.
+- Future roadmap remains at least three items deep: v0.6.43 cross-judge
+  correlated error, v0.6.44 evaluator belief/reward-signal leakage, and v0.7
+  empirical calibration.
+
+Release decision:
+
+- Approved for v0.6.42 publication after organization verification and public
+  residue checks.
+- Residual risk: the committed replay is example-only and cannot establish
+  independent sequestering, contamination freedom, policy-gaming absence,
+  actor honesty, competence, quality, selection, authorization, or authority.

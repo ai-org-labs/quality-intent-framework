@@ -79,6 +79,7 @@ Use additional documents when needed:
 | Turn adjudicated ambiguity into a reviewable, reversible rubric change without silently changing the rules | `docs/qif-v0.6.39-adjudication-feedback-rubric-revision.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Compare the same preserved decision under a reviewed candidate route policy without selecting or authorizing that policy | `docs/qif-v0.6.40-policy-counterfactual-replay.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Test whether a judge changes its answer when consequences or abstention options change, without treating abstention as failure or accuracy as authority | `docs/qif-v0.6.41-judge-consequence-abstention-robustness.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
+| Check whether an evaluation stayed blind, within allowed tools, and free of detected grader shortcuts without claiming contamination freedom | `docs/qif-v0.6.42-sequestered-replay-policy-gaming.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Understand quality theory background | `docs/quality-theory-report.md` |
 
 ## Required Framing

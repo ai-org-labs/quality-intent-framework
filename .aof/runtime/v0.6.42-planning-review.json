@@ -1,0 +1,37 @@
+{
+  "packet_type": "council-review-packet",
+  "recorded_at": "2026-10-09T04:35:09.795Z",
+  "review_packet_id": "CREV-MV0H20DF-GMDM52",
+  "council_id": "qif-v0.6.42-planning-council",
+  "stage": "planning",
+  "review_status": "approved",
+  "decision_summary": "Approve the narrow three-entity Sequestered Replay and Policy-Gaming Detection design for implementation.",
+  "rationale": "Visionary confirms the evaluation-integrity gap, Builder reuses calibration-report and judge trials, and Guardian requires evidenced blindness, explicit affordances, externalized transcript review, governance, privacy, and non-authority.",
+  "recommendation": "Implement schema, verifier, example, fixtures, documentation, roadmap, and release evidence, then run full self-review and Council review.",
+  "target_audience": null,
+  "expected_user_reaction": null,
+  "blocking_reasons": [],
+  "artifact_change_recommendations": [],
+  "organization_change_recommendations": [],
+  "diagnosis_category": null,
+  "diagnosis_confidence": null,
+  "diagnosis_evidence_refs": [],
+  "human_override_signal": null,
+  "team_output_refs": [],
+  "role_result_refs": [
+    ".aof/runtime/v0.6.42-planning-visionary.json",
+    ".aof/runtime/v0.6.42-planning-builder.json",
+    ".aof/runtime/v0.6.42-planning-guardian.json"
+  ],
+  "evidence_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0642.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0642.json"
+  ],
+  "follow_up_task_ids": [
+    "TASK-060"
+  ],
+  "escalation_required": false,
+  "source_task_id": "TASK-060",
+  "source_parent_session_id": "SESS-MV0GZ8F0-Z4KWNM",
+  "source_decision_record_id": "DEC-MV0H140Y-EXMYB0"
+}

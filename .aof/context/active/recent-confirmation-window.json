@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-08T04:44:44.884Z",
+  "updated_at": "2026-10-09T04:43:14.419Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means a human or AI can reproduce the unchanged evidence, exact judge-condition differences, expected label, returned output category, classification correctness, abstention justification, consequence sensitivity, aggregate counts, sufficiency, and governance route. A decline is not malformed output; an abstention is not automatically correct; a correct label under one framing is not proof of robust judgment; counts and lower error rates remain evidence, never quality, semantic truth, competence, optimality, or authority.",
-      "recorded_at": "2026-10-08T04:33:23.991Z",
+      "answer": "成功は、blind/sequestered状態と許可affordance、外部化行動、汚染・loophole所見を参照解決可能な構造で記録し、集計を再現し、違反・不足をgovernanceへ送ること。npm test、負例fixture全件、AOF verify全件が通り、v0.6.42タグとGitHub Releaseが公開されること。",
+      "recorded_at": "2026-10-09T04:33:07.879Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MUZ1J0XW-8EHIM9",
+      "source_session_id": "SESS-MV0GZ8F0-Z4KWNM",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The broad continuation request is reframed into the missing judge-robustness contract after policy counterfactual replay; aggregate accuracy and prose-only review cannot expose consequence-conditioned judgment or distinguish abstention from failure.",
-      "recorded_at": "2026-10-08T04:34:21.870Z",
+      "answer": "The broad continuation request is reframed into the evaluation-validity gap after judge robustness: a judge trial is not trustworthy merely because its arithmetic is reproducible when answers, labels, grader behavior, or loopholes may be available to the evaluated actor.",
+      "recorded_at": "2026-10-09T04:34:27.877Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MUZ1J0XW-8EHIM9",
-      "source_decision_record_id": "DEC-MUZ1L4Q3-9G1VV2"
+      "source_session_id": "SESS-MV0GZ8F0-Z4KWNM",
+      "source_decision_record_id": "DEC-MV0H140Y-EXMYB0"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "The committed conditions and trials are illustrative, unverified, and not sequestered; expected-label validity, real repeated judge calls, contamination, policy-gaming, representative cases, statistical uncertainty, correlated evaluator error, semantic validity, and actual authorization remain unresolved.",
-      "recorded_at": "2026-10-08T04:44:44.884Z",
-      "expectation_state": "QIF v0.6.41 adds reviewed judge-condition variants, identical-evidence trial groups, explicit six-way output classification, accountable abstention review, aggregate sensitivity assessment, governance, and semantic boundaries.",
-      "mismatch_state": "The committed conditions and trials are illustrative, unverified, and not sequestered; expected-label validity, real repeated judge calls, contamination, policy-gaming, representative cases, statistical uncertainty, correlated evaluator error, semantic validity, and actual authorization remain unresolved.",
-      "scale_direction": "Run Council review and release v0.6.41, then implement v0.6.42 Sequestered Replay and Policy-Gaming Detection.",
-      "source_session_id": "SESS-MUZ1J0XW-8EHIM9",
-      "source_decision_record_id": "DEC-MUZ1L4Q3-9G1VV2"
+      "answer": "The committed run is example-only with unknown blindness; independent sequestered infrastructure, secret cases, live actor execution, adversarial review, and representative empirical evidence remain outside this release.",
+      "recorded_at": "2026-10-09T04:43:14.419Z",
+      "expectation_state": "Schema, example, verifier, 39 retained negative fixtures, plain-language documentation, roadmap, and release notes implement the approved three-entity sequestered replay lifecycle; npm test passes 16/16 positive and 1064/1064 negative checks.",
+      "mismatch_state": "The committed run is example-only with unknown blindness; independent sequestered infrastructure, secret cases, live actor execution, adversarial review, and representative empirical evidence remain outside this release.",
+      "scale_direction": "Run Council review and organization verification, publish v0.6.42, then begin v0.6.43 cross-judge correlated-error design.",
+      "source_session_id": "SESS-MV0GZ8F0-Z4KWNM",
+      "source_decision_record_id": "DEC-MV0H140Y-EXMYB0"
     }
   ]
 }

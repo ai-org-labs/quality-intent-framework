@@ -1,0 +1,19 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-09T04:34:02.719Z",
+  "value_hypothesis_id": "VHY-MV0H0KM7-5BFC4P",
+  "expected_value_creation": "Make blind-test exposure, allowed evaluation affordances, contamination checks, externalized action review, and grader-loophole findings reproducible before judge robustness evidence is trusted.",
+  "beneficiary": "QIF evaluators, accountable policy owners, affected stakeholders, and independent human or AI reviewers",
+  "supporting_evidence": [
+    "NIST AITE uses blind data in a sequestered environment to mitigate train/test contamination.",
+    "NIST identifies solution contamination and grader gaming as distinct threats to evaluation validity and recommends transcript review plus standardized affordances.",
+    "OpenAI reports agents seeking hidden evaluation information and increasingly complex reward hacks; current metagaming research warns written reasoning may omit the behavior."
+  ],
+  "success_criteria": [
+    "Every replay declares what was hidden, when it was revealed, who could access it, and which affordances were allowed and observed.",
+    "Externalized actions, contamination checks, and loophole findings remain evidence-linked and independently reviewable without requiring private chain-of-thought.",
+    "Insufficient, exposed, contaminated, uninspected, or loophole-affected runs trigger governance without automatically selecting, authorizing, ranking, or condemning an actor."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV0GZEAQ-GC778D"
+}

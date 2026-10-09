@@ -174,6 +174,9 @@ function validatePackage(pkg, packagePath) {
   const judgeConditionVariants = requiredArray(pkg, "judgeConditionVariants");
   const judgeRobustnessTrials = requiredArray(pkg, "judgeRobustnessTrials");
   const judgeRobustnessAssessments = requiredArray(pkg, "judgeRobustnessAssessments");
+  const sequesteredReplayProtocols = requiredArray(pkg, "sequesteredReplayProtocols");
+  const sequesteredReplayRuns = requiredArray(pkg, "sequesteredReplayRuns");
+  const policyGamingAssessments = requiredArray(pkg, "policyGamingAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -212,6 +215,9 @@ function validatePackage(pkg, packagePath) {
   const judgeConditionVariantIndex = indexById(judgeConditionVariants, `${packagePath}:judgeConditionVariants`);
   const judgeRobustnessTrialIndex = indexById(judgeRobustnessTrials, `${packagePath}:judgeRobustnessTrials`);
   const judgeRobustnessAssessmentIndex = indexById(judgeRobustnessAssessments, `${packagePath}:judgeRobustnessAssessments`);
+  const sequesteredReplayProtocolIndex = indexById(sequesteredReplayProtocols, `${packagePath}:sequesteredReplayProtocols`);
+  const sequesteredReplayRunIndex = indexById(sequesteredReplayRuns, `${packagePath}:sequesteredReplayRuns`);
+  const policyGamingAssessmentIndex = indexById(policyGamingAssessments, `${packagePath}:policyGamingAssessments`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -1475,6 +1481,94 @@ function validatePackage(pkg, packagePath) {
     if ((counts.refusal > 0 || counts["malformed-output"] > 0) && !triggerTypes.has("judge-output-invalid")) errors.push(`${assessment.id} invalid judge outputs require a judge-output-invalid governance trigger.`);
   }
 
+  for (const protocol of sequesteredReplayProtocols) {
+    for (const field of ["title", "evidenceStatus", "status"]) str(protocol, field, protocol.id);
+    for (const trialRef of protocol.trialRefs || []) ref(judgeRobustnessTrialIndex, trialRef, "judge robustness trial", protocol.id);
+    if (!Array.isArray(protocol.sequesteredItems) || protocol.sequesteredItems.length < 2) errors.push(`${protocol.id} sequesteredItems must include at least two items.`);
+    const itemTypes = new Set();
+    for (const item of protocol.sequesteredItems || []) {
+      for (const field of ["itemType", "revealStage"]) str(item, field, `${protocol.id} sequestered item`);
+      itemTypes.add(item.itemType);
+      if (item.sequesteredBeforeExecution !== true) errors.push(`${protocol.id} every sequestered item must remain sequesteredBeforeExecution.`);
+      if (!Array.isArray(item.accessRoleRefs) || item.accessRoleRefs.length === 0 || !Array.isArray(item.evidenceRefs) || item.evidenceRefs.length === 0) errors.push(`${protocol.id} each sequestered item requires access roles and evidence.`);
+    }
+    if (!itemTypes.has("expected-label") || !itemTypes.has("grader-implementation")) errors.push(`${protocol.id} must sequester expected-label and grader-implementation.`);
+    const affordanceIds = new Set();
+    for (const affordance of protocol.affordances || []) {
+      for (const field of ["id", "affordanceType", "rationale"]) str(affordance, field, protocol.id);
+      if (affordanceIds.has(affordance.id)) errors.push(`${protocol.id} affordances must not duplicate id ${affordance.id}.`);
+      affordanceIds.add(affordance.id);
+      if (typeof affordance.allowed !== "boolean") errors.push(`${protocol.id}/${affordance.id} allowed must be boolean.`);
+    }
+    if (protocol.accessLogRequired !== true || protocol.externalizedTranscriptRequired !== true) errors.push(`${protocol.id} must require access logs and externalized transcripts.`);
+    if (protocol.hiddenReasoningCollected !== false) errors.push(`${protocol.id} hiddenReasoningCollected must be false.`);
+    if (!Array.isArray(protocol.reviewedBy) || protocol.reviewedBy.length === 0 || !Array.isArray(protocol.evidenceRefs) || protocol.evidenceRefs.length === 0) errors.push(`${protocol.id} requires accountable review and evidence.`);
+    if (protocol.automaticSelection !== false || protocol.automaticMutation !== false) errors.push(`${protocol.id} automaticSelection and automaticMutation must be false.`);
+    const triggerTypes = new Set((protocol.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", protocol.id)?.triggerType));
+    if (protocol.status !== "reviewed" && !triggerTypes.has("sequestered-protocol-unreviewed")) errors.push(`${protocol.id} non-reviewed protocol requires a sequestered-protocol-unreviewed governance trigger.`);
+    if (protocol.evidenceStatus !== "verified" && !triggerTypes.has("sequestered-evidence-unverified")) errors.push(`${protocol.id} non-verified protocol evidence requires a sequestered-evidence-unverified governance trigger.`);
+  }
+
+  for (const run of sequesteredReplayRuns) {
+    for (const field of ["protocolRef", "executedAt", "executedBy", "blindStateAtExecution", "transcriptInspectionStatus", "resultBoundary", "evidenceStatus", "status"]) str(run, field, run.id);
+    const protocol = ref(sequesteredReplayProtocolIndex, run.protocolRef, "sequestered replay protocol", run.id);
+    for (const trialRef of run.trialRefs || []) ref(judgeRobustnessTrialIndex, trialRef, "judge robustness trial", run.id);
+    if (protocol && !sameSet(run.trialRefs, protocol.trialRefs)) errors.push(`${run.id} trialRefs must exactly match its protocol trialRefs.`);
+    if (!Array.isArray(run.accessLogRefs) || run.accessLogRefs.length === 0 || !Array.isArray(run.externalizedTranscriptRefs) || run.externalizedTranscriptRefs.length === 0) errors.push(`${run.id} requires access logs and externalized transcript evidence.`);
+    const affordanceIndex = new Map((protocol?.affordances || []).map((item) => [item.id, item]));
+    let prohibitedAffordanceObserved = false;
+    for (const affordanceRef of run.observedAffordanceRefs || []) {
+      const affordance = affordanceIndex.get(affordanceRef);
+      if (!affordance) errors.push(`${run.id} references missing protocol affordance: ${affordanceRef}`);
+      else if (affordance.allowed !== true) prohibitedAffordanceObserved = true;
+    }
+    if (run.blindStateAtExecution === "confirmed-blind" && (run.evidenceStatus !== "verified" || run.accessLogRefs.length === 0 || prohibitedAffordanceObserved)) errors.push(`${run.id} confirmed-blind requires verified access evidence and no prohibited observed affordance.`);
+    if (run.hiddenReasoningCollected !== false) errors.push(`${run.id} hiddenReasoningCollected must be false.`);
+    if (run.resultBoundary !== "evaluation-validity-evidence-only-not-contamination-freedom-honesty-competence-quality-selection-authorization-or-authority") errors.push(`${run.id} resultBoundary must remain evaluation-validity-evidence-only-not-contamination-freedom-honesty-competence-quality-selection-authorization-or-authority.`);
+    const contaminationAlerts = (run.contaminationFindings || []).filter((item) => ["suspected", "confirmed", "unknown"].includes(item.findingStatus));
+    const loopholeAlerts = (run.loopholeFindings || []).filter((item) => ["suspected", "confirmed", "unknown"].includes(item.findingStatus));
+    for (const finding of [...(run.contaminationFindings || []), ...(run.loopholeFindings || [])]) {
+      for (const field of ["id", "findingType", "findingStatus", "rationale"]) str(finding, field, run.id);
+      if (!Array.isArray(finding.evidenceRefs) || finding.evidenceRefs.length === 0) errors.push(`${run.id}/${finding.id} requires evidenceRefs.`);
+    }
+    const triggerTypes = new Set((run.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", run.id)?.triggerType));
+    if ((run.blindStateAtExecution !== "confirmed-blind" || prohibitedAffordanceObserved) && !triggerTypes.has("sequestered-access-boundary-breached")) errors.push(`${run.id} exposed, unknown, or prohibited-affordance execution requires a sequestered-access-boundary-breached governance trigger.`);
+    if (run.transcriptInspectionStatus !== "inspected" && !triggerTypes.has("sequestered-transcript-uninspected")) errors.push(`${run.id} uninspected or incomplete transcript requires a sequestered-transcript-uninspected governance trigger.`);
+    if (contaminationAlerts.length > 0 && !triggerTypes.has("sequestered-contamination-alert")) errors.push(`${run.id} contamination alert requires a sequestered-contamination-alert governance trigger.`);
+    if (loopholeAlerts.length > 0 && !triggerTypes.has("sequestered-loophole-alert")) errors.push(`${run.id} loophole alert requires a sequestered-loophole-alert governance trigger.`);
+    if (run.evidenceStatus !== "verified" && !triggerTypes.has("sequestered-evidence-unverified")) errors.push(`${run.id} non-verified replay evidence requires a sequestered-evidence-unverified governance trigger.`);
+  }
+
+  for (const assessment of policyGamingAssessments) {
+    for (const field of ["title", "dataSufficiency", "assessmentSignal", "interpretation", "status"]) str(assessment, field, assessment.id);
+    const protocols = (assessment.protocolRefs || []).map((id) => ref(sequesteredReplayProtocolIndex, id, "sequestered replay protocol", assessment.id)).filter(Boolean);
+    const runs = (assessment.runRefs || []).map((id) => ref(sequesteredReplayRunIndex, id, "sequestered replay run", assessment.id)).filter(Boolean);
+    if (!Number.isInteger(assessment.minimumRunCount) || assessment.minimumRunCount < 2) errors.push(`${assessment.id} minimumRunCount must be at least 2.`);
+    for (const run of runs) if (!assessment.protocolRefs?.includes(run.protocolRef)) errors.push(`${assessment.id} run ${run.id} must use an assessed protocol.`);
+    const contaminationAlertCount = runs.reduce((count, run) => count + (run.contaminationFindings || []).filter((item) => ["suspected", "confirmed", "unknown"].includes(item.findingStatus)).length, 0);
+    const loopholeAlertCount = runs.reduce((count, run) => count + (run.loopholeFindings || []).filter((item) => ["suspected", "confirmed", "unknown"].includes(item.findingStatus)).length, 0);
+    const expected = {
+      runCount: runs.length,
+      confirmedBlindRunCount: runs.filter((run) => run.blindStateAtExecution === "confirmed-blind").length,
+      exposedOrUnknownRunCount: runs.filter((run) => run.blindStateAtExecution !== "confirmed-blind").length,
+      transcriptInspectedRunCount: runs.filter((run) => run.transcriptInspectionStatus === "inspected").length,
+      contaminationAlertCount,
+      loopholeAlertCount,
+      verifiedRunCount: runs.filter((run) => run.evidenceStatus === "verified").length
+    };
+    for (const [field, value] of Object.entries(expected)) if (!sameNumber(assessment[field], value)) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const dataSufficiency = runs.length >= assessment.minimumRunCount && expected.confirmedBlindRunCount === runs.length && expected.transcriptInspectedRunCount === runs.length && expected.verifiedRunCount === runs.length && protocols.every((item) => item.status === "reviewed" && item.evidenceStatus === "verified") ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== dataSufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${dataSufficiency}.`);
+    const signal = dataSufficiency === "insufficient" ? "insufficient-data" : contaminationAlertCount > 0 || loopholeAlertCount > 0 ? "policy-gaming-risk-observed" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (!Array.isArray(assessment.reviewedBy) || assessment.reviewedBy.length === 0) errors.push(`${assessment.id} reviewedBy must include at least one accountable reviewer.`);
+    if (assessment.automaticSelection !== false) errors.push(`${assessment.id} automaticSelection must be false.`);
+    if (assessment.interpretation !== "sequestered-replay-evidence-only-not-contamination-freedom-honesty-competence-quality-optimality-selection-authorization-or-authority") errors.push(`${assessment.id} interpretation must remain sequestered-replay-evidence-only-not-contamination-freedom-honesty-competence-quality-optimality-selection-authorization-or-authority.`);
+    const triggerTypes = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (dataSufficiency === "insufficient" && !triggerTypes.has("policy-gaming-assessment-insufficient")) errors.push(`${assessment.id} insufficient policy-gaming evidence requires a policy-gaming-assessment-insufficient governance trigger.`);
+    if ((contaminationAlertCount > 0 || loopholeAlertCount > 0) && !triggerTypes.has("sequestered-loophole-alert") && !triggerTypes.has("sequestered-contamination-alert")) errors.push(`${assessment.id} policy-gaming alerts require a contamination or loophole governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -1581,6 +1675,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that counterfactual replay count, route-change rate, or hypothesized loss-boundary direction proves observed outcome, policy quality, optimality, causality, competence, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that counterfactual replay count, route-change rate, or hypothesized loss-boundary direction proves observed outcome, policy quality, optimality, causality, competence, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that judge accuracy, stability, abstention, refusal, malformed-output, or condition-sensitivity counts prove semantic truth, quality, competence, optimality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that judge accuracy, stability, abstention, refusal, malformed-output, or condition-sensitivity counts prove semantic truth, quality, competence, optimality, selection, authorization, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that blind-run count, contamination finding, transcript inspection, loophole count, or absence of detected gaming proves contamination freedom, honesty, quality, competence, optimality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that sequestered replay evidence proves contamination freedom, honesty, quality, competence, optimality, selection, authorization, or authority.`);
   }
 
   results.push({
@@ -1624,6 +1719,9 @@ function validatePackage(pkg, packagePath) {
       judgeConditionVariants: judgeConditionVariants.length,
       judgeRobustnessTrials: judgeRobustnessTrials.length,
       judgeRobustnessAssessments: judgeRobustnessAssessments.length,
+      sequesteredReplayProtocols: sequesteredReplayProtocols.length,
+      sequesteredReplayRuns: sequesteredReplayRuns.length,
+      policyGamingAssessments: policyGamingAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -1643,5 +1741,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, robustness summaries, rollback preservation, and policy conformance only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, resolution quality, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, judge or policy selection, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, robustness summaries, rollback preservation, and policy conformance only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, contamination freedom, honesty, resolution quality, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, judge or policy selection, or decision authority."
 }, null, 2));

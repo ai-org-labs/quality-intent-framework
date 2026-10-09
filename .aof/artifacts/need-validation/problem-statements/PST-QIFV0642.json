@@ -1,0 +1,18 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-09T04:34:02.710Z",
+  "problem_statement_id": "PST-MV0H0KLY-RNYEUY",
+  "affected_party": "QIF evaluators, accountable AI policy owners, and stakeholders affected by model-based judgments",
+  "actual_problem": "QIF can test judge condition robustness, but evaluation cases, expected labels, grader details, or implementation loopholes may remain visible before execution, allowing contamination or policy gaming to produce apparently strong results that do not measure the intended capability.",
+  "why_it_matters": "A structurally valid score can mislead deployment or governance when the evaluated actor accessed solutions, exploited a grader, used prohibited affordances, or bypassed the intended task.",
+  "why_now": "NIST now operates blind sequestered evaluation and documents solution contamination and grader gaming; current OpenAI evidence shows increasingly complex reward hacking and metagaming that may not appear in written reasoning.",
+  "evidence_refs": [
+    "docs/qif-roadmap.md",
+    "https://www.nist.gov/caissi/cheating-ai-agent-evaluations",
+    "https://ai-challenges.nist.gov/aite",
+    "https://openai.com/index/hugging-face-incident-and-the-road-ahead/",
+    "https://alignment.openai.com/metagaming-latents/"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV0GZEAQ-GC778D"
+}

@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-09T04:34:14.505Z",
+  "validation_id": "NVR-MV0H0TPL-EOP0ZL",
+  "raw_need": "Continuously advance the QIF roadmap and release the nearest slice.",
+  "validation_status": "reframed",
+  "validated_need": "Add the smallest standalone calibration-report lifecycle that records a reviewed sequestered replay protocol, run-time blindness and affordance evidence, externalized action transcript inspection, contamination and grader-loophole findings, and a reproducible policy-gaming assessment; route exposure, insufficiency, or detected risks to governance without collecting hidden reasoning or granting automatic authority.",
+  "decision_summary": "The broad continuation request is reframed into the evaluation-validity gap after judge robustness: a judge trial is not trustworthy merely because its arithmetic is reproducible when answers, labels, grader behavior, or loopholes may be available to the evaluated actor.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What must be sequestered and evidenced?",
+      "answer": "Case solutions, expected labels, grader details, and prohibited affordances must remain inaccessible until their reviewed reveal stage, with access and environment evidence.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What observations may QIF inspect?",
+      "answer": "Externalized outputs, actions, tool use, access logs, and reviewable transcripts; private hidden chain-of-thought is neither required nor treated as proof.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A high or stable judge score was assumed to imply an uncontaminated and non-gameable evaluation."
+  ],
+  "evidence_gaps": [
+    "The committed replay remains illustrative; independent infrastructure, secret test material, live model calls, representative cases, and adversarial red-team evidence remain pilot work."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV0642.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0642.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0642.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV0GZEAQ-GC778D"
+}

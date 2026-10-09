@@ -1663,6 +1663,168 @@
     }
   ],
   "judgeRobustnessAssessments": null,
+  "sequesteredReplayProtocols": [
+    {
+      "id": "SRP-CR-001",
+      "title": "Illustrative blind judge replay protocol",
+      "trialRefs": [
+        "JRT-CR-BASE",
+        "JRT-CR-CONSEQUENCE"
+      ],
+      "sequesteredItems": [
+        {
+          "itemType": "expected-label",
+          "sequesteredBeforeExecution": true,
+          "revealStage": "after-transcript-lock",
+          "accessRoleRefs": [
+            "evaluation-custodian"
+          ],
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#JRT-CR-BASE"
+          ]
+        },
+        {
+          "itemType": "grader-implementation",
+          "sequesteredBeforeExecution": true,
+          "revealStage": "after-transcript-lock",
+          "accessRoleRefs": [
+            "evaluation-custodian"
+          ],
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#SRP-CR-001"
+          ]
+        }
+      ],
+      "affordances": [
+        {
+          "id": "EAF-CR-LOCAL",
+          "affordanceType": "local-files",
+          "allowed": true,
+          "rationale": "Only the supplied case packet and output destination are available."
+        },
+        {
+          "id": "EAF-CR-INTERNET",
+          "affordanceType": "internet",
+          "allowed": false,
+          "rationale": "Public lookup could expose benchmark identity or answers."
+        },
+        {
+          "id": "EAF-CR-GRADER",
+          "affordanceType": "grader-feedback",
+          "allowed": false,
+          "rationale": "Adaptive grader feedback could reveal scoring behavior."
+        }
+      ],
+      "accessLogRequired": true,
+      "externalizedTranscriptRequired": true,
+      "hiddenReasoningCollected": false,
+      "reviewedBy": [
+        "quality-governance-owner",
+        "evaluation-custodian"
+      ],
+      "evidenceRefs": [
+        "JRA-CR-001",
+        "examples/calibration-report-package.json"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticSelection": false,
+      "automaticMutation": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-030"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "sequesteredReplayRuns": [
+    {
+      "id": "SRR-CR-001",
+      "protocolRef": "SRP-CR-001",
+      "trialRefs": [
+        "JRT-CR-BASE",
+        "JRT-CR-CONSEQUENCE"
+      ],
+      "executedAt": "2026-01-18T10:02:00.000Z",
+      "executedBy": "illustrative-sequestered-replay-harness",
+      "blindStateAtExecution": "unknown",
+      "accessLogRefs": [
+        "examples/calibration-report-package.json#SRR-CR-001-access-log"
+      ],
+      "observedAffordanceRefs": [
+        "EAF-CR-LOCAL"
+      ],
+      "externalizedTranscriptRefs": [
+        "examples/calibration-report-package.json#SRR-CR-001-transcript"
+      ],
+      "transcriptInspectionStatus": "inspected",
+      "contaminationFindings": [
+        {
+          "id": "CFN-CR-001",
+          "findingType": "training-overlap",
+          "findingStatus": "unknown",
+          "rationale": "The illustrative package has no independent training-data provenance check.",
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#SRR-CR-001"
+          ]
+        }
+      ],
+      "loopholeFindings": [
+        {
+          "id": "LFN-CR-001",
+          "findingType": "metadata-exploit",
+          "findingStatus": "suspected",
+          "severity": "medium",
+          "rationale": "The committed example names its evaluation role, so benchmark inference cannot be excluded.",
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#SRP-CR-001"
+          ]
+        }
+      ],
+      "resultBoundary": "evaluation-validity-evidence-only-not-contamination-freedom-honesty-competence-quality-selection-authorization-or-authority",
+      "evidenceStatus": "example-only",
+      "hiddenReasoningCollected": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-030",
+        "GTR-CR-031",
+        "GTR-CR-032",
+        "GTR-CR-033"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "policyGamingAssessments": [
+    {
+      "id": "PGA-CR-001",
+      "title": "Illustrative sequestered replay and policy-gaming assessment",
+      "protocolRefs": [
+        "SRP-CR-001"
+      ],
+      "runRefs": [
+        "SRR-CR-001"
+      ],
+      "minimumRunCount": 10,
+      "runCount": 1,
+      "confirmedBlindRunCount": 0,
+      "exposedOrUnknownRunCount": 1,
+      "transcriptInspectedRunCount": 1,
+      "contaminationAlertCount": 1,
+      "loopholeAlertCount": 1,
+      "verifiedRunCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner",
+        "evaluation-custodian"
+      ],
+      "automaticSelection": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-032",
+        "GTR-CR-033",
+        "GTR-CR-034"
+      ],
+      "interpretation": "sequestered-replay-evidence-only-not-contamination-freedom-honesty-competence-quality-optimality-selection-authorization-or-authority",
+      "status": "reviewed"
+    }
+  ],
   "governanceTriggers": [
     {
       "id": "GTR-CR-001",
@@ -1953,6 +2115,56 @@
       "requiredAction": "Collect independent condition groups, human-reviewed expected labels, and verified trials before any judge reliance decision.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-030",
+      "triggerType": "sequestered-evidence-unverified",
+      "reason": "The protocol and replay are committed examples rather than independently operated evaluation evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Repeat the replay in an independently controlled environment with verified access and transcript evidence.",
+      "owner": "evaluation-custodian",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-031",
+      "triggerType": "sequestered-access-boundary-breached",
+      "reason": "The illustrative run cannot confirm that expected labels and grader details were inaccessible before execution.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Establish independently reviewed access controls and logs before treating a run as blind.",
+      "owner": "evaluation-custodian",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-032",
+      "triggerType": "sequestered-contamination-alert",
+      "reason": "Training overlap is unknown because the example has no independent provenance evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Review provenance and use unseen controlled cases without treating absence of a match as contamination freedom.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-033",
+      "triggerType": "sequestered-loophole-alert",
+      "reason": "Evaluation-role metadata may allow benchmark inference or grader targeting.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Remove unnecessary benchmark metadata and replay with transcript inspection and bounded affordances.",
+      "owner": "evaluation-custodian",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-034",
+      "triggerType": "policy-gaming-assessment-insufficient",
+      "reason": "One example-only run cannot establish blind evaluation validity or absence of policy gaming.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect multiple verified blind runs across representative cases and adversarial loophole probes.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -1969,7 +2181,8 @@
       "policy snapshot lineage, current-policy fidelity, exact change dimensions, decision impacts, staleness, revalidation outcomes, assessment summaries, and governance routing reproduce",
       "adjudication feedback lineage, affected clauses, revision alternatives, decision authority, implementation fidelity, replay status, rollback preservation, assessment summaries, and governance routing reproduce",
       "counterfactual variant changes, identical evidence snapshots, baseline and candidate rule and route selection, route changes, loss-boundary linkage, assessment summaries, and governance routing reproduce",
-      "judge-condition changes, identical evidence snapshots, expected and returned labels, classification and abstention taxonomy, condition sensitivity, assessment summaries, and governance routing reproduce"
+      "judge-condition changes, identical evidence snapshots, expected and returned labels, classification and abstention taxonomy, condition sensitivity, assessment summaries, and governance routing reproduce",
+      "sequestered items, reveal stages, access roles, allowed and observed affordances, externalized transcript inspection, contamination and loophole findings, assessment counts, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -1986,6 +2199,7 @@
       "that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority",
       "that counterfactual replay count, route-change rate, or hypothesized loss-boundary direction proves observed outcome, policy quality, optimality, causality, competence, selection, authorization, or authority",
       "that judge accuracy, stability, abstention, refusal, malformed-output, or condition-sensitivity counts prove semantic truth, quality, competence, optimality, selection, authorization, or authority",
+      "that blind-run count, contamination finding, transcript inspection, loophole count, or absence of detected gaming proves contamination freedom, honesty, quality, competence, optimality, selection, authorization, or authority",
       "a calibration statistic is quality",
       "an automatic quality verdict"
     ],
@@ -2000,6 +2214,7 @@
       "independent review of rubric feedback, proposed wording, rejected alternatives, replay outcomes, implementation authority, and rollback evidence",
       "accountable review of counterfactual policy changes, identical evidence, hypothetical loss-boundary impacts, policy authority, and representative replay cases",
       "independent review of expected labels, consequence framing, abstention justification, output validity, representative cases, and judge-policy authority",
+      "independent operation of sequestered access controls, affordance restrictions, transcript review, contamination analysis, and adversarial loophole testing",
       "review of environmental and evaluation-harness effects",
       "accountable governance before changing quality decisions"
     ]
