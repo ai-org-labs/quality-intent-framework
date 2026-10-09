@@ -57,7 +57,15 @@
     }
   ],
   "reopen_count": 0,
-  "outcome_reports": [],
+  "outcome_reports": [
+    {
+      "report_id": "OUT-MV0HET7D-9FT24C",
+      "result": "success",
+      "observed_at": "2026-10-09T04:45:07.023Z",
+      "note": "QIF v0.6.42 was verified, pushed, tagged, and published. Sequestered replay now records hidden-item boundaries, affordances, access and externalized transcript evidence, contamination and loophole findings, reproducible assessments, privacy, governance, and non-authority boundaries.",
+      "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.42"
+    }
+  ],
   "clarification": {
     "round_count": 1,
     "dimensions": {
@@ -142,7 +150,7 @@
     "should_wait_for_user": false
   },
   "created_at": "2026-10-09T04:33:00.248Z",
-  "updated_at": "2026-10-09T04:43:21.510Z",
+  "updated_at": "2026-10-09T04:45:07.023Z",
   "framing": {
     "request": "QIF v0.6.42として、校正評価の解答・期待ラベル・採点ロジックへの事前アクセスを隔離し、実行時の許可されたaffordance、外部化された行動トランスクリプト、汚染兆候、grader gaming/loopholeを追跡するSequestered Replay and Policy-Gaming Detectionを実装・検証・リリースする。意味的真実、内的思考、能力、誠実性、権限を構造検証から推定しない。",
     "need": "対象はcalibration-report packageと関連schema/example/verifier/fixtures/docs/roadmap/AOF evidence。隔離実行プロトコル、実行記録、policy-gaming assessmentを対象とし、UI、外部連携、秘密推論収集、自動選抜・自動権限付与、既存概念の再設計は対象外。",

@@ -2,14 +2,14 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-09T04:44:15.474Z",
+  "generated_at": "2026-10-09T04:45:40.239Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MUZ1J0XW-8EHIM9",
-    "report_id": "OUT-MUZ20GZK-ELC0SZ",
+    "source_session_id": "SESS-MV0GZ8F0-Z4KWNM",
+    "report_id": "OUT-MV0HET7D-9FT24C",
     "result": "success",
-    "observed_at": "2026-10-08T04:46:17.597Z",
-    "note": "QIF v0.6.41 was verified, pushed, tagged, and published. Judge robustness preserves identical evidence, six-way output taxonomy, accountable abstention review, privacy, governance authority, and verifier boundaries.",
-    "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.41"
+    "observed_at": "2026-10-09T04:45:07.023Z",
+    "note": "QIF v0.6.42 was verified, pushed, tagged, and published. Sequestered replay now records hidden-item boundaries, affordances, access and externalized transcript evidence, contamination and loophole findings, reproducible assessments, privacy, governance, and non-authority boundaries.",
+    "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.42"
   },
   "latest_self_audit": {
     "audit_id": "FSA-QIFV0642",
@@ -24,7 +24,7 @@
   },
   "current_next_value_slice": {
     "content": "QIF v0.6.43 Cross-Judge Correlated Error and Adjudication Calibration",
-    "updated_at": "2026-10-09T04:43:14.420Z",
+    "updated_at": "2026-10-09T04:45:34.478Z",
     "declared_complete_at": null,
     "source_session_id": "SESS-MV0GZ8F0-Z4KWNM",
     "source_decision_record_id": "DEC-MV0H140Y-EXMYB0"

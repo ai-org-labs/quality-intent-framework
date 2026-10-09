@@ -4718,8 +4718,15 @@ Implementation and evidence:
 
 Release decision:
 
-- Approved for v0.6.42 publication after organization verification and public
-  residue checks.
+- Published as v0.6.42 after AOF organization verification passed 277/277,
+  public residue checks were clean, and all 16/16 positive plus 1,064/1,064
+  negative verifier checks passed.
+- Release URL:
+  https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.42
+- Release commit and annotated tag target:
+  `00c4efc`.
+- AOF outcome report: `OUT-MV0HET7D-9FT24C`; the learning-loop snapshot keeps
+  v0.6.43 as the open next value slice rather than marking it complete.
 - Residual risk: the committed replay is example-only and cannot establish
   independent sequestering, contamination freedom, policy-gaming absence,
   actor honesty, competence, quality, selection, authorization, or authority.
