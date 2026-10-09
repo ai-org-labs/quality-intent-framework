@@ -2,19 +2,19 @@
   "task_id": "TASK-061",
   "title": "Release QIF v0.6.43 portable AI package",
   "description": "Build and validate a vendor-neutral, version-synchronized QIF portable package with AI entry instructions, canonical docs, all schemas/examples, manifest hashes, deterministic zip, npm integration, and release automation.",
-  "status": "open",
+  "status": "done",
   "origin": "human",
   "orchestrator_session_id": "SESS-MV1KCAQI-OQO7KY",
   "assigned_session_ids": [],
   "related_decision_record_id": "DEC-MV1KERUS-ILRLLI",
   "operating_goal_ref": ".aof/goals/operating-goal.json",
   "created_at": "2026-10-09T22:57:40.437Z",
-  "updated_at": "2026-10-09T22:57:40.437Z",
+  "updated_at": "2026-10-09T23:06:55.568Z",
   "assigned_at": null,
-  "done_at": null,
+  "done_at": "2026-10-09T23:06:55.568Z",
   "retired_at": null,
   "last_triaged_at": null,
   "stale_candidate_at": null,
   "retire_candidate_at": null,
-  "triage_notes": "Visionary: make QIF immediately usable by non-experts and AI. Builder: generate from canonical sources, never hand-copy. Guardian: distinguish prompt guidance from executable runtime and semantic truth."
+  "triage_notes": "Released v0.6.43; portable zip and checksum uploaded, SHA-256 matched, 16/16 positive and 1064/1064 negative checks passed, AOF 277/277 passed."
 }

@@ -61,8 +61,14 @@ Release decision:
   public residue scan was clean.
 - Pre-release portable zip SHA-256:
   `6db1e439a78d37cfe817fc1f152af7d18ec169b350d1050c15641b63623fc214`.
-- Release URL, release commit, tag target, and uploaded-asset identity will be
-  recorded after publication.
+- Released as v0.6.43:
+  https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.43
+- Release commit and annotated tag target: `9b84079`.
+- Release assets: `qif-portable-v0.6.43.zip` and
+  `qif-portable-v0.6.43.zip.sha256`; GitHub reported the same zip SHA-256 as
+  the local deterministic build.
+- AOF outcome report: `OUT-MV1KRR0N-EQQZFP`; the learning-loop snapshot keeps
+  v0.6.44 as an open next value slice rather than marking it complete.
 - Residual risk: document integrity does not establish that a vendor model
   understood or followed QIF; cross-vendor comprehension and real target
   outcome evidence remain pilot work.

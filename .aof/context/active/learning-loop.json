@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-09T04:45:40.239Z",
+  "generated_at": "2026-10-09T23:07:07.707Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MV0GZ8F0-Z4KWNM",
-    "report_id": "OUT-MV0HET7D-9FT24C",
+    "source_session_id": "SESS-MV1KCAQI-OQO7KY",
+    "report_id": "OUT-MV1KRR0N-EQQZFP",
     "result": "success",
-    "observed_at": "2026-10-09T04:45:07.023Z",
-    "note": "QIF v0.6.42 was verified, pushed, tagged, and published. Sequestered replay now records hidden-item boundaries, affordances, access and externalized transcript evidence, contamination and loophole findings, reproducible assessments, privacy, governance, and non-authority boundaries.",
-    "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.42"
+    "observed_at": "2026-10-09T23:06:55.751Z",
+    "note": "QIF v0.6.43 was implemented, verified, pushed, tagged, and released. Users can now give a versioned vendor-neutral QIF package to an AI; source mappings, hashes, deterministic archive bytes, stale-content rejection, and release assets are reproducible. AI comprehension and semantic validity remain unproven.",
+    "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.43"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV0642",
-    "recorded_at": "2026-10-09T04:43:14.412Z",
-    "summary": "Schema, example, verifier, 39 retained negative fixtures, plain-language documentation, roadmap, and release notes implement the approved three-entity sequestered replay lifecycle; npm test passes 16/16 positive and 1064/1064 negative checks.",
-    "detected_gap": "The committed run is example-only with unknown blindness; independent sequestered infrastructure, secret cases, live actor execution, adversarial review, and representative empirical evidence remain outside this release.",
+    "audit_id": "FSA-QIFV0643",
+    "recorded_at": "2026-10-09T23:05:25.432Z",
+    "summary": "Portable package builds deterministically from canonical sources, contains 49 files, verifies source mapping and SHA-256 integrity, rejects intentional mutation, and full npm test passes 16/16 positive plus 1064/1064 negative checks.",
+    "detected_gap": "Cross-vendor instruction comprehension, actual Google Drive use, evidence authenticity, and semantic verdict quality remain untested; release automation can prove asset generation but not AI compliance.",
     "result_state": "stable",
-    "next_action": "Run Council review and organization verification, publish v0.6.42, then begin v0.6.43 cross-judge correlated-error design.",
+    "next_action": "Run Council review and AOF organization verification, publish v0.6.43 with zip and checksum, then restore cross-judge correlated-error calibration as the next slice.",
     "related_task_ids": [
-      "TASK-060"
+      "TASK-061"
     ]
   },
   "current_next_value_slice": {
-    "content": "QIF v0.6.43 Cross-Judge Correlated Error and Adjudication Calibration",
-    "updated_at": "2026-10-09T04:45:34.478Z",
+    "content": "QIF v0.6.44 Cross-Judge Correlated Error and Adjudication Calibration",
+    "updated_at": "2026-10-09T23:07:07.550Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MV0GZ8F0-Z4KWNM",
-    "source_decision_record_id": "DEC-MV0H140Y-EXMYB0"
+    "source_session_id": "SESS-MV1KCAQI-OQO7KY",
+    "source_decision_record_id": "DEC-MV1KERUS-ILRLLI"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Run Council review and organization verification, publish v0.6.42, then begin v0.6.43 cross-judge correlated-error design.",
+    "proposed_focus": "Run Council review and AOF organization verification, publish v0.6.43 with zip and checksum, then restore cross-judge correlated-error calibration as the next slice.",
     "related_task_ids": [
-      "TASK-060"
+      "TASK-061"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: QIF v0.6.43 Cross-Judge Correlated Error and Adjudication Calibration",
-    "Latest self-audit next action: Run Council review and organization verification, publish v0.6.42, then begin v0.6.43 cross-judge correlated-error design.",
+    "Current next value slice: QIF v0.6.44 Cross-Judge Correlated Error and Adjudication Calibration",
+    "Latest self-audit next action: Run Council review and AOF organization verification, publish v0.6.43 with zip and checksum, then restore cross-judge correlated-error calibration as the next slice.",
     "Latest outcome result: success"
   ]
 }
