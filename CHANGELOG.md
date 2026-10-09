@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.6.43
+
+- Added a vendor-neutral Portable AI Package for using QIF with Gemini, Claude, Codex, and other document-context AI systems.
+- Added plain-language entry instructions, system instructions, a compact QIF core, use-case routing, and a structured output template.
+- Added deterministic current and versioned builds containing canonical guidance, all schemas and examples, source-mapped SHA-256 manifests, and a versioned zip checksum.
+- Added stale-content, inventory, mutation, version, and deterministic-archive verification to `npm test`.
+- Added GitHub Release automation that verifies the release tag and attaches the current portable zip and checksum.
+- Preserved the boundary that a prompt package is not an agent, complete runtime, semantic-truth proof, evidence verifier, or authority grant.
+
 ## v0.6.42
 
 - Added reviewed Sequestered Replay Protocols for hidden items, reveal stages, access roles, allowed affordances, access logs, and externalized transcript evidence.

@@ -1,0 +1,23 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-09T22:56:50.147Z",
+  "project_charter_id": "PCH-MV1KERQB-EZ97SJ",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIF-PORTABLE.json",
+  "validated_objective": "QIF v0.6.43として、常に現行versionから生成されるportable AI packageを実装、検証、配布、リリースする。",
+  "scope": [
+    "vendor-neutral START_HERE、SYSTEM_INSTRUCTIONS、QIF_CORE、USE_CASES、OUTPUT_TEMPLATE",
+    "選択されたcanonical docs、schemas、examplesとsource mapping",
+    "deterministic generator、manifest、SHA-256 verification、versioned zip、npm test integration",
+    "README、AI Authoring Guide、roadmap、release notes、AOF runtime evidence、GitHub Release asset"
+  ],
+  "constraints": [
+    "UI、外部サービス接続、vendor固有API、hidden reasoning、automatic authorityを追加しない。",
+    "portable文書の読了を完全Runtime、意味的真実、証拠実在、schema準拠の保証として扱わない。"
+  ],
+  "expected_outcomes": [
+    "一つのzipまたは展開directoryをAIへ渡し、QIFの作法で対象評価またはQuality Intent定義を開始できる。",
+    "source変更やversion変更後に生成物が古ければverificationとnpm testが失敗し、再生成で現行状態へ同期する。"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV1KDAER-JPKB4S"
+}

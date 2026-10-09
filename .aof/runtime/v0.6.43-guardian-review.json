@@ -1,0 +1,24 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-09T23:05:44.290Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MV1KCAQI-OQO7KY",
+  "status": "completed",
+  "recommendation": "Approve release with documented empirical adoption gap.",
+  "rationale": "The package rejects stale and modified content, distinguishes integrity from semantics, includes untrusted-input and authority boundaries, and does not require hidden reasoning.",
+  "signals": [
+    "Cross-vendor instruction-following and user comprehension remain unproven and must stay pilot evidence."
+  ],
+  "artifact_refs": [
+    "portable/SYSTEM_INSTRUCTIONS.md",
+    "tools/test-portable-package.mjs"
+  ],
+  "decision_required": true,
+  "source_task_id": "TASK-061",
+  "source_decision_record_id": "DEC-MV1KERUS-ILRLLI",
+  "source_parent_session_id": "SESS-MV1KCAQI-OQO7KY",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.94
+}

@@ -1,0 +1,62 @@
+{
+  "qifPortableVersion": "VERSION_REPLACED_AT_BUILD",
+  "language": "en",
+  "scope": "",
+  "needIntentContext": {
+    "need": "",
+    "intent": "",
+    "context": ""
+  },
+  "evaluationTarget": {
+    "name": "",
+    "description": "",
+    "domain": "",
+    "stakeholders": [],
+    "constraints": [],
+    "unknowns": []
+  },
+  "qualityIntents": [
+    {
+      "id": "QI-001",
+      "statement": "",
+      "stakeholder": "",
+      "risk": "",
+      "lossBoundary": "",
+      "applicabilityRationale": "",
+      "requiredEvidence": [],
+      "acceptanceConditions": [],
+      "rejectionConditions": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "EV-001",
+      "claim": "",
+      "source": "",
+      "observedOrInferred": "unknown",
+      "generatedBy": "",
+      "verifiedBy": [],
+      "reproducible": false,
+      "falsePositiveChecked": false,
+      "impactConfirmed": false,
+      "trustStatus": "draft",
+      "staleAfter": null,
+      "limitations": []
+    }
+  ],
+  "findings": [],
+  "verdicts": [
+    {
+      "qualityIntentRef": "QI-001",
+      "status": "pending",
+      "evidenceRefs": [],
+      "confidence": null,
+      "rationale": ""
+    }
+  ],
+  "missingOrWeakEvidence": [],
+  "residualRisks": [],
+  "governanceTriggers": [],
+  "nextActions": [],
+  "verifierBoundary": "Structural validity does not prove semantic quality, evidence truth, safety, or authority."
+}

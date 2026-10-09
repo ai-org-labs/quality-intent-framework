@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-09T22:56:14.678Z",
+  "alternative_analysis_id": "ALT-MV1KE0D2-WSRR0J",
+  "subject_need": "QIFを任意のAIで迷わず安全に使い始められる、常に現行版の配布物を提供する。",
+  "alternative_solutions": [
+    "正本から決定論的に生成するvendor-neutral portable packageと検証器を実装する。",
+    "利用者へリポジトリ全体を渡しAI自身に読むファイルを選ばせる。",
+    "各vendor専用promptを手作業で保守する。"
+  ],
+  "non_solution_options": [
+    "AI Authoring Guideだけを完全Runtimeとして配布し、schema、example、版、整合性検証を省略する。"
+  ],
+  "defer_options": [
+    "外部連携やUIまで待つが、現在の手動配布問題は残る。"
+  ],
+  "stop_options": [
+    "生成物が正本と版同期できない、またはAIへ意味的真実や自動権限を与える表現になる場合は実装しない。"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV1KDAER-JPKB4S"
+}

@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-09T22:56:32.345Z",
+  "validation_id": "NVR-MV1KEDZT-KXZ3Y7",
+  "raw_need": "ポータブルパッケージが欲しい。今後常に最新を出力する。",
+  "validation_status": "reframed",
+  "validated_need": "QIFの正本から、初見の人間またはAIが評価とQuality Intent定義を開始できるvendor-neutralな版付きportable packageを決定論的に生成・検証し、npm testとrelease工程で常にpackage.jsonの現行versionへ同期する。",
+  "decision_summary": "要求を単なるprompt集のコピーではなく、QIFの行動規約、用途別入口、出力契約、選択されたschema/example、manifest/hash、Runtime境界を持つ再生成可能なdistributionとして定義する。",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "何を単独配布できなければならないか",
+      "answer": "START_HEREから評価またはQuality Intent定義を開始できる文書、出力テンプレート、必要schema/example、manifest/hash。",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "常に最新とは何で証明するか",
+      "answer": "package.json version、収録元hash、生成後verification、npm test、版付きzipの一致。",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "リポジトリ全体または一枚のpromptを渡せば、AIが正しい読み順と境界を自動的に復元できる。"
+  ],
+  "evidence_gaps": [
+    "現段階ではGoogle Drive、Gemini、Claude、Codex各環境での実地理解・再現試験は未実施。"
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIF-PORTABLE.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIF-PORTABLE.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIF-PORTABLE.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV1KDAER-JPKB4S"
+}

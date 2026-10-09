@@ -1,5 +1,72 @@
 # AOF Runtime Log
 
+## QIF v0.6.43 Portable AI Package
+
+Date: 2026-10-10
+
+Need / Intent / Context:
+
+- Need: QIF has comprehensive canonical material but no single, current,
+  vendor-neutral distribution that a non-expert can give to an AI without
+  choosing files, reconstructing read order, or confusing guidance with the
+  complete runtime.
+- Intent: generate one versioned folder and zip from canonical sources, make
+  its source mapping and integrity reproducible, and fail verification when it
+  is stale or modified.
+- Context: support document-context use with Gemini, Claude, Codex, and other
+  AI systems. UI, vendor APIs, cloud integration, semantic-truth claims, and
+  automatic authority remain out of scope.
+
+AOF runtime and artifacts:
+
+- Latest public AOF check: `v12.2.0`; runtime source commit `fc7599b`.
+- Session: `SESS-MV1KCAQI-OQO7KY`; task: `TASK-061`; planning decision:
+  `DEC-MV1KERUS-ILRLLI`.
+- Need Validation chain:
+  `.aof/artifacts/need-validation/problem-statements/PST-QIF-PORTABLE.json`,
+  `.aof/artifacts/need-validation/value-hypotheses/VHY-QIF-PORTABLE.json`,
+  `.aof/artifacts/need-validation/alternative-analyses/ALT-QIF-PORTABLE.json`,
+  `.aof/artifacts/need-validation/records/NVR-QIF-PORTABLE.json`.
+- Project Charter was created only after the Validated Need:
+  `.aof/artifacts/need-validation/project-charters/PCH-QIF-PORTABLE.json`.
+- Actor skill, capability, resource, policy, blocker, and review evidence:
+  `.aof/artifacts/actor-skill-packets/ASP-QIF-PORTABLE.json`.
+- Planning Council runtime artifact:
+  `.aof/runtime/v0.6.43-portable-planning.json`.
+
+Council direction:
+
+- Visionary: package the shortest useful QIF path so a non-expert can begin
+  from a target and unacceptable loss rather than navigate the repository.
+- Builder: generate from canonical sources, make file inventory, version,
+  hashes, current directory, and zip deterministic, and test mutation failure.
+- Guardian: state that the package is not an agent, complete runtime,
+  semantic-truth proof, evidence authenticator, or authority grant.
+
+Implementation evidence:
+
+- `portable/` owns short human- and AI-readable entry documents.
+- `tools/qif-portable-lib.mjs` builds and verifies canonical source mappings,
+  SHA-256 hashes, deterministic zip bytes, and current/versioned directories.
+- `npm test` regenerates and verifies the package and runs an intentional
+  mutation rejection before the retained QIF suites.
+- `.github/workflows/release-portable.yml` rebuilds from the release tag and
+  uploads the versioned zip plus checksum for each published release.
+
+Release decision:
+
+- Approved for v0.6.43 publication after full QIF verification passed 16/16
+  positive and 1,064/1,064 negative checks, portable build/verify and mutation
+  rejection passed, AOF organization verification passed 277/277, and the
+  public residue scan was clean.
+- Pre-release portable zip SHA-256:
+  `6db1e439a78d37cfe817fc1f152af7d18ec169b350d1050c15641b63623fc214`.
+- Release URL, release commit, tag target, and uploaded-asset identity will be
+  recorded after publication.
+- Residual risk: document integrity does not establish that a vendor model
+  understood or followed QIF; cross-vendor comprehension and real target
+  outcome evidence remain pilot work.
+
 This log records the AOF v5.0.0 runtime-backed path used for the first QIF baseline.
 
 ## v0.6.41 Judge Consequence and Abstention Robustness

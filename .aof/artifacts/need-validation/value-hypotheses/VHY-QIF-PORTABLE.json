@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-09T22:56:14.681Z",
+  "value_hypothesis_id": "VHY-MV1KE0D5-18UDCR",
+  "expected_value_creation": "一つの版付きzipをAIへ渡すだけで、QIFの境界、主要ワークフロー、用途別入口、出力契約、必要なschema/exampleを読み、評価またはQuality Intent定義を開始できる。",
+  "beneficiary": "Gemini、Claude、Codex等を使うQIF利用者と、その判断の影響を受けるステークホルダー",
+  "supporting_evidence": [
+    "現行AI Authoring Guideは読み順とQIF作法を既に定義している。",
+    "package.jsonはcanonical versionを持ち、Node標準機能で決定論的なmanifest、hash、zip生成を実装できる。"
+  ],
+  "success_criteria": [
+    "生成物のversionがpackage.jsonと一致し、収録元とSHA-256が検証可能である。",
+    "npm testがstale、欠落、改変されたportable packageを失敗させる。",
+    "START_HEREが一般利用者へ文書配布と完全Runtimeの違いを明示する。"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV1KDAER-JPKB4S"
+}

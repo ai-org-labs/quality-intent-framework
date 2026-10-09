@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.6.43 Cross-Judge Correlated Error and Adjudication Calibration",
-  "updated_at": "2026-10-09T04:45:34.478Z",
+  "content": "QIF v0.6.44 Cross-Judge Correlated Error and Adjudication Calibration",
+  "updated_at": "2026-10-09T23:05:25.441Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MV0GZ8F0-Z4KWNM",
-  "source_decision_record_id": "DEC-MV0H140Y-EXMYB0",
+  "source_session_id": "SESS-MV1KCAQI-OQO7KY",
+  "source_decision_record_id": "DEC-MV1KERUS-ILRLLI",
   "declared_complete_at": null
 }

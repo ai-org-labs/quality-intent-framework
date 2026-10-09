@@ -1,0 +1,34 @@
+name: Attach current QIF portable package
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  portable-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify release version and build portable package
+        shell: bash
+        run: |
+          test "v$(node -p "require('./package.json').version")" = "${{ github.event.release.tag_name }}"
+          npm test
+      - name: Attach portable package and checksum
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          gh release upload "v${VERSION}" \
+            "dist/qif-portable-v${VERSION}.zip" \
+            "dist/qif-portable-v${VERSION}.zip.sha256" \
+            --clobber

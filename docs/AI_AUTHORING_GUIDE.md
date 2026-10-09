@@ -14,6 +14,11 @@ The goal is to make the agent act in QIF style:
 
 QIF is not a checklist framework. QIF is a framework for representing, evaluating, and governing discovered quality intent.
 
+When using the generated portable distribution, read `START_HERE.md`, then
+`SYSTEM_INSTRUCTIONS.md`, `QIF_CORE.md`, and `USE_CASES.md`. The portable files
+are an AI guidance profile, not proof that the complete QIF Runtime is present
+or that an AI followed the instructions.
+
 ## Core Rule
 
 Never start from a fixed quality checklist.
@@ -80,6 +85,7 @@ Use additional documents when needed:
 | Compare the same preserved decision under a reviewed candidate route policy without selecting or authorizing that policy | `docs/qif-v0.6.40-policy-counterfactual-replay.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Test whether a judge changes its answer when consequences or abstention options change, without treating abstention as failure or accuracy as authority | `docs/qif-v0.6.41-judge-consequence-abstention-robustness.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Check whether an evaluation stayed blind, within allowed tools, and free of detected grader shortcuts without claiming contamination freedom | `docs/qif-v0.6.42-sequestered-replay-policy-gaming.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
+| Package current QIF guidance for Gemini, Claude, Codex, or another AI | `docs/qif-v0.6.43-portable-ai-package.md`, then run `npm run portable:build` and `npm run portable:verify` |
 | Understand quality theory background | `docs/quality-theory-report.md` |
 
 ## Required Framing

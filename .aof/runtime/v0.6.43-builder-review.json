@@ -1,0 +1,24 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-09T23:05:43.760Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-MV1KCAQI-OQO7KY",
+  "status": "completed",
+  "recommendation": "Approve release after organization verification and asset upload.",
+  "rationale": "All 49 package files reproduce from canonical sources, deterministic zip and checksum match, mutation rejection passes, and full QIF tests pass 16/16 positive and 1064/1064 negative checks.",
+  "signals": [
+    "Release asset should match the tag version and recorded checksum."
+  ],
+  "artifact_refs": [
+    "tools/qif-portable-lib.mjs",
+    "dist/qif-portable-v0.6.43.zip.sha256"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-061",
+  "source_decision_record_id": "DEC-MV1KERUS-ILRLLI",
+  "source_parent_session_id": "SESS-MV1KCAQI-OQO7KY",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.96
+}

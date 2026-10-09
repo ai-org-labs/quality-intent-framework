@@ -1,0 +1,85 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-09T23:00:29.375Z",
+  "packet_id": "ASP-MV1KJGVZ-N2QM7H",
+  "source_task_id": "TASK-061",
+  "source_parent_session_id": "SESS-MV1KCAQI-OQO7KY",
+  "source_decision_record_id": "DEC-MV1KERUS-ILRLLI",
+  "objective": "Implement and release QIF v0.6.43 Portable AI Package",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns deterministic packaging, integrity verification, AI-readable instructions, release automation, evidence, and distribution boundaries.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "deterministic-build-design",
+    "AI-instruction-design",
+    "release-engineering"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-qif-portable-distribution",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "docs/AI_AUTHORING_GUIDE.md",
+        "schemas/authoring-template-package.schema.json",
+        "package.json"
+      ],
+      "rationale": "Existing AI guidance, canonical schemas/examples, and Node test runtime support a generated portable distribution without redesigning QIF."
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-public-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-no-semantic-truth",
+    "policy-untrusted-input-boundary",
+    "policy-no-automatic-authority"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-portable-release",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "START_HERE",
+      "SYSTEM_INSTRUCTIONS",
+      "QIF_CORE",
+      "USE_CASES",
+      "OUTPUT_TEMPLATE",
+      "MANIFEST"
+    ],
+    "acceptance_criteria": [
+      "package version, source mapping, hashes, current directory, and versioned zip reproduce from canonical sources",
+      "npm test rejects stale or modified portable content",
+      "release automation attaches the package and checksum without claiming a complete runtime"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "portable package remains usable, current, integrity-checkable, and honest about its limits",
+      "evaluator_ref": "guardian",
+      "evidence_required": "generator, verifier, mutation test, package inspection, full npm test, release asset",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "portable-stale-or-overclaim",
+      "trigger_condition": "package is stale, hand-copied, unverifiable, vendor-locked, or presented as semantic truth or automatic authority",
+      "consequence": "block-assignment",
+      "recovery_action": "restore canonical generation, integrity verification, vendor neutrality, and explicit runtime boundaries"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I package the rules without pretending the package is the judge.",
+    "current_action": "Generate and verify the current QIF portable package",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run full tests and Council review"
+  },
+  "status": "ready-for-assignment"
+}

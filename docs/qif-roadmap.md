@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.42 baseline)
+## Current Position (v0.6.43 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -208,6 +208,12 @@ and adoption surface — not pretending the limits away.
   and externalized-transcript evidence, contamination and loophole findings,
   reproducible assessment counts, and governance. None of these records prove
   contamination freedom, actor honesty, judge competence, or authority.
+  v0.6.43 adds a vendor-neutral Portable AI Package with a plain-language
+  entry path, system instructions, compact QIF core, use-case routing, output
+  template, canonical docs, all current schemas and examples, source-mapped
+  SHA-256 manifest, deterministic zip, mutation rejection, and release-asset
+  automation. Distribution integrity does not prove instruction compliance,
+  semantic quality, evidence truth, or authority.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -631,11 +637,16 @@ Deliverables:
   actual replay runs, contamination and loophole findings, reproducible
   assessment counts, governance, and retained negative fixtures. The committed
   run remains example-only, unknown-blindness, and insufficient by design.
-- Next planned slice, v0.6.43 Cross-Judge Correlated Error and Adjudication Calibration:
+- Implemented slice, v0.6.43 Portable AI Package: make the current QIF usable
+  from one vendor-neutral folder or zip, generated from canonical sources and
+  rejected when stale or modified. Status: implemented with deterministic
+  build and verification, mutation testing, npm integration, and release asset
+  automation. Cross-vendor comprehension remains empirical pilot work.
+- Next planned slice, v0.6.44 Cross-Judge Correlated Error and Adjudication Calibration:
   distinguish independent confirmation from shared model-family, rubric,
   retrieval, and prompt failures; preserve human disagreement and abstention;
   and prevent an ensemble majority from becoming semantic truth or authority.
-- Next planned slice, v0.6.44 Evaluator Belief and Reward-Signal Leakage:
+- Next planned slice, v0.6.45 Evaluator Belief and Reward-Signal Leakage:
   test matched cases with and without represented grader preferences,
   evaluation identity, deployment role, and reward cues; separate exposed
   metadata, stated explanation, externalized behavior, and observed outcome;

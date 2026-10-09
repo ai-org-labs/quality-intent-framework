@@ -1,0 +1,16 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-09T22:56:13.994Z",
+  "problem_statement_id": "PST-MV1KDZU2-6PSKN4",
+  "affected_party": "QIFを利用する非専門家、AIエージェント、導入組織",
+  "actual_problem": "QIFの正本は包括的だが、任意のAIへ渡す最小の入口と自己完結した配布物がなく、利用者がファイル選択、版同期、読み順、出力形式、QIFと完全Runtimeの境界を毎回判断しなければならない。",
+  "why_it_matters": "誤った文書集合や古いschemaを渡すと、AIがQIF作法を部分的にしか適用せず、説明不能な品質判定や意味的真実の過剰主張を生む。",
+  "why_now": "QIF v0.6.42はAI Authoring Guide、schema、example、verifierを備え、vendor-neutralなportable distributionへ編成できる成熟度に達した。",
+  "evidence_refs": [
+    "docs/AI_AUTHORING_GUIDE.md",
+    "README.md",
+    "package.json"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV1KDAER-JPKB4S"
+}

@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-09T23:05:05.904Z",
+  "role": "Guardian",
+  "stage": "planning",
+  "session_id": "SESS-MV1KCAQI-OQO7KY",
+  "status": "completed",
+  "recommendation": "Approve only with explicit non-agent, incomplete-runtime, non-truth, and non-authority boundaries.",
+  "rationale": "Prompt portability increases reach but can create false confidence that instructions were followed or evidence was verified; integrity and semantic validity must remain separate.",
+  "signals": [
+    "Block release if stale mutation passes or runtime boundaries disappear."
+  ],
+  "artifact_refs": [
+    "portable/SYSTEM_INSTRUCTIONS.md"
+  ],
+  "decision_required": true,
+  "source_task_id": "TASK-061",
+  "source_decision_record_id": "DEC-MV1KERUS-ILRLLI",
+  "source_parent_session_id": "SESS-MV1KCAQI-OQO7KY",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.93
+}

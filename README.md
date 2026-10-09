@@ -4,9 +4,31 @@ Quality Intent Framework (QIF) turns an organization's quality theory into an op
 
 QIF does not define quality as output volume. Page count, review count, and test count are treated only as possible evidence signals when they are linked to a quality intent, a risk, and a loss boundary.
 
+## Portable AI Package
+
+To use QIF with Gemini, Claude, Codex, or another AI without cloning the full
+repository:
+
+```bash
+npm run portable:build
+```
+
+Give the AI `dist/qif-portable-current/` or the generated versioned zip and ask
+it to read `SYSTEM_INSTRUCTIONS.md` first. Every published release also carries
+the matching zip and SHA-256 checksum as release assets.
+
+The package is generated from the repository's canonical documents, all
+current schemas, and all current examples. `npm run portable:verify` rejects
+stale, missing, added, modified, or version-mismatched content. See
+`docs/qif-v0.6.43-portable-ai-package.md`.
+
+The portable package guides an AI but is not itself an agent or the complete
+QIF Runtime. Its integrity check does not prove semantic quality or grant
+decision authority.
+
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x Action Quality Contract runtime for governing AI agent tool actions with trace approval evidence, and the v0.6.x Authoring Template runtime for guiding AI agents to author valid, understandable QIF packages:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x Action Quality Contract runtime for governing AI agent tool actions with trace approval evidence, the v0.6.x Authoring Template runtime for guiding AI agents to author valid, understandable QIF packages, and the v0.6.43 Portable AI Package:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -46,6 +68,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.6.40 Policy Counterfactual Replay: `docs/qif-v0.6.40-policy-counterfactual-replay.md`
 - QIF v0.6.41 Judge Consequence and Abstention Robustness: `docs/qif-v0.6.41-judge-consequence-abstention-robustness.md`
 - QIF v0.6.42 Sequestered Replay and Policy-Gaming Detection: `docs/qif-v0.6.42-sequestered-replay-policy-gaming.md`
+- QIF v0.6.43 Portable AI Package: `docs/qif-v0.6.43-portable-ai-package.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`

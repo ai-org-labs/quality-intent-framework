@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-09T23:05:08.222Z",
+  "role": "Builder",
+  "stage": "planning",
+  "session_id": "SESS-MV1KCAQI-OQO7KY",
+  "status": "completed",
+  "recommendation": "Generate root guidance and copy canonical docs, schemas, and examples through one deterministic library.",
+  "rationale": "One source map, package.json version authority, content hashes, stable zip bytes, and mutation tests prevent hand-maintained distribution drift.",
+  "signals": [
+    "Keep dist ignored and publish generated zip as a release asset."
+  ],
+  "artifact_refs": [
+    "tools/qif-portable-lib.mjs"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-061",
+  "source_decision_record_id": "DEC-MV1KERUS-ILRLLI",
+  "source_parent_session_id": "SESS-MV1KCAQI-OQO7KY",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.94
+}
