@@ -67,6 +67,10 @@ Release decision:
 - Release assets: `qif-portable-v0.6.43.zip` and
   `qif-portable-v0.6.43.zip.sha256`; GitHub reported the same zip SHA-256 as
   the local deterministic build.
+- Release workflow run `38002755586` completed successfully. Its deprecation
+  annotation was resolved on main by moving the official `actions/checkout`
+  and `actions/setup-node` references from v4 to the current v7 majors for
+  subsequent releases.
 - AOF outcome report: `OUT-MV1KRR0N-EQQZFP`; the learning-loop snapshot keeps
   v0.6.44 as an open next value slice rather than marking it complete.
 - Residual risk: document integrity does not establish that a vendor model
