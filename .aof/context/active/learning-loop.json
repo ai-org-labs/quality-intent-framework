@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-09T23:07:07.707Z",
+  "generated_at": "2026-10-10T04:54:03.664Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MV1KCAQI-OQO7KY",
-    "report_id": "OUT-MV1KRR0N-EQQZFP",
+    "source_session_id": "SESS-MV1WFKVT-8SSFVA",
+    "report_id": "OUT-MV1X65TR-3K4BLJ",
     "result": "success",
-    "observed_at": "2026-10-09T23:06:55.751Z",
-    "note": "QIF v0.6.43 was implemented, verified, pushed, tagged, and released. Users can now give a versioned vendor-neutral QIF package to an AI; source mappings, hashes, deterministic archive bytes, stale-content rejection, and release assets are reproducible. AI comprehension and semantic validity remain unproven.",
-    "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.43"
+    "observed_at": "2026-10-10T04:54:03.519Z",
+    "note": "QIF v0.6.44 was implemented, verified, tagged, and released with portable assets; correlated consensus is now structurally governed without semantic-truth or authority claims.",
+    "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.44"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV0643",
-    "recorded_at": "2026-10-09T23:05:25.432Z",
-    "summary": "Portable package builds deterministically from canonical sources, contains 49 files, verifies source mapping and SHA-256 integrity, rejects intentional mutation, and full npm test passes 16/16 positive plus 1064/1064 negative checks.",
-    "detected_gap": "Cross-vendor instruction comprehension, actual Google Drive use, evidence authenticity, and semantic verdict quality remain untested; release automation can prove asset generation but not AI compliance.",
+    "audit_id": "FSA-QIFV0644",
+    "recorded_at": "2026-10-10T04:52:13.250Z",
+    "summary": "Schema, example, deterministic verifier, 42 new retained negative cases, portable package, and full npm test are aligned.",
+    "detected_gap": "The committed panel is example-only; actual dependency declarations, empirically observed correlated error, representative domains, and independent human calibration remain unproven.",
     "result_state": "stable",
-    "next_action": "Run Council review and AOF organization verification, publish v0.6.43 with zip and checksum, then restore cross-judge correlated-error calibration as the next slice.",
+    "next_action": "Keep v0.6.45 focused on evaluator belief and reward-signal leakage, then conduct v0.7 empirical calibration with verified independent panels.",
     "related_task_ids": [
-      "TASK-061"
+      "TASK-062"
     ]
   },
   "current_next_value_slice": {
-    "content": "QIF v0.6.44 Cross-Judge Correlated Error and Adjudication Calibration",
-    "updated_at": "2026-10-09T23:07:07.550Z",
-    "declared_complete_at": null,
-    "source_session_id": "SESS-MV1KCAQI-OQO7KY",
-    "source_decision_record_id": "DEC-MV1KERUS-ILRLLI"
+    "content": "v0.6.45 Evaluator Belief and Reward-Signal Leakage",
+    "updated_at": "2026-10-10T04:54:03.521Z",
+    "declared_complete_at": "2026-10-10T04:54:03.521Z",
+    "source_session_id": "SESS-MV1WFKVT-8SSFVA",
+    "source_decision_record_id": null
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Run Council review and AOF organization verification, publish v0.6.43 with zip and checksum, then restore cross-judge correlated-error calibration as the next slice.",
+    "proposed_focus": "Keep v0.6.45 focused on evaluator belief and reward-signal leakage, then conduct v0.7 empirical calibration with verified independent panels.",
     "related_task_ids": [
-      "TASK-061"
+      "TASK-062"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: QIF v0.6.44 Cross-Judge Correlated Error and Adjudication Calibration",
-    "Latest self-audit next action: Run Council review and AOF organization verification, publish v0.6.43 with zip and checksum, then restore cross-judge correlated-error calibration as the next slice.",
+    "Current next value slice: v0.6.45 Evaluator Belief and Reward-Signal Leakage",
+    "Latest self-audit next action: Keep v0.6.45 focused on evaluator belief and reward-signal leakage, then conduct v0.7 empirical calibration with verified independent panels.",
     "Latest outcome result: success"
   ]
 }

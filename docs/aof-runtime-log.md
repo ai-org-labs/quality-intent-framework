@@ -68,11 +68,15 @@ Date: 2026-10-10
 
 ### Release
 
-- Planned tag and release: `v0.6.44`.
-- Planned assets: `qif-portable-v0.6.44.zip` and
+- Implementation commit: `aaa3d69`; annotated tag: `v0.6.44`.
+- Released at:
+  https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.44
+- Published assets: `qif-portable-v0.6.44.zip` and
   `qif-portable-v0.6.44.zip.sha256`.
-- Release publication and asset verification are recorded in the follow-up
-  evidence commit after GitHub accepts the release.
+- Local checksum and GitHub asset digest agree:
+  `c32a0b2175c76d0ae78b9e390ff648566b974853a68ea7d365d586c0e3b396ea`.
+- AOF outcome `OUT-MV1X65TR-3K4BLJ` records success; `TASK-062` is done;
+  the learning loop retains v0.6.45 as the uncompleted next value slice.
 
 ## QIF v0.6.43 Portable AI Package
 

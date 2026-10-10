@@ -57,7 +57,15 @@
     }
   ],
   "reopen_count": 0,
-  "outcome_reports": [],
+  "outcome_reports": [
+    {
+      "report_id": "OUT-MV1X65TR-3K4BLJ",
+      "result": "success",
+      "observed_at": "2026-10-10T04:54:03.519Z",
+      "note": "QIF v0.6.44 was implemented, verified, tagged, and released with portable assets; correlated consensus is now structurally governed without semantic-truth or authority claims.",
+      "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.44"
+    }
+  ],
   "clarification": {
     "round_count": 1,
     "dimensions": {
@@ -142,7 +150,7 @@
     "should_wait_for_user": false
   },
   "created_at": "2026-10-10T04:33:23.317Z",
-  "updated_at": "2026-10-10T04:52:13.414Z",
+  "updated_at": "2026-10-10T04:54:03.519Z",
   "framing": {
     "request": "QIF v0.6.44 Cross-Judge Correlated Error and Adjudication Calibrationを実装・検証・リリースする。複数判定者の一致を独立確認と誤認せず、model family、provider、prompt、rubric、retrieval source、harness、training lineage、organization、reporting lineの共有依存を構造化する。多数決、全会一致、confidence、adjudicationを意味的真実、品質、能力、選抜、権限に変換しない。",
     "need": "対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。",
