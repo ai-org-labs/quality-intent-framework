@@ -1,0 +1,18 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-10T04:36:05.639Z",
+  "problem_statement_id": "PST-MV1WJ24N-ENRWTR",
+  "affected_party": "QIF evaluators, accountable AI policy owners, and stakeholders affected by multi-judge decisions",
+  "actual_problem": "Multiple human, AI, or hybrid judges can agree while sharing the same model family, provider, prompt, rubric, retrieval source, harness, training lineage, organization, or reporting line, so apparent consensus may reproduce one correlated error rather than provide independent confirmation.",
+  "why_it_matters": "Treating correlated majority or unanimity as independent proof can overstate confidence, erase dissent, and grant unsupported truth, quality, competence, selection, authorization, or authority claims.",
+  "why_now": "Current agent-evaluation guidance uses multiple graders and consensus while warning about shared infrastructure, grader calibration, reward hacking, and manual review; QIF already records disagreement but cannot yet reproduce judge dependence.",
+  "evidence_refs": [
+    "docs/qif-roadmap.md",
+    "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+    "https://openai.com/index/trustworthy-third-party-evaluations-foundations/",
+    "https://www.anthropic.com/engineering/multi-agent-research-system",
+    "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-3.pdf"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV1WI2OO-LG4LF3"
+}

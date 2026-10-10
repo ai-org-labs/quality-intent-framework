@@ -1,0 +1,96 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-10T04:37:49.080Z",
+  "packet_id": "ASP-MV1WL9Y0-7CN83M",
+  "source_task_id": "TASK-062",
+  "source_parent_session_id": "SESS-MV1WFKVT-8SSFVA",
+  "source_decision_record_id": "DEC-MV1WJOMD-JZFDTU",
+  "objective": "Implement and release QIF v0.6.44 cross-judge correlation calibration",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "Builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, deterministic verifier, fixture, documentation, and release integration.",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "deterministic-verification",
+    "evaluation-governance"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "schema-design",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json"
+      ],
+      "rationale": "extends established calibration entities"
+    },
+    {
+      "capability_ref": "deterministic-verification",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "tools/validate-calibration-report.mjs"
+      ],
+      "rationale": "derived values can be recomputed from explicit profiles and judgments"
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository",
+    "resource-aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-no-semantic-truth",
+    "policy-preserve-dissent",
+    "policy-no-automatic-authority",
+    "policy-no-count-quality"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-calibration-report-package",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "judgeDependencyPolicies",
+      "judgeDependencyProfiles",
+      "crossJudgePanelAssessments",
+      "crossJudgeCorrelationAssessments"
+    ],
+    "acceptance_criteria": [
+      "shared dependency dimensions and verdict groups are deterministically reproduced",
+      "dependent consensus, unverified profiles, and insufficient evidence trigger governance",
+      "npm test and AOF organization verify pass"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "schema and verifier alignment",
+      "evaluator_ref": "Guardian",
+      "evidence_required": "positive and negative fixture results",
+      "blocking": true
+    },
+    {
+      "criterion": "claim boundary",
+      "evaluator_ref": "Visionary",
+      "evidence_required": "docs and schema constants deny semantic truth and authority",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "correlated-consensus-overclaim",
+      "trigger_condition": "agreement can become truth or authority without dependency review",
+      "consequence": "require-council-review",
+      "recovery_action": "restore governance trigger and non-authority boundary"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will make dependence visible before consensus is trusted.",
+    "current_action": "Implement cross-judge correlation lifecycle",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run fixtures and Council review"
+  },
+  "status": "ready-for-assignment"
+}

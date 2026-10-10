@@ -28,7 +28,7 @@ decision authority.
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x Action Quality Contract runtime for governing AI agent tool actions with trace approval evidence, the v0.6.x Authoring Template runtime for guiding AI agents to author valid, understandable QIF packages, and the v0.6.43 Portable AI Package:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x Action Quality Contract runtime for governing AI agent tool actions with trace approval evidence, the v0.6.x Authoring Template runtime for guiding AI agents to author valid, understandable QIF packages, the v0.6.43 Portable AI Package, and v0.6.44 Cross-Judge Correlation Calibration:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -69,6 +69,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.6.41 Judge Consequence and Abstention Robustness: `docs/qif-v0.6.41-judge-consequence-abstention-robustness.md`
 - QIF v0.6.42 Sequestered Replay and Policy-Gaming Detection: `docs/qif-v0.6.42-sequestered-replay-policy-gaming.md`
 - QIF v0.6.43 Portable AI Package: `docs/qif-v0.6.43-portable-ai-package.md`
+- QIF v0.6.44 Cross-Judge Correlation Calibration: `docs/qif-v0.6.44-cross-judge-correlation.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`

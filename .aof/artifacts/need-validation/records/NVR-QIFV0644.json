@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-10T04:36:20.770Z",
+  "validation_id": "NVR-MV1WJDSY-6T0ZJF",
+  "raw_need": "Continuously advance the QIF roadmap and release the nearest slice.",
+  "validation_status": "reframed",
+  "validated_need": "Add the smallest standalone calibration-report lifecycle that records reusable judge dependency policy, one-to-one dependency profiles, cross-judge panel agreement and dissent, and reproducible aggregate correlation assessment; route dependent consensus, unverified profiles, and insufficient evidence to governance without treating consensus as semantic truth or organizational authority.",
+  "decision_summary": "The continuation request is reframed into the next roadmap gap: multiple judges do not provide independent confirmation when they share material dependencies.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What makes two judgments non-independent?",
+      "answer": "A material shared provider, model family, prompt template, rubric, retrieval source, harness, training lineage, organization, or reporting line declared by policy.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What may consensus establish?",
+      "answer": "Only reproducible agreement evidence under declared dependencies; it cannot by itself establish semantic truth, quality, competence, selection, authorization, or authority.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Different judge identities or model labels were assumed to imply independent corroboration."
+  ],
+  "evidence_gaps": [
+    "The committed package is illustrative; independent live panels, empirically estimated error correlation, representative domains, and human calibration remain pilot work."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV0644.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0644.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0644.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV1WI2OO-LG4LF3"
+}

@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-09T23:05:25.440Z",
+  "updated_at": "2026-10-10T04:52:13.253Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "成功は、package.jsonのversionに同期したdist/qif-portable-currentと版付きzipを決定論的に生成し、manifestの収録元とSHA-256を検証でき、npm testがstale・欠落・改変を失敗させ、初見のAIがSTART_HEREから評価または品質項目定義を開始でき、リリースに最新zipが添付されること。",
-      "recorded_at": "2026-10-09T22:55:41.060Z",
+      "answer": "成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+      "recorded_at": "2026-10-10T04:35:19.710Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MV1KCAQI-OQO7KY",
+      "source_session_id": "SESS-MV1WFKVT-8SSFVA",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "要求を単なるprompt集のコピーではなく、QIFの行動規約、用途別入口、出力契約、選択されたschema/example、manifest/hash、Runtime境界を持つ再生成可能なdistributionとして定義する。",
-      "recorded_at": "2026-10-09T22:56:50.312Z",
+      "answer": "The continuation request is reframed into the next roadmap gap: multiple judges do not provide independent confirmation when they share material dependencies.",
+      "recorded_at": "2026-10-10T04:36:34.793Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MV1KCAQI-OQO7KY",
-      "source_decision_record_id": "DEC-MV1KERUS-ILRLLI"
+      "source_session_id": "SESS-MV1WFKVT-8SSFVA",
+      "source_decision_record_id": "DEC-MV1WJOMD-JZFDTU"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Cross-vendor instruction comprehension, actual Google Drive use, evidence authenticity, and semantic verdict quality remain untested; release automation can prove asset generation but not AI compliance.",
-      "recorded_at": "2026-10-09T23:05:25.440Z",
-      "expectation_state": "Portable package builds deterministically from canonical sources, contains 49 files, verifies source mapping and SHA-256 integrity, rejects intentional mutation, and full npm test passes 16/16 positive plus 1064/1064 negative checks.",
-      "mismatch_state": "Cross-vendor instruction comprehension, actual Google Drive use, evidence authenticity, and semantic verdict quality remain untested; release automation can prove asset generation but not AI compliance.",
-      "scale_direction": "Run Council review and AOF organization verification, publish v0.6.43 with zip and checksum, then restore cross-judge correlated-error calibration as the next slice.",
-      "source_session_id": "SESS-MV1KCAQI-OQO7KY",
-      "source_decision_record_id": "DEC-MV1KERUS-ILRLLI"
+      "answer": "The committed panel is example-only; actual dependency declarations, empirically observed correlated error, representative domains, and independent human calibration remain unproven.",
+      "recorded_at": "2026-10-10T04:52:13.253Z",
+      "expectation_state": "Schema, example, deterministic verifier, 42 new retained negative cases, portable package, and full npm test are aligned.",
+      "mismatch_state": "The committed panel is example-only; actual dependency declarations, empirically observed correlated error, representative domains, and independent human calibration remain unproven.",
+      "scale_direction": "Keep v0.6.45 focused on evaluator belief and reward-signal leakage, then conduct v0.7 empirical calibration with verified independent panels.",
+      "source_session_id": "SESS-MV1WFKVT-8SSFVA",
+      "source_decision_record_id": "DEC-MV1WJOMD-JZFDTU"
     }
   ]
 }

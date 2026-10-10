@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-10T04:36:05.924Z",
+  "alternative_analysis_id": "ALT-MV1WJ2CK-XS8456",
+  "subject_need": "Distinguish genuinely independent corroboration from correlated cross-judge agreement.",
+  "alternative_solutions": [
+    "Add dependency policies, one-to-one judge profiles, panel assessments, and aggregate correlation assessments with deterministic verifier rules.",
+    "Require human adjudication only, accepting that human judges can share organizational and rubric dependencies.",
+    "Report raw majority counts only, accepting that counts hide correlated failure and dissent provenance."
+  ],
+  "non_solution_options": [
+    "Assume different judge names or model labels imply independence."
+  ],
+  "defer_options": [
+    "Wait for a live multi-model pilot before defining the structural evidence contract."
+  ],
+  "stop_options": [
+    "Do not create the project if dissent preservation, privacy, non-authority, and deterministic traceability cannot be maintained."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV1WI2OO-LG4LF3"
+}

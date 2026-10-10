@@ -1,0 +1,24 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-10T04:52:26.970Z",
+  "role": "Guardian",
+  "stage": "review",
+  "session_id": "SESS-MV1WFKVT-8SSFVA",
+  "status": "completed",
+  "recommendation": "Approve with the permanent non-authority and semantic-review boundaries intact.",
+  "rationale": "Material dependence, unverified evidence, and correlated consensus are all governance-triggering; dissent is structurally preserved.",
+  "signals": [
+    "The verifier proves declarations and arithmetic, not factual completeness, independence, semantic truth, or authority."
+  ],
+  "artifact_refs": [
+    "examples/calibration-report-package.json",
+    "schemas/calibration-report-package.schema.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-062",
+  "source_decision_record_id": "DEC-MV1WJOMD-JZFDTU",
+  "source_parent_session_id": "SESS-MV1WFKVT-8SSFVA",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.98
+}

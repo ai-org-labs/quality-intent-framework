@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-10T04:36:05.784Z",
+  "value_hypothesis_id": "VHY-MV1WJ28O-ES3PA0",
+  "expected_value_creation": "Make cross-judge dependence, agreement, dissent, abstention, evidence state, and panel-level correlation risk explicit and deterministically reproducible before consensus is trusted.",
+  "beneficiary": "QIF evaluators, accountable policy owners, affected stakeholders, and independent human or AI reviewers",
+  "supporting_evidence": [
+    "Anthropic recommends calibrated model graders and warns that shared infrastructure can create correlated failures.",
+    "OpenAI requires evaluation claims to expose harness, inference budget, setup, and validity checks because reward hacking and configuration alter conclusions.",
+    "NIST statistical guidance treats intra-cluster correlation as material to evidence interpretation."
+  ],
+  "success_criteria": [
+    "Every cross-judge panel links judgments to dependency profiles and exactly reproduces verdict groups, majority state, dissent, and shared dependency dimensions.",
+    "Dependent consensus, unverified profiles, and insufficient panel evidence trigger governance without becoming truth, quality, competence, selection, authorization, or authority."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV1WI2OO-LG4LF3"
+}

@@ -1,0 +1,23 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-10T04:52:04.746Z",
+  "role": "Guardian",
+  "stage": "planning",
+  "session_id": "SESS-MV1WFKVT-8SSFVA",
+  "status": "completed",
+  "recommendation": "Require governance for material shared dependence, unverified profiles, dependent consensus, and insufficient panels.",
+  "rationale": "Different names, providers, or model labels do not establish independence when material sources remain shared.",
+  "signals": [
+    "Block any majority, unanimity, confidence, or adjudication claim that grants truth or authority."
+  ],
+  "artifact_refs": [
+    ".aof/artifacts/actor-skill-packets/ASP-QIFV0644.json"
+  ],
+  "decision_required": true,
+  "source_task_id": "TASK-062",
+  "source_decision_record_id": "DEC-MV1WJOMD-JZFDTU",
+  "source_parent_session_id": "SESS-MV1WFKVT-8SSFVA",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.97
+}

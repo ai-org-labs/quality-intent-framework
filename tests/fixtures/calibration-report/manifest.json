@@ -68,6 +68,300 @@
   ],
   "negatives": [
     {
+      "file": "calibration-report-dependency-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge dependency policies required",
+      "expect": "fail",
+      "errorIncludes": "package judgeDependencyPolicies must be an array."
+    },
+    {
+      "file": "calibration-report-dependency-profiles-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "judge dependency profiles required",
+      "expect": "fail",
+      "errorIncludes": "package judgeDependencyProfiles must be an array."
+    },
+    {
+      "file": "calibration-report-cross-judge-panels-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "cross-judge panels required",
+      "expect": "fail",
+      "errorIncludes": "package crossJudgePanelAssessments must be an array."
+    },
+    {
+      "file": "calibration-report-cross-judge-assessments-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "cross-judge assessments required",
+      "expect": "fail",
+      "errorIncludes": "package crossJudgeCorrelationAssessments must be an array."
+    },
+    {
+      "file": "calibration-report-dependency-policy-reviewer-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "dependency policy lineage",
+      "expect": "fail",
+      "errorIncludes": "references missing reviewer disagreement policy"
+    },
+    {
+      "file": "calibration-report-dependency-policy-min-judges.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "minimum judge count",
+      "expect": "fail",
+      "errorIncludes": "minimumJudgeCount must be at least 3."
+    },
+    {
+      "file": "calibration-report-dependency-policy-min-panels.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "minimum panel count",
+      "expect": "fail",
+      "errorIncludes": "minimumPanelCount must be at least 2."
+    },
+    {
+      "file": "calibration-report-dependency-policy-dimensions.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "dependency dimension identity",
+      "expect": "fail",
+      "errorIncludes": "dependencyDimensions must be a non-empty unique array."
+    },
+    {
+      "file": "calibration-report-dependency-policy-material-subset.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "material dependency subset",
+      "expect": "fail",
+      "errorIncludes": "materialDependencyDimensions must be a non-empty subset of dependencyDimensions."
+    },
+    {
+      "file": "calibration-report-dependency-policy-rule.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "independence rule boundary",
+      "expect": "fail",
+      "errorIncludes": "independenceRule must require no material shared dependency."
+    },
+    {
+      "file": "calibration-report-dependency-policy-boundary.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "consensus authority boundary",
+      "expect": "fail",
+      "errorIncludes": "aggregationBoundary must forbid consensus authority."
+    },
+    {
+      "file": "calibration-report-dependency-policy-review.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "dependency policy review",
+      "expect": "fail",
+      "errorIncludes": "reviewedBy must include at least one reviewer."
+    },
+    {
+      "file": "calibration-report-dependency-policy-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unreviewed dependency policy governance",
+      "expect": "fail",
+      "errorIncludes": "non-active policy requires a cross-judge-policy-unreviewed governance trigger."
+    },
+    {
+      "file": "calibration-report-dependency-profile-judgment-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "dependency profile judgment lineage",
+      "expect": "fail",
+      "errorIncludes": "references missing reviewer judgment"
+    },
+    {
+      "file": "calibration-report-dependency-profile-duplicate.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "one profile per judgment",
+      "expect": "fail",
+      "errorIncludes": "duplicates a dependency profile for judgment RJG-CR-001."
+    },
+    {
+      "file": "calibration-report-dependency-profile-provider.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "provider declaration",
+      "expect": "fail",
+      "errorIncludes": "must include non-empty string providerRef."
+    },
+    {
+      "file": "calibration-report-dependency-profile-retrieval.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "retrieval source declaration",
+      "expect": "fail",
+      "errorIncludes": "retrievalSourceRefs must be a non-empty unique array."
+    },
+    {
+      "file": "calibration-report-dependency-profile-evidence.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "profile evidence",
+      "expect": "fail",
+      "errorIncludes": "evidenceRefs must include at least one item."
+    },
+    {
+      "file": "calibration-report-dependency-profile-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unverified profile governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified dependency evidence requires a cross-judge-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-cross-judge-policy-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "panel policy lineage",
+      "expect": "fail",
+      "errorIncludes": "references missing judge dependency policy"
+    },
+    {
+      "file": "calibration-report-cross-judge-judgment-missing.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "panel judgment lineage",
+      "expect": "fail",
+      "errorIncludes": "references missing reviewer judgment"
+    },
+    {
+      "file": "calibration-report-cross-judge-profile-closure.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "profile-to-judgment closure",
+      "expect": "fail",
+      "errorIncludes": "profileRefs must provide exactly one profile for every judgmentRef."
+    },
+    {
+      "file": "calibration-report-cross-judge-verdict-groups.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "verdict group reproduction",
+      "expect": "fail",
+      "errorIncludes": "verdict group deferred must reproduce its judgmentRefs."
+    },
+    {
+      "file": "calibration-report-cross-judge-shared-dimensions.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "shared dependency reproduction",
+      "expect": "fail",
+      "errorIncludes": "sharedDependencyDimensions must reproduce as"
+    },
+    {
+      "file": "calibration-report-cross-judge-independent-dimensions.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "independent dimension reproduction",
+      "expect": "fail",
+      "errorIncludes": "independentDimensions must reproduce as"
+    },
+    {
+      "file": "calibration-report-cross-judge-independence-status.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "independence status reproduction",
+      "expect": "fail",
+      "errorIncludes": "independenceStatus must reproduce as dependent."
+    },
+    {
+      "file": "calibration-report-cross-judge-correlation-risk.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "correlation risk reproduction",
+      "expect": "fail",
+      "errorIncludes": "correlationRisk must reproduce as high."
+    },
+    {
+      "file": "calibration-report-cross-judge-agreement-state.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "agreement state reproduction",
+      "expect": "fail",
+      "errorIncludes": "agreementState must reproduce as majority."
+    },
+    {
+      "file": "calibration-report-cross-judge-majority.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "majority verdict reproduction",
+      "expect": "fail",
+      "errorIncludes": "majorityVerdict must reproduce as deferred."
+    },
+    {
+      "file": "calibration-report-cross-judge-dissent.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "dissent reproduction",
+      "expect": "fail",
+      "errorIncludes": "dissentJudgmentRefs must reproduce the non-majority judgments."
+    },
+    {
+      "file": "calibration-report-cross-judge-preservation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "original judgment preservation",
+      "expect": "fail",
+      "errorIncludes": "originalJudgmentsPreserved must be true."
+    },
+    {
+      "file": "calibration-report-cross-judge-evidence-status.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "panel evidence status",
+      "expect": "fail",
+      "errorIncludes": "evidenceStatus must reproduce as example-only."
+    },
+    {
+      "file": "calibration-report-cross-judge-dependency-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "material dependency governance",
+      "expect": "fail",
+      "errorIncludes": "material shared dependency requires a cross-judge-dependency-risk governance trigger."
+    },
+    {
+      "file": "calibration-report-cross-judge-evidence-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "panel evidence governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified panel evidence requires a cross-judge-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-cross-judge-consensus-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "correlated consensus governance",
+      "expect": "fail",
+      "errorIncludes": "dependent consensus requires a cross-judge-correlated-agreement-risk governance trigger."
+    },
+    {
+      "file": "calibration-report-cross-judge-panel-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "panel count reproduction",
+      "expect": "fail",
+      "errorIncludes": "panelCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-cross-judge-dependent-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "dependent count reproduction",
+      "expect": "fail",
+      "errorIncludes": "dependentPanelCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-cross-judge-sufficiency.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "correlation sufficiency reproduction",
+      "expect": "fail",
+      "errorIncludes": "dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "calibration-report-cross-judge-signal.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "correlation signal reproduction",
+      "expect": "fail",
+      "errorIncludes": "assessmentSignal must reproduce as insufficient-data."
+    },
+    {
+      "file": "calibration-report-cross-judge-reviewer.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "correlation review",
+      "expect": "fail",
+      "errorIncludes": "reviewedBy must include at least one reviewer."
+    },
+    {
+      "file": "calibration-report-cross-judge-assessment-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "insufficient correlation governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient cross-judge evidence requires a cross-judge-assessment-insufficient governance trigger."
+    },
+    {
+      "file": "calibration-report-cross-judge-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "cross-judge semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that cross-judge consensus proves independence, truth, quality, competence, selection, authorization, or authority."
+    },
+    {
       "file": "calibration-report-sequestered-protocols-not-array.json",
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "sequestered protocols required",

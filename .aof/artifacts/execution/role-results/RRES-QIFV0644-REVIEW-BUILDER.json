@@ -1,0 +1,24 @@
+{
+  "result_type": "role-result",
+  "recorded_at": "2026-10-10T04:52:26.837Z",
+  "role": "Builder",
+  "stage": "review",
+  "session_id": "SESS-MV1WFKVT-8SSFVA",
+  "status": "completed",
+  "recommendation": "Approve after 16 positive and 1106 retained negative checks pass.",
+  "rationale": "Schema, example, verifier, fixtures, portable artifact, and documentation agree on all derived fields.",
+  "signals": [
+    "No implementation blocker remains."
+  ],
+  "artifact_refs": [
+    "tools/validate-calibration-report.mjs",
+    "tests/fixtures/calibration-report/manifest.json"
+  ],
+  "decision_required": false,
+  "source_task_id": "TASK-062",
+  "source_decision_record_id": "DEC-MV1WJOMD-JZFDTU",
+  "source_parent_session_id": "SESS-MV1WFKVT-8SSFVA",
+  "blocking_reason": null,
+  "missing_inputs": null,
+  "confidence": 0.98
+}

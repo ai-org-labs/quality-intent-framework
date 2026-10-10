@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.6.44
+
+- Added reviewed Judge Dependency Policies covering provider, model family, prompt template, rubric, retrieval source, harness, training lineage, organization, and reporting line.
+- Added one-to-one Judge Dependency Profiles for human, model, and hybrid reviewer judgments.
+- Added Cross-Judge Panel Assessments that reproduce exact verdict groups, majority or unanimity, dissent, abstention, shared dependencies, independence status, correlation risk, and governance routing.
+- Added aggregate Cross-Judge Correlation Assessments with reproducible sufficiency and signal calculations.
+- Added retained negative fixtures for dependency lineage, derived classifications, consensus boundaries, dissent preservation, and governance triggers.
+- Kept majority, unanimity, confidence, adjudication, and panel counts as evidence only, never independent confirmation, semantic truth, quality, competence, optimality, selection, authorization, or authority.
+
 ## v0.6.43
 
 - Added a vendor-neutral Portable AI Package for using QIF with Gemini, Claude, Codex, and other document-context AI systems.

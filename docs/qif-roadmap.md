@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.43 baseline)
+## Current Position (v0.6.44 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -646,6 +646,11 @@ Deliverables:
   distinguish independent confirmation from shared model-family, rubric,
   retrieval, and prompt failures; preserve human disagreement and abstention;
   and prevent an ensemble majority from becoming semantic truth or authority.
+  Status: implemented in v0.6.44 through dependency policies, one-to-one
+  judgment profiles, exact panel agreement and dissent reproduction, material
+  shared-dependency detection, aggregate correlation assessment, governance,
+  and retained negative fixtures. The committed panel remains example-only
+  and cannot establish semantic truth, actual independence, or authority.
 - Next planned slice, v0.6.45 Evaluator Belief and Reward-Signal Leakage:
   test matched cases with and without represented grader preferences,
   evaluation identity, deployment role, and reward cues; separate exposed

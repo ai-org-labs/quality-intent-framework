@@ -1,0 +1,505 @@
+{
+  "session_id": "SESS-MV1WFKVT-8SSFVA",
+  "workflow_id": "service-design",
+  "organization_id": "civic-studio",
+  "organization": {
+    "language": "en"
+  },
+  "status": "framed",
+  "trigger": {
+    "trigger_id": "TRG-MV1WFKVT-M1NHBY",
+    "trigger_type": "cli",
+    "received_at": "2026-10-10T04:33:23.317Z",
+    "request_payload": "QIF v0.6.44 Cross-Judge Correlated Error and Adjudication Calibrationを実装・検証・リリースする。複数判定者の一致を独立確認と誤認せず、model family、provider、prompt、rubric、retrieval source、harness、training lineage、organization、reporting lineの共有依存を構造化する。多数決、全会一致、confidence、adjudicationを意味的真実、品質、能力、選抜、権限に変換しない。"
+  },
+  "current_stage": "planning",
+  "routing_mode": "deep-path",
+  "routing_mode_history": [
+    {
+      "from_mode": null,
+      "to_mode": "deep-path",
+      "at": "2026-10-10T04:33:23.317Z",
+      "reason": "session-created"
+    }
+  ],
+  "context_snapshot_id": "CTX-MV1WI2OL-L55JWK",
+  "open_decision_ids": [
+    "DEC-MV1WJOMD-JZFDTU"
+  ],
+  "closed_decision_ids": [
+    "DEC-MV1WFKVW-97EU0F",
+    "DEC-MV1WI2OO-LG4LF3"
+  ],
+  "stage_transitions": [
+    {
+      "from_stage": null,
+      "to_stage": "clarification",
+      "from_status": null,
+      "to_status": "waiting_user",
+      "at": "2026-10-10T04:33:23.317Z",
+      "reason": "session-created"
+    },
+    {
+      "from_stage": "clarification",
+      "to_stage": "need-validation",
+      "from_status": "waiting_user",
+      "to_status": "framed",
+      "at": "2026-10-10T04:35:19.697Z",
+      "reason": "clarification-complete"
+    },
+    {
+      "from_stage": "need-validation",
+      "to_stage": "planning",
+      "from_status": "framed",
+      "to_status": "framed",
+      "at": "2026-10-10T04:36:34.791Z",
+      "reason": "need-validation-approved"
+    }
+  ],
+  "reopen_count": 0,
+  "outcome_reports": [],
+  "clarification": {
+    "round_count": 1,
+    "dimensions": {
+      "need_clarity": "partial",
+      "intent_clarity": "partial",
+      "context_completeness": "missing",
+      "success_criteria_clarity": "missing",
+      "prohibited_conditions_clarity": "partial",
+      "governance_scope_clarity": "clear",
+      "brownfield_orientation_completeness": "clear",
+      "risk_exposure": "partial"
+    },
+    "gaps": [
+      {
+        "dimension": "need_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The underlying need is not specific enough yet."
+      },
+      {
+        "dimension": "intent_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The intended direction is not yet explicit."
+      },
+      {
+        "dimension": "context_completeness",
+        "status": "missing",
+        "trigger_class": "missing-constraint",
+        "summary": "Key constraints, scope, and current conditions are missing."
+      },
+      {
+        "dimension": "success_criteria_clarity",
+        "status": "missing",
+        "trigger_class": "missing-success-criteria",
+        "summary": "Success cannot be evaluated yet."
+      },
+      {
+        "dimension": "prohibited_conditions_clarity",
+        "status": "partial",
+        "trigger_class": "missing-prohibition",
+        "summary": "Forbidden changes or non-negotiables are not explicit."
+      }
+    ],
+    "pending_questions": [],
+    "asked_questions": [
+      "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "How should improvement success be judged: which metric or end state matters most?"
+    ],
+    "question_rationale": [],
+    "trigger_classes": [],
+    "target_fields": [],
+    "user_answers": [
+      {
+        "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+        "answer": "対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。",
+        "target_fields": [
+          "need",
+          "context"
+        ]
+      },
+      {
+        "question": "How should improvement success be judged: which metric or end state matters most?",
+        "answer": "成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+        "target_fields": [
+          "success_criteria",
+          "intent"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "ask_or_assume_decision": "ask",
+    "remaining_gaps": [],
+    "unresolved_ambiguity": [],
+    "question_budget": {
+      "initial_question_budget": 2,
+      "followup_budget": 1,
+      "max_rounds": 2
+    },
+    "next_stop_condition": "need validation can proceed",
+    "clarification_summary": "runtime captured first-round clarification answers and can proceed to need validation",
+    "should_wait_for_user": false
+  },
+  "created_at": "2026-10-10T04:33:23.317Z",
+  "updated_at": "2026-10-10T04:52:13.414Z",
+  "framing": {
+    "request": "QIF v0.6.44 Cross-Judge Correlated Error and Adjudication Calibrationを実装・検証・リリースする。複数判定者の一致を独立確認と誤認せず、model family、provider、prompt、rubric、retrieval source、harness、training lineage、organization、reporting lineの共有依存を構造化する。多数決、全会一致、confidence、adjudicationを意味的真実、品質、能力、選抜、権限に変換しない。",
+    "need": "対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。",
+    "intent": "成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+    "active_context": "context: 対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。 | success: 成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+    "success_criteria": "成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+    "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。 / How should improvement success be judged: which metric or end state matters most? => 成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。"
+  },
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/records/NVR-QIFV0644.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-QIFV0644.json",
+    ".aof/artifacts/need-validation/problem-statements/PST-QIFV0644.json",
+    ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0644.json",
+    ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0644.json"
+  ],
+  "council_execution_runs": [
+    {
+      "execution_id": "CRUN-MV1WJUFX-FFEZ7Y",
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Builder",
+        "Visionary",
+        "Guardian"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "status": "prepared",
+      "started_at": "2026-10-10T04:36:42.332Z",
+      "completed_at": "2026-10-10T04:36:42.332Z",
+      "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Builder(design-builder-01) -> Visionary(strategy-lead-01) -> Guardian(risk-reviewer-01)",
+      "steps": [
+        {
+          "step_id": "CRUN-MV1WJUFX-FFEZ7Y-STEP-01",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Builder planning call for actor design-builder-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV1WFKVT-8SSFVA",
+              "decision_id": "DEC-MV1WJOMD-JZFDTU",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。",
+              "intent": "成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+              "active_context": "context: 対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。 | success: 成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+              "context_snapshot_id": "CTX-MV1WI2OL-L55JWK",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。 / How should improvement success be judged: which metric or end state matters most? => 成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。"
+            },
+            "task": {
+              "request": "QIF v0.6.44 Cross-Judge Correlated Error and Adjudication Calibrationを実装・検証・リリースする。複数判定者の一致を独立確認と誤認せず、model family、provider、prompt、rubric、retrieval source、harness、training lineage、organization、reporting lineの共有依存を構造化する。多数決、全会一致、confidence、adjudicationを意味的真実、品質、能力、選抜、権限に変換しない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0644.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0644.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0644.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0644.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0644.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV1WJOMD-JZFDTU"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MV1WJUFX-FFEZ7Y-STEP-02",
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Visionary planning call for actor strategy-lead-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV1WFKVT-8SSFVA",
+              "decision_id": "DEC-MV1WJOMD-JZFDTU",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。",
+              "intent": "成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+              "active_context": "context: 対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。 | success: 成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+              "context_snapshot_id": "CTX-MV1WI2OL-L55JWK",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。 / How should improvement success be judged: which metric or end state matters most? => 成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。"
+            },
+            "task": {
+              "request": "QIF v0.6.44 Cross-Judge Correlated Error and Adjudication Calibrationを実装・検証・リリースする。複数判定者の一致を独立確認と誤認せず、model family、provider、prompt、rubric、retrieval source、harness、training lineage、organization、reporting lineの共有依存を構造化する。多数決、全会一致、confidence、adjudicationを意味的真実、品質、能力、選抜、権限に変換しない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0644.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0644.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0644.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0644.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0644.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV1WJOMD-JZFDTU"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MV1WJUFX-FFEZ7Y-STEP-03",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Guardian planning call for actor risk-reviewer-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV1WFKVT-8SSFVA",
+              "decision_id": "DEC-MV1WJOMD-JZFDTU",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。",
+              "intent": "成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+              "active_context": "context: 対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。 | success: 成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+              "context_snapshot_id": "CTX-MV1WI2OL-L55JWK",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。 / How should improvement success be judged: which metric or end state matters most? => 成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。"
+            },
+            "task": {
+              "request": "QIF v0.6.44 Cross-Judge Correlated Error and Adjudication Calibrationを実装・検証・リリースする。複数判定者の一致を独立確認と誤認せず、model family、provider、prompt、rubric、retrieval source、harness、training lineage、organization、reporting lineの共有依存を構造化する。多数決、全会一致、confidence、adjudicationを意味的真実、品質、能力、選抜、権限に変換しない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0644.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0644.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0644.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0644.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0644.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV1WJOMD-JZFDTU"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "execution_id": "CRUN-MV1X3SVA-Y8BS3U",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "prepared",
+      "started_at": "2026-10-10T04:52:13.413Z",
+      "completed_at": "2026-10-10T04:52:13.413Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01)",
+      "steps": [
+        {
+          "step_id": "CRUN-MV1X3SVA-Y8BS3U-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV1WFKVT-8SSFVA",
+              "decision_id": "DEC-MV1WJOMD-JZFDTU",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。",
+              "intent": "成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+              "active_context": "context: 対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。 | success: 成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+              "context_snapshot_id": "CTX-MV1WI2OL-L55JWK",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。 / How should improvement success be judged: which metric or end state matters most? => 成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。"
+            },
+            "task": {
+              "request": "QIF v0.6.44 Cross-Judge Correlated Error and Adjudication Calibrationを実装・検証・リリースする。複数判定者の一致を独立確認と誤認せず、model family、provider、prompt、rubric、retrieval source、harness、training lineage、organization、reporting lineの共有依存を構造化する。多数決、全会一致、confidence、adjudicationを意味的真実、品質、能力、選抜、権限に変換しない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0644.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0644.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0644.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0644.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0644.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV1WJOMD-JZFDTU"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MV1X3SVA-Y8BS3U-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV1WFKVT-8SSFVA",
+              "decision_id": "DEC-MV1WJOMD-JZFDTU",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。",
+              "intent": "成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+              "active_context": "context: 対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。 | success: 成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。",
+              "context_snapshot_id": "CTX-MV1WI2OL-L55JWK",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIF calibration-report packageのスキーマ、example、deterministic verifier、negative fixtures、docs、roadmap、AOF evidenceである。judge dependency policy/profile、cross-judge panel assessment、correlation aggregateを追加する。UI、外部連携、hidden reasoning、automatic selection/ranking/authority、semantic truthの主張は対象外とする。 / How should improvement success be judged: which metric or end state matters most? => 成功は、共有依存と独立性、verdict group、dissent、集計値が参照解決と決定的再計算で検証でき、共有依存を持つ多数決・全会一致または未検証データがgovernance triggerを生み、npm testとAOF verifyが通り、v0.6.44としてreleaseされることで判断する。"
+            },
+            "task": {
+              "request": "QIF v0.6.44 Cross-Judge Correlated Error and Adjudication Calibrationを実装・検証・リリースする。複数判定者の一致を独立確認と誤認せず、model family、provider、prompt、rubric、retrieval source、harness、training lineage、organization、reporting lineの共有依存を構造化する。多数決、全会一致、confidence、adjudicationを意味的真実、品質、能力、選抜、権限に変換しない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV0644.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV0644.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV0644.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0644.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0644.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV1WJOMD-JZFDTU"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "last_council_execution_id": "CRUN-MV1X3SVA-Y8BS3U"
+}

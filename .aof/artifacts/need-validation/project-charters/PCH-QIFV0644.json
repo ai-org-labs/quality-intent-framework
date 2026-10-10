@@ -1,0 +1,23 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-10T04:36:34.627Z",
+  "project_charter_id": "PCH-MV1WJOHV-8EOUD4",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV0644.json",
+  "validated_objective": "Release QIF v0.6.44 with an executable, auditable, domain-general cross-judge dependency and correlation lifecycle.",
+  "scope": [
+    "reusable judge dependency policy and one-to-one judgment dependency profiles",
+    "cross-judge panel assessment preserving agreement, dissent, abstention, shared dependencies, and adjudication provenance",
+    "deterministic aggregate correlation assessment and governance triggers",
+    "schema, verifier, example, retained fixtures, plain-language docs, roadmap, AOF evidence, tag, and GitHub release"
+  ],
+  "constraints": [
+    "No UI, external integration, hidden reasoning collection, automatic actor selection, ranking, replacement, authorization, policy mutation, or blame assignment",
+    "No claim that majority, unanimity, confidence, adjudication, or low observed disagreement proves truth, quality, competence, independence, optimality, selection, authorization, or authority"
+  ],
+  "expected_outcomes": [
+    "Humans and AI can reproduce whether cross-judge agreement is materially dependent and whether dissent and abstention remain visible.",
+    "Dependent consensus, unverified dependency evidence, and insufficient panels become explicit governance work before reliance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV1WI2OO-LG4LF3"
+}

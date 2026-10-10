@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "QIFの正本から、初見の人間またはAIが評価とQuality Intent定義を開始できるvendor-neutralな版付きportable packageを決定論的に生成・検証し、npm testとrelease工程で常にpackage.jsonの現行versionへ同期する。",
-  "updated_at": "2026-10-09T22:56:50.311Z",
+  "content": "Add the smallest standalone calibration-report lifecycle that records reusable judge dependency policy, one-to-one dependency profiles, cross-judge panel agreement and dissent, and reproducible aggregate correlation assessment; route dependent consensus, unverified profiles, and insufficient evidence to governance without treating consensus as semantic truth or organizational authority.",
+  "updated_at": "2026-10-10T04:36:34.792Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MV1KCAQI-OQO7KY",
-  "source_decision_record_id": "DEC-MV1KERUS-ILRLLI",
+  "source_session_id": "SESS-MV1WFKVT-8SSFVA",
+  "source_decision_record_id": "DEC-MV1WJOMD-JZFDTU",
   "declared_complete_at": null
 }

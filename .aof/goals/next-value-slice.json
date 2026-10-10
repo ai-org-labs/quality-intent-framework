@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.6.44 Cross-Judge Correlated Error and Adjudication Calibration",
-  "updated_at": "2026-10-09T23:07:07.550Z",
+  "content": "v0.6.45 Evaluator Belief and Reward-Signal Leakage",
+  "updated_at": "2026-10-10T04:52:13.254Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MV1KCAQI-OQO7KY",
-  "source_decision_record_id": "DEC-MV1KERUS-ILRLLI",
+  "source_session_id": "SESS-MV1WFKVT-8SSFVA",
+  "source_decision_record_id": "DEC-MV1WJOMD-JZFDTU",
   "declared_complete_at": null
 }

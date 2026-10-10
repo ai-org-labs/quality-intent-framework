@@ -158,6 +158,10 @@ function validatePackage(pkg, packagePath) {
   const reviewerDisagreements = requiredArray(pkg, "reviewerDisagreements");
   const adjudicationOutcomes = requiredArray(pkg, "adjudicationOutcomes");
   const reviewerDisagreementAssessments = requiredArray(pkg, "reviewerDisagreementAssessments");
+  const judgeDependencyPolicies = requiredArray(pkg, "judgeDependencyPolicies");
+  const judgeDependencyProfiles = requiredArray(pkg, "judgeDependencyProfiles");
+  const crossJudgePanelAssessments = requiredArray(pkg, "crossJudgePanelAssessments");
+  const crossJudgeCorrelationAssessments = requiredArray(pkg, "crossJudgeCorrelationAssessments");
   const routePolicySnapshots = requiredArray(pkg, "routePolicySnapshots");
   const routePolicyChanges = requiredArray(pkg, "routePolicyChanges");
   const routePolicyDriftAssessments = requiredArray(pkg, "routePolicyDriftAssessments");
@@ -199,6 +203,10 @@ function validatePackage(pkg, packagePath) {
   const reviewerDisagreementIndex = indexById(reviewerDisagreements, `${packagePath}:reviewerDisagreements`);
   const adjudicationIndex = indexById(adjudicationOutcomes, `${packagePath}:adjudicationOutcomes`);
   const reviewerAssessmentIndex = indexById(reviewerDisagreementAssessments, `${packagePath}:reviewerDisagreementAssessments`);
+  const judgeDependencyPolicyIndex = indexById(judgeDependencyPolicies, `${packagePath}:judgeDependencyPolicies`);
+  const judgeDependencyProfileIndex = indexById(judgeDependencyProfiles, `${packagePath}:judgeDependencyProfiles`);
+  const crossJudgePanelIndex = indexById(crossJudgePanelAssessments, `${packagePath}:crossJudgePanelAssessments`);
+  const crossJudgeCorrelationIndex = indexById(crossJudgeCorrelationAssessments, `${packagePath}:crossJudgeCorrelationAssessments`);
   const routePolicySnapshotIndex = indexById(routePolicySnapshots, `${packagePath}:routePolicySnapshots`);
   const routePolicyChangeIndex = indexById(routePolicyChanges, `${packagePath}:routePolicyChanges`);
   const routePolicyDriftIndex = indexById(routePolicyDriftAssessments, `${packagePath}:routePolicyDriftAssessments`);
@@ -959,6 +967,133 @@ function validatePackage(pkg, packagePath) {
     if (dataSufficiency === "insufficient" && !triggerTypes.has("insufficient-data")) errors.push(`${assessment.id} insufficient disagreement evidence requires an insufficient-data governance trigger.`);
   }
 
+  const dependencyFieldByDimension = {
+    provider: "providerRef",
+    "model-family": "modelFamilyRef",
+    "prompt-template": "promptTemplateDigest",
+    rubric: "rubricRef",
+    harness: "harnessRef",
+    "training-lineage": "trainingLineageRef",
+    organization: "organizationRef",
+    "reporting-line": "reportingLineRef"
+  };
+
+  for (const policy of judgeDependencyPolicies) {
+    for (const field of ["reviewerDisagreementPolicyRef", "independenceRule", "aggregationBoundary", "status"]) str(policy, field, policy.id);
+    ref(reviewerPolicyIndex, policy.reviewerDisagreementPolicyRef, "reviewer disagreement policy", policy.id);
+    if (!Number.isInteger(policy.minimumJudgeCount) || policy.minimumJudgeCount < 3) errors.push(`${policy.id} minimumJudgeCount must be at least 3.`);
+    if (!Number.isInteger(policy.minimumPanelCount) || policy.minimumPanelCount < 2) errors.push(`${policy.id} minimumPanelCount must be at least 2.`);
+    if (!Array.isArray(policy.dependencyDimensions) || policy.dependencyDimensions.length === 0 || new Set(policy.dependencyDimensions).size !== policy.dependencyDimensions.length) errors.push(`${policy.id} dependencyDimensions must be a non-empty unique array.`);
+    if (!Array.isArray(policy.materialDependencyDimensions) || policy.materialDependencyDimensions.length === 0 || !policy.materialDependencyDimensions.every((item) => policy.dependencyDimensions?.includes(item))) errors.push(`${policy.id} materialDependencyDimensions must be a non-empty subset of dependencyDimensions.`);
+    if (policy.independenceRule !== "independent-only-when-no-material-shared-dependency") errors.push(`${policy.id} independenceRule must require no material shared dependency.`);
+    if (policy.aggregationBoundary !== "no-majority-unanimity-confidence-or-adjudication-truth-quality-selection-authorization-or-authority") errors.push(`${policy.id} aggregationBoundary must forbid consensus authority.`);
+    if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one reviewer.`);
+    if (!Array.isArray(policy.evidenceRefs) || policy.evidenceRefs.length === 0) errors.push(`${policy.id} evidenceRefs must include at least one item.`);
+    const triggerTypes = new Set((policy.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", policy.id)?.triggerType));
+    if (policy.status !== "active" && !triggerTypes.has("cross-judge-policy-unreviewed")) errors.push(`${policy.id} non-active policy requires a cross-judge-policy-unreviewed governance trigger.`);
+  }
+
+  const profiledJudgments = new Set();
+  for (const profile of judgeDependencyProfiles) {
+    for (const field of ["reviewerJudgmentRef", "reviewerKind", "providerRef", "modelFamilyRef", "promptTemplateDigest", "rubricRef", "harnessRef", "trainingLineageRef", "organizationRef", "reportingLineRef", "declaredBy", "evidenceStatus", "status"]) str(profile, field, profile.id);
+    ref(reviewerJudgmentIndex, profile.reviewerJudgmentRef, "reviewer judgment", profile.id);
+    if (profiledJudgments.has(profile.reviewerJudgmentRef)) errors.push(`${profile.id} duplicates a dependency profile for judgment ${profile.reviewerJudgmentRef}.`);
+    profiledJudgments.add(profile.reviewerJudgmentRef);
+    if (!Array.isArray(profile.retrievalSourceRefs) || profile.retrievalSourceRefs.length === 0 || new Set(profile.retrievalSourceRefs).size !== profile.retrievalSourceRefs.length) errors.push(`${profile.id} retrievalSourceRefs must be a non-empty unique array.`);
+    if (!Array.isArray(profile.evidenceRefs) || profile.evidenceRefs.length === 0) errors.push(`${profile.id} evidenceRefs must include at least one item.`);
+    const triggerTypes = new Set((profile.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", profile.id)?.triggerType));
+    if (profile.evidenceStatus !== "verified" && !triggerTypes.has("cross-judge-evidence-unverified")) errors.push(`${profile.id} non-verified dependency evidence requires a cross-judge-evidence-unverified governance trigger.`);
+  }
+
+  for (const panel of crossJudgePanelAssessments) {
+    for (const field of ["title", "policyRef", "agreementState", "independenceStatus", "correlationRisk", "evidenceStatus", "resultBoundary", "status"]) str(panel, field, panel.id);
+    const policy = ref(judgeDependencyPolicyIndex, panel.policyRef, "judge dependency policy", panel.id);
+    const judgments = Array.isArray(panel.judgmentRefs) ? panel.judgmentRefs.map((id) => ref(reviewerJudgmentIndex, id, "reviewer judgment", panel.id)).filter(Boolean) : [];
+    const profiles = Array.isArray(panel.profileRefs) ? panel.profileRefs.map((id) => ref(judgeDependencyProfileIndex, id, "judge dependency profile", panel.id)).filter(Boolean) : [];
+    if (!policy || judgments.length < (policy?.minimumJudgeCount || 3)) errors.push(`${panel.id} judgmentRefs must satisfy the policy minimumJudgeCount.`);
+    if (new Set(panel.judgmentRefs || []).size !== (panel.judgmentRefs || []).length) errors.push(`${panel.id} judgmentRefs must not contain duplicates.`);
+    if (new Set(panel.profileRefs || []).size !== (panel.profileRefs || []).length) errors.push(`${panel.id} profileRefs must not contain duplicates.`);
+    if (!sameSet(profiles.map((item) => item.reviewerJudgmentRef), panel.judgmentRefs || [])) errors.push(`${panel.id} profileRefs must provide exactly one profile for every judgmentRef.`);
+    const reviewerPolicyRefs = new Set(judgments.map((item) => item.policyRef));
+    if (reviewerPolicyRefs.size !== 1 || !reviewerPolicyRefs.has(policy?.reviewerDisagreementPolicyRef)) errors.push(`${panel.id} judgments must use the dependency policy's reviewer disagreement policy.`);
+
+    const expectedGroups = new Map();
+    for (const judgment of judgments) expectedGroups.set(judgment.verdict, [...(expectedGroups.get(judgment.verdict) || []), judgment.id]);
+    const actualGroupMap = new Map();
+    for (const group of panel.verdictGroups || []) {
+      if (actualGroupMap.has(group.verdict)) errors.push(`${panel.id} verdictGroups must not repeat verdict ${group.verdict}.`);
+      actualGroupMap.set(group.verdict, group.judgmentRefs || []);
+    }
+    if (!sameSet([...actualGroupMap.keys()], [...expectedGroups.keys()])) errors.push(`${panel.id} verdictGroups must reproduce every observed verdict exactly.`);
+    for (const [verdict, refs] of expectedGroups) if (!sameSet(actualGroupMap.get(verdict), refs)) errors.push(`${panel.id} verdict group ${verdict} must reproduce its judgmentRefs.`);
+
+    const shared = [];
+    for (const dimension of policy?.dependencyDimensions || []) {
+      if (dimension === "retrieval-source") {
+        const common = profiles.length === 0 ? [] : profiles.slice(1).reduce((values, item) => values.filter((value) => item.retrievalSourceRefs?.includes(value)), profiles[0].retrievalSourceRefs || []);
+        if (common.length > 0) shared.push(dimension);
+      } else {
+        const field = dependencyFieldByDimension[dimension];
+        if (field && profiles.length > 0 && profiles.every((item) => item[field] === profiles[0][field])) shared.push(dimension);
+      }
+    }
+    const independent = (policy?.dependencyDimensions || []).filter((item) => !shared.includes(item));
+    if (!sameSet(panel.sharedDependencyDimensions, shared)) errors.push(`${panel.id} sharedDependencyDimensions must reproduce as ${shared.join(",") || "empty"}.`);
+    if (!sameSet(panel.independentDimensions, independent)) errors.push(`${panel.id} independentDimensions must reproduce as ${independent.join(",") || "empty"}.`);
+    const materialShared = shared.filter((item) => policy?.materialDependencyDimensions?.includes(item));
+    const allVerified = profiles.every((item) => item.evidenceStatus === "verified") && judgments.every((item) => item.evidenceStatus === "verified");
+    const independenceStatus = materialShared.length > 0 ? "dependent" : shared.length > 0 ? "partially-independent" : allVerified ? "independent" : "unknown";
+    const correlationRisk = materialShared.length >= 2 ? "high" : materialShared.length === 1 ? "medium" : allVerified ? "low" : "unknown";
+    if (panel.independenceStatus !== independenceStatus) errors.push(`${panel.id} independenceStatus must reproduce as ${independenceStatus}.`);
+    if (panel.correlationRisk !== correlationRisk) errors.push(`${panel.id} correlationRisk must reproduce as ${correlationRisk}.`);
+
+    const sortedGroups = [...expectedGroups.entries()].sort((a, b) => b[1].length - a[1].length);
+    const maxCount = sortedGroups[0]?.[1].length || 0;
+    const agreementState = judgments.length < (policy?.minimumJudgeCount || 3) ? "no-valid-quorum" : expectedGroups.size === 1 ? "unanimous" : maxCount > judgments.length / 2 ? "majority" : "split";
+    const majorityVerdict = ["majority", "unanimous"].includes(agreementState) ? sortedGroups[0]?.[0] : undefined;
+    if (panel.agreementState !== agreementState) errors.push(`${panel.id} agreementState must reproduce as ${agreementState}.`);
+    if (panel.majorityVerdict !== majorityVerdict) errors.push(`${panel.id} majorityVerdict must reproduce as ${majorityVerdict ?? "absent"}.`);
+    const dissent = majorityVerdict ? judgments.filter((item) => item.verdict !== majorityVerdict).map((item) => item.id) : [];
+    const abstentions = judgments.filter((item) => item.verdict === "unresolved").map((item) => item.id);
+    if (!sameSet(panel.dissentJudgmentRefs, dissent)) errors.push(`${panel.id} dissentJudgmentRefs must reproduce the non-majority judgments.`);
+    if (!sameSet(panel.abstentionJudgmentRefs, abstentions)) errors.push(`${panel.id} abstentionJudgmentRefs must reproduce unresolved judgments.`);
+    if (panel.adjudicationOutcomeRef) ref(adjudicationIndex, panel.adjudicationOutcomeRef, "adjudication outcome", panel.id);
+    if (panel.originalJudgmentsPreserved !== true) errors.push(`${panel.id} originalJudgmentsPreserved must be true.`);
+    const expectedEvidenceStatus = allVerified ? "verified" : profiles.some((item) => item.evidenceStatus === "example-only") || judgments.some((item) => item.evidenceStatus === "example-only") ? "example-only" : "unverified";
+    if (panel.evidenceStatus !== expectedEvidenceStatus) errors.push(`${panel.id} evidenceStatus must reproduce as ${expectedEvidenceStatus}.`);
+    if (panel.resultBoundary !== "cross-judge-agreement-evidence-only-not-independent-confirmation-truth-quality-competence-selection-authorization-or-authority") errors.push(`${panel.id} resultBoundary must prohibit independent-confirmation and authority claims.`);
+    const triggerTypes = new Set((panel.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", panel.id)?.triggerType));
+    if (materialShared.length > 0 && !triggerTypes.has("cross-judge-dependency-risk")) errors.push(`${panel.id} material shared dependency requires a cross-judge-dependency-risk governance trigger.`);
+    if (!allVerified && !triggerTypes.has("cross-judge-evidence-unverified")) errors.push(`${panel.id} non-verified panel evidence requires a cross-judge-evidence-unverified governance trigger.`);
+    if (["majority", "unanimous"].includes(agreementState) && materialShared.length > 0 && !triggerTypes.has("cross-judge-correlated-agreement-risk")) errors.push(`${panel.id} dependent consensus requires a cross-judge-correlated-agreement-risk governance trigger.`);
+  }
+
+  for (const assessment of crossJudgeCorrelationAssessments) {
+    for (const field of ["title", "policyRef", "dataSufficiency", "assessmentSignal", "interpretation", "status"]) str(assessment, field, assessment.id);
+    const policy = ref(judgeDependencyPolicyIndex, assessment.policyRef, "judge dependency policy", assessment.id);
+    const panels = Array.isArray(assessment.panelRefs) ? assessment.panelRefs.map((id) => ref(crossJudgePanelIndex, id, "cross-judge panel", assessment.id)).filter(Boolean) : [];
+    if (panels.length === 0) errors.push(`${assessment.id} panelRefs must include at least one panel.`);
+    for (const panel of panels) if (panel.policyRef !== assessment.policyRef) errors.push(`${assessment.id} panel ${panel.id} must use policy ${assessment.policyRef}.`);
+    const counts = {
+      panelCount: panels.length,
+      dependentPanelCount: panels.filter((item) => item.independenceStatus === "dependent").length,
+      independentPanelCount: panels.filter((item) => item.independenceStatus === "independent").length,
+      majorityOrUnanimousCount: panels.filter((item) => ["majority", "unanimous"].includes(item.agreementState)).length,
+      adjudicatedPanelCount: panels.filter((item) => Boolean(item.adjudicationOutcomeRef)).length,
+      unresolvedPanelCount: panels.filter((item) => !item.adjudicationOutcomeRef).length,
+      verifiedPanelCount: panels.filter((item) => item.evidenceStatus === "verified").length
+    };
+    for (const [field, value] of Object.entries(counts)) if (!sameNumber(assessment[field], value)) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const dataSufficiency = policy && panels.length >= policy.minimumPanelCount && counts.verifiedPanelCount >= policy.minimumPanelCount && counts.independentPanelCount > 0 ? "sufficient" : "insufficient";
+    const signal = dataSufficiency === "insufficient" ? "insufficient-data" : counts.dependentPanelCount > 0 ? "governance-required" : "observed-no-structural-alerts";
+    if (assessment.dataSufficiency !== dataSufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${dataSufficiency}.`);
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (!Array.isArray(assessment.reviewedBy) || assessment.reviewedBy.length === 0) errors.push(`${assessment.id} reviewedBy must include at least one reviewer.`);
+    if (assessment.interpretation !== "cross-judge-correlation-evidence-only-not-truth-quality-competence-optimality-selection-authorization-or-authority") errors.push(`${assessment.id} interpretation must preserve the cross-judge non-authority boundary.`);
+    const triggerTypes = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (dataSufficiency === "insufficient" && !triggerTypes.has("cross-judge-assessment-insufficient")) errors.push(`${assessment.id} insufficient cross-judge evidence requires a cross-judge-assessment-insufficient governance trigger.`);
+  }
+
   const snapshotsByPolicy = new Map();
   for (const snapshot of routePolicySnapshots) {
     for (const field of ["policyRef", "snapshotRole", "capturedAt", "effectiveFrom", "historyBoundary", "status"]) str(snapshot, field, snapshot.id);
@@ -1676,6 +1811,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that counterfactual replay count, route-change rate, or hypothesized loss-boundary direction proves observed outcome, policy quality, optimality, causality, competence, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that counterfactual replay count, route-change rate, or hypothesized loss-boundary direction proves observed outcome, policy quality, optimality, causality, competence, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that judge accuracy, stability, abstention, refusal, malformed-output, or condition-sensitivity counts prove semantic truth, quality, competence, optimality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that judge accuracy, stability, abstention, refusal, malformed-output, or condition-sensitivity counts prove semantic truth, quality, competence, optimality, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that blind-run count, contamination finding, transcript inspection, loophole count, or absence of detected gaming proves contamination freedom, honesty, quality, competence, optimality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that sequestered replay evidence proves contamination freedom, honesty, quality, competence, optimality, selection, authorization, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that cross-judge majority, unanimity, confidence, adjudication, or panel count proves independent confirmation, semantic truth, quality, competence, optimality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that cross-judge consensus proves independence, truth, quality, competence, selection, authorization, or authority.`);
   }
 
   results.push({
@@ -1703,6 +1839,10 @@ function validatePackage(pkg, packagePath) {
       reviewerDisagreements: reviewerDisagreements.length,
       adjudicationOutcomes: adjudicationOutcomes.length,
       reviewerDisagreementAssessments: reviewerDisagreementAssessments.length,
+      judgeDependencyPolicies: judgeDependencyPolicies.length,
+      judgeDependencyProfiles: judgeDependencyProfiles.length,
+      crossJudgePanelAssessments: crossJudgePanelAssessments.length,
+      crossJudgeCorrelationAssessments: crossJudgeCorrelationAssessments.length,
       routePolicySnapshots: routePolicySnapshots.length,
       routePolicyChanges: routePolicyChanges.length,
       routePolicyDriftAssessments: routePolicyDriftAssessments.length,
@@ -1741,5 +1881,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, robustness summaries, rollback preservation, and policy conformance only; it does not prove probability semantics, representativeness, causality, consequence truth, calibration truth, contamination freedom, honesty, resolution quality, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, judge or policy selection, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, robustness summaries, rollback preservation, and policy conformance only; it does not prove independence, probability semantics, representativeness, causality, consequence truth, calibration truth, contamination freedom, honesty, resolution quality, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, judge or policy selection, or decision authority."
 }, null, 2));

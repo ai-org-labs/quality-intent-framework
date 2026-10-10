@@ -19,6 +19,10 @@ function reviewerJudgment(pkg, index = 0) { return pkg.reviewerJudgments[index];
 function disagreement(pkg) { return pkg.reviewerDisagreements[0]; }
 function adjudication(pkg) { return pkg.adjudicationOutcomes[0]; }
 function disagreementAssessment(pkg) { return pkg.reviewerDisagreementAssessments[0]; }
+function dependencyPolicy(pkg) { return pkg.judgeDependencyPolicies[0]; }
+function dependencyProfile(pkg, index = 0) { return pkg.judgeDependencyProfiles[index]; }
+function crossJudgePanel(pkg) { return pkg.crossJudgePanelAssessments[0]; }
+function crossJudgeAssessment(pkg) { return pkg.crossJudgeCorrelationAssessments[0]; }
 function routeSnapshot(pkg, index = 0) { return pkg.routePolicySnapshots[index]; }
 function routeChange(pkg) { return pkg.routePolicyChanges[0]; }
 function driftAssessment(pkg) { return pkg.routePolicyDriftAssessments[0]; }
@@ -40,6 +44,48 @@ function sequesteredRun(pkg) { return pkg.sequesteredReplayRuns[0]; }
 function gamingAssessment(pkg) { return pkg.policyGamingAssessments[0]; }
 
 export const cases = [
+  { id: "dependency-policies-not-array", rule: "judge dependency policies required", expect: "package judgeDependencyPolicies must be an array.", mutate: (pkg) => { pkg.judgeDependencyPolicies = null; } },
+  { id: "dependency-profiles-not-array", rule: "judge dependency profiles required", expect: "package judgeDependencyProfiles must be an array.", mutate: (pkg) => { pkg.judgeDependencyProfiles = null; } },
+  { id: "cross-judge-panels-not-array", rule: "cross-judge panels required", expect: "package crossJudgePanelAssessments must be an array.", mutate: (pkg) => { pkg.crossJudgePanelAssessments = null; } },
+  { id: "cross-judge-assessments-not-array", rule: "cross-judge assessments required", expect: "package crossJudgeCorrelationAssessments must be an array.", mutate: (pkg) => { pkg.crossJudgeCorrelationAssessments = null; } },
+  { id: "dependency-policy-reviewer-missing", rule: "dependency policy lineage", expect: "references missing reviewer disagreement policy", mutate: (pkg) => { dependencyPolicy(pkg).reviewerDisagreementPolicyRef = "RDP-NOPE-999"; } },
+  { id: "dependency-policy-min-judges", rule: "minimum judge count", expect: "minimumJudgeCount must be at least 3.", mutate: (pkg) => { dependencyPolicy(pkg).minimumJudgeCount = 2; } },
+  { id: "dependency-policy-min-panels", rule: "minimum panel count", expect: "minimumPanelCount must be at least 2.", mutate: (pkg) => { dependencyPolicy(pkg).minimumPanelCount = 1; } },
+  { id: "dependency-policy-dimensions", rule: "dependency dimension identity", expect: "dependencyDimensions must be a non-empty unique array.", mutate: (pkg) => { dependencyPolicy(pkg).dependencyDimensions.push("rubric"); } },
+  { id: "dependency-policy-material-subset", rule: "material dependency subset", expect: "materialDependencyDimensions must be a non-empty subset of dependencyDimensions.", mutate: (pkg) => { dependencyPolicy(pkg).materialDependencyDimensions.push("not-declared"); } },
+  { id: "dependency-policy-rule", rule: "independence rule boundary", expect: "independenceRule must require no material shared dependency.", mutate: (pkg) => { dependencyPolicy(pkg).independenceRule = "different-names-are-independent"; } },
+  { id: "dependency-policy-boundary", rule: "consensus authority boundary", expect: "aggregationBoundary must forbid consensus authority.", mutate: (pkg) => { dependencyPolicy(pkg).aggregationBoundary = "majority-is-authority"; } },
+  { id: "dependency-policy-review", rule: "dependency policy review", expect: "reviewedBy must include at least one reviewer.", mutate: (pkg) => { dependencyPolicy(pkg).reviewedBy = []; } },
+  { id: "dependency-policy-trigger", rule: "unreviewed dependency policy governance", expect: "non-active policy requires a cross-judge-policy-unreviewed governance trigger.", mutate: (pkg) => { dependencyPolicy(pkg).status = "draft"; } },
+  { id: "dependency-profile-judgment-missing", rule: "dependency profile judgment lineage", expect: "references missing reviewer judgment", mutate: (pkg) => { dependencyProfile(pkg).reviewerJudgmentRef = "RJG-NOPE-999"; } },
+  { id: "dependency-profile-duplicate", rule: "one profile per judgment", expect: "duplicates a dependency profile for judgment RJG-CR-001.", mutate: (pkg) => { dependencyProfile(pkg, 1).reviewerJudgmentRef = "RJG-CR-001"; } },
+  { id: "dependency-profile-provider", rule: "provider declaration", expect: "must include non-empty string providerRef.", mutate: (pkg) => { dependencyProfile(pkg).providerRef = ""; } },
+  { id: "dependency-profile-retrieval", rule: "retrieval source declaration", expect: "retrievalSourceRefs must be a non-empty unique array.", mutate: (pkg) => { dependencyProfile(pkg).retrievalSourceRefs = []; } },
+  { id: "dependency-profile-evidence", rule: "profile evidence", expect: "evidenceRefs must include at least one item.", mutate: (pkg) => { dependencyProfile(pkg).evidenceRefs = []; } },
+  { id: "dependency-profile-trigger", rule: "unverified profile governance", expect: "non-verified dependency evidence requires a cross-judge-evidence-unverified governance trigger.", mutate: (pkg) => { dependencyProfile(pkg).governanceTriggerRefs = []; } },
+  { id: "cross-judge-policy-missing", rule: "panel policy lineage", expect: "references missing judge dependency policy", mutate: (pkg) => { crossJudgePanel(pkg).policyRef = "JDP-NOPE-999"; } },
+  { id: "cross-judge-judgment-missing", rule: "panel judgment lineage", expect: "references missing reviewer judgment", mutate: (pkg) => { crossJudgePanel(pkg).judgmentRefs[0] = "RJG-NOPE-999"; } },
+  { id: "cross-judge-profile-closure", rule: "profile-to-judgment closure", expect: "profileRefs must provide exactly one profile for every judgmentRef.", mutate: (pkg) => { crossJudgePanel(pkg).profileRefs.pop(); } },
+  { id: "cross-judge-verdict-groups", rule: "verdict group reproduction", expect: "verdict group deferred must reproduce its judgmentRefs.", mutate: (pkg) => { crossJudgePanel(pkg).verdictGroups[1].judgmentRefs.pop(); } },
+  { id: "cross-judge-shared-dimensions", rule: "shared dependency reproduction", expect: "sharedDependencyDimensions must reproduce as", mutate: (pkg) => { crossJudgePanel(pkg).sharedDependencyDimensions.pop(); } },
+  { id: "cross-judge-independent-dimensions", rule: "independent dimension reproduction", expect: "independentDimensions must reproduce as", mutate: (pkg) => { crossJudgePanel(pkg).independentDimensions = []; } },
+  { id: "cross-judge-independence-status", rule: "independence status reproduction", expect: "independenceStatus must reproduce as dependent.", mutate: (pkg) => { crossJudgePanel(pkg).independenceStatus = "independent"; } },
+  { id: "cross-judge-correlation-risk", rule: "correlation risk reproduction", expect: "correlationRisk must reproduce as high.", mutate: (pkg) => { crossJudgePanel(pkg).correlationRisk = "low"; } },
+  { id: "cross-judge-agreement-state", rule: "agreement state reproduction", expect: "agreementState must reproduce as majority.", mutate: (pkg) => { crossJudgePanel(pkg).agreementState = "unanimous"; } },
+  { id: "cross-judge-majority", rule: "majority verdict reproduction", expect: "majorityVerdict must reproduce as deferred.", mutate: (pkg) => { crossJudgePanel(pkg).majorityVerdict = "timed-out"; } },
+  { id: "cross-judge-dissent", rule: "dissent reproduction", expect: "dissentJudgmentRefs must reproduce the non-majority judgments.", mutate: (pkg) => { crossJudgePanel(pkg).dissentJudgmentRefs = []; } },
+  { id: "cross-judge-preservation", rule: "original judgment preservation", expect: "originalJudgmentsPreserved must be true.", mutate: (pkg) => { crossJudgePanel(pkg).originalJudgmentsPreserved = false; } },
+  { id: "cross-judge-evidence-status", rule: "panel evidence status", expect: "evidenceStatus must reproduce as example-only.", mutate: (pkg) => { crossJudgePanel(pkg).evidenceStatus = "verified"; } },
+  { id: "cross-judge-dependency-trigger", rule: "material dependency governance", expect: "material shared dependency requires a cross-judge-dependency-risk governance trigger.", mutate: (pkg) => { crossJudgePanel(pkg).governanceTriggerRefs = ["GTR-CR-037", "GTR-CR-038"]; } },
+  { id: "cross-judge-evidence-trigger", rule: "panel evidence governance", expect: "non-verified panel evidence requires a cross-judge-evidence-unverified governance trigger.", mutate: (pkg) => { crossJudgePanel(pkg).governanceTriggerRefs = ["GTR-CR-036", "GTR-CR-038"]; } },
+  { id: "cross-judge-consensus-trigger", rule: "correlated consensus governance", expect: "dependent consensus requires a cross-judge-correlated-agreement-risk governance trigger.", mutate: (pkg) => { crossJudgePanel(pkg).governanceTriggerRefs = ["GTR-CR-036", "GTR-CR-037"]; } },
+  { id: "cross-judge-panel-count", rule: "panel count reproduction", expect: "panelCount must reproduce as 1.", mutate: (pkg) => { crossJudgeAssessment(pkg).panelCount = 2; } },
+  { id: "cross-judge-dependent-count", rule: "dependent count reproduction", expect: "dependentPanelCount must reproduce as 1.", mutate: (pkg) => { crossJudgeAssessment(pkg).dependentPanelCount = 0; } },
+  { id: "cross-judge-sufficiency", rule: "correlation sufficiency reproduction", expect: "dataSufficiency must reproduce as insufficient.", mutate: (pkg) => { crossJudgeAssessment(pkg).dataSufficiency = "sufficient"; } },
+  { id: "cross-judge-signal", rule: "correlation signal reproduction", expect: "assessmentSignal must reproduce as insufficient-data.", mutate: (pkg) => { crossJudgeAssessment(pkg).assessmentSignal = "observed-no-structural-alerts"; } },
+  { id: "cross-judge-reviewer", rule: "correlation review", expect: "reviewedBy must include at least one reviewer.", mutate: (pkg) => { crossJudgeAssessment(pkg).reviewedBy = []; } },
+  { id: "cross-judge-assessment-trigger", rule: "insufficient correlation governance", expect: "insufficient cross-judge evidence requires a cross-judge-assessment-insufficient governance trigger.", mutate: (pkg) => { crossJudgeAssessment(pkg).governanceTriggerRefs = []; } },
+  { id: "cross-judge-boundary-overclaim", rule: "cross-judge semantic boundary", expect: "verifierBoundary must explicitly avoid claiming that cross-judge consensus proves independence, truth, quality, competence, selection, authorization, or authority.", mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => !claim.startsWith("that cross-judge majority")); } },
   { id: "sequestered-protocols-not-array", rule: "sequestered protocols required", expect: "package sequesteredReplayProtocols must be an array.", mutate: (pkg) => { pkg.sequesteredReplayProtocols = null; } },
   { id: "sequestered-runs-not-array", rule: "sequestered runs required", expect: "package sequesteredReplayRuns must be an array.", mutate: (pkg) => { pkg.sequesteredReplayRuns = null; } },
   { id: "gaming-assessments-not-array", rule: "policy gaming assessments required", expect: "package policyGamingAssessments must be an array.", mutate: (pkg) => { pkg.policyGamingAssessments = null; } },

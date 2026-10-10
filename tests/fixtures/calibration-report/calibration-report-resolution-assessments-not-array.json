@@ -1,6 +1,6 @@
 {
   "packageType": "calibration-report",
-  "runtimeVersion": "0.6.40",
+  "runtimeVersion": "0.6.44",
   "packageId": "CRPKG-001",
   "packageRefs": [
     {
@@ -731,6 +731,27 @@
         "GTR-CR-014"
       ],
       "status": "reviewed"
+    },
+    {
+      "id": "RJG-CR-003",
+      "escalationResolutionRef": "ERS-CR-001",
+      "policyRef": "RDP-CR-001",
+      "reviewerRef": "illustrative-policy-reviewer",
+      "reviewerRole": "policy",
+      "independenceGroup": "policy-line",
+      "verdict": "deferred",
+      "rationale": "The policy boundary remains unresolved, so the protected action stays deferred even though the response-time event is recorded separately.",
+      "evidenceRefs": [
+        "ERS-CR-001",
+        "RDP-CR-001"
+      ],
+      "confidence": 0.76,
+      "submittedAt": "2026-01-15T10:47:00.000Z",
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-014"
+      ],
+      "status": "reviewed"
     }
   ],
   "reviewerDisagreements": [
@@ -815,6 +836,218 @@
         "GTR-CR-015"
       ],
       "interpretation": "disagreement-and-adjudication-evidence-only-not-truth-quality-competence-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "judgeDependencyPolicies": [
+    {
+      "id": "JDP-CR-001",
+      "reviewerDisagreementPolicyRef": "RDP-CR-001",
+      "minimumJudgeCount": 3,
+      "minimumPanelCount": 2,
+      "dependencyDimensions": [
+        "provider",
+        "model-family",
+        "prompt-template",
+        "rubric",
+        "retrieval-source",
+        "harness",
+        "training-lineage",
+        "organization",
+        "reporting-line"
+      ],
+      "materialDependencyDimensions": [
+        "model-family",
+        "prompt-template",
+        "rubric",
+        "retrieval-source",
+        "harness",
+        "training-lineage",
+        "organization",
+        "reporting-line"
+      ],
+      "independenceRule": "independent-only-when-no-material-shared-dependency",
+      "aggregationBoundary": "no-majority-unanimity-confidence-or-adjudication-truth-quality-selection-authorization-or-authority",
+      "reviewedBy": [
+        "customer-operations-governance-board"
+      ],
+      "evidenceRefs": [
+        "RDP-CR-001",
+        "examples/calibration-report-package.json"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "judgeDependencyProfiles": [
+    {
+      "id": "JPF-CR-001",
+      "reviewerJudgmentRef": "RJG-CR-001",
+      "reviewerKind": "hybrid",
+      "providerRef": "provider-a",
+      "modelFamilyRef": "model-family-a",
+      "promptTemplateDigest": "sha256:shared-cross-judge-prompt",
+      "rubricRef": "RDP-CR-001",
+      "retrievalSourceRefs": [
+        "ERS-CR-001",
+        "shared-operations-handbook"
+      ],
+      "harnessRef": "qif-example-harness",
+      "trainingLineageRef": "unknown-example-lineage",
+      "organizationRef": "illustrative-organization",
+      "reportingLineRef": "operations-line",
+      "declaredBy": "example-maintainer",
+      "evidenceRefs": [
+        "RJG-CR-001",
+        "examples/calibration-report-package.json"
+      ],
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-037"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "JPF-CR-002",
+      "reviewerJudgmentRef": "RJG-CR-002",
+      "reviewerKind": "hybrid",
+      "providerRef": "provider-b",
+      "modelFamilyRef": "model-family-b",
+      "promptTemplateDigest": "sha256:shared-cross-judge-prompt",
+      "rubricRef": "RDP-CR-001",
+      "retrievalSourceRefs": [
+        "SED-CR-001",
+        "shared-operations-handbook"
+      ],
+      "harnessRef": "qif-example-harness",
+      "trainingLineageRef": "unknown-example-lineage",
+      "organizationRef": "illustrative-organization",
+      "reportingLineRef": "customer-impact-line",
+      "declaredBy": "example-maintainer",
+      "evidenceRefs": [
+        "RJG-CR-002",
+        "examples/calibration-report-package.json"
+      ],
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-037"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "JPF-CR-003",
+      "reviewerJudgmentRef": "RJG-CR-003",
+      "reviewerKind": "hybrid",
+      "providerRef": "provider-c",
+      "modelFamilyRef": "model-family-c",
+      "promptTemplateDigest": "sha256:shared-cross-judge-prompt",
+      "rubricRef": "RDP-CR-001",
+      "retrievalSourceRefs": [
+        "RDP-CR-001",
+        "shared-operations-handbook"
+      ],
+      "harnessRef": "qif-example-harness",
+      "trainingLineageRef": "unknown-example-lineage",
+      "organizationRef": "illustrative-organization",
+      "reportingLineRef": "policy-line",
+      "declaredBy": "example-maintainer",
+      "evidenceRefs": [
+        "RJG-CR-003",
+        "examples/calibration-report-package.json"
+      ],
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-037"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "crossJudgePanelAssessments": [
+    {
+      "id": "CJP-CR-001",
+      "title": "Illustrative dependent three-judge panel",
+      "policyRef": "JDP-CR-001",
+      "judgmentRefs": [
+        "RJG-CR-001",
+        "RJG-CR-002",
+        "RJG-CR-003"
+      ],
+      "profileRefs": [
+        "JPF-CR-001",
+        "JPF-CR-002",
+        "JPF-CR-003"
+      ],
+      "verdictGroups": [
+        {
+          "verdict": "timed-out",
+          "judgmentRefs": [
+            "RJG-CR-001"
+          ]
+        },
+        {
+          "verdict": "deferred",
+          "judgmentRefs": [
+            "RJG-CR-002",
+            "RJG-CR-003"
+          ]
+        }
+      ],
+      "majorityVerdict": "deferred",
+      "agreementState": "majority",
+      "sharedDependencyDimensions": [
+        "prompt-template",
+        "rubric",
+        "retrieval-source",
+        "harness",
+        "training-lineage",
+        "organization"
+      ],
+      "independentDimensions": [
+        "provider",
+        "model-family",
+        "reporting-line"
+      ],
+      "independenceStatus": "dependent",
+      "correlationRisk": "high",
+      "dissentJudgmentRefs": [
+        "RJG-CR-001"
+      ],
+      "abstentionJudgmentRefs": [],
+      "originalJudgmentsPreserved": true,
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-036",
+        "GTR-CR-037",
+        "GTR-CR-038"
+      ],
+      "resultBoundary": "cross-judge-agreement-evidence-only-not-independent-confirmation-truth-quality-competence-selection-authorization-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "crossJudgeCorrelationAssessments": [
+    {
+      "id": "CJA-CR-001",
+      "title": "Illustrative cross-judge correlation assessment",
+      "policyRef": "JDP-CR-001",
+      "panelRefs": [
+        "CJP-CR-001"
+      ],
+      "panelCount": 1,
+      "dependentPanelCount": 1,
+      "independentPanelCount": 0,
+      "majorityOrUnanimousCount": 1,
+      "adjudicatedPanelCount": 0,
+      "unresolvedPanelCount": 1,
+      "verifiedPanelCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "governanceTriggerRefs": [
+        "GTR-CR-039"
+      ],
+      "interpretation": "cross-judge-correlation-evidence-only-not-truth-quality-competence-optimality-selection-authorization-or-authority",
       "status": "reviewed"
     }
   ],
@@ -2174,6 +2407,56 @@
       "requiredAction": "Collect multiple verified blind runs across representative cases and adversarial loophole probes.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-035",
+      "triggerType": "cross-judge-policy-unreviewed",
+      "reason": "Reserved for dependency policies that have not received accountable review.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review dependency dimensions and materiality before panel use.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-036",
+      "triggerType": "cross-judge-dependency-risk",
+      "reason": "The panel shares multiple material dependencies despite using three named judges.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Obtain evidence from judges or processes without the material shared dependencies, or accept the residual risk explicitly.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-037",
+      "triggerType": "cross-judge-evidence-unverified",
+      "reason": "Judge dependency profiles are example-only and their provider, lineage, prompt, and retrieval declarations are not independently verified.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Verify each profile against reviewable configuration and provenance evidence.",
+      "owner": "evaluation-custodian",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-038",
+      "triggerType": "cross-judge-correlated-agreement-risk",
+      "reason": "A majority verdict exists while the panel shares material prompt, rubric, retrieval, harness, lineage, and organization dependencies.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Preserve dissent and prevent the majority from being treated as independent confirmation or authority.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-039",
+      "triggerType": "cross-judge-assessment-insufficient",
+      "reason": "One example-only dependent panel does not satisfy the minimum panel or verified evidence requirements.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect multiple verified panels including at least one materially independent panel before drawing a correlation conclusion.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -2191,7 +2474,8 @@
       "adjudication feedback lineage, affected clauses, revision alternatives, decision authority, implementation fidelity, replay status, rollback preservation, assessment summaries, and governance routing reproduce",
       "counterfactual variant changes, identical evidence snapshots, baseline and candidate rule and route selection, route changes, loss-boundary linkage, assessment summaries, and governance routing reproduce",
       "judge-condition changes, identical evidence snapshots, expected and returned labels, classification and abstention taxonomy, condition sensitivity, assessment summaries, and governance routing reproduce",
-      "sequestered items, reveal stages, access roles, allowed and observed affordances, externalized transcript inspection, contamination and loophole findings, assessment counts, and governance routing reproduce"
+      "sequestered items, reveal stages, access roles, allowed and observed affordances, externalized transcript inspection, contamination and loophole findings, assessment counts, and governance routing reproduce",
+      "judge dependency profiles, shared dimensions, verdict groups, majority state, dissent, abstention, panel correlation risk, aggregate counts, sufficiency, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -2209,6 +2493,7 @@
       "that counterfactual replay count, route-change rate, or hypothesized loss-boundary direction proves observed outcome, policy quality, optimality, causality, competence, selection, authorization, or authority",
       "that judge accuracy, stability, abstention, refusal, malformed-output, or condition-sensitivity counts prove semantic truth, quality, competence, optimality, selection, authorization, or authority",
       "that blind-run count, contamination finding, transcript inspection, loophole count, or absence of detected gaming proves contamination freedom, honesty, quality, competence, optimality, selection, authorization, or authority",
+      "that cross-judge majority, unanimity, confidence, adjudication, or panel count proves independent confirmation, semantic truth, quality, competence, optimality, selection, authorization, or authority",
       "a calibration statistic is quality",
       "an automatic quality verdict"
     ],
@@ -2224,6 +2509,7 @@
       "accountable review of counterfactual policy changes, identical evidence, hypothetical loss-boundary impacts, policy authority, and representative replay cases",
       "independent review of expected labels, consequence framing, abstention justification, output validity, representative cases, and judge-policy authority",
       "independent operation of sequestered access controls, affordance restrictions, transcript review, contamination analysis, and adversarial loophole testing",
+      "independent review of judge provenance, shared dependencies, dissent, abstention, adjudication, and representative cross-judge panels",
       "review of environmental and evaluation-harness effects",
       "accountable governance before changing quality decisions"
     ]

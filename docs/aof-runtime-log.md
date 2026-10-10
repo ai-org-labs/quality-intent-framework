@@ -1,5 +1,79 @@
 # AOF Runtime Log
 
+## QIF v0.6.44 Cross-Judge Correlation Calibration
+
+Date: 2026-10-10
+
+### Need / Intent / Context
+
+- Parent session: `SESS-MV1WFKVT-8SSFVA`; task: `TASK-062`; current AOF
+  runtime: v12.2.0 from source commit `fc7599b`.
+- Need Validation reframed the generic continuation request into a bounded
+  problem: agreement among several human, model, or hybrid judges is not
+  independent confirmation when material dependencies are shared.
+- Validated Need:
+  `.aof/artifacts/need-validation/records/NVR-QIFV0644.json`.
+- The Project Charter was created only after the Validated Need:
+  `.aof/artifacts/need-validation/project-charters/PCH-QIFV0644.json`.
+- Problem, value, and alternatives:
+  `.aof/artifacts/need-validation/problem-statements/PST-QIFV0644.json`,
+  `.aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0644.json`, and
+  `.aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0644.json`.
+
+### Direction And Execution
+
+- Current primary-source review identified four constraints: graders require
+  human calibration; shared infrastructure can correlate failures; evaluation
+  claims depend on harness and inference setup; and multiple judges are not
+  automatically more consistent.
+- Planning Council artifact:
+  `.aof/runtime/v0.6.44-planning-council.json`.
+- Visionary selected the smallest dependency-and-correlation slice; Builder
+  required every derived field to be recomputable; Guardian required
+  governance for material dependence, unverified profiles, correlated
+  consensus, and insufficient panels.
+- Actor packet:
+  `.aof/artifacts/actor-skill-packets/ASP-QIFV0644.json`, recording schema,
+  deterministic-verifier, and evaluation-governance skills; repository and
+  AOF resources; no-semantic-truth, dissent-preservation, no-authority, and
+  no-count-quality policies; acceptance criteria; and blocking evidence.
+- Implemented `JudgeDependencyPolicy`, one-to-one
+  `JudgeDependencyProfile`, `CrossJudgePanelAssessment`, and
+  `CrossJudgeCorrelationAssessment` in the calibration-report schema,
+  example, verifier, fixtures, plain-language documentation, roadmap, and
+  portable package.
+
+### Review Evidence
+
+- `npm test`: passed, including portable build and verification, all 16
+  positive package checks, and all 1,106 retained negative checks. The
+  calibration suite gained 42 negative cases.
+- AOF `organization-verify`: 289/289 checks passed.
+- Self-review:
+  `.aof/context/active/framework-self-audit.json`. Residual risk is explicit:
+  the panel is example-only and does not establish factual dependency
+  completeness, observed error correlation, representativeness, or semantic
+  validity.
+- Review Council:
+  `.aof/runtime/v0.6.44-review-council.json`, followed by Visionary, Builder,
+  and Guardian role results under
+  `.aof/artifacts/execution/role-results/RRES-QIFV0644-REVIEW-*.json`.
+- Decision reason: release is allowed because the verifier checks declarations,
+  references, exact grouping, derived dependency classifications, counts, and
+  governance routing while explicitly denying truth, competence, selection,
+  authorization, and authority claims.
+- Next three roadmap horizons remain v0.6.45 Evaluator Belief and Reward-Signal
+  Leakage, v0.7 Empirical Calibration, and v0.8 Multi-Agent Judgment Memory and
+  Reuse.
+
+### Release
+
+- Planned tag and release: `v0.6.44`.
+- Planned assets: `qif-portable-v0.6.44.zip` and
+  `qif-portable-v0.6.44.zip.sha256`.
+- Release publication and asset verification are recorded in the follow-up
+  evidence commit after GitHub accepts the release.
+
 ## QIF v0.6.43 Portable AI Package
 
 Date: 2026-10-10
