@@ -65,7 +65,15 @@ Date: 2026-10-11
 
 ### Release
 
-- Release commit, tag, URL, and asset checksum are recorded after publication.
+- Implementation commit: `e534927`; annotated tag: `v0.6.45`.
+- Released at:
+  https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.45
+- Published assets: `qif-portable-v0.6.45.zip` and
+  `qif-portable-v0.6.45.zip.sha256`.
+- Local checksum and GitHub asset digest agree:
+  `45fa88d66d75311e679804cc7cdd56597251278fb0413933d3e9bf9871b07a01`.
+- AOF outcome `OUT-MV3CCKRK-KAB8HT` records success; `TASK-063` is done;
+  the learning loop retains v0.6.46 as the uncompleted next value slice.
 
 ## QIF v0.6.44 Cross-Judge Correlation Calibration
 
