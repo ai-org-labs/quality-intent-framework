@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.6.45 Evaluator Belief and Reward-Signal Leakage",
-  "updated_at": "2026-10-10T04:54:13.924Z",
-  "agreed_with_human": true,
-  "source_session_id": "SESS-MV1WFKVT-8SSFVA",
-  "source_decision_record_id": "DEC-MV1WJOMD-JZFDTU",
+  "content": "v0.6.46 Evaluation-to-Deployment Transfer and Long-Horizon Drift",
+  "updated_at": "2026-10-11T04:44:58.992Z",
+  "agreed_with_human": null,
+  "source_session_id": "SESS-MV3BVT1J-YQV2NT",
+  "source_decision_record_id": "DEC-MV3BXJ1T-X2QVXI",
   "declared_complete_at": null
 }

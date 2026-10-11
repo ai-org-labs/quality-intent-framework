@@ -68,6 +68,146 @@
   ],
   "negatives": [
     {
+      "file": "calibration-report-signal-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal policies required",
+      "expect": "fail",
+      "errorIncludes": "package evaluatorSignalPolicies must be an array."
+    },
+    {
+      "file": "calibration-report-signal-variants-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal variants required",
+      "expect": "fail",
+      "errorIncludes": "package evaluatorSignalVariants must be an array."
+    },
+    {
+      "file": "calibration-report-signal-trials-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal trials required",
+      "expect": "fail",
+      "errorIncludes": "package evaluatorSignalTrials must be an array."
+    },
+    {
+      "file": "calibration-report-signal-assessments-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal assessments required",
+      "expect": "fail",
+      "errorIncludes": "package evaluatorSignalAssessments must be an array."
+    },
+    {
+      "file": "calibration-report-signal-policy-minimum.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal minimum trials",
+      "expect": "fail",
+      "errorIncludes": "minimumTrialCount must be at least 2."
+    },
+    {
+      "file": "calibration-report-signal-policy-boundary.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal inference boundary",
+      "expect": "fail",
+      "errorIncludes": "inferenceBoundary must forbid hidden-state and authority claims."
+    },
+    {
+      "file": "calibration-report-signal-baseline-shape.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal baseline identity",
+      "expect": "fail",
+      "errorIncludes": "baseline must have null baselineVariantRef and no changed dimensions."
+    },
+    {
+      "file": "calibration-report-signal-comparison-baseline.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal baseline reference",
+      "expect": "fail",
+      "errorIncludes": "references missing baseline evaluator signal variant"
+    },
+    {
+      "file": "calibration-report-signal-match-evidence.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "matched evaluator evidence",
+      "expect": "fail",
+      "errorIncludes": "matched variants must share evidenceDigest."
+    },
+    {
+      "file": "calibration-report-signal-match-affordance.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "matched evaluator affordance",
+      "expect": "fail",
+      "errorIncludes": "matched variants must share affordanceDigest."
+    },
+    {
+      "file": "calibration-report-signal-hidden-reasoning.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal privacy boundary",
+      "expect": "fail",
+      "errorIncludes": "hiddenReasoningCollected must be false."
+    },
+    {
+      "file": "calibration-report-signal-variant-evidence-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal evidence governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified evidence requires an evaluator-signal-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-signal-trial-policy.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal policy traceability",
+      "expect": "fail",
+      "errorIncludes": "references missing evaluator signal policy"
+    },
+    {
+      "file": "calibration-report-signal-trial-change-reproduction.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "externalized behavior change reproduction",
+      "expect": "fail",
+      "errorIncludes": "behaviorChanged must reproduce as true."
+    },
+    {
+      "file": "calibration-report-signal-trial-external-evidence.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "externalized behavior evidence",
+      "expect": "fail",
+      "errorIncludes": "requires externalized behavior evidence."
+    },
+    {
+      "file": "calibration-report-signal-trial-change-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "behavior change governance",
+      "expect": "fail",
+      "errorIncludes": "behavior change requires an evaluator-signal-behavior-change governance trigger."
+    },
+    {
+      "file": "calibration-report-signal-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal count reproduction",
+      "expect": "fail",
+      "errorIncludes": "trialCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-signal-assessment-sufficiency.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal sufficiency",
+      "expect": "fail",
+      "errorIncludes": "dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "calibration-report-signal-assessment-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal insufficiency governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient evidence requires an evaluator-signal-assessment-insufficient governance trigger."
+    },
+    {
+      "file": "calibration-report-signal-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "evaluator signal semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that evaluator-signal evidence proves hidden state"
+    },
+    {
       "file": "calibration-report-dependency-policies-not-array.json",
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "judge dependency policies required",

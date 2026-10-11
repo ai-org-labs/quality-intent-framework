@@ -42,8 +42,32 @@ function judgeAssessment(pkg) { return pkg.judgeRobustnessAssessments[0]; }
 function sequesteredProtocol(pkg) { return pkg.sequesteredReplayProtocols[0]; }
 function sequesteredRun(pkg) { return pkg.sequesteredReplayRuns[0]; }
 function gamingAssessment(pkg) { return pkg.policyGamingAssessments[0]; }
+function signalPolicy(pkg) { return pkg.evaluatorSignalPolicies[0]; }
+function signalVariant(pkg, index = 0) { return pkg.evaluatorSignalVariants[index]; }
+function signalTrial(pkg) { return pkg.evaluatorSignalTrials[0]; }
+function signalAssessment(pkg) { return pkg.evaluatorSignalAssessments[0]; }
 
 export const cases = [
+  { id: "signal-policies-not-array", rule: "evaluator signal policies required", expect: "package evaluatorSignalPolicies must be an array.", mutate: (pkg) => { pkg.evaluatorSignalPolicies = null; } },
+  { id: "signal-variants-not-array", rule: "evaluator signal variants required", expect: "package evaluatorSignalVariants must be an array.", mutate: (pkg) => { pkg.evaluatorSignalVariants = null; } },
+  { id: "signal-trials-not-array", rule: "evaluator signal trials required", expect: "package evaluatorSignalTrials must be an array.", mutate: (pkg) => { pkg.evaluatorSignalTrials = null; } },
+  { id: "signal-assessments-not-array", rule: "evaluator signal assessments required", expect: "package evaluatorSignalAssessments must be an array.", mutate: (pkg) => { pkg.evaluatorSignalAssessments = null; } },
+  { id: "signal-policy-minimum", rule: "evaluator signal minimum trials", expect: "minimumTrialCount must be at least 2.", mutate: (pkg) => { signalPolicy(pkg).minimumTrialCount = 1; } },
+  { id: "signal-policy-boundary", rule: "evaluator signal inference boundary", expect: "inferenceBoundary must forbid hidden-state and authority claims.", mutate: (pkg) => { signalPolicy(pkg).inferenceBoundary = "detect-deception"; } },
+  { id: "signal-baseline-shape", rule: "evaluator signal baseline identity", expect: "baseline must have null baselineVariantRef and no changed dimensions.", mutate: (pkg) => { signalVariant(pkg).changedDimensions = ["reward-cue"]; } },
+  { id: "signal-comparison-baseline", rule: "evaluator signal baseline reference", expect: "references missing baseline evaluator signal variant", mutate: (pkg) => { signalVariant(pkg, 1).baselineVariantRef = "ESV-NOPE-999"; } },
+  { id: "signal-match-evidence", rule: "matched evaluator evidence", expect: "matched variants must share evidenceDigest.", mutate: (pkg) => { signalVariant(pkg, 1).evidenceDigest = "sha256:different"; } },
+  { id: "signal-match-affordance", rule: "matched evaluator affordance", expect: "matched variants must share affordanceDigest.", mutate: (pkg) => { signalVariant(pkg, 1).affordanceDigest = "sha256:different"; } },
+  { id: "signal-hidden-reasoning", rule: "evaluator signal privacy boundary", expect: "hiddenReasoningCollected must be false.", mutate: (pkg) => { signalVariant(pkg).hiddenReasoningCollected = true; } },
+  { id: "signal-variant-evidence-trigger", rule: "evaluator signal evidence governance", expect: "non-verified evidence requires an evaluator-signal-evidence-unverified governance trigger.", mutate: (pkg) => { signalVariant(pkg).governanceTriggerRefs = []; } },
+  { id: "signal-trial-policy", rule: "evaluator signal policy traceability", expect: "references missing evaluator signal policy", mutate: (pkg) => { signalTrial(pkg).policyRef = "ESP-NOPE-999"; } },
+  { id: "signal-trial-change-reproduction", rule: "externalized behavior change reproduction", expect: "behaviorChanged must reproduce as true.", mutate: (pkg) => { signalTrial(pkg).behaviorChanged = false; } },
+  { id: "signal-trial-external-evidence", rule: "externalized behavior evidence", expect: "requires externalized behavior evidence.", mutate: (pkg) => { signalTrial(pkg).externalizedEvidenceRefs = []; } },
+  { id: "signal-trial-change-trigger", rule: "behavior change governance", expect: "behavior change requires an evaluator-signal-behavior-change governance trigger.", mutate: (pkg) => { signalTrial(pkg).governanceTriggerRefs = ["GTR-CR-040"]; } },
+  { id: "signal-assessment-count", rule: "evaluator signal count reproduction", expect: "trialCount must reproduce as 1.", mutate: (pkg) => { signalAssessment(pkg).trialCount = 2; } },
+  { id: "signal-assessment-sufficiency", rule: "evaluator signal sufficiency", expect: "dataSufficiency must reproduce as insufficient.", mutate: (pkg) => { signalAssessment(pkg).dataSufficiency = "sufficient"; } },
+  { id: "signal-assessment-trigger", rule: "evaluator signal insufficiency governance", expect: "insufficient evidence requires an evaluator-signal-assessment-insufficient governance trigger.", mutate: (pkg) => { signalAssessment(pkg).governanceTriggerRefs = ["GTR-CR-041"]; } },
+  { id: "signal-boundary-overclaim", rule: "evaluator signal semantic boundary", expect: "verifierBoundary must explicitly avoid claiming that evaluator-signal evidence proves hidden state", mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => !claim.startsWith("that evaluator-signal exposure")); } },
   { id: "dependency-policies-not-array", rule: "judge dependency policies required", expect: "package judgeDependencyPolicies must be an array.", mutate: (pkg) => { pkg.judgeDependencyPolicies = null; } },
   { id: "dependency-profiles-not-array", rule: "judge dependency profiles required", expect: "package judgeDependencyProfiles must be an array.", mutate: (pkg) => { pkg.judgeDependencyProfiles = null; } },
   { id: "cross-judge-panels-not-array", rule: "cross-judge panels required", expect: "package crossJudgePanelAssessments must be an array.", mutate: (pkg) => { pkg.crossJudgePanelAssessments = null; } },

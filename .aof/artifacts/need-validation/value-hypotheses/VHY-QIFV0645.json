@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-11T04:34:40.208Z",
+  "value_hypothesis_id": "VHY-MV3BX2VK-FMYFBW",
+  "expected_value_creation": "Matched evaluator-signal trials make observable behavior sensitivity explicit without mind-reading.",
+  "beneficiary": "human, AI, and hybrid quality governance teams",
+  "supporting_evidence": [
+    "Evaluation awareness and reward cues can change measured behavior.",
+    "Controlled interventions can separate changed context from changed evidence."
+  ],
+  "success_criteria": [
+    "same evidence and affordances are enforced across baseline and comparison variants",
+    "external behavior changes and governance routing are deterministically reproduced"
+  ],
+  "source_task_id": "TASK-063",
+  "source_decision_record_id": "DEC-MV3BW5SH-J65JY0"
+}

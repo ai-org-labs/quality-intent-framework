@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-11T04:34:40.347Z",
+  "alternative_analysis_id": "ALT-MV3BX2ZF-W3REQC",
+  "subject_need": "detect evaluator-signal sensitivity without inferring hidden intent",
+  "alternative_solutions": [
+    "extend existing judge robustness variants only",
+    "add a bounded evaluator signal policy, matched variants, trials, and assessment"
+  ],
+  "non_solution_options": [
+    "document the risk without executable schema or verifier rules"
+  ],
+  "defer_options": [
+    "defer until empirical pilots, leaving current evaluations unable to represent known transfer risk"
+  ],
+  "stop_options": [
+    "stop if the design requires hidden chain-of-thought or automatic deception claims"
+  ],
+  "source_task_id": "TASK-063",
+  "source_decision_record_id": "DEC-MV3BW5SH-J65JY0"
+}

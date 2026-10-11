@@ -1,0 +1,23 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-11T04:35:01.022Z",
+  "project_charter_id": "PCH-MV3BXIXQ-UW3Z5E",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV0645.json",
+  "validated_objective": "Release QIF v0.6.45 with executable evaluator-signal leakage calibration bounded to observable behavior.",
+  "scope": [
+    "evaluator signal policy and matched variants",
+    "externalized behavior trials and deterministic assessment",
+    "governance, negative fixtures, docs, portable package, and release evidence"
+  ],
+  "constraints": [
+    "do not collect hidden reasoning or infer belief, intent, deception, truth, competence, selection, authorization, or authority",
+    "do not treat trial counts as quality"
+  ],
+  "expected_outcomes": [
+    "matched evidence and affordance invariants are machine checked",
+    "behavior changes and insufficiency produce governance triggers",
+    "v0.6.45 release with verified portable assets"
+  ],
+  "source_task_id": "TASK-063",
+  "source_decision_record_id": "DEC-MV3BW5SH-J65JY0"
+}

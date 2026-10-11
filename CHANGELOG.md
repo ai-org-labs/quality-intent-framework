@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.45
+
+- Added Evaluator Signal Policies for evaluation identity, grader preference, reward cues, deployment consequences, monitor presence, and stakeholder preference.
+- Added matched baseline and comparison variants that keep the case, evidence, affordances, and output contract identical.
+- Added trials that compare externalized behavior while keeping stated explanations non-authoritative and hidden reasoning out of scope.
+- Added deterministic assessment counts, evidence sufficiency, governance routing, and retained negative fixtures.
+- Kept signal exposure and behavior changes as evidence only, never belief, intent, deception, honesty, semantic truth, quality, competence, selection, authorization, or authority.
+
 ## v0.6.44
 
 - Added reviewed Judge Dependency Policies covering provider, model family, prompt template, rubric, retrieval source, harness, training lineage, organization, and reporting line.

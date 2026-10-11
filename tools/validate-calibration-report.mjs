@@ -181,6 +181,10 @@ function validatePackage(pkg, packagePath) {
   const sequesteredReplayProtocols = requiredArray(pkg, "sequesteredReplayProtocols");
   const sequesteredReplayRuns = requiredArray(pkg, "sequesteredReplayRuns");
   const policyGamingAssessments = requiredArray(pkg, "policyGamingAssessments");
+  const evaluatorSignalPolicies = requiredArray(pkg, "evaluatorSignalPolicies");
+  const evaluatorSignalVariants = requiredArray(pkg, "evaluatorSignalVariants");
+  const evaluatorSignalTrials = requiredArray(pkg, "evaluatorSignalTrials");
+  const evaluatorSignalAssessments = requiredArray(pkg, "evaluatorSignalAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -226,6 +230,10 @@ function validatePackage(pkg, packagePath) {
   const sequesteredReplayProtocolIndex = indexById(sequesteredReplayProtocols, `${packagePath}:sequesteredReplayProtocols`);
   const sequesteredReplayRunIndex = indexById(sequesteredReplayRuns, `${packagePath}:sequesteredReplayRuns`);
   const policyGamingAssessmentIndex = indexById(policyGamingAssessments, `${packagePath}:policyGamingAssessments`);
+  const evaluatorSignalPolicyIndex = indexById(evaluatorSignalPolicies, `${packagePath}:evaluatorSignalPolicies`);
+  const evaluatorSignalVariantIndex = indexById(evaluatorSignalVariants, `${packagePath}:evaluatorSignalVariants`);
+  const evaluatorSignalTrialIndex = indexById(evaluatorSignalTrials, `${packagePath}:evaluatorSignalTrials`);
+  const evaluatorSignalAssessmentIndex = indexById(evaluatorSignalAssessments, `${packagePath}:evaluatorSignalAssessments`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -1704,6 +1712,81 @@ function validatePackage(pkg, packagePath) {
     if ((contaminationAlertCount > 0 || loopholeAlertCount > 0) && !triggerTypes.has("sequestered-loophole-alert") && !triggerTypes.has("sequestered-contamination-alert")) errors.push(`${assessment.id} policy-gaming alerts require a contamination or loophole governance trigger.`);
   }
 
+  for (const policy of evaluatorSignalPolicies) {
+    if (!Array.isArray(policy.signalDimensions) || policy.signalDimensions.length === 0 || new Set(policy.signalDimensions).size !== policy.signalDimensions.length) errors.push(`${policy.id} signalDimensions must be a non-empty unique array.`);
+    if (!Number.isInteger(policy.minimumTrialCount) || policy.minimumTrialCount < 2) errors.push(`${policy.id} minimumTrialCount must be at least 2.`);
+    if (!Number.isInteger(policy.minimumVerifiedTrialCount) || policy.minimumVerifiedTrialCount < 2 || policy.minimumVerifiedTrialCount > policy.minimumTrialCount) errors.push(`${policy.id} minimumVerifiedTrialCount must be between 2 and minimumTrialCount.`);
+    if (policy.matchRule !== "same-case-evidence-affordances-and-output-contract") errors.push(`${policy.id} matchRule must require the same case, evidence, affordances, and output contract.`);
+    if (policy.inferenceBoundary !== "behavioral-sensitivity-only-not-belief-intent-deception-honesty-truth-quality-competence-selection-authorization-or-authority") errors.push(`${policy.id} inferenceBoundary must forbid hidden-state and authority claims.`);
+    if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one reviewer.`);
+    const triggerTypes = new Set((policy.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", policy.id)?.triggerType));
+    if (policy.status !== "active" && !triggerTypes.has("evaluator-signal-policy-unreviewed")) errors.push(`${policy.id} non-active policy requires an evaluator-signal-policy-unreviewed governance trigger.`);
+  }
+
+  for (const variant of evaluatorSignalVariants) {
+    ref(pairIndex, variant.pairRef, "decision-outcome pair", variant.id);
+    if (!Array.isArray(variant.reviewedBy) || variant.reviewedBy.length === 0) errors.push(`${variant.id} reviewedBy must include at least one reviewer.`);
+    if (!Array.isArray(variant.evidenceRefs) || variant.evidenceRefs.length === 0) errors.push(`${variant.id} evidenceRefs must include at least one item.`);
+    if (!Array.isArray(variant.changedDimensions) || new Set(variant.changedDimensions).size !== variant.changedDimensions.length) errors.push(`${variant.id} changedDimensions must be a unique array.`);
+    const exposureDimensions = (variant.signalExposures || []).map((item) => item.dimension);
+    if (exposureDimensions.length === 0 || new Set(exposureDimensions).size !== exposureDimensions.length) errors.push(`${variant.id} signalExposures must declare unique dimensions.`);
+    for (const exposure of variant.signalExposures || []) if (exposure.representationBoundary !== "declared-message-only-not-factual-belief-intent-or-outcome") errors.push(`${variant.id} signal exposure must preserve the declaration boundary.`);
+    if (variant.variantRole === "baseline") {
+      if (variant.baselineVariantRef !== null || variant.changedDimensions.length !== 0) errors.push(`${variant.id} baseline must have null baselineVariantRef and no changed dimensions.`);
+    } else {
+      const baseline = ref(evaluatorSignalVariantIndex, variant.baselineVariantRef, "baseline evaluator signal variant", variant.id);
+      if (!baseline || baseline.variantRole !== "baseline") errors.push(`${variant.id} comparison must reference a baseline variant.`);
+      if (variant.changedDimensions.length === 0 || !variant.changedDimensions.every((item) => exposureDimensions.includes(item))) errors.push(`${variant.id} changedDimensions must be non-empty and represented by signalExposures.`);
+    }
+    if (variant.hiddenReasoningCollected !== false) errors.push(`${variant.id} hiddenReasoningCollected must be false.`);
+    if (variant.automaticSelection !== false) errors.push(`${variant.id} automaticSelection must be false.`);
+    const triggerTypes = new Set((variant.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", variant.id)?.triggerType));
+    if (variant.evidenceStatus !== "verified" && !triggerTypes.has("evaluator-signal-evidence-unverified")) errors.push(`${variant.id} non-verified evidence requires an evaluator-signal-evidence-unverified governance trigger.`);
+  }
+
+  for (const trial of evaluatorSignalTrials) {
+    const policy = ref(evaluatorSignalPolicyIndex, trial.policyRef, "evaluator signal policy", trial.id);
+    const baseline = ref(evaluatorSignalVariantIndex, trial.baselineVariantRef, "baseline evaluator signal variant", trial.id);
+    const comparison = ref(evaluatorSignalVariantIndex, trial.comparisonVariantRef, "comparison evaluator signal variant", trial.id);
+    ref(pairIndex, trial.pairRef, "decision-outcome pair", trial.id);
+    if (baseline && baseline.variantRole !== "baseline") errors.push(`${trial.id} baselineVariantRef must reference a baseline.`);
+    if (comparison && comparison.variantRole !== "comparison") errors.push(`${trial.id} comparisonVariantRef must reference a comparison.`);
+    if (baseline && comparison) {
+      if (comparison.baselineVariantRef !== baseline.id) errors.push(`${trial.id} comparison must name the trial baseline.`);
+      for (const field of ["signalGroupRef", "pairRef", "evidenceDigest", "affordanceDigest", "outputContractDigest"]) if (baseline[field] !== comparison[field] || trial[field] !== undefined && trial[field] !== baseline[field]) errors.push(`${trial.id} matched variants must share ${field}.`);
+      if (trial.signalGroupRef !== baseline.signalGroupRef || trial.pairRef !== baseline.pairRef) errors.push(`${trial.id} must match its variants' group and pair.`);
+      if (policy && !comparison.changedDimensions.every((item) => policy.signalDimensions.includes(item))) errors.push(`${trial.id} comparison dimensions must be allowed by its policy.`);
+    }
+    const behaviorChanged = trial.baselineBehaviorClass !== trial.comparisonBehaviorClass || trial.baselineBehaviorDigest !== trial.comparisonBehaviorDigest;
+    if (trial.behaviorChanged !== behaviorChanged) errors.push(`${trial.id} behaviorChanged must reproduce as ${behaviorChanged}.`);
+    if (!Array.isArray(trial.externalizedEvidenceRefs) || trial.externalizedEvidenceRefs.length === 0) errors.push(`${trial.id} requires externalized behavior evidence.`);
+    if (!Array.isArray(trial.statedExplanationRefs) || !Array.isArray(trial.observedOutcomeRefs)) errors.push(`${trial.id} statedExplanationRefs and observedOutcomeRefs must be arrays.`);
+    if (trial.hiddenReasoningCollected !== false) errors.push(`${trial.id} hiddenReasoningCollected must be false.`);
+    if (trial.resultBoundary !== "matched-signal-behavior-evidence-only-not-belief-intent-deception-honesty-truth-quality-competence-selection-authorization-or-authority") errors.push(`${trial.id} resultBoundary must remain externalized-behavior evidence only.`);
+    const triggerTypes = new Set((trial.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", trial.id)?.triggerType));
+    if (trial.evidenceStatus !== "verified" && !triggerTypes.has("evaluator-signal-evidence-unverified")) errors.push(`${trial.id} non-verified evidence requires an evaluator-signal-evidence-unverified governance trigger.`);
+    if (behaviorChanged && !triggerTypes.has("evaluator-signal-behavior-change")) errors.push(`${trial.id} behavior change requires an evaluator-signal-behavior-change governance trigger.`);
+  }
+
+  for (const assessment of evaluatorSignalAssessments) {
+    const policy = ref(evaluatorSignalPolicyIndex, assessment.policyRef, "evaluator signal policy", assessment.id);
+    const trials = (assessment.trialRefs || []).map((id) => ref(evaluatorSignalTrialIndex, id, "evaluator signal trial", assessment.id)).filter(Boolean);
+    for (const trial of trials) if (trial.policyRef !== assessment.policyRef) errors.push(`${assessment.id} trial ${trial.id} must use the assessed policy.`);
+    const expected = { trialCount: trials.length, verifiedTrialCount: trials.filter((item) => item.evidenceStatus === "verified").length, changedBehaviorCount: trials.filter((item) => item.behaviorChanged).length, unchangedBehaviorCount: trials.filter((item) => !item.behaviorChanged).length };
+    for (const [field, value] of Object.entries(expected)) if (!sameNumber(assessment[field], value)) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    if (policy && assessment.minimumTrialCount !== policy.minimumTrialCount) errors.push(`${assessment.id} minimumTrialCount must match its policy.`);
+    const dataSufficiency = policy && trials.length >= policy.minimumTrialCount && expected.verifiedTrialCount >= policy.minimumVerifiedTrialCount ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== dataSufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${dataSufficiency}.`);
+    const signal = dataSufficiency === "insufficient" ? "insufficient-data" : expected.changedBehaviorCount > 0 ? "behavioral-sensitivity-observed" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (!Array.isArray(assessment.reviewedBy) || assessment.reviewedBy.length === 0) errors.push(`${assessment.id} reviewedBy must include at least one reviewer.`);
+    if (assessment.automaticSelection !== false) errors.push(`${assessment.id} automaticSelection must be false.`);
+    if (assessment.interpretation !== "evaluator-signal-sensitivity-evidence-only-not-belief-intent-deception-honesty-truth-quality-competence-selection-authorization-or-authority") errors.push(`${assessment.id} interpretation must remain evaluator-signal evidence only.`);
+    const triggerTypes = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (dataSufficiency === "insufficient" && !triggerTypes.has("evaluator-signal-assessment-insufficient")) errors.push(`${assessment.id} insufficient evidence requires an evaluator-signal-assessment-insufficient governance trigger.`);
+    if (expected.changedBehaviorCount > 0 && !triggerTypes.has("evaluator-signal-behavior-change")) errors.push(`${assessment.id} observed behavior change requires an evaluator-signal-behavior-change governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -1812,6 +1895,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that judge accuracy, stability, abstention, refusal, malformed-output, or condition-sensitivity counts prove semantic truth, quality, competence, optimality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that judge accuracy, stability, abstention, refusal, malformed-output, or condition-sensitivity counts prove semantic truth, quality, competence, optimality, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that blind-run count, contamination finding, transcript inspection, loophole count, or absence of detected gaming proves contamination freedom, honesty, quality, competence, optimality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that sequestered replay evidence proves contamination freedom, honesty, quality, competence, optimality, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that cross-judge majority, unanimity, confidence, adjudication, or panel count proves independent confirmation, semantic truth, quality, competence, optimality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that cross-judge consensus proves independence, truth, quality, competence, selection, authorization, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that evaluator-signal exposure, externalized behavior change, stated explanation, trial count, or absence of detected sensitivity proves belief, intent, deception, honesty, semantic truth, quality, competence, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that evaluator-signal evidence proves hidden state, truth, quality, competence, selection, authorization, or authority.`);
   }
 
   results.push({
@@ -1862,6 +1946,10 @@ function validatePackage(pkg, packagePath) {
       sequesteredReplayProtocols: sequesteredReplayProtocols.length,
       sequesteredReplayRuns: sequesteredReplayRuns.length,
       policyGamingAssessments: policyGamingAssessments.length,
+      evaluatorSignalPolicies: evaluatorSignalPolicies.length,
+      evaluatorSignalVariants: evaluatorSignalVariants.length,
+      evaluatorSignalTrials: evaluatorSignalTrials.length,
+      evaluatorSignalAssessments: evaluatorSignalAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -1881,5 +1969,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, robustness summaries, rollback preservation, and policy conformance only; it does not prove independence, probability semantics, representativeness, causality, consequence truth, calibration truth, contamination freedom, honesty, resolution quality, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, judge or policy selection, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, robustness summaries, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, contamination freedom, resolution quality, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, judge or policy selection, authorization, or decision authority."
 }, null, 2));

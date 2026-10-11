@@ -1,0 +1,81 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-11T04:38:38.126Z",
+  "packet_id": "ASP-MV3C26GE-ZIFOSA",
+  "source_task_id": "TASK-063",
+  "source_parent_session_id": "SESS-MV3BVT1J-YQV2NT",
+  "source_decision_record_id": null,
+  "objective": "Implement and release QIF v0.6.45 evaluator signal leakage calibration",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime",
+    "assignment_reason": "Builder owns schema, verifier, fixtures, docs, portable package, and release execution",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "deterministic-verification",
+    "evaluation-governance"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-schema-verifier",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs"
+      ],
+      "rationale": "existing calibration runtime extension"
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository",
+    "resource-aof-v12.2.0"
+  ],
+  "policy_refs": [
+    "policy-no-hidden-reasoning",
+    "policy-no-semantic-truth",
+    "policy-no-count-quality"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "matched-signal-policy",
+      "externalized-behavior-trial",
+      "governance-boundary"
+    ],
+    "acceptance_criteria": [
+      "same evidence, affordance, case, and output contract are verified",
+      "behavior change and insufficiency route to governance",
+      "npm test and AOF organization-verify pass"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "matched comparison is reproducible",
+      "evaluator_ref": "guardian",
+      "evidence_required": "schema verifier and negative fixtures",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "hidden-state-overclaim",
+      "trigger_condition": "implementation infers belief, intent, deception, honesty, competence, or authority",
+      "consequence": "require-council-review",
+      "recovery_action": "restrict claims to externalized behavior evidence"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will keep the comparison matched and the claims bounded.",
+    "current_action": "Implement evaluator signal calibration",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Run retained regression and council review"
+  },
+  "status": "draft"
+}

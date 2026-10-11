@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-10T04:52:13.250Z",
-  "audit_id": "FSA-QIFV0644",
-  "scope": "QIF v0.6.44 implementation self-review",
-  "summary": "Schema, example, deterministic verifier, 42 new retained negative cases, portable package, and full npm test are aligned.",
-  "detected_gap": "The committed panel is example-only; actual dependency declarations, empirically observed correlated error, representative domains, and independent human calibration remain unproven.",
+  "recorded_at": "2026-10-11T04:44:58.984Z",
+  "audit_id": "FSA-QIFV0645",
+  "scope": "QIF v0.6.45 implementation self-review",
+  "summary": "Matched evaluator-signal structure, deterministic verifier, governance, docs, fixtures, and portable package pass the retained suite.",
+  "detected_gap": "Committed trials remain example-only and evaluation behavior may not transfer to shadow or operational trajectories.",
   "result_state": "stable",
-  "next_action": "Keep v0.6.45 focused on evaluator belief and reward-signal leakage, then conduct v0.7 empirical calibration with verified independent panels.",
+  "next_action": "Implement v0.6.46 evaluation-to-deployment transfer and long-horizon drift without converting short-eval results into deployment safety claims.",
   "related_task_ids": [
-    "TASK-062"
+    "TASK-063"
   ],
-  "source_session_id": "SESS-MV1WFKVT-8SSFVA",
-  "source_decision_record_id": "DEC-MV1WJOMD-JZFDTU"
+  "source_session_id": "SESS-MV3BVT1J-YQV2NT",
+  "source_decision_record_id": "DEC-MV3BXJ1T-X2QVXI"
 }

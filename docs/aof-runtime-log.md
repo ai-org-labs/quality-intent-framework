@@ -1,5 +1,72 @@
 # AOF Runtime Log
 
+## QIF v0.6.45 Evaluator Signal Leakage
+
+Date: 2026-10-11
+
+### Need / Intent / Context
+
+- Parent session: `SESS-MV3BVT1J-YQV2NT`; task: `TASK-063`; current AOF
+  runtime: v12.2.0 from source commit `fc7599b`.
+- Need Validation reframed the generic continuation request into an observable
+  problem: evaluator identity, represented preference, reward cues, and
+  deployment consequences may change externalized behavior even when the
+  evaluated case and available evidence do not change.
+- Validated Need:
+  `.aof/artifacts/need-validation/records/NVR-QIFV0645.json`.
+- The Project Charter was created only after the Validated Need:
+  `.aof/artifacts/need-validation/project-charters/PCH-QIFV0645.json`.
+- Problem, value, and alternatives:
+  `.aof/artifacts/need-validation/problem-statements/PST-QIFV0645.json`,
+  `.aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0645.json`, and
+  `.aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0645.json`.
+
+### Direction And Execution
+
+- Current primary-source review identified that evaluation awareness, grader
+  preference, reward cues, harness loopholes, and deployment consequences can
+  distort measured behavior. QIF therefore compares declared interventions
+  without collecting hidden reasoning or inferring an evaluator's inner state.
+- Planning Council artifact:
+  `.aof/runtime/v0.6.45-planning-council.json`.
+- Visionary selected transfer risk as the protected value. Builder required
+  matched digests and deterministic counts. Guardian required governance for
+  mismatch, unverified evidence, behavior change, and insufficient trials.
+- Actor packet:
+  `.aof/artifacts/actor-skill-packets/ASP-QIFV0645.json`, recording schema,
+  deterministic-verifier, and evaluation-governance skills; repository and
+  AOF resources; no-hidden-reasoning, no-semantic-truth, and no-count-quality
+  policies; review evidence; and blocking semantics.
+- Implemented Evaluator Signal Policy, Variant, Trial, and Assessment in the
+  calibration-report schema, example, verifier, negative fixtures,
+  plain-language documentation, roadmap, and portable package.
+
+### Review Evidence
+
+- `npm test`: passed, including portable build and verification, all 16
+  positive package checks, and all 1,126 retained negative checks.
+- AOF `organization-verify`: 295/295 checks passed.
+- Self-review:
+  `.aof/context/active/framework-self-audit.json`.
+- Review Council:
+  `.aof/runtime/v0.6.45-review-council.json`, followed by Visionary, Builder,
+  and Guardian role results under
+  `.aof/artifacts/execution/role-results/RRES-QIFV0645-REVIEW-*.json`.
+- Council decision: release is allowed because QIF checks only declared
+  interventions, matched condition identity, externalized behavior, counts,
+  and governance routing. It does not infer hidden mental state or grant
+  selection, authorization, or decision authority.
+- The committed trial remains example-only and cannot establish factual signal
+  exposure, stable sensitivity, transfer to operations, belief, intent,
+  deception, honesty, competence, semantic truth, or authority.
+- The next three roadmap horizons are v0.6.46 Evaluation-to-Deployment
+  Transfer and Long-Horizon Drift, v0.7 Empirical Calibration, and v0.8
+  Multi-Agent Judgment Memory and Reuse.
+
+### Release
+
+- Release commit, tag, URL, and asset checksum are recorded after publication.
+
 ## QIF v0.6.44 Cross-Judge Correlation Calibration
 
 Date: 2026-10-10

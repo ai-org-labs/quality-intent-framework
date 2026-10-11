@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-11T04:34:40.067Z",
+  "problem_statement_id": "PST-MV3BX2RN-6ZZ5WJ",
+  "affected_party": "organizations evaluating AI or human judgments under disclosed evaluator signals",
+  "actual_problem": "evaluation identity, grader preference, reward cue, or deployment consequence can change externalized behavior while current QIF cannot isolate and govern that sensitivity",
+  "why_it_matters": "evaluation results may not transfer beyond the disclosed evaluation setting and can be mistaken for stable quality or honest intent",
+  "why_now": "v0.6.44 exposed correlated judges but did not test evaluator-signal sensitivity",
+  "evidence_refs": [
+    "docs/qif-roadmap.md",
+    "https://openai.com/index/trustworthy-third-party-evaluations-foundations/"
+  ],
+  "source_task_id": "TASK-063",
+  "source_decision_record_id": "DEC-MV3BW5SH-J65JY0"
+}

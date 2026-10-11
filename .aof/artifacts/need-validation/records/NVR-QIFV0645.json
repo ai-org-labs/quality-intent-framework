@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-11T04:34:51.183Z",
+  "validation_id": "NVR-MV3BXBCF-0K8MQV",
+  "raw_need": "Continue QIF development and release the nearest roadmap item.",
+  "validation_status": "reframed",
+  "validated_need": "Represent and deterministically verify matched evaluator-signal sensitivity using only externalized behavior, while routing uncertainty and mismatch to governance.",
+  "decision_summary": "The continuation request is narrowed to one observable calibration capability and explicitly excludes hidden-state or authority claims.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What changes between matched conditions?",
+      "answer": "Only declared evaluator signals; evidence and affordances remain identical.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What may the result claim?",
+      "answer": "Only behavioral sensitivity under declared matched conditions, never belief, intent, deception, truth, competence, selection, authorization, or authority.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Observed evaluation behavior transfers unchanged to undeclared or operational contexts."
+  ],
+  "evidence_gaps": [
+    "No real verified trials exist yet; committed evidence remains example-only."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV0645.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV0645.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV0645.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": "TASK-063",
+  "source_decision_record_id": "DEC-MV3BW5SH-J65JY0"
+}
