@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.6.46 Evaluation-to-Deployment Transfer and Long-Horizon Drift",
-  "updated_at": "2026-10-11T04:47:00.194Z",
+  "content": "v0.6.47 Deployment Intervention and Recovery Calibration",
+  "updated_at": "2026-10-12T04:46:29.176Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MV3BVT1J-YQV2NT",
-  "source_decision_record_id": "DEC-MV3BXJ1T-X2QVXI",
+  "source_session_id": "SESS-MV4RCM30-5HZ6SR",
+  "source_decision_record_id": "DEC-MV4RQXEW-NEMRS8",
   "declared_complete_at": null
 }

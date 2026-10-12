@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Represent and deterministically verify matched evaluator-signal sensitivity using only externalized behavior, while routing uncertainty and mismatch to governance.",
-  "updated_at": "2026-10-11T04:35:01.171Z",
+  "content": "structurally compare matched externalized trajectories across stages and time while preserving governance and inference boundaries",
+  "updated_at": "2026-10-12T04:45:33.226Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MV3BVT1J-YQV2NT",
-  "source_decision_record_id": "DEC-MV3BXJ1T-X2QVXI",
+  "source_session_id": "SESS-MV4RCM30-5HZ6SR",
+  "source_decision_record_id": "DEC-MV4RQXEW-NEMRS8",
   "declared_complete_at": null
 }

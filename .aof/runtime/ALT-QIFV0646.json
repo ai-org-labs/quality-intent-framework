@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-12T04:45:06.106Z",
+  "alternative_analysis_id": "ALT-MV4RQCHM-7QAOOD",
+  "subject_need": "prevent short evaluation results from being treated as deployment safety",
+  "alternative_solutions": [
+    "document the limitation only",
+    "add structural staged trajectory evidence and deterministic verification"
+  ],
+  "non_solution_options": [
+    "treat activity counts or evaluator opinion as safety"
+  ],
+  "defer_options": [
+    "wait for empirical v0.7 pilots"
+  ],
+  "stop_options": [
+    "stop if the model requires hidden reasoning or autonomous deployment authority"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

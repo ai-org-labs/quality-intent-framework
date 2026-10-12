@@ -55,6 +55,10 @@
     "evaluatorSignalVariants",
     "evaluatorSignalTrials",
     "evaluatorSignalAssessments",
+    "transferDriftPolicies",
+    "deploymentTrajectories",
+    "transferComparisons",
+    "transferDriftAssessments",
     "governanceTriggers",
     "verifierBoundary"
   ],
@@ -413,6 +417,34 @@
       "minItems": 1,
       "items": {
         "$ref": "#/$defs/evaluatorSignalAssessment"
+      }
+    },
+    "transferDriftPolicies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/transferDriftPolicy"
+      }
+    },
+    "deploymentTrajectories": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "$ref": "#/$defs/deploymentTrajectory"
+      }
+    },
+    "transferComparisons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/transferComparison"
+      }
+    },
+    "transferDriftAssessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/transferDriftAssessment"
       }
     }
   },
@@ -6607,6 +6639,500 @@
         },
         "interpretation": {
           "const": "evaluator-signal-sensitivity-evidence-only-not-belief-intent-deception-honesty-truth-quality-competence-selection-authorization-or-authority"
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "reviewed",
+            "retired"
+          ]
+        }
+      }
+    },
+    "transferDriftPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "requiredEnvironmentStages",
+        "minimumTrajectoryCount",
+        "minimumVerifiedTrajectoryCount",
+        "matchingDimensions",
+        "comparisonRule",
+        "reviewedBy",
+        "governanceTriggerRefs",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requiredEnvironmentStages": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "evaluation",
+              "shadow-operation",
+              "limited-operation",
+              "operation"
+            ]
+          }
+        },
+        "minimumTrajectoryCount": {
+          "type": "integer",
+          "minimum": 3
+        },
+        "minimumVerifiedTrajectoryCount": {
+          "type": "integer",
+          "minimum": 3
+        },
+        "matchingDimensions": {
+          "type": "array",
+          "minItems": 5,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "task-intent",
+              "evidence-contract",
+              "tool-affordances",
+              "output-contract",
+              "policy-version"
+            ]
+          }
+        },
+        "comparisonRule": {
+          "const": "compare-matched-externalized-trajectories-without-deployment-safety-causality-or-intent-claim"
+        },
+        "reviewedBy": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "governanceTriggerRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "active",
+            "retired"
+          ]
+        }
+      }
+    },
+    "trajectoryCheckpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "observedAt",
+        "elapsedMinutes",
+        "behaviorClass",
+        "actionDigest",
+        "externalizedEvidenceRefs",
+        "evidenceStatus"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "elapsedMinutes": {
+          "type": "number",
+          "minimum": 0
+        },
+        "behaviorClass": {
+          "enum": [
+            "proceed",
+            "defer",
+            "abstain",
+            "stop",
+            "policy-boundary-alert",
+            "custom"
+          ]
+        },
+        "actionDigest": {
+          "type": "string",
+          "minLength": 1
+        },
+        "externalizedEvidenceRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 1
+        },
+        "evidenceStatus": {
+          "enum": [
+            "verified",
+            "unverified",
+            "example-only"
+          ]
+        }
+      }
+    },
+    "deploymentTrajectory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "policyRef",
+        "transferGroupRef",
+        "environmentStage",
+        "taskIntentDigest",
+        "evidenceContractDigest",
+        "affordanceDigest",
+        "outputContractDigest",
+        "policyVersionDigest",
+        "startedAt",
+        "endedAt",
+        "horizonMinutes",
+        "checkpoints",
+        "withinTrajectoryDriftObserved",
+        "evidenceStatus",
+        "hiddenReasoningCollected",
+        "automaticDeploymentDecision",
+        "authorizationBoundary",
+        "governanceTriggerRefs",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "policyRef": {
+          "$ref": "#/$defs/id"
+        },
+        "transferGroupRef": {
+          "$ref": "#/$defs/id"
+        },
+        "environmentStage": {
+          "enum": [
+            "evaluation",
+            "shadow-operation",
+            "limited-operation",
+            "operation"
+          ]
+        },
+        "taskIntentDigest": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidenceContractDigest": {
+          "type": "string",
+          "minLength": 1
+        },
+        "affordanceDigest": {
+          "type": "string",
+          "minLength": 1
+        },
+        "outputContractDigest": {
+          "type": "string",
+          "minLength": 1
+        },
+        "policyVersionDigest": {
+          "type": "string",
+          "minLength": 1
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "horizonMinutes": {
+          "type": "number",
+          "minimum": 0
+        },
+        "checkpoints": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/$defs/trajectoryCheckpoint"
+          }
+        },
+        "withinTrajectoryDriftObserved": {
+          "type": "boolean"
+        },
+        "evidenceStatus": {
+          "enum": [
+            "verified",
+            "unverified",
+            "example-only"
+          ]
+        },
+        "hiddenReasoningCollected": {
+          "const": false
+        },
+        "automaticDeploymentDecision": {
+          "const": false
+        },
+        "authorizationBoundary": {
+          "const": "measurement-only-not-deploy-pause-rollback-recovery-selection-authorization-or-authority"
+        },
+        "governanceTriggerRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "reviewed",
+            "retired"
+          ]
+        }
+      }
+    },
+    "transferComparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "policyRef",
+        "transferGroupRef",
+        "baselineTrajectoryRef",
+        "comparisonTrajectoryRef",
+        "matchedDimensions",
+        "mismatchedDimensions",
+        "terminalBehaviorChanged",
+        "transferGapObserved",
+        "externalizedEvidenceRefs",
+        "evidenceStatus",
+        "interpretation",
+        "governanceTriggerRefs",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "policyRef": {
+          "$ref": "#/$defs/id"
+        },
+        "transferGroupRef": {
+          "$ref": "#/$defs/id"
+        },
+        "baselineTrajectoryRef": {
+          "$ref": "#/$defs/id"
+        },
+        "comparisonTrajectoryRef": {
+          "$ref": "#/$defs/id"
+        },
+        "matchedDimensions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "task-intent",
+              "evidence-contract",
+              "tool-affordances",
+              "output-contract",
+              "policy-version"
+            ]
+          }
+        },
+        "mismatchedDimensions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "task-intent",
+              "evidence-contract",
+              "tool-affordances",
+              "output-contract",
+              "policy-version"
+            ]
+          }
+        },
+        "terminalBehaviorChanged": {
+          "type": "boolean"
+        },
+        "transferGapObserved": {
+          "type": "boolean"
+        },
+        "externalizedEvidenceRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 1
+        },
+        "evidenceStatus": {
+          "enum": [
+            "verified",
+            "unverified",
+            "example-only"
+          ]
+        },
+        "interpretation": {
+          "const": "matched-externalized-trajectory-evidence-only-not-deployment-safety-causality-intent-quality-selection-authorization-or-authority"
+        },
+        "governanceTriggerRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "reviewed",
+            "retired"
+          ]
+        }
+      }
+    },
+    "transferDriftAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "policyRef",
+        "trajectoryRefs",
+        "comparisonRefs",
+        "trajectoryCount",
+        "verifiedTrajectoryCount",
+        "matchedComparisonCount",
+        "mismatchedComparisonCount",
+        "transferGapCount",
+        "longHorizonDriftCount",
+        "environmentStageCoverage",
+        "dataSufficiency",
+        "assessmentSignal",
+        "reviewedBy",
+        "automaticDeploymentDecision",
+        "governanceTriggerRefs",
+        "interpretation",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "policyRef": {
+          "$ref": "#/$defs/id"
+        },
+        "trajectoryRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 1
+        },
+        "comparisonRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 1
+        },
+        "trajectoryCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "verifiedTrajectoryCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "matchedComparisonCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mismatchedComparisonCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "transferGapCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "longHorizonDriftCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "environmentStageCoverage": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "evaluation",
+              "shadow-operation",
+              "limited-operation",
+              "operation"
+            ]
+          }
+        },
+        "dataSufficiency": {
+          "enum": [
+            "sufficient",
+            "insufficient"
+          ]
+        },
+        "assessmentSignal": {
+          "enum": [
+            "insufficient-data",
+            "transfer-gap-observed",
+            "long-horizon-drift-observed",
+            "transfer-gap-and-drift-observed",
+            "observed-no-structural-alerts"
+          ]
+        },
+        "reviewedBy": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "automaticDeploymentDecision": {
+          "const": false
+        },
+        "governanceTriggerRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "interpretation": {
+          "const": "transfer-and-horizon-evidence-only-not-deployment-safety-causality-intent-quality-selection-authorization-or-authority"
         },
         "status": {
           "enum": [

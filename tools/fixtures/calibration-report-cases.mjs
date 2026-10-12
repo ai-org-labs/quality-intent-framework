@@ -979,6 +979,46 @@ export const cases = [
     rule: "verifier semantic boundary",
     expect: "verifierBoundary must explicitly avoid claiming a calibration statistic is quality.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "a calibration statistic is quality"); }
+  },
+  {
+    id: "transfer-policies-not-array", rule: "transfer policies required", expect: "package transferDriftPolicies must be an array.",
+    mutate: (pkg) => { pkg.transferDriftPolicies = null; }
+  },
+  {
+    id: "transfer-policy-match-controls", rule: "five transfer controls", expect: "matchingDimensions must include all five transfer controls.",
+    mutate: (pkg) => { pkg.transferDriftPolicies[0].matchingDimensions.pop(); }
+  },
+  {
+    id: "trajectory-horizon-reproduction", rule: "trajectory horizon", expect: "horizonMinutes must reproduce from timestamps and final checkpoint.",
+    mutate: (pkg) => { pkg.deploymentTrajectories[0].horizonMinutes = 59; }
+  },
+  {
+    id: "trajectory-checkpoint-order", rule: "checkpoint order", expect: "checkpoint elapsedMinutes must increase strictly.",
+    mutate: (pkg) => { pkg.deploymentTrajectories[0].checkpoints[1].elapsedMinutes = 0; }
+  },
+  {
+    id: "trajectory-drift-reproduction", rule: "within-trajectory drift", expect: "withinTrajectoryDriftObserved must reproduce as true.",
+    mutate: (pkg) => { pkg.deploymentTrajectories[1].withinTrajectoryDriftObserved = false; }
+  },
+  {
+    id: "transfer-gap-reproduction", rule: "transfer gap", expect: "transferGapObserved must reproduce as true.",
+    mutate: (pkg) => { pkg.transferComparisons[0].transferGapObserved = false; }
+  },
+  {
+    id: "transfer-gap-trigger", rule: "transfer gap governance", expect: "transfer gap requires a transfer-gap-observed governance trigger.",
+    mutate: (pkg) => { pkg.transferComparisons[0].governanceTriggerRefs = ["GTR-CR-044"]; }
+  },
+  {
+    id: "transfer-assessment-count", rule: "assessment count reproduction", expect: "transferGapCount must reproduce as 2.",
+    mutate: (pkg) => { pkg.transferDriftAssessments[0].transferGapCount = 1; }
+  },
+  {
+    id: "transfer-assessment-sufficiency", rule: "assessment sufficiency", expect: "dataSufficiency must reproduce as insufficient.",
+    mutate: (pkg) => { pkg.transferDriftAssessments[0].dataSufficiency = "sufficient"; }
+  },
+  {
+    id: "transfer-boundary-overclaim", rule: "transfer semantic boundary", expect: "verifierBoundary must explicitly avoid claiming that transfer evidence proves deployment safety",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => !claim.startsWith("that transfer matching")); }
   }
 ];
 

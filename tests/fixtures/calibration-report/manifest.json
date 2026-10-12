@@ -3391,6 +3391,76 @@
       "rule": "verifier semantic boundary",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming a calibration statistic is quality."
+    },
+    {
+      "file": "calibration-report-transfer-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "transfer policies required",
+      "expect": "fail",
+      "errorIncludes": "package transferDriftPolicies must be an array."
+    },
+    {
+      "file": "calibration-report-transfer-policy-match-controls.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "five transfer controls",
+      "expect": "fail",
+      "errorIncludes": "matchingDimensions must include all five transfer controls."
+    },
+    {
+      "file": "calibration-report-trajectory-horizon-reproduction.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "trajectory horizon",
+      "expect": "fail",
+      "errorIncludes": "horizonMinutes must reproduce from timestamps and final checkpoint."
+    },
+    {
+      "file": "calibration-report-trajectory-checkpoint-order.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "checkpoint order",
+      "expect": "fail",
+      "errorIncludes": "checkpoint elapsedMinutes must increase strictly."
+    },
+    {
+      "file": "calibration-report-trajectory-drift-reproduction.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "within-trajectory drift",
+      "expect": "fail",
+      "errorIncludes": "withinTrajectoryDriftObserved must reproduce as true."
+    },
+    {
+      "file": "calibration-report-transfer-gap-reproduction.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "transfer gap",
+      "expect": "fail",
+      "errorIncludes": "transferGapObserved must reproduce as true."
+    },
+    {
+      "file": "calibration-report-transfer-gap-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "transfer gap governance",
+      "expect": "fail",
+      "errorIncludes": "transfer gap requires a transfer-gap-observed governance trigger."
+    },
+    {
+      "file": "calibration-report-transfer-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "assessment count reproduction",
+      "expect": "fail",
+      "errorIncludes": "transferGapCount must reproduce as 2."
+    },
+    {
+      "file": "calibration-report-transfer-assessment-sufficiency.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "assessment sufficiency",
+      "expect": "fail",
+      "errorIncludes": "dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "calibration-report-transfer-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "transfer semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that transfer evidence proves deployment safety"
     }
   ],
   "rescopedRules": []

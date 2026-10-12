@@ -1,6 +1,6 @@
 {
   "packageType": "calibration-report",
-  "runtimeVersion": "0.6.45",
+  "runtimeVersion": "0.6.46",
   "packageId": "CRPKG-001",
   "packageRefs": [
     {
@@ -2488,6 +2488,46 @@
       "requiredAction": "Correct or exclude the unmatched trial and rerun under controlled conditions.",
       "owner": "evaluation-custodian",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-044",
+      "triggerType": "transfer-evidence-unverified",
+      "reason": "The committed trajectories contain example-only evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified externalized trajectory evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-045",
+      "triggerType": "transfer-gap-observed",
+      "reason": "Matched evaluation and operation trajectories end with different externalized behavior.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the transfer gap before expanding deployment.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-046",
+      "triggerType": "long-horizon-drift-observed",
+      "reason": "Externalized behavior changed within a longer trajectory.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review checkpoints and intervention boundaries before relying on the behavior.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-047",
+      "triggerType": "transfer-assessment-insufficient",
+      "reason": "Verified trajectory count is below policy minimum.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep the assessment non-authoritative until verified evidence meets policy.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -2527,7 +2567,8 @@
       "that cross-judge majority, unanimity, confidence, adjudication, or panel count proves independent confirmation, semantic truth, quality, competence, optimality, selection, authorization, or authority",
       "a calibration statistic is quality",
       "an automatic quality verdict",
-      "that evaluator-signal exposure, externalized behavior change, stated explanation, trial count, or absence of detected sensitivity proves belief, intent, deception, honesty, semantic truth, quality, competence, selection, authorization, or authority"
+      "that evaluator-signal exposure, externalized behavior change, stated explanation, trial count, or absence of detected sensitivity proves belief, intent, deception, honesty, semantic truth, quality, competence, selection, authorization, or authority",
+      "that transfer matching, trajectory duration, terminal behavior, drift count, or absence of detected drift proves deployment safety, causality, intent, quality, selection, authorization, or authority"
     ],
     "semanticValidityRequires": [
       "expert review of prediction and outcome meaning",
@@ -2712,6 +2753,281 @@
         "GTR-CR-042"
       ],
       "interpretation": "evaluator-signal-sensitivity-evidence-only-not-belief-intent-deception-honesty-truth-quality-competence-selection-authorization-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "transferDriftPolicies": [
+    {
+      "id": "TDP-CR-001",
+      "title": "Illustrative evaluation-to-operation transfer policy",
+      "requiredEnvironmentStages": [
+        "evaluation",
+        "shadow-operation",
+        "operation"
+      ],
+      "minimumTrajectoryCount": 3,
+      "minimumVerifiedTrajectoryCount": 3,
+      "matchingDimensions": [
+        "task-intent",
+        "evidence-contract",
+        "tool-affordances",
+        "output-contract",
+        "policy-version"
+      ],
+      "comparisonRule": "compare-matched-externalized-trajectories-without-deployment-safety-causality-or-intent-claim",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "deploymentTrajectories": [
+    {
+      "id": "DTR-CR-001",
+      "title": "Illustrative evaluation trajectory",
+      "policyRef": "TDP-CR-001",
+      "transferGroupRef": "TRG-CR-001",
+      "environmentStage": "evaluation",
+      "taskIntentDigest": "sha256:task-intent-001",
+      "evidenceContractDigest": "sha256:evidence-contract-001",
+      "affordanceDigest": "sha256:affordances-001",
+      "outputContractDigest": "sha256:output-contract-001",
+      "policyVersionDigest": "sha256:policy-v1",
+      "startedAt": "2026-10-01T00:00:00Z",
+      "endedAt": "2026-10-01T01:00:00Z",
+      "horizonMinutes": 60,
+      "checkpoints": [
+        {
+          "id": "TCP-001-A",
+          "observedAt": "2026-10-01T00:00:00Z",
+          "elapsedMinutes": 0,
+          "behaviorClass": "defer",
+          "actionDigest": "sha256:defer",
+          "externalizedEvidenceRefs": [
+            "EV-CR-TRANSFER-001"
+          ],
+          "evidenceStatus": "example-only"
+        },
+        {
+          "id": "TCP-001-B",
+          "observedAt": "2026-10-01T01:00:00Z",
+          "elapsedMinutes": 60,
+          "behaviorClass": "defer",
+          "actionDigest": "sha256:defer",
+          "externalizedEvidenceRefs": [
+            "EV-CR-TRANSFER-002"
+          ],
+          "evidenceStatus": "example-only"
+        }
+      ],
+      "withinTrajectoryDriftObserved": false,
+      "evidenceStatus": "example-only",
+      "hiddenReasoningCollected": false,
+      "automaticDeploymentDecision": false,
+      "authorizationBoundary": "measurement-only-not-deploy-pause-rollback-recovery-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-044"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "DTR-CR-002",
+      "title": "Illustrative shadow-operation trajectory",
+      "policyRef": "TDP-CR-001",
+      "transferGroupRef": "TRG-CR-001",
+      "environmentStage": "shadow-operation",
+      "taskIntentDigest": "sha256:task-intent-001",
+      "evidenceContractDigest": "sha256:evidence-contract-001",
+      "affordanceDigest": "sha256:affordances-001",
+      "outputContractDigest": "sha256:output-contract-001",
+      "policyVersionDigest": "sha256:policy-v1",
+      "startedAt": "2026-10-01T00:00:00Z",
+      "endedAt": "2026-10-01T04:00:00Z",
+      "horizonMinutes": 240,
+      "checkpoints": [
+        {
+          "id": "TCP-002-A",
+          "observedAt": "2026-10-01T00:00:00Z",
+          "elapsedMinutes": 0,
+          "behaviorClass": "defer",
+          "actionDigest": "sha256:defer",
+          "externalizedEvidenceRefs": [
+            "EV-CR-TRANSFER-001"
+          ],
+          "evidenceStatus": "example-only"
+        },
+        {
+          "id": "TCP-002-B",
+          "observedAt": "2026-10-01T04:00:00Z",
+          "elapsedMinutes": 240,
+          "behaviorClass": "proceed",
+          "actionDigest": "sha256:proceed",
+          "externalizedEvidenceRefs": [
+            "EV-CR-TRANSFER-002"
+          ],
+          "evidenceStatus": "example-only"
+        }
+      ],
+      "withinTrajectoryDriftObserved": true,
+      "evidenceStatus": "example-only",
+      "hiddenReasoningCollected": false,
+      "automaticDeploymentDecision": false,
+      "authorizationBoundary": "measurement-only-not-deploy-pause-rollback-recovery-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-044",
+        "GTR-CR-046"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "DTR-CR-003",
+      "title": "Illustrative operation trajectory",
+      "policyRef": "TDP-CR-001",
+      "transferGroupRef": "TRG-CR-001",
+      "environmentStage": "operation",
+      "taskIntentDigest": "sha256:task-intent-001",
+      "evidenceContractDigest": "sha256:evidence-contract-001",
+      "affordanceDigest": "sha256:affordances-001",
+      "outputContractDigest": "sha256:output-contract-001",
+      "policyVersionDigest": "sha256:policy-v1",
+      "startedAt": "2026-10-01T00:00:00Z",
+      "endedAt": "2026-10-02T00:00:00Z",
+      "horizonMinutes": 1440,
+      "checkpoints": [
+        {
+          "id": "TCP-003-A",
+          "observedAt": "2026-10-01T00:00:00Z",
+          "elapsedMinutes": 0,
+          "behaviorClass": "defer",
+          "actionDigest": "sha256:defer",
+          "externalizedEvidenceRefs": [
+            "EV-CR-TRANSFER-001"
+          ],
+          "evidenceStatus": "example-only"
+        },
+        {
+          "id": "TCP-003-B",
+          "observedAt": "2026-10-02T00:00:00Z",
+          "elapsedMinutes": 1440,
+          "behaviorClass": "proceed",
+          "actionDigest": "sha256:proceed",
+          "externalizedEvidenceRefs": [
+            "EV-CR-TRANSFER-002"
+          ],
+          "evidenceStatus": "example-only"
+        }
+      ],
+      "withinTrajectoryDriftObserved": true,
+      "evidenceStatus": "example-only",
+      "hiddenReasoningCollected": false,
+      "automaticDeploymentDecision": false,
+      "authorizationBoundary": "measurement-only-not-deploy-pause-rollback-recovery-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-044",
+        "GTR-CR-046"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "transferComparisons": [
+    {
+      "id": "TCM-CR-001",
+      "title": "Illustrative evaluation comparison to DTR-CR-002",
+      "policyRef": "TDP-CR-001",
+      "transferGroupRef": "TRG-CR-001",
+      "baselineTrajectoryRef": "DTR-CR-001",
+      "comparisonTrajectoryRef": "DTR-CR-002",
+      "matchedDimensions": [
+        "task-intent",
+        "evidence-contract",
+        "tool-affordances",
+        "output-contract",
+        "policy-version"
+      ],
+      "mismatchedDimensions": [],
+      "terminalBehaviorChanged": true,
+      "transferGapObserved": true,
+      "externalizedEvidenceRefs": [
+        "EV-CR-TRANSFER-001",
+        "EV-CR-TRANSFER-002"
+      ],
+      "evidenceStatus": "example-only",
+      "interpretation": "matched-externalized-trajectory-evidence-only-not-deployment-safety-causality-intent-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-044",
+        "GTR-CR-045"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "TCM-CR-002",
+      "title": "Illustrative evaluation comparison to DTR-CR-003",
+      "policyRef": "TDP-CR-001",
+      "transferGroupRef": "TRG-CR-001",
+      "baselineTrajectoryRef": "DTR-CR-001",
+      "comparisonTrajectoryRef": "DTR-CR-003",
+      "matchedDimensions": [
+        "task-intent",
+        "evidence-contract",
+        "tool-affordances",
+        "output-contract",
+        "policy-version"
+      ],
+      "mismatchedDimensions": [],
+      "terminalBehaviorChanged": true,
+      "transferGapObserved": true,
+      "externalizedEvidenceRefs": [
+        "EV-CR-TRANSFER-001",
+        "EV-CR-TRANSFER-002"
+      ],
+      "evidenceStatus": "example-only",
+      "interpretation": "matched-externalized-trajectory-evidence-only-not-deployment-safety-causality-intent-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-044",
+        "GTR-CR-045"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "transferDriftAssessments": [
+    {
+      "id": "TDA-CR-001",
+      "title": "Illustrative transfer and long-horizon drift assessment",
+      "policyRef": "TDP-CR-001",
+      "trajectoryRefs": [
+        "DTR-CR-001",
+        "DTR-CR-002",
+        "DTR-CR-003"
+      ],
+      "comparisonRefs": [
+        "TCM-CR-001",
+        "TCM-CR-002"
+      ],
+      "trajectoryCount": 3,
+      "verifiedTrajectoryCount": 0,
+      "matchedComparisonCount": 2,
+      "mismatchedComparisonCount": 0,
+      "transferGapCount": 2,
+      "longHorizonDriftCount": 2,
+      "environmentStageCoverage": [
+        "evaluation",
+        "shadow-operation",
+        "operation"
+      ],
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "automaticDeploymentDecision": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-044",
+        "GTR-CR-045",
+        "GTR-CR-046",
+        "GTR-CR-047"
+      ],
+      "interpretation": "transfer-and-horizon-evidence-only-not-deployment-safety-causality-intent-quality-selection-authorization-or-authority",
       "status": "reviewed"
     }
   ]

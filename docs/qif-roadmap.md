@@ -665,6 +665,14 @@ Deliverables:
   compare matched evaluation, shadow-operation, and operational trajectory
   evidence; record transfer gaps and time-dependent behavior change; and
   prohibit a short evaluation result from becoming a deployment-safety claim.
+- Status: implemented in v0.6.46 through reviewed transfer policies, staged
+  trajectories, ordered externalized checkpoints, exact five-dimension
+  matching, reproducible transfer gaps and long-horizon drift, evidence
+  sufficiency, governance, and explicit non-authority boundaries.
+- Next planned slice, v0.6.47 Deployment Intervention and Recovery Calibration:
+  connect transfer and drift signals to authorized, reversible intervention,
+  rollback, and recovery evidence without giving QIF autonomous operational
+  control or treating interruption count as quality.
 - Next planned phase, v0.7 Empirical Calibration: replace illustrative
   calibration evidence with governed pilot outcomes, suite-health records, and
   framework-learning evidence while preserving uncertainty boundaries.

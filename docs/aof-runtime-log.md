@@ -4960,3 +4960,16 @@ Release decision:
 - Residual risk: the committed replay is example-only and cannot establish
   independent sequestering, contamination freedom, policy-gaming absence,
   actor honesty, competence, quality, selection, authorization, or authority.
+# QIF v0.6.46 Evaluation-to-Deployment Transfer and Long-Horizon Drift
+
+Date: 2026-10-12
+
+- Need: short evaluations can miss behavior that appears only in longer or operational trajectories.
+- Intent: make transfer conditions, externalized checkpoints, transfer gaps, time-dependent drift, evidence sufficiency, and governance reproducible.
+- Context: QIF remains standalone; AOF v12.2.0 is development governance, not a runtime dependency.
+- AOF session: `SESS-MV4RCM30-5HZ6SR`; runtime source commit `fc7599b`.
+- Trend evidence: current OpenAI long-horizon deployment reporting, OpenAI third-party evaluation guidance, and Anthropic reporting on unintended actions support trajectory monitoring and evaluation-environment boundaries.
+- Council direction: Visionary approved closing the evaluation/deployment evidence gap; Builder required four narrowly owned records and deterministic recomputation; Guardian required externalized evidence, governance, and no autonomous deployment, pause, rollback, or recovery authority.
+- Decision: implement `TransferDriftPolicy`, `DeploymentTrajectory`, `TransferComparison`, and `TransferDriftAssessment`; retain example-only evidence as explicitly insufficient.
+- Verification: `npm test` passed 16/16 positive and 1,126/1,126 retained negative checks; the dedicated transfer/drift fixture extension then passed 1,136/1,136 negative checks. Portable build and verification passed with 49 files. AOF organization verification passed 295/295.
+- Next value slice: v0.6.47 Deployment Intervention and Recovery Calibration.

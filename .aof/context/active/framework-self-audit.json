@@ -1,15 +1,13 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-11T04:44:58.984Z",
-  "audit_id": "FSA-QIFV0645",
-  "scope": "QIF v0.6.45 implementation self-review",
-  "summary": "Matched evaluator-signal structure, deterministic verifier, governance, docs, fixtures, and portable package pass the retained suite.",
-  "detected_gap": "Committed trials remain example-only and evaluation behavior may not transfer to shadow or operational trajectories.",
+  "recorded_at": "2026-10-12T04:46:29.169Z",
+  "audit_id": "FSA-QIFV0646",
+  "scope": "v0.6.46 self-review and retrospective",
+  "summary": "matched staged trajectories now expose transfer gaps and within-trajectory drift while preserving non-authority boundaries",
+  "detected_gap": "the committed package is example-only and cannot establish operational deployment safety",
   "result_state": "stable",
-  "next_action": "Implement v0.6.46 evaluation-to-deployment transfer and long-horizon drift without converting short-eval results into deployment safety claims.",
-  "related_task_ids": [
-    "TASK-063"
-  ],
-  "source_session_id": "SESS-MV3BVT1J-YQV2NT",
-  "source_decision_record_id": "DEC-MV3BXJ1T-X2QVXI"
+  "next_action": "calibrate authorized intervention, rollback, and recovery evidence without autonomous control",
+  "related_task_ids": [],
+  "source_session_id": "SESS-MV4RCM30-5HZ6SR",
+  "source_decision_record_id": "DEC-MV4RQXEW-NEMRS8"
 }

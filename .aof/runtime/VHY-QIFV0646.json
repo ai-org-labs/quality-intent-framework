@@ -1,0 +1,15 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-12T04:45:05.961Z",
+  "value_hypothesis_id": "VHY-MV4RQCDL-GGA7RF",
+  "expected_value_creation": "Matched staged trajectories make transfer gaps and time-dependent behavior changes explicit and governable",
+  "beneficiary": "quality reviewers and accountable deployment governance",
+  "supporting_evidence": [
+    "Current primary sources report failures missed by pre-deployment evaluation and recommend trajectory monitoring"
+  ],
+  "success_criteria": [
+    "QIF recomputes matching, horizon, drift, transfer gap, sufficiency, and governance without safety or authority claims"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

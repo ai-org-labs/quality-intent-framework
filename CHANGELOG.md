@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.46
+
+- Added evaluation-to-deployment transfer policies, staged trajectories, matched comparisons, and aggregate drift assessments.
+- Added ordered externalized-behavior checkpoints with reproducible elapsed time and within-trajectory drift.
+- Added exact five-dimension matching and reproducible transfer-gap detection.
+- Added governance for unverified evidence, comparison mismatch, transfer gaps, long-horizon drift, and insufficient evidence.
+- Kept transfer and drift evidence separate from deployment safety, causality, intent, quality, selection, authorization, and authority.
+
 ## v0.6.45
 
 - Added Evaluator Signal Policies for evaluation identity, grader preference, reward cues, deployment consequences, monitor presence, and stakeholder preference.

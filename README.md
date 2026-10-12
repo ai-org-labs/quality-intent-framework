@@ -1,5 +1,10 @@
 # Quality Intent Framework
 
+Current release: **v0.6.46**. The calibration runtime now compares matched
+evaluation and operational trajectories and detects externally observable
+long-horizon behavior drift without turning short evaluations into deployment
+safety claims.
+
 Quality Intent Framework (QIF) turns an organization's quality theory into an operational, AI-verifiable framework.
 
 QIF does not define quality as output volume. Page count, review count, and test count are treated only as possible evidence signals when they are linked to a quality intent, a risk, and a loss boundary.

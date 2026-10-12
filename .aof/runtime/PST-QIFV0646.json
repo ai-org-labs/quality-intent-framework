@@ -1,0 +1,14 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-12T04:45:05.816Z",
+  "problem_statement_id": "PST-MV4RQC9K-RXUJKW",
+  "affected_party": "organizations evaluating long-running human, AI, or hybrid work",
+  "actual_problem": "short evaluations can miss behavior changes that appear in shadow or operational trajectories",
+  "why_it_matters": "a short result may be overgeneralized into an unsupported deployment-safety claim",
+  "why_now": "current long-horizon systems expose deployment failures outside pre-deployment evaluation",
+  "evidence_refs": [
+    "docs/qif-v0.6.46-evaluation-deployment-transfer-drift.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

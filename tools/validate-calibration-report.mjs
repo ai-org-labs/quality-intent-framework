@@ -185,6 +185,10 @@ function validatePackage(pkg, packagePath) {
   const evaluatorSignalVariants = requiredArray(pkg, "evaluatorSignalVariants");
   const evaluatorSignalTrials = requiredArray(pkg, "evaluatorSignalTrials");
   const evaluatorSignalAssessments = requiredArray(pkg, "evaluatorSignalAssessments");
+  const transferDriftPolicies = requiredArray(pkg, "transferDriftPolicies");
+  const deploymentTrajectories = requiredArray(pkg, "deploymentTrajectories");
+  const transferComparisons = requiredArray(pkg, "transferComparisons");
+  const transferDriftAssessments = requiredArray(pkg, "transferDriftAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -234,6 +238,9 @@ function validatePackage(pkg, packagePath) {
   const evaluatorSignalVariantIndex = indexById(evaluatorSignalVariants, `${packagePath}:evaluatorSignalVariants`);
   const evaluatorSignalTrialIndex = indexById(evaluatorSignalTrials, `${packagePath}:evaluatorSignalTrials`);
   const evaluatorSignalAssessmentIndex = indexById(evaluatorSignalAssessments, `${packagePath}:evaluatorSignalAssessments`);
+  const transferDriftPolicyIndex = indexById(transferDriftPolicies, `${packagePath}:transferDriftPolicies`);
+  const deploymentTrajectoryIndex = indexById(deploymentTrajectories, `${packagePath}:deploymentTrajectories`);
+  const transferComparisonIndex = indexById(transferComparisons, `${packagePath}:transferComparisons`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -1787,6 +1794,77 @@ function validatePackage(pkg, packagePath) {
     if (expected.changedBehaviorCount > 0 && !triggerTypes.has("evaluator-signal-behavior-change")) errors.push(`${assessment.id} observed behavior change requires an evaluator-signal-behavior-change governance trigger.`);
   }
 
+  const matchFields = {
+    "task-intent": "taskIntentDigest",
+    "evidence-contract": "evidenceContractDigest",
+    "tool-affordances": "affordanceDigest",
+    "output-contract": "outputContractDigest",
+    "policy-version": "policyVersionDigest"
+  };
+  for (const policy of transferDriftPolicies) {
+    if (!Number.isInteger(policy.minimumTrajectoryCount) || policy.minimumTrajectoryCount < 3) errors.push(`${policy.id} minimumTrajectoryCount must be at least 3.`);
+    if (!Number.isInteger(policy.minimumVerifiedTrajectoryCount) || policy.minimumVerifiedTrajectoryCount < 3 || policy.minimumVerifiedTrajectoryCount > policy.minimumTrajectoryCount) errors.push(`${policy.id} minimumVerifiedTrajectoryCount must be between 3 and minimumTrajectoryCount.`);
+    if (!sameSet(policy.matchingDimensions, Object.keys(matchFields))) errors.push(`${policy.id} matchingDimensions must include all five transfer controls.`);
+    if (policy.comparisonRule !== "compare-matched-externalized-trajectories-without-deployment-safety-causality-or-intent-claim") errors.push(`${policy.id} comparisonRule must preserve the transfer inference boundary.`);
+    if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one reviewer.`);
+  }
+
+  for (const trajectory of deploymentTrajectories) {
+    ref(transferDriftPolicyIndex, trajectory.policyRef, "transfer drift policy", trajectory.id);
+    const checkpoints = trajectory.checkpoints || [];
+    if (checkpoints.length < 2) errors.push(`${trajectory.id} checkpoints must include at least two observations.`);
+    let prior = -1;
+    for (const checkpoint of checkpoints) {
+      if (checkpoint.elapsedMinutes <= prior) errors.push(`${trajectory.id} checkpoint elapsedMinutes must increase strictly.`);
+      prior = checkpoint.elapsedMinutes;
+      if (!Array.isArray(checkpoint.externalizedEvidenceRefs) || checkpoint.externalizedEvidenceRefs.length === 0) errors.push(`${trajectory.id}/${checkpoint.id} requires externalized evidence.`);
+    }
+    const expectedHorizon = (Date.parse(trajectory.endedAt) - Date.parse(trajectory.startedAt)) / 60000;
+    if (!sameNumber(trajectory.horizonMinutes, expectedHorizon) || checkpoints.at(-1)?.elapsedMinutes !== expectedHorizon) errors.push(`${trajectory.id} horizonMinutes must reproduce from timestamps and final checkpoint.`);
+    const first = checkpoints[0];
+    const drift = checkpoints.some((item) => item.behaviorClass !== first?.behaviorClass || item.actionDigest !== first?.actionDigest);
+    if (trajectory.withinTrajectoryDriftObserved !== drift) errors.push(`${trajectory.id} withinTrajectoryDriftObserved must reproduce as ${drift}.`);
+    if (trajectory.hiddenReasoningCollected !== false || trajectory.automaticDeploymentDecision !== false) errors.push(`${trajectory.id} must not collect hidden reasoning or make an automatic deployment decision.`);
+    const types = new Set((trajectory.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", trajectory.id)?.triggerType));
+    if (trajectory.evidenceStatus !== "verified" && !types.has("transfer-evidence-unverified")) errors.push(`${trajectory.id} non-verified evidence requires a transfer-evidence-unverified governance trigger.`);
+    if (drift && !types.has("long-horizon-drift-observed")) errors.push(`${trajectory.id} observed drift requires a long-horizon-drift-observed governance trigger.`);
+  }
+
+  for (const comparison of transferComparisons) {
+    const policy = ref(transferDriftPolicyIndex, comparison.policyRef, "transfer drift policy", comparison.id);
+    const baseline = ref(deploymentTrajectoryIndex, comparison.baselineTrajectoryRef, "baseline trajectory", comparison.id);
+    const candidate = ref(deploymentTrajectoryIndex, comparison.comparisonTrajectoryRef, "comparison trajectory", comparison.id);
+    if (baseline && baseline.environmentStage !== "evaluation") errors.push(`${comparison.id} baselineTrajectoryRef must use evaluation stage.`);
+    const matched = [], mismatched = [];
+    for (const dimension of policy?.matchingDimensions || []) (baseline?.[matchFields[dimension]] === candidate?.[matchFields[dimension]] ? matched : mismatched).push(dimension);
+    if (!sameSet(comparison.matchedDimensions, matched) || !sameSet(comparison.mismatchedDimensions, mismatched)) errors.push(`${comparison.id} matched and mismatched dimensions must reproduce from trajectory digests.`);
+    const terminalChanged = baseline?.checkpoints?.at(-1)?.behaviorClass !== candidate?.checkpoints?.at(-1)?.behaviorClass || baseline?.checkpoints?.at(-1)?.actionDigest !== candidate?.checkpoints?.at(-1)?.actionDigest;
+    if (comparison.terminalBehaviorChanged !== terminalChanged) errors.push(`${comparison.id} terminalBehaviorChanged must reproduce as ${terminalChanged}.`);
+    const gap = mismatched.length === 0 && terminalChanged;
+    if (comparison.transferGapObserved !== gap) errors.push(`${comparison.id} transferGapObserved must reproduce as ${gap}.`);
+    const types = new Set((comparison.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", comparison.id)?.triggerType));
+    if (mismatched.length > 0 && !types.has("transfer-match-mismatch")) errors.push(`${comparison.id} mismatched controls require a transfer-match-mismatch governance trigger.`);
+    if (gap && !types.has("transfer-gap-observed")) errors.push(`${comparison.id} transfer gap requires a transfer-gap-observed governance trigger.`);
+  }
+
+  for (const assessment of transferDriftAssessments) {
+    const policy = ref(transferDriftPolicyIndex, assessment.policyRef, "transfer drift policy", assessment.id);
+    const trajectories = (assessment.trajectoryRefs || []).map((id) => ref(deploymentTrajectoryIndex, id, "deployment trajectory", assessment.id)).filter(Boolean);
+    const comparisons = (assessment.comparisonRefs || []).map((id) => ref(transferComparisonIndex, id, "transfer comparison", assessment.id)).filter(Boolean);
+    const expected = { trajectoryCount: trajectories.length, verifiedTrajectoryCount: trajectories.filter((item) => item.evidenceStatus === "verified").length, matchedComparisonCount: comparisons.filter((item) => item.mismatchedDimensions.length === 0).length, mismatchedComparisonCount: comparisons.filter((item) => item.mismatchedDimensions.length > 0).length, transferGapCount: comparisons.filter((item) => item.transferGapObserved).length, longHorizonDriftCount: trajectories.filter((item) => item.withinTrajectoryDriftObserved).length };
+    for (const [field, value] of Object.entries(expected)) if (assessment[field] !== value) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const stages = [...new Set(trajectories.map((item) => item.environmentStage))];
+    if (!sameSet(assessment.environmentStageCoverage, stages)) errors.push(`${assessment.id} environmentStageCoverage must reproduce from trajectories.`);
+    const sufficient = policy && trajectories.length >= policy.minimumTrajectoryCount && expected.verifiedTrajectoryCount >= policy.minimumVerifiedTrajectoryCount && policy.requiredEnvironmentStages.every((stage) => stages.includes(stage));
+    const dataSufficiency = sufficient ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== dataSufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${dataSufficiency}.`);
+    const signal = !sufficient ? "insufficient-data" : expected.transferGapCount && expected.longHorizonDriftCount ? "transfer-gap-and-drift-observed" : expected.transferGapCount ? "transfer-gap-observed" : expected.longHorizonDriftCount ? "long-horizon-drift-observed" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (assessment.automaticDeploymentDecision !== false) errors.push(`${assessment.id} automaticDeploymentDecision must be false.`);
+    const types = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (!sufficient && !types.has("transfer-assessment-insufficient")) errors.push(`${assessment.id} insufficient transfer evidence requires a transfer-assessment-insufficient governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -1896,6 +1974,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that blind-run count, contamination finding, transcript inspection, loophole count, or absence of detected gaming proves contamination freedom, honesty, quality, competence, optimality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that sequestered replay evidence proves contamination freedom, honesty, quality, competence, optimality, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that cross-judge majority, unanimity, confidence, adjudication, or panel count proves independent confirmation, semantic truth, quality, competence, optimality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that cross-judge consensus proves independence, truth, quality, competence, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that evaluator-signal exposure, externalized behavior change, stated explanation, trial count, or absence of detected sensitivity proves belief, intent, deception, honesty, semantic truth, quality, competence, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that evaluator-signal evidence proves hidden state, truth, quality, competence, selection, authorization, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that transfer matching, trajectory duration, terminal behavior, drift count, or absence of detected drift proves deployment safety, causality, intent, quality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that transfer evidence proves deployment safety, causality, intent, quality, selection, authorization, or authority.`);
   }
 
   results.push({

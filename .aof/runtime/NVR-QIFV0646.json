@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-12T04:45:32.927Z",
+  "validation_id": "NVR-MV4RQX6N-05BDPB",
+  "raw_need": "add evaluation-to-deployment transfer and long-horizon drift",
+  "validation_status": "validated",
+  "validated_need": "structurally compare matched externalized trajectories across stages and time while preserving governance and inference boundaries",
+  "decision_summary": "Implement the narrow four-entity structural slice; keep empirical safety and operational control out of scope",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is in scope?",
+      "answer": "Matched evaluation, shadow and operational trajectory evidence.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What proves success?",
+      "answer": "Reproducible structural signals and governance, not semantic or safety truth.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "matched digests adequately declare comparison controls"
+  ],
+  "evidence_gaps": [
+    "example package is not operational evidence"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0646.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0646.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0646.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": null
+}
