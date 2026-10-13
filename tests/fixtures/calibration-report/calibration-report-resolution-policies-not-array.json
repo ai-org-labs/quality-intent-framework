@@ -1,6 +1,6 @@
 {
   "packageType": "calibration-report",
-  "runtimeVersion": "0.6.46",
+  "runtimeVersion": "0.6.47",
   "packageId": "CRPKG-001",
   "packageRefs": [
     {
@@ -2489,6 +2489,46 @@
       "requiredAction": "Keep the assessment non-authoritative until verified evidence meets policy.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-048",
+      "triggerType": "intervention-recovery-evidence-unverified",
+      "reason": "The committed intervention and recovery records are example-only.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified operational evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-049",
+      "triggerType": "recovery-verification-failed",
+      "reason": "A required post-rollback verification check failed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep redeployment blocked and investigate downstream state integrity.",
+      "owner": "incident-response-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-050",
+      "triggerType": "recovery-residual-risk-open",
+      "reason": "Residual risk remains after the illustrative rollback.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Obtain accountable risk acceptance or additional remediation.",
+      "owner": "service-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-051",
+      "triggerType": "intervention-recovery-assessment-insufficient",
+      "reason": "Verified intervention and recovery evidence is below the policy requirement.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep the assessment descriptive and non-authoritative.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -2529,7 +2569,8 @@
       "a calibration statistic is quality",
       "an automatic quality verdict",
       "that evaluator-signal exposure, externalized behavior change, stated explanation, trial count, or absence of detected sensitivity proves belief, intent, deception, honesty, semantic truth, quality, competence, selection, authorization, or authority",
-      "that transfer matching, trajectory duration, terminal behavior, drift count, or absence of detected drift proves deployment safety, causality, intent, quality, selection, authorization, or authority"
+      "that transfer matching, trajectory duration, terminal behavior, drift count, or absence of detected drift proves deployment safety, causality, intent, quality, selection, authorization, or authority",
+      "that intervention count, response time, rollback, recovery checks, or absence of detected residual risk proves intervention effectiveness, operational safety, causality, quality, redeployment readiness, selection, authorization, or authority"
     ],
     "semanticValidityRequires": [
       "expert review of prediction and outcome meaning",
@@ -2989,6 +3030,158 @@
         "GTR-CR-047"
       ],
       "interpretation": "transfer-and-horizon-evidence-only-not-deployment-safety-causality-intent-quality-selection-authorization-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "interventionRecoveryPolicies": [
+    {
+      "id": "IRP-CR-001",
+      "title": "Illustrative authorized intervention and recovery policy",
+      "eligibleSignalTypes": [
+        "transfer-gap-observed",
+        "long-horizon-drift-observed",
+        "transfer-gap-and-drift-observed"
+      ],
+      "allowedActions": [
+        "pause",
+        "isolate",
+        "rollback",
+        "escalate"
+      ],
+      "maximumResponseMinutes": 15,
+      "requiredAuthorityRoles": [
+        "incident-commander",
+        "service-owner"
+      ],
+      "failClosedRequired": true,
+      "rollbackEvidenceRequired": true,
+      "recoveryVerificationRequired": true,
+      "reviewedBy": [
+        "quality-governance-owner",
+        "incident-response-owner"
+      ],
+      "inferenceBoundary": "response-evidence-only-not-intervention-effectiveness-recovery-safety-causality-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "interventionEvents": [
+    {
+      "id": "IVE-CR-001",
+      "title": "Illustrative pause and rollback intervention",
+      "policyRef": "IRP-CR-001",
+      "sourceTransferAssessmentRef": "TDA-CR-001",
+      "sourceSignal": "transfer-gap-and-drift-observed",
+      "detectedAt": "2026-10-02T00:00:00Z",
+      "actionStartedAt": "2026-10-02T00:10:00Z",
+      "responseMinutes": 10,
+      "maximumResponseMinutes": 15,
+      "withinResponseSla": true,
+      "action": "rollback",
+      "initiatedBy": "incident-commander-001",
+      "authorityRole": "incident-commander",
+      "authorityEvidenceRefs": [
+        "EV-CR-AUTH-001"
+      ],
+      "affectedScopeRefs": [
+        "SCOPE-CR-AGENT-001"
+      ],
+      "reversible": true,
+      "rollbackPlanRef": "RBP-CR-001",
+      "failClosed": true,
+      "externalizedEvidenceRefs": [
+        "EV-CR-INTERVENTION-001"
+      ],
+      "evidenceStatus": "example-only",
+      "qifInitiatedAction": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-048"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "recoveryVerifications": [
+    {
+      "id": "RCV-CR-001",
+      "title": "Illustrative post-rollback recovery verification",
+      "policyRef": "IRP-CR-001",
+      "interventionEventRef": "IVE-CR-001",
+      "recoveryStartedAt": "2026-10-02T00:10:00Z",
+      "recoveryCompletedAt": "2026-10-02T00:40:00Z",
+      "recoveryMinutes": 30,
+      "rollbackApplied": true,
+      "rollbackEvidenceRefs": [
+        "EV-CR-ROLLBACK-001"
+      ],
+      "verificationChecks": [
+        {
+          "id": "RCK-CR-001",
+          "name": "Protected boundary replay",
+          "result": "pass",
+          "evidenceRefs": [
+            "EV-CR-RECOVERY-001"
+          ]
+        },
+        {
+          "id": "RCK-CR-002",
+          "name": "Downstream state integrity",
+          "result": "fail",
+          "evidenceRefs": [
+            "EV-CR-RECOVERY-002"
+          ]
+        }
+      ],
+      "passedCheckCount": 1,
+      "failedCheckCount": 1,
+      "notRunCheckCount": 0,
+      "restorationState": "verification-failed",
+      "residualRisks": [
+        "Downstream state integrity remains unverified after rollback."
+      ],
+      "evidenceStatus": "example-only",
+      "automaticRedeployment": false,
+      "interpretation": "recovery-verification-evidence-only-not-safety-effectiveness-causality-quality-redeployment-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-048",
+        "GTR-CR-049",
+        "GTR-CR-050"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "interventionRecoveryAssessments": [
+    {
+      "id": "IRA-CR-001",
+      "title": "Illustrative intervention and recovery assessment",
+      "policyRef": "IRP-CR-001",
+      "interventionEventRefs": [
+        "IVE-CR-001"
+      ],
+      "recoveryVerificationRefs": [
+        "RCV-CR-001"
+      ],
+      "interventionCount": 1,
+      "verifiedInterventionCount": 0,
+      "withinSlaCount": 1,
+      "authorizedInterventionCount": 1,
+      "reversibleInterventionCount": 1,
+      "verifiedRecoveryCount": 0,
+      "failedRecoveryCount": 1,
+      "residualRiskCount": 1,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "activityCountIsQuality": false,
+      "automaticOperationalDecision": false,
+      "interpretation": "intervention-and-recovery-evidence-only-not-effectiveness-safety-causality-quality-selection-redeployment-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-048",
+        "GTR-CR-049",
+        "GTR-CR-050",
+        "GTR-CR-051"
+      ],
       "status": "reviewed"
     }
   ]

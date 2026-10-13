@@ -1,0 +1,14 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-13T04:33:11.464Z",
+  "problem_statement_id": "PST-MV66QVQG-6ZWVP8",
+  "affected_party": "operators and stakeholders exposed to long-running system failures",
+  "actual_problem": "transfer or drift alerts do not yet prove that intervention was authorized, timely, reversible, or followed by verified recovery",
+  "why_it_matters": "an intervention can itself corrupt downstream state or restore unsafe operation",
+  "why_now": "current long-horizon guidance emphasizes rapid response, fail-closed controls, rollback traceability, and recovery",
+  "evidence_refs": [
+    "docs/qif-v0.6.46-evaluation-deployment-transfer-drift.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

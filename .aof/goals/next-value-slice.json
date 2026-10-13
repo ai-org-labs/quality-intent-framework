@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.6.47 Deployment Intervention and Recovery Calibration",
-  "updated_at": "2026-10-12T04:46:29.176Z",
+  "content": "v0.6.48 Distributed Intervention Coordination and Blast-Radius Containment",
+  "updated_at": "2026-10-13T04:46:48.595Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MV4RCM30-5HZ6SR",
-  "source_decision_record_id": "DEC-MV4RQXEW-NEMRS8",
+  "source_session_id": "SESS-MV66PRUC-LU26N2",
+  "source_decision_record_id": "DEC-MV66QW9M-ZDGH9I",
   "declared_complete_at": null
 }

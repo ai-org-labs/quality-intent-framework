@@ -1,0 +1,404 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-10-13T04:33:12.300Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MV66PRUC-LU26N2",
+    "stage": "planning",
+    "executionId": "CRUN-MV66QWDL-518EDA",
+    "executionStatus": "prepared",
+    "invokedModel": false,
+    "seatCount": 3,
+    "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Builder(design-builder-01) -> Visionary(strategy-lead-01) -> Guardian(risk-reviewer-01)",
+    "lastCouncilExecutionId": "CRUN-MV66QWDL-518EDA",
+    "escalation": null,
+    "plan": {
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "required_roles": [
+        "Builder",
+        "Visionary",
+        "Guardian"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV66PRUC-LU26N2",
+              "decision_id": "DEC-MV66QW9M-ZDGH9I",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。",
+              "intent": "成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。",
+              "active_context": "context: 評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。 | success: 成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。",
+              "context_snapshot_id": "CTX-MV66Q3ZI-MBTKHG",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。"
+            },
+            "task": {
+              "request": "QIF v0.6.47として転移差・長時間ドリフトから、権限付き介入、可逆な停止・隔離・ロールバック、復旧後検証までを外部証拠で再計算可能にする。QIF自身には運用実行権限を与えず、介入件数を品質とみなさない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0647.json",
+                ".aof/runtime/PCH-QIFV0647.json",
+                ".aof/runtime/PST-QIFV0647.json",
+                ".aof/runtime/VHY-QIFV0647.json",
+                ".aof/runtime/ALT-QIFV0647.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV66QW9M-ZDGH9I"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV66PRUC-LU26N2",
+              "decision_id": "DEC-MV66QW9M-ZDGH9I",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。",
+              "intent": "成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。",
+              "active_context": "context: 評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。 | success: 成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。",
+              "context_snapshot_id": "CTX-MV66Q3ZI-MBTKHG",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。"
+            },
+            "task": {
+              "request": "QIF v0.6.47として転移差・長時間ドリフトから、権限付き介入、可逆な停止・隔離・ロールバック、復旧後検証までを外部証拠で再計算可能にする。QIF自身には運用実行権限を与えず、介入件数を品質とみなさない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0647.json",
+                ".aof/runtime/PCH-QIFV0647.json",
+                ".aof/runtime/PST-QIFV0647.json",
+                ".aof/runtime/VHY-QIFV0647.json",
+                ".aof/runtime/ALT-QIFV0647.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV66QW9M-ZDGH9I"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV66PRUC-LU26N2",
+              "decision_id": "DEC-MV66QW9M-ZDGH9I",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。",
+              "intent": "成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。",
+              "active_context": "context: 評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。 | success: 成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。",
+              "context_snapshot_id": "CTX-MV66Q3ZI-MBTKHG",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。"
+            },
+            "task": {
+              "request": "QIF v0.6.47として転移差・長時間ドリフトから、権限付き介入、可逆な停止・隔離・ロールバック、復旧後検証までを外部証拠で再計算可能にする。QIF自身には運用実行権限を与えず、介入件数を品質とみなさない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0647.json",
+                ".aof/runtime/PCH-QIFV0647.json",
+                ".aof/runtime/PST-QIFV0647.json",
+                ".aof/runtime/VHY-QIFV0647.json",
+                ".aof/runtime/ALT-QIFV0647.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV66QW9M-ZDGH9I"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MV66QWDL-518EDA",
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Builder",
+        "Visionary",
+        "Guardian"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "status": "prepared",
+      "started_at": "2026-10-13T04:33:12.297Z",
+      "completed_at": "2026-10-13T04:33:12.297Z",
+      "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Builder(design-builder-01) -> Visionary(strategy-lead-01) -> Guardian(risk-reviewer-01)",
+      "steps": [
+        {
+          "step_id": "CRUN-MV66QWDL-518EDA-STEP-01",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Builder planning call for actor design-builder-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV66PRUC-LU26N2",
+              "decision_id": "DEC-MV66QW9M-ZDGH9I",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。",
+              "intent": "成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。",
+              "active_context": "context: 評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。 | success: 成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。",
+              "context_snapshot_id": "CTX-MV66Q3ZI-MBTKHG",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。"
+            },
+            "task": {
+              "request": "QIF v0.6.47として転移差・長時間ドリフトから、権限付き介入、可逆な停止・隔離・ロールバック、復旧後検証までを外部証拠で再計算可能にする。QIF自身には運用実行権限を与えず、介入件数を品質とみなさない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0647.json",
+                ".aof/runtime/PCH-QIFV0647.json",
+                ".aof/runtime/PST-QIFV0647.json",
+                ".aof/runtime/VHY-QIFV0647.json",
+                ".aof/runtime/ALT-QIFV0647.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV66QW9M-ZDGH9I"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MV66QWDL-518EDA-STEP-02",
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Visionary planning call for actor strategy-lead-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV66PRUC-LU26N2",
+              "decision_id": "DEC-MV66QW9M-ZDGH9I",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。",
+              "intent": "成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。",
+              "active_context": "context: 評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。 | success: 成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。",
+              "context_snapshot_id": "CTX-MV66Q3ZI-MBTKHG",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。"
+            },
+            "task": {
+              "request": "QIF v0.6.47として転移差・長時間ドリフトから、権限付き介入、可逆な停止・隔離・ロールバック、復旧後検証までを外部証拠で再計算可能にする。QIF自身には運用実行権限を与えず、介入件数を品質とみなさない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0647.json",
+                ".aof/runtime/PCH-QIFV0647.json",
+                ".aof/runtime/PST-QIFV0647.json",
+                ".aof/runtime/VHY-QIFV0647.json",
+                ".aof/runtime/ALT-QIFV0647.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV66QW9M-ZDGH9I"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MV66QWDL-518EDA-STEP-03",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "prepared",
+          "summary": "prepare Guardian planning call for actor risk-reviewer-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV66PRUC-LU26N2",
+              "decision_id": "DEC-MV66QW9M-ZDGH9I",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。",
+              "intent": "成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。",
+              "active_context": "context: 評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。 | success: 成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。",
+              "context_snapshot_id": "CTX-MV66Q3ZI-MBTKHG",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 評価、shadow-operation、limited-operation、operationで検出された転移差・ドリフトへの介入判断、実施、ロールバック、復旧検証を対象にする。介入の自動執行、組織権限の付与、内部思考の収集、特定AI製品への依存は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。"
+            },
+            "task": {
+              "request": "QIF v0.6.47として転移差・長時間ドリフトから、権限付き介入、可逆な停止・隔離・ロールバック、復旧後検証までを外部証拠で再計算可能にする。QIF自身には運用実行権限を与えず、介入件数を品質とみなさない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0647.json",
+                ".aof/runtime/PCH-QIFV0647.json",
+                ".aof/runtime/PST-QIFV0647.json",
+                ".aof/runtime/VHY-QIFV0647.json",
+                ".aof/runtime/ALT-QIFV0647.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV66QW9M-ZDGH9I"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

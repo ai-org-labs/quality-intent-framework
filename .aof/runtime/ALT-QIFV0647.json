@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-13T04:33:11.743Z",
+  "alternative_analysis_id": "ALT-MV66QVY7-1BBORK",
+  "subject_need": "make intervention and recovery evidence executable",
+  "alternative_solutions": [
+    "document recommended response in prose",
+    "add structural policy, event, recovery verification, and assessment records"
+  ],
+  "non_solution_options": [
+    "count pauses or rollbacks as quality"
+  ],
+  "defer_options": [
+    "wait for empirical pilot evidence"
+  ],
+  "stop_options": [
+    "stop if QIF must gain autonomous operational authority"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

@@ -1019,6 +1019,36 @@ export const cases = [
   {
     id: "transfer-boundary-overclaim", rule: "transfer semantic boundary", expect: "verifierBoundary must explicitly avoid claiming that transfer evidence proves deployment safety",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => !claim.startsWith("that transfer matching")); }
+  },
+  {
+    id:"intervention-policies-not-array",rule:"intervention policies required",expect:"package interventionRecoveryPolicies must be an array.",mutate:(pkg)=>{pkg.interventionRecoveryPolicies=null;}
+  },
+  {
+    id:"intervention-response-minutes",rule:"response time reproduction",expect:"responseMinutes must reproduce as 10.",mutate:(pkg)=>{pkg.interventionEvents[0].responseMinutes=9;}
+  },
+  {
+    id:"intervention-authority-role",rule:"authorized intervention",expect:"requires policy-authorized role and authority evidence.",mutate:(pkg)=>{pkg.interventionEvents[0].authorityRole="observer";}
+  },
+  {
+    id:"intervention-reversibility",rule:"reversible state change",expect:"state-changing intervention requires reversibility and rollbackPlanRef.",mutate:(pkg)=>{pkg.interventionEvents[0].reversible=false;}
+  },
+  {
+    id:"intervention-qif-authority",rule:"no QIF action authority",expect:"qifInitiatedAction must be false.",mutate:(pkg)=>{pkg.interventionEvents[0].qifInitiatedAction=true;}
+  },
+  {
+    id:"recovery-minutes",rule:"recovery time reproduction",expect:"recoveryMinutes must reproduce as 30.",mutate:(pkg)=>{pkg.recoveryVerifications[0].recoveryMinutes=31;}
+  },
+  {
+    id:"recovery-count",rule:"recovery check reproduction",expect:"failedCheckCount must reproduce as 1.",mutate:(pkg)=>{pkg.recoveryVerifications[0].failedCheckCount=0;}
+  },
+  {
+    id:"recovery-state",rule:"recovery state reproduction",expect:"restorationState must reproduce as verification-failed.",mutate:(pkg)=>{pkg.recoveryVerifications[0].restorationState="verified-restored";}
+  },
+  {
+    id:"intervention-assessment-count",rule:"intervention assessment reproduction",expect:"residualRiskCount must reproduce as 1.",mutate:(pkg)=>{pkg.interventionRecoveryAssessments[0].residualRiskCount=0;}
+  },
+  {
+    id:"intervention-boundary-overclaim",rule:"intervention semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that intervention and recovery evidence proves effectiveness",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that intervention count"));}
   }
 ];
 

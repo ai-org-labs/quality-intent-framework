@@ -4973,3 +4973,19 @@ Date: 2026-10-12
 - Decision: implement `TransferDriftPolicy`, `DeploymentTrajectory`, `TransferComparison`, and `TransferDriftAssessment`; retain example-only evidence as explicitly insufficient.
 - Verification: `npm test` passed 16/16 positive and 1,126/1,126 retained negative checks; the dedicated transfer/drift fixture extension then passed 1,136/1,136 negative checks. Portable build and verification passed with 49 files. AOF organization verification passed 295/295.
 - Next value slice: v0.6.47 Deployment Intervention and Recovery Calibration.
+# QIF v0.6.47 Deployment Intervention and Recovery Calibration
+
+Date: 2026-10-13
+
+- Need: transfer and drift findings did not yet prove intervention authority, timeliness, reversibility, rollback evidence, or verified recovery.
+- Intent: make the response chain reproducible while keeping operational authority outside QIF.
+- Context: QIF remains standalone; AOF v12.2.0 is development governance, not a QIF runtime dependency.
+- AOF session: `SESS-MV66PRUC-LU26N2`; Need Validation and Charter artifacts are under `.aof/runtime/*QIFV0647.json`.
+- Trend evidence: current OpenAI long-horizon and frontier-training safety guidance emphasizes trajectory intervention, response SLAs, fail-closed monitoring, rollback ability, and recovery under continued monitoring. NIST guidance covers incident response, override, recovery, and change management.
+- Council direction: Visionary approved completing the operational evidence loop; Builder required four separately owned records and deterministic arithmetic; Guardian required authority evidence, reversible action, fail-closed behavior, residual-risk governance, and no autonomous QIF intervention or redeployment.
+- Decision: implement `InterventionRecoveryPolicy`, `InterventionEvent`, `RecoveryVerification`, and `InterventionRecoveryAssessment`; keep the committed evidence example-only and insufficient.
+- Runtime evidence: `TASK-064`, `.aof/runtime/v0.6.47-actor-skill-packet.json`, `.aof/runtime/v0.6.47-planning-council-executed.json`, `.aof/runtime/v0.6.47-review-council-executed.json`, and self-audit `FSA-QIFV0647` record assignment, capability, resource, policy, review, and retrospective evidence. The executed mock council recorded `proceed` with no Guardian veto; it is routing evidence, not an independent semantic review.
+- Verification: `npm test` passed 16/16 positive and 1,146/1,146 retained negative checks. Portable build and verification passed with 49 files. AOF `organization-verify` passed 295/295 checks.
+- Outcome report: `OUT-MV678598-WSCEAH` recorded implementation success and retained v0.6.48 as an open next value slice.
+- Residual risk: the committed intervention and recovery records are example-only. They do not prove operational authority, intervention effectiveness, recovery safety, restored service quality, or containment beyond the declared scope.
+- Next value slice: v0.6.48 Distributed Intervention Coordination and Blast-Radius Containment.

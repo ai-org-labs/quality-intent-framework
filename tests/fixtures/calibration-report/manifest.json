@@ -3461,6 +3461,76 @@
       "rule": "transfer semantic boundary",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming that transfer evidence proves deployment safety"
+    },
+    {
+      "file": "calibration-report-intervention-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "intervention policies required",
+      "expect": "fail",
+      "errorIncludes": "package interventionRecoveryPolicies must be an array."
+    },
+    {
+      "file": "calibration-report-intervention-response-minutes.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "response time reproduction",
+      "expect": "fail",
+      "errorIncludes": "responseMinutes must reproduce as 10."
+    },
+    {
+      "file": "calibration-report-intervention-authority-role.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "authorized intervention",
+      "expect": "fail",
+      "errorIncludes": "requires policy-authorized role and authority evidence."
+    },
+    {
+      "file": "calibration-report-intervention-reversibility.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "reversible state change",
+      "expect": "fail",
+      "errorIncludes": "state-changing intervention requires reversibility and rollbackPlanRef."
+    },
+    {
+      "file": "calibration-report-intervention-qif-authority.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no QIF action authority",
+      "expect": "fail",
+      "errorIncludes": "qifInitiatedAction must be false."
+    },
+    {
+      "file": "calibration-report-recovery-minutes.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "recovery time reproduction",
+      "expect": "fail",
+      "errorIncludes": "recoveryMinutes must reproduce as 30."
+    },
+    {
+      "file": "calibration-report-recovery-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "recovery check reproduction",
+      "expect": "fail",
+      "errorIncludes": "failedCheckCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-recovery-state.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "recovery state reproduction",
+      "expect": "fail",
+      "errorIncludes": "restorationState must reproduce as verification-failed."
+    },
+    {
+      "file": "calibration-report-intervention-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "intervention assessment reproduction",
+      "expect": "fail",
+      "errorIncludes": "residualRiskCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-intervention-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "intervention semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that intervention and recovery evidence proves effectiveness"
     }
   ],
   "rescopedRules": []

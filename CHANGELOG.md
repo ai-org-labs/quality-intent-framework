@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.47
+
+- Added executable intervention and recovery policies, events, recovery verifications, and assessments.
+- Added reproducible response and recovery timing, authority, SLA, reversibility, rollback evidence, verification results, and residual-risk checks.
+- Added governance routing for unverified evidence, response boundary breaches, failed recovery, open residual risk, and insufficient assessment evidence.
+- Prevented activity counts from becoming quality and preserved human or authorized-system authority over intervention and redeployment.
+
 ## v0.6.46
 
 - Added evaluation-to-deployment transfer policies, staged trajectories, matched comparisons, and aggregate drift assessments.

@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-12T04:46:29.174Z",
+  "updated_at": "2026-10-13T04:45:18.728Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "成功は、各段階の外部観測可能な軌跡から転移差と時間依存の変化を再計算でき、証拠不足や差異がガバナンスへ送られ、短時間評価を配備安全性へ一般化しないこと。",
-      "recorded_at": "2026-10-12T04:34:57.864Z",
+      "answer": "成功は、検出から介入までのSLA、権限証拠、可逆性、影響範囲、ロールバック、復旧検証、残存リスクを再計算でき、不十分・失敗・無権限をガバナンスへ送り、回数を品質指標にしないこと。",
+      "recorded_at": "2026-10-13T04:32:35.510Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MV4RCM30-5HZ6SR",
+      "source_session_id": "SESS-MV66PRUC-LU26N2",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "Implement the narrow four-entity structural slice; keep empirical safety and operational control out of scope",
-      "recorded_at": "2026-10-12T04:45:33.228Z",
+      "answer": "Implement a narrow response-evidence extension; retain intervention effectiveness and safety as semantic governance questions",
+      "recorded_at": "2026-10-13T04:33:12.158Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MV4RCM30-5HZ6SR",
-      "source_decision_record_id": "DEC-MV4RQXEW-NEMRS8"
+      "source_session_id": "SESS-MV66PRUC-LU26N2",
+      "source_decision_record_id": "DEC-MV66QW9M-ZDGH9I"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "the committed package is example-only and cannot establish operational deployment safety",
-      "recorded_at": "2026-10-12T04:46:29.174Z",
-      "expectation_state": "matched staged trajectories now expose transfer gaps and within-trajectory drift while preserving non-authority boundaries",
-      "mismatch_state": "the committed package is example-only and cannot establish operational deployment safety",
-      "scale_direction": "calibrate authorized intervention, rollback, and recovery evidence without autonomous control",
-      "source_session_id": "SESS-MV4RCM30-5HZ6SR",
-      "source_decision_record_id": "DEC-MV4RQXEW-NEMRS8"
+      "answer": "The example remains example-only and cannot prove intervention effectiveness, recovery safety, or cross-system blast-radius containment.",
+      "recorded_at": "2026-10-13T04:45:18.728Z",
+      "expectation_state": "Authorized intervention through recovery is structurally reproducible without granting QIF operational authority.",
+      "mismatch_state": "The example remains example-only and cannot prove intervention effectiveness, recovery safety, or cross-system blast-radius containment.",
+      "scale_direction": "Implement lane-local authority, coordination, and blast-radius evidence across distributed interventions.",
+      "source_session_id": "SESS-MV66PRUC-LU26N2",
+      "source_decision_record_id": "DEC-MV66QW9M-ZDGH9I"
     }
   ]
 }

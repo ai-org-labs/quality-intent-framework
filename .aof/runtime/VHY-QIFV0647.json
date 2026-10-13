@@ -1,0 +1,15 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-13T04:33:11.610Z",
+  "value_hypothesis_id": "VHY-MV66QVUI-SVHUAP",
+  "expected_value_creation": "A traceable intervention and recovery chain makes operational response evidence reviewable without transferring authority to QIF",
+  "beneficiary": "operators, governance owners, and affected stakeholders",
+  "supporting_evidence": [
+    "Current primary guidance calls for trajectory intervention, response SLAs, fail-closed controls, rollback ability, and recovery monitoring"
+  ],
+  "success_criteria": [
+    "QIF reproduces authority, SLA, reversibility, rollback, recovery checks, residual risk, and governance routing"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

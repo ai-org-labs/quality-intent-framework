@@ -189,6 +189,10 @@ function validatePackage(pkg, packagePath) {
   const deploymentTrajectories = requiredArray(pkg, "deploymentTrajectories");
   const transferComparisons = requiredArray(pkg, "transferComparisons");
   const transferDriftAssessments = requiredArray(pkg, "transferDriftAssessments");
+  const interventionRecoveryPolicies = requiredArray(pkg, "interventionRecoveryPolicies");
+  const interventionEvents = requiredArray(pkg, "interventionEvents");
+  const recoveryVerifications = requiredArray(pkg, "recoveryVerifications");
+  const interventionRecoveryAssessments = requiredArray(pkg, "interventionRecoveryAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -241,6 +245,10 @@ function validatePackage(pkg, packagePath) {
   const transferDriftPolicyIndex = indexById(transferDriftPolicies, `${packagePath}:transferDriftPolicies`);
   const deploymentTrajectoryIndex = indexById(deploymentTrajectories, `${packagePath}:deploymentTrajectories`);
   const transferComparisonIndex = indexById(transferComparisons, `${packagePath}:transferComparisons`);
+  const transferDriftAssessmentIndex = indexById(transferDriftAssessments, `${packagePath}:transferDriftAssessments`);
+  const interventionRecoveryPolicyIndex = indexById(interventionRecoveryPolicies, `${packagePath}:interventionRecoveryPolicies`);
+  const interventionEventIndex = indexById(interventionEvents, `${packagePath}:interventionEvents`);
+  const recoveryVerificationIndex = indexById(recoveryVerifications, `${packagePath}:recoveryVerifications`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -1865,6 +1873,80 @@ function validatePackage(pkg, packagePath) {
     if (!sufficient && !types.has("transfer-assessment-insufficient")) errors.push(`${assessment.id} insufficient transfer evidence requires a transfer-assessment-insufficient governance trigger.`);
   }
 
+  for (const policy of interventionRecoveryPolicies) {
+    if (!Number.isInteger(policy.maximumResponseMinutes) || policy.maximumResponseMinutes < 1) errors.push(`${policy.id} maximumResponseMinutes must be a positive integer.`);
+    if (!Array.isArray(policy.requiredAuthorityRoles) || policy.requiredAuthorityRoles.length === 0) errors.push(`${policy.id} requiredAuthorityRoles must include at least one role.`);
+    if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one reviewer.`);
+    if (policy.failClosedRequired !== true || policy.rollbackEvidenceRequired !== true || policy.recoveryVerificationRequired !== true) errors.push(`${policy.id} must require fail-closed, rollback evidence, and recovery verification.`);
+    if (policy.inferenceBoundary !== "response-evidence-only-not-intervention-effectiveness-recovery-safety-causality-quality-selection-authorization-or-authority") errors.push(`${policy.id} inferenceBoundary must preserve response evidence limits.`);
+  }
+
+  for (const event of interventionEvents) {
+    const policy = ref(interventionRecoveryPolicyIndex, event.policyRef, "intervention recovery policy", event.id);
+    const source = ref(transferDriftAssessmentIndex, event.sourceTransferAssessmentRef, "transfer drift assessment", event.id);
+    if (source && ![source.assessmentSignal, "transfer-gap-and-drift-observed"].includes(event.sourceSignal) && source.assessmentSignal !== "insufficient-data") errors.push(`${event.id} sourceSignal must remain compatible with its transfer assessment.`);
+    const responseMinutes = (Date.parse(event.actionStartedAt) - Date.parse(event.detectedAt)) / 60000;
+    if (!sameNumber(event.responseMinutes, responseMinutes)) errors.push(`${event.id} responseMinutes must reproduce as ${responseMinutes}.`);
+    if (policy && event.maximumResponseMinutes !== policy.maximumResponseMinutes) errors.push(`${event.id} maximumResponseMinutes must match its policy.`);
+    const withinSla = responseMinutes >= 0 && responseMinutes <= event.maximumResponseMinutes;
+    if (event.withinResponseSla !== withinSla) errors.push(`${event.id} withinResponseSla must reproduce as ${withinSla}.`);
+    if (policy && !policy.allowedActions.includes(event.action)) errors.push(`${event.id} action must be allowed by its policy.`);
+    const authorized = policy?.requiredAuthorityRoles.includes(event.authorityRole) && Array.isArray(event.authorityEvidenceRefs) && event.authorityEvidenceRefs.length > 0;
+    if (!authorized) errors.push(`${event.id} requires policy-authorized role and authority evidence.`);
+    if (["pause","isolate","rollback"].includes(event.action) && (!event.reversible || !event.rollbackPlanRef)) errors.push(`${event.id} state-changing intervention requires reversibility and rollbackPlanRef.`);
+    if (policy?.failClosedRequired && event.failClosed !== true) errors.push(`${event.id} must fail closed under its policy.`);
+    if (event.qifInitiatedAction !== false) errors.push(`${event.id} qifInitiatedAction must be false.`);
+    const types = new Set((event.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", event.id)?.triggerType));
+    if (event.evidenceStatus !== "verified" && !types.has("intervention-recovery-evidence-unverified")) errors.push(`${event.id} non-verified intervention evidence requires an intervention-recovery-evidence-unverified governance trigger.`);
+    if (!withinSla && !types.has("intervention-response-sla-breached")) errors.push(`${event.id} late response requires an intervention-response-sla-breached governance trigger.`);
+  }
+
+  for (const recovery of recoveryVerifications) {
+    const policy = ref(interventionRecoveryPolicyIndex, recovery.policyRef, "intervention recovery policy", recovery.id);
+    const event = ref(interventionEventIndex, recovery.interventionEventRef, "intervention event", recovery.id);
+    if (event && event.policyRef !== recovery.policyRef) errors.push(`${recovery.id} must use its intervention event policy.`);
+    const recoveryMinutes = (Date.parse(recovery.recoveryCompletedAt) - Date.parse(recovery.recoveryStartedAt)) / 60000;
+    if (!sameNumber(recovery.recoveryMinutes, recoveryMinutes)) errors.push(`${recovery.id} recoveryMinutes must reproduce as ${recoveryMinutes}.`);
+    const checks = recovery.verificationChecks || [];
+    const expected = { passedCheckCount: checks.filter((item) => item.result === "pass").length, failedCheckCount: checks.filter((item) => item.result === "fail").length, notRunCheckCount: checks.filter((item) => item.result === "not-run").length };
+    for (const [field, value] of Object.entries(expected)) if (recovery[field] !== value) errors.push(`${recovery.id} ${field} must reproduce as ${value}.`);
+    for (const check of checks) if (!Array.isArray(check.evidenceRefs) || check.evidenceRefs.length === 0) errors.push(`${recovery.id}/${check.id} requires evidenceRefs.`);
+    const state = expected.failedCheckCount > 0 || expected.notRunCheckCount > 0 ? "verification-failed" : checks.length > 0 ? "verified-restored" : "not-restored";
+    if (recovery.restorationState !== state) errors.push(`${recovery.id} restorationState must reproduce as ${state}.`);
+    if (policy?.rollbackEvidenceRequired && recovery.rollbackApplied && (!Array.isArray(recovery.rollbackEvidenceRefs) || recovery.rollbackEvidenceRefs.length === 0)) errors.push(`${recovery.id} applied rollback requires rollback evidence.`);
+    if (recovery.automaticRedeployment !== false) errors.push(`${recovery.id} automaticRedeployment must be false.`);
+    const types = new Set((recovery.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", recovery.id)?.triggerType));
+    if (recovery.evidenceStatus !== "verified" && !types.has("intervention-recovery-evidence-unverified")) errors.push(`${recovery.id} non-verified recovery evidence requires an intervention-recovery-evidence-unverified governance trigger.`);
+    if (state === "verification-failed" && !types.has("recovery-verification-failed")) errors.push(`${recovery.id} failed recovery verification requires a recovery-verification-failed governance trigger.`);
+    if ((recovery.residualRisks || []).length > 0 && !types.has("recovery-residual-risk-open")) errors.push(`${recovery.id} residual recovery risk requires a recovery-residual-risk-open governance trigger.`);
+  }
+
+  for (const assessment of interventionRecoveryAssessments) {
+    const policy = ref(interventionRecoveryPolicyIndex, assessment.policyRef, "intervention recovery policy", assessment.id);
+    const events = (assessment.interventionEventRefs || []).map((id) => ref(interventionEventIndex, id, "intervention event", assessment.id)).filter(Boolean);
+    const recoveries = (assessment.recoveryVerificationRefs || []).map((id) => ref(recoveryVerificationIndex, id, "recovery verification", assessment.id)).filter(Boolean);
+    const expected = {
+      interventionCount: events.length,
+      verifiedInterventionCount: events.filter((item) => item.evidenceStatus === "verified").length,
+      withinSlaCount: events.filter((item) => item.withinResponseSla).length,
+      authorizedInterventionCount: events.filter((item) => policy?.requiredAuthorityRoles.includes(item.authorityRole) && item.authorityEvidenceRefs.length > 0).length,
+      reversibleInterventionCount: events.filter((item) => item.reversible && item.rollbackPlanRef).length,
+      verifiedRecoveryCount: recoveries.filter((item) => item.evidenceStatus === "verified" && item.restorationState === "verified-restored").length,
+      failedRecoveryCount: recoveries.filter((item) => item.restorationState !== "verified-restored").length,
+      residualRiskCount: recoveries.reduce((sum, item) => sum + (item.residualRisks || []).length, 0)
+    };
+    for (const [field, value] of Object.entries(expected)) if (assessment[field] !== value) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const sufficient = expected.interventionCount > 0 && expected.verifiedInterventionCount === expected.interventionCount && recoveries.length === events.length && expected.verifiedRecoveryCount === recoveries.length;
+    const sufficiency = sufficient ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== sufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${sufficiency}.`);
+    const responseBoundaryBreached = expected.withinSlaCount < events.length || expected.authorizedInterventionCount < events.length || expected.reversibleInterventionCount < events.length;
+    const signal = !sufficient ? "insufficient-data" : responseBoundaryBreached ? "response-boundary-breached" : expected.failedRecoveryCount > 0 ? "recovery-verification-failed" : expected.residualRiskCount > 0 ? "residual-risk-open" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (assessment.activityCountIsQuality !== false || assessment.automaticOperationalDecision !== false) errors.push(`${assessment.id} must not treat activity counts as quality or make an automatic operational decision.`);
+    const types = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (!sufficient && !types.has("intervention-recovery-assessment-insufficient")) errors.push(`${assessment.id} insufficient evidence requires an intervention-recovery-assessment-insufficient governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -1975,6 +2057,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that cross-judge majority, unanimity, confidence, adjudication, or panel count proves independent confirmation, semantic truth, quality, competence, optimality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that cross-judge consensus proves independence, truth, quality, competence, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that evaluator-signal exposure, externalized behavior change, stated explanation, trial count, or absence of detected sensitivity proves belief, intent, deception, honesty, semantic truth, quality, competence, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that evaluator-signal evidence proves hidden state, truth, quality, competence, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that transfer matching, trajectory duration, terminal behavior, drift count, or absence of detected drift proves deployment safety, causality, intent, quality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that transfer evidence proves deployment safety, causality, intent, quality, selection, authorization, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that intervention count, response time, rollback, recovery checks, or absence of detected residual risk proves intervention effectiveness, operational safety, causality, quality, redeployment readiness, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that intervention and recovery evidence proves effectiveness, safety, causality, quality, redeployment readiness, selection, authorization, or authority.`);
   }
 
   results.push({

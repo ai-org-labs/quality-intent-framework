@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-13T04:33:11.878Z",
+  "validation_id": "NVR-MV66QW1Y-X0BYP4",
+  "raw_need": "connect transfer and drift signals to intervention and recovery",
+  "validation_status": "validated",
+  "validated_need": "structurally verify authorized timely reversible intervention and evidence-backed recovery without operational authority",
+  "decision_summary": "Implement a narrow response-evidence extension; retain intervention effectiveness and safety as semantic governance questions",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is in scope?",
+      "answer": "Intervention policy, event, rollback and recovery evidence.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What proves success?",
+      "answer": "Reproducible response and recovery structure, not automatic operational safety.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "declared timestamps and evidence references represent the operational sequence"
+  ],
+  "evidence_gaps": [
+    "committed examples are not independent operational evidence"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0647.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0647.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0647.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

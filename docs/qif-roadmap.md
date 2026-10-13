@@ -673,6 +673,15 @@ Deliverables:
   connect transfer and drift signals to authorized, reversible intervention,
   rollback, and recovery evidence without giving QIF autonomous operational
   control or treating interruption count as quality.
+- Status: implemented in v0.6.47 through reviewed response policies, timed
+  intervention events, authority and scope evidence, reversible rollback,
+  recovery checks, residual-risk governance, deterministic assessment, and
+  explicit non-authority boundaries.
+- Next planned slice, v0.6.48 Distributed Intervention Coordination and Blast-Radius Containment:
+  preserve authority, dependency, notification, partial-failure, and recovery
+  evidence when one intervention spans multiple agents, teams, services, or
+  organizational boundaries; prohibit aggregate success from hiding a failed
+  lane or expanding authority implicitly.
 - Next planned phase, v0.7 Empirical Calibration: replace illustrative
   calibration evidence with governed pilot outcomes, suite-health records, and
   framework-learning evidence while preserving uncertainty boundaries.

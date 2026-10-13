@@ -1,9 +1,8 @@
 # Quality Intent Framework
 
-Current release: **v0.6.46**. The calibration runtime now compares matched
-evaluation and operational trajectories and detects externally observable
-long-horizon behavior drift without turning short evaluations into deployment
-safety claims.
+Current release: **v0.6.47**. The calibration runtime now traces authorized,
+timely, reversible intervention through rollback and recovery verification
+without treating response activity as quality or granting operational authority.
 
 Quality Intent Framework (QIF) turns an organization's quality theory into an operational, AI-verifiable framework.
 
