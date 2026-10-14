@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-14T04:33:24.569Z",
+  "validation_id": "NVR-MV7M70IH-N7BRLZ",
+  "raw_need": "coordinate interventions and contain blast radius across agents, services, and operational lanes",
+  "validation_status": "validated",
+  "validated_need": "structurally verify distributed intervention authority, ordering, dependencies, conflicts, propagation, and containment without operational authority",
+  "decision_summary": "Implement a narrow distributed-response evidence extension; retain coordination correctness, causality, and containment effectiveness as semantic governance questions",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is in scope?",
+      "answer": "Coordination policy and run evidence plus observed blast-radius and containment assessment across multiple operational lanes.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What proves success?",
+      "answer": "Reproducible authority, dependency, conflict, propagation, containment, and governance structure, not automatic systemic safety.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "declared lane, dependency, timing, and propagation evidence represents the actual distributed sequence"
+  ],
+  "evidence_gaps": [
+    "committed examples are not independent multi-agent operational evidence"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0648.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0648.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0648.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV7M5UTH-N1FX7K"
+}

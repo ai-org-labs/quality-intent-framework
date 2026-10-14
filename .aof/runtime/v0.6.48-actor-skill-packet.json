@@ -1,0 +1,79 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-14T04:45:27.648Z",
+  "packet_id": "ASP-MV7MMIG0-VSI4NT",
+  "source_task_id": "TASK-065",
+  "source_parent_session_id": "SESS-MV7M5LHA-74FT22",
+  "source_decision_record_id": "DEC-MV7M7E9G-MWADGQ",
+  "objective": "Implement and verify QIF v0.6.48 distributed intervention coordination and blast-radius containment",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime",
+    "assignment_reason": "Builder owns schema, verifier, fixtures, documentation, and release evidence for the validated slice",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "schema-evolution",
+    "verifier-engineering",
+    "release-validation"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-qif-runtime-hardening",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs",
+        "tests/fixtures/calibration-report/manifest.json"
+      ],
+      "rationale": "The assigned actor can evolve QIF schemas, executable verifier rules, negative fixtures, and release artifacts."
+    }
+  ],
+  "resource_refs": [
+    "repository-quality-intent-framework",
+    "aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-structural-not-semantic-truth",
+    "policy-human-operational-authority"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "distributed intervention policy and coordination traceability",
+      "blast-radius observation and assessment"
+    ],
+    "acceptance_criteria": [
+      "npm test passes 16 positive and 1158 negative fixture checks",
+      "QIF never claims coordination authority, containment effectiveness, or systemic safety"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "schema, example, verifier, fixtures, docs, and runtime evidence agree",
+      "evaluator_ref": "guardian",
+      "evidence_required": "npm test and diff review",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "distributed-authority-overclaim",
+      "trigger_condition": "QIF is represented as coordinating intervention or proving systemic safety",
+      "consequence": "block-assignment",
+      "recovery_action": "restore accountable authority and verifier boundary"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I am encoding distributed intervention evidence without granting QIF coordination authority.",
+    "current_action": "Validate and prepare v0.6.48 release",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Submit completed implementation to Guardian review"
+  },
+  "status": "completed"
+}

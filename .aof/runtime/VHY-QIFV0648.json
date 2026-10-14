@@ -1,0 +1,15 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-14T04:33:08.756Z",
+  "value_hypothesis_id": "VHY-MV7M6OB8-VSF3KS",
+  "expected_value_creation": "A traceable coordination and blast-radius chain makes distributed intervention conflicts and containment evidence reviewable without transferring operational authority to QIF",
+  "beneficiary": "operators, service owners, governance owners, and affected stakeholders",
+  "supporting_evidence": [
+    "Current multi-agent research reports conflict escalation, correlated choices, shared-resource flooding, and coordination failure across agents"
+  ],
+  "success_criteria": [
+    "QIF reproduces lane authority, dependencies, ordering, conflict handling, stand-down state, intended scope, observed propagation, unexpected impact, containment, residual risk, and governance routing"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV7M5UTH-N1FX7K"
+}

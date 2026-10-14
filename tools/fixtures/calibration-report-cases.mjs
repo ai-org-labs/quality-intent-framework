@@ -1049,6 +1049,42 @@ export const cases = [
   },
   {
     id:"intervention-boundary-overclaim",rule:"intervention semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that intervention and recovery evidence proves effectiveness",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that intervention count"));}
+  },
+  {
+    id:"distributed-policies-not-array",rule:"distributed intervention policies required",expect:"package distributedInterventionPolicies must be an array.",mutate:(pkg)=>{pkg.distributedInterventionPolicies=null;}
+  },
+  {
+    id:"coordination-concurrent-count",rule:"coordination concurrency reproduction",expect:"concurrentInterventionCount must reproduce as 2.",mutate:(pkg)=>{pkg.interventionCoordinationRuns[0].concurrentInterventionCount=1;}
+  },
+  {
+    id:"coordination-authority-match",rule:"lane authority fidelity",expect:"authority must match its intervention event.",mutate:(pkg)=>{pkg.interventionCoordinationRuns[0].laneActions[1].authorityRole="observer";}
+  },
+  {
+    id:"coordination-order",rule:"dependency order reproduction",expect:"orderValid must reproduce as false.",mutate:(pkg)=>{pkg.interventionCoordinationRuns[0].laneActions[1].sequence=1;}
+  },
+  {
+    id:"coordination-resource-limit",rule:"shared resource limit reproduction",expect:"resourceLimitsRespected must reproduce as false.",mutate:(pkg)=>{pkg.interventionCoordinationRuns[0].resourceLimitsRespected=true;}
+  },
+  {
+    id:"coordination-qif-authority",rule:"no QIF coordination authority",expect:"qifCoordinatedAction must be false.",mutate:(pkg)=>{pkg.interventionCoordinationRuns[0].qifCoordinatedAction=true;}
+  },
+  {
+    id:"coordination-conflict-trigger",rule:"open conflict governance",expect:"unresolved conflict requires an open-conflict trigger and incomplete stand-down state.",mutate:(pkg)=>{pkg.interventionCoordinationRuns[0].governanceTriggerRefs=["GTR-CR-052","GTR-CR-055"];}
+  },
+  {
+    id:"blast-unexpected-scope",rule:"unexpected scope reproduction",expect:"unexpectedAffectedScopeRefs must reproduce from observed minus intended scope.",mutate:(pkg)=>{pkg.blastRadiusObservations[0].unexpectedAffectedScopeRefs=[];}
+  },
+  {
+    id:"blast-affected-count",rule:"blast radius count reproduction",expect:"affectedScopeCount must reproduce as 3.",mutate:(pkg)=>{pkg.blastRadiusObservations[0].affectedScopeCount=2;}
+  },
+  {
+    id:"blast-containment-state",rule:"containment state reproduction",expect:"containmentState must reproduce as partially-contained.",mutate:(pkg)=>{pkg.blastRadiusObservations[0].containmentState="contained";}
+  },
+  {
+    id:"distributed-assessment-count",rule:"distributed assessment reproduction",expect:"unresolvedConflictCount must reproduce as 1.",mutate:(pkg)=>{pkg.distributedInterventionAssessments[0].unresolvedConflictCount=0;}
+  },
+  {
+    id:"distributed-boundary-overclaim",rule:"distributed intervention semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that distributed intervention evidence proves systemic safety",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that lane count"));}
   }
 ];
 

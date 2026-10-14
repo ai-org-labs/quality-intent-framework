@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.45 baseline)
+## Current Position (v0.6.48 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -682,6 +682,17 @@ Deliverables:
   evidence when one intervention spans multiple agents, teams, services, or
   organizational boundaries; prohibit aggregate success from hiding a failed
   lane or expanding authority implicitly.
+- Status: implemented in v0.6.48 through reviewed distributed-intervention
+  policies, per-lane authority and ordering, explicit conflicts and stand-down
+  state, shared-resource limits, observed propagation, blast-radius and
+  containment evidence, deterministic assessment, governance, and retained
+  negative fixtures. The committed run remains example-only and cannot prove
+  coordination success, containment effectiveness, systemic safety, or authority.
+- Next planned slice, v0.6.49 Intervention Dependency Diversity and Correlated Recovery Risk:
+  expose shared model, prompt, policy, control-plane, resource, owner, and
+  rollback dependencies across intervention lanes; require an independently
+  operable recovery path where policy demands one; and prevent nominal lane
+  diversity from hiding common-mode recovery failure.
 - Next planned phase, v0.7 Empirical Calibration: replace illustrative
   calibration evidence with governed pilot outcomes, suite-health records, and
   framework-learning evidence while preserving uncertainty boundaries.

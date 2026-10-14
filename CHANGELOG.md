@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.48
+
+- Added executable distributed intervention policies, coordination runs, blast-radius observations, and aggregate assessments.
+- Added reproducible per-lane authority, dependency order, conflict, stand-down, concurrency, and shared-resource limit checks.
+- Added observed propagation, unexpected affected scope, containment state, common-mode failure, and blast-radius governance.
+- Prevented lane count, intervention throughput, conflict resolution, and containment status from becoming quality or systemic-safety claims.
+
 ## v0.6.47
 
 - Added executable intervention and recovery policies, events, recovery verifications, and assessments.

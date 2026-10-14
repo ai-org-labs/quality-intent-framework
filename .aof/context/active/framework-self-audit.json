@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-13T04:45:18.722Z",
-  "audit_id": "FSA-QIFV0647",
-  "scope": "v0.6.47 self-review and retrospective",
-  "summary": "Authorized intervention through recovery is structurally reproducible without granting QIF operational authority.",
-  "detected_gap": "The example remains example-only and cannot prove intervention effectiveness, recovery safety, or cross-system blast-radius containment.",
+  "recorded_at": "2026-10-14T04:45:40.297Z",
+  "audit_id": "FSA-QIFV0648",
+  "scope": "v0.6.48 self-review and retrospective",
+  "summary": "Distributed lane coordination and observed blast radius are structurally reproducible without granting QIF operational authority.",
+  "detected_gap": "The example remains example-only and cannot prove coordination success, containment effectiveness, systemic safety, or recovery-path independence.",
   "result_state": "stable",
-  "next_action": "Implement lane-local authority, coordination, and blast-radius evidence across distributed interventions.",
+  "next_action": "Expose shared dependencies and require independently operable recovery paths across intervention lanes.",
   "related_task_ids": [
-    "TASK-064"
+    "TASK-065"
   ],
-  "source_session_id": "SESS-MV66PRUC-LU26N2",
-  "source_decision_record_id": "DEC-MV66QW9M-ZDGH9I"
+  "source_session_id": "SESS-MV7M5LHA-74FT22",
+  "source_decision_record_id": "DEC-MV7M7E9G-MWADGQ"
 }

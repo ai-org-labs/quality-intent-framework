@@ -1,0 +1,320 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-10-14T04:45:33.068Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MV7M5LHA-74FT22",
+    "stage": "review",
+    "executionId": "CRUN-MV7MMMMH-CUHJ24",
+    "executionStatus": "completed",
+    "invokedModel": true,
+    "seatCount": 2,
+    "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+    "lastCouncilExecutionId": "CRUN-MV7MMMMH-CUHJ24",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV7M5LHA-74FT22",
+              "decision_id": "DEC-MV7M7E9G-MWADGQ",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。",
+              "intent": "成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。",
+              "active_context": "context: 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。 | success: 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。",
+              "context_snapshot_id": "CTX-MV7M5UTE-2KAJZ2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。"
+            },
+            "task": {
+              "request": "QIF v0.6.48として、複数エージェント・複数サービス・複数運用レーンにまたがる介入が競合、連鎖、同時失敗、共有資源飽和を起こす場合でも、権限境界、介入順序、依存関係、競合解決、停止合意、影響範囲、伝播経路、封じ込め結果を外部証拠から再計算可能にする。QIF自身には介入実行権限を与えず、介入数・参加エージェント数・処理量を品質とみなさない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0648.json",
+                ".aof/runtime/PCH-QIFV0648.json",
+                ".aof/runtime/PST-QIFV0648.json",
+                ".aof/runtime/VHY-QIFV0648.json",
+                ".aof/runtime/ALT-QIFV0648.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV7M7E9G-MWADGQ"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV7M5LHA-74FT22",
+              "decision_id": "DEC-MV7M7E9G-MWADGQ",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。",
+              "intent": "成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。",
+              "active_context": "context: 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。 | success: 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。",
+              "context_snapshot_id": "CTX-MV7M5UTE-2KAJZ2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。"
+            },
+            "task": {
+              "request": "QIF v0.6.48として、複数エージェント・複数サービス・複数運用レーンにまたがる介入が競合、連鎖、同時失敗、共有資源飽和を起こす場合でも、権限境界、介入順序、依存関係、競合解決、停止合意、影響範囲、伝播経路、封じ込め結果を外部証拠から再計算可能にする。QIF自身には介入実行権限を与えず、介入数・参加エージェント数・処理量を品質とみなさない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0648.json",
+                ".aof/runtime/PCH-QIFV0648.json",
+                ".aof/runtime/PST-QIFV0648.json",
+                ".aof/runtime/VHY-QIFV0648.json",
+                ".aof/runtime/ALT-QIFV0648.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV7M7E9G-MWADGQ"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MV7MMMMH-CUHJ24",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "completed",
+      "started_at": "2026-10-14T04:45:33.064Z",
+      "completed_at": "2026-10-14T04:45:33.065Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MV7MMMMH-CUHJ24-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV7M5LHA-74FT22",
+              "decision_id": "DEC-MV7M7E9G-MWADGQ",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。",
+              "intent": "成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。",
+              "active_context": "context: 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。 | success: 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。",
+              "context_snapshot_id": "CTX-MV7M5UTE-2KAJZ2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。"
+            },
+            "task": {
+              "request": "QIF v0.6.48として、複数エージェント・複数サービス・複数運用レーンにまたがる介入が競合、連鎖、同時失敗、共有資源飽和を起こす場合でも、権限境界、介入順序、依存関係、競合解決、停止合意、影響範囲、伝播経路、封じ込め結果を外部証拠から再計算可能にする。QIF自身には介入実行権限を与えず、介入数・参加エージェント数・処理量を品質とみなさない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0648.json",
+                ".aof/runtime/PCH-QIFV0648.json",
+                ".aof/runtime/PST-QIFV0648.json",
+                ".aof/runtime/VHY-QIFV0648.json",
+                ".aof/runtime/ALT-QIFV0648.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV7M7E9G-MWADGQ"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-14T04:45:33.065Z",
+          "completed_at": "2026-10-14T04:45:33.065Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-14T04:45:33.065Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian review response: focus on 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。 and align to 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。.",
+            "output_summary": "DECISION: proceed VETO: no Guardian review response: focus on 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.6.48として、複数エージェント・複数サービス・複数運用レーンにまたがる介入が競合、連鎖、同時失敗、共有資源飽和を起こす場合でも、権限境界、介入順序、依存関係、競合解決、停止合意、影響範囲、伝播経路、封じ込め結果を外部証拠から再計算可能にする。QIF自身には介入実行権限を与えず、介入数・参加エージェント数・処理量を品質とみなさない。\nNeed: 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。\nIntent: 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。\nActive Context: context: 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。 | success: 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。"
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MV7MMMMH-CUHJ24-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MV7M5LHA-74FT22",
+              "decision_id": "DEC-MV7M7E9G-MWADGQ",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。",
+              "intent": "成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。",
+              "active_context": "context: 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。 | success: 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。",
+              "context_snapshot_id": "CTX-MV7M5UTE-2KAJZ2",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。"
+            },
+            "task": {
+              "request": "QIF v0.6.48として、複数エージェント・複数サービス・複数運用レーンにまたがる介入が競合、連鎖、同時失敗、共有資源飽和を起こす場合でも、権限境界、介入順序、依存関係、競合解決、停止合意、影響範囲、伝播経路、封じ込め結果を外部証拠から再計算可能にする。QIF自身には介入実行権限を与えず、介入数・参加エージェント数・処理量を品質とみなさない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0648.json",
+                ".aof/runtime/PCH-QIFV0648.json",
+                ".aof/runtime/PST-QIFV0648.json",
+                ".aof/runtime/VHY-QIFV0648.json",
+                ".aof/runtime/ALT-QIFV0648.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MV7M7E9G-MWADGQ"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-14T04:45:33.065Z",
+          "completed_at": "2026-10-14T04:45:33.065Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-14T04:45:33.065Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder review response: focus on 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。 and align to 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。.",
+            "output_summary": "DECISION: proceed VETO: no Builder review response: focus on 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.6.48として、複数エージェント・複数サービス・複数運用レーンにまたがる介入が競合、連鎖、同時失敗、共有資源飽和を起こす場合でも、権限境界、介入順序、依存関係、競合解決、停止合意、影響範囲、伝播経路、封じ込め結果を外部証拠から再計算可能にする。QIF自身には介入実行権限を与えず、介入数・参加エージェント数・処理量を品質とみなさない。\nNeed: 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。\nIntent: 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。\nActive Context: context: 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。 | success: 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象は、評価・shadow-operation・limited-operation・operationにおける複数エージェント、複数サービス、複数運用レーン間の介入調整と影響範囲封じ込め。単一レーンの介入実行、外部システム統合、QIFへの運用権限付与、内部思考収集、特定ベンダー依存は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。"
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

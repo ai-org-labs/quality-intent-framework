@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-14T04:33:13.061Z",
+  "alternative_analysis_id": "ALT-MV7M6RMT-W76JHD",
+  "subject_need": "make distributed intervention coordination and blast-radius containment evidence executable",
+  "alternative_solutions": [
+    "extend the single-intervention record with free-text coordination notes",
+    "add separately owned coordination policy, coordination run, blast-radius observation, and aggregate assessment records"
+  ],
+  "non_solution_options": [
+    "count participating agents, interventions, or throughput as quality"
+  ],
+  "defer_options": [
+    "wait for empirical multi-agent incident data"
+  ],
+  "stop_options": [
+    "stop if QIF must execute interventions, resolve operational authority, or inspect hidden reasoning"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV7M5UTH-N1FX7K"
+}

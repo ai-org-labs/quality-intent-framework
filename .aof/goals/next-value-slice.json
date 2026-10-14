@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.6.48 Distributed Intervention Coordination and Blast-Radius Containment",
-  "updated_at": "2026-10-13T04:46:48.595Z",
+  "content": "v0.6.49 Intervention Dependency Diversity and Correlated Recovery Risk",
+  "updated_at": "2026-10-14T04:46:40.668Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MV66PRUC-LU26N2",
-  "source_decision_record_id": "DEC-MV66QW9M-ZDGH9I",
+  "source_session_id": "SESS-MV7M5LHA-74FT22",
+  "source_decision_record_id": "DEC-MV7M7E9G-MWADGQ",
   "declared_complete_at": null
 }

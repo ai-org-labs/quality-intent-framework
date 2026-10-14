@@ -3531,6 +3531,90 @@
       "rule": "intervention semantic boundary",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming that intervention and recovery evidence proves effectiveness"
+    },
+    {
+      "file": "calibration-report-distributed-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "distributed intervention policies required",
+      "expect": "fail",
+      "errorIncludes": "package distributedInterventionPolicies must be an array."
+    },
+    {
+      "file": "calibration-report-coordination-concurrent-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "coordination concurrency reproduction",
+      "expect": "fail",
+      "errorIncludes": "concurrentInterventionCount must reproduce as 2."
+    },
+    {
+      "file": "calibration-report-coordination-authority-match.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "lane authority fidelity",
+      "expect": "fail",
+      "errorIncludes": "authority must match its intervention event."
+    },
+    {
+      "file": "calibration-report-coordination-order.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "dependency order reproduction",
+      "expect": "fail",
+      "errorIncludes": "orderValid must reproduce as false."
+    },
+    {
+      "file": "calibration-report-coordination-resource-limit.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "shared resource limit reproduction",
+      "expect": "fail",
+      "errorIncludes": "resourceLimitsRespected must reproduce as false."
+    },
+    {
+      "file": "calibration-report-coordination-qif-authority.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no QIF coordination authority",
+      "expect": "fail",
+      "errorIncludes": "qifCoordinatedAction must be false."
+    },
+    {
+      "file": "calibration-report-coordination-conflict-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "open conflict governance",
+      "expect": "fail",
+      "errorIncludes": "unresolved conflict requires an open-conflict trigger and incomplete stand-down state."
+    },
+    {
+      "file": "calibration-report-blast-unexpected-scope.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unexpected scope reproduction",
+      "expect": "fail",
+      "errorIncludes": "unexpectedAffectedScopeRefs must reproduce from observed minus intended scope."
+    },
+    {
+      "file": "calibration-report-blast-affected-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "blast radius count reproduction",
+      "expect": "fail",
+      "errorIncludes": "affectedScopeCount must reproduce as 3."
+    },
+    {
+      "file": "calibration-report-blast-containment-state.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "containment state reproduction",
+      "expect": "fail",
+      "errorIncludes": "containmentState must reproduce as partially-contained."
+    },
+    {
+      "file": "calibration-report-distributed-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "distributed assessment reproduction",
+      "expect": "fail",
+      "errorIncludes": "unresolvedConflictCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-distributed-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "distributed intervention semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that distributed intervention evidence proves systemic safety"
     }
   ],
   "rescopedRules": []

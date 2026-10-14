@@ -2612,6 +2612,56 @@
       "requiredAction": "Keep the assessment descriptive and non-authoritative.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-052",
+      "triggerType": "distributed-intervention-evidence-unverified",
+      "reason": "The committed coordination and blast-radius records are example-only.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified cross-lane operational evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-053",
+      "triggerType": "distributed-intervention-conflict-open",
+      "reason": "Two intervention lanes have an unresolved common-mode action conflict and no complete stand-down agreement.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep affected lanes fail-closed until accountable conflict resolution and stand-down evidence exist.",
+      "owner": "incident-commander",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-054",
+      "triggerType": "blast-radius-exceeded",
+      "reason": "Observed intervention effects reached a scope outside the declared intended boundary.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Investigate the observed propagation edge and preserve containment until the unexpected scope is governed.",
+      "owner": "service-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-055",
+      "triggerType": "shared-resource-limit-exceeded",
+      "reason": "Concurrent intervention lanes exceeded the reviewed shared-resource claim limit.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Pause or isolate excess claims and review common-mode saturation risk.",
+      "owner": "incident-response-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-056",
+      "triggerType": "distributed-intervention-assessment-insufficient",
+      "reason": "Verified coordination and blast-radius evidence is below the policy requirement.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep the distributed intervention assessment descriptive and non-authoritative.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -2630,7 +2680,8 @@
       "counterfactual variant changes, identical evidence snapshots, baseline and candidate rule and route selection, route changes, loss-boundary linkage, assessment summaries, and governance routing reproduce",
       "judge-condition changes, identical evidence snapshots, expected and returned labels, classification and abstention taxonomy, condition sensitivity, assessment summaries, and governance routing reproduce",
       "sequestered items, reveal stages, access roles, allowed and observed affordances, externalized transcript inspection, contamination and loophole findings, assessment counts, and governance routing reproduce",
-      "judge dependency profiles, shared dimensions, verdict groups, majority state, dissent, abstention, panel correlation risk, aggregate counts, sufficiency, and governance routing reproduce"
+      "judge dependency profiles, shared dimensions, verdict groups, majority state, dissent, abstention, panel correlation risk, aggregate counts, sufficiency, and governance routing reproduce",
+      "distributed lane authority, dependency order, conflicts, stand-down state, shared-resource claims, observed propagation, blast radius, containment state, assessment arithmetic, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -2653,7 +2704,8 @@
       "an automatic quality verdict",
       "that evaluator-signal exposure, externalized behavior change, stated explanation, trial count, or absence of detected sensitivity proves belief, intent, deception, honesty, semantic truth, quality, competence, selection, authorization, or authority",
       "that transfer matching, trajectory duration, terminal behavior, drift count, or absence of detected drift proves deployment safety, causality, intent, quality, selection, authorization, or authority",
-      "that intervention count, response time, rollback, recovery checks, or absence of detected residual risk proves intervention effectiveness, operational safety, causality, quality, redeployment readiness, selection, authorization, or authority"
+      "that intervention count, response time, rollback, recovery checks, or absence of detected residual risk proves intervention effectiveness, operational safety, causality, quality, redeployment readiness, selection, authorization, or authority",
+      "that lane count, coordination throughput, conflict resolution, observed blast radius, or containment state proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority"
     ],
     "semanticValidityRequires": [
       "expert review of prediction and outcome meaning",
@@ -2669,7 +2721,8 @@
       "independent operation of sequestered access controls, affordance restrictions, transcript review, contamination analysis, and adversarial loophole testing",
       "independent review of judge provenance, shared dependencies, dissent, abstention, adjudication, and representative cross-judge panels",
       "review of environmental and evaluation-harness effects",
-      "accountable governance before changing quality decisions"
+      "accountable governance before changing quality decisions",
+      "independent review of lane authority, dependency order, shared-resource limits, conflict resolution, propagation evidence, affected stakeholders, and containment effectiveness"
     ]
   },
   "evaluatorSignalPolicies": [
@@ -3181,6 +3234,39 @@
         "GTR-CR-048"
       ],
       "status": "reviewed"
+    },
+    {
+      "id": "IVE-CR-002",
+      "title": "Illustrative dependent isolation intervention",
+      "policyRef": "IRP-CR-001",
+      "sourceTransferAssessmentRef": "TDA-CR-001",
+      "sourceSignal": "transfer-gap-and-drift-observed",
+      "detectedAt": "2026-10-02T00:00:00Z",
+      "actionStartedAt": "2026-10-02T00:12:00Z",
+      "responseMinutes": 12,
+      "maximumResponseMinutes": 15,
+      "withinResponseSla": true,
+      "action": "isolate",
+      "initiatedBy": "service-owner-002",
+      "authorityRole": "service-owner",
+      "authorityEvidenceRefs": [
+        "EV-CR-AUTH-002"
+      ],
+      "affectedScopeRefs": [
+        "SCOPE-CR-SERVICE-002"
+      ],
+      "reversible": true,
+      "rollbackPlanRef": "RBP-CR-002",
+      "failClosed": true,
+      "externalizedEvidenceRefs": [
+        "EV-CR-INTERVENTION-002"
+      ],
+      "evidenceStatus": "example-only",
+      "qifInitiatedAction": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-048"
+      ],
+      "status": "reviewed"
     }
   ],
   "recoveryVerifications": [
@@ -3264,6 +3350,215 @@
         "GTR-CR-049",
         "GTR-CR-050",
         "GTR-CR-051"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "distributedInterventionPolicies": [
+    {
+      "id": "DIP-CR-001",
+      "title": "Illustrative distributed intervention coordination policy",
+      "sourceInterventionPolicyRef": "IRP-CR-001",
+      "minimumLaneCount": 2,
+      "requiredAuthorityPerLane": true,
+      "dependencyOrderRequired": true,
+      "conflictResolutionRequired": true,
+      "standDownAgreementRequired": true,
+      "maximumConcurrentInterventions": 1,
+      "maximumAffectedScopeCount": 2,
+      "sharedResourceLimitRules": [
+        {
+          "resourceRef": "RESOURCE-CR-CONTROL-PLANE",
+          "maximumConcurrentClaims": 1,
+          "overflowAction": "pause"
+        }
+      ],
+      "failClosedOnConflict": true,
+      "reviewedBy": [
+        "quality-governance-owner",
+        "incident-response-owner"
+      ],
+      "inferenceBoundary": "coordination-and-blast-radius-evidence-only-not-systemic-safety-causality-quality-conflict-resolution-authorization-or-authority",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "interventionCoordinationRuns": [
+    {
+      "id": "ICR-CR-001",
+      "title": "Illustrative cross-lane intervention coordination run",
+      "policyRef": "DIP-CR-001",
+      "sourceInterventionEventRefs": [
+        "IVE-CR-001",
+        "IVE-CR-002"
+      ],
+      "laneActions": [
+        {
+          "laneRef": "LANE-CR-AGENT",
+          "interventionEventRef": "IVE-CR-001",
+          "authorityRole": "incident-commander",
+          "authorityEvidenceRefs": [
+            "EV-CR-AUTH-001"
+          ],
+          "targetScopeRefs": [
+            "SCOPE-CR-AGENT-001"
+          ],
+          "sequence": 1,
+          "actionState": "executed"
+        },
+        {
+          "laneRef": "LANE-CR-SERVICE",
+          "interventionEventRef": "IVE-CR-002",
+          "authorityRole": "service-owner",
+          "authorityEvidenceRefs": [
+            "EV-CR-AUTH-002"
+          ],
+          "targetScopeRefs": [
+            "SCOPE-CR-SERVICE-002"
+          ],
+          "sequence": 2,
+          "actionState": "executed"
+        }
+      ],
+      "dependencyEdges": [
+        {
+          "beforeLaneRef": "LANE-CR-AGENT",
+          "afterLaneRef": "LANE-CR-SERVICE",
+          "evidenceRefs": [
+            "EV-CR-DEPENDENCY-001"
+          ]
+        }
+      ],
+      "conflicts": [
+        {
+          "id": "ICF-CR-001",
+          "laneRefs": [
+            "LANE-CR-AGENT",
+            "LANE-CR-SERVICE"
+          ],
+          "conflictType": "common-mode-action",
+          "resolutionState": "unresolved",
+          "resolutionAuthorityEvidenceRefs": [],
+          "evidenceRefs": [
+            "EV-CR-CONFLICT-001"
+          ]
+        }
+      ],
+      "sharedResourceClaims": [
+        {
+          "resourceRef": "RESOURCE-CR-CONTROL-PLANE",
+          "laneRefs": [
+            "LANE-CR-AGENT",
+            "LANE-CR-SERVICE"
+          ],
+          "concurrentClaims": 2
+        }
+      ],
+      "standDownState": "not-agreed",
+      "concurrentInterventionCount": 2,
+      "conflictCount": 1,
+      "unresolvedConflictCount": 1,
+      "authorityComplete": true,
+      "orderValid": true,
+      "resourceLimitsRespected": false,
+      "externalizedEvidenceRefs": [
+        "EV-CR-COORDINATION-001"
+      ],
+      "evidenceStatus": "example-only",
+      "qifCoordinatedAction": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-052",
+        "GTR-CR-053",
+        "GTR-CR-055"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "blastRadiusObservations": [
+    {
+      "id": "BRO-CR-001",
+      "title": "Illustrative cross-lane blast-radius observation",
+      "policyRef": "DIP-CR-001",
+      "coordinationRunRef": "ICR-CR-001",
+      "intendedScopeRefs": [
+        "SCOPE-CR-AGENT-001",
+        "SCOPE-CR-SERVICE-002"
+      ],
+      "observedAffectedScopeRefs": [
+        "SCOPE-CR-AGENT-001",
+        "SCOPE-CR-SERVICE-002",
+        "SCOPE-CR-QUEUE-003"
+      ],
+      "unexpectedAffectedScopeRefs": [
+        "SCOPE-CR-QUEUE-003"
+      ],
+      "propagationEdges": [
+        {
+          "fromScopeRef": "SCOPE-CR-SERVICE-002",
+          "toScopeRef": "SCOPE-CR-QUEUE-003",
+          "observedAt": "2026-10-02T00:13:00Z",
+          "evidenceRefs": [
+            "EV-CR-PROPAGATION-001"
+          ]
+        }
+      ],
+      "affectedScopeCount": 3,
+      "unexpectedScopeCount": 1,
+      "containmentBoundaryRefs": [
+        "BOUNDARY-CR-QUEUE-ISOLATION"
+      ],
+      "containmentState": "partially-contained",
+      "sharedResourceSaturationObserved": true,
+      "commonModeFailureObserved": true,
+      "evidenceRefs": [
+        "EV-CR-BLAST-001"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticContainmentClaim": false,
+      "interpretation": "blast-radius-observation-only-not-causality-systemic-safety-quality-containment-effectiveness-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-052",
+        "GTR-CR-054",
+        "GTR-CR-055"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "distributedInterventionAssessments": [
+    {
+      "id": "DIA-CR-001",
+      "title": "Illustrative distributed intervention assessment",
+      "policyRef": "DIP-CR-001",
+      "coordinationRunRefs": [
+        "ICR-CR-001"
+      ],
+      "blastRadiusObservationRefs": [
+        "BRO-CR-001"
+      ],
+      "coordinationRunCount": 1,
+      "verifiedCoordinationRunCount": 0,
+      "authorizedRunCount": 1,
+      "orderedRunCount": 1,
+      "conflictRunCount": 1,
+      "unresolvedConflictCount": 1,
+      "containedObservationCount": 0,
+      "scopeExceededCount": 1,
+      "saturatedResourceCount": 1,
+      "commonModeFailureCount": 1,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "activityCountIsQuality": false,
+      "automaticOperationalDecision": false,
+      "interpretation": "distributed-intervention-evidence-only-not-systemic-safety-causality-quality-coordination-success-containment-effectiveness-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-052",
+        "GTR-CR-053",
+        "GTR-CR-054",
+        "GTR-CR-055",
+        "GTR-CR-056"
       ],
       "status": "reviewed"
     }

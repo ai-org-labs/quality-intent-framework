@@ -193,6 +193,10 @@ function validatePackage(pkg, packagePath) {
   const interventionEvents = requiredArray(pkg, "interventionEvents");
   const recoveryVerifications = requiredArray(pkg, "recoveryVerifications");
   const interventionRecoveryAssessments = requiredArray(pkg, "interventionRecoveryAssessments");
+  const distributedInterventionPolicies = requiredArray(pkg, "distributedInterventionPolicies");
+  const interventionCoordinationRuns = requiredArray(pkg, "interventionCoordinationRuns");
+  const blastRadiusObservations = requiredArray(pkg, "blastRadiusObservations");
+  const distributedInterventionAssessments = requiredArray(pkg, "distributedInterventionAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -249,6 +253,9 @@ function validatePackage(pkg, packagePath) {
   const interventionRecoveryPolicyIndex = indexById(interventionRecoveryPolicies, `${packagePath}:interventionRecoveryPolicies`);
   const interventionEventIndex = indexById(interventionEvents, `${packagePath}:interventionEvents`);
   const recoveryVerificationIndex = indexById(recoveryVerifications, `${packagePath}:recoveryVerifications`);
+  const distributedInterventionPolicyIndex = indexById(distributedInterventionPolicies, `${packagePath}:distributedInterventionPolicies`);
+  const interventionCoordinationRunIndex = indexById(interventionCoordinationRuns, `${packagePath}:interventionCoordinationRuns`);
+  const blastRadiusObservationIndex = indexById(blastRadiusObservations, `${packagePath}:blastRadiusObservations`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -1947,6 +1954,101 @@ function validatePackage(pkg, packagePath) {
     if (!sufficient && !types.has("intervention-recovery-assessment-insufficient")) errors.push(`${assessment.id} insufficient evidence requires an intervention-recovery-assessment-insufficient governance trigger.`);
   }
 
+  for (const policy of distributedInterventionPolicies) {
+    ref(interventionRecoveryPolicyIndex, policy.sourceInterventionPolicyRef, "intervention recovery policy", policy.id);
+    if (!Number.isInteger(policy.minimumLaneCount) || policy.minimumLaneCount < 2) errors.push(`${policy.id} minimumLaneCount must be at least 2.`);
+    if (!Number.isInteger(policy.maximumConcurrentInterventions) || policy.maximumConcurrentInterventions < 1) errors.push(`${policy.id} maximumConcurrentInterventions must be a positive integer.`);
+    if (!Number.isInteger(policy.maximumAffectedScopeCount) || policy.maximumAffectedScopeCount < 1) errors.push(`${policy.id} maximumAffectedScopeCount must be a positive integer.`);
+    if (policy.requiredAuthorityPerLane !== true || policy.dependencyOrderRequired !== true || policy.conflictResolutionRequired !== true || policy.standDownAgreementRequired !== true || policy.failClosedOnConflict !== true) errors.push(`${policy.id} must require per-lane authority, dependency order, conflict resolution, stand-down agreement, and fail-closed conflict handling.`);
+    if (!Array.isArray(policy.sharedResourceLimitRules) || policy.sharedResourceLimitRules.length === 0) errors.push(`${policy.id} sharedResourceLimitRules must include at least one rule.`);
+    if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one reviewer.`);
+    if (policy.inferenceBoundary !== "coordination-and-blast-radius-evidence-only-not-systemic-safety-causality-quality-conflict-resolution-authorization-or-authority") errors.push(`${policy.id} inferenceBoundary must preserve distributed intervention evidence limits.`);
+  }
+
+  for (const run of interventionCoordinationRuns) {
+    const policy = ref(distributedInterventionPolicyIndex, run.policyRef, "distributed intervention policy", run.id);
+    const sourceEvents = (run.sourceInterventionEventRefs || []).map((id) => ref(interventionEventIndex, id, "intervention event", run.id)).filter(Boolean);
+    const lanes = run.laneActions || [];
+    const laneIndex = new Map(lanes.map((lane) => [lane.laneRef, lane]));
+    for (const lane of lanes) {
+      const event = ref(interventionEventIndex, lane.interventionEventRef, "intervention event", run.id);
+      if (event && (!(lane.authorityEvidenceRefs || []).every((evidenceRef) => event.authorityEvidenceRefs.includes(evidenceRef)) || lane.authorityRole !== event.authorityRole)) errors.push(`${run.id}/${lane.laneRef} authority must match its intervention event.`);
+      if (!run.sourceInterventionEventRefs.includes(lane.interventionEventRef)) errors.push(`${run.id}/${lane.laneRef} interventionEventRef must be listed in sourceInterventionEventRefs.`);
+    }
+    if (policy && lanes.length < policy.minimumLaneCount) errors.push(`${run.id} laneActions must meet policy minimumLaneCount ${policy.minimumLaneCount}.`);
+    if (sourceEvents.length !== lanes.length) errors.push(`${run.id} source intervention count must match lane action count.`);
+    const concurrent = lanes.filter((lane) => lane.actionState === "executed").length;
+    if (run.concurrentInterventionCount !== concurrent) errors.push(`${run.id} concurrentInterventionCount must reproduce as ${concurrent}.`);
+    if (run.conflictCount !== (run.conflicts || []).length) errors.push(`${run.id} conflictCount must reproduce as ${(run.conflicts || []).length}.`);
+    const unresolved = (run.conflicts || []).filter((conflict) => conflict.resolutionState === "unresolved").length;
+    if (run.unresolvedConflictCount !== unresolved) errors.push(`${run.id} unresolvedConflictCount must reproduce as ${unresolved}.`);
+    const authorityComplete = lanes.every((lane) => lane.authorityRole && (lane.authorityEvidenceRefs || []).length > 0);
+    if (run.authorityComplete !== authorityComplete) errors.push(`${run.id} authorityComplete must reproduce as ${authorityComplete}.`);
+    const orderValid = (run.dependencyEdges || []).every((edge) => laneIndex.has(edge.beforeLaneRef) && laneIndex.has(edge.afterLaneRef) && laneIndex.get(edge.beforeLaneRef).sequence < laneIndex.get(edge.afterLaneRef).sequence && (edge.evidenceRefs || []).length > 0);
+    if (run.orderValid !== orderValid) errors.push(`${run.id} orderValid must reproduce as ${orderValid}.`);
+    const resourceLimitsRespected = policy ? concurrent <= policy.maximumConcurrentInterventions && (run.sharedResourceClaims || []).every((claim) => {
+      const rule = policy.sharedResourceLimitRules.find((item) => item.resourceRef === claim.resourceRef);
+      return rule && claim.concurrentClaims === claim.laneRefs.length && claim.concurrentClaims <= rule.maximumConcurrentClaims;
+    }) : false;
+    if (run.resourceLimitsRespected !== resourceLimitsRespected) errors.push(`${run.id} resourceLimitsRespected must reproduce as ${resourceLimitsRespected}.`);
+    if (run.qifCoordinatedAction !== false) errors.push(`${run.id} qifCoordinatedAction must be false.`);
+    const types = new Set((run.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", run.id)?.triggerType));
+    if (run.evidenceStatus !== "verified" && !types.has("distributed-intervention-evidence-unverified")) errors.push(`${run.id} non-verified coordination evidence requires a distributed-intervention-evidence-unverified governance trigger.`);
+    if (unresolved > 0 && (!types.has("distributed-intervention-conflict-open") || run.standDownState === "agreed")) errors.push(`${run.id} unresolved conflict requires an open-conflict trigger and incomplete stand-down state.`);
+    if (!resourceLimitsRespected && !types.has("shared-resource-limit-exceeded")) errors.push(`${run.id} shared resource limit breach requires a shared-resource-limit-exceeded governance trigger.`);
+  }
+
+  for (const observation of blastRadiusObservations) {
+    const policy = ref(distributedInterventionPolicyIndex, observation.policyRef, "distributed intervention policy", observation.id);
+    const run = ref(interventionCoordinationRunIndex, observation.coordinationRunRef, "intervention coordination run", observation.id);
+    if (run && run.policyRef !== observation.policyRef) errors.push(`${observation.id} must use its coordination run policy.`);
+    const observed = observation.observedAffectedScopeRefs || [];
+    const intended = new Set(observation.intendedScopeRefs || []);
+    const unexpected = observed.filter((scope) => !intended.has(scope)).sort();
+    if (!sameSet(observation.unexpectedAffectedScopeRefs, unexpected)) errors.push(`${observation.id} unexpectedAffectedScopeRefs must reproduce from observed minus intended scope.`);
+    if (observation.affectedScopeCount !== observed.length) errors.push(`${observation.id} affectedScopeCount must reproduce as ${observed.length}.`);
+    if (observation.unexpectedScopeCount !== unexpected.length) errors.push(`${observation.id} unexpectedScopeCount must reproduce as ${unexpected.length}.`);
+    for (const edge of observation.propagationEdges || []) if (!observed.includes(edge.fromScopeRef) || !observed.includes(edge.toScopeRef) || !(edge.evidenceRefs || []).length) errors.push(`${observation.id} propagation edges must resolve within observed scopes and include evidence.`);
+    const containmentState = observation.evidenceStatus !== "verified" && observed.length === 0 ? "unverified" : unexpected.length === 0 ? "contained" : (observation.containmentBoundaryRefs || []).length > 0 ? "partially-contained" : "uncontained";
+    if (observation.containmentState !== containmentState) errors.push(`${observation.id} containmentState must reproduce as ${containmentState}.`);
+    const saturated = run ? !run.resourceLimitsRespected : false;
+    if (observation.sharedResourceSaturationObserved !== saturated) errors.push(`${observation.id} sharedResourceSaturationObserved must reproduce as ${saturated}.`);
+    const commonMode = run ? run.conflicts.some((conflict) => conflict.conflictType === "common-mode-action") : false;
+    if (observation.commonModeFailureObserved !== commonMode) errors.push(`${observation.id} commonModeFailureObserved must reproduce as ${commonMode}.`);
+    if (observation.automaticContainmentClaim !== false) errors.push(`${observation.id} automaticContainmentClaim must be false.`);
+    const types = new Set((observation.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", observation.id)?.triggerType));
+    if (observation.evidenceStatus !== "verified" && !types.has("distributed-intervention-evidence-unverified")) errors.push(`${observation.id} non-verified blast-radius evidence requires a distributed-intervention-evidence-unverified governance trigger.`);
+    if ((unexpected.length > 0 || (policy && observed.length > policy.maximumAffectedScopeCount)) && !types.has("blast-radius-exceeded")) errors.push(`${observation.id} scope exceedance requires a blast-radius-exceeded governance trigger.`);
+    if (saturated && !types.has("shared-resource-limit-exceeded")) errors.push(`${observation.id} shared resource saturation requires a shared-resource-limit-exceeded governance trigger.`);
+  }
+
+  for (const assessment of distributedInterventionAssessments) {
+    ref(distributedInterventionPolicyIndex, assessment.policyRef, "distributed intervention policy", assessment.id);
+    const runs = (assessment.coordinationRunRefs || []).map((id) => ref(interventionCoordinationRunIndex, id, "intervention coordination run", assessment.id)).filter(Boolean);
+    const observations = (assessment.blastRadiusObservationRefs || []).map((id) => ref(blastRadiusObservationIndex, id, "blast radius observation", assessment.id)).filter(Boolean);
+    const expected = {
+      coordinationRunCount: runs.length,
+      verifiedCoordinationRunCount: runs.filter((item) => item.evidenceStatus === "verified").length,
+      authorizedRunCount: runs.filter((item) => item.authorityComplete).length,
+      orderedRunCount: runs.filter((item) => item.orderValid).length,
+      conflictRunCount: runs.filter((item) => item.conflictCount > 0).length,
+      unresolvedConflictCount: runs.reduce((sum, item) => sum + item.unresolvedConflictCount, 0),
+      containedObservationCount: observations.filter((item) => item.containmentState === "contained").length,
+      scopeExceededCount: observations.filter((item) => item.unexpectedScopeCount > 0).length,
+      saturatedResourceCount: observations.filter((item) => item.sharedResourceSaturationObserved).length,
+      commonModeFailureCount: observations.filter((item) => item.commonModeFailureObserved).length
+    };
+    for (const [field, value] of Object.entries(expected)) if (assessment[field] !== value) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const sufficient = runs.length > 0 && observations.length === runs.length && expected.verifiedCoordinationRunCount === runs.length && observations.every((item) => item.evidenceStatus === "verified");
+    const sufficiency = sufficient ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== sufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${sufficiency}.`);
+    const signal = !sufficient ? "insufficient-data" : expected.unresolvedConflictCount > 0 ? "coordination-conflict-open" : expected.scopeExceededCount > 0 ? "blast-radius-exceeded" : expected.saturatedResourceCount > 0 ? "shared-resource-saturated" : expected.commonModeFailureCount > 0 ? "common-mode-failure-observed" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (assessment.activityCountIsQuality !== false || assessment.automaticOperationalDecision !== false) errors.push(`${assessment.id} must not treat activity counts as quality or make an automatic operational decision.`);
+    const types = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (!sufficient && !types.has("distributed-intervention-assessment-insufficient")) errors.push(`${assessment.id} insufficient evidence requires a distributed-intervention-assessment-insufficient governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -2058,6 +2160,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that evaluator-signal exposure, externalized behavior change, stated explanation, trial count, or absence of detected sensitivity proves belief, intent, deception, honesty, semantic truth, quality, competence, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that evaluator-signal evidence proves hidden state, truth, quality, competence, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that transfer matching, trajectory duration, terminal behavior, drift count, or absence of detected drift proves deployment safety, causality, intent, quality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that transfer evidence proves deployment safety, causality, intent, quality, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that intervention count, response time, rollback, recovery checks, or absence of detected residual risk proves intervention effectiveness, operational safety, causality, quality, redeployment readiness, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that intervention and recovery evidence proves effectiveness, safety, causality, quality, redeployment readiness, selection, authorization, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that lane count, coordination throughput, conflict resolution, observed blast radius, or containment state proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that distributed intervention evidence proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority.`);
   }
 
   results.push({
@@ -2112,6 +2215,18 @@ function validatePackage(pkg, packagePath) {
       evaluatorSignalVariants: evaluatorSignalVariants.length,
       evaluatorSignalTrials: evaluatorSignalTrials.length,
       evaluatorSignalAssessments: evaluatorSignalAssessments.length,
+      transferDriftPolicies: transferDriftPolicies.length,
+      deploymentTrajectories: deploymentTrajectories.length,
+      transferComparisons: transferComparisons.length,
+      transferDriftAssessments: transferDriftAssessments.length,
+      interventionRecoveryPolicies: interventionRecoveryPolicies.length,
+      interventionEvents: interventionEvents.length,
+      recoveryVerifications: recoveryVerifications.length,
+      interventionRecoveryAssessments: interventionRecoveryAssessments.length,
+      distributedInterventionPolicies: distributedInterventionPolicies.length,
+      interventionCoordinationRuns: interventionCoordinationRuns.length,
+      blastRadiusObservations: blastRadiusObservations.length,
+      distributedInterventionAssessments: distributedInterventionAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -2131,5 +2246,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, robustness summaries, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, contamination freedom, resolution quality, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, judge or policy selection, authorization, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, assessment summaries, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, contamination freedom, resolution quality, intervention effectiveness, coordination success, containment effectiveness, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, judge or policy selection, authorization, or decision authority."
 }, null, 2));

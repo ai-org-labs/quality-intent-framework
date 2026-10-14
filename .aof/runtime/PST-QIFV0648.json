@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-14T04:33:06.264Z",
+  "problem_statement_id": "PST-MV7M6ME0-BXZCFC",
+  "affected_party": "operators, service owners, and stakeholders exposed to coordinated intervention failures",
+  "actual_problem": "individually valid interventions can conflict, propagate across dependencies, saturate shared resources, or exceed intended blast radius when multiple agents, services, or operational lanes act together",
+  "why_it_matters": "local recovery can still create systemic failure, unauthorized cross-lane action, or hidden downstream loss",
+  "why_now": "current multi-agent evidence shows correlated behavior, conflicting objectives, resource flooding, and fast escalation that single-lane controls do not capture",
+  "evidence_refs": [
+    "docs/qif-v0.6.47-deployment-intervention-recovery.md",
+    "docs/qif-roadmap.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV7M5UTH-N1FX7K"
+}

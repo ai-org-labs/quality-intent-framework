@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-065",
+  "title": "Release QIF v0.6.48 distributed intervention containment",
+  "description": "Implement and release policy-bound coordination, conflict handling, propagation observation, and blast-radius containment evidence across operational lanes.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MV7M5LHA-74FT22",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MV7M7E9G-MWADGQ",
+  "operating_goal_ref": "v0.6.48-distributed-intervention-containment",
+  "created_at": "2026-10-14T04:33:50.961Z",
+  "updated_at": "2026-10-14T04:45:53.160Z",
+  "assigned_at": null,
+  "done_at": "2026-10-14T04:45:53.160Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented schema, example, deterministic verifier, 12 negative fixtures, docs, roadmap, portable package, actor packet, council review, and self-audit. npm test passed 16/16 positive and 1158/1158 negative checks."
+}

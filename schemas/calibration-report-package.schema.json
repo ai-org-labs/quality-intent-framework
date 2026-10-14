@@ -63,6 +63,10 @@
     "interventionEvents",
     "recoveryVerifications",
     "interventionRecoveryAssessments",
+    "distributedInterventionPolicies",
+    "interventionCoordinationRuns",
+    "blastRadiusObservations",
+    "distributedInterventionAssessments",
     "governanceTriggers",
     "verifierBoundary"
   ],
@@ -477,6 +481,34 @@
       "minItems": 1,
       "items": {
         "$ref": "#/$defs/interventionRecoveryAssessment"
+      }
+    },
+    "distributedInterventionPolicies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/distributedInterventionPolicy"
+      }
+    },
+    "interventionCoordinationRuns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/interventionCoordinationRun"
+      }
+    },
+    "blastRadiusObservations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/blastRadiusObservation"
+      }
+    },
+    "distributedInterventionAssessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/distributedInterventionAssessment"
       }
     }
   },
@@ -7702,6 +7734,221 @@
             "retired"
           ]
         }
+      }
+    },
+    "sharedResourceLimitRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resourceRef", "maximumConcurrentClaims", "overflowAction"],
+      "properties": {
+        "resourceRef": {"type": "string", "minLength": 1},
+        "maximumConcurrentClaims": {"type": "integer", "minimum": 1},
+        "overflowAction": {"enum": ["pause", "isolate", "escalate"]}
+      }
+    },
+    "distributedInterventionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "title", "sourceInterventionPolicyRef", "minimumLaneCount",
+        "requiredAuthorityPerLane", "dependencyOrderRequired",
+        "conflictResolutionRequired", "standDownAgreementRequired",
+        "maximumConcurrentInterventions", "maximumAffectedScopeCount",
+        "sharedResourceLimitRules", "failClosedOnConflict", "reviewedBy",
+        "inferenceBoundary", "governanceTriggerRefs", "status"
+      ],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "sourceInterventionPolicyRef": {"$ref": "#/$defs/id"},
+        "minimumLaneCount": {"type": "integer", "minimum": 2},
+        "requiredAuthorityPerLane": {"const": true},
+        "dependencyOrderRequired": {"const": true},
+        "conflictResolutionRequired": {"const": true},
+        "standDownAgreementRequired": {"const": true},
+        "maximumConcurrentInterventions": {"type": "integer", "minimum": 1},
+        "maximumAffectedScopeCount": {"type": "integer", "minimum": 1},
+        "sharedResourceLimitRules": {
+          "type": "array", "minItems": 1,
+          "items": {"$ref": "#/$defs/sharedResourceLimitRule"}
+        },
+        "failClosedOnConflict": {"const": true},
+        "reviewedBy": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "inferenceBoundary": {
+          "const": "coordination-and-blast-radius-evidence-only-not-systemic-safety-causality-quality-conflict-resolution-authorization-or-authority"
+        },
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "active", "retired"]}
+      }
+    },
+    "coordinationLaneAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "laneRef", "interventionEventRef", "authorityRole",
+        "authorityEvidenceRefs", "targetScopeRefs", "sequence", "actionState"
+      ],
+      "properties": {
+        "laneRef": {"type": "string", "minLength": 1},
+        "interventionEventRef": {"$ref": "#/$defs/id"},
+        "authorityRole": {"type": "string", "minLength": 1},
+        "authorityEvidenceRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
+        "targetScopeRefs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "sequence": {"type": "integer", "minimum": 1},
+        "actionState": {"enum": ["planned", "executed", "stood-down", "blocked"]}
+      }
+    },
+    "coordinationDependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["beforeLaneRef", "afterLaneRef", "evidenceRefs"],
+      "properties": {
+        "beforeLaneRef": {"type": "string", "minLength": 1},
+        "afterLaneRef": {"type": "string", "minLength": 1},
+        "evidenceRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}}
+      }
+    },
+    "coordinationConflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "laneRefs", "conflictType", "resolutionState", "resolutionAuthorityEvidenceRefs", "evidenceRefs"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "laneRefs": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "conflictType": {"enum": ["target-overlap", "authority-overlap", "order-conflict", "resource-contention", "common-mode-action"]},
+        "resolutionState": {"enum": ["resolved", "unresolved"]},
+        "resolutionAuthorityEvidenceRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "evidenceRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}}
+      }
+    },
+    "sharedResourceClaim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resourceRef", "laneRefs", "concurrentClaims"],
+      "properties": {
+        "resourceRef": {"type": "string", "minLength": 1},
+        "laneRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "concurrentClaims": {"type": "integer", "minimum": 1}
+      }
+    },
+    "interventionCoordinationRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "title", "policyRef", "sourceInterventionEventRefs", "laneActions",
+        "dependencyEdges", "conflicts", "sharedResourceClaims", "standDownState",
+        "concurrentInterventionCount", "conflictCount", "unresolvedConflictCount",
+        "authorityComplete", "orderValid", "resourceLimitsRespected",
+        "externalizedEvidenceRefs", "evidenceStatus", "qifCoordinatedAction",
+        "governanceTriggerRefs", "status"
+      ],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "sourceInterventionEventRefs": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "laneActions": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/coordinationLaneAction"}},
+        "dependencyEdges": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/coordinationDependency"}},
+        "conflicts": {"type": "array", "items": {"$ref": "#/$defs/coordinationConflict"}},
+        "sharedResourceClaims": {"type": "array", "items": {"$ref": "#/$defs/sharedResourceClaim"}},
+        "standDownState": {"enum": ["agreed", "partial", "not-agreed", "not-required"]},
+        "concurrentInterventionCount": {"type": "integer", "minimum": 0},
+        "conflictCount": {"type": "integer", "minimum": 0},
+        "unresolvedConflictCount": {"type": "integer", "minimum": 0},
+        "authorityComplete": {"type": "boolean"},
+        "orderValid": {"type": "boolean"},
+        "resourceLimitsRespected": {"type": "boolean"},
+        "externalizedEvidenceRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
+        "evidenceStatus": {"enum": ["verified", "unverified", "example-only"]},
+        "qifCoordinatedAction": {"const": false},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "propagationEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fromScopeRef", "toScopeRef", "observedAt", "evidenceRefs"],
+      "properties": {
+        "fromScopeRef": {"type": "string", "minLength": 1},
+        "toScopeRef": {"type": "string", "minLength": 1},
+        "observedAt": {"type": "string", "format": "date-time"},
+        "evidenceRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}}
+      }
+    },
+    "blastRadiusObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "title", "policyRef", "coordinationRunRef", "intendedScopeRefs",
+        "observedAffectedScopeRefs", "unexpectedAffectedScopeRefs", "propagationEdges",
+        "affectedScopeCount", "unexpectedScopeCount", "containmentBoundaryRefs",
+        "containmentState", "sharedResourceSaturationObserved", "commonModeFailureObserved",
+        "evidenceRefs", "evidenceStatus", "automaticContainmentClaim", "interpretation",
+        "governanceTriggerRefs", "status"
+      ],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "coordinationRunRef": {"$ref": "#/$defs/id"},
+        "intendedScopeRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "observedAffectedScopeRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "unexpectedAffectedScopeRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "propagationEdges": {"type": "array", "items": {"$ref": "#/$defs/propagationEdge"}},
+        "affectedScopeCount": {"type": "integer", "minimum": 0},
+        "unexpectedScopeCount": {"type": "integer", "minimum": 0},
+        "containmentBoundaryRefs": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "containmentState": {"enum": ["contained", "partially-contained", "uncontained", "unverified"]},
+        "sharedResourceSaturationObserved": {"type": "boolean"},
+        "commonModeFailureObserved": {"type": "boolean"},
+        "evidenceRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
+        "evidenceStatus": {"enum": ["verified", "unverified", "example-only"]},
+        "automaticContainmentClaim": {"const": false},
+        "interpretation": {"const": "blast-radius-observation-only-not-causality-systemic-safety-quality-containment-effectiveness-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "distributedInterventionAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "title", "policyRef", "coordinationRunRefs", "blastRadiusObservationRefs",
+        "coordinationRunCount", "verifiedCoordinationRunCount", "authorizedRunCount",
+        "orderedRunCount", "conflictRunCount", "unresolvedConflictCount",
+        "containedObservationCount", "scopeExceededCount", "saturatedResourceCount",
+        "commonModeFailureCount", "dataSufficiency", "assessmentSignal", "reviewedBy",
+        "activityCountIsQuality", "automaticOperationalDecision", "interpretation",
+        "governanceTriggerRefs", "status"
+      ],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "coordinationRunRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
+        "blastRadiusObservationRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
+        "coordinationRunCount": {"type": "integer", "minimum": 0},
+        "verifiedCoordinationRunCount": {"type": "integer", "minimum": 0},
+        "authorizedRunCount": {"type": "integer", "minimum": 0},
+        "orderedRunCount": {"type": "integer", "minimum": 0},
+        "conflictRunCount": {"type": "integer", "minimum": 0},
+        "unresolvedConflictCount": {"type": "integer", "minimum": 0},
+        "containedObservationCount": {"type": "integer", "minimum": 0},
+        "scopeExceededCount": {"type": "integer", "minimum": 0},
+        "saturatedResourceCount": {"type": "integer", "minimum": 0},
+        "commonModeFailureCount": {"type": "integer", "minimum": 0},
+        "dataSufficiency": {"enum": ["sufficient", "insufficient"]},
+        "assessmentSignal": {"enum": ["insufficient-data", "coordination-conflict-open", "blast-radius-exceeded", "shared-resource-saturated", "common-mode-failure-observed", "observed-no-structural-alerts"]},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "activityCountIsQuality": {"const": false},
+        "automaticOperationalDecision": {"const": false},
+        "interpretation": {"const": "distributed-intervention-evidence-only-not-systemic-safety-causality-quality-coordination-success-containment-effectiveness-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
       }
     }
   }
