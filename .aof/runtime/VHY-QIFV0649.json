@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-15T04:33:32.922Z",
+  "value_hypothesis_id": "VHY-MV91N1MI-ZT2MN8",
+  "expected_value_creation": "make common dependencies, recovery-path diversity, failover evidence, and correlated recovery risk reproducible before operators rely on redundancy claims",
+  "beneficiary": "accountable operators, reviewers, governance owners, and affected stakeholders",
+  "supporting_evidence": [
+    "Anthropic reports low-variance agents can make the same bad decision and turn isolated problems into systemic failures",
+    "durable agent platforms require explicit saved-state and recovery boundaries before retry or failover"
+  ],
+  "success_criteria": [
+    "shared dependency and recovery-path claims are reference-resolved and deterministically reproducible",
+    "unverified independence, common-cause exposure, and unavailable fallback routes trigger governance"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV91MKSX-CA9QKN"
+}

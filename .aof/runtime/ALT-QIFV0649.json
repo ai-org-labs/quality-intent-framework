@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-15T04:33:35.381Z",
+  "alternative_analysis_id": "ALT-MV91N3IT-WH3OHI",
+  "subject_need": "prevent false assurance from correlated intervention and recovery dependencies",
+  "alternative_solutions": [
+    "extend the existing calibration-report package with dependency-diversity policy, recovery-path observations, and correlated-risk assessment",
+    "document common dependencies only in narrative incident playbooks"
+  ],
+  "non_solution_options": [
+    "count vendors, paths, agents, or tests as redundancy quality"
+  ],
+  "defer_options": [
+    "wait for production incidents before recording recovery dependencies"
+  ],
+  "stop_options": [
+    "do not implement if the extension grants QIF operational authority or duplicates v0.6.48 blast-radius evidence"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV91MKSX-CA9QKN"
+}

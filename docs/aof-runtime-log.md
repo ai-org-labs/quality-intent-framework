@@ -5006,3 +5006,20 @@ Date: 2026-10-14
 - Outcome report: `OUT-MV7MNNN1-2D5SQ3` recorded implementation success and retained v0.6.49 as an open next value slice.
 - Residual risk: the committed coordination and blast-radius records are example-only. They do not prove coordination success, causal propagation, containment effectiveness, systemic safety, or recovery-path independence.
 - Next value slice: v0.6.49 Intervention Dependency Diversity and Correlated Recovery Risk.
+# QIF v0.6.49 Intervention Dependency Diversity and Correlated Recovery Risk
+
+Date: 2026-10-15
+
+- Need: differently named intervention and recovery lanes can share a model, prompt, service, identity, credential, queue, data source, runtime, operator, or procedure and fail together.
+- Intent: reproduce dependency nodes and edges, path overlap, evidence-backed independence, common causes, failover prerequisites, observed switching, and correlated recovery risk without granting QIF path-selection authority.
+- Context: QIF remains standalone; publicly released AOF v12.2.0 is development governance, not a QIF runtime dependency.
+- AOF session: `SESS-MV91MAK4-40N9W2`; task: `TASK-066`; validated decision: `DEC-MV91NNOE-AMWITO`.
+- Need Validation and Charter artifacts: `.aof/runtime/PST-QIFV0649.json`, `.aof/runtime/VHY-QIFV0649.json`, `.aof/runtime/ALT-QIFV0649.json`, `.aof/runtime/NVR-QIFV0649.json`, and `.aof/runtime/PCH-QIFV0649.json`.
+- Trend evidence: current Anthropic multi-agent research reports low-variance agents making the same bad decision and turning isolated defects into systemic failure; current durable-agent guidance requires saved-state and completed-effect checks before retry and recovery.
+- Council direction: Visionary, Builder, and Guardian proceeded with a narrow evidence model and retained real independence, causality, recovery effectiveness, route selection, and operational authority as semantic governance questions.
+- Decision: implement `DependencyDiversityPolicy`, `RecoveryDependencyGraph`, `RecoveryPathTrial`, and `CorrelatedRecoveryAssessment`; keep committed evidence example-only and insufficient.
+- Runtime evidence: `.aof/runtime/v0.6.49-actor-skill-packet.json`, `.aof/runtime/v0.6.49-planning-council-executed.json`, `.aof/runtime/v0.6.49-review-council-executed.json`, and self-audit `FSA-QIFV0649` record assignment, capability, resource, policy, review, and retrospective evidence. The executed mock council recorded `proceed` with no Guardian veto; it is routing evidence, not an independent semantic review.
+- Verification: `npm test` passed 16/16 positive and 1,170/1,170 retained negative checks. Portable build and verification passed with 49 files. AOF `organization-verify` passed 295/295 checks.
+- Outcome report: `OUT-MV920DRD-DG84CS` recorded implementation success and retained v0.6.50 as an open next value slice.
+- Residual risk: the committed dependency graph and recovery-path trial are example-only. They do not prove real independence, causal common failure, recovery effectiveness, operational safety, or retry side-effect safety.
+- Next value slice: v0.6.50 Durable Recovery State and Retry Side-Effect Safety.

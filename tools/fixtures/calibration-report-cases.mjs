@@ -1085,6 +1085,42 @@ export const cases = [
   },
   {
     id:"distributed-boundary-overclaim",rule:"distributed intervention semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that distributed intervention evidence proves systemic safety",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that lane count"));}
+  },
+  {
+    id:"dependency-diversity-policies-not-array",rule:"dependency diversity policies required",expect:"package dependencyDiversityPolicies must be an array.",mutate:(pkg)=>{pkg.dependencyDiversityPolicies=null;}
+  },
+  {
+    id:"recovery-graph-shared-dependency",rule:"shared dependency reproduction",expect:"sharedDependencyRefs must reproduce from path dependency overlap.",mutate:(pkg)=>{pkg.recoveryDependencyGraphs[0].sharedDependencyRefs=[];}
+  },
+  {
+    id:"recovery-graph-critical-count",rule:"critical shared dependency reproduction",expect:"criticalSharedDependencyCount must reproduce as 1.",mutate:(pkg)=>{pkg.recoveryDependencyGraphs[0].criticalSharedDependencyCount=0;}
+  },
+  {
+    id:"recovery-graph-independent-count",rule:"independent path reproduction",expect:"independentPathCount must reproduce as 0.",mutate:(pkg)=>{pkg.recoveryDependencyGraphs[0].independentPathCount=1;}
+  },
+  {
+    id:"recovery-graph-qif-selection",rule:"no QIF recovery selection authority",expect:"qifSelectedRecoveryPath must be false.",mutate:(pkg)=>{pkg.recoveryDependencyGraphs[0].qifSelectedRecoveryPath=true;}
+  },
+  {
+    id:"recovery-graph-critical-trigger",rule:"critical shared dependency governance",expect:"critical shared dependency requires a critical-shared-recovery-dependency governance trigger.",mutate:(pkg)=>{pkg.recoveryDependencyGraphs[0].governanceTriggerRefs=["GTR-CR-057","GTR-CR-059"];}
+  },
+  {
+    id:"recovery-graph-independence-trigger",rule:"unverified independence governance",expect:"insufficient verified independent paths require a recovery-independence-unverified governance trigger.",mutate:(pkg)=>{pkg.recoveryDependencyGraphs[0].governanceTriggerRefs=["GTR-CR-057","GTR-CR-058"];}
+  },
+  {
+    id:"recovery-trial-prerequisite-partition",rule:"failover prerequisite partition",expect:"prerequisite results must exactly partition requiredPrerequisiteRefs.",mutate:(pkg)=>{pkg.recoveryPathTrials[0].failedPrerequisiteRefs=[];}
+  },
+  {
+    id:"recovery-trial-executed-authority",rule:"failover switch authority",expect:"executed switch requires authority evidence and no failed prerequisite.",mutate:(pkg)=>{pkg.recoveryPathTrials[0].executedSwitch=true;}
+  },
+  {
+    id:"recovery-trial-fallback-trigger",rule:"fallback availability governance",expect:"unavailable fallback requires a fallback-path-unavailable governance trigger.",mutate:(pkg)=>{pkg.recoveryPathTrials[0].governanceTriggerRefs=["GTR-CR-057","GTR-CR-058"];}
+  },
+  {
+    id:"correlated-recovery-assessment-count",rule:"correlated recovery assessment reproduction",expect:"criticalSharedDependencyCount must reproduce as 1.",mutate:(pkg)=>{pkg.correlatedRecoveryAssessments[0].criticalSharedDependencyCount=0;}
+  },
+  {
+    id:"correlated-recovery-boundary-overclaim",rule:"correlated recovery semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that dependency diversity proves independence",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that path count"));}
   }
 ];
 

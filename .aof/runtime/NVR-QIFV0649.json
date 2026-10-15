@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-15T04:33:45.018Z",
+  "validation_id": "NVR-MV91NAYI-9EQ1ER",
+  "raw_need": "Add intervention dependency diversity and correlated recovery risk to QIF",
+  "validation_status": "validated",
+  "validated_need": "Add a narrow, domain-general evidence model that distinguishes declared redundancy from verified recovery-path independence by tracing shared dependencies, common-cause exposure, failover prerequisites, observed switching, and correlated recovery risk.",
+  "decision_summary": "The need is distinct from v0.6.48 blast-radius containment: it evaluates whether recovery paths can fail together, not where intervention effects propagate.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is the protected loss boundary?",
+      "answer": "An organization must not rely on a fallback that shares the cause or dependency that disabled the primary path.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What remains semantic?",
+      "answer": "Actual independence, causal common failure, recovery effectiveness, and path selection remain expert and governance judgments.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "different labels, vendors, or agents imply operational independence"
+  ],
+  "evidence_gaps": [
+    "committed examples cannot prove real recovery-path independence or failover effectiveness"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0649.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0649.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0649.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV91MKSX-CA9QKN"
+}

@@ -197,6 +197,10 @@ function validatePackage(pkg, packagePath) {
   const interventionCoordinationRuns = requiredArray(pkg, "interventionCoordinationRuns");
   const blastRadiusObservations = requiredArray(pkg, "blastRadiusObservations");
   const distributedInterventionAssessments = requiredArray(pkg, "distributedInterventionAssessments");
+  const dependencyDiversityPolicies = requiredArray(pkg, "dependencyDiversityPolicies");
+  const recoveryDependencyGraphs = requiredArray(pkg, "recoveryDependencyGraphs");
+  const recoveryPathTrials = requiredArray(pkg, "recoveryPathTrials");
+  const correlatedRecoveryAssessments = requiredArray(pkg, "correlatedRecoveryAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -256,6 +260,9 @@ function validatePackage(pkg, packagePath) {
   const distributedInterventionPolicyIndex = indexById(distributedInterventionPolicies, `${packagePath}:distributedInterventionPolicies`);
   const interventionCoordinationRunIndex = indexById(interventionCoordinationRuns, `${packagePath}:interventionCoordinationRuns`);
   const blastRadiusObservationIndex = indexById(blastRadiusObservations, `${packagePath}:blastRadiusObservations`);
+  const dependencyDiversityPolicyIndex = indexById(dependencyDiversityPolicies, `${packagePath}:dependencyDiversityPolicies`);
+  const recoveryDependencyGraphIndex = indexById(recoveryDependencyGraphs, `${packagePath}:recoveryDependencyGraphs`);
+  const recoveryPathTrialIndex = indexById(recoveryPathTrials, `${packagePath}:recoveryPathTrials`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -2049,6 +2056,96 @@ function validatePackage(pkg, packagePath) {
     if (!sufficient && !types.has("distributed-intervention-assessment-insufficient")) errors.push(`${assessment.id} insufficient evidence requires a distributed-intervention-assessment-insufficient governance trigger.`);
   }
 
+  for (const policy of dependencyDiversityPolicies) {
+    ref(distributedInterventionPolicyIndex, policy.sourceDistributedInterventionPolicyRef, "distributed intervention policy", policy.id);
+    if (!Number.isInteger(policy.minimumRecoveryPathCount) || policy.minimumRecoveryPathCount < 2) errors.push(`${policy.id} minimumRecoveryPathCount must be at least 2.`);
+    if (!Number.isInteger(policy.minimumIndependentPathCount) || policy.minimumIndependentPathCount < 1) errors.push(`${policy.id} minimumIndependentPathCount must be positive.`);
+    if (!Number.isInteger(policy.maximumCriticalSharedDependencyCount) || policy.maximumCriticalSharedDependencyCount < 0) errors.push(`${policy.id} maximumCriticalSharedDependencyCount must be a non-negative integer.`);
+    if (policy.independenceEvidenceRequired !== true || policy.observedFailoverRequired !== true || policy.failClosedOnUnverifiedIndependence !== true) errors.push(`${policy.id} must require independence evidence, observed failover, and fail-closed unverified independence.`);
+    if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one reviewer.`);
+    if (policy.inferenceBoundary !== "dependency-diversity-evidence-only-not-independence-causality-recovery-effectiveness-quality-selection-authorization-or-authority") errors.push(`${policy.id} inferenceBoundary must preserve dependency-diversity evidence limits.`);
+  }
+
+  for (const graph of recoveryDependencyGraphs) {
+    const policy = ref(dependencyDiversityPolicyIndex, graph.policyRef, "dependency diversity policy", graph.id);
+    ref(interventionCoordinationRunIndex, graph.coordinationRunRef, "intervention coordination run", graph.id);
+    const nodes = graph.dependencyNodes || [];
+    const paths = graph.recoveryPaths || [];
+    const nodeIndex = indexById(nodes, `${graph.id}:dependencyNodes`);
+    const pathIndex = indexById(paths, `${graph.id}:recoveryPaths`);
+    for (const pathItem of paths) {
+      for (const dependencyRef of pathItem.dependencyRefs || []) ref(nodeIndex, dependencyRef, "dependency node", pathItem.id);
+      const edgeDependencies = (graph.dependencyEdges || []).filter((edge) => edge.pathRef === pathItem.id && edge.requiredForRecovery).map((edge) => edge.dependencyRef);
+      if (!sameSet(pathItem.dependencyRefs, edgeDependencies)) errors.push(`${graph.id}/${pathItem.id} dependencyRefs must exactly match required dependency edges.`);
+      if (pathItem.independenceClaim === "verified" && !(pathItem.independenceEvidenceRefs || []).length) errors.push(`${graph.id}/${pathItem.id} verified independence requires evidence.`);
+    }
+    for (const edge of graph.dependencyEdges || []) {
+      ref(pathIndex, edge.pathRef, "recovery path", graph.id);
+      ref(nodeIndex, edge.dependencyRef, "dependency node", graph.id);
+      if (!(edge.evidenceRefs || []).length) errors.push(`${graph.id} dependency edges must include evidence.`);
+    }
+    const dependencyUse = new Map();
+    for (const pathItem of paths) for (const dependencyRef of new Set(pathItem.dependencyRefs || [])) dependencyUse.set(dependencyRef, (dependencyUse.get(dependencyRef) || 0) + 1);
+    const shared = [...dependencyUse.entries()].filter(([, count]) => count > 1).map(([id]) => id);
+    if (!sameSet(graph.sharedDependencyRefs, shared)) errors.push(`${graph.id} sharedDependencyRefs must reproduce from path dependency overlap.`);
+    const criticalShared = shared.filter((id) => nodeIndex.get(id)?.critical).length;
+    if (graph.criticalSharedDependencyCount !== criticalShared) errors.push(`${graph.id} criticalSharedDependencyCount must reproduce as ${criticalShared}.`);
+    const independent = paths.filter((item) => item.independenceClaim === "verified" && (item.independenceEvidenceRefs || []).length > 0).length;
+    if (graph.independentPathCount !== independent) errors.push(`${graph.id} independentPathCount must reproduce as ${independent}.`);
+    if (policy && paths.length < policy.minimumRecoveryPathCount) errors.push(`${graph.id} recoveryPaths must meet policy minimumRecoveryPathCount ${policy.minimumRecoveryPathCount}.`);
+    if (graph.qifSelectedRecoveryPath !== false) errors.push(`${graph.id} qifSelectedRecoveryPath must be false.`);
+    const types = new Set((graph.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", graph.id)?.triggerType));
+    if (graph.evidenceStatus !== "verified" && !types.has("dependency-diversity-evidence-unverified")) errors.push(`${graph.id} non-verified dependency evidence requires a dependency-diversity-evidence-unverified governance trigger.`);
+    if (policy && criticalShared > policy.maximumCriticalSharedDependencyCount && !types.has("critical-shared-recovery-dependency")) errors.push(`${graph.id} critical shared dependency requires a critical-shared-recovery-dependency governance trigger.`);
+    if (policy && independent < policy.minimumIndependentPathCount && !types.has("recovery-independence-unverified")) errors.push(`${graph.id} insufficient verified independent paths require a recovery-independence-unverified governance trigger.`);
+  }
+
+  for (const trial of recoveryPathTrials) {
+    ref(dependencyDiversityPolicyIndex, trial.policyRef, "dependency diversity policy", trial.id);
+    const graph = ref(recoveryDependencyGraphIndex, trial.dependencyGraphRef, "recovery dependency graph", trial.id);
+    const pathIndex = indexById(graph?.recoveryPaths || [], `${trial.id}:recoveryPaths`);
+    ref(pathIndex, trial.primaryPathRef, "primary recovery path", trial.id);
+    ref(pathIndex, trial.fallbackPathRef, "fallback recovery path", trial.id);
+    if (trial.primaryPathRef === trial.fallbackPathRef) errors.push(`${trial.id} primaryPathRef and fallbackPathRef must differ.`);
+    const required = trial.requiredPrerequisiteRefs || [];
+    const satisfied = trial.satisfiedPrerequisiteRefs || [];
+    const failed = trial.failedPrerequisiteRefs || [];
+    if (!sameSet([...satisfied, ...failed], required) || satisfied.some((id) => failed.includes(id))) errors.push(`${trial.id} prerequisite results must exactly partition requiredPrerequisiteRefs.`);
+    if (trial.executedSwitch && ((trial.switchAuthorityEvidenceRefs || []).length === 0 || failed.length > 0)) errors.push(`${trial.id} executed switch requires authority evidence and no failed prerequisite.`);
+    if (trial.recoveryCompleted && !trial.executedSwitch) errors.push(`${trial.id} recoveryCompleted requires executedSwitch.`);
+    if (trial.automaticRecoveryClaim !== false) errors.push(`${trial.id} automaticRecoveryClaim must be false.`);
+    const types = new Set((trial.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", trial.id)?.triggerType));
+    if (trial.evidenceStatus !== "verified" && !types.has("dependency-diversity-evidence-unverified")) errors.push(`${trial.id} non-verified failover evidence requires a dependency-diversity-evidence-unverified governance trigger.`);
+    if ((!trial.executedSwitch || failed.length > 0) && !types.has("fallback-path-unavailable")) errors.push(`${trial.id} unavailable fallback requires a fallback-path-unavailable governance trigger.`);
+    if (trial.sharedFailureObserved && !types.has("critical-shared-recovery-dependency")) errors.push(`${trial.id} observed shared failure requires a critical-shared-recovery-dependency governance trigger.`);
+  }
+
+  for (const assessment of correlatedRecoveryAssessments) {
+    const policy = ref(dependencyDiversityPolicyIndex, assessment.policyRef, "dependency diversity policy", assessment.id);
+    const graphs = (assessment.dependencyGraphRefs || []).map((id) => ref(recoveryDependencyGraphIndex, id, "recovery dependency graph", assessment.id)).filter(Boolean);
+    const trials = (assessment.recoveryPathTrialRefs || []).map((id) => ref(recoveryPathTrialIndex, id, "recovery path trial", assessment.id)).filter(Boolean);
+    const expected = {
+      graphCount: graphs.length,
+      verifiedGraphCount: graphs.filter((item) => item.evidenceStatus === "verified").length,
+      pathCount: graphs.reduce((sum, item) => sum + (item.recoveryPaths || []).length, 0),
+      independentPathCount: graphs.reduce((sum, item) => sum + item.independentPathCount, 0),
+      criticalSharedDependencyCount: graphs.reduce((sum, item) => sum + item.criticalSharedDependencyCount, 0),
+      trialCount: trials.length,
+      verifiedTrialCount: trials.filter((item) => item.evidenceStatus === "verified").length,
+      successfulFailoverCount: trials.filter((item) => item.executedSwitch && item.recoveryCompleted).length,
+      sharedFailureCount: trials.filter((item) => item.sharedFailureObserved).length
+    };
+    for (const [field, value] of Object.entries(expected)) if (assessment[field] !== value) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const sufficient = graphs.length > 0 && trials.length > 0 && expected.verifiedGraphCount === graphs.length && expected.verifiedTrialCount === trials.length;
+    const sufficiency = sufficient ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== sufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${sufficiency}.`);
+    const signal = !sufficient ? "insufficient-data" : policy && expected.criticalSharedDependencyCount > policy.maximumCriticalSharedDependencyCount ? "critical-shared-dependency" : policy && expected.independentPathCount < policy.minimumIndependentPathCount ? "unverified-independence" : expected.successfulFailoverCount < trials.length ? "fallback-unavailable" : expected.sharedFailureCount > 0 ? "correlated-recovery-failure" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (assessment.activityCountIsQuality !== false || assessment.automaticOperationalDecision !== false) errors.push(`${assessment.id} must not treat activity counts as quality or make an automatic operational decision.`);
+    const types = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (!sufficient && !types.has("correlated-recovery-assessment-insufficient")) errors.push(`${assessment.id} insufficient evidence requires a correlated-recovery-assessment-insufficient governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -2161,6 +2258,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that transfer matching, trajectory duration, terminal behavior, drift count, or absence of detected drift proves deployment safety, causality, intent, quality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that transfer evidence proves deployment safety, causality, intent, quality, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that intervention count, response time, rollback, recovery checks, or absence of detected residual risk proves intervention effectiveness, operational safety, causality, quality, redeployment readiness, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that intervention and recovery evidence proves effectiveness, safety, causality, quality, redeployment readiness, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that lane count, coordination throughput, conflict resolution, observed blast radius, or containment state proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that distributed intervention evidence proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that path count, vendor count, dependency diversity, failover execution, or absence of observed shared failure proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that dependency diversity proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority.`);
   }
 
   results.push({
@@ -2227,6 +2325,10 @@ function validatePackage(pkg, packagePath) {
       interventionCoordinationRuns: interventionCoordinationRuns.length,
       blastRadiusObservations: blastRadiusObservations.length,
       distributedInterventionAssessments: distributedInterventionAssessments.length,
+      dependencyDiversityPolicies: dependencyDiversityPolicies.length,
+      recoveryDependencyGraphs: recoveryDependencyGraphs.length,
+      recoveryPathTrials: recoveryPathTrials.length,
+      correlatedRecoveryAssessments: correlatedRecoveryAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -2246,5 +2348,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, assessment summaries, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, contamination freedom, resolution quality, intervention effectiveness, coordination success, containment effectiveness, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, judge or policy selection, authorization, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, recovery dependency overlap, path membership, failover prerequisite partitioning, correlated recovery assessment summaries, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, contamination freedom, resolution quality, intervention effectiveness, coordination success, containment effectiveness, recovery effectiveness, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, judge or policy selection, authorization, or decision authority."
 }, null, 2));

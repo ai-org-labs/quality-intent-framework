@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-14T04:45:40.300Z",
+  "updated_at": "2026-10-15T04:43:38.065Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "成功は、各介入レーンの権限・対象・依存・順序・共有資源・競合・停止合意と、意図した影響範囲、実観測された伝播、予期しない影響、封じ込め状態を外部証拠から再計算でき、競合・共通原因・範囲超過・証拠不足をガバナンスへ送り、件数や処理量を品質とみなさないこと。",
-      "recorded_at": "2026-10-14T04:32:30.536Z",
+      "answer": "成功は、依存ノードと共有依存、独立性根拠、共通原因、代替復旧経路、切替前提、実観測の切替証拠、相関回復リスクを外部証拠から再計算でき、未検証の独立性や代替不能をガバナンスへ送り、経路数・ベンダー数・テスト数を品質とみなさないこと。",
+      "recorded_at": "2026-10-15T04:33:11.126Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MV7M5LHA-74FT22",
+      "source_session_id": "SESS-MV91MAK4-40N9W2",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "Implement a narrow distributed-response evidence extension; retain coordination correctness, causality, and containment effectiveness as semantic governance questions",
-      "recorded_at": "2026-10-14T04:33:42.392Z",
+      "answer": "The need is distinct from v0.6.48 blast-radius containment: it evaluates whether recovery paths can fail together, not where intervention effects propagate.",
+      "recorded_at": "2026-10-15T04:34:01.506Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MV7M5LHA-74FT22",
-      "source_decision_record_id": "DEC-MV7M7E9G-MWADGQ"
+      "source_session_id": "SESS-MV91MAK4-40N9W2",
+      "source_decision_record_id": "DEC-MV91NNOE-AMWITO"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "The example remains example-only and cannot prove coordination success, containment effectiveness, systemic safety, or recovery-path independence.",
-      "recorded_at": "2026-10-14T04:45:40.300Z",
-      "expectation_state": "Distributed lane coordination and observed blast radius are structurally reproducible without granting QIF operational authority.",
-      "mismatch_state": "The example remains example-only and cannot prove coordination success, containment effectiveness, systemic safety, or recovery-path independence.",
-      "scale_direction": "Expose shared dependencies and require independently operable recovery paths across intervention lanes.",
-      "source_session_id": "SESS-MV7M5LHA-74FT22",
-      "source_decision_record_id": "DEC-MV7M7E9G-MWADGQ"
+      "answer": "The example remains example-only and cannot prove real independence, causal common failure, recovery effectiveness, or retry side-effect safety.",
+      "recorded_at": "2026-10-15T04:43:38.065Z",
+      "expectation_state": "Shared recovery dependencies, evidence-backed independence claims, failover prerequisites, and correlated recovery assessments are structurally reproducible without granting QIF path-selection authority.",
+      "mismatch_state": "The example remains example-only and cannot prove real independence, causal common failure, recovery effectiveness, or retry side-effect safety.",
+      "scale_direction": "Bind durable recovery state, completed external effects, idempotency, retry budgets, and accountable resume authority.",
+      "source_session_id": "SESS-MV91MAK4-40N9W2",
+      "source_decision_record_id": "DEC-MV91NNOE-AMWITO"
     }
   ]
 }

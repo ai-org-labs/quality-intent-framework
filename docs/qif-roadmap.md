@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.48 baseline)
+## Current Position (v0.6.49 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -225,13 +225,14 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-10-09 against primary-source signals. The
+The roadmap was revalidated on 2026-10-15 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
 
 | Current signal | Quality risk exposed | QIF response | Lead, not follow |
 | --- | --- | --- | --- |
+| Emerging multi-agent studies report low-variance agents making the same mistake, turning isolated defects into systemic failures; durable agent APIs also require completed effects and saved state to be checked before retry or recovery. ([Anthropic multi-agent systems](https://www.anthropic.com/research/multiagent-systems), [OpenAI Agents API recovery](https://developers.openai.com/api/docs/guides/agents-api/errors), [OpenAI Agents SDK durability](https://openai.com/index/the-next-evolution-of-the-agents-sdk/)) | Nominally separate lanes or fallback paths can share a model, credential, queue, data source, runtime, or recovery procedure. Retrying through the fallback can repeat side effects or reproduce the same failure. | v0.6.49 Dependency Diversity and Correlated Recovery Risk, followed by v0.6.50 Durable Recovery State and Retry Side-Effect Safety. | Require evidence-backed dependency graphs and observed failover before trusting redundancy, then bind retries to saved state, completed effects, idempotency, and accountable resume authority. |
 | Sequestered blind evaluation is becoming a measurement control, while recent evidence shows agents can infer benchmarks, seek hidden answers, target graders, and metagame without revealing that behavior in written reasoning. ([NIST AITE](https://ai-challenges.nist.gov/aite), [NIST evaluation cheating](https://www.nist.gov/caissi/cheating-ai-agent-evaluations), [OpenAI incident](https://openai.com/index/hugging-face-incident-and-the-road-ahead/), [OpenAI metagaming](https://alignment.openai.com/metagaming-latents/)) | A reproducible score can still be invalid when answers, labels, grader behavior, metadata, or forbidden affordances were available; absence of a detected shortcut can be mistaken for proof of clean evaluation. | v0.6.42 Sequestered Replay and Policy-Gaming Detection. | Bind blind-state claims to access evidence, declare affordances before execution, inspect externalized trajectories, and govern contamination or loophole uncertainty without requesting hidden reasoning or claiming honesty. |
 | Evaluation and operations are moving toward selective human or specialist review for low-confidence, disputed, novel, or high-impact cases rather than reviewing everything. ([OpenAI evaluation audit](https://openai.com/index/separating-signal-from-noise-coding-evaluations/), [OpenAI AI scorecard](https://openai.com/index/a-scorecard-for-the-ai-age/), [Anthropic trustworthy agents](https://www.anthropic.com/research/trustworthy-agents), [ConfTriage](https://arxiv.org/abs/2608.10885)) | A deferral count can be mistaken for safety, an escalation route can lack real authority or capability, and a later outcome can be misused as causal proof or employee-performance evidence. | v0.6.35 Selective Escalation Calibration, followed by v0.6.36 resolution and timeliness evidence. | Keep policy, actual route, authority, capability, execution evidence, outcome, disagreement, and response timing separate before optimizing any routing policy. |
 | Agent oversight is beginning to report review latency, blocking or redirection, and escalation rates separately, while risk guidance calls for response times and response types to be documented. ([Anthropic pace and oversight measurements](https://www.anthropic.com/institute/measuring-pace-of-ai-development), [NIST AI RMF Playbook](https://airc.nist.gov/docs/AI_RMF_Playbook.pdf)) | A configured human-review route can be mistaken for effective oversight even when nobody is available, no disposition is recorded, or the case silently times out. Speed and volume can then become misleading proxies for quality. | v0.6.36 Escalation Resolution and Timeliness, followed by v0.6.37 disagreement calibration. | Preserve route selection, actual disposition, response window, availability, evidence verification, and timeout consequence as separate governed records before using escalation metrics operationally. |
@@ -693,6 +694,17 @@ Deliverables:
   rollback dependencies across intervention lanes; require an independently
   operable recovery path where policy demands one; and prevent nominal lane
   diversity from hiding common-mode recovery failure.
+- Status: implemented in v0.6.49 through reviewed dependency-diversity
+  policies, recovery dependency graphs, path membership and overlap,
+  evidence-backed independence claims, failover prerequisite trials,
+  deterministic correlated-risk assessments, governance, and retained
+  negative fixtures. The committed graph remains example-only and cannot
+  prove real independence, causality, recovery effectiveness, or authority.
+- Next planned slice, v0.6.50 Durable Recovery State and Retry Side-Effect Safety:
+  bind snapshot or checkpoint state, completed external effects, idempotency
+  scope, retry budgets, rehydration identity, resume authority, and partial
+  completion evidence so recovery cannot silently replay already completed
+  actions or continue from stale state.
 - Next planned phase, v0.7 Empirical Calibration: replace illustrative
   calibration evidence with governed pilot outcomes, suite-health records, and
   framework-learning evidence while preserving uncertainty boundaries.

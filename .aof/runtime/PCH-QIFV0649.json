@@ -1,0 +1,22 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-15T04:33:51.637Z",
+  "project_charter_id": "PCH-MV91NG2D-MAT3U9",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0649.json",
+  "validated_objective": "Ship QIF v0.6.49 with reproducible dependency diversity, recovery-path, failover evidence, and correlated recovery risk records",
+  "scope": [
+    "calibration-report schema and example",
+    "deterministic verifier and retained negative fixtures",
+    "documentation, roadmap, portable package, release evidence"
+  ],
+  "constraints": [
+    "do not grant QIF recovery selection, switching, or operational authority",
+    "do not treat path, vendor, agent, or test counts as quality"
+  ],
+  "expected_outcomes": [
+    "shared dependencies and fallback assumptions become explicit and reference-resolved",
+    "unverified independence and correlated recovery exposure route to governance"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV91MKSX-CA9QKN"
+}

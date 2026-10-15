@@ -1,0 +1,14 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-15T04:33:30.612Z",
+  "problem_statement_id": "PST-MV91MZUC-3ARHRH",
+  "affected_party": "organizations operating multiple AI agents, services, and recovery lanes",
+  "actual_problem": "apparently separate interventions and recovery paths can share hidden dependencies and fail together",
+  "why_it_matters": "a declared fallback may reproduce the same failure, expand loss, and create false assurance",
+  "why_now": "multi-agent systems increasingly fan out through common models, services, credentials, queues, and data sources",
+  "evidence_refs": [
+    "docs/qif-v0.6.48-distributed-intervention-containment.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MV91MKSX-CA9QKN"
+}

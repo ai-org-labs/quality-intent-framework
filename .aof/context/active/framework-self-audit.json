@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-14T04:45:40.297Z",
-  "audit_id": "FSA-QIFV0648",
-  "scope": "v0.6.48 self-review and retrospective",
-  "summary": "Distributed lane coordination and observed blast radius are structurally reproducible without granting QIF operational authority.",
-  "detected_gap": "The example remains example-only and cannot prove coordination success, containment effectiveness, systemic safety, or recovery-path independence.",
+  "recorded_at": "2026-10-15T04:43:38.062Z",
+  "audit_id": "FSA-QIFV0649",
+  "scope": "v0.6.49 self-review and retrospective",
+  "summary": "Shared recovery dependencies, evidence-backed independence claims, failover prerequisites, and correlated recovery assessments are structurally reproducible without granting QIF path-selection authority.",
+  "detected_gap": "The example remains example-only and cannot prove real independence, causal common failure, recovery effectiveness, or retry side-effect safety.",
   "result_state": "stable",
-  "next_action": "Expose shared dependencies and require independently operable recovery paths across intervention lanes.",
+  "next_action": "Bind durable recovery state, completed external effects, idempotency, retry budgets, and accountable resume authority.",
   "related_task_ids": [
-    "TASK-065"
+    "TASK-066"
   ],
-  "source_session_id": "SESS-MV7M5LHA-74FT22",
-  "source_decision_record_id": "DEC-MV7M7E9G-MWADGQ"
+  "source_session_id": "SESS-MV91MAK4-40N9W2",
+  "source_decision_record_id": "DEC-MV91NNOE-AMWITO"
 }

@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "structurally verify distributed intervention authority, ordering, dependencies, conflicts, propagation, and containment without operational authority",
-  "updated_at": "2026-10-14T04:33:42.390Z",
+  "content": "Add a narrow, domain-general evidence model that distinguishes declared redundancy from verified recovery-path independence by tracing shared dependencies, common-cause exposure, failover prerequisites, observed switching, and correlated recovery risk.",
+  "updated_at": "2026-10-15T04:34:01.505Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MV7M5LHA-74FT22",
-  "source_decision_record_id": "DEC-MV7M7E9G-MWADGQ",
+  "source_session_id": "SESS-MV91MAK4-40N9W2",
+  "source_decision_record_id": "DEC-MV91NNOE-AMWITO",
   "declared_complete_at": null
 }

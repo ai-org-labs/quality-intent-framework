@@ -67,6 +67,10 @@
     "interventionCoordinationRuns",
     "blastRadiusObservations",
     "distributedInterventionAssessments",
+    "dependencyDiversityPolicies",
+    "recoveryDependencyGraphs",
+    "recoveryPathTrials",
+    "correlatedRecoveryAssessments",
     "governanceTriggers",
     "verifierBoundary"
   ],
@@ -509,6 +513,34 @@
       "minItems": 1,
       "items": {
         "$ref": "#/$defs/distributedInterventionAssessment"
+      }
+    },
+    "dependencyDiversityPolicies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/dependencyDiversityPolicy"
+      }
+    },
+    "recoveryDependencyGraphs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/recoveryDependencyGraph"
+      }
+    },
+    "recoveryPathTrials": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/recoveryPathTrial"
+      }
+    },
+    "correlatedRecoveryAssessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/correlatedRecoveryAssessment"
       }
     }
   },
@@ -7947,6 +7979,163 @@
         "activityCountIsQuality": {"const": false},
         "automaticOperationalDecision": {"const": false},
         "interpretation": {"const": "distributed-intervention-evidence-only-not-systemic-safety-causality-quality-coordination-success-containment-effectiveness-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "dependencyDiversityPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "title", "sourceDistributedInterventionPolicyRef",
+        "minimumRecoveryPathCount", "minimumIndependentPathCount",
+        "maximumCriticalSharedDependencyCount", "independenceEvidenceRequired",
+        "observedFailoverRequired", "failClosedOnUnverifiedIndependence",
+        "reviewedBy", "inferenceBoundary", "governanceTriggerRefs", "status"
+      ],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "sourceDistributedInterventionPolicyRef": {"$ref": "#/$defs/id"},
+        "minimumRecoveryPathCount": {"type": "integer", "minimum": 2},
+        "minimumIndependentPathCount": {"type": "integer", "minimum": 1},
+        "maximumCriticalSharedDependencyCount": {"type": "integer", "minimum": 0},
+        "independenceEvidenceRequired": {"const": true},
+        "observedFailoverRequired": {"const": true},
+        "failClosedOnUnverifiedIndependence": {"const": true},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "inferenceBoundary": {"const": "dependency-diversity-evidence-only-not-independence-causality-recovery-effectiveness-quality-selection-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "active", "retired"]}
+      }
+    },
+    "recoveryDependencyNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "dependencyKind", "critical", "evidenceRefs"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "dependencyKind": {"enum": ["model", "prompt", "service", "identity", "credential", "queue", "data-source", "runtime", "network", "operator", "procedure", "other"]},
+        "critical": {"type": "boolean"},
+        "evidenceRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}}
+      }
+    },
+    "recoveryDependencyEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pathRef", "dependencyRef", "requiredForRecovery", "evidenceRefs"],
+      "properties": {
+        "pathRef": {"$ref": "#/$defs/id"},
+        "dependencyRef": {"$ref": "#/$defs/id"},
+        "requiredForRecovery": {"type": "boolean"},
+        "evidenceRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}}
+      }
+    },
+    "recoveryPathDeclaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "role", "dependencyRefs", "independenceClaim", "independenceEvidenceRefs", "activationAuthorityRole"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "role": {"enum": ["primary", "fallback", "manual"]},
+        "dependencyRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "independenceClaim": {"enum": ["verified", "unverified", "not-independent"]},
+        "independenceEvidenceRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "activationAuthorityRole": {"type": "string", "minLength": 1}
+      }
+    },
+    "recoveryDependencyGraph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "title", "policyRef", "coordinationRunRef", "dependencyNodes",
+        "dependencyEdges", "recoveryPaths", "sharedDependencyRefs",
+        "criticalSharedDependencyCount", "independentPathCount", "commonCauseRefs",
+        "evidenceStatus", "qifSelectedRecoveryPath", "governanceTriggerRefs", "status"
+      ],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "coordinationRunRef": {"$ref": "#/$defs/id"},
+        "dependencyNodes": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/recoveryDependencyNode"}},
+        "dependencyEdges": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/recoveryDependencyEdge"}},
+        "recoveryPaths": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/recoveryPathDeclaration"}},
+        "sharedDependencyRefs": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "criticalSharedDependencyCount": {"type": "integer", "minimum": 0},
+        "independentPathCount": {"type": "integer", "minimum": 0},
+        "commonCauseRefs": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "evidenceStatus": {"enum": ["verified", "unverified", "example-only"]},
+        "qifSelectedRecoveryPath": {"const": false},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "recoveryPathTrial": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "title", "policyRef", "dependencyGraphRef", "primaryPathRef",
+        "fallbackPathRef", "triggerRef", "requiredPrerequisiteRefs",
+        "satisfiedPrerequisiteRefs", "failedPrerequisiteRefs", "executedSwitch",
+        "switchAuthorityEvidenceRefs", "sharedFailureObserved", "recoveryCompleted",
+        "externalizedEvidenceRefs", "evidenceStatus", "automaticRecoveryClaim",
+        "governanceTriggerRefs", "status"
+      ],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "dependencyGraphRef": {"$ref": "#/$defs/id"},
+        "primaryPathRef": {"$ref": "#/$defs/id"},
+        "fallbackPathRef": {"$ref": "#/$defs/id"},
+        "triggerRef": {"type": "string", "minLength": 1},
+        "requiredPrerequisiteRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "satisfiedPrerequisiteRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "failedPrerequisiteRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "executedSwitch": {"type": "boolean"},
+        "switchAuthorityEvidenceRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "sharedFailureObserved": {"type": "boolean"},
+        "recoveryCompleted": {"type": "boolean"},
+        "externalizedEvidenceRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
+        "evidenceStatus": {"enum": ["verified", "unverified", "example-only"]},
+        "automaticRecoveryClaim": {"const": false},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "correlatedRecoveryAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "title", "policyRef", "dependencyGraphRefs", "recoveryPathTrialRefs",
+        "graphCount", "verifiedGraphCount", "pathCount", "independentPathCount",
+        "criticalSharedDependencyCount", "trialCount", "verifiedTrialCount",
+        "successfulFailoverCount", "sharedFailureCount", "dataSufficiency",
+        "assessmentSignal", "reviewedBy", "activityCountIsQuality",
+        "automaticOperationalDecision", "interpretation", "governanceTriggerRefs", "status"
+      ],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "dependencyGraphRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
+        "recoveryPathTrialRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
+        "graphCount": {"type": "integer", "minimum": 0},
+        "verifiedGraphCount": {"type": "integer", "minimum": 0},
+        "pathCount": {"type": "integer", "minimum": 0},
+        "independentPathCount": {"type": "integer", "minimum": 0},
+        "criticalSharedDependencyCount": {"type": "integer", "minimum": 0},
+        "trialCount": {"type": "integer", "minimum": 0},
+        "verifiedTrialCount": {"type": "integer", "minimum": 0},
+        "successfulFailoverCount": {"type": "integer", "minimum": 0},
+        "sharedFailureCount": {"type": "integer", "minimum": 0},
+        "dataSufficiency": {"enum": ["sufficient", "insufficient"]},
+        "assessmentSignal": {"enum": ["insufficient-data", "unverified-independence", "critical-shared-dependency", "fallback-unavailable", "correlated-recovery-failure", "observed-no-structural-alerts"]},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "activityCountIsQuality": {"const": false},
+        "automaticOperationalDecision": {"const": false},
+        "interpretation": {"const": "correlated-recovery-evidence-only-not-independence-causality-recovery-effectiveness-quality-selection-authorization-or-authority"},
         "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
         "status": {"enum": ["draft", "reviewed", "retired"]}
       }

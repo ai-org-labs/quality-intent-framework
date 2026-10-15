@@ -1,9 +1,10 @@
 # Quality Intent Framework
 
-Current release: **v0.6.48**. The calibration runtime now traces authority,
-dependency order, conflict, shared-resource pressure, propagation, and
-blast-radius containment across multiple intervention lanes without granting
-operational authority or treating coordination activity as quality.
+Current release: **v0.6.49**. The calibration runtime now exposes shared
+dependencies across primary and fallback recovery paths, reproduces verified
+independence and failover prerequisites, and routes correlated recovery risk
+to governance without granting operational authority or treating path count
+as quality.
 
 Quality Intent Framework (QIF) turns an organization's quality theory into an operational, AI-verifiable framework.
 
@@ -33,7 +34,7 @@ decision authority.
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x Action Quality Contract runtime for governing AI agent tool actions with trace approval evidence, the v0.6.x Authoring Template runtime for guiding AI agents to author valid, understandable QIF packages, and the v0.6.43-v0.6.48 portable, evaluator, deployment, intervention, and distributed-containment runtime:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x Action Quality Contract runtime for governing AI agent tool actions with trace approval evidence, the v0.6.x Authoring Template runtime for guiding AI agents to author valid, understandable QIF packages, and the v0.6.43-v0.6.49 portable, evaluator, deployment, intervention, containment, and correlated-recovery runtime:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -79,6 +80,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.6.46 Evaluation-to-Deployment Transfer and Long-Horizon Drift: `docs/qif-v0.6.46-evaluation-deployment-transfer-drift.md`
 - QIF v0.6.47 Deployment Intervention and Recovery Calibration: `docs/qif-v0.6.47-deployment-intervention-recovery.md`
 - QIF v0.6.48 Distributed Intervention Coordination and Blast-Radius Containment: `docs/qif-v0.6.48-distributed-intervention-containment.md`
+- QIF v0.6.49 Intervention Dependency Diversity and Correlated Recovery Risk: `docs/qif-v0.6.49-intervention-dependency-diversity.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`

@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.49
+
+- Added executable dependency-diversity policies, recovery dependency graphs, recovery-path trials, and correlated recovery assessments.
+- Added reproducible path membership, shared critical dependency, verified independence, prerequisite partition, failover execution, and assessment checks.
+- Added governance routing for example-only evidence, critical shared dependencies, unverified independence, unavailable fallback paths, and insufficient assessment evidence.
+- Prevented path count, vendor count, nominal diversity, and failover activity from becoming independence, recovery-effectiveness, quality, or authority claims.
+
 ## v0.6.48
 
 - Added executable distributed intervention policies, coordination runs, blast-radius observations, and aggregate assessments.

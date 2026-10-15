@@ -2685,6 +2685,56 @@
       "requiredAction": "Keep the distributed intervention assessment descriptive and non-authoritative.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-057",
+      "triggerType": "dependency-diversity-evidence-unverified",
+      "reason": "The committed dependency graph and recovery-path trial are example-only.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified dependency and failover evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-058",
+      "triggerType": "critical-shared-recovery-dependency",
+      "reason": "Primary and fallback recovery paths share a critical model dependency.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Do not represent the fallback as independent until the shared critical dependency is removed or governed.",
+      "owner": "incident-response-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-059",
+      "triggerType": "recovery-independence-unverified",
+      "reason": "No recovery path has verified independence evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep independence claims fail-closed and obtain accountable review evidence.",
+      "owner": "service-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-060",
+      "triggerType": "fallback-path-unavailable",
+      "reason": "A required failover prerequisite was not satisfied and the fallback was not executed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep automatic failover blocked and remediate the missing prerequisite under accountable authority.",
+      "owner": "incident-commander",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-061",
+      "triggerType": "correlated-recovery-assessment-insufficient",
+      "reason": "Verified dependency graphs and failover trials are below the policy requirement.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep the correlated recovery assessment descriptive and non-authoritative.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -2704,7 +2754,8 @@
       "judge-condition changes, identical evidence snapshots, expected and returned labels, classification and abstention taxonomy, condition sensitivity, assessment summaries, and governance routing reproduce",
       "sequestered items, reveal stages, access roles, allowed and observed affordances, externalized transcript inspection, contamination and loophole findings, assessment counts, and governance routing reproduce",
       "judge dependency profiles, shared dimensions, verdict groups, majority state, dissent, abstention, panel correlation risk, aggregate counts, sufficiency, and governance routing reproduce",
-      "distributed lane authority, dependency order, conflicts, stand-down state, shared-resource claims, observed propagation, blast radius, containment state, assessment arithmetic, and governance routing reproduce"
+      "distributed lane authority, dependency order, conflicts, stand-down state, shared-resource claims, observed propagation, blast radius, containment state, assessment arithmetic, and governance routing reproduce",
+      "recovery dependency nodes and edges, path membership, shared critical dependencies, independence evidence, failover prerequisites, observed switching, correlated recovery assessment arithmetic, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -2728,7 +2779,8 @@
       "that evaluator-signal exposure, externalized behavior change, stated explanation, trial count, or absence of detected sensitivity proves belief, intent, deception, honesty, semantic truth, quality, competence, selection, authorization, or authority",
       "that transfer matching, trajectory duration, terminal behavior, drift count, or absence of detected drift proves deployment safety, causality, intent, quality, selection, authorization, or authority",
       "that intervention count, response time, rollback, recovery checks, or absence of detected residual risk proves intervention effectiveness, operational safety, causality, quality, redeployment readiness, selection, authorization, or authority",
-      "that lane count, coordination throughput, conflict resolution, observed blast radius, or containment state proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority"
+      "that lane count, coordination throughput, conflict resolution, observed blast radius, or containment state proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority",
+      "that path count, vendor count, dependency diversity, failover execution, or absence of observed shared failure proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority"
     ],
     "semanticValidityRequires": [
       "expert review of prediction and outcome meaning",
@@ -2745,7 +2797,8 @@
       "independent review of judge provenance, shared dependencies, dissent, abstention, adjudication, and representative cross-judge panels",
       "review of environmental and evaluation-harness effects",
       "accountable governance before changing quality decisions",
-      "independent review of lane authority, dependency order, shared-resource limits, conflict resolution, propagation evidence, affected stakeholders, and containment effectiveness"
+      "independent review of lane authority, dependency order, shared-resource limits, conflict resolution, propagation evidence, affected stakeholders, and containment effectiveness",
+      "independent review of dependency identity, common causes, path independence, failover prerequisites, activation authority, observed recovery, and representative failure conditions"
     ]
   },
   "evaluatorSignalPolicies": [
@@ -3582,6 +3635,212 @@
         "GTR-CR-054",
         "GTR-CR-055",
         "GTR-CR-056"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "dependencyDiversityPolicies": [
+    {
+      "id": "DDP-CR-001",
+      "title": "Illustrative recovery dependency diversity policy",
+      "sourceDistributedInterventionPolicyRef": "DIP-CR-001",
+      "minimumRecoveryPathCount": 2,
+      "minimumIndependentPathCount": 1,
+      "maximumCriticalSharedDependencyCount": 0,
+      "independenceEvidenceRequired": true,
+      "observedFailoverRequired": true,
+      "failClosedOnUnverifiedIndependence": true,
+      "reviewedBy": [
+        "quality-governance-owner",
+        "incident-response-owner"
+      ],
+      "inferenceBoundary": "dependency-diversity-evidence-only-not-independence-causality-recovery-effectiveness-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "recoveryDependencyGraphs": [
+    {
+      "id": "RDG-CR-001",
+      "title": "Illustrative correlated recovery dependency graph",
+      "policyRef": "DDP-CR-001",
+      "coordinationRunRef": "ICR-CR-001",
+      "dependencyNodes": [
+        {
+          "id": "DEP-CR-MODEL",
+          "dependencyKind": "model",
+          "critical": true,
+          "evidenceRefs": [
+            "EV-CR-DEPENDENCY-MODEL"
+          ]
+        },
+        {
+          "id": "DEP-CR-QUEUE",
+          "dependencyKind": "queue",
+          "critical": true,
+          "evidenceRefs": [
+            "EV-CR-DEPENDENCY-QUEUE"
+          ]
+        },
+        {
+          "id": "DEP-CR-MANUAL",
+          "dependencyKind": "operator",
+          "critical": false,
+          "evidenceRefs": [
+            "EV-CR-DEPENDENCY-MANUAL"
+          ]
+        }
+      ],
+      "dependencyEdges": [
+        {
+          "pathRef": "RPATH-CR-PRIMARY",
+          "dependencyRef": "DEP-CR-MODEL",
+          "requiredForRecovery": true,
+          "evidenceRefs": [
+            "EV-CR-PATH-PRIMARY"
+          ]
+        },
+        {
+          "pathRef": "RPATH-CR-PRIMARY",
+          "dependencyRef": "DEP-CR-QUEUE",
+          "requiredForRecovery": true,
+          "evidenceRefs": [
+            "EV-CR-PATH-PRIMARY"
+          ]
+        },
+        {
+          "pathRef": "RPATH-CR-FALLBACK",
+          "dependencyRef": "DEP-CR-MODEL",
+          "requiredForRecovery": true,
+          "evidenceRefs": [
+            "EV-CR-PATH-FALLBACK"
+          ]
+        },
+        {
+          "pathRef": "RPATH-CR-FALLBACK",
+          "dependencyRef": "DEP-CR-MANUAL",
+          "requiredForRecovery": true,
+          "evidenceRefs": [
+            "EV-CR-PATH-FALLBACK"
+          ]
+        }
+      ],
+      "recoveryPaths": [
+        {
+          "id": "RPATH-CR-PRIMARY",
+          "role": "primary",
+          "dependencyRefs": [
+            "DEP-CR-MODEL",
+            "DEP-CR-QUEUE"
+          ],
+          "independenceClaim": "unverified",
+          "independenceEvidenceRefs": [],
+          "activationAuthorityRole": "service-owner"
+        },
+        {
+          "id": "RPATH-CR-FALLBACK",
+          "role": "fallback",
+          "dependencyRefs": [
+            "DEP-CR-MODEL",
+            "DEP-CR-MANUAL"
+          ],
+          "independenceClaim": "not-independent",
+          "independenceEvidenceRefs": [
+            "EV-CR-SHARED-MODEL"
+          ],
+          "activationAuthorityRole": "incident-commander"
+        }
+      ],
+      "sharedDependencyRefs": [
+        "DEP-CR-MODEL"
+      ],
+      "criticalSharedDependencyCount": 1,
+      "independentPathCount": 0,
+      "commonCauseRefs": [
+        "COMMON-CAUSE-CR-SAME-MODEL"
+      ],
+      "evidenceStatus": "example-only",
+      "qifSelectedRecoveryPath": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-057",
+        "GTR-CR-058",
+        "GTR-CR-059"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "recoveryPathTrials": [
+    {
+      "id": "RPT-CR-001",
+      "title": "Illustrative fallback activation trial",
+      "policyRef": "DDP-CR-001",
+      "dependencyGraphRef": "RDG-CR-001",
+      "primaryPathRef": "RPATH-CR-PRIMARY",
+      "fallbackPathRef": "RPATH-CR-FALLBACK",
+      "triggerRef": "TRIGGER-CR-PRIMARY-UNAVAILABLE",
+      "requiredPrerequisiteRefs": [
+        "PREREQ-CR-AUTHORITY",
+        "PREREQ-CR-MANUAL-CAPACITY",
+        "PREREQ-CR-INDEPENDENT-MODEL"
+      ],
+      "satisfiedPrerequisiteRefs": [
+        "PREREQ-CR-AUTHORITY",
+        "PREREQ-CR-MANUAL-CAPACITY"
+      ],
+      "failedPrerequisiteRefs": [
+        "PREREQ-CR-INDEPENDENT-MODEL"
+      ],
+      "executedSwitch": false,
+      "switchAuthorityEvidenceRefs": [],
+      "sharedFailureObserved": true,
+      "recoveryCompleted": false,
+      "externalizedEvidenceRefs": [
+        "EV-CR-FAILOVER-TRIAL"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticRecoveryClaim": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-057",
+        "GTR-CR-058",
+        "GTR-CR-060"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "correlatedRecoveryAssessments": [
+    {
+      "id": "CRA-CR-001",
+      "title": "Illustrative correlated recovery assessment",
+      "policyRef": "DDP-CR-001",
+      "dependencyGraphRefs": [
+        "RDG-CR-001"
+      ],
+      "recoveryPathTrialRefs": [
+        "RPT-CR-001"
+      ],
+      "graphCount": 1,
+      "verifiedGraphCount": 0,
+      "pathCount": 2,
+      "independentPathCount": 0,
+      "criticalSharedDependencyCount": 1,
+      "trialCount": 1,
+      "verifiedTrialCount": 0,
+      "successfulFailoverCount": 0,
+      "sharedFailureCount": 1,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "activityCountIsQuality": false,
+      "automaticOperationalDecision": false,
+      "interpretation": "correlated-recovery-evidence-only-not-independence-causality-recovery-effectiveness-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-057",
+        "GTR-CR-058",
+        "GTR-CR-059",
+        "GTR-CR-060",
+        "GTR-CR-061"
       ],
       "status": "reviewed"
     }

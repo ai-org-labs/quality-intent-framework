@@ -3615,6 +3615,90 @@
       "rule": "distributed intervention semantic boundary",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming that distributed intervention evidence proves systemic safety"
+    },
+    {
+      "file": "calibration-report-dependency-diversity-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "dependency diversity policies required",
+      "expect": "fail",
+      "errorIncludes": "package dependencyDiversityPolicies must be an array."
+    },
+    {
+      "file": "calibration-report-recovery-graph-shared-dependency.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "shared dependency reproduction",
+      "expect": "fail",
+      "errorIncludes": "sharedDependencyRefs must reproduce from path dependency overlap."
+    },
+    {
+      "file": "calibration-report-recovery-graph-critical-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "critical shared dependency reproduction",
+      "expect": "fail",
+      "errorIncludes": "criticalSharedDependencyCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-recovery-graph-independent-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "independent path reproduction",
+      "expect": "fail",
+      "errorIncludes": "independentPathCount must reproduce as 0."
+    },
+    {
+      "file": "calibration-report-recovery-graph-qif-selection.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no QIF recovery selection authority",
+      "expect": "fail",
+      "errorIncludes": "qifSelectedRecoveryPath must be false."
+    },
+    {
+      "file": "calibration-report-recovery-graph-critical-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "critical shared dependency governance",
+      "expect": "fail",
+      "errorIncludes": "critical shared dependency requires a critical-shared-recovery-dependency governance trigger."
+    },
+    {
+      "file": "calibration-report-recovery-graph-independence-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unverified independence governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient verified independent paths require a recovery-independence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-recovery-trial-prerequisite-partition.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "failover prerequisite partition",
+      "expect": "fail",
+      "errorIncludes": "prerequisite results must exactly partition requiredPrerequisiteRefs."
+    },
+    {
+      "file": "calibration-report-recovery-trial-executed-authority.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "failover switch authority",
+      "expect": "fail",
+      "errorIncludes": "executed switch requires authority evidence and no failed prerequisite."
+    },
+    {
+      "file": "calibration-report-recovery-trial-fallback-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "fallback availability governance",
+      "expect": "fail",
+      "errorIncludes": "unavailable fallback requires a fallback-path-unavailable governance trigger."
+    },
+    {
+      "file": "calibration-report-correlated-recovery-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "correlated recovery assessment reproduction",
+      "expect": "fail",
+      "errorIncludes": "criticalSharedDependencyCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-correlated-recovery-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "correlated recovery semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that dependency diversity proves independence"
     }
   ],
   "rescopedRules": []
