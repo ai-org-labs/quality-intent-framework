@@ -1121,6 +1121,42 @@ export const cases = [
   },
   {
     id:"correlated-recovery-boundary-overclaim",rule:"correlated recovery semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that dependency diversity proves independence",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that path count"));}
+  },
+  {
+    id:"durable-recovery-policies-not-array",rule:"durable recovery policies required",expect:"package durableRecoveryPolicies must be an array.",mutate:(pkg)=>{pkg.durableRecoveryPolicies=null;}
+  },
+  {
+    id:"recovery-snapshot-age",rule:"checkpoint age reproduction",expect:"checkpointAgeMinutes must reproduce as 20.",mutate:(pkg)=>{pkg.recoveryStateSnapshots[0].checkpointAgeMinutes=19;}
+  },
+  {
+    id:"recovery-snapshot-freshness",rule:"checkpoint freshness reproduction",expect:"checkpointFresh must reproduce as false.",mutate:(pkg)=>{pkg.recoveryStateSnapshots[0].checkpointFresh=true;}
+  },
+  {
+    id:"recovery-snapshot-identity",rule:"rehydration identity reproduction",expect:"identityMatched must reproduce as false.",mutate:(pkg)=>{pkg.recoveryStateSnapshots[0].identityMatched=true;}
+  },
+  {
+    id:"recovery-effect-partition",rule:"effect-state partition",expect:"completed, pending, and unknown effects must be disjoint.",mutate:(pkg)=>{pkg.recoveryStateSnapshots[0].pendingEffectRefs.push("EFFECT-CR-NOTIFY-001");}
+  },
+  {
+    id:"recovery-qif-resume-authority",rule:"no QIF resume authority",expect:"qifResumedExecution must be false.",mutate:(pkg)=>{pkg.recoveryStateSnapshots[0].qifResumedExecution=true;}
+  },
+  {
+    id:"retry-budget",rule:"retry budget reproduction",expect:"retryBudgetExceeded must reproduce as true.",mutate:(pkg)=>{pkg.retryExecutionRecords[0].retryBudgetExceeded=false;}
+  },
+  {
+    id:"retry-completed-effect-check",rule:"completed effect coverage",expect:"completedEffectChecks must exactly cover snapshot completed effects.",mutate:(pkg)=>{pkg.retryExecutionRecords[0].completedEffectChecks=[];}
+  },
+  {
+    id:"retry-duplicate-effect",rule:"duplicate effect reproduction",expect:"duplicateEffectRefs must reproduce from retried completed effects.",mutate:(pkg)=>{pkg.retryExecutionRecords[0].duplicateEffectRefs=[];}
+  },
+  {
+    id:"retry-unknown-effect",rule:"unknown effect reproduction",expect:"unresolvedEffectRefs must exactly match snapshot unknown effects.",mutate:(pkg)=>{pkg.retryExecutionRecords[0].unresolvedEffectRefs=[];}
+  },
+  {
+    id:"durable-recovery-assessment-count",rule:"durable recovery assessment reproduction",expect:"duplicateEffectCount must reproduce as 1.",mutate:(pkg)=>{pkg.durableRecoveryAssessments[0].duplicateEffectCount=0;}
+  },
+  {
+    id:"durable-recovery-boundary-overclaim",rule:"durable recovery semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that durable recovery evidence proves state truth",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that snapshot presence"));}
   }
 ];
 

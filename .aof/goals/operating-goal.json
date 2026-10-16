@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Add a narrow, domain-general evidence model that distinguishes declared redundancy from verified recovery-path independence by tracing shared dependencies, common-cause exposure, failover prerequisites, observed switching, and correlated recovery risk.",
-  "updated_at": "2026-10-15T04:34:01.505Z",
+  "content": "耐久実行の復元・再試行における状態鮮度、主体同一性、作用の完了状態、冪等性、再試行予算、再開権限を、意味的真実や自動運用判断と分離して評価・監査可能にする",
+  "updated_at": "2026-10-16T04:30:10.649Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MV91MAK4-40N9W2",
-  "source_decision_record_id": "DEC-MV91NNOE-AMWITO",
+  "source_session_id": "SESS-MVAGW80S-DLR6B5",
+  "source_decision_record_id": "DEC-MVAGYK7R-AI99K6",
   "declared_complete_at": null
 }

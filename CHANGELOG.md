@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.50
+
+- Added executable durable recovery policies, recovery state snapshots, retry execution records, and durable recovery assessments.
+- Added reproducible checkpoint-age, freshness, actor-identity, effect-state partition, completed-effect coverage, duplicate-effect, retry-budget, and assessment checks.
+- Added governance routing for unverified evidence, stale state, identity mismatch, unknown effects, duplicate side effects, exceeded retry budgets, and insufficient assessment evidence.
+- Prevented snapshot presence, retry counts, idempotency-key presence, and recorded effect state from becoming state-truth, recovery-safety, quality, authorization, or authority claims.
+
 ## v0.6.49
 
 - Added executable dependency-diversity policies, recovery dependency graphs, recovery-path trials, and correlated recovery assessments.

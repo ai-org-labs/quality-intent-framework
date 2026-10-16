@@ -1,0 +1,79 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-16T04:38:42.326Z",
+  "packet_id": "ASP-MVAH9J12-ZWZVTU",
+  "source_task_id": "TASK-067",
+  "source_parent_session_id": "SESS-MVAGW80S-DLR6B5",
+  "source_decision_record_id": "DEC-MVAGYK7R-AI99K6",
+  "objective": "Implement and verify QIF v0.6.50 durable recovery state and retry side-effect safety",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime",
+    "assignment_reason": "Builder owns schema, verifier, fixtures, documentation, portable package, and release evidence for the validated slice",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "schema-evolution",
+    "verifier-engineering",
+    "release-validation"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-qif-runtime-hardening",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs",
+        "tests/fixtures/calibration-report/manifest.json"
+      ],
+      "rationale": "The actor implemented deterministic state, identity, effect, retry, evidence, and governance checks with retained negative coverage."
+    }
+  ],
+  "resource_refs": [
+    "repository-quality-intent-framework",
+    "aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "policy-structural-not-semantic-truth",
+    "policy-human-operational-authority"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "durable recovery policy, snapshot, retry record, and assessment traceability",
+      "portable package and public release evidence"
+    ],
+    "acceptance_criteria": [
+      "npm test passes 16 positive and 1182 negative fixture checks",
+      "QIF never resumes execution, authorizes retry, or claims state truth, effect completion, recovery safety, or quality"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "schema, example, verifier, fixtures, docs, portable package, and runtime evidence agree",
+      "evaluator_ref": "guardian",
+      "evidence_required": "npm test, portable verification, diff review, and organization verification",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "retry-authority-overclaim",
+      "trigger_condition": "QIF is represented as authorizing retry, proving external effect completion, or treating retry activity as quality",
+      "consequence": "block-assignment",
+      "recovery_action": "restore evidence-only interpretation and accountable governance"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I am making recovery state and retry side effects inspectable without granting QIF operational authority.",
+    "current_action": "Validate and prepare v0.6.50 release",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Submit implementation to Visionary, Builder, and Guardian review"
+  },
+  "status": "completed"
+}

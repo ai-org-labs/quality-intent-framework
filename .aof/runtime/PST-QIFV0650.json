@@ -1,0 +1,16 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-16T04:29:22.546Z",
+  "problem_statement_id": "PST-MVAGXJ3M-E1WY43",
+  "affected_party": "AIエージェント運用者、AIが変更する外部システムの利用者、QIFを使う人間・AI組織",
+  "actual_problem": "耐久実行の復元や再試行で、古いチェックポイント、主体不一致、完了済み外部作用の再実行、未知作用、再試行上限超過が品質リスクとして追跡されず、失敗後の回復が新たな損失を生み得る",
+  "why_it_matters": "エージェントの失敗後も外部作用は既に完了している場合があり、無検証の再開や再試行は二重送信、二重更新、誤った権限主体での継続を起こす",
+  "why_now": "Agents APIの失敗回復、snapshot/rehydration、durable executionが実装段階に入り、QIFの相関回復リスクモデルの次に単一回復経路内の状態と副作用安全性を扱う必要がある",
+  "evidence_refs": [
+    "docs/roadmap.md",
+    "https://developers.openai.com/api/docs/guides/agents-api/errors",
+    "https://docs.aws.amazon.com/durable-execution/patterns/best-practices/idempotency/"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVAGWE1R-TF2RQS"
+}

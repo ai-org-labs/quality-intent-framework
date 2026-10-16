@@ -1,0 +1,39 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-16T04:30:00.132Z",
+  "validation_id": "NVR-MVAGYC3O-UD9SPV",
+  "raw_need": "QIF v0.6.50 Durable Recovery State and Retry Side-Effect Safetyを実装し公開する",
+  "validation_status": "validated",
+  "validated_need": "耐久実行の復元・再試行における状態鮮度、主体同一性、作用の完了状態、冪等性、再試行予算、再開権限を、意味的真実や自動運用判断と分離して評価・監査可能にする",
+  "decision_summary": "Visionary観点では耐久エージェントの新しい品質境界、Builder観点では既存calibration-reportへの局所追加、Guardian観点では二重副作用と誤主体再開の損失境界が明確であり、固定チェックリストではなく証拠・関係・再現可能計算として実装できるためValidated Needとする",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "対象範囲は何か",
+      "answer": "calibration-report package、schema、verifier、fixtures、example、docs、portable release。UI、外部統合、自動再開判断は除外。",
+      "evidence_state": "strong"
+    },
+    {
+      "question": "成功はどう判断するか",
+      "answer": "危険な回復状態を再現可能に検出しgovernanceへ送り、npm test、portable検証、AOF検証、公開releaseを通す。",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "snapshotが存在すれば復元が安全だという前提",
+    "同じworkflow IDなら同じ権限主体だという前提",
+    "失敗した試行には外部作用がないという前提"
+  ],
+  "evidence_gaps": [
+    "実運用ベンダー横断データは未収集であり、この版は構造的検証を提供するが意味的妥当性を証明しない"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0650.json",
+  "value_hypothesis_ref": ".aof/runtime/VHR-QIFV0650.json",
+  "alternative_analysis_ref": ".aof/runtime/AAR-QIFV0650.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVAGWE1R-TF2RQS"
+}

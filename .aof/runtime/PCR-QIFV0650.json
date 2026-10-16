@@ -1,0 +1,22 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-16T04:30:10.496Z",
+  "project_charter_id": "PCH-MVAGYK3K-NYPR4F",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0650.json",
+  "validated_objective": "QIF v0.6.50で耐久回復状態と再試行副作用安全性を構造化し、再現可能なローカル検証、説明可能な例、portable package、公開releaseとして提供する",
+  "scope": [
+    "calibration-report schemaへdurable recovery policy、snapshot、retry execution、assessmentを追加",
+    "verifierへ参照解決、算術、集合整合性、evidence、governance、QIF判断境界を追加",
+    "example、negative fixtures、docs、AI authoring guide、roadmap、changelog、runtime log、portable package、release"
+  ],
+  "constraints": [
+    "外部サービス統合、UI、実際の再開・再試行実行、意味的真実の自動判定は行わない",
+    "活動件数、retry件数、snapshot件数を品質そのものとして扱わない"
+  ],
+  "expected_outcomes": [
+    "古いcheckpoint、rehydration identity mismatch、unknown effect、duplicate effect、retry budget exceedを機械検出できる",
+    "危険または証拠不足が明示的governance triggerへ送られ、automatic operational decisionが禁止される"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVAGWE1R-TF2RQS"
+}

@@ -5023,3 +5023,21 @@ Date: 2026-10-15
 - Outcome report: `OUT-MV920DRD-DG84CS` recorded implementation success and retained v0.6.50 as an open next value slice.
 - Residual risk: the committed dependency graph and recovery-path trial are example-only. They do not prove real independence, causal common failure, recovery effectiveness, operational safety, or retry side-effect safety.
 - Next value slice: v0.6.50 Durable Recovery State and Retry Side-Effect Safety.
+
+# QIF v0.6.50 Durable Recovery State and Retry Side-Effect Safety
+
+Date: 2026-10-16
+
+- Need: a failed or interrupted agent attempt may have completed external effects, while recovery can restore stale state, use a different actor identity, replay completed work, or exceed a retry budget.
+- Intent: reproduce checkpoint freshness, rehydration identity, completed/pending/unknown effect state, completed-effect checks, idempotency scope, retry budget, resume authority, and governance without granting QIF execution or retry authority.
+- Context: QIF remains standalone; publicly released AOF v12.2.0 is development governance, not a QIF runtime dependency.
+- AOF session: `SESS-MVAGW80S-DLR6B5`; task: `TASK-067`; validated decision: `DEC-MVAGYK7R-AI99K6`.
+- Need Validation and Charter artifacts: `.aof/runtime/PST-QIFV0650.json`, `.aof/runtime/VHR-QIFV0650.json`, `.aof/runtime/AAR-QIFV0650.json`, `.aof/runtime/NVR-QIFV0650.json`, and `.aof/runtime/PCR-QIFV0650.json`.
+- Trend evidence: current OpenAI Agents API recovery guidance requires checking outcomes, saved work, and completed actions before retry; OpenAI Agents SDK durability provides snapshot and rehydration; AWS durable execution guidance requires retry-safe idempotency or bounded execution semantics for side effects.
+- Council direction: Visionary, Builder, and Guardian proceeded in planning; Builder and Guardian proceeded in review with no veto. The mock council proves runtime routing, not independent semantic approval.
+- Decision: implement `DurableRecoveryPolicy`, `RecoveryStateSnapshot`, `RetryExecutionRecord`, and `DurableRecoveryAssessment`; keep committed evidence example-only and insufficient.
+- Runtime evidence: `.aof/runtime/v0.6.50-actor-skill-packet.json`, `.aof/runtime/v0.6.50-planning-council-executed.json`, `.aof/runtime/v0.6.50-review-council-executed.json`, organization verification, and self-audit `FSA-QIFV0650` record capability, resource, policy, review, and retrospective evidence.
+- Verification: `npm test` passed 16/16 positive and 1,182/1,182 retained negative checks. Portable build and verification passed with 49 files. AOF `organization-verify` passed 295/295 checks.
+- Outcome report: `OUT-MVAHAT72-MSEE3I` recorded implementation success and retained v0.6.51 as an open next value slice.
+- Residual risk: the committed snapshot and retry records are example-only. They do not prove state truth, external effect completion, real idempotency, recovery safety, retry authorization, or authority. Delayed effects remain the next gap.
+- Next value slice: v0.6.51 Recovery Observation Windows and Delayed Side-Effect Reconciliation.

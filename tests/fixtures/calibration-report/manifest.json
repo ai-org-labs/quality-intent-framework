@@ -3699,6 +3699,90 @@
       "rule": "correlated recovery semantic boundary",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming that dependency diversity proves independence"
+    },
+    {
+      "file": "calibration-report-durable-recovery-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "durable recovery policies required",
+      "expect": "fail",
+      "errorIncludes": "package durableRecoveryPolicies must be an array."
+    },
+    {
+      "file": "calibration-report-recovery-snapshot-age.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "checkpoint age reproduction",
+      "expect": "fail",
+      "errorIncludes": "checkpointAgeMinutes must reproduce as 20."
+    },
+    {
+      "file": "calibration-report-recovery-snapshot-freshness.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "checkpoint freshness reproduction",
+      "expect": "fail",
+      "errorIncludes": "checkpointFresh must reproduce as false."
+    },
+    {
+      "file": "calibration-report-recovery-snapshot-identity.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "rehydration identity reproduction",
+      "expect": "fail",
+      "errorIncludes": "identityMatched must reproduce as false."
+    },
+    {
+      "file": "calibration-report-recovery-effect-partition.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "effect-state partition",
+      "expect": "fail",
+      "errorIncludes": "completed, pending, and unknown effects must be disjoint."
+    },
+    {
+      "file": "calibration-report-recovery-qif-resume-authority.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no QIF resume authority",
+      "expect": "fail",
+      "errorIncludes": "qifResumedExecution must be false."
+    },
+    {
+      "file": "calibration-report-retry-budget.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "retry budget reproduction",
+      "expect": "fail",
+      "errorIncludes": "retryBudgetExceeded must reproduce as true."
+    },
+    {
+      "file": "calibration-report-retry-completed-effect-check.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "completed effect coverage",
+      "expect": "fail",
+      "errorIncludes": "completedEffectChecks must exactly cover snapshot completed effects."
+    },
+    {
+      "file": "calibration-report-retry-duplicate-effect.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "duplicate effect reproduction",
+      "expect": "fail",
+      "errorIncludes": "duplicateEffectRefs must reproduce from retried completed effects."
+    },
+    {
+      "file": "calibration-report-retry-unknown-effect.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unknown effect reproduction",
+      "expect": "fail",
+      "errorIncludes": "unresolvedEffectRefs must exactly match snapshot unknown effects."
+    },
+    {
+      "file": "calibration-report-durable-recovery-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "durable recovery assessment reproduction",
+      "expect": "fail",
+      "errorIncludes": "duplicateEffectCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-durable-recovery-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "durable recovery semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that durable recovery evidence proves state truth"
     }
   ],
   "rescopedRules": []

@@ -730,6 +730,27 @@ A verifier must not claim:
 
 Semantic validity requires expert review, stakeholder review, reproduction tests, operational feedback, and governance.
 
+## Durable Recovery Review
+
+When the target resumes or retries work after interruption, do not ask only
+whether a checkpoint or retry exists. Establish and preserve:
+
+1. Which exact state artifact and digest will be restored, when it was captured,
+   and whether it is still fresh for the reviewed policy.
+2. Whether the rehydrated actor, identity, permissions, and delegated authority
+   match the actor expected by that state.
+3. Which external effects are completed, pending, or unknown. These sets must
+   not overlap.
+4. Whether every completed effect was checked before retry, and whether a
+   stable idempotency key covers the logical operation across attempts.
+5. Whether the attempt remains inside its retry budget and has accountable
+   resume authority evidence.
+6. Whether stale state, identity mismatch, unknown effects, duplicate-effect
+   risk, exceeded budgets, or weak evidence opened governance.
+
+QIF records and checks these claims. QIF does not resume the work, authorize a
+retry, prove an external effect completed, or treat retry volume as quality.
+
 ## Common Failure Modes
 
 Avoid these:

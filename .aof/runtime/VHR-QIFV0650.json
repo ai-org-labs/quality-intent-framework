@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-16T04:29:24.178Z",
+  "value_hypothesis_id": "VHY-MVAGXKCY-4HDB7F",
+  "expected_value_creation": "回復状態、再水和主体、完了・未完了・未知作用、冪等性、再試行予算、再開権限を構造化し、危険または証拠不足を機械的に可視化してガバナンスへ送る",
+  "beneficiary": "QIFを用いてAIエージェント、業務自動化、耐久ワークフローを評価する人間・AI・ハイブリッド組織",
+  "supporting_evidence": [
+    "OpenAI Agents APIは再試行前に結果と完了済み作用を確認し、未完了作業だけを続けるよう求める",
+    "OpenAI Agents SDKはsnapshotとrehydrationによる復元を提供し、AWS Durable Executionは副作用再実行に冪等性またはat-most-once境界が必要とする"
+  ],
+  "success_criteria": [
+    "スキーマと検証器が古いsnapshot、identity mismatch、unknown effect、duplicate side effect、retry budget超過を再現可能に検出する",
+    "QIF自身は意味的真実や運用再開を決定せず、危険と証拠不足をgovernance triggerへ送る"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVAGWE1R-TF2RQS"
+}

@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.6.50 Durable Recovery State and Retry Side-Effect Safety",
-  "updated_at": "2026-10-15T04:44:02.365Z",
+  "content": "v0.6.51 Recovery Observation Windows and Delayed Side-Effect Reconciliation",
+  "updated_at": "2026-10-16T04:39:50.828Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MV91MAK4-40N9W2",
-  "source_decision_record_id": "DEC-MV91NNOE-AMWITO",
+  "source_session_id": "SESS-MVAGW80S-DLR6B5",
+  "source_decision_record_id": "DEC-MVAGYK7R-AI99K6",
   "declared_complete_at": null
 }

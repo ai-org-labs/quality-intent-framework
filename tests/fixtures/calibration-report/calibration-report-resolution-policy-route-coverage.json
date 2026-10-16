@@ -2692,6 +2692,76 @@
       "requiredAction": "Keep the correlated recovery assessment descriptive and non-authoritative.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-062",
+      "triggerType": "durable-recovery-evidence-unverified",
+      "reason": "The committed recovery snapshot and retry execution evidence are example-only.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Obtain independently verified state, effect, identity, and authority evidence before operational use.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-063",
+      "triggerType": "stale-recovery-checkpoint",
+      "reason": "The recovery checkpoint exceeds the reviewed freshness boundary.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep resume blocked until accountable review establishes a fresh state or accepts the stale-state risk.",
+      "owner": "incident-commander",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-064",
+      "triggerType": "rehydration-identity-mismatch",
+      "reason": "The rehydrated actor does not match the actor identity declared by the checkpoint.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "critical",
+      "requiredAction": "Do not resume execution until identity, permission, and delegation boundaries are reconciled.",
+      "owner": "security-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-065",
+      "triggerType": "recovery-effect-state-unknown",
+      "reason": "At least one external effect has an unknown completion state.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Reconcile the external effect ledger and keep retry fail-closed while completion remains unknown.",
+      "owner": "service-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-066",
+      "triggerType": "duplicate-side-effect-risk",
+      "reason": "The proposed retry set includes an effect already recorded as completed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "critical",
+      "requiredAction": "Remove or deduplicate completed effects before accountable retry authorization.",
+      "owner": "incident-response-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-067",
+      "triggerType": "retry-budget-exceeded",
+      "reason": "The retry attempt exceeds the reviewed retry budget.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Stop automatic retry and require accountable diagnosis and authorization.",
+      "owner": "incident-commander",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-068",
+      "triggerType": "durable-recovery-assessment-insufficient",
+      "reason": "Verified recovery snapshots and retry execution evidence are below the policy requirement.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep the durable recovery assessment descriptive and non-authoritative.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -2712,7 +2782,8 @@
       "sequestered items, reveal stages, access roles, allowed and observed affordances, externalized transcript inspection, contamination and loophole findings, assessment counts, and governance routing reproduce",
       "judge dependency profiles, shared dimensions, verdict groups, majority state, dissent, abstention, panel correlation risk, aggregate counts, sufficiency, and governance routing reproduce",
       "distributed lane authority, dependency order, conflicts, stand-down state, shared-resource claims, observed propagation, blast radius, containment state, assessment arithmetic, and governance routing reproduce",
-      "recovery dependency nodes and edges, path membership, shared critical dependencies, independence evidence, failover prerequisites, observed switching, correlated recovery assessment arithmetic, and governance routing reproduce"
+      "recovery dependency nodes and edges, path membership, shared critical dependencies, independence evidence, failover prerequisites, observed switching, correlated recovery assessment arithmetic, and governance routing reproduce",
+      "checkpoint freshness, rehydration identity equality, disjoint effect state, completed-effect checks, idempotency, retry budgets, duplicate-effect intersections, resume authority evidence, durable recovery assessment arithmetic, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -2737,7 +2808,8 @@
       "that transfer matching, trajectory duration, terminal behavior, drift count, or absence of detected drift proves deployment safety, causality, intent, quality, selection, authorization, or authority",
       "that intervention count, response time, rollback, recovery checks, or absence of detected residual risk proves intervention effectiveness, operational safety, causality, quality, redeployment readiness, selection, authorization, or authority",
       "that lane count, coordination throughput, conflict resolution, observed blast radius, or containment state proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority",
-      "that path count, vendor count, dependency diversity, failover execution, or absence of observed shared failure proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority"
+      "that path count, vendor count, dependency diversity, failover execution, or absence of observed shared failure proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority",
+      "that snapshot presence, retry count, idempotency-key presence, recorded effect state, or absence of detected duplicates proves state truth, effect completion, recovery safety, quality, retry authorization, or authority"
     ],
     "semanticValidityRequires": [
       "expert review of prediction and outcome meaning",
@@ -2755,7 +2827,8 @@
       "review of environmental and evaluation-harness effects",
       "accountable governance before changing quality decisions",
       "independent review of lane authority, dependency order, shared-resource limits, conflict resolution, propagation evidence, affected stakeholders, and containment effectiveness",
-      "independent review of dependency identity, common causes, path independence, failover prerequisites, activation authority, observed recovery, and representative failure conditions"
+      "independent review of dependency identity, common causes, path independence, failover prerequisites, activation authority, observed recovery, and representative failure conditions",
+      "independent reconciliation of checkpoint state, actor identity, completed, pending, and unknown external effects, idempotency scope, retry budget, and accountable resume authority"
     ]
   },
   "evaluatorSignalPolicies": [
@@ -3798,6 +3871,150 @@
         "GTR-CR-059",
         "GTR-CR-060",
         "GTR-CR-061"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "durableRecoveryPolicies": [
+    {
+      "id": "DRP-CR-001",
+      "title": "Illustrative durable recovery and retry safety policy",
+      "sourceDependencyDiversityPolicyRef": "DDP-CR-001",
+      "maximumRetryAttempts": 2,
+      "checkpointFreshnessMinutes": 15,
+      "completedEffectCheckRequired": true,
+      "idempotencyKeyRequired": true,
+      "rehydrationIdentityRequired": true,
+      "resumeAuthorityRequired": true,
+      "failClosedOnUnknownEffects": true,
+      "reviewedBy": [
+        "quality-governance-owner",
+        "incident-response-owner",
+        "security-owner"
+      ],
+      "inferenceBoundary": "durable-recovery-evidence-only-not-state-truth-effect-completion-recovery-safety-quality-retry-authorization-or-authority",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "recoveryStateSnapshots": [
+    {
+      "id": "RSS-CR-001",
+      "title": "Illustrative stale and identity-mismatched recovery snapshot",
+      "policyRef": "DRP-CR-001",
+      "recoveryPathRef": "RPATH-CR-FALLBACK",
+      "capturedAt": "2026-10-16T00:00:00Z",
+      "resumeAttemptedAt": "2026-10-16T00:20:00Z",
+      "stateArtifactRef": "STATE-CR-CHECKPOINT-001",
+      "stateArtifactDigest": "sha256:illustrative-not-empirical",
+      "checkpointAgeMinutes": 20,
+      "checkpointFresh": false,
+      "rehydratedActorRef": "ACTOR-CR-REHYDRATED-B",
+      "expectedActorRef": "ACTOR-CR-ORIGINAL-A",
+      "identityMatched": false,
+      "completedEffectRefs": [
+        "EFFECT-CR-NOTIFY-001"
+      ],
+      "pendingEffectRefs": [
+        "EFFECT-CR-ROLLBACK-001"
+      ],
+      "unknownEffectRefs": [
+        "EFFECT-CR-AUDIT-001"
+      ],
+      "evidenceRefs": [
+        "EV-CR-SNAPSHOT-001",
+        "EV-CR-EFFECT-LEDGER-001"
+      ],
+      "evidenceStatus": "example-only",
+      "qifResumedExecution": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-062",
+        "GTR-CR-063",
+        "GTR-CR-064",
+        "GTR-CR-065"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "retryExecutionRecords": [
+    {
+      "id": "RER-CR-001",
+      "title": "Illustrative blocked retry with duplicate-effect and budget risk",
+      "policyRef": "DRP-CR-001",
+      "snapshotRef": "RSS-CR-001",
+      "idempotencyKey": "workflow-001:recovery-rollback:v1",
+      "attemptNumber": 3,
+      "retryBudgetExceeded": true,
+      "completedEffectChecks": [
+        "EFFECT-CR-NOTIFY-001"
+      ],
+      "skippedCompletedEffectRefs": [],
+      "retriedEffectRefs": [
+        "EFFECT-CR-NOTIFY-001",
+        "EFFECT-CR-ROLLBACK-001"
+      ],
+      "duplicateEffectRefs": [
+        "EFFECT-CR-NOTIFY-001"
+      ],
+      "unresolvedEffectRefs": [
+        "EFFECT-CR-AUDIT-001"
+      ],
+      "resumeAuthorityRole": "incident-commander",
+      "resumeAuthorityEvidenceRefs": [
+        "EV-CR-RESUME-AUTHORITY-001"
+      ],
+      "executionState": "blocked",
+      "evidenceRefs": [
+        "EV-CR-RETRY-PLAN-001"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticRetryDecision": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-062",
+        "GTR-CR-065",
+        "GTR-CR-066",
+        "GTR-CR-067"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "durableRecoveryAssessments": [
+    {
+      "id": "DRA-CR-001",
+      "title": "Illustrative durable recovery safety assessment",
+      "policyRef": "DRP-CR-001",
+      "snapshotRefs": [
+        "RSS-CR-001"
+      ],
+      "retryExecutionRefs": [
+        "RER-CR-001"
+      ],
+      "snapshotCount": 1,
+      "verifiedSnapshotCount": 0,
+      "freshSnapshotCount": 0,
+      "identityMatchedCount": 0,
+      "retryCount": 1,
+      "verifiedRetryCount": 0,
+      "authorizedRetryCount": 1,
+      "duplicateEffectCount": 1,
+      "unknownEffectCount": 1,
+      "budgetExceededCount": 1,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "activityCountIsQuality": false,
+      "automaticOperationalDecision": false,
+      "interpretation": "durable-recovery-evidence-only-not-state-truth-effect-completion-recovery-safety-quality-retry-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-062",
+        "GTR-CR-063",
+        "GTR-CR-064",
+        "GTR-CR-065",
+        "GTR-CR-066",
+        "GTR-CR-067",
+        "GTR-CR-068"
       ],
       "status": "reviewed"
     }

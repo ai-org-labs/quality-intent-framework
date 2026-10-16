@@ -1,36 +1,46 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-15T04:43:38.065Z",
+  "updated_at": "2026-10-16T04:39:04.328Z",
   "entries": [
     {
-      "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "成功は、依存ノードと共有依存、独立性根拠、共通原因、代替復旧経路、切替前提、実観測の切替証拠、相関回復リスクを外部証拠から再計算でき、未検証の独立性や代替不能をガバナンスへ送り、経路数・ベンダー数・テスト数を品質とみなさないこと。",
-      "recorded_at": "2026-10-15T04:33:11.126Z",
+      "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "answer": "対象はQIFのcalibration-report package、スキーマ、ローカル検証器、例、fixture、文書、portable packageである。外部システム統合、UI、実運用の自動再開、意味的真実の自動判定は対象外。",
+      "recorded_at": "2026-10-16T04:28:29.344Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MV91MAK4-40N9W2",
+      "source_session_id": "SESS-MVAGW80S-DLR6B5",
+      "source_decision_record_id": null
+    },
+    {
+      "question": "How should improvement success be judged: which metric or end state matters most?",
+      "answer": "成功は、復元状態・完了済み作用・未完了作用・未知作用・再水和主体・再開権限・冪等性キー・再試行予算を機械検証でき、危険または証拠不足をQIF判断でなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開リリースの完了で確認する。",
+      "recorded_at": "2026-10-16T04:28:29.346Z",
+      "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
+      "mismatch_state": null,
+      "scale_direction": "complete need validation before planning",
+      "source_session_id": "SESS-MVAGW80S-DLR6B5",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The need is distinct from v0.6.48 blast-radius containment: it evaluates whether recovery paths can fail together, not where intervention effects propagate.",
-      "recorded_at": "2026-10-15T04:34:01.506Z",
+      "answer": "Visionary観点では耐久エージェントの新しい品質境界、Builder観点では既存calibration-reportへの局所追加、Guardian観点では二重副作用と誤主体再開の損失境界が明確であり、固定チェックリストではなく証拠・関係・再現可能計算として実装できるためValidated Needとする",
+      "recorded_at": "2026-10-16T04:30:10.650Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MV91MAK4-40N9W2",
-      "source_decision_record_id": "DEC-MV91NNOE-AMWITO"
+      "source_session_id": "SESS-MVAGW80S-DLR6B5",
+      "source_decision_record_id": "DEC-MVAGYK7R-AI99K6"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "The example remains example-only and cannot prove real independence, causal common failure, recovery effectiveness, or retry side-effect safety.",
-      "recorded_at": "2026-10-15T04:43:38.065Z",
-      "expectation_state": "Shared recovery dependencies, evidence-backed independence claims, failover prerequisites, and correlated recovery assessments are structurally reproducible without granting QIF path-selection authority.",
-      "mismatch_state": "The example remains example-only and cannot prove real independence, causal common failure, recovery effectiveness, or retry side-effect safety.",
-      "scale_direction": "Bind durable recovery state, completed external effects, idempotency, retry budgets, and accountable resume authority.",
-      "source_session_id": "SESS-MV91MAK4-40N9W2",
-      "source_decision_record_id": "DEC-MV91NNOE-AMWITO"
+      "answer": "The committed evidence is example-only; delayed or eventually consistent external effects can arrive after the recorded retry decision, so present structural success does not establish terminal recovery or real operational safety.",
+      "recorded_at": "2026-10-16T04:39:04.328Z",
+      "expectation_state": "The validated slice adds checkpoint freshness, actor identity, disjoint effect state, idempotency, completed-effect checks, retry budgets, authority evidence, deterministic assessment, governance, and evidence-only boundaries. npm test passed 16 positive and 1182 negative checks.",
+      "mismatch_state": "The committed evidence is example-only; delayed or eventually consistent external effects can arrive after the recorded retry decision, so present structural success does not establish terminal recovery or real operational safety.",
+      "scale_direction": "Implement v0.6.51 Recovery Observation Windows and Delayed Side-Effect Reconciliation.",
+      "source_session_id": "SESS-MVAGW80S-DLR6B5",
+      "source_decision_record_id": "DEC-MVAGYK7R-AI99K6"
     }
   ]
 }

@@ -71,6 +71,10 @@
     "recoveryDependencyGraphs",
     "recoveryPathTrials",
     "correlatedRecoveryAssessments",
+    "durableRecoveryPolicies",
+    "recoveryStateSnapshots",
+    "retryExecutionRecords",
+    "durableRecoveryAssessments",
     "governanceTriggers",
     "verifierBoundary"
   ],
@@ -542,6 +546,26 @@
       "items": {
         "$ref": "#/$defs/correlatedRecoveryAssessment"
       }
+    },
+    "durableRecoveryPolicies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/durableRecoveryPolicy"}
+    },
+    "recoveryStateSnapshots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/recoveryStateSnapshot"}
+    },
+    "retryExecutionRecords": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/retryExecutionRecord"}
+    },
+    "durableRecoveryAssessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/durableRecoveryAssessment"}
     }
   },
   "$defs": {
@@ -8100,6 +8124,112 @@
         "externalizedEvidenceRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
         "evidenceStatus": {"enum": ["verified", "unverified", "example-only"]},
         "automaticRecoveryClaim": {"const": false},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "durableRecoveryPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "sourceDependencyDiversityPolicyRef", "maximumRetryAttempts", "checkpointFreshnessMinutes", "completedEffectCheckRequired", "idempotencyKeyRequired", "rehydrationIdentityRequired", "resumeAuthorityRequired", "failClosedOnUnknownEffects", "reviewedBy", "inferenceBoundary", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "sourceDependencyDiversityPolicyRef": {"$ref": "#/$defs/id"},
+        "maximumRetryAttempts": {"type": "integer", "minimum": 0},
+        "checkpointFreshnessMinutes": {"type": "integer", "minimum": 1},
+        "completedEffectCheckRequired": {"const": true},
+        "idempotencyKeyRequired": {"const": true},
+        "rehydrationIdentityRequired": {"const": true},
+        "resumeAuthorityRequired": {"const": true},
+        "failClosedOnUnknownEffects": {"const": true},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "inferenceBoundary": {"const": "durable-recovery-evidence-only-not-state-truth-effect-completion-recovery-safety-quality-retry-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["active", "retired"]}
+      }
+    },
+    "recoveryStateSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "recoveryPathRef", "capturedAt", "resumeAttemptedAt", "stateArtifactRef", "stateArtifactDigest", "checkpointAgeMinutes", "checkpointFresh", "rehydratedActorRef", "expectedActorRef", "identityMatched", "completedEffectRefs", "pendingEffectRefs", "unknownEffectRefs", "evidenceRefs", "evidenceStatus", "qifResumedExecution", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "recoveryPathRef": {"$ref": "#/$defs/id"},
+        "capturedAt": {"type": "string", "format": "date-time"},
+        "resumeAttemptedAt": {"type": "string", "format": "date-time"},
+        "stateArtifactRef": {"type": "string", "minLength": 1},
+        "stateArtifactDigest": {"type": "string", "minLength": 1},
+        "checkpointAgeMinutes": {"type": "integer", "minimum": 0},
+        "checkpointFresh": {"type": "boolean"},
+        "rehydratedActorRef": {"type": "string", "minLength": 1},
+        "expectedActorRef": {"type": "string", "minLength": 1},
+        "identityMatched": {"type": "boolean"},
+        "completedEffectRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "pendingEffectRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "unknownEffectRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "evidenceRefs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "evidenceStatus": {"enum": ["verified", "unverified", "example-only"]},
+        "qifResumedExecution": {"const": false},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "retryExecutionRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "snapshotRef", "idempotencyKey", "attemptNumber", "retryBudgetExceeded", "completedEffectChecks", "skippedCompletedEffectRefs", "retriedEffectRefs", "duplicateEffectRefs", "unresolvedEffectRefs", "resumeAuthorityRole", "resumeAuthorityEvidenceRefs", "executionState", "evidenceRefs", "evidenceStatus", "automaticRetryDecision", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "snapshotRef": {"$ref": "#/$defs/id"},
+        "idempotencyKey": {"type": "string", "minLength": 1},
+        "attemptNumber": {"type": "integer", "minimum": 1},
+        "retryBudgetExceeded": {"type": "boolean"},
+        "completedEffectChecks": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "skippedCompletedEffectRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "retriedEffectRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "duplicateEffectRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "unresolvedEffectRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "resumeAuthorityRole": {"type": "string", "minLength": 1},
+        "resumeAuthorityEvidenceRefs": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "executionState": {"enum": ["planned", "blocked", "executed", "aborted"]},
+        "evidenceRefs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "evidenceStatus": {"enum": ["verified", "unverified", "example-only"]},
+        "automaticRetryDecision": {"const": false},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "durableRecoveryAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "snapshotRefs", "retryExecutionRefs", "snapshotCount", "verifiedSnapshotCount", "freshSnapshotCount", "identityMatchedCount", "retryCount", "verifiedRetryCount", "authorizedRetryCount", "duplicateEffectCount", "unknownEffectCount", "budgetExceededCount", "dataSufficiency", "assessmentSignal", "reviewedBy", "activityCountIsQuality", "automaticOperationalDecision", "interpretation", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "snapshotRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
+        "retryExecutionRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
+        "snapshotCount": {"type": "integer", "minimum": 0},
+        "verifiedSnapshotCount": {"type": "integer", "minimum": 0},
+        "freshSnapshotCount": {"type": "integer", "minimum": 0},
+        "identityMatchedCount": {"type": "integer", "minimum": 0},
+        "retryCount": {"type": "integer", "minimum": 0},
+        "verifiedRetryCount": {"type": "integer", "minimum": 0},
+        "authorizedRetryCount": {"type": "integer", "minimum": 0},
+        "duplicateEffectCount": {"type": "integer", "minimum": 0},
+        "unknownEffectCount": {"type": "integer", "minimum": 0},
+        "budgetExceededCount": {"type": "integer", "minimum": 0},
+        "dataSufficiency": {"enum": ["sufficient", "insufficient"]},
+        "assessmentSignal": {"enum": ["insufficient-data", "stale-checkpoint", "identity-mismatch", "unknown-effect-state", "duplicate-side-effect", "retry-budget-exceeded", "observed-no-structural-alerts"]},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "activityCountIsQuality": {"const": false},
+        "automaticOperationalDecision": {"const": false},
+        "interpretation": {"const": "durable-recovery-evidence-only-not-state-truth-effect-completion-recovery-safety-quality-retry-authorization-or-authority"},
         "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
         "status": {"enum": ["draft", "reviewed", "retired"]}
       }

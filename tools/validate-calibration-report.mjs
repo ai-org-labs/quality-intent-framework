@@ -201,6 +201,10 @@ function validatePackage(pkg, packagePath) {
   const recoveryDependencyGraphs = requiredArray(pkg, "recoveryDependencyGraphs");
   const recoveryPathTrials = requiredArray(pkg, "recoveryPathTrials");
   const correlatedRecoveryAssessments = requiredArray(pkg, "correlatedRecoveryAssessments");
+  const durableRecoveryPolicies = requiredArray(pkg, "durableRecoveryPolicies");
+  const recoveryStateSnapshots = requiredArray(pkg, "recoveryStateSnapshots");
+  const retryExecutionRecords = requiredArray(pkg, "retryExecutionRecords");
+  const durableRecoveryAssessments = requiredArray(pkg, "durableRecoveryAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -263,6 +267,9 @@ function validatePackage(pkg, packagePath) {
   const dependencyDiversityPolicyIndex = indexById(dependencyDiversityPolicies, `${packagePath}:dependencyDiversityPolicies`);
   const recoveryDependencyGraphIndex = indexById(recoveryDependencyGraphs, `${packagePath}:recoveryDependencyGraphs`);
   const recoveryPathTrialIndex = indexById(recoveryPathTrials, `${packagePath}:recoveryPathTrials`);
+  const durableRecoveryPolicyIndex = indexById(durableRecoveryPolicies, `${packagePath}:durableRecoveryPolicies`);
+  const recoveryStateSnapshotIndex = indexById(recoveryStateSnapshots, `${packagePath}:recoveryStateSnapshots`);
+  const retryExecutionRecordIndex = indexById(retryExecutionRecords, `${packagePath}:retryExecutionRecords`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -2146,6 +2153,91 @@ function validatePackage(pkg, packagePath) {
     if (!sufficient && !types.has("correlated-recovery-assessment-insufficient")) errors.push(`${assessment.id} insufficient evidence requires a correlated-recovery-assessment-insufficient governance trigger.`);
   }
 
+  for (const policy of durableRecoveryPolicies) {
+    ref(dependencyDiversityPolicyIndex, policy.sourceDependencyDiversityPolicyRef, "dependency diversity policy", policy.id);
+    if (!Number.isInteger(policy.maximumRetryAttempts) || policy.maximumRetryAttempts < 0) errors.push(`${policy.id} maximumRetryAttempts must be a non-negative integer.`);
+    if (!Number.isInteger(policy.checkpointFreshnessMinutes) || policy.checkpointFreshnessMinutes < 1) errors.push(`${policy.id} checkpointFreshnessMinutes must be a positive integer.`);
+    if (![policy.completedEffectCheckRequired, policy.idempotencyKeyRequired, policy.rehydrationIdentityRequired, policy.resumeAuthorityRequired, policy.failClosedOnUnknownEffects].every((value) => value === true)) errors.push(`${policy.id} must require completed-effect checks, idempotency, rehydration identity, resume authority, and fail-closed unknown effects.`);
+    if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one reviewer.`);
+    if (policy.inferenceBoundary !== "durable-recovery-evidence-only-not-state-truth-effect-completion-recovery-safety-quality-retry-authorization-or-authority") errors.push(`${policy.id} inferenceBoundary must preserve durable-recovery evidence limits.`);
+  }
+
+  for (const snapshot of recoveryStateSnapshots) {
+    const policy = ref(durableRecoveryPolicyIndex, snapshot.policyRef, "durable recovery policy", snapshot.id);
+    let recoveryPath = null;
+    for (const graph of recoveryDependencyGraphs) {
+      recoveryPath ||= (graph.recoveryPaths || []).find((item) => item.id === snapshot.recoveryPathRef);
+    }
+    if (!recoveryPath) errors.push(`${snapshot.id} references missing recovery path: ${snapshot.recoveryPathRef}`);
+    const capturedAt = Date.parse(snapshot.capturedAt);
+    const resumeAttemptedAt = Date.parse(snapshot.resumeAttemptedAt);
+    const age = Number.isFinite(capturedAt) && Number.isFinite(resumeAttemptedAt) ? Math.round((resumeAttemptedAt - capturedAt) / 60000) : NaN;
+    if (!Number.isInteger(age) || age < 0) errors.push(`${snapshot.id} timestamps must produce a non-negative checkpoint age.`);
+    else if (snapshot.checkpointAgeMinutes !== age) errors.push(`${snapshot.id} checkpointAgeMinutes must reproduce as ${age}.`);
+    const fresh = Number.isInteger(age) && policy ? age <= policy.checkpointFreshnessMinutes : false;
+    if (snapshot.checkpointFresh !== fresh) errors.push(`${snapshot.id} checkpointFresh must reproduce as ${fresh}.`);
+    const identityMatched = snapshot.rehydratedActorRef === snapshot.expectedActorRef;
+    if (snapshot.identityMatched !== identityMatched) errors.push(`${snapshot.id} identityMatched must reproduce as ${identityMatched}.`);
+    const completed = new Set(snapshot.completedEffectRefs || []);
+    const pending = new Set(snapshot.pendingEffectRefs || []);
+    const unknown = new Set(snapshot.unknownEffectRefs || []);
+    if ([...completed].some((id) => pending.has(id) || unknown.has(id)) || [...pending].some((id) => unknown.has(id))) errors.push(`${snapshot.id} completed, pending, and unknown effects must be disjoint.`);
+    if (snapshot.qifResumedExecution !== false) errors.push(`${snapshot.id} qifResumedExecution must be false.`);
+    const types = new Set((snapshot.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", snapshot.id)?.triggerType));
+    if (snapshot.evidenceStatus !== "verified" && !types.has("durable-recovery-evidence-unverified")) errors.push(`${snapshot.id} non-verified recovery evidence requires a durable-recovery-evidence-unverified governance trigger.`);
+    if (!fresh && !types.has("stale-recovery-checkpoint")) errors.push(`${snapshot.id} stale checkpoint requires a stale-recovery-checkpoint governance trigger.`);
+    if (!identityMatched && !types.has("rehydration-identity-mismatch")) errors.push(`${snapshot.id} rehydration identity mismatch requires a rehydration-identity-mismatch governance trigger.`);
+    if (unknown.size > 0 && !types.has("recovery-effect-state-unknown")) errors.push(`${snapshot.id} unknown effects require a recovery-effect-state-unknown governance trigger.`);
+  }
+
+  for (const retry of retryExecutionRecords) {
+    const policy = ref(durableRecoveryPolicyIndex, retry.policyRef, "durable recovery policy", retry.id);
+    const snapshot = ref(recoveryStateSnapshotIndex, retry.snapshotRef, "recovery state snapshot", retry.id);
+    const budgetExceeded = policy ? retry.attemptNumber > policy.maximumRetryAttempts : false;
+    if (retry.retryBudgetExceeded !== budgetExceeded) errors.push(`${retry.id} retryBudgetExceeded must reproduce as ${budgetExceeded}.`);
+    if (typeof retry.idempotencyKey !== "string" || retry.idempotencyKey.trim() === "") errors.push(`${retry.id} must include a non-empty idempotencyKey.`);
+    if (snapshot && !sameSet(retry.completedEffectChecks, snapshot.completedEffectRefs)) errors.push(`${retry.id} completedEffectChecks must exactly cover snapshot completed effects.`);
+    const completed = new Set(snapshot?.completedEffectRefs || []);
+    const retried = new Set(retry.retriedEffectRefs || []);
+    const duplicates = [...retried].filter((id) => completed.has(id));
+    if (!sameSet(retry.duplicateEffectRefs, duplicates)) errors.push(`${retry.id} duplicateEffectRefs must reproduce from retried completed effects.`);
+    const unresolved = new Set(retry.unresolvedEffectRefs || []);
+    if (snapshot && !sameSet(retry.unresolvedEffectRefs, snapshot.unknownEffectRefs)) errors.push(`${retry.id} unresolvedEffectRefs must exactly match snapshot unknown effects.`);
+    if (retry.executionState === "executed" && !(retry.resumeAuthorityEvidenceRefs || []).length) errors.push(`${retry.id} executed retry requires resume authority evidence.`);
+    if (retry.automaticRetryDecision !== false) errors.push(`${retry.id} automaticRetryDecision must be false.`);
+    const types = new Set((retry.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", retry.id)?.triggerType));
+    if (duplicates.length > 0 && !types.has("duplicate-side-effect-risk")) errors.push(`${retry.id} duplicate side-effect risk requires a duplicate-side-effect-risk governance trigger.`);
+    if (unresolved.size > 0 && !types.has("recovery-effect-state-unknown")) errors.push(`${retry.id} unresolved effects require a recovery-effect-state-unknown governance trigger.`);
+    if (budgetExceeded && !types.has("retry-budget-exceeded")) errors.push(`${retry.id} exceeded retry budget requires a retry-budget-exceeded governance trigger.`);
+  }
+
+  for (const assessment of durableRecoveryAssessments) {
+    ref(durableRecoveryPolicyIndex, assessment.policyRef, "durable recovery policy", assessment.id);
+    const snapshots = (assessment.snapshotRefs || []).map((id) => ref(recoveryStateSnapshotIndex, id, "recovery state snapshot", assessment.id)).filter(Boolean);
+    const retries = (assessment.retryExecutionRefs || []).map((id) => ref(retryExecutionRecordIndex, id, "retry execution record", assessment.id)).filter(Boolean);
+    const expected = {
+      snapshotCount: snapshots.length,
+      verifiedSnapshotCount: snapshots.filter((item) => item.evidenceStatus === "verified").length,
+      freshSnapshotCount: snapshots.filter((item) => item.checkpointFresh).length,
+      identityMatchedCount: snapshots.filter((item) => item.identityMatched).length,
+      retryCount: retries.length,
+      verifiedRetryCount: retries.filter((item) => item.evidenceStatus === "verified").length,
+      authorizedRetryCount: retries.filter((item) => (item.resumeAuthorityEvidenceRefs || []).length > 0).length,
+      duplicateEffectCount: retries.reduce((sum, item) => sum + (item.duplicateEffectRefs || []).length, 0),
+      unknownEffectCount: snapshots.reduce((sum, item) => sum + (item.unknownEffectRefs || []).length, 0),
+      budgetExceededCount: retries.filter((item) => item.retryBudgetExceeded).length
+    };
+    for (const [field, value] of Object.entries(expected)) if (assessment[field] !== value) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const sufficient = snapshots.length > 0 && retries.length > 0 && expected.verifiedSnapshotCount === snapshots.length && expected.verifiedRetryCount === retries.length;
+    const sufficiency = sufficient ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== sufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${sufficiency}.`);
+    const signal = !sufficient ? "insufficient-data" : expected.freshSnapshotCount < snapshots.length ? "stale-checkpoint" : expected.identityMatchedCount < snapshots.length ? "identity-mismatch" : expected.unknownEffectCount > 0 ? "unknown-effect-state" : expected.duplicateEffectCount > 0 ? "duplicate-side-effect" : expected.budgetExceededCount > 0 ? "retry-budget-exceeded" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (assessment.activityCountIsQuality !== false || assessment.automaticOperationalDecision !== false) errors.push(`${assessment.id} must not treat activity counts as quality or make an automatic operational decision.`);
+    const types = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (!sufficient && !types.has("durable-recovery-assessment-insufficient")) errors.push(`${assessment.id} insufficient evidence requires a durable-recovery-assessment-insufficient governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -2259,6 +2351,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that intervention count, response time, rollback, recovery checks, or absence of detected residual risk proves intervention effectiveness, operational safety, causality, quality, redeployment readiness, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that intervention and recovery evidence proves effectiveness, safety, causality, quality, redeployment readiness, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that lane count, coordination throughput, conflict resolution, observed blast radius, or containment state proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that distributed intervention evidence proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that path count, vendor count, dependency diversity, failover execution, or absence of observed shared failure proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that dependency diversity proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that snapshot presence, retry count, idempotency-key presence, recorded effect state, or absence of detected duplicates proves state truth, effect completion, recovery safety, quality, retry authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that durable recovery evidence proves state truth, effect completion, recovery safety, quality, retry authorization, or authority.`);
   }
 
   results.push({
@@ -2329,6 +2422,10 @@ function validatePackage(pkg, packagePath) {
       recoveryDependencyGraphs: recoveryDependencyGraphs.length,
       recoveryPathTrials: recoveryPathTrials.length,
       correlatedRecoveryAssessments: correlatedRecoveryAssessments.length,
+      durableRecoveryPolicies: durableRecoveryPolicies.length,
+      recoveryStateSnapshots: recoveryStateSnapshots.length,
+      retryExecutionRecords: retryExecutionRecords.length,
+      durableRecoveryAssessments: durableRecoveryAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -2348,5 +2445,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, recovery dependency overlap, path membership, failover prerequisite partitioning, correlated recovery assessment summaries, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, contamination freedom, resolution quality, intervention effectiveness, coordination success, containment effectiveness, recovery effectiveness, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, judge or policy selection, authorization, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, recovery dependency overlap, path membership, failover prerequisite partitioning, correlated recovery summaries, checkpoint age, rehydration identity equality, effect-state partitioning, retry-budget arithmetic, duplicate-effect intersection, durable recovery summaries, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, contamination freedom, resolution quality, intervention effectiveness, coordination success, containment effectiveness, recovery effectiveness, state truth, effect completion, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, retry or policy selection, authorization, or decision authority."
 }, null, 2));
