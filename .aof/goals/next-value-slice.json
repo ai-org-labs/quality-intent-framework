@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.6.51 Recovery Observation Windows and Delayed Side-Effect Reconciliation",
-  "updated_at": "2026-10-16T04:39:50.828Z",
+  "content": "v0.7 Empirical Calibration pilot with real governed outcomes",
+  "updated_at": "2026-10-17T04:49:13.528Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MVAGW80S-DLR6B5",
-  "source_decision_record_id": "DEC-MVAGYK7R-AI99K6",
+  "source_session_id": "SESS-MVBWLE9J-B1WTMH",
+  "source_decision_record_id": "DEC-MVBWMNGK-4D6KD1",
   "declared_complete_at": null
 }

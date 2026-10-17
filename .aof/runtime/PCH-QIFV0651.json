@@ -1,0 +1,22 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-17T04:36:29.726Z",
+  "project_charter_id": "PCH-MVBWMJDQ-0NVA9C",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0651.json",
+  "validated_objective": "QIF v0.6.51で回復観測窓と遅延副作用の再照合を構造化し、再現可能な検証、説明可能な例、portable package、公開releaseとして提供する",
+  "scope": [
+    "calibration-report schemaへobservation policy、window、effect observation、reconciliation、assessmentを追加",
+    "verifierへ参照解決、時刻算術、状態遷移、集合整合性、evidence、governance、QIF判断境界を追加",
+    "example、negative fixtures、docs、AI authoring guide、roadmap、changelog、runtime log、portable package、release"
+  ],
+  "constraints": [
+    "外部統合、UI、実際の停止・再開・再試行・補償、意味的真実の自動判定は行わない",
+    "観測数、待機時間、再照合数を品質そのものとして扱わない"
+  ],
+  "expected_outcomes": [
+    "遅延作用、観測窓不足、状態不整合、未解決作用、早すぎる終了宣言を機械検出できる",
+    "危険または証拠不足が明示的governance triggerへ送られ、automatic operational decisionが禁止される"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVBWLKLH-R8620T"
+}

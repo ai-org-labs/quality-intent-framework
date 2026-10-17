@@ -1,0 +1,79 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-17T04:37:05.364Z",
+  "packet_id": "ASP-MVBWNAVO-GY63WH",
+  "source_task_id": "TASK-068",
+  "source_parent_session_id": "SESS-MVBWLE9J-B1WTMH",
+  "source_decision_record_id": "DEC-MVBWMNGK-4D6KD1",
+  "objective": "Implement QIF v0.6.51 recovery observation windows and delayed side-effect reconciliation",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, verifier, fixture, documentation, and release implementation after validated need and council planning",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "schema-verifier-release-engineering"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-qif-schema-verifier",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs",
+        "tools/fixtures/calibration-report-cases.mjs"
+      ],
+      "rationale": "existing calibration-report extension pattern and retained fixture harness are directly reusable"
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-public-repository"
+  ],
+  "policy_refs": [
+    "policy-qif-semantic-boundary"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "observation-policy",
+      "observation-window",
+      "effect-observation",
+      "reconciliation",
+      "assessment"
+    ],
+    "acceptance_criteria": [
+      "npm test passes all positive and retained negative checks",
+      "portable package builds and verifies",
+      "AOF organization verification passes"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "delayed-effect arithmetic, state transitions, and governance routing reproduce",
+      "evaluator_ref": "guardian",
+      "evidence_required": "schema, validator, example, negative fixtures, and test output",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "semantic-overclaim",
+      "trigger_condition": "QIF claims operational completion, effect truth, safety, or authority",
+      "consequence": "block-assignment",
+      "recovery_action": "restore evidence-only boundary and governance routing"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will keep observation evidence separate from operational authority.",
+    "current_action": "Implement v0.6.51",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Submit full verifier evidence to council review"
+  },
+  "status": "draft"
+}

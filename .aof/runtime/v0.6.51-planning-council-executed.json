@@ -1,0 +1,455 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-10-17T04:36:46.722Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MVBWLE9J-B1WTMH",
+    "stage": "planning",
+    "executionId": "CRUN-MVBWMWHR-L4CZGV",
+    "executionStatus": "completed",
+    "invokedModel": true,
+    "seatCount": 3,
+    "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Builder(design-builder-01) -> Visionary(strategy-lead-01) -> Guardian(risk-reviewer-01) with 3 completed model calls",
+    "lastCouncilExecutionId": "CRUN-MVBWMWHR-L4CZGV",
+    "escalation": null,
+    "plan": {
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "required_roles": [
+        "Builder",
+        "Visionary",
+        "Guardian"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVBWLE9J-B1WTMH",
+              "decision_id": "DEC-MVBWMNGK-4D6KD1",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。",
+              "intent": "成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。",
+              "active_context": "context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 | success: 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。",
+              "context_snapshot_id": "CTX-MVBWLKLE-9GYEJA",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。"
+            },
+            "task": {
+              "request": "QIF v0.6.51として、回復や再試行を終了扱いする前に観測窓を設け、遅れて現れる外部副作用、停止後も継続する処理、観測時点間の作用状態変化、再照合結果、未解決作用を構造的に記録・再現検証し、証拠不足や不整合をガバナンスへ送るRecovery Observation Windows and Delayed Side-Effect Reconciliationを実装・検証・公開する。QIFは実運用の停止、再開、再試行、補償を実行せず、意味的真実や件数を品質として扱わない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0651.json",
+                ".aof/runtime/PCH-QIFV0651.json",
+                ".aof/runtime/PST-QIFV0651.json",
+                ".aof/runtime/VHY-QIFV0651.json",
+                ".aof/runtime/ALT-QIFV0651.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVBWMNGK-4D6KD1"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVBWLE9J-B1WTMH",
+              "decision_id": "DEC-MVBWMNGK-4D6KD1",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。",
+              "intent": "成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。",
+              "active_context": "context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 | success: 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。",
+              "context_snapshot_id": "CTX-MVBWLKLE-9GYEJA",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。"
+            },
+            "task": {
+              "request": "QIF v0.6.51として、回復や再試行を終了扱いする前に観測窓を設け、遅れて現れる外部副作用、停止後も継続する処理、観測時点間の作用状態変化、再照合結果、未解決作用を構造的に記録・再現検証し、証拠不足や不整合をガバナンスへ送るRecovery Observation Windows and Delayed Side-Effect Reconciliationを実装・検証・公開する。QIFは実運用の停止、再開、再試行、補償を実行せず、意味的真実や件数を品質として扱わない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0651.json",
+                ".aof/runtime/PCH-QIFV0651.json",
+                ".aof/runtime/PST-QIFV0651.json",
+                ".aof/runtime/VHY-QIFV0651.json",
+                ".aof/runtime/ALT-QIFV0651.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVBWMNGK-4D6KD1"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVBWLE9J-B1WTMH",
+              "decision_id": "DEC-MVBWMNGK-4D6KD1",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。",
+              "intent": "成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。",
+              "active_context": "context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 | success: 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。",
+              "context_snapshot_id": "CTX-MVBWLKLE-9GYEJA",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。"
+            },
+            "task": {
+              "request": "QIF v0.6.51として、回復や再試行を終了扱いする前に観測窓を設け、遅れて現れる外部副作用、停止後も継続する処理、観測時点間の作用状態変化、再照合結果、未解決作用を構造的に記録・再現検証し、証拠不足や不整合をガバナンスへ送るRecovery Observation Windows and Delayed Side-Effect Reconciliationを実装・検証・公開する。QIFは実運用の停止、再開、再試行、補償を実行せず、意味的真実や件数を品質として扱わない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0651.json",
+                ".aof/runtime/PCH-QIFV0651.json",
+                ".aof/runtime/PST-QIFV0651.json",
+                ".aof/runtime/VHY-QIFV0651.json",
+                ".aof/runtime/ALT-QIFV0651.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVBWMNGK-4D6KD1"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MVBWMWHR-L4CZGV",
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Builder",
+        "Visionary",
+        "Guardian"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "status": "completed",
+      "started_at": "2026-10-17T04:36:46.718Z",
+      "completed_at": "2026-10-17T04:36:46.719Z",
+      "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Builder(design-builder-01) -> Visionary(strategy-lead-01) -> Guardian(risk-reviewer-01) with 3 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MVBWMWHR-L4CZGV-STEP-01",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Builder planning call for actor design-builder-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVBWLE9J-B1WTMH",
+              "decision_id": "DEC-MVBWMNGK-4D6KD1",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。",
+              "intent": "成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。",
+              "active_context": "context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 | success: 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。",
+              "context_snapshot_id": "CTX-MVBWLKLE-9GYEJA",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。"
+            },
+            "task": {
+              "request": "QIF v0.6.51として、回復や再試行を終了扱いする前に観測窓を設け、遅れて現れる外部副作用、停止後も継続する処理、観測時点間の作用状態変化、再照合結果、未解決作用を構造的に記録・再現検証し、証拠不足や不整合をガバナンスへ送るRecovery Observation Windows and Delayed Side-Effect Reconciliationを実装・検証・公開する。QIFは実運用の停止、再開、再試行、補償を実行せず、意味的真実や件数を品質として扱わない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0651.json",
+                ".aof/runtime/PCH-QIFV0651.json",
+                ".aof/runtime/PST-QIFV0651.json",
+                ".aof/runtime/VHY-QIFV0651.json",
+                ".aof/runtime/ALT-QIFV0651.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVBWMNGK-4D6KD1"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-17T04:36:46.719Z",
+          "completed_at": "2026-10-17T04:36:46.719Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-17T04:36:46.719Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder planning response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 and align to 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。.",
+            "output_summary": "DECISION: proceed VETO: no Builder planning response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.6.51として、回復や再試行を終了扱いする前に観測窓を設け、遅れて現れる外部副作用、停止後も継続する処理、観測時点間の作用状態変化、再照合結果、未解決作用を構造的に記録・再現検証し、証拠不足や不整合をガバナンスへ送るRecovery Observation Windows and Delayed Side-Effect Reconciliationを実装・検証・公開する。QIFは実運用の停止、再開、再試行、補償を実行せず、意味的真実や件数を品質として扱わない。\nNeed: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。\nIntent: 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。\nActive Context: context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 | success: 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。"
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVBWMWHR-L4CZGV-STEP-02",
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Visionary planning call for actor strategy-lead-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVBWLE9J-B1WTMH",
+              "decision_id": "DEC-MVBWMNGK-4D6KD1",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。",
+              "intent": "成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。",
+              "active_context": "context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 | success: 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。",
+              "context_snapshot_id": "CTX-MVBWLKLE-9GYEJA",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。"
+            },
+            "task": {
+              "request": "QIF v0.6.51として、回復や再試行を終了扱いする前に観測窓を設け、遅れて現れる外部副作用、停止後も継続する処理、観測時点間の作用状態変化、再照合結果、未解決作用を構造的に記録・再現検証し、証拠不足や不整合をガバナンスへ送るRecovery Observation Windows and Delayed Side-Effect Reconciliationを実装・検証・公開する。QIFは実運用の停止、再開、再試行、補償を実行せず、意味的真実や件数を品質として扱わない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0651.json",
+                ".aof/runtime/PCH-QIFV0651.json",
+                ".aof/runtime/PST-QIFV0651.json",
+                ".aof/runtime/VHY-QIFV0651.json",
+                ".aof/runtime/ALT-QIFV0651.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVBWMNGK-4D6KD1"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-17T04:36:46.719Z",
+          "completed_at": "2026-10-17T04:36:46.719Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-17T04:36:46.719Z",
+            "output_text": "DECISION: proceed\nVETO: no\nVisionary planning response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 and align to 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。.",
+            "output_summary": "DECISION: proceed VETO: no Visionary planning response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Visionary in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.6.51として、回復や再試行を終了扱いする前に観測窓を設け、遅れて現れる外部副作用、停止後も継続する処理、観測時点間の作用状態変化、再照合結果、未解決作用を構造的に記録・再現検証し、証拠不足や不整合をガバナンスへ送るRecovery Observation Windows and Delayed Side-Effect Reconciliationを実装・検証・公開する。QIFは実運用の停止、再開、再試行、補償を実行せず、意味的真実や件数を品質として扱わない。\nNeed: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。\nIntent: 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。\nActive Context: context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 | success: 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。"
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVBWMWHR-L4CZGV-STEP-03",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Guardian planning call for actor risk-reviewer-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVBWLE9J-B1WTMH",
+              "decision_id": "DEC-MVBWMNGK-4D6KD1",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。",
+              "intent": "成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。",
+              "active_context": "context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 | success: 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。",
+              "context_snapshot_id": "CTX-MVBWLKLE-9GYEJA",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。"
+            },
+            "task": {
+              "request": "QIF v0.6.51として、回復や再試行を終了扱いする前に観測窓を設け、遅れて現れる外部副作用、停止後も継続する処理、観測時点間の作用状態変化、再照合結果、未解決作用を構造的に記録・再現検証し、証拠不足や不整合をガバナンスへ送るRecovery Observation Windows and Delayed Side-Effect Reconciliationを実装・検証・公開する。QIFは実運用の停止、再開、再試行、補償を実行せず、意味的真実や件数を品質として扱わない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0651.json",
+                ".aof/runtime/PCH-QIFV0651.json",
+                ".aof/runtime/PST-QIFV0651.json",
+                ".aof/runtime/VHY-QIFV0651.json",
+                ".aof/runtime/ALT-QIFV0651.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVBWMNGK-4D6KD1"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-17T04:36:46.719Z",
+          "completed_at": "2026-10-17T04:36:46.719Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-17T04:36:46.719Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian planning response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 and align to 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。.",
+            "output_summary": "DECISION: proceed VETO: no Guardian planning response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.6.51として、回復や再試行を終了扱いする前に観測窓を設け、遅れて現れる外部副作用、停止後も継続する処理、観測時点間の作用状態変化、再照合結果、未解決作用を構造的に記録・再現検証し、証拠不足や不整合をガバナンスへ送るRecovery Observation Windows and Delayed Side-Effect Reconciliationを実装・検証・公開する。QIFは実運用の停止、再開、再試行、補償を実行せず、意味的真実や件数を品質として扱わない。\nNeed: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。\nIntent: 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。\nActive Context: context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 | success: 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、releaseである。UI、外部システム統合、実運用の停止・再開・再試行・補償実行、意味的真実の自動判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。"
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

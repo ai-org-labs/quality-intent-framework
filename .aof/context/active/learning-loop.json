@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-11T04:47:00.355Z",
+  "generated_at": "2026-10-17T04:48:55.612Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MV3BVT1J-YQV2NT",
-    "report_id": "OUT-MV3CCKRK-KAB8HT",
+    "source_session_id": "SESS-MVBWLE9J-B1WTMH",
+    "report_id": "OUT-MVBX2ISG-12WFRT",
     "result": "success",
-    "observed_at": "2026-10-11T04:46:43.232Z",
-    "note": "QIF v0.6.45 implemented, verified, tagged, and released with portable assets; evaluator-signal sensitivity is now structurally governed without hidden-state or authority claims.",
-    "signal_ref": "https://github.com/ai-org-labs/quality-intent-framework/releases/tag/v0.6.45"
+    "observed_at": "2026-10-17T04:48:55.456Z",
+    "note": "QIF v0.6.51 implements recovery observation windows and delayed-effect reconciliation; npm test passed 16/16 positive and 1197/1197 negative checks, portable verification passed with 49 files, and AOF organization verification passed 295/295. Public release pending.",
+    "signal_ref": ".aof/runtime/v0.6.51-review-council-executed.json"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV0645",
-    "recorded_at": "2026-10-11T04:44:58.984Z",
-    "summary": "Matched evaluator-signal structure, deterministic verifier, governance, docs, fixtures, and portable package pass the retained suite.",
-    "detected_gap": "Committed trials remain example-only and evaluation behavior may not transfer to shadow or operational trajectories.",
+    "audit_id": "FSA-QIFV0651",
+    "recorded_at": "2026-10-17T04:48:49.811Z",
+    "summary": "Recovery observation window, delayed-effect reconciliation, governance, documentation, fixtures, and portable validation are complete; semantic and authority boundaries remain explicit.",
+    "detected_gap": "Committed observation evidence is example-only and cannot establish a universally sufficient window or operational effect truth.",
     "result_state": "stable",
-    "next_action": "Implement v0.6.46 evaluation-to-deployment transfer and long-horizon drift without converting short-eval results into deployment safety claims.",
+    "next_action": "Begin v0.7 empirical calibration with governed operational outcomes and suite-health evidence.",
     "related_task_ids": [
-      "TASK-063"
+      "TASK-068"
     ]
   },
   "current_next_value_slice": {
-    "content": "v0.6.46 Evaluation-to-Deployment Transfer and Long-Horizon Drift",
-    "updated_at": "2026-10-11T04:47:00.194Z",
-    "declared_complete_at": null,
-    "source_session_id": "SESS-MV3BVT1J-YQV2NT",
-    "source_decision_record_id": "DEC-MV3BXJ1T-X2QVXI"
+    "content": "v0.7 Empirical Calibration pilot with real governed outcomes",
+    "updated_at": "2026-10-17T04:48:55.459Z",
+    "declared_complete_at": "2026-10-17T04:48:55.459Z",
+    "source_session_id": "SESS-MVBWLE9J-B1WTMH",
+    "source_decision_record_id": null
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Implement v0.6.46 evaluation-to-deployment transfer and long-horizon drift without converting short-eval results into deployment safety claims.",
+    "proposed_focus": "Begin v0.7 empirical calibration with governed operational outcomes and suite-health evidence.",
     "related_task_ids": [
-      "TASK-063"
+      "TASK-068"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: v0.6.46 Evaluation-to-Deployment Transfer and Long-Horizon Drift",
-    "Latest self-audit next action: Implement v0.6.46 evaluation-to-deployment transfer and long-horizon drift without converting short-eval results into deployment safety claims.",
+    "Current next value slice: v0.7 Empirical Calibration pilot with real governed outcomes",
+    "Latest self-audit next action: Begin v0.7 empirical calibration with governed operational outcomes and suite-health evidence.",
     "Latest outcome result: success"
   ]
 }

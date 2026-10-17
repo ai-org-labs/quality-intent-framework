@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.51
+
+- Added executable recovery observation policies, observation windows, effect observations, delayed-effect reconciliations, and aggregate assessments.
+- Added reproducible planned and actual duration, observation ordering and coverage, delayed completion, unresolved final state, terminal-state conflict, closure-state, and assessment checks.
+- Added governance routing for unverified observation evidence, insufficient windows, delayed side effects, unresolved effects, and insufficient assessment evidence.
+- Prevented observation duration, observation count, reconciliation state, and absence of unresolved effects from becoming effect-truth, completeness, recovery-safety, quality, closure-authorization, or authority claims.
+
 ## v0.6.50
 
 - Added executable durable recovery policies, recovery state snapshots, retry execution records, and durable recovery assessments.

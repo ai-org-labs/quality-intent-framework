@@ -751,6 +751,31 @@ whether a checkpoint or retry exists. Establish and preserve:
 QIF records and checks these claims. QIF does not resume the work, authorize a
 retry, prove an external effect completed, or treat retry volume as quality.
 
+## Recovery Observation Review
+
+Do not close a recovery review immediately after a stop, failure, or retry.
+First establish a reviewed observation window:
+
+1. State how long a delayed external effect could reasonably remain invisible
+   and who reviewed that boundary.
+2. Monitor every completed, pending, and unknown effect from the recovery
+   snapshot, not only the effect that failed.
+3. Record at least two timestamped observations and the evidence returned by
+   each external system. More observations are evidence, not quality.
+4. Identify effects that were open initially and completed later.
+5. Keep final `pending`, `absent`, or `unknown` effects unresolved.
+6. Flag a conflict when a completed or failed effect later changes state.
+7. Keep closure blocked when the time window is short, evidence is unverified,
+   or any effect is unresolved or conflicting.
+8. Route the record to the accountable operational owner. QIF must not end the
+   window, compensate an effect, or close recovery.
+
+Use `RecoveryObservationPolicy`, `RecoveryObservationWindow`,
+`EffectObservation`, `DelayedEffectReconciliation`, and
+`RecoveryObservationAssessment`. Explain the result in ordinary words: what
+appeared late, what is still unknown, and why the work cannot yet be called
+finished.
+
 ## Common Failure Modes
 
 Avoid these:

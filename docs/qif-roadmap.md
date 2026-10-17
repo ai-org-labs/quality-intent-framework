@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.6.50 baseline)
+## Current Position (v0.6.51 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -214,6 +214,11 @@ and adoption surface — not pretending the limits away.
   SHA-256 manifest, deterministic zip, mutation rejection, and release-asset
   automation. Distribution integrity does not prove instruction compliance,
   semantic quality, evidence truth, or authority.
+  v0.6.44-v0.6.51 extend calibration through cross-judge correlation,
+  evaluator-signal leakage, evaluation-to-deployment transfer, intervention,
+  distributed containment, recovery-path dependence, durable retry state, and
+  delayed-effect reconciliation. These remain evidence and governance records;
+  they do not grant operational authority or prove real-world safety.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -225,14 +230,14 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-10-16 against primary-source signals. The
+The roadmap was revalidated on 2026-10-17 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
 
 | Current signal | Quality risk exposed | QIF response | Lead, not follow |
 | --- | --- | --- | --- |
-| Emerging multi-agent studies report low-variance agents making the same mistake, while durable agent APIs require saved state and completed effects to be inspected before recovery. Durable workflow guidance warns that replay can repeat external effects unless idempotency scope survives retries. ([Anthropic multi-agent systems](https://www.anthropic.com/research/multiagent-systems), [OpenAI Agents API recovery](https://developers.openai.com/api/docs/guides/agents-api/errors), [OpenAI Agents SDK durability](https://openai.com/index/the-next-evolution-of-the-agents-sdk/), [AWS idempotency and retries](https://docs.aws.amazon.com/durable-execution/patterns/best-practices/idempotency/)) | Nominally separate paths can share dependencies; a recovered actor can resume from stale state or with changed identity; a failed attempt may already have completed external effects; delayed effects can appear after a retry decision. | v0.6.49 Dependency Diversity, v0.6.50 Durable Recovery State and Retry Side-Effect Safety, then v0.6.51 Recovery Observation Windows and Delayed Side-Effect Reconciliation. | Require evidence-backed dependency graphs, bind retries to checkpoint freshness, actor identity, completed/pending/unknown effects, idempotency, budgets, and authority, then reconcile delayed effects before declaring recovery terminal. |
+| Emerging multi-agent studies report low-variance agents making the same mistake, while durable agent APIs require saved state and completed effects to be inspected before recovery. Durable workflow guidance warns that replay can repeat external effects unless idempotency scope survives retries, and that stopping an execution does not cancel work already in flight before its next checkpoint. ([Anthropic multi-agent systems](https://www.anthropic.com/research/multiagent-systems), [OpenAI Agents API recovery](https://developers.openai.com/api/docs/guides/agents-api/errors), [OpenAI Agents SDK durability](https://openai.com/index/the-next-evolution-of-the-agents-sdk/), [AWS idempotency and retries](https://docs.aws.amazon.com/durable-execution/patterns/best-practices/idempotency/), [AWS stopped-execution semantics](https://docs.aws.amazon.com/durable-execution/getting-started/manage-executions/)) | Nominally separate paths can share dependencies; a recovered actor can resume from stale state or with changed identity; a failed or stopped attempt may still complete external effects; delayed effects can appear after a retry decision. | v0.6.49 Dependency Diversity, v0.6.50 Durable Recovery State and Retry Side-Effect Safety, and v0.6.51 Recovery Observation Windows and Delayed Side-Effect Reconciliation. | Require evidence-backed dependency graphs, bind retries to checkpoint freshness, actor identity, completed/pending/unknown effects, idempotency, budgets, and authority, then reconcile delayed effects across a reviewed observation window before accountable closure review. |
 | Sequestered blind evaluation is becoming a measurement control, while recent evidence shows agents can infer benchmarks, seek hidden answers, target graders, and metagame without revealing that behavior in written reasoning. ([NIST AITE](https://ai-challenges.nist.gov/aite), [NIST evaluation cheating](https://www.nist.gov/caissi/cheating-ai-agent-evaluations), [OpenAI incident](https://openai.com/index/hugging-face-incident-and-the-road-ahead/), [OpenAI metagaming](https://alignment.openai.com/metagaming-latents/)) | A reproducible score can still be invalid when answers, labels, grader behavior, metadata, or forbidden affordances were available; absence of a detected shortcut can be mistaken for proof of clean evaluation. | v0.6.42 Sequestered Replay and Policy-Gaming Detection. | Bind blind-state claims to access evidence, declare affordances before execution, inspect externalized trajectories, and govern contamination or loophole uncertainty without requesting hidden reasoning or claiming honesty. |
 | Evaluation and operations are moving toward selective human or specialist review for low-confidence, disputed, novel, or high-impact cases rather than reviewing everything. ([OpenAI evaluation audit](https://openai.com/index/separating-signal-from-noise-coding-evaluations/), [OpenAI AI scorecard](https://openai.com/index/a-scorecard-for-the-ai-age/), [Anthropic trustworthy agents](https://www.anthropic.com/research/trustworthy-agents), [ConfTriage](https://arxiv.org/abs/2608.10885)) | A deferral count can be mistaken for safety, an escalation route can lack real authority or capability, and a later outcome can be misused as causal proof or employee-performance evidence. | v0.6.35 Selective Escalation Calibration, followed by v0.6.36 resolution and timeliness evidence. | Keep policy, actual route, authority, capability, execution evidence, outcome, disagreement, and response timing separate before optimizing any routing policy. |
 | Agent oversight is beginning to report review latency, blocking or redirection, and escalation rates separately, while risk guidance calls for response times and response types to be documented. ([Anthropic pace and oversight measurements](https://www.anthropic.com/institute/measuring-pace-of-ai-development), [NIST AI RMF Playbook](https://airc.nist.gov/docs/AI_RMF_Playbook.pdf)) | A configured human-review route can be mistaken for effective oversight even when nobody is available, no disposition is recorded, or the case silently times out. Speed and volume can then become misleading proxies for quality. | v0.6.36 Escalation Resolution and Timeliness, followed by v0.6.37 disagreement calibration. | Preserve route selection, actual disposition, response window, availability, evidence verification, and timeout consequence as separate governed records before using escalation metrics operationally. |
@@ -716,6 +721,12 @@ Deliverables:
   preserve expected and observed effect windows, late arrivals, reconciliation
   checks, terminality criteria, and compensating-action authority so eventual
   consistency cannot make an incomplete or duplicated recovery look finished.
+- Status: implemented in v0.6.51 through reviewed observation policies,
+  timestamped windows and effect observations, reproducible delayed completion,
+  final unresolved state, terminal-state conflict and closure-state checks,
+  governance, and retained negative fixtures. The committed evidence remains
+  example-only and cannot prove effect truth, observation completeness,
+  causality, recovery safety, closure authorization, or authority.
 - Next planned phase, v0.7 Empirical Calibration: replace illustrative
   calibration evidence with governed pilot outcomes, suite-health records, and
   framework-learning evidence while preserving uncertainty boundaries.

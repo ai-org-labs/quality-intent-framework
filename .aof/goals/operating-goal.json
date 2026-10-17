@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "耐久実行の復元・再試行における状態鮮度、主体同一性、作用の完了状態、冪等性、再試行予算、再開権限を、意味的真実や自動運用判断と分離して評価・監査可能にする",
-  "updated_at": "2026-10-16T04:30:10.649Z",
+  "content": "Recovery closure must remain auditable across a bounded observation period so late effects, state changes, and unresolved inconsistencies are not erased by a point-in-time retry record",
+  "updated_at": "2026-10-17T04:36:35.015Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVAGW80S-DLR6B5",
-  "source_decision_record_id": "DEC-MVAGYK7R-AI99K6",
+  "source_session_id": "SESS-MVBWLE9J-B1WTMH",
+  "source_decision_record_id": "DEC-MVBWMNGK-4D6KD1",
   "declared_complete_at": null
 }

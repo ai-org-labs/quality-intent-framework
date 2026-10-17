@@ -1,10 +1,10 @@
 # Quality Intent Framework
 
-Current release: **v0.6.50**. The calibration runtime now binds durable
-recovery to checkpoint freshness, actor identity, completed, pending, and
-unknown effects, idempotency, retry budgets, and resume authority. It routes
-unsafe or weakly evidenced recovery to governance without granting QIF retry
-authority or treating retry activity as quality.
+Current release: **v0.6.51**. The calibration runtime now keeps recovery open
+across a reviewed observation window, records timestamped external-effect
+states, reproduces delayed completion and unresolved state, and blocks closure
+when the window or evidence is insufficient. QIF records this evidence without
+stopping, retrying, compensating, or closing operational work.
 
 Quality Intent Framework (QIF) turns an organization's quality theory into an operational, AI-verifiable framework.
 
@@ -34,7 +34,7 @@ decision authority.
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x Action Quality Contract runtime for governing AI agent tool actions with trace approval evidence, the v0.6.x Authoring Template runtime for guiding AI agents to author valid, understandable QIF packages, and the v0.6.43-v0.6.50 portable, evaluator, deployment, intervention, containment, correlated-recovery, and durable-retry runtime:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x Action Quality Contract runtime for governing AI agent tool actions with trace approval evidence, the v0.6.x Authoring Template runtime for guiding AI agents to author valid, understandable QIF packages, and the v0.6.43-v0.6.51 portable, evaluator, deployment, intervention, containment, durable-retry, and delayed-effect reconciliation runtime:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -82,6 +82,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.6.48 Distributed Intervention Coordination and Blast-Radius Containment: `docs/qif-v0.6.48-distributed-intervention-containment.md`
 - QIF v0.6.49 Intervention Dependency Diversity and Correlated Recovery Risk: `docs/qif-v0.6.49-intervention-dependency-diversity.md`
 - QIF v0.6.50 Durable Recovery State and Retry Side-Effect Safety: `docs/qif-v0.6.50-durable-recovery.md`
+- QIF v0.6.51 Recovery Observation Windows and Delayed Side-Effect Reconciliation: `docs/qif-v0.6.51-recovery-observation.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`

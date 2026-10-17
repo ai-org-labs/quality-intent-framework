@@ -1,46 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-16T04:39:04.328Z",
+  "updated_at": "2026-10-17T04:48:49.818Z",
   "entries": [
     {
-      "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
-      "answer": "対象はQIFのcalibration-report package、スキーマ、ローカル検証器、例、fixture、文書、portable packageである。外部システム統合、UI、実運用の自動再開、意味的真実の自動判定は対象外。",
-      "recorded_at": "2026-10-16T04:28:29.344Z",
-      "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
-      "mismatch_state": null,
-      "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVAGW80S-DLR6B5",
-      "source_decision_record_id": null
-    },
-    {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "成功は、復元状態・完了済み作用・未完了作用・未知作用・再水和主体・再開権限・冪等性キー・再試行予算を機械検証でき、危険または証拠不足をQIF判断でなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開リリースの完了で確認する。",
-      "recorded_at": "2026-10-16T04:28:29.346Z",
+      "answer": "成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。",
+      "recorded_at": "2026-10-17T04:35:44.648Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVAGW80S-DLR6B5",
+      "source_session_id": "SESS-MVBWLE9J-B1WTMH",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "Visionary観点では耐久エージェントの新しい品質境界、Builder観点では既存calibration-reportへの局所追加、Guardian観点では二重副作用と誤主体再開の損失境界が明確であり、固定チェックリストではなく証拠・関係・再現可能計算として実装できるためValidated Needとする",
-      "recorded_at": "2026-10-16T04:30:10.650Z",
+      "answer": "Visionary sees a new long-horizon quality boundary, Builder can add it locally to calibration-report, and Guardian identifies premature closure and hidden delayed effects as concrete loss boundaries. The need is distinct from v0.6.50 point-in-time recovery state and remains evidence-focused.",
+      "recorded_at": "2026-10-17T04:36:35.016Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVAGW80S-DLR6B5",
-      "source_decision_record_id": "DEC-MVAGYK7R-AI99K6"
+      "source_session_id": "SESS-MVBWLE9J-B1WTMH",
+      "source_decision_record_id": "DEC-MVBWMNGK-4D6KD1"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "The committed evidence is example-only; delayed or eventually consistent external effects can arrive after the recorded retry decision, so present structural success does not establish terminal recovery or real operational safety.",
-      "recorded_at": "2026-10-16T04:39:04.328Z",
-      "expectation_state": "The validated slice adds checkpoint freshness, actor identity, disjoint effect state, idempotency, completed-effect checks, retry budgets, authority evidence, deterministic assessment, governance, and evidence-only boundaries. npm test passed 16 positive and 1182 negative checks.",
-      "mismatch_state": "The committed evidence is example-only; delayed or eventually consistent external effects can arrive after the recorded retry decision, so present structural success does not establish terminal recovery or real operational safety.",
-      "scale_direction": "Implement v0.6.51 Recovery Observation Windows and Delayed Side-Effect Reconciliation.",
-      "source_session_id": "SESS-MVAGW80S-DLR6B5",
-      "source_decision_record_id": "DEC-MVAGYK7R-AI99K6"
+      "answer": "Committed observation evidence is example-only and cannot establish a universally sufficient window or operational effect truth.",
+      "recorded_at": "2026-10-17T04:48:49.818Z",
+      "expectation_state": "Recovery observation window, delayed-effect reconciliation, governance, documentation, fixtures, and portable validation are complete; semantic and authority boundaries remain explicit.",
+      "mismatch_state": "Committed observation evidence is example-only and cannot establish a universally sufficient window or operational effect truth.",
+      "scale_direction": "Begin v0.7 empirical calibration with governed operational outcomes and suite-health evidence.",
+      "source_session_id": "SESS-MVBWLE9J-B1WTMH",
+      "source_decision_record_id": "DEC-MVBWLKLH-R8620T"
     }
   ]
 }

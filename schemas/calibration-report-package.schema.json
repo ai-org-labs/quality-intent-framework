@@ -75,6 +75,11 @@
     "recoveryStateSnapshots",
     "retryExecutionRecords",
     "durableRecoveryAssessments",
+    "recoveryObservationPolicies",
+    "recoveryObservationWindows",
+    "effectObservations",
+    "delayedEffectReconciliations",
+    "recoveryObservationAssessments",
     "governanceTriggers",
     "verifierBoundary"
   ],
@@ -566,6 +571,31 @@
       "type": "array",
       "minItems": 1,
       "items": {"$ref": "#/$defs/durableRecoveryAssessment"}
+    },
+    "recoveryObservationPolicies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/recoveryObservationPolicy"}
+    },
+    "recoveryObservationWindows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/recoveryObservationWindow"}
+    },
+    "effectObservations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/effectObservation"}
+    },
+    "delayedEffectReconciliations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/delayedEffectReconciliation"}
+    },
+    "recoveryObservationAssessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/recoveryObservationAssessment"}
     }
   },
   "$defs": {
@@ -8230,6 +8260,133 @@
         "activityCountIsQuality": {"const": false},
         "automaticOperationalDecision": {"const": false},
         "interpretation": {"const": "durable-recovery-evidence-only-not-state-truth-effect-completion-recovery-safety-quality-retry-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "recoveryObservationPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "sourceDurableRecoveryPolicyRef", "minimumObservationMinutes", "minimumObservationCount", "effectReconciliationRequired", "failClosedOnShortWindow", "failClosedOnUnresolvedEffects", "reviewedBy", "inferenceBoundary", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "sourceDurableRecoveryPolicyRef": {"$ref": "#/$defs/id"},
+        "minimumObservationMinutes": {"type": "integer", "minimum": 1},
+        "minimumObservationCount": {"type": "integer", "minimum": 2},
+        "effectReconciliationRequired": {"const": true},
+        "failClosedOnShortWindow": {"const": true},
+        "failClosedOnUnresolvedEffects": {"const": true},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "inferenceBoundary": {"const": "recovery-observation-evidence-only-not-effect-truth-observation-completeness-causality-recovery-safety-quality-closure-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["active", "retired"]}
+      }
+    },
+    "recoveryObservationWindow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "snapshotRef", "retryExecutionRef", "startedAt", "plannedEndAt", "actualEndAt", "plannedDurationMinutes", "observedDurationMinutes", "windowSatisfied", "monitoredEffectRefs", "observationRefs", "evidenceRefs", "evidenceStatus", "qifEndedObservation", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "snapshotRef": {"$ref": "#/$defs/id"},
+        "retryExecutionRef": {"$ref": "#/$defs/id"},
+        "startedAt": {"type": "string", "format": "date-time"},
+        "plannedEndAt": {"type": "string", "format": "date-time"},
+        "actualEndAt": {"type": "string", "format": "date-time"},
+        "plannedDurationMinutes": {"type": "integer", "minimum": 0},
+        "observedDurationMinutes": {"type": "integer", "minimum": 0},
+        "windowSatisfied": {"type": "boolean"},
+        "monitoredEffectRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "observationRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "evidenceRefs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "evidenceStatus": {"enum": ["verified", "unverified", "example-only"]},
+        "qifEndedObservation": {"const": false},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "observing", "reviewed", "retired"]}
+      }
+    },
+    "effectObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "windowRef", "observedAt", "sequence", "effectStates", "evidenceRefs", "evidenceStatus", "qifInferredExternalState", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "windowRef": {"$ref": "#/$defs/id"},
+        "observedAt": {"type": "string", "format": "date-time"},
+        "sequence": {"type": "integer", "minimum": 1},
+        "effectStates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["effectRef", "state", "evidenceRefs"],
+            "properties": {
+              "effectRef": {"type": "string", "minLength": 1},
+              "state": {"enum": ["completed", "pending", "absent", "unknown", "failed"]},
+              "evidenceRefs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+            }
+          }
+        },
+        "evidenceRefs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "evidenceStatus": {"enum": ["verified", "unverified", "example-only"]},
+        "qifInferredExternalState": {"const": false},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "delayedEffectReconciliation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "windowRef", "snapshotRef", "observationRefs", "initialOpenEffectRefs", "delayedCompletedEffectRefs", "unresolvedEffectRefs", "conflictingEffectRefs", "closureDecision", "evidenceStatus", "automaticCompensationDecision", "qifClosedRecovery", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "windowRef": {"$ref": "#/$defs/id"},
+        "snapshotRef": {"$ref": "#/$defs/id"},
+        "observationRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "initialOpenEffectRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "delayedCompletedEffectRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "unresolvedEffectRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "conflictingEffectRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "closureDecision": {"enum": ["blocked", "eligible-for-accountable-review"]},
+        "evidenceStatus": {"enum": ["verified", "unverified", "example-only"]},
+        "automaticCompensationDecision": {"const": false},
+        "qifClosedRecovery": {"const": false},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "recoveryObservationAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "windowRefs", "reconciliationRefs", "windowCount", "verifiedWindowCount", "satisfiedWindowCount", "observationCount", "verifiedObservationCount", "delayedEffectCount", "unresolvedEffectCount", "conflictingEffectCount", "blockedClosureCount", "dataSufficiency", "assessmentSignal", "reviewedBy", "activityCountIsQuality", "automaticOperationalDecision", "interpretation", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "windowRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
+        "reconciliationRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
+        "windowCount": {"type": "integer", "minimum": 0},
+        "verifiedWindowCount": {"type": "integer", "minimum": 0},
+        "satisfiedWindowCount": {"type": "integer", "minimum": 0},
+        "observationCount": {"type": "integer", "minimum": 0},
+        "verifiedObservationCount": {"type": "integer", "minimum": 0},
+        "delayedEffectCount": {"type": "integer", "minimum": 0},
+        "unresolvedEffectCount": {"type": "integer", "minimum": 0},
+        "conflictingEffectCount": {"type": "integer", "minimum": 0},
+        "blockedClosureCount": {"type": "integer", "minimum": 0},
+        "dataSufficiency": {"enum": ["sufficient", "insufficient"]},
+        "assessmentSignal": {"enum": ["insufficient-data", "observation-window-too-short", "effect-state-conflict", "unresolved-delayed-effect", "delayed-effect-observed", "observed-no-structural-alerts"]},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "activityCountIsQuality": {"const": false},
+        "automaticOperationalDecision": {"const": false},
+        "interpretation": {"const": "recovery-observation-evidence-only-not-effect-truth-observation-completeness-causality-recovery-safety-quality-closure-authorization-or-authority"},
         "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
         "status": {"enum": ["draft", "reviewed", "retired"]}
       }

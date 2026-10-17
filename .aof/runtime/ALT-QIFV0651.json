@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-17T04:36:17.775Z",
+  "alternative_analysis_id": "ALT-MVBWMA5R-QTSAGE",
+  "subject_need": "Prevent premature recovery closure when external effects can appear late",
+  "alternative_solutions": [
+    "Extend the existing calibration-report package with observation policy, observation window, effect observation, reconciliation, and assessment records",
+    "Document delayed-effect advice only without executable schema or verifier rules"
+  ],
+  "non_solution_options": [
+    "Treat a successful retry response or a single immediate observation as proof that recovery is complete"
+  ],
+  "defer_options": [
+    "Wait for one vendor-specific incident corpus before defining a vendor-neutral structure"
+  ],
+  "stop_options": [
+    "Do not grant QIF authority to stop, retry, compensate, reconcile, or declare semantic operational safety"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVBWLKLH-R8620T"
+}

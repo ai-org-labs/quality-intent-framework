@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-17T04:36:15.281Z",
+  "value_hypothesis_id": "VHY-MVBWM88H-EEY9FH",
+  "expected_value_creation": "Make delayed side effects and changing effect state auditable before recovery closure",
+  "beneficiary": "humans, AI agents, hybrid operations, reviewers, and governance owners using QIF",
+  "supporting_evidence": [
+    "AWS durable execution guidance states stopped code may continue until the next checkpoint and side effects already underway still take effect",
+    "OpenAI durable-agent guidance externalizes state for snapshot and rehydration, making post-resume reconciliation an explicit quality boundary"
+  ],
+  "success_criteria": [
+    "observation windows and observations are structurally linked and timestamp arithmetic is reproducible",
+    "effect state transitions and delayed effects are reconciled or remain explicitly unresolved",
+    "premature closure, insufficient windows, unverified evidence, and conflicts route to governance"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVBWLKLH-R8620T"
+}

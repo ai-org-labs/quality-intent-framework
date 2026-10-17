@@ -5041,3 +5041,21 @@ Date: 2026-10-16
 - Outcome report: `OUT-MVAHAT72-MSEE3I` recorded implementation success and retained v0.6.51 as an open next value slice.
 - Residual risk: the committed snapshot and retry records are example-only. They do not prove state truth, external effect completion, real idempotency, recovery safety, retry authorization, or authority. Delayed effects remain the next gap.
 - Next value slice: v0.6.51 Recovery Observation Windows and Delayed Side-Effect Reconciliation.
+
+# QIF v0.6.51 Recovery Observation Windows and Delayed Side-Effect Reconciliation
+
+Date: 2026-10-17
+
+- Need: a stopped or interrupted execution can still finish an external side effect after the recovery snapshot, so a point-in-time state can authorize premature closure, compensation, or retry.
+- Intent: reproduce observation policy, observation windows, per-effect observations, delayed completion, unresolved effects, terminal-state conflicts, closure blocking, and governance without granting QIF recovery authority.
+- Context: QIF remains standalone; publicly released AOF v12.2.0 at source commit `fc7599b` is development governance, not a QIF runtime dependency.
+- AOF session: `SESS-MVBWLE9J-B1WTMH`; task: `TASK-068`; framing decisions: `DEC-MVBWLE9L-3MJRX0` and `DEC-MVBWLKLH-R8620T`; Need Validation decision: `DEC-MVBWMNGK-4D6KD1`.
+- Need Validation and Charter artifacts: `.aof/runtime/PST-QIFV0651.json`, `.aof/runtime/VHY-QIFV0651.json`, `.aof/runtime/ALT-QIFV0651.json`, `.aof/runtime/NVR-QIFV0651.json`, and `.aof/runtime/PCH-QIFV0651.json`. The charter was created only after Validated Need `NVR-MVBWMCJ3-56D5Q5`.
+- Trend evidence: current AWS durable-execution guidance states that stopping an execution does not stop currently running code and that side effects can complete before the next checkpoint; AWS also requires retry-safe idempotency, while the OpenAI Agents SDK exposes snapshot and rehydration primitives for durable execution.
+- Council direction: Visionary, Builder, and Guardian proceeded in planning; Builder and Guardian proceeded in review with no veto. Guardian required insufficient windows, unverified observations, delayed completion, unresolved effects, and terminal-state conflicts to block closure and route governance. The mock council proves runtime routing, not independent semantic approval.
+- Decision: implement `RecoveryObservationPolicy`, `RecoveryObservationWindow`, `EffectObservation`, `DelayedEffectReconciliation`, and `RecoveryObservationAssessment`; keep committed evidence example-only and insufficient.
+- Runtime evidence: `.aof/runtime/v0.6.51-actor-skill-packet.json`, `.aof/runtime/v0.6.51-planning-council-executed.json`, `.aof/runtime/v0.6.51-review-council-executed.json`, self-audit `FSA-QIFV0651`, and learning-loop snapshot record assignment, capability, resource, policy, review, self-review, and retrospective evidence.
+- Verification: `npm test` passed 16/16 positive and 1,197/1,197 retained negative checks. Portable build and verification passed with 49 files. AOF `organization-verify` passed 295/295 checks.
+- Outcome report: `OUT-MVBX2ISG-12WFRT` recorded implementation success; the next value slice is reset as an open v0.7 empirical-calibration pilot rather than treated as completed by this release.
+- Residual risk: the committed observation sequence is example-only. It cannot prove external effect truth, causal linkage, universal observation-window sufficiency, real closure safety, compensation correctness, recovery authorization, or authority.
+- Next value slices: v0.7 Empirical Calibration, v0.8 Multi-Agent Judgment Memory, and v0.9 Anticipatory Quality Intent Twin remain defined in the roadmap.

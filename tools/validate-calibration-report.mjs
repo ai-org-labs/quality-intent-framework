@@ -205,6 +205,11 @@ function validatePackage(pkg, packagePath) {
   const recoveryStateSnapshots = requiredArray(pkg, "recoveryStateSnapshots");
   const retryExecutionRecords = requiredArray(pkg, "retryExecutionRecords");
   const durableRecoveryAssessments = requiredArray(pkg, "durableRecoveryAssessments");
+  const recoveryObservationPolicies = requiredArray(pkg, "recoveryObservationPolicies");
+  const recoveryObservationWindows = requiredArray(pkg, "recoveryObservationWindows");
+  const effectObservations = requiredArray(pkg, "effectObservations");
+  const delayedEffectReconciliations = requiredArray(pkg, "delayedEffectReconciliations");
+  const recoveryObservationAssessments = requiredArray(pkg, "recoveryObservationAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -270,6 +275,10 @@ function validatePackage(pkg, packagePath) {
   const durableRecoveryPolicyIndex = indexById(durableRecoveryPolicies, `${packagePath}:durableRecoveryPolicies`);
   const recoveryStateSnapshotIndex = indexById(recoveryStateSnapshots, `${packagePath}:recoveryStateSnapshots`);
   const retryExecutionRecordIndex = indexById(retryExecutionRecords, `${packagePath}:retryExecutionRecords`);
+  const recoveryObservationPolicyIndex = indexById(recoveryObservationPolicies, `${packagePath}:recoveryObservationPolicies`);
+  const recoveryObservationWindowIndex = indexById(recoveryObservationWindows, `${packagePath}:recoveryObservationWindows`);
+  const effectObservationIndex = indexById(effectObservations, `${packagePath}:effectObservations`);
+  const delayedEffectReconciliationIndex = indexById(delayedEffectReconciliations, `${packagePath}:delayedEffectReconciliations`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -2238,6 +2247,119 @@ function validatePackage(pkg, packagePath) {
     if (!sufficient && !types.has("durable-recovery-assessment-insufficient")) errors.push(`${assessment.id} insufficient evidence requires a durable-recovery-assessment-insufficient governance trigger.`);
   }
 
+  for (const policy of recoveryObservationPolicies) {
+    ref(durableRecoveryPolicyIndex, policy.sourceDurableRecoveryPolicyRef, "durable recovery policy", policy.id);
+    if (!Number.isInteger(policy.minimumObservationMinutes) || policy.minimumObservationMinutes < 1) errors.push(`${policy.id} minimumObservationMinutes must be a positive integer.`);
+    if (!Number.isInteger(policy.minimumObservationCount) || policy.minimumObservationCount < 2) errors.push(`${policy.id} minimumObservationCount must be at least 2.`);
+    if (![policy.effectReconciliationRequired, policy.failClosedOnShortWindow, policy.failClosedOnUnresolvedEffects].every((value) => value === true)) errors.push(`${policy.id} must require reconciliation and fail closed on short windows and unresolved effects.`);
+    if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one reviewer.`);
+    if (policy.inferenceBoundary !== "recovery-observation-evidence-only-not-effect-truth-observation-completeness-causality-recovery-safety-quality-closure-authorization-or-authority") errors.push(`${policy.id} inferenceBoundary must preserve recovery-observation evidence limits.`);
+  }
+
+  for (const window of recoveryObservationWindows) {
+    const policy = ref(recoveryObservationPolicyIndex, window.policyRef, "recovery observation policy", window.id);
+    const snapshot = ref(recoveryStateSnapshotIndex, window.snapshotRef, "recovery state snapshot", window.id);
+    const retry = ref(retryExecutionRecordIndex, window.retryExecutionRef, "retry execution record", window.id);
+    if (retry && retry.snapshotRef !== window.snapshotRef) errors.push(`${window.id} retryExecutionRef must use the same snapshotRef.`);
+    const start = Date.parse(window.startedAt);
+    const plannedEnd = Date.parse(window.plannedEndAt);
+    const actualEnd = Date.parse(window.actualEndAt);
+    const plannedMinutes = Number.isFinite(start) && Number.isFinite(plannedEnd) ? Math.round((plannedEnd - start) / 60000) : NaN;
+    const observedMinutes = Number.isFinite(start) && Number.isFinite(actualEnd) ? Math.round((actualEnd - start) / 60000) : NaN;
+    if (!Number.isInteger(plannedMinutes) || plannedMinutes < 0 || !Number.isInteger(observedMinutes) || observedMinutes < 0) errors.push(`${window.id} timestamps must produce non-negative observation durations.`);
+    else {
+      if (window.plannedDurationMinutes !== plannedMinutes) errors.push(`${window.id} plannedDurationMinutes must reproduce as ${plannedMinutes}.`);
+      if (window.observedDurationMinutes !== observedMinutes) errors.push(`${window.id} observedDurationMinutes must reproduce as ${observedMinutes}.`);
+    }
+    const observations = effectObservations.filter((item) => item.windowRef === window.id).sort((a, b) => a.sequence - b.sequence);
+    if (!sameSet(window.observationRefs, observations.map((item) => item.id))) errors.push(`${window.id} observationRefs must exactly match linked effect observations.`);
+    const expectedSequences = observations.map((_, index) => index + 1);
+    if (observations.some((item, index) => item.sequence !== expectedSequences[index])) errors.push(`${window.id} observation sequences must be contiguous from 1.`);
+    if (observations.some((item, index) => index > 0 && Date.parse(item.observedAt) < Date.parse(observations[index - 1].observedAt))) errors.push(`${window.id} observations must be chronological by sequence.`);
+    const monitored = [...new Set([...(snapshot?.completedEffectRefs || []), ...(snapshot?.pendingEffectRefs || []), ...(snapshot?.unknownEffectRefs || [])])];
+    if (!sameSet(window.monitoredEffectRefs, monitored)) errors.push(`${window.id} monitoredEffectRefs must exactly cover snapshot effects.`);
+    const satisfied = Number.isInteger(observedMinutes) && policy ? observedMinutes >= policy.minimumObservationMinutes && observations.length >= policy.minimumObservationCount : false;
+    if (window.windowSatisfied !== satisfied) errors.push(`${window.id} windowSatisfied must reproduce as ${satisfied}.`);
+    if (window.qifEndedObservation !== false) errors.push(`${window.id} qifEndedObservation must be false.`);
+    const types = new Set((window.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", window.id)?.triggerType));
+    if (window.evidenceStatus !== "verified" && !types.has("recovery-observation-evidence-unverified")) errors.push(`${window.id} non-verified evidence requires a recovery-observation-evidence-unverified governance trigger.`);
+    if (!satisfied && !types.has("recovery-observation-window-insufficient")) errors.push(`${window.id} insufficient observation window requires a recovery-observation-window-insufficient governance trigger.`);
+  }
+
+  for (const observation of effectObservations) {
+    const window = ref(recoveryObservationWindowIndex, observation.windowRef, "recovery observation window", observation.id);
+    const observedAt = Date.parse(observation.observedAt);
+    if (window && (observedAt < Date.parse(window.startedAt) || observedAt > Date.parse(window.actualEndAt))) errors.push(`${observation.id} observedAt must fall within its observation window.`);
+    const effectRefs = (observation.effectStates || []).map((item) => item.effectRef);
+    if (new Set(effectRefs).size !== effectRefs.length) errors.push(`${observation.id} effectStates must contain unique effectRef values.`);
+    if (window && !sameSet(effectRefs, window.monitoredEffectRefs)) errors.push(`${observation.id} effectStates must exactly cover monitored effects.`);
+    if (observation.qifInferredExternalState !== false) errors.push(`${observation.id} qifInferredExternalState must be false.`);
+    const types = new Set((observation.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", observation.id)?.triggerType));
+    if (observation.evidenceStatus !== "verified" && !types.has("recovery-observation-evidence-unverified")) errors.push(`${observation.id} non-verified evidence requires a recovery-observation-evidence-unverified governance trigger.`);
+  }
+
+  for (const reconciliation of delayedEffectReconciliations) {
+    ref(recoveryObservationPolicyIndex, reconciliation.policyRef, "recovery observation policy", reconciliation.id);
+    const window = ref(recoveryObservationWindowIndex, reconciliation.windowRef, "recovery observation window", reconciliation.id);
+    const snapshot = ref(recoveryStateSnapshotIndex, reconciliation.snapshotRef, "recovery state snapshot", reconciliation.id);
+    if (window && window.snapshotRef !== reconciliation.snapshotRef) errors.push(`${reconciliation.id} windowRef must use the same snapshotRef.`);
+    const observations = (reconciliation.observationRefs || []).map((id) => ref(effectObservationIndex, id, "effect observation", reconciliation.id)).filter(Boolean).sort((a, b) => a.sequence - b.sequence);
+    if (window && !sameSet(reconciliation.observationRefs, window.observationRefs)) errors.push(`${reconciliation.id} observationRefs must exactly match the observation window.`);
+    const initialOpen = [...new Set([...(snapshot?.pendingEffectRefs || []), ...(snapshot?.unknownEffectRefs || [])])];
+    if (!sameSet(reconciliation.initialOpenEffectRefs, initialOpen)) errors.push(`${reconciliation.id} initialOpenEffectRefs must reproduce from pending and unknown snapshot effects.`);
+    const delayed = initialOpen.filter((effectRef) => observations.some((observation) => (observation.effectStates || []).some((item) => item.effectRef === effectRef && item.state === "completed")));
+    if (!sameSet(reconciliation.delayedCompletedEffectRefs, delayed)) errors.push(`${reconciliation.id} delayedCompletedEffectRefs must reproduce from later completed states.`);
+    const finalStates = new Map((observations.at(-1)?.effectStates || []).map((item) => [item.effectRef, item.state]));
+    const unresolved = initialOpen.filter((effectRef) => !["completed", "failed"].includes(finalStates.get(effectRef)));
+    if (!sameSet(reconciliation.unresolvedEffectRefs, unresolved)) errors.push(`${reconciliation.id} unresolvedEffectRefs must reproduce from final open effect states.`);
+    const conflicts = [];
+    for (const effectRef of window?.monitoredEffectRefs || []) {
+      let terminalState = null;
+      for (const observation of observations) {
+        const state = (observation.effectStates || []).find((item) => item.effectRef === effectRef)?.state;
+        if (terminalState && state && state !== terminalState) { conflicts.push(effectRef); break; }
+        if (state === "completed" || state === "failed") terminalState = state;
+      }
+    }
+    if (!sameSet(reconciliation.conflictingEffectRefs, conflicts)) errors.push(`${reconciliation.id} conflictingEffectRefs must reproduce from terminal-state reversals.`);
+    const evidenceVerified = reconciliation.evidenceStatus === "verified" && observations.every((item) => item.evidenceStatus === "verified") && window?.evidenceStatus === "verified";
+    const closure = window?.windowSatisfied && unresolved.length === 0 && conflicts.length === 0 && evidenceVerified ? "eligible-for-accountable-review" : "blocked";
+    if (reconciliation.closureDecision !== closure) errors.push(`${reconciliation.id} closureDecision must reproduce as ${closure}.`);
+    if (reconciliation.automaticCompensationDecision !== false || reconciliation.qifClosedRecovery !== false) errors.push(`${reconciliation.id} must not make compensation decisions or close recovery.`);
+    const types = new Set((reconciliation.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", reconciliation.id)?.triggerType));
+    if (reconciliation.evidenceStatus !== "verified" && !types.has("recovery-observation-evidence-unverified")) errors.push(`${reconciliation.id} non-verified evidence requires a recovery-observation-evidence-unverified governance trigger.`);
+    if (delayed.length > 0 && !types.has("delayed-side-effect-observed")) errors.push(`${reconciliation.id} delayed effects require a delayed-side-effect-observed governance trigger.`);
+    if (unresolved.length > 0 && !types.has("delayed-effect-unresolved")) errors.push(`${reconciliation.id} unresolved effects require a delayed-effect-unresolved governance trigger.`);
+    if (conflicts.length > 0 && !types.has("effect-state-reconciliation-conflict")) errors.push(`${reconciliation.id} effect conflicts require an effect-state-reconciliation-conflict governance trigger.`);
+  }
+
+  for (const assessment of recoveryObservationAssessments) {
+    ref(recoveryObservationPolicyIndex, assessment.policyRef, "recovery observation policy", assessment.id);
+    const windows = (assessment.windowRefs || []).map((id) => ref(recoveryObservationWindowIndex, id, "recovery observation window", assessment.id)).filter(Boolean);
+    const reconciliations = (assessment.reconciliationRefs || []).map((id) => ref(delayedEffectReconciliationIndex, id, "delayed effect reconciliation", assessment.id)).filter(Boolean);
+    const observations = windows.flatMap((window) => (window.observationRefs || []).map((id) => effectObservationIndex.get(id)).filter(Boolean));
+    const expected = {
+      windowCount: windows.length,
+      verifiedWindowCount: windows.filter((item) => item.evidenceStatus === "verified").length,
+      satisfiedWindowCount: windows.filter((item) => item.windowSatisfied).length,
+      observationCount: observations.length,
+      verifiedObservationCount: observations.filter((item) => item.evidenceStatus === "verified").length,
+      delayedEffectCount: reconciliations.reduce((sum, item) => sum + (item.delayedCompletedEffectRefs || []).length, 0),
+      unresolvedEffectCount: reconciliations.reduce((sum, item) => sum + (item.unresolvedEffectRefs || []).length, 0),
+      conflictingEffectCount: reconciliations.reduce((sum, item) => sum + (item.conflictingEffectRefs || []).length, 0),
+      blockedClosureCount: reconciliations.filter((item) => item.closureDecision === "blocked").length
+    };
+    for (const [field, value] of Object.entries(expected)) if (assessment[field] !== value) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const sufficient = windows.length > 0 && reconciliations.length > 0 && expected.verifiedWindowCount === windows.length && expected.verifiedObservationCount === observations.length && reconciliations.every((item) => item.evidenceStatus === "verified");
+    const sufficiency = sufficient ? "sufficient" : "insufficient";
+    if (assessment.dataSufficiency !== sufficiency) errors.push(`${assessment.id} dataSufficiency must reproduce as ${sufficiency}.`);
+    const signal = !sufficient ? "insufficient-data" : expected.satisfiedWindowCount < windows.length ? "observation-window-too-short" : expected.conflictingEffectCount > 0 ? "effect-state-conflict" : expected.unresolvedEffectCount > 0 ? "unresolved-delayed-effect" : expected.delayedEffectCount > 0 ? "delayed-effect-observed" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (assessment.activityCountIsQuality !== false || assessment.automaticOperationalDecision !== false) errors.push(`${assessment.id} must not treat activity counts as quality or make an automatic operational decision.`);
+    const types = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (!sufficient && !types.has("recovery-observation-assessment-insufficient")) errors.push(`${assessment.id} insufficient evidence requires a recovery-observation-assessment-insufficient governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -2352,6 +2474,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that lane count, coordination throughput, conflict resolution, observed blast radius, or containment state proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that distributed intervention evidence proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that path count, vendor count, dependency diversity, failover execution, or absence of observed shared failure proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that dependency diversity proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that snapshot presence, retry count, idempotency-key presence, recorded effect state, or absence of detected duplicates proves state truth, effect completion, recovery safety, quality, retry authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that durable recovery evidence proves state truth, effect completion, recovery safety, quality, retry authorization, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that observation duration, observation count, delayed-effect detection, reconciliation state, or absence of unresolved effects proves effect truth, observation completeness, causality, recovery safety, quality, closure authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that recovery observation evidence proves effect truth, completeness, causality, safety, quality, closure authorization, or authority.`);
   }
 
   results.push({
@@ -2426,6 +2549,11 @@ function validatePackage(pkg, packagePath) {
       recoveryStateSnapshots: recoveryStateSnapshots.length,
       retryExecutionRecords: retryExecutionRecords.length,
       durableRecoveryAssessments: durableRecoveryAssessments.length,
+      recoveryObservationPolicies: recoveryObservationPolicies.length,
+      recoveryObservationWindows: recoveryObservationWindows.length,
+      effectObservations: effectObservations.length,
+      delayedEffectReconciliations: delayedEffectReconciliations.length,
+      recoveryObservationAssessments: recoveryObservationAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -2445,5 +2573,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, recovery dependency overlap, path membership, failover prerequisite partitioning, correlated recovery summaries, checkpoint age, rehydration identity equality, effect-state partitioning, retry-budget arithmetic, duplicate-effect intersection, durable recovery summaries, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, contamination freedom, resolution quality, intervention effectiveness, coordination success, containment effectiveness, recovery effectiveness, state truth, effect completion, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, retry or policy selection, authorization, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, recovery dependency overlap, path membership, failover prerequisite partitioning, correlated recovery summaries, checkpoint age, rehydration identity equality, effect-state partitioning, retry-budget arithmetic, duplicate-effect intersection, durable recovery summaries, recovery observation durations, observation sequencing, delayed-effect reconciliation, closure-state reproduction, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, contamination freedom, observation completeness, resolution quality, intervention effectiveness, coordination success, containment effectiveness, recovery effectiveness, state truth, effect completion, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, recovery closure, retry or policy selection, authorization, or decision authority."
 }, null, 2));

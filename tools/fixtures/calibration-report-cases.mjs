@@ -1157,6 +1157,51 @@ export const cases = [
   },
   {
     id:"durable-recovery-boundary-overclaim",rule:"durable recovery semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that durable recovery evidence proves state truth",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that snapshot presence"));}
+  },
+  {
+    id:"recovery-observation-policies-not-array",rule:"recovery observation policies required",expect:"package recoveryObservationPolicies must be an array.",mutate:(pkg)=>{pkg.recoveryObservationPolicies=null;}
+  },
+  {
+    id:"recovery-observation-planned-duration",rule:"planned observation duration reproduction",expect:"plannedDurationMinutes must reproduce as 30.",mutate:(pkg)=>{pkg.recoveryObservationWindows[0].plannedDurationMinutes=29;}
+  },
+  {
+    id:"recovery-observation-observed-duration",rule:"actual observation duration reproduction",expect:"observedDurationMinutes must reproduce as 25.",mutate:(pkg)=>{pkg.recoveryObservationWindows[0].observedDurationMinutes=24;}
+  },
+  {
+    id:"recovery-observation-window-satisfied",rule:"observation window sufficiency reproduction",expect:"windowSatisfied must reproduce as false.",mutate:(pkg)=>{pkg.recoveryObservationWindows[0].windowSatisfied=true;}
+  },
+  {
+    id:"recovery-observation-window-refs",rule:"window observation coverage",expect:"observationRefs must exactly match linked effect observations.",mutate:(pkg)=>{pkg.recoveryObservationWindows[0].observationRefs.pop();}
+  },
+  {
+    id:"recovery-observation-monitored-effects",rule:"snapshot effect coverage",expect:"monitoredEffectRefs must exactly cover snapshot effects.",mutate:(pkg)=>{pkg.recoveryObservationWindows[0].monitoredEffectRefs.pop();}
+  },
+  {
+    id:"recovery-observation-sequence",rule:"observation sequence continuity",expect:"observation sequences must be contiguous from 1.",mutate:(pkg)=>{pkg.effectObservations[1].sequence=3;}
+  },
+  {
+    id:"recovery-observation-effect-coverage",rule:"observation effect coverage",expect:"effectStates must exactly cover monitored effects.",mutate:(pkg)=>{pkg.effectObservations[0].effectStates.pop();}
+  },
+  {
+    id:"recovery-observation-qif-inference",rule:"no QIF external state inference",expect:"qifInferredExternalState must be false.",mutate:(pkg)=>{pkg.effectObservations[0].qifInferredExternalState=true;}
+  },
+  {
+    id:"delayed-reconciliation-initial-open",rule:"initial open effect reproduction",expect:"initialOpenEffectRefs must reproduce from pending and unknown snapshot effects.",mutate:(pkg)=>{pkg.delayedEffectReconciliations[0].initialOpenEffectRefs=[];}
+  },
+  {
+    id:"delayed-reconciliation-completed",rule:"delayed completion reproduction",expect:"delayedCompletedEffectRefs must reproduce from later completed states.",mutate:(pkg)=>{pkg.delayedEffectReconciliations[0].delayedCompletedEffectRefs=[];}
+  },
+  {
+    id:"delayed-reconciliation-unresolved",rule:"final unresolved state reproduction",expect:"unresolvedEffectRefs must reproduce from final open effect states.",mutate:(pkg)=>{pkg.delayedEffectReconciliations[0].unresolvedEffectRefs=[];}
+  },
+  {
+    id:"delayed-reconciliation-closure",rule:"closure state reproduction",expect:"closureDecision must reproduce as blocked.",mutate:(pkg)=>{pkg.delayedEffectReconciliations[0].closureDecision="eligible-for-accountable-review";}
+  },
+  {
+    id:"recovery-observation-assessment-count",rule:"recovery observation assessment reproduction",expect:"delayedEffectCount must reproduce as 1.",mutate:(pkg)=>{pkg.recoveryObservationAssessments[0].delayedEffectCount=0;}
+  },
+  {
+    id:"recovery-observation-boundary-overclaim",rule:"recovery observation semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that recovery observation evidence proves effect truth",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that observation duration"));}
   }
 ];
 

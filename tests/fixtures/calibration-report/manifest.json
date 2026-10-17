@@ -3783,6 +3783,111 @@
       "rule": "durable recovery semantic boundary",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming that durable recovery evidence proves state truth"
+    },
+    {
+      "file": "calibration-report-recovery-observation-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "recovery observation policies required",
+      "expect": "fail",
+      "errorIncludes": "package recoveryObservationPolicies must be an array."
+    },
+    {
+      "file": "calibration-report-recovery-observation-planned-duration.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "planned observation duration reproduction",
+      "expect": "fail",
+      "errorIncludes": "plannedDurationMinutes must reproduce as 30."
+    },
+    {
+      "file": "calibration-report-recovery-observation-observed-duration.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "actual observation duration reproduction",
+      "expect": "fail",
+      "errorIncludes": "observedDurationMinutes must reproduce as 25."
+    },
+    {
+      "file": "calibration-report-recovery-observation-window-satisfied.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "observation window sufficiency reproduction",
+      "expect": "fail",
+      "errorIncludes": "windowSatisfied must reproduce as false."
+    },
+    {
+      "file": "calibration-report-recovery-observation-window-refs.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "window observation coverage",
+      "expect": "fail",
+      "errorIncludes": "observationRefs must exactly match linked effect observations."
+    },
+    {
+      "file": "calibration-report-recovery-observation-monitored-effects.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "snapshot effect coverage",
+      "expect": "fail",
+      "errorIncludes": "monitoredEffectRefs must exactly cover snapshot effects."
+    },
+    {
+      "file": "calibration-report-recovery-observation-sequence.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "observation sequence continuity",
+      "expect": "fail",
+      "errorIncludes": "observation sequences must be contiguous from 1."
+    },
+    {
+      "file": "calibration-report-recovery-observation-effect-coverage.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "observation effect coverage",
+      "expect": "fail",
+      "errorIncludes": "effectStates must exactly cover monitored effects."
+    },
+    {
+      "file": "calibration-report-recovery-observation-qif-inference.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no QIF external state inference",
+      "expect": "fail",
+      "errorIncludes": "qifInferredExternalState must be false."
+    },
+    {
+      "file": "calibration-report-delayed-reconciliation-initial-open.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "initial open effect reproduction",
+      "expect": "fail",
+      "errorIncludes": "initialOpenEffectRefs must reproduce from pending and unknown snapshot effects."
+    },
+    {
+      "file": "calibration-report-delayed-reconciliation-completed.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "delayed completion reproduction",
+      "expect": "fail",
+      "errorIncludes": "delayedCompletedEffectRefs must reproduce from later completed states."
+    },
+    {
+      "file": "calibration-report-delayed-reconciliation-unresolved.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "final unresolved state reproduction",
+      "expect": "fail",
+      "errorIncludes": "unresolvedEffectRefs must reproduce from final open effect states."
+    },
+    {
+      "file": "calibration-report-delayed-reconciliation-closure.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "closure state reproduction",
+      "expect": "fail",
+      "errorIncludes": "closureDecision must reproduce as blocked."
+    },
+    {
+      "file": "calibration-report-recovery-observation-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "recovery observation assessment reproduction",
+      "expect": "fail",
+      "errorIncludes": "delayedEffectCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-recovery-observation-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "recovery observation semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that recovery observation evidence proves effect truth"
     }
   ],
   "rescopedRules": []

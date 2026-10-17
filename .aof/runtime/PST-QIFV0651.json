@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-17T04:36:13.076Z",
+  "problem_statement_id": "PST-MVBWM6J8-Z3SIR6",
+  "affected_party": "QIF users and operators evaluating interrupted or stopped agent workflows",
+  "actual_problem": "A retry or recovery can be declared finished before delayed external effects become observable, leaving effect state inconsistent or unknown",
+  "why_it_matters": "Premature closure can hide duplicate notifications, late writes, unfinished rollback, or effects that continue after stop and can cause operational loss",
+  "why_now": "Durable agent runtimes increasingly resume from checkpoints while current QIF v0.6.50 records point-in-time effect state but not observation windows or later reconciliation",
+  "evidence_refs": [
+    "docs/qif-roadmap.md",
+    "docs/qif-v0.6.50-durable-recovery.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVBWLKLH-R8620T"
+}

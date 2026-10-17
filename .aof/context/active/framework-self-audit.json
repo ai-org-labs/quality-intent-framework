@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-16T04:39:04.322Z",
-  "audit_id": "FSA-QIFV0650",
-  "scope": "QIF v0.6.50 durable recovery implementation, verification, and release readiness",
-  "summary": "The validated slice adds checkpoint freshness, actor identity, disjoint effect state, idempotency, completed-effect checks, retry budgets, authority evidence, deterministic assessment, governance, and evidence-only boundaries. npm test passed 16 positive and 1182 negative checks.",
-  "detected_gap": "The committed evidence is example-only; delayed or eventually consistent external effects can arrive after the recorded retry decision, so present structural success does not establish terminal recovery or real operational safety.",
+  "recorded_at": "2026-10-17T04:48:49.811Z",
+  "audit_id": "FSA-QIFV0651",
+  "scope": "QIF v0.6.51 post-implementation self-review",
+  "summary": "Recovery observation window, delayed-effect reconciliation, governance, documentation, fixtures, and portable validation are complete; semantic and authority boundaries remain explicit.",
+  "detected_gap": "Committed observation evidence is example-only and cannot establish a universally sufficient window or operational effect truth.",
   "result_state": "stable",
-  "next_action": "Implement v0.6.51 Recovery Observation Windows and Delayed Side-Effect Reconciliation.",
+  "next_action": "Begin v0.7 empirical calibration with governed operational outcomes and suite-health evidence.",
   "related_task_ids": [
-    "TASK-067"
+    "TASK-068"
   ],
-  "source_session_id": "SESS-MVAGW80S-DLR6B5",
-  "source_decision_record_id": "DEC-MVAGYK7R-AI99K6"
+  "source_session_id": "SESS-MVBWLE9J-B1WTMH",
+  "source_decision_record_id": "DEC-MVBWLKLH-R8620T"
 }

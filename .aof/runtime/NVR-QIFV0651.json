@@ -1,0 +1,39 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-17T04:36:20.847Z",
+  "validation_id": "NVR-MVBWMCJ3-56D5Q5",
+  "raw_need": "Release QIF v0.6.51 Recovery Observation Windows and Delayed Side-Effect Reconciliation",
+  "validation_status": "validated",
+  "validated_need": "Recovery closure must remain auditable across a bounded observation period so late effects, state changes, and unresolved inconsistencies are not erased by a point-in-time retry record",
+  "decision_summary": "Visionary sees a new long-horizon quality boundary, Builder can add it locally to calibration-report, and Guardian identifies premature closure and hidden delayed effects as concrete loss boundaries. The need is distinct from v0.6.50 point-in-time recovery state and remains evidence-focused.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is in scope?",
+      "answer": "calibration-report schema, verifier, example, fixtures, docs, portable package, and release; no external integration or operational action",
+      "evidence_state": "strong"
+    },
+    {
+      "question": "How is success judged?",
+      "answer": "reproducible observation-window arithmetic, effect-state transitions, reconciliation, governance routing, full tests, portable verification, AOF verification, and release",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "a stop request means in-flight work and effects have stopped",
+    "one clean observation is enough to close recovery",
+    "an absent effect at retry time will never appear later"
+  ],
+  "evidence_gaps": [
+    "the committed package remains example-only and cannot prove vendor behavior, external state truth, or a universally sufficient observation duration"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0651.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0651.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0651.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVBWLKLH-R8620T"
+}

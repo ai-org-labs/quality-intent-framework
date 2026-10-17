@@ -1,6 +1,6 @@
 {
   "packageType": "calibration-report",
-  "runtimeVersion": "0.6.47",
+  "runtimeVersion": "0.6.51",
   "packageId": "CRPKG-001",
   "packageRefs": [
     {
@@ -2752,6 +2752,56 @@
       "requiredAction": "Keep the durable recovery assessment descriptive and non-authoritative.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-069",
+      "triggerType": "recovery-observation-evidence-unverified",
+      "reason": "The committed observation window, observations, and reconciliation are example-only.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Obtain independently verified timestamped external-state evidence before operational interpretation.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-070",
+      "triggerType": "recovery-observation-window-insufficient",
+      "reason": "The actual observation duration is shorter than the reviewed minimum.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep recovery closure blocked until an accountable owner completes or waives the observation boundary.",
+      "owner": "incident-commander",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-071",
+      "triggerType": "delayed-side-effect-observed",
+      "reason": "An effect that was open at the recovery snapshot became completed during later observation.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review retry and compensation plans against the newly observed completion before authorizing further action.",
+      "owner": "service-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-072",
+      "triggerType": "delayed-effect-unresolved",
+      "reason": "At least one initially open effect remains absent, pending, or unknown at the final observation.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep closure and further retry fail-closed while the external effect remains unresolved.",
+      "owner": "service-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-073",
+      "triggerType": "recovery-observation-assessment-insufficient",
+      "reason": "Verified windows, observations, and reconciliations are below the evidence requirement.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep the recovery observation assessment descriptive and non-authoritative.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -2773,7 +2823,8 @@
       "judge dependency profiles, shared dimensions, verdict groups, majority state, dissent, abstention, panel correlation risk, aggregate counts, sufficiency, and governance routing reproduce",
       "distributed lane authority, dependency order, conflicts, stand-down state, shared-resource claims, observed propagation, blast radius, containment state, assessment arithmetic, and governance routing reproduce",
       "recovery dependency nodes and edges, path membership, shared critical dependencies, independence evidence, failover prerequisites, observed switching, correlated recovery assessment arithmetic, and governance routing reproduce",
-      "checkpoint freshness, rehydration identity equality, disjoint effect state, completed-effect checks, idempotency, retry budgets, duplicate-effect intersections, resume authority evidence, durable recovery assessment arithmetic, and governance routing reproduce"
+      "checkpoint freshness, rehydration identity equality, disjoint effect state, completed-effect checks, idempotency, retry budgets, duplicate-effect intersections, resume authority evidence, durable recovery assessment arithmetic, and governance routing reproduce",
+      "observation-window duration, observation sequence and coverage, delayed completion, unresolved final state, terminal-state conflicts, closure-state reproduction, assessment arithmetic, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -2799,7 +2850,8 @@
       "that intervention count, response time, rollback, recovery checks, or absence of detected residual risk proves intervention effectiveness, operational safety, causality, quality, redeployment readiness, selection, authorization, or authority",
       "that lane count, coordination throughput, conflict resolution, observed blast radius, or containment state proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority",
       "that path count, vendor count, dependency diversity, failover execution, or absence of observed shared failure proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority",
-      "that snapshot presence, retry count, idempotency-key presence, recorded effect state, or absence of detected duplicates proves state truth, effect completion, recovery safety, quality, retry authorization, or authority"
+      "that snapshot presence, retry count, idempotency-key presence, recorded effect state, or absence of detected duplicates proves state truth, effect completion, recovery safety, quality, retry authorization, or authority",
+      "that observation duration, observation count, delayed-effect detection, reconciliation state, or absence of unresolved effects proves effect truth, observation completeness, causality, recovery safety, quality, closure authorization, or authority"
     ],
     "semanticValidityRequires": [
       "expert review of prediction and outcome meaning",
@@ -2818,7 +2870,8 @@
       "accountable governance before changing quality decisions",
       "independent review of lane authority, dependency order, shared-resource limits, conflict resolution, propagation evidence, affected stakeholders, and containment effectiveness",
       "independent review of dependency identity, common causes, path independence, failover prerequisites, activation authority, observed recovery, and representative failure conditions",
-      "independent reconciliation of checkpoint state, actor identity, completed, pending, and unknown external effects, idempotency scope, retry budget, and accountable resume authority"
+      "independent reconciliation of checkpoint state, actor identity, completed, pending, and unknown external effects, idempotency scope, retry budget, and accountable resume authority",
+      "independent review of observation-window sufficiency, external effect timestamps and states, delayed effects, reconciliation conflicts, unresolved effects, and accountable recovery closure authority"
     ]
   },
   "evaluatorSignalPolicies": [
@@ -4005,6 +4058,253 @@
         "GTR-CR-066",
         "GTR-CR-067",
         "GTR-CR-068"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "recoveryObservationPolicies": [
+    {
+      "id": "ROP-CR-001",
+      "title": "Illustrative delayed-effect observation policy",
+      "sourceDurableRecoveryPolicyRef": "DRP-CR-001",
+      "minimumObservationMinutes": 30,
+      "minimumObservationCount": 3,
+      "effectReconciliationRequired": true,
+      "failClosedOnShortWindow": true,
+      "failClosedOnUnresolvedEffects": true,
+      "reviewedBy": [
+        "quality-governance-owner",
+        "incident-response-owner",
+        "service-owner"
+      ],
+      "inferenceBoundary": "recovery-observation-evidence-only-not-effect-truth-observation-completeness-causality-recovery-safety-quality-closure-authorization-or-authority",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "recoveryObservationWindows": [
+    {
+      "id": "ROW-CR-001",
+      "title": "Illustrative shortened post-retry observation window",
+      "policyRef": "ROP-CR-001",
+      "snapshotRef": "RSS-CR-001",
+      "retryExecutionRef": "RER-CR-001",
+      "startedAt": "2026-10-16T00:25:00Z",
+      "plannedEndAt": "2026-10-16T00:55:00Z",
+      "actualEndAt": "2026-10-16T00:50:00Z",
+      "plannedDurationMinutes": 30,
+      "observedDurationMinutes": 25,
+      "windowSatisfied": false,
+      "monitoredEffectRefs": [
+        "EFFECT-CR-NOTIFY-001",
+        "EFFECT-CR-ROLLBACK-001",
+        "EFFECT-CR-AUDIT-001"
+      ],
+      "observationRefs": [
+        "EOB-CR-001",
+        "EOB-CR-002",
+        "EOB-CR-003"
+      ],
+      "evidenceRefs": [
+        "EV-CR-OBSERVATION-WINDOW-001"
+      ],
+      "evidenceStatus": "example-only",
+      "qifEndedObservation": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-069",
+        "GTR-CR-070"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "effectObservations": [
+    {
+      "id": "EOB-CR-001",
+      "title": "Illustrative initial external-effect observation",
+      "windowRef": "ROW-CR-001",
+      "observedAt": "2026-10-16T00:25:00Z",
+      "sequence": 1,
+      "effectStates": [
+        {
+          "effectRef": "EFFECT-CR-NOTIFY-001",
+          "state": "completed",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-NOTIFY-001"
+          ]
+        },
+        {
+          "effectRef": "EFFECT-CR-ROLLBACK-001",
+          "state": "pending",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-ROLLBACK-001"
+          ]
+        },
+        {
+          "effectRef": "EFFECT-CR-AUDIT-001",
+          "state": "absent",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-AUDIT-001"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "EV-CR-OBSERVATION-001"
+      ],
+      "evidenceStatus": "example-only",
+      "qifInferredExternalState": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-069"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "EOB-CR-002",
+      "title": "Illustrative delayed rollback completion observation",
+      "windowRef": "ROW-CR-001",
+      "observedAt": "2026-10-16T00:35:00Z",
+      "sequence": 2,
+      "effectStates": [
+        {
+          "effectRef": "EFFECT-CR-NOTIFY-001",
+          "state": "completed",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-NOTIFY-002"
+          ]
+        },
+        {
+          "effectRef": "EFFECT-CR-ROLLBACK-001",
+          "state": "completed",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-ROLLBACK-002"
+          ]
+        },
+        {
+          "effectRef": "EFFECT-CR-AUDIT-001",
+          "state": "absent",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-AUDIT-002"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "EV-CR-OBSERVATION-002"
+      ],
+      "evidenceStatus": "example-only",
+      "qifInferredExternalState": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-069"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "EOB-CR-003",
+      "title": "Illustrative final unresolved audit-effect observation",
+      "windowRef": "ROW-CR-001",
+      "observedAt": "2026-10-16T00:50:00Z",
+      "sequence": 3,
+      "effectStates": [
+        {
+          "effectRef": "EFFECT-CR-NOTIFY-001",
+          "state": "completed",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-NOTIFY-003"
+          ]
+        },
+        {
+          "effectRef": "EFFECT-CR-ROLLBACK-001",
+          "state": "completed",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-ROLLBACK-003"
+          ]
+        },
+        {
+          "effectRef": "EFFECT-CR-AUDIT-001",
+          "state": "unknown",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-AUDIT-003"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "EV-CR-OBSERVATION-003"
+      ],
+      "evidenceStatus": "example-only",
+      "qifInferredExternalState": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-069"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "delayedEffectReconciliations": [
+    {
+      "id": "DER-CR-001",
+      "title": "Illustrative delayed-effect reconciliation",
+      "policyRef": "ROP-CR-001",
+      "windowRef": "ROW-CR-001",
+      "snapshotRef": "RSS-CR-001",
+      "observationRefs": [
+        "EOB-CR-001",
+        "EOB-CR-002",
+        "EOB-CR-003"
+      ],
+      "initialOpenEffectRefs": [
+        "EFFECT-CR-ROLLBACK-001",
+        "EFFECT-CR-AUDIT-001"
+      ],
+      "delayedCompletedEffectRefs": [
+        "EFFECT-CR-ROLLBACK-001"
+      ],
+      "unresolvedEffectRefs": [
+        "EFFECT-CR-AUDIT-001"
+      ],
+      "conflictingEffectRefs": [],
+      "closureDecision": "blocked",
+      "evidenceStatus": "example-only",
+      "automaticCompensationDecision": false,
+      "qifClosedRecovery": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-069",
+        "GTR-CR-071",
+        "GTR-CR-072"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "recoveryObservationAssessments": [
+    {
+      "id": "ROA-CR-001",
+      "title": "Illustrative recovery observation assessment",
+      "policyRef": "ROP-CR-001",
+      "windowRefs": [
+        "ROW-CR-001"
+      ],
+      "reconciliationRefs": [
+        "DER-CR-001"
+      ],
+      "windowCount": 1,
+      "verifiedWindowCount": 0,
+      "satisfiedWindowCount": 0,
+      "observationCount": 3,
+      "verifiedObservationCount": 0,
+      "delayedEffectCount": 1,
+      "unresolvedEffectCount": 1,
+      "conflictingEffectCount": 0,
+      "blockedClosureCount": 1,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "activityCountIsQuality": false,
+      "automaticOperationalDecision": false,
+      "interpretation": "recovery-observation-evidence-only-not-effect-truth-observation-completeness-causality-recovery-safety-quality-closure-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-069",
+        "GTR-CR-070",
+        "GTR-CR-071",
+        "GTR-CR-072",
+        "GTR-CR-073"
       ],
       "status": "reviewed"
     }
