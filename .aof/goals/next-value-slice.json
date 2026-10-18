@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.7 Empirical Calibration pilot with real governed outcomes",
-  "updated_at": "2026-10-17T04:49:13.528Z",
+  "content": "v0.7.1 Outcome Collection Ledger",
+  "updated_at": "2026-10-18T04:49:14.353Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MVBWLE9J-B1WTMH",
-  "source_decision_record_id": "DEC-MVBWMNGK-4D6KD1",
+  "source_session_id": "SESS-MVDC1RDA-JW5Y6C",
+  "source_decision_record_id": "DEC-MVDC2W8Q-B5URBP",
   "declared_complete_at": null
 }

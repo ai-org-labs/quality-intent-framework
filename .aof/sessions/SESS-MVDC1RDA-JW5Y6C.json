@@ -1,0 +1,598 @@
+{
+  "session_id": "SESS-MVDC1RDA-JW5Y6C",
+  "workflow_id": "service-design",
+  "organization_id": "civic-studio",
+  "organization": {
+    "language": "en"
+  },
+  "status": "framed",
+  "trigger": {
+    "trigger_id": "TRG-MVDC1RDA-5PYDL2",
+    "trigger_type": "cli",
+    "received_at": "2026-10-18T04:36:00.330Z",
+    "request_payload": "QIF v0.7.0の最初のvalue sliceとして、実運用で得る意思決定と結果の対応を事前登録し、観測中・欠測・完了・除外を混同せず、複数領域かつ少なくとも1つの非ソフトウェア領域でEmpirical Calibration Pilotを開始できる構造を設計・実装・検証・公開する。実データは捏造せず、件数や指標を品質そのものとせず、パイロット計画の妥当性や意味的真実をverifierが断定しない。"
+  },
+  "current_stage": "planning",
+  "routing_mode": "deep-path",
+  "routing_mode_history": [
+    {
+      "from_mode": null,
+      "to_mode": "deep-path",
+      "at": "2026-10-18T04:36:00.330Z",
+      "reason": "session-created"
+    }
+  ],
+  "context_snapshot_id": "CTX-MVDC1WPA-U2P1RA",
+  "open_decision_ids": [
+    "DEC-MVDC2W8Q-B5URBP"
+  ],
+  "closed_decision_ids": [
+    "DEC-MVDC1RDC-7L7CV2",
+    "DEC-MVDC1WPD-CQODC3"
+  ],
+  "stage_transitions": [
+    {
+      "from_stage": null,
+      "to_stage": "clarification",
+      "from_status": null,
+      "to_status": "waiting_user",
+      "at": "2026-10-18T04:36:00.330Z",
+      "reason": "session-created"
+    },
+    {
+      "from_stage": "clarification",
+      "to_stage": "need-validation",
+      "from_status": "waiting_user",
+      "to_status": "framed",
+      "at": "2026-10-18T04:36:07.245Z",
+      "reason": "clarification-complete"
+    },
+    {
+      "from_stage": "need-validation",
+      "to_stage": "planning",
+      "from_status": "framed",
+      "to_status": "framed",
+      "at": "2026-10-18T04:36:53.309Z",
+      "reason": "need-validation-approved"
+    }
+  ],
+  "reopen_count": 0,
+  "outcome_reports": [
+    {
+      "report_id": "OUT-MVDCIMLO-B8BNPD",
+      "result": "success",
+      "observed_at": "2026-10-18T04:49:07.305Z",
+      "note": "QIF v0.7.0 implements a prospective empirical pilot contract with cross-domain planning, enrollment timing, explicit outcome states, evidence-origin limits, reproducible assessment arithmetic, and governance routing. npm test passed 16/16 positive and 1217/1217 negative fixtures; portable and AOF organization checks passed. Public release pending.",
+      "signal_ref": ".aof/runtime/v0.7.0-review-council-executed.json"
+    }
+  ],
+  "clarification": {
+    "round_count": 1,
+    "dimensions": {
+      "need_clarity": "partial",
+      "intent_clarity": "partial",
+      "context_completeness": "missing",
+      "success_criteria_clarity": "missing",
+      "prohibited_conditions_clarity": "partial",
+      "governance_scope_clarity": "clear",
+      "brownfield_orientation_completeness": "clear",
+      "risk_exposure": "partial"
+    },
+    "gaps": [
+      {
+        "dimension": "need_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The underlying need is not specific enough yet."
+      },
+      {
+        "dimension": "intent_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The intended direction is not yet explicit."
+      },
+      {
+        "dimension": "context_completeness",
+        "status": "missing",
+        "trigger_class": "missing-constraint",
+        "summary": "Key constraints, scope, and current conditions are missing."
+      },
+      {
+        "dimension": "success_criteria_clarity",
+        "status": "missing",
+        "trigger_class": "missing-success-criteria",
+        "summary": "Success cannot be evaluated yet."
+      },
+      {
+        "dimension": "prohibited_conditions_clarity",
+        "status": "partial",
+        "trigger_class": "missing-prohibition",
+        "summary": "Forbidden changes or non-negotiables are not explicit."
+      }
+    ],
+    "pending_questions": [],
+    "asked_questions": [
+      "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "How should improvement success be judged: which metric or end state matters most?"
+    ],
+    "question_rationale": [],
+    "trigger_classes": [],
+    "target_fields": [],
+    "user_answers": [
+      {
+        "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+        "answer": "対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。",
+        "target_fields": [
+          "need",
+          "context"
+        ]
+      },
+      {
+        "question": "How should improvement success be judged: which metric or end state matters most?",
+        "answer": "成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+        "target_fields": [
+          "success_criteria",
+          "intent"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "ask_or_assume_decision": "ask",
+    "remaining_gaps": [],
+    "unresolved_ambiguity": [],
+    "question_budget": {
+      "initial_question_budget": 2,
+      "followup_budget": 1,
+      "max_rounds": 2
+    },
+    "next_stop_condition": "need validation can proceed",
+    "clarification_summary": "runtime captured first-round clarification answers and can proceed to need validation",
+    "should_wait_for_user": false
+  },
+  "created_at": "2026-10-18T04:36:00.330Z",
+  "updated_at": "2026-10-18T04:49:07.305Z",
+  "framing": {
+    "request": "QIF v0.7.0の最初のvalue sliceとして、実運用で得る意思決定と結果の対応を事前登録し、観測中・欠測・完了・除外を混同せず、複数領域かつ少なくとも1つの非ソフトウェア領域でEmpirical Calibration Pilotを開始できる構造を設計・実装・検証・公開する。実データは捏造せず、件数や指標を品質そのものとせず、パイロット計画の妥当性や意味的真実をverifierが断定しない。",
+    "need": "対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。",
+    "intent": "成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+    "active_context": "context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 | success: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+    "success_criteria": "成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+    "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。"
+  },
+  "artifact_refs": [
+    ".aof/runtime/NVR-QIFV0700.json",
+    ".aof/runtime/PCH-QIFV0700.json",
+    ".aof/runtime/PST-QIFV0700.json",
+    ".aof/runtime/VHY-QIFV0700.json",
+    ".aof/runtime/ALT-QIFV0700.json"
+  ],
+  "council_execution_runs": [
+    {
+      "execution_id": "CRUN-MVDC3BK7-9RNYO7",
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Builder",
+        "Visionary",
+        "Guardian"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "status": "completed",
+      "started_at": "2026-10-18T04:37:13.156Z",
+      "completed_at": "2026-10-18T04:37:13.160Z",
+      "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Builder(design-builder-01) -> Visionary(strategy-lead-01) -> Guardian(risk-reviewer-01) with 3 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MVDC3BK7-9RNYO7-STEP-01",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Builder planning call for actor design-builder-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVDC1RDA-JW5Y6C",
+              "decision_id": "DEC-MVDC2W8Q-B5URBP",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。",
+              "intent": "成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+              "active_context": "context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 | success: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+              "context_snapshot_id": "CTX-MVDC1WPA-U2P1RA",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。"
+            },
+            "task": {
+              "request": "QIF v0.7.0の最初のvalue sliceとして、実運用で得る意思決定と結果の対応を事前登録し、観測中・欠測・完了・除外を混同せず、複数領域かつ少なくとも1つの非ソフトウェア領域でEmpirical Calibration Pilotを開始できる構造を設計・実装・検証・公開する。実データは捏造せず、件数や指標を品質そのものとせず、パイロット計画の妥当性や意味的真実をverifierが断定しない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0700.json",
+                ".aof/runtime/PCH-QIFV0700.json",
+                ".aof/runtime/PST-QIFV0700.json",
+                ".aof/runtime/VHY-QIFV0700.json",
+                ".aof/runtime/ALT-QIFV0700.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVDC2W8Q-B5URBP"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-18T04:37:13.160Z",
+          "completed_at": "2026-10-18T04:37:13.160Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-18T04:37:13.160Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder planning response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 and align to 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。.",
+            "output_summary": "DECISION: proceed VETO: no Builder planning response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.7.0の最初のvalue sliceとして、実運用で得る意思決定と結果の対応を事前登録し、観測中・欠測・完了・除外を混同せず、複数領域かつ少なくとも1つの非ソフトウェア領域でEmpirical Calibration Pilotを開始できる構造を設計・実装・検証・公開する。実データは捏造せず、件数や指標を品質そのものとせず、パイロット計画の妥当性や意味的真実をverifierが断定しない。\nNeed: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。\nIntent: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。\nActive Context: context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 | success: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。"
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVDC3BK7-9RNYO7-STEP-02",
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Visionary planning call for actor strategy-lead-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVDC1RDA-JW5Y6C",
+              "decision_id": "DEC-MVDC2W8Q-B5URBP",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。",
+              "intent": "成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+              "active_context": "context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 | success: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+              "context_snapshot_id": "CTX-MVDC1WPA-U2P1RA",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。"
+            },
+            "task": {
+              "request": "QIF v0.7.0の最初のvalue sliceとして、実運用で得る意思決定と結果の対応を事前登録し、観測中・欠測・完了・除外を混同せず、複数領域かつ少なくとも1つの非ソフトウェア領域でEmpirical Calibration Pilotを開始できる構造を設計・実装・検証・公開する。実データは捏造せず、件数や指標を品質そのものとせず、パイロット計画の妥当性や意味的真実をverifierが断定しない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0700.json",
+                ".aof/runtime/PCH-QIFV0700.json",
+                ".aof/runtime/PST-QIFV0700.json",
+                ".aof/runtime/VHY-QIFV0700.json",
+                ".aof/runtime/ALT-QIFV0700.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVDC2W8Q-B5URBP"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-18T04:37:13.160Z",
+          "completed_at": "2026-10-18T04:37:13.160Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-18T04:37:13.160Z",
+            "output_text": "DECISION: proceed\nVETO: no\nVisionary planning response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 and align to 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。.",
+            "output_summary": "DECISION: proceed VETO: no Visionary planning response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Visionary in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.7.0の最初のvalue sliceとして、実運用で得る意思決定と結果の対応を事前登録し、観測中・欠測・完了・除外を混同せず、複数領域かつ少なくとも1つの非ソフトウェア領域でEmpirical Calibration Pilotを開始できる構造を設計・実装・検証・公開する。実データは捏造せず、件数や指標を品質そのものとせず、パイロット計画の妥当性や意味的真実をverifierが断定しない。\nNeed: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。\nIntent: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。\nActive Context: context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 | success: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。"
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVDC3BK7-9RNYO7-STEP-03",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Guardian planning call for actor risk-reviewer-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVDC1RDA-JW5Y6C",
+              "decision_id": "DEC-MVDC2W8Q-B5URBP",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。",
+              "intent": "成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+              "active_context": "context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 | success: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+              "context_snapshot_id": "CTX-MVDC1WPA-U2P1RA",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。"
+            },
+            "task": {
+              "request": "QIF v0.7.0の最初のvalue sliceとして、実運用で得る意思決定と結果の対応を事前登録し、観測中・欠測・完了・除外を混同せず、複数領域かつ少なくとも1つの非ソフトウェア領域でEmpirical Calibration Pilotを開始できる構造を設計・実装・検証・公開する。実データは捏造せず、件数や指標を品質そのものとせず、パイロット計画の妥当性や意味的真実をverifierが断定しない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0700.json",
+                ".aof/runtime/PCH-QIFV0700.json",
+                ".aof/runtime/PST-QIFV0700.json",
+                ".aof/runtime/VHY-QIFV0700.json",
+                ".aof/runtime/ALT-QIFV0700.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVDC2W8Q-B5URBP"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-18T04:37:13.160Z",
+          "completed_at": "2026-10-18T04:37:13.160Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-18T04:37:13.160Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian planning response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 and align to 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。.",
+            "output_summary": "DECISION: proceed VETO: no Guardian planning response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.7.0の最初のvalue sliceとして、実運用で得る意思決定と結果の対応を事前登録し、観測中・欠測・完了・除外を混同せず、複数領域かつ少なくとも1つの非ソフトウェア領域でEmpirical Calibration Pilotを開始できる構造を設計・実装・検証・公開する。実データは捏造せず、件数や指標を品質そのものとせず、パイロット計画の妥当性や意味的真実をverifierが断定しない。\nNeed: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。\nIntent: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。\nActive Context: context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 | success: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "execution_id": "CRUN-MVDCI1OW-RKRKFD",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "completed",
+      "started_at": "2026-10-18T04:48:40.204Z",
+      "completed_at": "2026-10-18T04:48:40.208Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MVDCI1OW-RKRKFD-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVDC1RDA-JW5Y6C",
+              "decision_id": "DEC-MVDC2W8Q-B5URBP",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。",
+              "intent": "成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+              "active_context": "context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 | success: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+              "context_snapshot_id": "CTX-MVDC1WPA-U2P1RA",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。"
+            },
+            "task": {
+              "request": "QIF v0.7.0の最初のvalue sliceとして、実運用で得る意思決定と結果の対応を事前登録し、観測中・欠測・完了・除外を混同せず、複数領域かつ少なくとも1つの非ソフトウェア領域でEmpirical Calibration Pilotを開始できる構造を設計・実装・検証・公開する。実データは捏造せず、件数や指標を品質そのものとせず、パイロット計画の妥当性や意味的真実をverifierが断定しない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0700.json",
+                ".aof/runtime/PCH-QIFV0700.json",
+                ".aof/runtime/PST-QIFV0700.json",
+                ".aof/runtime/VHY-QIFV0700.json",
+                ".aof/runtime/ALT-QIFV0700.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVDC2W8Q-B5URBP"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-18T04:48:40.208Z",
+          "completed_at": "2026-10-18T04:48:40.208Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-18T04:48:40.208Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian review response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 and align to 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。.",
+            "output_summary": "DECISION: proceed VETO: no Guardian review response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.7.0の最初のvalue sliceとして、実運用で得る意思決定と結果の対応を事前登録し、観測中・欠測・完了・除外を混同せず、複数領域かつ少なくとも1つの非ソフトウェア領域でEmpirical Calibration Pilotを開始できる構造を設計・実装・検証・公開する。実データは捏造せず、件数や指標を品質そのものとせず、パイロット計画の妥当性や意味的真実をverifierが断定しない。\nNeed: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。\nIntent: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。\nActive Context: context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 | success: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。"
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVDCI1OW-RKRKFD-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVDC1RDA-JW5Y6C",
+              "decision_id": "DEC-MVDC2W8Q-B5URBP",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。",
+              "intent": "成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+              "active_context": "context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 | success: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+              "context_snapshot_id": "CTX-MVDC1WPA-U2P1RA",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。"
+            },
+            "task": {
+              "request": "QIF v0.7.0の最初のvalue sliceとして、実運用で得る意思決定と結果の対応を事前登録し、観測中・欠測・完了・除外を混同せず、複数領域かつ少なくとも1つの非ソフトウェア領域でEmpirical Calibration Pilotを開始できる構造を設計・実装・検証・公開する。実データは捏造せず、件数や指標を品質そのものとせず、パイロット計画の妥当性や意味的真実をverifierが断定しない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0700.json",
+                ".aof/runtime/PCH-QIFV0700.json",
+                ".aof/runtime/PST-QIFV0700.json",
+                ".aof/runtime/VHY-QIFV0700.json",
+                ".aof/runtime/ALT-QIFV0700.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVDC2W8Q-B5URBP"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-18T04:48:40.208Z",
+          "completed_at": "2026-10-18T04:48:40.208Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-18T04:48:40.208Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder review response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 and align to 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。.",
+            "output_summary": "DECISION: proceed VETO: no Builder review response: focus on 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.7.0の最初のvalue sliceとして、実運用で得る意思決定と結果の対応を事前登録し、観測中・欠測・完了・除外を混同せず、複数領域かつ少なくとも1つの非ソフトウェア領域でEmpirical Calibration Pilotを開始できる構造を設計・実装・検証・公開する。実データは捏造せず、件数や指標を品質そのものとせず、パイロット計画の妥当性や意味的真実をverifierが断定しない。\nNeed: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。\nIntent: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。\nActive Context: context: 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 | success: 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はQIFのcalibration-report package、schema、local verifier、example、negative fixtures、docs、AI authoring guide、roadmap、runtime log、portable package、release。外部システム統合、UI、実組織のデータ収集、被験者募集、実運用判断、意味的真実の判定は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "last_council_execution_id": "CRUN-MVDCI1OW-RKRKFD"
+}

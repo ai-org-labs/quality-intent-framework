@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-17T04:48:49.818Z",
+  "updated_at": "2026-10-18T04:48:47.232Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "成功は、観測窓、観測時点、期待作用、遅延して観測された作用、状態遷移、再照合、未解決作用、終了判定の保留を機械検証し、窓不足・証拠不足・遅延作用・不整合をQIF判断ではなくガバナンスへ送ること。npm test、portable検証、AOF組織検証、公開releaseで確認する。",
-      "recorded_at": "2026-10-17T04:35:44.648Z",
+      "answer": "成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
+      "recorded_at": "2026-10-18T04:36:07.252Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVBWLE9J-B1WTMH",
+      "source_session_id": "SESS-MVDC1RDA-JW5Y6C",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "Visionary sees a new long-horizon quality boundary, Builder can add it locally to calibration-report, and Guardian identifies premature closure and hidden delayed effects as concrete loss boundaries. The need is distinct from v0.6.50 point-in-time recovery state and remains evidence-focused.",
-      "recorded_at": "2026-10-17T04:36:35.016Z",
-      "expectation_state": "validated",
+      "answer": "Visionary identifies the transition from structural readiness to governed field learning; Builder can add a bounded local model to calibration-report; Guardian requires no fabricated observations, prospective freeze, non-software coverage, explicit missing/excluded states, and governance for insufficiency.",
+      "recorded_at": "2026-10-18T04:36:53.310Z",
+      "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVBWLE9J-B1WTMH",
-      "source_decision_record_id": "DEC-MVBWMNGK-4D6KD1"
+      "source_session_id": "SESS-MVDC1RDA-JW5Y6C",
+      "source_decision_record_id": "DEC-MVDC2W8Q-B5URBP"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Committed observation evidence is example-only and cannot establish a universally sufficient window or operational effect truth.",
-      "recorded_at": "2026-10-17T04:48:49.818Z",
-      "expectation_state": "Recovery observation window, delayed-effect reconciliation, governance, documentation, fixtures, and portable validation are complete; semantic and authority boundaries remain explicit.",
-      "mismatch_state": "Committed observation evidence is example-only and cannot establish a universally sufficient window or operational effect truth.",
-      "scale_direction": "Begin v0.7 empirical calibration with governed operational outcomes and suite-health evidence.",
-      "source_session_id": "SESS-MVBWLE9J-B1WTMH",
-      "source_decision_record_id": "DEC-MVBWLKLH-R8620T"
+      "answer": "No independently verified operational decision-outcome pairs are committed, so empirical calibration and transportability remain unestablished.",
+      "recorded_at": "2026-10-18T04:48:47.232Z",
+      "expectation_state": "Prospective empirical pilot protocol, cross-domain plans, enrollment timing, outcome-state preservation, governance, documentation, fixtures, and portable validation are complete; example remains explicitly not-started and insufficient.",
+      "mismatch_state": "No independently verified operational decision-outcome pairs are committed, so empirical calibration and transportability remain unestablished.",
+      "scale_direction": "Implement v0.7.1 Outcome Collection Ledger with append-only observation revisions and source-correction history.",
+      "source_session_id": "SESS-MVDC1RDA-JW5Y6C",
+      "source_decision_record_id": "DEC-MVDC2W8Q-B5URBP"
     }
   ]
 }

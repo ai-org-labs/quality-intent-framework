@@ -1,6 +1,6 @@
 {
   "packageType": "calibration-report",
-  "runtimeVersion": "0.6.51",
+  "runtimeVersion": "0.7.0",
   "packageId": "CRPKG-001",
   "packageRefs": [
     {
@@ -2823,6 +2823,26 @@
       "requiredAction": "Keep the recovery observation assessment descriptive and non-authoritative.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-074",
+      "triggerType": "empirical-pilot-evidence-not-collected",
+      "reason": "The committed pilot enrollment and outcome observation are example-only and no operational outcome evidence has been collected.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep the pilot in not-started state until an accountable operator records independently verifiable operational or historical outcome evidence.",
+      "owner": "pilot-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-075",
+      "triggerType": "empirical-pilot-assessment-insufficient",
+      "reason": "Verified empirical outcomes are below the prospectively registered protocol minimum.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Do not issue an empirical calibration claim; continue governed collection or revise the protocol through governance.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -2845,7 +2865,8 @@
       "distributed lane authority, dependency order, conflicts, stand-down state, shared-resource claims, observed propagation, blast radius, containment state, assessment arithmetic, and governance routing reproduce",
       "recovery dependency nodes and edges, path membership, shared critical dependencies, independence evidence, failover prerequisites, observed switching, correlated recovery assessment arithmetic, and governance routing reproduce",
       "checkpoint freshness, rehydration identity equality, disjoint effect state, completed-effect checks, idempotency, retry budgets, duplicate-effect intersections, resume authority evidence, durable recovery assessment arithmetic, and governance routing reproduce",
-      "observation-window duration, observation sequence and coverage, delayed completion, unresolved final state, terminal-state conflicts, closure-state reproduction, assessment arithmetic, and governance routing reproduce"
+      "observation-window duration, observation sequence and coverage, delayed completion, unresolved final state, terminal-state conflicts, closure-state reproduction, assessment arithmetic, and governance routing reproduce",
+      "prospective pilot registration, domain coverage, enrollment timing, outcome evidence state, empirical origin eligibility, pilot readiness arithmetic, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -2872,7 +2893,8 @@
       "that lane count, coordination throughput, conflict resolution, observed blast radius, or containment state proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority",
       "that path count, vendor count, dependency diversity, failover execution, or absence of observed shared failure proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority",
       "that snapshot presence, retry count, idempotency-key presence, recorded effect state, or absence of detected duplicates proves state truth, effect completion, recovery safety, quality, retry authorization, or authority",
-      "that observation duration, observation count, delayed-effect detection, reconciliation state, or absence of unresolved effects proves effect truth, observation completeness, causality, recovery safety, quality, closure authorization, or authority"
+      "that observation duration, observation count, delayed-effect detection, reconciliation state, or absence of unresolved effects proves effect truth, observation completeness, causality, recovery safety, quality, closure authorization, or authority",
+      "that pilot domain count, enrollment count, prospective timing, outcome count, or readiness state proves study validity, representativeness, causality, calibration truth, quality, authorization, or authority"
     ],
     "semanticValidityRequires": [
       "expert review of prediction and outcome meaning",
@@ -2892,7 +2914,8 @@
       "independent review of lane authority, dependency order, shared-resource limits, conflict resolution, propagation evidence, affected stakeholders, and containment effectiveness",
       "independent review of dependency identity, common causes, path independence, failover prerequisites, activation authority, observed recovery, and representative failure conditions",
       "independent reconciliation of checkpoint state, actor identity, completed, pending, and unknown external effects, idempotency scope, retry budget, and accountable resume authority",
-      "independent review of observation-window sufficiency, external effect timestamps and states, delayed effects, reconciliation conflicts, unresolved effects, and accountable recovery closure authority"
+      "independent review of observation-window sufficiency, external effect timestamps and states, delayed effects, reconciliation conflicts, unresolved effects, and accountable recovery closure authority",
+      "accountable review of pilot protocol, domain relevance, prospective registration, outcome definitions, missingness, exclusions, evidence provenance, and empirical interpretation"
     ]
   },
   "evaluatorSignalPolicies": [
@@ -4326,6 +4349,191 @@
         "GTR-CR-071",
         "GTR-CR-072",
         "GTR-CR-073"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "empiricalPilotProtocols": [
+    {
+      "id": "EPP-CR-001",
+      "title": "Illustrative cross-domain empirical calibration pilot protocol",
+      "registeredAt": "2026-10-18T00:00:00Z",
+      "domainRefs": [
+        "EPD-CR-SOFTWARE-001",
+        "EPD-CR-SUPPORT-001"
+      ],
+      "minimumDomainCount": 2,
+      "minimumNonSoftwareDomainCount": 1,
+      "minimumVerifiedOutcomeCount": 10,
+      "acceptedEvidenceOriginKinds": [
+        "observed-operational",
+        "historical-record"
+      ],
+      "prospectiveRegistrationRequired": true,
+      "outcomeDefinitionFrozenBeforeDecision": true,
+      "missingOutcomeHandling": "preserve-as-missing",
+      "excludedOutcomeHandling": "preserve-with-rationale",
+      "reviewedBy": [
+        "pilot-governance-owner",
+        "independent-method-reviewer"
+      ],
+      "qifCollectsOperationalData": false,
+      "inferenceBoundary": "empirical-pilot-structure-only-not-study-validity-representativeness-causality-calibration-truth-quality-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-074",
+        "GTR-CR-075"
+      ],
+      "status": "active"
+    }
+  ],
+  "empiricalPilotDomains": [
+    {
+      "id": "EPD-CR-SOFTWARE-001",
+      "title": "Software release decision pilot domain",
+      "protocolRef": "EPP-CR-001",
+      "domain": "software-development",
+      "domainClass": "software",
+      "targetPopulation": "Accountable release decisions with a declared post-release observation window",
+      "decisionType": "quality-gate release disposition",
+      "outcomeDefinition": "Whether the protected Quality Intents held throughout the registered post-release window",
+      "observationWindow": "registered per enrollment before the release decision",
+      "outcomeEvidenceRequirements": [
+        "timestamped operational outcome record",
+        "independent evidence-origin verification"
+      ],
+      "accountableOwner": "software-pilot-owner",
+      "reviewedBy": [
+        "pilot-governance-owner"
+      ],
+      "evidenceRefs": [
+        "docs/qif-v0.7.0-empirical-pilot.md"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticDomainAdequacyDecision": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-074"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "EPD-CR-SUPPORT-001",
+      "title": "Customer support decision pilot domain",
+      "protocolRef": "EPP-CR-001",
+      "domain": "customer-support",
+      "domainClass": "non-software",
+      "targetPopulation": "Accountable support-operation decisions with measurable customer-impact outcomes",
+      "decisionType": "operational quality disposition",
+      "outcomeDefinition": "Whether the declared customer-impact loss boundary remained protected during the registered window",
+      "observationWindow": "registered per enrollment before the operational decision",
+      "outcomeEvidenceRequirements": [
+        "timestamped case outcome",
+        "stakeholder-impact evidence",
+        "independent evidence-origin verification"
+      ],
+      "accountableOwner": "support-pilot-owner",
+      "reviewedBy": [
+        "pilot-governance-owner",
+        "support-quality-owner"
+      ],
+      "evidenceRefs": [
+        "docs/qif-v0.7.0-empirical-pilot.md"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticDomainAdequacyDecision": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-074"
+      ],
+      "status": "planned"
+    }
+  ],
+  "empiricalPilotEnrollments": [
+    {
+      "id": "EPE-CR-001",
+      "title": "Illustrative prospectively ordered support decision enrollment",
+      "protocolRef": "EPP-CR-001",
+      "domainRef": "EPD-CR-SUPPORT-001",
+      "sourcePackageRef": "PKGREF-CR-001",
+      "gateDecisionRef": "QGD-QG-001",
+      "registeredAt": "2026-10-18T01:00:00Z",
+      "decisionAt": "2026-10-18T02:00:00Z",
+      "prospectiveOrderSatisfied": true,
+      "forecastProbability": 0.7,
+      "confidenceMeaning": "Probability that the registered support loss boundary remains protected throughout the declared observation window.",
+      "outcomeDefinitionSnapshot": "Protected support outcome holds throughout the registered seven-day window without crossing the financial-limit loss boundary.",
+      "observationDueAt": "2026-10-25T02:00:00Z",
+      "enrollmentState": "enrolled",
+      "exclusionRationale": "",
+      "evidenceRefs": [
+        "examples/quality-gate-package.json#QGD-QG-001"
+      ],
+      "evidenceStatus": "example-only",
+      "qifSelectedParticipant": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-074"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "empiricalOutcomeObservations": [
+    {
+      "id": "EPO-CR-001",
+      "title": "Illustrative outcome awaiting collection",
+      "enrollmentRef": "EPE-CR-001",
+      "recordedAt": "2026-10-18T02:00:00Z",
+      "observationState": "planned",
+      "observedAt": null,
+      "outcomeClass": "not-observed",
+      "outcomeValue": null,
+      "evidenceOriginRef": null,
+      "evidenceRefs": [],
+      "evidenceStatus": "not-collected",
+      "observationWindowClosed": false,
+      "missingReason": "",
+      "exclusionRationale": "",
+      "automaticOutcomeInference": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-074"
+      ],
+      "status": "draft"
+    }
+  ],
+  "empiricalPilotAssessments": [
+    {
+      "id": "EPA-CR-001",
+      "title": "Illustrative empirical pilot readiness assessment",
+      "protocolRef": "EPP-CR-001",
+      "domainRefs": [
+        "EPD-CR-SOFTWARE-001",
+        "EPD-CR-SUPPORT-001"
+      ],
+      "enrollmentRefs": [
+        "EPE-CR-001"
+      ],
+      "observationRefs": [
+        "EPO-CR-001"
+      ],
+      "domainCount": 2,
+      "nonSoftwareDomainCount": 1,
+      "domainCoverageSatisfied": true,
+      "enrollmentCount": 1,
+      "prospectiveEnrollmentCount": 1,
+      "plannedOutcomeCount": 1,
+      "observingOutcomeCount": 0,
+      "completedOutcomeCount": 0,
+      "missingOutcomeCount": 0,
+      "excludedOutcomeCount": 0,
+      "verifiedEmpiricalOutcomeCount": 0,
+      "dataSufficiency": "insufficient",
+      "pilotState": "not-started",
+      "reviewedBy": [
+        "pilot-governance-owner"
+      ],
+      "activityCountIsQuality": false,
+      "automaticCalibrationClaim": false,
+      "interpretation": "empirical-pilot-structure-only-not-study-validity-representativeness-causality-calibration-truth-quality-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-074",
+        "GTR-CR-075"
       ],
       "status": "reviewed"
     }

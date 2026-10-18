@@ -1,0 +1,21 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-18T04:36:53.142Z",
+  "project_charter_id": "PCH-MVDC2W46-NAI3Z0",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0700.json",
+  "validated_objective": "Release QIF v0.7.0 with an executable Empirical Calibration Pilot Contract that can begin governed data collection without claiming calibration before observed evidence exists",
+  "scope": [
+    "calibration-report pilot protocol, domain plan, prospective enrollment, outcome observation, and pilot assessment records",
+    "deterministic verifier checks, example-only pending package, retained negative fixtures, docs, portable package, and release"
+  ],
+  "constraints": [
+    "do not fabricate real outcomes, integrate external systems, collect personal data, or grant operational authority",
+    "counts, domain coverage, confidence, and calibration metrics remain evidence rather than quality"
+  ],
+  "expected_outcomes": [
+    "planned, observing, missing, excluded, and completed evidence states remain distinct and traceable",
+    "a pilot cannot be empirically ready without verified observed outcomes and required domain coverage"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVDC1WPD-CQODC3"
+}

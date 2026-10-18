@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.7.0
+
+- Added executable empirical pilot protocols, cross-domain plans, prospective decision enrollments, outcome observations, and pilot assessments.
+- Kept planned, observing, completed, missing, and excluded outcomes distinct; only verified operational or historical evidence can count as a completed empirical outcome.
+- Added reproducible registration timing, domain coverage, outcome-state, empirical-origin, evidence-sufficiency, readiness, and governance checks.
+- Added 20 retained negative fixtures and preserved the committed example as intentionally not-started and insufficient.
+- Prevented pilot counts and readiness state from becoming study-validity, representativeness, causality, calibration-truth, quality, authorization, or authority claims.
+
 ## v0.6.51
 
 - Added executable recovery observation policies, observation windows, effect observations, delayed-effect reconciliations, and aggregate assessments.

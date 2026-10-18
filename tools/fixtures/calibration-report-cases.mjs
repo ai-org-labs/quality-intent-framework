@@ -1202,6 +1202,66 @@ export const cases = [
   },
   {
     id:"recovery-observation-boundary-overclaim",rule:"recovery observation semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that recovery observation evidence proves effect truth",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that observation duration"));}
+  },
+  {
+    id:"empirical-pilot-protocols-not-array",rule:"empirical pilot protocols required",expect:"package empiricalPilotProtocols must be an array.",mutate:(pkg)=>{pkg.empiricalPilotProtocols=null;}
+  },
+  {
+    id:"empirical-pilot-domain-minimum",rule:"cross-domain pilot minimum",expect:"minimumDomainCount must be at least 2.",mutate:(pkg)=>{pkg.empiricalPilotProtocols[0].minimumDomainCount=1;}
+  },
+  {
+    id:"empirical-pilot-nonsoftware-minimum",rule:"non-software pilot minimum",expect:"minimumNonSoftwareDomainCount must be at least 1.",mutate:(pkg)=>{pkg.empiricalPilotProtocols[0].minimumNonSoftwareDomainCount=0;}
+  },
+  {
+    id:"empirical-pilot-origin-kinds",rule:"empirical origin allowlist",expect:"acceptedEvidenceOriginKinds must exactly contain observed-operational and historical-record.",mutate:(pkg)=>{pkg.empiricalPilotProtocols[0].acceptedEvidenceOriginKinds=["example"];}
+  },
+  {
+    id:"empirical-pilot-domain-refs",rule:"protocol domain coverage",expect:"domainRefs must exactly match linked empirical pilot domains.",mutate:(pkg)=>{pkg.empiricalPilotProtocols[0].domainRefs.pop();}
+  },
+  {
+    id:"empirical-pilot-qif-collection",rule:"no QIF operational collection",expect:"qifCollectsOperationalData must be false.",mutate:(pkg)=>{pkg.empiricalPilotProtocols[0].qifCollectsOperationalData=true;}
+  },
+  {
+    id:"empirical-pilot-domain-protocol",rule:"domain protocol resolution",expect:"references missing empirical pilot protocol",mutate:(pkg)=>{pkg.empiricalPilotDomains[0].protocolRef="EPP-NOPE-999";}
+  },
+  {
+    id:"empirical-pilot-domain-evidence-trigger",rule:"domain evidence governance",expect:"non-verified domain evidence requires an empirical-pilot-evidence-not-collected governance trigger.",mutate:(pkg)=>{pkg.empiricalPilotDomains[0].governanceTriggerRefs=[];}
+  },
+  {
+    id:"empirical-pilot-enrollment-decision",rule:"gate decision resolution",expect:"references missing gate decision",mutate:(pkg)=>{pkg.empiricalPilotEnrollments[0].gateDecisionRef="QGD-NOPE-999";}
+  },
+  {
+    id:"empirical-pilot-prospective-order",rule:"prospective registration reproduction",expect:"prospectiveOrderSatisfied must reproduce as false.",mutate:(pkg)=>{pkg.empiricalPilotEnrollments[0].registeredAt="2026-10-18T03:00:00Z";}
+  },
+  {
+    id:"empirical-pilot-enrolled-prospective",rule:"prospective enrollment requirement",expect:"enrolled record must satisfy prospective registration order.",mutate:(pkg)=>{pkg.empiricalPilotEnrollments[0].registeredAt="2026-10-18T03:00:00Z";pkg.empiricalPilotEnrollments[0].prospectiveOrderSatisfied=false;pkg.empiricalPilotEnrollments[0].governanceTriggerRefs.push("GTR-CR-075");}
+  },
+  {
+    id:"empirical-pilot-qif-selection",rule:"no QIF participant selection",expect:"qifSelectedParticipant must be false.",mutate:(pkg)=>{pkg.empiricalPilotEnrollments[0].qifSelectedParticipant=true;}
+  },
+  {
+    id:"empirical-pilot-outcome-state",rule:"non-completed outcome preservation",expect:"non-completed observation must preserve outcomeClass not-observed with null value and origin.",mutate:(pkg)=>{pkg.empiricalOutcomeObservations[0].outcomeValue=1;}
+  },
+  {
+    id:"empirical-pilot-completed-evidence",rule:"completed empirical evidence",expect:"completed observation requires verified empirical evidence origin and evidence refs.",mutate:(pkg)=>{const o=pkg.empiricalOutcomeObservations[0];o.observationState="completed";o.observedAt="2026-10-25T02:00:00Z";o.outcomeClass="protected-outcome-held";o.outcomeValue=1;o.observationWindowClosed=true;o.evidenceStatus="example-only";}
+  },
+  {
+    id:"empirical-pilot-missing-reason",rule:"missing outcome explanation",expect:"missing observation must include missingReason.",mutate:(pkg)=>{pkg.empiricalOutcomeObservations[0].observationState="missing";pkg.empiricalOutcomeObservations[0].governanceTriggerRefs.push("GTR-CR-075");}
+  },
+  {
+    id:"empirical-pilot-assessment-count",rule:"pilot assessment arithmetic",expect:"plannedOutcomeCount must reproduce as 1.",mutate:(pkg)=>{pkg.empiricalPilotAssessments[0].plannedOutcomeCount=0;}
+  },
+  {
+    id:"empirical-pilot-domain-coverage",rule:"pilot domain coverage reproduction",expect:"domainCoverageSatisfied must reproduce as true.",mutate:(pkg)=>{pkg.empiricalPilotAssessments[0].domainCoverageSatisfied=false;}
+  },
+  {
+    id:"empirical-pilot-state",rule:"pilot state reproduction",expect:"pilotState must reproduce as not-started.",mutate:(pkg)=>{pkg.empiricalPilotAssessments[0].pilotState="ready-for-calibration-analysis";}
+  },
+  {
+    id:"empirical-pilot-assessment-trigger",rule:"insufficient pilot governance",expect:"insufficient empirical outcomes require an empirical-pilot-assessment-insufficient governance trigger.",mutate:(pkg)=>{pkg.empiricalPilotAssessments[0].governanceTriggerRefs=["GTR-CR-074"];}
+  },
+  {
+    id:"empirical-pilot-boundary-overclaim",rule:"empirical pilot semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that empirical pilot structure proves study validity",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that pilot domain count"));}
   }
 ];
 

@@ -3888,6 +3888,146 @@
       "rule": "recovery observation semantic boundary",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming that recovery observation evidence proves effect truth"
+    },
+    {
+      "file": "calibration-report-empirical-pilot-protocols-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "empirical pilot protocols required",
+      "expect": "fail",
+      "errorIncludes": "package empiricalPilotProtocols must be an array."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-domain-minimum.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "cross-domain pilot minimum",
+      "expect": "fail",
+      "errorIncludes": "minimumDomainCount must be at least 2."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-nonsoftware-minimum.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "non-software pilot minimum",
+      "expect": "fail",
+      "errorIncludes": "minimumNonSoftwareDomainCount must be at least 1."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-origin-kinds.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "empirical origin allowlist",
+      "expect": "fail",
+      "errorIncludes": "acceptedEvidenceOriginKinds must exactly contain observed-operational and historical-record."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-domain-refs.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "protocol domain coverage",
+      "expect": "fail",
+      "errorIncludes": "domainRefs must exactly match linked empirical pilot domains."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-qif-collection.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no QIF operational collection",
+      "expect": "fail",
+      "errorIncludes": "qifCollectsOperationalData must be false."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-domain-protocol.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "domain protocol resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing empirical pilot protocol"
+    },
+    {
+      "file": "calibration-report-empirical-pilot-domain-evidence-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "domain evidence governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified domain evidence requires an empirical-pilot-evidence-not-collected governance trigger."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-enrollment-decision.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "gate decision resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing gate decision"
+    },
+    {
+      "file": "calibration-report-empirical-pilot-prospective-order.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "prospective registration reproduction",
+      "expect": "fail",
+      "errorIncludes": "prospectiveOrderSatisfied must reproduce as false."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-enrolled-prospective.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "prospective enrollment requirement",
+      "expect": "fail",
+      "errorIncludes": "enrolled record must satisfy prospective registration order."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-qif-selection.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no QIF participant selection",
+      "expect": "fail",
+      "errorIncludes": "qifSelectedParticipant must be false."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-outcome-state.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "non-completed outcome preservation",
+      "expect": "fail",
+      "errorIncludes": "non-completed observation must preserve outcomeClass not-observed with null value and origin."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-completed-evidence.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "completed empirical evidence",
+      "expect": "fail",
+      "errorIncludes": "completed observation requires verified empirical evidence origin and evidence refs."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-missing-reason.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "missing outcome explanation",
+      "expect": "fail",
+      "errorIncludes": "missing observation must include missingReason."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "pilot assessment arithmetic",
+      "expect": "fail",
+      "errorIncludes": "plannedOutcomeCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-domain-coverage.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "pilot domain coverage reproduction",
+      "expect": "fail",
+      "errorIncludes": "domainCoverageSatisfied must reproduce as true."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-state.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "pilot state reproduction",
+      "expect": "fail",
+      "errorIncludes": "pilotState must reproduce as not-started."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-assessment-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "insufficient pilot governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient empirical outcomes require an empirical-pilot-assessment-insufficient governance trigger."
+    },
+    {
+      "file": "calibration-report-empirical-pilot-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "empirical pilot semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that empirical pilot structure proves study validity"
     }
   ],
   "rescopedRules": []

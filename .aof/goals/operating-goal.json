@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Recovery closure must remain auditable across a bounded observation period so late effects, state changes, and unresolved inconsistencies are not erased by a point-in-time retry record",
-  "updated_at": "2026-10-17T04:36:35.015Z",
+  "content": "Provide a prospective, domain-general Empirical Calibration Pilot Contract that preserves evidence state and blocks example-only or incomplete observations from being interpreted as empirical readiness",
+  "updated_at": "2026-10-18T04:36:53.309Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVBWLE9J-B1WTMH",
-  "source_decision_record_id": "DEC-MVBWMNGK-4D6KD1",
+  "source_session_id": "SESS-MVDC1RDA-JW5Y6C",
+  "source_decision_record_id": "DEC-MVDC2W8Q-B5URBP",
   "declared_complete_at": null
 }

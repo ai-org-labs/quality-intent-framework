@@ -5059,3 +5059,21 @@ Date: 2026-10-17
 - Outcome report: `OUT-MVBX2ISG-12WFRT` recorded implementation success; the next value slice is reset as an open v0.7 empirical-calibration pilot rather than treated as completed by this release.
 - Residual risk: the committed observation sequence is example-only. It cannot prove external effect truth, causal linkage, universal observation-window sufficiency, real closure safety, compensation correctness, recovery authorization, or authority.
 - Next value slices: v0.7 Empirical Calibration, v0.8 Multi-Agent Judgment Memory, and v0.9 Anticipatory Quality Intent Twin remain defined in the roadmap.
+
+# QIF v0.7.0 Empirical Calibration Pilot Contract
+
+Date: 2026-10-18
+
+- Need: QIF could describe calibration prerequisites, but lacked a prospective contract for starting a real cross-domain pilot without mistaking plans or examples for observed outcomes.
+- Intent: make protocol registration, domain coverage, decision enrollment, outcome-state preservation, evidence eligibility, assessment arithmetic, and governance structurally executable while refusing to fabricate empirical evidence.
+- Context: QIF remains standalone; publicly released AOF v12.2.0 at source commit `fc7599b` governs development and is not a QIF runtime dependency.
+- AOF session: `SESS-MVDC1RDA-JW5Y6C`; task: `TASK-069`; framing decisions: `DEC-MVDC1RDC-7L7CV2` and `DEC-MVDC1WPD-CQODC3`; Need Validation decision: `DEC-MVDC2W8Q-B5URBP`.
+- Need Validation and Charter artifacts: `.aof/runtime/PST-QIFV0700.json`, `.aof/runtime/VHY-QIFV0700.json`, `.aof/runtime/ALT-QIFV0700.json`, `.aof/runtime/NVR-QIFV0700.json`, and `.aof/runtime/PCH-QIFV0700.json`. Charter creation followed Validated Need `NVR-MVDC2NZP-CBUUD9`.
+- Trend evidence: NIST AI 800-4 emphasizes longitudinal post-deployment ground truth, baselines, drift, and terminology alignment; Anthropic recommends combining automated evaluation, production monitoring, and periodic human calibration; OpenAI guidance emphasizes claim scope, harness disclosure, and validity checks for trustworthy evaluation.
+- Council direction: Visionary, Builder, and Guardian proceeded in planning; Builder and Guardian proceeded in review with no veto. Guardian required prospective freezing, at least one non-software domain, explicit missing and excluded states, no fabricated observations, and governance for insufficient evidence. Mock council execution proves routing, not independent semantic approval.
+- Decision: implement `EmpiricalPilotProtocol`, `EmpiricalPilotDomain`, `EmpiricalPilotEnrollment`, `EmpiricalOutcomeObservation`, and `EmpiricalPilotAssessment`. The committed example contains software-development and customer-support plans but remains explicitly `not-started` and `insufficient`.
+- Runtime evidence: `.aof/runtime/v0.7.0-actor-skill-packet.json`, `.aof/runtime/v0.7.0-planning-council-executed.json`, `.aof/runtime/v0.7.0-review-council-executed.json`, self-audit `FSA-QIFV0700`, and the learning-loop snapshot record capability, resource, policy, review, self-review, and retrospective evidence.
+- Verification: `npm test` passed 16/16 positive and 1,217/1,217 retained negative checks. Portable build and verification passed with 49 files. AOF `organization-verify` passed 295/295 checks.
+- Outcome report: `OUT-MVDCIMLO-B8BNPD` recorded implementation success and retained v0.7.1 as an open next value slice.
+- Residual risk: no independently verified operational decision-outcome pairs are committed. Structural validity does not establish study validity, representativeness, causality, calibration truth, transportability, quality, authorization, or decision authority.
+- Next value slices: v0.7.1 Outcome Collection Ledger, v0.7.2 Missingness and Attrition Sensitivity, and v0.7.3 Cross-Domain Transportability Review.

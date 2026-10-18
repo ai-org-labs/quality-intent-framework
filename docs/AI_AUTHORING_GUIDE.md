@@ -74,6 +74,7 @@ Use additional documents when needed:
 | Explain repeated-trial variation and infrastructure uncertainty without false precision | `docs/qif-v0.6.29-trial-infrastructure-uncertainty.md`, `schemas/world-model-calibration-package.schema.json` |
 | Show that contradictory calibration evidence changed the framework through accountable governance | `docs/qif-v0.6.30-framework-learning-records.md`, `schemas/world-model-calibration-package.schema.json` |
 | Compare declared probability forecasts with later outcomes without turning a score into a quality verdict | `docs/qif-v0.6.31-calibration-report.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
+| Start a real calibration pilot without inventing outcomes or hiding missing evidence | `docs/qif-v0.7.0-empirical-pilot.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Expose selection, missing outcomes, dependence, segments, and drift behind a calibration aggregate | `docs/qif-v0.6.32-calibration-cohort-integrity.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Explain why one calibration error requires stronger governance than another at an explicit loss boundary | `docs/qif-v0.6.33-consequence-sensitive-calibration.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Show whether a decision is brittle under bounded, reviewed threshold alternatives | `docs/qif-v0.6.34-threshold-robustness.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
@@ -775,6 +776,34 @@ Use `RecoveryObservationPolicy`, `RecoveryObservationWindow`,
 `RecoveryObservationAssessment`. Explain the result in ordinary words: what
 appeared late, what is still unknown, and why the work cannot yet be called
 finished.
+
+## Empirical Pilot Review
+
+When an organization wants to learn whether QIF confidence predicts later
+outcomes, do not begin by filling a calibration table. First create a
+prospective pilot contract:
+
+1. Register the protocol before pilot decisions occur.
+2. Name at least two domains and include at least one non-software domain.
+3. Define the population, decision, protected outcome, observation window,
+   evidence requirements, and accountable owner for each domain.
+4. Enroll each decision before it is made. Freeze its forecast, confidence
+   meaning, and outcome definition.
+5. Preserve outcome state as `planned`, `observing`, `completed`, `missing`, or
+   `excluded`. Never silently drop missing or excluded cases.
+6. Count a completed empirical outcome only when its observation window closed
+   and its Evidence Origin is verified `observed-operational` or
+   `historical-record`.
+7. Keep the pilot `not-started` or `collecting` until the registered evidence
+   minimum is met. Do not call an example package empirical evidence.
+8. Send insufficient coverage, invalid timing, missing outcomes, or weak
+   provenance to governance.
+
+Use `EmpiricalPilotProtocol`, `EmpiricalPilotDomain`,
+`EmpiricalPilotEnrollment`, `EmpiricalOutcomeObservation`, and
+`EmpiricalPilotAssessment`. Explain the status simply: what is planned, what
+has actually been observed, what is missing, and why calibration analysis is
+or is not ready.
 
 ## Common Failure Modes
 

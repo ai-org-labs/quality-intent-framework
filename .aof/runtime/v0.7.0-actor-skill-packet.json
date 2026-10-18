@@ -1,0 +1,87 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-18T04:37:24.912Z",
+  "packet_id": "ASP-MVDC3KMO-6KSEO4",
+  "source_task_id": "TASK-069",
+  "source_parent_session_id": "SESS-MVDC1RDA-JW5Y6C",
+  "source_decision_record_id": "DEC-MVDC2W8Q-B5URBP",
+  "objective": "Implement QIF v0.7.0 Empirical Calibration Pilot Contract",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "Builder",
+    "team_ref": "qif-runtime",
+    "assignment_reason": "Builder owns bounded schema, verifier, fixture, documentation, and release implementation under Guardian boundaries",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "verifier-implementation",
+    "release-engineering"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-qif-runtime",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs"
+      ],
+      "rationale": "existing calibration runtime and retained fixture corpus support a bounded extension"
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository"
+  ],
+  "policy_refs": [
+    "policy-runtime-backed-development",
+    "policy-no-semantic-truth-overclaim"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "empirical pilot protocol",
+      "pilot domain plans",
+      "prospective enrollments",
+      "outcome observations",
+      "pilot assessment"
+    ],
+    "acceptance_criteria": [
+      "full npm test passes",
+      "example remains empirically not-ready",
+      "portable package verifies"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "traceability and evidence-state separation",
+      "evaluator_ref": "Guardian",
+      "evidence_required": "schema, verifier, fixtures, and example",
+      "blocking": true
+    },
+    {
+      "criterion": "bounded implementation and deterministic reproduction",
+      "evaluator_ref": "Builder",
+      "evidence_required": "test output and diff",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "fabricated-empirical-readiness",
+      "trigger_condition": "example-only or incomplete evidence can yield empirical-ready",
+      "consequence": "block-assignment",
+      "recovery_action": "restore fail-closed evidence and governance rules"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will make the pilot startable without inventing its outcomes.",
+    "current_action": "Implement prospective pilot contract and verification",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run retained fixtures and council review"
+  },
+  "status": "ready-for-assignment"
+}

@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-069",
+  "title": "Release QIF v0.7.0 empirical pilot contract",
+  "description": "Implement schemas, verifier rules, example package, retained negative fixtures, documentation, portable package, and public release for prospective empirical calibration pilots.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MVDC1RDA-JW5Y6C",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MVDC2W8Q-B5URBP",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-10-18T04:37:00.776Z",
+  "updated_at": "2026-10-18T04:48:53.521Z",
+  "assigned_at": null,
+  "done_at": "2026-10-18T04:48:53.521Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented QIF v0.7.0 Empirical Calibration Pilot Contract with prospective registration, two-domain planning including customer support, explicit planned/observing/completed/missing/excluded outcome states, pilot assessment and governance routing. Full npm test passed 16/16 positive and 1217/1217 negative fixtures; review council completed with no Guardian veto."
+}

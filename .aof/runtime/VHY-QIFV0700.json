@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-18T04:36:32.333Z",
+  "value_hypothesis_id": "VHY-MVDC2G25-EFQKP5",
+  "expected_value_creation": "A prospective, domain-general pilot contract makes empirical collection startable without fabricating results or overstating readiness",
+  "beneficiary": "QIF adopters, reviewers, and governance owners across software and non-software domains",
+  "supporting_evidence": [
+    "NIST post-deployment monitoring identifies longitudinal ground-truth and terminology gaps",
+    "Anthropic recommends combining automated evals, production monitoring, and periodic human calibration"
+  ],
+  "success_criteria": [
+    "pilot protocols, domain plans, enrollments, outcome observations, assessments, and governance are structurally reproducible",
+    "the committed example remains explicitly planned and not empirically ready"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVDC1WPD-CQODC3"
+}

@@ -1,0 +1,39 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-18T04:36:42.613Z",
+  "validation_id": "NVR-MVDC2NZP-CBUUD9",
+  "raw_need": "Release QIF v0.7.0 empirical calibration capability",
+  "validation_status": "reframed",
+  "validated_need": "Provide a prospective, domain-general Empirical Calibration Pilot Contract that preserves evidence state and blocks example-only or incomplete observations from being interpreted as empirical readiness",
+  "decision_summary": "Visionary identifies the transition from structural readiness to governed field learning; Builder can add a bounded local model to calibration-report; Guardian requires no fabricated observations, prospective freeze, non-software coverage, explicit missing/excluded states, and governance for insufficiency.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is in scope?",
+      "answer": "calibration-report schema, verifier, example, fixtures, docs, portable package, and release; no external integration or real data collection",
+      "evidence_state": "strong"
+    },
+    {
+      "question": "How is success judged?",
+      "answer": "prospective protocol and outcome-state traceability validate while example-only evidence remains not-ready",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "existing calibration examples can stand in for observed operational outcomes",
+    "software-only pilot evidence demonstrates domain generality",
+    "a missing outcome is equivalent to a favorable or unfavorable outcome"
+  ],
+  "evidence_gaps": [
+    "no independent operational decision-outcome pairs are committed, so empirical calibration claims must remain pending"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0700.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0700.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0700.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVDC1WPD-CQODC3"
+}

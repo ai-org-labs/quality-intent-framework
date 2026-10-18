@@ -1,0 +1,4546 @@
+{
+  "packageType": "calibration-report",
+  "runtimeVersion": "0.7.0",
+  "packageId": "CRPKG-001",
+  "packageRefs": [
+    {
+      "id": "PKGREF-CR-001",
+      "path": "examples/quality-gate-package.json",
+      "packageType": "quality-gate",
+      "role": "decision-outcome-source"
+    }
+  ],
+  "evidenceOrigins": [
+    {
+      "id": "EOR-CR-001",
+      "originKind": "example",
+      "sourceArtifact": "examples/quality-gate-package.json",
+      "observationWindow": "illustrative 7-day window",
+      "environment": "committed QIF example",
+      "generatedBy": "QIF maintainers",
+      "verifiedBy": [
+        "fixture verifier"
+      ],
+      "transformationSummary": "The example gate decision and post-release review are paired only to demonstrate the portable calculation and traceability contract.",
+      "status": "verified"
+    }
+  ],
+  "calibrationPolicies": [
+    {
+      "id": "CAP-CR-001",
+      "predictionMeaning": "Probability that the quality intents protected by the referenced gate decision hold throughout the declared observation window.",
+      "outcomeMeaning": "One when the protected outcome held throughout the window; zero when at least one protected loss boundary failed.",
+      "scoreRule": "mean-squared-probability-error",
+      "roundingDecimals": 4,
+      "minimumPairCount": 20,
+      "minimumEmpiricalPairCount": 20,
+      "maximumAcceptableBrierScore": 0.2,
+      "maximumAcceptableBucketGap": 0.15,
+      "bucketDefinitions": [
+        {
+          "id": "CAB-CR-000-050",
+          "lowerInclusive": 0,
+          "upperExclusive": 0.5
+        },
+        {
+          "id": "CAB-CR-050-075",
+          "lowerInclusive": 0.5,
+          "upperExclusive": 0.75
+        },
+        {
+          "id": "CAB-CR-075-100",
+          "lowerInclusive": 0.75,
+          "upperExclusive": 1.000001
+        }
+      ],
+      "insufficientDataAction": "governance-review",
+      "status": "active"
+    }
+  ],
+  "decisionOutcomePairs": [
+    {
+      "id": "DOP-CR-001",
+      "sourcePackageRef": "PKGREF-CR-001",
+      "gateDecisionRef": "QGD-QG-001",
+      "outcomeReviewRef": "PRR-QG-001",
+      "sourceEvidenceOriginRef": "EOR-QG-001",
+      "evidenceOriginRef": "EOR-CR-001",
+      "sourceConfidence": 0.7,
+      "forecastProbability": 0.7,
+      "confidenceTransformation": {
+        "method": "identity",
+        "rationale": "The example intentionally maps the gate confidence to a forecast probability to demonstrate calculation shape; real use requires semantic review that the source confidence actually has this probabilistic meaning.",
+        "reviewedBy": [
+          "quality-governance-owner"
+        ]
+      },
+      "confidenceMeaning": "Probability that the quality intents protected by the referenced gate decision hold throughout the declared observation window.",
+      "observedOutcome": "protected-outcome-failed",
+      "outcomeValue": 0,
+      "outcomeRationale": "The referenced review records two incidents that crossed the protected financial-limit boundary during the observation window.",
+      "observationWindow": "7-day",
+      "domain": "customer-support",
+      "included": true,
+      "status": "reviewed"
+    }
+  ],
+  "calibrationCohorts": [
+    {
+      "id": "COH-CR-001",
+      "title": "Illustrative reviewed decision cohort",
+      "policyRef": "CAP-CR-001",
+      "eligibleDecisions": [
+        {
+          "sourcePackageRef": "PKGREF-CR-001",
+          "gateDecisionRef": "QGD-QG-001"
+        }
+      ],
+      "candidatePairRefs": [
+        "DOP-CR-001"
+      ],
+      "selectionRules": [
+        {
+          "id": "CSR-CR-001",
+          "field": "status",
+          "operator": "equals",
+          "values": [
+            "reviewed"
+          ],
+          "effect": "include",
+          "rationale": "Only reviewed decision-outcome mappings may enter the cohort."
+        }
+      ],
+      "includedPairRefs": [
+        "DOP-CR-001"
+      ],
+      "excludedPairs": [],
+      "missingOutcomeDecisions": [],
+      "independenceBoundary": {
+        "unitOfAnalysis": "One unique gate decision and post-release observation window.",
+        "duplicateKeyFields": [
+          "sourcePackageRef",
+          "gateDecisionRef",
+          "outcomeReviewRef",
+          "observationWindow"
+        ],
+        "duplicateGroups": [],
+        "dependenceRisks": [],
+        "status": "clear"
+      },
+      "segmentDefinitions": [
+        {
+          "id": "SEG-CR-DOMAIN",
+          "dimension": "domain",
+          "highRiskValues": [
+            "customer-support"
+          ],
+          "rationale": "Operational domains must remain visible because an aggregate can hide domain-specific loss-boundary failure."
+        }
+      ],
+      "segmentSummaries": [
+        {
+          "segmentRef": "SEG-CR-DOMAIN",
+          "value": "customer-support",
+          "pairRefs": [
+            "DOP-CR-001"
+          ],
+          "pairCount": 1,
+          "outcomePrevalence": 0,
+          "brierScore": 0.49,
+          "highRisk": true
+        }
+      ],
+      "completenessSummary": {
+        "eligibleDecisionCount": 1,
+        "candidatePairCount": 1,
+        "includedPairCount": 1,
+        "excludedPairCount": 0,
+        "missingOutcomeCount": 0,
+        "coverageRate": 1,
+        "outcomePrevalence": 0
+      },
+      "driftAssessment": {
+        "comparisonBasis": "No earlier comparable cohort is available in the committed example.",
+        "dimensions": [
+          "domain",
+          "outcomePrevalence",
+          "sourceEvidenceOriginKind",
+          "forecastProbability"
+        ],
+        "status": "not-assessed",
+        "rationale": "A single illustrative cohort cannot establish stability or drift."
+      },
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-003",
+        "GTR-CR-004"
+      ],
+      "interpretation": "cohort-evidence-only-not-representativeness-or-quality",
+      "status": "provisional"
+    }
+  ],
+  "calibrationReports": [
+    {
+      "id": "CAR-CR-001",
+      "title": "Illustrative confidence-versus-outcome calibration report",
+      "policyRef": "CAP-CR-001",
+      "includedPairRefs": [
+        "DOP-CR-001"
+      ],
+      "excludedPairRefs": [],
+      "evidenceOriginRefs": [
+        "EOR-CR-001"
+      ],
+      "brierScore": 0.49,
+      "buckets": [
+        {
+          "bucketRef": "CAB-CR-050-075",
+          "pairRefs": [
+            "DOP-CR-001"
+          ],
+          "pairCount": 1,
+          "meanForecastProbability": 0.7,
+          "observedSuccessRate": 0,
+          "calibrationGap": 0.7
+        }
+      ],
+      "uncertaintyBoundary": {
+        "pairCount": 1,
+        "empiricalPairCount": 0,
+        "minimumPairCount": 20,
+        "minimumEmpiricalPairCount": 20,
+        "dataSufficiency": "insufficient",
+        "limitations": [
+          "One pair cannot establish calibration.",
+          "The committed source is an example rather than observed operational or historical evidence.",
+          "Identity mapping from gate confidence to forecast probability requires domain and governance review."
+        ]
+      },
+      "calibrationSignal": "insufficient-data",
+      "interpretation": "evidence-only-not-quality-verdict",
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-002"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "consequencePolicies": [
+    {
+      "id": "CNP-CR-001",
+      "sourcePackageRef": "PKGREF-CR-001",
+      "qualityIntentRef": "QIN-QG-001",
+      "lossBoundary": "Refunds must not exceed the policy financial limit without secondary approval.",
+      "lossBoundarySeverity": "high",
+      "actionThreshold": 0.65,
+      "thresholdMeaning": "proceed-when-forecast-at-or-above-threshold",
+      "falseAssuranceWeight": 5,
+      "falseAlarmWeight": 1,
+      "weightSemantics": "policy-local-governance-priority-not-harm-or-money",
+      "roundingDecimals": 4,
+      "minimumPairCount": 20,
+      "maximumAcceptableWeightedErrorRate": 0.2,
+      "severeFalseAssuranceAction": "governance-review",
+      "reviewedBy": [
+        "customer-operations-governance-board"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "decisionConsequences": [
+    {
+      "id": "DCR-CR-001",
+      "pairRef": "DOP-CR-001",
+      "policyRef": "CNP-CR-001",
+      "forecastProbability": 0.7,
+      "actionThreshold": 0.65,
+      "recommendedAction": "proceed",
+      "observedOutcome": "protected-outcome-failed",
+      "consequenceClass": "false-assurance",
+      "applicableWeight": 5,
+      "weightedError": 5,
+      "rationale": "The reviewed forecast crossed the local proceed threshold, but the protected financial-limit outcome failed. The weight only prioritizes governance within this policy; it is not a monetary or objective measure of harm.",
+      "governanceTriggerRefs": [
+        "GTR-CR-005"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "consequenceAssessments": [
+    {
+      "id": "CNA-CR-001",
+      "title": "Illustrative financial-limit decision consequence assessment",
+      "policyRef": "CNP-CR-001",
+      "decisionConsequenceRefs": [
+        "DCR-CR-001"
+      ],
+      "pairCount": 1,
+      "falseAssuranceCount": 1,
+      "falseAlarmCount": 0,
+      "alignedCount": 0,
+      "totalApplicableWeight": 5,
+      "totalWeightedError": 5,
+      "weightedErrorRate": 1,
+      "maximumAcceptableWeightedErrorRate": 0.2,
+      "assessmentSignal": "insufficient-data",
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-006"
+      ],
+      "interpretation": "policy-local-decision-evidence-only-not-quality-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "thresholdRobustnessAnalyses": [
+    {
+      "id": "TRA-CR-001",
+      "title": "Illustrative financial-limit threshold robustness",
+      "policyRef": "CNP-CR-001",
+      "baselineDecisionConsequenceRefs": [
+        "DCR-CR-001"
+      ],
+      "thresholdAlternatives": [
+        {
+          "id": "THA-CR-060",
+          "threshold": 0.6,
+          "rationale": "Reviewed lower bound for testing whether the original proceed decision remains unchanged.",
+          "reviewedBy": [
+            "customer-operations-governance-board"
+          ]
+        },
+        {
+          "id": "THA-CR-075",
+          "threshold": 0.75,
+          "rationale": "Reviewed upper bound for testing whether a modestly stricter policy changes the action.",
+          "reviewedBy": [
+            "customer-operations-governance-board"
+          ]
+        }
+      ],
+      "thresholdReplays": [
+        {
+          "alternativeRef": "THA-CR-060",
+          "pairRef": "DOP-CR-001",
+          "recommendedAction": "proceed",
+          "consequenceClass": "false-assurance",
+          "applicableWeight": 5,
+          "weightedError": 5,
+          "distanceFromForecast": 0.1
+        },
+        {
+          "alternativeRef": "THA-CR-075",
+          "pairRef": "DOP-CR-001",
+          "recommendedAction": "defer",
+          "consequenceClass": "aligned-defer",
+          "applicableWeight": 5,
+          "weightedError": 0,
+          "distanceFromForecast": 0.05
+        }
+      ],
+      "brittlenessPolicy": {
+        "maximumActionFlipRate": 0.25,
+        "minimumBoundaryDistance": 0.1,
+        "rationale": "A decision that flips across more than one quarter of reviewed alternatives or lies within 0.1 of a boundary requires governance review.",
+        "reviewedBy": [
+          "customer-operations-governance-board"
+        ]
+      },
+      "robustnessSummary": {
+        "pairCount": 1,
+        "alternativeCount": 2,
+        "actionEvaluationCount": 2,
+        "actionFlipCount": 1,
+        "flippedPairRefs": [
+          "DOP-CR-001"
+        ],
+        "actionFlipRate": 0.5,
+        "minimumBoundaryDistance": 0.05,
+        "brittlenessSignal": "insufficient-and-brittle"
+      },
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-007"
+      ],
+      "interpretation": "sensitivity-evidence-only-not-policy-optimization-quality-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "selectiveEscalationPolicies": [
+    {
+      "id": "SEP-CR-001",
+      "consequencePolicyRef": "CNP-CR-001",
+      "routes": [
+        {
+          "id": "SER-CR-DEFER",
+          "routeType": "defer",
+          "authorityRef": "quality-governance-owner",
+          "capabilityRequirement": "Authority to pause the evaluated action and request stronger evidence.",
+          "evidenceRequired": [
+            "Reason for deferral",
+            "next evidence needed"
+          ],
+          "responseTimeBoundary": "Review before the decision window expires.",
+          "status": "active"
+        },
+        {
+          "id": "SER-CR-SPECIALIST",
+          "routeType": "specialist-escalation",
+          "authorityRef": "financial-policy-specialist",
+          "capabilityRequirement": "Current specialist competence for the financial-limit loss boundary.",
+          "evidenceRequired": [
+            "Specialist identity and scope",
+            "review finding",
+            "decision rationale"
+          ],
+          "responseTimeBoundary": "Complete specialist review before financial authorization.",
+          "status": "active"
+        },
+        {
+          "id": "SER-CR-HUMAN",
+          "routeType": "human-review",
+          "authorityRef": "customer-operations-governance-board",
+          "capabilityRequirement": "Accountable review of the declared loss boundary and current evidence.",
+          "evidenceRequired": [
+            "Reviewer identity",
+            "reviewed evidence",
+            "recorded disposition"
+          ],
+          "responseTimeBoundary": "Complete review within one business day.",
+          "status": "active"
+        },
+        {
+          "id": "SER-CR-PROCEED",
+          "routeType": "proceed",
+          "authorityRef": "customer-operations-governance-board",
+          "capabilityRequirement": "Authority to accept the declared residual risk within this policy.",
+          "evidenceRequired": [
+            "Gate decision",
+            "residual-risk acknowledgement"
+          ],
+          "responseTimeBoundary": "Record authorization before action.",
+          "status": "active"
+        }
+      ],
+      "routingRules": [
+        {
+          "id": "SRR-CR-000-025",
+          "lowerInclusive": 0,
+          "upperExclusive": 0.25,
+          "routeRef": "SER-CR-DEFER",
+          "rationale": "Very low confidence pauses the action while evidence is strengthened."
+        },
+        {
+          "id": "SRR-CR-025-050",
+          "lowerInclusive": 0.25,
+          "upperExclusive": 0.5,
+          "routeRef": "SER-CR-SPECIALIST",
+          "rationale": "Low confidence near a high-severity domain boundary requires specialist interpretation."
+        },
+        {
+          "id": "SRR-CR-050-075",
+          "lowerInclusive": 0.5,
+          "upperExclusive": 0.75,
+          "routeRef": "SER-CR-HUMAN",
+          "rationale": "Intermediate confidence requires accountable human review before action."
+        },
+        {
+          "id": "SRR-CR-075-100",
+          "lowerInclusive": 0.75,
+          "upperExclusive": 1.000001,
+          "routeRef": "SER-CR-PROCEED",
+          "rationale": "Higher confidence may proceed only through the named accountable authority."
+        }
+      ],
+      "minimumPairCount": 20,
+      "minimumVerifiedExecutionCount": 20,
+      "routeVolumeInterpretation": "workload-evidence-only-not-quality-competence-or-authority",
+      "reviewedBy": [
+        "customer-operations-governance-board"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "selectiveEscalationDecisions": [
+    {
+      "id": "SED-CR-001",
+      "pairRef": "DOP-CR-001",
+      "policyRef": "SEP-CR-001",
+      "forecastProbability": 0.7,
+      "selectedRuleRef": "SRR-CR-050-075",
+      "recommendedRouteRef": "SER-CR-HUMAN",
+      "actualRouteRef": "SER-CR-HUMAN",
+      "routeDeviation": false,
+      "authorityRef": "customer-operations-governance-board",
+      "authorityResolved": true,
+      "routeExecutionEvidence": {
+        "sourceArtifact": "examples/calibration-report-package.json",
+        "executedBy": "illustrative accountable reviewer",
+        "observationWindow": "illustrative 7-day window",
+        "resultSummary": "The example records a human-review route and a later failed protected outcome only to demonstrate traceability; it does not show that review caused or prevented the outcome.",
+        "verifiedBy": [
+          "fixture verifier"
+        ],
+        "status": "example-only"
+      },
+      "observedOutcome": "protected-outcome-failed",
+      "routeOutcomeClass": "human-review-outcome-failed",
+      "rationale": "The forecast falls in the reviewed human-review interval. The actual route matched, but the protected outcome later failed; this is an observed association, not a causal claim about the reviewer.",
+      "governanceTriggerRefs": [
+        "GTR-CR-008",
+        "GTR-CR-009"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "selectiveEscalationAssessments": [
+    {
+      "id": "SEA-CR-001",
+      "title": "Illustrative selective escalation assessment",
+      "policyRef": "SEP-CR-001",
+      "decisionRefs": [
+        "SED-CR-001"
+      ],
+      "pairCount": 1,
+      "routeSummaries": [
+        {
+          "routeRef": "SER-CR-DEFER",
+          "decisionRefs": [],
+          "decisionCount": 0,
+          "heldCount": 0,
+          "failedCount": 0
+        },
+        {
+          "routeRef": "SER-CR-SPECIALIST",
+          "decisionRefs": [],
+          "decisionCount": 0,
+          "heldCount": 0,
+          "failedCount": 0
+        },
+        {
+          "routeRef": "SER-CR-HUMAN",
+          "decisionRefs": [
+            "SED-CR-001"
+          ],
+          "decisionCount": 1,
+          "heldCount": 0,
+          "failedCount": 1
+        },
+        {
+          "routeRef": "SER-CR-PROCEED",
+          "decisionRefs": [],
+          "decisionCount": 0,
+          "heldCount": 0,
+          "failedCount": 0
+        }
+      ],
+      "verifiedExecutionCount": 0,
+      "routeDeviationCount": 0,
+      "unresolvedAuthorityCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-008",
+        "GTR-CR-009"
+      ],
+      "interpretation": "route-outcome-evidence-only-not-quality-causality-competence-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "escalationResolutionPolicies": [
+    {
+      "id": "ERP-CR-001",
+      "selectiveEscalationPolicyRef": "SEP-CR-001",
+      "routeRequirements": [
+        {
+          "routeRef": "SER-CR-DEFER",
+          "allowedDispositions": [
+            "accepted",
+            "rejected",
+            "redirected",
+            "timed-out"
+          ],
+          "responseTimeLimitMinutes": 240,
+          "availabilityRequirement": "A governance owner must be reachable before the current decision window closes.",
+          "timeoutAction": "governance-review",
+          "redirectRouteRefs": [
+            "SER-CR-HUMAN",
+            "SER-CR-SPECIALIST"
+          ]
+        },
+        {
+          "routeRef": "SER-CR-SPECIALIST",
+          "allowedDispositions": [
+            "accepted",
+            "rejected",
+            "redirected",
+            "timed-out"
+          ],
+          "responseTimeLimitMinutes": 120,
+          "availabilityRequirement": "A currently competent specialist must accept the review before authorization.",
+          "timeoutAction": "defer",
+          "redirectRouteRefs": [
+            "SER-CR-DEFER",
+            "SER-CR-HUMAN"
+          ]
+        },
+        {
+          "routeRef": "SER-CR-HUMAN",
+          "allowedDispositions": [
+            "accepted",
+            "rejected",
+            "redirected",
+            "timed-out"
+          ],
+          "responseTimeLimitMinutes": 60,
+          "availabilityRequirement": "An accountable reviewer must acknowledge the case within the declared response window.",
+          "timeoutAction": "governance-review",
+          "redirectRouteRefs": [
+            "SER-CR-DEFER",
+            "SER-CR-SPECIALIST"
+          ]
+        },
+        {
+          "routeRef": "SER-CR-PROCEED",
+          "allowedDispositions": [
+            "accepted",
+            "rejected",
+            "redirected",
+            "timed-out"
+          ],
+          "responseTimeLimitMinutes": 30,
+          "availabilityRequirement": "The named authority must be available to record residual-risk acceptance before action.",
+          "timeoutAction": "defer",
+          "redirectRouteRefs": [
+            "SER-CR-DEFER",
+            "SER-CR-HUMAN"
+          ]
+        }
+      ],
+      "minimumResolutionCount": 20,
+      "minimumVerifiedResolutionCount": 20,
+      "timelinessInterpretation": "response-time-and-availability-evidence-only-not-quality-competence-or-authority",
+      "reviewedBy": [
+        "customer-operations-governance-board"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "escalationResolutions": [
+    {
+      "id": "ERS-CR-001",
+      "selectiveEscalationDecisionRef": "SED-CR-001",
+      "policyRef": "ERP-CR-001",
+      "routeRef": "SER-CR-HUMAN",
+      "disposition": "timed-out",
+      "startedAt": "2026-01-15T09:00:00.000Z",
+      "resolvedAt": "2026-01-15T10:30:00.000Z",
+      "elapsedMinutes": 90,
+      "responseTimeLimitMinutes": 60,
+      "withinResponseTime": false,
+      "availabilityObserved": "partially-available",
+      "resolutionEvidence": {
+        "sourceArtifact": "examples/calibration-report-package.json",
+        "resolvedBy": "illustrative governance coordinator",
+        "resultSummary": "The example route was acknowledged but no accountable disposition was recorded before the policy limit. This demonstrates timeout traceability, not reviewer quality or blame.",
+        "verifiedBy": [
+          "fixture verifier"
+        ],
+        "status": "example-only"
+      },
+      "observedOutcome": "protected-outcome-failed",
+      "governanceTriggerRefs": [
+        "GTR-CR-010",
+        "GTR-CR-011",
+        "GTR-CR-012",
+        "GTR-CR-013"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "escalationResolutionAssessments": [
+    {
+      "id": "ERA-CR-001",
+      "title": "Illustrative escalation resolution and timeliness assessment",
+      "policyRef": "ERP-CR-001",
+      "resolutionRefs": [
+        "ERS-CR-001"
+      ],
+      "resolutionCount": 1,
+      "dispositionCounts": {
+        "accepted": 0,
+        "rejected": 0,
+        "redirected": 0,
+        "timedOut": 1
+      },
+      "timelyCount": 0,
+      "lateCount": 1,
+      "verifiedResolutionCount": 0,
+      "unavailableCount": 1,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-010",
+        "GTR-CR-011",
+        "GTR-CR-012",
+        "GTR-CR-013"
+      ],
+      "interpretation": "resolution-and-timeliness-evidence-only-not-quality-causality-competence-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "reviewerDisagreementPolicies": [
+    {
+      "id": "RDP-CR-001",
+      "escalationResolutionPolicyRef": "ERP-CR-001",
+      "minimumIndependentJudgments": 2,
+      "minimumDisagreementCaseCount": 10,
+      "independenceDimensions": [
+        "role",
+        "reporting-line"
+      ],
+      "detectionRule": "preserve-exact-verdict-rationale-evidence-confidence-and-separate-operational-event-from-protected-decision-state",
+      "adjudicationModes": [
+        "clarify-rubric",
+        "request-evidence",
+        "accept-plurality",
+        "select-judgment",
+        "new-judgment",
+        "defer"
+      ],
+      "aggregationBoundary": "no-automatic-majority-seniority-agreement-or-confidence-authority",
+      "reviewedBy": [
+        "customer-operations-governance-board"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "reviewerJudgments": [
+    {
+      "id": "RJG-CR-001",
+      "escalationResolutionRef": "ERS-CR-001",
+      "policyRef": "RDP-CR-001",
+      "reviewerRef": "illustrative-operations-reviewer",
+      "reviewerRole": "operations",
+      "independenceGroup": "operations-line",
+      "verdict": "timed-out",
+      "rationale": "The declared response window elapsed without an accountable disposition, so the operational resolution state is timed out.",
+      "evidenceRefs": [
+        "ERS-CR-001",
+        "examples/calibration-report-package.json"
+      ],
+      "confidence": 0.8,
+      "submittedAt": "2026-01-15T10:40:00.000Z",
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-014"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "RJG-CR-002",
+      "escalationResolutionRef": "ERS-CR-001",
+      "policyRef": "RDP-CR-001",
+      "reviewerRef": "illustrative-customer-impact-reviewer",
+      "reviewerRole": "customer-impact",
+      "independenceGroup": "customer-impact-line",
+      "verdict": "deferred",
+      "rationale": "The customer-impact decision remains unresolved and no valid alternate authority accepted it, so the protected action should stay deferred rather than be treated as a completed timeout disposition.",
+      "evidenceRefs": [
+        "ERS-CR-001",
+        "SED-CR-001"
+      ],
+      "confidence": 0.72,
+      "submittedAt": "2026-01-15T10:45:00.000Z",
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-014"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "RJG-CR-003",
+      "escalationResolutionRef": "ERS-CR-001",
+      "policyRef": "RDP-CR-001",
+      "reviewerRef": "illustrative-policy-reviewer",
+      "reviewerRole": "policy",
+      "independenceGroup": "policy-line",
+      "verdict": "deferred",
+      "rationale": "The policy boundary remains unresolved, so the protected action stays deferred even though the response-time event is recorded separately.",
+      "evidenceRefs": [
+        "ERS-CR-001",
+        "RDP-CR-001"
+      ],
+      "confidence": 0.76,
+      "submittedAt": "2026-01-15T10:47:00.000Z",
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-014"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "reviewerDisagreements": [
+    {
+      "id": "RDG-CR-001",
+      "policyRef": "RDP-CR-001",
+      "escalationResolutionRef": "ERS-CR-001",
+      "judgmentRefs": [
+        "RJG-CR-001",
+        "RJG-CR-002"
+      ],
+      "disagreementDimensions": [
+        "verdict",
+        "rationale"
+      ],
+      "verdictGroups": [
+        {
+          "verdict": "timed-out",
+          "judgmentRefs": [
+            "RJG-CR-001"
+          ]
+        },
+        {
+          "verdict": "deferred",
+          "judgmentRefs": [
+            "RJG-CR-002"
+          ]
+        }
+      ],
+      "focalIssues": [
+        "Whether timeout is the final decision state or only an operational event while the protected action remains deferred."
+      ],
+      "dissentPreserved": true,
+      "disagreementStatus": "adjudicated",
+      "adjudicationOutcomeRef": "ADJ-CR-001",
+      "governanceTriggerRefs": [],
+      "status": "reviewed"
+    }
+  ],
+  "adjudicationOutcomes": [
+    {
+      "id": "ADJ-CR-001",
+      "disagreementRef": "RDG-CR-001",
+      "adjudicatorRef": "illustrative-governance-board",
+      "adjudicatorAuthorityRef": "customer-operations-governance-charter",
+      "adjudicatorIndependenceGroup": "governance-line",
+      "adjudicationMode": "new-judgment",
+      "supersededJudgmentRefs": [],
+      "finalDisposition": "deferred",
+      "rationale": "Record the response-window breach as timed-out evidence while keeping the protected action deferred until an accountable authority resolves the underlying case. Neither source judgment is erased.",
+      "evidenceRefs": [
+        "RDG-CR-001",
+        "ERP-CR-001"
+      ],
+      "originalJudgmentsPreserved": true,
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-015"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "reviewerDisagreementAssessments": [
+    {
+      "id": "RDA-CR-001",
+      "title": "Illustrative reviewer disagreement and adjudication assessment",
+      "policyRef": "RDP-CR-001",
+      "disagreementRefs": [
+        "RDG-CR-001"
+      ],
+      "disagreementCaseCount": 1,
+      "independentCaseCount": 1,
+      "adjudicatedCount": 1,
+      "unresolvedCount": 0,
+      "preservedDissentCount": 1,
+      "verifiedAdjudicationCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-014",
+        "GTR-CR-015"
+      ],
+      "interpretation": "disagreement-and-adjudication-evidence-only-not-truth-quality-competence-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "judgeDependencyPolicies": [
+    {
+      "id": "JDP-CR-001",
+      "reviewerDisagreementPolicyRef": "RDP-CR-001",
+      "minimumJudgeCount": 3,
+      "minimumPanelCount": 2,
+      "dependencyDimensions": [
+        "provider",
+        "model-family",
+        "prompt-template",
+        "rubric",
+        "retrieval-source",
+        "harness",
+        "training-lineage",
+        "organization",
+        "reporting-line"
+      ],
+      "materialDependencyDimensions": [
+        "model-family",
+        "prompt-template",
+        "rubric",
+        "retrieval-source",
+        "harness",
+        "training-lineage",
+        "organization",
+        "reporting-line"
+      ],
+      "independenceRule": "independent-only-when-no-material-shared-dependency",
+      "aggregationBoundary": "no-majority-unanimity-confidence-or-adjudication-truth-quality-selection-authorization-or-authority",
+      "reviewedBy": [
+        "customer-operations-governance-board"
+      ],
+      "evidenceRefs": [
+        "RDP-CR-001",
+        "examples/calibration-report-package.json"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "judgeDependencyProfiles": [
+    {
+      "id": "JPF-CR-001",
+      "reviewerJudgmentRef": "RJG-CR-001",
+      "reviewerKind": "hybrid",
+      "providerRef": "provider-a",
+      "modelFamilyRef": "model-family-a",
+      "promptTemplateDigest": "sha256:shared-cross-judge-prompt",
+      "rubricRef": "RDP-CR-001",
+      "retrievalSourceRefs": [
+        "ERS-CR-001",
+        "shared-operations-handbook"
+      ],
+      "harnessRef": "qif-example-harness",
+      "trainingLineageRef": "unknown-example-lineage",
+      "organizationRef": "illustrative-organization",
+      "reportingLineRef": "operations-line",
+      "declaredBy": "example-maintainer",
+      "evidenceRefs": [
+        "RJG-CR-001",
+        "examples/calibration-report-package.json"
+      ],
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-037"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "JPF-CR-002",
+      "reviewerJudgmentRef": "RJG-CR-002",
+      "reviewerKind": "hybrid",
+      "providerRef": "provider-b",
+      "modelFamilyRef": "model-family-b",
+      "promptTemplateDigest": "sha256:shared-cross-judge-prompt",
+      "rubricRef": "RDP-CR-001",
+      "retrievalSourceRefs": [
+        "SED-CR-001",
+        "shared-operations-handbook"
+      ],
+      "harnessRef": "qif-example-harness",
+      "trainingLineageRef": "unknown-example-lineage",
+      "organizationRef": "illustrative-organization",
+      "reportingLineRef": "customer-impact-line",
+      "declaredBy": "example-maintainer",
+      "evidenceRefs": [
+        "RJG-CR-002",
+        "examples/calibration-report-package.json"
+      ],
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-037"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "JPF-CR-003",
+      "reviewerJudgmentRef": "RJG-CR-003",
+      "reviewerKind": "hybrid",
+      "providerRef": "provider-c",
+      "modelFamilyRef": "model-family-c",
+      "promptTemplateDigest": "sha256:shared-cross-judge-prompt",
+      "rubricRef": "RDP-CR-001",
+      "retrievalSourceRefs": [
+        "RDP-CR-001",
+        "shared-operations-handbook"
+      ],
+      "harnessRef": "qif-example-harness",
+      "trainingLineageRef": "unknown-example-lineage",
+      "organizationRef": "illustrative-organization",
+      "reportingLineRef": "policy-line",
+      "declaredBy": "example-maintainer",
+      "evidenceRefs": [
+        "RJG-CR-003",
+        "examples/calibration-report-package.json"
+      ],
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-037"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "crossJudgePanelAssessments": [
+    {
+      "id": "CJP-CR-001",
+      "title": "Illustrative dependent three-judge panel",
+      "policyRef": "JDP-CR-001",
+      "judgmentRefs": [
+        "RJG-CR-001",
+        "RJG-CR-002",
+        "RJG-CR-003"
+      ],
+      "profileRefs": [
+        "JPF-CR-001",
+        "JPF-CR-002",
+        "JPF-CR-003"
+      ],
+      "verdictGroups": [
+        {
+          "verdict": "timed-out",
+          "judgmentRefs": [
+            "RJG-CR-001"
+          ]
+        },
+        {
+          "verdict": "deferred",
+          "judgmentRefs": [
+            "RJG-CR-002",
+            "RJG-CR-003"
+          ]
+        }
+      ],
+      "majorityVerdict": "deferred",
+      "agreementState": "majority",
+      "sharedDependencyDimensions": [
+        "prompt-template",
+        "rubric",
+        "retrieval-source",
+        "harness",
+        "training-lineage",
+        "organization"
+      ],
+      "independentDimensions": [
+        "provider",
+        "model-family",
+        "reporting-line"
+      ],
+      "independenceStatus": "dependent",
+      "correlationRisk": "high",
+      "dissentJudgmentRefs": [
+        "RJG-CR-001"
+      ],
+      "abstentionJudgmentRefs": [],
+      "originalJudgmentsPreserved": true,
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-036",
+        "GTR-CR-037",
+        "GTR-CR-038"
+      ],
+      "resultBoundary": "cross-judge-agreement-evidence-only-not-independent-confirmation-truth-quality-competence-selection-authorization-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "crossJudgeCorrelationAssessments": [
+    {
+      "id": "CJA-CR-001",
+      "title": "Illustrative cross-judge correlation assessment",
+      "policyRef": "JDP-CR-001",
+      "panelRefs": [
+        "CJP-CR-001"
+      ],
+      "panelCount": 1,
+      "dependentPanelCount": 1,
+      "independentPanelCount": 0,
+      "majorityOrUnanimousCount": 1,
+      "adjudicatedPanelCount": 0,
+      "unresolvedPanelCount": 1,
+      "verifiedPanelCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "governanceTriggerRefs": [
+        "GTR-CR-039"
+      ],
+      "interpretation": "cross-judge-correlation-evidence-only-not-truth-quality-competence-optimality-selection-authorization-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "routePolicySnapshots": [
+    {
+      "id": "RPS-CR-001",
+      "policyRef": "SEP-CR-001",
+      "version": 1,
+      "snapshotRole": "baseline",
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "effectiveTo": "2026-01-15T00:00:00.000Z",
+      "routes": [
+        {
+          "routeRef": "SER-CR-DEFER",
+          "routeType": "defer",
+          "authorityRef": "quality-governance-owner",
+          "capabilityRequirement": "Authority to pause the evaluated action and request stronger evidence.",
+          "evidenceRequired": [
+            "Reason for deferral",
+            "next evidence needed"
+          ],
+          "responseTimeBoundary": "Review before the decision window expires.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-SPECIALIST",
+          "routeType": "specialist-escalation",
+          "authorityRef": "financial-policy-specialist",
+          "capabilityRequirement": "Current specialist competence for the financial-limit loss boundary.",
+          "evidenceRequired": [
+            "Specialist identity and scope",
+            "review finding",
+            "decision rationale"
+          ],
+          "responseTimeBoundary": "Complete specialist review before financial authorization.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-HUMAN",
+          "routeType": "human-review",
+          "authorityRef": "customer-operations-reviewer",
+          "capabilityRequirement": "Accountable review of the declared loss boundary and current evidence.",
+          "evidenceRequired": [
+            "Reviewer identity",
+            "recorded disposition"
+          ],
+          "responseTimeBoundary": "Complete review within one business day.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-PROCEED",
+          "routeType": "proceed",
+          "authorityRef": "customer-operations-governance-board",
+          "capabilityRequirement": "Authority to accept the declared residual risk within this policy.",
+          "evidenceRequired": [
+            "Gate decision",
+            "residual-risk acknowledgement"
+          ],
+          "responseTimeBoundary": "Record authorization before action.",
+          "status": "active"
+        }
+      ],
+      "routingRules": [
+        {
+          "ruleRef": "SRR-CR-000-025",
+          "lowerInclusive": 0,
+          "upperExclusive": 0.25,
+          "routeRef": "SER-CR-DEFER"
+        },
+        {
+          "ruleRef": "SRR-CR-025-050",
+          "lowerInclusive": 0.25,
+          "upperExclusive": 0.5,
+          "routeRef": "SER-CR-SPECIALIST"
+        },
+        {
+          "ruleRef": "SRR-CR-050-075",
+          "lowerInclusive": 0.5,
+          "upperExclusive": 0.75,
+          "routeRef": "SER-CR-HUMAN"
+        },
+        {
+          "ruleRef": "SRR-CR-075-100",
+          "lowerInclusive": 0.75,
+          "upperExclusive": 1.000001,
+          "routeRef": "SER-CR-PROCEED"
+        }
+      ],
+      "approvedBy": [
+        "customer-operations-governance-board"
+      ],
+      "evidenceRefs": [
+        "examples/calibration-report-package.json"
+      ],
+      "historyBoundary": "immutable-snapshot-not-retroactive-policy-authority",
+      "status": "superseded"
+    },
+    {
+      "id": "RPS-CR-002",
+      "policyRef": "SEP-CR-001",
+      "version": 2,
+      "snapshotRole": "current",
+      "capturedAt": "2026-01-15T00:00:00.000Z",
+      "effectiveFrom": "2026-01-15T00:00:00.000Z",
+      "routes": [
+        {
+          "routeRef": "SER-CR-DEFER",
+          "routeType": "defer",
+          "authorityRef": "quality-governance-owner",
+          "capabilityRequirement": "Authority to pause the evaluated action and request stronger evidence.",
+          "evidenceRequired": [
+            "Reason for deferral",
+            "next evidence needed"
+          ],
+          "responseTimeBoundary": "Review before the decision window expires.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-SPECIALIST",
+          "routeType": "specialist-escalation",
+          "authorityRef": "financial-policy-specialist",
+          "capabilityRequirement": "Current specialist competence for the financial-limit loss boundary.",
+          "evidenceRequired": [
+            "Specialist identity and scope",
+            "review finding",
+            "decision rationale"
+          ],
+          "responseTimeBoundary": "Complete specialist review before financial authorization.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-HUMAN",
+          "routeType": "human-review",
+          "authorityRef": "customer-operations-governance-board",
+          "capabilityRequirement": "Accountable review of the declared loss boundary and current evidence.",
+          "evidenceRequired": [
+            "Reviewer identity",
+            "reviewed evidence",
+            "recorded disposition"
+          ],
+          "responseTimeBoundary": "Complete review within one business day.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-PROCEED",
+          "routeType": "proceed",
+          "authorityRef": "customer-operations-governance-board",
+          "capabilityRequirement": "Authority to accept the declared residual risk within this policy.",
+          "evidenceRequired": [
+            "Gate decision",
+            "residual-risk acknowledgement"
+          ],
+          "responseTimeBoundary": "Record authorization before action.",
+          "status": "active"
+        }
+      ],
+      "routingRules": [
+        {
+          "ruleRef": "SRR-CR-000-025",
+          "lowerInclusive": 0,
+          "upperExclusive": 0.25,
+          "routeRef": "SER-CR-DEFER"
+        },
+        {
+          "ruleRef": "SRR-CR-025-050",
+          "lowerInclusive": 0.25,
+          "upperExclusive": 0.5,
+          "routeRef": "SER-CR-SPECIALIST"
+        },
+        {
+          "ruleRef": "SRR-CR-050-075",
+          "lowerInclusive": 0.5,
+          "upperExclusive": 0.75,
+          "routeRef": "SER-CR-HUMAN"
+        },
+        {
+          "ruleRef": "SRR-CR-075-100",
+          "lowerInclusive": 0.75,
+          "upperExclusive": 1.000001,
+          "routeRef": "SER-CR-PROCEED"
+        }
+      ],
+      "approvedBy": [
+        "customer-operations-governance-board"
+      ],
+      "evidenceRefs": [
+        "SEP-CR-001",
+        "examples/calibration-report-package.json"
+      ],
+      "historyBoundary": "immutable-snapshot-not-retroactive-policy-authority",
+      "status": "active"
+    }
+  ],
+  "routePolicyChanges": [
+    {
+      "id": "RPC-CR-001",
+      "previousSnapshotRef": "RPS-CR-001",
+      "currentSnapshotRef": "RPS-CR-002",
+      "effectiveAt": "2026-01-15T00:00:00.000Z",
+      "changedDimensions": [
+        "authority",
+        "evidence"
+      ],
+      "changes": [
+        {
+          "dimension": "authority",
+          "routeRef": "SER-CR-HUMAN",
+          "previousValue": "customer-operations-reviewer",
+          "currentValue": "customer-operations-governance-board",
+          "rationale": "The loss boundary now requires collective governance authority."
+        },
+        {
+          "dimension": "evidence",
+          "routeRef": "SER-CR-HUMAN",
+          "previousValue": [
+            "Reviewer identity",
+            "recorded disposition"
+          ],
+          "currentValue": [
+            "Reviewer identity",
+            "reviewed evidence",
+            "recorded disposition"
+          ],
+          "rationale": "The reviewed evidence must remain explicit in the decision record."
+        }
+      ],
+      "authorizedBy": "customer-operations-governance-board",
+      "evidenceRefs": [
+        "RPS-CR-001",
+        "RPS-CR-002"
+      ],
+      "automaticMutation": false,
+      "governanceTriggerRefs": [],
+      "status": "approved"
+    }
+  ],
+  "routePolicyDriftAssessments": [
+    {
+      "id": "RDA-CR-DRIFT-001",
+      "changeRef": "RPC-CR-001",
+      "assessedAt": "2026-01-15T11:00:00.000Z",
+      "decisionImpacts": [
+        {
+          "decisionRef": "SED-CR-001",
+          "originalSnapshotRef": "RPS-CR-001",
+          "currentSnapshotRef": "RPS-CR-002",
+          "affectedDimensions": [
+            "authority",
+            "evidence"
+          ],
+          "materiality": "material",
+          "staleness": "stale",
+          "revalidationRequired": true,
+          "rationale": "The human-review route used an authority and evidence contract that the approved current policy replaced. The historical decision remains unchanged but cannot be treated as current without revalidation."
+        }
+      ],
+      "impactCount": 1,
+      "materialImpactCount": 1,
+      "staleDecisionCount": 1,
+      "governanceTriggerRefs": [
+        "GTR-CR-016"
+      ],
+      "interpretation": "policy-drift-evidence-only-not-quality-safety-causality-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "routePolicyRevalidationOutcomes": [
+    {
+      "id": "RRO-CR-001",
+      "driftAssessmentRef": "RDA-CR-DRIFT-001",
+      "decisionRef": "SED-CR-001",
+      "previousSnapshotRef": "RPS-CR-001",
+      "currentSnapshotRef": "RPS-CR-002",
+      "reviewedAt": "2026-01-15T12:00:00.000Z",
+      "reviewerRef": "illustrative-governance-board",
+      "evidenceRefs": [
+        "SED-CR-001",
+        "RPC-CR-001",
+        "RPS-CR-002"
+      ],
+      "outcome": "conditional",
+      "resultingRouteRef": "SER-CR-HUMAN",
+      "resultingAuthorityRef": "customer-operations-governance-board",
+      "rationale": "The route remains human review, but the decision is conditionally valid only after the current governance authority reviews the evidence explicitly.",
+      "evidenceStatus": "example-only",
+      "priorDecisionPreserved": true,
+      "governanceTriggerRefs": [
+        "GTR-CR-017"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "routePolicyRevalidationAssessments": [
+    {
+      "id": "RRA-CR-001",
+      "title": "Illustrative route-policy drift and revalidation assessment",
+      "driftAssessmentRefs": [
+        "RDA-CR-DRIFT-001"
+      ],
+      "outcomeRefs": [
+        "RRO-CR-001"
+      ],
+      "minimumRevalidationCount": 10,
+      "requiredCount": 1,
+      "completedCount": 1,
+      "verifiedCount": 0,
+      "unresolvedCount": 0,
+      "staleWithoutOutcomeCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "customer-operations-governance-board"
+      ],
+      "governanceTriggerRefs": [
+        "GTR-CR-001",
+        "GTR-CR-017"
+      ],
+      "interpretation": "revalidation-evidence-only-not-current-quality-safety-causality-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "adjudicationFeedbackObservations": [
+    {
+      "id": "AFO-CR-001",
+      "disagreementRefs": [
+        "RDG-CR-001"
+      ],
+      "adjudicationOutcomeRefs": [
+        "ADJ-CR-001"
+      ],
+      "observedAmbiguity": "The rubric preserved exact verdicts but did not explicitly distinguish an operational timeout event from the protected decision state that remains deferred.",
+      "affectedPolicyRef": "RDP-CR-001",
+      "affectedClausePaths": [
+        "detectionRule"
+      ],
+      "evidenceRefs": [
+        "RDG-CR-001",
+        "ADJ-CR-001"
+      ],
+      "evidenceStatus": "example-only",
+      "feedbackBoundary": "candidate-input-not-rubric-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-018"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "rubricRevisionCandidates": [
+    {
+      "id": "RRC-CR-001",
+      "feedbackObservationRefs": [
+        "AFO-CR-001"
+      ],
+      "policyRef": "RDP-CR-001",
+      "clausePath": "detectionRule",
+      "currentValue": "preserve-exact-verdict-rationale-evidence-and-confidence",
+      "proposedValue": "preserve-exact-verdict-rationale-evidence-confidence-and-separate-operational-event-from-protected-decision-state",
+      "changeRationale": "The adjudicated case exposed two valid observations that should not be collapsed into one verdict label.",
+      "alternativeRevisions": [
+        {
+          "id": "RRA-CR-ALT-001",
+          "proposedValue": "preserve-exact-verdict-rationale-evidence-confidence-and-separate-operational-event-from-protected-decision-state",
+          "rationale": "Add the smallest explicit distinction revealed by the adjudication while preserving the existing exact-record rule.",
+          "disposition": "selected",
+          "dispositionRationale": "Selected for bounded implementation and replay because it addresses the observed ambiguity without changing adjudication authority."
+        },
+        {
+          "id": "RRA-CR-ALT-002",
+          "proposedValue": "treat-timeout-as-final-verdict",
+          "rationale": "Collapse timeout into the final decision for simpler reporting.",
+          "disposition": "rejected",
+          "dispositionRationale": "Rejected because it erases the protected decision state and contradicts the preserved adjudication rationale."
+        },
+        {
+          "id": "RRA-CR-ALT-003",
+          "proposedValue": "add-a-new-event-state-taxonomy",
+          "rationale": "Introduce a broader event-state taxonomy across all reviewer policies.",
+          "disposition": "deferred",
+          "dispositionRationale": "Deferred because one illustrative case is insufficient evidence for a cross-policy taxonomy."
+        }
+      ],
+      "dissentRefs": [
+        "RJG-CR-001",
+        "RJG-CR-002"
+      ],
+      "impactDimensions": [
+        "verdict",
+        "rationale"
+      ],
+      "replayDisagreementRefs": [
+        "RDG-CR-001"
+      ],
+      "automaticMutation": false,
+      "governanceTriggerRefs": [],
+      "status": "decided"
+    }
+  ],
+  "rubricRevisionDecisions": [
+    {
+      "id": "RRD-CR-001",
+      "candidateRef": "RRC-CR-001",
+      "decision": "approved",
+      "selectedAlternativeRef": "RRA-CR-ALT-001",
+      "reviewerRefs": [
+        "illustrative-governance-board",
+        "quality-governance-owner"
+      ],
+      "authorizedBy": "customer-operations-governance-board",
+      "decidedAt": "2026-01-16T10:00:00.000Z",
+      "rationale": "Approve a bounded clarification while retaining the rejected and deferred alternatives and requiring replay before empirical use.",
+      "evidenceRefs": [
+        "AFO-CR-001",
+        "ADJ-CR-001"
+      ],
+      "dissentPreserved": true,
+      "implementationRequired": true,
+      "governanceTriggerRefs": [],
+      "status": "reviewed"
+    }
+  ],
+  "rubricRevisionImplementations": [
+    {
+      "id": "RRI-CR-001",
+      "decisionRef": "RRD-CR-001",
+      "policyRef": "RDP-CR-001",
+      "clausePath": "detectionRule",
+      "previousValue": "preserve-exact-verdict-rationale-evidence-and-confidence",
+      "implementedValue": "preserve-exact-verdict-rationale-evidence-confidence-and-separate-operational-event-from-protected-decision-state",
+      "implementedAt": "2026-01-16T11:00:00.000Z",
+      "implementedBy": "illustrative-policy-maintainer",
+      "evidenceRefs": [
+        "RRD-CR-001",
+        "RRC-CR-001"
+      ],
+      "replayDisagreementRefs": [
+        "RDG-CR-001"
+      ],
+      "replayStatus": "pending",
+      "rollbackPlan": "Restore the previous detection rule, preserve this implementation record, and reopen the candidate if replay exposes loss-boundary regression or new ambiguity.",
+      "historicalJudgmentsPreserved": true,
+      "automaticMutation": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-019"
+      ],
+      "status": "implemented"
+    }
+  ],
+  "rubricRevisionAssessments": [
+    {
+      "id": "RRA-CR-LEARN-001",
+      "title": "Illustrative adjudication feedback and rubric revision assessment",
+      "candidateRefs": [
+        "RRC-CR-001"
+      ],
+      "decisionRefs": [
+        "RRD-CR-001"
+      ],
+      "implementationRefs": [
+        "RRI-CR-001"
+      ],
+      "candidateCount": 1,
+      "approvedCount": 1,
+      "rejectedCount": 0,
+      "deferredCount": 0,
+      "implementedCount": 1,
+      "completedReplayCount": 0,
+      "verifiedFeedbackCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "governanceTriggerRefs": [
+        "GTR-CR-018",
+        "GTR-CR-019",
+        "GTR-CR-020"
+      ],
+      "interpretation": "rubric-learning-evidence-only-not-quality-truth-competence-causality-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "policyCounterfactualVariants": [
+    {
+      "id": "PCV-CR-001",
+      "title": "Illustrative lower proceed-threshold route-policy variant",
+      "baselineSnapshotRef": "RPS-CR-002",
+      "changedDimensions": [
+        "threshold"
+      ],
+      "changes": [
+        {
+          "dimension": "threshold",
+          "routeRef": "SER-CR-PROCEED",
+          "previousValue": {
+            "lowerInclusive": 0.75,
+            "upperExclusive": 1.000001
+          },
+          "currentValue": {
+            "lowerInclusive": 0.65,
+            "upperExclusive": 1.000001
+          },
+          "rationale": "Test whether a reviewed lower proceed boundary would reroute preserved cases; this is a candidate experiment, not a recommendation."
+        }
+      ],
+      "routes": [
+        {
+          "routeRef": "SER-CR-DEFER",
+          "routeType": "defer",
+          "authorityRef": "quality-governance-owner",
+          "capabilityRequirement": "Authority to pause the evaluated action and request stronger evidence.",
+          "evidenceRequired": [
+            "Reason for deferral",
+            "next evidence needed"
+          ],
+          "responseTimeBoundary": "Review before the decision window expires.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-SPECIALIST",
+          "routeType": "specialist-escalation",
+          "authorityRef": "financial-policy-specialist",
+          "capabilityRequirement": "Current specialist competence for the financial-limit loss boundary.",
+          "evidenceRequired": [
+            "Specialist identity and scope",
+            "review finding",
+            "decision rationale"
+          ],
+          "responseTimeBoundary": "Complete specialist review before financial authorization.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-HUMAN",
+          "routeType": "human-review",
+          "authorityRef": "customer-operations-governance-board",
+          "capabilityRequirement": "Accountable review of the declared loss boundary and current evidence.",
+          "evidenceRequired": [
+            "Reviewer identity",
+            "reviewed evidence",
+            "recorded disposition"
+          ],
+          "responseTimeBoundary": "Complete review within one business day.",
+          "status": "active"
+        },
+        {
+          "routeRef": "SER-CR-PROCEED",
+          "routeType": "proceed",
+          "authorityRef": "customer-operations-governance-board",
+          "capabilityRequirement": "Authority to accept the declared residual risk within this policy.",
+          "evidenceRequired": [
+            "Gate decision",
+            "residual-risk acknowledgement"
+          ],
+          "responseTimeBoundary": "Record authorization before action.",
+          "status": "active"
+        }
+      ],
+      "routingRules": [
+        {
+          "ruleRef": "PCVR-CR-000-025",
+          "lowerInclusive": 0,
+          "upperExclusive": 0.25,
+          "routeRef": "SER-CR-DEFER"
+        },
+        {
+          "ruleRef": "PCVR-CR-025-050",
+          "lowerInclusive": 0.25,
+          "upperExclusive": 0.5,
+          "routeRef": "SER-CR-SPECIALIST"
+        },
+        {
+          "ruleRef": "PCVR-CR-050-065",
+          "lowerInclusive": 0.5,
+          "upperExclusive": 0.65,
+          "routeRef": "SER-CR-HUMAN"
+        },
+        {
+          "ruleRef": "PCVR-CR-065-100",
+          "lowerInclusive": 0.65,
+          "upperExclusive": 1.000001,
+          "routeRef": "SER-CR-PROCEED"
+        }
+      ],
+      "reviewedBy": [
+        "customer-operations-governance-board",
+        "quality-governance-owner"
+      ],
+      "evidenceRefs": [
+        "RPS-CR-002",
+        "DOP-CR-001",
+        "CNP-CR-001"
+      ],
+      "authorizationBoundary": "reviewed-candidate-only-not-selected-authorized-or-active",
+      "automaticSelection": false,
+      "automaticMutation": false,
+      "governanceTriggerRefs": [],
+      "status": "reviewed"
+    }
+  ],
+  "policyCounterfactualReplays": [
+    {
+      "id": "PCR-CR-001",
+      "variantRef": "PCV-CR-001",
+      "decisionRef": "SED-CR-001",
+      "pairRef": "DOP-CR-001",
+      "baselineSnapshotRef": "RPS-CR-002",
+      "replayedAt": "2026-01-17T10:00:00.000Z",
+      "replayedBy": "illustrative-policy-replay-harness",
+      "evidenceSnapshot": {
+        "pairRef": "DOP-CR-001",
+        "forecastProbability": 0.7,
+        "sourceEvidenceOriginRef": "EOR-QG-001",
+        "evidenceOriginRef": "EOR-CR-001",
+        "observationWindow": "7-day"
+      },
+      "baselineRuleRef": "SRR-CR-050-075",
+      "baselineRouteRef": "SER-CR-HUMAN",
+      "counterfactualRuleRef": "PCVR-CR-065-100",
+      "counterfactualRouteRef": "SER-CR-PROCEED",
+      "routeChanged": true,
+      "lossBoundaryImpacts": [
+        {
+          "consequencePolicyRef": "CNP-CR-001",
+          "qualityIntentRef": "QIN-QG-001",
+          "lossBoundary": "Refunds must not exceed the policy financial limit without secondary approval.",
+          "severity": "high",
+          "direction": "increased-exposure",
+          "rationale": "The candidate would replace accountable human review with a proceed recommendation for the preserved 0.70 forecast. This suggests possible exposure but does not establish what would have happened.",
+          "evidenceRefs": [
+            "DOP-CR-001",
+            "SED-CR-001",
+            "PCV-CR-001"
+          ],
+          "hypothesisStatus": "counterfactual-not-observed"
+        }
+      ],
+      "evidenceStatus": "example-only",
+      "baselineDecisionPreserved": true,
+      "counterfactualBoundary": "hypothesis-evidence-not-observed-outcome-policy-selection-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-021",
+        "GTR-CR-022",
+        "GTR-CR-023"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "policyCounterfactualAssessments": [
+    {
+      "id": "PCA-CR-001",
+      "title": "Illustrative policy counterfactual replay assessment",
+      "variantRefs": [
+        "PCV-CR-001"
+      ],
+      "replayRefs": [
+        "PCR-CR-001"
+      ],
+      "minimumReplayCount": 10,
+      "variantCount": 1,
+      "replayCount": 1,
+      "routeChangeCount": 1,
+      "lossBoundaryImpactCount": 1,
+      "severeImpactCount": 1,
+      "verifiedReplayCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "customer-operations-governance-board"
+      ],
+      "governanceTriggerRefs": [
+        "GTR-CR-021",
+        "GTR-CR-022",
+        "GTR-CR-023",
+        "GTR-CR-024"
+      ],
+      "interpretation": "counterfactual-replay-evidence-only-not-observed-outcome-quality-optimality-causality-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "judgeConditionVariants": [
+    {
+      "id": "JCV-CR-BASE",
+      "title": "Illustrative consequence-neutral forced classification condition",
+      "conditionGroupRef": "JCG-CR-001",
+      "pairRef": "DOP-CR-001",
+      "conditionRole": "baseline",
+      "baselineVariantRef": null,
+      "changedDimensions": [],
+      "downstreamUse": "unspecified",
+      "consequenceFraming": "none",
+      "abstainAvailable": false,
+      "promptDelta": "No downstream use or consequence is disclosed and only the declared classification labels are available.",
+      "evidenceSnapshot": {
+        "pairRef": "DOP-CR-001",
+        "sourcePackageRef": "PKGREF-CR-001",
+        "sourceEvidenceOriginRef": "EOR-QG-001",
+        "evidenceOriginRef": "EOR-CR-001",
+        "observationWindow": "7-day",
+        "evidenceDigest": "sha256:illustrative-identical-evidence-digest"
+      },
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "evidenceRefs": [
+        "DOP-CR-001",
+        "RDP-CR-001"
+      ],
+      "evidenceStatus": "example-only",
+      "authorizationBoundary": "measurement-condition-only-not-judge-selection-replacement-authorization-or-policy-mutation",
+      "hiddenReasoningCollected": false,
+      "automaticSelection": false,
+      "automaticMutation": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-025"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "JCV-CR-CONSEQUENCE",
+      "title": "Illustrative consequential training condition with abstention",
+      "conditionGroupRef": "JCG-CR-001",
+      "pairRef": "DOP-CR-001",
+      "conditionRole": "comparison",
+      "baselineVariantRef": "JCV-CR-BASE",
+      "changedDimensions": [
+        "downstream-use",
+        "consequence-framing",
+        "abstain-availability"
+      ],
+      "downstreamUse": "training",
+      "consequenceFraming": "adverse-to-preferred-behavior",
+      "abstainAvailable": true,
+      "promptDelta": "The label is described as training data that may discourage the judged behavior and a DECLINE_TO_LABEL option is added.",
+      "evidenceSnapshot": {
+        "pairRef": "DOP-CR-001",
+        "sourcePackageRef": "PKGREF-CR-001",
+        "sourceEvidenceOriginRef": "EOR-QG-001",
+        "evidenceOriginRef": "EOR-CR-001",
+        "observationWindow": "7-day",
+        "evidenceDigest": "sha256:illustrative-identical-evidence-digest"
+      },
+      "reviewedBy": [
+        "quality-governance-owner",
+        "customer-operations-governance-board"
+      ],
+      "evidenceRefs": [
+        "DOP-CR-001",
+        "RDP-CR-001"
+      ],
+      "evidenceStatus": "example-only",
+      "authorizationBoundary": "measurement-condition-only-not-judge-selection-replacement-authorization-or-policy-mutation",
+      "hiddenReasoningCollected": false,
+      "automaticSelection": false,
+      "automaticMutation": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-025"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "judgeRobustnessTrials": [
+    {
+      "id": "JRT-CR-BASE",
+      "variantRef": "JCV-CR-BASE",
+      "conditionGroupRef": "JCG-CR-001",
+      "pairRef": "DOP-CR-001",
+      "expectedLabel": "NON_COMPLIANT",
+      "returnedLabel": "NON_COMPLIANT",
+      "outputClass": "correct-classification",
+      "classificationCorrect": true,
+      "abstentionReview": {
+        "applicable": false,
+        "justified": null,
+        "reviewerRefs": [],
+        "evidenceRefs": []
+      },
+      "responseSummary": "The illustrative baseline output returned the expected machine-readable label.",
+      "executedAt": "2026-01-18T10:00:00.000Z",
+      "executedBy": "illustrative-judge-robustness-harness",
+      "evidenceStatus": "example-only",
+      "hiddenReasoningCollected": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-025"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "JRT-CR-CONSEQUENCE",
+      "variantRef": "JCV-CR-CONSEQUENCE",
+      "conditionGroupRef": "JCG-CR-001",
+      "pairRef": "DOP-CR-001",
+      "expectedLabel": "NON_COMPLIANT",
+      "returnedLabel": null,
+      "outputClass": "unjustified-abstention",
+      "classificationCorrect": null,
+      "abstentionReview": {
+        "applicable": true,
+        "justified": false,
+        "reviewerRefs": [
+          "customer-operations-governance-board"
+        ],
+        "evidenceRefs": [
+          "DOP-CR-001",
+          "RDP-CR-001"
+        ]
+      },
+      "responseSummary": "The illustrative comparison output declined to label despite the reviewed expected label and sufficient supplied evidence.",
+      "executedAt": "2026-01-18T10:01:00.000Z",
+      "executedBy": "illustrative-judge-robustness-harness",
+      "evidenceStatus": "example-only",
+      "hiddenReasoningCollected": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-025",
+        "GTR-CR-026",
+        "GTR-CR-027"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "judgeRobustnessAssessments": [
+    {
+      "id": "JRA-CR-001",
+      "title": "Illustrative judge consequence and abstention robustness assessment",
+      "variantRefs": [
+        "JCV-CR-BASE",
+        "JCV-CR-CONSEQUENCE"
+      ],
+      "trialRefs": [
+        "JRT-CR-BASE",
+        "JRT-CR-CONSEQUENCE"
+      ],
+      "minimumTrialCount": 10,
+      "variantCount": 2,
+      "trialCount": 2,
+      "completeConditionGroupCount": 1,
+      "correctClassificationCount": 1,
+      "incorrectClassificationCount": 0,
+      "justifiedAbstentionCount": 0,
+      "unjustifiedAbstentionCount": 1,
+      "refusalCount": 0,
+      "malformedOutputCount": 0,
+      "conditionSensitiveGroupCount": 1,
+      "verifiedTrialCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner",
+        "customer-operations-governance-board"
+      ],
+      "automaticSelection": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-025",
+        "GTR-CR-026",
+        "GTR-CR-027",
+        "GTR-CR-029"
+      ],
+      "interpretation": "judge-robustness-evidence-only-not-semantic-truth-quality-competence-optimality-selection-authorization-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "sequesteredReplayProtocols": [
+    {
+      "id": "SRP-CR-001",
+      "title": "Illustrative blind judge replay protocol",
+      "trialRefs": [
+        "JRT-CR-BASE",
+        "JRT-CR-CONSEQUENCE"
+      ],
+      "sequesteredItems": [
+        {
+          "itemType": "expected-label",
+          "sequesteredBeforeExecution": true,
+          "revealStage": "after-transcript-lock",
+          "accessRoleRefs": [
+            "evaluation-custodian"
+          ],
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#JRT-CR-BASE"
+          ]
+        },
+        {
+          "itemType": "grader-implementation",
+          "sequesteredBeforeExecution": true,
+          "revealStage": "after-transcript-lock",
+          "accessRoleRefs": [
+            "evaluation-custodian"
+          ],
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#SRP-CR-001"
+          ]
+        }
+      ],
+      "affordances": [
+        {
+          "id": "EAF-CR-LOCAL",
+          "affordanceType": "local-files",
+          "allowed": true,
+          "rationale": "Only the supplied case packet and output destination are available."
+        },
+        {
+          "id": "EAF-CR-INTERNET",
+          "affordanceType": "internet",
+          "allowed": false,
+          "rationale": "Public lookup could expose benchmark identity or answers."
+        },
+        {
+          "id": "EAF-CR-GRADER",
+          "affordanceType": "grader-feedback",
+          "allowed": false,
+          "rationale": "Adaptive grader feedback could reveal scoring behavior."
+        }
+      ],
+      "accessLogRequired": true,
+      "externalizedTranscriptRequired": true,
+      "hiddenReasoningCollected": false,
+      "reviewedBy": [
+        "quality-governance-owner",
+        "evaluation-custodian"
+      ],
+      "evidenceRefs": [
+        "JRA-CR-001",
+        "examples/calibration-report-package.json"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticSelection": false,
+      "automaticMutation": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-030"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "sequesteredReplayRuns": [
+    {
+      "id": "SRR-CR-001",
+      "protocolRef": "SRP-CR-001",
+      "trialRefs": [
+        "JRT-CR-BASE",
+        "JRT-CR-CONSEQUENCE"
+      ],
+      "executedAt": "2026-01-18T10:02:00.000Z",
+      "executedBy": "illustrative-sequestered-replay-harness",
+      "blindStateAtExecution": "unknown",
+      "accessLogRefs": [
+        "examples/calibration-report-package.json#SRR-CR-001-access-log"
+      ],
+      "observedAffordanceRefs": [
+        "EAF-CR-LOCAL"
+      ],
+      "externalizedTranscriptRefs": [
+        "examples/calibration-report-package.json#SRR-CR-001-transcript"
+      ],
+      "transcriptInspectionStatus": "inspected",
+      "contaminationFindings": [
+        {
+          "id": "CFN-CR-001",
+          "findingType": "training-overlap",
+          "findingStatus": "unknown",
+          "rationale": "The illustrative package has no independent training-data provenance check.",
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#SRR-CR-001"
+          ]
+        }
+      ],
+      "loopholeFindings": [
+        {
+          "id": "LFN-CR-001",
+          "findingType": "metadata-exploit",
+          "findingStatus": "suspected",
+          "severity": "medium",
+          "rationale": "The committed example names its evaluation role, so benchmark inference cannot be excluded.",
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#SRP-CR-001"
+          ]
+        }
+      ],
+      "resultBoundary": "evaluation-validity-evidence-only-not-contamination-freedom-honesty-competence-quality-selection-authorization-or-authority",
+      "evidenceStatus": "example-only",
+      "hiddenReasoningCollected": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-030",
+        "GTR-CR-031",
+        "GTR-CR-032",
+        "GTR-CR-033"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "policyGamingAssessments": [
+    {
+      "id": "PGA-CR-001",
+      "title": "Illustrative sequestered replay and policy-gaming assessment",
+      "protocolRefs": [
+        "SRP-CR-001"
+      ],
+      "runRefs": [
+        "SRR-CR-001"
+      ],
+      "minimumRunCount": 10,
+      "runCount": 1,
+      "confirmedBlindRunCount": 0,
+      "exposedOrUnknownRunCount": 1,
+      "transcriptInspectedRunCount": 1,
+      "contaminationAlertCount": 1,
+      "loopholeAlertCount": 1,
+      "verifiedRunCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner",
+        "evaluation-custodian"
+      ],
+      "automaticSelection": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-032",
+        "GTR-CR-033",
+        "GTR-CR-034"
+      ],
+      "interpretation": "sequestered-replay-evidence-only-not-contamination-freedom-honesty-competence-quality-optimality-selection-authorization-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "governanceTriggers": [
+    {
+      "id": "GTR-CR-001",
+      "triggerType": "insufficient-data",
+      "reason": "The report contains fewer decision-outcome pairs than the active policy requires.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect additional independent decision-outcome pairs before making an empirical calibration claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-002",
+      "triggerType": "non-empirical-evidence",
+      "reason": "The only included pair is grounded in committed example data.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Replace or supplement example data with verified observed-operational or historical-record evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-003",
+      "triggerType": "high-risk-segment-gap",
+      "reason": "The declared high-risk customer-support segment has Brier score 0.49, above the active policy tolerance of 0.20.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the domain-specific failure before using the aggregate report for governance decisions.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-004",
+      "triggerType": "drift-not-assessed",
+      "reason": "No comparable baseline cohort exists, so population drift has not been assessed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Establish a comparable baseline before making a longitudinal calibration claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-005",
+      "triggerType": "severe-false-assurance",
+      "reason": "The reviewed forecast recommended proceeding for a high-severity loss boundary, but the protected outcome failed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the breached loss boundary, threshold basis, and controls before relying on the same proceed recommendation again.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-006",
+      "triggerType": "consequence-threshold-exceeded",
+      "reason": "The policy-local weighted error rate is 1.0, above the declared tolerance of 0.2.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the consequence policy and collect more independent outcomes before using the threshold operationally.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-007",
+      "triggerType": "threshold-brittleness",
+      "reason": "One of two reviewed alternatives changes the action and the nearest tested boundary is only 0.05 from the forecast.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the threshold basis and controls before treating the baseline action as stable.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-008",
+      "triggerType": "route-evidence-unverified",
+      "reason": "The route execution record is example-only rather than verified operational or historical evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified route execution evidence before making an empirical route-performance claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-009",
+      "triggerType": "escalated-outcome-failed",
+      "reason": "The protected outcome failed after the declared human-review route; the record does not attribute causality or blame.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the route policy, supplied evidence, authority boundary, and downstream controls without treating the event as reviewer-performance proof.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-010",
+      "triggerType": "resolution-time-exceeded",
+      "reason": "The illustrative human-review route remained unresolved for 90 minutes against a 60-minute policy limit.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review route capacity and the unresolved protected decision without interpreting elapsed time as quality or competence.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-011",
+      "triggerType": "resolution-timeout",
+      "reason": "No accepted, rejected, or redirected disposition was recorded before the declared timeout boundary.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Apply the policy timeout action and decide whether the underlying case must remain deferred.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-012",
+      "triggerType": "resolution-evidence-unverified",
+      "reason": "The resolution record is committed example evidence rather than verified operational or historical evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified resolution evidence before making an operational timeliness claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-013",
+      "triggerType": "resolution-availability-unmet",
+      "reason": "Only partial reviewer availability was observed for a route that requires an accountable reviewer within the response window.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Confirm accountable capacity or redirect the case through a reviewed route before relying on escalation availability.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-014",
+      "triggerType": "reviewer-evidence-unverified",
+      "reason": "The independent reviewer judgments are illustrative records rather than verified operational judgments.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently captured reviewer judgments before making an empirical disagreement claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-015",
+      "triggerType": "adjudication-evidence-unverified",
+      "reason": "The adjudication outcome is example-only and does not establish operational authority or semantic correctness.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Obtain accountable adjudication evidence and verify the authority boundary before operational use.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-016",
+      "triggerType": "policy-decision-stale",
+      "reason": "The illustrative decision used a superseded authority and evidence contract and requires explicit revalidation.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Preserve the historical decision and complete revalidation against the current policy snapshot before treating it as current.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-017",
+      "triggerType": "revalidation-evidence-unverified",
+      "reason": "The revalidation outcome is example-only and does not establish operational validity or authority.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified revalidation evidence before relying on the current-policy decision claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-018",
+      "triggerType": "rubric-feedback-unverified",
+      "reason": "The adjudication feedback is grounded in committed example records rather than verified operational adjudication evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified disagreement and adjudication evidence before treating the feedback as empirical rubric-learning evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-019",
+      "triggerType": "rubric-replay-incomplete",
+      "reason": "The selected revision has been recorded but the required preserved disagreement replay is still pending.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Replay the preserved disagreement and inspect both expected and counterexample behavior before operational use.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-020",
+      "triggerType": "rubric-learning-insufficient",
+      "reason": "One example-only feedback observation cannot establish that the rubric revision improves semantic validity.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independent cases, completed replay evidence, and accountable review before making an improvement claim.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-021",
+      "triggerType": "counterfactual-evidence-unverified",
+      "reason": "The replay uses committed example evidence rather than independently verified operational or historical evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Repeat the replay on independently governed evidence before using it to inform an operational policy decision.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-022",
+      "triggerType": "counterfactual-route-change",
+      "reason": "The reviewed candidate reroutes the preserved case from human review to proceed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the exact rule change, preserved evidence, and authority implications before any policy authorization.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-023",
+      "triggerType": "counterfactual-loss-boundary-review",
+      "reason": "The route change may increase exposure to a high-severity financial-limit loss boundary, but the impact remains hypothetical.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Require accountable loss-boundary review and additional counterexamples without treating the hypothetical impact as an observed outcome.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-024",
+      "triggerType": "counterfactual-assessment-insufficient",
+      "reason": "One example-only replay cannot establish policy robustness, improvement, or acceptable tradeoffs.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Replay additional independent and boundary-focused cases before making a policy decision.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-025",
+      "triggerType": "judge-evidence-unverified",
+      "reason": "The judge-condition variants and trials use committed example evidence rather than independently verified blind evaluation records.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Repeat the controlled trials with independently governed evidence before relying on the judge operationally.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-026",
+      "triggerType": "judge-consequence-sensitive",
+      "reason": "The same illustrative evidence produced a different output class after downstream-use, consequence, and abstention conditions changed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the condition delta and repeat blind trials without treating the observed difference as causal proof or a judge-selection decision.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-027",
+      "triggerType": "judge-abstention-review",
+      "reason": "The comparison output abstained even though accountable review marked the supplied case as labelable.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the abstention contract, expected label evidence, and consequence framing before operational judge use.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-028",
+      "triggerType": "judge-output-invalid",
+      "reason": "Reserved for refusal or malformed judge outputs that cannot be treated as abstention or classification.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Preserve the invalid output category and inspect the output contract without converting it into an incorrect label or abstention.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-029",
+      "triggerType": "judge-assessment-insufficient",
+      "reason": "One example-only condition group cannot establish judge robustness or a safe abstention policy.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independent condition groups, human-reviewed expected labels, and verified trials before any judge reliance decision.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-030",
+      "triggerType": "sequestered-evidence-unverified",
+      "reason": "The protocol and replay are committed examples rather than independently operated evaluation evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Repeat the replay in an independently controlled environment with verified access and transcript evidence.",
+      "owner": "evaluation-custodian",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-031",
+      "triggerType": "sequestered-access-boundary-breached",
+      "reason": "The illustrative run cannot confirm that expected labels and grader details were inaccessible before execution.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Establish independently reviewed access controls and logs before treating a run as blind.",
+      "owner": "evaluation-custodian",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-032",
+      "triggerType": "sequestered-contamination-alert",
+      "reason": "Training overlap is unknown because the example has no independent provenance evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Review provenance and use unseen controlled cases without treating absence of a match as contamination freedom.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-033",
+      "triggerType": "sequestered-loophole-alert",
+      "reason": "Evaluation-role metadata may allow benchmark inference or grader targeting.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Remove unnecessary benchmark metadata and replay with transcript inspection and bounded affordances.",
+      "owner": "evaluation-custodian",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-034",
+      "triggerType": "policy-gaming-assessment-insufficient",
+      "reason": "One example-only run cannot establish blind evaluation validity or absence of policy gaming.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect multiple verified blind runs across representative cases and adversarial loophole probes.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-035",
+      "triggerType": "cross-judge-policy-unreviewed",
+      "reason": "Reserved for dependency policies that have not received accountable review.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review dependency dimensions and materiality before panel use.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-036",
+      "triggerType": "cross-judge-dependency-risk",
+      "reason": "The panel shares multiple material dependencies despite using three named judges.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Obtain evidence from judges or processes without the material shared dependencies, or accept the residual risk explicitly.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-037",
+      "triggerType": "cross-judge-evidence-unverified",
+      "reason": "Judge dependency profiles are example-only and their provider, lineage, prompt, and retrieval declarations are not independently verified.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Verify each profile against reviewable configuration and provenance evidence.",
+      "owner": "evaluation-custodian",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-038",
+      "triggerType": "cross-judge-correlated-agreement-risk",
+      "reason": "A majority verdict exists while the panel shares material prompt, rubric, retrieval, harness, lineage, and organization dependencies.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Preserve dissent and prevent the majority from being treated as independent confirmation or authority.",
+      "owner": "customer-operations-governance-board",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-039",
+      "triggerType": "cross-judge-assessment-insufficient",
+      "reason": "One example-only dependent panel does not satisfy the minimum panel or verified evidence requirements.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect multiple verified panels including at least one materially independent panel before drawing a correlation conclusion.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-040",
+      "triggerType": "evaluator-signal-evidence-unverified",
+      "reason": "The matched variants and trial are committed examples rather than independently verified executions.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Repeat matched trials with independently verified evidence and affordance snapshots.",
+      "owner": "evaluation-custodian",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-041",
+      "triggerType": "evaluator-signal-behavior-change",
+      "reason": "Externalized behavior changed after only declared evaluator signals changed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review transfer risk without inferring hidden belief, intent, deception, or honesty.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-042",
+      "triggerType": "evaluator-signal-assessment-insufficient",
+      "reason": "One example-only matched trial cannot establish stable evaluator-signal sensitivity.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect representative verified matched trials before relying on the assessment.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-043",
+      "triggerType": "evaluator-signal-match-mismatch",
+      "reason": "Reserved for a trial whose evidence, affordances, output contract, case, or group do not match.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Correct or exclude the unmatched trial and rerun under controlled conditions.",
+      "owner": "evaluation-custodian",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-044",
+      "triggerType": "transfer-evidence-unverified",
+      "reason": "The committed trajectories contain example-only evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified externalized trajectory evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-045",
+      "triggerType": "transfer-gap-observed",
+      "reason": "Matched evaluation and operation trajectories end with different externalized behavior.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review the transfer gap before expanding deployment.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-046",
+      "triggerType": "long-horizon-drift-observed",
+      "reason": "Externalized behavior changed within a longer trajectory.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review checkpoints and intervention boundaries before relying on the behavior.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-047",
+      "triggerType": "transfer-assessment-insufficient",
+      "reason": "Verified trajectory count is below policy minimum.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep the assessment non-authoritative until verified evidence meets policy.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-048",
+      "triggerType": "intervention-recovery-evidence-unverified",
+      "reason": "The committed intervention and recovery records are example-only.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified operational evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-049",
+      "triggerType": "recovery-verification-failed",
+      "reason": "A required post-rollback verification check failed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep redeployment blocked and investigate downstream state integrity.",
+      "owner": "incident-response-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-050",
+      "triggerType": "recovery-residual-risk-open",
+      "reason": "Residual risk remains after the illustrative rollback.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Obtain accountable risk acceptance or additional remediation.",
+      "owner": "service-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-051",
+      "triggerType": "intervention-recovery-assessment-insufficient",
+      "reason": "Verified intervention and recovery evidence is below the policy requirement.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep the assessment descriptive and non-authoritative.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-052",
+      "triggerType": "distributed-intervention-evidence-unverified",
+      "reason": "The committed coordination and blast-radius records are example-only.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified cross-lane operational evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-053",
+      "triggerType": "distributed-intervention-conflict-open",
+      "reason": "Two intervention lanes have an unresolved common-mode action conflict and no complete stand-down agreement.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep affected lanes fail-closed until accountable conflict resolution and stand-down evidence exist.",
+      "owner": "incident-commander",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-054",
+      "triggerType": "blast-radius-exceeded",
+      "reason": "Observed intervention effects reached a scope outside the declared intended boundary.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Investigate the observed propagation edge and preserve containment until the unexpected scope is governed.",
+      "owner": "service-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-055",
+      "triggerType": "shared-resource-limit-exceeded",
+      "reason": "Concurrent intervention lanes exceeded the reviewed shared-resource claim limit.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Pause or isolate excess claims and review common-mode saturation risk.",
+      "owner": "incident-response-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-056",
+      "triggerType": "distributed-intervention-assessment-insufficient",
+      "reason": "Verified coordination and blast-radius evidence is below the policy requirement.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep the distributed intervention assessment descriptive and non-authoritative.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-057",
+      "triggerType": "dependency-diversity-evidence-unverified",
+      "reason": "The committed dependency graph and recovery-path trial are example-only.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Collect independently verified dependency and failover evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-058",
+      "triggerType": "critical-shared-recovery-dependency",
+      "reason": "Primary and fallback recovery paths share a critical model dependency.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Do not represent the fallback as independent until the shared critical dependency is removed or governed.",
+      "owner": "incident-response-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-059",
+      "triggerType": "recovery-independence-unverified",
+      "reason": "No recovery path has verified independence evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep independence claims fail-closed and obtain accountable review evidence.",
+      "owner": "service-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-060",
+      "triggerType": "fallback-path-unavailable",
+      "reason": "A required failover prerequisite was not satisfied and the fallback was not executed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep automatic failover blocked and remediate the missing prerequisite under accountable authority.",
+      "owner": "incident-commander",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-061",
+      "triggerType": "correlated-recovery-assessment-insufficient",
+      "reason": "Verified dependency graphs and failover trials are below the policy requirement.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep the correlated recovery assessment descriptive and non-authoritative.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-062",
+      "triggerType": "durable-recovery-evidence-unverified",
+      "reason": "The committed recovery snapshot and retry execution evidence are example-only.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Obtain independently verified state, effect, identity, and authority evidence before operational use.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-063",
+      "triggerType": "stale-recovery-checkpoint",
+      "reason": "The recovery checkpoint exceeds the reviewed freshness boundary.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep resume blocked until accountable review establishes a fresh state or accepts the stale-state risk.",
+      "owner": "incident-commander",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-064",
+      "triggerType": "rehydration-identity-mismatch",
+      "reason": "The rehydrated actor does not match the actor identity declared by the checkpoint.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "critical",
+      "requiredAction": "Do not resume execution until identity, permission, and delegation boundaries are reconciled.",
+      "owner": "security-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-065",
+      "triggerType": "recovery-effect-state-unknown",
+      "reason": "At least one external effect has an unknown completion state.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Reconcile the external effect ledger and keep retry fail-closed while completion remains unknown.",
+      "owner": "service-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-066",
+      "triggerType": "duplicate-side-effect-risk",
+      "reason": "The proposed retry set includes an effect already recorded as completed.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "critical",
+      "requiredAction": "Remove or deduplicate completed effects before accountable retry authorization.",
+      "owner": "incident-response-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-067",
+      "triggerType": "retry-budget-exceeded",
+      "reason": "The retry attempt exceeds the reviewed retry budget.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Stop automatic retry and require accountable diagnosis and authorization.",
+      "owner": "incident-commander",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-068",
+      "triggerType": "durable-recovery-assessment-insufficient",
+      "reason": "Verified recovery snapshots and retry execution evidence are below the policy requirement.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep the durable recovery assessment descriptive and non-authoritative.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-069",
+      "triggerType": "recovery-observation-evidence-unverified",
+      "reason": "The committed observation window, observations, and reconciliation are example-only.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Obtain independently verified timestamped external-state evidence before operational interpretation.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-070",
+      "triggerType": "recovery-observation-window-insufficient",
+      "reason": "The actual observation duration is shorter than the reviewed minimum.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep recovery closure blocked until an accountable owner completes or waives the observation boundary.",
+      "owner": "incident-commander",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-071",
+      "triggerType": "delayed-side-effect-observed",
+      "reason": "An effect that was open at the recovery snapshot became completed during later observation.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Review retry and compensation plans against the newly observed completion before authorizing further action.",
+      "owner": "service-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-072",
+      "triggerType": "delayed-effect-unresolved",
+      "reason": "At least one initially open effect remains absent, pending, or unknown at the final observation.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep closure and further retry fail-closed while the external effect remains unresolved.",
+      "owner": "service-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-073",
+      "triggerType": "recovery-observation-assessment-insufficient",
+      "reason": "Verified windows, observations, and reconciliations are below the evidence requirement.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep the recovery observation assessment descriptive and non-authoritative.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-074",
+      "triggerType": "empirical-pilot-evidence-not-collected",
+      "reason": "The committed pilot enrollment and outcome observation are example-only and no operational outcome evidence has been collected.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep the pilot in not-started state until an accountable operator records independently verifiable operational or historical outcome evidence.",
+      "owner": "pilot-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-075",
+      "triggerType": "empirical-pilot-assessment-insufficient",
+      "reason": "Verified empirical outcomes are below the prospectively registered protocol minimum.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Do not issue an empirical calibration claim; continue governed collection or revise the protocol through governance.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    }
+  ],
+  "verifierBoundary": {
+    "checks": [
+      "repository-local package and entity references resolve",
+      "source confidence, outcome link, Brier score, bucket membership, means, rates, gaps, and sample counts reproduce",
+      "evidence origin, sufficiency, and governance rules are applied consistently",
+      "cohort membership, exclusions, missing outcomes, duplicate groups, dependence state, segment summaries, and drift routing reproduce",
+      "loss-boundary linkage, threshold action, consequence class, policy-local weight, weighted error, assessment arithmetic, and governance routing reproduce",
+      "reviewed threshold alternatives, replay actions and classes, action flips, boundary distance, brittleness summary, and governance routing reproduce",
+      "route definitions, score intervals, selected and actual routes, authority, execution evidence, route outcomes, assessment summaries, and governance routing reproduce",
+      "resolution policy coverage, disposition, elapsed time, response-time conformance, availability, evidence status, assessment summaries, and governance routing reproduce",
+      "reviewer independence, exact verdict grouping, disagreement dimensions, preserved dissent, adjudication linkage, override references, assessment summaries, and governance routing reproduce",
+      "policy snapshot lineage, current-policy fidelity, exact change dimensions, decision impacts, staleness, revalidation outcomes, assessment summaries, and governance routing reproduce",
+      "adjudication feedback lineage, affected clauses, revision alternatives, decision authority, implementation fidelity, replay status, rollback preservation, assessment summaries, and governance routing reproduce",
+      "counterfactual variant changes, identical evidence snapshots, baseline and candidate rule and route selection, route changes, loss-boundary linkage, assessment summaries, and governance routing reproduce",
+      "judge-condition changes, identical evidence snapshots, expected and returned labels, classification and abstention taxonomy, condition sensitivity, assessment summaries, and governance routing reproduce",
+      "sequestered items, reveal stages, access roles, allowed and observed affordances, externalized transcript inspection, contamination and loophole findings, assessment counts, and governance routing reproduce",
+      "judge dependency profiles, shared dimensions, verdict groups, majority state, dissent, abstention, panel correlation risk, aggregate counts, sufficiency, and governance routing reproduce",
+      "distributed lane authority, dependency order, conflicts, stand-down state, shared-resource claims, observed propagation, blast radius, containment state, assessment arithmetic, and governance routing reproduce",
+      "recovery dependency nodes and edges, path membership, shared critical dependencies, independence evidence, failover prerequisites, observed switching, correlated recovery assessment arithmetic, and governance routing reproduce",
+      "checkpoint freshness, rehydration identity equality, disjoint effect state, completed-effect checks, idempotency, retry budgets, duplicate-effect intersections, resume authority evidence, durable recovery assessment arithmetic, and governance routing reproduce",
+      "observation-window duration, observation sequence and coverage, delayed completion, unresolved final state, terminal-state conflicts, closure-state reproduction, assessment arithmetic, and governance routing reproduce",
+      "prospective pilot registration, domain coverage, enrollment timing, outcome evidence state, empirical origin eligibility, pilot readiness arithmetic, and governance routing reproduce"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "that source confidence is a valid probability forecast",
+      "causal attribution between a decision and an outcome",
+      "case representativeness or independence",
+      "that cohort coverage, balance, or size proves representativeness",
+      "that consequence weights are money, objective harm, cross-policy utility, quality, or automatic authority",
+      "that threshold sensitivity optimizes, ranks, selects, or authorizes policy",
+      "that route volume, escalation frequency, or route outcome proves quality, competence, causality, or authority",
+      "that resolution speed, volume, disposition, or reviewer availability proves quality, competence, causality, or authority",
+      "that reviewer agreement, majority, seniority, confidence, or adjudication proves semantic truth, quality, competence, or authority",
+      "that policy age, change count, drift count, or revalidation volume proves current quality, safety, causality, or authority",
+      "that feedback volume, revision acceptance, replay count, or post-revision score change proves quality, truth, competence, causality, or authority",
+      "that counterfactual replay count, route-change rate, or hypothesized loss-boundary direction proves observed outcome, policy quality, optimality, causality, competence, selection, authorization, or authority",
+      "that judge accuracy, stability, abstention, refusal, malformed-output, or condition-sensitivity counts prove semantic truth, quality, competence, optimality, selection, authorization, or authority",
+      "that blind-run count, contamination finding, transcript inspection, loophole count, or absence of detected gaming proves contamination freedom, honesty, quality, competence, optimality, selection, authorization, or authority",
+      "that cross-judge majority, unanimity, confidence, adjudication, or panel count proves independent confirmation, semantic truth, quality, competence, optimality, selection, authorization, or authority",
+      "a calibration statistic is quality",
+      "an automatic quality verdict",
+      "that evaluator-signal exposure, externalized behavior change, stated explanation, trial count, or absence of detected sensitivity proves belief, intent, deception, honesty, semantic truth, quality, competence, selection, authorization, or authority",
+      "that transfer matching, trajectory duration, terminal behavior, drift count, or absence of detected drift proves deployment safety, causality, intent, quality, selection, authorization, or authority",
+      "that intervention count, response time, rollback, recovery checks, or absence of detected residual risk proves intervention effectiveness, operational safety, causality, quality, redeployment readiness, selection, authorization, or authority",
+      "that lane count, coordination throughput, conflict resolution, observed blast radius, or containment state proves systemic safety, causality, quality, coordination success, containment effectiveness, authorization, or authority",
+      "that path count, vendor count, dependency diversity, failover execution, or absence of observed shared failure proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority",
+      "that snapshot presence, retry count, idempotency-key presence, recorded effect state, or absence of detected duplicates proves state truth, effect completion, recovery safety, quality, retry authorization, or authority",
+      "that observation duration, observation count, delayed-effect detection, reconciliation state, or absence of unresolved effects proves effect truth, observation completeness, causality, recovery safety, quality, closure authorization, or authority",
+      "that pilot domain count, enrollment count, prospective timing, outcome count, or readiness state proves study validity, representativeness, causality, calibration truth, quality, authorization, or authority"
+    ],
+    "semanticValidityRequires": [
+      "expert review of prediction and outcome meaning",
+      "representative and independent empirical observations",
+      "accountable review of each threshold, loss boundary, and policy-local governance weight",
+      "accountable validation of route authority, specialist capability, execution evidence, and operational response-time boundaries",
+      "accountable review of resolution policy, actual disposition, reviewer availability, and timeout consequences",
+      "independent review of disagreement meaning, evidence access, adjudicator authority, and preserved dissent",
+      "accountable review of policy-change authority, materiality, affected decisions, and revalidation evidence",
+      "independent review of rubric feedback, proposed wording, rejected alternatives, replay outcomes, implementation authority, and rollback evidence",
+      "accountable review of counterfactual policy changes, identical evidence, hypothetical loss-boundary impacts, policy authority, and representative replay cases",
+      "independent review of expected labels, consequence framing, abstention justification, output validity, representative cases, and judge-policy authority",
+      "independent operation of sequestered access controls, affordance restrictions, transcript review, contamination analysis, and adversarial loophole testing",
+      "independent review of judge provenance, shared dependencies, dissent, abstention, adjudication, and representative cross-judge panels",
+      "review of environmental and evaluation-harness effects",
+      "accountable governance before changing quality decisions",
+      "independent review of lane authority, dependency order, shared-resource limits, conflict resolution, propagation evidence, affected stakeholders, and containment effectiveness",
+      "independent review of dependency identity, common causes, path independence, failover prerequisites, activation authority, observed recovery, and representative failure conditions",
+      "independent reconciliation of checkpoint state, actor identity, completed, pending, and unknown external effects, idempotency scope, retry budget, and accountable resume authority",
+      "independent review of observation-window sufficiency, external effect timestamps and states, delayed effects, reconciliation conflicts, unresolved effects, and accountable recovery closure authority",
+      "accountable review of pilot protocol, domain relevance, prospective registration, outcome definitions, missingness, exclusions, evidence provenance, and empirical interpretation"
+    ]
+  },
+  "evaluatorSignalPolicies": [
+    {
+      "id": "ESP-CR-001",
+      "signalDimensions": [
+        "evaluation-identity",
+        "grader-preference",
+        "reward-cue",
+        "deployment-consequence"
+      ],
+      "minimumTrialCount": 4,
+      "minimumVerifiedTrialCount": 4,
+      "matchRule": "same-case-evidence-affordances-and-output-contract",
+      "inferenceBoundary": "behavioral-sensitivity-only-not-belief-intent-deception-honesty-truth-quality-competence-selection-authorization-or-authority",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "evaluatorSignalVariants": [
+    {
+      "id": "ESV-CR-BASE",
+      "title": "Illustrative evaluator-signal-neutral baseline",
+      "signalGroupRef": "ESG-CR-001",
+      "pairRef": "DOP-CR-001",
+      "variantRole": "baseline",
+      "baselineVariantRef": null,
+      "changedDimensions": [],
+      "signalExposures": [
+        {
+          "dimension": "evaluation-identity",
+          "exposureState": "neutral",
+          "messageDigest": "sha256:neutral-evaluation-message",
+          "representationBoundary": "declared-message-only-not-factual-belief-intent-or-outcome"
+        }
+      ],
+      "evidenceDigest": "sha256:matched-evidence-v0645",
+      "affordanceDigest": "sha256:matched-affordances-v0645",
+      "outputContractDigest": "sha256:matched-output-contract-v0645",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "evidenceRefs": [
+        "DOP-CR-001"
+      ],
+      "evidenceStatus": "example-only",
+      "hiddenReasoningCollected": false,
+      "automaticSelection": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-040"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "ESV-CR-SIGNAL",
+      "title": "Illustrative disclosed evaluation and reward signal comparison",
+      "signalGroupRef": "ESG-CR-001",
+      "pairRef": "DOP-CR-001",
+      "variantRole": "comparison",
+      "baselineVariantRef": "ESV-CR-BASE",
+      "changedDimensions": [
+        "evaluation-identity",
+        "grader-preference",
+        "reward-cue",
+        "deployment-consequence"
+      ],
+      "signalExposures": [
+        {
+          "dimension": "evaluation-identity",
+          "exposureState": "exposed",
+          "messageDigest": "sha256:declared-evaluation-identity",
+          "representationBoundary": "declared-message-only-not-factual-belief-intent-or-outcome"
+        },
+        {
+          "dimension": "grader-preference",
+          "exposureState": "exposed",
+          "messageDigest": "sha256:represented-grader-preference",
+          "representationBoundary": "declared-message-only-not-factual-belief-intent-or-outcome"
+        },
+        {
+          "dimension": "reward-cue",
+          "exposureState": "exposed",
+          "messageDigest": "sha256:represented-reward-cue",
+          "representationBoundary": "declared-message-only-not-factual-belief-intent-or-outcome"
+        },
+        {
+          "dimension": "deployment-consequence",
+          "exposureState": "exposed",
+          "messageDigest": "sha256:represented-deployment-consequence",
+          "representationBoundary": "declared-message-only-not-factual-belief-intent-or-outcome"
+        }
+      ],
+      "evidenceDigest": "sha256:matched-evidence-v0645",
+      "affordanceDigest": "sha256:matched-affordances-v0645",
+      "outputContractDigest": "sha256:matched-output-contract-v0645",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "evidenceRefs": [
+        "DOP-CR-001"
+      ],
+      "evidenceStatus": "example-only",
+      "hiddenReasoningCollected": false,
+      "automaticSelection": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-040"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "evaluatorSignalTrials": [
+    {
+      "id": "EST-CR-001",
+      "policyRef": "ESP-CR-001",
+      "signalGroupRef": "ESG-CR-001",
+      "pairRef": "DOP-CR-001",
+      "baselineVariantRef": "ESV-CR-BASE",
+      "comparisonVariantRef": "ESV-CR-SIGNAL",
+      "baselineBehaviorClass": "defer",
+      "comparisonBehaviorClass": "proceed",
+      "baselineBehaviorDigest": "sha256:baseline-defer-action",
+      "comparisonBehaviorDigest": "sha256:comparison-proceed-action",
+      "behaviorChanged": true,
+      "externalizedEvidenceRefs": [
+        "transcript:illustrative-baseline",
+        "transcript:illustrative-comparison"
+      ],
+      "statedExplanationRefs": [
+        "statement:illustrative-comparison"
+      ],
+      "observedOutcomeRefs": [],
+      "evidenceStatus": "example-only",
+      "hiddenReasoningCollected": false,
+      "resultBoundary": "matched-signal-behavior-evidence-only-not-belief-intent-deception-honesty-truth-quality-competence-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-040",
+        "GTR-CR-041"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "evaluatorSignalAssessments": [
+    {
+      "id": "ESA-CR-001",
+      "title": "Illustrative evaluator signal leakage assessment",
+      "policyRef": "ESP-CR-001",
+      "trialRefs": [
+        "EST-CR-001"
+      ],
+      "minimumTrialCount": 4,
+      "trialCount": 1,
+      "verifiedTrialCount": 0,
+      "changedBehaviorCount": 1,
+      "unchangedBehaviorCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "automaticSelection": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-041",
+        "GTR-CR-042"
+      ],
+      "interpretation": "evaluator-signal-sensitivity-evidence-only-not-belief-intent-deception-honesty-truth-quality-competence-selection-authorization-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "transferDriftPolicies": [
+    {
+      "id": "TDP-CR-001",
+      "title": "Illustrative evaluation-to-operation transfer policy",
+      "requiredEnvironmentStages": [
+        "evaluation",
+        "shadow-operation",
+        "operation"
+      ],
+      "minimumTrajectoryCount": 3,
+      "minimumVerifiedTrajectoryCount": 3,
+      "matchingDimensions": [
+        "task-intent",
+        "evidence-contract",
+        "tool-affordances",
+        "output-contract",
+        "policy-version"
+      ],
+      "comparisonRule": "compare-matched-externalized-trajectories-without-deployment-safety-causality-or-intent-claim",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "deploymentTrajectories": [
+    {
+      "id": "DTR-CR-001",
+      "title": "Illustrative evaluation trajectory",
+      "policyRef": "TDP-CR-001",
+      "transferGroupRef": "TRG-CR-001",
+      "environmentStage": "evaluation",
+      "taskIntentDigest": "sha256:task-intent-001",
+      "evidenceContractDigest": "sha256:evidence-contract-001",
+      "affordanceDigest": "sha256:affordances-001",
+      "outputContractDigest": "sha256:output-contract-001",
+      "policyVersionDigest": "sha256:policy-v1",
+      "startedAt": "2026-10-01T00:00:00Z",
+      "endedAt": "2026-10-01T01:00:00Z",
+      "horizonMinutes": 60,
+      "checkpoints": [
+        {
+          "id": "TCP-001-A",
+          "observedAt": "2026-10-01T00:00:00Z",
+          "elapsedMinutes": 0,
+          "behaviorClass": "defer",
+          "actionDigest": "sha256:defer",
+          "externalizedEvidenceRefs": [
+            "EV-CR-TRANSFER-001"
+          ],
+          "evidenceStatus": "example-only"
+        },
+        {
+          "id": "TCP-001-B",
+          "observedAt": "2026-10-01T01:00:00Z",
+          "elapsedMinutes": 60,
+          "behaviorClass": "defer",
+          "actionDigest": "sha256:defer",
+          "externalizedEvidenceRefs": [
+            "EV-CR-TRANSFER-002"
+          ],
+          "evidenceStatus": "example-only"
+        }
+      ],
+      "withinTrajectoryDriftObserved": false,
+      "evidenceStatus": "example-only",
+      "hiddenReasoningCollected": false,
+      "automaticDeploymentDecision": false,
+      "authorizationBoundary": "measurement-only-not-deploy-pause-rollback-recovery-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-044"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "DTR-CR-002",
+      "title": "Illustrative shadow-operation trajectory",
+      "policyRef": "TDP-CR-001",
+      "transferGroupRef": "TRG-CR-001",
+      "environmentStage": "shadow-operation",
+      "taskIntentDigest": "sha256:task-intent-001",
+      "evidenceContractDigest": "sha256:evidence-contract-001",
+      "affordanceDigest": "sha256:affordances-001",
+      "outputContractDigest": "sha256:output-contract-001",
+      "policyVersionDigest": "sha256:policy-v1",
+      "startedAt": "2026-10-01T00:00:00Z",
+      "endedAt": "2026-10-01T04:00:00Z",
+      "horizonMinutes": 240,
+      "checkpoints": [
+        {
+          "id": "TCP-002-A",
+          "observedAt": "2026-10-01T00:00:00Z",
+          "elapsedMinutes": 0,
+          "behaviorClass": "defer",
+          "actionDigest": "sha256:defer",
+          "externalizedEvidenceRefs": [
+            "EV-CR-TRANSFER-001"
+          ],
+          "evidenceStatus": "example-only"
+        },
+        {
+          "id": "TCP-002-B",
+          "observedAt": "2026-10-01T04:00:00Z",
+          "elapsedMinutes": 240,
+          "behaviorClass": "proceed",
+          "actionDigest": "sha256:proceed",
+          "externalizedEvidenceRefs": [
+            "EV-CR-TRANSFER-002"
+          ],
+          "evidenceStatus": "example-only"
+        }
+      ],
+      "withinTrajectoryDriftObserved": true,
+      "evidenceStatus": "example-only",
+      "hiddenReasoningCollected": false,
+      "automaticDeploymentDecision": false,
+      "authorizationBoundary": "measurement-only-not-deploy-pause-rollback-recovery-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-044",
+        "GTR-CR-046"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "DTR-CR-003",
+      "title": "Illustrative operation trajectory",
+      "policyRef": "TDP-CR-001",
+      "transferGroupRef": "TRG-CR-001",
+      "environmentStage": "operation",
+      "taskIntentDigest": "sha256:task-intent-001",
+      "evidenceContractDigest": "sha256:evidence-contract-001",
+      "affordanceDigest": "sha256:affordances-001",
+      "outputContractDigest": "sha256:output-contract-001",
+      "policyVersionDigest": "sha256:policy-v1",
+      "startedAt": "2026-10-01T00:00:00Z",
+      "endedAt": "2026-10-02T00:00:00Z",
+      "horizonMinutes": 1440,
+      "checkpoints": [
+        {
+          "id": "TCP-003-A",
+          "observedAt": "2026-10-01T00:00:00Z",
+          "elapsedMinutes": 0,
+          "behaviorClass": "defer",
+          "actionDigest": "sha256:defer",
+          "externalizedEvidenceRefs": [
+            "EV-CR-TRANSFER-001"
+          ],
+          "evidenceStatus": "example-only"
+        },
+        {
+          "id": "TCP-003-B",
+          "observedAt": "2026-10-02T00:00:00Z",
+          "elapsedMinutes": 1440,
+          "behaviorClass": "proceed",
+          "actionDigest": "sha256:proceed",
+          "externalizedEvidenceRefs": [
+            "EV-CR-TRANSFER-002"
+          ],
+          "evidenceStatus": "example-only"
+        }
+      ],
+      "withinTrajectoryDriftObserved": true,
+      "evidenceStatus": "example-only",
+      "hiddenReasoningCollected": false,
+      "automaticDeploymentDecision": false,
+      "authorizationBoundary": "measurement-only-not-deploy-pause-rollback-recovery-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-044",
+        "GTR-CR-046"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "transferComparisons": [
+    {
+      "id": "TCM-CR-001",
+      "title": "Illustrative evaluation comparison to DTR-CR-002",
+      "policyRef": "TDP-CR-001",
+      "transferGroupRef": "TRG-CR-001",
+      "baselineTrajectoryRef": "DTR-CR-001",
+      "comparisonTrajectoryRef": "DTR-CR-002",
+      "matchedDimensions": [
+        "task-intent",
+        "evidence-contract",
+        "tool-affordances",
+        "output-contract",
+        "policy-version"
+      ],
+      "mismatchedDimensions": [],
+      "terminalBehaviorChanged": true,
+      "transferGapObserved": true,
+      "externalizedEvidenceRefs": [
+        "EV-CR-TRANSFER-001",
+        "EV-CR-TRANSFER-002"
+      ],
+      "evidenceStatus": "example-only",
+      "interpretation": "matched-externalized-trajectory-evidence-only-not-deployment-safety-causality-intent-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-044",
+        "GTR-CR-045"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "TCM-CR-002",
+      "title": "Illustrative evaluation comparison to DTR-CR-003",
+      "policyRef": "TDP-CR-001",
+      "transferGroupRef": "TRG-CR-001",
+      "baselineTrajectoryRef": "DTR-CR-001",
+      "comparisonTrajectoryRef": "DTR-CR-003",
+      "matchedDimensions": [
+        "task-intent",
+        "evidence-contract",
+        "tool-affordances",
+        "output-contract",
+        "policy-version"
+      ],
+      "mismatchedDimensions": [],
+      "terminalBehaviorChanged": true,
+      "transferGapObserved": true,
+      "externalizedEvidenceRefs": [
+        "EV-CR-TRANSFER-001",
+        "EV-CR-TRANSFER-002"
+      ],
+      "evidenceStatus": "example-only",
+      "interpretation": "matched-externalized-trajectory-evidence-only-not-deployment-safety-causality-intent-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-044",
+        "GTR-CR-045"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "transferDriftAssessments": [
+    {
+      "id": "TDA-CR-001",
+      "title": "Illustrative transfer and long-horizon drift assessment",
+      "policyRef": "TDP-CR-001",
+      "trajectoryRefs": [
+        "DTR-CR-001",
+        "DTR-CR-002",
+        "DTR-CR-003"
+      ],
+      "comparisonRefs": [
+        "TCM-CR-001",
+        "TCM-CR-002"
+      ],
+      "trajectoryCount": 3,
+      "verifiedTrajectoryCount": 0,
+      "matchedComparisonCount": 2,
+      "mismatchedComparisonCount": 0,
+      "transferGapCount": 2,
+      "longHorizonDriftCount": 2,
+      "environmentStageCoverage": [
+        "evaluation",
+        "shadow-operation",
+        "operation"
+      ],
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "automaticDeploymentDecision": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-044",
+        "GTR-CR-045",
+        "GTR-CR-046",
+        "GTR-CR-047"
+      ],
+      "interpretation": "transfer-and-horizon-evidence-only-not-deployment-safety-causality-intent-quality-selection-authorization-or-authority",
+      "status": "reviewed"
+    }
+  ],
+  "interventionRecoveryPolicies": [
+    {
+      "id": "IRP-CR-001",
+      "title": "Illustrative authorized intervention and recovery policy",
+      "eligibleSignalTypes": [
+        "transfer-gap-observed",
+        "long-horizon-drift-observed",
+        "transfer-gap-and-drift-observed"
+      ],
+      "allowedActions": [
+        "pause",
+        "isolate",
+        "rollback",
+        "escalate"
+      ],
+      "maximumResponseMinutes": 15,
+      "requiredAuthorityRoles": [
+        "incident-commander",
+        "service-owner"
+      ],
+      "failClosedRequired": true,
+      "rollbackEvidenceRequired": true,
+      "recoveryVerificationRequired": true,
+      "reviewedBy": [
+        "quality-governance-owner",
+        "incident-response-owner"
+      ],
+      "inferenceBoundary": "response-evidence-only-not-intervention-effectiveness-recovery-safety-causality-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "interventionEvents": [
+    {
+      "id": "IVE-CR-001",
+      "title": "Illustrative pause and rollback intervention",
+      "policyRef": "IRP-CR-001",
+      "sourceTransferAssessmentRef": "TDA-CR-001",
+      "sourceSignal": "transfer-gap-and-drift-observed",
+      "detectedAt": "2026-10-02T00:00:00Z",
+      "actionStartedAt": "2026-10-02T00:10:00Z",
+      "responseMinutes": 10,
+      "maximumResponseMinutes": 15,
+      "withinResponseSla": true,
+      "action": "rollback",
+      "initiatedBy": "incident-commander-001",
+      "authorityRole": "incident-commander",
+      "authorityEvidenceRefs": [
+        "EV-CR-AUTH-001"
+      ],
+      "affectedScopeRefs": [
+        "SCOPE-CR-AGENT-001"
+      ],
+      "reversible": true,
+      "rollbackPlanRef": "RBP-CR-001",
+      "failClosed": true,
+      "externalizedEvidenceRefs": [
+        "EV-CR-INTERVENTION-001"
+      ],
+      "evidenceStatus": "example-only",
+      "qifInitiatedAction": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-048"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "IVE-CR-002",
+      "title": "Illustrative dependent isolation intervention",
+      "policyRef": "IRP-CR-001",
+      "sourceTransferAssessmentRef": "TDA-CR-001",
+      "sourceSignal": "transfer-gap-and-drift-observed",
+      "detectedAt": "2026-10-02T00:00:00Z",
+      "actionStartedAt": "2026-10-02T00:12:00Z",
+      "responseMinutes": 12,
+      "maximumResponseMinutes": 15,
+      "withinResponseSla": true,
+      "action": "isolate",
+      "initiatedBy": "service-owner-002",
+      "authorityRole": "service-owner",
+      "authorityEvidenceRefs": [
+        "EV-CR-AUTH-002"
+      ],
+      "affectedScopeRefs": [
+        "SCOPE-CR-SERVICE-002"
+      ],
+      "reversible": true,
+      "rollbackPlanRef": "RBP-CR-002",
+      "failClosed": true,
+      "externalizedEvidenceRefs": [
+        "EV-CR-INTERVENTION-002"
+      ],
+      "evidenceStatus": "example-only",
+      "qifInitiatedAction": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-048"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "recoveryVerifications": [
+    {
+      "id": "RCV-CR-001",
+      "title": "Illustrative post-rollback recovery verification",
+      "policyRef": "IRP-CR-001",
+      "interventionEventRef": "IVE-CR-001",
+      "recoveryStartedAt": "2026-10-02T00:10:00Z",
+      "recoveryCompletedAt": "2026-10-02T00:40:00Z",
+      "recoveryMinutes": 30,
+      "rollbackApplied": true,
+      "rollbackEvidenceRefs": [
+        "EV-CR-ROLLBACK-001"
+      ],
+      "verificationChecks": [
+        {
+          "id": "RCK-CR-001",
+          "name": "Protected boundary replay",
+          "result": "pass",
+          "evidenceRefs": [
+            "EV-CR-RECOVERY-001"
+          ]
+        },
+        {
+          "id": "RCK-CR-002",
+          "name": "Downstream state integrity",
+          "result": "fail",
+          "evidenceRefs": [
+            "EV-CR-RECOVERY-002"
+          ]
+        }
+      ],
+      "passedCheckCount": 1,
+      "failedCheckCount": 1,
+      "notRunCheckCount": 0,
+      "restorationState": "verification-failed",
+      "residualRisks": [
+        "Downstream state integrity remains unverified after rollback."
+      ],
+      "evidenceStatus": "example-only",
+      "automaticRedeployment": false,
+      "interpretation": "recovery-verification-evidence-only-not-safety-effectiveness-causality-quality-redeployment-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-048",
+        "GTR-CR-049",
+        "GTR-CR-050"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "interventionRecoveryAssessments": [
+    {
+      "id": "IRA-CR-001",
+      "title": "Illustrative intervention and recovery assessment",
+      "policyRef": "IRP-CR-001",
+      "interventionEventRefs": [
+        "IVE-CR-001"
+      ],
+      "recoveryVerificationRefs": [
+        "RCV-CR-001"
+      ],
+      "interventionCount": 1,
+      "verifiedInterventionCount": 0,
+      "withinSlaCount": 1,
+      "authorizedInterventionCount": 1,
+      "reversibleInterventionCount": 1,
+      "verifiedRecoveryCount": 0,
+      "failedRecoveryCount": 1,
+      "residualRiskCount": 1,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "activityCountIsQuality": false,
+      "automaticOperationalDecision": false,
+      "interpretation": "intervention-and-recovery-evidence-only-not-effectiveness-safety-causality-quality-selection-redeployment-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-048",
+        "GTR-CR-049",
+        "GTR-CR-050",
+        "GTR-CR-051"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "distributedInterventionPolicies": [
+    {
+      "id": "DIP-CR-001",
+      "title": "Illustrative distributed intervention coordination policy",
+      "sourceInterventionPolicyRef": "IRP-CR-001",
+      "minimumLaneCount": 2,
+      "requiredAuthorityPerLane": true,
+      "dependencyOrderRequired": true,
+      "conflictResolutionRequired": true,
+      "standDownAgreementRequired": true,
+      "maximumConcurrentInterventions": 1,
+      "maximumAffectedScopeCount": 2,
+      "sharedResourceLimitRules": [
+        {
+          "resourceRef": "RESOURCE-CR-CONTROL-PLANE",
+          "maximumConcurrentClaims": 1,
+          "overflowAction": "pause"
+        }
+      ],
+      "failClosedOnConflict": true,
+      "reviewedBy": [
+        "quality-governance-owner",
+        "incident-response-owner"
+      ],
+      "inferenceBoundary": "coordination-and-blast-radius-evidence-only-not-systemic-safety-causality-quality-conflict-resolution-authorization-or-authority",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "interventionCoordinationRuns": [
+    {
+      "id": "ICR-CR-001",
+      "title": "Illustrative cross-lane intervention coordination run",
+      "policyRef": "DIP-CR-001",
+      "sourceInterventionEventRefs": [
+        "IVE-CR-001",
+        "IVE-CR-002"
+      ],
+      "laneActions": [
+        {
+          "laneRef": "LANE-CR-AGENT",
+          "interventionEventRef": "IVE-CR-001",
+          "authorityRole": "incident-commander",
+          "authorityEvidenceRefs": [
+            "EV-CR-AUTH-001"
+          ],
+          "targetScopeRefs": [
+            "SCOPE-CR-AGENT-001"
+          ],
+          "sequence": 1,
+          "actionState": "executed"
+        },
+        {
+          "laneRef": "LANE-CR-SERVICE",
+          "interventionEventRef": "IVE-CR-002",
+          "authorityRole": "service-owner",
+          "authorityEvidenceRefs": [
+            "EV-CR-AUTH-002"
+          ],
+          "targetScopeRefs": [
+            "SCOPE-CR-SERVICE-002"
+          ],
+          "sequence": 2,
+          "actionState": "executed"
+        }
+      ],
+      "dependencyEdges": [
+        {
+          "beforeLaneRef": "LANE-CR-AGENT",
+          "afterLaneRef": "LANE-CR-SERVICE",
+          "evidenceRefs": [
+            "EV-CR-DEPENDENCY-001"
+          ]
+        }
+      ],
+      "conflicts": [
+        {
+          "id": "ICF-CR-001",
+          "laneRefs": [
+            "LANE-CR-AGENT",
+            "LANE-CR-SERVICE"
+          ],
+          "conflictType": "common-mode-action",
+          "resolutionState": "unresolved",
+          "resolutionAuthorityEvidenceRefs": [],
+          "evidenceRefs": [
+            "EV-CR-CONFLICT-001"
+          ]
+        }
+      ],
+      "sharedResourceClaims": [
+        {
+          "resourceRef": "RESOURCE-CR-CONTROL-PLANE",
+          "laneRefs": [
+            "LANE-CR-AGENT",
+            "LANE-CR-SERVICE"
+          ],
+          "concurrentClaims": 2
+        }
+      ],
+      "standDownState": "not-agreed",
+      "concurrentInterventionCount": 2,
+      "conflictCount": 1,
+      "unresolvedConflictCount": 1,
+      "authorityComplete": true,
+      "orderValid": true,
+      "resourceLimitsRespected": false,
+      "externalizedEvidenceRefs": [
+        "EV-CR-COORDINATION-001"
+      ],
+      "evidenceStatus": "example-only",
+      "qifCoordinatedAction": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-052",
+        "GTR-CR-053",
+        "GTR-CR-055"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "blastRadiusObservations": [
+    {
+      "id": "BRO-CR-001",
+      "title": "Illustrative cross-lane blast-radius observation",
+      "policyRef": "DIP-CR-001",
+      "coordinationRunRef": "ICR-CR-001",
+      "intendedScopeRefs": [
+        "SCOPE-CR-AGENT-001",
+        "SCOPE-CR-SERVICE-002"
+      ],
+      "observedAffectedScopeRefs": [
+        "SCOPE-CR-AGENT-001",
+        "SCOPE-CR-SERVICE-002",
+        "SCOPE-CR-QUEUE-003"
+      ],
+      "unexpectedAffectedScopeRefs": [
+        "SCOPE-CR-QUEUE-003"
+      ],
+      "propagationEdges": [
+        {
+          "fromScopeRef": "SCOPE-CR-SERVICE-002",
+          "toScopeRef": "SCOPE-CR-QUEUE-003",
+          "observedAt": "2026-10-02T00:13:00Z",
+          "evidenceRefs": [
+            "EV-CR-PROPAGATION-001"
+          ]
+        }
+      ],
+      "affectedScopeCount": 3,
+      "unexpectedScopeCount": 1,
+      "containmentBoundaryRefs": [
+        "BOUNDARY-CR-QUEUE-ISOLATION"
+      ],
+      "containmentState": "partially-contained",
+      "sharedResourceSaturationObserved": true,
+      "commonModeFailureObserved": true,
+      "evidenceRefs": [
+        "EV-CR-BLAST-001"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticContainmentClaim": false,
+      "interpretation": "blast-radius-observation-only-not-causality-systemic-safety-quality-containment-effectiveness-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-052",
+        "GTR-CR-054",
+        "GTR-CR-055"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "distributedInterventionAssessments": [
+    {
+      "id": "DIA-CR-001",
+      "title": "Illustrative distributed intervention assessment",
+      "policyRef": "DIP-CR-001",
+      "coordinationRunRefs": [
+        "ICR-CR-001"
+      ],
+      "blastRadiusObservationRefs": [
+        "BRO-CR-001"
+      ],
+      "coordinationRunCount": 1,
+      "verifiedCoordinationRunCount": 0,
+      "authorizedRunCount": 1,
+      "orderedRunCount": 1,
+      "conflictRunCount": 1,
+      "unresolvedConflictCount": 1,
+      "containedObservationCount": 0,
+      "scopeExceededCount": 1,
+      "saturatedResourceCount": 1,
+      "commonModeFailureCount": 1,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "activityCountIsQuality": false,
+      "automaticOperationalDecision": false,
+      "interpretation": "distributed-intervention-evidence-only-not-systemic-safety-causality-quality-coordination-success-containment-effectiveness-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-052",
+        "GTR-CR-053",
+        "GTR-CR-054",
+        "GTR-CR-055",
+        "GTR-CR-056"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "dependencyDiversityPolicies": [
+    {
+      "id": "DDP-CR-001",
+      "title": "Illustrative recovery dependency diversity policy",
+      "sourceDistributedInterventionPolicyRef": "DIP-CR-001",
+      "minimumRecoveryPathCount": 2,
+      "minimumIndependentPathCount": 1,
+      "maximumCriticalSharedDependencyCount": 0,
+      "independenceEvidenceRequired": true,
+      "observedFailoverRequired": true,
+      "failClosedOnUnverifiedIndependence": true,
+      "reviewedBy": [
+        "quality-governance-owner",
+        "incident-response-owner"
+      ],
+      "inferenceBoundary": "dependency-diversity-evidence-only-not-independence-causality-recovery-effectiveness-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "recoveryDependencyGraphs": [
+    {
+      "id": "RDG-CR-001",
+      "title": "Illustrative correlated recovery dependency graph",
+      "policyRef": "DDP-CR-001",
+      "coordinationRunRef": "ICR-CR-001",
+      "dependencyNodes": [
+        {
+          "id": "DEP-CR-MODEL",
+          "dependencyKind": "model",
+          "critical": true,
+          "evidenceRefs": [
+            "EV-CR-DEPENDENCY-MODEL"
+          ]
+        },
+        {
+          "id": "DEP-CR-QUEUE",
+          "dependencyKind": "queue",
+          "critical": true,
+          "evidenceRefs": [
+            "EV-CR-DEPENDENCY-QUEUE"
+          ]
+        },
+        {
+          "id": "DEP-CR-MANUAL",
+          "dependencyKind": "operator",
+          "critical": false,
+          "evidenceRefs": [
+            "EV-CR-DEPENDENCY-MANUAL"
+          ]
+        }
+      ],
+      "dependencyEdges": [
+        {
+          "pathRef": "RPATH-CR-PRIMARY",
+          "dependencyRef": "DEP-CR-MODEL",
+          "requiredForRecovery": true,
+          "evidenceRefs": [
+            "EV-CR-PATH-PRIMARY"
+          ]
+        },
+        {
+          "pathRef": "RPATH-CR-PRIMARY",
+          "dependencyRef": "DEP-CR-QUEUE",
+          "requiredForRecovery": true,
+          "evidenceRefs": [
+            "EV-CR-PATH-PRIMARY"
+          ]
+        },
+        {
+          "pathRef": "RPATH-CR-FALLBACK",
+          "dependencyRef": "DEP-CR-MODEL",
+          "requiredForRecovery": true,
+          "evidenceRefs": [
+            "EV-CR-PATH-FALLBACK"
+          ]
+        },
+        {
+          "pathRef": "RPATH-CR-FALLBACK",
+          "dependencyRef": "DEP-CR-MANUAL",
+          "requiredForRecovery": true,
+          "evidenceRefs": [
+            "EV-CR-PATH-FALLBACK"
+          ]
+        }
+      ],
+      "recoveryPaths": [
+        {
+          "id": "RPATH-CR-PRIMARY",
+          "role": "primary",
+          "dependencyRefs": [
+            "DEP-CR-MODEL",
+            "DEP-CR-QUEUE"
+          ],
+          "independenceClaim": "unverified",
+          "independenceEvidenceRefs": [],
+          "activationAuthorityRole": "service-owner"
+        },
+        {
+          "id": "RPATH-CR-FALLBACK",
+          "role": "fallback",
+          "dependencyRefs": [
+            "DEP-CR-MODEL",
+            "DEP-CR-MANUAL"
+          ],
+          "independenceClaim": "not-independent",
+          "independenceEvidenceRefs": [
+            "EV-CR-SHARED-MODEL"
+          ],
+          "activationAuthorityRole": "incident-commander"
+        }
+      ],
+      "sharedDependencyRefs": [
+        "DEP-CR-MODEL"
+      ],
+      "criticalSharedDependencyCount": 1,
+      "independentPathCount": 0,
+      "commonCauseRefs": [
+        "COMMON-CAUSE-CR-SAME-MODEL"
+      ],
+      "evidenceStatus": "example-only",
+      "qifSelectedRecoveryPath": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-057",
+        "GTR-CR-058",
+        "GTR-CR-059"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "recoveryPathTrials": [
+    {
+      "id": "RPT-CR-001",
+      "title": "Illustrative fallback activation trial",
+      "policyRef": "DDP-CR-001",
+      "dependencyGraphRef": "RDG-CR-001",
+      "primaryPathRef": "RPATH-CR-PRIMARY",
+      "fallbackPathRef": "RPATH-CR-FALLBACK",
+      "triggerRef": "TRIGGER-CR-PRIMARY-UNAVAILABLE",
+      "requiredPrerequisiteRefs": [
+        "PREREQ-CR-AUTHORITY",
+        "PREREQ-CR-MANUAL-CAPACITY",
+        "PREREQ-CR-INDEPENDENT-MODEL"
+      ],
+      "satisfiedPrerequisiteRefs": [
+        "PREREQ-CR-AUTHORITY",
+        "PREREQ-CR-MANUAL-CAPACITY"
+      ],
+      "failedPrerequisiteRefs": [
+        "PREREQ-CR-INDEPENDENT-MODEL"
+      ],
+      "executedSwitch": false,
+      "switchAuthorityEvidenceRefs": [],
+      "sharedFailureObserved": true,
+      "recoveryCompleted": false,
+      "externalizedEvidenceRefs": [
+        "EV-CR-FAILOVER-TRIAL"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticRecoveryClaim": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-057",
+        "GTR-CR-058",
+        "GTR-CR-060"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "correlatedRecoveryAssessments": [
+    {
+      "id": "CRA-CR-001",
+      "title": "Illustrative correlated recovery assessment",
+      "policyRef": "DDP-CR-001",
+      "dependencyGraphRefs": [
+        "RDG-CR-001"
+      ],
+      "recoveryPathTrialRefs": [
+        "RPT-CR-001"
+      ],
+      "graphCount": 1,
+      "verifiedGraphCount": 0,
+      "pathCount": 2,
+      "independentPathCount": 0,
+      "criticalSharedDependencyCount": 1,
+      "trialCount": 1,
+      "verifiedTrialCount": 0,
+      "successfulFailoverCount": 0,
+      "sharedFailureCount": 1,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "activityCountIsQuality": false,
+      "automaticOperationalDecision": false,
+      "interpretation": "correlated-recovery-evidence-only-not-independence-causality-recovery-effectiveness-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-057",
+        "GTR-CR-058",
+        "GTR-CR-059",
+        "GTR-CR-060",
+        "GTR-CR-061"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "durableRecoveryPolicies": [
+    {
+      "id": "DRP-CR-001",
+      "title": "Illustrative durable recovery and retry safety policy",
+      "sourceDependencyDiversityPolicyRef": "DDP-CR-001",
+      "maximumRetryAttempts": 2,
+      "checkpointFreshnessMinutes": 15,
+      "completedEffectCheckRequired": true,
+      "idempotencyKeyRequired": true,
+      "rehydrationIdentityRequired": true,
+      "resumeAuthorityRequired": true,
+      "failClosedOnUnknownEffects": true,
+      "reviewedBy": [
+        "quality-governance-owner",
+        "incident-response-owner",
+        "security-owner"
+      ],
+      "inferenceBoundary": "durable-recovery-evidence-only-not-state-truth-effect-completion-recovery-safety-quality-retry-authorization-or-authority",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "recoveryStateSnapshots": [
+    {
+      "id": "RSS-CR-001",
+      "title": "Illustrative stale and identity-mismatched recovery snapshot",
+      "policyRef": "DRP-CR-001",
+      "recoveryPathRef": "RPATH-CR-FALLBACK",
+      "capturedAt": "2026-10-16T00:00:00Z",
+      "resumeAttemptedAt": "2026-10-16T00:20:00Z",
+      "stateArtifactRef": "STATE-CR-CHECKPOINT-001",
+      "stateArtifactDigest": "sha256:illustrative-not-empirical",
+      "checkpointAgeMinutes": 20,
+      "checkpointFresh": false,
+      "rehydratedActorRef": "ACTOR-CR-REHYDRATED-B",
+      "expectedActorRef": "ACTOR-CR-ORIGINAL-A",
+      "identityMatched": false,
+      "completedEffectRefs": [
+        "EFFECT-CR-NOTIFY-001"
+      ],
+      "pendingEffectRefs": [
+        "EFFECT-CR-ROLLBACK-001"
+      ],
+      "unknownEffectRefs": [
+        "EFFECT-CR-AUDIT-001"
+      ],
+      "evidenceRefs": [
+        "EV-CR-SNAPSHOT-001",
+        "EV-CR-EFFECT-LEDGER-001"
+      ],
+      "evidenceStatus": "example-only",
+      "qifResumedExecution": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-062",
+        "GTR-CR-063",
+        "GTR-CR-064",
+        "GTR-CR-065"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "retryExecutionRecords": [
+    {
+      "id": "RER-CR-001",
+      "title": "Illustrative blocked retry with duplicate-effect and budget risk",
+      "policyRef": "DRP-CR-001",
+      "snapshotRef": "RSS-CR-001",
+      "idempotencyKey": "workflow-001:recovery-rollback:v1",
+      "attemptNumber": 3,
+      "retryBudgetExceeded": true,
+      "completedEffectChecks": [
+        "EFFECT-CR-NOTIFY-001"
+      ],
+      "skippedCompletedEffectRefs": [],
+      "retriedEffectRefs": [
+        "EFFECT-CR-NOTIFY-001",
+        "EFFECT-CR-ROLLBACK-001"
+      ],
+      "duplicateEffectRefs": [
+        "EFFECT-CR-NOTIFY-001"
+      ],
+      "unresolvedEffectRefs": [
+        "EFFECT-CR-AUDIT-001"
+      ],
+      "resumeAuthorityRole": "incident-commander",
+      "resumeAuthorityEvidenceRefs": [
+        "EV-CR-RESUME-AUTHORITY-001"
+      ],
+      "executionState": "blocked",
+      "evidenceRefs": [
+        "EV-CR-RETRY-PLAN-001"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticRetryDecision": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-062",
+        "GTR-CR-065",
+        "GTR-CR-066",
+        "GTR-CR-067"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "durableRecoveryAssessments": [
+    {
+      "id": "DRA-CR-001",
+      "title": "Illustrative durable recovery safety assessment",
+      "policyRef": "DRP-CR-001",
+      "snapshotRefs": [
+        "RSS-CR-001"
+      ],
+      "retryExecutionRefs": [
+        "RER-CR-001"
+      ],
+      "snapshotCount": 1,
+      "verifiedSnapshotCount": 0,
+      "freshSnapshotCount": 0,
+      "identityMatchedCount": 0,
+      "retryCount": 1,
+      "verifiedRetryCount": 0,
+      "authorizedRetryCount": 1,
+      "duplicateEffectCount": 1,
+      "unknownEffectCount": 1,
+      "budgetExceededCount": 1,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "activityCountIsQuality": false,
+      "automaticOperationalDecision": false,
+      "interpretation": "durable-recovery-evidence-only-not-state-truth-effect-completion-recovery-safety-quality-retry-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-062",
+        "GTR-CR-063",
+        "GTR-CR-064",
+        "GTR-CR-065",
+        "GTR-CR-066",
+        "GTR-CR-067",
+        "GTR-CR-068"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "recoveryObservationPolicies": [
+    {
+      "id": "ROP-CR-001",
+      "title": "Illustrative delayed-effect observation policy",
+      "sourceDurableRecoveryPolicyRef": "DRP-CR-001",
+      "minimumObservationMinutes": 30,
+      "minimumObservationCount": 3,
+      "effectReconciliationRequired": true,
+      "failClosedOnShortWindow": true,
+      "failClosedOnUnresolvedEffects": true,
+      "reviewedBy": [
+        "quality-governance-owner",
+        "incident-response-owner",
+        "service-owner"
+      ],
+      "inferenceBoundary": "recovery-observation-evidence-only-not-effect-truth-observation-completeness-causality-recovery-safety-quality-closure-authorization-or-authority",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "recoveryObservationWindows": [
+    {
+      "id": "ROW-CR-001",
+      "title": "Illustrative shortened post-retry observation window",
+      "policyRef": "ROP-CR-001",
+      "snapshotRef": "RSS-CR-001",
+      "retryExecutionRef": "RER-CR-001",
+      "startedAt": "2026-10-16T00:25:00Z",
+      "plannedEndAt": "2026-10-16T00:55:00Z",
+      "actualEndAt": "2026-10-16T00:50:00Z",
+      "plannedDurationMinutes": 30,
+      "observedDurationMinutes": 25,
+      "windowSatisfied": false,
+      "monitoredEffectRefs": [
+        "EFFECT-CR-NOTIFY-001",
+        "EFFECT-CR-ROLLBACK-001",
+        "EFFECT-CR-AUDIT-001"
+      ],
+      "observationRefs": [
+        "EOB-CR-001",
+        "EOB-CR-002",
+        "EOB-CR-003"
+      ],
+      "evidenceRefs": [
+        "EV-CR-OBSERVATION-WINDOW-001"
+      ],
+      "evidenceStatus": "example-only",
+      "qifEndedObservation": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-069",
+        "GTR-CR-070"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "effectObservations": [
+    {
+      "id": "EOB-CR-001",
+      "title": "Illustrative initial external-effect observation",
+      "windowRef": "ROW-CR-001",
+      "observedAt": "2026-10-16T00:25:00Z",
+      "sequence": 1,
+      "effectStates": [
+        {
+          "effectRef": "EFFECT-CR-NOTIFY-001",
+          "state": "completed",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-NOTIFY-001"
+          ]
+        },
+        {
+          "effectRef": "EFFECT-CR-ROLLBACK-001",
+          "state": "pending",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-ROLLBACK-001"
+          ]
+        },
+        {
+          "effectRef": "EFFECT-CR-AUDIT-001",
+          "state": "absent",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-AUDIT-001"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "EV-CR-OBSERVATION-001"
+      ],
+      "evidenceStatus": "example-only",
+      "qifInferredExternalState": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-069"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "EOB-CR-002",
+      "title": "Illustrative delayed rollback completion observation",
+      "windowRef": "ROW-CR-001",
+      "observedAt": "2026-10-16T00:35:00Z",
+      "sequence": 2,
+      "effectStates": [
+        {
+          "effectRef": "EFFECT-CR-NOTIFY-001",
+          "state": "completed",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-NOTIFY-002"
+          ]
+        },
+        {
+          "effectRef": "EFFECT-CR-ROLLBACK-001",
+          "state": "completed",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-ROLLBACK-002"
+          ]
+        },
+        {
+          "effectRef": "EFFECT-CR-AUDIT-001",
+          "state": "absent",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-AUDIT-002"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "EV-CR-OBSERVATION-002"
+      ],
+      "evidenceStatus": "example-only",
+      "qifInferredExternalState": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-069"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "EOB-CR-003",
+      "title": "Illustrative final unresolved audit-effect observation",
+      "windowRef": "ROW-CR-001",
+      "observedAt": "2026-10-16T00:50:00Z",
+      "sequence": 3,
+      "effectStates": [
+        {
+          "effectRef": "EFFECT-CR-NOTIFY-001",
+          "state": "completed",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-NOTIFY-003"
+          ]
+        },
+        {
+          "effectRef": "EFFECT-CR-ROLLBACK-001",
+          "state": "completed",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-ROLLBACK-003"
+          ]
+        },
+        {
+          "effectRef": "EFFECT-CR-AUDIT-001",
+          "state": "unknown",
+          "evidenceRefs": [
+            "EV-CR-EFFECT-AUDIT-003"
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        "EV-CR-OBSERVATION-003"
+      ],
+      "evidenceStatus": "example-only",
+      "qifInferredExternalState": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-069"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "delayedEffectReconciliations": [
+    {
+      "id": "DER-CR-001",
+      "title": "Illustrative delayed-effect reconciliation",
+      "policyRef": "ROP-CR-001",
+      "windowRef": "ROW-CR-001",
+      "snapshotRef": "RSS-CR-001",
+      "observationRefs": [
+        "EOB-CR-001",
+        "EOB-CR-002",
+        "EOB-CR-003"
+      ],
+      "initialOpenEffectRefs": [
+        "EFFECT-CR-ROLLBACK-001",
+        "EFFECT-CR-AUDIT-001"
+      ],
+      "delayedCompletedEffectRefs": [
+        "EFFECT-CR-ROLLBACK-001"
+      ],
+      "unresolvedEffectRefs": [
+        "EFFECT-CR-AUDIT-001"
+      ],
+      "conflictingEffectRefs": [],
+      "closureDecision": "blocked",
+      "evidenceStatus": "example-only",
+      "automaticCompensationDecision": false,
+      "qifClosedRecovery": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-069",
+        "GTR-CR-071",
+        "GTR-CR-072"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "recoveryObservationAssessments": [
+    {
+      "id": "ROA-CR-001",
+      "title": "Illustrative recovery observation assessment",
+      "policyRef": "ROP-CR-001",
+      "windowRefs": [
+        "ROW-CR-001"
+      ],
+      "reconciliationRefs": [
+        "DER-CR-001"
+      ],
+      "windowCount": 1,
+      "verifiedWindowCount": 0,
+      "satisfiedWindowCount": 0,
+      "observationCount": 3,
+      "verifiedObservationCount": 0,
+      "delayedEffectCount": 1,
+      "unresolvedEffectCount": 1,
+      "conflictingEffectCount": 0,
+      "blockedClosureCount": 1,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "insufficient-data",
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "activityCountIsQuality": false,
+      "automaticOperationalDecision": false,
+      "interpretation": "recovery-observation-evidence-only-not-effect-truth-observation-completeness-causality-recovery-safety-quality-closure-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-069",
+        "GTR-CR-070",
+        "GTR-CR-071",
+        "GTR-CR-072",
+        "GTR-CR-073"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "empiricalPilotProtocols": [
+    {
+      "id": "EPP-CR-001",
+      "title": "Illustrative cross-domain empirical calibration pilot protocol",
+      "registeredAt": "2026-10-18T00:00:00Z",
+      "domainRefs": [
+        "EPD-CR-SOFTWARE-001",
+        "EPD-CR-SUPPORT-001"
+      ],
+      "minimumDomainCount": 2,
+      "minimumNonSoftwareDomainCount": 1,
+      "minimumVerifiedOutcomeCount": 10,
+      "acceptedEvidenceOriginKinds": [
+        "observed-operational",
+        "historical-record"
+      ],
+      "prospectiveRegistrationRequired": true,
+      "outcomeDefinitionFrozenBeforeDecision": true,
+      "missingOutcomeHandling": "preserve-as-missing",
+      "excludedOutcomeHandling": "preserve-with-rationale",
+      "reviewedBy": [
+        "pilot-governance-owner",
+        "independent-method-reviewer"
+      ],
+      "qifCollectsOperationalData": false,
+      "inferenceBoundary": "empirical-pilot-structure-only-not-study-validity-representativeness-causality-calibration-truth-quality-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-074",
+        "GTR-CR-075"
+      ],
+      "status": "active"
+    }
+  ],
+  "empiricalPilotDomains": [
+    {
+      "id": "EPD-CR-SOFTWARE-001",
+      "title": "Software release decision pilot domain",
+      "protocolRef": "EPP-CR-001",
+      "domain": "software-development",
+      "domainClass": "software",
+      "targetPopulation": "Accountable release decisions with a declared post-release observation window",
+      "decisionType": "quality-gate release disposition",
+      "outcomeDefinition": "Whether the protected Quality Intents held throughout the registered post-release window",
+      "observationWindow": "registered per enrollment before the release decision",
+      "outcomeEvidenceRequirements": [
+        "timestamped operational outcome record",
+        "independent evidence-origin verification"
+      ],
+      "accountableOwner": "software-pilot-owner",
+      "reviewedBy": [
+        "pilot-governance-owner"
+      ],
+      "evidenceRefs": [
+        "docs/qif-v0.7.0-empirical-pilot.md"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticDomainAdequacyDecision": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-074"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "EPD-CR-SUPPORT-001",
+      "title": "Customer support decision pilot domain",
+      "protocolRef": "EPP-CR-001",
+      "domain": "customer-support",
+      "domainClass": "non-software",
+      "targetPopulation": "Accountable support-operation decisions with measurable customer-impact outcomes",
+      "decisionType": "operational quality disposition",
+      "outcomeDefinition": "Whether the declared customer-impact loss boundary remained protected during the registered window",
+      "observationWindow": "registered per enrollment before the operational decision",
+      "outcomeEvidenceRequirements": [
+        "timestamped case outcome",
+        "stakeholder-impact evidence",
+        "independent evidence-origin verification"
+      ],
+      "accountableOwner": "support-pilot-owner",
+      "reviewedBy": [
+        "pilot-governance-owner",
+        "support-quality-owner"
+      ],
+      "evidenceRefs": [
+        "docs/qif-v0.7.0-empirical-pilot.md"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticDomainAdequacyDecision": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-074"
+      ],
+      "status": "planned"
+    }
+  ],
+  "empiricalPilotEnrollments": [
+    {
+      "id": "EPE-CR-001",
+      "title": "Illustrative prospectively ordered support decision enrollment",
+      "protocolRef": "EPP-CR-001",
+      "domainRef": "EPD-CR-SUPPORT-001",
+      "sourcePackageRef": "PKGREF-CR-001",
+      "gateDecisionRef": "QGD-QG-001",
+      "registeredAt": "2026-10-18T01:00:00Z",
+      "decisionAt": "2026-10-18T02:00:00Z",
+      "prospectiveOrderSatisfied": true,
+      "forecastProbability": 0.7,
+      "confidenceMeaning": "Probability that the registered support loss boundary remains protected throughout the declared observation window.",
+      "outcomeDefinitionSnapshot": "Protected support outcome holds throughout the registered seven-day window without crossing the financial-limit loss boundary.",
+      "observationDueAt": "2026-10-25T02:00:00Z",
+      "enrollmentState": "enrolled",
+      "exclusionRationale": "",
+      "evidenceRefs": [
+        "examples/quality-gate-package.json#QGD-QG-001"
+      ],
+      "evidenceStatus": "example-only",
+      "qifSelectedParticipant": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-074"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "empiricalOutcomeObservations": [
+    {
+      "id": "EPO-CR-001",
+      "title": "Illustrative outcome awaiting collection",
+      "enrollmentRef": "EPE-CR-001",
+      "recordedAt": "2026-10-18T02:00:00Z",
+      "observationState": "planned",
+      "observedAt": null,
+      "outcomeClass": "not-observed",
+      "outcomeValue": null,
+      "evidenceOriginRef": null,
+      "evidenceRefs": [],
+      "evidenceStatus": "not-collected",
+      "observationWindowClosed": false,
+      "missingReason": "",
+      "exclusionRationale": "",
+      "automaticOutcomeInference": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-074"
+      ],
+      "status": "draft"
+    }
+  ],
+  "empiricalPilotAssessments": [
+    {
+      "id": "EPA-CR-001",
+      "title": "Illustrative empirical pilot readiness assessment",
+      "protocolRef": "EPP-CR-001",
+      "domainRefs": [
+        "EPD-CR-SOFTWARE-001",
+        "EPD-CR-SUPPORT-001"
+      ],
+      "enrollmentRefs": [
+        "EPE-CR-001"
+      ],
+      "observationRefs": [
+        "EPO-CR-001"
+      ],
+      "domainCount": 2,
+      "nonSoftwareDomainCount": 1,
+      "domainCoverageSatisfied": true,
+      "enrollmentCount": 1,
+      "prospectiveEnrollmentCount": 1,
+      "plannedOutcomeCount": 0,
+      "observingOutcomeCount": 0,
+      "completedOutcomeCount": 0,
+      "missingOutcomeCount": 0,
+      "excludedOutcomeCount": 0,
+      "verifiedEmpiricalOutcomeCount": 0,
+      "dataSufficiency": "insufficient",
+      "pilotState": "not-started",
+      "reviewedBy": [
+        "pilot-governance-owner"
+      ],
+      "activityCountIsQuality": false,
+      "automaticCalibrationClaim": false,
+      "interpretation": "empirical-pilot-structure-only-not-study-validity-representativeness-causality-calibration-truth-quality-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-074",
+        "GTR-CR-075"
+      ],
+      "status": "reviewed"
+    }
+  ]
+}

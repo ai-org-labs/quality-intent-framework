@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-18T04:36:32.187Z",
+  "problem_statement_id": "PST-MVDC2FY3-DS2WJW",
+  "affected_party": "QIF adopters and accountable reviewers beginning empirical calibration",
+  "actual_problem": "QIF can structure calibration reports but does not yet provide a prospective pilot contract that prevents planned, observing, missing, excluded, and completed outcome evidence from being conflated",
+  "why_it_matters": "Without a prospective pilot boundary, example data or incomplete observations can be mistaken for empirical support and software-only evidence can overstate domain generality",
+  "why_now": "v0.6.51 completes the pre-pilot evidence and recovery controls, while current evaluation practice emphasizes production monitoring, real outcomes, and human calibration",
+  "evidence_refs": [
+    "docs/qif-roadmap.md",
+    "examples/calibration-report-package.json"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVDC1WPD-CQODC3"
+}

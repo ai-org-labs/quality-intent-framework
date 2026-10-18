@@ -210,6 +210,11 @@ function validatePackage(pkg, packagePath) {
   const effectObservations = requiredArray(pkg, "effectObservations");
   const delayedEffectReconciliations = requiredArray(pkg, "delayedEffectReconciliations");
   const recoveryObservationAssessments = requiredArray(pkg, "recoveryObservationAssessments");
+  const empiricalPilotProtocols = requiredArray(pkg, "empiricalPilotProtocols");
+  const empiricalPilotDomains = requiredArray(pkg, "empiricalPilotDomains");
+  const empiricalPilotEnrollments = requiredArray(pkg, "empiricalPilotEnrollments");
+  const empiricalOutcomeObservations = requiredArray(pkg, "empiricalOutcomeObservations");
+  const empiricalPilotAssessments = requiredArray(pkg, "empiricalPilotAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -279,6 +284,10 @@ function validatePackage(pkg, packagePath) {
   const recoveryObservationWindowIndex = indexById(recoveryObservationWindows, `${packagePath}:recoveryObservationWindows`);
   const effectObservationIndex = indexById(effectObservations, `${packagePath}:effectObservations`);
   const delayedEffectReconciliationIndex = indexById(delayedEffectReconciliations, `${packagePath}:delayedEffectReconciliations`);
+  const empiricalPilotProtocolIndex = indexById(empiricalPilotProtocols, `${packagePath}:empiricalPilotProtocols`);
+  const empiricalPilotDomainIndex = indexById(empiricalPilotDomains, `${packagePath}:empiricalPilotDomains`);
+  const empiricalPilotEnrollmentIndex = indexById(empiricalPilotEnrollments, `${packagePath}:empiricalPilotEnrollments`);
+  const empiricalOutcomeObservationIndex = indexById(empiricalOutcomeObservations, `${packagePath}:empiricalOutcomeObservations`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -2360,6 +2369,107 @@ function validatePackage(pkg, packagePath) {
     if (!sufficient && !types.has("recovery-observation-assessment-insufficient")) errors.push(`${assessment.id} insufficient evidence requires a recovery-observation-assessment-insufficient governance trigger.`);
   }
 
+  for (const protocol of empiricalPilotProtocols) {
+    if (!Number.isInteger(protocol.minimumDomainCount) || protocol.minimumDomainCount < 2) errors.push(`${protocol.id} minimumDomainCount must be at least 2.`);
+    if (!Number.isInteger(protocol.minimumNonSoftwareDomainCount) || protocol.minimumNonSoftwareDomainCount < 1) errors.push(`${protocol.id} minimumNonSoftwareDomainCount must be at least 1.`);
+    if (!Number.isInteger(protocol.minimumVerifiedOutcomeCount) || protocol.minimumVerifiedOutcomeCount < 1) errors.push(`${protocol.id} minimumVerifiedOutcomeCount must be at least 1.`);
+    if (!sameSet(protocol.acceptedEvidenceOriginKinds, [...empiricalKinds])) errors.push(`${protocol.id} acceptedEvidenceOriginKinds must exactly contain observed-operational and historical-record.`);
+    if (protocol.prospectiveRegistrationRequired !== true || protocol.outcomeDefinitionFrozenBeforeDecision !== true) errors.push(`${protocol.id} must require prospective registration and a pre-decision outcome-definition freeze.`);
+    if (protocol.qifCollectsOperationalData !== false) errors.push(`${protocol.id} qifCollectsOperationalData must be false.`);
+    const domains = empiricalPilotDomains.filter((item) => item.protocolRef === protocol.id);
+    if (!sameSet(protocol.domainRefs, domains.map((item) => item.id))) errors.push(`${protocol.id} domainRefs must exactly match linked empirical pilot domains.`);
+  }
+
+  for (const domain of empiricalPilotDomains) {
+    ref(empiricalPilotProtocolIndex, domain.protocolRef, "empirical pilot protocol", domain.id);
+    for (const field of ["domain", "targetPopulation", "decisionType", "outcomeDefinition", "observationWindow", "accountableOwner"]) str(domain, field, domain.id);
+    if (!Array.isArray(domain.outcomeEvidenceRequirements) || domain.outcomeEvidenceRequirements.length === 0) errors.push(`${domain.id} outcomeEvidenceRequirements must include at least one requirement.`);
+    if (!Array.isArray(domain.reviewedBy) || domain.reviewedBy.length === 0) errors.push(`${domain.id} reviewedBy must include at least one accountable reviewer.`);
+    if (domain.automaticDomainAdequacyDecision !== false) errors.push(`${domain.id} automaticDomainAdequacyDecision must be false.`);
+    const types = new Set((domain.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", domain.id)?.triggerType));
+    if (domain.evidenceStatus !== "verified" && !types.has("empirical-pilot-evidence-not-collected")) errors.push(`${domain.id} non-verified domain evidence requires an empirical-pilot-evidence-not-collected governance trigger.`);
+  }
+
+  for (const enrollment of empiricalPilotEnrollments) {
+    const protocol = ref(empiricalPilotProtocolIndex, enrollment.protocolRef, "empirical pilot protocol", enrollment.id);
+    const domain = ref(empiricalPilotDomainIndex, enrollment.domainRef, "empirical pilot domain", enrollment.id);
+    const packageRef = ref(packageRefIndex, enrollment.sourcePackageRef, "source package", enrollment.id);
+    const source = loaded.get(enrollment.sourcePackageRef);
+    if (source && !source.decisions.has(enrollment.gateDecisionRef)) errors.push(`${enrollment.id} references missing gate decision: ${enrollment.gateDecisionRef}`);
+    if (domain && protocol && domain.protocolRef !== protocol.id) errors.push(`${enrollment.id} domain must belong to its protocol.`);
+    if (packageRef && packageRef.role !== "decision-outcome-source") errors.push(`${enrollment.id} source package must have decision-outcome-source role.`);
+    const registeredAt = Date.parse(enrollment.registeredAt);
+    const decisionAt = Date.parse(enrollment.decisionAt);
+    const dueAt = Date.parse(enrollment.observationDueAt);
+    const prospective = Number.isFinite(registeredAt) && Number.isFinite(decisionAt) && registeredAt <= decisionAt;
+    if (enrollment.prospectiveOrderSatisfied !== prospective) errors.push(`${enrollment.id} prospectiveOrderSatisfied must reproduce as ${prospective}.`);
+    if (Number.isFinite(decisionAt) && Number.isFinite(dueAt) && dueAt <= decisionAt) errors.push(`${enrollment.id} observationDueAt must be after decisionAt.`);
+    if (protocol && protocol.prospectiveRegistrationRequired && enrollment.enrollmentState === "enrolled" && !prospective) errors.push(`${enrollment.id} enrolled record must satisfy prospective registration order.`);
+    if (enrollment.enrollmentState === "enrolled" && enrollment.exclusionRationale !== "") errors.push(`${enrollment.id} enrolled record must have an empty exclusionRationale.`);
+    if (enrollment.enrollmentState !== "enrolled" && !enrollment.exclusionRationale) errors.push(`${enrollment.id} excluded or withdrawn record must include exclusionRationale.`);
+    if (enrollment.qifSelectedParticipant !== false) errors.push(`${enrollment.id} qifSelectedParticipant must be false.`);
+    const types = new Set((enrollment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", enrollment.id)?.triggerType));
+    if (enrollment.evidenceStatus !== "verified" && !types.has("empirical-pilot-evidence-not-collected")) errors.push(`${enrollment.id} non-verified enrollment evidence requires an empirical-pilot-evidence-not-collected governance trigger.`);
+    if (!prospective && !types.has("empirical-pilot-registration-invalid")) errors.push(`${enrollment.id} non-prospective registration requires an empirical-pilot-registration-invalid governance trigger.`);
+  }
+
+  for (const observation of empiricalOutcomeObservations) {
+    const enrollment = ref(empiricalPilotEnrollmentIndex, observation.enrollmentRef, "empirical pilot enrollment", observation.id);
+    const origin = observation.evidenceOriginRef ? ref(originIndex, observation.evidenceOriginRef, "evidence origin", observation.id) : null;
+    if (observation.automaticOutcomeInference !== false) errors.push(`${observation.id} automaticOutcomeInference must be false.`);
+    const completed = observation.observationState === "completed";
+    if (completed) {
+      if (!observation.observedAt || ![0, 1].includes(observation.outcomeValue) || observation.outcomeClass === "not-observed") errors.push(`${observation.id} completed observation must include observedAt, binary outcomeValue, and observed outcomeClass.`);
+      if (!observation.observationWindowClosed) errors.push(`${observation.id} completed observation must close its registered observation window.`);
+      if (!origin || !empiricalKinds.has(origin.originKind) || origin.status !== "verified" || observation.evidenceStatus !== "verified" || (observation.evidenceRefs || []).length === 0) errors.push(`${observation.id} completed observation requires verified empirical evidence origin and evidence refs.`);
+      if (enrollment?.enrollmentState !== "enrolled" || enrollment?.prospectiveOrderSatisfied !== true) errors.push(`${observation.id} completed observation requires a prospectively enrolled decision.`);
+    } else if (observation.outcomeClass !== "not-observed" || observation.outcomeValue !== null || observation.evidenceOriginRef !== null) {
+      errors.push(`${observation.id} non-completed observation must preserve outcomeClass not-observed with null value and origin.`);
+    }
+    if (observation.observationState === "missing" && !observation.missingReason) errors.push(`${observation.id} missing observation must include missingReason.`);
+    if (observation.observationState === "excluded" && !observation.exclusionRationale) errors.push(`${observation.id} excluded observation must include exclusionRationale.`);
+    const types = new Set((observation.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", observation.id)?.triggerType));
+    if (observation.evidenceStatus !== "verified" && !types.has("empirical-pilot-evidence-not-collected")) errors.push(`${observation.id} non-verified outcome evidence requires an empirical-pilot-evidence-not-collected governance trigger.`);
+    if (observation.observationState === "missing" && !types.has("empirical-pilot-outcome-missing")) errors.push(`${observation.id} missing outcome requires an empirical-pilot-outcome-missing governance trigger.`);
+  }
+
+  for (const assessment of empiricalPilotAssessments) {
+    const protocol = ref(empiricalPilotProtocolIndex, assessment.protocolRef, "empirical pilot protocol", assessment.id);
+    const domains = (assessment.domainRefs || []).map((id) => ref(empiricalPilotDomainIndex, id, "empirical pilot domain", assessment.id)).filter(Boolean);
+    const enrollments = (assessment.enrollmentRefs || []).map((id) => ref(empiricalPilotEnrollmentIndex, id, "empirical pilot enrollment", assessment.id)).filter(Boolean);
+    const observations = (assessment.observationRefs || []).map((id) => ref(empiricalOutcomeObservationIndex, id, "empirical outcome observation", assessment.id)).filter(Boolean);
+    if (protocol && !sameSet(assessment.domainRefs, protocol.domainRefs)) errors.push(`${assessment.id} domainRefs must exactly match protocol domainRefs.`);
+    if (!sameSet(observations.map((item) => item.enrollmentRef), assessment.enrollmentRefs)) errors.push(`${assessment.id} observations must exactly cover assessed enrollments.`);
+    const empiricalCompleted = observations.filter((item) => {
+      if (item.observationState !== "completed" || item.evidenceStatus !== "verified" || !item.evidenceOriginRef) return false;
+      const origin = originIndex.get(item.evidenceOriginRef);
+      return origin?.status === "verified" && empiricalKinds.has(origin.originKind);
+    });
+    const expected = {
+      domainCount: domains.length,
+      nonSoftwareDomainCount: domains.filter((item) => item.domainClass === "non-software").length,
+      enrollmentCount: enrollments.length,
+      prospectiveEnrollmentCount: enrollments.filter((item) => item.enrollmentState === "enrolled" && item.prospectiveOrderSatisfied).length,
+      plannedOutcomeCount: observations.filter((item) => item.observationState === "planned").length,
+      observingOutcomeCount: observations.filter((item) => item.observationState === "observing").length,
+      completedOutcomeCount: observations.filter((item) => item.observationState === "completed").length,
+      missingOutcomeCount: observations.filter((item) => item.observationState === "missing").length,
+      excludedOutcomeCount: observations.filter((item) => item.observationState === "excluded").length,
+      verifiedEmpiricalOutcomeCount: empiricalCompleted.length
+    };
+    for (const [field, value] of Object.entries(expected)) if (assessment[field] !== value) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const domainCoverage = !!protocol && expected.domainCount >= protocol.minimumDomainCount && expected.nonSoftwareDomainCount >= protocol.minimumNonSoftwareDomainCount;
+    if (assessment.domainCoverageSatisfied !== domainCoverage) errors.push(`${assessment.id} domainCoverageSatisfied must reproduce as ${domainCoverage}.`);
+    const sufficient = !!protocol && domainCoverage && expected.verifiedEmpiricalOutcomeCount >= protocol.minimumVerifiedOutcomeCount;
+    if (assessment.dataSufficiency !== (sufficient ? "sufficient" : "insufficient")) errors.push(`${assessment.id} dataSufficiency must reproduce as ${sufficient ? "sufficient" : "insufficient"}.`);
+    const pilotState = !domainCoverage ? "blocked" : sufficient ? "ready-for-calibration-analysis" : expected.observingOutcomeCount > 0 || expected.completedOutcomeCount > 0 ? "collecting" : "not-started";
+    if (assessment.pilotState !== pilotState) errors.push(`${assessment.id} pilotState must reproduce as ${pilotState}.`);
+    if (assessment.activityCountIsQuality !== false || assessment.automaticCalibrationClaim !== false) errors.push(`${assessment.id} must not treat activity counts as quality or make an automatic calibration claim.`);
+    const types = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (!domainCoverage && !types.has("empirical-pilot-domain-coverage-insufficient")) errors.push(`${assessment.id} insufficient domain coverage requires an empirical-pilot-domain-coverage-insufficient governance trigger.`);
+    if (!sufficient && !types.has("empirical-pilot-assessment-insufficient")) errors.push(`${assessment.id} insufficient empirical outcomes require an empirical-pilot-assessment-insufficient governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -2475,6 +2585,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that path count, vendor count, dependency diversity, failover execution, or absence of observed shared failure proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that dependency diversity proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that snapshot presence, retry count, idempotency-key presence, recorded effect state, or absence of detected duplicates proves state truth, effect completion, recovery safety, quality, retry authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that durable recovery evidence proves state truth, effect completion, recovery safety, quality, retry authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that observation duration, observation count, delayed-effect detection, reconciliation state, or absence of unresolved effects proves effect truth, observation completeness, causality, recovery safety, quality, closure authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that recovery observation evidence proves effect truth, completeness, causality, safety, quality, closure authorization, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that pilot domain count, enrollment count, prospective timing, outcome count, or readiness state proves study validity, representativeness, causality, calibration truth, quality, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that empirical pilot structure proves study validity, representativeness, causality, calibration truth, quality, authorization, or authority.`);
   }
 
   results.push({
@@ -2554,6 +2665,11 @@ function validatePackage(pkg, packagePath) {
       effectObservations: effectObservations.length,
       delayedEffectReconciliations: delayedEffectReconciliations.length,
       recoveryObservationAssessments: recoveryObservationAssessments.length,
+      empiricalPilotProtocols: empiricalPilotProtocols.length,
+      empiricalPilotDomains: empiricalPilotDomains.length,
+      empiricalPilotEnrollments: empiricalPilotEnrollments.length,
+      empiricalOutcomeObservations: empiricalOutcomeObservations.length,
+      empiricalPilotAssessments: empiricalPilotAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -2573,5 +2689,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, recovery dependency overlap, path membership, failover prerequisite partitioning, correlated recovery summaries, checkpoint age, rehydration identity equality, effect-state partitioning, retry-budget arithmetic, duplicate-effect intersection, durable recovery summaries, recovery observation durations, observation sequencing, delayed-effect reconciliation, closure-state reproduction, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, contamination freedom, observation completeness, resolution quality, intervention effectiveness, coordination success, containment effectiveness, recovery effectiveness, state truth, effect completion, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, recovery closure, retry or policy selection, authorization, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, recovery dependency overlap, path membership, failover prerequisite partitioning, correlated recovery summaries, checkpoint age, rehydration identity equality, effect-state partitioning, retry-budget arithmetic, duplicate-effect intersection, durable recovery summaries, recovery observation durations, observation sequencing, delayed-effect reconciliation, closure-state reproduction, prospective pilot registration, domain coverage, enrollment timing, outcome evidence state, empirical origin eligibility, pilot readiness arithmetic, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, study validity, contamination freedom, observation completeness, resolution quality, intervention effectiveness, coordination success, containment effectiveness, recovery effectiveness, state truth, effect completion, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, recovery closure, retry or policy selection, authorization, or decision authority."
 }, null, 2));

@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-18T04:36:32.470Z",
+  "alternative_analysis_id": "ALT-MVDC2G5Y-5RQ6WZ",
+  "subject_need": "Begin QIF empirical calibration without inventing operational evidence",
+  "alternative_solutions": [
+    "Add a prospective empirical pilot contract to calibration-report",
+    "Publish prose-only pilot guidance and defer executable enforcement"
+  ],
+  "non_solution_options": [
+    "Treat existing example calibration pairs as empirical"
+  ],
+  "defer_options": [
+    "Wait for a partner organization before defining the collection contract"
+  ],
+  "stop_options": [
+    "Do not release if the verifier can present planned or example-only evidence as empirical readiness"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVDC1WPD-CQODC3"
+}
