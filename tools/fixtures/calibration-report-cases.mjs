@@ -1249,19 +1249,82 @@ export const cases = [
     id:"empirical-pilot-missing-reason",rule:"missing outcome explanation",expect:"missing observation must include missingReason.",mutate:(pkg)=>{pkg.empiricalOutcomeObservations[0].observationState="missing";pkg.empiricalOutcomeObservations[0].governanceTriggerRefs.push("GTR-CR-075");}
   },
   {
-    id:"empirical-pilot-assessment-count",rule:"pilot assessment arithmetic",expect:"plannedOutcomeCount must reproduce as 1.",mutate:(pkg)=>{pkg.empiricalPilotAssessments[0].plannedOutcomeCount=0;}
+    id:"empirical-pilot-assessment-count",rule:"pilot assessment arithmetic",expect:"observingOutcomeCount must reproduce as 1.",mutate:(pkg)=>{pkg.empiricalPilotAssessments[0].observingOutcomeCount=0;}
   },
   {
     id:"empirical-pilot-domain-coverage",rule:"pilot domain coverage reproduction",expect:"domainCoverageSatisfied must reproduce as true.",mutate:(pkg)=>{pkg.empiricalPilotAssessments[0].domainCoverageSatisfied=false;}
   },
   {
-    id:"empirical-pilot-state",rule:"pilot state reproduction",expect:"pilotState must reproduce as not-started.",mutate:(pkg)=>{pkg.empiricalPilotAssessments[0].pilotState="ready-for-calibration-analysis";}
+    id:"empirical-pilot-state",rule:"pilot state reproduction",expect:"pilotState must reproduce as collecting.",mutate:(pkg)=>{pkg.empiricalPilotAssessments[0].pilotState="ready-for-calibration-analysis";}
   },
   {
     id:"empirical-pilot-assessment-trigger",rule:"insufficient pilot governance",expect:"insufficient empirical outcomes require an empirical-pilot-assessment-insufficient governance trigger.",mutate:(pkg)=>{pkg.empiricalPilotAssessments[0].governanceTriggerRefs=["GTR-CR-074"];}
   },
   {
     id:"empirical-pilot-boundary-overclaim",rule:"empirical pilot semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that empirical pilot structure proves study validity",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that pilot domain count"));}
+  },
+  {
+    id:"outcome-ledger-policies-not-array",rule:"outcome collection policies required",expect:"package outcomeCollectionPolicies must be an array.",mutate:(pkg)=>{pkg.outcomeCollectionPolicies=null;}
+  },
+  {
+    id:"outcome-ledger-revisions-not-array",rule:"outcome revisions required",expect:"package outcomeObservationRevisions must be an array.",mutate:(pkg)=>{pkg.outcomeObservationRevisions=null;}
+  },
+  {
+    id:"outcome-ledger-policy-protocol",rule:"ledger policy protocol resolution",expect:"references missing empirical pilot protocol",mutate:(pkg)=>{pkg.outcomeCollectionPolicies[0].protocolRef="EPP-NOPE-999";}
+  },
+  {
+    id:"outcome-ledger-policy-append-only",rule:"append-only policy",expect:"must require append-only revisions",mutate:(pkg)=>{pkg.outcomeCollectionPolicies[0].appendOnlyRequired=false;}
+  },
+  {
+    id:"outcome-ledger-policy-source-mutation",rule:"no source mutation",expect:"qifMutatesSourceRecords must be false.",mutate:(pkg)=>{pkg.outcomeCollectionPolicies[0].qifMutatesSourceRecords=true;}
+  },
+  {
+    id:"outcome-ledger-first-revision",rule:"initial revision boundary",expect:"first revision must be initial with null supersedesRevisionRef.",mutate:(pkg)=>{pkg.outcomeObservationRevisions[0].revisionType="state-transition";}
+  },
+  {
+    id:"outcome-ledger-supersession",rule:"contiguous revision supersession",expect:"must supersede the immediately preceding revision for the same observation.",mutate:(pkg)=>{pkg.outcomeObservationRevisions[2].supersedesRevisionRef="OOR-CR-001";}
+  },
+  {
+    id:"outcome-ledger-correction-backlink",rule:"source correction backlink",expect:"source-correction revision must link a correction that points back to it.",mutate:(pkg)=>{pkg.outcomeObservationRevisions[2].correctionRef="OSC-NOPE-999";}
+  },
+  {
+    id:"outcome-ledger-late-arrival",rule:"late arrival reproduction",expect:"lateArrival must reproduce as true.",mutate:(pkg)=>{pkg.outcomeObservationRevisions[2].recordedAt="2026-10-26T00:00:00Z";}
+  },
+  {
+    id:"outcome-ledger-revision-evidence-trigger",rule:"revision evidence governance",expect:"non-verified revision evidence requires an outcome-ledger-evidence-unverified governance trigger.",mutate:(pkg)=>{pkg.outcomeObservationRevisions[0].governanceTriggerRefs=[];}
+  },
+  {
+    id:"outcome-ledger-correction-observation",rule:"correction observation lineage",expect:"references missing empirical outcome observation",mutate:(pkg)=>{pkg.outcomeSourceCorrections[0].observationRef="EPO-NOPE-999";}
+  },
+  {
+    id:"outcome-ledger-correction-digests",rule:"correction value difference",expect:"originalValuesDigest and correctedValuesDigest must differ.",mutate:(pkg)=>{pkg.outcomeSourceCorrections[0].correctedValuesDigest=pkg.outcomeSourceCorrections[0].originalValuesDigest;}
+  },
+  {
+    id:"outcome-ledger-correction-source-mutation",rule:"correction preserves source",expect:"sourceRecordMutated must be false.",mutate:(pkg)=>{pkg.outcomeSourceCorrections[0].sourceRecordMutated=true;}
+  },
+  {
+    id:"outcome-ledger-custody-observation",rule:"custody revision closure",expect:"revisionRef must belong to its observation.",mutate:(pkg)=>{pkg.outcomeCustodyEvents[0].observationRef="EPO-NOPE-999";}
+  },
+  {
+    id:"outcome-ledger-custody-initial",rule:"initial custody source",expect:"first custody event must have null fromCustodian.",mutate:(pkg)=>{pkg.outcomeCustodyEvents[0].fromCustodian="unknown";}
+  },
+  {
+    id:"outcome-ledger-custody-authority",rule:"no QIF custody authority",expect:"qifCustodyAuthority must be false.",mutate:(pkg)=>{pkg.outcomeCustodyEvents[0].qifCustodyAuthority=true;}
+  },
+  {
+    id:"outcome-ledger-assessment-count",rule:"ledger assessment arithmetic",expect:"revisionCount must reproduce as 3.",mutate:(pkg)=>{pkg.outcomeLedgerAssessments[0].revisionCount=2;}
+  },
+  {
+    id:"outcome-ledger-latest-revision",rule:"latest revision closure",expect:"latestRevisionRefs must exactly match the latest revision",mutate:(pkg)=>{pkg.outcomeLedgerAssessments[0].latestRevisionRefs=["OOR-CR-002"];}
+  },
+  {
+    id:"outcome-ledger-snapshot-alignment",rule:"latest snapshot alignment",expect:"snapshotMismatchCount must reproduce as 1.",mutate:(pkg)=>{pkg.empiricalOutcomeObservations[0].recordedAt="2026-10-19T01:01:00Z";}
+  },
+  {
+    id:"outcome-ledger-assessment-trigger",rule:"insufficient ledger governance",expect:"insufficient ledger evidence requires an outcome-ledger-assessment-insufficient governance trigger.",mutate:(pkg)=>{pkg.outcomeLedgerAssessments[0].governanceTriggerRefs=["GTR-CR-076"];}
+  },
+  {
+    id:"outcome-ledger-boundary-overclaim",rule:"outcome ledger semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that outcome ledger structure proves source truth",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that revision count"));}
   }
 ];
 

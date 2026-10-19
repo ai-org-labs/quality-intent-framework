@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Provide a prospective, domain-general Empirical Calibration Pilot Contract that preserves evidence state and blocks example-only or incomplete observations from being interpreted as empirical readiness",
-  "updated_at": "2026-10-18T04:36:53.309Z",
+  "content": "Provide an append-only, domain-general outcome observation ledger that preserves historical revisions, late-arrival status, source corrections, custody transitions, and current-snapshot alignment without mutating prospective enrollment or claiming evidence truth",
+  "updated_at": "2026-10-19T04:37:21.611Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVDC1RDA-JW5Y6C",
-  "source_decision_record_id": "DEC-MVDC2W8Q-B5URBP",
+  "source_session_id": "SESS-MVERHQS7-DSGHQE",
+  "source_decision_record_id": "DEC-MVERJCQX-AIX9H3",
   "declared_complete_at": null
 }

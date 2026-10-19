@@ -85,6 +85,11 @@
     "empiricalPilotEnrollments",
     "empiricalOutcomeObservations",
     "empiricalPilotAssessments",
+    "outcomeCollectionPolicies",
+    "outcomeObservationRevisions",
+    "outcomeSourceCorrections",
+    "outcomeCustodyEvents",
+    "outcomeLedgerAssessments",
     "governanceTriggers",
     "verifierBoundary"
   ],
@@ -626,6 +631,31 @@
       "type": "array",
       "minItems": 1,
       "items": {"$ref": "#/$defs/empiricalPilotAssessment"}
+    },
+    "outcomeCollectionPolicies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/outcomeCollectionPolicy"}
+    },
+    "outcomeObservationRevisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/outcomeObservationRevision"}
+    },
+    "outcomeSourceCorrections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/outcomeSourceCorrection"}
+    },
+    "outcomeCustodyEvents": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/outcomeCustodyEvent"}
+    },
+    "outcomeLedgerAssessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/outcomeLedgerAssessment"}
     }
   },
   "$defs": {
@@ -8548,6 +8578,144 @@
         "activityCountIsQuality": {"const": false},
         "automaticCalibrationClaim": {"const": false},
         "interpretation": {"const": "empirical-pilot-structure-only-not-study-validity-representativeness-causality-calibration-truth-quality-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "outcomeCollectionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "protocolRef", "appendOnlyRequired", "revisionSequenceStartsAt", "supersessionRequiredAfterInitial", "sourceCorrectionMode", "custodyHistoryRequired", "currentSnapshotMustMatchLatestRevision", "lateArrivalRule", "reviewedBy", "qifMutatesSourceRecords", "inferenceBoundary", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "protocolRef": {"$ref": "#/$defs/id"},
+        "appendOnlyRequired": {"const": true},
+        "revisionSequenceStartsAt": {"const": 1},
+        "supersessionRequiredAfterInitial": {"const": true},
+        "sourceCorrectionMode": {"const": "append-correction-never-rewrite"},
+        "custodyHistoryRequired": {"const": true},
+        "currentSnapshotMustMatchLatestRevision": {"const": true},
+        "lateArrivalRule": {"const": "record-arrival-after-due-with-original-effective-time"},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "qifMutatesSourceRecords": {"const": false},
+        "inferenceBoundary": {"const": "outcome-ledger-structure-only-not-source-truth-custody-authenticity-causality-quality-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["active", "retired"]}
+      }
+    },
+    "outcomeObservationRevision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "observationRef", "revisionNumber", "revisionType", "supersedesRevisionRef", "correctionRef", "recordedAt", "effectiveAt", "lateArrival", "observationState", "observedAt", "outcomeClass", "outcomeValue", "evidenceOriginRef", "evidenceRefs", "evidenceStatus", "observationWindowClosed", "missingReason", "exclusionRationale", "sourceArtifact", "sourceRecordRef", "payloadDigest", "recordedBy", "custodyEventRefs", "automaticOutcomeInference", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "observationRef": {"$ref": "#/$defs/id"},
+        "revisionNumber": {"type": "integer", "minimum": 1},
+        "revisionType": {"enum": ["initial", "state-transition", "late-outcome", "source-correction", "evidence-amendment"]},
+        "supersedesRevisionRef": {"oneOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+        "correctionRef": {"oneOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+        "recordedAt": {"type": "string", "format": "date-time"},
+        "effectiveAt": {"type": "string", "format": "date-time"},
+        "lateArrival": {"type": "boolean"},
+        "observationState": {"enum": ["planned", "observing", "completed", "missing", "excluded"]},
+        "observedAt": {"type": ["string", "null"], "format": "date-time"},
+        "outcomeClass": {"enum": ["protected-outcome-held", "protected-outcome-failed", "not-observed"]},
+        "outcomeValue": {"type": ["integer", "null"], "enum": [0, 1, null]},
+        "evidenceOriginRef": {"oneOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+        "evidenceRefs": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "evidenceStatus": {"enum": ["verified", "unverified", "example-only", "not-collected"]},
+        "observationWindowClosed": {"type": "boolean"},
+        "missingReason": {"type": "string"},
+        "exclusionRationale": {"type": "string"},
+        "sourceArtifact": {"type": "string", "minLength": 1},
+        "sourceRecordRef": {"type": "string", "minLength": 1},
+        "payloadDigest": {"type": "string", "pattern": "^sha256:[a-f0-9]{8,64}$"},
+        "recordedBy": {"type": "string", "minLength": 1},
+        "custodyEventRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "automaticOutcomeInference": {"const": false},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["recorded", "superseded", "retired"]}
+      }
+    },
+    "outcomeSourceCorrection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "observationRef", "incorrectRevisionRef", "correctedByRevisionRef", "detectedAt", "correctionReason", "correctedFields", "originalValuesDigest", "correctedValuesDigest", "authorizedBy", "evidenceRefs", "evidenceStatus", "sourceRecordMutated", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "observationRef": {"$ref": "#/$defs/id"},
+        "incorrectRevisionRef": {"$ref": "#/$defs/id"},
+        "correctedByRevisionRef": {"$ref": "#/$defs/id"},
+        "detectedAt": {"type": "string", "format": "date-time"},
+        "correctionReason": {"type": "string", "minLength": 1},
+        "correctedFields": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "originalValuesDigest": {"type": "string", "pattern": "^sha256:[a-f0-9]{8,64}$"},
+        "correctedValuesDigest": {"type": "string", "pattern": "^sha256:[a-f0-9]{8,64}$"},
+        "authorizedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "evidenceRefs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "evidenceStatus": {"enum": ["verified", "unverified", "example-only"]},
+        "sourceRecordMutated": {"const": false},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["recorded", "reviewed", "retired"]}
+      }
+    },
+    "outcomeCustodyEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "observationRef", "revisionRef", "sequenceNumber", "eventType", "occurredAt", "actorRef", "fromCustodian", "toCustodian", "evidenceRefs", "evidenceStatus", "qifCustodyAuthority", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "observationRef": {"$ref": "#/$defs/id"},
+        "revisionRef": {"$ref": "#/$defs/id"},
+        "sequenceNumber": {"type": "integer", "minimum": 1},
+        "eventType": {"enum": ["captured", "transferred", "verified", "corrected", "sealed"]},
+        "occurredAt": {"type": "string", "format": "date-time"},
+        "actorRef": {"type": "string", "minLength": 1},
+        "fromCustodian": {"type": ["string", "null"]},
+        "toCustodian": {"type": "string", "minLength": 1},
+        "evidenceRefs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "evidenceStatus": {"enum": ["verified", "unverified", "example-only"]},
+        "qifCustodyAuthority": {"const": false},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["recorded", "reviewed", "retired"]}
+      }
+    },
+    "outcomeLedgerAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "observationRefs", "revisionRefs", "correctionRefs", "custodyEventRefs", "latestRevisionRefs", "observationCount", "revisionCount", "supersededRevisionCount", "lateArrivalCount", "correctionCount", "custodyEventCount", "verifiedCustodyEventCount", "sequenceGapCount", "orphanRevisionCount", "snapshotMismatchCount", "dataSufficiency", "ledgerState", "reviewedBy", "activityCountIsQuality", "automaticTruthClaim", "interpretation", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "observationRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "revisionRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "correctionRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "custodyEventRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "latestRevisionRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "observationCount": {"type": "integer", "minimum": 0},
+        "revisionCount": {"type": "integer", "minimum": 0},
+        "supersededRevisionCount": {"type": "integer", "minimum": 0},
+        "lateArrivalCount": {"type": "integer", "minimum": 0},
+        "correctionCount": {"type": "integer", "minimum": 0},
+        "custodyEventCount": {"type": "integer", "minimum": 0},
+        "verifiedCustodyEventCount": {"type": "integer", "minimum": 0},
+        "sequenceGapCount": {"type": "integer", "minimum": 0},
+        "orphanRevisionCount": {"type": "integer", "minimum": 0},
+        "snapshotMismatchCount": {"type": "integer", "minimum": 0},
+        "dataSufficiency": {"enum": ["sufficient", "insufficient"]},
+        "ledgerState": {"enum": ["collecting", "internally-consistent", "blocked"]},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "activityCountIsQuality": {"const": false},
+        "automaticTruthClaim": {"const": false},
+        "interpretation": {"const": "outcome-ledger-structure-only-not-source-truth-custody-authenticity-causality-quality-authorization-or-authority"},
         "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
         "status": {"enum": ["draft", "reviewed", "retired"]}
       }

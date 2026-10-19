@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-18T04:49:16.253Z",
+  "generated_at": "2026-10-19T04:50:00.395Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MVDC1RDA-JW5Y6C",
-    "report_id": "OUT-MVDCIMLO-B8BNPD",
+    "source_session_id": "SESS-MVERHQS7-DSGHQE",
+    "report_id": "OUT-MVERZGE3-PD91BP",
     "result": "success",
-    "observed_at": "2026-10-18T04:49:07.305Z",
-    "note": "QIF v0.7.0 implements a prospective empirical pilot contract with cross-domain planning, enrollment timing, explicit outcome states, evidence-origin limits, reproducible assessment arithmetic, and governance routing. npm test passed 16/16 positive and 1217/1217 negative fixtures; portable and AOF organization checks passed. Public release pending.",
-    "signal_ref": ".aof/runtime/v0.7.0-review-council-executed.json"
+    "observed_at": "2026-10-19T04:49:52.826Z",
+    "note": "QIF v0.7.1 implements append-only outcome revisions, source corrections, custody history, late-arrival handling, current-snapshot alignment, governance routing, 21 negative fixtures, documentation, and portable packaging. npm test passed 16/16 positive and 1238/1238 negative checks; AOF organization verification passed 295/295. Public release pending.",
+    "signal_ref": ".aof/runtime/v0.7.1-review-council-executed.json"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV0700",
-    "recorded_at": "2026-10-18T04:48:47.229Z",
-    "summary": "Prospective empirical pilot protocol, cross-domain plans, enrollment timing, outcome-state preservation, governance, documentation, fixtures, and portable validation are complete; example remains explicitly not-started and insufficient.",
-    "detected_gap": "No independently verified operational decision-outcome pairs are committed, so empirical calibration and transportability remain unestablished.",
+    "audit_id": "FSA-QIFV0710",
+    "recorded_at": "2026-10-19T04:49:41.004Z",
+    "summary": "Append-only outcome collection policy, observation revisions, source corrections, custody history, current-snapshot alignment, governance, documentation, fixtures, and portable validation are complete; example remains collecting, example-only, and insufficient.",
+    "detected_gap": "No independently verified operational ledger history or custody evidence is committed, so source truth, custody authenticity, empirical calibration, and transportability remain unestablished.",
     "result_state": "stable",
-    "next_action": "Implement v0.7.1 Outcome Collection Ledger with append-only observation revisions and source-correction history.",
+    "next_action": "Implement v0.7.2 Missingness and Attrition Sensitivity with explicit bounds for missing, excluded, withdrawn, and delayed outcomes.",
     "related_task_ids": [
-      "TASK-069"
+      "TASK-070"
     ]
   },
   "current_next_value_slice": {
-    "content": "v0.7.1 Outcome Collection Ledger",
-    "updated_at": "2026-10-18T04:49:14.353Z",
+    "content": "v0.7.2 Missingness and Attrition Sensitivity",
+    "updated_at": "2026-10-19T04:49:56.797Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MVDC1RDA-JW5Y6C",
-    "source_decision_record_id": "DEC-MVDC2W8Q-B5URBP"
+    "source_session_id": "SESS-MVERHQS7-DSGHQE",
+    "source_decision_record_id": "DEC-MVERJCQX-AIX9H3"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Implement v0.7.1 Outcome Collection Ledger with append-only observation revisions and source-correction history.",
+    "proposed_focus": "Implement v0.7.2 Missingness and Attrition Sensitivity with explicit bounds for missing, excluded, withdrawn, and delayed outcomes.",
     "related_task_ids": [
-      "TASK-069"
+      "TASK-070"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: v0.7.1 Outcome Collection Ledger",
-    "Latest self-audit next action: Implement v0.7.1 Outcome Collection Ledger with append-only observation revisions and source-correction history.",
+    "Current next value slice: v0.7.2 Missingness and Attrition Sensitivity",
+    "Latest self-audit next action: Implement v0.7.2 Missingness and Attrition Sensitivity with explicit bounds for missing, excluded, withdrawn, and delayed outcomes.",
     "Latest outcome result: success"
   ]
 }

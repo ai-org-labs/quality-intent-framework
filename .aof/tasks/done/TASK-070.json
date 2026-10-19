@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-070",
+  "title": "Release QIF v0.7.1 Outcome Collection Ledger",
+  "description": "Implement append-only outcome observation revisions, source corrections, custody events, ledger assessment, verifier rules, examples, fixtures, docs, portable package, and public release.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MVERHQS7-DSGHQE",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MVERJCQX-AIX9H3",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-10-19T04:37:52.158Z",
+  "updated_at": "2026-10-19T04:49:45.807Z",
+  "assigned_at": null,
+  "done_at": "2026-10-19T04:49:45.807Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented Outcome Collection Ledger with append-only revisions, source corrections, custody history, late-arrival handling, current-snapshot alignment, governance triggers, docs, examples, and 21 negative fixtures. npm test passed 16/16 positive and 1238/1238 negative checks; review council returned no veto."
+}

@@ -75,6 +75,7 @@ Use additional documents when needed:
 | Show that contradictory calibration evidence changed the framework through accountable governance | `docs/qif-v0.6.30-framework-learning-records.md`, `schemas/world-model-calibration-package.schema.json` |
 | Compare declared probability forecasts with later outcomes without turning a score into a quality verdict | `docs/qif-v0.6.31-calibration-report.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Start a real calibration pilot without inventing outcomes or hiding missing evidence | `docs/qif-v0.7.0-empirical-pilot.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
+| Preserve changing outcome evidence without rewriting history | `docs/qif-v0.7.1-outcome-collection-ledger.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Expose selection, missing outcomes, dependence, segments, and drift behind a calibration aggregate | `docs/qif-v0.6.32-calibration-cohort-integrity.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Explain why one calibration error requires stronger governance than another at an explicit loss boundary | `docs/qif-v0.6.33-consequence-sensitive-calibration.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Show whether a decision is brittle under bounded, reviewed threshold alternatives | `docs/qif-v0.6.34-threshold-robustness.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
@@ -804,6 +805,31 @@ Use `EmpiricalPilotProtocol`, `EmpiricalPilotDomain`,
 `EmpiricalPilotAssessment`. Explain the status simply: what is planned, what
 has actually been observed, what is missing, and why calibration analysis is
 or is not ready.
+
+## Outcome Collection Ledger Review
+
+When an outcome changes after enrollment, never replace the old value in
+place. Build a history another person can replay:
+
+1. Record revision 1 as the initial snapshot.
+2. Add each later state or evidence change as the next numbered revision.
+3. Link every later revision to the immediately preceding revision.
+4. Mark evidence recorded after its due time as late-arriving while preserving
+   the original effective time.
+5. For a source correction, preserve before and after digests, name the changed
+   fields, explain the reason, and link the correcting revision both ways.
+6. Record a custody event for every revision and maintain the declared
+   custodian handoff sequence.
+7. Require the current `EmpiricalOutcomeObservation` snapshot to exactly match
+   the latest revision.
+8. Route sequence gaps, orphan revisions, snapshot mismatch, weak evidence, or
+   uncertain custody to governance.
+
+Use `OutcomeCollectionPolicy`, `OutcomeObservationRevision`,
+`OutcomeSourceCorrection`, `OutcomeCustodyEvent`, and
+`OutcomeLedgerAssessment`. Explain the result as a timeline: what was known,
+what changed, why it changed, and what remains unverified. Never say that an
+internally consistent ledger proves source truth or authentic custody.
 
 ## Common Failure Modes
 

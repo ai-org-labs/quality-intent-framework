@@ -3999,7 +3999,7 @@
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "pilot assessment arithmetic",
       "expect": "fail",
-      "errorIncludes": "plannedOutcomeCount must reproduce as 1."
+      "errorIncludes": "observingOutcomeCount must reproduce as 1."
     },
     {
       "file": "calibration-report-empirical-pilot-domain-coverage.json",
@@ -4013,7 +4013,7 @@
       "validator": "tools/validate-calibration-report.mjs",
       "rule": "pilot state reproduction",
       "expect": "fail",
-      "errorIncludes": "pilotState must reproduce as not-started."
+      "errorIncludes": "pilotState must reproduce as collecting."
     },
     {
       "file": "calibration-report-empirical-pilot-assessment-trigger.json",
@@ -4028,6 +4028,153 @@
       "rule": "empirical pilot semantic boundary",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming that empirical pilot structure proves study validity"
+    },
+    {
+      "file": "calibration-report-outcome-ledger-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "outcome collection policies required",
+      "expect": "fail",
+      "errorIncludes": "package outcomeCollectionPolicies must be an array."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-revisions-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "outcome revisions required",
+      "expect": "fail",
+      "errorIncludes": "package outcomeObservationRevisions must be an array."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-policy-protocol.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "ledger policy protocol resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing empirical pilot protocol"
+    },
+    {
+      "file": "calibration-report-outcome-ledger-policy-append-only.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "append-only policy",
+      "expect": "fail",
+      "errorIncludes": "must require append-only revisions"
+    },
+    {
+      "file": "calibration-report-outcome-ledger-policy-source-mutation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no source mutation",
+      "expect": "fail",
+      "errorIncludes": "qifMutatesSourceRecords must be false."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-first-revision.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "initial revision boundary",
+      "expect": "fail",
+      "errorIncludes": "first revision must be initial with null supersedesRevisionRef."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-supersession.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "contiguous revision supersession",
+      "expect": "fail",
+      "errorIncludes": "must supersede the immediately preceding revision for the same observation."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-correction-backlink.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "source correction backlink",
+      "expect": "fail",
+      "errorIncludes": "source-correction revision must link a correction that points back to it."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-late-arrival.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "late arrival reproduction",
+      "expect": "fail",
+      "errorIncludes": "lateArrival must reproduce as true."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-revision-evidence-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "revision evidence governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified revision evidence requires an outcome-ledger-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-correction-observation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "correction observation lineage",
+      "expect": "fail",
+      "errorIncludes": "references missing empirical outcome observation"
+    },
+    {
+      "file": "calibration-report-outcome-ledger-correction-digests.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "correction value difference",
+      "expect": "fail",
+      "errorIncludes": "originalValuesDigest and correctedValuesDigest must differ."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-correction-source-mutation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "correction preserves source",
+      "expect": "fail",
+      "errorIncludes": "sourceRecordMutated must be false."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-custody-observation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "custody revision closure",
+      "expect": "fail",
+      "errorIncludes": "revisionRef must belong to its observation."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-custody-initial.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "initial custody source",
+      "expect": "fail",
+      "errorIncludes": "first custody event must have null fromCustodian."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-custody-authority.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no QIF custody authority",
+      "expect": "fail",
+      "errorIncludes": "qifCustodyAuthority must be false."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "ledger assessment arithmetic",
+      "expect": "fail",
+      "errorIncludes": "revisionCount must reproduce as 3."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-latest-revision.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "latest revision closure",
+      "expect": "fail",
+      "errorIncludes": "latestRevisionRefs must exactly match the latest revision"
+    },
+    {
+      "file": "calibration-report-outcome-ledger-snapshot-alignment.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "latest snapshot alignment",
+      "expect": "fail",
+      "errorIncludes": "snapshotMismatchCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-assessment-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "insufficient ledger governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient ledger evidence requires an outcome-ledger-assessment-insufficient governance trigger."
+    },
+    {
+      "file": "calibration-report-outcome-ledger-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "outcome ledger semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that outcome ledger structure proves source truth"
     }
   ],
   "rescopedRules": []

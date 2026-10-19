@@ -1,0 +1,21 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-19T04:37:21.462Z",
+  "project_charter_id": "PCH-MVERJCMU-XIYP04",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0710.json",
+  "validated_objective": "Release QIF v0.7.1 with an executable Outcome Collection Ledger that preserves every outcome observation revision, correction, and custody transition while keeping the latest snapshot reproducible",
+  "scope": [
+    "calibration-report collection policy, observation revision, source correction, custody event, and ledger assessment records",
+    "deterministic verifier checks, example-only collecting package, retained negative fixtures, docs, portable package, and release"
+  ],
+  "constraints": [
+    "do not overwrite prior revisions, mutate prospective enrollment, collect external data, claim source truth, or grant custody or operational authority",
+    "counts, corrections, evidence status, and ledger completeness remain evidence rather than quality"
+  ],
+  "expected_outcomes": [
+    "late-arriving outcomes and source corrections preserve what was known before and after each append",
+    "the current empirical outcome snapshot exactly matches the latest ledger revision or validation fails"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVERHVJ0-VAL87J"
+}

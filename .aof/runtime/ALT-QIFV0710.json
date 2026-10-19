@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-19T04:37:07.248Z",
+  "alternative_analysis_id": "ALT-MVERJ1O0-5BRUSE",
+  "subject_need": "Preserve the history and custody of empirical outcome observations",
+  "alternative_solutions": [
+    "Add append-only observation revisions, source corrections, custody events, and a ledger assessment to calibration-report",
+    "Create a separate ledger package and cross-package synchronization protocol"
+  ],
+  "non_solution_options": [
+    "Overwrite empiricalOutcomeObservation whenever later evidence arrives"
+  ],
+  "defer_options": [
+    "Collect outcomes in ad hoc external logs until a later release"
+  ],
+  "stop_options": [
+    "Do not release if the current snapshot can diverge from its latest revision without detection",
+    "Do not release if source correction can erase original values or imply semantic truth"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVERHVJ0-VAL87J"
+}

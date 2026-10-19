@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.7.1
+
+- Added executable outcome collection policies, append-only observation revisions, source corrections, custody events, and ledger assessments.
+- Added reproducible revision sequence, immediate supersession, late-arrival classification, correction backlink, custody continuity, latest snapshot alignment, and assessment checks.
+- Preserved original source values through correction digests and prohibited QIF from mutating source records or claiming custody authority.
+- Added 21 retained negative fixtures and changed the committed pilot example from not-started to example-only collecting without inventing a completed outcome.
+- Prevented revision counts, corrections, custody events, digests, continuity, and snapshot alignment from becoming source-truth, custody-authenticity, causality, quality, authorization, or authority claims.
+
 ## v0.7.0
 
 - Added executable empirical pilot protocols, cross-domain plans, prospective decision enrollments, outcome observations, and pilot assessments.

@@ -1,0 +1,87 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-19T04:38:01.657Z",
+  "packet_id": "ASP-MVERK7ND-GJFECI",
+  "source_task_id": "TASK-070",
+  "source_parent_session_id": "SESS-MVERHQS7-DSGHQE",
+  "source_decision_record_id": "DEC-MVERJCQX-AIX9H3",
+  "objective": "Implement QIF v0.7.1 Outcome Collection Ledger",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "Builder",
+    "team_ref": "qif-runtime",
+    "assignment_reason": "Builder owns bounded schema, verifier, fixture, documentation, and release implementation under Guardian append-only and truth boundaries",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "schema-design",
+    "verifier-implementation",
+    "release-engineering"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-qif-runtime",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs"
+      ],
+      "rationale": "existing empirical pilot model and retained fixture corpus support a bounded temporal-ledger extension"
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository"
+  ],
+  "policy_refs": [
+    "policy-runtime-backed-development",
+    "policy-no-semantic-truth-overclaim"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/calibration-report-package.schema.json",
+    "required_sections": [
+      "outcome collection policy",
+      "observation revisions",
+      "source corrections",
+      "custody events",
+      "ledger assessment"
+    ],
+    "acceptance_criteria": [
+      "full npm test passes",
+      "latest snapshot exactly matches latest revision",
+      "portable package verifies"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "append-only traceability and truth boundary",
+      "evaluator_ref": "Guardian",
+      "evidence_required": "schema, verifier, fixtures, and example",
+      "blocking": true
+    },
+    {
+      "criterion": "deterministic revision and custody reproduction",
+      "evaluator_ref": "Builder",
+      "evidence_required": "test output and diff",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "destructive-outcome-rewrite",
+      "trigger_condition": "a later revision can erase original evidence or diverge from the current snapshot without detection",
+      "consequence": "block-assignment",
+      "recovery_action": "restore immutable lineage and fail-closed alignment rules"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will preserve what was known, what changed, and why.",
+    "current_action": "Implement outcome revision and custody ledger",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run retained fixtures and council review"
+  },
+  "status": "ready-for-assignment"
+}

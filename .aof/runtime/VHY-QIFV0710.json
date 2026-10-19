@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-19T04:37:07.116Z",
+  "value_hypothesis_id": "VHY-MVERJ1KC-KKTRZ4",
+  "expected_value_creation": "An append-only outcome ledger lets humans and AI reproduce what was known when, why a record changed, who held custody, and which snapshot is current without treating corrections as truth",
+  "beneficiary": "QIF adopters, evidence custodians, reviewers, and governance owners across software and non-software domains",
+  "supporting_evidence": [
+    "Anthropic distinguishes claimed output from the final environment outcome and combines evals with production monitoring and human review",
+    "NIST post-deployment monitoring identifies longitudinal ground truth, data access, baseline, and terminology challenges"
+  ],
+  "success_criteria": [
+    "revision sequence, supersession, late arrival, source correction, custody history, and latest snapshot alignment are structurally reproducible",
+    "the example remains example-only and the verifier makes no semantic truth, custody authenticity, causality, or quality claim"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVERHVJ0-VAL87J"
+}

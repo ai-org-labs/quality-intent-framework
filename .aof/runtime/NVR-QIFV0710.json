@@ -1,0 +1,39 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-19T04:37:07.383Z",
+  "validation_id": "NVR-MVERJ1RR-4NHMPW",
+  "raw_need": "Release QIF v0.7.1 Outcome Collection Ledger",
+  "validation_status": "reframed",
+  "validated_need": "Provide an append-only, domain-general outcome observation ledger that preserves historical revisions, late-arrival status, source corrections, custody transitions, and current-snapshot alignment without mutating prospective enrollment or claiming evidence truth",
+  "decision_summary": "Visionary frames temporal evidence integrity as the next empirical-calibration boundary; Builder can extend calibration-report locally; Guardian requires immutable history, explicit correction lineage, custody sequencing, current-snapshot reproduction, and governance without truth or authority claims.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is in scope?",
+      "answer": "calibration-report schema, verifier, example, fixtures, docs, portable package, and release; no external collection or operational decisions",
+      "evidence_state": "strong"
+    },
+    {
+      "question": "How is success judged?",
+      "answer": "append-only history and custody are reproducible while example-only evidence remains non-empirical",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "a corrected record can safely replace the record originally observed",
+    "the latest source value is necessarily the true value",
+    "custody metadata proves authentic custody"
+  ],
+  "evidence_gaps": [
+    "no independently verified operational ledger entries are committed, so outcome truth and custody authenticity remain unestablished"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0710.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0710.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0710.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVERHVJ0-VAL87J"
+}

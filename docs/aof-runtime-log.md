@@ -5077,3 +5077,21 @@ Date: 2026-10-18
 - Outcome report: `OUT-MVDCIMLO-B8BNPD` recorded implementation success and retained v0.7.1 as an open next value slice.
 - Residual risk: no independently verified operational decision-outcome pairs are committed. Structural validity does not establish study validity, representativeness, causality, calibration truth, transportability, quality, authorization, or decision authority.
 - Next value slices: v0.7.1 Outcome Collection Ledger, v0.7.2 Missingness and Attrition Sensitivity, and v0.7.3 Cross-Domain Transportability Review.
+
+# QIF v0.7.1 Outcome Collection Ledger
+
+Date: 2026-10-19
+
+- Need: a prospective enrollment could move toward collection, but QIF could not preserve how an outcome observation changed, arrived late, was corrected at its source, or moved between custodians.
+- Intent: make append-only revisions, supersession, late-arrival classification, source correction, custody continuity, current-snapshot alignment, assessment arithmetic, and governance structurally reproducible without treating a ledger as source truth.
+- Context: QIF remains standalone; publicly released AOF v12.2.0 at source commit `fc7599b` governs development and is not a QIF runtime dependency.
+- AOF session: `SESS-MVERHQS7-DSGHQE`; task: `TASK-070`; framing decisions: `DEC-MVERHQS9-ZJATCR` and `DEC-MVERHVJ0-VAL87J`; Need Validation decision: `DEC-MVERJCQX-AIX9H3`.
+- Need Validation and Charter artifacts: `.aof/runtime/PST-QIFV0710.json`, `.aof/runtime/VHY-QIFV0710.json`, `.aof/runtime/ALT-QIFV0710.json`, `.aof/runtime/NVR-QIFV0710.json`, and `.aof/runtime/PCH-QIFV0710.json`. Charter creation followed Validated Need `NVR-MVERJ1RR-4NHMPW`.
+- Trend evidence: NIST AI 800-4 emphasizes longitudinal ground truth, baselines, and post-deployment data access; Anthropic separates claimed output from environment outcome and combines evaluation, monitoring, and human review; OpenAI monitorability evaluations withhold unreliable datapoints and distinguish process, outcome, and intervention evidence.
+- Council direction: Visionary, Builder, and Guardian proceeded in planning; Builder and Guardian proceeded in review with no veto. Guardian required immutable history, explicit correction lineage, custody sequencing, current-snapshot reproduction, governance, and explicit refusal to claim source truth or authority. Mock council execution proves routing, not independent semantic approval.
+- Decision: implement `OutcomeCollectionPolicy`, `OutcomeObservationRevision`, `OutcomeSourceCorrection`, `OutcomeCustodyEvent`, and `OutcomeLedgerAssessment`. The committed example advances only to `collecting`; it contains no completed empirical outcome.
+- Runtime evidence: `.aof/runtime/v0.7.1-actor-skill-packet.json`, `.aof/runtime/v0.7.1-planning-council-executed.json`, `.aof/runtime/v0.7.1-review-council-executed.json`, self-audit `FSA-QIFV0710`, and the learning-loop snapshot record capability, resource, policy, review, self-review, and retrospective evidence.
+- Verification: `npm test` passed 16/16 positive and 1,238/1,238 retained negative checks. Portable build and verification passed with 49 files. AOF `organization-verify` passed 295/295 checks.
+- Outcome report: `OUT-MVERZGE3-PD91BP` recorded implementation success and retained v0.7.2 as an open next value slice.
+- Residual risk: no independently verified operational ledger history or custody evidence is committed. Structural validity does not establish source truth, custody authenticity, observation completeness, causality, calibration truth, quality, authorization, or decision authority.
+- Next value slices: v0.7.2 Missingness and Attrition Sensitivity, v0.7.3 Cross-Domain Transportability Review, and v0.8 Multi-Agent Judgment Memory remain defined in the roadmap.

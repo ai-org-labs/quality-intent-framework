@@ -2848,6 +2848,26 @@
       "requiredAction": "Do not issue an empirical calibration claim; continue governed collection or revise the protocol through governance.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-076",
+      "triggerType": "outcome-ledger-evidence-unverified",
+      "reason": "The committed revision, correction, and custody records are example-only rather than independently verified operational evidence.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Keep ledger interpretation structural and obtain independently verified source and custody evidence before empirical use.",
+      "owner": "pilot-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-077",
+      "triggerType": "outcome-ledger-assessment-insufficient",
+      "reason": "The ledger has no independently verified custody chain or completed empirical outcome.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Do not treat structural ledger consistency as outcome truth, calibration evidence, or custody authenticity.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -2871,7 +2891,8 @@
       "recovery dependency nodes and edges, path membership, shared critical dependencies, independence evidence, failover prerequisites, observed switching, correlated recovery assessment arithmetic, and governance routing reproduce",
       "checkpoint freshness, rehydration identity equality, disjoint effect state, completed-effect checks, idempotency, retry budgets, duplicate-effect intersections, resume authority evidence, durable recovery assessment arithmetic, and governance routing reproduce",
       "observation-window duration, observation sequence and coverage, delayed completion, unresolved final state, terminal-state conflicts, closure-state reproduction, assessment arithmetic, and governance routing reproduce",
-      "prospective pilot registration, domain coverage, enrollment timing, outcome evidence state, empirical origin eligibility, pilot readiness arithmetic, and governance routing reproduce"
+      "prospective pilot registration, domain coverage, enrollment timing, outcome evidence state, empirical origin eligibility, pilot readiness arithmetic, and governance routing reproduce",
+      "append-only outcome revision sequence, supersession, late-arrival classification, source correction lineage, custody sequence, latest snapshot alignment, ledger assessment arithmetic, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -2899,7 +2920,8 @@
       "that path count, vendor count, dependency diversity, failover execution, or absence of observed shared failure proves independence, causality, recovery effectiveness, quality, selection, authorization, or authority",
       "that snapshot presence, retry count, idempotency-key presence, recorded effect state, or absence of detected duplicates proves state truth, effect completion, recovery safety, quality, retry authorization, or authority",
       "that observation duration, observation count, delayed-effect detection, reconciliation state, or absence of unresolved effects proves effect truth, observation completeness, causality, recovery safety, quality, closure authorization, or authority",
-      "that pilot domain count, enrollment count, prospective timing, outcome count, or readiness state proves study validity, representativeness, causality, calibration truth, quality, authorization, or authority"
+      "that pilot domain count, enrollment count, prospective timing, outcome count, or readiness state proves study validity, representativeness, causality, calibration truth, quality, authorization, or authority",
+      "that revision count, source correction, custody event, digest, sequence continuity, or snapshot alignment proves source truth, custody authenticity, causality, quality, authorization, or authority"
     ],
     "semanticValidityRequires": [
       "expert review of prediction and outcome meaning",
@@ -2920,7 +2942,8 @@
       "independent review of dependency identity, common causes, path independence, failover prerequisites, activation authority, observed recovery, and representative failure conditions",
       "independent reconciliation of checkpoint state, actor identity, completed, pending, and unknown external effects, idempotency scope, retry budget, and accountable resume authority",
       "independent review of observation-window sufficiency, external effect timestamps and states, delayed effects, reconciliation conflicts, unresolved effects, and accountable recovery closure authority",
-      "accountable review of pilot protocol, domain relevance, prospective registration, outcome definitions, missingness, exclusions, evidence provenance, and empirical interpretation"
+      "accountable review of pilot protocol, domain relevance, prospective registration, outcome definitions, missingness, exclusions, evidence provenance, and empirical interpretation",
+      "independent verification of source records, correction authority, custody actors, timestamps, digests, late-arrival meaning, and current snapshot interpretation"
     ]
   },
   "evaluatorSignalPolicies": [
@@ -4484,8 +4507,8 @@
       "id": "EPO-CR-001",
       "title": "Illustrative outcome awaiting collection",
       "enrollmentRef": "EPE-CR-001",
-      "recordedAt": "2026-10-18T02:00:00Z",
-      "observationState": "planned",
+      "recordedAt": "2026-10-19T01:00:00Z",
+      "observationState": "observing",
       "observedAt": null,
       "outcomeClass": "not-observed",
       "outcomeValue": null,
@@ -4505,7 +4528,7 @@
   "empiricalPilotAssessments": [
     {
       "id": "EPA-CR-001",
-      "title": "Illustrative empirical pilot readiness assessment",
+      "title": "Illustrative empirical pilot collection assessment",
       "protocolRef": "EPP-CR-001",
       "domainRefs": [
         "EPD-CR-SOFTWARE-001",
@@ -4522,14 +4545,14 @@
       "domainCoverageSatisfied": true,
       "enrollmentCount": 1,
       "prospectiveEnrollmentCount": 1,
-      "plannedOutcomeCount": 1,
-      "observingOutcomeCount": 0,
+      "plannedOutcomeCount": 0,
+      "observingOutcomeCount": 1,
       "completedOutcomeCount": 0,
       "missingOutcomeCount": 0,
       "excludedOutcomeCount": 0,
       "verifiedEmpiricalOutcomeCount": 0,
       "dataSufficiency": "insufficient",
-      "pilotState": "not-started",
+      "pilotState": "collecting",
       "reviewedBy": [
         "pilot-governance-owner"
       ],
@@ -4538,6 +4561,286 @@
       "interpretation": "empirical-pilot-structure-only-not-study-validity-representativeness-causality-calibration-truth-quality-authorization-or-authority",
       "governanceTriggerRefs": [
         "GTR-CR-074"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "outcomeCollectionPolicies": [
+    {
+      "id": "OCP-CR-001",
+      "title": "Illustrative append-only outcome collection policy",
+      "protocolRef": "EPP-CR-001",
+      "appendOnlyRequired": true,
+      "revisionSequenceStartsAt": 1,
+      "supersessionRequiredAfterInitial": true,
+      "sourceCorrectionMode": "append-correction-never-rewrite",
+      "custodyHistoryRequired": true,
+      "currentSnapshotMustMatchLatestRevision": true,
+      "lateArrivalRule": "record-arrival-after-due-with-original-effective-time",
+      "reviewedBy": [
+        "pilot-governance-owner",
+        "evidence-custody-owner"
+      ],
+      "qifMutatesSourceRecords": false,
+      "inferenceBoundary": "outcome-ledger-structure-only-not-source-truth-custody-authenticity-causality-quality-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-076",
+        "GTR-CR-077"
+      ],
+      "status": "active"
+    }
+  ],
+  "outcomeObservationRevisions": [
+    {
+      "id": "OOR-CR-001",
+      "title": "Initial planned outcome snapshot",
+      "policyRef": "OCP-CR-001",
+      "observationRef": "EPO-CR-001",
+      "revisionNumber": 1,
+      "revisionType": "initial",
+      "supersedesRevisionRef": null,
+      "correctionRef": null,
+      "recordedAt": "2026-10-18T02:00:00Z",
+      "effectiveAt": "2026-10-18T02:00:00Z",
+      "lateArrival": false,
+      "observationState": "planned",
+      "observedAt": null,
+      "outcomeClass": "not-observed",
+      "outcomeValue": null,
+      "evidenceOriginRef": null,
+      "evidenceRefs": [],
+      "evidenceStatus": "not-collected",
+      "observationWindowClosed": false,
+      "missingReason": "",
+      "exclusionRationale": "",
+      "sourceArtifact": "illustrative-support-case-log",
+      "sourceRecordRef": "case-example-01-typo",
+      "payloadDigest": "sha256:11111111",
+      "recordedBy": "illustrative-support-operator",
+      "custodyEventRefs": [
+        "OCE-CR-001"
+      ],
+      "automaticOutcomeInference": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-076"
+      ],
+      "status": "superseded"
+    },
+    {
+      "id": "OOR-CR-002",
+      "title": "Observation window opened",
+      "policyRef": "OCP-CR-001",
+      "observationRef": "EPO-CR-001",
+      "revisionNumber": 2,
+      "revisionType": "state-transition",
+      "supersedesRevisionRef": "OOR-CR-001",
+      "correctionRef": null,
+      "recordedAt": "2026-10-19T00:30:00Z",
+      "effectiveAt": "2026-10-19T00:30:00Z",
+      "lateArrival": false,
+      "observationState": "observing",
+      "observedAt": null,
+      "outcomeClass": "not-observed",
+      "outcomeValue": null,
+      "evidenceOriginRef": null,
+      "evidenceRefs": [],
+      "evidenceStatus": "not-collected",
+      "observationWindowClosed": false,
+      "missingReason": "",
+      "exclusionRationale": "",
+      "sourceArtifact": "illustrative-support-case-log",
+      "sourceRecordRef": "case-example-01-typo",
+      "payloadDigest": "sha256:22222222",
+      "recordedBy": "illustrative-support-operator",
+      "custodyEventRefs": [
+        "OCE-CR-002"
+      ],
+      "automaticOutcomeInference": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-076"
+      ],
+      "status": "superseded"
+    },
+    {
+      "id": "OOR-CR-003",
+      "title": "Corrected source record reference",
+      "policyRef": "OCP-CR-001",
+      "observationRef": "EPO-CR-001",
+      "revisionNumber": 3,
+      "revisionType": "source-correction",
+      "supersedesRevisionRef": "OOR-CR-002",
+      "correctionRef": "OSC-CR-001",
+      "recordedAt": "2026-10-19T01:00:00Z",
+      "effectiveAt": "2026-10-19T00:30:00Z",
+      "lateArrival": false,
+      "observationState": "observing",
+      "observedAt": null,
+      "outcomeClass": "not-observed",
+      "outcomeValue": null,
+      "evidenceOriginRef": null,
+      "evidenceRefs": [],
+      "evidenceStatus": "not-collected",
+      "observationWindowClosed": false,
+      "missingReason": "",
+      "exclusionRationale": "",
+      "sourceArtifact": "illustrative-support-case-log",
+      "sourceRecordRef": "case-example-001",
+      "payloadDigest": "sha256:33333333",
+      "recordedBy": "illustrative-evidence-custodian",
+      "custodyEventRefs": [
+        "OCE-CR-003"
+      ],
+      "automaticOutcomeInference": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-076"
+      ],
+      "status": "recorded"
+    }
+  ],
+  "outcomeSourceCorrections": [
+    {
+      "id": "OSC-CR-001",
+      "title": "Illustrative source locator correction",
+      "policyRef": "OCP-CR-001",
+      "observationRef": "EPO-CR-001",
+      "incorrectRevisionRef": "OOR-CR-002",
+      "correctedByRevisionRef": "OOR-CR-003",
+      "detectedAt": "2026-10-19T00:50:00Z",
+      "correctionReason": "The source record locator contained a transcription error; outcome state and value were unchanged.",
+      "correctedFields": [
+        "sourceRecordRef"
+      ],
+      "originalValuesDigest": "sha256:aaaaaaaa",
+      "correctedValuesDigest": "sha256:bbbbbbbb",
+      "authorizedBy": [
+        "illustrative-evidence-custodian"
+      ],
+      "evidenceRefs": [
+        "examples/calibration-report-package.json#OOR-CR-002",
+        "examples/calibration-report-package.json#OOR-CR-003"
+      ],
+      "evidenceStatus": "example-only",
+      "sourceRecordMutated": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-076"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "outcomeCustodyEvents": [
+    {
+      "id": "OCE-CR-001",
+      "title": "Initial snapshot captured",
+      "policyRef": "OCP-CR-001",
+      "observationRef": "EPO-CR-001",
+      "revisionRef": "OOR-CR-001",
+      "sequenceNumber": 1,
+      "eventType": "captured",
+      "occurredAt": "2026-10-18T02:00:00Z",
+      "actorRef": "illustrative-support-operator",
+      "fromCustodian": null,
+      "toCustodian": "support-operations-custody",
+      "evidenceRefs": [
+        "examples/calibration-report-package.json#OOR-CR-001"
+      ],
+      "evidenceStatus": "example-only",
+      "qifCustodyAuthority": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-076"
+      ],
+      "status": "recorded"
+    },
+    {
+      "id": "OCE-CR-002",
+      "title": "Observing snapshot transferred",
+      "policyRef": "OCP-CR-001",
+      "observationRef": "EPO-CR-001",
+      "revisionRef": "OOR-CR-002",
+      "sequenceNumber": 2,
+      "eventType": "transferred",
+      "occurredAt": "2026-10-19T00:30:00Z",
+      "actorRef": "illustrative-support-operator",
+      "fromCustodian": "support-operations-custody",
+      "toCustodian": "evidence-review-custody",
+      "evidenceRefs": [
+        "examples/calibration-report-package.json#OOR-CR-002"
+      ],
+      "evidenceStatus": "example-only",
+      "qifCustodyAuthority": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-076"
+      ],
+      "status": "recorded"
+    },
+    {
+      "id": "OCE-CR-003",
+      "title": "Source locator correction recorded",
+      "policyRef": "OCP-CR-001",
+      "observationRef": "EPO-CR-001",
+      "revisionRef": "OOR-CR-003",
+      "sequenceNumber": 3,
+      "eventType": "corrected",
+      "occurredAt": "2026-10-19T01:00:00Z",
+      "actorRef": "illustrative-evidence-custodian",
+      "fromCustodian": "evidence-review-custody",
+      "toCustodian": "evidence-review-custody",
+      "evidenceRefs": [
+        "examples/calibration-report-package.json#OSC-CR-001"
+      ],
+      "evidenceStatus": "example-only",
+      "qifCustodyAuthority": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-076"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "outcomeLedgerAssessments": [
+    {
+      "id": "OLA-CR-001",
+      "title": "Illustrative outcome ledger assessment",
+      "policyRef": "OCP-CR-001",
+      "observationRefs": [
+        "EPO-CR-001"
+      ],
+      "revisionRefs": [
+        "OOR-CR-001",
+        "OOR-CR-002",
+        "OOR-CR-003"
+      ],
+      "correctionRefs": [
+        "OSC-CR-001"
+      ],
+      "custodyEventRefs": [
+        "OCE-CR-001",
+        "OCE-CR-002",
+        "OCE-CR-003"
+      ],
+      "latestRevisionRefs": [
+        "OOR-CR-003"
+      ],
+      "observationCount": 1,
+      "revisionCount": 3,
+      "supersededRevisionCount": 2,
+      "lateArrivalCount": 0,
+      "correctionCount": 1,
+      "custodyEventCount": 3,
+      "verifiedCustodyEventCount": 0,
+      "sequenceGapCount": 0,
+      "orphanRevisionCount": 0,
+      "snapshotMismatchCount": 0,
+      "dataSufficiency": "insufficient",
+      "ledgerState": "collecting",
+      "reviewedBy": [
+        "pilot-governance-owner",
+        "evidence-custody-owner"
+      ],
+      "activityCountIsQuality": false,
+      "automaticTruthClaim": false,
+      "interpretation": "outcome-ledger-structure-only-not-source-truth-custody-authenticity-causality-quality-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-076",
+        "GTR-CR-077"
       ],
       "status": "reviewed"
     }

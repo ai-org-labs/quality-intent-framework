@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-19T04:37:06.967Z",
+  "problem_statement_id": "PST-MVERJ1G7-2FJLLC",
+  "affected_party": "QIF pilot operators, evidence custodians, and accountable reviewers",
+  "actual_problem": "QIF can register an empirical outcome observation but cannot preserve how that observation changes over time without overwriting prior state",
+  "why_it_matters": "Late outcomes, source corrections, and custody transfers can silently rewrite the evidence used for calibration, destroying auditability and making corrected data look originally known",
+  "why_now": "v0.7.0 made prospective pilots startable; current evaluation practice distinguishes environment outcomes from claims and requires production monitoring, human calibration, missing-data restraint, and provenance",
+  "evidence_refs": [
+    "docs/qif-roadmap.md",
+    "examples/calibration-report-package.json"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVERHVJ0-VAL87J"
+}

@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.7.1 Outcome Collection Ledger",
-  "updated_at": "2026-10-18T04:49:14.353Z",
+  "content": "v0.7.2 Missingness and Attrition Sensitivity",
+  "updated_at": "2026-10-19T04:49:56.797Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MVDC1RDA-JW5Y6C",
-  "source_decision_record_id": "DEC-MVDC2W8Q-B5URBP",
+  "source_session_id": "SESS-MVERHQS7-DSGHQE",
+  "source_decision_record_id": "DEC-MVERJCQX-AIX9H3",
   "declared_complete_at": null
 }

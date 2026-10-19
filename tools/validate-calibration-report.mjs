@@ -215,6 +215,11 @@ function validatePackage(pkg, packagePath) {
   const empiricalPilotEnrollments = requiredArray(pkg, "empiricalPilotEnrollments");
   const empiricalOutcomeObservations = requiredArray(pkg, "empiricalOutcomeObservations");
   const empiricalPilotAssessments = requiredArray(pkg, "empiricalPilotAssessments");
+  const outcomeCollectionPolicies = requiredArray(pkg, "outcomeCollectionPolicies");
+  const outcomeObservationRevisions = requiredArray(pkg, "outcomeObservationRevisions");
+  const outcomeSourceCorrections = requiredArray(pkg, "outcomeSourceCorrections");
+  const outcomeCustodyEvents = requiredArray(pkg, "outcomeCustodyEvents");
+  const outcomeLedgerAssessments = requiredArray(pkg, "outcomeLedgerAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -288,6 +293,10 @@ function validatePackage(pkg, packagePath) {
   const empiricalPilotDomainIndex = indexById(empiricalPilotDomains, `${packagePath}:empiricalPilotDomains`);
   const empiricalPilotEnrollmentIndex = indexById(empiricalPilotEnrollments, `${packagePath}:empiricalPilotEnrollments`);
   const empiricalOutcomeObservationIndex = indexById(empiricalOutcomeObservations, `${packagePath}:empiricalOutcomeObservations`);
+  const outcomeCollectionPolicyIndex = indexById(outcomeCollectionPolicies, `${packagePath}:outcomeCollectionPolicies`);
+  const outcomeObservationRevisionIndex = indexById(outcomeObservationRevisions, `${packagePath}:outcomeObservationRevisions`);
+  const outcomeSourceCorrectionIndex = indexById(outcomeSourceCorrections, `${packagePath}:outcomeSourceCorrections`);
+  const outcomeCustodyEventIndex = indexById(outcomeCustodyEvents, `${packagePath}:outcomeCustodyEvents`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -2470,6 +2479,104 @@ function validatePackage(pkg, packagePath) {
     if (!sufficient && !types.has("empirical-pilot-assessment-insufficient")) errors.push(`${assessment.id} insufficient empirical outcomes require an empirical-pilot-assessment-insufficient governance trigger.`);
   }
 
+  for (const policy of outcomeCollectionPolicies) {
+    ref(empiricalPilotProtocolIndex, policy.protocolRef, "empirical pilot protocol", policy.id);
+    if (policy.appendOnlyRequired !== true || policy.supersessionRequiredAfterInitial !== true || policy.custodyHistoryRequired !== true || policy.currentSnapshotMustMatchLatestRevision !== true) errors.push(`${policy.id} must require append-only revisions, supersession, custody history, and latest snapshot alignment.`);
+    if (policy.qifMutatesSourceRecords !== false) errors.push(`${policy.id} qifMutatesSourceRecords must be false.`);
+    if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one accountable reviewer.`);
+  }
+
+  for (const revision of outcomeObservationRevisions) {
+    ref(outcomeCollectionPolicyIndex, revision.policyRef, "outcome collection policy", revision.id);
+    const observation = ref(empiricalOutcomeObservationIndex, revision.observationRef, "empirical outcome observation", revision.id);
+    const superseded = revision.supersedesRevisionRef ? ref(outcomeObservationRevisionIndex, revision.supersedesRevisionRef, "superseded outcome revision", revision.id) : null;
+    const correction = revision.correctionRef ? ref(outcomeSourceCorrectionIndex, revision.correctionRef, "outcome source correction", revision.id) : null;
+    const custody = (revision.custodyEventRefs || []).map((id) => ref(outcomeCustodyEventIndex, id, "outcome custody event", revision.id)).filter(Boolean);
+    if (revision.revisionNumber === 1 && (revision.revisionType !== "initial" || revision.supersedesRevisionRef !== null)) errors.push(`${revision.id} first revision must be initial with null supersedesRevisionRef.`);
+    if (revision.revisionNumber > 1 && (!superseded || superseded.observationRef !== revision.observationRef || superseded.revisionNumber !== revision.revisionNumber - 1)) errors.push(`${revision.id} must supersede the immediately preceding revision for the same observation.`);
+    if (revision.revisionType === "source-correction" && (!correction || correction.correctedByRevisionRef !== revision.id)) errors.push(`${revision.id} source-correction revision must link a correction that points back to it.`);
+    if (revision.revisionType !== "source-correction" && revision.correctionRef !== null) errors.push(`${revision.id} non-correction revision must have null correctionRef.`);
+    const dueAt = observation ? Date.parse(empiricalPilotEnrollmentIndex.get(observation.enrollmentRef)?.observationDueAt) : NaN;
+    const recordedAt = Date.parse(revision.recordedAt);
+    const expectedLate = Number.isFinite(dueAt) && Number.isFinite(recordedAt) && recordedAt > dueAt;
+    if (revision.lateArrival !== expectedLate) errors.push(`${revision.id} lateArrival must reproduce as ${expectedLate}.`);
+    if (revision.automaticOutcomeInference !== false) errors.push(`${revision.id} automaticOutcomeInference must be false.`);
+    if (custody.some((event) => event.revisionRef !== revision.id || event.observationRef !== revision.observationRef)) errors.push(`${revision.id} custodyEventRefs must resolve to events for the same revision and observation.`);
+    const types = new Set((revision.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", revision.id)?.triggerType));
+    if (revision.evidenceStatus !== "verified" && !types.has("outcome-ledger-evidence-unverified")) errors.push(`${revision.id} non-verified revision evidence requires an outcome-ledger-evidence-unverified governance trigger.`);
+  }
+
+  for (const correction of outcomeSourceCorrections) {
+    ref(outcomeCollectionPolicyIndex, correction.policyRef, "outcome collection policy", correction.id);
+    ref(empiricalOutcomeObservationIndex, correction.observationRef, "empirical outcome observation", correction.id);
+    const incorrect = ref(outcomeObservationRevisionIndex, correction.incorrectRevisionRef, "incorrect outcome revision", correction.id);
+    const corrected = ref(outcomeObservationRevisionIndex, correction.correctedByRevisionRef, "correcting outcome revision", correction.id);
+    if (incorrect && incorrect.observationRef !== correction.observationRef) errors.push(`${correction.id} incorrectRevisionRef must belong to its observation.`);
+    if (corrected && (corrected.observationRef !== correction.observationRef || corrected.revisionType !== "source-correction" || corrected.correctionRef !== correction.id)) errors.push(`${correction.id} correctedByRevisionRef must be a source-correction revision linked back to the correction.`);
+    if (correction.originalValuesDigest === correction.correctedValuesDigest) errors.push(`${correction.id} originalValuesDigest and correctedValuesDigest must differ.`);
+    if (correction.sourceRecordMutated !== false) errors.push(`${correction.id} sourceRecordMutated must be false.`);
+    const types = new Set((correction.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", correction.id)?.triggerType));
+    if (correction.evidenceStatus !== "verified" && !types.has("outcome-ledger-evidence-unverified")) errors.push(`${correction.id} non-verified correction evidence requires an outcome-ledger-evidence-unverified governance trigger.`);
+  }
+
+  for (const event of outcomeCustodyEvents) {
+    ref(outcomeCollectionPolicyIndex, event.policyRef, "outcome collection policy", event.id);
+    const revision = ref(outcomeObservationRevisionIndex, event.revisionRef, "outcome observation revision", event.id);
+    if (revision && revision.observationRef !== event.observationRef) errors.push(`${event.id} revisionRef must belong to its observation.`);
+    if (event.sequenceNumber === 1 && event.fromCustodian !== null) errors.push(`${event.id} first custody event must have null fromCustodian.`);
+    if (event.qifCustodyAuthority !== false) errors.push(`${event.id} qifCustodyAuthority must be false.`);
+    const types = new Set((event.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", event.id)?.triggerType));
+    if (event.evidenceStatus !== "verified" && !types.has("outcome-ledger-evidence-unverified")) errors.push(`${event.id} non-verified custody evidence requires an outcome-ledger-evidence-unverified governance trigger.`);
+  }
+
+  for (const assessment of outcomeLedgerAssessments) {
+    ref(outcomeCollectionPolicyIndex, assessment.policyRef, "outcome collection policy", assessment.id);
+    const observations = (assessment.observationRefs || []).map((id) => ref(empiricalOutcomeObservationIndex, id, "empirical outcome observation", assessment.id)).filter(Boolean);
+    const revisions = (assessment.revisionRefs || []).map((id) => ref(outcomeObservationRevisionIndex, id, "outcome observation revision", assessment.id)).filter(Boolean);
+    const corrections = (assessment.correctionRefs || []).map((id) => ref(outcomeSourceCorrectionIndex, id, "outcome source correction", assessment.id)).filter(Boolean);
+    const custodyEvents = (assessment.custodyEventRefs || []).map((id) => ref(outcomeCustodyEventIndex, id, "outcome custody event", assessment.id)).filter(Boolean);
+    const latest = [];
+    let sequenceGapCount = 0;
+    let orphanRevisionCount = 0;
+    let snapshotMismatchCount = 0;
+    for (const observation of observations) {
+      const history = revisions.filter((item) => item.observationRef === observation.id).sort((a, b) => a.revisionNumber - b.revisionNumber);
+      if (history.length === 0) { orphanRevisionCount += 1; continue; }
+      for (let i = 0; i < history.length; i += 1) if (history[i].revisionNumber !== i + 1) sequenceGapCount += 1;
+      const current = history.at(-1);
+      latest.push(current.id);
+      for (const field of ["recordedAt", "observationState", "observedAt", "outcomeClass", "outcomeValue", "evidenceOriginRef", "evidenceStatus", "observationWindowClosed", "missingReason", "exclusionRationale", "automaticOutcomeInference"]) if (observation[field] !== current[field]) { snapshotMismatchCount += 1; break; }
+      if (!sameSet(observation.evidenceRefs, current.evidenceRefs)) snapshotMismatchCount += 1;
+    }
+    orphanRevisionCount += revisions.filter((item) => !assessment.observationRefs.includes(item.observationRef)).length;
+    const orderedEvents = [...custodyEvents].sort((a, b) => a.sequenceNumber - b.sequenceNumber);
+    for (let i = 0; i < orderedEvents.length; i += 1) {
+      if (orderedEvents[i].sequenceNumber !== i + 1) sequenceGapCount += 1;
+      if (i > 0 && orderedEvents[i].fromCustodian !== orderedEvents[i - 1].toCustodian) sequenceGapCount += 1;
+    }
+    const expected = {
+      observationCount: observations.length,
+      revisionCount: revisions.length,
+      supersededRevisionCount: revisions.filter((item) => item.status === "superseded").length,
+      lateArrivalCount: revisions.filter((item) => item.lateArrival).length,
+      correctionCount: corrections.length,
+      custodyEventCount: custodyEvents.length,
+      verifiedCustodyEventCount: custodyEvents.filter((item) => item.evidenceStatus === "verified").length,
+      sequenceGapCount,
+      orphanRevisionCount,
+      snapshotMismatchCount
+    };
+    for (const [field, value] of Object.entries(expected)) if (assessment[field] !== value) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    if (!sameSet(assessment.latestRevisionRefs, latest)) errors.push(`${assessment.id} latestRevisionRefs must exactly match the latest revision for every assessed observation.`);
+    const sufficient = revisions.length > 0 && expected.verifiedCustodyEventCount === custodyEvents.length && revisions.every((item) => item.evidenceStatus === "verified") && corrections.every((item) => item.evidenceStatus === "verified") && sequenceGapCount === 0 && orphanRevisionCount === 0 && snapshotMismatchCount === 0;
+    if (assessment.dataSufficiency !== (sufficient ? "sufficient" : "insufficient")) errors.push(`${assessment.id} dataSufficiency must reproduce as ${sufficient ? "sufficient" : "insufficient"}.`);
+    const state = sequenceGapCount > 0 || orphanRevisionCount > 0 || snapshotMismatchCount > 0 ? "blocked" : sufficient ? "internally-consistent" : "collecting";
+    if (assessment.ledgerState !== state) errors.push(`${assessment.id} ledgerState must reproduce as ${state}.`);
+    if (assessment.activityCountIsQuality !== false || assessment.automaticTruthClaim !== false) errors.push(`${assessment.id} must not treat activity counts as quality or make an automatic truth claim.`);
+    const types = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (!sufficient && !types.has("outcome-ledger-assessment-insufficient")) errors.push(`${assessment.id} insufficient ledger evidence requires an outcome-ledger-assessment-insufficient governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -2586,6 +2693,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that snapshot presence, retry count, idempotency-key presence, recorded effect state, or absence of detected duplicates proves state truth, effect completion, recovery safety, quality, retry authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that durable recovery evidence proves state truth, effect completion, recovery safety, quality, retry authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that observation duration, observation count, delayed-effect detection, reconciliation state, or absence of unresolved effects proves effect truth, observation completeness, causality, recovery safety, quality, closure authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that recovery observation evidence proves effect truth, completeness, causality, safety, quality, closure authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that pilot domain count, enrollment count, prospective timing, outcome count, or readiness state proves study validity, representativeness, causality, calibration truth, quality, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that empirical pilot structure proves study validity, representativeness, causality, calibration truth, quality, authorization, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that revision count, source correction, custody event, digest, sequence continuity, or snapshot alignment proves source truth, custody authenticity, causality, quality, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that outcome ledger structure proves source truth, custody authenticity, causality, quality, authorization, or authority.`);
   }
 
   results.push({
@@ -2670,6 +2778,11 @@ function validatePackage(pkg, packagePath) {
       empiricalPilotEnrollments: empiricalPilotEnrollments.length,
       empiricalOutcomeObservations: empiricalOutcomeObservations.length,
       empiricalPilotAssessments: empiricalPilotAssessments.length,
+      outcomeCollectionPolicies: outcomeCollectionPolicies.length,
+      outcomeObservationRevisions: outcomeObservationRevisions.length,
+      outcomeSourceCorrections: outcomeSourceCorrections.length,
+      outcomeCustodyEvents: outcomeCustodyEvents.length,
+      outcomeLedgerAssessments: outcomeLedgerAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -2689,5 +2802,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, recovery dependency overlap, path membership, failover prerequisite partitioning, correlated recovery summaries, checkpoint age, rehydration identity equality, effect-state partitioning, retry-budget arithmetic, duplicate-effect intersection, durable recovery summaries, recovery observation durations, observation sequencing, delayed-effect reconciliation, closure-state reproduction, prospective pilot registration, domain coverage, enrollment timing, outcome evidence state, empirical origin eligibility, pilot readiness arithmetic, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, study validity, contamination freedom, observation completeness, resolution quality, intervention effectiveness, coordination success, containment effectiveness, recovery effectiveness, state truth, effect completion, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, recovery closure, retry or policy selection, authorization, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, recovery dependency overlap, path membership, failover prerequisite partitioning, correlated recovery summaries, checkpoint age, rehydration identity equality, effect-state partitioning, retry-budget arithmetic, duplicate-effect intersection, durable recovery summaries, recovery observation durations, observation sequencing, delayed-effect reconciliation, closure-state reproduction, prospective pilot registration, domain coverage, enrollment timing, outcome evidence state, empirical origin eligibility, pilot readiness arithmetic, append-only outcome revision sequence, supersession, late-arrival classification, source correction linkage, custody continuity, latest snapshot alignment, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, study validity, source truth, custody authenticity, contamination freedom, observation completeness, resolution quality, intervention effectiveness, coordination success, containment effectiveness, recovery effectiveness, state truth, effect completion, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, recovery closure, retry or policy selection, authorization, or decision authority."
 }, null, 2));

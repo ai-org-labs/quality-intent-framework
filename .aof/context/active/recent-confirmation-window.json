@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-18T04:48:47.232Z",
+  "updated_at": "2026-10-19T04:49:41.008Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "成功は、pilot protocol、domain plan、prospective enrollment、outcome observation status、pilot assessment、governance routingを機械検証し、実データなしをreadyと誤認せず、複数領域と非ソフトウェア領域の計画を示し、npm test、portable検証、AOF組織検証、公開releaseを完了すること。",
-      "recorded_at": "2026-10-18T04:36:07.252Z",
+      "answer": "成功は、観測revisionの連続性とsupersession、late-arrival、source correction、custody event、最新snapshot整合、governance routingを再現可能に検証し、実データなしやexample-onlyを真実と誤認せず、npm test・portable・AOF組織検証・公開releaseを完了すること。",
+      "recorded_at": "2026-10-19T04:36:12.639Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVDC1RDA-JW5Y6C",
+      "source_session_id": "SESS-MVERHQS7-DSGHQE",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "Visionary identifies the transition from structural readiness to governed field learning; Builder can add a bounded local model to calibration-report; Guardian requires no fabricated observations, prospective freeze, non-software coverage, explicit missing/excluded states, and governance for insufficiency.",
-      "recorded_at": "2026-10-18T04:36:53.310Z",
+      "answer": "Visionary frames temporal evidence integrity as the next empirical-calibration boundary; Builder can extend calibration-report locally; Guardian requires immutable history, explicit correction lineage, custody sequencing, current-snapshot reproduction, and governance without truth or authority claims.",
+      "recorded_at": "2026-10-19T04:37:21.611Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVDC1RDA-JW5Y6C",
-      "source_decision_record_id": "DEC-MVDC2W8Q-B5URBP"
+      "source_session_id": "SESS-MVERHQS7-DSGHQE",
+      "source_decision_record_id": "DEC-MVERJCQX-AIX9H3"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "No independently verified operational decision-outcome pairs are committed, so empirical calibration and transportability remain unestablished.",
-      "recorded_at": "2026-10-18T04:48:47.232Z",
-      "expectation_state": "Prospective empirical pilot protocol, cross-domain plans, enrollment timing, outcome-state preservation, governance, documentation, fixtures, and portable validation are complete; example remains explicitly not-started and insufficient.",
-      "mismatch_state": "No independently verified operational decision-outcome pairs are committed, so empirical calibration and transportability remain unestablished.",
-      "scale_direction": "Implement v0.7.1 Outcome Collection Ledger with append-only observation revisions and source-correction history.",
-      "source_session_id": "SESS-MVDC1RDA-JW5Y6C",
-      "source_decision_record_id": "DEC-MVDC2W8Q-B5URBP"
+      "answer": "No independently verified operational ledger history or custody evidence is committed, so source truth, custody authenticity, empirical calibration, and transportability remain unestablished.",
+      "recorded_at": "2026-10-19T04:49:41.008Z",
+      "expectation_state": "Append-only outcome collection policy, observation revisions, source corrections, custody history, current-snapshot alignment, governance, documentation, fixtures, and portable validation are complete; example remains collecting, example-only, and insufficient.",
+      "mismatch_state": "No independently verified operational ledger history or custody evidence is committed, so source truth, custody authenticity, empirical calibration, and transportability remain unestablished.",
+      "scale_direction": "Implement v0.7.2 Missingness and Attrition Sensitivity with explicit bounds for missing, excluded, withdrawn, and delayed outcomes.",
+      "source_session_id": "SESS-MVERHQS7-DSGHQE",
+      "source_decision_record_id": "DEC-MVERJCQX-AIX9H3"
     }
   ]
 }

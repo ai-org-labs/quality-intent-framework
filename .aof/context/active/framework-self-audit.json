@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-18T04:48:47.229Z",
-  "audit_id": "FSA-QIFV0700",
-  "scope": "QIF v0.7.0 post-implementation self-review",
-  "summary": "Prospective empirical pilot protocol, cross-domain plans, enrollment timing, outcome-state preservation, governance, documentation, fixtures, and portable validation are complete; example remains explicitly not-started and insufficient.",
-  "detected_gap": "No independently verified operational decision-outcome pairs are committed, so empirical calibration and transportability remain unestablished.",
+  "recorded_at": "2026-10-19T04:49:41.004Z",
+  "audit_id": "FSA-QIFV0710",
+  "scope": "QIF v0.7.1 post-implementation self-review",
+  "summary": "Append-only outcome collection policy, observation revisions, source corrections, custody history, current-snapshot alignment, governance, documentation, fixtures, and portable validation are complete; example remains collecting, example-only, and insufficient.",
+  "detected_gap": "No independently verified operational ledger history or custody evidence is committed, so source truth, custody authenticity, empirical calibration, and transportability remain unestablished.",
   "result_state": "stable",
-  "next_action": "Implement v0.7.1 Outcome Collection Ledger with append-only observation revisions and source-correction history.",
+  "next_action": "Implement v0.7.2 Missingness and Attrition Sensitivity with explicit bounds for missing, excluded, withdrawn, and delayed outcomes.",
   "related_task_ids": [
-    "TASK-069"
+    "TASK-070"
   ],
-  "source_session_id": "SESS-MVDC1RDA-JW5Y6C",
-  "source_decision_record_id": "DEC-MVDC2W8Q-B5URBP"
+  "source_session_id": "SESS-MVERHQS7-DSGHQE",
+  "source_decision_record_id": "DEC-MVERJCQX-AIX9H3"
 }
