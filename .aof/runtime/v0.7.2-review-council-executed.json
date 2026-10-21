@@ -1,0 +1,320 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-10-21T04:41:32.779Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MVHM4JG8-J57TJ9",
+    "stage": "review",
+    "executionId": "CRUN-MVHMKFVS-A0PQ46",
+    "executionStatus": "completed",
+    "invokedModel": true,
+    "seatCount": 2,
+    "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+    "lastCouncilExecutionId": "CRUN-MVHMKFVS-A0PQ46",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVHM4JG8-J57TJ9",
+              "decision_id": "DEC-MVHM5IR9-JAHM0K",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。",
+              "intent": "成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。",
+              "active_context": "context: 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。 | success: 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。",
+              "context_snapshot_id": "CTX-MVHM4OT1-70CGH9",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。"
+            },
+            "task": {
+              "request": "QIF v0.7.2 Missingness and Attrition Sensitivityを実装・検証・公開する。観測欠測、除外、撤回、遅延、追跡不能、観測機会の差による偏りを明示し、best-case/worst-case boundsと感度判定を再現可能にする。欠測を成功や品質と誤認せず、domain-generalで、実データや意味的真実を捏造しない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0720.json",
+                ".aof/runtime/PCH-QIFV0720.json",
+                ".aof/runtime/PST-QIFV0720.json",
+                ".aof/runtime/VHY-QIFV0720.json",
+                ".aof/runtime/ALT-QIFV0720.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVHM5IR9-JAHM0K"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVHM4JG8-J57TJ9",
+              "decision_id": "DEC-MVHM5IR9-JAHM0K",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。",
+              "intent": "成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。",
+              "active_context": "context: 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。 | success: 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。",
+              "context_snapshot_id": "CTX-MVHM4OT1-70CGH9",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。"
+            },
+            "task": {
+              "request": "QIF v0.7.2 Missingness and Attrition Sensitivityを実装・検証・公開する。観測欠測、除外、撤回、遅延、追跡不能、観測機会の差による偏りを明示し、best-case/worst-case boundsと感度判定を再現可能にする。欠測を成功や品質と誤認せず、domain-generalで、実データや意味的真実を捏造しない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0720.json",
+                ".aof/runtime/PCH-QIFV0720.json",
+                ".aof/runtime/PST-QIFV0720.json",
+                ".aof/runtime/VHY-QIFV0720.json",
+                ".aof/runtime/ALT-QIFV0720.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVHM5IR9-JAHM0K"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MVHMKFVS-A0PQ46",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "completed",
+      "started_at": "2026-10-21T04:41:32.774Z",
+      "completed_at": "2026-10-21T04:41:32.776Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MVHMKFVS-A0PQ46-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVHM4JG8-J57TJ9",
+              "decision_id": "DEC-MVHM5IR9-JAHM0K",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。",
+              "intent": "成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。",
+              "active_context": "context: 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。 | success: 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。",
+              "context_snapshot_id": "CTX-MVHM4OT1-70CGH9",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。"
+            },
+            "task": {
+              "request": "QIF v0.7.2 Missingness and Attrition Sensitivityを実装・検証・公開する。観測欠測、除外、撤回、遅延、追跡不能、観測機会の差による偏りを明示し、best-case/worst-case boundsと感度判定を再現可能にする。欠測を成功や品質と誤認せず、domain-generalで、実データや意味的真実を捏造しない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0720.json",
+                ".aof/runtime/PCH-QIFV0720.json",
+                ".aof/runtime/PST-QIFV0720.json",
+                ".aof/runtime/VHY-QIFV0720.json",
+                ".aof/runtime/ALT-QIFV0720.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVHM5IR9-JAHM0K"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-21T04:41:32.776Z",
+          "completed_at": "2026-10-21T04:41:32.776Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-21T04:41:32.776Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian review response: focus on 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。 and align to 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。.",
+            "output_summary": "DECISION: proceed VETO: no Guardian review response: focus on 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.7.2 Missingness and Attrition Sensitivityを実装・検証・公開する。観測欠測、除外、撤回、遅延、追跡不能、観測機会の差による偏りを明示し、best-case/worst-case boundsと感度判定を再現可能にする。欠測を成功や品質と誤認せず、domain-generalで、実データや意味的真実を捏造しない。\nNeed: 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。\nIntent: 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。\nActive Context: context: 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。 | success: 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。"
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVHMKFVS-A0PQ46-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVHM4JG8-J57TJ9",
+              "decision_id": "DEC-MVHM5IR9-JAHM0K",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。",
+              "intent": "成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。",
+              "active_context": "context: 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。 | success: 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。",
+              "context_snapshot_id": "CTX-MVHM4OT1-70CGH9",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。"
+            },
+            "task": {
+              "request": "QIF v0.7.2 Missingness and Attrition Sensitivityを実装・検証・公開する。観測欠測、除外、撤回、遅延、追跡不能、観測機会の差による偏りを明示し、best-case/worst-case boundsと感度判定を再現可能にする。欠測を成功や品質と誤認せず、domain-generalで、実データや意味的真実を捏造しない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0720.json",
+                ".aof/runtime/PCH-QIFV0720.json",
+                ".aof/runtime/PST-QIFV0720.json",
+                ".aof/runtime/VHY-QIFV0720.json",
+                ".aof/runtime/ALT-QIFV0720.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVHM5IR9-JAHM0K"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-21T04:41:32.776Z",
+          "completed_at": "2026-10-21T04:41:32.776Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-21T04:41:32.776Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder review response: focus on 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。 and align to 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。.",
+            "output_summary": "DECISION: proceed VETO: no Builder review response: focus on 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.7.2 Missingness and Attrition Sensitivityを実装・検証・公開する。観測欠測、除外、撤回、遅延、追跡不能、観測機会の差による偏りを明示し、best-case/worst-case boundsと感度判定を再現可能にする。欠測を成功や品質と誤認せず、domain-generalで、実データや意味的真実を捏造しない。\nNeed: 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。\nIntent: 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。\nActive Context: context: 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。 | success: 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はcalibration-report packageのschema、local verifier、example、negative fixtures、docs、roadmap、portable package、release。外部データ収集、UI、外部連携、実運用判断、個人評価、既存観測の破壊的更新は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。"
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

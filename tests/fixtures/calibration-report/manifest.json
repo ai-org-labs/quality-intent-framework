@@ -4175,6 +4175,146 @@
       "rule": "outcome ledger semantic boundary",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming that outcome ledger structure proves source truth"
+    },
+    {
+      "file": "calibration-report-missingness-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "missingness policies required",
+      "expect": "fail",
+      "errorIncludes": "package missingnessPolicies must be an array."
+    },
+    {
+      "file": "calibration-report-outcome-dispositions-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "outcome dispositions required",
+      "expect": "fail",
+      "errorIncludes": "package outcomeDispositions must be an array."
+    },
+    {
+      "file": "calibration-report-missingness-policy-protocol.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "missingness policy protocol resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing empirical pilot protocol"
+    },
+    {
+      "file": "calibration-report-missingness-policy-classes.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "canonical disposition coverage",
+      "expect": "fail",
+      "errorIncludes": "requiredDispositionClasses must contain every canonical disposition exactly once."
+    },
+    {
+      "file": "calibration-report-missingness-policy-success.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unavailable outcomes are not success",
+      "expect": "fail",
+      "errorIncludes": "unavailableOutcomesCountAsSuccess must be false."
+    },
+    {
+      "file": "calibration-report-missingness-policy-optimization.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no exclusion optimization",
+      "expect": "fail",
+      "errorIncludes": "exclusionOptimizationAllowed must be false."
+    },
+    {
+      "file": "calibration-report-outcome-disposition-enrollment.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "disposition enrollment resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing empirical pilot enrollment"
+    },
+    {
+      "file": "calibration-report-outcome-disposition-observation.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "disposition observation lineage",
+      "expect": "fail",
+      "errorIncludes": "observationRef must belong to its enrollment."
+    },
+    {
+      "file": "calibration-report-outcome-disposition-value.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "unavailable outcome value boundary",
+      "expect": "fail",
+      "errorIncludes": "unavailable disposition must have null outcomeValueUsed."
+    },
+    {
+      "file": "calibration-report-outcome-disposition-inference.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no automatic missingness mechanism",
+      "expect": "fail",
+      "errorIncludes": "automaticMissingnessMechanismInference must be false."
+    },
+    {
+      "file": "calibration-report-outcome-disposition-evidence-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "disposition evidence governance",
+      "expect": "fail",
+      "errorIncludes": "non-verified disposition evidence requires a missingness-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-missingness-sensitivity-eligible.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "sensitivity denominator arithmetic",
+      "expect": "fail",
+      "errorIncludes": "eligibleCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-missingness-sensitivity-best-rate.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "best-case bound arithmetic",
+      "expect": "fail",
+      "errorIncludes": "bestCaseRate must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-missingness-sensitivity-worst-decision.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "worst-case threshold decision",
+      "expect": "fail",
+      "errorIncludes": "worstCaseDecision must reproduce as below-threshold."
+    },
+    {
+      "file": "calibration-report-missingness-sensitivity-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "conclusion sensitivity governance",
+      "expect": "fail",
+      "errorIncludes": "conclusion-sensitive bounds require a missingness-conclusion-sensitive governance trigger."
+    },
+    {
+      "file": "calibration-report-missingness-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "missingness assessment arithmetic",
+      "expect": "fail",
+      "errorIncludes": "delayedCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-missingness-assessment-coverage.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "eligible enrollment coverage",
+      "expect": "fail",
+      "errorIncludes": "dispositions must classify every empirical pilot enrollment exactly once."
+    },
+    {
+      "file": "calibration-report-missingness-assessment-sufficiency.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "missingness sufficiency reproduction",
+      "expect": "fail",
+      "errorIncludes": "dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "calibration-report-missingness-assessment-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "insufficient missingness governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient missingness evidence requires a missingness-assessment-insufficient governance trigger."
+    },
+    {
+      "file": "calibration-report-missingness-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "missingness semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that missingness sensitivity proves a missingness mechanism"
     }
   ],
   "rescopedRules": []

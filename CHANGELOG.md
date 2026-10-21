@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.7.2
+
+- Added executable missingness policies, one-to-one outcome dispositions, missingness sensitivity analyses, and aggregate missingness assessments.
+- Added exact eligible-population accounting across observed, missing, excluded, withdrawn, delayed, and untraceable outcomes.
+- Added reproducible observed coverage, observed success rate, best-case and worst-case success bounds, threshold decisions, and conclusion-sensitivity checks.
+- Added 20 retained negative fixtures and governance for unverified disposition evidence, sensitive conclusions, incomplete classification, and insufficient assessment evidence.
+- Prevented unavailable outcomes, exclusion choices, and sensitivity bounds from becoming observed truth, missingness-mechanism claims, causality, representativeness, statistical validity, quality, authorization, or authority.
+
 ## v0.7.1
 
 - Added executable outcome collection policies, append-only observation revisions, source corrections, custody events, and ledger assessments.

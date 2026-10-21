@@ -90,6 +90,10 @@
     "outcomeSourceCorrections",
     "outcomeCustodyEvents",
     "outcomeLedgerAssessments",
+    "missingnessPolicies",
+    "outcomeDispositions",
+    "missingnessSensitivityAnalyses",
+    "missingnessAssessments",
     "governanceTriggers",
     "verifierBoundary"
   ],
@@ -656,6 +660,26 @@
       "type": "array",
       "minItems": 1,
       "items": {"$ref": "#/$defs/outcomeLedgerAssessment"}
+    },
+    "missingnessPolicies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/missingnessPolicy"}
+    },
+    "outcomeDispositions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/outcomeDisposition"}
+    },
+    "missingnessSensitivityAnalyses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/missingnessSensitivityAnalysis"}
+    },
+    "missingnessAssessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/missingnessAssessment"}
     }
   },
   "$defs": {
@@ -8716,6 +8740,109 @@
         "activityCountIsQuality": {"const": false},
         "automaticTruthClaim": {"const": false},
         "interpretation": {"const": "outcome-ledger-structure-only-not-source-truth-custody-authenticity-causality-quality-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "missingnessPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "protocolRef", "eligiblePopulationRule", "requiredDispositionClasses", "minimumObservedRate", "sensitivityMethod", "decisionThreshold", "unavailableOutcomesCountAsSuccess", "exclusionOptimizationAllowed", "reviewedBy", "inferenceBoundary", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "protocolRef": {"$ref": "#/$defs/id"},
+        "eligiblePopulationRule": {"const": "all-prospectively-registered-enrollments"},
+        "requiredDispositionClasses": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"enum": ["observed", "missing", "excluded", "withdrawn", "delayed", "untraceable"]}},
+        "minimumObservedRate": {"$ref": "#/$defs/score"},
+        "sensitivityMethod": {"const": "binary-best-case-worst-case-bounds"},
+        "decisionThreshold": {"$ref": "#/$defs/score"},
+        "unavailableOutcomesCountAsSuccess": {"const": false},
+        "exclusionOptimizationAllowed": {"const": false},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "inferenceBoundary": {"const": "missingness-sensitivity-structure-only-not-missingness-mechanism-causality-representativeness-statistical-validity-quality-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["active", "retired"]}
+      }
+    },
+    "outcomeDisposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "enrollmentRef", "observationRef", "dispositionClass", "reasonCode", "reasonDetail", "responsibleOwner", "classifiedAt", "evidenceRefs", "evidenceStatus", "outcomeValueUsed", "automaticMissingnessMechanismInference", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "enrollmentRef": {"$ref": "#/$defs/id"},
+        "observationRef": {"oneOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+        "dispositionClass": {"enum": ["observed", "missing", "excluded", "withdrawn", "delayed", "untraceable"]},
+        "reasonCode": {"type": "string", "minLength": 1},
+        "reasonDetail": {"type": "string", "minLength": 1},
+        "responsibleOwner": {"type": "string", "minLength": 1},
+        "classifiedAt": {"type": "string", "format": "date-time"},
+        "evidenceRefs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "evidenceStatus": {"enum": ["verified", "unverified", "example-only", "not-collected"]},
+        "outcomeValueUsed": {"type": ["integer", "null"], "enum": [0, 1, null]},
+        "automaticMissingnessMechanismInference": {"const": false},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["classified", "reviewed", "retired"]}
+      }
+    },
+    "missingnessSensitivityAnalysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "dispositionRefs", "eligibleCount", "observedCount", "unavailableCount", "observedSuccessCount", "observedRate", "bestCaseSuccessCount", "worstCaseSuccessCount", "bestCaseRate", "worstCaseRate", "decisionThreshold", "bestCaseDecision", "worstCaseDecision", "conclusionSensitive", "reviewedBy", "automaticImputation", "interpretation", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "dispositionRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "eligibleCount": {"type": "integer", "minimum": 1},
+        "observedCount": {"type": "integer", "minimum": 0},
+        "unavailableCount": {"type": "integer", "minimum": 0},
+        "observedSuccessCount": {"type": "integer", "minimum": 0},
+        "observedRate": {"oneOf": [{"$ref": "#/$defs/score"}, {"type": "null"}]},
+        "bestCaseSuccessCount": {"type": "integer", "minimum": 0},
+        "worstCaseSuccessCount": {"type": "integer", "minimum": 0},
+        "bestCaseRate": {"$ref": "#/$defs/score"},
+        "worstCaseRate": {"$ref": "#/$defs/score"},
+        "decisionThreshold": {"$ref": "#/$defs/score"},
+        "bestCaseDecision": {"enum": ["meets-threshold", "below-threshold"]},
+        "worstCaseDecision": {"enum": ["meets-threshold", "below-threshold"]},
+        "conclusionSensitive": {"type": "boolean"},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "automaticImputation": {"const": false},
+        "interpretation": {"const": "bounded-sensitivity-only-not-observed-outcome-missingness-mechanism-causality-representativeness-statistical-validity-quality-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "missingnessAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "dispositionRefs", "sensitivityAnalysisRefs", "eligibleCount", "observedCount", "missingCount", "excludedCount", "withdrawnCount", "delayedCount", "untraceableCount", "observedRate", "unexplainedUnavailableCount", "conclusionSensitiveAnalysisCount", "dataSufficiency", "assessmentSignal", "reviewedBy", "activityCountIsQuality", "automaticQualityVerdict", "interpretation", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "dispositionRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "sensitivityAnalysisRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "eligibleCount": {"type": "integer", "minimum": 1},
+        "observedCount": {"type": "integer", "minimum": 0},
+        "missingCount": {"type": "integer", "minimum": 0},
+        "excludedCount": {"type": "integer", "minimum": 0},
+        "withdrawnCount": {"type": "integer", "minimum": 0},
+        "delayedCount": {"type": "integer", "minimum": 0},
+        "untraceableCount": {"type": "integer", "minimum": 0},
+        "observedRate": {"$ref": "#/$defs/score"},
+        "unexplainedUnavailableCount": {"type": "integer", "minimum": 0},
+        "conclusionSensitiveAnalysisCount": {"type": "integer", "minimum": 0},
+        "dataSufficiency": {"enum": ["sufficient", "insufficient"]},
+        "assessmentSignal": {"enum": ["insufficient-observation", "unexplained-attrition", "conclusion-sensitive", "observed-no-structural-alerts"]},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "activityCountIsQuality": {"const": false},
+        "automaticQualityVerdict": {"const": false},
+        "interpretation": {"const": "missingness-sensitivity-structure-only-not-missingness-mechanism-causality-representativeness-statistical-validity-quality-authorization-or-authority"},
         "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
         "status": {"enum": ["draft", "reviewed", "retired"]}
       }

@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-21T04:29:45.511Z",
+  "validation_id": "NVR-MVHM5A5J-HY8WD5",
+  "raw_need": "Add missingness and attrition sensitivity to the empirical calibration runtime.",
+  "validation_status": "validated",
+  "validated_need": "QIF needs a domain-general structural contract that accounts for every eligible outcome disposition and bounds whether unavailable outcomes could change the conclusion, without imputing semantic truth.",
+  "decision_summary": "Proceed with the smallest additive calibration-report slice: policy, disposition, sensitivity analysis, assessment, governance, verifier, examples, fixtures, docs, portable release.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is in scope?",
+      "answer": "calibration-report schema, verifier, examples, fixtures, docs, portable package, release",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What proves success?",
+      "answer": "deterministic disposition arithmetic, best/worst bounds, sensitivity classification, governance, full tests and release",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Observed outcomes are not automatically representative of all eligible outcomes."
+  ],
+  "evidence_gaps": [
+    "No real operational attrition dataset is committed; examples remain illustrative and cannot establish statistical validity."
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0720.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0720.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0720.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVHM4OT3-Y38L8N"
+}

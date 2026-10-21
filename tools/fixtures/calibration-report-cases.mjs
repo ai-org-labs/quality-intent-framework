@@ -1325,6 +1325,66 @@ export const cases = [
   },
   {
     id:"outcome-ledger-boundary-overclaim",rule:"outcome ledger semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that outcome ledger structure proves source truth",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that revision count"));}
+  },
+  {
+    id:"missingness-policies-not-array",rule:"missingness policies required",expect:"package missingnessPolicies must be an array.",mutate:(pkg)=>{pkg.missingnessPolicies=null;}
+  },
+  {
+    id:"outcome-dispositions-not-array",rule:"outcome dispositions required",expect:"package outcomeDispositions must be an array.",mutate:(pkg)=>{pkg.outcomeDispositions=null;}
+  },
+  {
+    id:"missingness-policy-protocol",rule:"missingness policy protocol resolution",expect:"references missing empirical pilot protocol",mutate:(pkg)=>{pkg.missingnessPolicies[0].protocolRef="EPP-NOPE-999";}
+  },
+  {
+    id:"missingness-policy-classes",rule:"canonical disposition coverage",expect:"requiredDispositionClasses must contain every canonical disposition exactly once.",mutate:(pkg)=>{pkg.missingnessPolicies[0].requiredDispositionClasses=["observed","missing","excluded","withdrawn","delayed","delayed"];}
+  },
+  {
+    id:"missingness-policy-success",rule:"unavailable outcomes are not success",expect:"unavailableOutcomesCountAsSuccess must be false.",mutate:(pkg)=>{pkg.missingnessPolicies[0].unavailableOutcomesCountAsSuccess=true;}
+  },
+  {
+    id:"missingness-policy-optimization",rule:"no exclusion optimization",expect:"exclusionOptimizationAllowed must be false.",mutate:(pkg)=>{pkg.missingnessPolicies[0].exclusionOptimizationAllowed=true;}
+  },
+  {
+    id:"outcome-disposition-enrollment",rule:"disposition enrollment resolution",expect:"references missing empirical pilot enrollment",mutate:(pkg)=>{pkg.outcomeDispositions[0].enrollmentRef="EPE-NOPE-999";}
+  },
+  {
+    id:"outcome-disposition-observation",rule:"disposition observation lineage",expect:"observationRef must belong to its enrollment.",mutate:(pkg)=>{pkg.outcomeDispositions[0].enrollmentRef="EPE-CR-001";pkg.empiricalOutcomeObservations[0].enrollmentRef="EPE-NOPE-999";}
+  },
+  {
+    id:"outcome-disposition-value",rule:"unavailable outcome value boundary",expect:"unavailable disposition must have null outcomeValueUsed.",mutate:(pkg)=>{pkg.outcomeDispositions[0].outcomeValueUsed=1;}
+  },
+  {
+    id:"outcome-disposition-inference",rule:"no automatic missingness mechanism",expect:"automaticMissingnessMechanismInference must be false.",mutate:(pkg)=>{pkg.outcomeDispositions[0].automaticMissingnessMechanismInference=true;}
+  },
+  {
+    id:"outcome-disposition-evidence-trigger",rule:"disposition evidence governance",expect:"non-verified disposition evidence requires a missingness-evidence-unverified governance trigger.",mutate:(pkg)=>{pkg.outcomeDispositions[0].governanceTriggerRefs=[];}
+  },
+  {
+    id:"missingness-sensitivity-eligible",rule:"sensitivity denominator arithmetic",expect:"eligibleCount must reproduce as 1.",mutate:(pkg)=>{pkg.missingnessSensitivityAnalyses[0].eligibleCount=2;}
+  },
+  {
+    id:"missingness-sensitivity-best-rate",rule:"best-case bound arithmetic",expect:"bestCaseRate must reproduce as 1.",mutate:(pkg)=>{pkg.missingnessSensitivityAnalyses[0].bestCaseRate=0.5;}
+  },
+  {
+    id:"missingness-sensitivity-worst-decision",rule:"worst-case threshold decision",expect:"worstCaseDecision must reproduce as below-threshold.",mutate:(pkg)=>{pkg.missingnessSensitivityAnalyses[0].worstCaseDecision="meets-threshold";}
+  },
+  {
+    id:"missingness-sensitivity-trigger",rule:"conclusion sensitivity governance",expect:"conclusion-sensitive bounds require a missingness-conclusion-sensitive governance trigger.",mutate:(pkg)=>{pkg.missingnessSensitivityAnalyses[0].governanceTriggerRefs=[];}
+  },
+  {
+    id:"missingness-assessment-count",rule:"missingness assessment arithmetic",expect:"delayedCount must reproduce as 1.",mutate:(pkg)=>{pkg.missingnessAssessments[0].delayedCount=0;}
+  },
+  {
+    id:"missingness-assessment-coverage",rule:"eligible enrollment coverage",expect:"dispositions must classify every empirical pilot enrollment exactly once.",mutate:(pkg)=>{pkg.missingnessAssessments[0].dispositionRefs=[];}
+  },
+  {
+    id:"missingness-assessment-sufficiency",rule:"missingness sufficiency reproduction",expect:"dataSufficiency must reproduce as insufficient.",mutate:(pkg)=>{pkg.missingnessAssessments[0].dataSufficiency="sufficient";}
+  },
+  {
+    id:"missingness-assessment-trigger",rule:"insufficient missingness governance",expect:"insufficient missingness evidence requires a missingness-assessment-insufficient governance trigger.",mutate:(pkg)=>{pkg.missingnessAssessments[0].governanceTriggerRefs=["GTR-CR-079"];}
+  },
+  {
+    id:"missingness-boundary-overclaim",rule:"missingness semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that missingness sensitivity proves a missingness mechanism",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that a disposition label"));}
   }
 ];
 

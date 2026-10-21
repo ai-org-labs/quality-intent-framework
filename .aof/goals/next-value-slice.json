@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.7.2 Missingness and Attrition Sensitivity",
-  "updated_at": "2026-10-19T04:49:56.797Z",
+  "content": "v0.7.3 Cross-Domain Transportability Review",
+  "updated_at": "2026-10-21T04:41:58.051Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MVERHQS7-DSGHQE",
-  "source_decision_record_id": "DEC-MVERJCQX-AIX9H3",
+  "source_session_id": "SESS-MVHM4JG8-J57TJ9",
+  "source_decision_record_id": "DEC-MVHM5IR9-JAHM0K",
   "declared_complete_at": null
 }

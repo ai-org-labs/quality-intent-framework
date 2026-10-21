@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Provide an append-only, domain-general outcome observation ledger that preserves historical revisions, late-arrival status, source corrections, custody transitions, and current-snapshot alignment without mutating prospective enrollment or claiming evidence truth",
-  "updated_at": "2026-10-19T04:37:21.611Z",
+  "content": "QIF needs a domain-general structural contract that accounts for every eligible outcome disposition and bounds whether unavailable outcomes could change the conclusion, without imputing semantic truth.",
+  "updated_at": "2026-10-21T04:29:56.664Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVERHQS7-DSGHQE",
-  "source_decision_record_id": "DEC-MVERJCQX-AIX9H3",
+  "source_session_id": "SESS-MVHM4JG8-J57TJ9",
+  "source_decision_record_id": "DEC-MVHM5IR9-JAHM0K",
   "declared_complete_at": null
 }

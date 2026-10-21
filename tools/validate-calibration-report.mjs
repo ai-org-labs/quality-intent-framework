@@ -220,6 +220,10 @@ function validatePackage(pkg, packagePath) {
   const outcomeSourceCorrections = requiredArray(pkg, "outcomeSourceCorrections");
   const outcomeCustodyEvents = requiredArray(pkg, "outcomeCustodyEvents");
   const outcomeLedgerAssessments = requiredArray(pkg, "outcomeLedgerAssessments");
+  const missingnessPolicies = requiredArray(pkg, "missingnessPolicies");
+  const outcomeDispositions = requiredArray(pkg, "outcomeDispositions");
+  const missingnessSensitivityAnalyses = requiredArray(pkg, "missingnessSensitivityAnalyses");
+  const missingnessAssessments = requiredArray(pkg, "missingnessAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -297,6 +301,9 @@ function validatePackage(pkg, packagePath) {
   const outcomeObservationRevisionIndex = indexById(outcomeObservationRevisions, `${packagePath}:outcomeObservationRevisions`);
   const outcomeSourceCorrectionIndex = indexById(outcomeSourceCorrections, `${packagePath}:outcomeSourceCorrections`);
   const outcomeCustodyEventIndex = indexById(outcomeCustodyEvents, `${packagePath}:outcomeCustodyEvents`);
+  const missingnessPolicyIndex = indexById(missingnessPolicies, `${packagePath}:missingnessPolicies`);
+  const outcomeDispositionIndex = indexById(outcomeDispositions, `${packagePath}:outcomeDispositions`);
+  const missingnessSensitivityIndex = indexById(missingnessSensitivityAnalyses, `${packagePath}:missingnessSensitivityAnalyses`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -2577,6 +2584,79 @@ function validatePackage(pkg, packagePath) {
     if (!sufficient && !types.has("outcome-ledger-assessment-insufficient")) errors.push(`${assessment.id} insufficient ledger evidence requires an outcome-ledger-assessment-insufficient governance trigger.`);
   }
 
+  const requiredDispositionClasses = ["observed", "missing", "excluded", "withdrawn", "delayed", "untraceable"];
+  for (const policy of missingnessPolicies) {
+    ref(empiricalPilotProtocolIndex, policy.protocolRef, "empirical pilot protocol", policy.id);
+    if (!sameSet(policy.requiredDispositionClasses, requiredDispositionClasses)) errors.push(`${policy.id} requiredDispositionClasses must contain every canonical disposition exactly once.`);
+    if (policy.unavailableOutcomesCountAsSuccess !== false) errors.push(`${policy.id} unavailableOutcomesCountAsSuccess must be false.`);
+    if (policy.exclusionOptimizationAllowed !== false) errors.push(`${policy.id} exclusionOptimizationAllowed must be false.`);
+    if (!Array.isArray(policy.reviewedBy) || policy.reviewedBy.length === 0) errors.push(`${policy.id} reviewedBy must include at least one accountable reviewer.`);
+  }
+
+  for (const disposition of outcomeDispositions) {
+    ref(missingnessPolicyIndex, disposition.policyRef, "missingness policy", disposition.id);
+    const enrollment = ref(empiricalPilotEnrollmentIndex, disposition.enrollmentRef, "empirical pilot enrollment", disposition.id);
+    const observation = disposition.observationRef ? ref(empiricalOutcomeObservationIndex, disposition.observationRef, "empirical outcome observation", disposition.id) : null;
+    if (observation && observation.enrollmentRef !== disposition.enrollmentRef) errors.push(`${disposition.id} observationRef must belong to its enrollment.`);
+    if (disposition.dispositionClass === "observed") {
+      if (!observation || observation.observationState !== "completed" || ![0, 1].includes(disposition.outcomeValueUsed)) errors.push(`${disposition.id} observed disposition requires a completed observation and binary outcomeValueUsed.`);
+      if (observation && disposition.outcomeValueUsed !== observation.outcomeValue) errors.push(`${disposition.id} outcomeValueUsed must match the completed observation.`);
+    } else if (disposition.outcomeValueUsed !== null) {
+      errors.push(`${disposition.id} unavailable disposition must have null outcomeValueUsed.`);
+    }
+    if (enrollment?.enrollmentState === "withdrawn" && disposition.dispositionClass !== "withdrawn") errors.push(`${disposition.id} withdrawn enrollment must use withdrawn disposition.`);
+    if (disposition.automaticMissingnessMechanismInference !== false) errors.push(`${disposition.id} automaticMissingnessMechanismInference must be false.`);
+    const types = new Set((disposition.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", disposition.id)?.triggerType));
+    if (disposition.evidenceStatus !== "verified" && !types.has("missingness-evidence-unverified")) errors.push(`${disposition.id} non-verified disposition evidence requires a missingness-evidence-unverified governance trigger.`);
+  }
+
+  for (const analysis of missingnessSensitivityAnalyses) {
+    const policy = ref(missingnessPolicyIndex, analysis.policyRef, "missingness policy", analysis.id);
+    const dispositions = (analysis.dispositionRefs || []).map((id) => ref(outcomeDispositionIndex, id, "outcome disposition", analysis.id)).filter(Boolean);
+    const observed = dispositions.filter((item) => item.dispositionClass === "observed");
+    const observedSuccessCount = observed.filter((item) => item.outcomeValueUsed === 1).length;
+    const eligibleCount = dispositions.length;
+    const unavailableCount = eligibleCount - observed.length;
+    const observedRate = observed.length > 0 ? round(observedSuccessCount / observed.length, 4) : null;
+    const bestCaseSuccessCount = observedSuccessCount + unavailableCount;
+    const worstCaseSuccessCount = observedSuccessCount;
+    const bestCaseRate = round(bestCaseSuccessCount / eligibleCount, 4);
+    const worstCaseRate = round(worstCaseSuccessCount / eligibleCount, 4);
+    const threshold = policy?.decisionThreshold ?? analysis.decisionThreshold;
+    const bestCaseDecision = bestCaseRate >= threshold ? "meets-threshold" : "below-threshold";
+    const worstCaseDecision = worstCaseRate >= threshold ? "meets-threshold" : "below-threshold";
+    const conclusionSensitive = bestCaseDecision !== worstCaseDecision;
+    const expected = {eligibleCount, observedCount: observed.length, unavailableCount, observedSuccessCount, observedRate, bestCaseSuccessCount, worstCaseSuccessCount, bestCaseRate, worstCaseRate, decisionThreshold: threshold, bestCaseDecision, worstCaseDecision, conclusionSensitive};
+    for (const [field, value] of Object.entries(expected)) if (analysis[field] !== value) errors.push(`${analysis.id} ${field} must reproduce as ${value}.`);
+    if (analysis.automaticImputation !== false) errors.push(`${analysis.id} automaticImputation must be false.`);
+    const types = new Set((analysis.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", analysis.id)?.triggerType));
+    if (conclusionSensitive && !types.has("missingness-conclusion-sensitive")) errors.push(`${analysis.id} conclusion-sensitive bounds require a missingness-conclusion-sensitive governance trigger.`);
+  }
+
+  for (const assessment of missingnessAssessments) {
+    const policy = ref(missingnessPolicyIndex, assessment.policyRef, "missingness policy", assessment.id);
+    const dispositions = (assessment.dispositionRefs || []).map((id) => ref(outcomeDispositionIndex, id, "outcome disposition", assessment.id)).filter(Boolean);
+    const analyses = (assessment.sensitivityAnalysisRefs || []).map((id) => ref(missingnessSensitivityIndex, id, "missingness sensitivity analysis", assessment.id)).filter(Boolean);
+    const count = (kind) => dispositions.filter((item) => item.dispositionClass === kind).length;
+    const eligibleCount = dispositions.length;
+    const observedCount = count("observed");
+    const unexplainedUnavailableCount = dispositions.filter((item) => item.dispositionClass !== "observed" && item.reasonCode === "unknown").length;
+    const conclusionSensitiveAnalysisCount = analyses.filter((item) => item.conclusionSensitive).length;
+    const observedRate = round(observedCount / eligibleCount, 4);
+    const expected = {eligibleCount, observedCount, missingCount: count("missing"), excludedCount: count("excluded"), withdrawnCount: count("withdrawn"), delayedCount: count("delayed"), untraceableCount: count("untraceable"), observedRate, unexplainedUnavailableCount, conclusionSensitiveAnalysisCount};
+    for (const [field, value] of Object.entries(expected)) if (assessment[field] !== value) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    if (!sameSet(dispositions.map((item) => item.enrollmentRef), empiricalPilotEnrollments.map((item) => item.id))) errors.push(`${assessment.id} dispositions must classify every empirical pilot enrollment exactly once.`);
+    if (new Set(dispositions.map((item) => item.enrollmentRef)).size !== dispositions.length) errors.push(`${assessment.id} must include exactly one disposition per enrollment.`);
+    const sufficient = observedRate >= (policy?.minimumObservedRate ?? 1) && unexplainedUnavailableCount === 0 && conclusionSensitiveAnalysisCount === 0;
+    if (assessment.dataSufficiency !== (sufficient ? "sufficient" : "insufficient")) errors.push(`${assessment.id} dataSufficiency must reproduce as ${sufficient ? "sufficient" : "insufficient"}.`);
+    const signal = conclusionSensitiveAnalysisCount > 0 ? "conclusion-sensitive" : unexplainedUnavailableCount > 0 ? "unexplained-attrition" : !sufficient ? "insufficient-observation" : "observed-no-structural-alerts";
+    if (assessment.assessmentSignal !== signal) errors.push(`${assessment.id} assessmentSignal must reproduce as ${signal}.`);
+    if (assessment.activityCountIsQuality !== false || assessment.automaticQualityVerdict !== false) errors.push(`${assessment.id} must not treat activity counts as quality or make an automatic quality verdict.`);
+    const types = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (!sufficient && !types.has("missingness-assessment-insufficient")) errors.push(`${assessment.id} insufficient missingness evidence requires a missingness-assessment-insufficient governance trigger.`);
+    if (conclusionSensitiveAnalysisCount > 0 && !types.has("missingness-conclusion-sensitive")) errors.push(`${assessment.id} conclusion sensitivity requires a missingness-conclusion-sensitive governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -2694,6 +2774,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that observation duration, observation count, delayed-effect detection, reconciliation state, or absence of unresolved effects proves effect truth, observation completeness, causality, recovery safety, quality, closure authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that recovery observation evidence proves effect truth, completeness, causality, safety, quality, closure authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that pilot domain count, enrollment count, prospective timing, outcome count, or readiness state proves study validity, representativeness, causality, calibration truth, quality, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that empirical pilot structure proves study validity, representativeness, causality, calibration truth, quality, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that revision count, source correction, custody event, digest, sequence continuity, or snapshot alignment proves source truth, custody authenticity, causality, quality, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that outcome ledger structure proves source truth, custody authenticity, causality, quality, authorization, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that a disposition label, attrition count, observed rate, best-case or worst-case bound, or stable threshold result proves the missingness mechanism, causality, representativeness, statistical validity, quality, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that missingness sensitivity proves a missingness mechanism, causality, representativeness, statistical validity, quality, authorization, or authority.`);
   }
 
   results.push({
@@ -2783,6 +2864,10 @@ function validatePackage(pkg, packagePath) {
       outcomeSourceCorrections: outcomeSourceCorrections.length,
       outcomeCustodyEvents: outcomeCustodyEvents.length,
       outcomeLedgerAssessments: outcomeLedgerAssessments.length,
+      missingnessPolicies: missingnessPolicies.length,
+      outcomeDispositions: outcomeDispositions.length,
+      missingnessSensitivityAnalyses: missingnessSensitivityAnalyses.length,
+      missingnessAssessments: missingnessAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -2802,5 +2887,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, recovery dependency overlap, path membership, failover prerequisite partitioning, correlated recovery summaries, checkpoint age, rehydration identity equality, effect-state partitioning, retry-budget arithmetic, duplicate-effect intersection, durable recovery summaries, recovery observation durations, observation sequencing, delayed-effect reconciliation, closure-state reproduction, prospective pilot registration, domain coverage, enrollment timing, outcome evidence state, empirical origin eligibility, pilot readiness arithmetic, append-only outcome revision sequence, supersession, late-arrival classification, source correction linkage, custody continuity, latest snapshot alignment, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, study validity, source truth, custody authenticity, contamination freedom, observation completeness, resolution quality, intervention effectiveness, coordination success, containment effectiveness, recovery effectiveness, state truth, effect completion, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, recovery closure, retry or policy selection, authorization, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, recovery dependency overlap, path membership, failover prerequisite partitioning, correlated recovery summaries, checkpoint age, rehydration identity equality, effect-state partitioning, retry-budget arithmetic, duplicate-effect intersection, durable recovery summaries, recovery observation durations, observation sequencing, delayed-effect reconciliation, closure-state reproduction, prospective pilot registration, domain coverage, enrollment timing, outcome evidence state, empirical origin eligibility, pilot readiness arithmetic, append-only outcome revision sequence, supersession, late-arrival classification, source correction linkage, custody continuity, latest snapshot alignment, missingness disposition coverage, best-case and worst-case bounds, conclusion sensitivity, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, study validity, source truth, custody authenticity, missingness mechanism, statistical validity, contamination freedom, observation completeness, resolution quality, intervention effectiveness, coordination success, containment effectiveness, recovery effectiveness, state truth, effect completion, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, recovery closure, retry or policy selection, authorization, or decision authority."
 }, null, 2));

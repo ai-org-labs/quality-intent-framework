@@ -831,6 +831,35 @@ Use `OutcomeCollectionPolicy`, `OutcomeObservationRevision`,
 what changed, why it changed, and what remains unverified. Never say that an
 internally consistent ledger proves source truth or authentic custody.
 
+## Missingness and Attrition Sensitivity Review
+
+When some eligible outcomes are unavailable, do not hide them, silently remove
+them, or guess their values. Make the uncertainty visible and reproducible:
+
+1. Freeze the eligible population from the prospective enrollment records
+   before looking at outcomes.
+2. Classify every eligible enrollment exactly once as `observed`, `missing`,
+   `excluded`, `withdrawn`, `delayed`, or `untraceable`.
+3. Record the reason, evidence, owner, and review state for each classification.
+   If the reason is unknown, keep it unknown.
+4. Never count an unavailable outcome as an observed success or failure.
+5. Report observation coverage separately from the success rate among outcomes
+   that were actually observed.
+6. Reproduce a worst case by treating every unavailable binary outcome as 0,
+   and a best case by treating every unavailable binary outcome as 1. These are
+   hypothetical bounds, not observed results.
+7. Compare both bounds with the registered decision threshold.
+8. If the conclusion changes between the bounds, classification is incomplete,
+   evidence is weak, or coverage is below policy, route the result to
+   governance and do not claim an empirical conclusion.
+
+Use `MissingnessPolicy`, `OutcomeDisposition`,
+`MissingnessSensitivityAnalysis`, and `MissingnessAssessment`. Explain both
+rates in plain language: observation coverage answers "how much did we actually
+observe?"; observed success rate answers "among observed cases, how many
+succeeded?" Verifier success does not identify the missingness mechanism or
+prove representativeness, causality, calibration, or quality.
+
 ## Common Failure Modes
 
 Avoid these:

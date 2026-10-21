@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-21T04:29:28.194Z",
+  "problem_statement_id": "PST-MVHM4WSI-3X0RWA",
+  "affected_party": "QIF evaluators and governed organizations",
+  "actual_problem": "Outcome ledgers preserve revisions but cannot show how missing, excluded, withdrawn, delayed, or untraceable outcomes change empirical conclusions.",
+  "why_it_matters": "Observed-only results can create false assurance when outcome availability is selective or uneven.",
+  "why_now": "v0.7.1 established append-only collection, making missingness sensitivity the smallest next empirical-calibration boundary.",
+  "evidence_refs": [
+    "docs/qif-roadmap.md",
+    "docs/qif-v0.7.1-outcome-collection-ledger.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVHM4OT3-Y38L8N"
+}

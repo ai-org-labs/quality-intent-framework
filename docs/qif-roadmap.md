@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.7.1 baseline)
+## Current Position (v0.7.2 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -239,14 +239,15 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-10-19 against primary-source signals. The
+The roadmap was revalidated on 2026-10-21 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
 
 | Current signal | Quality risk exposed | QIF response | Lead, not follow |
 | --- | --- | --- | --- |
-| Agent evaluation increasingly distinguishes what an agent says from the resulting environment state, while production monitoring and human review supply longitudinal evidence. NIST identifies longitudinal ground truth and data-access gaps, and OpenAI monitorability evaluation withholds datapoints when evidence is too weak to report reliably. ([Anthropic agent evals](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), [NIST AI 800-4](https://www.nist.gov/publications/challenges-monitoring-deployed-ai-systems-center-ai-standards-and-innovation), [OpenAI monitorability evals](https://alignment.openai.com/monitorability-evals/)) | A later outcome or corrected source can overwrite what was originally known; missing, late, and corrected data can become invisible; a neat current table can falsely imply an authentic custody chain. | v0.7.1 Outcome Collection Ledger. | Preserve every observation snapshot as an append-only revision, reproduce late arrival and correction lineage, track declared custody, and require the current view to match the latest revision while refusing truth or authority claims. |
+| Agent evaluation increasingly distinguishes what an agent says from the resulting environment state, while production monitoring and human review supply longitudinal evidence. NIST identifies longitudinal ground truth and data-access gaps, and OpenAI monitorability evaluation withholds datapoints when evidence is too weak to report reliably. ([Anthropic agent evals](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), [NIST AI 800-4](https://www.nist.gov/publications/challenges-monitoring-deployed-ai-systems-center-ai-standards-and-innovation), [OpenAI monitorability evals](https://alignment.openai.com/monitorability-evals/)) | A later outcome or corrected source can overwrite what was originally known; missing, late, corrected, excluded, or withdrawn data can become invisible; analysis of observed cases alone can reverse the registered conclusion. | v0.7.1 Outcome Collection Ledger and v0.7.2 Missingness and Attrition Sensitivity. | Preserve every observation revision, classify every eligible enrollment once, and reproduce best/worst threshold bounds while refusing source-truth or missingness-mechanism claims. |
+| Frontier-agent safety work now includes incidents in which agents can suppress monitoring alerts or disable monitoring controls. ([OpenAI monitoring-suppression incident](https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/)) | Missing evidence may be caused by the evaluated actor or by compromised monitoring, so treating non-reporting as an ordinary random gap can conceal the most consequential cases. | v0.7.2 preserves non-reporting explicitly; v0.7.3 must carry monitoring-integrity evidence into transportability review. | Keep absence, monitor state, actor access, alert lineage, and intervention evidence separate; never infer benign missingness from silence. |
 | NIST identifies post-deployment ground truth, longitudinal tracking, baselines, drift, and common terminology as open monitoring challenges. Anthropic recommends combining automated evaluation, production monitoring, and periodic human calibration; OpenAI requires claim scope, harness choices, and validity checks to travel with evaluation results. ([NIST AI 800-4](https://www.nist.gov/publications/challenges-monitoring-deployed-ai-systems-center-ai-standards-and-innovation), [Anthropic agent evals](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), [OpenAI third-party evaluation guidance](https://openai.com/index/trustworthy-third-party-evaluations-foundations/)) | Teams can define outcomes after seeing results, discard missing cases, use software-only samples to imply domain generality, or treat example data as field evidence. | v0.7.0 Empirical Calibration Pilot Contract. | Freeze the domain, forecast meaning, outcome definition, observation window, and evidence requirements before decisions; preserve missing and excluded records; require non-software planning and verified operational or historical origins before analysis readiness. |
 | Emerging multi-agent studies report low-variance agents making the same mistake, while durable agent APIs require saved state and completed effects to be inspected before recovery. Durable workflow guidance warns that replay can repeat external effects unless idempotency scope survives retries, and that stopping an execution does not cancel work already in flight before its next checkpoint. ([Anthropic multi-agent systems](https://www.anthropic.com/research/multiagent-systems), [OpenAI Agents API recovery](https://developers.openai.com/api/docs/guides/agents-api/errors), [OpenAI Agents SDK durability](https://openai.com/index/the-next-evolution-of-the-agents-sdk/), [AWS idempotency and retries](https://docs.aws.amazon.com/durable-execution/patterns/best-practices/idempotency/), [AWS stopped-execution semantics](https://docs.aws.amazon.com/durable-execution/getting-started/manage-executions/)) | Nominally separate paths can share dependencies; a recovered actor can resume from stale state or with changed identity; a failed or stopped attempt may still complete external effects; delayed effects can appear after a retry decision. | v0.6.49 Dependency Diversity, v0.6.50 Durable Recovery State and Retry Side-Effect Safety, and v0.6.51 Recovery Observation Windows and Delayed Side-Effect Reconciliation. | Require evidence-backed dependency graphs, bind retries to checkpoint freshness, actor identity, completed/pending/unknown effects, idempotency, budgets, and authority, then reconcile delayed effects across a reviewed observation window before accountable closure review. |
 | Sequestered blind evaluation is becoming a measurement control, while recent evidence shows agents can infer benchmarks, seek hidden answers, target graders, and metagame without revealing that behavior in written reasoning. ([NIST AITE](https://ai-challenges.nist.gov/aite), [NIST evaluation cheating](https://www.nist.gov/caissi/cheating-ai-agent-evaluations), [OpenAI incident](https://openai.com/index/hugging-face-incident-and-the-road-ahead/), [OpenAI metagaming](https://alignment.openai.com/metagaming-latents/)) | A reproducible score can still be invalid when answers, labels, grader behavior, metadata, or forbidden affordances were available; absence of a detected shortcut can be mistaken for proof of clean evaluation. | v0.6.42 Sequestered Replay and Policy-Gaming Detection. | Bind blind-state claims to access evidence, declare affordances before execution, inspect externalized trajectories, and govern contamination or loophole uncertainty without requesting hidden reasoning or claiming honesty. |
@@ -758,13 +759,23 @@ Deliverables:
   `OutcomeCustodyEvent`, and `OutcomeLedgerAssessment`, deterministic verifier
   rules, governance, and retained negative fixtures. The example advances only
   to example-only `collecting`; it does not invent a completed outcome.
+- Implemented third phase slice, v0.7.2 Missingness and Attrition Sensitivity:
+  classify every eligible enrollment exactly once as observed, missing,
+  excluded, withdrawn, delayed, or untraceable; reproduce observed coverage and
+  best/worst success bounds; and route threshold-sensitive conclusions to
+  governance without imputing unavailable outcomes as truth.
+- Status: implemented through `MissingnessPolicy`, `OutcomeDisposition`,
+  `MissingnessSensitivityAnalysis`, and `MissingnessAssessment`, deterministic
+  verifier rules, governance, and retained negative fixtures. The example has
+  no completed empirical outcome and remains example-only and insufficient.
 - Next planned slices:
-  - v0.7.2 Missingness and Attrition Sensitivity: reproduce how missing,
-    excluded, withdrawn, and delayed outcomes change reported calibration
-    bounds without imputing truth or optimizing exclusions.
   - v0.7.3 Cross-Domain Transportability Review: compare domain-local
     calibration and shift evidence without treating pooled performance as proof
     that an intent, threshold, or confidence meaning transfers.
+  - v0.8 Multi-Agent Judgment Memory: preserve disagreement, dependency,
+    revision, and forgetting boundaries across cooperating evaluators.
+  - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
+    while keeping forecasts distinct from observed evidence and authority.
 - Continuing phase objective, v0.7 Empirical Calibration: replace illustrative
   calibration evidence with governed pilot outcomes, suite-health records, and
   framework-learning evidence while preserving uncertainty boundaries.

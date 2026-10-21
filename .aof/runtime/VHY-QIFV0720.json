@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-21T04:29:28.364Z",
+  "value_hypothesis_id": "VHY-MVHM4WX8-JQBX3T",
+  "expected_value_creation": "QIF can expose denominator loss and bound how unavailable outcomes could reverse a verdict without claiming why data is missing.",
+  "beneficiary": "QIF evaluators, governance owners, and affected stakeholders",
+  "supporting_evidence": [
+    "NIST AI 800-4 identifies missing high-quality ground truth and longitudinal tracking as monitoring barriers.",
+    "OpenAI monitorability evaluations withhold unreliable datapoints instead of reporting them as ordinary results."
+  ],
+  "success_criteria": [
+    "Verifier reproduces disposition counts and rejects denominator mismatches.",
+    "Best-case and worst-case outcome bounds and conclusion sensitivity are reproducible.",
+    "Insufficient or conclusion-changing missingness routes governance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVHM4OT3-Y38L8N"
+}

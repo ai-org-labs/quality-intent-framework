@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-21T04:29:28.553Z",
+  "alternative_analysis_id": "ALT-MVHM4X2H-C12JTQ",
+  "subject_need": "Prevent selective outcome availability from creating false empirical assurance.",
+  "alternative_solutions": [
+    "Add a missingness and attrition policy, case-level disposition ledger, sensitivity scenario, and assessment.",
+    "Only document missing-data caveats in prose."
+  ],
+  "non_solution_options": [
+    "Treat unobserved outcomes as successful or exclude them silently."
+  ],
+  "defer_options": [
+    "Wait for a real pilot before defining the structural contract."
+  ],
+  "stop_options": [
+    "Stop if the model requires domain-specific statistical assumptions or claims causal reasons for missingness."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVHM4OT3-Y38L8N"
+}

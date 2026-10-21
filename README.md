@@ -1,10 +1,8 @@
 # Quality Intent Framework
 
-Current release: **v0.7.1**. The calibration runtime now preserves empirical
-outcome collection as an append-only ledger. It records what was known at each
-revision, why a source was corrected, when evidence arrived late, who held
-declared custody, and whether the current snapshot matches the latest revision,
-without treating ledger consistency as evidence truth.
+Current release: **v0.7.2**. The calibration runtime now preserves every
+eligible outcome disposition and reproduces how unavailable outcomes can change
+a threshold conclusion without imputing them as observed truth.
 
 Quality Intent Framework (QIF) turns an organization's quality theory into an operational, AI-verifiable framework.
 
@@ -34,7 +32,7 @@ decision authority.
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x AI-native authoring, action, evaluation, deployment, intervention, recovery, and portable-package runtime, and the v0.7.1 empirical calibration pilot and outcome collection runtime:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x AI-native authoring, action, evaluation, deployment, intervention, recovery, and portable-package runtime, and the v0.7.2 empirical calibration, outcome collection, and missingness-sensitivity runtime:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -85,6 +83,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.6.51 Recovery Observation Windows and Delayed Side-Effect Reconciliation: `docs/qif-v0.6.51-recovery-observation.md`
 - QIF v0.7.0 Empirical Calibration Pilot Contract: `docs/qif-v0.7.0-empirical-pilot.md`
 - QIF v0.7.1 Outcome Collection Ledger: `docs/qif-v0.7.1-outcome-collection-ledger.md`
+- QIF v0.7.2 Missingness and Attrition Sensitivity: `docs/qif-v0.7.2-missingness-attrition-sensitivity.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`

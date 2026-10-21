@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-19T04:50:00.395Z",
+  "generated_at": "2026-10-21T04:42:00.887Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MVERHQS7-DSGHQE",
-    "report_id": "OUT-MVERZGE3-PD91BP",
+    "source_session_id": "SESS-MVHM4JG8-J57TJ9",
+    "report_id": "OUT-MVHMKW4O-NASPGI",
     "result": "success",
-    "observed_at": "2026-10-19T04:49:52.826Z",
-    "note": "QIF v0.7.1 implements append-only outcome revisions, source corrections, custody history, late-arrival handling, current-snapshot alignment, governance routing, 21 negative fixtures, documentation, and portable packaging. npm test passed 16/16 positive and 1238/1238 negative checks; AOF organization verification passed 295/295. Public release pending.",
-    "signal_ref": ".aof/runtime/v0.7.1-review-council-executed.json"
+    "observed_at": "2026-10-21T04:41:53.831Z",
+    "note": "QIF v0.7.2 implements exact eligible-outcome disposition accounting, best/worst sensitivity bounds, conclusion sensitivity, governance, fixtures, docs, and portable packaging. npm test passed 16/16 positive and 1258/1258 retained negative checks; AOF organization verification passed 295/295. Public release pending.",
+    "signal_ref": ".aof/runtime/v0.7.2-review-council-executed.json"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV0710",
-    "recorded_at": "2026-10-19T04:49:41.004Z",
-    "summary": "Append-only outcome collection policy, observation revisions, source corrections, custody history, current-snapshot alignment, governance, documentation, fixtures, and portable validation are complete; example remains collecting, example-only, and insufficient.",
-    "detected_gap": "No independently verified operational ledger history or custody evidence is committed, so source truth, custody authenticity, empirical calibration, and transportability remain unestablished.",
+    "audit_id": "FSA-QIFV0720",
+    "recorded_at": "2026-10-21T04:41:40.099Z",
+    "summary": "Missingness policy, exact outcome dispositions, bounded sensitivity analysis, aggregate assessment, governance, documentation, fixtures, and portable validation are complete; the example remains collecting, example-only, and insufficient.",
+    "detected_gap": "No independently verified operational attrition dataset is committed, so missingness mechanisms, representativeness, statistical validity, calibration truth, and transportability remain unestablished.",
     "result_state": "stable",
-    "next_action": "Implement v0.7.2 Missingness and Attrition Sensitivity with explicit bounds for missing, excluded, withdrawn, and delayed outcomes.",
+    "next_action": "Implement v0.7.3 Cross-Domain Transportability Review without treating pooled performance as proof of transfer.",
     "related_task_ids": [
-      "TASK-070"
+      "TASK-071"
     ]
   },
   "current_next_value_slice": {
-    "content": "v0.7.2 Missingness and Attrition Sensitivity",
-    "updated_at": "2026-10-19T04:49:56.797Z",
+    "content": "v0.7.3 Cross-Domain Transportability Review",
+    "updated_at": "2026-10-21T04:41:58.051Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MVERHQS7-DSGHQE",
-    "source_decision_record_id": "DEC-MVERJCQX-AIX9H3"
+    "source_session_id": "SESS-MVHM4JG8-J57TJ9",
+    "source_decision_record_id": "DEC-MVHM5IR9-JAHM0K"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Implement v0.7.2 Missingness and Attrition Sensitivity with explicit bounds for missing, excluded, withdrawn, and delayed outcomes.",
+    "proposed_focus": "Implement v0.7.3 Cross-Domain Transportability Review without treating pooled performance as proof of transfer.",
     "related_task_ids": [
-      "TASK-070"
+      "TASK-071"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: v0.7.2 Missingness and Attrition Sensitivity",
-    "Latest self-audit next action: Implement v0.7.2 Missingness and Attrition Sensitivity with explicit bounds for missing, excluded, withdrawn, and delayed outcomes.",
+    "Current next value slice: v0.7.3 Cross-Domain Transportability Review",
+    "Latest self-audit next action: Implement v0.7.3 Cross-Domain Transportability Review without treating pooled performance as proof of transfer.",
     "Latest outcome result: success"
   ]
 }

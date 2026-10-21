@@ -2862,6 +2862,36 @@
       "requiredAction": "Do not treat structural ledger consistency as outcome truth, calibration evidence, or custody authenticity.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-078",
+      "triggerType": "missingness-evidence-unverified",
+      "reason": "The committed outcome disposition is example-only and does not establish the real reason or mechanism for outcome unavailability.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "medium",
+      "requiredAction": "Obtain independently verified disposition evidence and retain unknown mechanism semantics.",
+      "owner": "pilot-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-079",
+      "triggerType": "missingness-conclusion-sensitive",
+      "reason": "The best-case and worst-case assignments for unavailable outcomes produce different threshold decisions.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Do not issue an empirical conclusion until accountable governance reviews the uncertainty or sufficient outcomes become observed.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-080",
+      "triggerType": "missingness-assessment-insufficient",
+      "reason": "Observed outcome coverage is below policy and the conclusion remains sensitive to unavailable outcomes.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep calibration claims blocked and continue governed outcome collection.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -2886,7 +2916,8 @@
       "checkpoint freshness, rehydration identity equality, disjoint effect state, completed-effect checks, idempotency, retry budgets, duplicate-effect intersections, resume authority evidence, durable recovery assessment arithmetic, and governance routing reproduce",
       "observation-window duration, observation sequence and coverage, delayed completion, unresolved final state, terminal-state conflicts, closure-state reproduction, assessment arithmetic, and governance routing reproduce",
       "prospective pilot registration, domain coverage, enrollment timing, outcome evidence state, empirical origin eligibility, pilot readiness arithmetic, and governance routing reproduce",
-      "append-only outcome revision sequence, supersession, late-arrival classification, source correction lineage, custody sequence, latest snapshot alignment, ledger assessment arithmetic, and governance routing reproduce"
+      "append-only outcome revision sequence, supersession, late-arrival classification, source correction lineage, custody sequence, latest snapshot alignment, ledger assessment arithmetic, and governance routing reproduce",
+      "eligible-population disposition coverage, observed and unavailable counts, best-case and worst-case bounds, conclusion sensitivity, assessment arithmetic, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -2915,7 +2946,8 @@
       "that snapshot presence, retry count, idempotency-key presence, recorded effect state, or absence of detected duplicates proves state truth, effect completion, recovery safety, quality, retry authorization, or authority",
       "that observation duration, observation count, delayed-effect detection, reconciliation state, or absence of unresolved effects proves effect truth, observation completeness, causality, recovery safety, quality, closure authorization, or authority",
       "that pilot domain count, enrollment count, prospective timing, outcome count, or readiness state proves study validity, representativeness, causality, calibration truth, quality, authorization, or authority",
-      "that revision count, source correction, custody event, digest, sequence continuity, or snapshot alignment proves source truth, custody authenticity, causality, quality, authorization, or authority"
+      "that revision count, source correction, custody event, digest, sequence continuity, or snapshot alignment proves source truth, custody authenticity, causality, quality, authorization, or authority",
+      "that a disposition label, attrition count, observed rate, best-case or worst-case bound, or stable threshold result proves the missingness mechanism, causality, representativeness, statistical validity, quality, authorization, or authority"
     ],
     "semanticValidityRequires": [
       "expert review of prediction and outcome meaning",
@@ -2937,7 +2969,8 @@
       "independent reconciliation of checkpoint state, actor identity, completed, pending, and unknown external effects, idempotency scope, retry budget, and accountable resume authority",
       "independent review of observation-window sufficiency, external effect timestamps and states, delayed effects, reconciliation conflicts, unresolved effects, and accountable recovery closure authority",
       "accountable review of pilot protocol, domain relevance, prospective registration, outcome definitions, missingness, exclusions, evidence provenance, and empirical interpretation",
-      "independent verification of source records, correction authority, custody actors, timestamps, digests, late-arrival meaning, and current snapshot interpretation"
+      "independent verification of source records, correction authority, custody actors, timestamps, digests, late-arrival meaning, and current snapshot interpretation",
+      "accountable review of eligibility, disposition reasons, unavailable-outcome mechanisms, observation opportunity, sensitivity assumptions, threshold meaning, and statistical interpretation"
     ]
   },
   "evaluatorSignalPolicies": [
@@ -4836,6 +4869,128 @@
       "governanceTriggerRefs": [
         "GTR-CR-076",
         "GTR-CR-077"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "missingnessPolicies": [
+    {
+      "id": "MSP-CR-001",
+      "title": "Illustrative missingness and attrition policy",
+      "protocolRef": "EPP-CR-001",
+      "eligiblePopulationRule": "all-prospectively-registered-enrollments",
+      "requiredDispositionClasses": [
+        "observed",
+        "missing",
+        "excluded",
+        "withdrawn",
+        "delayed",
+        "untraceable"
+      ],
+      "minimumObservedRate": 0.8,
+      "sensitivityMethod": "binary-best-case-worst-case-bounds",
+      "decisionThreshold": 0.7,
+      "unavailableOutcomesCountAsSuccess": false,
+      "exclusionOptimizationAllowed": false,
+      "reviewedBy": [
+        "pilot-governance-owner",
+        "quality-governance-owner"
+      ],
+      "inferenceBoundary": "missingness-sensitivity-structure-only-not-missingness-mechanism-causality-representativeness-statistical-validity-quality-authorization-or-authority",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "outcomeDispositions": [
+    {
+      "id": "ODP-CR-001",
+      "title": "Illustrative outcome remains delayed",
+      "policyRef": "MSP-CR-001",
+      "enrollmentRef": "EPE-CR-001",
+      "observationRef": "EPO-CR-001",
+      "dispositionClass": "delayed",
+      "reasonCode": "observation-window-open",
+      "reasonDetail": "The prospectively registered observation window remains open; no outcome value has been observed.",
+      "responsibleOwner": "pilot-governance-owner",
+      "classifiedAt": "2026-10-21T00:00:00Z",
+      "evidenceRefs": [
+        "examples/calibration-report-package.json#EPO-CR-001",
+        "examples/calibration-report-package.json#OOR-CR-003"
+      ],
+      "evidenceStatus": "example-only",
+      "outcomeValueUsed": null,
+      "automaticMissingnessMechanismInference": false,
+      "governanceTriggerRefs": [
+        "GTR-CR-078"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "missingnessSensitivityAnalyses": [
+    {
+      "id": "MSA-CR-001",
+      "title": "Illustrative unavailable-outcome bounds",
+      "policyRef": "MSP-CR-001",
+      "dispositionRefs": [
+        "ODP-CR-001"
+      ],
+      "eligibleCount": 1,
+      "observedCount": 0,
+      "unavailableCount": 1,
+      "observedSuccessCount": 0,
+      "observedRate": null,
+      "bestCaseSuccessCount": 1,
+      "worstCaseSuccessCount": 0,
+      "bestCaseRate": 1,
+      "worstCaseRate": 0,
+      "decisionThreshold": 0.7,
+      "bestCaseDecision": "meets-threshold",
+      "worstCaseDecision": "below-threshold",
+      "conclusionSensitive": true,
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "automaticImputation": false,
+      "interpretation": "bounded-sensitivity-only-not-observed-outcome-missingness-mechanism-causality-representativeness-statistical-validity-quality-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-079"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "missingnessAssessments": [
+    {
+      "id": "MAT-CR-001",
+      "title": "Illustrative missingness and attrition assessment",
+      "policyRef": "MSP-CR-001",
+      "dispositionRefs": [
+        "ODP-CR-001"
+      ],
+      "sensitivityAnalysisRefs": [
+        "MSA-CR-001"
+      ],
+      "eligibleCount": 1,
+      "observedCount": 0,
+      "missingCount": 0,
+      "excludedCount": 0,
+      "withdrawnCount": 0,
+      "delayedCount": 1,
+      "untraceableCount": 0,
+      "observedRate": 0,
+      "unexplainedUnavailableCount": 0,
+      "conclusionSensitiveAnalysisCount": 1,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "conclusion-sensitive",
+      "reviewedBy": [
+        "pilot-governance-owner",
+        "quality-governance-owner"
+      ],
+      "activityCountIsQuality": false,
+      "automaticQualityVerdict": false,
+      "interpretation": "missingness-sensitivity-structure-only-not-missingness-mechanism-causality-representativeness-statistical-validity-quality-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-079",
+        "GTR-CR-080"
       ],
       "status": "reviewed"
     }

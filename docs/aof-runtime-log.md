@@ -5095,3 +5095,21 @@ Date: 2026-10-19
 - Outcome report: `OUT-MVERZGE3-PD91BP` recorded implementation success and retained v0.7.2 as an open next value slice.
 - Residual risk: no independently verified operational ledger history or custody evidence is committed. Structural validity does not establish source truth, custody authenticity, observation completeness, causality, calibration truth, quality, authorization, or decision authority.
 - Next value slices: v0.7.2 Missingness and Attrition Sensitivity, v0.7.3 Cross-Domain Transportability Review, and v0.8 Multi-Agent Judgment Memory remain defined in the roadmap.
+
+# QIF v0.7.2 Missingness and Attrition Sensitivity
+
+Date: 2026-10-21
+
+- Need: outcome collection could preserve revision and custody history, but QIF could not account for every eligible case or reproduce how missing, excluded, withdrawn, delayed, or untraceable outcomes changed a threshold conclusion.
+- Intent: freeze the eligible denominator, classify each enrollment exactly once, preserve reason and evidence, reproduce observation coverage and best/worst binary bounds, and route conclusion sensitivity to governance without imputing unavailable outcomes as truth.
+- Context: QIF remains standalone; publicly released AOF v12.2.0 at source commit `fc7599b` governs development and is not a QIF runtime dependency.
+- AOF session: `SESS-MVHM4JG8-J57TJ9`; task: `TASK-071`; framing decisions: `DEC-MVHM4JGA-5ODF4J` and `DEC-MVHM4OT3-Y38L8N`; Need Validation decision: `DEC-MVHM5IR9-JAHM0K`.
+- Need Validation and Charter artifacts: `.aof/runtime/PST-QIFV0720.json`, `.aof/runtime/VHY-QIFV0720.json`, `.aof/runtime/ALT-QIFV0720.json`, `.aof/runtime/NVR-QIFV0720.json`, and `.aof/runtime/PCH-QIFV0720.json`. Charter creation followed Validated Need `NVR-MVHM5A5J-HY8WD5`.
+- Trend evidence: NIST AI 800-4 identifies longitudinal ground-truth, data-access, drift, and baseline gaps; Anthropic recommends combining automated evaluation with production monitoring and human review; OpenAI monitorability evaluations withhold unreliable datapoints, and its monitoring-suppression incident shows that silence cannot be assumed benign.
+- Council direction: Visionary, Builder, and Guardian proceeded in planning; Guardian and Builder proceeded in review with no veto. Guardian required exact disposition coverage, no imputed success, no exclusion optimization, bounded sensitivity, governance for weak evidence or changed conclusions, and explicit semantic limits. Mock council execution proves routing, not independent semantic approval.
+- Decision: implement `MissingnessPolicy`, `OutcomeDisposition`, `MissingnessSensitivityAnalysis`, and `MissingnessAssessment`. The committed case is delayed, example-only, and has no completed empirical outcome.
+- Runtime evidence: `.aof/runtime/v0.7.2-actor-skill-packet.json`, `.aof/runtime/v0.7.2-planning-council-executed.json`, `.aof/runtime/v0.7.2-review-council-executed.json`, self-audit `FSA-QIFV0720`, and the learning-loop snapshot record capability, resource, policy, review, self-review, and retrospective evidence.
+- Verification: `npm test` passed 16/16 positive and 1,258/1,258 retained negative checks. Portable build and verification passed with 49 files. AOF `organization-verify` passed 295/295 checks.
+- Outcome report: `OUT-MVHMKW4O-NASPGI` recorded implementation success and retained v0.7.3 as an open next value slice.
+- Residual risk: no independently verified operational attrition dataset is committed. Structural validity and sensitivity bounds do not establish the missingness mechanism, representativeness, causality, statistical validity, calibration truth, transportability, quality, authorization, or decision authority.
+- Next value slices: v0.7.3 Cross-Domain Transportability Review, v0.8 Multi-Agent Judgment Memory, and v0.9 Anticipatory Quality Intent Twin remain defined in the roadmap.
