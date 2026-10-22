@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-22T04:31:41.625Z",
+  "validation_id": "NVR-MVJ1NMEX-TV3AY3",
+  "raw_need": "Add cross-domain transportability review to QIF empirical calibration.",
+  "validation_status": "validated",
+  "validated_need": "QIF needs a domain-general structural contract that keeps domain-local evidence separate and evaluates whether constructs, populations, contexts, outcomes, evidence, thresholds, and confidence meanings support a bounded transfer claim.",
+  "decision_summary": "Proceed with the smallest additive calibration-report slice: transfer policy, domain profile, domain-local result, transportability comparison, assessment, governance, verifier, examples, fixtures, docs, portable release.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is in scope?",
+      "answer": "calibration-report schema, verifier, examples, fixtures, docs, portable package, release",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What proves success?",
+      "answer": "deterministic context comparisons, domain-local result preservation, bounded transfer classification, governance, full tests and release",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Similar aggregate performance was assumed to imply transferable quality knowledge."
+  ],
+  "evidence_gaps": [
+    "No independently verified multi-domain operational dataset is committed; examples cannot establish real transportability."
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0730.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0730.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0730.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVJ1MYXQ-MO0WGX"
+}

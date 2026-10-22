@@ -4315,6 +4315,153 @@
       "rule": "missingness semantic boundary",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming that missingness sensitivity proves a missingness mechanism"
+    },
+    {
+      "file": "calibration-report-transportability-policies-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "transportability policies required",
+      "expect": "fail",
+      "errorIncludes": "package transportabilityPolicies must be an array."
+    },
+    {
+      "file": "calibration-report-transportability-profiles-not-array.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "domain transport profiles required",
+      "expect": "fail",
+      "errorIncludes": "package domainTransportProfiles must be an array."
+    },
+    {
+      "file": "calibration-report-transportability-policy-protocol.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "transportability protocol resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing empirical pilot protocol"
+    },
+    {
+      "file": "calibration-report-transportability-policy-dimensions.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "canonical transportability dimensions",
+      "expect": "fail",
+      "errorIncludes": "requiredComparisonDimensions must contain every canonical transportability dimension exactly once."
+    },
+    {
+      "file": "calibration-report-transportability-policy-target-evidence.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "target evidence requirement",
+      "expect": "fail",
+      "errorIncludes": "targetDomainEvidenceRequired must be true."
+    },
+    {
+      "file": "calibration-report-transportability-policy-pooled-proof.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "no pooled transfer proof",
+      "expect": "fail",
+      "errorIncludes": "must not treat pooled performance as transfer proof"
+    },
+    {
+      "file": "calibration-report-transportability-profile-domain.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "domain profile resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing empirical pilot domain"
+    },
+    {
+      "file": "calibration-report-transportability-profile-evidence-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "profile evidence governance",
+      "expect": "fail",
+      "errorIncludes": "unverified profile or monitoring integrity requires a transportability-evidence-unverified governance trigger."
+    },
+    {
+      "file": "calibration-report-domain-local-profile.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "domain-local profile resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing domain transport profile"
+    },
+    {
+      "file": "calibration-report-domain-local-assessment-ref.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "domain-local assessment resolution",
+      "expect": "fail",
+      "errorIncludes": "sourceAssessmentRefs references missing pilot or missingness assessment"
+    },
+    {
+      "file": "calibration-report-domain-local-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "domain-local eligible count reproduction",
+      "expect": "fail",
+      "errorIncludes": "eligibleCount must reproduce as 0."
+    },
+    {
+      "file": "calibration-report-domain-local-pooling.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "domain-local result separation",
+      "expect": "fail",
+      "errorIncludes": "pooledWithOtherDomains must be false."
+    },
+    {
+      "file": "calibration-report-transportability-source-role.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "source profile role",
+      "expect": "fail",
+      "errorIncludes": "sourceProfileRef must reference a source profile."
+    },
+    {
+      "file": "calibration-report-transportability-local-lineage.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "local result profile lineage",
+      "expect": "fail",
+      "errorIncludes": "local results must belong to their referenced source and target profiles."
+    },
+    {
+      "file": "calibration-report-transportability-comparison-dimensions.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "comparison dimension coverage",
+      "expect": "fail",
+      "errorIncludes": "dimensionComparisons must cover every policy dimension exactly once."
+    },
+    {
+      "file": "calibration-report-transportability-comparison-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "comparison mismatch count reproduction",
+      "expect": "fail",
+      "errorIncludes": "mismatchedDimensionCount must reproduce as 7."
+    },
+    {
+      "file": "calibration-report-transportability-comparison-status.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "transfer status reproduction",
+      "expect": "fail",
+      "errorIncludes": "transferStatus must reproduce as unsupported."
+    },
+    {
+      "file": "calibration-report-transportability-mismatch-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "domain mismatch governance",
+      "expect": "fail",
+      "errorIncludes": "domain mismatch requires a transportability-mismatch governance trigger."
+    },
+    {
+      "file": "calibration-report-transportability-assessment-count.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "transportability assessment reproduction",
+      "expect": "fail",
+      "errorIncludes": "unsupportedComparisonCount must reproduce as 1."
+    },
+    {
+      "file": "calibration-report-transportability-assessment-trigger.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "transportability assessment governance",
+      "expect": "fail",
+      "errorIncludes": "insufficient transportability evidence requires a transportability-assessment-insufficient governance trigger."
+    },
+    {
+      "file": "calibration-report-transportability-boundary-overclaim.json",
+      "validator": "tools/validate-calibration-report.mjs",
+      "rule": "transportability semantic boundary",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming that transportability structure proves generalization"
     }
   ],
   "rescopedRules": []

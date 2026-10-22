@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.7.2 baseline)
+## Current Position (v0.7.3 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -239,13 +239,14 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-10-21 against primary-source signals. The
+The roadmap was revalidated on 2026-10-22 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
 
 | Current signal | Quality risk exposed | QIF response | Lead, not follow |
 | --- | --- | --- | --- |
+| NIST measurement science identifies construct validity and unjustified generalization beyond a test setting as distinct open problems, while its TEVV-Athlon draft emphasizes context-specific, customizable assessment. ([NIST measurement science](https://www.nist.gov/blogs/caissi-research-blog/accelerating-ai-innovation-through-measurement-science), [NIST TEVV-Athlon](https://www.nist.gov/artificial-intelligence/ai-research/tevv-athlon-framework-evaluating-ai-systems)) | A score, threshold, confidence label, or apparently similar Quality Intent can be moved between domains even though the construct, stakeholders, losses, evidence, and monitoring differ. | v0.7.3 Cross-Domain Transportability Review. | Keep domain-local results separate, compare meaning and evidence dimension by dimension, require target-domain evidence, and bound any supported claim to the declared source-target scope. |
 | Agent evaluation increasingly distinguishes what an agent says from the resulting environment state, while production monitoring and human review supply longitudinal evidence. NIST identifies longitudinal ground truth and data-access gaps, and OpenAI monitorability evaluation withholds datapoints when evidence is too weak to report reliably. ([Anthropic agent evals](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), [NIST AI 800-4](https://www.nist.gov/publications/challenges-monitoring-deployed-ai-systems-center-ai-standards-and-innovation), [OpenAI monitorability evals](https://alignment.openai.com/monitorability-evals/)) | A later outcome or corrected source can overwrite what was originally known; missing, late, corrected, excluded, or withdrawn data can become invisible; analysis of observed cases alone can reverse the registered conclusion. | v0.7.1 Outcome Collection Ledger and v0.7.2 Missingness and Attrition Sensitivity. | Preserve every observation revision, classify every eligible enrollment once, and reproduce best/worst threshold bounds while refusing source-truth or missingness-mechanism claims. |
 | Frontier-agent safety work now includes incidents in which agents can suppress monitoring alerts or disable monitoring controls. ([OpenAI monitoring-suppression incident](https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/)) | Missing evidence may be caused by the evaluated actor or by compromised monitoring, so treating non-reporting as an ordinary random gap can conceal the most consequential cases. | v0.7.2 preserves non-reporting explicitly; v0.7.3 must carry monitoring-integrity evidence into transportability review. | Keep absence, monitor state, actor access, alert lineage, and intervention evidence separate; never infer benign missingness from silence. |
 | NIST identifies post-deployment ground truth, longitudinal tracking, baselines, drift, and common terminology as open monitoring challenges. Anthropic recommends combining automated evaluation, production monitoring, and periodic human calibration; OpenAI requires claim scope, harness choices, and validity checks to travel with evaluation results. ([NIST AI 800-4](https://www.nist.gov/publications/challenges-monitoring-deployed-ai-systems-center-ai-standards-and-innovation), [Anthropic agent evals](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), [OpenAI third-party evaluation guidance](https://openai.com/index/trustworthy-third-party-evaluations-foundations/)) | Teams can define outcomes after seeing results, discard missing cases, use software-only samples to imply domain generality, or treat example data as field evidence. | v0.7.0 Empirical Calibration Pilot Contract. | Freeze the domain, forecast meaning, outcome definition, observation window, and evidence requirements before decisions; preserve missing and excluded records; require non-software planning and verified operational or historical origins before analysis readiness. |
@@ -768,14 +769,23 @@ Deliverables:
   `MissingnessSensitivityAnalysis`, and `MissingnessAssessment`, deterministic
   verifier rules, governance, and retained negative fixtures. The example has
   no completed empirical outcome and remains example-only and insufficient.
+- Implemented fourth phase slice, v0.7.3 Cross-Domain Transportability Review:
+  preserve source and target domain profiles, keep local results separate,
+  compare ten meaning and evidence dimensions, and classify transfer as
+  supported only for a declared scope, unsupported, or unestablished.
+- Status: implemented through `TransportabilityPolicy`,
+  `DomainTransportProfile`, `DomainLocalCalibrationResult`,
+  `TransportabilityComparison`, and `TransportabilityAssessment`,
+  deterministic verifier rules, governance, and retained negative fixtures.
+  The example explicitly rejects software-to-support transfer and contains no
+  independently verified domain-local calibration evidence.
 - Next planned slices:
-  - v0.7.3 Cross-Domain Transportability Review: compare domain-local
-    calibration and shift evidence without treating pooled performance as proof
-    that an intent, threshold, or confidence meaning transfers.
   - v0.8 Multi-Agent Judgment Memory: preserve disagreement, dependency,
     revision, and forgetting boundaries across cooperating evaluators.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
+  - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,
+    conformance profiles, migration guarantees, and governance boundaries.
 - Continuing phase objective, v0.7 Empirical Calibration: replace illustrative
   calibration evidence with governed pilot outcomes, suite-health records, and
   framework-learning evidence while preserving uncertainty boundaries.

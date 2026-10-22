@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "QIF needs a domain-general structural contract that accounts for every eligible outcome disposition and bounds whether unavailable outcomes could change the conclusion, without imputing semantic truth.",
-  "updated_at": "2026-10-21T04:29:56.664Z",
+  "content": "QIF needs a domain-general structural contract that keeps domain-local evidence separate and evaluates whether constructs, populations, contexts, outcomes, evidence, thresholds, and confidence meanings support a bounded transfer claim.",
+  "updated_at": "2026-10-22T04:31:55.561Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVHM4JG8-J57TJ9",
-  "source_decision_record_id": "DEC-MVHM5IR9-JAHM0K",
+  "source_session_id": "SESS-MVJ1MUK6-GL8O4L",
+  "source_decision_record_id": "DEC-MVJ1NX5Z-F9I4G3",
   "declared_complete_at": null
 }

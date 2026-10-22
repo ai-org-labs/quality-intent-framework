@@ -224,6 +224,11 @@ function validatePackage(pkg, packagePath) {
   const outcomeDispositions = requiredArray(pkg, "outcomeDispositions");
   const missingnessSensitivityAnalyses = requiredArray(pkg, "missingnessSensitivityAnalyses");
   const missingnessAssessments = requiredArray(pkg, "missingnessAssessments");
+  const transportabilityPolicies = requiredArray(pkg, "transportabilityPolicies");
+  const domainTransportProfiles = requiredArray(pkg, "domainTransportProfiles");
+  const domainLocalCalibrationResults = requiredArray(pkg, "domainLocalCalibrationResults");
+  const transportabilityComparisons = requiredArray(pkg, "transportabilityComparisons");
+  const transportabilityAssessments = requiredArray(pkg, "transportabilityAssessments");
   const triggers = requiredArray(pkg, "governanceTriggers");
   const { index: packageRefIndex, loaded } = loadPackageRefs(packageRefs, packagePath);
   const originIndex = indexById(origins, `${packagePath}:evidenceOrigins`);
@@ -297,6 +302,7 @@ function validatePackage(pkg, packagePath) {
   const empiricalPilotDomainIndex = indexById(empiricalPilotDomains, `${packagePath}:empiricalPilotDomains`);
   const empiricalPilotEnrollmentIndex = indexById(empiricalPilotEnrollments, `${packagePath}:empiricalPilotEnrollments`);
   const empiricalOutcomeObservationIndex = indexById(empiricalOutcomeObservations, `${packagePath}:empiricalOutcomeObservations`);
+  const empiricalPilotAssessmentIndex = indexById(empiricalPilotAssessments, `${packagePath}:empiricalPilotAssessments`);
   const outcomeCollectionPolicyIndex = indexById(outcomeCollectionPolicies, `${packagePath}:outcomeCollectionPolicies`);
   const outcomeObservationRevisionIndex = indexById(outcomeObservationRevisions, `${packagePath}:outcomeObservationRevisions`);
   const outcomeSourceCorrectionIndex = indexById(outcomeSourceCorrections, `${packagePath}:outcomeSourceCorrections`);
@@ -304,6 +310,11 @@ function validatePackage(pkg, packagePath) {
   const missingnessPolicyIndex = indexById(missingnessPolicies, `${packagePath}:missingnessPolicies`);
   const outcomeDispositionIndex = indexById(outcomeDispositions, `${packagePath}:outcomeDispositions`);
   const missingnessSensitivityIndex = indexById(missingnessSensitivityAnalyses, `${packagePath}:missingnessSensitivityAnalyses`);
+  const missingnessAssessmentIndex = indexById(missingnessAssessments, `${packagePath}:missingnessAssessments`);
+  const transportabilityPolicyIndex = indexById(transportabilityPolicies, `${packagePath}:transportabilityPolicies`);
+  const domainTransportProfileIndex = indexById(domainTransportProfiles, `${packagePath}:domainTransportProfiles`);
+  const domainLocalCalibrationResultIndex = indexById(domainLocalCalibrationResults, `${packagePath}:domainLocalCalibrationResults`);
+  const transportabilityComparisonIndex = indexById(transportabilityComparisons, `${packagePath}:transportabilityComparisons`);
   const triggerIndex = indexById(triggers, `${packagePath}:governanceTriggers`);
 
   for (const origin of origins) {
@@ -2657,6 +2668,85 @@ function validatePackage(pkg, packagePath) {
     if (conclusionSensitiveAnalysisCount > 0 && !types.has("missingness-conclusion-sensitive")) errors.push(`${assessment.id} conclusion sensitivity requires a missingness-conclusion-sensitive governance trigger.`);
   }
 
+  const requiredTransportDimensions = ["construct", "stakeholder-population", "operating-context", "loss-boundary", "outcome-definition", "evidence-origin", "observation-window", "threshold-meaning", "confidence-meaning", "monitoring-integrity"];
+  for (const policy of transportabilityPolicies) {
+    ref(empiricalPilotProtocolIndex, policy.protocolRef, "empirical pilot protocol", policy.id);
+    if (!sameSet(policy.requiredComparisonDimensions, requiredTransportDimensions) || new Set(policy.requiredComparisonDimensions || []).size !== requiredTransportDimensions.length) errors.push(`${policy.id} requiredComparisonDimensions must contain every canonical transportability dimension exactly once.`);
+    if (policy.targetDomainEvidenceRequired !== true) errors.push(`${policy.id} targetDomainEvidenceRequired must be true.`);
+    if (policy.pooledPerformanceProvesTransfer !== false || policy.automaticTransferAuthorization !== false) errors.push(`${policy.id} must not treat pooled performance as transfer proof or authorize transfer automatically.`);
+  }
+
+  for (const profile of domainTransportProfiles) {
+    ref(transportabilityPolicyIndex, profile.policyRef, "transportability policy", profile.id);
+    ref(empiricalPilotDomainIndex, profile.domainRef, "empirical pilot domain", profile.id);
+    const types = new Set((profile.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", profile.id)?.triggerType));
+    if ((profile.evidenceStatus !== "verified" || profile.monitoringIntegrity !== "verified") && !types.has("transportability-evidence-unverified")) errors.push(`${profile.id} unverified profile or monitoring integrity requires a transportability-evidence-unverified governance trigger.`);
+  }
+
+  for (const result of domainLocalCalibrationResults) {
+    ref(transportabilityPolicyIndex, result.policyRef, "transportability policy", result.id);
+    const profile = ref(domainTransportProfileIndex, result.profileRef, "domain transport profile", result.id);
+    for (const assessmentRef of result.sourceAssessmentRefs || []) {
+      if (!empiricalPilotAssessmentIndex.has(assessmentRef) && !missingnessAssessmentIndex.has(assessmentRef)) errors.push(`${result.id} sourceAssessmentRefs references missing pilot or missingness assessment ${assessmentRef}.`);
+    }
+    const enrollments = profile ? empiricalPilotEnrollments.filter((item) => item.domainRef === profile.domainRef) : [];
+    const enrollmentIds = new Set(enrollments.map((item) => item.id));
+    const dispositions = outcomeDispositions.filter((item) => enrollmentIds.has(item.enrollmentRef));
+    const observed = dispositions.filter((item) => item.dispositionClass === "observed");
+    const verifiedEmpiricalOutcomeCount = observed.filter((item) => {
+      const observation = item.observationRef ? empiricalOutcomeObservationIndex.get(item.observationRef) : null;
+      return observation?.evidenceStatus === "verified" && observation.observationState === "completed";
+    }).length;
+    const sufficient = Boolean(profile) && profile.evidenceStatus === "verified" && profile.monitoringIntegrity === "verified" && enrollments.length > 0 && observed.length === enrollments.length && verifiedEmpiricalOutcomeCount === observed.length;
+    const expected = {eligibleCount: enrollments.length, observedCount: observed.length, verifiedEmpiricalOutcomeCount, dataSufficiency: sufficient ? "sufficient" : "insufficient", localConclusion: sufficient ? "descriptive-only" : "not-established"};
+    for (const [field, value] of Object.entries(expected)) if (result[field] !== value) errors.push(`${result.id} ${field} must reproduce as ${value}.`);
+    if (result.pooledWithOtherDomains !== false) errors.push(`${result.id} pooledWithOtherDomains must be false.`);
+  }
+
+  for (const comparison of transportabilityComparisons) {
+    const policy = ref(transportabilityPolicyIndex, comparison.policyRef, "transportability policy", comparison.id);
+    const sourceProfile = ref(domainTransportProfileIndex, comparison.sourceProfileRef, "source domain transport profile", comparison.id);
+    const targetProfile = ref(domainTransportProfileIndex, comparison.targetProfileRef, "target domain transport profile", comparison.id);
+    const sourceResult = ref(domainLocalCalibrationResultIndex, comparison.sourceLocalResultRef, "source domain-local result", comparison.id);
+    const targetResult = ref(domainLocalCalibrationResultIndex, comparison.targetLocalResultRef, "target domain-local result", comparison.id);
+    if (sourceProfile?.profileRole !== "source") errors.push(`${comparison.id} sourceProfileRef must reference a source profile.`);
+    if (targetProfile?.profileRole !== "target") errors.push(`${comparison.id} targetProfileRef must reference a target profile.`);
+    if (sourceResult?.profileRef !== comparison.sourceProfileRef || targetResult?.profileRef !== comparison.targetProfileRef) errors.push(`${comparison.id} local results must belong to their referenced source and target profiles.`);
+    const dimensions = comparison.dimensionComparisons || [];
+    if (!sameSet(dimensions.map((item) => item.dimension), policy?.requiredComparisonDimensions || []) || new Set(dimensions.map((item) => item.dimension)).size !== requiredTransportDimensions.length) errors.push(`${comparison.id} dimensionComparisons must cover every policy dimension exactly once.`);
+    const matchedDimensionCount = dimensions.filter((item) => item.comparisonStatus === "equivalent").length;
+    const mismatchedDimensionCount = dimensions.filter((item) => item.comparisonStatus === "different").length;
+    const unverifiedDimensionCount = dimensions.filter((item) => item.comparisonStatus === "unverified").length;
+    const targetEvidencePresent = Boolean(targetResult && targetResult.dataSufficiency === "sufficient" && targetResult.verifiedEmpiricalOutcomeCount > 0);
+    const transferStatus = mismatchedDimensionCount > 0 ? "unsupported" : unverifiedDimensionCount > 0 || sourceResult?.dataSufficiency !== "sufficient" || !targetEvidencePresent ? "unestablished" : "supported-for-declared-scope";
+    const expected = {matchedDimensionCount, mismatchedDimensionCount, unverifiedDimensionCount, targetEvidencePresent, transferStatus};
+    for (const [field, value] of Object.entries(expected)) if (comparison[field] !== value) errors.push(`${comparison.id} ${field} must reproduce as ${value}.`);
+    if (comparison.automaticTransferClaim !== false) errors.push(`${comparison.id} automaticTransferClaim must be false.`);
+    const types = new Set((comparison.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", comparison.id)?.triggerType));
+    if (mismatchedDimensionCount > 0 && !types.has("transportability-mismatch")) errors.push(`${comparison.id} domain mismatch requires a transportability-mismatch governance trigger.`);
+    if ((unverifiedDimensionCount > 0 || !targetEvidencePresent) && !types.has("transportability-evidence-unverified")) errors.push(`${comparison.id} unverified comparison or missing target evidence requires a transportability-evidence-unverified governance trigger.`);
+  }
+
+  for (const assessment of transportabilityAssessments) {
+    ref(transportabilityPolicyIndex, assessment.policyRef, "transportability policy", assessment.id);
+    const comparisons = (assessment.comparisonRefs || []).map((id) => ref(transportabilityComparisonIndex, id, "transportability comparison", assessment.id)).filter(Boolean);
+    const profiles = (assessment.profileRefs || []).map((id) => ref(domainTransportProfileIndex, id, "domain transport profile", assessment.id)).filter(Boolean);
+    const localResults = (assessment.localResultRefs || []).map((id) => ref(domainLocalCalibrationResultIndex, id, "domain-local result", assessment.id)).filter(Boolean);
+    const supportedComparisonCount = comparisons.filter((item) => item.transferStatus === "supported-for-declared-scope").length;
+    const unsupportedComparisonCount = comparisons.filter((item) => item.transferStatus === "unsupported").length;
+    const unestablishedComparisonCount = comparisons.filter((item) => item.transferStatus === "unestablished").length;
+    const verifiedProfileCount = profiles.filter((item) => item.evidenceStatus === "verified" && item.monitoringIntegrity === "verified").length;
+    const sufficientLocalResultCount = localResults.filter((item) => item.dataSufficiency === "sufficient").length;
+    const sufficient = comparisons.length > 0 && supportedComparisonCount === comparisons.length && verifiedProfileCount === profiles.length && sufficientLocalResultCount === localResults.length;
+    const signal = unsupportedComparisonCount > 0 ? "domain-mismatch" : sufficient ? "supported-for-declared-scope" : "transfer-unestablished";
+    const expected = {comparisonCount: comparisons.length, supportedComparisonCount, unsupportedComparisonCount, unestablishedComparisonCount, verifiedProfileCount, sufficientLocalResultCount, dataSufficiency: sufficient ? "sufficient" : "insufficient", assessmentSignal: signal};
+    for (const [field, value] of Object.entries(expected)) if (assessment[field] !== value) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    if (assessment.activityCountIsQuality !== false || assessment.automaticQualityVerdict !== false) errors.push(`${assessment.id} must not treat activity counts as quality or make an automatic quality verdict.`);
+    const types = new Set((assessment.governanceTriggerRefs || []).map((id) => ref(triggerIndex, id, "governance trigger", assessment.id)?.triggerType));
+    if (!sufficient && !types.has("transportability-assessment-insufficient")) errors.push(`${assessment.id} insufficient transportability evidence requires a transportability-assessment-insufficient governance trigger.`);
+    if (unsupportedComparisonCount > 0 && !types.has("transportability-mismatch")) errors.push(`${assessment.id} unsupported comparison requires a transportability-mismatch governance trigger.`);
+  }
+
   for (const report of reports) {
     for (const field of ["title", "policyRef", "calibrationSignal", "interpretation", "status"]) str(report, field, report.id);
     const policy = ref(policyIndex, report.policyRef, "calibration policy", report.id);
@@ -2775,6 +2865,7 @@ function validatePackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim || []).includes("that pilot domain count, enrollment count, prospective timing, outcome count, or readiness state proves study validity, representativeness, causality, calibration truth, quality, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that empirical pilot structure proves study validity, representativeness, causality, calibration truth, quality, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that revision count, source correction, custody event, digest, sequence continuity, or snapshot alignment proves source truth, custody authenticity, causality, quality, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that outcome ledger structure proves source truth, custody authenticity, causality, quality, authorization, or authority.`);
     if (!(boundary.doesNotClaim || []).includes("that a disposition label, attrition count, observed rate, best-case or worst-case bound, or stable threshold result proves the missingness mechanism, causality, representativeness, statistical validity, quality, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that missingness sensitivity proves a missingness mechanism, causality, representativeness, statistical validity, quality, authorization, or authority.`);
+    if (!(boundary.doesNotClaim || []).includes("that matched dimensions, pooled performance, domain count, local calibration, or a supported status proves generalization, construct validity, representativeness, causality, calibration truth, quality, selection, authorization, or authority")) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming that transportability structure proves generalization, construct validity, representativeness, causality, calibration truth, quality, selection, authorization, or authority.`);
   }
 
   results.push({
@@ -2868,6 +2959,11 @@ function validatePackage(pkg, packagePath) {
       outcomeDispositions: outcomeDispositions.length,
       missingnessSensitivityAnalyses: missingnessSensitivityAnalyses.length,
       missingnessAssessments: missingnessAssessments.length,
+      transportabilityPolicies: transportabilityPolicies.length,
+      domainTransportProfiles: domainTransportProfiles.length,
+      domainLocalCalibrationResults: domainLocalCalibrationResults.length,
+      transportabilityComparisons: transportabilityComparisons.length,
+      transportabilityAssessments: transportabilityAssessments.length,
       governanceTriggers: triggers.length
     }
   });
@@ -2887,5 +2983,5 @@ console.log(JSON.stringify({
   ok: true,
   message: "QIF calibration report package validation passed.",
   packages: results,
-  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, recovery dependency overlap, path membership, failover prerequisite partitioning, correlated recovery summaries, checkpoint age, rehydration identity equality, effect-state partitioning, retry-budget arithmetic, duplicate-effect intersection, durable recovery summaries, recovery observation durations, observation sequencing, delayed-effect reconciliation, closure-state reproduction, prospective pilot registration, domain coverage, enrollment timing, outcome evidence state, empirical origin eligibility, pilot readiness arithmetic, append-only outcome revision sequence, supersession, late-arrival classification, source correction linkage, custody continuity, latest snapshot alignment, missingness disposition coverage, best-case and worst-case bounds, conclusion sensitivity, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, causality, consequence truth, calibration truth, study validity, source truth, custody authenticity, missingness mechanism, statistical validity, contamination freedom, observation completeness, resolution quality, intervention effectiveness, coordination success, containment effectiveness, recovery effectiveness, state truth, effect completion, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, recovery closure, retry or policy selection, authorization, or decision authority."
+  verifierBoundary: "This verifies declared structure, references, classifications, timing arithmetic, disagreement grouping, adjudication traceability, judge dependency profiles, shared dimensions, cross-judge agreement, dissent, abstention, correlation summaries, evaluator-signal matched evidence and affordances, externalized behavior differences, route-policy lineage, drift and revalidation traceability, rubric-feedback lineage, revision lifecycle, counterfactual same-evidence replay, hypothetical loss-boundary linkage, judge-condition evidence identity, output taxonomy, abstention review, sequestered access declarations, observed affordances, externalized transcript inspection, contamination and loophole findings, intervention timing and recovery arithmetic, distributed lane authority, dependency order, conflict counts, shared-resource limits, observed propagation, blast-radius counts, containment states, recovery dependency overlap, path membership, failover prerequisite partitioning, correlated recovery summaries, checkpoint age, rehydration identity equality, effect-state partitioning, retry-budget arithmetic, duplicate-effect intersection, durable recovery summaries, recovery observation durations, observation sequencing, delayed-effect reconciliation, closure-state reproduction, prospective pilot registration, domain coverage, enrollment timing, outcome evidence state, empirical origin eligibility, pilot readiness arithmetic, append-only outcome revision sequence, supersession, late-arrival classification, source correction linkage, custody continuity, latest snapshot alignment, missingness disposition coverage, best-case and worst-case bounds, conclusion sensitivity, cross-domain profile comparison, local-result separation, transfer classification, rollback preservation, and policy conformance only; it does not prove independence, belief, intent, deception, honesty, probability semantics, representativeness, generalization, construct validity, causality, consequence truth, calibration truth, study validity, source truth, custody authenticity, missingness mechanism, statistical validity, contamination freedom, observation completeness, resolution quality, intervention effectiveness, coordination success, containment effectiveness, recovery effectiveness, state truth, effect completion, systemic safety, judge, rubric, or policy improvement, optimality, reviewer competence, semantic correctness, service availability, current quality, safety, recovery closure, retry or policy selection, authorization, or decision authority."
 }, null, 2));

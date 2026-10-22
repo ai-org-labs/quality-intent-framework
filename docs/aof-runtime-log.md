@@ -5113,3 +5113,21 @@ Date: 2026-10-21
 - Outcome report: `OUT-MVHMKW4O-NASPGI` recorded implementation success and retained v0.7.3 as an open next value slice.
 - Residual risk: no independently verified operational attrition dataset is committed. Structural validity and sensitivity bounds do not establish the missingness mechanism, representativeness, causality, statistical validity, calibration truth, transportability, quality, authorization, or decision authority.
 - Next value slices: v0.7.3 Cross-Domain Transportability Review, v0.8 Multi-Agent Judgment Memory, and v0.9 Anticipatory Quality Intent Twin remain defined in the roadmap.
+
+# QIF v0.7.3 Cross-Domain Transportability Review
+
+Date: 2026-10-22
+
+- Need: domain-local calibration evidence could be recorded, but QIF could not prevent a score, threshold, confidence meaning, or quality conclusion from being silently transferred to a different domain.
+- Intent: make construct, stakeholder population, operating context, loss boundary, outcome definition, evidence origin, observation window, threshold meaning, confidence meaning, and monitoring integrity comparable without claiming that structural agreement proves generalization.
+- Context: QIF remains standalone; publicly released AOF v12.2.0 at source commit `fc7599b` governs development and is not a QIF runtime dependency.
+- AOF session: `SESS-MVJ1MUK6-GL8O4L`; task: `TASK-072`; framing decisions: `DEC-MVJ1MUK8-VQNLWD` and `DEC-MVJ1MYXQ-MO0WGX`; Need Validation decision: `DEC-MVJ1NX5Z-F9I4G3`.
+- Need Validation and Charter artifacts: `.aof/runtime/PST-QIFV0730.json`, `.aof/runtime/VHY-QIFV0730.json`, `.aof/runtime/ALT-QIFV0730.json`, `.aof/runtime/NVR-QIFV0730.json`, and `.aof/runtime/PCH-QIFV0730.json`. Charter creation followed Validated Need `NVR-MVJ1NMEX-TV3AY3`.
+- Trend evidence: NIST measurement science identifies construct validity and cross-domain generalization as open evaluation problems; NIST TEVV-Athlon emphasizes context-specific configurable evaluation; NIST deployed-system guidance emphasizes ongoing monitoring; Anthropic recommends combining agent evaluation with production and human evidence.
+- Council direction: Visionary, Builder, and Guardian proceeded in planning; Guardian and Builder proceeded in review with no veto. Guardian required domain-local results, explicit target evidence, exact comparison dimensions, governance for mismatch or uncertainty, and refusal to equate pooled results with safe transfer. Mock council execution proves routing, not independent semantic approval.
+- Decision: implement `TransportabilityPolicy`, `DomainTransportProfile`, `DomainLocalCalibrationResult`, `TransportabilityComparison`, and `TransportabilityAssessment`. The committed software-release to customer-support comparison has seven differing and three unverified dimensions, so transfer is `unsupported` and both local results remain `insufficient`.
+- Runtime evidence: `.aof/runtime/v0.7.3-actor-skill-packet.json`, `.aof/runtime/v0.7.3-planning-council-executed.json`, `.aof/runtime/v0.7.3-review-council-executed.json`, self-audit `FSA-QIFV0730`, and the learning-loop snapshot record capability, resource, policy, review, self-review, and retrospective evidence.
+- Verification: `npm test` passed 16/16 positive and 1,279/1,279 retained negative checks. Portable build and verification passed with 49 files. AOF `organization-verify` passed 295/295 checks.
+- Outcome report: `OUT-MVJ20ZTJ-6H9JO6` recorded implementation success and retained v0.8 as an open next value slice.
+- Residual risk: no independently verified multi-domain operational dataset is committed. Structural comparison does not establish construct equivalence, real generalization, representativeness, causality, calibration truth, safe transfer, quality, authorization, or decision authority.
+- Next value slices: v0.8 Multi-Agent Judgment Memory, v0.9 Anticipatory Quality Intent Twin, and v1.0 Stable Standalone Contract remain defined in the roadmap.

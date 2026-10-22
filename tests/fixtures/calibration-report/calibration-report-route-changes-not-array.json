@@ -2856,6 +2856,36 @@
       "requiredAction": "Keep calibration claims blocked and continue governed outcome collection.",
       "owner": "quality-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CR-081",
+      "triggerType": "transportability-evidence-unverified",
+      "reason": "The source and target domain profiles and monitoring integrity are example-only rather than independently verified.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep transfer unestablished until both domains have verified context, monitoring, and target-domain outcome evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-082",
+      "triggerType": "transportability-mismatch",
+      "reason": "The software release and customer-support domains differ on construct, stakeholder population, operating context, loss boundary, and outcome definition.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Do not transfer the source-domain conclusion; define and validate a target-domain policy and evidence plan.",
+      "owner": "pilot-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CR-083",
+      "triggerType": "transportability-assessment-insufficient",
+      "reason": "No independently verified domain profile or sufficient domain-local calibration result is available.",
+      "sourceCalibrationReportRef": "CAR-CR-001",
+      "severity": "high",
+      "requiredAction": "Keep cross-domain calibration claims blocked and collect governed domain-local evidence.",
+      "owner": "quality-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -2881,7 +2911,8 @@
       "observation-window duration, observation sequence and coverage, delayed completion, unresolved final state, terminal-state conflicts, closure-state reproduction, assessment arithmetic, and governance routing reproduce",
       "prospective pilot registration, domain coverage, enrollment timing, outcome evidence state, empirical origin eligibility, pilot readiness arithmetic, and governance routing reproduce",
       "append-only outcome revision sequence, supersession, late-arrival classification, source correction lineage, custody sequence, latest snapshot alignment, ledger assessment arithmetic, and governance routing reproduce",
-      "eligible-population disposition coverage, observed and unavailable counts, best-case and worst-case bounds, conclusion sensitivity, assessment arithmetic, and governance routing reproduce"
+      "eligible-population disposition coverage, observed and unavailable counts, best-case and worst-case bounds, conclusion sensitivity, assessment arithmetic, and governance routing reproduce",
+      "source and target domain profiles, domain-local result separation, exact comparison dimensions, mismatch and uncertainty counts, transfer classification, assessment arithmetic, and governance routing reproduce"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -2911,7 +2942,8 @@
       "that observation duration, observation count, delayed-effect detection, reconciliation state, or absence of unresolved effects proves effect truth, observation completeness, causality, recovery safety, quality, closure authorization, or authority",
       "that pilot domain count, enrollment count, prospective timing, outcome count, or readiness state proves study validity, representativeness, causality, calibration truth, quality, authorization, or authority",
       "that revision count, source correction, custody event, digest, sequence continuity, or snapshot alignment proves source truth, custody authenticity, causality, quality, authorization, or authority",
-      "that a disposition label, attrition count, observed rate, best-case or worst-case bound, or stable threshold result proves the missingness mechanism, causality, representativeness, statistical validity, quality, authorization, or authority"
+      "that a disposition label, attrition count, observed rate, best-case or worst-case bound, or stable threshold result proves the missingness mechanism, causality, representativeness, statistical validity, quality, authorization, or authority",
+      "that matched dimensions, pooled performance, domain count, local calibration, or a supported status proves generalization, construct validity, representativeness, causality, calibration truth, quality, selection, authorization, or authority"
     ],
     "semanticValidityRequires": [
       "expert review of prediction and outcome meaning",
@@ -2934,7 +2966,8 @@
       "independent review of observation-window sufficiency, external effect timestamps and states, delayed effects, reconciliation conflicts, unresolved effects, and accountable recovery closure authority",
       "accountable review of pilot protocol, domain relevance, prospective registration, outcome definitions, missingness, exclusions, evidence provenance, and empirical interpretation",
       "independent verification of source records, correction authority, custody actors, timestamps, digests, late-arrival meaning, and current snapshot interpretation",
-      "accountable review of eligibility, disposition reasons, unavailable-outcome mechanisms, observation opportunity, sensitivity assumptions, threshold meaning, and statistical interpretation"
+      "accountable review of eligibility, disposition reasons, unavailable-outcome mechanisms, observation opportunity, sensitivity assumptions, threshold meaning, and statistical interpretation",
+      "independent review of source and target constructs, stakeholders, contexts, loss boundaries, outcome definitions, evidence origin, observation windows, thresholds, confidence meanings, monitoring integrity, and target-domain outcomes"
     ]
   },
   "evaluatorSignalPolicies": [
@@ -4955,6 +4988,300 @@
       "governanceTriggerRefs": [
         "GTR-CR-079",
         "GTR-CR-080"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "transportabilityPolicies": [
+    {
+      "id": "TRP-CR-001",
+      "title": "Illustrative cross-domain transportability policy",
+      "protocolRef": "EPP-CR-001",
+      "requiredComparisonDimensions": [
+        "construct",
+        "stakeholder-population",
+        "operating-context",
+        "loss-boundary",
+        "outcome-definition",
+        "evidence-origin",
+        "observation-window",
+        "threshold-meaning",
+        "confidence-meaning",
+        "monitoring-integrity"
+      ],
+      "targetDomainEvidenceRequired": true,
+      "pooledPerformanceProvesTransfer": false,
+      "automaticTransferAuthorization": false,
+      "reviewedBy": [
+        "pilot-governance-owner",
+        "independent-method-reviewer"
+      ],
+      "inferenceBoundary": "transportability-structure-only-not-generalization-construct-validity-representativeness-causality-calibration-truth-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [],
+      "status": "active"
+    }
+  ],
+  "domainTransportProfiles": [
+    {
+      "id": "DTP-CR-SOFTWARE-001",
+      "title": "Illustrative software release source profile",
+      "policyRef": "TRP-CR-001",
+      "domainRef": "EPD-CR-SOFTWARE-001",
+      "profileRole": "source",
+      "constructMeaning": "Protection of declared release Quality Intents",
+      "stakeholderPopulation": "People affected by accountable software release decisions",
+      "operatingContext": "Software release governance with post-release operational monitoring",
+      "lossBoundary": "A release must not cross its declared stakeholder loss boundaries",
+      "outcomeDefinition": "Declared release Quality Intents hold through the registered observation window",
+      "evidenceOriginKinds": [
+        "observed-operational",
+        "historical-record"
+      ],
+      "observationWindow": "Registered per release enrollment before decision",
+      "thresholdMeaning": "Policy-local minimum evidence for a release calibration conclusion",
+      "confidenceMeaning": "Probability that declared release loss boundaries remain protected",
+      "monitoringIntegrity": "not-assessed",
+      "assumptions": [
+        "Release telemetry and review evidence remain available and uncompromised."
+      ],
+      "evidenceRefs": [
+        "examples/calibration-report-package.json#EPD-CR-SOFTWARE-001"
+      ],
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-081"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "DTP-CR-SUPPORT-001",
+      "title": "Illustrative customer support target profile",
+      "policyRef": "TRP-CR-001",
+      "domainRef": "EPD-CR-SUPPORT-001",
+      "profileRole": "target",
+      "constructMeaning": "Protection of declared customer-impact Quality Intents",
+      "stakeholderPopulation": "Customers and operators affected by support-operation decisions",
+      "operatingContext": "Customer support operations with case and stakeholder-impact monitoring",
+      "lossBoundary": "A support decision must not cross the declared customer-impact or financial-limit boundary",
+      "outcomeDefinition": "The declared customer-impact loss boundary remains protected through the registered window",
+      "evidenceOriginKinds": [
+        "observed-operational",
+        "historical-record"
+      ],
+      "observationWindow": "Registered per support enrollment before decision",
+      "thresholdMeaning": "Policy-local minimum evidence for a support calibration conclusion",
+      "confidenceMeaning": "Probability that the registered support loss boundary remains protected",
+      "monitoringIntegrity": "not-assessed",
+      "assumptions": [
+        "Case outcomes and stakeholder-impact evidence remain available and uncompromised."
+      ],
+      "evidenceRefs": [
+        "examples/calibration-report-package.json#EPD-CR-SUPPORT-001"
+      ],
+      "evidenceStatus": "example-only",
+      "governanceTriggerRefs": [
+        "GTR-CR-081"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "domainLocalCalibrationResults": [
+    {
+      "id": "DLR-CR-SOFTWARE-001",
+      "title": "Illustrative software domain-local result",
+      "policyRef": "TRP-CR-001",
+      "profileRef": "DTP-CR-SOFTWARE-001",
+      "sourceAssessmentRefs": [
+        "EPA-CR-001",
+        "MAT-CR-001"
+      ],
+      "eligibleCount": 0,
+      "observedCount": 0,
+      "verifiedEmpiricalOutcomeCount": 0,
+      "dataSufficiency": "insufficient",
+      "localConclusion": "not-established",
+      "pooledWithOtherDomains": false,
+      "interpretation": "domain-local-result-only-not-cross-domain-transfer-proof-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-081"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "DLR-CR-SUPPORT-001",
+      "title": "Illustrative support domain-local result",
+      "policyRef": "TRP-CR-001",
+      "profileRef": "DTP-CR-SUPPORT-001",
+      "sourceAssessmentRefs": [
+        "EPA-CR-001",
+        "MAT-CR-001"
+      ],
+      "eligibleCount": 1,
+      "observedCount": 0,
+      "verifiedEmpiricalOutcomeCount": 0,
+      "dataSufficiency": "insufficient",
+      "localConclusion": "not-established",
+      "pooledWithOtherDomains": false,
+      "interpretation": "domain-local-result-only-not-cross-domain-transfer-proof-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-081"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "transportabilityComparisons": [
+    {
+      "id": "TRC-CR-001",
+      "title": "Illustrative software-to-support transportability comparison",
+      "policyRef": "TRP-CR-001",
+      "sourceProfileRef": "DTP-CR-SOFTWARE-001",
+      "targetProfileRef": "DTP-CR-SUPPORT-001",
+      "sourceLocalResultRef": "DLR-CR-SOFTWARE-001",
+      "targetLocalResultRef": "DLR-CR-SUPPORT-001",
+      "dimensionComparisons": [
+        {
+          "dimension": "construct",
+          "comparisonStatus": "different",
+          "rationale": "Release-intent protection and customer-impact protection are distinct constructs.",
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#DTP-CR-SOFTWARE-001",
+            "examples/calibration-report-package.json#DTP-CR-SUPPORT-001"
+          ]
+        },
+        {
+          "dimension": "stakeholder-population",
+          "comparisonStatus": "different",
+          "rationale": "Release stakeholders and support customers and operators are different populations.",
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#DTP-CR-SOFTWARE-001",
+            "examples/calibration-report-package.json#DTP-CR-SUPPORT-001"
+          ]
+        },
+        {
+          "dimension": "operating-context",
+          "comparisonStatus": "different",
+          "rationale": "Release governance and support operations use different workflows and consequences.",
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#DTP-CR-SOFTWARE-001",
+            "examples/calibration-report-package.json#DTP-CR-SUPPORT-001"
+          ]
+        },
+        {
+          "dimension": "loss-boundary",
+          "comparisonStatus": "different",
+          "rationale": "The target adds customer-impact and financial-limit losses not established in the source.",
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#DTP-CR-SOFTWARE-001",
+            "examples/calibration-report-package.json#DTP-CR-SUPPORT-001"
+          ]
+        },
+        {
+          "dimension": "outcome-definition",
+          "comparisonStatus": "different",
+          "rationale": "The observed outcome meanings are domain-local and not interchangeable.",
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#DTP-CR-SOFTWARE-001",
+            "examples/calibration-report-package.json#DTP-CR-SUPPORT-001"
+          ]
+        },
+        {
+          "dimension": "evidence-origin",
+          "comparisonStatus": "unverified",
+          "rationale": "Both profiles declare allowed origin kinds but contain only example evidence.",
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#DTP-CR-SOFTWARE-001",
+            "examples/calibration-report-package.json#DTP-CR-SUPPORT-001"
+          ]
+        },
+        {
+          "dimension": "observation-window",
+          "comparisonStatus": "different",
+          "rationale": "Observation windows are registered against different operational events.",
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#DTP-CR-SOFTWARE-001",
+            "examples/calibration-report-package.json#DTP-CR-SUPPORT-001"
+          ]
+        },
+        {
+          "dimension": "threshold-meaning",
+          "comparisonStatus": "unverified",
+          "rationale": "No accountable evidence establishes threshold equivalence across domains.",
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#TRP-CR-001"
+          ]
+        },
+        {
+          "dimension": "confidence-meaning",
+          "comparisonStatus": "different",
+          "rationale": "Confidence refers to different loss boundaries and populations.",
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#DTP-CR-SOFTWARE-001",
+            "examples/calibration-report-package.json#DTP-CR-SUPPORT-001"
+          ]
+        },
+        {
+          "dimension": "monitoring-integrity",
+          "comparisonStatus": "unverified",
+          "rationale": "Monitoring integrity has not been independently assessed in either domain.",
+          "evidenceRefs": [
+            "examples/calibration-report-package.json#DTP-CR-SOFTWARE-001",
+            "examples/calibration-report-package.json#DTP-CR-SUPPORT-001"
+          ]
+        }
+      ],
+      "matchedDimensionCount": 0,
+      "mismatchedDimensionCount": 7,
+      "unverifiedDimensionCount": 3,
+      "targetEvidencePresent": false,
+      "transferStatus": "unsupported",
+      "reviewedBy": [
+        "pilot-governance-owner",
+        "independent-method-reviewer"
+      ],
+      "automaticTransferClaim": false,
+      "interpretation": "bounded-transportability-comparison-only-not-generalization-construct-validity-representativeness-causality-calibration-truth-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-081",
+        "GTR-CR-082"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "transportabilityAssessments": [
+    {
+      "id": "TRA-CR-001",
+      "title": "Illustrative cross-domain transportability assessment",
+      "policyRef": "TRP-CR-001",
+      "comparisonRefs": [
+        "TRC-CR-001"
+      ],
+      "profileRefs": [
+        "DTP-CR-SOFTWARE-001",
+        "DTP-CR-SUPPORT-001"
+      ],
+      "localResultRefs": [
+        "DLR-CR-SOFTWARE-001",
+        "DLR-CR-SUPPORT-001"
+      ],
+      "comparisonCount": 1,
+      "supportedComparisonCount": 0,
+      "unsupportedComparisonCount": 1,
+      "unestablishedComparisonCount": 0,
+      "verifiedProfileCount": 0,
+      "sufficientLocalResultCount": 0,
+      "dataSufficiency": "insufficient",
+      "assessmentSignal": "domain-mismatch",
+      "reviewedBy": [
+        "quality-governance-owner",
+        "independent-method-reviewer"
+      ],
+      "activityCountIsQuality": false,
+      "automaticQualityVerdict": false,
+      "interpretation": "transportability-assessment-only-not-generalization-construct-validity-representativeness-causality-calibration-truth-quality-selection-authorization-or-authority",
+      "governanceTriggerRefs": [
+        "GTR-CR-081",
+        "GTR-CR-082",
+        "GTR-CR-083"
       ],
       "status": "reviewed"
     }

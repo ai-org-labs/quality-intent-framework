@@ -1,0 +1,78 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-22T04:32:09.323Z",
+  "packet_id": "ASP-MVJ1O7SB-P9TQF0",
+  "source_task_id": "TASK-072",
+  "source_parent_session_id": "SESS-MVJ1MUK6-GL8O4L",
+  "source_decision_record_id": "DEC-MVJ1NX5Z-F9I4G3",
+  "objective": "Implement and release QIF v0.7.3 Cross-Domain Transportability Review",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime",
+    "assignment_reason": "Builder owns additive schema, verifier, fixture, documentation, and release implementation.",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "schema-evolution",
+    "verifier-design"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-contract-alignment",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs"
+      ],
+      "rationale": "Existing calibration package is locally extensible."
+    }
+  ],
+  "resource_refs": [
+    "resource-repo-main",
+    "resource-npm-test"
+  ],
+  "policy_refs": [
+    "policy-runtime-backed-answer-discipline"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "Canonical entities and verifier boundary",
+      "Example and negative fixture evidence",
+      "Roadmap, changelog, runtime log, and portable release"
+    ],
+    "acceptance_criteria": [
+      "npm test passes all positive and negative fixtures",
+      "portable package builds and verifies",
+      "AOF organization verification and council review pass"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "Domain-local evidence stays separate and every transfer classification reproduces",
+      "evaluator_ref": "guardian",
+      "evidence_required": "schema, verifier, fixtures, and example",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "transportability-overclaim",
+      "trigger_condition": "pooled or source-domain performance is treated as proof of target-domain transfer",
+      "consequence": "require-council-review",
+      "recovery_action": "restore domain-local results, exact mismatch dimensions, and semantic boundary"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will keep local evidence separate from transfer claims.",
+    "current_action": "Implement v0.7.3",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Submit complete package to Guardian review"
+  },
+  "status": "draft"
+}

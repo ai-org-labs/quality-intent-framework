@@ -1385,6 +1385,69 @@ export const cases = [
   },
   {
     id:"missingness-boundary-overclaim",rule:"missingness semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that missingness sensitivity proves a missingness mechanism",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that a disposition label"));}
+  },
+  {
+    id:"transportability-policies-not-array",rule:"transportability policies required",expect:"package transportabilityPolicies must be an array.",mutate:(pkg)=>{pkg.transportabilityPolicies=null;}
+  },
+  {
+    id:"transportability-profiles-not-array",rule:"domain transport profiles required",expect:"package domainTransportProfiles must be an array.",mutate:(pkg)=>{pkg.domainTransportProfiles=null;}
+  },
+  {
+    id:"transportability-policy-protocol",rule:"transportability protocol resolution",expect:"references missing empirical pilot protocol",mutate:(pkg)=>{pkg.transportabilityPolicies[0].protocolRef="EPP-NOPE-999";}
+  },
+  {
+    id:"transportability-policy-dimensions",rule:"canonical transportability dimensions",expect:"requiredComparisonDimensions must contain every canonical transportability dimension exactly once.",mutate:(pkg)=>{pkg.transportabilityPolicies[0].requiredComparisonDimensions.pop();}
+  },
+  {
+    id:"transportability-policy-target-evidence",rule:"target evidence requirement",expect:"targetDomainEvidenceRequired must be true.",mutate:(pkg)=>{pkg.transportabilityPolicies[0].targetDomainEvidenceRequired=false;}
+  },
+  {
+    id:"transportability-policy-pooled-proof",rule:"no pooled transfer proof",expect:"must not treat pooled performance as transfer proof",mutate:(pkg)=>{pkg.transportabilityPolicies[0].pooledPerformanceProvesTransfer=true;}
+  },
+  {
+    id:"transportability-profile-domain",rule:"domain profile resolution",expect:"references missing empirical pilot domain",mutate:(pkg)=>{pkg.domainTransportProfiles[0].domainRef="EPD-NOPE-999";}
+  },
+  {
+    id:"transportability-profile-evidence-trigger",rule:"profile evidence governance",expect:"unverified profile or monitoring integrity requires a transportability-evidence-unverified governance trigger.",mutate:(pkg)=>{pkg.domainTransportProfiles[0].governanceTriggerRefs=[];}
+  },
+  {
+    id:"domain-local-profile",rule:"domain-local profile resolution",expect:"references missing domain transport profile",mutate:(pkg)=>{pkg.domainLocalCalibrationResults[0].profileRef="DTP-NOPE-999";}
+  },
+  {
+    id:"domain-local-assessment-ref",rule:"domain-local assessment resolution",expect:"sourceAssessmentRefs references missing pilot or missingness assessment",mutate:(pkg)=>{pkg.domainLocalCalibrationResults[0].sourceAssessmentRefs=["EPA-NOPE-999"];}
+  },
+  {
+    id:"domain-local-count",rule:"domain-local eligible count reproduction",expect:"eligibleCount must reproduce as 0.",mutate:(pkg)=>{pkg.domainLocalCalibrationResults[0].eligibleCount=1;}
+  },
+  {
+    id:"domain-local-pooling",rule:"domain-local result separation",expect:"pooledWithOtherDomains must be false.",mutate:(pkg)=>{pkg.domainLocalCalibrationResults[0].pooledWithOtherDomains=true;}
+  },
+  {
+    id:"transportability-source-role",rule:"source profile role",expect:"sourceProfileRef must reference a source profile.",mutate:(pkg)=>{pkg.domainTransportProfiles[0].profileRole="target";}
+  },
+  {
+    id:"transportability-local-lineage",rule:"local result profile lineage",expect:"local results must belong to their referenced source and target profiles.",mutate:(pkg)=>{pkg.transportabilityComparisons[0].sourceLocalResultRef="DLR-CR-SUPPORT-001";}
+  },
+  {
+    id:"transportability-comparison-dimensions",rule:"comparison dimension coverage",expect:"dimensionComparisons must cover every policy dimension exactly once.",mutate:(pkg)=>{pkg.transportabilityComparisons[0].dimensionComparisons.pop();}
+  },
+  {
+    id:"transportability-comparison-count",rule:"comparison mismatch count reproduction",expect:"mismatchedDimensionCount must reproduce as 7.",mutate:(pkg)=>{pkg.transportabilityComparisons[0].mismatchedDimensionCount=6;}
+  },
+  {
+    id:"transportability-comparison-status",rule:"transfer status reproduction",expect:"transferStatus must reproduce as unsupported.",mutate:(pkg)=>{pkg.transportabilityComparisons[0].transferStatus="unestablished";}
+  },
+  {
+    id:"transportability-mismatch-trigger",rule:"domain mismatch governance",expect:"domain mismatch requires a transportability-mismatch governance trigger.",mutate:(pkg)=>{pkg.transportabilityComparisons[0].governanceTriggerRefs=["GTR-CR-081"];}
+  },
+  {
+    id:"transportability-assessment-count",rule:"transportability assessment reproduction",expect:"unsupportedComparisonCount must reproduce as 1.",mutate:(pkg)=>{pkg.transportabilityAssessments[0].unsupportedComparisonCount=0;}
+  },
+  {
+    id:"transportability-assessment-trigger",rule:"transportability assessment governance",expect:"insufficient transportability evidence requires a transportability-assessment-insufficient governance trigger.",mutate:(pkg)=>{pkg.transportabilityAssessments[0].governanceTriggerRefs=["GTR-CR-081","GTR-CR-082"];}
+  },
+  {
+    id:"transportability-boundary-overclaim",rule:"transportability semantic boundary",expect:"verifierBoundary must explicitly avoid claiming that transportability structure proves generalization",mutate:(pkg)=>{pkg.verifierBoundary.doesNotClaim=pkg.verifierBoundary.doesNotClaim.filter((claim)=>!claim.startsWith("that matched dimensions"));}
   }
 ];
 

@@ -94,6 +94,11 @@
     "outcomeDispositions",
     "missingnessSensitivityAnalyses",
     "missingnessAssessments",
+    "transportabilityPolicies",
+    "domainTransportProfiles",
+    "domainLocalCalibrationResults",
+    "transportabilityComparisons",
+    "transportabilityAssessments",
     "governanceTriggers",
     "verifierBoundary"
   ],
@@ -680,6 +685,31 @@
       "type": "array",
       "minItems": 1,
       "items": {"$ref": "#/$defs/missingnessAssessment"}
+    },
+    "transportabilityPolicies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/transportabilityPolicy"}
+    },
+    "domainTransportProfiles": {
+      "type": "array",
+      "minItems": 2,
+      "items": {"$ref": "#/$defs/domainTransportProfile"}
+    },
+    "domainLocalCalibrationResults": {
+      "type": "array",
+      "minItems": 2,
+      "items": {"$ref": "#/$defs/domainLocalCalibrationResult"}
+    },
+    "transportabilityComparisons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/transportabilityComparison"}
+    },
+    "transportabilityAssessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/transportabilityAssessment"}
     }
   },
   "$defs": {
@@ -8843,6 +8873,138 @@
         "activityCountIsQuality": {"const": false},
         "automaticQualityVerdict": {"const": false},
         "interpretation": {"const": "missingness-sensitivity-structure-only-not-missingness-mechanism-causality-representativeness-statistical-validity-quality-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "transportabilityPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "protocolRef", "requiredComparisonDimensions", "targetDomainEvidenceRequired", "pooledPerformanceProvesTransfer", "automaticTransferAuthorization", "reviewedBy", "inferenceBoundary", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "protocolRef": {"$ref": "#/$defs/id"},
+        "requiredComparisonDimensions": {"type": "array", "minItems": 10, "uniqueItems": true, "items": {"enum": ["construct", "stakeholder-population", "operating-context", "loss-boundary", "outcome-definition", "evidence-origin", "observation-window", "threshold-meaning", "confidence-meaning", "monitoring-integrity"]}},
+        "targetDomainEvidenceRequired": {"const": true},
+        "pooledPerformanceProvesTransfer": {"const": false},
+        "automaticTransferAuthorization": {"const": false},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "inferenceBoundary": {"const": "transportability-structure-only-not-generalization-construct-validity-representativeness-causality-calibration-truth-quality-selection-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["active", "retired"]}
+      }
+    },
+    "domainTransportProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "domainRef", "profileRole", "constructMeaning", "stakeholderPopulation", "operatingContext", "lossBoundary", "outcomeDefinition", "evidenceOriginKinds", "observationWindow", "thresholdMeaning", "confidenceMeaning", "monitoringIntegrity", "assumptions", "evidenceRefs", "evidenceStatus", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "domainRef": {"$ref": "#/$defs/id"},
+        "profileRole": {"enum": ["source", "target"]},
+        "constructMeaning": {"type": "string", "minLength": 1},
+        "stakeholderPopulation": {"type": "string", "minLength": 1},
+        "operatingContext": {"type": "string", "minLength": 1},
+        "lossBoundary": {"type": "string", "minLength": 1},
+        "outcomeDefinition": {"type": "string", "minLength": 1},
+        "evidenceOriginKinds": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "observationWindow": {"type": "string", "minLength": 1},
+        "thresholdMeaning": {"type": "string", "minLength": 1},
+        "confidenceMeaning": {"type": "string", "minLength": 1},
+        "monitoringIntegrity": {"enum": ["verified", "unverified", "compromised", "not-assessed"]},
+        "assumptions": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "evidenceRefs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "evidenceStatus": {"enum": ["verified", "unverified", "example-only", "not-collected"]},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "domainLocalCalibrationResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "profileRef", "sourceAssessmentRefs", "eligibleCount", "observedCount", "verifiedEmpiricalOutcomeCount", "dataSufficiency", "localConclusion", "pooledWithOtherDomains", "interpretation", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "profileRef": {"$ref": "#/$defs/id"},
+        "sourceAssessmentRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "eligibleCount": {"type": "integer", "minimum": 0},
+        "observedCount": {"type": "integer", "minimum": 0},
+        "verifiedEmpiricalOutcomeCount": {"type": "integer", "minimum": 0},
+        "dataSufficiency": {"enum": ["sufficient", "insufficient"]},
+        "localConclusion": {"enum": ["not-established", "descriptive-only", "within-local-policy", "outside-local-policy"]},
+        "pooledWithOtherDomains": {"const": false},
+        "interpretation": {"const": "domain-local-result-only-not-cross-domain-transfer-proof-quality-selection-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "transportabilityComparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "sourceProfileRef", "targetProfileRef", "sourceLocalResultRef", "targetLocalResultRef", "dimensionComparisons", "matchedDimensionCount", "mismatchedDimensionCount", "unverifiedDimensionCount", "targetEvidencePresent", "transferStatus", "reviewedBy", "automaticTransferClaim", "interpretation", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "sourceProfileRef": {"$ref": "#/$defs/id"},
+        "targetProfileRef": {"$ref": "#/$defs/id"},
+        "sourceLocalResultRef": {"$ref": "#/$defs/id"},
+        "targetLocalResultRef": {"$ref": "#/$defs/id"},
+        "dimensionComparisons": {
+          "type": "array",
+          "minItems": 10,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["dimension", "comparisonStatus", "rationale", "evidenceRefs"],
+            "properties": {
+              "dimension": {"enum": ["construct", "stakeholder-population", "operating-context", "loss-boundary", "outcome-definition", "evidence-origin", "observation-window", "threshold-meaning", "confidence-meaning", "monitoring-integrity"]},
+              "comparisonStatus": {"enum": ["equivalent", "different", "unverified"]},
+              "rationale": {"type": "string", "minLength": 1},
+              "evidenceRefs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+            }
+          }
+        },
+        "matchedDimensionCount": {"type": "integer", "minimum": 0},
+        "mismatchedDimensionCount": {"type": "integer", "minimum": 0},
+        "unverifiedDimensionCount": {"type": "integer", "minimum": 0},
+        "targetEvidencePresent": {"type": "boolean"},
+        "transferStatus": {"enum": ["supported-for-declared-scope", "unsupported", "unestablished"]},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "automaticTransferClaim": {"const": false},
+        "interpretation": {"const": "bounded-transportability-comparison-only-not-generalization-construct-validity-representativeness-causality-calibration-truth-quality-selection-authorization-or-authority"},
+        "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "status": {"enum": ["draft", "reviewed", "retired"]}
+      }
+    },
+    "transportabilityAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "policyRef", "comparisonRefs", "profileRefs", "localResultRefs", "comparisonCount", "supportedComparisonCount", "unsupportedComparisonCount", "unestablishedComparisonCount", "verifiedProfileCount", "sufficientLocalResultCount", "dataSufficiency", "assessmentSignal", "reviewedBy", "activityCountIsQuality", "automaticQualityVerdict", "interpretation", "governanceTriggerRefs", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "policyRef": {"$ref": "#/$defs/id"},
+        "comparisonRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "profileRefs": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "localResultRefs": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "comparisonCount": {"type": "integer", "minimum": 0},
+        "supportedComparisonCount": {"type": "integer", "minimum": 0},
+        "unsupportedComparisonCount": {"type": "integer", "minimum": 0},
+        "unestablishedComparisonCount": {"type": "integer", "minimum": 0},
+        "verifiedProfileCount": {"type": "integer", "minimum": 0},
+        "sufficientLocalResultCount": {"type": "integer", "minimum": 0},
+        "dataSufficiency": {"enum": ["sufficient", "insufficient"]},
+        "assessmentSignal": {"enum": ["supported-for-declared-scope", "domain-mismatch", "transfer-unestablished"]},
+        "reviewedBy": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "activityCountIsQuality": {"const": false},
+        "automaticQualityVerdict": {"const": false},
+        "interpretation": {"const": "transportability-assessment-only-not-generalization-construct-validity-representativeness-causality-calibration-truth-quality-selection-authorization-or-authority"},
         "governanceTriggerRefs": {"type": "array", "items": {"$ref": "#/$defs/id"}},
         "status": {"enum": ["draft", "reviewed", "retired"]}
       }

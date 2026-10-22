@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-22T04:31:28.979Z",
+  "value_hypothesis_id": "VHY-MVJ1NCNN-KO4RWG",
+  "expected_value_creation": "A reviewer can reproduce why quality knowledge is transferable, conditionally transferable, or non-transferable between two domains without relying on pooled performance.",
+  "beneficiary": "QIF users, affected stakeholders, reviewers, and governance owners",
+  "supporting_evidence": [
+    "NIST measurement science identifies unjustified generalization beyond test settings as an open validity problem.",
+    "NIST post-deployment monitoring guidance identifies dynamic context, baseline, drift, and real-world evidence gaps."
+  ],
+  "success_criteria": [
+    "Every transfer claim names source and target domains and compares construct, population, context, outcome, evidence, threshold, and confidence meaning.",
+    "Domain-local results remain separate and unsupported transfer routes governance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVJ1MYXQ-MO0WGX"
+}

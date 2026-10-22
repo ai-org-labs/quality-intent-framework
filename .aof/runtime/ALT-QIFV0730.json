@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-22T04:31:35.753Z",
+  "alternative_analysis_id": "ALT-MVJ1NHVT-CBH437",
+  "subject_need": "Prevent unsupported cross-domain transfer of QIF calibration claims.",
+  "alternative_solutions": [
+    "Add a separate cross-domain transportability package.",
+    "Extend the existing calibration-report package with transfer context, domain-local result, comparison, and assessment entities."
+  ],
+  "non_solution_options": [
+    "Document a warning without executable references or arithmetic."
+  ],
+  "defer_options": [
+    "Wait for a real multi-domain dataset before defining the structural contract."
+  ],
+  "stop_options": [
+    "Do not create the slice if it requires pooled metrics to become semantic truth or makes Organizational Quality Culture a prerequisite."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVJ1MYXQ-MO0WGX"
+}

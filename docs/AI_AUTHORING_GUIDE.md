@@ -860,6 +860,34 @@ observe?"; observed success rate answers "among observed cases, how many
 succeeded?" Verifier success does not identify the missingness mechanism or
 prove representativeness, causality, calibration, or quality.
 
+## Cross-Domain Transportability Review
+
+Never carry a quality conclusion from one domain into another just because the
+same words, score, or threshold appear in both. Compare what those things mean:
+
+1. Name the source and target domains.
+2. Describe each domain's construct, affected stakeholder population,
+   operating context, loss boundary, and outcome definition.
+3. Preserve each domain-local calibration result separately. Do not pool them
+   to manufacture evidence.
+4. Compare evidence origin, observation window, threshold meaning, confidence
+   meaning, and monitoring integrity as well as business language.
+5. Mark every dimension `equivalent`, `different`, or `unverified`, with
+   rationale and evidence.
+6. Classify transfer as `unsupported` when a dimension differs,
+   `unestablished` when evidence is missing, or
+   `supported-for-declared-scope` only when all dimensions are equivalent and
+   both domains have sufficient verified local evidence.
+7. Route mismatch, weak monitoring, absent target-domain outcomes, and
+   insufficient evidence to governance.
+
+Use `TransportabilityPolicy`, `DomainTransportProfile`,
+`DomainLocalCalibrationResult`, `TransportabilityComparison`, and
+`TransportabilityAssessment`. Say exactly what differs and what evidence is
+missing. A structurally supported status is bounded to the declared comparison;
+it does not prove generalization, construct validity, representativeness,
+causality, calibration truth, quality, or authority.
+
 ## Common Failure Modes
 
 Avoid these:

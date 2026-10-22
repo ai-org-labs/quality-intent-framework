@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-21T04:41:40.099Z",
-  "audit_id": "FSA-QIFV0720",
-  "scope": "QIF v0.7.2 post-implementation self-review",
-  "summary": "Missingness policy, exact outcome dispositions, bounded sensitivity analysis, aggregate assessment, governance, documentation, fixtures, and portable validation are complete; the example remains collecting, example-only, and insufficient.",
-  "detected_gap": "No independently verified operational attrition dataset is committed, so missingness mechanisms, representativeness, statistical validity, calibration truth, and transportability remain unestablished.",
+  "recorded_at": "2026-10-22T04:41:55.399Z",
+  "audit_id": "FSA-QIFV0730",
+  "scope": "QIF v0.7.3 post-implementation self-review",
+  "summary": "Transportability policy, source and target profiles, domain-local result separation, ten-dimension comparison, bounded transfer status, assessment, governance, documentation, fixtures, and portable validation are complete; the example remains unsupported, example-only, and insufficient.",
+  "detected_gap": "No independently verified multi-domain operational dataset is committed, so construct equivalence, real generalization, representativeness, calibration truth, and safe transfer remain unestablished.",
   "result_state": "stable",
-  "next_action": "Implement v0.7.3 Cross-Domain Transportability Review without treating pooled performance as proof of transfer.",
+  "next_action": "Implement v0.8 Multi-Agent Judgment Memory while preserving disagreement, dependency, revision, and forgetting boundaries.",
   "related_task_ids": [
-    "TASK-071"
+    "TASK-072"
   ],
-  "source_session_id": "SESS-MVHM4JG8-J57TJ9",
-  "source_decision_record_id": "DEC-MVHM5IR9-JAHM0K"
+  "source_session_id": "SESS-MVJ1MUK6-GL8O4L",
+  "source_decision_record_id": "DEC-MVJ1NX5Z-F9I4G3"
 }

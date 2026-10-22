@@ -1,0 +1,21 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-22T04:31:51.287Z",
+  "project_charter_id": "PCH-MVJ1NTVA-FZIYGV",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0730.json",
+  "validated_objective": "Release QIF v0.7.3 with an executable, domain-general Cross-Domain Transportability Review.",
+  "scope": [
+    "Add canonical transportability policy, domain profile, domain-local result, transfer comparison, and assessment entities.",
+    "Extend verifier, schema, example, negative fixtures, authoring guide, roadmap, changelog, runtime log, and portable package."
+  ],
+  "constraints": [
+    "Do not pool domain results into proof, infer causality, or grant operational authority.",
+    "Retain all existing v0.7.2 behavior and example-only boundaries."
+  ],
+  "expected_outcomes": [
+    "Every transfer claim preserves source and target context and identifies exact matched and mismatched dimensions.",
+    "Unsupported or conditional transfer routes governance while domain-local results remain visible."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVJ1MYXQ-MO0WGX"
+}

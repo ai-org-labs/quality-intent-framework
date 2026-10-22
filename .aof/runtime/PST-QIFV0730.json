@@ -1,0 +1,14 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-22T04:31:23.554Z",
+  "problem_statement_id": "PST-MVJ1N8GY-3I4DXU",
+  "affected_party": "QIF evaluators and organizations applying calibration knowledge across domains",
+  "actual_problem": "Domain-local evidence can be pooled or reused across contexts even when constructs, populations, outcomes, evidence collection, thresholds, and confidence meanings differ.",
+  "why_it_matters": "Unsupported transfer can produce false assurance at the exact loss boundary QIF is meant to protect.",
+  "why_now": "v0.7.2 now preserves local outcome uncertainty, making cross-domain comparability the next unresolved calibration boundary.",
+  "evidence_refs": [
+    "docs/qif-roadmap.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVJ1MYXQ-MO0WGX"
+}

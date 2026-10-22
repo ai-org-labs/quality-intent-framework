@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-21T04:41:40.102Z",
+  "updated_at": "2026-10-22T04:41:55.411Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "成功は、eligible cohortの分母、観測・欠測・除外・撤回・遅延・追跡不能の分類、理由と責任主体、best/worst bounds、感度結果、governance routingを決定論的に再現し、欠測を品質や成功へ算入せず、npm test・portable・AOF組織検証・公開releaseを完了すること。",
-      "recorded_at": "2026-10-21T04:29:17.851Z",
+      "answer": "成功は、source/target domain、constructとoutcome meaning、population/context shift、evidence comparability、threshold/confidence transfer assumptions、domain-local results、transfer claim status、governance routingを決定論的に再現し、pooled performanceを品質や移送可能性の証明へ格上げせず、npm test・portable・AOF組織検証・公開releaseを完了すること。",
+      "recorded_at": "2026-10-22T04:31:11.201Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVHM4JG8-J57TJ9",
+      "source_session_id": "SESS-MVJ1MUK6-GL8O4L",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "Proceed with the smallest additive calibration-report slice: policy, disposition, sensitivity analysis, assessment, governance, verifier, examples, fixtures, docs, portable release.",
-      "recorded_at": "2026-10-21T04:29:56.665Z",
+      "answer": "Proceed with the smallest additive calibration-report slice: transfer policy, domain profile, domain-local result, transportability comparison, assessment, governance, verifier, examples, fixtures, docs, portable release.",
+      "recorded_at": "2026-10-22T04:31:55.562Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVHM4JG8-J57TJ9",
-      "source_decision_record_id": "DEC-MVHM5IR9-JAHM0K"
+      "source_session_id": "SESS-MVJ1MUK6-GL8O4L",
+      "source_decision_record_id": "DEC-MVJ1NX5Z-F9I4G3"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "No independently verified operational attrition dataset is committed, so missingness mechanisms, representativeness, statistical validity, calibration truth, and transportability remain unestablished.",
-      "recorded_at": "2026-10-21T04:41:40.102Z",
-      "expectation_state": "Missingness policy, exact outcome dispositions, bounded sensitivity analysis, aggregate assessment, governance, documentation, fixtures, and portable validation are complete; the example remains collecting, example-only, and insufficient.",
-      "mismatch_state": "No independently verified operational attrition dataset is committed, so missingness mechanisms, representativeness, statistical validity, calibration truth, and transportability remain unestablished.",
-      "scale_direction": "Implement v0.7.3 Cross-Domain Transportability Review without treating pooled performance as proof of transfer.",
-      "source_session_id": "SESS-MVHM4JG8-J57TJ9",
-      "source_decision_record_id": "DEC-MVHM5IR9-JAHM0K"
+      "answer": "No independently verified multi-domain operational dataset is committed, so construct equivalence, real generalization, representativeness, calibration truth, and safe transfer remain unestablished.",
+      "recorded_at": "2026-10-22T04:41:55.411Z",
+      "expectation_state": "Transportability policy, source and target profiles, domain-local result separation, ten-dimension comparison, bounded transfer status, assessment, governance, documentation, fixtures, and portable validation are complete; the example remains unsupported, example-only, and insufficient.",
+      "mismatch_state": "No independently verified multi-domain operational dataset is committed, so construct equivalence, real generalization, representativeness, calibration truth, and safe transfer remain unestablished.",
+      "scale_direction": "Implement v0.8 Multi-Agent Judgment Memory while preserving disagreement, dependency, revision, and forgetting boundaries.",
+      "source_session_id": "SESS-MVJ1MUK6-GL8O4L",
+      "source_decision_record_id": "DEC-MVJ1NX5Z-F9I4G3"
     }
   ]
 }

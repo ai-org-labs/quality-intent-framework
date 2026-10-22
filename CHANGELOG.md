@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.7.3
+
+- Added executable transportability policies, source and target domain profiles, domain-local calibration results, transportability comparisons, and aggregate assessments.
+- Added exact comparison across construct, stakeholder population, operating context, loss boundary, outcome definition, evidence origin, observation window, threshold meaning, confidence meaning, and monitoring integrity.
+- Kept source and target results separate and reproduced matched, mismatched, and unverified dimensions before assigning a bounded transfer status.
+- Added 21 retained negative fixtures and governance for unverified profiles, domain mismatch, absent target-domain evidence, and insufficient assessments.
+- Prevented pooled performance, domain count, local calibration, and supported status from becoming proof of generalization, construct validity, representativeness, causality, calibration truth, quality, selection, authorization, or authority.
+
 ## v0.7.2
 
 - Added executable missingness policies, one-to-one outcome dispositions, missingness sensitivity analyses, and aggregate missingness assessments.

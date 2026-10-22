@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.7.3 Cross-Domain Transportability Review",
-  "updated_at": "2026-10-21T04:41:58.051Z",
+  "content": "v0.8 Multi-Agent Judgment Memory",
+  "updated_at": "2026-10-22T04:42:08.499Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MVHM4JG8-J57TJ9",
-  "source_decision_record_id": "DEC-MVHM5IR9-JAHM0K",
+  "source_session_id": "SESS-MVJ1MUK6-GL8O4L",
+  "source_decision_record_id": "DEC-MVJ1NX5Z-F9I4G3",
   "declared_complete_at": null
 }
