@@ -1,0 +1,16 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-23T04:32:51.786Z",
+  "problem_statement_id": "PST-MVKH4Z7U-ZFIJNH",
+  "affected_party": "Organizations using multiple human or AI evaluators",
+  "actual_problem": "Aggregate judgments can erase dissent, conceal shared dependencies, preserve stale conclusions as current, or remove inconvenient evidence without an auditable retirement decision.",
+  "why_it_matters": "A successful aggregate verdict can create false confidence when independent lane evidence, minority concerns, and revision history are no longer inspectable.",
+  "why_now": "QIF v0.7.3 now bounds cross-domain transfer; the next roadmap gap is durable, reusable multi-agent judgment memory.",
+  "evidence_refs": [
+    "docs/qif-roadmap.md",
+    "https://www.anthropic.com/research/multiagent-systems",
+    "https://developers.openai.com/cookbook/examples/agents_sdk/building_reliable_agents_memory_compaction"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVKH46I0-SPIOFI"
+}

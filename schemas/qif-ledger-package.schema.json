@@ -14,6 +14,14 @@
     "agentTrials",
     "evidenceOrigins",
     "agentOutcomes",
+    "judgmentMemoryPolicies",
+    "judgmentMemoryGovernanceTriggers",
+    "judgmentMemoryEntries",
+    "judgmentMemoryDependencies",
+    "judgmentMemoryRevisions",
+    "judgmentRetirementDecisions",
+    "multiAgentJudgmentJoins",
+    "judgmentMemoryAssessments",
     "ledgerIndex",
     "verifierBoundary"
   ],
@@ -51,6 +59,46 @@
     "agentOutcomes": {
       "type": "array",
       "items": { "$ref": "#/$defs/agentOutcome" }
+    },
+    "judgmentMemoryPolicies": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/judgmentMemoryPolicy" }
+    },
+    "judgmentMemoryGovernanceTriggers": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/judgmentMemoryGovernanceTrigger" }
+    },
+    "judgmentMemoryEntries": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "$ref": "#/$defs/judgmentMemoryEntry" }
+    },
+    "judgmentMemoryDependencies": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/judgmentMemoryDependency" }
+    },
+    "judgmentMemoryRevisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/judgmentMemoryRevision" }
+    },
+    "judgmentRetirementDecisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/judgmentRetirementDecision" }
+    },
+    "multiAgentJudgmentJoins": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/multiAgentJudgmentJoin" }
+    },
+    "judgmentMemoryAssessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/judgmentMemoryAssessment" }
     },
     "ledgerIndex": { "$ref": "#/$defs/ledgerIndex" },
     "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
@@ -181,6 +229,163 @@
           "items": { "$ref": "#/$defs/entityRef" }
         },
         "status": { "type": "string" }
+      }
+    },
+    "judgmentMemoryPolicy": {
+      "type": "object",
+      "required": ["id", "minimumDistinctLanes", "preserveDissent", "dependencyDisclosureRequired", "appendOnlyRevisions", "destructiveForgetAllowed", "hiddenReasoningAllowed", "automaticAuthority", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "minimumDistinctLanes": { "type": "integer", "minimum": 2 },
+        "preserveDissent": { "const": true },
+        "dependencyDisclosureRequired": { "const": true },
+        "appendOnlyRevisions": { "const": true },
+        "destructiveForgetAllowed": { "const": false },
+        "hiddenReasoningAllowed": { "const": false },
+        "automaticAuthority": { "const": false },
+        "status": { "enum": ["draft", "active", "retired"] }
+      }
+    },
+    "judgmentMemoryGovernanceTrigger": {
+      "type": "object",
+      "required": ["id", "triggerType", "reason", "severity", "requiredAction", "owner", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "triggerType": { "enum": ["memory-evidence-unverified", "memory-shared-dependency", "memory-conflict-unresolved", "memory-retirement-review", "memory-assessment-insufficient"] },
+        "reason": { "type": "string", "minLength": 1 },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "requiredAction": { "type": "string", "minLength": 1 },
+        "owner": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["open", "closed"] }
+      }
+    },
+    "judgmentMemoryEntry": {
+      "type": "object",
+      "required": ["id", "policyRef", "laneId", "actorRef", "roleRef", "independenceGroup", "sourceJudgment", "evidenceOriginRef", "dependencyRefs", "currentRevisionRef", "status", "hiddenReasoningStored"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "policyRef": { "$ref": "#/$defs/id" },
+        "laneId": { "type": "string", "minLength": 1 },
+        "actorRef": { "type": "string", "minLength": 1 },
+        "roleRef": { "type": "string", "minLength": 1 },
+        "independenceGroup": { "type": "string", "minLength": 1 },
+        "sourceJudgment": { "$ref": "#/$defs/entityRef" },
+        "evidenceOriginRef": { "$ref": "#/$defs/id" },
+        "dependencyRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+        "currentRevisionRef": { "$ref": "#/$defs/id" },
+        "status": { "enum": ["current", "retired"] },
+        "hiddenReasoningStored": { "const": false }
+      }
+    },
+    "judgmentMemoryDependency": {
+      "type": "object",
+      "required": ["id", "policyRef", "dependencyType", "affectedMemoryRefs", "sourceDescription", "evidenceRefs", "independenceImpact", "governanceTriggerRefs", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "policyRef": { "$ref": "#/$defs/id" },
+        "dependencyType": { "enum": ["shared-source", "shared-model", "shared-prompt", "shared-tool", "shared-data", "shared-operator", "declared-independent"] },
+        "affectedMemoryRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+        "sourceDescription": { "type": "string", "minLength": 1 },
+        "evidenceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/entityRef" } },
+        "independenceImpact": { "enum": ["independent", "partially-dependent", "dependent", "unverified"] },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "status": { "enum": ["current", "superseded", "retired"] }
+      }
+    },
+    "judgmentMemoryRevision": {
+      "type": "object",
+      "required": ["id", "memoryRef", "revisionNumber", "previousRevisionRef", "judgment", "rationale", "evidenceRefs", "applicabilityBoundary", "confidence", "evidenceStatus", "createdAt", "createdBy", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "memoryRef": { "$ref": "#/$defs/id" },
+        "revisionNumber": { "type": "integer", "minimum": 1 },
+        "previousRevisionRef": { "oneOf": [{ "$ref": "#/$defs/id" }, { "type": "null" }] },
+        "judgment": { "type": "string", "minLength": 1 },
+        "rationale": { "type": "string", "minLength": 1 },
+        "evidenceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/entityRef" } },
+        "applicabilityBoundary": { "type": "string", "minLength": 1 },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "evidenceStatus": { "enum": ["verified", "example-only", "unverified", "stale"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "createdBy": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["current", "superseded"] }
+      }
+    },
+    "judgmentRetirementDecision": {
+      "type": "object",
+      "required": ["id", "policyRef", "memoryRef", "action", "rationale", "evidenceRefs", "decidedBy", "decidedAt", "resultingStatus", "destructiveDeletion", "governanceTriggerRefs", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "policyRef": { "$ref": "#/$defs/id" },
+        "memoryRef": { "$ref": "#/$defs/id" },
+        "action": { "enum": ["retain", "retire"] },
+        "rationale": { "type": "string", "minLength": 1 },
+        "evidenceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/entityRef" } },
+        "decidedBy": { "type": "string", "minLength": 1 },
+        "decidedAt": { "type": "string", "format": "date-time" },
+        "resultingStatus": { "enum": ["current", "retired"] },
+        "destructiveDeletion": { "const": false },
+        "governanceTriggerRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+        "status": { "enum": ["proposed", "approved", "rejected"] }
+      }
+    },
+    "multiAgentJudgmentJoin": {
+      "type": "object",
+      "required": ["id", "policyRef", "memoryRefs", "revisionRefs", "dependencyRefs", "dissentMemoryRefs", "conflictDimensions", "joinMethod", "joinedJudgment", "rationale", "evidenceRefs", "authorityOwner", "authorityBoundary", "dissentPreserved", "automaticAuthority", "dataSufficiency", "governanceTriggerRefs", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "policyRef": { "$ref": "#/$defs/id" },
+        "memoryRefs": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/id" } },
+        "revisionRefs": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/id" } },
+        "dependencyRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "dissentMemoryRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "conflictDimensions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "joinMethod": { "enum": ["governed-synthesis", "unanimous", "adjudicated", "unresolved"] },
+        "joinedJudgment": { "type": "string", "minLength": 1 },
+        "rationale": { "type": "string", "minLength": 1 },
+        "evidenceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/entityRef" } },
+        "authorityOwner": { "type": "string", "minLength": 1 },
+        "authorityBoundary": { "const": "recorded-join-only-not-semantic-truth-quality-competence-authorization-or-authority" },
+        "dissentPreserved": { "const": true },
+        "automaticAuthority": { "const": false },
+        "dataSufficiency": { "enum": ["sufficient", "insufficient"] },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "status": { "enum": ["draft", "reviewed", "governance-required"] }
+      }
+    },
+    "judgmentMemoryAssessment": {
+      "type": "object",
+      "required": ["id", "policyRef", "memoryEntryRefs", "revisionRefs", "dependencyRefs", "retirementDecisionRefs", "joinRefs", "laneCount", "currentMemoryCount", "retiredMemoryCount", "dissentCount", "sharedDependencyCount", "unresolvedConflictCount", "unverifiedMemoryCount", "dataSufficiency", "assessmentSignals", "activityCountIsQuality", "automaticQualityVerdict", "governanceTriggerRefs", "reviewedBy", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "policyRef": { "$ref": "#/$defs/id" },
+        "memoryEntryRefs": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/id" } },
+        "revisionRefs": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/id" } },
+        "dependencyRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+        "retirementDecisionRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+        "joinRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+        "laneCount": { "type": "integer", "minimum": 0 },
+        "currentMemoryCount": { "type": "integer", "minimum": 0 },
+        "retiredMemoryCount": { "type": "integer", "minimum": 0 },
+        "dissentCount": { "type": "integer", "minimum": 0 },
+        "sharedDependencyCount": { "type": "integer", "minimum": 0 },
+        "unresolvedConflictCount": { "type": "integer", "minimum": 0 },
+        "unverifiedMemoryCount": { "type": "integer", "minimum": 0 },
+        "dataSufficiency": { "enum": ["sufficient", "insufficient"] },
+        "assessmentSignals": { "type": "array", "minItems": 1, "items": { "enum": ["evidence-insufficient", "shared-dependency", "disagreement-preserved", "unresolved-conflict", "retired-history-preserved", "ready-for-governed-use"] } },
+        "activityCountIsQuality": { "const": false },
+        "automaticQualityVerdict": { "const": false },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "reviewedBy": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "status": { "enum": ["draft", "reviewed"] }
       }
     },
     "ledgerIndex": {

@@ -1,8 +1,8 @@
 # Quality Intent Framework
 
-Current release: **v0.7.3**. The calibration runtime now keeps domain-local
-results separate and explains whether a quality claim is unsupported,
-unestablished, or supported only for a declared source-to-target scope.
+Current release: **v0.8.0**. The Living QIF Ledger now preserves lane-local
+human and AI judgments, shared dependencies, dissent, append-only revisions,
+governed retirement, and bounded multi-agent joins.
 
 Quality Intent Framework (QIF) turns an organization's quality theory into an operational, AI-verifiable framework.
 
@@ -32,7 +32,7 @@ decision authority.
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x AI-native authoring, action, evaluation, deployment, intervention, recovery, and portable-package runtime, and the v0.7.3 empirical calibration, outcome collection, missingness-sensitivity, and cross-domain transportability runtime:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x AI-native authoring, action, evaluation, deployment, intervention, recovery, and portable-package runtime, the v0.7.x empirical calibration runtime, and the v0.8.0 Multi-Agent Judgment Memory runtime:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -85,6 +85,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.7.1 Outcome Collection Ledger: `docs/qif-v0.7.1-outcome-collection-ledger.md`
 - QIF v0.7.2 Missingness and Attrition Sensitivity: `docs/qif-v0.7.2-missingness-attrition-sensitivity.md`
 - QIF v0.7.3 Cross-Domain Transportability Review: `docs/qif-v0.7.3-cross-domain-transportability.md`
+- QIF v0.8.0 Multi-Agent Judgment Memory: `docs/qif-v0.8.0-multi-agent-judgment-memory.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`

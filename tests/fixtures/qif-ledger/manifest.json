@@ -192,6 +192,195 @@
       "rule": "ledger verifier boundary avoids semantic truth",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming semantic truth."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-policies-not-array.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "judgment memory policies are retained",
+      "expect": "fail",
+      "errorIncludes": "judgmentMemoryPolicies must be an array."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-entries-not-array.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "lane-local judgment memories are retained",
+      "expect": "fail",
+      "errorIncludes": "judgmentMemoryEntries must be an array."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-policy-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "memory policy forbids destructive forgetting and authority",
+      "expect": "fail",
+      "errorIncludes": "must forbid destructive forgetting, hidden reasoning storage, and automatic authority."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-source-missing.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "memory source judgment resolves",
+      "expect": "fail",
+      "errorIncludes": "JME-001/sourceJudgment references missing entity"
+    },
+    {
+      "file": "qif-ledger-judgment-memory-hidden-reasoning.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "memory excludes hidden reasoning",
+      "expect": "fail",
+      "errorIncludes": "JME-001 hiddenReasoningStored must be false."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-current-revision.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "memory identifies one current revision",
+      "expect": "fail",
+      "errorIncludes": "JME-001 must identify exactly one current revision through currentRevisionRef."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-dependency-backlink.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "dependency disclosure is bidirectional",
+      "expect": "fail",
+      "errorIncludes": "JMD-001 affected memory JME-002 must link back through dependencyRefs."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-shared-dependency-count.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "shared dependency affects multiple memories",
+      "expect": "fail",
+      "errorIncludes": "JMD-001 shared dependency must affect at least two memories."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-dependency-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "shared dependency routes governance",
+      "expect": "fail",
+      "errorIncludes": "JMD-001 non-independent dependency requires a memory-shared-dependency governance trigger."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-revision-previous.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "revision lineage resolves",
+      "expect": "fail",
+      "errorIncludes": "JMR-002 references missing previous judgment memory revision JMR-NOPE-999."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-revision-contiguous.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "revision numbers are contiguous",
+      "expect": "fail",
+      "errorIncludes": "JMR-002 previous revision must belong to the same memory and increment revisionNumber by one."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-retirement-status.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "retirement status reproduces",
+      "expect": "fail",
+      "errorIncludes": "JRD-001 resultingStatus must reproduce as retired."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-destructive-delete.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "retirement is non-destructive",
+      "expect": "fail",
+      "errorIncludes": "JRD-001 destructiveDeletion must be false."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-retirement-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "retirement routes governance",
+      "expect": "fail",
+      "errorIncludes": "JRD-001 retirement requires a memory-retirement-review governance trigger."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-join-retired.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "joins exclude retired memories",
+      "expect": "fail",
+      "errorIncludes": "JMJ-001 must not join retired memories."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-join-distinct-lanes.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "join requires distinct lanes",
+      "expect": "fail",
+      "errorIncludes": "JMJ-001 must include at least 2 distinct lanes."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-join-revisions.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "join uses current revisions",
+      "expect": "fail",
+      "errorIncludes": "JMJ-001 revisionRefs must exactly match current revisions of joined memories."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-join-dependencies.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "join discloses shared dependencies",
+      "expect": "fail",
+      "errorIncludes": "JMJ-001 dependencyRefs must disclose every dependency shared by joined memories."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-join-dissent.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "join preserves exact dissent",
+      "expect": "fail",
+      "errorIncludes": "JMJ-001 dissentMemoryRefs must reproduce every joined memory that differs from joinedJudgment."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-join-conflict-dimensions.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "join names conflict dimensions",
+      "expect": "fail",
+      "errorIncludes": "JMJ-001 conflicting judgments require conflictDimensions."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-join-sufficiency.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "join sufficiency reproduces",
+      "expect": "fail",
+      "errorIncludes": "JMJ-001 dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-join-evidence-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "unverified memory routes governance",
+      "expect": "fail",
+      "errorIncludes": "JMJ-001 unverified memory evidence requires a memory-evidence-unverified governance trigger."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-join-authority-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "join does not grant authority",
+      "expect": "fail",
+      "errorIncludes": "JMJ-001 authorityBoundary must remain recorded-join-only-not-semantic-truth-quality-competence-authorization-or-authority."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-assessment-count.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "assessment counts reproduce",
+      "expect": "fail",
+      "errorIncludes": "JMA-001 dissentCount must reproduce as 1."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-assessment-signals.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "assessment signals reproduce",
+      "expect": "fail",
+      "errorIncludes": "JMA-001 assessmentSignals must reproduce as"
+    },
+    {
+      "file": "qif-ledger-judgment-memory-assessment-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "insufficient assessment routes governance",
+      "expect": "fail",
+      "errorIncludes": "JMA-001 insufficient memory evidence requires a memory-assessment-insufficient governance trigger."
+    },
+    {
+      "file": "qif-ledger-judgment-memory-verifier-authority-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "verifier does not claim authority",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming authorization or authority."
     }
   ],
   "rescopedRules": []

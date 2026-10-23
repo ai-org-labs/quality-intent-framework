@@ -1,0 +1,21 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-23T04:33:11.243Z",
+  "project_charter_id": "PCH-MVKH5E8B-ZPL4GI",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0800.json",
+  "validated_objective": "Release QIF v0.8.0 with executable Multi-Agent Judgment Memory in the Living Ledger.",
+  "scope": [
+    "Add canonical judgment memory policy, memory entry, dependency disclosure, revision, retirement decision, join, and assessment entities.",
+    "Extend qif-ledger schema, verifier, example, retained negative fixtures, docs, AI guide, roadmap, changelog, runtime log, portable package, and public release."
+  ],
+  "constraints": [
+    "Do not store hidden chain-of-thought, destructively delete history, treat consensus counts as truth, infer competence, surveil workers, or grant operational authority.",
+    "Retain QIF standalone use and all existing package behavior."
+  ],
+  "expected_outcomes": [
+    "Every aggregate judgment remains traceable to lane-local memories, evidence, dependencies, dissent, and authority boundaries.",
+    "Revision and retirement are append-only and governed; conflicts, stale evidence, weak independence, and destructive forgetting attempts fail or route governance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVKH46I0-SPIOFI"
+}

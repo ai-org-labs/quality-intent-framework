@@ -1,0 +1,320 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-10-23T04:50:48.598Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MVKH3Y7V-AYX3MB",
+    "stage": "review",
+    "executionId": "CRUN-MVKHS237-K3Y18O",
+    "executionStatus": "completed",
+    "invokedModel": true,
+    "seatCount": 2,
+    "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+    "lastCouncilExecutionId": "CRUN-MVKHS237-K3Y18O",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVKH3Y7V-AYX3MB",
+              "decision_id": "DEC-MVKH5GR4-7JJ1HM",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims.",
+              "intent": "to be refined after clarification",
+              "active_context": "context: Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins. / Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims. | prohibited: Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins.",
+              "context_snapshot_id": "CTX-MVKH46HX-3BBFYE",
+              "clarifications_or_assumptions": "For safety, legal, authentication, or personal-data concerns, what conditions are absolutely non-negotiable? => Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins. / Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.0 Multi-Agent Judgment Memory. Need: cooperating evaluators can overwrite dissent, hide shared dependencies, keep stale judgments, or forget inconvenient evidence. Intent: make lane-local judgment memory, dependency disclosure, revision lineage, governed retirement, and aggregate join decisions structurally executable and auditable. Context: extend the standalone QIF Living Ledger without UI or external integrations; verifier proves structure and reproducibility, never semantic truth, competence, consensus correctness, or authority.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0800.json",
+                ".aof/runtime/PCH-QIFV0800.json",
+                ".aof/runtime/PST-QIFV0800.json",
+                ".aof/runtime/VHY-QIFV0800.json",
+                ".aof/runtime/ALT-QIFV0800.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVKH5GR4-7JJ1HM"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVKH3Y7V-AYX3MB",
+              "decision_id": "DEC-MVKH5GR4-7JJ1HM",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims.",
+              "intent": "to be refined after clarification",
+              "active_context": "context: Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins. / Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims. | prohibited: Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins.",
+              "context_snapshot_id": "CTX-MVKH46HX-3BBFYE",
+              "clarifications_or_assumptions": "For safety, legal, authentication, or personal-data concerns, what conditions are absolutely non-negotiable? => Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins. / Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.0 Multi-Agent Judgment Memory. Need: cooperating evaluators can overwrite dissent, hide shared dependencies, keep stale judgments, or forget inconvenient evidence. Intent: make lane-local judgment memory, dependency disclosure, revision lineage, governed retirement, and aggregate join decisions structurally executable and auditable. Context: extend the standalone QIF Living Ledger without UI or external integrations; verifier proves structure and reproducibility, never semantic truth, competence, consensus correctness, or authority.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0800.json",
+                ".aof/runtime/PCH-QIFV0800.json",
+                ".aof/runtime/PST-QIFV0800.json",
+                ".aof/runtime/VHY-QIFV0800.json",
+                ".aof/runtime/ALT-QIFV0800.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVKH5GR4-7JJ1HM"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MVKHS237-K3Y18O",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "completed",
+      "started_at": "2026-10-23T04:50:48.593Z",
+      "completed_at": "2026-10-23T04:50:48.596Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MVKHS237-K3Y18O-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVKH3Y7V-AYX3MB",
+              "decision_id": "DEC-MVKH5GR4-7JJ1HM",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims.",
+              "intent": "to be refined after clarification",
+              "active_context": "context: Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins. / Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims. | prohibited: Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins.",
+              "context_snapshot_id": "CTX-MVKH46HX-3BBFYE",
+              "clarifications_or_assumptions": "For safety, legal, authentication, or personal-data concerns, what conditions are absolutely non-negotiable? => Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins. / Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.0 Multi-Agent Judgment Memory. Need: cooperating evaluators can overwrite dissent, hide shared dependencies, keep stale judgments, or forget inconvenient evidence. Intent: make lane-local judgment memory, dependency disclosure, revision lineage, governed retirement, and aggregate join decisions structurally executable and auditable. Context: extend the standalone QIF Living Ledger without UI or external integrations; verifier proves structure and reproducibility, never semantic truth, competence, consensus correctness, or authority.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0800.json",
+                ".aof/runtime/PCH-QIFV0800.json",
+                ".aof/runtime/PST-QIFV0800.json",
+                ".aof/runtime/VHY-QIFV0800.json",
+                ".aof/runtime/ALT-QIFV0800.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVKH5GR4-7JJ1HM"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-23T04:50:48.595Z",
+          "completed_at": "2026-10-23T04:50:48.596Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-23T04:50:48.596Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian review response: focus on Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims. and align to to be refined after clarification.",
+            "output_summary": "DECISION: proceed VETO: no Guardian review response: focus on Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Develop and release QIF v0.8.0 Multi-Agent Judgment Memory. Need: cooperating evaluators can overwrite dissent, hide shared dependencies, keep stale judgments, or forget inconvenient evidence. Intent: make lane-local judgment memory, dependency disclosure, revision lineage, governed retirement, and aggregate join decisions structurally executable and auditable. Context: extend the standalone QIF Living Ledger without UI or external integrations; verifier proves structure and reproducibility, never semantic truth, competence, consensus correctness, or authority.\nNeed: Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims.\nIntent: to be refined after clarification\nActive Context: context: Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins. / Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims. | prohibited: Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: For safety, legal, authentication, or personal-data concerns, what conditions are absolutely non-negotiable? => Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins. / Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVKHS237-K3Y18O-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVKH3Y7V-AYX3MB",
+              "decision_id": "DEC-MVKH5GR4-7JJ1HM",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims.",
+              "intent": "to be refined after clarification",
+              "active_context": "context: Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins. / Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims. | prohibited: Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins.",
+              "context_snapshot_id": "CTX-MVKH46HX-3BBFYE",
+              "clarifications_or_assumptions": "For safety, legal, authentication, or personal-data concerns, what conditions are absolutely non-negotiable? => Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins. / Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.0 Multi-Agent Judgment Memory. Need: cooperating evaluators can overwrite dissent, hide shared dependencies, keep stale judgments, or forget inconvenient evidence. Intent: make lane-local judgment memory, dependency disclosure, revision lineage, governed retirement, and aggregate join decisions structurally executable and auditable. Context: extend the standalone QIF Living Ledger without UI or external integrations; verifier proves structure and reproducibility, never semantic truth, competence, consensus correctness, or authority.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0800.json",
+                ".aof/runtime/PCH-QIFV0800.json",
+                ".aof/runtime/PST-QIFV0800.json",
+                ".aof/runtime/VHY-QIFV0800.json",
+                ".aof/runtime/ALT-QIFV0800.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVKH5GR4-7JJ1HM"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-23T04:50:48.596Z",
+          "completed_at": "2026-10-23T04:50:48.596Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-23T04:50:48.596Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder review response: focus on Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims. and align to to be refined after clarification.",
+            "output_summary": "DECISION: proceed VETO: no Builder review response: focus on Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Develop and release QIF v0.8.0 Multi-Agent Judgment Memory. Need: cooperating evaluators can overwrite dissent, hide shared dependencies, keep stale judgments, or forget inconvenient evidence. Intent: make lane-local judgment memory, dependency disclosure, revision lineage, governed retirement, and aggregate join decisions structurally executable and auditable. Context: extend the standalone QIF Living Ledger without UI or external integrations; verifier proves structure and reproducibility, never semantic truth, competence, consensus correctness, or authority.\nNeed: Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims.\nIntent: to be refined after clarification\nActive Context: context: Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins. / Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims. | prohibited: Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: For safety, legal, authentication, or personal-data concerns, what conditions are absolutely non-negotiable? => Non-negotiable: preserve every lane-local judgment, dissent, source, dependency, and revision; retirement must be governed and auditable rather than destructive deletion; never collect hidden chain-of-thought or infer competence, truth, consensus correctness, authorization, or authority from counts or joins. / Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims."
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

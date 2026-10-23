@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-073",
+  "title": "Release QIF v0.8.0 Multi-Agent Judgment Memory",
+  "description": "Extend the Living QIF Ledger with policy, lane-local memories, dependency disclosure, append-only revisions, governed retirement, joins, assessment, verifier rules, fixtures, docs, portable package, and public release.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MVKH3Y7V-AYX3MB",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MVKH5GR4-7JJ1HM",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-10-23T04:33:29.710Z",
+  "updated_at": "2026-10-23T04:50:55.883Z",
+  "assigned_at": null,
+  "done_at": "2026-10-23T04:50:55.883Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented QIF v0.8.0 Multi-Agent Judgment Memory with schema, verifier, example, 28 negative fixtures, documentation, roadmap, and portable package. npm test passed 16/16 and 1306/1306; review council completed with no veto."
+}

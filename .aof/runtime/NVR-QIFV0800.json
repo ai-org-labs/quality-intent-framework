@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-23T04:32:59.298Z",
+  "validation_id": "NVR-MVKH550I-Y6NJK1",
+  "raw_need": "Build QIF v0.8 Multi-Agent Judgment Memory.",
+  "validation_status": "validated",
+  "validated_need": "QIF needs a domain-general Living Ledger extension that preserves lane-local judgment, evidence provenance, dependency and dissent, append-only revision lineage, governed retirement, and bounded multi-agent join decisions.",
+  "decision_summary": "Proceed with the smallest v0.8.0 executable slice inside qif-ledger: policy, memory entry, dependency disclosure, revision, retirement decision, judgment join, assessment, governance, verifier, example, fixtures, documentation, portable package, and release.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What must never be lost?",
+      "answer": "lane-local judgments, source evidence, dissent, dependencies, revisions, and retirement rationale",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What proves the slice works?",
+      "answer": "deterministic joins preserve all inputs and dissent; shared dependency, unresolved conflict, stale memory, or destructive retirement attempts fail or route governance",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A final consensus was assumed to preserve the quality of its contributing judgments."
+  ],
+  "evidence_gaps": [
+    "No independently verified operational multi-agent memory corpus is committed; the example remains synthetic/example-only."
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0800.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0800.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0800.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVKH46I0-SPIOFI"
+}

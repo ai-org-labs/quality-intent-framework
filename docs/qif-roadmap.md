@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.7.3 baseline)
+## Current Position (v0.8.0 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -228,6 +228,12 @@ and adoption surface — not pretending the limits away.
   revisions, source corrections, custody events, current-snapshot alignment,
   and governance. The current example remains example-only and advances only
   to collecting, never to a completed empirical outcome.
+  v0.7.2 adds Missingness and Attrition Sensitivity, and v0.7.3 adds
+  Cross-Domain Transportability Review. v0.8.0 extends the Living QIF Ledger
+  with lane-local Judgment Memory Entries, shared-dependency disclosure,
+  append-only revisions, governed retirement, dissent-preserving joins, and
+  reproducible assessments. The committed memory remains example-only and
+  insufficient by design.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -239,13 +245,14 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-10-22 against primary-source signals. The
+The roadmap was revalidated on 2026-10-23 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
 
 | Current signal | Quality risk exposed | QIF response | Lead, not follow |
 | --- | --- | --- | --- |
+| Persistent agent memory is being used to carry reusable lessons across runs, while current guidance keeps human-reviewed artifacts as the source of truth. Multi-agent research reports shared mistakes, hidden-profile failures, gullibility, and incompatible-goal escalation. A recent financial-agent deployment describes versioned organizational judgment records as a response to "memory debt." ([OpenAI memory and compaction](https://developers.openai.com/cookbook/examples/agents_sdk/building_reliable_agents_memory_compaction), [Anthropic multi-agent systems](https://www.anthropic.com/research/multiagent-systems), [OpenAI Terminal X](https://openai.com/index/terminal-x/)) | A final aggregate can overwrite minority evidence, make correlated lanes look independent, keep obsolete judgment active, or silently forget the record needed to challenge a future decision. | v0.8.0 Multi-Agent Judgment Memory. | Preserve lane-local source judgments, dependencies, revisions, dissent, retirement rationale, and authority boundaries as executable ledger records before optimizing memory retrieval or reuse. |
 | NIST measurement science identifies construct validity and unjustified generalization beyond a test setting as distinct open problems, while its TEVV-Athlon draft emphasizes context-specific, customizable assessment. ([NIST measurement science](https://www.nist.gov/blogs/caissi-research-blog/accelerating-ai-innovation-through-measurement-science), [NIST TEVV-Athlon](https://www.nist.gov/artificial-intelligence/ai-research/tevv-athlon-framework-evaluating-ai-systems)) | A score, threshold, confidence label, or apparently similar Quality Intent can be moved between domains even though the construct, stakeholders, losses, evidence, and monitoring differ. | v0.7.3 Cross-Domain Transportability Review. | Keep domain-local results separate, compare meaning and evidence dimension by dimension, require target-domain evidence, and bound any supported claim to the declared source-target scope. |
 | Agent evaluation increasingly distinguishes what an agent says from the resulting environment state, while production monitoring and human review supply longitudinal evidence. NIST identifies longitudinal ground truth and data-access gaps, and OpenAI monitorability evaluation withholds datapoints when evidence is too weak to report reliably. ([Anthropic agent evals](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), [NIST AI 800-4](https://www.nist.gov/publications/challenges-monitoring-deployed-ai-systems-center-ai-standards-and-innovation), [OpenAI monitorability evals](https://alignment.openai.com/monitorability-evals/)) | A later outcome or corrected source can overwrite what was originally known; missing, late, corrected, excluded, or withdrawn data can become invisible; analysis of observed cases alone can reverse the registered conclusion. | v0.7.1 Outcome Collection Ledger and v0.7.2 Missingness and Attrition Sensitivity. | Preserve every observation revision, classify every eligible enrollment once, and reproduce best/worst threshold bounds while refusing source-truth or missingness-mechanism claims. |
 | Frontier-agent safety work now includes incidents in which agents can suppress monitoring alerts or disable monitoring controls. ([OpenAI monitoring-suppression incident](https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/)) | Missing evidence may be caused by the evaluated actor or by compromised monitoring, so treating non-reporting as an ordinary random gap can conceal the most consequential cases. | v0.7.2 preserves non-reporting explicitly; v0.7.3 must carry monitoring-integrity evidence into transportability review. | Keep absence, monitor state, actor access, alert lineage, and intervention evidence separate; never infer benign missingness from silence. |
@@ -779,9 +786,23 @@ Deliverables:
   deterministic verifier rules, governance, and retained negative fixtures.
   The example explicitly rejects software-to-support transfer and contains no
   independently verified domain-local calibration evidence.
+- Implemented first v0.8 slice, v0.8.0 Multi-Agent Judgment Memory: preserve
+  lane-local judgment, evidence origin, shared dependencies, append-only
+  revision, governed retirement, exact dissent, and bounded join decisions in
+  the Living QIF Ledger.
+- Status: implemented through `JudgmentMemoryPolicy`,
+  `JudgmentMemoryGovernanceTrigger`, `JudgmentMemoryEntry`,
+  `JudgmentMemoryDependency`, `JudgmentMemoryRevision`,
+  `JudgmentRetirementDecision`, `MultiAgentJudgmentJoin`, and
+  `JudgmentMemoryAssessment`, deterministic verifier rules, governance, and
+  retained negative fixtures. The example is example-only and insufficient.
 - Next planned slices:
-  - v0.8 Multi-Agent Judgment Memory: preserve disagreement, dependency,
-    revision, and forgetting boundaries across cooperating evaluators.
+  - v0.8.1 Portable Pattern Library Import: package reusable Decision Patterns
+    and Quality Intents with provenance, applicability boundaries,
+    counterexamples, and candidate-only import state.
+  - v0.8.2 Local Applicability and Reproduction: require local cases,
+    applicability decisions, and reproduction evidence before imported quality
+    knowledge can become active.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,
@@ -833,6 +854,14 @@ Deliverables:
 - A public example corpus spanning at least five domains, each example a
   full validating chain, serving simultaneously as documentation, test
   suite, and evidence for the domain-generality claim.
+
+Implementation status:
+
+- v0.8.0 implements the governed multi-agent memory and join foundation in
+  `qif-ledger`. It preserves lane-local judgments, shared dependencies,
+  append-only revisions, dissent, retirement rationale, and authority
+  boundaries. The portable library and cross-domain local-validation chain
+  remain v0.8.1-v0.8.2 work.
 
 Exit evidence:
 

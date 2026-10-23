@@ -76,6 +76,7 @@ Use additional documents when needed:
 | Compare declared probability forecasts with later outcomes without turning a score into a quality verdict | `docs/qif-v0.6.31-calibration-report.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Start a real calibration pilot without inventing outcomes or hiding missing evidence | `docs/qif-v0.7.0-empirical-pilot.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Preserve changing outcome evidence without rewriting history | `docs/qif-v0.7.1-outcome-collection-ledger.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
+| Preserve multiple human or AI judgments across revisions and joins without erasing dissent or shared dependencies | `docs/qif-v0.8.0-multi-agent-judgment-memory.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
 | Expose selection, missing outcomes, dependence, segments, and drift behind a calibration aggregate | `docs/qif-v0.6.32-calibration-cohort-integrity.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Explain why one calibration error requires stronger governance than another at an explicit loss boundary | `docs/qif-v0.6.33-consequence-sensitive-calibration.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Show whether a decision is brittle under bounded, reviewed threshold alternatives | `docs/qif-v0.6.34-threshold-robustness.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
@@ -89,6 +90,27 @@ Use additional documents when needed:
 | Check whether an evaluation stayed blind, within allowed tools, and free of detected grader shortcuts without claiming contamination freedom | `docs/qif-v0.6.42-sequestered-replay-policy-gaming.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Package current QIF guidance for Gemini, Claude, Codex, or another AI | `docs/qif-v0.6.43-portable-ai-package.md`, then run `npm run portable:build` and `npm run portable:verify` |
 | Understand quality theory background | `docs/quality-theory-report.md` |
+
+## Multi-Agent Judgment Memory
+
+When several people or agents contribute to a judgment, keep the lane-local
+records before producing any aggregate:
+
+```text
+Lane-local source judgment
+-> Judgment Memory Entry
+-> Dependency Disclosure
+-> Append-only Revision
+-> Dissent-preserving Join
+-> Governed Retirement Decision
+-> Judgment Memory Assessment
+```
+
+Never keep only the final consensus. Preserve each lane, its evidence,
+applicability boundary, confidence, current revision, shared dependencies, and
+dissent. Retirement excludes a memory from current use but never deletes its
+auditable history. A joined judgment records synthesis; it does not create
+semantic truth, competence, authorization, or authority.
 
 ## Required Framing
 

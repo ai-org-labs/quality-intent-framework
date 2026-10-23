@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.8.0
+
+- Extended the Living QIF Ledger with executable judgment memory policies, lane-local memory entries, dependency disclosures, append-only revisions, governed retirement decisions, multi-agent joins, assessments, and memory-specific governance triggers.
+- Preserved dissent and current revision identity while requiring joins to disclose every shared dependency and exclude retired memories.
+- Added deterministic reproduction of lane, current/retired memory, dissent, shared-dependency, unresolved-conflict, and unverified-memory counts without treating those counts as quality.
+- Added 28 retained negative fixtures covering source traceability, hidden-reasoning exclusion, dependency backlinks, revision lineage, non-destructive retirement, join consistency, governance, and verifier boundaries.
+- Kept the committed example explicitly example-only and insufficient; verifier success does not prove semantic truth, agent competence, consensus correctness, independence, authorization, or authority.
+
 ## v0.7.3
 
 - Added executable transportability policies, source and target domain profiles, domain-local calibration results, transportability comparisons, and aggregate assessments.

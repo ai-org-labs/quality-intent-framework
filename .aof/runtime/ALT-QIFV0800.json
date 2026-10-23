@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-23T04:32:51.786Z",
+  "alternative_analysis_id": "ALT-MVKH4Z7U-5O65EB",
+  "subject_need": "Preserve and safely reuse multi-agent quality judgment over time.",
+  "alternative_solutions": [
+    "Create a new standalone judgment-memory package.",
+    "Extend the existing QIF Living Ledger with judgment memory policy, entries, dependencies, revisions, retirement decisions, joins, and assessments."
+  ],
+  "non_solution_options": [
+    "Store only the final consensus or agent transcript."
+  ],
+  "defer_options": [
+    "Wait for production multi-agent memory datasets before defining the structural contract."
+  ],
+  "stop_options": [
+    "Do not proceed if the model requires hidden chain-of-thought, destructive forgetting, automatic authority, or consensus counts as truth."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVKH46I0-SPIOFI"
+}

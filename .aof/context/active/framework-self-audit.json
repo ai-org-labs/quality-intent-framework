@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-22T04:41:55.399Z",
-  "audit_id": "FSA-QIFV0730",
-  "scope": "QIF v0.7.3 post-implementation self-review",
-  "summary": "Transportability policy, source and target profiles, domain-local result separation, ten-dimension comparison, bounded transfer status, assessment, governance, documentation, fixtures, and portable validation are complete; the example remains unsupported, example-only, and insufficient.",
-  "detected_gap": "No independently verified multi-domain operational dataset is committed, so construct equivalence, real generalization, representativeness, calibration truth, and safe transfer remain unestablished.",
+  "recorded_at": "2026-10-23T04:50:55.703Z",
+  "audit_id": "FSA-QIFV0800",
+  "scope": "QIF v0.8.0 post-implementation self-review",
+  "summary": "Living Ledger judgment memory policy, lane-local entries, dependency disclosure, append-only revisions, non-destructive retirement, exact dissent-preserving joins, assessment, governance, documentation, fixtures, and portable validation are complete; committed evidence remains example-only and insufficient.",
+  "detected_gap": "No independently verified operational multi-agent memory corpus or cross-domain imported pattern validation is committed, so semantic correctness, real independence, organizational learning benefit, and safe reuse remain unestablished.",
   "result_state": "stable",
-  "next_action": "Implement v0.8 Multi-Agent Judgment Memory while preserving disagreement, dependency, revision, and forgetting boundaries.",
+  "next_action": "Implement v0.8.1 Portable Pattern Library Import with provenance, applicability boundaries, counterexamples, and candidate-only import state.",
   "related_task_ids": [
-    "TASK-072"
+    "TASK-073"
   ],
-  "source_session_id": "SESS-MVJ1MUK6-GL8O4L",
-  "source_decision_record_id": "DEC-MVJ1NX5Z-F9I4G3"
+  "source_session_id": "SESS-MVKH3Y7V-AYX3MB",
+  "source_decision_record_id": "DEC-MVKH5GR4-7JJ1HM"
 }

@@ -31,6 +31,14 @@ function outcome(pkg) {
   return pkg.agentOutcomes[0];
 }
 
+function memoryPolicy(pkg) { return pkg.judgmentMemoryPolicies[0]; }
+function memoryEntry(pkg, index = 0) { return pkg.judgmentMemoryEntries[index]; }
+function memoryDependency(pkg) { return pkg.judgmentMemoryDependencies[0]; }
+function memoryRevision(pkg, id = "JMR-002") { return pkg.judgmentMemoryRevisions.find((entry) => entry.id === id); }
+function retirementDecision(pkg) { return pkg.judgmentRetirementDecisions[0]; }
+function memoryJoin(pkg) { return pkg.multiAgentJudgmentJoins[0]; }
+function memoryAssessment(pkg) { return pkg.judgmentMemoryAssessments[0]; }
+
 export const cases = [
   {
     id: "packageRefs-not-array",
@@ -151,6 +159,168 @@ export const cases = [
     rule: "ledger verifier boundary avoids semantic truth",
     expect: "verifierBoundary must explicitly avoid claiming semantic truth.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = ["expert correctness"]; }
+  },
+  {
+    id: "judgment-memory-policies-not-array",
+    rule: "judgment memory policies are retained",
+    expect: "judgmentMemoryPolicies must be an array.",
+    mutate: (pkg) => { pkg.judgmentMemoryPolicies = null; }
+  },
+  {
+    id: "judgment-memory-entries-not-array",
+    rule: "lane-local judgment memories are retained",
+    expect: "judgmentMemoryEntries must be an array.",
+    mutate: (pkg) => { pkg.judgmentMemoryEntries = null; }
+  },
+  {
+    id: "judgment-memory-policy-boundary",
+    rule: "memory policy forbids destructive forgetting and authority",
+    expect: "must forbid destructive forgetting, hidden reasoning storage, and automatic authority.",
+    mutate: (pkg) => { memoryPolicy(pkg).destructiveForgetAllowed = true; }
+  },
+  {
+    id: "judgment-memory-source-missing",
+    rule: "memory source judgment resolves",
+    expect: "JME-001/sourceJudgment references missing entity",
+    mutate: (pkg) => { memoryEntry(pkg).sourceJudgment.entityRef = "RJG-NOPE-999"; }
+  },
+  {
+    id: "judgment-memory-hidden-reasoning",
+    rule: "memory excludes hidden reasoning",
+    expect: "JME-001 hiddenReasoningStored must be false.",
+    mutate: (pkg) => { memoryEntry(pkg).hiddenReasoningStored = true; }
+  },
+  {
+    id: "judgment-memory-current-revision",
+    rule: "memory identifies one current revision",
+    expect: "JME-001 must identify exactly one current revision through currentRevisionRef.",
+    mutate: (pkg) => { memoryEntry(pkg).currentRevisionRef = "JMR-001"; }
+  },
+  {
+    id: "judgment-memory-dependency-backlink",
+    rule: "dependency disclosure is bidirectional",
+    expect: "JMD-001 affected memory JME-002 must link back through dependencyRefs.",
+    mutate: (pkg) => { memoryEntry(pkg, 1).dependencyRefs = ["JMD-NOPE-999"]; }
+  },
+  {
+    id: "judgment-memory-shared-dependency-count",
+    rule: "shared dependency affects multiple memories",
+    expect: "JMD-001 shared dependency must affect at least two memories.",
+    mutate: (pkg) => { memoryDependency(pkg).affectedMemoryRefs = ["JME-001"]; }
+  },
+  {
+    id: "judgment-memory-dependency-trigger",
+    rule: "shared dependency routes governance",
+    expect: "JMD-001 non-independent dependency requires a memory-shared-dependency governance trigger.",
+    mutate: (pkg) => { memoryDependency(pkg).governanceTriggerRefs = []; }
+  },
+  {
+    id: "judgment-memory-revision-previous",
+    rule: "revision lineage resolves",
+    expect: "JMR-002 references missing previous judgment memory revision JMR-NOPE-999.",
+    mutate: (pkg) => { memoryRevision(pkg).previousRevisionRef = "JMR-NOPE-999"; }
+  },
+  {
+    id: "judgment-memory-revision-contiguous",
+    rule: "revision numbers are contiguous",
+    expect: "JMR-002 previous revision must belong to the same memory and increment revisionNumber by one.",
+    mutate: (pkg) => { memoryRevision(pkg).revisionNumber = 3; }
+  },
+  {
+    id: "judgment-memory-retirement-status",
+    rule: "retirement status reproduces",
+    expect: "JRD-001 resultingStatus must reproduce as retired.",
+    mutate: (pkg) => { retirementDecision(pkg).resultingStatus = "current"; }
+  },
+  {
+    id: "judgment-memory-destructive-delete",
+    rule: "retirement is non-destructive",
+    expect: "JRD-001 destructiveDeletion must be false.",
+    mutate: (pkg) => { retirementDecision(pkg).destructiveDeletion = true; }
+  },
+  {
+    id: "judgment-memory-retirement-trigger",
+    rule: "retirement routes governance",
+    expect: "JRD-001 retirement requires a memory-retirement-review governance trigger.",
+    mutate: (pkg) => { retirementDecision(pkg).governanceTriggerRefs = ["JGT-001"]; }
+  },
+  {
+    id: "judgment-memory-join-retired",
+    rule: "joins exclude retired memories",
+    expect: "JMJ-001 must not join retired memories.",
+    mutate: (pkg) => { memoryJoin(pkg).memoryRefs[0] = "JME-004"; memoryJoin(pkg).revisionRefs[0] = "JMR-005"; }
+  },
+  {
+    id: "judgment-memory-join-distinct-lanes",
+    rule: "join requires distinct lanes",
+    expect: "JMJ-001 must include at least 2 distinct lanes.",
+    mutate: (pkg) => { memoryEntry(pkg, 1).laneId = "operations-lane"; memoryEntry(pkg, 2).laneId = "operations-lane"; }
+  },
+  {
+    id: "judgment-memory-join-revisions",
+    rule: "join uses current revisions",
+    expect: "JMJ-001 revisionRefs must exactly match current revisions of joined memories.",
+    mutate: (pkg) => { memoryJoin(pkg).revisionRefs[0] = "JMR-001"; }
+  },
+  {
+    id: "judgment-memory-join-dependencies",
+    rule: "join discloses shared dependencies",
+    expect: "JMJ-001 dependencyRefs must disclose every dependency shared by joined memories.",
+    mutate: (pkg) => { memoryJoin(pkg).dependencyRefs = []; }
+  },
+  {
+    id: "judgment-memory-join-dissent",
+    rule: "join preserves exact dissent",
+    expect: "JMJ-001 dissentMemoryRefs must reproduce every joined memory that differs from joinedJudgment.",
+    mutate: (pkg) => { memoryJoin(pkg).dissentMemoryRefs = []; }
+  },
+  {
+    id: "judgment-memory-join-conflict-dimensions",
+    rule: "join names conflict dimensions",
+    expect: "JMJ-001 conflicting judgments require conflictDimensions.",
+    mutate: (pkg) => { memoryJoin(pkg).conflictDimensions = []; }
+  },
+  {
+    id: "judgment-memory-join-sufficiency",
+    rule: "join sufficiency reproduces",
+    expect: "JMJ-001 dataSufficiency must reproduce as insufficient.",
+    mutate: (pkg) => { memoryJoin(pkg).dataSufficiency = "sufficient"; }
+  },
+  {
+    id: "judgment-memory-join-evidence-trigger",
+    rule: "unverified memory routes governance",
+    expect: "JMJ-001 unverified memory evidence requires a memory-evidence-unverified governance trigger.",
+    mutate: (pkg) => { memoryJoin(pkg).governanceTriggerRefs = ["JGT-002", "JGT-003"]; }
+  },
+  {
+    id: "judgment-memory-join-authority-boundary",
+    rule: "join does not grant authority",
+    expect: "JMJ-001 authorityBoundary must remain recorded-join-only-not-semantic-truth-quality-competence-authorization-or-authority.",
+    mutate: (pkg) => { memoryJoin(pkg).authorityBoundary = "approved-by-consensus"; }
+  },
+  {
+    id: "judgment-memory-assessment-count",
+    rule: "assessment counts reproduce",
+    expect: "JMA-001 dissentCount must reproduce as 1.",
+    mutate: (pkg) => { memoryAssessment(pkg).dissentCount = 0; }
+  },
+  {
+    id: "judgment-memory-assessment-signals",
+    rule: "assessment signals reproduce",
+    expect: "JMA-001 assessmentSignals must reproduce as",
+    mutate: (pkg) => { memoryAssessment(pkg).assessmentSignals = ["ready-for-governed-use"]; }
+  },
+  {
+    id: "judgment-memory-assessment-trigger",
+    rule: "insufficient assessment routes governance",
+    expect: "JMA-001 insufficient memory evidence requires a memory-assessment-insufficient governance trigger.",
+    mutate: (pkg) => { memoryAssessment(pkg).governanceTriggerRefs = ["JGT-001", "JGT-002", "JGT-003"]; }
+  },
+  {
+    id: "judgment-memory-verifier-authority-boundary",
+    rule: "verifier does not claim authority",
+    expect: "verifierBoundary must explicitly avoid claiming authorization or authority.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "authorization or authority"); }
   }
 ];
 

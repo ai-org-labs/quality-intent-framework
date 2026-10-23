@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-22T04:41:55.411Z",
+  "updated_at": "2026-10-23T04:50:55.706Z",
   "entries": [
     {
-      "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "成功は、source/target domain、constructとoutcome meaning、population/context shift、evidence comparability、threshold/confidence transfer assumptions、domain-local results、transfer claim status、governance routingを決定論的に再現し、pooled performanceを品質や移送可能性の証明へ格上げせず、npm test・portable・AOF組織検証・公開releaseを完了すること。",
-      "recorded_at": "2026-10-22T04:31:11.201Z",
+      "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "answer": "Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims.",
+      "recorded_at": "2026-10-23T04:32:14.573Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVJ1MUK6-GL8O4L",
+      "source_session_id": "SESS-MVKH3Y7V-AYX3MB",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "Proceed with the smallest additive calibration-report slice: transfer policy, domain profile, domain-local result, transportability comparison, assessment, governance, verifier, examples, fixtures, docs, portable release.",
-      "recorded_at": "2026-10-22T04:31:55.562Z",
+      "answer": "Proceed with the smallest v0.8.0 executable slice inside qif-ledger: policy, memory entry, dependency disclosure, revision, retirement decision, judgment join, assessment, governance, verifier, example, fixtures, documentation, portable package, and release.",
+      "recorded_at": "2026-10-23T04:33:14.515Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVJ1MUK6-GL8O4L",
-      "source_decision_record_id": "DEC-MVJ1NX5Z-F9I4G3"
+      "source_session_id": "SESS-MVKH3Y7V-AYX3MB",
+      "source_decision_record_id": "DEC-MVKH5GR4-7JJ1HM"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "No independently verified multi-domain operational dataset is committed, so construct equivalence, real generalization, representativeness, calibration truth, and safe transfer remain unestablished.",
-      "recorded_at": "2026-10-22T04:41:55.411Z",
-      "expectation_state": "Transportability policy, source and target profiles, domain-local result separation, ten-dimension comparison, bounded transfer status, assessment, governance, documentation, fixtures, and portable validation are complete; the example remains unsupported, example-only, and insufficient.",
-      "mismatch_state": "No independently verified multi-domain operational dataset is committed, so construct equivalence, real generalization, representativeness, calibration truth, and safe transfer remain unestablished.",
-      "scale_direction": "Implement v0.8 Multi-Agent Judgment Memory while preserving disagreement, dependency, revision, and forgetting boundaries.",
-      "source_session_id": "SESS-MVJ1MUK6-GL8O4L",
-      "source_decision_record_id": "DEC-MVJ1NX5Z-F9I4G3"
+      "answer": "No independently verified operational multi-agent memory corpus or cross-domain imported pattern validation is committed, so semantic correctness, real independence, organizational learning benefit, and safe reuse remain unestablished.",
+      "recorded_at": "2026-10-23T04:50:55.706Z",
+      "expectation_state": "Living Ledger judgment memory policy, lane-local entries, dependency disclosure, append-only revisions, non-destructive retirement, exact dissent-preserving joins, assessment, governance, documentation, fixtures, and portable validation are complete; committed evidence remains example-only and insufficient.",
+      "mismatch_state": "No independently verified operational multi-agent memory corpus or cross-domain imported pattern validation is committed, so semantic correctness, real independence, organizational learning benefit, and safe reuse remain unestablished.",
+      "scale_direction": "Implement v0.8.1 Portable Pattern Library Import with provenance, applicability boundaries, counterexamples, and candidate-only import state.",
+      "source_session_id": "SESS-MVKH3Y7V-AYX3MB",
+      "source_decision_record_id": "DEC-MVKH5GR4-7JJ1HM"
     }
   ]
 }

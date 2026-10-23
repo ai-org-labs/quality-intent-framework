@@ -1,0 +1,78 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-23T04:33:52.271Z",
+  "packet_id": "ASP-MVKH69VZ-5IFMKK",
+  "source_task_id": "TASK-073",
+  "source_parent_session_id": "SESS-MVKH3Y7V-AYX3MB",
+  "source_decision_record_id": "DEC-MVKH5GR4-7JJ1HM",
+  "objective": "Implement and release QIF v0.8.0 Multi-Agent Judgment Memory",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime",
+    "assignment_reason": "Builder owns additive Living Ledger schema, verifier, fixture, documentation, and release implementation.",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "schema-evolution",
+    "verifier-design"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-contract-alignment",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/qif-ledger-package.schema.json",
+        "tools/validate-qif-ledger.mjs"
+      ],
+      "rationale": "The existing Living Ledger and retained negative fixture suite provide the bounded extension point."
+    }
+  ],
+  "resource_refs": [
+    "resource-repo-main",
+    "resource-npm-test"
+  ],
+  "policy_refs": [
+    "policy-runtime-backed-answer-discipline"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "Canonical memory entities and verifier boundary",
+      "Example, governance, and retained negative fixtures",
+      "Roadmap, changelog, runtime log, portable package, and public release"
+    ],
+    "acceptance_criteria": [
+      "npm test passes all positive and negative fixtures",
+      "portable package builds and verifies",
+      "AOF organization verification and council review pass"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "Every joined judgment preserves lane-local memories, dissent, dependencies, revision lineage, retirement rationale, and authority boundary",
+      "evaluator_ref": "guardian",
+      "evidence_required": "schema, verifier, fixtures, and example",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "memory-overwrite-or-authority-overclaim",
+      "trigger_condition": "a join erases dissent, hides shared dependency, destroys history, or treats consensus as truth or authority",
+      "consequence": "require-council-review",
+      "recovery_action": "restore append-only lineage, dissent, dependency disclosure, governance, and semantic boundaries"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will preserve disagreement and history before joining judgments.",
+    "current_action": "Implement v0.8.0",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Submit the complete Living Ledger extension to Guardian review"
+  },
+  "status": "draft"
+}
