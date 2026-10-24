@@ -381,6 +381,181 @@
       "rule": "verifier does not claim authority",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming authorization or authority."
+    },
+    {
+      "file": "qif-ledger-portable-knowledge-policies-not-array.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "portable import policies are retained",
+      "expect": "fail",
+      "errorIncludes": "portableKnowledgeImportPolicies must be an array."
+    },
+    {
+      "file": "qif-ledger-portable-knowledge-policy-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "portable import policy forbids activation and authority",
+      "expect": "fail",
+      "errorIncludes": "must forbid executable imported instructions, hidden reasoning, automatic activation, and automatic authority."
+    },
+    {
+      "file": "qif-ledger-portable-knowledge-source-missing.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "portable item source resolves",
+      "expect": "fail",
+      "errorIncludes": "PKI-001/sourceEntity references missing entity"
+    },
+    {
+      "file": "qif-ledger-portable-knowledge-snapshot-mismatch.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "portable snapshot exactly preserves source",
+      "expect": "fail",
+      "errorIncludes": "PKI-001 sourceSnapshot must exactly reproduce the resolved source entity."
+    },
+    {
+      "file": "qif-ledger-portable-knowledge-digest-mismatch.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "portable source digest reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKI-001 sourceDigest must reproduce the canonical source entity digest"
+    },
+    {
+      "file": "qif-ledger-portable-knowledge-type-mismatch.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "knowledge type matches source collection",
+      "expect": "fail",
+      "errorIncludes": "PKI-001 knowledgeType quality-intent requires source entityType qualityIntents."
+    },
+    {
+      "file": "qif-ledger-portable-knowledge-counterexamples-required.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "portable items preserve counterexample challenges",
+      "expect": "fail",
+      "errorIncludes": "PKI-001 counterexamples must include at least one concrete challenge."
+    },
+    {
+      "file": "qif-ledger-portable-knowledge-instruction-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "portable items are not executable instructions",
+      "expect": "fail",
+      "errorIncludes": "PKI-001 must remain reference data only and must not store hidden reasoning."
+    },
+    {
+      "file": "qif-ledger-portable-knowledge-hidden-reasoning.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "portable items exclude hidden reasoning",
+      "expect": "fail",
+      "errorIncludes": "PKI-001 must remain reference data only and must not store hidden reasoning."
+    },
+    {
+      "file": "qif-ledger-portable-knowledge-evidence-required.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "portable items retain evidence refs",
+      "expect": "fail",
+      "errorIncludes": "PKI-001 evidenceRefs must include source evidence."
+    },
+    {
+      "file": "qif-ledger-portable-library-item-list.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "library item index is exact",
+      "expect": "fail",
+      "errorIncludes": "PKL-001 itemRefs must exactly list items owned by the library."
+    },
+    {
+      "file": "qif-ledger-portable-library-digest.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "library digest reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKL-001 libraryDigest must reproduce as"
+    },
+    {
+      "file": "qif-ledger-portable-library-trust-source.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "library trust sources resolve",
+      "expect": "fail",
+      "errorIncludes": "PKL-001 trust references missing source package PKG-NOPE-999."
+    },
+    {
+      "file": "qif-ledger-portable-import-candidate-only.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "imported knowledge stays candidate-only",
+      "expect": "fail",
+      "errorIncludes": "PKD-001 imported knowledge must remain candidate-only, non-executable, non-activating, and non-authoritative."
+    },
+    {
+      "file": "qif-ledger-portable-import-digest-reproduction.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "import decision reproduces digest verification",
+      "expect": "fail",
+      "errorIncludes": "PKD-001 sourceDigestVerified must reproduce as true."
+    },
+    {
+      "file": "qif-ledger-portable-import-provenance.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "import preserves provenance",
+      "expect": "fail",
+      "errorIncludes": "PKD-001 provenancePreserved must be true."
+    },
+    {
+      "file": "qif-ledger-portable-import-source-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "unverified source trust routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKD-001 unverified source trust requires a portable-source-unverified governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-import-applicability-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "candidate imports route applicability governance",
+      "expect": "fail",
+      "errorIncludes": "PKD-001 candidate import requires a portable-applicability-unvalidated governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-import-counterexample-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "candidate imports route counterexample governance",
+      "expect": "fail",
+      "errorIncludes": "PKD-001 candidate import requires a portable-counterexample-unresolved governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-import-governance-status.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "candidate imports require governance",
+      "expect": "fail",
+      "errorIncludes": "PKD-001 candidate import must have status governance-required until local validation."
+    },
+    {
+      "file": "qif-ledger-portable-assessment-count.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "portable assessment counts reproduce",
+      "expect": "fail",
+      "errorIncludes": "PKA-001 itemCount must reproduce as 2."
+    },
+    {
+      "file": "qif-ledger-portable-assessment-signals.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "portable assessment signals reproduce",
+      "expect": "fail",
+      "errorIncludes": "PKA-001 assessmentSignals must reproduce as"
+    },
+    {
+      "file": "qif-ledger-portable-assessment-sufficiency.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "portable assessment remains insufficient",
+      "expect": "fail",
+      "errorIncludes": "PKA-001 dataSufficiency must remain insufficient before local validation."
+    },
+    {
+      "file": "qif-ledger-portable-assessment-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "insufficient portable assessment routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKA-001 insufficient portable knowledge assessment requires a portable-assessment-insufficient governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-verifier-local-validity-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "verifier does not claim imported applicability",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming imported knowledge applicability or local validity."
     }
   ],
   "rescopedRules": []

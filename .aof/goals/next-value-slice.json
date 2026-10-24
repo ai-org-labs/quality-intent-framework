@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.8.1 Portable Pattern Library Import",
-  "updated_at": "2026-10-23T04:51:06.965Z",
+  "content": "v0.8.2 Local Applicability and Reproduction",
+  "updated_at": "2026-10-24T04:42:18.275Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MVKH3Y7V-AYX3MB",
-  "source_decision_record_id": "DEC-MVKH5GR4-7JJ1HM",
+  "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
+  "source_decision_record_id": "DEC-MVLWH76S-AB3O9Z",
   "declared_complete_at": null
 }

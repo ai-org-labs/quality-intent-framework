@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-23T04:51:07.148Z",
+  "generated_at": "2026-10-24T04:42:18.455Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MVKH3Y7V-AYX3MB",
-    "report_id": "OUT-MVKHSCP2-URWKZO",
+    "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
+    "report_id": "OUT-MVLWWWKJ-JXQOOT",
     "result": "success",
-    "observed_at": "2026-10-23T04:51:02.342Z",
-    "note": "QIF v0.8.0 implements governed multi-agent judgment memory with lane-local sources, shared-dependency disclosure, append-only revision lineage, non-destructive retirement, exact dissent-preserving joins, assessment, governance, and open-risk visibility. npm test passed 16/16 and 1306/1306; AOF organization verification passed 295/295. Public release pending.",
-    "signal_ref": ".aof/runtime/v0.8.0-review-council-executed.json"
+    "observed_at": "2026-10-24T04:42:15.138Z",
+    "note": "QIF v0.8.1 implements exact-source, digest-verified, candidate-only Portable Pattern Library Import with provenance, applicability boundaries, counterexamples, trust, non-executable and authority boundaries, assessment, governance, and open-risk visibility. npm test passed 16/16 and 1331/1331; AOF organization verification passed 295/295. Public release pending.",
+    "signal_ref": ".aof/runtime/v0.8.1-review-council-executed.json"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV0800",
-    "recorded_at": "2026-10-23T04:50:55.703Z",
-    "summary": "Living Ledger judgment memory policy, lane-local entries, dependency disclosure, append-only revisions, non-destructive retirement, exact dissent-preserving joins, assessment, governance, documentation, fixtures, and portable validation are complete; committed evidence remains example-only and insufficient.",
-    "detected_gap": "No independently verified operational multi-agent memory corpus or cross-domain imported pattern validation is committed, so semantic correctness, real independence, organizational learning benefit, and safe reuse remain unestablished.",
+    "audit_id": "FSA-QIFV0810",
+    "recorded_at": "2026-10-24T04:42:09.386Z",
+    "summary": "Portable quality-knowledge policies, exact source snapshots, canonical digests, provenance, applicability boundaries, counterexamples, trust metadata, candidate-only decisions, governance, documentation, retained fixtures, and portable validation are complete; committed evidence remains example-only and insufficient.",
+    "detected_gap": "Imported knowledge has not been tested against target-specific cases, loss boundaries, stakeholder context, or unseen counterexamples, so local applicability and reproduction remain unestablished.",
     "result_state": "stable",
-    "next_action": "Implement v0.8.1 Portable Pattern Library Import with provenance, applicability boundaries, counterexamples, and candidate-only import state.",
+    "next_action": "Implement v0.8.2 Local Applicability and Reproduction with target-specific cases, applicability decisions, reproduction evidence, activation gates, and governed rejection.",
     "related_task_ids": [
-      "TASK-073"
+      "TASK-074"
     ]
   },
   "current_next_value_slice": {
-    "content": "v0.8.1 Portable Pattern Library Import",
-    "updated_at": "2026-10-23T04:51:06.965Z",
+    "content": "v0.8.2 Local Applicability and Reproduction",
+    "updated_at": "2026-10-24T04:42:18.275Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MVKH3Y7V-AYX3MB",
-    "source_decision_record_id": "DEC-MVKH5GR4-7JJ1HM"
+    "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
+    "source_decision_record_id": "DEC-MVLWH76S-AB3O9Z"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Implement v0.8.1 Portable Pattern Library Import with provenance, applicability boundaries, counterexamples, and candidate-only import state.",
+    "proposed_focus": "Implement v0.8.2 Local Applicability and Reproduction with target-specific cases, applicability decisions, reproduction evidence, activation gates, and governed rejection.",
     "related_task_ids": [
-      "TASK-073"
+      "TASK-074"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: v0.8.1 Portable Pattern Library Import",
-    "Latest self-audit next action: Implement v0.8.1 Portable Pattern Library Import with provenance, applicability boundaries, counterexamples, and candidate-only import state.",
+    "Current next value slice: v0.8.2 Local Applicability and Reproduction",
+    "Latest self-audit next action: Implement v0.8.2 Local Applicability and Reproduction with target-specific cases, applicability decisions, reproduction evidence, activation gates, and governed rejection.",
     "Latest outcome result: success"
   ]
 }

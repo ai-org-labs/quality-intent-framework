@@ -1,0 +1,14 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-24T04:29:35.169Z",
+  "problem_statement_id": "PST-MVLWGM69-LWJDS5",
+  "affected_party": "organizations and agents reusing quality knowledge across domains and runtimes",
+  "actual_problem": "portable Decision Patterns and Quality Intents can be copied without preserved provenance, applicability boundaries, counterexamples, trust state, or local-validation status",
+  "why_it_matters": "foreign or stale quality knowledge can silently become active, authoritative, or executable despite being untested in the target context",
+  "why_now": "Agent Skills became a vendor-neutral cross-platform standard on 2026-10-22, making governed quality-knowledge portability an immediate adoption boundary",
+  "evidence_refs": [
+    "docs/qif-roadmap.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

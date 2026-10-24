@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import fs from "node:fs";
+import crypto from "node:crypto";
 import path from "node:path";
 import process from "node:process";
 
@@ -156,6 +157,18 @@ function sameSet(left, right) {
   return Array.isArray(left) && Array.isArray(right) && left.length === right.length && new Set(left).size === left.length && new Set(right).size === right.length && left.every((item) => new Set(right).has(item));
 }
 
+function canonicalJson(value) {
+  if (Array.isArray(value)) return `[${value.map(canonicalJson).join(",")}]`;
+  if (value && typeof value === "object") {
+    return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonicalJson(value[key])}`).join(",")}}`;
+  }
+  return JSON.stringify(value);
+}
+
+function sha256(value) {
+  return `sha256:${crypto.createHash("sha256").update(canonicalJson(value)).digest("hex")}`;
+}
+
 function addEntity(index, collection, item) {
   if (!item || typeof item !== "object" || typeof item.id !== "string") {
     return;
@@ -234,6 +247,12 @@ function validateLedgerPackage(pkg, packagePath) {
   const judgmentRetirementDecisions = requireArray(pkg, "judgmentRetirementDecisions", packagePath);
   const multiAgentJudgmentJoins = requireArray(pkg, "multiAgentJudgmentJoins", packagePath);
   const judgmentMemoryAssessments = requireArray(pkg, "judgmentMemoryAssessments", packagePath);
+  const portableKnowledgeImportPolicies = requireArray(pkg, "portableKnowledgeImportPolicies", packagePath);
+  const portableKnowledgeGovernanceTriggers = requireArray(pkg, "portableKnowledgeGovernanceTriggers", packagePath);
+  const portableKnowledgeLibraries = requireArray(pkg, "portableKnowledgeLibraries", packagePath);
+  const portableKnowledgeItems = requireArray(pkg, "portableKnowledgeItems", packagePath);
+  const portableKnowledgeImportDecisions = requireArray(pkg, "portableKnowledgeImportDecisions", packagePath);
+  const portableKnowledgeAssessments = requireArray(pkg, "portableKnowledgeAssessments", packagePath);
   const packageRefIndex = indexById(packageRefs, `${packagePath}:packageRefs`);
   const crossPackageRefIndex = indexById(crossPackageRefs, `${packagePath}:crossPackageRefs`);
   const lifecycleIndex = indexById(lifecycleRecords, `${packagePath}:qualityIntentLifecycleRecords`);
@@ -248,6 +267,11 @@ function validateLedgerPackage(pkg, packagePath) {
   const judgmentMemoryRevisionIndex = indexById(judgmentMemoryRevisions, `${packagePath}:judgmentMemoryRevisions`);
   const judgmentRetirementDecisionIndex = indexById(judgmentRetirementDecisions, `${packagePath}:judgmentRetirementDecisions`);
   const multiAgentJudgmentJoinIndex = indexById(multiAgentJudgmentJoins, `${packagePath}:multiAgentJudgmentJoins`);
+  const portableKnowledgeImportPolicyIndex = indexById(portableKnowledgeImportPolicies, `${packagePath}:portableKnowledgeImportPolicies`);
+  const portableKnowledgeGovernanceTriggerIndex = indexById(portableKnowledgeGovernanceTriggers, `${packagePath}:portableKnowledgeGovernanceTriggers`);
+  const portableKnowledgeLibraryIndex = indexById(portableKnowledgeLibraries, `${packagePath}:portableKnowledgeLibraries`);
+  const portableKnowledgeItemIndex = indexById(portableKnowledgeItems, `${packagePath}:portableKnowledgeItems`);
+  const portableKnowledgeImportDecisionIndex = indexById(portableKnowledgeImportDecisions, `${packagePath}:portableKnowledgeImportDecisions`);
   void crossPackageRefIndex;
   void missedIntentIndex;
 
@@ -521,6 +545,114 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!sufficient && !types.has("memory-assessment-insufficient")) errors.push(`${assessment.id} insufficient memory evidence requires a memory-assessment-insufficient governance trigger.`);
   }
 
+  const portableGovernanceTypes = (refs, ownerId) => new Set((refs ?? []).map((id) => {
+    const trigger = portableKnowledgeGovernanceTriggerIndex.get(id);
+    if (!trigger) errors.push(`${ownerId} references missing portable-knowledge governance trigger ${id}.`);
+    return trigger?.triggerType;
+  }).filter(Boolean));
+
+  for (const policy of portableKnowledgeImportPolicies) {
+    if (!sameSet(policy.allowedKnowledgeTypes, ["decision-pattern", "quality-intent"])) errors.push(`${policy.id} allowedKnowledgeTypes must include decision-pattern and quality-intent exactly once.`);
+    if (policy.preserveSourceIdentity !== true || policy.requireContentDigest !== true || policy.requireApplicabilityBoundary !== true || policy.requireCounterexamples !== true) errors.push(`${policy.id} must require source identity, content digest, applicability boundary, and counterexamples.`);
+    if (policy.importedInstructionsExecutable !== false || policy.hiddenReasoningAllowed !== false || policy.automaticActivation !== false || policy.automaticAuthority !== false) errors.push(`${policy.id} must forbid executable imported instructions, hidden reasoning, automatic activation, and automatic authority.`);
+  }
+
+  for (const trigger of portableKnowledgeGovernanceTriggers) {
+    for (const field of ["triggerType", "reason", "severity", "requiredAction", "owner", "status"]) checkRequiredString(trigger, field, trigger.id);
+  }
+
+  const integrityByItem = new Map();
+  for (const item of portableKnowledgeItems) {
+    if (!portableKnowledgeLibraryIndex.has(item.libraryRef)) errors.push(`${item.id} references missing portable knowledge library ${item.libraryRef}.`);
+    const source = resolveEntity(item.sourceEntity, packageIndex, `${item.id}/sourceEntity`);
+    const expectedType = item.knowledgeType === "decision-pattern" ? "decisionPatterns" : item.knowledgeType === "quality-intent" ? "qualityIntents" : null;
+    if (expectedType && item.sourceEntity?.entityType !== expectedType) errors.push(`${item.id} knowledgeType ${item.knowledgeType} requires source entityType ${expectedType}.`);
+    const snapshotMatches = Boolean(source) && canonicalJson(item.sourceSnapshot) === canonicalJson(source);
+    if (!snapshotMatches) errors.push(`${item.id} sourceSnapshot must exactly reproduce the resolved source entity.`);
+    const expectedDigest = source ? sha256(source) : null;
+    const digestMatches = Boolean(expectedDigest) && item.sourceDigest === expectedDigest;
+    if (!digestMatches) errors.push(`${item.id} sourceDigest must reproduce the canonical source entity digest ${expectedDigest ?? "unavailable"}.`);
+    integrityByItem.set(item.id, snapshotMatches && digestMatches);
+    checkRequiredString(item, "provenanceSummary", item.id);
+    checkRequiredString(item, "applicabilityBoundary", item.id);
+    if (!Array.isArray(item.counterexamples) || item.counterexamples.length === 0) errors.push(`${item.id} counterexamples must include at least one concrete challenge.`);
+    if (item.instructionBoundary !== "reference-data-only-not-executable-agent-instructions" || item.hiddenReasoningStored !== false) errors.push(`${item.id} must remain reference data only and must not store hidden reasoning.`);
+    if (!Array.isArray(item.evidenceRefs) || item.evidenceRefs.length === 0) errors.push(`${item.id} evidenceRefs must include source evidence.`);
+    for (const evidenceRef of item.evidenceRefs ?? []) resolveEntity(evidenceRef, packageIndex, `${item.id}/evidenceRef`);
+  }
+
+  for (const library of portableKnowledgeLibraries) {
+    if (!portableKnowledgeImportPolicyIndex.has(library.policyRef)) errors.push(`${library.id} references missing portable knowledge import policy ${library.policyRef}.`);
+    if (!evidenceOriginIndex.has(library.evidenceOriginRef)) errors.push(`${library.id} references missing evidence origin ${library.evidenceOriginRef}.`);
+    const items = (library.itemRefs ?? []).map((id) => portableKnowledgeItemIndex.get(id)).filter(Boolean);
+    for (const id of library.itemRefs ?? []) if (!portableKnowledgeItemIndex.has(id)) errors.push(`${library.id} references missing portable knowledge item ${id}.`);
+    if (new Set(library.itemRefs ?? []).size !== (library.itemRefs ?? []).length) errors.push(`${library.id} itemRefs must not contain duplicates.`);
+    const ownedItems = portableKnowledgeItems.filter((item) => item.libraryRef === library.id).map((item) => item.id);
+    if (!sameSet(library.itemRefs, ownedItems)) errors.push(`${library.id} itemRefs must exactly list items owned by the library.`);
+    const expectedDigest = sha256((library.itemRefs ?? []).map((id) => ({ id, sourceDigest: portableKnowledgeItemIndex.get(id)?.sourceDigest })));
+    if (library.libraryDigest !== expectedDigest) errors.push(`${library.id} libraryDigest must reproduce as ${expectedDigest}.`);
+    const trust = library.trust;
+    if (!trust || !Array.isArray(trust.sources) || trust.sources.length === 0 || !Array.isArray(trust.verifiedBy)) errors.push(`${library.id} trust must include sources and verifiedBy arrays.`);
+    for (const field of ["generatedBy", "status", "staleAfter"]) checkRequiredString(trust ?? {}, field, `${library.id}/trust`);
+    for (const sourceRef of trust?.sources ?? []) if (!packageRefIndex.has(sourceRef)) errors.push(`${library.id} trust references missing source package ${sourceRef}.`);
+    void items;
+  }
+
+  for (const decision of portableKnowledgeImportDecisions) {
+    if (!portableKnowledgeImportPolicyIndex.has(decision.policyRef)) errors.push(`${decision.id} references missing portable knowledge import policy ${decision.policyRef}.`);
+    const library = portableKnowledgeLibraryIndex.get(decision.libraryRef);
+    if (!library) errors.push(`${decision.id} references missing portable knowledge library ${decision.libraryRef}.`);
+    for (const id of decision.importedItemRefs ?? []) if (!portableKnowledgeItemIndex.has(id)) errors.push(`${decision.id} references missing portable knowledge item ${id}.`);
+    if (!(decision.importedItemRefs ?? []).every((id) => (library?.itemRefs ?? []).includes(id))) errors.push(`${decision.id} importedItemRefs must belong to the referenced library.`);
+    if (new Set(decision.importedItemRefs ?? []).size !== (decision.importedItemRefs ?? []).length) errors.push(`${decision.id} importedItemRefs must not contain duplicates.`);
+    const integrityVerified = (decision.importedItemRefs ?? []).every((id) => integrityByItem.get(id) === true);
+    if (decision.sourceDigestVerified !== integrityVerified) errors.push(`${decision.id} sourceDigestVerified must reproduce as ${integrityVerified}.`);
+    if (decision.provenancePreserved !== true) errors.push(`${decision.id} provenancePreserved must be true.`);
+    if (decision.importedStatus !== "candidate" || decision.executable !== false || decision.automaticActivation !== false || decision.automaticAuthority !== false) errors.push(`${decision.id} imported knowledge must remain candidate-only, non-executable, non-activating, and non-authoritative.`);
+    if (!['not-started', 'planned'].includes(decision.localValidationStatus)) errors.push(`${decision.id} localValidationStatus must remain not-started or planned in v0.8.1.`);
+    const types = portableGovernanceTypes(decision.governanceTriggerRefs, decision.id);
+    if (library?.trust?.status !== "verified" && !types.has("portable-source-unverified")) errors.push(`${decision.id} unverified source trust requires a portable-source-unverified governance trigger.`);
+    if (decision.decision === "candidate-import" && !types.has("portable-applicability-unvalidated")) errors.push(`${decision.id} candidate import requires a portable-applicability-unvalidated governance trigger.`);
+    if (decision.decision === "candidate-import" && !types.has("portable-counterexample-unresolved")) errors.push(`${decision.id} candidate import requires a portable-counterexample-unresolved governance trigger.`);
+    if (decision.decision === "candidate-import" && decision.status !== "governance-required") errors.push(`${decision.id} candidate import must have status governance-required until local validation.`);
+  }
+
+  for (const assessment of portableKnowledgeAssessments) {
+    if (!portableKnowledgeImportPolicyIndex.has(assessment.policyRef)) errors.push(`${assessment.id} references missing portable knowledge import policy ${assessment.policyRef}.`);
+    const libraries = (assessment.libraryRefs ?? []).map((id) => portableKnowledgeLibraryIndex.get(id)).filter(Boolean);
+    const items = (assessment.itemRefs ?? []).map((id) => portableKnowledgeItemIndex.get(id)).filter(Boolean);
+    const decisions = (assessment.importDecisionRefs ?? []).map((id) => portableKnowledgeImportDecisionIndex.get(id)).filter(Boolean);
+    for (const id of assessment.libraryRefs ?? []) if (!portableKnowledgeLibraryIndex.has(id)) errors.push(`${assessment.id} references missing portable knowledge library ${id}.`);
+    for (const id of assessment.itemRefs ?? []) if (!portableKnowledgeItemIndex.has(id)) errors.push(`${assessment.id} references missing portable knowledge item ${id}.`);
+    for (const id of assessment.importDecisionRefs ?? []) if (!portableKnowledgeImportDecisionIndex.has(id)) errors.push(`${assessment.id} references missing portable knowledge import decision ${id}.`);
+    const candidateItems = new Set(decisions.filter((decision) => decision.decision === "candidate-import").flatMap((decision) => decision.importedItemRefs ?? []));
+    const expected = {
+      libraryCount: libraries.length,
+      itemCount: items.length,
+      candidateImportCount: decisions.filter((decision) => decision.decision === "candidate-import").length,
+      rejectedImportCount: decisions.filter((decision) => decision.decision === "reject-import").length,
+      locallyValidatedItemCount: 0,
+      unresolvedApplicabilityCount: candidateItems.size,
+      unresolvedCounterexampleCount: candidateItems.size
+    };
+    for (const [field, value] of Object.entries(expected)) if (assessment[field] !== value) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    const sourceIntegrityStatus = items.every((item) => integrityByItem.get(item.id) === true) ? "verified" : "mismatch";
+    if (assessment.sourceIntegrityStatus !== sourceIntegrityStatus) errors.push(`${assessment.id} sourceIntegrityStatus must reproduce as ${sourceIntegrityStatus}.`);
+    const sourceUnverified = libraries.some((library) => library.trust?.status !== "verified");
+    const signals = [];
+    if (sourceUnverified) signals.push("source-unverified");
+    if (sourceIntegrityStatus === "mismatch") signals.push("integrity-mismatch");
+    if (expected.candidateImportCount > 0) signals.push("candidate-only");
+    if (expected.unresolvedApplicabilityCount > 0) signals.push("applicability-unvalidated");
+    if (expected.unresolvedCounterexampleCount > 0) signals.push("counterexample-unresolved");
+    if (!sourceUnverified && sourceIntegrityStatus === "verified" && expected.candidateImportCount > 0) signals.push("ready-for-local-validation");
+    if (!sameSet(assessment.assessmentSignals, signals)) errors.push(`${assessment.id} assessmentSignals must reproduce as ${signals.join(", ")}.`);
+    if (assessment.dataSufficiency !== "insufficient") errors.push(`${assessment.id} dataSufficiency must remain insufficient before local validation.`);
+    if (assessment.activityCountIsQuality !== false || assessment.automaticQualityVerdict !== false) errors.push(`${assessment.id} must not treat import counts as quality or make an automatic quality verdict.`);
+    const types = portableGovernanceTypes(assessment.governanceTriggerRefs, assessment.id);
+    if (!types.has("portable-assessment-insufficient")) errors.push(`${assessment.id} insufficient portable knowledge assessment requires a portable-assessment-insufficient governance trigger.`);
+  }
+
   const index = pkg.ledgerIndex;
   if (!index || typeof index !== "object") {
     errors.push(`${packagePath} must include ledgerIndex.`);
@@ -552,7 +684,7 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim ?? []).includes("semantic truth")) {
       errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
     }
-    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority"]) {
+    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution"]) {
       if (!(boundary.doesNotClaim ?? []).includes(claim)) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming ${claim}.`);
     }
   }
@@ -575,7 +707,13 @@ function validateLedgerPackage(pkg, packagePath) {
       judgmentMemoryRevisions: judgmentMemoryRevisions.length,
       judgmentRetirementDecisions: judgmentRetirementDecisions.length,
       multiAgentJudgmentJoins: multiAgentJudgmentJoins.length,
-      judgmentMemoryAssessments: judgmentMemoryAssessments.length
+      judgmentMemoryAssessments: judgmentMemoryAssessments.length,
+      portableKnowledgeImportPolicies: portableKnowledgeImportPolicies.length,
+      portableKnowledgeGovernanceTriggers: portableKnowledgeGovernanceTriggers.length,
+      portableKnowledgeLibraries: portableKnowledgeLibraries.length,
+      portableKnowledgeItems: portableKnowledgeItems.length,
+      portableKnowledgeImportDecisions: portableKnowledgeImportDecisions.length,
+      portableKnowledgeAssessments: portableKnowledgeAssessments.length
     }
   });
 }

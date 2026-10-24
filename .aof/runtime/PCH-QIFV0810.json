@@ -1,0 +1,22 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-24T04:29:56.183Z",
+  "project_charter_id": "PCH-MVLWH2DZ-U6PMUA",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0810.json",
+  "validated_objective": "Release the smallest standalone QIF slice that imports reusable quality knowledge as traceable, immutable, non-executable, non-authoritative candidates",
+  "scope": [
+    "qif-ledger portable library schema and example",
+    "source package identity, integrity digest, provenance, applicability boundaries, counterexamples, trust, import decision, assessment, and governance",
+    "deterministic verifier rules, retained negative fixtures, docs, AI guide, roadmap, portable package, and public release"
+  ],
+  "constraints": [
+    "do not activate imported knowledge or implement local applicability and reproduction before v0.8.2",
+    "do not treat imported content as agent instructions, semantic truth, local evidence, authorization, or authority"
+  ],
+  "expected_outcomes": [
+    "a source Decision Pattern and Quality Intent can be imported without losing source context or silently gaining active status",
+    "tampering, missing context, active status, executable instructions, hidden reasoning, or authority claims fail structural validation"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVLWFTLV-5D0PVB"
+}

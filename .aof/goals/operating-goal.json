@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "QIF needs a domain-general Living Ledger extension that preserves lane-local judgment, evidence provenance, dependency and dissent, append-only revision lineage, governed retirement, and bounded multi-agent join decisions.",
-  "updated_at": "2026-10-23T04:33:14.514Z",
+  "content": "Extend the standalone Living QIF Ledger with a minimal, executable candidate-only import contract for reusable Decision Patterns and Quality Intents that preserves source identity, content integrity, provenance, applicability boundaries, counterexamples, evidence and trust state, rejects executable imported instructions and hidden reasoning, and cannot activate or authorize imported knowledge before local validation.",
+  "updated_at": "2026-10-24T04:30:02.407Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVKH3Y7V-AYX3MB",
-  "source_decision_record_id": "DEC-MVKH5GR4-7JJ1HM",
+  "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
+  "source_decision_record_id": "DEC-MVLWH76S-AB3O9Z",
   "declared_complete_at": null
 }

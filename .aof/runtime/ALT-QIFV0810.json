@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-24T04:29:35.500Z",
+  "alternative_analysis_id": "ALT-MVLWGMFG-LDS1RJ",
+  "subject_need": "govern reusable quality-knowledge import without unsafe activation",
+  "alternative_solutions": [
+    "publish prose-only examples and rely on reviewer discipline",
+    "create a separate pattern-registry package type before testing ledger composition"
+  ],
+  "non_solution_options": [
+    "allow direct copy-paste into active local Quality Intents"
+  ],
+  "defer_options": [
+    "wait for v0.9 and combine import with anticipatory simulation"
+  ],
+  "stop_options": [
+    "do not implement if candidate-only and source-integrity boundaries cannot be deterministically verified"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

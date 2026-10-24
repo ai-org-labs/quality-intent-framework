@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-074",
+  "title": "Release QIF v0.8.1 Portable Pattern Library Import",
+  "description": "Extend qif-ledger with candidate-only portable quality-knowledge import policy, source package, imported knowledge record, integrity digest, import decision, assessment, governance, verifier rules, fixtures, docs, portable package, and public release.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MVLWFO6Y-21A2OJ",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MVLWH76S-AB3O9Z",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-10-24T04:30:05.625Z",
+  "updated_at": "2026-10-24T04:42:09.576Z",
+  "assigned_at": null,
+  "done_at": "2026-10-24T04:42:09.576Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented QIF v0.8.1 Portable Pattern Library Import with schema, verifier, example, 25 negative fixtures, open-risk visibility, documentation, roadmap, and portable package. npm test passed 16/16 and 1331/1331; review council completed with no veto."
+}

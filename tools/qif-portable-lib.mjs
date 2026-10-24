@@ -21,6 +21,7 @@ const CANONICAL_DOCS = [
   "docs/qif-v0.5.5-world-model-elicitation.md",
   "docs/qif-v0.6.0-action-quality-contract.md",
   "docs/qif-v0.8.0-multi-agent-judgment-memory.md",
+  "docs/qif-v0.8.1-portable-pattern-library-import.md",
   "docs/expert-judgment-framework.md"
 ];
 

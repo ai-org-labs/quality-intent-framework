@@ -1,8 +1,8 @@
 # Quality Intent Framework
 
-Current release: **v0.8.0**. The Living QIF Ledger now preserves lane-local
-human and AI judgments, shared dependencies, dissent, append-only revisions,
-governed retirement, and bounded multi-agent joins.
+Current release: **v0.8.1**. The Living QIF Ledger now imports reusable
+Decision Patterns and Quality Intents as exact, traceable, candidate-only
+knowledge that cannot silently become executable, active, or authoritative.
 
 Quality Intent Framework (QIF) turns an organization's quality theory into an operational, AI-verifiable framework.
 
@@ -32,7 +32,7 @@ decision authority.
 
 ## Current Baseline
 
-This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x AI-native authoring, action, evaluation, deployment, intervention, recovery, and portable-package runtime, the v0.7.x empirical calibration runtime, and the v0.8.0 Multi-Agent Judgment Memory runtime:
+This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 Discovery Layer design milestone, the v0.4.0 quality gate runtime baseline, the v0.4.x retained runtime fixture frontier, the v0.5.x Living QIF Ledger and World Model runtimes, the v0.6.x AI-native authoring, action, evaluation, deployment, intervention, recovery, and portable-package runtime, the v0.7.x empirical calibration runtime, and the v0.8.x Multi-Agent Judgment Memory and Portable Pattern Library runtime:
 
 - Human-readable framework specification: `docs/qif-operational-framework.md`
 - AI authoring guide: `docs/AI_AUTHORING_GUIDE.md`
@@ -86,6 +86,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.7.2 Missingness and Attrition Sensitivity: `docs/qif-v0.7.2-missingness-attrition-sensitivity.md`
 - QIF v0.7.3 Cross-Domain Transportability Review: `docs/qif-v0.7.3-cross-domain-transportability.md`
 - QIF v0.8.0 Multi-Agent Judgment Memory: `docs/qif-v0.8.0-multi-agent-judgment-memory.md`
+- QIF v0.8.1 Portable Pattern Library Import: `docs/qif-v0.8.1-portable-pattern-library-import.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`

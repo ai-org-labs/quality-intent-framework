@@ -1,0 +1,16 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-24T04:29:35.339Z",
+  "value_hypothesis_id": "VHY-MVLWGMAZ-QYJGXN",
+  "expected_value_creation": "teams can exchange quality knowledge cheaply while retaining enough context to challenge, reject, or locally validate it",
+  "beneficiary": "human reviewers, AI agents, hybrid organizations, and downstream governance owners",
+  "supporting_evidence": [
+    "cross-platform Agent Skills package reusable instructions and resources, while current QIF roadmap identifies foreign-pattern import as the next unimplemented loss boundary"
+  ],
+  "success_criteria": [
+    "imported patterns and intents preserve source, provenance, applicability boundaries, counterexamples, trust, and content identity",
+    "imports remain candidate-only, non-executable, and non-authoritative until local validation"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

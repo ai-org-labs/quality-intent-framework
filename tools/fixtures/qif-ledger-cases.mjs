@@ -38,6 +38,11 @@ function memoryRevision(pkg, id = "JMR-002") { return pkg.judgmentMemoryRevision
 function retirementDecision(pkg) { return pkg.judgmentRetirementDecisions[0]; }
 function memoryJoin(pkg) { return pkg.multiAgentJudgmentJoins[0]; }
 function memoryAssessment(pkg) { return pkg.judgmentMemoryAssessments[0]; }
+function portablePolicy(pkg) { return pkg.portableKnowledgeImportPolicies[0]; }
+function portableLibrary(pkg) { return pkg.portableKnowledgeLibraries[0]; }
+function portableItem(pkg, index = 0) { return pkg.portableKnowledgeItems[index]; }
+function portableDecision(pkg) { return pkg.portableKnowledgeImportDecisions[0]; }
+function portableAssessment(pkg) { return pkg.portableKnowledgeAssessments[0]; }
 
 export const cases = [
   {
@@ -321,6 +326,156 @@ export const cases = [
     rule: "verifier does not claim authority",
     expect: "verifierBoundary must explicitly avoid claiming authorization or authority.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "authorization or authority"); }
+  },
+  {
+    id: "portable-knowledge-policies-not-array",
+    rule: "portable import policies are retained",
+    expect: "portableKnowledgeImportPolicies must be an array.",
+    mutate: (pkg) => { pkg.portableKnowledgeImportPolicies = null; }
+  },
+  {
+    id: "portable-knowledge-policy-boundary",
+    rule: "portable import policy forbids activation and authority",
+    expect: "must forbid executable imported instructions, hidden reasoning, automatic activation, and automatic authority.",
+    mutate: (pkg) => { portablePolicy(pkg).automaticActivation = true; }
+  },
+  {
+    id: "portable-knowledge-source-missing",
+    rule: "portable item source resolves",
+    expect: "PKI-001/sourceEntity references missing entity",
+    mutate: (pkg) => { portableItem(pkg).sourceEntity.entityRef = "PAT-NOPE-999"; }
+  },
+  {
+    id: "portable-knowledge-snapshot-mismatch",
+    rule: "portable snapshot exactly preserves source",
+    expect: "PKI-001 sourceSnapshot must exactly reproduce the resolved source entity.",
+    mutate: (pkg) => { portableItem(pkg).sourceSnapshot.title = "Silently changed title"; }
+  },
+  {
+    id: "portable-knowledge-digest-mismatch",
+    rule: "portable source digest reproduces",
+    expect: "PKI-001 sourceDigest must reproduce the canonical source entity digest",
+    mutate: (pkg) => { portableItem(pkg).sourceDigest = `sha256:${"0".repeat(64)}`; }
+  },
+  {
+    id: "portable-knowledge-type-mismatch",
+    rule: "knowledge type matches source collection",
+    expect: "PKI-001 knowledgeType quality-intent requires source entityType qualityIntents.",
+    mutate: (pkg) => { portableItem(pkg).knowledgeType = "quality-intent"; }
+  },
+  {
+    id: "portable-knowledge-counterexamples-required",
+    rule: "portable items preserve counterexample challenges",
+    expect: "PKI-001 counterexamples must include at least one concrete challenge.",
+    mutate: (pkg) => { portableItem(pkg).counterexamples = []; }
+  },
+  {
+    id: "portable-knowledge-instruction-boundary",
+    rule: "portable items are not executable instructions",
+    expect: "PKI-001 must remain reference data only and must not store hidden reasoning.",
+    mutate: (pkg) => { portableItem(pkg).instructionBoundary = "execute-as-agent-instructions"; }
+  },
+  {
+    id: "portable-knowledge-hidden-reasoning",
+    rule: "portable items exclude hidden reasoning",
+    expect: "PKI-001 must remain reference data only and must not store hidden reasoning.",
+    mutate: (pkg) => { portableItem(pkg).hiddenReasoningStored = true; }
+  },
+  {
+    id: "portable-knowledge-evidence-required",
+    rule: "portable items retain evidence refs",
+    expect: "PKI-001 evidenceRefs must include source evidence.",
+    mutate: (pkg) => { portableItem(pkg).evidenceRefs = []; }
+  },
+  {
+    id: "portable-library-item-list",
+    rule: "library item index is exact",
+    expect: "PKL-001 itemRefs must exactly list items owned by the library.",
+    mutate: (pkg) => { portableLibrary(pkg).itemRefs = ["PKI-001"]; }
+  },
+  {
+    id: "portable-library-digest",
+    rule: "library digest reproduces",
+    expect: "PKL-001 libraryDigest must reproduce as",
+    mutate: (pkg) => { portableLibrary(pkg).libraryDigest = `sha256:${"f".repeat(64)}`; }
+  },
+  {
+    id: "portable-library-trust-source",
+    rule: "library trust sources resolve",
+    expect: "PKL-001 trust references missing source package PKG-NOPE-999.",
+    mutate: (pkg) => { portableLibrary(pkg).trust.sources = ["PKG-NOPE-999"]; }
+  },
+  {
+    id: "portable-import-candidate-only",
+    rule: "imported knowledge stays candidate-only",
+    expect: "PKD-001 imported knowledge must remain candidate-only, non-executable, non-activating, and non-authoritative.",
+    mutate: (pkg) => { portableDecision(pkg).importedStatus = "active"; }
+  },
+  {
+    id: "portable-import-digest-reproduction",
+    rule: "import decision reproduces digest verification",
+    expect: "PKD-001 sourceDigestVerified must reproduce as true.",
+    mutate: (pkg) => { portableDecision(pkg).sourceDigestVerified = false; }
+  },
+  {
+    id: "portable-import-provenance",
+    rule: "import preserves provenance",
+    expect: "PKD-001 provenancePreserved must be true.",
+    mutate: (pkg) => { portableDecision(pkg).provenancePreserved = false; }
+  },
+  {
+    id: "portable-import-source-trigger",
+    rule: "unverified source trust routes governance",
+    expect: "PKD-001 unverified source trust requires a portable-source-unverified governance trigger.",
+    mutate: (pkg) => { portableDecision(pkg).governanceTriggerRefs = ["PKGTR-002", "PKGTR-003"]; }
+  },
+  {
+    id: "portable-import-applicability-trigger",
+    rule: "candidate imports route applicability governance",
+    expect: "PKD-001 candidate import requires a portable-applicability-unvalidated governance trigger.",
+    mutate: (pkg) => { portableDecision(pkg).governanceTriggerRefs = ["PKGTR-001", "PKGTR-003"]; }
+  },
+  {
+    id: "portable-import-counterexample-trigger",
+    rule: "candidate imports route counterexample governance",
+    expect: "PKD-001 candidate import requires a portable-counterexample-unresolved governance trigger.",
+    mutate: (pkg) => { portableDecision(pkg).governanceTriggerRefs = ["PKGTR-001", "PKGTR-002"]; }
+  },
+  {
+    id: "portable-import-governance-status",
+    rule: "candidate imports require governance",
+    expect: "PKD-001 candidate import must have status governance-required until local validation.",
+    mutate: (pkg) => { portableDecision(pkg).status = "reviewed"; }
+  },
+  {
+    id: "portable-assessment-count",
+    rule: "portable assessment counts reproduce",
+    expect: "PKA-001 itemCount must reproduce as 2.",
+    mutate: (pkg) => { portableAssessment(pkg).itemCount = 1; }
+  },
+  {
+    id: "portable-assessment-signals",
+    rule: "portable assessment signals reproduce",
+    expect: "PKA-001 assessmentSignals must reproduce as",
+    mutate: (pkg) => { portableAssessment(pkg).assessmentSignals = ["candidate-only"]; }
+  },
+  {
+    id: "portable-assessment-sufficiency",
+    rule: "portable assessment remains insufficient",
+    expect: "PKA-001 dataSufficiency must remain insufficient before local validation.",
+    mutate: (pkg) => { portableAssessment(pkg).dataSufficiency = "sufficient"; }
+  },
+  {
+    id: "portable-assessment-trigger",
+    rule: "insufficient portable assessment routes governance",
+    expect: "PKA-001 insufficient portable knowledge assessment requires a portable-assessment-insufficient governance trigger.",
+    mutate: (pkg) => { portableAssessment(pkg).governanceTriggerRefs = ["PKGTR-001", "PKGTR-002", "PKGTR-003"]; }
+  },
+  {
+    id: "portable-verifier-local-validity-boundary",
+    rule: "verifier does not claim imported applicability",
+    expect: "verifierBoundary must explicitly avoid claiming imported knowledge applicability or local validity.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "imported knowledge applicability or local validity"); }
   }
 ];
 

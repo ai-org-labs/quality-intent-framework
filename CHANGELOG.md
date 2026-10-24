@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.8.1
+
+- Added executable portable quality-knowledge import policies, governance triggers, versioned libraries, exact source items, candidate-only import decisions, and aggregate assessments to the Living QIF Ledger.
+- Preserved each source Decision Pattern or Quality Intent as an exact snapshot with a reproducible canonical SHA-256 digest, provenance, applicability boundary, counterexamples, evidence, and trust metadata.
+- Enforced that imported knowledge remains candidate-only, non-executable, non-activating, and non-authoritative until target-specific local validation.
+- Extended `qif open-risks` and added 25 retained negative fixtures covering source resolution, snapshot and digest integrity, type consistency, trust, candidate status, governance, assessment, and verifier boundaries.
+- Kept the committed library example-only and insufficient; digest validity does not prove source authenticity, licensing, semantic truth, local applicability, safe execution, authorization, or authority.
+
 ## v0.8.0
 
 - Extended the Living QIF Ledger with executable judgment memory policies, lane-local memory entries, dependency disclosures, append-only revisions, governed retirement decisions, multi-agent joins, assessments, and memory-specific governance triggers.

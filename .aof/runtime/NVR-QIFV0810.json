@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-24T04:29:42.373Z",
+  "validation_id": "NVR-MVLWGRQD-MNF0JU",
+  "raw_need": "Add Portable Pattern Library Import to QIF",
+  "validation_status": "validated",
+  "validated_need": "Extend the standalone Living QIF Ledger with a minimal, executable candidate-only import contract for reusable Decision Patterns and Quality Intents that preserves source identity, content integrity, provenance, applicability boundaries, counterexamples, evidence and trust state, rejects executable imported instructions and hidden reasoning, and cannot activate or authorize imported knowledge before local validation.",
+  "decision_summary": "The roadmap item is valid, but it is narrowed to safe import and auditability; local applicability and reproduction remain v0.8.2 so v0.8.1 cannot overclaim reuse.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What remains in scope?",
+      "answer": "qif-ledger import policy, source package, imported knowledge records, integrity digest, import decision, assessment, governance, verifier, examples, fixtures, docs, portable release",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What is non-negotiable?",
+      "answer": "candidate-only status, original source preservation, non-executable content, no hidden reasoning, no authority, no local activation without future local validation",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "portability was assumed to imply applicability, but a portable artifact can still be semantically foreign or unsafe in the target context"
+  ],
+  "evidence_gaps": [
+    "no independently verified cross-organization import corpus exists; committed evidence must remain example-only"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0810.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0810.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0810.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": ".aof/runtime/PCH-QIFV0810.json",
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVLWFTLV-5D0PVB"
+}

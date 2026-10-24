@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-23T04:50:55.706Z",
+  "updated_at": "2026-10-24T04:42:09.396Z",
   "entries": [
     {
-      "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
-      "answer": "Scope: extend the standalone qif-ledger schema, example, verifier, retained negative fixtures, documentation, AI guide, roadmap, portable package, changelog, and release. Out of scope: UI, external integrations, provider-specific memory stores, employee surveillance, automatic authority, and real operational claims.",
-      "recorded_at": "2026-10-23T04:32:14.573Z",
+      "question": "How should improvement success be judged: which metric or end state matters most?",
+      "answer": "Success means an imported pattern/intent library preserves exact source identity, provenance, applicability boundaries, counterexamples, evidence/trust state, and immutable source payload; every import remains candidate-only and non-authoritative; any attempt to activate, silently alter, omit required source context, or treat imported instructions as executable is rejected by retained verifier fixtures.",
+      "recorded_at": "2026-10-24T04:28:58.150Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVKH3Y7V-AYX3MB",
+      "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "Proceed with the smallest v0.8.0 executable slice inside qif-ledger: policy, memory entry, dependency disclosure, revision, retirement decision, judgment join, assessment, governance, verifier, example, fixtures, documentation, portable package, and release.",
-      "recorded_at": "2026-10-23T04:33:14.515Z",
+      "answer": "The roadmap item is valid, but it is narrowed to safe import and auditability; local applicability and reproduction remain v0.8.2 so v0.8.1 cannot overclaim reuse.",
+      "recorded_at": "2026-10-24T04:30:02.408Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVKH3Y7V-AYX3MB",
-      "source_decision_record_id": "DEC-MVKH5GR4-7JJ1HM"
+      "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
+      "source_decision_record_id": "DEC-MVLWH76S-AB3O9Z"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "No independently verified operational multi-agent memory corpus or cross-domain imported pattern validation is committed, so semantic correctness, real independence, organizational learning benefit, and safe reuse remain unestablished.",
-      "recorded_at": "2026-10-23T04:50:55.706Z",
-      "expectation_state": "Living Ledger judgment memory policy, lane-local entries, dependency disclosure, append-only revisions, non-destructive retirement, exact dissent-preserving joins, assessment, governance, documentation, fixtures, and portable validation are complete; committed evidence remains example-only and insufficient.",
-      "mismatch_state": "No independently verified operational multi-agent memory corpus or cross-domain imported pattern validation is committed, so semantic correctness, real independence, organizational learning benefit, and safe reuse remain unestablished.",
-      "scale_direction": "Implement v0.8.1 Portable Pattern Library Import with provenance, applicability boundaries, counterexamples, and candidate-only import state.",
-      "source_session_id": "SESS-MVKH3Y7V-AYX3MB",
-      "source_decision_record_id": "DEC-MVKH5GR4-7JJ1HM"
+      "answer": "Imported knowledge has not been tested against target-specific cases, loss boundaries, stakeholder context, or unseen counterexamples, so local applicability and reproduction remain unestablished.",
+      "recorded_at": "2026-10-24T04:42:09.396Z",
+      "expectation_state": "Portable quality-knowledge policies, exact source snapshots, canonical digests, provenance, applicability boundaries, counterexamples, trust metadata, candidate-only decisions, governance, documentation, retained fixtures, and portable validation are complete; committed evidence remains example-only and insufficient.",
+      "mismatch_state": "Imported knowledge has not been tested against target-specific cases, loss boundaries, stakeholder context, or unseen counterexamples, so local applicability and reproduction remain unestablished.",
+      "scale_direction": "Implement v0.8.2 Local Applicability and Reproduction with target-specific cases, applicability decisions, reproduction evidence, activation gates, and governed rejection.",
+      "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
+      "source_decision_record_id": "DEC-MVLWH76S-AB3O9Z"
     }
   ]
 }

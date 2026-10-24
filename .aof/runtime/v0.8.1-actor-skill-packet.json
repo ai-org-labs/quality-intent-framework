@@ -1,0 +1,81 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-24T04:30:28.120Z",
+  "packet_id": "ASP-MVLWHR14-OP1H4K",
+  "source_task_id": "TASK-074",
+  "source_parent_session_id": "SESS-MVLWFO6Y-21A2OJ",
+  "source_decision_record_id": "DEC-MVLWH76S-AB3O9Z",
+  "objective": "Implement and verify QIF v0.8.1 Portable Pattern Library Import",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "builder",
+    "team_ref": "integration-team",
+    "assignment_reason": "Builder owns the smallest executable qif-ledger extension and Guardian-verifiable fixture surface",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "qif-schema-verifier-release"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "domain-general-schema-and-verifier-design",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/qif-ledger-package.schema.json",
+        "tools/validate-qif-ledger.mjs",
+        "tests/fixtures/qif-ledger/manifest.json"
+      ],
+      "rationale": "existing qif-ledger extension pattern and retained fixture generator directly support this slice"
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository"
+  ],
+  "policy_refs": [
+    "policy-candidate-only-portable-import"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/qif-ledger-package.schema.json",
+    "required_sections": [
+      "portable library source and import entities",
+      "candidate-only authority and instruction boundaries"
+    ],
+    "acceptance_criteria": [
+      "npm test passes all positive and retained negative fixtures",
+      "portable package verifies and public release assets match v0.8.1"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "import cannot silently activate or authorize foreign knowledge",
+      "evaluator_ref": "guardian",
+      "evidence_required": "negative fixtures and verifier rules",
+      "blocking": true
+    },
+    {
+      "criterion": "provenance, applicability boundary, counterexample, trust, and source integrity remain traceable",
+      "evaluator_ref": "builder",
+      "evidence_required": "schema, example, and validator",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "unsafe-import-activation",
+      "trigger_condition": "imported knowledge can become active, executable, or authoritative before local validation",
+      "consequence": "block-assignment",
+      "recovery_action": "enforce candidate-only decision and retained rejecting fixture"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "Portable does not mean locally valid.",
+    "current_action": "Implement candidate-only import contract",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Run Guardian review and full release validation"
+  },
+  "status": "draft"
+}

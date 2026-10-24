@@ -826,7 +826,7 @@ function entitySummary(entity) {
 function openRisks(files) {
   const { entities, warnings } = collectRiskCarriers(files);
   const governanceTriggers = entities
-    .filter((entity) => ["governanceTriggers", "judgmentMemoryGovernanceTriggers"].includes(entity.collection) && !isClosedStatus(entity.entity.status))
+    .filter((entity) => ["governanceTriggers", "judgmentMemoryGovernanceTriggers", "portableKnowledgeGovernanceTriggers"].includes(entity.collection) && !isClosedStatus(entity.entity.status))
     .map((entity) => ({
       ...entitySummary(entity),
       triggerType: entity.entity.triggerType || entity.entity.type || "unspecified",

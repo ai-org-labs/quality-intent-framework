@@ -1,6 +1,6 @@
 {
   "packageType": "qif-ledger",
-  "runtimeVersion": "0.8.0",
+  "runtimeVersion": "0.8.1",
   "packageId": "LEDGERPKG-001",
   "packageRefs": [
     {
@@ -678,6 +678,238 @@
       "status": "reviewed"
     }
   ],
+  "portableKnowledgeImportPolicies": [
+    {
+      "id": "PKP-001",
+      "allowedKnowledgeTypes": [
+        "decision-pattern",
+        "quality-intent"
+      ],
+      "preserveSourceIdentity": true,
+      "requireContentDigest": true,
+      "requireApplicabilityBoundary": true,
+      "requireCounterexamples": true,
+      "importedInstructionsExecutable": false,
+      "hiddenReasoningAllowed": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "status": "active"
+    }
+  ],
+  "portableKnowledgeGovernanceTriggers": [
+    {
+      "id": "PKGTR-001",
+      "triggerType": "portable-source-unverified",
+      "reason": "The portable library is generated from committed examples and has no independently verified operational source evidence.",
+      "severity": "high",
+      "requiredAction": "Verify source ownership, origin, and evidence before local use.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-002",
+      "triggerType": "portable-applicability-unvalidated",
+      "reason": "Neither imported item has been tested against the target organization's context, stakeholders, or loss boundaries.",
+      "severity": "high",
+      "requiredAction": "Run target-specific applicability decisions before activation.",
+      "owner": "local-quality-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-003",
+      "triggerType": "portable-counterexample-unresolved",
+      "reason": "Source counterexamples are preserved but have not been reproduced or resolved in the target context.",
+      "severity": "medium",
+      "requiredAction": "Test the imported knowledge against local counterexamples and exceptions.",
+      "owner": "local-quality-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-004",
+      "triggerType": "portable-assessment-insufficient",
+      "reason": "Candidate-only imported knowledge lacks local applicability and reproduction evidence.",
+      "severity": "high",
+      "requiredAction": "Keep imported knowledge candidate-only and route local validation through governance.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    }
+  ],
+  "portableKnowledgeLibraries": [
+    {
+      "id": "PKL-001",
+      "policyRef": "PKP-001",
+      "name": "QIF Example Evidence and Tacit Judgment Library",
+      "version": "0.8.1-example",
+      "publisherRef": "QIF example publisher",
+      "itemRefs": [
+        "PKI-001",
+        "PKI-002"
+      ],
+      "libraryDigest": "sha256:192aa6aecdbeb7e3876930458f142186a6cd0838a810426425a1e04707eb56a4",
+      "license": "repository license applies",
+      "publishedAt": "2026-10-24T00:00:00.000Z",
+      "evidenceOriginRef": "EOR-LEDGER-001",
+      "trust": {
+        "sources": [
+          "PKG-DISCOVERY"
+        ],
+        "generatedBy": "QIF v0.8.1 example author",
+        "verifiedBy": [
+          "QIF local digest verifier"
+        ],
+        "status": "draft",
+        "staleAfter": "2027-01-24T00:00:00.000Z"
+      },
+      "status": "published"
+    }
+  ],
+  "portableKnowledgeItems": [
+    {
+      "id": "PKI-001",
+      "libraryRef": "PKL-001",
+      "knowledgeType": "decision-pattern",
+      "sourceEntity": {
+        "packageRef": "PKG-DISCOVERY",
+        "entityType": "decisionPatterns",
+        "entityRef": "PAT-DS-001"
+      },
+      "sourceSnapshot": {
+        "id": "PAT-DS-001",
+        "title": "Missing protective evidence blocks acceptance even when surrounding signals are positive",
+        "sourceJudgmentRefs": [
+          "JDG-DS-001",
+          "JDG-DS-002"
+        ],
+        "typicalDecision": "unacceptable",
+        "confidence": 0.84
+      },
+      "sourceDigest": "sha256:2b724cd432c28cc9a4f2892b5cb1241dbdeac5f66db467ca399b63b615872c78",
+      "provenanceSummary": "Copied exactly from the expert-judgment example with its source judgments, concern, loss boundary, counterexample, and reproduction-test references intact.",
+      "applicabilityBoundary": "Candidate for contexts where a decision depends on missing, stale, or bypassed critical evidence; not yet validated in the importing organization.",
+      "counterexamples": [
+        "Healthy surrounding metrics do not make missing gated evidence acceptable.",
+        "A documented waiver may change the decision only when local authority and compensating controls are verified."
+      ],
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "expertJudgments",
+          "entityRef": "JDG-DS-001"
+        }
+      ],
+      "instructionBoundary": "reference-data-only-not-executable-agent-instructions",
+      "hiddenReasoningStored": false,
+      "status": "published"
+    },
+    {
+      "id": "PKI-002",
+      "libraryRef": "PKL-001",
+      "knowledgeType": "quality-intent",
+      "sourceEntity": {
+        "packageRef": "PKG-DISCOVERY",
+        "entityType": "qualityIntents",
+        "entityRef": "QIN-DS-001"
+      },
+      "sourceSnapshot": {
+        "id": "QIN-DS-001",
+        "statement": "Boundary-protective decisions must include evidence close enough to the protected harm to make acceptance reproducible.",
+        "lossBoundaryRefs": [
+          "LSB-DS-001",
+          "LSB-DS-002"
+        ],
+        "status": "candidate"
+      },
+      "sourceDigest": "sha256:c59f3490c7ca84f3d32b8c7c2967e6de0b7ec60fea999a76c30bad2c3f12a28e",
+      "provenanceSummary": "Copied exactly from the discovery-session example; the source candidate status is preserved as source data and remains candidate in the importer.",
+      "applicabilityBoundary": "Candidate for organizations preserving veteran judgment; target stakeholders, terminology, privacy, and reproduction conditions remain unvalidated.",
+      "counterexamples": [
+        "A generic advice document without cases and cues does not satisfy this intent.",
+        "A source intent marked active does not become active in the importing organization."
+      ],
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "lossBoundaries",
+          "entityRef": "LSB-DS-001"
+        }
+      ],
+      "instructionBoundary": "reference-data-only-not-executable-agent-instructions",
+      "hiddenReasoningStored": false,
+      "status": "published"
+    }
+  ],
+  "portableKnowledgeImportDecisions": [
+    {
+      "id": "PKD-001",
+      "policyRef": "PKP-001",
+      "libraryRef": "PKL-001",
+      "importedItemRefs": [
+        "PKI-001",
+        "PKI-002"
+      ],
+      "targetContext": "Illustrative cross-domain hybrid organization preparing local applicability and reproduction work.",
+      "decision": "candidate-import",
+      "rationale": "Preserve the foreign knowledge for local challenge without activating it, executing it as instructions, or treating source confidence and status as local truth.",
+      "sourceDigestVerified": true,
+      "provenancePreserved": true,
+      "localValidationStatus": "not-started",
+      "importedStatus": "candidate",
+      "executable": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "governanceTriggerRefs": [
+        "PKGTR-001",
+        "PKGTR-002",
+        "PKGTR-003"
+      ],
+      "decidedBy": "portable-knowledge-governance-owner",
+      "decidedAt": "2026-10-24T00:10:00.000Z",
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeAssessments": [
+    {
+      "id": "PKA-001",
+      "policyRef": "PKP-001",
+      "libraryRefs": [
+        "PKL-001"
+      ],
+      "itemRefs": [
+        "PKI-001",
+        "PKI-002"
+      ],
+      "importDecisionRefs": [
+        "PKD-001"
+      ],
+      "libraryCount": 1,
+      "itemCount": 2,
+      "candidateImportCount": 1,
+      "rejectedImportCount": 0,
+      "locallyValidatedItemCount": 0,
+      "unresolvedApplicabilityCount": 2,
+      "unresolvedCounterexampleCount": 2,
+      "sourceIntegrityStatus": "verified",
+      "dataSufficiency": "insufficient",
+      "assessmentSignals": [
+        "source-unverified",
+        "candidate-only",
+        "applicability-unvalidated",
+        "counterexample-unresolved"
+      ],
+      "activityCountIsQuality": false,
+      "automaticQualityVerdict": false,
+      "governanceTriggerRefs": [
+        "PKGTR-001",
+        "PKGTR-002",
+        "PKGTR-003",
+        "PKGTR-004"
+      ],
+      "reviewedBy": [
+        "portable-knowledge-governance-owner"
+      ],
+      "status": "reviewed"
+    }
+  ],
   "ledgerIndex": {
     "activeQualityIntentRefs": [
       {
@@ -730,8 +962,8 @@
         "entityRef": "CALRUN-WMC-001"
       }
     ],
-    "lastUpdated": "2026-10-23",
-    "summary": "Living Ledger index plus multi-agent judgment memory with preserved dissent, dependency disclosure, append-only revision, governed retirement, and bounded join evidence."
+    "lastUpdated": "2026-10-24",
+    "summary": "Living Ledger index plus multi-agent judgment memory and candidate-only portable quality-knowledge import with exact source snapshots, integrity digests, applicability boundaries, counterexamples, trust, and authority limits."
   },
   "verifierBoundary": {
     "checks": [
@@ -743,7 +975,9 @@
       "judgment memory policy and source linkage",
       "dependency disclosure and revision lineage",
       "governed retirement without destructive deletion",
-      "multi-agent join and assessment reproduction"
+      "multi-agent join and assessment reproduction",
+      "portable library source integrity and exact snapshot reproduction",
+      "candidate-only import, applicability, counterexample, trust, and governance boundaries"
     ],
     "doesNotClaim": [
       "expert correctness"
@@ -752,7 +986,9 @@
       "expert review",
       "operational feedback",
       "governance decision",
-      "pilot calibration"
+      "pilot calibration",
+      "target-specific applicability decision",
+      "local reproduction testing"
     ]
   }
 }
