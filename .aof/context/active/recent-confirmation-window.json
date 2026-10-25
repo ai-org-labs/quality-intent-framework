@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-24T04:42:09.396Z",
+  "updated_at": "2026-10-25T04:45:53.881Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means an imported pattern/intent library preserves exact source identity, provenance, applicability boundaries, counterexamples, evidence/trust state, and immutable source payload; every import remains candidate-only and non-authoritative; any attempt to activate, silently alter, omit required source context, or treat imported instructions as executable is rejected by retained verifier fixtures.",
-      "recorded_at": "2026-10-24T04:28:58.150Z",
+      "answer": "Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+      "recorded_at": "2026-10-25T04:34:05.192Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
+      "source_session_id": "SESS-MVNC25GX-0OT8F3",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The roadmap item is valid, but it is narrowed to safe import and auditability; local applicability and reproduction remain v0.8.2 so v0.8.1 cannot overclaim reuse.",
-      "recorded_at": "2026-10-24T04:30:02.408Z",
+      "answer": "The need is not generic import convenience; it is an evidence-backed boundary between portable candidate knowledge and local eligibility for governed use.",
+      "recorded_at": "2026-10-25T04:34:46.341Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
-      "source_decision_record_id": "DEC-MVLWH76S-AB3O9Z"
+      "source_session_id": "SESS-MVNC25GX-0OT8F3",
+      "source_decision_record_id": "DEC-MVNC34XU-54RVX6"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Imported knowledge has not been tested against target-specific cases, loss boundaries, stakeholder context, or unseen counterexamples, so local applicability and reproduction remain unestablished.",
-      "recorded_at": "2026-10-24T04:42:09.396Z",
-      "expectation_state": "Portable quality-knowledge policies, exact source snapshots, canonical digests, provenance, applicability boundaries, counterexamples, trust metadata, candidate-only decisions, governance, documentation, retained fixtures, and portable validation are complete; committed evidence remains example-only and insufficient.",
-      "mismatch_state": "Imported knowledge has not been tested against target-specific cases, loss boundaries, stakeholder context, or unseen counterexamples, so local applicability and reproduction remain unestablished.",
-      "scale_direction": "Implement v0.8.2 Local Applicability and Reproduction with target-specific cases, applicability decisions, reproduction evidence, activation gates, and governed rejection.",
-      "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
-      "source_decision_record_id": "DEC-MVLWH76S-AB3O9Z"
+      "answer": "Committed source trust and reproduction evidence remain example-only; supply-chain revocation is deferred to v0.8.3.",
+      "recorded_at": "2026-10-25T04:45:53.881Z",
+      "expectation_state": "Schemas, examples, verifier arithmetic, governance routing, negative fixtures, and portable documentation preserve candidate-only and non-authority boundaries.",
+      "mismatch_state": "Committed source trust and reproduction evidence remain example-only; supply-chain revocation is deferred to v0.8.3.",
+      "scale_direction": "Release v0.8.2, then model revocation and transitive invalidation in v0.8.3.",
+      "source_session_id": null,
+      "source_decision_record_id": null
     }
   ]
 }

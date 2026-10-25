@@ -1,0 +1,12 @@
+{
+  "artifact_type": "experiment-proposal",
+  "recorded_at": "2026-10-25T04:34:24.071Z",
+  "experiment_proposal_id": "EXP-MVNC2NRB-71AN9H",
+  "assumption_to_test": "explicit target fit plus unseen-case reproduction can make activation eligibility auditable without granting authority",
+  "smallest_testable_validation": "extend the existing qif-ledger example with one local target, per-item applicability decisions, unseen cases, reproduction trials, and an assessment that remains insufficient when source trust is draft",
+  "expected_learning": "whether the verifier can distinguish tested local fit from semantic truth and automatic activation",
+  "expected_cost": "one bounded schema, verifier, fixture, documentation, and release slice",
+  "success_threshold": "all positive tests and retained negative fixtures pass while missing context, evidence, independence, counterexample resolution, or agreement fails",
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

@@ -253,6 +253,10 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeItems = requireArray(pkg, "portableKnowledgeItems", packagePath);
   const portableKnowledgeImportDecisions = requireArray(pkg, "portableKnowledgeImportDecisions", packagePath);
   const portableKnowledgeAssessments = requireArray(pkg, "portableKnowledgeAssessments", packagePath);
+  const portableKnowledgeLocalValidationPolicies = requireArray(pkg, "portableKnowledgeLocalValidationPolicies", packagePath);
+  const portableKnowledgeApplicabilityDecisions = requireArray(pkg, "portableKnowledgeApplicabilityDecisions", packagePath);
+  const portableKnowledgeReproductionTrials = requireArray(pkg, "portableKnowledgeReproductionTrials", packagePath);
+  const portableKnowledgeLocalValidationAssessments = requireArray(pkg, "portableKnowledgeLocalValidationAssessments", packagePath);
   const packageRefIndex = indexById(packageRefs, `${packagePath}:packageRefs`);
   const crossPackageRefIndex = indexById(crossPackageRefs, `${packagePath}:crossPackageRefs`);
   const lifecycleIndex = indexById(lifecycleRecords, `${packagePath}:qualityIntentLifecycleRecords`);
@@ -272,6 +276,9 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeLibraryIndex = indexById(portableKnowledgeLibraries, `${packagePath}:portableKnowledgeLibraries`);
   const portableKnowledgeItemIndex = indexById(portableKnowledgeItems, `${packagePath}:portableKnowledgeItems`);
   const portableKnowledgeImportDecisionIndex = indexById(portableKnowledgeImportDecisions, `${packagePath}:portableKnowledgeImportDecisions`);
+  const portableKnowledgeLocalValidationPolicyIndex = indexById(portableKnowledgeLocalValidationPolicies, `${packagePath}:portableKnowledgeLocalValidationPolicies`);
+  const portableKnowledgeApplicabilityDecisionIndex = indexById(portableKnowledgeApplicabilityDecisions, `${packagePath}:portableKnowledgeApplicabilityDecisions`);
+  const portableKnowledgeReproductionTrialIndex = indexById(portableKnowledgeReproductionTrials, `${packagePath}:portableKnowledgeReproductionTrials`);
   void crossPackageRefIndex;
   void missedIntentIndex;
 
@@ -293,8 +300,9 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!referenced) {
       continue;
     }
-    if (referenced.packageType !== ref.packageType) {
-      errors.push(`${ref.id} expected packageType ${ref.packageType} but found ${referenced.packageType}.`);
+    const referencedPackageType = referenced.packageType ?? (typeof referenced.frameworkVersion === "string" && Array.isArray(referenced.expertJudgments) && Array.isArray(referenced.decisionPatterns) ? "expert-judgment" : undefined);
+    if (referencedPackageType !== ref.packageType) {
+      errors.push(`${ref.id} expected packageType ${ref.packageType} but found ${referencedPackageType}.`);
     }
     packageIndex.set(ref.id, {
       ref,
@@ -653,6 +661,130 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!types.has("portable-assessment-insufficient")) errors.push(`${assessment.id} insufficient portable knowledge assessment requires a portable-assessment-insufficient governance trigger.`);
   }
 
+  const requiredApplicabilityDimensions = ["context", "stakeholder-impact", "risk", "domain", "loss-boundary", "artifact-type", "operational-impact"];
+  for (const policy of portableKnowledgeLocalValidationPolicies) {
+    if (!sameSet(policy.requiredApplicabilityDimensions, requiredApplicabilityDimensions)) errors.push(`${policy.id} requiredApplicabilityDimensions must include all seven local target dimensions exactly once.`);
+    if (!Number.isInteger(policy.minimumUnseenCases) || policy.minimumUnseenCases < 1) errors.push(`${policy.id} minimumUnseenCases must be a positive integer.`);
+    if (typeof policy.minimumAgreement !== "number" || policy.minimumAgreement < 0 || policy.minimumAgreement > 1) errors.push(`${policy.id} minimumAgreement must be between 0 and 1.`);
+    if (policy.requireIndependentEvaluator !== true || policy.requireCounterexampleChallenge !== true || policy.requireVerifiedSource !== true || policy.requireVerifiedEvidence !== true) errors.push(`${policy.id} must require independent evaluation, counterexample challenge, verified source, and verified evidence.`);
+    if (policy.automaticActivation !== false || policy.automaticAuthority !== false || policy.semanticTruthClaimed !== false) errors.push(`${policy.id} must forbid automatic activation, automatic authority, and semantic truth claims.`);
+  }
+
+  for (const decision of portableKnowledgeApplicabilityDecisions) {
+    const policy = portableKnowledgeLocalValidationPolicyIndex.get(decision.policyRef);
+    if (!policy) errors.push(`${decision.id} references missing local validation policy ${decision.policyRef}.`);
+    if (!portableKnowledgeItemIndex.has(decision.itemRef)) errors.push(`${decision.id} references missing portable knowledge item ${decision.itemRef}.`);
+    resolveEntity(decision.targetRef, packageIndex, `${decision.id}/targetRef`);
+    if (decision.targetRef?.entityType !== "evaluationTargets") errors.push(`${decision.id} targetRef must reference evaluationTargets.`);
+    if (!sameSet(decision.evaluatedDimensions, policy?.requiredApplicabilityDimensions ?? requiredApplicabilityDimensions)) errors.push(`${decision.id} evaluatedDimensions must reproduce the policy dimensions exactly once.`);
+    if (!Array.isArray(decision.matches) || decision.matches.length === 0) errors.push(`${decision.id} matches must include at least one concrete local match.`);
+    for (const evidenceRef of decision.evidenceRefs ?? []) resolveEntity(evidenceRef, packageIndex, `${decision.id}/evidenceRef`);
+    const mismatch = (decision.mismatches ?? []).length > 0;
+    const types = portableGovernanceTypes(decision.governanceTriggerRefs, decision.id);
+    if (decision.decision === "applicable" && mismatch) errors.push(`${decision.id} cannot be applicable while context mismatches remain.`);
+    if ((decision.decision !== "applicable" || mismatch) && !types.has("portable-local-target-mismatch")) errors.push(`${decision.id} local mismatch or non-applicable decision requires a portable-local-target-mismatch governance trigger.`);
+    if ((decision.decision !== "applicable" || mismatch) && decision.status !== "governance-required") errors.push(`${decision.id} local mismatch or non-applicable decision must require governance.`);
+  }
+
+  const trialState = new Map();
+  for (const trial of portableKnowledgeReproductionTrials) {
+    const policy = portableKnowledgeLocalValidationPolicyIndex.get(trial.policyRef);
+    const item = portableKnowledgeItemIndex.get(trial.itemRef);
+    const decision = portableKnowledgeApplicabilityDecisionIndex.get(trial.applicabilityDecisionRef);
+    if (!policy) errors.push(`${trial.id} references missing local validation policy ${trial.policyRef}.`);
+    if (!item) errors.push(`${trial.id} references missing portable knowledge item ${trial.itemRef}.`);
+    if (!decision) errors.push(`${trial.id} references missing applicability decision ${trial.applicabilityDecisionRef}.`);
+    if (decision && decision.itemRef !== trial.itemRef) errors.push(`${trial.id} applicability decision must evaluate the same portable knowledge item.`);
+    if (decision && refLabel(decision.targetRef) !== refLabel(trial.targetRef)) errors.push(`${trial.id} targetRef must match its applicability decision target.`);
+    resolveEntity(trial.targetRef, packageIndex, `${trial.id}/targetRef`);
+
+    const sourceCaseKeys = new Set();
+    for (const caseRef of trial.sourceCaseRefs ?? []) {
+      resolveEntity(caseRef, packageIndex, `${trial.id}/sourceCaseRef`);
+      if (caseRef?.entityType !== "cases") errors.push(`${trial.id} sourceCaseRefs must reference cases.`);
+      sourceCaseKeys.add(refLabel(caseRef));
+    }
+    const unseenCaseKeys = new Set();
+    for (const caseRef of trial.unseenCaseRefs ?? []) {
+      resolveEntity(caseRef, packageIndex, `${trial.id}/unseenCaseRef`);
+      if (caseRef?.entityType !== "cases") errors.push(`${trial.id} unseenCaseRefs must reference cases.`);
+      unseenCaseKeys.add(refLabel(caseRef));
+    }
+    if (sourceCaseKeys.size !== (trial.sourceCaseRefs ?? []).length || unseenCaseKeys.size !== (trial.unseenCaseRefs ?? []).length) errors.push(`${trial.id} source and unseen case refs must not contain duplicates.`);
+    if ([...unseenCaseKeys].some((key) => sourceCaseKeys.has(key))) errors.push(`${trial.id} unseen cases must not overlap source cases.`);
+
+    const expectedMap = new Map((trial.expectedDecisions ?? []).map((entry) => [refLabel(entry.caseRef), entry.decision]));
+    const observedMap = new Map((trial.observedDecisions ?? []).map((entry) => [refLabel(entry.caseRef), entry.decision]));
+    for (const entry of [...(trial.expectedDecisions ?? []), ...(trial.observedDecisions ?? [])]) resolveEntity(entry.caseRef, packageIndex, `${trial.id}/caseDecision`);
+    if (!sameSet([...expectedMap.keys()], [...unseenCaseKeys]) || expectedMap.size !== (trial.expectedDecisions ?? []).length) errors.push(`${trial.id} expectedDecisions must cover unseenCaseRefs exactly once.`);
+    if (!sameSet([...observedMap.keys()], [...unseenCaseKeys]) || observedMap.size !== (trial.observedDecisions ?? []).length) errors.push(`${trial.id} observedDecisions must cover unseenCaseRefs exactly once.`);
+    const agreementCount = [...unseenCaseKeys].filter((key) => expectedMap.get(key) === observedMap.get(key)).length;
+    const expectedAgreement = unseenCaseKeys.size > 0 ? agreementCount / unseenCaseKeys.size : 0;
+    if (Math.abs(trial.agreementScore - expectedAgreement) > 1e-9) errors.push(`${trial.id} agreementScore must reproduce as ${expectedAgreement}.`);
+
+    const independent = !(trial.sourceEvaluatorRefs ?? []).includes(trial.evaluatorRef);
+    if (trial.evaluatorIndependent !== independent) errors.push(`${trial.id} evaluatorIndependent must reproduce as ${independent}.`);
+    const counterexampleTexts = (trial.counterexampleOutcomes ?? []).map((outcome) => outcome.counterexample);
+    if (!sameSet(counterexampleTexts, item?.counterexamples ?? [])) errors.push(`${trial.id} counterexampleOutcomes must challenge every imported counterexample exactly once.`);
+    for (const outcome of trial.counterexampleOutcomes ?? []) {
+      resolveEntity(outcome.caseRef, packageIndex, `${trial.id}/counterexampleCaseRef`);
+      for (const evidenceRef of outcome.evidenceRefs ?? []) resolveEntity(evidenceRef, packageIndex, `${trial.id}/counterexampleEvidenceRef`);
+    }
+    for (const evidenceRef of trial.evidenceRefs ?? []) resolveEntity(evidenceRef, packageIndex, `${trial.id}/evidenceRef`);
+    const unresolvedCounterexampleCount = (trial.counterexampleOutcomes ?? []).filter((outcome) => ["contradicts", "unresolved"].includes(outcome.outcome)).length;
+    const behaviorPass = decision?.decision === "applicable" && unseenCaseKeys.size >= (policy?.minimumUnseenCases ?? Infinity) && independent && expectedAgreement >= (policy?.minimumAgreement ?? Infinity) && unresolvedCounterexampleCount === 0 && sameSet(counterexampleTexts, item?.counterexamples ?? []);
+    const expectedResult = behaviorPass ? "pass" : decision?.decision === "applicable" && expectedAgreement > 0 ? "partial-pass" : "fail";
+    if (trial.result !== expectedResult) errors.push(`${trial.id} result must reproduce as ${expectedResult}.`);
+    if (trial.hiddenReasoningStored !== false) errors.push(`${trial.id} must not store hidden reasoning.`);
+    const types = portableGovernanceTypes(trial.governanceTriggerRefs, trial.id);
+    if (trial.evidenceStatus !== "verified" && !types.has("portable-local-evidence-unverified")) errors.push(`${trial.id} unverified or example-only evidence requires a portable-local-evidence-unverified governance trigger.`);
+    if (!behaviorPass && !types.has("portable-local-reproduction-insufficient")) errors.push(`${trial.id} insufficient reproduction requires a portable-local-reproduction-insufficient governance trigger.`);
+    trialState.set(trial.id, { behaviorPass, independent, unresolvedCounterexampleCount });
+  }
+
+  for (const assessment of portableKnowledgeLocalValidationAssessments) {
+    const policy = portableKnowledgeLocalValidationPolicyIndex.get(assessment.policyRef);
+    if (!policy) errors.push(`${assessment.id} references missing local validation policy ${assessment.policyRef}.`);
+    const items = (assessment.itemRefs ?? []).map((id) => portableKnowledgeItemIndex.get(id)).filter(Boolean);
+    const decisions = (assessment.applicabilityDecisionRefs ?? []).map((id) => portableKnowledgeApplicabilityDecisionIndex.get(id)).filter(Boolean);
+    const trials = (assessment.reproductionTrialRefs ?? []).map((id) => portableKnowledgeReproductionTrialIndex.get(id)).filter(Boolean);
+    for (const id of assessment.itemRefs ?? []) if (!portableKnowledgeItemIndex.has(id)) errors.push(`${assessment.id} references missing portable knowledge item ${id}.`);
+    for (const id of assessment.applicabilityDecisionRefs ?? []) if (!portableKnowledgeApplicabilityDecisionIndex.has(id)) errors.push(`${assessment.id} references missing applicability decision ${id}.`);
+    for (const id of assessment.reproductionTrialRefs ?? []) if (!portableKnowledgeReproductionTrialIndex.has(id)) errors.push(`${assessment.id} references missing reproduction trial ${id}.`);
+    if (!sameSet(assessment.itemRefs, decisions.map((decision) => decision.itemRef))) errors.push(`${assessment.id} applicability decisions must cover itemRefs exactly once.`);
+    if (!sameSet(assessment.itemRefs, trials.map((trial) => trial.itemRef))) errors.push(`${assessment.id} reproduction trials must cover itemRefs exactly once.`);
+    const targetCount = new Set(decisions.map((decision) => refLabel(decision.targetRef))).size;
+    const applicableItemCount = decisions.filter((decision) => decision.decision === "applicable" && (decision.mismatches ?? []).length === 0).length;
+    const rejectedItemCount = decisions.filter((decision) => decision.decision === "not-applicable").length;
+    const reproducedItemCount = trials.filter((trial) => trialState.get(trial.id)?.behaviorPass).length;
+    const independentTrialCount = trials.filter((trial) => trialState.get(trial.id)?.independent).length;
+    const verifiedEvidenceTrialCount = trials.filter((trial) => trial.evidenceStatus === "verified").length;
+    const unresolvedCounterexampleCount = trials.reduce((sum, trial) => sum + (trialState.get(trial.id)?.unresolvedCounterexampleCount ?? 0), 0);
+    const libraries = items.map((item) => portableKnowledgeLibraryIndex.get(item.libraryRef)).filter(Boolean);
+    const trustStates = libraries.map((library) => library.trust?.status);
+    const sourceTrustStatus = trustStates.includes("retired") ? "retired" : trustStates.includes("stale") ? "stale" : trustStates.length > 0 && trustStates.every((state) => state === "verified") ? "verified" : "unverified";
+    const expected = { targetCount, applicableItemCount, rejectedItemCount, reproducedItemCount, independentTrialCount, verifiedEvidenceTrialCount, unresolvedCounterexampleCount };
+    for (const [field, value] of Object.entries(expected)) if (assessment[field] !== value) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    if (assessment.sourceTrustStatus !== sourceTrustStatus) errors.push(`${assessment.id} sourceTrustStatus must reproduce as ${sourceTrustStatus}.`);
+    const allDimensionsTested = decisions.length === items.length && decisions.every((decision) => sameSet(decision.evaluatedDimensions, policy?.requiredApplicabilityDimensions ?? []));
+    const sufficient = items.length > 0 && sourceTrustStatus === "verified" && allDimensionsTested && applicableItemCount === items.length && reproducedItemCount === items.length && independentTrialCount === trials.length && verifiedEvidenceTrialCount === trials.length && unresolvedCounterexampleCount === 0;
+    if (assessment.dataSufficiency !== (sufficient ? "sufficient" : "insufficient")) errors.push(`${assessment.id} dataSufficiency must reproduce as ${sufficient ? "sufficient" : "insufficient"}.`);
+    if (assessment.activationEligibility !== (sufficient ? "eligible-for-governed-activation" : "not-eligible")) errors.push(`${assessment.id} activationEligibility must reproduce as ${sufficient ? "eligible-for-governed-activation" : "not-eligible"}.`);
+    const signals = [];
+    if (sourceTrustStatus !== "verified") signals.push("source-unverified");
+    if (applicableItemCount !== items.length) signals.push("target-mismatch");
+    if (allDimensionsTested) signals.push("local-applicability-tested");
+    if (reproducedItemCount === items.length) signals.push("reproduction-passed"); else signals.push("reproduction-insufficient");
+    if (verifiedEvidenceTrialCount !== trials.length) signals.push("evidence-unverified");
+    if (unresolvedCounterexampleCount > 0) signals.push("counterexample-unresolved");
+    signals.push(sufficient ? "eligible-for-governed-activation" : "activation-eligibility-blocked");
+    if (!sameSet(assessment.assessmentSignals, signals)) errors.push(`${assessment.id} assessmentSignals must reproduce as ${signals.join(", ")}.`);
+    if (assessment.activityCountIsQuality !== false || assessment.automaticActivation !== false || assessment.automaticAuthority !== false || assessment.semanticTruthClaimed !== false) errors.push(`${assessment.id} must keep counts as evidence and forbid automatic activation, authority, and semantic truth claims.`);
+    const types = portableGovernanceTypes(assessment.governanceTriggerRefs, assessment.id);
+    if (!sufficient && !types.has("portable-local-validation-insufficient")) errors.push(`${assessment.id} insufficient local validation requires a portable-local-validation-insufficient governance trigger.`);
+    if (sufficient && (assessment.governanceTriggerRefs ?? []).length > 0) warnings.push(`${assessment.id} is eligible but still has governance triggers; eligibility does not resolve governance automatically.`);
+  }
+
   const index = pkg.ledgerIndex;
   if (!index || typeof index !== "object") {
     errors.push(`${packagePath} must include ledgerIndex.`);
@@ -684,7 +816,7 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim ?? []).includes("semantic truth")) {
       errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
     }
-    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution"]) {
+    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use"]) {
       if (!(boundary.doesNotClaim ?? []).includes(claim)) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming ${claim}.`);
     }
   }
@@ -713,7 +845,11 @@ function validateLedgerPackage(pkg, packagePath) {
       portableKnowledgeLibraries: portableKnowledgeLibraries.length,
       portableKnowledgeItems: portableKnowledgeItems.length,
       portableKnowledgeImportDecisions: portableKnowledgeImportDecisions.length,
-      portableKnowledgeAssessments: portableKnowledgeAssessments.length
+      portableKnowledgeAssessments: portableKnowledgeAssessments.length,
+      portableKnowledgeLocalValidationPolicies: portableKnowledgeLocalValidationPolicies.length,
+      portableKnowledgeApplicabilityDecisions: portableKnowledgeApplicabilityDecisions.length,
+      portableKnowledgeReproductionTrials: portableKnowledgeReproductionTrials.length,
+      portableKnowledgeLocalValidationAssessments: portableKnowledgeLocalValidationAssessments.length
     }
   });
 }

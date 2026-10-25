@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.8.2
+
+- Added executable local validation policies, target-specific applicability decisions, unseen-case reproduction trials, and aggregate local validation assessments to the Living QIF Ledger.
+- Required every tested imported item to name its local target, evaluate seven context dimensions, preserve matches and mismatches, challenge all imported counterexamples, and separate source from unseen cases.
+- Reproduced decision agreement, evaluator identity separation, counterexample outcomes, evidence status, source trust, sufficiency, and governed-activation eligibility deterministically.
+- Added 23 retained negative fixtures for target resolution, context mismatch, unseen-case separation, agreement, counterexample coverage, evidence, sufficiency, governance, and verifier boundaries.
+- Kept the committed example not eligible because its source and local evidence are example-only; successful reproduction does not activate knowledge, grant authority, or prove semantic fitness.
+
 ## v0.8.1
 
 - Added executable portable quality-knowledge import policies, governance triggers, versioned libraries, exact source items, candidate-only import decisions, and aggregate assessments to the Living QIF Ledger.

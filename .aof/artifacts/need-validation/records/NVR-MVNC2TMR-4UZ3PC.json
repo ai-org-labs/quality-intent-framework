@@ -1,0 +1,35 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-25T04:34:31.683Z",
+  "validation_id": "NVR-MVNC2TMR-4UZ3PC",
+  "raw_need": "Make imported QIF knowledge usable locally",
+  "validation_status": "validated",
+  "validated_need": "Make local applicability and independent reproduction auditable for candidate portable Decision Patterns and Quality Intents before any governed activation",
+  "decision_summary": "The need is not generic import convenience; it is an evidence-backed boundary between portable candidate knowledge and local eligibility for governed use.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What must be locally demonstrated?",
+      "answer": "named-target fit, mismatches, unseen-case decisions, counterexample outcomes, evaluator independence, and evidence",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must remain prohibited?",
+      "answer": "automatic activation, authority, semantic truth, hidden reasoning, activity-count quality, and employee scoring",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "source confidence and successful import were assumed to imply local validity"
+  ],
+  "evidence_gaps": [],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-MVNC2ND1-KGDQEO.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-MVNC2NHN-UFQEU4.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-MVNC2NM3-A5XUI7.json",
+  "experiment_proposal_ref": ".aof/artifacts/need-validation/experiment-proposals/EXP-MVNC2NRB-71AN9H.json",
+  "project_charter_ref": ".aof/artifacts/need-validation/project-charters/PCH-MVNC2X88-UPADN3.json",
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

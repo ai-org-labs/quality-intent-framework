@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-25T04:34:23.723Z",
+  "value_hypothesis_id": "VHY-MVNC2NHN-UFQEU4",
+  "expected_value_creation": "local teams can challenge imported knowledge against named targets and unseen cases before governed activation",
+  "beneficiary": "human, AI, and hybrid QIF users",
+  "supporting_evidence": [
+    "v0.8.1 governance explicitly leaves applicability and reproduction unresolved"
+  ],
+  "success_criteria": [
+    "target-specific applicability matches and mismatches are traceable",
+    "independent unseen-case reproduction and counterexample outcomes are reproducible",
+    "insufficient evidence blocks activation eligibility and routes governance"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Extend the standalone Living QIF Ledger with a minimal, executable candidate-only import contract for reusable Decision Patterns and Quality Intents that preserves source identity, content integrity, provenance, applicability boundaries, counterexamples, evidence and trust state, rejects executable imported instructions and hidden reasoning, and cannot activate or authorize imported knowledge before local validation.",
-  "updated_at": "2026-10-24T04:30:02.407Z",
+  "content": "Make local applicability and independent reproduction auditable for candidate portable Decision Patterns and Quality Intents before any governed activation",
+  "updated_at": "2026-10-25T04:34:46.340Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
-  "source_decision_record_id": "DEC-MVLWH76S-AB3O9Z",
+  "source_session_id": "SESS-MVNC25GX-0OT8F3",
+  "source_decision_record_id": "DEC-MVNC34XU-54RVX6",
   "declared_complete_at": null
 }

@@ -1,0 +1,22 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-25T04:34:36.344Z",
+  "project_charter_id": "PCH-MVNC2X88-UPADN3",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-MVNC2TMR-4UZ3PC.json",
+  "validated_objective": "Release the smallest standalone QIF slice that tests portable quality knowledge against local targets and unseen cases without granting activation or authority",
+  "scope": [
+    "qif-ledger local applicability policy and decisions",
+    "local reproduction trials and deterministic assessment",
+    "governance, verifier fixtures, docs, portable package, and public release"
+  ],
+  "constraints": [
+    "do not automatically activate imported knowledge or claim semantic truth",
+    "do not implement v0.8.3 revocation, UI, external registries, or employee surveillance"
+  ],
+  "expected_outcomes": [
+    "local fit and mismatch are explicit for every tested imported item",
+    "unseen-case reproduction evidence deterministically controls governed-activation eligibility"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

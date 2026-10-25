@@ -43,6 +43,10 @@ function portableLibrary(pkg) { return pkg.portableKnowledgeLibraries[0]; }
 function portableItem(pkg, index = 0) { return pkg.portableKnowledgeItems[index]; }
 function portableDecision(pkg) { return pkg.portableKnowledgeImportDecisions[0]; }
 function portableAssessment(pkg) { return pkg.portableKnowledgeAssessments[0]; }
+function localValidationPolicy(pkg) { return pkg.portableKnowledgeLocalValidationPolicies[0]; }
+function localApplicability(pkg, index = 0) { return pkg.portableKnowledgeApplicabilityDecisions[index]; }
+function localReproduction(pkg, index = 0) { return pkg.portableKnowledgeReproductionTrials[index]; }
+function localValidationAssessment(pkg) { return pkg.portableKnowledgeLocalValidationAssessments[0]; }
 
 export const cases = [
   {
@@ -476,6 +480,144 @@ export const cases = [
     rule: "verifier does not claim imported applicability",
     expect: "verifierBoundary must explicitly avoid claiming imported knowledge applicability or local validity.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "imported knowledge applicability or local validity"); }
+  },
+  {
+    id: "portable-local-policies-not-array",
+    rule: "local validation policies are retained",
+    expect: "portableKnowledgeLocalValidationPolicies must be an array.",
+    mutate: (pkg) => { pkg.portableKnowledgeLocalValidationPolicies = null; }
+  },
+  {
+    id: "portable-local-policy-dimensions",
+    rule: "local validation covers every applicability dimension",
+    expect: "PKLVP-001 requiredApplicabilityDimensions must include all seven local target dimensions exactly once.",
+    mutate: (pkg) => { localValidationPolicy(pkg).requiredApplicabilityDimensions = ["context", "domain"]; }
+  },
+  {
+    id: "portable-local-policy-authority-boundary",
+    rule: "local validation does not activate knowledge",
+    expect: "PKLVP-001 must forbid automatic activation, automatic authority, and semantic truth claims.",
+    mutate: (pkg) => { localValidationPolicy(pkg).automaticAuthority = true; }
+  },
+  {
+    id: "portable-local-applicability-target",
+    rule: "applicability decision target resolves",
+    expect: "PKLAD-001/targetRef references missing entity",
+    mutate: (pkg) => { localApplicability(pkg).targetRef.entityRef = "TGT-NOPE-999"; }
+  },
+  {
+    id: "portable-local-applicability-dimensions",
+    rule: "applicability decision executes policy dimensions",
+    expect: "PKLAD-001 evaluatedDimensions must reproduce the policy dimensions exactly once.",
+    mutate: (pkg) => { localApplicability(pkg).evaluatedDimensions = ["context", "domain"]; }
+  },
+  {
+    id: "portable-local-applicability-mismatch-trigger",
+    rule: "local context mismatch routes governance",
+    expect: "PKLAD-001 local mismatch or non-applicable decision requires a portable-local-target-mismatch governance trigger.",
+    mutate: (pkg) => { localApplicability(pkg).mismatches = ["Local waiver authority differs."]; }
+  },
+  {
+    id: "portable-local-reproduction-source-overlap",
+    rule: "reproduction cases are unseen",
+    expect: "PKLRT-001 unseen cases must not overlap source cases.",
+    mutate: (pkg) => { localReproduction(pkg).unseenCaseRefs[0] = structuredClone(localReproduction(pkg).sourceCaseRefs[0]); }
+  },
+  {
+    id: "portable-local-reproduction-case-coverage",
+    rule: "expected decisions cover unseen cases",
+    expect: "PKLRT-001 expectedDecisions must cover unseenCaseRefs exactly once.",
+    mutate: (pkg) => { localReproduction(pkg).expectedDecisions.pop(); }
+  },
+  {
+    id: "portable-local-reproduction-agreement",
+    rule: "agreement score reproduces from case decisions",
+    expect: "PKLRT-001 agreementScore must reproduce as 1.",
+    mutate: (pkg) => { localReproduction(pkg).agreementScore = 0.5; }
+  },
+  {
+    id: "portable-local-reproduction-independence",
+    rule: "evaluator identity separation reproduces",
+    expect: "PKLRT-001 evaluatorIndependent must reproduce as false.",
+    mutate: (pkg) => { localReproduction(pkg).evaluatorRef = "EXP-SW-001"; }
+  },
+  {
+    id: "portable-local-reproduction-counterexamples",
+    rule: "all imported counterexamples are challenged",
+    expect: "PKLRT-001 counterexampleOutcomes must challenge every imported counterexample exactly once.",
+    mutate: (pkg) => { localReproduction(pkg).counterexampleOutcomes.pop(); }
+  },
+  {
+    id: "portable-local-reproduction-result",
+    rule: "trial result reproduces",
+    expect: "PKLRT-001 result must reproduce as partial-pass.",
+    mutate: (pkg) => { localReproduction(pkg).counterexampleOutcomes[0].outcome = "unresolved"; }
+  },
+  {
+    id: "portable-local-reproduction-evidence-trigger",
+    rule: "example-only evidence routes governance",
+    expect: "PKLRT-001 unverified or example-only evidence requires a portable-local-evidence-unverified governance trigger.",
+    mutate: (pkg) => { localReproduction(pkg).governanceTriggerRefs = []; }
+  },
+  {
+    id: "portable-local-reproduction-hidden-reasoning",
+    rule: "reproduction excludes hidden reasoning",
+    expect: "PKLRT-001 must not store hidden reasoning.",
+    mutate: (pkg) => { localReproduction(pkg).hiddenReasoningStored = true; }
+  },
+  {
+    id: "portable-local-assessment-item-coverage",
+    rule: "applicability decisions cover assessed items",
+    expect: "PKLVA-001 applicability decisions must cover itemRefs exactly once.",
+    mutate: (pkg) => { localValidationAssessment(pkg).applicabilityDecisionRefs = ["PKLAD-001"]; }
+  },
+  {
+    id: "portable-local-assessment-count",
+    rule: "local validation counts reproduce",
+    expect: "PKLVA-001 reproducedItemCount must reproduce as 2.",
+    mutate: (pkg) => { localValidationAssessment(pkg).reproducedItemCount = 1; }
+  },
+  {
+    id: "portable-local-assessment-source-trust",
+    rule: "source trust state reproduces",
+    expect: "PKLVA-001 sourceTrustStatus must reproduce as unverified.",
+    mutate: (pkg) => { localValidationAssessment(pkg).sourceTrustStatus = "verified"; }
+  },
+  {
+    id: "portable-local-assessment-sufficiency",
+    rule: "local validation sufficiency reproduces",
+    expect: "PKLVA-001 dataSufficiency must reproduce as insufficient.",
+    mutate: (pkg) => { localValidationAssessment(pkg).dataSufficiency = "sufficient"; }
+  },
+  {
+    id: "portable-local-assessment-eligibility",
+    rule: "activation eligibility reproduces",
+    expect: "PKLVA-001 activationEligibility must reproduce as not-eligible.",
+    mutate: (pkg) => { localValidationAssessment(pkg).activationEligibility = "eligible-for-governed-activation"; }
+  },
+  {
+    id: "portable-local-assessment-signals",
+    rule: "local validation signals reproduce",
+    expect: "PKLVA-001 assessmentSignals must reproduce as",
+    mutate: (pkg) => { localValidationAssessment(pkg).assessmentSignals = ["eligible-for-governed-activation"]; }
+  },
+  {
+    id: "portable-local-assessment-trigger",
+    rule: "insufficient local validation routes governance",
+    expect: "PKLVA-001 insufficient local validation requires a portable-local-validation-insufficient governance trigger.",
+    mutate: (pkg) => { localValidationAssessment(pkg).governanceTriggerRefs = ["PKGTR-001", "PKGTR-005"]; }
+  },
+  {
+    id: "portable-local-assessment-authority-boundary",
+    rule: "local assessment does not grant authority",
+    expect: "PKLVA-001 must keep counts as evidence and forbid automatic activation, authority, and semantic truth claims.",
+    mutate: (pkg) => { localValidationAssessment(pkg).automaticActivation = true; }
+  },
+  {
+    id: "portable-local-verifier-independence-boundary",
+    rule: "verifier does not overclaim evaluator independence",
+    expect: "verifierBoundary must explicitly avoid claiming evaluator independence beyond recorded identity separation.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "evaluator independence beyond recorded identity separation"); }
   }
 ];
 

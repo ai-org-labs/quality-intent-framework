@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-24T04:42:18.455Z",
+  "generated_at": "2026-10-25T04:45:54.444Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
-    "report_id": "OUT-MVLWWWKJ-JXQOOT",
+    "source_session_id": "SESS-MVNC25GX-0OT8F3",
+    "report_id": "OUT-MVNCHG8J-B3MTIG",
     "result": "success",
-    "observed_at": "2026-10-24T04:42:15.138Z",
-    "note": "QIF v0.8.1 implements exact-source, digest-verified, candidate-only Portable Pattern Library Import with provenance, applicability boundaries, counterexamples, trust, non-executable and authority boundaries, assessment, governance, and open-risk visibility. npm test passed 16/16 and 1331/1331; AOF organization verification passed 295/295. Public release pending.",
-    "signal_ref": ".aof/runtime/v0.8.1-review-council-executed.json"
+    "observed_at": "2026-10-25T04:45:54.162Z",
+    "note": "QIF v0.8.2 implementation and release candidate validation completed; imported knowledge remains candidate-only unless verified local evidence makes it eligible for accountable governance.",
+    "signal_ref": ".aof/runtime/v0.8.2-review-council-executed.json"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV0810",
-    "recorded_at": "2026-10-24T04:42:09.386Z",
-    "summary": "Portable quality-knowledge policies, exact source snapshots, canonical digests, provenance, applicability boundaries, counterexamples, trust metadata, candidate-only decisions, governance, documentation, retained fixtures, and portable validation are complete; committed evidence remains example-only and insufficient.",
-    "detected_gap": "Imported knowledge has not been tested against target-specific cases, loss boundaries, stakeholder context, or unseen counterexamples, so local applicability and reproduction remain unestablished.",
+    "audit_id": "FSA-QIFV0820",
+    "recorded_at": "2026-10-25T04:45:53.876Z",
+    "summary": "Schemas, examples, verifier arithmetic, governance routing, negative fixtures, and portable documentation preserve candidate-only and non-authority boundaries.",
+    "detected_gap": "Committed source trust and reproduction evidence remain example-only; supply-chain revocation is deferred to v0.8.3.",
     "result_state": "stable",
-    "next_action": "Implement v0.8.2 Local Applicability and Reproduction with target-specific cases, applicability decisions, reproduction evidence, activation gates, and governed rejection.",
+    "next_action": "Release v0.8.2, then model revocation and transitive invalidation in v0.8.3.",
     "related_task_ids": [
-      "TASK-074"
+      "TASK-075"
     ]
   },
   "current_next_value_slice": {
-    "content": "v0.8.2 Local Applicability and Reproduction",
-    "updated_at": "2026-10-24T04:42:18.275Z",
+    "content": "v0.8.3 Portable Knowledge Supply-Chain Revocation",
+    "updated_at": "2026-10-25T04:45:54.295Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
-    "source_decision_record_id": "DEC-MVLWH76S-AB3O9Z"
+    "source_session_id": "SESS-MVNC25GX-0OT8F3",
+    "source_decision_record_id": "DEC-MVNC34XU-54RVX6"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Implement v0.8.2 Local Applicability and Reproduction with target-specific cases, applicability decisions, reproduction evidence, activation gates, and governed rejection.",
+    "proposed_focus": "Release v0.8.2, then model revocation and transitive invalidation in v0.8.3.",
     "related_task_ids": [
-      "TASK-074"
+      "TASK-075"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: v0.8.2 Local Applicability and Reproduction",
-    "Latest self-audit next action: Implement v0.8.2 Local Applicability and Reproduction with target-specific cases, applicability decisions, reproduction evidence, activation gates, and governed rejection.",
+    "Current next value slice: v0.8.3 Portable Knowledge Supply-Chain Revocation",
+    "Latest self-audit next action: Release v0.8.2, then model revocation and transitive invalidation in v0.8.3.",
     "Latest outcome result: success"
   ]
 }

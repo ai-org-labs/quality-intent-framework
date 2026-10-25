@@ -82,6 +82,19 @@ complete.
 - `schemas/qif-ledger-package.schema.json`
 - `examples/qif-ledger-package.json`
 
+## 8. Test Imported Knowledge Locally
+
+For each candidate imported item, name the local target and compare context,
+stakeholders, risk, domain, loss boundary, artifact type, and operational
+impact. Then give a non-source evaluator unseen local cases, compare expected
+and observed decisions, and challenge every preserved counterexample. Treat
+agreement and case counts as evidence only. Eligibility means the item may be
+submitted to governance; it is not activation, approval, or semantic truth.
+
+- `docs/qif-v0.8.2-local-applicability-reproduction.md`
+- `schemas/qif-ledger-package.schema.json`
+- `examples/qif-ledger-package.json`
+
 ## Choosing a Package Type
 
 Open `MANIFEST.json` to see every included schema and example. Use a schema only

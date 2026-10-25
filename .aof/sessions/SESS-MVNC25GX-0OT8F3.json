@@ -1,0 +1,604 @@
+{
+  "session_id": "SESS-MVNC25GX-0OT8F3",
+  "workflow_id": "service-design",
+  "organization_id": "civic-studio",
+  "organization": {
+    "language": "en"
+  },
+  "status": "framed",
+  "trigger": {
+    "trigger_id": "TRG-MVNC25GX-DGR34C",
+    "trigger_type": "cli",
+    "received_at": "2026-10-25T04:34:00.365Z",
+    "request_payload": "Develop and release QIF v0.8.2 Local Applicability and Reproduction. Need: v0.8.1 can import portable Decision Patterns and Quality Intents as traceable candidates, but cannot determine whether they fit a local target or whether another evaluator can reproduce their decisions on unseen local cases. Intent: extend standalone qif-ledger with target-specific applicability decisions, local reproduction trials, deterministic sufficiency assessment, and governance so imported knowledge becomes only eligible for governed activation when source trust, context fit, counterexample challenges, independent reproduction, and evidence all pass. Context: reuse existing evaluation-target and expert-judgment packages through cross-package references; preserve candidate-only, non-executable, non-authoritative boundaries; do not implement automatic activation, semantic truth, external registries, UI, employee surveillance, or v0.8.3 revocation. Add schemas, example, verifier rules, negative fixtures, docs, AI guide, portable package, roadmap, changelog, AOF evidence, tag, and GitHub release."
+  },
+  "current_stage": "planning",
+  "routing_mode": "deep-path",
+  "routing_mode_history": [
+    {
+      "from_mode": null,
+      "to_mode": "deep-path",
+      "at": "2026-10-25T04:34:00.365Z",
+      "reason": "session-created"
+    }
+  ],
+  "context_snapshot_id": "CTX-MVNC296Q-BZ4MAG",
+  "open_decision_ids": [
+    "DEC-MVNC34XU-54RVX6"
+  ],
+  "closed_decision_ids": [
+    "DEC-MVNC25GZ-FRCSCP",
+    "DEC-MVNC296T-7ZUHJ9"
+  ],
+  "stage_transitions": [
+    {
+      "from_stage": null,
+      "to_stage": "clarification",
+      "from_status": null,
+      "to_status": "waiting_user",
+      "at": "2026-10-25T04:34:00.365Z",
+      "reason": "session-created"
+    },
+    {
+      "from_stage": "clarification",
+      "to_stage": "need-validation",
+      "from_status": "waiting_user",
+      "to_status": "framed",
+      "at": "2026-10-25T04:34:05.186Z",
+      "reason": "clarification-complete"
+    },
+    {
+      "from_stage": "need-validation",
+      "to_stage": "planning",
+      "from_status": "framed",
+      "to_status": "framed",
+      "at": "2026-10-25T04:34:46.340Z",
+      "reason": "need-validation-approved"
+    }
+  ],
+  "reopen_count": 0,
+  "outcome_reports": [
+    {
+      "report_id": "OUT-MVNCHG8J-B3MTIG",
+      "result": "success",
+      "observed_at": "2026-10-25T04:45:54.162Z",
+      "note": "QIF v0.8.2 implementation and release candidate validation completed; imported knowledge remains candidate-only unless verified local evidence makes it eligible for accountable governance.",
+      "signal_ref": ".aof/runtime/v0.8.2-review-council-executed.json"
+    }
+  ],
+  "clarification": {
+    "round_count": 1,
+    "dimensions": {
+      "need_clarity": "partial",
+      "intent_clarity": "partial",
+      "context_completeness": "missing",
+      "success_criteria_clarity": "missing",
+      "prohibited_conditions_clarity": "partial",
+      "governance_scope_clarity": "clear",
+      "brownfield_orientation_completeness": "clear",
+      "risk_exposure": "partial"
+    },
+    "gaps": [
+      {
+        "dimension": "need_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The underlying need is not specific enough yet."
+      },
+      {
+        "dimension": "intent_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The intended direction is not yet explicit."
+      },
+      {
+        "dimension": "context_completeness",
+        "status": "missing",
+        "trigger_class": "missing-constraint",
+        "summary": "Key constraints, scope, and current conditions are missing."
+      },
+      {
+        "dimension": "success_criteria_clarity",
+        "status": "missing",
+        "trigger_class": "missing-success-criteria",
+        "summary": "Success cannot be evaluated yet."
+      },
+      {
+        "dimension": "prohibited_conditions_clarity",
+        "status": "partial",
+        "trigger_class": "missing-prohibition",
+        "summary": "Forbidden changes or non-negotiables are not explicit."
+      }
+    ],
+    "pending_questions": [],
+    "asked_questions": [
+      "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "How should improvement success be judged: which metric or end state matters most?"
+    ],
+    "question_rationale": [],
+    "trigger_classes": [],
+    "target_fields": [],
+    "user_answers": [
+      {
+        "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+        "answer": "Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope.",
+        "target_fields": [
+          "need",
+          "context"
+        ]
+      },
+      {
+        "question": "How should improvement success be judged: which metric or end state matters most?",
+        "answer": "Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+        "target_fields": [
+          "success_criteria",
+          "intent"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "ask_or_assume_decision": "ask",
+    "remaining_gaps": [],
+    "unresolved_ambiguity": [],
+    "question_budget": {
+      "initial_question_budget": 2,
+      "followup_budget": 1,
+      "max_rounds": 2
+    },
+    "next_stop_condition": "need validation can proceed",
+    "clarification_summary": "runtime captured first-round clarification answers and can proceed to need validation",
+    "should_wait_for_user": false
+  },
+  "created_at": "2026-10-25T04:34:00.365Z",
+  "updated_at": "2026-10-25T04:45:54.162Z",
+  "framing": {
+    "request": "Develop and release QIF v0.8.2 Local Applicability and Reproduction. Need: v0.8.1 can import portable Decision Patterns and Quality Intents as traceable candidates, but cannot determine whether they fit a local target or whether another evaluator can reproduce their decisions on unseen local cases. Intent: extend standalone qif-ledger with target-specific applicability decisions, local reproduction trials, deterministic sufficiency assessment, and governance so imported knowledge becomes only eligible for governed activation when source trust, context fit, counterexample challenges, independent reproduction, and evidence all pass. Context: reuse existing evaluation-target and expert-judgment packages through cross-package references; preserve candidate-only, non-executable, non-authoritative boundaries; do not implement automatic activation, semantic truth, external registries, UI, employee surveillance, or v0.8.3 revocation. Add schemas, example, verifier rules, negative fixtures, docs, AI guide, portable package, roadmap, changelog, AOF evidence, tag, and GitHub release.",
+    "need": "Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope.",
+    "intent": "Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+    "active_context": "context: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. | success: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+    "success_criteria": "Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+    "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance."
+  },
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/records/NVR-MVNC2TMR-4UZ3PC.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-MVNC2X88-UPADN3.json",
+    ".aof/artifacts/need-validation/problem-statements/PST-MVNC2ND1-KGDQEO.json",
+    ".aof/artifacts/need-validation/value-hypotheses/VHY-MVNC2NHN-UFQEU4.json",
+    ".aof/artifacts/need-validation/alternative-analyses/ALT-MVNC2NM3-A5XUI7.json",
+    ".aof/artifacts/need-validation/experiment-proposals/EXP-MVNC2NRB-71AN9H.json"
+  ],
+  "council_execution_runs": [
+    {
+      "execution_id": "CRUN-MVNC37HG-P1VC5Y",
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Builder",
+        "Visionary",
+        "Guardian"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "status": "completed",
+      "started_at": "2026-10-25T04:34:49.636Z",
+      "completed_at": "2026-10-25T04:34:49.637Z",
+      "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Builder(design-builder-01) -> Visionary(strategy-lead-01) -> Guardian(risk-reviewer-01) with 3 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MVNC37HG-P1VC5Y-STEP-01",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Builder planning call for actor design-builder-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVNC25GX-0OT8F3",
+              "decision_id": "DEC-MVNC34XU-54RVX6",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope.",
+              "intent": "Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+              "active_context": "context: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. | success: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+              "context_snapshot_id": "CTX-MVNC296Q-BZ4MAG",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.2 Local Applicability and Reproduction. Need: v0.8.1 can import portable Decision Patterns and Quality Intents as traceable candidates, but cannot determine whether they fit a local target or whether another evaluator can reproduce their decisions on unseen local cases. Intent: extend standalone qif-ledger with target-specific applicability decisions, local reproduction trials, deterministic sufficiency assessment, and governance so imported knowledge becomes only eligible for governed activation when source trust, context fit, counterexample challenges, independent reproduction, and evidence all pass. Context: reuse existing evaluation-target and expert-judgment packages through cross-package references; preserve candidate-only, non-executable, non-authoritative boundaries; do not implement automatic activation, semantic truth, external registries, UI, employee surveillance, or v0.8.3 revocation. Add schemas, example, verifier rules, negative fixtures, docs, AI guide, portable package, roadmap, changelog, AOF evidence, tag, and GitHub release.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVNC2TMR-4UZ3PC.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVNC2X88-UPADN3.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVNC2ND1-KGDQEO.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVNC2NHN-UFQEU4.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVNC2NM3-A5XUI7.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVNC2NRB-71AN9H.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVNC34XU-54RVX6"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-25T04:34:49.636Z",
+          "completed_at": "2026-10-25T04:34:49.637Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-25T04:34:49.637Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder planning response: focus on Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. and align to Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance..",
+            "output_summary": "DECISION: proceed VETO: no Builder planning response: focus on Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Develop and release QIF v0.8.2 Local Applicability and Reproduction. Need: v0.8.1 can import portable Decision Patterns and Quality Intents as traceable candidates, but cannot determine whether they fit a local target or whether another evaluator can reproduce their decisions on unseen local cases. Intent: extend standalone qif-ledger with target-specific applicability decisions, local reproduction trials, deterministic sufficiency assessment, and governance so imported knowledge becomes only eligible for governed activation when source trust, context fit, counterexample challenges, independent reproduction, and evidence all pass. Context: reuse existing evaluation-target and expert-judgment packages through cross-package references; preserve candidate-only, non-executable, non-authoritative boundaries; do not implement automatic activation, semantic truth, external registries, UI, employee surveillance, or v0.8.3 revocation. Add schemas, example, verifier rules, negative fixtures, docs, AI guide, portable package, roadmap, changelog, AOF evidence, tag, and GitHub release.\nNeed: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope.\nIntent: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.\nActive Context: context: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. | success: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVNC37HG-P1VC5Y-STEP-02",
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Visionary planning call for actor strategy-lead-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVNC25GX-0OT8F3",
+              "decision_id": "DEC-MVNC34XU-54RVX6",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope.",
+              "intent": "Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+              "active_context": "context: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. | success: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+              "context_snapshot_id": "CTX-MVNC296Q-BZ4MAG",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.2 Local Applicability and Reproduction. Need: v0.8.1 can import portable Decision Patterns and Quality Intents as traceable candidates, but cannot determine whether they fit a local target or whether another evaluator can reproduce their decisions on unseen local cases. Intent: extend standalone qif-ledger with target-specific applicability decisions, local reproduction trials, deterministic sufficiency assessment, and governance so imported knowledge becomes only eligible for governed activation when source trust, context fit, counterexample challenges, independent reproduction, and evidence all pass. Context: reuse existing evaluation-target and expert-judgment packages through cross-package references; preserve candidate-only, non-executable, non-authoritative boundaries; do not implement automatic activation, semantic truth, external registries, UI, employee surveillance, or v0.8.3 revocation. Add schemas, example, verifier rules, negative fixtures, docs, AI guide, portable package, roadmap, changelog, AOF evidence, tag, and GitHub release.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVNC2TMR-4UZ3PC.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVNC2X88-UPADN3.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVNC2ND1-KGDQEO.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVNC2NHN-UFQEU4.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVNC2NM3-A5XUI7.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVNC2NRB-71AN9H.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVNC34XU-54RVX6"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-25T04:34:49.637Z",
+          "completed_at": "2026-10-25T04:34:49.637Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-25T04:34:49.637Z",
+            "output_text": "DECISION: proceed\nVETO: no\nVisionary planning response: focus on Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. and align to Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance..",
+            "output_summary": "DECISION: proceed VETO: no Visionary planning response: focus on Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Visionary in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Develop and release QIF v0.8.2 Local Applicability and Reproduction. Need: v0.8.1 can import portable Decision Patterns and Quality Intents as traceable candidates, but cannot determine whether they fit a local target or whether another evaluator can reproduce their decisions on unseen local cases. Intent: extend standalone qif-ledger with target-specific applicability decisions, local reproduction trials, deterministic sufficiency assessment, and governance so imported knowledge becomes only eligible for governed activation when source trust, context fit, counterexample challenges, independent reproduction, and evidence all pass. Context: reuse existing evaluation-target and expert-judgment packages through cross-package references; preserve candidate-only, non-executable, non-authoritative boundaries; do not implement automatic activation, semantic truth, external registries, UI, employee surveillance, or v0.8.3 revocation. Add schemas, example, verifier rules, negative fixtures, docs, AI guide, portable package, roadmap, changelog, AOF evidence, tag, and GitHub release.\nNeed: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope.\nIntent: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.\nActive Context: context: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. | success: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVNC37HG-P1VC5Y-STEP-03",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Guardian planning call for actor risk-reviewer-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVNC25GX-0OT8F3",
+              "decision_id": "DEC-MVNC34XU-54RVX6",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope.",
+              "intent": "Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+              "active_context": "context: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. | success: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+              "context_snapshot_id": "CTX-MVNC296Q-BZ4MAG",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.2 Local Applicability and Reproduction. Need: v0.8.1 can import portable Decision Patterns and Quality Intents as traceable candidates, but cannot determine whether they fit a local target or whether another evaluator can reproduce their decisions on unseen local cases. Intent: extend standalone qif-ledger with target-specific applicability decisions, local reproduction trials, deterministic sufficiency assessment, and governance so imported knowledge becomes only eligible for governed activation when source trust, context fit, counterexample challenges, independent reproduction, and evidence all pass. Context: reuse existing evaluation-target and expert-judgment packages through cross-package references; preserve candidate-only, non-executable, non-authoritative boundaries; do not implement automatic activation, semantic truth, external registries, UI, employee surveillance, or v0.8.3 revocation. Add schemas, example, verifier rules, negative fixtures, docs, AI guide, portable package, roadmap, changelog, AOF evidence, tag, and GitHub release.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVNC2TMR-4UZ3PC.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVNC2X88-UPADN3.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVNC2ND1-KGDQEO.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVNC2NHN-UFQEU4.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVNC2NM3-A5XUI7.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVNC2NRB-71AN9H.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVNC34XU-54RVX6"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-25T04:34:49.637Z",
+          "completed_at": "2026-10-25T04:34:49.637Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-25T04:34:49.637Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian planning response: focus on Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. and align to Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance..",
+            "output_summary": "DECISION: proceed VETO: no Guardian planning response: focus on Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Develop and release QIF v0.8.2 Local Applicability and Reproduction. Need: v0.8.1 can import portable Decision Patterns and Quality Intents as traceable candidates, but cannot determine whether they fit a local target or whether another evaluator can reproduce their decisions on unseen local cases. Intent: extend standalone qif-ledger with target-specific applicability decisions, local reproduction trials, deterministic sufficiency assessment, and governance so imported knowledge becomes only eligible for governed activation when source trust, context fit, counterexample challenges, independent reproduction, and evidence all pass. Context: reuse existing evaluation-target and expert-judgment packages through cross-package references; preserve candidate-only, non-executable, non-authoritative boundaries; do not implement automatic activation, semantic truth, external registries, UI, employee surveillance, or v0.8.3 revocation. Add schemas, example, verifier rules, negative fixtures, docs, AI guide, portable package, roadmap, changelog, AOF evidence, tag, and GitHub release.\nNeed: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope.\nIntent: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.\nActive Context: context: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. | success: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "execution_id": "CRUN-MVNCH9QB-EYNHCC",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "completed",
+      "started_at": "2026-10-25T04:45:45.727Z",
+      "completed_at": "2026-10-25T04:45:45.731Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MVNCH9QB-EYNHCC-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVNC25GX-0OT8F3",
+              "decision_id": "DEC-MVNC34XU-54RVX6",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope.",
+              "intent": "Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+              "active_context": "context: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. | success: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+              "context_snapshot_id": "CTX-MVNC296Q-BZ4MAG",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.2 Local Applicability and Reproduction. Need: v0.8.1 can import portable Decision Patterns and Quality Intents as traceable candidates, but cannot determine whether they fit a local target or whether another evaluator can reproduce their decisions on unseen local cases. Intent: extend standalone qif-ledger with target-specific applicability decisions, local reproduction trials, deterministic sufficiency assessment, and governance so imported knowledge becomes only eligible for governed activation when source trust, context fit, counterexample challenges, independent reproduction, and evidence all pass. Context: reuse existing evaluation-target and expert-judgment packages through cross-package references; preserve candidate-only, non-executable, non-authoritative boundaries; do not implement automatic activation, semantic truth, external registries, UI, employee surveillance, or v0.8.3 revocation. Add schemas, example, verifier rules, negative fixtures, docs, AI guide, portable package, roadmap, changelog, AOF evidence, tag, and GitHub release.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVNC2TMR-4UZ3PC.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVNC2X88-UPADN3.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVNC2ND1-KGDQEO.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVNC2NHN-UFQEU4.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVNC2NM3-A5XUI7.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVNC2NRB-71AN9H.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVNC34XU-54RVX6"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-25T04:45:45.731Z",
+          "completed_at": "2026-10-25T04:45:45.731Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-25T04:45:45.731Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian review response: focus on Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. and align to Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance..",
+            "output_summary": "DECISION: proceed VETO: no Guardian review response: focus on Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Develop and release QIF v0.8.2 Local Applicability and Reproduction. Need: v0.8.1 can import portable Decision Patterns and Quality Intents as traceable candidates, but cannot determine whether they fit a local target or whether another evaluator can reproduce their decisions on unseen local cases. Intent: extend standalone qif-ledger with target-specific applicability decisions, local reproduction trials, deterministic sufficiency assessment, and governance so imported knowledge becomes only eligible for governed activation when source trust, context fit, counterexample challenges, independent reproduction, and evidence all pass. Context: reuse existing evaluation-target and expert-judgment packages through cross-package references; preserve candidate-only, non-executable, non-authoritative boundaries; do not implement automatic activation, semantic truth, external registries, UI, employee surveillance, or v0.8.3 revocation. Add schemas, example, verifier rules, negative fixtures, docs, AI guide, portable package, roadmap, changelog, AOF evidence, tag, and GitHub release.\nNeed: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope.\nIntent: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.\nActive Context: context: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. | success: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVNCH9QB-EYNHCC-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVNC25GX-0OT8F3",
+              "decision_id": "DEC-MVNC34XU-54RVX6",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope.",
+              "intent": "Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+              "active_context": "context: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. | success: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
+              "context_snapshot_id": "CTX-MVNC296Q-BZ4MAG",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.2 Local Applicability and Reproduction. Need: v0.8.1 can import portable Decision Patterns and Quality Intents as traceable candidates, but cannot determine whether they fit a local target or whether another evaluator can reproduce their decisions on unseen local cases. Intent: extend standalone qif-ledger with target-specific applicability decisions, local reproduction trials, deterministic sufficiency assessment, and governance so imported knowledge becomes only eligible for governed activation when source trust, context fit, counterexample challenges, independent reproduction, and evidence all pass. Context: reuse existing evaluation-target and expert-judgment packages through cross-package references; preserve candidate-only, non-executable, non-authoritative boundaries; do not implement automatic activation, semantic truth, external registries, UI, employee surveillance, or v0.8.3 revocation. Add schemas, example, verifier rules, negative fixtures, docs, AI guide, portable package, roadmap, changelog, AOF evidence, tag, and GitHub release.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVNC2TMR-4UZ3PC.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVNC2X88-UPADN3.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVNC2ND1-KGDQEO.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVNC2NHN-UFQEU4.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVNC2NM3-A5XUI7.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVNC2NRB-71AN9H.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVNC34XU-54RVX6"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-25T04:45:45.731Z",
+          "completed_at": "2026-10-25T04:45:45.731Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-25T04:45:45.731Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder review response: focus on Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. and align to Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance..",
+            "output_summary": "DECISION: proceed VETO: no Builder review response: focus on Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Develop and release QIF v0.8.2 Local Applicability and Reproduction. Need: v0.8.1 can import portable Decision Patterns and Quality Intents as traceable candidates, but cannot determine whether they fit a local target or whether another evaluator can reproduce their decisions on unseen local cases. Intent: extend standalone qif-ledger with target-specific applicability decisions, local reproduction trials, deterministic sufficiency assessment, and governance so imported knowledge becomes only eligible for governed activation when source trust, context fit, counterexample challenges, independent reproduction, and evidence all pass. Context: reuse existing evaluation-target and expert-judgment packages through cross-package references; preserve candidate-only, non-executable, non-authoritative boundaries; do not implement automatic activation, semantic truth, external registries, UI, employee surveillance, or v0.8.3 revocation. Add schemas, example, verifier rules, negative fixtures, docs, AI guide, portable package, roadmap, changelog, AOF evidence, tag, and GitHub release.\nNeed: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope.\nIntent: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.\nActive Context: context: Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. | success: Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked local target and case records, applicability decisions, reproduction trials, validation assessment, governance, verifier, fixtures, docs, AI guide, roadmap, portable package, changelog, and release. Keep UI, external registries, provider-specific loaders, automatic activation, automatic authority, semantic truth claims, employee scoring, and v0.8.3 dependency revocation out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance."
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "last_council_execution_id": "CRUN-MVNCH9QB-EYNHCC"
+}

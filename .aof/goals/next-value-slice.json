@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.8.2 Local Applicability and Reproduction",
-  "updated_at": "2026-10-24T04:42:18.275Z",
+  "content": "v0.8.3 Portable Knowledge Supply-Chain Revocation",
+  "updated_at": "2026-10-25T04:45:54.295Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
-  "source_decision_record_id": "DEC-MVLWH76S-AB3O9Z",
+  "source_session_id": "SESS-MVNC25GX-0OT8F3",
+  "source_decision_record_id": "DEC-MVNC34XU-54RVX6",
   "declared_complete_at": null
 }

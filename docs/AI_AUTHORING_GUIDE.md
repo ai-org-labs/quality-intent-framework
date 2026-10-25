@@ -77,6 +77,8 @@ Use additional documents when needed:
 | Start a real calibration pilot without inventing outcomes or hiding missing evidence | `docs/qif-v0.7.0-empirical-pilot.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Preserve changing outcome evidence without rewriting history | `docs/qif-v0.7.1-outcome-collection-ledger.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Preserve multiple human or AI judgments across revisions and joins without erasing dissent or shared dependencies | `docs/qif-v0.8.0-multi-agent-judgment-memory.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
+| Import reusable quality knowledge without silently trusting or activating it | `docs/qif-v0.8.1-portable-pattern-library-import.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
+| Test imported knowledge against a local target and unseen cases | `docs/qif-v0.8.2-local-applicability-reproduction.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
 | Expose selection, missing outcomes, dependence, segments, and drift behind a calibration aggregate | `docs/qif-v0.6.32-calibration-cohort-integrity.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Explain why one calibration error requires stronger governance than another at an explicit loss boundary | `docs/qif-v0.6.33-consequence-sensitive-calibration.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Show whether a decision is brittle under bounded, reviewed threshold alternatives | `docs/qif-v0.6.34-threshold-robustness.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
@@ -931,6 +933,33 @@ Use `PortableKnowledgeImportPolicy`, `PortableKnowledgeLibrary`,
 `PortableKnowledgeAssessment`. A matching digest proves content consistency,
 not authenticity, ownership, licensing, semantic truth, local applicability,
 safe execution, authorization, or authority.
+
+## Local Applicability and Reproduction
+
+After candidate import, do not ask only whether the source pattern sounds
+reasonable. Make local fit and reproducibility inspectable.
+
+1. Name one local Evaluation Target for each tested imported item.
+2. Compare context, stakeholder impact, risk, domain, loss boundary, artifact
+   type, and operational impact; record matches and mismatches separately.
+3. Keep source cases distinct from unseen local cases.
+4. Use a declared non-source evaluator and record identity separation without
+   claiming that identity metadata proves real independence.
+5. Record expected and observed decisions for every unseen case, then
+   reproduce agreement from those decisions.
+6. Challenge every imported counterexample and record whether it supports,
+   narrows, contradicts, or leaves the boundary unresolved.
+7. Distinguish verified evidence from unverified or example-only evidence.
+8. Mark an item `eligible-for-governed-activation` only when policy inputs are
+   sufficient. Eligibility never activates the item or grants authority.
+9. Route mismatches, weak reproduction, unverified evidence, unresolved
+   counterexamples, or insufficient source trust to governance.
+
+Use `PortableKnowledgeLocalValidationPolicy`,
+`PortableKnowledgeApplicabilityDecision`,
+`PortableKnowledgeReproductionTrial`, and
+`PortableKnowledgeLocalValidationAssessment`. Agreement, case count, and a
+passing trial are evidence, not quality or semantic truth.
 
 ## Common Failure Modes
 

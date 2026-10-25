@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-25T04:34:23.883Z",
+  "alternative_analysis_id": "ALT-MVNC2NM3-A5XUI7",
+  "subject_need": "validate portable quality knowledge locally before use",
+  "alternative_solutions": [
+    "extend qif-ledger with local applicability and reproduction entities",
+    "reuse review-run applicability records without portable-item linkage"
+  ],
+  "non_solution_options": [
+    "trust publisher confidence and import count"
+  ],
+  "defer_options": [
+    "keep all imports candidate-only indefinitely"
+  ],
+  "stop_options": [
+    "do not create the release if deterministic sufficiency cannot be verified without claiming semantic truth"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

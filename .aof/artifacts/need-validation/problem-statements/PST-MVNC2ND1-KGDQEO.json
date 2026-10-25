@@ -1,0 +1,14 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-25T04:34:23.557Z",
+  "problem_statement_id": "PST-MVNC2ND1-KGDQEO",
+  "affected_party": "organizations importing portable quality knowledge",
+  "actual_problem": "imported Decision Patterns and Quality Intents remain candidates because local context fit and reproducibility are untested",
+  "why_it_matters": "foreign knowledge can be over-generalized, rejected without evidence, or activated despite different stakeholders and loss boundaries",
+  "why_now": "QIF v0.8.1 established safe import and the current Agent Skills ecosystem accelerates cross-organization reuse",
+  "evidence_refs": [
+    "docs/qif-roadmap.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

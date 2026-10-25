@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.8.1 baseline)
+## Current Position (v0.8.2 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -235,8 +235,12 @@ and adoption surface — not pretending the limits away.
   reproducible assessments. v0.8.1 adds candidate-only Portable Pattern
   Library Import with exact source snapshots, canonical digests, provenance,
   applicability boundaries, counterexamples, trust metadata, governance, and
-  explicit non-executable/non-authoritative import decisions. The committed
-  memory and library remain example-only and insufficient by design.
+  explicit non-executable/non-authoritative import decisions. v0.8.2 adds
+  target-specific local applicability decisions, unseen-case reproduction,
+  counterexample challenge outcomes, deterministic agreement, evidence and
+  source-trust sufficiency, and governed-activation eligibility. The committed
+  memory, library, and local validation remain example-only and insufficient
+  by design.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -248,14 +252,14 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-10-24 against primary-source signals. The
+The roadmap was revalidated on 2026-10-25 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
 
 | Current signal | Quality risk exposed | QIF response | Lead, not follow |
 | --- | --- | --- | --- |
-| Agent Skills became a vendor-neutral AAIF standard on 2026-10-22 after adoption across more than 70 agent platforms; the proposed roadmap now includes versioned releases and security guidance. OpenAI likewise treats skills as versioned bundles of reusable instructions and resources. ([Anthropic Agent Skills donation](https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation), [OpenAI agent computer environments and skills](https://openai.com/index/equip-responses-api-computer-environment/), [OpenAI skill boundary](https://developers.openai.com/plugins/concepts/skills)) | Portable expertise can be installed faster than organizations can establish source identity, applicability, counterexamples, local evidence, or authority. Instructions embedded in imported quality knowledge can also be followed as commands rather than treated as untrusted reference data. | v0.8.1 Portable Pattern Library Import, then v0.8.2 local applicability and v0.8.3 supply-chain revocation. | Preserve exact source snapshots and digests, retain trust and counterexamples, keep every import candidate-only and non-executable, then require local reproduction and later revocation-aware dependency governance before activation. |
+| Agent Skills became a vendor-neutral AAIF standard on 2026-10-22 after adoption across more than 70 agent platforms; OpenAI now documents independently versioned skill bundles, production version pinning, and review of skill files before agent exposure. ([Anthropic Agent Skills donation](https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation), [OpenAI Skills guide](https://developers.openai.com/api/docs/guides/tools-skills), [OpenAI Skills cookbook](https://developers.openai.com/cookbook/examples/skills_in_api)) | Portable expertise can be installed faster than organizations can establish source identity, applicability, counterexamples, local evidence, or authority. Version pinning reproduces content but does not show that the knowledge fits a local target. | v0.8.1 Portable Pattern Library Import, v0.8.2 Local Applicability and Reproduction, then v0.8.3 supply-chain revocation. | Preserve exact source snapshots and digests, keep imports candidate-only, require target-specific comparison plus unseen-case reproduction before eligibility, then preserve revocation-aware dependency governance after adoption. |
 | Persistent agent memory is being used to carry reusable lessons across runs, while current guidance keeps human-reviewed artifacts as the source of truth. Multi-agent research reports shared mistakes, hidden-profile failures, gullibility, and incompatible-goal escalation. A recent financial-agent deployment describes versioned organizational judgment records as a response to "memory debt." ([OpenAI memory and compaction](https://developers.openai.com/cookbook/examples/agents_sdk/building_reliable_agents_memory_compaction), [Anthropic multi-agent systems](https://www.anthropic.com/research/multiagent-systems), [OpenAI Terminal X](https://openai.com/index/terminal-x/)) | A final aggregate can overwrite minority evidence, make correlated lanes look independent, keep obsolete judgment active, or silently forget the record needed to challenge a future decision. | v0.8.0 Multi-Agent Judgment Memory. | Preserve lane-local source judgments, dependencies, revisions, dissent, retirement rationale, and authority boundaries as executable ledger records before optimizing memory retrieval or reuse. |
 | NIST measurement science identifies construct validity and unjustified generalization beyond a test setting as distinct open problems, while its TEVV-Athlon draft emphasizes context-specific, customizable assessment. ([NIST measurement science](https://www.nist.gov/blogs/caissi-research-blog/accelerating-ai-innovation-through-measurement-science), [NIST TEVV-Athlon](https://www.nist.gov/artificial-intelligence/ai-research/tevv-athlon-framework-evaluating-ai-systems)) | A score, threshold, confidence label, or apparently similar Quality Intent can be moved between domains even though the construct, stakeholders, losses, evidence, and monitoring differ. | v0.7.3 Cross-Domain Transportability Review. | Keep domain-local results separate, compare meaning and evidence dimension by dimension, require target-domain evidence, and bound any supported claim to the declared source-target scope. |
 | Agent evaluation increasingly distinguishes what an agent says from the resulting environment state, while production monitoring and human review supply longitudinal evidence. NIST identifies longitudinal ground truth and data-access gaps, and OpenAI monitorability evaluation withholds datapoints when evidence is too weak to report reliably. ([Anthropic agent evals](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), [NIST AI 800-4](https://www.nist.gov/publications/challenges-monitoring-deployed-ai-systems-center-ai-standards-and-innovation), [OpenAI monitorability evals](https://alignment.openai.com/monitorability-evals/)) | A later outcome or corrected source can overwrite what was originally known; missing, late, corrected, excluded, or withdrawn data can become invisible; analysis of observed cases alone can reverse the registered conclusion. | v0.7.1 Outcome Collection Ledger and v0.7.2 Missingness and Attrition Sensitivity. | Preserve every observation revision, classify every eligible enrollment once, and reproduce best/worst threshold bounds while refusing source-truth or missingness-mechanism claims. |
@@ -810,10 +814,19 @@ Deliverables:
   `PortableKnowledgeAssessment`, deterministic verifier rules, open-risk
   visibility, and retained negative fixtures. The committed import is
   example-only, candidate-only, governance-required, and insufficient.
+- Implemented third v0.8 slice, v0.8.2 Local Applicability and Reproduction:
+  bind each tested imported item to a named Evaluation Target, compare all
+  seven applicability dimensions, separate source from unseen cases,
+  reproduce decision agreement, challenge every imported counterexample, and
+  calculate governed-activation eligibility from source trust and local
+  evidence without granting activation or authority.
+- Status: implemented through `PortableKnowledgeLocalValidationPolicy`,
+  `PortableKnowledgeApplicabilityDecision`,
+  `PortableKnowledgeReproductionTrial`, and
+  `PortableKnowledgeLocalValidationAssessment`, deterministic verifier rules,
+  governance, and retained negative fixtures. The committed trials reproduce
+  their decisions but remain not eligible because evidence is example-only.
 - Next planned slices:
-  - v0.8.2 Local Applicability and Reproduction: require local cases,
-    applicability decisions, and reproduction evidence before imported quality
-    knowledge can become active.
   - v0.8.3 Portable Knowledge Supply-Chain Revocation: preserve transitive
     import dependencies, security advisories, revoked source versions,
     replacement lineage, and affected local decisions without treating a
@@ -874,8 +887,9 @@ Implementation status:
 
 - v0.8.0 implements the governed multi-agent memory and join foundation in
   `qif-ledger`. v0.8.1 implements source-preserving candidate-only library
-  import. Local applicability and reproduction remain v0.8.2 work, while
-  transitive dependency and revocation governance is now planned for v0.8.3.
+  import. v0.8.2 implements target-specific local applicability and unseen-case
+  reproduction. Transitive dependency and revocation governance is planned for
+  v0.8.3.
 
 Exit evidence:
 

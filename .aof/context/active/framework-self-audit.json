@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-24T04:42:09.386Z",
-  "audit_id": "FSA-QIFV0810",
-  "scope": "QIF v0.8.1 post-implementation self-review",
-  "summary": "Portable quality-knowledge policies, exact source snapshots, canonical digests, provenance, applicability boundaries, counterexamples, trust metadata, candidate-only decisions, governance, documentation, retained fixtures, and portable validation are complete; committed evidence remains example-only and insufficient.",
-  "detected_gap": "Imported knowledge has not been tested against target-specific cases, loss boundaries, stakeholder context, or unseen counterexamples, so local applicability and reproduction remain unestablished.",
+  "recorded_at": "2026-10-25T04:45:53.876Z",
+  "audit_id": "FSA-QIFV0820",
+  "scope": "QIF v0.8.2 local applicability and reproduction release review",
+  "summary": "Schemas, examples, verifier arithmetic, governance routing, negative fixtures, and portable documentation preserve candidate-only and non-authority boundaries.",
+  "detected_gap": "Committed source trust and reproduction evidence remain example-only; supply-chain revocation is deferred to v0.8.3.",
   "result_state": "stable",
-  "next_action": "Implement v0.8.2 Local Applicability and Reproduction with target-specific cases, applicability decisions, reproduction evidence, activation gates, and governed rejection.",
+  "next_action": "Release v0.8.2, then model revocation and transitive invalidation in v0.8.3.",
   "related_task_ids": [
-    "TASK-074"
+    "TASK-075"
   ],
-  "source_session_id": "SESS-MVLWFO6Y-21A2OJ",
-  "source_decision_record_id": "DEC-MVLWH76S-AB3O9Z"
+  "source_session_id": null,
+  "source_decision_record_id": null
 }

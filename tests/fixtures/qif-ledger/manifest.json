@@ -556,6 +556,167 @@
       "rule": "verifier does not claim imported applicability",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming imported knowledge applicability or local validity."
+    },
+    {
+      "file": "qif-ledger-portable-local-policies-not-array.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "local validation policies are retained",
+      "expect": "fail",
+      "errorIncludes": "portableKnowledgeLocalValidationPolicies must be an array."
+    },
+    {
+      "file": "qif-ledger-portable-local-policy-dimensions.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "local validation covers every applicability dimension",
+      "expect": "fail",
+      "errorIncludes": "PKLVP-001 requiredApplicabilityDimensions must include all seven local target dimensions exactly once."
+    },
+    {
+      "file": "qif-ledger-portable-local-policy-authority-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "local validation does not activate knowledge",
+      "expect": "fail",
+      "errorIncludes": "PKLVP-001 must forbid automatic activation, automatic authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-local-applicability-target.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "applicability decision target resolves",
+      "expect": "fail",
+      "errorIncludes": "PKLAD-001/targetRef references missing entity"
+    },
+    {
+      "file": "qif-ledger-portable-local-applicability-dimensions.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "applicability decision executes policy dimensions",
+      "expect": "fail",
+      "errorIncludes": "PKLAD-001 evaluatedDimensions must reproduce the policy dimensions exactly once."
+    },
+    {
+      "file": "qif-ledger-portable-local-applicability-mismatch-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "local context mismatch routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKLAD-001 local mismatch or non-applicable decision requires a portable-local-target-mismatch governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-local-reproduction-source-overlap.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "reproduction cases are unseen",
+      "expect": "fail",
+      "errorIncludes": "PKLRT-001 unseen cases must not overlap source cases."
+    },
+    {
+      "file": "qif-ledger-portable-local-reproduction-case-coverage.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "expected decisions cover unseen cases",
+      "expect": "fail",
+      "errorIncludes": "PKLRT-001 expectedDecisions must cover unseenCaseRefs exactly once."
+    },
+    {
+      "file": "qif-ledger-portable-local-reproduction-agreement.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "agreement score reproduces from case decisions",
+      "expect": "fail",
+      "errorIncludes": "PKLRT-001 agreementScore must reproduce as 1."
+    },
+    {
+      "file": "qif-ledger-portable-local-reproduction-independence.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "evaluator identity separation reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKLRT-001 evaluatorIndependent must reproduce as false."
+    },
+    {
+      "file": "qif-ledger-portable-local-reproduction-counterexamples.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "all imported counterexamples are challenged",
+      "expect": "fail",
+      "errorIncludes": "PKLRT-001 counterexampleOutcomes must challenge every imported counterexample exactly once."
+    },
+    {
+      "file": "qif-ledger-portable-local-reproduction-result.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "trial result reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKLRT-001 result must reproduce as partial-pass."
+    },
+    {
+      "file": "qif-ledger-portable-local-reproduction-evidence-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "example-only evidence routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKLRT-001 unverified or example-only evidence requires a portable-local-evidence-unverified governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-local-reproduction-hidden-reasoning.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "reproduction excludes hidden reasoning",
+      "expect": "fail",
+      "errorIncludes": "PKLRT-001 must not store hidden reasoning."
+    },
+    {
+      "file": "qif-ledger-portable-local-assessment-item-coverage.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "applicability decisions cover assessed items",
+      "expect": "fail",
+      "errorIncludes": "PKLVA-001 applicability decisions must cover itemRefs exactly once."
+    },
+    {
+      "file": "qif-ledger-portable-local-assessment-count.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "local validation counts reproduce",
+      "expect": "fail",
+      "errorIncludes": "PKLVA-001 reproducedItemCount must reproduce as 2."
+    },
+    {
+      "file": "qif-ledger-portable-local-assessment-source-trust.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "source trust state reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKLVA-001 sourceTrustStatus must reproduce as unverified."
+    },
+    {
+      "file": "qif-ledger-portable-local-assessment-sufficiency.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "local validation sufficiency reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKLVA-001 dataSufficiency must reproduce as insufficient."
+    },
+    {
+      "file": "qif-ledger-portable-local-assessment-eligibility.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "activation eligibility reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKLVA-001 activationEligibility must reproduce as not-eligible."
+    },
+    {
+      "file": "qif-ledger-portable-local-assessment-signals.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "local validation signals reproduce",
+      "expect": "fail",
+      "errorIncludes": "PKLVA-001 assessmentSignals must reproduce as"
+    },
+    {
+      "file": "qif-ledger-portable-local-assessment-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "insufficient local validation routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKLVA-001 insufficient local validation requires a portable-local-validation-insufficient governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-local-assessment-authority-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "local assessment does not grant authority",
+      "expect": "fail",
+      "errorIncludes": "PKLVA-001 must keep counts as evidence and forbid automatic activation, authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-local-verifier-independence-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "verifier does not overclaim evaluator independence",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming evaluator independence beyond recorded identity separation."
     }
   ],
   "rescopedRules": []
