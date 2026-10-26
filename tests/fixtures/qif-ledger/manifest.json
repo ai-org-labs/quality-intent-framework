@@ -717,6 +717,97 @@
       "rule": "verifier does not overclaim evaluator independence",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming evaluator independence beyond recorded identity separation."
+    },
+    {
+      "file": "qif-ledger-portable-revocation-policy-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "revocation policy fails closed and preserves history",
+      "expect": "fail",
+      "errorIncludes": "PKRVP-001 must require evidence, dependency closure, fail-closed handling, and history preservation."
+    },
+    {
+      "file": "qif-ledger-portable-revocation-exact-item.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "revocation subject resolves exactly",
+      "expect": "fail",
+      "errorIncludes": "PKRVN-001 references missing portable knowledge item PKI-NOPE-999."
+    },
+    {
+      "file": "qif-ledger-portable-revocation-digest-match.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "item revocation digest matches source",
+      "expect": "fail",
+      "errorIncludes": "PKRVN-001 sourceDigest must exactly match PKI-001."
+    },
+    {
+      "file": "qif-ledger-portable-revocation-source-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "unverified notice routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKRVN-001 unverified revocation issuer requires a portable-revocation-source-unverified governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-dependency-upstream.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "dependency endpoints resolve",
+      "expect": "fail",
+      "errorIncludes": "PKDE-001 references missing upstream record PKI-NOPE-999."
+    },
+    {
+      "file": "qif-ledger-portable-dependency-self.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "dependency edges do not self-reference",
+      "expect": "fail",
+      "errorIncludes": "PKDE-001 must not self-reference."
+    },
+    {
+      "file": "qif-ledger-portable-revocation-direct-impact.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "direct impact reproduces from graph",
+      "expect": "fail",
+      "errorIncludes": "PKRVIA-001 directDependentRefs must exactly reproduce direct dependency impact."
+    },
+    {
+      "file": "qif-ledger-portable-revocation-transitive-impact.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "transitive impact reproduces from graph",
+      "expect": "fail",
+      "errorIncludes": "PKRVIA-001 transitiveDependentRefs must exactly reproduce transitive dependency impact."
+    },
+    {
+      "file": "qif-ledger-portable-revocation-fail-closed.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "active revocation suspends eligibility",
+      "expect": "fail",
+      "errorIncludes": "PKRVIA-001 active or disputed notice must fail closed with suspended eligibility."
+    },
+    {
+      "file": "qif-ledger-portable-revocation-preserves-history.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "revocation does not delete history",
+      "expect": "fail",
+      "errorIncludes": "PKRVIA-001 must preserve history and forbid deletion, automatic activation, authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-revalidation-remains-suspended.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "untrusted replacement cannot restore use",
+      "expect": "fail",
+      "errorIncludes": "PKRVD-001 must remain suspended until trusted replacement evidence is reviewed."
+    },
+    {
+      "file": "qif-ledger-portable-revalidation-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "insufficient revalidation routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKRVD-001 insufficient revalidation requires a portable-revalidation-insufficient governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-revocation-verifier-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "verifier does not claim revocation authenticity",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming revocation notice authenticity or compromise truth."
     }
   ],
   "rescopedRules": []

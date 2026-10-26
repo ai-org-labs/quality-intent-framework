@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-26T04:31:03.476Z",
+  "value_hypothesis_id": "VHY-MVORE7N8-AV2WR7",
+  "expected_value_creation": "local organizations can deterministically identify and suspend every direct and transitive dependent of a revoked portable knowledge source, then revalidate through accountable governance",
+  "beneficiary": "human, AI, and hybrid organizations consuming portable QIF knowledge",
+  "supporting_evidence": [
+    "v0.8.1 and v0.8.2 preserve exact source identity, digests, applicability, and reproduction evidence but have no post-import revocation path",
+    "current portable skill ecosystems emphasize versioning, inspection, and security while software supply-chain policy requires explicit revocation handling"
+  ],
+  "success_criteria": [
+    "exact revocation subjects and dependency paths are traceable",
+    "direct and transitive impact sets reproduce deterministically",
+    "affected eligibility fails closed and revalidation requires reviewed replacement evidence"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

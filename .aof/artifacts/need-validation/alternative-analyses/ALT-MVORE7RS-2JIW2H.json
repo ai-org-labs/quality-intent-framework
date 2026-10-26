@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-26T04:31:03.640Z",
+  "alternative_analysis_id": "ALT-MVORE7RS-2JIW2H",
+  "subject_need": "prevent revoked portable quality knowledge from remaining silently eligible or active",
+  "alternative_solutions": [
+    "extend qif-ledger with revocation policy, notices, dependency edges, impact assessments, and revalidation decisions",
+    "treat every library update as a complete re-import and discard prior local validation"
+  ],
+  "non_solution_options": [
+    "trust latest-version pointers or publisher confidence without preserving historical dependency paths"
+  ],
+  "defer_options": [
+    "keep all imported knowledge permanently candidate-only"
+  ],
+  "stop_options": [
+    "do not release if impact traversal or fail-closed eligibility cannot be reproduced without claiming source authenticity or authority"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

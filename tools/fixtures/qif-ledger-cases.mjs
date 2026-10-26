@@ -47,6 +47,11 @@ function localValidationPolicy(pkg) { return pkg.portableKnowledgeLocalValidatio
 function localApplicability(pkg, index = 0) { return pkg.portableKnowledgeApplicabilityDecisions[index]; }
 function localReproduction(pkg, index = 0) { return pkg.portableKnowledgeReproductionTrials[index]; }
 function localValidationAssessment(pkg) { return pkg.portableKnowledgeLocalValidationAssessments[0]; }
+function revocationPolicy(pkg) { return pkg.portableKnowledgeRevocationPolicies[0]; }
+function revocationNotice(pkg) { return pkg.portableKnowledgeRevocationNotices[0]; }
+function dependencyEdge(pkg, index = 0) { return pkg.portableKnowledgeDependencyEdges[index]; }
+function revocationImpact(pkg) { return pkg.portableKnowledgeRevocationImpactAssessments[0]; }
+function revalidationDecision(pkg) { return pkg.portableKnowledgeRevalidationDecisions[0]; }
 
 export const cases = [
   {
@@ -618,6 +623,84 @@ export const cases = [
     rule: "verifier does not overclaim evaluator independence",
     expect: "verifierBoundary must explicitly avoid claiming evaluator independence beyond recorded identity separation.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "evaluator independence beyond recorded identity separation"); }
+  },
+  {
+    id: "portable-revocation-policy-boundary",
+    rule: "revocation policy fails closed and preserves history",
+    expect: "PKRVP-001 must require evidence, dependency closure, fail-closed handling, and history preservation.",
+    mutate: (pkg) => { revocationPolicy(pkg).failClosedOnUnknownImpact = false; }
+  },
+  {
+    id: "portable-revocation-exact-item",
+    rule: "revocation subject resolves exactly",
+    expect: "PKRVN-001 references missing portable knowledge item PKI-NOPE-999.",
+    mutate: (pkg) => { revocationNotice(pkg).itemRef = "PKI-NOPE-999"; }
+  },
+  {
+    id: "portable-revocation-digest-match",
+    rule: "item revocation digest matches source",
+    expect: "PKRVN-001 sourceDigest must exactly match PKI-001.",
+    mutate: (pkg) => { revocationNotice(pkg).sourceDigest = `sha256:${"0".repeat(64)}`; }
+  },
+  {
+    id: "portable-revocation-source-trigger",
+    rule: "unverified notice routes governance",
+    expect: "PKRVN-001 unverified revocation issuer requires a portable-revocation-source-unverified governance trigger.",
+    mutate: (pkg) => { revocationNotice(pkg).governanceTriggerRefs = ["PKGTR-008"]; }
+  },
+  {
+    id: "portable-dependency-upstream",
+    rule: "dependency endpoints resolve",
+    expect: "PKDE-001 references missing upstream record PKI-NOPE-999.",
+    mutate: (pkg) => { dependencyEdge(pkg).upstreamRef = "PKI-NOPE-999"; }
+  },
+  {
+    id: "portable-dependency-self",
+    rule: "dependency edges do not self-reference",
+    expect: "PKDE-001 must not self-reference.",
+    mutate: (pkg) => { dependencyEdge(pkg).downstreamRef = "PKI-001"; }
+  },
+  {
+    id: "portable-revocation-direct-impact",
+    rule: "direct impact reproduces from graph",
+    expect: "PKRVIA-001 directDependentRefs must exactly reproduce direct dependency impact.",
+    mutate: (pkg) => { revocationImpact(pkg).directDependentRefs = ["PKLAD-001"]; }
+  },
+  {
+    id: "portable-revocation-transitive-impact",
+    rule: "transitive impact reproduces from graph",
+    expect: "PKRVIA-001 transitiveDependentRefs must exactly reproduce transitive dependency impact.",
+    mutate: (pkg) => { revocationImpact(pkg).transitiveDependentRefs = []; }
+  },
+  {
+    id: "portable-revocation-fail-closed",
+    rule: "active revocation suspends eligibility",
+    expect: "PKRVIA-001 active or disputed notice must fail closed with suspended eligibility.",
+    mutate: (pkg) => { revocationImpact(pkg).eligibilityEffect = "unaffected"; }
+  },
+  {
+    id: "portable-revocation-preserves-history",
+    rule: "revocation does not delete history",
+    expect: "PKRVIA-001 must preserve history and forbid deletion, automatic activation, authority, and semantic truth claims.",
+    mutate: (pkg) => { revocationImpact(pkg).destructiveDeletion = true; }
+  },
+  {
+    id: "portable-revalidation-remains-suspended",
+    rule: "untrusted replacement cannot restore use",
+    expect: "PKRVD-001 must remain suspended until trusted replacement evidence is reviewed.",
+    mutate: (pkg) => { revalidationDecision(pkg).resultingUseStatus = "candidate"; }
+  },
+  {
+    id: "portable-revalidation-trigger",
+    rule: "insufficient revalidation routes governance",
+    expect: "PKRVD-001 insufficient revalidation requires a portable-revalidation-insufficient governance trigger.",
+    mutate: (pkg) => { revalidationDecision(pkg).governanceTriggerRefs = ["PKGTR-008"]; }
+  },
+  {
+    id: "portable-revocation-verifier-boundary",
+    rule: "verifier does not claim revocation authenticity",
+    expect: "verifierBoundary must explicitly avoid claiming revocation notice authenticity or compromise truth.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "revocation notice authenticity or compromise truth"); }
   }
 ];
 

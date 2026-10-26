@@ -1,0 +1,82 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-26T04:31:51.249Z",
+  "packet_id": "ASP-MVORF8I9-FO72F5",
+  "source_task_id": "TASK-076",
+  "source_parent_session_id": "SESS-MVORD031-BEPQNW",
+  "source_decision_record_id": "DEC-MVOREMQQ-LM6ISD",
+  "objective": "Implement and verify QIF v0.8.3 Portable Knowledge Supply-Chain Revocation",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "builder",
+    "team_ref": "integration-team",
+    "assignment_reason": "Builder owns the bounded qif-ledger revocation schema, dependency traversal verifier, retained fixtures, documentation, and release slice",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "qif-schema-verifier-release"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "domain-general-schema-and-verifier-design",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/qif-ledger-package.schema.json",
+        "tools/validate-qif-ledger.mjs",
+        "tests/fixtures/qif-ledger/manifest.json"
+      ],
+      "rationale": "existing portable import, local validation, and cross-reference architecture support bounded revocation lineage"
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository"
+  ],
+  "policy_refs": [
+    "policy-no-automatic-activation",
+    "policy-semantic-truth-boundary"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/qif-ledger-package.schema.json",
+    "required_sections": [
+      "revocation notices, dependency edges, impact assessments, and revalidation decisions",
+      "fail-closed suspension and non-authority boundaries"
+    ],
+    "acceptance_criteria": [
+      "npm test passes all positive and retained negative fixtures",
+      "portable package verifies and release assets match v0.8.3"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "revocation impact is exact, transitive, history-preserving, and fail-closed",
+      "evaluator_ref": "guardian",
+      "evidence_required": "schema constants, deterministic traversal, example, and rejecting fixtures",
+      "blocking": true
+    },
+    {
+      "criterion": "revalidation requires reviewed replacement evidence and cannot grant activation or authority",
+      "evaluator_ref": "builder",
+      "evidence_required": "schema, validator rules, governance triggers, and fixtures",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "silent-revocation-gap",
+      "trigger_condition": "an active or disputed notice can leave a dependent eligibility unsuspended, omit a transitive dependency, delete history, or revalidate without reviewed evidence",
+      "consequence": "block-assignment",
+      "recovery_action": "add deterministic fail-closed rule and rejecting fixture"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "Revoked knowledge must stop propagating.",
+    "current_action": "Implement portable knowledge revocation lineage",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Run Guardian review and full release validation"
+  },
+  "status": "draft"
+}

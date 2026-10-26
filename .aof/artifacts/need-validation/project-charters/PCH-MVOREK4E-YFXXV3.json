@@ -1,0 +1,21 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-26T04:31:19.646Z",
+  "project_charter_id": "PCH-MVOREK4E-YFXXV3",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-MVOREFF1-O3410Q.json",
+  "validated_objective": "Release the smallest standalone QIF slice that turns exact portable-knowledge revocation signals into deterministic direct and transitive impact, fail-closed suspension, and governed revalidation",
+  "scope": [
+    "qif-ledger revocation policy, notices, dependency edges, impact assessments, and revalidation decisions",
+    "governance triggers, deterministic verifier rules, retained negative fixtures, docs, AI guide, portable package, roadmap, changelog, and public release"
+  ],
+  "constraints": [
+    "preserve prior records and never automatically delete, rewrite, activate, execute, authorize, or grant authority",
+    "do not implement live registries, cryptographic signing infrastructure, UI, employee surveillance, v0.9 intent-twin work, or semantic truth claims"
+  ],
+  "expected_outcomes": [
+    "exact direct and transitive dependency impact is reproducible for every active or disputed revocation notice",
+    "affected prior eligibility becomes suspended until reviewed replacement evidence supports bounded revalidation"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

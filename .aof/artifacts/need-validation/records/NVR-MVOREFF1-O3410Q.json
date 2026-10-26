@@ -1,0 +1,35 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-26T04:31:13.549Z",
+  "validation_id": "NVR-MVOREFF1-O3410Q",
+  "raw_need": "Revoke bad portable QIF knowledge",
+  "validation_status": "validated",
+  "validated_need": "Make post-import revocation, transitive dependency impact, fail-closed suspension, and governed revalidation auditable for portable quality knowledge without deleting history or granting authority",
+  "decision_summary": "The need is not a general package updater or trust oracle; it is a deterministic local control that turns an exact upstream revocation signal into traceable downstream suspension and bounded revalidation.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What must a revocation identify and change?",
+      "answer": "the exact source subject, evidence, direct and transitive dependents, prior eligibility state, suspension state, and governance path",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must remain outside verifier claims?",
+      "answer": "source authenticity, compromise truth, semantic unsafety, operational safety, authorization, activation, and authority",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "a matching digest and previously successful local reproduction were assumed to remain sufficient after upstream trust changed"
+  ],
+  "evidence_gaps": [],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-MVORE7IH-QK49AA.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-MVORE7N8-AV2WR7.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-MVORE7RS-2JIW2H.json",
+  "experiment_proposal_ref": ".aof/artifacts/need-validation/experiment-proposals/EXP-MVORE7WE-9LQYG6.json",
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

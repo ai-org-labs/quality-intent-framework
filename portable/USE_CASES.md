@@ -95,6 +95,18 @@ submitted to governance; it is not activation, approval, or semantic truth.
 - `schemas/qif-ledger-package.schema.json`
 - `examples/qif-ledger-package.json`
 
+## 9. Respond to Revoked or Disputed Knowledge
+
+Match a notice to an exact library, item, digest, evidence origin, or publisher.
+Traverse recorded dependencies to identify direct and transitive local impact.
+For an active or disputed notice, suspend affected reuse while preserving all
+history. Do not reactivate from a signature or replacement claim alone: require
+reviewed replacement evidence, complete impact traversal, and governance.
+
+- `docs/qif-v0.8.3-portable-knowledge-revocation.md`
+- `schemas/qif-ledger-package.schema.json`
+- `examples/qif-ledger-package.json`
+
 ## Choosing a Package Type
 
 Open `MANIFEST.json` to see every included schema and example. Use a schema only

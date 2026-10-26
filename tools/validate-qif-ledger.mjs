@@ -257,6 +257,11 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeApplicabilityDecisions = requireArray(pkg, "portableKnowledgeApplicabilityDecisions", packagePath);
   const portableKnowledgeReproductionTrials = requireArray(pkg, "portableKnowledgeReproductionTrials", packagePath);
   const portableKnowledgeLocalValidationAssessments = requireArray(pkg, "portableKnowledgeLocalValidationAssessments", packagePath);
+  const portableKnowledgeRevocationPolicies = requireArray(pkg, "portableKnowledgeRevocationPolicies", packagePath);
+  const portableKnowledgeRevocationNotices = requireArray(pkg, "portableKnowledgeRevocationNotices", packagePath);
+  const portableKnowledgeDependencyEdges = requireArray(pkg, "portableKnowledgeDependencyEdges", packagePath);
+  const portableKnowledgeRevocationImpactAssessments = requireArray(pkg, "portableKnowledgeRevocationImpactAssessments", packagePath);
+  const portableKnowledgeRevalidationDecisions = requireArray(pkg, "portableKnowledgeRevalidationDecisions", packagePath);
   const packageRefIndex = indexById(packageRefs, `${packagePath}:packageRefs`);
   const crossPackageRefIndex = indexById(crossPackageRefs, `${packagePath}:crossPackageRefs`);
   const lifecycleIndex = indexById(lifecycleRecords, `${packagePath}:qualityIntentLifecycleRecords`);
@@ -279,6 +284,11 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeLocalValidationPolicyIndex = indexById(portableKnowledgeLocalValidationPolicies, `${packagePath}:portableKnowledgeLocalValidationPolicies`);
   const portableKnowledgeApplicabilityDecisionIndex = indexById(portableKnowledgeApplicabilityDecisions, `${packagePath}:portableKnowledgeApplicabilityDecisions`);
   const portableKnowledgeReproductionTrialIndex = indexById(portableKnowledgeReproductionTrials, `${packagePath}:portableKnowledgeReproductionTrials`);
+  const portableKnowledgeLocalValidationAssessmentIndex = indexById(portableKnowledgeLocalValidationAssessments, `${packagePath}:portableKnowledgeLocalValidationAssessments`);
+  const portableKnowledgeRevocationPolicyIndex = indexById(portableKnowledgeRevocationPolicies, `${packagePath}:portableKnowledgeRevocationPolicies`);
+  const portableKnowledgeRevocationNoticeIndex = indexById(portableKnowledgeRevocationNotices, `${packagePath}:portableKnowledgeRevocationNotices`);
+  const portableKnowledgeDependencyEdgeIndex = indexById(portableKnowledgeDependencyEdges, `${packagePath}:portableKnowledgeDependencyEdges`);
+  const portableKnowledgeRevocationImpactAssessmentIndex = indexById(portableKnowledgeRevocationImpactAssessments, `${packagePath}:portableKnowledgeRevocationImpactAssessments`);
   void crossPackageRefIndex;
   void missedIntentIndex;
 
@@ -785,6 +795,133 @@ function validateLedgerPackage(pkg, packagePath) {
     if (sufficient && (assessment.governanceTriggerRefs ?? []).length > 0) warnings.push(`${assessment.id} is eligible but still has governance triggers; eligibility does not resolve governance automatically.`);
   }
 
+  const revocationSubjectKinds = ["library", "item", "source-digest", "evidence-origin", "publisher"];
+  for (const policy of portableKnowledgeRevocationPolicies) {
+    if (!sameSet(policy.acceptedNoticeStates, ["active", "disputed"])) errors.push(`${policy.id} acceptedNoticeStates must contain active and disputed exactly once.`);
+    if (!sameSet(policy.supportedSubjectKinds, revocationSubjectKinds)) errors.push(`${policy.id} supportedSubjectKinds must contain all five exact subject kinds.`);
+    if (policy.requireEvidence !== true || policy.requireDependencyClosure !== true || policy.failClosedOnUnknownImpact !== true || policy.preserveHistory !== true) errors.push(`${policy.id} must require evidence, dependency closure, fail-closed handling, and history preservation.`);
+    if (policy.destructiveDeletionAllowed !== false || policy.automaticActivation !== false || policy.automaticAuthority !== false || policy.semanticTruthClaimed !== false) errors.push(`${policy.id} must forbid destructive deletion, automatic activation, automatic authority, and semantic truth claims.`);
+  }
+
+  const portableRecordIndex = new Map();
+  for (const collection of [portableKnowledgeLibraries, portableKnowledgeItems, portableKnowledgeImportDecisions, portableKnowledgeAssessments, portableKnowledgeApplicabilityDecisions, portableKnowledgeReproductionTrials, portableKnowledgeLocalValidationAssessments]) {
+    for (const record of collection) portableRecordIndex.set(record.id, record);
+  }
+  const revocationTypes = (refs, owner) => portableGovernanceTypes(refs, owner);
+  const noticeAffectedItems = new Map();
+  for (const notice of portableKnowledgeRevocationNotices) {
+    if (!portableKnowledgeRevocationPolicyIndex.has(notice.policyRef)) errors.push(`${notice.id} references missing revocation policy ${notice.policyRef}.`);
+    for (const evidenceRef of notice.evidenceRefs ?? []) resolveEntity(evidenceRef, packageIndex, `${notice.id}/evidenceRef`);
+    let items = [];
+    if (notice.subjectKind === "item") {
+      const item = portableKnowledgeItemIndex.get(notice.itemRef);
+      if (!item) errors.push(`${notice.id} references missing portable knowledge item ${notice.itemRef}.`);
+      else {
+        items = [item];
+        if (notice.sourceDigest !== item.sourceDigest) errors.push(`${notice.id} sourceDigest must exactly match ${item.id}.`);
+      }
+    } else if (notice.subjectKind === "library") {
+      const library = portableKnowledgeLibraryIndex.get(notice.libraryRef);
+      if (!library) errors.push(`${notice.id} references missing portable knowledge library ${notice.libraryRef}.`);
+      items = portableKnowledgeItems.filter((item) => item.libraryRef === notice.libraryRef);
+    } else if (notice.subjectKind === "source-digest") {
+      items = portableKnowledgeItems.filter((item) => item.sourceDigest === notice.sourceDigest);
+    } else if (notice.subjectKind === "evidence-origin") {
+      items = portableKnowledgeItems.filter((item) => portableKnowledgeLibraryIndex.get(item.libraryRef)?.evidenceOriginRef === notice.evidenceOriginRef);
+    } else if (notice.subjectKind === "publisher") {
+      items = portableKnowledgeItems.filter((item) => portableKnowledgeLibraryIndex.get(item.libraryRef)?.publisherRef === notice.publisherRef);
+    }
+    if (items.length === 0) errors.push(`${notice.id} exact revocation subject must resolve to at least one portable knowledge item.`);
+    noticeAffectedItems.set(notice.id, items.map((item) => item.id));
+    const types = revocationTypes(notice.governanceTriggerRefs, notice.id);
+    if (["active", "disputed"].includes(notice.noticeState) && (notice.evidenceRefs ?? []).length === 0) errors.push(`${notice.id} active or disputed notice requires evidenceRefs.`);
+    if (["active", "disputed"].includes(notice.noticeState) && notice.issuerTrustStatus !== "verified" && !types.has("portable-revocation-source-unverified")) errors.push(`${notice.id} unverified revocation issuer requires a portable-revocation-source-unverified governance trigger.`);
+  }
+
+  const graph = new Map();
+  const edgePairs = new Set();
+  for (const edge of portableKnowledgeDependencyEdges) {
+    if (!portableRecordIndex.has(edge.upstreamRef)) errors.push(`${edge.id} references missing upstream record ${edge.upstreamRef}.`);
+    if (!portableRecordIndex.has(edge.downstreamRef)) errors.push(`${edge.id} references missing downstream record ${edge.downstreamRef}.`);
+    if (edge.upstreamRef === edge.downstreamRef) errors.push(`${edge.id} must not self-reference.`);
+    const pair = `${edge.upstreamRef}->${edge.downstreamRef}`;
+    if (edgePairs.has(pair)) errors.push(`${edge.id} duplicates dependency ${pair}.`);
+    edgePairs.add(pair);
+    for (const evidenceRef of edge.evidenceRefs ?? []) resolveEntity(evidenceRef, packageIndex, `${edge.id}/evidenceRef`);
+    if (edge.active && edge.status === "current") {
+      if (!graph.has(edge.upstreamRef)) graph.set(edge.upstreamRef, []);
+      graph.get(edge.upstreamRef).push(edge);
+    }
+  }
+
+  for (const assessment of portableKnowledgeRevocationImpactAssessments) {
+    const policy = portableKnowledgeRevocationPolicyIndex.get(assessment.policyRef);
+    const notice = portableKnowledgeRevocationNoticeIndex.get(assessment.noticeRef);
+    if (!policy) errors.push(`${assessment.id} references missing revocation policy ${assessment.policyRef}.`);
+    if (!notice) errors.push(`${assessment.id} references missing revocation notice ${assessment.noticeRef}.`);
+    if (notice && notice.policyRef !== assessment.policyRef) errors.push(`${assessment.id} policyRef must match its notice policy.`);
+    const seeds = noticeAffectedItems.get(assessment.noticeRef) ?? [];
+    const direct = new Set();
+    const transitive = new Set();
+    const usedEdges = new Set();
+    const queue = seeds.map((id) => ({ id, depth: 0 }));
+    const visited = new Set(seeds);
+    while (queue.length > 0) {
+      const current = queue.shift();
+      for (const edge of graph.get(current.id) ?? []) {
+        usedEdges.add(edge.id);
+        if (current.depth === 0) direct.add(edge.downstreamRef); else if (!direct.has(edge.downstreamRef)) transitive.add(edge.downstreamRef);
+        if (!visited.has(edge.downstreamRef)) {
+          visited.add(edge.downstreamRef);
+          queue.push({ id: edge.downstreamRef, depth: current.depth + 1 });
+        }
+      }
+    }
+    if (!sameSet(assessment.affectedItemRefs, seeds)) errors.push(`${assessment.id} affectedItemRefs must exactly reproduce the notice subject match.`);
+    if (!sameSet(assessment.directDependentRefs, [...direct])) errors.push(`${assessment.id} directDependentRefs must exactly reproduce direct dependency impact.`);
+    if (!sameSet(assessment.transitiveDependentRefs, [...transitive])) errors.push(`${assessment.id} transitiveDependentRefs must exactly reproduce transitive dependency impact.`);
+    if (!sameSet(assessment.dependencyEdgeRefs, [...usedEdges])) errors.push(`${assessment.id} dependencyEdgeRefs must exactly reproduce traversed dependency edges.`);
+    for (const id of assessment.dependencyEdgeRefs ?? []) if (!portableKnowledgeDependencyEdgeIndex.has(id)) errors.push(`${assessment.id} references missing dependency edge ${id}.`);
+    const unresolved = (assessment.unresolvedDependencyRefs ?? []).filter((id) => !portableRecordIndex.has(id));
+    const complete = unresolved.length === 0;
+    const counts = { affectedItemCount: seeds.length, directDependentCount: direct.size, transitiveDependentCount: transitive.size };
+    for (const [field, value] of Object.entries(counts)) if (assessment[field] !== value) errors.push(`${assessment.id} ${field} must reproduce as ${value}.`);
+    if (assessment.traversalComplete !== complete) errors.push(`${assessment.id} traversalComplete must reproduce as ${complete}.`);
+    const active = ["active", "disputed"].includes(notice?.noticeState);
+    if (active && assessment.eligibilityEffect !== "suspended") errors.push(`${assessment.id} active or disputed notice must fail closed with suspended eligibility.`);
+    const sufficient = complete && notice?.issuerTrustStatus === "verified";
+    if (assessment.dataSufficiency !== (sufficient ? "sufficient" : "insufficient")) errors.push(`${assessment.id} dataSufficiency must reproduce as ${sufficient ? "sufficient" : "insufficient"}.`);
+    const signals = ["revocation-recorded"];
+    if (direct.size > 0) signals.push("direct-impact-found");
+    if (transitive.size > 0) signals.push("transitive-impact-found");
+    if (!complete) signals.push("dependency-closure-incomplete");
+    if (notice?.issuerTrustStatus !== "verified") signals.push("issuer-unverified");
+    if (active) signals.push("eligibility-suspended");
+    if (!sameSet(assessment.assessmentSignals, signals)) errors.push(`${assessment.id} assessmentSignals must reproduce as ${signals.join(", ")}.`);
+    if (assessment.preservationStatus !== "history-preserved" || assessment.destructiveDeletion !== false || assessment.automaticActivation !== false || assessment.automaticAuthority !== false || assessment.semanticTruthClaimed !== false) errors.push(`${assessment.id} must preserve history and forbid deletion, automatic activation, authority, and semantic truth claims.`);
+    const types = revocationTypes(assessment.governanceTriggerRefs, assessment.id);
+    if (!complete && !types.has("portable-revocation-impact-incomplete")) errors.push(`${assessment.id} incomplete impact traversal requires a portable-revocation-impact-incomplete governance trigger.`);
+    if (active && !types.has("portable-revocation-dependent-suspended")) errors.push(`${assessment.id} suspended dependents require a portable-revocation-dependent-suspended governance trigger.`);
+  }
+
+  for (const decision of portableKnowledgeRevalidationDecisions) {
+    const notice = portableKnowledgeRevocationNoticeIndex.get(decision.noticeRef);
+    const assessment = portableKnowledgeRevocationImpactAssessmentIndex.get(decision.impactAssessmentRef);
+    if (!portableKnowledgeRevocationPolicyIndex.has(decision.policyRef)) errors.push(`${decision.id} references missing revocation policy ${decision.policyRef}.`);
+    if (!notice) errors.push(`${decision.id} references missing revocation notice ${decision.noticeRef}.`);
+    if (!assessment) errors.push(`${decision.id} references missing impact assessment ${decision.impactAssessmentRef}.`);
+    if (assessment && (assessment.noticeRef !== decision.noticeRef || assessment.policyRef !== decision.policyRef)) errors.push(`${decision.id} notice, policy, and impact assessment references must align.`);
+    if (!sameSet(decision.affectedItemRefs, assessment?.affectedItemRefs ?? [])) errors.push(`${decision.id} affectedItemRefs must match its impact assessment.`);
+    for (const evidenceRef of decision.replacementEvidenceRefs ?? []) resolveEntity(evidenceRef, packageIndex, `${decision.id}/replacementEvidenceRef`);
+    if (decision.replacementItemRef && !portableKnowledgeItemIndex.has(decision.replacementItemRef)) errors.push(`${decision.id} references missing replacement item ${decision.replacementItemRef}.`);
+    const trustedReplacement = Boolean(decision.replacementItemRef) && (decision.replacementEvidenceRefs ?? []).length > 0 && notice?.issuerTrustStatus === "verified" && assessment?.dataSufficiency === "sufficient";
+    const active = ["active", "disputed"].includes(notice?.noticeState);
+    if (active && !trustedReplacement && (decision.resultingUseStatus !== "suspended" || !["suspend", "keep-suspended"].includes(decision.decision))) errors.push(`${decision.id} must remain suspended until trusted replacement evidence is reviewed.`);
+    if (decision.preserveHistory !== true || decision.automaticActivation !== false || decision.automaticAuthority !== false) errors.push(`${decision.id} must preserve history and forbid automatic activation and authority.`);
+    const types = revocationTypes(decision.governanceTriggerRefs, decision.id);
+    if (active && !trustedReplacement && !types.has("portable-revalidation-insufficient")) errors.push(`${decision.id} insufficient revalidation requires a portable-revalidation-insufficient governance trigger.`);
+  }
+
   const index = pkg.ledgerIndex;
   if (!index || typeof index !== "object") {
     errors.push(`${packagePath} must include ledgerIndex.`);
@@ -816,7 +953,7 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim ?? []).includes("semantic truth")) {
       errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
     }
-    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use"]) {
+    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth"]) {
       if (!(boundary.doesNotClaim ?? []).includes(claim)) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming ${claim}.`);
     }
   }
@@ -849,7 +986,12 @@ function validateLedgerPackage(pkg, packagePath) {
       portableKnowledgeLocalValidationPolicies: portableKnowledgeLocalValidationPolicies.length,
       portableKnowledgeApplicabilityDecisions: portableKnowledgeApplicabilityDecisions.length,
       portableKnowledgeReproductionTrials: portableKnowledgeReproductionTrials.length,
-      portableKnowledgeLocalValidationAssessments: portableKnowledgeLocalValidationAssessments.length
+      portableKnowledgeLocalValidationAssessments: portableKnowledgeLocalValidationAssessments.length,
+      portableKnowledgeRevocationPolicies: portableKnowledgeRevocationPolicies.length,
+      portableKnowledgeRevocationNotices: portableKnowledgeRevocationNotices.length,
+      portableKnowledgeDependencyEdges: portableKnowledgeDependencyEdges.length,
+      portableKnowledgeRevocationImpactAssessments: portableKnowledgeRevocationImpactAssessments.length,
+      portableKnowledgeRevalidationDecisions: portableKnowledgeRevalidationDecisions.length
     }
   });
 }

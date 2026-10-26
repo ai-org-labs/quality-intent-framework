@@ -1,0 +1,290 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-10-26T04:38:59.665Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MVORD031-BEPQNW",
+    "stage": "review",
+    "executionId": "CRUN-MVOROF2L-PLQ2UZ",
+    "executionStatus": "prepared",
+    "invokedModel": false,
+    "seatCount": 2,
+    "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01)",
+    "lastCouncilExecutionId": "CRUN-MVOROF2L-PLQ2UZ",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVORD031-BEPQNW",
+              "decision_id": "DEC-MVOREMQQ-LM6ISD",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover the standalone qif-ledger schema, source-linked portable libraries and items, local applicability/reproduction assessments, revocation dependency graph, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Keep UI, external registries, live key infrastructure, cryptographic signing implementation, automatic deletion, automatic activation, automatic authority, employee surveillance, v0.9 intent-twin work, and semantic truth claims out of scope.",
+              "intent": "Success means an active or disputed revocation notice names exact affected source identities and evidence; direct and transitive dependents are reproduced from explicit dependency edges; prior eligibility fails closed into suspension without history deletion; stale or incomplete traversal opens governance; and revalidation requires a replacement source or reviewed evidence. Every count and status must be deterministic, while authenticity, compromise truth, safety, and authority remain human or governance judgments.",
+              "active_context": "context: Cover the standalone qif-ledger schema, source-linked portable libraries and items, local applicability/reproduction assessments, revocation dependency graph, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Keep UI, external registries, live key infrastructure, cryptographic signing implementation, automatic deletion, automatic activation, automatic authority, employee surveillance, v0.9 intent-twin work, and semantic truth claims out of scope. | success: Success means an active or disputed revocation notice names exact affected source identities and evidence; direct and transitive dependents are reproduced from explicit dependency edges; prior eligibility fails closed into suspension without history deletion; stale or incomplete traversal opens governance; and revalidation requires a replacement source or reviewed evidence. Every count and status must be deterministic, while authenticity, compromise truth, safety, and authority remain human or governance judgments.",
+              "context_snapshot_id": "CTX-MVORD5OD-M5YW5X",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked portable libraries and items, local applicability/reproduction assessments, revocation dependency graph, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Keep UI, external registries, live key infrastructure, cryptographic signing implementation, automatic deletion, automatic activation, automatic authority, employee surveillance, v0.9 intent-twin work, and semantic truth claims out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means an active or disputed revocation notice names exact affected source identities and evidence; direct and transitive dependents are reproduced from explicit dependency edges; prior eligibility fails closed into suspension without history deletion; stale or incomplete traversal opens governance; and revalidation requires a replacement source or reviewed evidence. Every count and status must be deterministic, while authenticity, compromise truth, safety, and authority remain human or governance judgments."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.3 Portable Knowledge Supply-Chain Revocation. Need: v0.8.2 can import portable Decision Patterns and Quality Intents, test local applicability, and mark them only eligible for governed activation, but it cannot respond when a source library, item digest, signer, evidence source, or upstream pattern is later revoked, compromised, superseded, disputed, or stale. Intent: extend standalone qif-ledger with source revocation notices, dependency lineage, deterministic direct and transitive impact assessment, fail-closed suspension, bounded revalidation, and governance. Preserve history; never delete or silently rewrite prior decisions. Do not grant automatic semantic truth, activation, execution, authorization, or authority. Add schemas, example, verifier rules, retained negative fixtures, documentation, AI authoring guidance, portable package integration, roadmap, changelog, AOF evidence, tag, and GitHub release.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVOREFF1-O3410Q.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVOREK4E-YFXXV3.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVORE7IH-QK49AA.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVORE7N8-AV2WR7.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVORE7RS-2JIW2H.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVORE7WE-9LQYG6.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVOREMQQ-LM6ISD"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVORD031-BEPQNW",
+              "decision_id": "DEC-MVOREMQQ-LM6ISD",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover the standalone qif-ledger schema, source-linked portable libraries and items, local applicability/reproduction assessments, revocation dependency graph, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Keep UI, external registries, live key infrastructure, cryptographic signing implementation, automatic deletion, automatic activation, automatic authority, employee surveillance, v0.9 intent-twin work, and semantic truth claims out of scope.",
+              "intent": "Success means an active or disputed revocation notice names exact affected source identities and evidence; direct and transitive dependents are reproduced from explicit dependency edges; prior eligibility fails closed into suspension without history deletion; stale or incomplete traversal opens governance; and revalidation requires a replacement source or reviewed evidence. Every count and status must be deterministic, while authenticity, compromise truth, safety, and authority remain human or governance judgments.",
+              "active_context": "context: Cover the standalone qif-ledger schema, source-linked portable libraries and items, local applicability/reproduction assessments, revocation dependency graph, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Keep UI, external registries, live key infrastructure, cryptographic signing implementation, automatic deletion, automatic activation, automatic authority, employee surveillance, v0.9 intent-twin work, and semantic truth claims out of scope. | success: Success means an active or disputed revocation notice names exact affected source identities and evidence; direct and transitive dependents are reproduced from explicit dependency edges; prior eligibility fails closed into suspension without history deletion; stale or incomplete traversal opens governance; and revalidation requires a replacement source or reviewed evidence. Every count and status must be deterministic, while authenticity, compromise truth, safety, and authority remain human or governance judgments.",
+              "context_snapshot_id": "CTX-MVORD5OD-M5YW5X",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked portable libraries and items, local applicability/reproduction assessments, revocation dependency graph, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Keep UI, external registries, live key infrastructure, cryptographic signing implementation, automatic deletion, automatic activation, automatic authority, employee surveillance, v0.9 intent-twin work, and semantic truth claims out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means an active or disputed revocation notice names exact affected source identities and evidence; direct and transitive dependents are reproduced from explicit dependency edges; prior eligibility fails closed into suspension without history deletion; stale or incomplete traversal opens governance; and revalidation requires a replacement source or reviewed evidence. Every count and status must be deterministic, while authenticity, compromise truth, safety, and authority remain human or governance judgments."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.3 Portable Knowledge Supply-Chain Revocation. Need: v0.8.2 can import portable Decision Patterns and Quality Intents, test local applicability, and mark them only eligible for governed activation, but it cannot respond when a source library, item digest, signer, evidence source, or upstream pattern is later revoked, compromised, superseded, disputed, or stale. Intent: extend standalone qif-ledger with source revocation notices, dependency lineage, deterministic direct and transitive impact assessment, fail-closed suspension, bounded revalidation, and governance. Preserve history; never delete or silently rewrite prior decisions. Do not grant automatic semantic truth, activation, execution, authorization, or authority. Add schemas, example, verifier rules, retained negative fixtures, documentation, AI authoring guidance, portable package integration, roadmap, changelog, AOF evidence, tag, and GitHub release.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVOREFF1-O3410Q.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVOREK4E-YFXXV3.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVORE7IH-QK49AA.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVORE7N8-AV2WR7.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVORE7RS-2JIW2H.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVORE7WE-9LQYG6.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVOREMQQ-LM6ISD"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MVOROF2L-PLQ2UZ",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "prepared",
+      "started_at": "2026-10-26T04:38:59.661Z",
+      "completed_at": "2026-10-26T04:38:59.661Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01)",
+      "steps": [
+        {
+          "step_id": "CRUN-MVOROF2L-PLQ2UZ-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVORD031-BEPQNW",
+              "decision_id": "DEC-MVOREMQQ-LM6ISD",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover the standalone qif-ledger schema, source-linked portable libraries and items, local applicability/reproduction assessments, revocation dependency graph, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Keep UI, external registries, live key infrastructure, cryptographic signing implementation, automatic deletion, automatic activation, automatic authority, employee surveillance, v0.9 intent-twin work, and semantic truth claims out of scope.",
+              "intent": "Success means an active or disputed revocation notice names exact affected source identities and evidence; direct and transitive dependents are reproduced from explicit dependency edges; prior eligibility fails closed into suspension without history deletion; stale or incomplete traversal opens governance; and revalidation requires a replacement source or reviewed evidence. Every count and status must be deterministic, while authenticity, compromise truth, safety, and authority remain human or governance judgments.",
+              "active_context": "context: Cover the standalone qif-ledger schema, source-linked portable libraries and items, local applicability/reproduction assessments, revocation dependency graph, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Keep UI, external registries, live key infrastructure, cryptographic signing implementation, automatic deletion, automatic activation, automatic authority, employee surveillance, v0.9 intent-twin work, and semantic truth claims out of scope. | success: Success means an active or disputed revocation notice names exact affected source identities and evidence; direct and transitive dependents are reproduced from explicit dependency edges; prior eligibility fails closed into suspension without history deletion; stale or incomplete traversal opens governance; and revalidation requires a replacement source or reviewed evidence. Every count and status must be deterministic, while authenticity, compromise truth, safety, and authority remain human or governance judgments.",
+              "context_snapshot_id": "CTX-MVORD5OD-M5YW5X",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked portable libraries and items, local applicability/reproduction assessments, revocation dependency graph, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Keep UI, external registries, live key infrastructure, cryptographic signing implementation, automatic deletion, automatic activation, automatic authority, employee surveillance, v0.9 intent-twin work, and semantic truth claims out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means an active or disputed revocation notice names exact affected source identities and evidence; direct and transitive dependents are reproduced from explicit dependency edges; prior eligibility fails closed into suspension without history deletion; stale or incomplete traversal opens governance; and revalidation requires a replacement source or reviewed evidence. Every count and status must be deterministic, while authenticity, compromise truth, safety, and authority remain human or governance judgments."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.3 Portable Knowledge Supply-Chain Revocation. Need: v0.8.2 can import portable Decision Patterns and Quality Intents, test local applicability, and mark them only eligible for governed activation, but it cannot respond when a source library, item digest, signer, evidence source, or upstream pattern is later revoked, compromised, superseded, disputed, or stale. Intent: extend standalone qif-ledger with source revocation notices, dependency lineage, deterministic direct and transitive impact assessment, fail-closed suspension, bounded revalidation, and governance. Preserve history; never delete or silently rewrite prior decisions. Do not grant automatic semantic truth, activation, execution, authorization, or authority. Add schemas, example, verifier rules, retained negative fixtures, documentation, AI authoring guidance, portable package integration, roadmap, changelog, AOF evidence, tag, and GitHub release.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVOREFF1-O3410Q.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVOREK4E-YFXXV3.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVORE7IH-QK49AA.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVORE7N8-AV2WR7.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVORE7RS-2JIW2H.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVORE7WE-9LQYG6.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVOREMQQ-LM6ISD"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVOROF2L-PLQ2UZ-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVORD031-BEPQNW",
+              "decision_id": "DEC-MVOREMQQ-LM6ISD",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover the standalone qif-ledger schema, source-linked portable libraries and items, local applicability/reproduction assessments, revocation dependency graph, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Keep UI, external registries, live key infrastructure, cryptographic signing implementation, automatic deletion, automatic activation, automatic authority, employee surveillance, v0.9 intent-twin work, and semantic truth claims out of scope.",
+              "intent": "Success means an active or disputed revocation notice names exact affected source identities and evidence; direct and transitive dependents are reproduced from explicit dependency edges; prior eligibility fails closed into suspension without history deletion; stale or incomplete traversal opens governance; and revalidation requires a replacement source or reviewed evidence. Every count and status must be deterministic, while authenticity, compromise truth, safety, and authority remain human or governance judgments.",
+              "active_context": "context: Cover the standalone qif-ledger schema, source-linked portable libraries and items, local applicability/reproduction assessments, revocation dependency graph, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Keep UI, external registries, live key infrastructure, cryptographic signing implementation, automatic deletion, automatic activation, automatic authority, employee surveillance, v0.9 intent-twin work, and semantic truth claims out of scope. | success: Success means an active or disputed revocation notice names exact affected source identities and evidence; direct and transitive dependents are reproduced from explicit dependency edges; prior eligibility fails closed into suspension without history deletion; stale or incomplete traversal opens governance; and revalidation requires a replacement source or reviewed evidence. Every count and status must be deterministic, while authenticity, compromise truth, safety, and authority remain human or governance judgments.",
+              "context_snapshot_id": "CTX-MVORD5OD-M5YW5X",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, source-linked portable libraries and items, local applicability/reproduction assessments, revocation dependency graph, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Keep UI, external registries, live key infrastructure, cryptographic signing implementation, automatic deletion, automatic activation, automatic authority, employee surveillance, v0.9 intent-twin work, and semantic truth claims out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means an active or disputed revocation notice names exact affected source identities and evidence; direct and transitive dependents are reproduced from explicit dependency edges; prior eligibility fails closed into suspension without history deletion; stale or incomplete traversal opens governance; and revalidation requires a replacement source or reviewed evidence. Every count and status must be deterministic, while authenticity, compromise truth, safety, and authority remain human or governance judgments."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.3 Portable Knowledge Supply-Chain Revocation. Need: v0.8.2 can import portable Decision Patterns and Quality Intents, test local applicability, and mark them only eligible for governed activation, but it cannot respond when a source library, item digest, signer, evidence source, or upstream pattern is later revoked, compromised, superseded, disputed, or stale. Intent: extend standalone qif-ledger with source revocation notices, dependency lineage, deterministic direct and transitive impact assessment, fail-closed suspension, bounded revalidation, and governance. Preserve history; never delete or silently rewrite prior decisions. Do not grant automatic semantic truth, activation, execution, authorization, or authority. Add schemas, example, verifier rules, retained negative fixtures, documentation, AI authoring guidance, portable package integration, roadmap, changelog, AOF evidence, tag, and GitHub release.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVOREFF1-O3410Q.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVOREK4E-YFXXV3.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVORE7IH-QK49AA.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVORE7N8-AV2WR7.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVORE7RS-2JIW2H.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVORE7WE-9LQYG6.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVOREMQQ-LM6ISD"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

@@ -32,6 +32,11 @@
     "portableKnowledgeApplicabilityDecisions",
     "portableKnowledgeReproductionTrials",
     "portableKnowledgeLocalValidationAssessments",
+    "portableKnowledgeRevocationPolicies",
+    "portableKnowledgeRevocationNotices",
+    "portableKnowledgeDependencyEdges",
+    "portableKnowledgeRevocationImpactAssessments",
+    "portableKnowledgeRevalidationDecisions",
     "ledgerIndex",
     "verifierBoundary"
   ],
@@ -159,6 +164,26 @@
       "type": "array",
       "minItems": 1,
       "items": { "$ref": "#/$defs/portableKnowledgeLocalValidationAssessment" }
+    },
+    "portableKnowledgeRevocationPolicies": {
+      "type": "array", "minItems": 1,
+      "items": { "$ref": "#/$defs/portableKnowledgeRevocationPolicy" }
+    },
+    "portableKnowledgeRevocationNotices": {
+      "type": "array", "minItems": 1,
+      "items": { "$ref": "#/$defs/portableKnowledgeRevocationNotice" }
+    },
+    "portableKnowledgeDependencyEdges": {
+      "type": "array", "minItems": 1,
+      "items": { "$ref": "#/$defs/portableKnowledgeDependencyEdge" }
+    },
+    "portableKnowledgeRevocationImpactAssessments": {
+      "type": "array", "minItems": 1,
+      "items": { "$ref": "#/$defs/portableKnowledgeRevocationImpactAssessment" }
+    },
+    "portableKnowledgeRevalidationDecisions": {
+      "type": "array", "minItems": 1,
+      "items": { "$ref": "#/$defs/portableKnowledgeRevalidationDecision" }
     },
     "ledgerIndex": { "$ref": "#/$defs/ledgerIndex" },
     "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
@@ -484,7 +509,7 @@
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" },
-        "triggerType": { "enum": ["portable-source-unverified", "portable-integrity-mismatch", "portable-applicability-unvalidated", "portable-counterexample-unresolved", "portable-assessment-insufficient", "portable-local-target-mismatch", "portable-local-reproduction-insufficient", "portable-local-evidence-unverified", "portable-local-validation-insufficient"] },
+        "triggerType": { "enum": ["portable-source-unverified", "portable-integrity-mismatch", "portable-applicability-unvalidated", "portable-counterexample-unresolved", "portable-assessment-insufficient", "portable-local-target-mismatch", "portable-local-reproduction-insufficient", "portable-local-evidence-unverified", "portable-local-validation-insufficient", "portable-revocation-source-unverified", "portable-revocation-impact-incomplete", "portable-revocation-dependent-suspended", "portable-revalidation-insufficient"] },
         "reason": { "type": "string", "minLength": 1 },
         "severity": { "enum": ["low", "medium", "high", "critical"] },
         "requiredAction": { "type": "string", "minLength": 1 },
@@ -722,6 +747,84 @@
         },
         "lastUpdated": { "type": "string" },
         "summary": { "type": "string" }
+      }
+    },
+    "portableKnowledgeRevocationPolicy": {
+      "type": "object",
+      "required": ["id", "acceptedNoticeStates", "supportedSubjectKinds", "requireEvidence", "requireDependencyClosure", "failClosedOnUnknownImpact", "preserveHistory", "destructiveDeletionAllowed", "automaticActivation", "automaticAuthority", "semanticTruthClaimed", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "acceptedNoticeStates": { "type": "array", "items": { "enum": ["active", "disputed"] } },
+        "supportedSubjectKinds": { "type": "array", "items": { "enum": ["library", "item", "source-digest", "evidence-origin", "publisher"] } },
+        "requireEvidence": { "const": true },
+        "requireDependencyClosure": { "const": true },
+        "failClosedOnUnknownImpact": { "const": true },
+        "preserveHistory": { "const": true },
+        "destructiveDeletionAllowed": { "const": false },
+        "automaticActivation": { "const": false },
+        "automaticAuthority": { "const": false },
+        "semanticTruthClaimed": { "const": false },
+        "status": { "enum": ["draft", "active", "retired"] }
+      }
+    },
+    "portableKnowledgeRevocationNotice": {
+      "type": "object",
+      "required": ["id", "policyRef", "noticeState", "subjectKind", "reasonCode", "reason", "effectiveAt", "observedAt", "evidenceRefs", "issuedBy", "issuerTrustStatus", "governanceTriggerRefs", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" }, "policyRef": { "$ref": "#/$defs/id" },
+        "noticeState": { "enum": ["active", "disputed", "withdrawn", "resolved"] },
+        "subjectKind": { "enum": ["library", "item", "source-digest", "evidence-origin", "publisher"] },
+        "libraryRef": { "$ref": "#/$defs/id" }, "itemRef": { "$ref": "#/$defs/id" },
+        "sourceDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "evidenceOriginRef": { "$ref": "#/$defs/id" }, "publisherRef": { "type": "string", "minLength": 1 },
+        "reasonCode": { "enum": ["compromised", "superseded", "disputed", "stale", "withdrawn-by-publisher", "evidence-invalidated"] },
+        "reason": { "type": "string", "minLength": 1 }, "effectiveAt": { "type": "string", "format": "date-time" }, "observedAt": { "type": "string", "format": "date-time" },
+        "evidenceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/entityRef" } },
+        "issuedBy": { "type": "string", "minLength": 1 }, "issuerTrustStatus": { "enum": ["verified", "unverified", "disputed"] },
+        "replacementItemRef": { "$ref": "#/$defs/id" },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "status": { "enum": ["reviewed", "governance-required"] }
+      }
+    },
+    "portableKnowledgeDependencyEdge": {
+      "type": "object",
+      "required": ["id", "upstreamRef", "downstreamRef", "dependencyKind", "rationale", "evidenceRefs", "active", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" }, "upstreamRef": { "$ref": "#/$defs/id" }, "downstreamRef": { "$ref": "#/$defs/id" },
+        "dependencyKind": { "enum": ["source", "applicability", "evidence", "derivation", "eligibility"] },
+        "rationale": { "type": "string", "minLength": 1 }, "evidenceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/entityRef" } },
+        "active": { "type": "boolean" }, "status": { "enum": ["current", "superseded"] }
+      }
+    },
+    "portableKnowledgeRevocationImpactAssessment": {
+      "type": "object",
+      "required": ["id", "policyRef", "noticeRef", "dependencyEdgeRefs", "affectedItemRefs", "directDependentRefs", "transitiveDependentRefs", "unresolvedDependencyRefs", "affectedItemCount", "directDependentCount", "transitiveDependentCount", "traversalComplete", "eligibilityEffect", "preservationStatus", "destructiveDeletion", "dataSufficiency", "assessmentSignals", "automaticActivation", "automaticAuthority", "semanticTruthClaimed", "governanceTriggerRefs", "reviewedBy", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" }, "policyRef": { "$ref": "#/$defs/id" }, "noticeRef": { "$ref": "#/$defs/id" },
+        "dependencyEdgeRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "affectedItemRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+        "directDependentRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "transitiveDependentRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "unresolvedDependencyRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "affectedItemCount": { "type": "integer", "minimum": 0 }, "directDependentCount": { "type": "integer", "minimum": 0 }, "transitiveDependentCount": { "type": "integer", "minimum": 0 },
+        "traversalComplete": { "type": "boolean" }, "eligibilityEffect": { "enum": ["suspended", "unaffected", "governance-required"] }, "preservationStatus": { "const": "history-preserved" }, "destructiveDeletion": { "const": false },
+        "dataSufficiency": { "enum": ["sufficient", "insufficient"] }, "assessmentSignals": { "type": "array", "minItems": 1, "items": { "enum": ["revocation-recorded", "direct-impact-found", "transitive-impact-found", "dependency-closure-incomplete", "issuer-unverified", "eligibility-suspended"] } },
+        "automaticActivation": { "const": false }, "automaticAuthority": { "const": false }, "semanticTruthClaimed": { "const": false },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "reviewedBy": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }, "status": { "enum": ["reviewed", "governance-required"] }
+      }
+    },
+    "portableKnowledgeRevalidationDecision": {
+      "type": "object",
+      "required": ["id", "policyRef", "noticeRef", "impactAssessmentRef", "affectedItemRefs", "priorUseStatus", "decision", "resultingUseStatus", "replacementEvidenceRefs", "rationale", "decidedBy", "decidedAt", "preserveHistory", "automaticActivation", "automaticAuthority", "governanceTriggerRefs", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" }, "policyRef": { "$ref": "#/$defs/id" }, "noticeRef": { "$ref": "#/$defs/id" }, "impactAssessmentRef": { "$ref": "#/$defs/id" },
+        "affectedItemRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } }, "priorUseStatus": { "enum": ["candidate", "eligible", "suspended", "rejected"] },
+        "decision": { "enum": ["suspend", "keep-suspended", "revalidate", "reject"] }, "resultingUseStatus": { "enum": ["suspended", "candidate", "rejected"] },
+        "replacementItemRef": { "$ref": "#/$defs/id" }, "replacementEvidenceRefs": { "type": "array", "items": { "$ref": "#/$defs/entityRef" } },
+        "rationale": { "type": "string", "minLength": 1 }, "decidedBy": { "type": "string", "minLength": 1 }, "decidedAt": { "type": "string", "format": "date-time" },
+        "preserveHistory": { "const": true }, "automaticActivation": { "const": false }, "automaticAuthority": { "const": false }, "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "status": { "enum": ["reviewed", "governance-required"] }
       }
     },
     "verifierBoundary": {

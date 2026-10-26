@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Make local applicability and independent reproduction auditable for candidate portable Decision Patterns and Quality Intents before any governed activation",
-  "updated_at": "2026-10-25T04:34:46.340Z",
+  "content": "Make post-import revocation, transitive dependency impact, fail-closed suspension, and governed revalidation auditable for portable quality knowledge without deleting history or granting authority",
+  "updated_at": "2026-10-26T04:31:23.045Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVNC25GX-0OT8F3",
-  "source_decision_record_id": "DEC-MVNC34XU-54RVX6",
+  "source_session_id": "SESS-MVORD031-BEPQNW",
+  "source_decision_record_id": "DEC-MVOREMQQ-LM6ISD",
   "declared_complete_at": null
 }

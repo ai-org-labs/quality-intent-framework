@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-25T04:45:54.444Z",
+  "generated_at": "2026-10-26T04:42:31.206Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MVNC25GX-0OT8F3",
-    "report_id": "OUT-MVNCHG8J-B3MTIG",
+    "source_session_id": "SESS-MVORD031-BEPQNW",
+    "report_id": "OUT-MVORSSF1-6NO6KK",
     "result": "success",
-    "observed_at": "2026-10-25T04:45:54.162Z",
-    "note": "QIF v0.8.2 implementation and release candidate validation completed; imported knowledge remains candidate-only unless verified local evidence makes it eligible for accountable governance.",
-    "signal_ref": ".aof/runtime/v0.8.2-review-council-executed.json"
+    "observed_at": "2026-10-26T04:42:23.581Z",
+    "note": "QIF v0.8.3 revocation runtime implemented and structurally verified; release publication follows.",
+    "signal_ref": "TASK-076"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV0820",
-    "recorded_at": "2026-10-25T04:45:53.876Z",
-    "summary": "Schemas, examples, verifier arithmetic, governance routing, negative fixtures, and portable documentation preserve candidate-only and non-authority boundaries.",
-    "detected_gap": "Committed source trust and reproduction evidence remain example-only; supply-chain revocation is deferred to v0.8.3.",
+    "audit_id": "FSA-QIFV0830",
+    "recorded_at": "2026-10-26T04:39:31.850Z",
+    "summary": "Schema, example, verifier, dependency closure, fail-closed suspension, governance, fixtures, docs, roadmap, and portable package align; verifier boundary rejects authenticity and compromise truth claims.",
+    "detected_gap": "Cryptographic attestation and issuer trust policy remain intentionally outside v0.8.3.",
     "result_state": "stable",
-    "next_action": "Release v0.8.2, then model revocation and transitive invalidation in v0.8.3.",
+    "next_action": "Develop v0.8.4 Portable Trust Policy and Attestation Binding after this release.",
     "related_task_ids": [
-      "TASK-075"
+      "TASK-076"
     ]
   },
   "current_next_value_slice": {
-    "content": "v0.8.3 Portable Knowledge Supply-Chain Revocation",
-    "updated_at": "2026-10-25T04:45:54.295Z",
+    "content": "QIF v0.8.4 Portable Trust Policy and Attestation Binding",
+    "updated_at": "2026-10-26T04:42:28.258Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MVNC25GX-0OT8F3",
-    "source_decision_record_id": "DEC-MVNC34XU-54RVX6"
+    "source_session_id": "SESS-MVORD031-BEPQNW",
+    "source_decision_record_id": null
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Release v0.8.2, then model revocation and transitive invalidation in v0.8.3.",
+    "proposed_focus": "Develop v0.8.4 Portable Trust Policy and Attestation Binding after this release.",
     "related_task_ids": [
-      "TASK-075"
+      "TASK-076"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: v0.8.3 Portable Knowledge Supply-Chain Revocation",
-    "Latest self-audit next action: Release v0.8.2, then model revocation and transitive invalidation in v0.8.3.",
+    "Current next value slice: QIF v0.8.4 Portable Trust Policy and Attestation Binding",
+    "Latest self-audit next action: Develop v0.8.4 Portable Trust Policy and Attestation Binding after this release.",
     "Latest outcome result: success"
   ]
 }

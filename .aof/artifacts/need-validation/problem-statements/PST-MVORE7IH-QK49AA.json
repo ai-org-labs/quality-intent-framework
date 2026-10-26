@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-26T04:31:03.305Z",
+  "problem_statement_id": "PST-MVORE7IH-QK49AA",
+  "affected_party": "organizations reusing portable quality knowledge",
+  "actual_problem": "revoked, compromised, superseded, disputed, or stale upstream knowledge can remain locally eligible because QIF cannot trace revocation through dependent decisions and assessments",
+  "why_it_matters": "agents and humans may continue applying knowledge whose source trust or evidence no longer supports the original quality claim",
+  "why_now": "portable Agent Skills are rapidly becoming cross-platform, versioned supply-chain artifacts while current QIF import and local validation records remain static snapshots",
+  "evidence_refs": [
+    "docs/qif-roadmap.md",
+    "examples/qif-ledger-package.json"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

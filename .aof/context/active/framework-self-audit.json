@@ -1,14 +1,14 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-25T04:45:53.876Z",
-  "audit_id": "FSA-QIFV0820",
-  "scope": "QIF v0.8.2 local applicability and reproduction release review",
-  "summary": "Schemas, examples, verifier arithmetic, governance routing, negative fixtures, and portable documentation preserve candidate-only and non-authority boundaries.",
-  "detected_gap": "Committed source trust and reproduction evidence remain example-only; supply-chain revocation is deferred to v0.8.3.",
+  "recorded_at": "2026-10-26T04:39:31.850Z",
+  "audit_id": "FSA-QIFV0830",
+  "scope": "QIF v0.8.3 revocation release self-review",
+  "summary": "Schema, example, verifier, dependency closure, fail-closed suspension, governance, fixtures, docs, roadmap, and portable package align; verifier boundary rejects authenticity and compromise truth claims.",
+  "detected_gap": "Cryptographic attestation and issuer trust policy remain intentionally outside v0.8.3.",
   "result_state": "stable",
-  "next_action": "Release v0.8.2, then model revocation and transitive invalidation in v0.8.3.",
+  "next_action": "Develop v0.8.4 Portable Trust Policy and Attestation Binding after this release.",
   "related_task_ids": [
-    "TASK-075"
+    "TASK-076"
   ],
   "source_session_id": null,
   "source_decision_record_id": null

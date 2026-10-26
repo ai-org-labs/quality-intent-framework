@@ -1,0 +1,12 @@
+{
+  "artifact_type": "experiment-proposal",
+  "recorded_at": "2026-10-26T04:31:03.807Z",
+  "experiment_proposal_id": "EXP-MVORE7WE-9LQYG6",
+  "assumption_to_test": "explicit revocation subjects and dependency edges can make direct and transitive invalidation auditable without deleting history or granting automatic authority",
+  "smallest_testable_validation": "extend the existing qif-ledger example with one active revocation notice, explicit dependency edges, a deterministic impact assessment, and a revalidation decision that suspends prior eligibility because replacement evidence is absent",
+  "expected_learning": "whether QIF can distinguish structural revocation propagation from proof that a source is truly compromised or semantically unsafe",
+  "expected_cost": "one bounded qif-ledger schema, verifier, fixture, documentation, portable package, and release slice",
+  "success_threshold": "positive validation and retained negative fixtures pass while unknown subjects, broken paths, incomplete transitive closure, unsuspended eligibility, destructive deletion, weak evidence, or unauthorized revalidation fail",
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

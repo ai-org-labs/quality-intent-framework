@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.8.3
+
+- Added revocation policies, exact-subject notices, portable dependency edges, impact assessments, and governed revalidation decisions to the Living QIF Ledger.
+- Reproduced direct and transitive impact from current dependency edges and failed closed to suspended reuse for active or disputed notices.
+- Preserved source and local history while requiring trusted replacement evidence and accountable review before revalidation.
+- Added 13 retained negative fixtures for subject and digest matching, graph integrity, closure, suspension, governance, history, and verifier boundaries.
+- Kept revocation evidence distinct from truth: verifier success does not prove notice authenticity, compromise, source safety, semantic fitness, authorization, or authority.
+
 ## v0.8.2
 
 - Added executable local validation policies, target-specific applicability decisions, unseen-case reproduction trials, and aggregate local validation assessments to the Living QIF Ledger.

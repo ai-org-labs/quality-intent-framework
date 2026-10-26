@@ -23,6 +23,7 @@ const CANONICAL_DOCS = [
   "docs/qif-v0.8.0-multi-agent-judgment-memory.md",
   "docs/qif-v0.8.1-portable-pattern-library-import.md",
   "docs/qif-v0.8.2-local-applicability-reproduction.md",
+  "docs/qif-v0.8.3-portable-knowledge-revocation.md",
   "docs/expert-judgment-framework.md"
 ];
 

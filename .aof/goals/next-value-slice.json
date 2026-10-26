@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.8.3 Portable Knowledge Supply-Chain Revocation",
-  "updated_at": "2026-10-25T04:45:54.295Z",
-  "agreed_with_human": null,
-  "source_session_id": "SESS-MVNC25GX-0OT8F3",
-  "source_decision_record_id": "DEC-MVNC34XU-54RVX6",
+  "content": "QIF v0.8.4 Portable Trust Policy and Attestation Binding",
+  "updated_at": "2026-10-26T04:42:28.258Z",
+  "agreed_with_human": true,
+  "source_session_id": "SESS-MVORD031-BEPQNW",
+  "source_decision_record_id": null,
   "declared_complete_at": null
 }

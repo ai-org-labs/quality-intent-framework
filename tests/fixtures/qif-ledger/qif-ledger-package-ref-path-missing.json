@@ -762,6 +762,33 @@
       "requiredAction": "Keep every imported item candidate-only until verified source and local evidence satisfy policy.",
       "owner": "portable-knowledge-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "PKGTR-007",
+      "triggerType": "portable-revocation-source-unverified",
+      "reason": "The revocation notice is a committed example and its issuer identity is not independently verified.",
+      "severity": "high",
+      "requiredAction": "Verify the notice issuer and supporting evidence before treating the notice as authentic.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-008",
+      "triggerType": "portable-revocation-dependent-suspended",
+      "reason": "An active notice matches PKI-001 and reaches local applicability, reproduction, and assessment records.",
+      "severity": "critical",
+      "requiredAction": "Keep affected reuse decisions suspended while preserving their history.",
+      "owner": "local-quality-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-009",
+      "triggerType": "portable-revalidation-insufficient",
+      "reason": "No trusted replacement item or replacement evidence supports revalidation.",
+      "severity": "high",
+      "requiredAction": "Require reviewed replacement evidence and a new local validation before reuse.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
     }
   ],
   "portableKnowledgeLibraries": [
@@ -1351,6 +1378,201 @@
       "status": "reviewed"
     }
   ],
+  "portableKnowledgeRevocationPolicies": [
+    {
+      "id": "PKRVP-001",
+      "acceptedNoticeStates": [
+        "active",
+        "disputed"
+      ],
+      "supportedSubjectKinds": [
+        "library",
+        "item",
+        "source-digest",
+        "evidence-origin",
+        "publisher"
+      ],
+      "requireEvidence": true,
+      "requireDependencyClosure": true,
+      "failClosedOnUnknownImpact": true,
+      "preserveHistory": true,
+      "destructiveDeletionAllowed": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "active"
+    }
+  ],
+  "portableKnowledgeRevocationNotices": [
+    {
+      "id": "PKRVN-001",
+      "policyRef": "PKRVP-001",
+      "noticeState": "active",
+      "subjectKind": "item",
+      "itemRef": "PKI-001",
+      "sourceDigest": "sha256:2b724cd432c28cc9a4f2892b5cb1241dbdeac5f66db467ca399b63b615872c78",
+      "reasonCode": "disputed",
+      "reason": "Pilot notice disputes whether the source judgment evidence remains fit for portable reuse.",
+      "effectiveAt": "2026-10-26T00:00:00.000Z",
+      "observedAt": "2026-10-26T00:05:00.000Z",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "expertJudgments",
+          "entityRef": "JDG-DS-001"
+        }
+      ],
+      "issuedBy": "QIF example publisher",
+      "issuerTrustStatus": "unverified",
+      "governanceTriggerRefs": [
+        "PKGTR-007",
+        "PKGTR-008"
+      ],
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeDependencyEdges": [
+    {
+      "id": "PKDE-001",
+      "upstreamRef": "PKI-001",
+      "downstreamRef": "PKLAD-001",
+      "dependencyKind": "applicability",
+      "rationale": "The local applicability decision evaluates this item.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "active": true,
+      "status": "current"
+    },
+    {
+      "id": "PKDE-002",
+      "upstreamRef": "PKI-001",
+      "downstreamRef": "PKLRT-001",
+      "dependencyKind": "evidence",
+      "rationale": "The reproduction trial applies this item.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "reproductionTests",
+          "entityRef": "RPT-EVD-001"
+        }
+      ],
+      "active": true,
+      "status": "current"
+    },
+    {
+      "id": "PKDE-003",
+      "upstreamRef": "PKLAD-001",
+      "downstreamRef": "PKLVA-001",
+      "dependencyKind": "eligibility",
+      "rationale": "The local assessment aggregates this applicability decision.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "active": true,
+      "status": "current"
+    },
+    {
+      "id": "PKDE-004",
+      "upstreamRef": "PKLRT-001",
+      "downstreamRef": "PKLVA-001",
+      "dependencyKind": "eligibility",
+      "rationale": "The local assessment aggregates this reproduction trial.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "reproductionTests",
+          "entityRef": "RPT-EVD-001"
+        }
+      ],
+      "active": true,
+      "status": "current"
+    }
+  ],
+  "portableKnowledgeRevocationImpactAssessments": [
+    {
+      "id": "PKRVIA-001",
+      "policyRef": "PKRVP-001",
+      "noticeRef": "PKRVN-001",
+      "dependencyEdgeRefs": [
+        "PKDE-001",
+        "PKDE-002",
+        "PKDE-003",
+        "PKDE-004"
+      ],
+      "affectedItemRefs": [
+        "PKI-001"
+      ],
+      "directDependentRefs": [
+        "PKLAD-001",
+        "PKLRT-001"
+      ],
+      "transitiveDependentRefs": [
+        "PKLVA-001"
+      ],
+      "unresolvedDependencyRefs": [],
+      "affectedItemCount": 1,
+      "directDependentCount": 2,
+      "transitiveDependentCount": 1,
+      "traversalComplete": true,
+      "eligibilityEffect": "suspended",
+      "preservationStatus": "history-preserved",
+      "destructiveDeletion": false,
+      "dataSufficiency": "insufficient",
+      "assessmentSignals": [
+        "revocation-recorded",
+        "direct-impact-found",
+        "transitive-impact-found",
+        "issuer-unverified",
+        "eligibility-suspended"
+      ],
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "governanceTriggerRefs": [
+        "PKGTR-007",
+        "PKGTR-008"
+      ],
+      "reviewedBy": [
+        "portable-knowledge-governance-owner"
+      ],
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeRevalidationDecisions": [
+    {
+      "id": "PKRVD-001",
+      "policyRef": "PKRVP-001",
+      "noticeRef": "PKRVN-001",
+      "impactAssessmentRef": "PKRVIA-001",
+      "affectedItemRefs": [
+        "PKI-001"
+      ],
+      "priorUseStatus": "candidate",
+      "decision": "keep-suspended",
+      "resultingUseStatus": "suspended",
+      "replacementEvidenceRefs": [],
+      "rationale": "The active notice is unverified and no trusted replacement evidence exists, so reuse fails closed without deleting history.",
+      "decidedBy": "portable-knowledge-governance-owner",
+      "decidedAt": "2026-10-26T00:15:00.000Z",
+      "preserveHistory": true,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "governanceTriggerRefs": [
+        "PKGTR-008",
+        "PKGTR-009"
+      ],
+      "status": "governance-required"
+    }
+  ],
   "ledgerIndex": {
     "activeQualityIntentRefs": [
       {
@@ -1421,7 +1643,8 @@
       "candidate-only import, applicability, counterexample, trust, and governance boundaries",
       "local target dimension coverage and mismatch routing",
       "unseen-case separation, agreement reproduction, evaluator identity separation, and counterexample challenge coverage",
-      "local validation sufficiency and governed-activation eligibility reproduction"
+      "local validation sufficiency and governed-activation eligibility reproduction",
+      "revocation subject matching, dependency closure, fail-closed suspension, and history preservation"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -1435,7 +1658,8 @@
       "evaluator independence beyond recorded identity separation",
       "counterexample completeness or operational representativeness",
       "activation approval or semantic fitness for use",
-      "source authenticity, license sufficiency, or safe execution"
+      "source authenticity, license sufficiency, or safe execution",
+      "revocation notice authenticity or compromise truth"
     ],
     "semanticValidityRequires": [
       "expert review",

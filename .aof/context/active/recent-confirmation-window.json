@@ -1,34 +1,34 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-25T04:45:53.881Z",
+  "updated_at": "2026-10-26T04:39:31.858Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means each candidate imported item is evaluated against a named local target with explicit matches and mismatches; challenged on unseen local cases including counterexamples; reproduced by a declared non-source evaluator with evidence; assessed deterministically against a policy; and either rejected, kept under governance, or marked only eligible for governed activation. Missing trust, context fit, independent cases, evidence, counterexample resolution, or threshold agreement must block eligibility and open governance.",
-      "recorded_at": "2026-10-25T04:34:05.192Z",
+      "answer": "Success means an active or disputed revocation notice names exact affected source identities and evidence; direct and transitive dependents are reproduced from explicit dependency edges; prior eligibility fails closed into suspension without history deletion; stale or incomplete traversal opens governance; and revalidation requires a replacement source or reviewed evidence. Every count and status must be deterministic, while authenticity, compromise truth, safety, and authority remain human or governance judgments.",
+      "recorded_at": "2026-10-26T04:30:14.275Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVNC25GX-0OT8F3",
+      "source_session_id": "SESS-MVORD031-BEPQNW",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The need is not generic import convenience; it is an evidence-backed boundary between portable candidate knowledge and local eligibility for governed use.",
-      "recorded_at": "2026-10-25T04:34:46.341Z",
+      "answer": "The need is not a general package updater or trust oracle; it is a deterministic local control that turns an exact upstream revocation signal into traceable downstream suspension and bounded revalidation.",
+      "recorded_at": "2026-10-26T04:31:23.046Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVNC25GX-0OT8F3",
-      "source_decision_record_id": "DEC-MVNC34XU-54RVX6"
+      "source_session_id": "SESS-MVORD031-BEPQNW",
+      "source_decision_record_id": "DEC-MVOREMQQ-LM6ISD"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Committed source trust and reproduction evidence remain example-only; supply-chain revocation is deferred to v0.8.3.",
-      "recorded_at": "2026-10-25T04:45:53.881Z",
-      "expectation_state": "Schemas, examples, verifier arithmetic, governance routing, negative fixtures, and portable documentation preserve candidate-only and non-authority boundaries.",
-      "mismatch_state": "Committed source trust and reproduction evidence remain example-only; supply-chain revocation is deferred to v0.8.3.",
-      "scale_direction": "Release v0.8.2, then model revocation and transitive invalidation in v0.8.3.",
+      "answer": "Cryptographic attestation and issuer trust policy remain intentionally outside v0.8.3.",
+      "recorded_at": "2026-10-26T04:39:31.858Z",
+      "expectation_state": "Schema, example, verifier, dependency closure, fail-closed suspension, governance, fixtures, docs, roadmap, and portable package align; verifier boundary rejects authenticity and compromise truth claims.",
+      "mismatch_state": "Cryptographic attestation and issuer trust policy remain intentionally outside v0.8.3.",
+      "scale_direction": "Develop v0.8.4 Portable Trust Policy and Attestation Binding after this release.",
       "source_session_id": null,
       "source_decision_record_id": null
     }

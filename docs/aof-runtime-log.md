@@ -5185,3 +5185,41 @@ Date: 2026-10-25
 - Outcome report: `OUT-MVNCHG8J-B3MTIG` recorded implementation success and retained v0.8.3 as an open next value slice.
 - Residual risk: committed source trust and local reproduction evidence are example-only. Structural validation cannot prove source authenticity, real evaluator independence, representativeness, evidence truth, semantic applicability, safe activation, authorization, or authority.
 - Next value slices: v0.8.3 Portable Knowledge Supply-Chain Revocation, v0.9 Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger Standard remain defined in the roadmap.
+# QIF v0.8.3 Portable Knowledge Supply-Chain Revocation
+
+- Date: 2026-10-26.
+- AOF runtime: v12.2.0, managed-project topology.
+- Need: QIF v0.8.2 could preserve, import, and locally test portable quality
+  knowledge, but could not suspend downstream reuse when the source item,
+  digest, issuer, or evidence was later disputed or invalidated.
+- Validated Need: preserve exact revocation subjects, direct and transitive
+  dependency impact, fail-closed suspension, history, and governed replacement
+  evidence without claiming authenticity or semantic truth.
+- Need Validation artifacts: `PST-MVORE7IH-QK49AA`,
+  `VHY-MVORE7N8-AV2WR7`, `ALT-MVORE7RS-2JIW2H`,
+  `EXP-MVORE7WE-9LQYG6`, `NVR-MVOREFF1-O3410Q`, and charter
+  `PCH-MVOREK4E-YFXXV3`.
+- Council: planning execution `CRUN-MVOREPR8-UWZMA9`; Visionary, Builder, and
+  Guardian all proceeded with fail-closed, non-destructive, non-authoritative
+  boundaries. Session: `SESS-MVORD031-BEPQNW`; task: `TASK-076`; actor skill
+  packet: `ASP-MVORF8I9-FO72F5`.
+- Trend evidence: Agent Skills are now a vendor-neutral AAIF standard and are
+  versioned/pinned across platforms. Sigstore explicitly states signatures do
+  not establish artifact goodness and requires trust policy and compromise
+  handling; GitHub treats revocation and attestations as incident-response
+  evidence. This supports revocation-aware dependency governance before
+  attestation-bound trust policy.
+- Decision: add `PortableKnowledgeRevocationPolicy`,
+  `PortableKnowledgeRevocationNotice`, `PortableKnowledgeDependencyEdge`,
+  `PortableKnowledgeRevocationImpactAssessment`, and
+  `PortableKnowledgeRevalidationDecision` to `qif-ledger`.
+- Implementation boundary: no UI, registry, live key infrastructure,
+  cryptographic signing implementation, automatic deletion, automatic
+  activation, automatic authority, or semantic-truth claim.
+- Verification: `npm test` passed with 16/16 positive and 1,367/1,367 retained
+  negative checks; portable v0.8.3 built and verified with 53 files; AOF
+  organization verification passed 295/295 checks. Review runtime command:
+  `CRUN-MVOROF2L-PLQ2UZ`; self-audit: `FSA-QIFV0830`.
+- Next value slices: v0.8.4 Portable Trust Policy and Attestation Binding,
+  v0.9 Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger
+  Standard.
