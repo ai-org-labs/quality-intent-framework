@@ -1,34 +1,34 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-26T04:39:31.858Z",
+  "updated_at": "2026-10-27T04:40:32.979Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means an active or disputed revocation notice names exact affected source identities and evidence; direct and transitive dependents are reproduced from explicit dependency edges; prior eligibility fails closed into suspension without history deletion; stale or incomplete traversal opens governance; and revalidation requires a replacement source or reviewed evidence. Every count and status must be deterministic, while authenticity, compromise truth, safety, and authority remain human or governance judgments.",
-      "recorded_at": "2026-10-26T04:30:14.275Z",
+      "answer": "Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority.",
+      "recorded_at": "2026-10-27T04:30:14.048Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVORD031-BEPQNW",
+      "source_session_id": "SESS-MVQ6SV96-D0ZQ33",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The need is not a general package updater or trust oracle; it is a deterministic local control that turns an exact upstream revocation signal into traceable downstream suspension and bounded revalidation.",
-      "recorded_at": "2026-10-26T04:31:23.046Z",
+      "answer": "The need is not live signature verification or a universal trust oracle; it is an auditable local policy decision over recorded attestation evidence.",
+      "recorded_at": "2026-10-27T04:31:35.092Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVORD031-BEPQNW",
-      "source_decision_record_id": "DEC-MVOREMQQ-LM6ISD"
+      "source_session_id": "SESS-MVQ6SV96-D0ZQ33",
+      "source_decision_record_id": "DEC-MVQ6UQPD-1YOWLS"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Cryptographic attestation and issuer trust policy remain intentionally outside v0.8.3.",
-      "recorded_at": "2026-10-26T04:39:31.858Z",
-      "expectation_state": "Schema, example, verifier, dependency closure, fail-closed suspension, governance, fixtures, docs, roadmap, and portable package align; verifier boundary rejects authenticity and compromise truth claims.",
-      "mismatch_state": "Cryptographic attestation and issuer trust policy remain intentionally outside v0.8.3.",
-      "scale_direction": "Develop v0.8.4 Portable Trust Policy and Attestation Binding after this release.",
+      "answer": "Trust policy rotation and historical replay remain unimplemented.",
+      "recorded_at": "2026-10-27T04:40:32.979Z",
+      "expectation_state": "Schema, example, deterministic verifier, retained fixtures, documentation, portable package, roadmap, and AOF review evidence pass structural verification. Policy conformance remains distinct from semantic truth, activation, authorization, and authority.",
+      "mismatch_state": "Trust policy rotation and historical replay remain unimplemented.",
+      "scale_direction": "Develop v0.8.5 Trust Policy Rotation and Historical Replay.",
       "source_session_id": null,
       "source_decision_record_id": null
     }

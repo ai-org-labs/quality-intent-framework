@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-27T04:31:11.975Z",
+  "value_hypothesis_id": "VHY-MVQ6U8VB-Z0YTCC",
+  "expected_value_creation": "make portable knowledge trust decisions reproducible and fail-closed without turning cryptography into semantic truth",
+  "beneficiary": "QIF adopters, reviewers, and AI agents",
+  "supporting_evidence": [
+    "GitHub says attestations require consumer-defined policy and do not guarantee security",
+    "SLSA requires verification against trusted builder identity and expected provenance values"
+  ],
+  "success_criteria": [
+    "exact subject digest and policy revision are bound",
+    "issuer, subject, predicate, root, time, transparency, and revocation checks reproduce",
+    "every mismatch fails closed into governance"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVQ6T065-WJMD5U"
+}

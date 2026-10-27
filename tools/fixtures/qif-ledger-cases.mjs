@@ -52,6 +52,9 @@ function revocationNotice(pkg) { return pkg.portableKnowledgeRevocationNotices[0
 function dependencyEdge(pkg, index = 0) { return pkg.portableKnowledgeDependencyEdges[index]; }
 function revocationImpact(pkg) { return pkg.portableKnowledgeRevocationImpactAssessments[0]; }
 function revalidationDecision(pkg) { return pkg.portableKnowledgeRevalidationDecisions[0]; }
+function trustPolicy(pkg) { return pkg.portableKnowledgeTrustPolicies[0]; }
+function attestation(pkg) { return pkg.portableKnowledgeAttestations[0]; }
+function trustDecision(pkg) { return pkg.portableKnowledgeTrustDecisions[0]; }
 
 export const cases = [
   {
@@ -701,6 +704,96 @@ export const cases = [
     rule: "verifier does not claim revocation authenticity",
     expect: "verifierBoundary must explicitly avoid claiming revocation notice authenticity or compromise truth.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "revocation notice authenticity or compromise truth"); }
+  },
+  {
+    id: "portable-trust-policy-window",
+    rule: "trust policy validity window is ordered",
+    expect: "PKTP-001 validFrom must precede validUntil.",
+    mutate: (pkg) => { trustPolicy(pkg).validUntil = "2026-09-01T00:00:00.000Z"; }
+  },
+  {
+    id: "portable-trust-policy-boundary",
+    rule: "trust policy fails closed without authority",
+    expect: "PKTP-001 must require cryptographic, transparency, and revocation evidence and fail closed.",
+    mutate: (pkg) => { trustPolicy(pkg).failClosed = false; }
+  },
+  {
+    id: "portable-attestation-item",
+    rule: "attestation item resolves",
+    expect: "PKAT-001 references missing portable knowledge item PKI-NOPE-999.",
+    mutate: (pkg) => { attestation(pkg).itemRef = "PKI-NOPE-999"; }
+  },
+  {
+    id: "portable-attestation-digest",
+    rule: "attestation digest matches exact item",
+    expect: "PKAT-001 subjectDigest must exactly match PKI-002.",
+    mutate: (pkg) => { attestation(pkg).subjectDigest = `sha256:${"0".repeat(64)}`; }
+  },
+  {
+    id: "portable-attestation-window",
+    rule: "attestation window is ordered",
+    expect: "PKAT-001 issuedAt must precede expiresAt.",
+    mutate: (pkg) => { attestation(pkg).expiresAt = "2026-10-01T00:00:00.000Z"; }
+  },
+  {
+    id: "portable-attestation-hidden-reasoning",
+    rule: "attestation excludes hidden reasoning",
+    expect: "PKAT-001 must not store hidden reasoning.",
+    mutate: (pkg) => { attestation(pkg).hiddenReasoningStored = true; }
+  },
+  {
+    id: "portable-trust-decision-policy-version",
+    rule: "trust decision pins policy version",
+    expect: "PKTD-001 policyVersion must exactly match PKTP-001.",
+    mutate: (pkg) => { trustDecision(pkg).policyVersion = "0.9.0"; }
+  },
+  {
+    id: "portable-trust-decision-issuer",
+    rule: "issuer acceptance reproduces",
+    expect: "PKTD-001 issuerAccepted must reproduce as false.",
+    mutate: (pkg) => { attestation(pkg).issuer = "https://untrusted.example"; }
+  },
+  {
+    id: "portable-trust-decision-predicate",
+    rule: "predicate acceptance reproduces",
+    expect: "PKTD-001 predicateTypeAccepted must reproduce as false.",
+    mutate: (pkg) => { attestation(pkg).predicateType = "https://example.org/unknown"; }
+  },
+  {
+    id: "portable-trust-decision-root",
+    rule: "trust-root acceptance reproduces",
+    expect: "PKTD-001 trustRootAccepted must reproduce as false.",
+    mutate: (pkg) => { attestation(pkg).trustRootRevision = "unknown-root"; }
+  },
+  {
+    id: "portable-trust-decision-expiry",
+    rule: "attestation validity reproduces",
+    expect: "PKTD-001 withinAttestationWindow must reproduce as false.",
+    mutate: (pkg) => { trustDecision(pkg).evaluatedAt = "2026-12-01T00:00:00.000Z"; }
+  },
+  {
+    id: "portable-trust-decision-transparency",
+    rule: "transparency evidence reproduces",
+    expect: "PKTD-001 transparencyEvidenceSatisfied must reproduce as false.",
+    mutate: (pkg) => { attestation(pkg).transparencyEvidenceStatus = "missing"; }
+  },
+  {
+    id: "portable-trust-decision-revoked",
+    rule: "revocation status rejects",
+    expect: "PKTD-001 revocationCheckSatisfied must reproduce as false.",
+    mutate: (pkg) => { attestation(pkg).revocationStatus = "revoked"; }
+  },
+  {
+    id: "portable-trust-decision-authority-boundary",
+    rule: "trust checks do not grant authority",
+    expect: "PKTD-001 must treat checks as evidence and forbid automatic activation, authority, and semantic truth claims.",
+    mutate: (pkg) => { trustDecision(pkg).automaticAuthority = true; }
+  },
+  {
+    id: "portable-trust-verifier-boundary",
+    rule: "verifier does not claim cryptographic or semantic truth",
+    expect: "verifierBoundary must explicitly avoid claiming cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness"); }
   }
 ];
 

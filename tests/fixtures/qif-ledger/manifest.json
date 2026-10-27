@@ -808,6 +808,111 @@
       "rule": "verifier does not claim revocation authenticity",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming revocation notice authenticity or compromise truth."
+    },
+    {
+      "file": "qif-ledger-portable-trust-policy-window.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "trust policy validity window is ordered",
+      "expect": "fail",
+      "errorIncludes": "PKTP-001 validFrom must precede validUntil."
+    },
+    {
+      "file": "qif-ledger-portable-trust-policy-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "trust policy fails closed without authority",
+      "expect": "fail",
+      "errorIncludes": "PKTP-001 must require cryptographic, transparency, and revocation evidence and fail closed."
+    },
+    {
+      "file": "qif-ledger-portable-attestation-item.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "attestation item resolves",
+      "expect": "fail",
+      "errorIncludes": "PKAT-001 references missing portable knowledge item PKI-NOPE-999."
+    },
+    {
+      "file": "qif-ledger-portable-attestation-digest.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "attestation digest matches exact item",
+      "expect": "fail",
+      "errorIncludes": "PKAT-001 subjectDigest must exactly match PKI-002."
+    },
+    {
+      "file": "qif-ledger-portable-attestation-window.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "attestation window is ordered",
+      "expect": "fail",
+      "errorIncludes": "PKAT-001 issuedAt must precede expiresAt."
+    },
+    {
+      "file": "qif-ledger-portable-attestation-hidden-reasoning.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "attestation excludes hidden reasoning",
+      "expect": "fail",
+      "errorIncludes": "PKAT-001 must not store hidden reasoning."
+    },
+    {
+      "file": "qif-ledger-portable-trust-decision-policy-version.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "trust decision pins policy version",
+      "expect": "fail",
+      "errorIncludes": "PKTD-001 policyVersion must exactly match PKTP-001."
+    },
+    {
+      "file": "qif-ledger-portable-trust-decision-issuer.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "issuer acceptance reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKTD-001 issuerAccepted must reproduce as false."
+    },
+    {
+      "file": "qif-ledger-portable-trust-decision-predicate.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "predicate acceptance reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKTD-001 predicateTypeAccepted must reproduce as false."
+    },
+    {
+      "file": "qif-ledger-portable-trust-decision-root.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "trust-root acceptance reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKTD-001 trustRootAccepted must reproduce as false."
+    },
+    {
+      "file": "qif-ledger-portable-trust-decision-expiry.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "attestation validity reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKTD-001 withinAttestationWindow must reproduce as false."
+    },
+    {
+      "file": "qif-ledger-portable-trust-decision-transparency.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "transparency evidence reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKTD-001 transparencyEvidenceSatisfied must reproduce as false."
+    },
+    {
+      "file": "qif-ledger-portable-trust-decision-revoked.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "revocation status rejects",
+      "expect": "fail",
+      "errorIncludes": "PKTD-001 revocationCheckSatisfied must reproduce as false."
+    },
+    {
+      "file": "qif-ledger-portable-trust-decision-authority-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "trust checks do not grant authority",
+      "expect": "fail",
+      "errorIncludes": "PKTD-001 must treat checks as evidence and forbid automatic activation, authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-trust-verifier-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "verifier does not claim cryptographic or semantic truth",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness."
     }
   ],
   "rescopedRules": []

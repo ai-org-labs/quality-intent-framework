@@ -1,0 +1,12 @@
+{
+  "artifact_type": "experiment-proposal",
+  "recorded_at": "2026-10-27T04:31:12.246Z",
+  "experiment_proposal_id": "EXP-MVQ6U92U-K8FZU9",
+  "assumption_to_test": "a compact policy, attestation, and assessment model can reproduce acceptance and rejection without live crypto verification",
+  "smallest_testable_validation": "one exact item digest, one versioned trust policy, one attestation record, one fail-closed decision, and negative fixtures",
+  "expected_learning": "whether trust inputs and verifier boundaries are sufficient for a v0.8.4 release",
+  "expected_cost": "one backward-compatible qif-ledger slice",
+  "success_threshold": "all positive validation and retained negative fixtures pass; mismatches cannot become trusted",
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVQ6T065-WJMD5U"
+}

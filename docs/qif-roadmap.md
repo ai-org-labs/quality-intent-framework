@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.8.3 baseline)
+## Current Position (v0.8.4 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -252,13 +252,14 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-10-26 against primary-source signals. The
+The roadmap was revalidated on 2026-10-27 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
 
 | Current signal | Quality risk exposed | QIF response | Lead, not follow |
 | --- | --- | --- | --- |
+| GitHub artifact attestations bind provenance to an exact subject digest but explicitly do not guarantee security; Sigstore policy-controller separates trusted identities, authorities, predicates, and trust roots; SLSA verification requires consumers to select trusted builders and expected provenance fields. ([GitHub artifact attestations](https://docs.github.com/en/actions/concepts/security/artifact-attestations), [GitHub attestation verification](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations), [Sigstore policy-controller](https://docs.sigstore.dev/policy-controller/overview/), [SLSA verification](https://slsa.dev/spec/v1.2/verifying-artifacts)) | A signature can validate while its issuer, subject identity, predicate, root, time window, transparency record, or revocation state violates the receiving organization's policy; later policy rotation can also change today's answer without changing yesterday's evidence. | v0.8.4 Portable Trust Policy and Attestation Binding, followed by v0.8.5 historical policy replay. | Reproduce policy-local conformance from recorded inputs now; next preserve policy lineage and replay changed decisions without rewriting history or converting attestation validity into semantic trust. |
 | Supply-chain systems increasingly carry provenance and attestations, while Sigstore explicitly separates signature verification from artifact goodness and requires trust policy and compromise handling; GitHub likewise treats credential revocation and attestations as incident-response evidence rather than semantic safety. ([Sigstore threat model](https://docs.sigstore.dev/about/threat-model/), [GitHub artifact attestations](https://github.blog/changelog/2025-02-18-recent-improvements-to-artifact-attestations/), [GitHub supply-chain response](https://github.blog/security/supply-chain-security/disrupting-supply-chain-attacks-on-npm-and-github-actions/)) | A valid digest or signature can remain structurally correct after an issuer, credential, source version, or evidence basis is disputed; downstream local decisions may stay active because their transitive dependency is invisible. | v0.8.3 Portable Knowledge Supply-Chain Revocation, followed by v0.8.4 attestation-bound trust policy. | Preserve exact revocation subjects and dependency closure now; next bind attestations to explicit issuer scope, expiry, transparency, and local trust policy without converting cryptography into semantic truth. |
 | Agent Skills became a vendor-neutral AAIF standard on 2026-10-22 after adoption across more than 70 agent platforms; OpenAI now documents independently versioned skill bundles, production version pinning, and review of skill files before agent exposure. ([Anthropic Agent Skills donation](https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation), [OpenAI Skills guide](https://developers.openai.com/api/docs/guides/tools-skills), [OpenAI Skills cookbook](https://developers.openai.com/cookbook/examples/skills_in_api)) | Portable expertise can be installed faster than organizations can establish source identity, applicability, counterexamples, local evidence, or authority. Version pinning reproduces content but does not show that the knowledge fits a local target. | v0.8.1 Portable Pattern Library Import, v0.8.2 Local Applicability and Reproduction, then v0.8.3 supply-chain revocation. | Preserve exact source snapshots and digests, keep imports candidate-only, require target-specific comparison plus unseen-case reproduction before eligibility, then preserve revocation-aware dependency governance after adoption. |
 | Persistent agent memory is being used to carry reusable lessons across runs, while current guidance keeps human-reviewed artifacts as the source of truth. Multi-agent research reports shared mistakes, hidden-profile failures, gullibility, and incompatible-goal escalation. A recent financial-agent deployment describes versioned organizational judgment records as a response to "memory debt." ([OpenAI memory and compaction](https://developers.openai.com/cookbook/examples/agents_sdk/building_reliable_agents_memory_compaction), [Anthropic multi-agent systems](https://www.anthropic.com/research/multiagent-systems), [OpenAI Terminal X](https://openai.com/index/terminal-x/)) | A final aggregate can overwrite minority evidence, make correlated lanes look independent, keep obsolete judgment active, or silently forget the record needed to challenge a future decision. | v0.8.0 Multi-Agent Judgment Memory. | Preserve lane-local source judgments, dependencies, revisions, dissent, retirement rationale, and authority boundaries as executable ledger records before optimizing memory retrieval or reuse. |
@@ -837,10 +838,20 @@ Deliverables:
   `PortableKnowledgeRevalidationDecision`, deterministic verifier rules,
   governance, and retained negative fixtures. The example notice remains
   explicitly unverified and cannot prove compromise truth.
+- Implemented fifth v0.8 slice, v0.8.4 Portable Trust Policy and Attestation
+  Binding: evaluate exact-subject attestations against versioned local issuer,
+  subject identity, predicate, trust-root, validity-window, transparency,
+  cryptographic-verification, and revocation requirements.
+- Status: implemented through `PortableKnowledgeTrustPolicy`,
+  `PortableKnowledgeAttestation`, and `PortableKnowledgeTrustDecision`, with
+  deterministic policy reproduction, governance routing, and retained negative
+  fixtures. A conformant result remains candidate-only and does not prove
+  authenticity, safety, applicability, semantic truth, activation, or
+  authority.
 - Next planned slices:
-  - v0.8.4 Portable Trust Policy and Attestation Binding: bind attestations,
-    issuer scopes, expiry, transparency evidence, trust roots, and policy-local
-    acceptance without equating signature validity with safe knowledge.
+  - v0.8.5 Trust Policy Rotation and Historical Replay: preserve superseded
+    trust policies, replay historical decisions under a named policy revision,
+    and route changed outcomes without rewriting past evidence.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,
@@ -900,7 +911,9 @@ Implementation status:
   import. v0.8.2 implements target-specific local applicability and unseen-case
   reproduction. v0.8.3 implements exact-subject revocation notices, transitive
   dependency impact, fail-closed suspension, history preservation, and governed
-  revalidation.
+  revalidation. v0.8.4 implements versioned local trust policy, exact-digest
+  attestation binding, and deterministic policy-conformance decisions without
+  granting activation or authority.
 
 Exit evidence:
 

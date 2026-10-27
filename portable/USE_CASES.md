@@ -107,6 +107,20 @@ reviewed replacement evidence, complete impact traversal, and governance.
 - `schemas/qif-ledger-package.schema.json`
 - `examples/qif-ledger-package.json`
 
+## 10. Evaluate Recorded Attestations Against Local Trust Policy
+
+Bind an attestation to the exact digest of a portable knowledge item, then
+evaluate its issuer, subject identity, predicate type, trust root, validity
+window, transparency evidence, cryptographic verification record, and
+revocation state against a versioned local policy. A conformant result means
+only that the recorded attestation meets that policy. It does not activate the
+item or prove authenticity, safety, applicability, semantic truth, or decision
+authority.
+
+- `docs/qif-v0.8.4-portable-trust-attestation.md`
+- `schemas/qif-ledger-package.schema.json`
+- `examples/qif-ledger-package.json`
+
 ## Choosing a Package Type
 
 Open `MANIFEST.json` to see every included schema and example. Use a schema only

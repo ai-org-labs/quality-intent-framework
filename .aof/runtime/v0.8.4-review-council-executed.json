@@ -1,0 +1,324 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-10-27T04:40:24.526Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MVQ6SV96-D0ZQ33",
+    "stage": "review",
+    "executionId": "CRUN-MVQ7637V-9UZPAW",
+    "executionStatus": "completed",
+    "invokedModel": true,
+    "seatCount": 2,
+    "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+    "lastCouncilExecutionId": "CRUN-MVQ7637V-9UZPAW",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVQ6SV96-D0ZQ33",
+              "decision_id": "DEC-MVQ6UQPD-1YOWLS",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims.",
+              "intent": "Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority.",
+              "active_context": "context: Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims. | success: Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority.",
+              "context_snapshot_id": "CTX-MVQ6T062-STPIEI",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.4 Portable Trust Policy and Attestation Binding. Need: v0.8.3 records revocation and fails closed but cannot express which attestation issuers, signer identities, predicate types, trust roots, transparency evidence, validity windows, or policy revisions a local organization accepts. Intent: add provider-neutral, executable trust-policy and attestation-binding records to qif-ledger; verify exact subject digest, issuer and subject scope, predicate type, trust-root revision, validity time, transparency evidence status, policy decision and governance. Preserve the boundary that cryptographic verification and policy conformance do not prove semantic quality, source safety, authenticity beyond recorded evidence, authorization, or authority. Include schema, example, deterministic verifier, retained negative fixtures, docs, AI guidance, portable package, roadmap, AOF evidence, tag, and release.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV084.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV084.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV084.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV084.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV084.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-QIFV084.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVQ6UQPD-1YOWLS"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVQ6SV96-D0ZQ33",
+              "decision_id": "DEC-MVQ6UQPD-1YOWLS",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims.",
+              "intent": "Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority.",
+              "active_context": "context: Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims. | success: Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority.",
+              "context_snapshot_id": "CTX-MVQ6T062-STPIEI",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.4 Portable Trust Policy and Attestation Binding. Need: v0.8.3 records revocation and fails closed but cannot express which attestation issuers, signer identities, predicate types, trust roots, transparency evidence, validity windows, or policy revisions a local organization accepts. Intent: add provider-neutral, executable trust-policy and attestation-binding records to qif-ledger; verify exact subject digest, issuer and subject scope, predicate type, trust-root revision, validity time, transparency evidence status, policy decision and governance. Preserve the boundary that cryptographic verification and policy conformance do not prove semantic quality, source safety, authenticity beyond recorded evidence, authorization, or authority. Include schema, example, deterministic verifier, retained negative fixtures, docs, AI guidance, portable package, roadmap, AOF evidence, tag, and release.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV084.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV084.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV084.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV084.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV084.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-QIFV084.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVQ6UQPD-1YOWLS"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MVQ7637V-9UZPAW",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "completed",
+      "started_at": "2026-10-27T04:40:24.521Z",
+      "completed_at": "2026-10-27T04:40:24.523Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MVQ7637V-9UZPAW-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVQ6SV96-D0ZQ33",
+              "decision_id": "DEC-MVQ6UQPD-1YOWLS",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims.",
+              "intent": "Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority.",
+              "active_context": "context: Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims. | success: Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority.",
+              "context_snapshot_id": "CTX-MVQ6T062-STPIEI",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.4 Portable Trust Policy and Attestation Binding. Need: v0.8.3 records revocation and fails closed but cannot express which attestation issuers, signer identities, predicate types, trust roots, transparency evidence, validity windows, or policy revisions a local organization accepts. Intent: add provider-neutral, executable trust-policy and attestation-binding records to qif-ledger; verify exact subject digest, issuer and subject scope, predicate type, trust-root revision, validity time, transparency evidence status, policy decision and governance. Preserve the boundary that cryptographic verification and policy conformance do not prove semantic quality, source safety, authenticity beyond recorded evidence, authorization, or authority. Include schema, example, deterministic verifier, retained negative fixtures, docs, AI guidance, portable package, roadmap, AOF evidence, tag, and release.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV084.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV084.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV084.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV084.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV084.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-QIFV084.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVQ6UQPD-1YOWLS"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-27T04:40:24.523Z",
+          "completed_at": "2026-10-27T04:40:24.523Z",
+          "result": {
+            "provider": "mock",
+            "model": "mock",
+            "generated_at": "2026-10-27T04:40:24.523Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian review response: focus on Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims. and align to Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority..",
+            "output_summary": "DECISION: proceed VETO: no Guardian review response: focus on Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Develop and release QIF v0.8.4 Portable Trust Policy and Attestation Binding. Need: v0.8.3 records revocation and fails closed but cannot express which attestation issuers, signer identities, predicate types, trust roots, transparency evidence, validity windows, or policy revisions a local organization accepts. Intent: add provider-neutral, executable trust-policy and attestation-binding records to qif-ledger; verify exact subject digest, issuer and subject scope, predicate type, trust-root revision, validity time, transparency evidence status, policy decision and governance. Preserve the boundary that cryptographic verification and policy conformance do not prove semantic quality, source safety, authenticity beyond recorded evidence, authorization, or authority. Include schema, example, deterministic verifier, retained negative fixtures, docs, AI guidance, portable package, roadmap, AOF evidence, tag, and release.\nNeed: Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims.\nIntent: Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority.\nActive Context: context: Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims. | success: Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVQ7637V-9UZPAW-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVQ6SV96-D0ZQ33",
+              "decision_id": "DEC-MVQ6UQPD-1YOWLS",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims.",
+              "intent": "Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority.",
+              "active_context": "context: Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims. | success: Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority.",
+              "context_snapshot_id": "CTX-MVQ6T062-STPIEI",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority."
+            },
+            "task": {
+              "request": "Develop and release QIF v0.8.4 Portable Trust Policy and Attestation Binding. Need: v0.8.3 records revocation and fails closed but cannot express which attestation issuers, signer identities, predicate types, trust roots, transparency evidence, validity windows, or policy revisions a local organization accepts. Intent: add provider-neutral, executable trust-policy and attestation-binding records to qif-ledger; verify exact subject digest, issuer and subject scope, predicate type, trust-root revision, validity time, transparency evidence status, policy decision and governance. Preserve the boundary that cryptographic verification and policy conformance do not prove semantic quality, source safety, authenticity beyond recorded evidence, authorization, or authority. Include schema, example, deterministic verifier, retained negative fixtures, docs, AI guidance, portable package, roadmap, AOF evidence, tag, and release.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV084.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV084.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV084.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV084.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV084.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-QIFV084.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVQ6UQPD-1YOWLS"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-27T04:40:24.523Z",
+          "completed_at": "2026-10-27T04:40:24.523Z",
+          "result": {
+            "provider": "mock",
+            "model": "mock",
+            "generated_at": "2026-10-27T04:40:24.523Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder review response: focus on Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims. and align to Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority..",
+            "output_summary": "DECISION: proceed VETO: no Builder review response: focus on Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Develop and release QIF v0.8.4 Portable Trust Policy and Attestation Binding. Need: v0.8.3 records revocation and fails closed but cannot express which attestation issuers, signer identities, predicate types, trust roots, transparency evidence, validity windows, or policy revisions a local organization accepts. Intent: add provider-neutral, executable trust-policy and attestation-binding records to qif-ledger; verify exact subject digest, issuer and subject scope, predicate type, trust-root revision, validity time, transparency evidence status, policy decision and governance. Preserve the boundary that cryptographic verification and policy conformance do not prove semantic quality, source safety, authenticity beyond recorded evidence, authorization, or authority. Include schema, example, deterministic verifier, retained negative fixtures, docs, AI guidance, portable package, roadmap, AOF evidence, tag, and release.\nNeed: Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims.\nIntent: Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority.\nActive Context: context: Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims. | success: Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover the standalone qif-ledger schema, portable libraries and items, revocation records, trust-policy records, attestation bindings, deterministic policy evaluation, governance, verifier, fixtures, docs, AI guide, portable package, roadmap, changelog, and release. Exclude UI, external registry calls, live cryptographic verification, key management, secret handling, employee surveillance, automatic activation, automatic authority, and semantic truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority."
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

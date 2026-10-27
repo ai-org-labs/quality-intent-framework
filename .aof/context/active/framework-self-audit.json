@@ -1,14 +1,14 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-26T04:39:31.850Z",
-  "audit_id": "FSA-QIFV0830",
-  "scope": "QIF v0.8.3 revocation release self-review",
-  "summary": "Schema, example, verifier, dependency closure, fail-closed suspension, governance, fixtures, docs, roadmap, and portable package align; verifier boundary rejects authenticity and compromise truth claims.",
-  "detected_gap": "Cryptographic attestation and issuer trust policy remain intentionally outside v0.8.3.",
+  "recorded_at": "2026-10-27T04:40:32.976Z",
+  "audit_id": "FSA-QIFV0840",
+  "scope": "QIF v0.8.4 portable trust policy and attestation binding",
+  "summary": "Schema, example, deterministic verifier, retained fixtures, documentation, portable package, roadmap, and AOF review evidence pass structural verification. Policy conformance remains distinct from semantic truth, activation, authorization, and authority.",
+  "detected_gap": "Trust policy rotation and historical replay remain unimplemented.",
   "result_state": "stable",
-  "next_action": "Develop v0.8.4 Portable Trust Policy and Attestation Binding after this release.",
+  "next_action": "Develop v0.8.5 Trust Policy Rotation and Historical Replay.",
   "related_task_ids": [
-    "TASK-076"
+    "TASK-077"
   ],
   "source_session_id": null,
   "source_decision_record_id": null

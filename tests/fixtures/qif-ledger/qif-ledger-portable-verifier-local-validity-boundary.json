@@ -1573,6 +1573,88 @@
       "status": "governance-required"
     }
   ],
+  "portableKnowledgeTrustPolicies": [
+    {
+      "id": "PKTP-001",
+      "version": "1.0.0",
+      "acceptedIssuers": [
+        "https://token.actions.githubusercontent.com"
+      ],
+      "acceptedSubjectIdentities": [
+        "repo:ai-org-labs/quality-intent-framework:ref:refs/heads/main"
+      ],
+      "acceptedPredicateTypes": [
+        "https://slsa.dev/provenance/v1"
+      ],
+      "trustedRootRevisions": [
+        "sigstore-public-good-v1"
+      ],
+      "validFrom": "2026-10-01T00:00:00.000Z",
+      "validUntil": "2027-10-01T00:00:00.000Z",
+      "requireCryptographicEvidence": true,
+      "requireTransparencyEvidence": true,
+      "requireRevocationCheck": true,
+      "failClosed": true,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "active"
+    }
+  ],
+  "portableKnowledgeAttestations": [
+    {
+      "id": "PKAT-001",
+      "itemRef": "PKI-002",
+      "subjectDigest": "sha256:c59f3490c7ca84f3d32b8c7c2967e6de0b7ec60fea999a76c30bad2c3f12a28e",
+      "issuer": "https://token.actions.githubusercontent.com",
+      "subjectIdentity": "repo:ai-org-labs/quality-intent-framework:ref:refs/heads/main",
+      "predicateType": "https://slsa.dev/provenance/v1",
+      "trustRootRevision": "sigstore-public-good-v1",
+      "issuedAt": "2026-10-26T00:00:00.000Z",
+      "expiresAt": "2026-11-26T00:00:00.000Z",
+      "cryptographicEvidenceStatus": "recorded-verified",
+      "transparencyEvidenceStatus": "recorded-verified",
+      "revocationStatus": "clear",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "qualityIntents",
+          "entityRef": "QIN-DS-001"
+        }
+      ],
+      "hiddenReasoningStored": false,
+      "status": "recorded"
+    }
+  ],
+  "portableKnowledgeTrustDecisions": [
+    {
+      "id": "PKTD-001",
+      "policyRef": "PKTP-001",
+      "policyVersion": "1.0.0",
+      "attestationRef": "PKAT-001",
+      "itemRef": "PKI-002",
+      "evaluatedAt": "2026-10-27T00:00:00.000Z",
+      "subjectDigestMatch": true,
+      "issuerAccepted": true,
+      "subjectIdentityAccepted": true,
+      "predicateTypeAccepted": true,
+      "trustRootAccepted": true,
+      "withinPolicyWindow": true,
+      "withinAttestationWindow": true,
+      "cryptographicEvidenceSatisfied": true,
+      "transparencyEvidenceSatisfied": true,
+      "revocationCheckSatisfied": true,
+      "decision": "policy-conformant-candidate",
+      "rationale": "Recorded evidence satisfies this versioned local trust policy; the item remains candidate-only and receives no semantic or operational authority.",
+      "governanceTriggerRefs": [],
+      "activityCountIsQuality": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "decidedBy": "portable-knowledge-governance-owner",
+      "status": "reviewed"
+    }
+  ],
   "ledgerIndex": {
     "activeQualityIntentRefs": [
       {
@@ -1644,7 +1726,8 @@
       "local target dimension coverage and mismatch routing",
       "unseen-case separation, agreement reproduction, evaluator identity separation, and counterexample challenge coverage",
       "local validation sufficiency and governed-activation eligibility reproduction",
-      "revocation subject matching, dependency closure, fail-closed suspension, and history preservation"
+      "revocation subject matching, dependency closure, fail-closed suspension, and history preservation",
+      "attestation subject, identity, predicate, trust-root, time, transparency, revocation, and policy-decision reproduction"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -1658,7 +1741,8 @@
       "counterexample completeness or operational representativeness",
       "activation approval or semantic fitness for use",
       "source authenticity, license sufficiency, or safe execution",
-      "revocation notice authenticity or compromise truth"
+      "revocation notice authenticity or compromise truth",
+      "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness"
     ],
     "semanticValidityRequires": [
       "expert review",

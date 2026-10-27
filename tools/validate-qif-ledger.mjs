@@ -262,6 +262,9 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeDependencyEdges = requireArray(pkg, "portableKnowledgeDependencyEdges", packagePath);
   const portableKnowledgeRevocationImpactAssessments = requireArray(pkg, "portableKnowledgeRevocationImpactAssessments", packagePath);
   const portableKnowledgeRevalidationDecisions = requireArray(pkg, "portableKnowledgeRevalidationDecisions", packagePath);
+  const portableKnowledgeTrustPolicies = requireArray(pkg, "portableKnowledgeTrustPolicies", packagePath);
+  const portableKnowledgeAttestations = requireArray(pkg, "portableKnowledgeAttestations", packagePath);
+  const portableKnowledgeTrustDecisions = requireArray(pkg, "portableKnowledgeTrustDecisions", packagePath);
   const packageRefIndex = indexById(packageRefs, `${packagePath}:packageRefs`);
   const crossPackageRefIndex = indexById(crossPackageRefs, `${packagePath}:crossPackageRefs`);
   const lifecycleIndex = indexById(lifecycleRecords, `${packagePath}:qualityIntentLifecycleRecords`);
@@ -289,6 +292,8 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeRevocationNoticeIndex = indexById(portableKnowledgeRevocationNotices, `${packagePath}:portableKnowledgeRevocationNotices`);
   const portableKnowledgeDependencyEdgeIndex = indexById(portableKnowledgeDependencyEdges, `${packagePath}:portableKnowledgeDependencyEdges`);
   const portableKnowledgeRevocationImpactAssessmentIndex = indexById(portableKnowledgeRevocationImpactAssessments, `${packagePath}:portableKnowledgeRevocationImpactAssessments`);
+  const portableKnowledgeTrustPolicyIndex = indexById(portableKnowledgeTrustPolicies, `${packagePath}:portableKnowledgeTrustPolicies`);
+  const portableKnowledgeAttestationIndex = indexById(portableKnowledgeAttestations, `${packagePath}:portableKnowledgeAttestations`);
   void crossPackageRefIndex;
   void missedIntentIndex;
 
@@ -922,6 +927,70 @@ function validateLedgerPackage(pkg, packagePath) {
     if (active && !trustedReplacement && !types.has("portable-revalidation-insufficient")) errors.push(`${decision.id} insufficient revalidation requires a portable-revalidation-insufficient governance trigger.`);
   }
 
+  for (const policy of portableKnowledgeTrustPolicies) {
+    for (const field of ["acceptedIssuers", "acceptedSubjectIdentities", "acceptedPredicateTypes", "trustedRootRevisions"]) {
+      if (!Array.isArray(policy[field]) || policy[field].length === 0 || new Set(policy[field]).size !== policy[field].length) errors.push(`${policy.id} ${field} must contain unique non-empty values.`);
+    }
+    if (!(Date.parse(policy.validFrom) < Date.parse(policy.validUntil))) errors.push(`${policy.id} validFrom must precede validUntil.`);
+    if (policy.requireCryptographicEvidence !== true || policy.requireTransparencyEvidence !== true || policy.requireRevocationCheck !== true || policy.failClosed !== true) errors.push(`${policy.id} must require cryptographic, transparency, and revocation evidence and fail closed.`);
+    if (policy.automaticActivation !== false || policy.automaticAuthority !== false || policy.semanticTruthClaimed !== false) errors.push(`${policy.id} must forbid automatic activation, automatic authority, and semantic truth claims.`);
+  }
+
+  for (const attestation of portableKnowledgeAttestations) {
+    const item = portableKnowledgeItemIndex.get(attestation.itemRef);
+    if (!item) errors.push(`${attestation.id} references missing portable knowledge item ${attestation.itemRef}.`);
+    else if (attestation.subjectDigest !== item.sourceDigest) errors.push(`${attestation.id} subjectDigest must exactly match ${item.id}.`);
+    if (!(Date.parse(attestation.issuedAt) < Date.parse(attestation.expiresAt))) errors.push(`${attestation.id} issuedAt must precede expiresAt.`);
+    for (const evidenceRef of attestation.evidenceRefs ?? []) resolveEntity(evidenceRef, packageIndex, `${attestation.id}/evidenceRef`);
+    if (attestation.hiddenReasoningStored !== false) errors.push(`${attestation.id} must not store hidden reasoning.`);
+  }
+
+  const trustTriggerForCheck = {
+    subjectDigestMatch: "portable-attestation-subject-mismatch",
+    issuerAccepted: "portable-attestation-identity-mismatch",
+    subjectIdentityAccepted: "portable-attestation-identity-mismatch",
+    predicateTypeAccepted: "portable-attestation-predicate-mismatch",
+    trustRootAccepted: "portable-attestation-root-untrusted",
+    withinPolicyWindow: "portable-attestation-expired",
+    withinAttestationWindow: "portable-attestation-expired",
+    cryptographicEvidenceSatisfied: "portable-attestation-crypto-unverified",
+    transparencyEvidenceSatisfied: "portable-attestation-transparency-insufficient",
+    revocationCheckSatisfied: "portable-attestation-revocation-uncertain"
+  };
+  for (const decision of portableKnowledgeTrustDecisions) {
+    const policy = portableKnowledgeTrustPolicyIndex.get(decision.policyRef);
+    const attestation = portableKnowledgeAttestationIndex.get(decision.attestationRef);
+    const item = portableKnowledgeItemIndex.get(decision.itemRef);
+    if (!policy) errors.push(`${decision.id} references missing trust policy ${decision.policyRef}.`);
+    if (!attestation) errors.push(`${decision.id} references missing attestation ${decision.attestationRef}.`);
+    if (!item) errors.push(`${decision.id} references missing portable knowledge item ${decision.itemRef}.`);
+    if (attestation && attestation.itemRef !== decision.itemRef) errors.push(`${decision.id} attestation and decision must reference the same item.`);
+    if (policy && decision.policyVersion !== policy.version) errors.push(`${decision.id} policyVersion must exactly match ${policy.id}.`);
+    const evaluatedAt = Date.parse(decision.evaluatedAt);
+    const expectedChecks = {
+      subjectDigestMatch: Boolean(item && attestation && attestation.subjectDigest === item.sourceDigest),
+      issuerAccepted: Boolean(policy && attestation && policy.acceptedIssuers.includes(attestation.issuer)),
+      subjectIdentityAccepted: Boolean(policy && attestation && policy.acceptedSubjectIdentities.includes(attestation.subjectIdentity)),
+      predicateTypeAccepted: Boolean(policy && attestation && policy.acceptedPredicateTypes.includes(attestation.predicateType)),
+      trustRootAccepted: Boolean(policy && attestation && policy.trustedRootRevisions.includes(attestation.trustRootRevision)),
+      withinPolicyWindow: Boolean(policy && evaluatedAt >= Date.parse(policy.validFrom) && evaluatedAt <= Date.parse(policy.validUntil)),
+      withinAttestationWindow: Boolean(attestation && evaluatedAt >= Date.parse(attestation.issuedAt) && evaluatedAt <= Date.parse(attestation.expiresAt)),
+      cryptographicEvidenceSatisfied: attestation?.cryptographicEvidenceStatus === "recorded-verified",
+      transparencyEvidenceSatisfied: attestation?.transparencyEvidenceStatus === "recorded-verified",
+      revocationCheckSatisfied: attestation?.revocationStatus === "clear"
+    };
+    for (const [field, value] of Object.entries(expectedChecks)) if (decision[field] !== value) errors.push(`${decision.id} ${field} must reproduce as ${value}.`);
+    const allSatisfied = Object.values(expectedChecks).every(Boolean);
+    const hardReject = attestation?.cryptographicEvidenceStatus === "failed" || attestation?.revocationStatus === "revoked";
+    const expectedDecision = allSatisfied ? "policy-conformant-candidate" : hardReject ? "rejected" : "governance-required";
+    if (decision.decision !== expectedDecision) errors.push(`${decision.id} decision must reproduce as ${expectedDecision}.`);
+    if (decision.status !== (allSatisfied ? "reviewed" : "governance-required")) errors.push(`${decision.id} status must reproduce as ${allSatisfied ? "reviewed" : "governance-required"}.`);
+    const types = portableGovernanceTypes(decision.governanceTriggerRefs, decision.id);
+    for (const [field, value] of Object.entries(expectedChecks)) if (!value && !types.has(trustTriggerForCheck[field])) errors.push(`${decision.id} failed ${field} requires a ${trustTriggerForCheck[field]} governance trigger.`);
+    if (!allSatisfied && !types.has("portable-trust-decision-insufficient")) errors.push(`${decision.id} insufficient trust decision requires a portable-trust-decision-insufficient governance trigger.`);
+    if (decision.activityCountIsQuality !== false || decision.automaticActivation !== false || decision.automaticAuthority !== false || decision.semanticTruthClaimed !== false) errors.push(`${decision.id} must treat checks as evidence and forbid automatic activation, authority, and semantic truth claims.`);
+  }
+
   const index = pkg.ledgerIndex;
   if (!index || typeof index !== "object") {
     errors.push(`${packagePath} must include ledgerIndex.`);
@@ -953,7 +1022,7 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim ?? []).includes("semantic truth")) {
       errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
     }
-    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth"]) {
+    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness"]) {
       if (!(boundary.doesNotClaim ?? []).includes(claim)) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming ${claim}.`);
     }
   }
@@ -991,7 +1060,10 @@ function validateLedgerPackage(pkg, packagePath) {
       portableKnowledgeRevocationNotices: portableKnowledgeRevocationNotices.length,
       portableKnowledgeDependencyEdges: portableKnowledgeDependencyEdges.length,
       portableKnowledgeRevocationImpactAssessments: portableKnowledgeRevocationImpactAssessments.length,
-      portableKnowledgeRevalidationDecisions: portableKnowledgeRevalidationDecisions.length
+      portableKnowledgeRevalidationDecisions: portableKnowledgeRevalidationDecisions.length,
+      portableKnowledgeTrustPolicies: portableKnowledgeTrustPolicies.length,
+      portableKnowledgeAttestations: portableKnowledgeAttestations.length,
+      portableKnowledgeTrustDecisions: portableKnowledgeTrustDecisions.length
     }
   });
 }

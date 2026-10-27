@@ -5223,3 +5223,50 @@ Date: 2026-10-25
 - Next value slices: v0.8.4 Portable Trust Policy and Attestation Binding,
   v0.9 Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger
   Standard.
+
+# QIF v0.8.4 Portable Trust Policy and Attestation Binding
+
+- Date: 2026-10-27.
+- AOF runtime: v12.2.0, managed-project topology.
+- Need: QIF v0.8.3 could preserve revocation and fail-closed suspension, but
+  could not express which attestation issuer, subject identity, predicate,
+  trust root, validity window, transparency record, or cryptographic
+  verification state a receiving organization accepts.
+- Validated Need: provide provider-neutral, policy-local structural evaluation
+  of exact-digest attestation bindings while keeping policy conformance
+  separate from authenticity beyond recorded evidence, safety, applicability,
+  semantic truth, activation, authorization, and authority.
+- Need Validation artifacts: `PST-QIFV084`, `VHY-QIFV084`, `ALT-QIFV084`,
+  `EXP-QIFV084`, Validated Need `NVR-MVQ6ULKL-79D1E6`, and charter
+  `PCH-MVQ6UQKZ-JNFDUI`. The charter was created only after validation.
+- Council: planning execution `CRUN-MVQ6UT3R-8526JF` included Visionary,
+  Builder, and Guardian; review execution `CRUN-MVQ7637V-9UZPAW` included
+  Guardian and Builder with no veto. Mock execution proves runtime routing,
+  not independent semantic approval. Session: `SESS-MVQ6SV96-D0ZQ33`;
+  task: `TASK-077`; actor skill packet: `ASP-MVQ6VJTG-DA5JTB`.
+- Trend evidence: GitHub binds attestations to exact subject digests but states
+  that attestations do not guarantee security; Sigstore separates trusted
+  authorities, identities, predicates, roots, and transparency evidence; SLSA
+  requires consumers to choose trusted builders and expected provenance fields.
+  Sources: https://docs.github.com/en/actions/concepts/security/artifact-attestations,
+  https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations,
+  https://docs.sigstore.dev/policy-controller/overview/, and
+  https://slsa.dev/spec/v1.2/verifying-artifacts.
+- Decision: add `PortableKnowledgeTrustPolicy`,
+  `PortableKnowledgeAttestation`, and `PortableKnowledgeTrustDecision` to
+  `qif-ledger`, reproduce all declared checks deterministically, and route
+  mismatch or insufficient evidence to governance.
+- Implementation boundary: no UI, external registry, live cryptographic
+  verifier, key management, automatic activation, automatic authority, or
+  semantic-truth claim. A `policy-conformant-candidate` remains candidate-only.
+- Verification: `npm test` passed with 16/16 positive and 1,382/1,382 retained
+  negative checks; portable v0.8.4 built and verified with 54 files; AOF
+  organization verification passed 295/295 checks. Self-audit:
+  `FSA-QIFV0840`.
+- Outcome report: `OUT-MVQ7749K-AIEJUG` recorded implementation success and
+  retained v0.8.5 as the open next value slice.
+- Residual gap: trust-policy rotation and historical decision replay are not
+  implemented; policy changes must not rewrite prior evidence.
+- Next value slices: v0.8.5 Trust Policy Rotation and Historical Replay,
+  v0.9 Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger
+  Standard.

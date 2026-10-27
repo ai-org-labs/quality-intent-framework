@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Make post-import revocation, transitive dependency impact, fail-closed suspension, and governed revalidation auditable for portable quality knowledge without deleting history or granting authority",
-  "updated_at": "2026-10-26T04:31:23.045Z",
+  "content": "Provide provider-neutral, policy-local structural evaluation of attestation bindings for portable QIF knowledge, with exact subject identity, versioned trust expectations, deterministic fail-closed decisions, and explicit semantic and authority boundaries.",
+  "updated_at": "2026-10-27T04:31:35.091Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVORD031-BEPQNW",
-  "source_decision_record_id": "DEC-MVOREMQQ-LM6ISD",
+  "source_session_id": "SESS-MVQ6SV96-D0ZQ33",
+  "source_decision_record_id": "DEC-MVQ6UQPD-1YOWLS",
   "declared_complete_at": null
 }

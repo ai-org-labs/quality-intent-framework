@@ -1,0 +1,14 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-27T04:31:11.833Z",
+  "problem_statement_id": "PST-MVQ6U8RD-KOXZV2",
+  "affected_party": "organizations and agents importing portable QIF knowledge",
+  "actual_problem": "attestations cannot be evaluated against explicit local issuer, identity, predicate, root, time, transparency, and revocation expectations",
+  "why_it_matters": "a digest or signature can be structurally valid yet originate from an unacceptable identity, expired trust root, wrong predicate, or revoked source",
+  "why_now": "vendor-neutral skills and portable agent knowledge are spreading faster than local trust policies",
+  "evidence_refs": [
+    "docs/qif-v0.8.3-portable-knowledge-revocation.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVQ6T065-WJMD5U"
+}

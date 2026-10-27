@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-27T04:31:28.437Z",
+  "validation_id": "NVR-MVQ6ULKL-79D1E6",
+  "raw_need": "add trust and attestation support",
+  "validation_status": "validated",
+  "validated_need": "Provide provider-neutral, policy-local structural evaluation of attestation bindings for portable QIF knowledge, with exact subject identity, versioned trust expectations, deterministic fail-closed decisions, and explicit semantic and authority boundaries.",
+  "decision_summary": "The need is not live signature verification or a universal trust oracle; it is an auditable local policy decision over recorded attestation evidence.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What must be trusted?",
+      "answer": "Exact subject digest, accepted issuer and subject scope, predicate, trust-root revision, time window, transparency evidence, and revocation state under one local policy revision.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What remains unproven?",
+      "answer": "Cryptographic validity beyond recorded evidence, artifact safety, semantic quality, authorization, and authority.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "signature validity implies acceptable knowledge"
+  ],
+  "evidence_gaps": [
+    "no live cryptographic verifier or registry evidence is in scope"
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV084.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV084.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV084.json",
+  "experiment_proposal_ref": ".aof/artifacts/need-validation/experiment-proposals/EXP-QIFV084.json",
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVQ6T065-WJMD5U"
+}

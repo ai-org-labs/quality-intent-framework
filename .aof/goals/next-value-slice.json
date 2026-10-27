@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.8.4 Portable Trust Policy and Attestation Binding",
-  "updated_at": "2026-10-26T04:42:28.258Z",
-  "agreed_with_human": true,
-  "source_session_id": "SESS-MVORD031-BEPQNW",
-  "source_decision_record_id": null,
+  "content": "QIF v0.8.5 Trust Policy Rotation and Historical Replay",
+  "updated_at": "2026-10-27T04:41:17.543Z",
+  "agreed_with_human": null,
+  "source_session_id": "SESS-MVQ6SV96-D0ZQ33",
+  "source_decision_record_id": "DEC-MVQ6UQPD-1YOWLS",
   "declared_complete_at": null
 }

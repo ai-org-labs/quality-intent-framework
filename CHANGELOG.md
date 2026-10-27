@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.8.4
+
+- Added versioned portable trust policies, exact item-digest attestation records, and policy-local trust decisions to the Living QIF Ledger.
+- Reproduced issuer, subject identity, predicate type, trust-root revision, policy and attestation windows, cryptographic evidence, transparency evidence, and revocation checks.
+- Failed closed to rejection or governance when recorded trust evidence is mismatched, expired, failed, missing, unknown, or revoked.
+- Added 15 retained negative fixtures and portable AI guidance.
+- Kept policy conformance distinct from live cryptographic validity, artifact safety, semantic fitness, activation, authorization, and authority.
+
 ## v0.8.3
 
 - Added revocation policies, exact-subject notices, portable dependency edges, impact assessments, and governed revalidation decisions to the Living QIF Ledger.

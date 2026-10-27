@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-27T04:31:12.111Z",
+  "alternative_analysis_id": "ALT-MVQ6U8Z3-HRW6C0",
+  "subject_need": "govern portable quality knowledge attestations",
+  "alternative_solutions": [
+    "record only a verified boolean",
+    "delegate trust entirely to an external registry",
+    "bind attestation evidence to a versioned local trust policy and deterministic decision"
+  ],
+  "non_solution_options": [
+    "treat signature presence as quality or safety"
+  ],
+  "defer_options": [
+    "remain on v0.8.3 revocation only"
+  ],
+  "stop_options": [
+    "stop if structural policy evaluation cannot remain provider-neutral or bounded from semantic truth"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVQ6T065-WJMD5U"
+}

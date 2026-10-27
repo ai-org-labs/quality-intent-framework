@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-077",
+  "title": "Release QIF v0.8.4 Portable Trust Policy and Attestation Binding",
+  "description": "Add versioned local trust policies, attestation bindings, deterministic evaluations, governance, fixtures, docs, portable package, and release.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MVQ6SV96-D0ZQ33",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MVQ6UQPD-1YOWLS",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-10-27T04:31:44.244Z",
+  "updated_at": "2026-10-27T04:41:09.181Z",
+  "assigned_at": null,
+  "done_at": "2026-10-27T04:41:09.181Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "QIF v0.8.4 implemented; npm test 16/16 positive and 1382/1382 negative; portable 54 files; review council no veto."
+}

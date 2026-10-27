@@ -1,0 +1,1757 @@
+{
+  "packageType": "qif-ledger",
+  "runtimeVersion": "0.8.2",
+  "packageId": "LEDGERPKG-001",
+  "packageRefs": [
+    {
+      "id": "PKG-DISCOVERY",
+      "path": "examples/discovery-session-package.json",
+      "packageType": "discovery-session",
+      "role": "source-of-derived-quality-knowledge"
+    },
+    {
+      "id": "PKG-REVIEW",
+      "path": "examples/review-run-package.json",
+      "packageType": "review-run",
+      "role": "target-application-and-verdict"
+    },
+    {
+      "id": "PKG-GATE",
+      "path": "examples/quality-gate-package.json",
+      "packageType": "quality-gate",
+      "role": "release-gate-and-post-release-feedback"
+    },
+    {
+      "id": "PKG-WORLD",
+      "path": "examples/world-model-review-package.json",
+      "packageType": "world-model-review",
+      "role": "world-model-gap-to-quality-intent"
+    },
+    {
+      "id": "PKG-CALIB",
+      "path": "examples/world-model-calibration-package.json",
+      "packageType": "world-model-calibration",
+      "role": "world-model-gap-calibration"
+    },
+    {
+      "id": "PKG-CALREPORT",
+      "path": "examples/calibration-report-package.json",
+      "packageType": "calibration-report",
+      "role": "source-of-independent-reviewer-judgments"
+    },
+    {
+      "id": "PKG-TARGET",
+      "path": "examples/evaluation-target-package.json",
+      "packageType": "evaluation-target",
+      "role": "local-applicability-target"
+    },
+    {
+      "id": "PKG-EXPERT",
+      "path": "examples/expert-judgment-sample-package.json",
+      "packageType": "expert-judgment",
+      "role": "local-unseen-reproduction-cases"
+    }
+  ],
+  "crossPackageRefs": [
+    {
+      "id": "XREF-001",
+      "from": {
+        "packageRef": "PKG-DISCOVERY",
+        "entityType": "qualityIntentDerivations",
+        "entityRef": "QID-DS-001"
+      },
+      "to": {
+        "packageRef": "PKG-DISCOVERY",
+        "entityType": "qualityIntents",
+        "entityRef": "QIN-DS-001"
+      },
+      "purpose": "Preserve the chain from extracted expert judgment to candidate Quality Intent.",
+      "provenance": "Derived from discovery-session extraction steps and expert judgments."
+    },
+    {
+      "id": "XREF-002",
+      "from": {
+        "packageRef": "PKG-REVIEW",
+        "entityType": "reviewRuns",
+        "entityRef": "RRN-001"
+      },
+      "to": {
+        "packageRef": "PKG-REVIEW",
+        "entityType": "governanceTriggers",
+        "entityRef": "GTR-RR-001"
+      },
+      "purpose": "Preserve the route from low-confidence verdict to governance.",
+      "provenance": "Recorded by the review-run package governanceTriggerRefs."
+    },
+    {
+      "id": "XREF-003",
+      "from": {
+        "packageRef": "PKG-GATE",
+        "entityType": "postReleaseReviews",
+        "entityRef": "PRR-QG-001"
+      },
+      "to": {
+        "packageRef": "PKG-GATE",
+        "entityType": "improvementActions",
+        "entityRef": "IMP-QG-001"
+      },
+      "purpose": "Preserve the incident-to-improvement feedback loop.",
+      "provenance": "Recorded by postReleaseReview.improvementActionRefs."
+    },
+    {
+      "id": "XREF-004",
+      "from": {
+        "packageRef": "PKG-WORLD",
+        "entityType": "worldModelGapFindings",
+        "entityRef": "WMG-WM-001"
+      },
+      "to": {
+        "packageRef": "PKG-WORLD",
+        "entityType": "qualityIntents",
+        "entityRef": "QIN-WM-001"
+      },
+      "purpose": "Preserve the chain from a concrete world-model gap to a candidate Quality Intent.",
+      "provenance": "Recorded by world-model-review missingItem, expectedDefinition, evidence, and resolution actions."
+    },
+    {
+      "id": "XREF-005",
+      "from": {
+        "packageRef": "PKG-CALIB",
+        "entityType": "calibrationRuns",
+        "entityRef": "CALRUN-WMC-001"
+      },
+      "to": {
+        "packageRef": "PKG-WORLD",
+        "entityType": "worldModelGapFindings",
+        "entityRef": "WMG-WM-001"
+      },
+      "purpose": "Preserve the chain from a calibration run back to the world-model gap pattern it exercises.",
+      "provenance": "Recorded by world-model-calibration case and finding-match evidence."
+    }
+  ],
+  "qualityIntentLifecycleRecords": [
+    {
+      "id": "QLC-001",
+      "intent": {
+        "packageRef": "PKG-DISCOVERY",
+        "entityType": "qualityIntents",
+        "entityRef": "QIN-DS-001"
+      },
+      "state": "candidate",
+      "rationale": "The Quality Intent is derived from concrete expert judgments and extraction steps, but still requires reproduction on more cases before active use.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "qualityIntentDerivations",
+          "entityRef": "QID-DS-001"
+        },
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "decisionPatterns",
+          "entityRef": "PAT-DS-001"
+        }
+      ],
+      "owner": "quality-steward",
+      "status": "open"
+    },
+    {
+      "id": "QLC-002",
+      "intent": {
+        "packageRef": "PKG-GATE",
+        "entityType": "qualityIntents",
+        "entityRef": "QIN-QG-001"
+      },
+      "state": "active",
+      "rationale": "The financial-limit Quality Intent is actively used by a gate decision and has post-release feedback.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-GATE",
+          "entityType": "qualityGateDecisions",
+          "entityRef": "QGD-QG-001"
+        },
+        {
+          "packageRef": "PKG-GATE",
+          "entityType": "postReleaseReviews",
+          "entityRef": "PRR-QG-001"
+        }
+      ],
+      "owner": "support-quality-owner",
+      "status": "active"
+    },
+    {
+      "id": "QLC-003",
+      "intent": {
+        "packageRef": "PKG-WORLD",
+        "entityType": "qualityIntents",
+        "entityRef": "QIN-WM-001"
+      },
+      "state": "candidate",
+      "rationale": "The Quality Intent is derived from an explicit world-model gap finding and requires stakeholder confirmation before active use.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-WORLD",
+          "entityType": "worldModelGapFindings",
+          "entityRef": "WMG-WM-001"
+        },
+        {
+          "packageRef": "PKG-WORLD",
+          "entityType": "modelEvidence",
+          "entityRef": "EVD-WM-001"
+        }
+      ],
+      "owner": "quality-steward",
+      "status": "open"
+    }
+  ],
+  "missedIntentRecords": [
+    {
+      "id": "MIR-001",
+      "sourceIncident": {
+        "packageRef": "PKG-GATE",
+        "entityType": "incidents",
+        "entityRef": "INC-QG-001"
+      },
+      "matchedActiveIntentRefs": [
+        {
+          "packageRef": "PKG-GATE",
+          "entityType": "qualityIntents",
+          "entityRef": "QIN-QG-001"
+        }
+      ],
+      "outcome": "derive-new-intent",
+      "newQualityIntentDerivation": {
+        "packageRef": "PKG-DISCOVERY",
+        "entityType": "qualityIntentDerivations",
+        "entityRef": "QID-DS-001"
+      },
+      "owner": "quality-steward",
+      "status": "candidate-derivation-recorded"
+    }
+  ],
+  "agentTrials": [
+    {
+      "id": "ATR-001",
+      "target": {
+        "packageRef": "PKG-REVIEW",
+        "entityType": "evaluationTargets",
+        "entityRef": "TGT-RR-001"
+      },
+      "reviewRun": {
+        "packageRef": "PKG-REVIEW",
+        "entityType": "reviewRuns",
+        "entityRef": "RRN-001"
+      },
+      "trajectorySummary": "The reviewer agent selected maintenance restart intents, collected wear and waiver evidence, detected low confidence and conflicting evidence, and routed the result to governance instead of approving restart.",
+      "environmentState": "Synthetic maintenance restart scenario; no production system mutated.",
+      "toolActionProvenance": [
+        "Read review-run package",
+        "Validated evidence refs",
+        "Reproduced confidence from evidence inputs"
+      ],
+      "outcomeRef": "AOC-001",
+      "evaluatorUncertainty": "The trial proves structural path quality only; it does not prove the maintenance judgment is correct.",
+      "transcriptHandling": "summary-without-hidden-reasoning"
+    }
+  ],
+  "evidenceOrigins": [
+    {
+      "id": "EOR-LEDGER-001",
+      "originKind": "example",
+      "sourceArtifact": "examples/qif-ledger-package.json",
+      "observationWindow": "not-applicable-example",
+      "environment": "committed-example",
+      "generatedBy": "QIF maintainers",
+      "verifiedBy": [
+        "QIF fixture suite"
+      ],
+      "transformationSummary": "Illustrative agent outcome retained to demonstrate ledger traceability; it is not operational evidence.",
+      "status": "verified"
+    }
+  ],
+  "agentOutcomes": [
+    {
+      "id": "AOC-001",
+      "trialRef": "ATR-001",
+      "evidenceOriginRef": "EOR-LEDGER-001",
+      "actualOutcome": "Review ended in governance escalation with low-confidence and conflicting-evidence triggers preserved.",
+      "outcomeEvidenceRefs": [
+        {
+          "packageRef": "PKG-REVIEW",
+          "entityType": "governanceTriggers",
+          "entityRef": "GTR-RR-001"
+        },
+        {
+          "packageRef": "PKG-REVIEW",
+          "entityType": "governanceTriggers",
+          "entityRef": "GTR-RR-003"
+        }
+      ],
+      "status": "recorded"
+    }
+  ],
+  "judgmentMemoryPolicies": [
+    {
+      "id": "JMP-001",
+      "minimumDistinctLanes": 2,
+      "preserveDissent": true,
+      "dependencyDisclosureRequired": true,
+      "appendOnlyRevisions": true,
+      "destructiveForgetAllowed": false,
+      "hiddenReasoningAllowed": false,
+      "automaticAuthority": false,
+      "status": "active"
+    }
+  ],
+  "judgmentMemoryGovernanceTriggers": [
+    {
+      "id": "JGT-001",
+      "triggerType": "memory-evidence-unverified",
+      "reason": "All retained reviewer judgments and revisions are example-only rather than independently verified operational evidence.",
+      "severity": "high",
+      "requiredAction": "Keep reuse and joined conclusions provisional until evidence is independently verified.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "JGT-002",
+      "triggerType": "memory-shared-dependency",
+      "reason": "The reviewer lanes share the same underlying escalation-resolution record.",
+      "severity": "medium",
+      "requiredAction": "Treat the lanes as partially dependent and seek evidence from a genuinely independent source before reliance.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "JGT-003",
+      "triggerType": "memory-conflict-unresolved",
+      "reason": "The operational timeout interpretation and the protected-action deferral interpretation remain materially different.",
+      "severity": "high",
+      "requiredAction": "Preserve the dissent and obtain an accountable semantic decision before operational use.",
+      "owner": "review-authority-owner",
+      "status": "open"
+    },
+    {
+      "id": "JGT-004",
+      "triggerType": "memory-retirement-review",
+      "reason": "A stale aggregate summary is retired from current use but must remain available for audit and correction history.",
+      "severity": "medium",
+      "requiredAction": "Retain the entry and revision content while excluding it from current joins.",
+      "owner": "memory-governance-owner",
+      "status": "closed"
+    },
+    {
+      "id": "JGT-005",
+      "triggerType": "memory-assessment-insufficient",
+      "reason": "Example-only evidence, a shared dependency, preserved disagreement, and retired stale history prevent sufficient memory reuse evidence.",
+      "severity": "high",
+      "requiredAction": "Do not treat the joined judgment as semantic truth, quality proof, authorization, or authority.",
+      "owner": "quality-governance-owner",
+      "status": "open"
+    }
+  ],
+  "judgmentMemoryEntries": [
+    {
+      "id": "JME-001",
+      "policyRef": "JMP-001",
+      "laneId": "operations-lane",
+      "actorRef": "illustrative-operations-reviewer",
+      "roleRef": "operations",
+      "independenceGroup": "operations-line",
+      "sourceJudgment": {
+        "packageRef": "PKG-CALREPORT",
+        "entityType": "reviewerJudgments",
+        "entityRef": "RJG-CR-001"
+      },
+      "evidenceOriginRef": "EOR-LEDGER-001",
+      "dependencyRefs": [
+        "JMD-001"
+      ],
+      "currentRevisionRef": "JMR-002",
+      "status": "current",
+      "hiddenReasoningStored": false
+    },
+    {
+      "id": "JME-002",
+      "policyRef": "JMP-001",
+      "laneId": "customer-impact-lane",
+      "actorRef": "illustrative-customer-impact-reviewer",
+      "roleRef": "customer-impact",
+      "independenceGroup": "customer-impact-line",
+      "sourceJudgment": {
+        "packageRef": "PKG-CALREPORT",
+        "entityType": "reviewerJudgments",
+        "entityRef": "RJG-CR-002"
+      },
+      "evidenceOriginRef": "EOR-LEDGER-001",
+      "dependencyRefs": [
+        "JMD-001"
+      ],
+      "currentRevisionRef": "JMR-003",
+      "status": "current",
+      "hiddenReasoningStored": false
+    },
+    {
+      "id": "JME-003",
+      "policyRef": "JMP-001",
+      "laneId": "policy-lane",
+      "actorRef": "illustrative-policy-reviewer",
+      "roleRef": "policy",
+      "independenceGroup": "policy-line",
+      "sourceJudgment": {
+        "packageRef": "PKG-CALREPORT",
+        "entityType": "reviewerJudgments",
+        "entityRef": "RJG-CR-003"
+      },
+      "evidenceOriginRef": "EOR-LEDGER-001",
+      "dependencyRefs": [
+        "JMD-001"
+      ],
+      "currentRevisionRef": "JMR-004",
+      "status": "current",
+      "hiddenReasoningStored": false
+    },
+    {
+      "id": "JME-004",
+      "policyRef": "JMP-001",
+      "laneId": "legacy-summary-lane",
+      "actorRef": "illustrative-summary-agent",
+      "roleRef": "aggregator",
+      "independenceGroup": "summary-line",
+      "sourceJudgment": {
+        "packageRef": "PKG-CALREPORT",
+        "entityType": "reviewerJudgments",
+        "entityRef": "RJG-CR-001"
+      },
+      "evidenceOriginRef": "EOR-LEDGER-001",
+      "dependencyRefs": [
+        "JMD-001"
+      ],
+      "currentRevisionRef": "JMR-005",
+      "status": "retired",
+      "hiddenReasoningStored": false
+    }
+  ],
+  "judgmentMemoryDependencies": [
+    {
+      "id": "JMD-001",
+      "policyRef": "JMP-001",
+      "dependencyType": "shared-source",
+      "affectedMemoryRefs": [
+        "JME-001",
+        "JME-002",
+        "JME-003",
+        "JME-004"
+      ],
+      "sourceDescription": "All four memories depend on the same illustrative escalation-resolution record, even though three originate from distinct reviewer lanes.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-CALREPORT",
+          "entityType": "escalationResolutions",
+          "entityRef": "ERS-CR-001"
+        }
+      ],
+      "independenceImpact": "partially-dependent",
+      "governanceTriggerRefs": [
+        "JGT-002"
+      ],
+      "status": "current"
+    }
+  ],
+  "judgmentMemoryRevisions": [
+    {
+      "id": "JMR-001",
+      "memoryRef": "JME-001",
+      "revisionNumber": 1,
+      "previousRevisionRef": null,
+      "judgment": "completed",
+      "rationale": "The first summary incorrectly collapsed an elapsed response window into a completed operational decision.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-CALREPORT",
+          "entityType": "reviewerJudgments",
+          "entityRef": "RJG-CR-001"
+        }
+      ],
+      "applicabilityBoundary": "Illustrative escalation-resolution case only.",
+      "confidence": 0.55,
+      "evidenceStatus": "example-only",
+      "createdAt": "2026-01-15T10:41:00.000Z",
+      "createdBy": "illustrative-operations-reviewer",
+      "status": "superseded"
+    },
+    {
+      "id": "JMR-002",
+      "memoryRef": "JME-001",
+      "revisionNumber": 2,
+      "previousRevisionRef": "JMR-001",
+      "judgment": "timed-out",
+      "rationale": "The corrected memory separates the elapsed response window from a completed protected-action decision.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-CALREPORT",
+          "entityType": "reviewerJudgments",
+          "entityRef": "RJG-CR-001"
+        }
+      ],
+      "applicabilityBoundary": "Illustrative escalation-resolution case and operational timing interpretation only.",
+      "confidence": 0.8,
+      "evidenceStatus": "example-only",
+      "createdAt": "2026-01-15T10:42:00.000Z",
+      "createdBy": "illustrative-operations-reviewer",
+      "status": "current"
+    },
+    {
+      "id": "JMR-003",
+      "memoryRef": "JME-002",
+      "revisionNumber": 1,
+      "previousRevisionRef": null,
+      "judgment": "deferred",
+      "rationale": "The protected action remains deferred because no accountable decision resolved customer impact.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-CALREPORT",
+          "entityType": "reviewerJudgments",
+          "entityRef": "RJG-CR-002"
+        }
+      ],
+      "applicabilityBoundary": "Illustrative customer-impact interpretation for the referenced case only.",
+      "confidence": 0.72,
+      "evidenceStatus": "example-only",
+      "createdAt": "2026-01-15T10:45:00.000Z",
+      "createdBy": "illustrative-customer-impact-reviewer",
+      "status": "current"
+    },
+    {
+      "id": "JMR-004",
+      "memoryRef": "JME-003",
+      "revisionNumber": 1,
+      "previousRevisionRef": null,
+      "judgment": "deferred",
+      "rationale": "The policy boundary remains unresolved and therefore does not authorize the protected action.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-CALREPORT",
+          "entityType": "reviewerJudgments",
+          "entityRef": "RJG-CR-003"
+        }
+      ],
+      "applicabilityBoundary": "Illustrative policy interpretation for the referenced case only.",
+      "confidence": 0.76,
+      "evidenceStatus": "example-only",
+      "createdAt": "2026-01-15T10:47:00.000Z",
+      "createdBy": "illustrative-policy-reviewer",
+      "status": "current"
+    },
+    {
+      "id": "JMR-005",
+      "memoryRef": "JME-004",
+      "revisionNumber": 1,
+      "previousRevisionRef": null,
+      "judgment": "timed-out",
+      "rationale": "Legacy aggregate summary duplicated one lane and omitted the customer-impact dissent.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-CALREPORT",
+          "entityType": "reviewerJudgments",
+          "entityRef": "RJG-CR-001"
+        }
+      ],
+      "applicabilityBoundary": "Historical illustrative summary retained only for audit.",
+      "confidence": 0.4,
+      "evidenceStatus": "stale",
+      "createdAt": "2026-01-15T10:48:00.000Z",
+      "createdBy": "illustrative-summary-agent",
+      "status": "current"
+    }
+  ],
+  "judgmentRetirementDecisions": [
+    {
+      "id": "JRD-001",
+      "policyRef": "JMP-001",
+      "memoryRef": "JME-004",
+      "action": "retire",
+      "rationale": "Exclude the stale aggregate summary from current joins while preserving its content and correction context for audit.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-CALREPORT",
+          "entityType": "reviewerDisagreements",
+          "entityRef": "RDG-CR-001"
+        }
+      ],
+      "decidedBy": "memory-governance-owner",
+      "decidedAt": "2026-01-15T11:00:00.000Z",
+      "resultingStatus": "retired",
+      "destructiveDeletion": false,
+      "governanceTriggerRefs": [
+        "JGT-004"
+      ],
+      "status": "approved"
+    }
+  ],
+  "multiAgentJudgmentJoins": [
+    {
+      "id": "JMJ-001",
+      "policyRef": "JMP-001",
+      "memoryRefs": [
+        "JME-001",
+        "JME-002",
+        "JME-003"
+      ],
+      "revisionRefs": [
+        "JMR-002",
+        "JMR-003",
+        "JMR-004"
+      ],
+      "dependencyRefs": [
+        "JMD-001"
+      ],
+      "dissentMemoryRefs": [
+        "JME-001"
+      ],
+      "conflictDimensions": [
+        "judgment",
+        "rationale"
+      ],
+      "joinMethod": "governed-synthesis",
+      "joinedJudgment": "deferred",
+      "rationale": "The protected action remains deferred while the operational timeout is retained as a distinct dissenting interpretation rather than overwritten.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-CALREPORT",
+          "entityType": "reviewerDisagreements",
+          "entityRef": "RDG-CR-001"
+        }
+      ],
+      "authorityOwner": "review-authority-owner",
+      "authorityBoundary": "recorded-join-only-not-semantic-truth-quality-competence-authorization-or-authority",
+      "dissentPreserved": true,
+      "automaticAuthority": false,
+      "dataSufficiency": "insufficient",
+      "governanceTriggerRefs": [
+        "JGT-001",
+        "JGT-002",
+        "JGT-003"
+      ],
+      "status": "governance-required"
+    }
+  ],
+  "judgmentMemoryAssessments": [
+    {
+      "id": "JMA-001",
+      "policyRef": "JMP-001",
+      "memoryEntryRefs": [
+        "JME-001",
+        "JME-002",
+        "JME-003",
+        "JME-004"
+      ],
+      "revisionRefs": [
+        "JMR-001",
+        "JMR-002",
+        "JMR-003",
+        "JMR-004",
+        "JMR-005"
+      ],
+      "dependencyRefs": [
+        "JMD-001"
+      ],
+      "retirementDecisionRefs": [
+        "JRD-001"
+      ],
+      "joinRefs": [
+        "JMJ-001"
+      ],
+      "laneCount": 4,
+      "currentMemoryCount": 3,
+      "retiredMemoryCount": 1,
+      "dissentCount": 1,
+      "sharedDependencyCount": 1,
+      "unresolvedConflictCount": 1,
+      "unverifiedMemoryCount": 4,
+      "dataSufficiency": "insufficient",
+      "assessmentSignals": [
+        "evidence-insufficient",
+        "shared-dependency",
+        "disagreement-preserved",
+        "unresolved-conflict",
+        "retired-history-preserved"
+      ],
+      "activityCountIsQuality": false,
+      "automaticQualityVerdict": false,
+      "governanceTriggerRefs": [
+        "JGT-001",
+        "JGT-002",
+        "JGT-003",
+        "JGT-005"
+      ],
+      "reviewedBy": [
+        "quality-governance-owner"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "portableKnowledgeImportPolicies": [
+    {
+      "id": "PKP-001",
+      "allowedKnowledgeTypes": [
+        "decision-pattern",
+        "quality-intent"
+      ],
+      "preserveSourceIdentity": true,
+      "requireContentDigest": true,
+      "requireApplicabilityBoundary": true,
+      "requireCounterexamples": true,
+      "importedInstructionsExecutable": false,
+      "hiddenReasoningAllowed": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "status": "active"
+    }
+  ],
+  "portableKnowledgeGovernanceTriggers": [
+    {
+      "id": "PKGTR-001",
+      "triggerType": "portable-source-unverified",
+      "reason": "The portable library is generated from committed examples and has no independently verified operational source evidence.",
+      "severity": "high",
+      "requiredAction": "Verify source ownership, origin, and evidence before local use.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-002",
+      "triggerType": "portable-applicability-unvalidated",
+      "reason": "At import time, neither item had been tested against the target organization's context, stakeholders, or loss boundaries.",
+      "severity": "high",
+      "requiredAction": "Completed by the target-specific applicability decisions retained in this ledger.",
+      "owner": "local-quality-owner",
+      "status": "closed"
+    },
+    {
+      "id": "PKGTR-003",
+      "triggerType": "portable-counterexample-unresolved",
+      "reason": "At import time, source counterexamples had not been reproduced or resolved in the target context.",
+      "severity": "medium",
+      "requiredAction": "Completed by the counterexample challenges retained in the local reproduction trials.",
+      "owner": "local-quality-owner",
+      "status": "closed"
+    },
+    {
+      "id": "PKGTR-004",
+      "triggerType": "portable-assessment-insufficient",
+      "reason": "The import-time candidate assessment lacked local applicability and reproduction evidence.",
+      "severity": "high",
+      "requiredAction": "Completed by the later local-validation assessment; its remaining evidence and trust gaps use separate triggers.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "closed"
+    },
+    {
+      "id": "PKGTR-005",
+      "triggerType": "portable-local-evidence-unverified",
+      "reason": "The local reproduction trials use committed example cases rather than verified operational evidence.",
+      "severity": "high",
+      "requiredAction": "Repeat the trials with verified local evidence and retained evaluator identity boundaries.",
+      "owner": "local-quality-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-006",
+      "triggerType": "portable-local-validation-insufficient",
+      "reason": "Local applicability and reproduction mechanics pass, but source trust and local evidence remain example-only.",
+      "severity": "high",
+      "requiredAction": "Keep every imported item candidate-only until verified source and local evidence satisfy policy.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-007",
+      "triggerType": "portable-revocation-source-unverified",
+      "reason": "The revocation notice is a committed example and its issuer identity is not independently verified.",
+      "severity": "high",
+      "requiredAction": "Verify the notice issuer and supporting evidence before treating the notice as authentic.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-008",
+      "triggerType": "portable-revocation-dependent-suspended",
+      "reason": "An active notice matches PKI-001 and reaches local applicability, reproduction, and assessment records.",
+      "severity": "critical",
+      "requiredAction": "Keep affected reuse decisions suspended while preserving their history.",
+      "owner": "local-quality-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-009",
+      "triggerType": "portable-revalidation-insufficient",
+      "reason": "No trusted replacement item or replacement evidence supports revalidation.",
+      "severity": "high",
+      "requiredAction": "Require reviewed replacement evidence and a new local validation before reuse.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    }
+  ],
+  "portableKnowledgeLibraries": [
+    {
+      "id": "PKL-001",
+      "policyRef": "PKP-001",
+      "name": "QIF Example Evidence and Tacit Judgment Library",
+      "version": "0.8.1-example",
+      "publisherRef": "QIF example publisher",
+      "itemRefs": [
+        "PKI-001",
+        "PKI-002"
+      ],
+      "libraryDigest": "sha256:192aa6aecdbeb7e3876930458f142186a6cd0838a810426425a1e04707eb56a4",
+      "license": "repository license applies",
+      "publishedAt": "2026-10-24T00:00:00.000Z",
+      "evidenceOriginRef": "EOR-LEDGER-001",
+      "trust": {
+        "sources": [
+          "PKG-DISCOVERY"
+        ],
+        "generatedBy": "QIF v0.8.1 example author",
+        "verifiedBy": [
+          "QIF local digest verifier"
+        ],
+        "status": "draft",
+        "staleAfter": "2027-01-24T00:00:00.000Z"
+      },
+      "status": "published"
+    }
+  ],
+  "portableKnowledgeItems": [
+    {
+      "id": "PKI-001",
+      "libraryRef": "PKL-001",
+      "knowledgeType": "decision-pattern",
+      "sourceEntity": {
+        "packageRef": "PKG-DISCOVERY",
+        "entityType": "decisionPatterns",
+        "entityRef": "PAT-DS-001"
+      },
+      "sourceSnapshot": {
+        "id": "PAT-DS-001",
+        "title": "Missing protective evidence blocks acceptance even when surrounding signals are positive",
+        "sourceJudgmentRefs": [
+          "JDG-DS-001",
+          "JDG-DS-002"
+        ],
+        "typicalDecision": "unacceptable",
+        "confidence": 0.84
+      },
+      "sourceDigest": "sha256:2b724cd432c28cc9a4f2892b5cb1241dbdeac5f66db467ca399b63b615872c78",
+      "provenanceSummary": "Copied exactly from the expert-judgment example with its source judgments, concern, loss boundary, counterexample, and reproduction-test references intact.",
+      "applicabilityBoundary": "Candidate for contexts where a decision depends on missing, stale, or bypassed critical evidence; not yet validated in the importing organization.",
+      "counterexamples": [
+        "Healthy surrounding metrics do not make missing gated evidence acceptable.",
+        "A documented waiver may change the decision only when local authority and compensating controls are verified."
+      ],
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "expertJudgments",
+          "entityRef": "JDG-DS-001"
+        }
+      ],
+      "instructionBoundary": "reference-data-only-not-executable-agent-instructions",
+      "hiddenReasoningStored": false,
+      "status": "published"
+    },
+    {
+      "id": "PKI-002",
+      "libraryRef": "PKL-001",
+      "knowledgeType": "quality-intent",
+      "sourceEntity": {
+        "packageRef": "PKG-DISCOVERY",
+        "entityType": "qualityIntents",
+        "entityRef": "QIN-DS-001"
+      },
+      "sourceSnapshot": {
+        "id": "QIN-DS-001",
+        "statement": "Boundary-protective decisions must include evidence close enough to the protected harm to make acceptance reproducible.",
+        "lossBoundaryRefs": [
+          "LSB-DS-001",
+          "LSB-DS-002"
+        ],
+        "status": "candidate"
+      },
+      "sourceDigest": "sha256:c59f3490c7ca84f3d32b8c7c2967e6de0b7ec60fea999a76c30bad2c3f12a28e",
+      "provenanceSummary": "Copied exactly from the discovery-session example; the source candidate status is preserved as source data and remains candidate in the importer.",
+      "applicabilityBoundary": "Candidate for organizations preserving veteran judgment; target stakeholders, terminology, privacy, and reproduction conditions remain unvalidated.",
+      "counterexamples": [
+        "A generic advice document without cases and cues does not satisfy this intent.",
+        "A source intent marked active does not become active in the importing organization."
+      ],
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "lossBoundaries",
+          "entityRef": "LSB-DS-001"
+        }
+      ],
+      "instructionBoundary": "reference-data-only-not-executable-agent-instructions",
+      "hiddenReasoningStored": false,
+      "status": "published"
+    }
+  ],
+  "portableKnowledgeImportDecisions": [
+    {
+      "id": "PKD-001",
+      "policyRef": "PKP-001",
+      "libraryRef": "PKL-001",
+      "importedItemRefs": [
+        "PKI-001",
+        "PKI-002"
+      ],
+      "targetContext": "Illustrative cross-domain hybrid organization preparing local applicability and reproduction work.",
+      "decision": "candidate-import",
+      "rationale": "Preserve the foreign knowledge for local challenge without activating it, executing it as instructions, or treating source confidence and status as local truth.",
+      "sourceDigestVerified": true,
+      "provenancePreserved": true,
+      "localValidationStatus": "not-started",
+      "importedStatus": "candidate",
+      "executable": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "governanceTriggerRefs": [
+        "PKGTR-001",
+        "PKGTR-002",
+        "PKGTR-003"
+      ],
+      "decidedBy": "portable-knowledge-governance-owner",
+      "decidedAt": "2026-10-24T00:10:00.000Z",
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeAssessments": [
+    {
+      "id": "PKA-001",
+      "policyRef": "PKP-001",
+      "libraryRefs": [
+        "PKL-001"
+      ],
+      "itemRefs": [
+        "PKI-001",
+        "PKI-002"
+      ],
+      "importDecisionRefs": [
+        "PKD-001"
+      ],
+      "libraryCount": 1,
+      "itemCount": 2,
+      "candidateImportCount": 1,
+      "rejectedImportCount": 0,
+      "locallyValidatedItemCount": 0,
+      "unresolvedApplicabilityCount": 2,
+      "unresolvedCounterexampleCount": 2,
+      "sourceIntegrityStatus": "verified",
+      "dataSufficiency": "insufficient",
+      "assessmentSignals": [
+        "source-unverified",
+        "candidate-only",
+        "applicability-unvalidated",
+        "counterexample-unresolved"
+      ],
+      "activityCountIsQuality": false,
+      "automaticQualityVerdict": false,
+      "governanceTriggerRefs": [
+        "PKGTR-001",
+        "PKGTR-002",
+        "PKGTR-003",
+        "PKGTR-004"
+      ],
+      "reviewedBy": [
+        "portable-knowledge-governance-owner"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "portableKnowledgeLocalValidationPolicies": [
+    {
+      "id": "PKLVP-001",
+      "requiredApplicabilityDimensions": [
+        "context",
+        "stakeholder-impact",
+        "risk",
+        "domain",
+        "loss-boundary",
+        "artifact-type",
+        "operational-impact"
+      ],
+      "minimumUnseenCases": 2,
+      "minimumAgreement": 0.8,
+      "requireIndependentEvaluator": true,
+      "requireCounterexampleChallenge": true,
+      "requireVerifiedSource": true,
+      "requireVerifiedEvidence": true,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "active"
+    }
+  ],
+  "portableKnowledgeApplicabilityDecisions": [
+    {
+      "id": "PKLAD-001",
+      "policyRef": "PKLVP-001",
+      "itemRef": "PKI-001",
+      "targetRef": {
+        "packageRef": "PKG-TARGET",
+        "entityType": "evaluationTargets",
+        "entityRef": "TGT-OPS-001"
+      },
+      "evaluatedDimensions": [
+        "context",
+        "stakeholder-impact",
+        "risk",
+        "domain",
+        "loss-boundary",
+        "artifact-type",
+        "operational-impact"
+      ],
+      "matches": [
+        "The target concerns continuing live service when protective local evidence is stale.",
+        "Operators and service customers are exposed to the same unknown-state loss mechanism."
+      ],
+      "mismatches": [],
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-TARGET",
+          "entityType": "evaluationTargets",
+          "entityRef": "TGT-OPS-001"
+        }
+      ],
+      "decision": "applicable",
+      "rationale": "The imported decision pattern addresses the target's named stale-evidence cue and unknown-field-state loss boundary.",
+      "confidence": 0.86,
+      "counterexampleChallengeRequired": true,
+      "governanceTriggerRefs": [],
+      "decidedBy": "local-quality-reviewer",
+      "decidedAt": "2026-10-25T00:10:00.000Z",
+      "status": "reviewed"
+    },
+    {
+      "id": "PKLAD-002",
+      "policyRef": "PKLVP-001",
+      "itemRef": "PKI-002",
+      "targetRef": {
+        "packageRef": "PKG-TARGET",
+        "entityType": "evaluationTargets",
+        "entityRef": "TGT-OPS-001"
+      },
+      "evaluatedDimensions": [
+        "context",
+        "stakeholder-impact",
+        "risk",
+        "domain",
+        "loss-boundary",
+        "artifact-type",
+        "operational-impact"
+      ],
+      "matches": [
+        "The target requires evidence close to the protected operational harm.",
+        "The intent's boundary-protective evidence principle can be tested against the target's inspection state."
+      ],
+      "mismatches": [],
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-TARGET",
+          "entityType": "evaluationTargets",
+          "entityRef": "TGT-OPS-001"
+        }
+      ],
+      "decision": "applicable",
+      "rationale": "The target exposes the same evidence-to-loss-boundary relation while retaining local stakeholder and operational context.",
+      "confidence": 0.82,
+      "counterexampleChallengeRequired": true,
+      "governanceTriggerRefs": [],
+      "decidedBy": "local-quality-reviewer",
+      "decidedAt": "2026-10-25T00:12:00.000Z",
+      "status": "reviewed"
+    }
+  ],
+  "portableKnowledgeReproductionTrials": [
+    {
+      "id": "PKLRT-001",
+      "policyRef": "PKLVP-001",
+      "itemRef": "PKI-001",
+      "applicabilityDecisionRef": "PKLAD-001",
+      "targetRef": {
+        "packageRef": "PKG-TARGET",
+        "entityType": "evaluationTargets",
+        "entityRef": "TGT-OPS-001"
+      },
+      "sourceCaseRefs": [
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "cases",
+          "entityRef": "CAS-DS-001"
+        },
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "cases",
+          "entityRef": "CAS-DS-002"
+        }
+      ],
+      "unseenCaseRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-ACC-001"
+        },
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-MTN-001"
+        }
+      ],
+      "evaluatorRef": "local-ai-evaluator-01",
+      "sourceEvaluatorRefs": [
+        "EXP-SW-001",
+        "EXP-OPS-001"
+      ],
+      "evaluatorIndependent": true,
+      "expectedDecisions": [
+        {
+          "caseRef": {
+            "packageRef": "PKG-EXPERT",
+            "entityType": "cases",
+            "entityRef": "CAS-ACC-001"
+          },
+          "decision": "unacceptable"
+        },
+        {
+          "caseRef": {
+            "packageRef": "PKG-EXPERT",
+            "entityType": "cases",
+            "entityRef": "CAS-MTN-001"
+          },
+          "decision": "unacceptable"
+        }
+      ],
+      "observedDecisions": [
+        {
+          "caseRef": {
+            "packageRef": "PKG-EXPERT",
+            "entityType": "cases",
+            "entityRef": "CAS-ACC-001"
+          },
+          "decision": "unacceptable"
+        },
+        {
+          "caseRef": {
+            "packageRef": "PKG-EXPERT",
+            "entityType": "cases",
+            "entityRef": "CAS-MTN-001"
+          },
+          "decision": "unacceptable"
+        }
+      ],
+      "agreementScore": 1,
+      "counterexampleOutcomes": [
+        {
+          "counterexample": "Healthy surrounding metrics do not make missing gated evidence acceptable.",
+          "caseRef": {
+            "packageRef": "PKG-EXPERT",
+            "entityType": "cases",
+            "entityRef": "CAS-ACC-001"
+          },
+          "outcome": "supports-boundary",
+          "rationale": "Commercial approval does not replace missing delivery confirmation.",
+          "evidenceRefs": [
+            {
+              "packageRef": "PKG-EXPERT",
+              "entityType": "cases",
+              "entityRef": "CAS-ACC-001"
+            }
+          ]
+        },
+        {
+          "counterexample": "A documented waiver may change the decision only when local authority and compensating controls are verified.",
+          "caseRef": {
+            "packageRef": "PKG-EXPERT",
+            "entityType": "cases",
+            "entityRef": "CAS-MTN-001"
+          },
+          "outcome": "narrows-boundary",
+          "rationale": "The case has no approved waiver or compensating restart control, so the exception remains bounded.",
+          "evidenceRefs": [
+            {
+              "packageRef": "PKG-EXPERT",
+              "entityType": "cases",
+              "entityRef": "CAS-MTN-001"
+            }
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "reproductionTests",
+          "entityRef": "RPT-EVD-001"
+        }
+      ],
+      "evidenceStatus": "example-only",
+      "result": "pass",
+      "hiddenReasoningStored": false,
+      "governanceTriggerRefs": [
+        "PKGTR-005"
+      ],
+      "status": "governance-required"
+    },
+    {
+      "id": "PKLRT-002",
+      "policyRef": "PKLVP-001",
+      "itemRef": "PKI-002",
+      "applicabilityDecisionRef": "PKLAD-002",
+      "targetRef": {
+        "packageRef": "PKG-TARGET",
+        "entityType": "evaluationTargets",
+        "entityRef": "TGT-OPS-001"
+      },
+      "sourceCaseRefs": [
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "cases",
+          "entityRef": "CAS-DS-001"
+        },
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "cases",
+          "entityRef": "CAS-DS-002"
+        }
+      ],
+      "unseenCaseRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-ACC-001"
+        },
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-MTN-001"
+        }
+      ],
+      "evaluatorRef": "local-human-reviewer-01",
+      "sourceEvaluatorRefs": [
+        "EXP-SW-001",
+        "EXP-OPS-001"
+      ],
+      "evaluatorIndependent": true,
+      "expectedDecisions": [
+        {
+          "caseRef": {
+            "packageRef": "PKG-EXPERT",
+            "entityType": "cases",
+            "entityRef": "CAS-ACC-001"
+          },
+          "decision": "unacceptable"
+        },
+        {
+          "caseRef": {
+            "packageRef": "PKG-EXPERT",
+            "entityType": "cases",
+            "entityRef": "CAS-MTN-001"
+          },
+          "decision": "unacceptable"
+        }
+      ],
+      "observedDecisions": [
+        {
+          "caseRef": {
+            "packageRef": "PKG-EXPERT",
+            "entityType": "cases",
+            "entityRef": "CAS-ACC-001"
+          },
+          "decision": "unacceptable"
+        },
+        {
+          "caseRef": {
+            "packageRef": "PKG-EXPERT",
+            "entityType": "cases",
+            "entityRef": "CAS-MTN-001"
+          },
+          "decision": "unacceptable"
+        }
+      ],
+      "agreementScore": 1,
+      "counterexampleOutcomes": [
+        {
+          "counterexample": "A generic advice document without cases and cues does not satisfy this intent.",
+          "caseRef": {
+            "packageRef": "PKG-EXPERT",
+            "entityType": "cases",
+            "entityRef": "CAS-ACC-001"
+          },
+          "outcome": "supports-boundary",
+          "rationale": "The judgment uses a concrete case and named missing evidence rather than generic advice.",
+          "evidenceRefs": [
+            {
+              "packageRef": "PKG-EXPERT",
+              "entityType": "cases",
+              "entityRef": "CAS-ACC-001"
+            }
+          ]
+        },
+        {
+          "counterexample": "A source intent marked active does not become active in the importing organization.",
+          "caseRef": {
+            "packageRef": "PKG-EXPERT",
+            "entityType": "cases",
+            "entityRef": "CAS-MTN-001"
+          },
+          "outcome": "supports-boundary",
+          "rationale": "The trial tests a candidate and grants no local status or authority.",
+          "evidenceRefs": [
+            {
+              "packageRef": "PKG-EXPERT",
+              "entityType": "cases",
+              "entityRef": "CAS-MTN-001"
+            }
+          ]
+        }
+      ],
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "reproductionTests",
+          "entityRef": "RPT-EVD-001"
+        }
+      ],
+      "evidenceStatus": "example-only",
+      "result": "pass",
+      "hiddenReasoningStored": false,
+      "governanceTriggerRefs": [
+        "PKGTR-005"
+      ],
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeLocalValidationAssessments": [
+    {
+      "id": "PKLVA-001",
+      "policyRef": "PKLVP-001",
+      "itemRefs": [
+        "PKI-001",
+        "PKI-002"
+      ],
+      "applicabilityDecisionRefs": [
+        "PKLAD-001",
+        "PKLAD-002"
+      ],
+      "reproductionTrialRefs": [
+        "PKLRT-001",
+        "PKLRT-002"
+      ],
+      "targetCount": 1,
+      "applicableItemCount": 2,
+      "rejectedItemCount": 0,
+      "reproducedItemCount": 2,
+      "independentTrialCount": 2,
+      "verifiedEvidenceTrialCount": 0,
+      "unresolvedCounterexampleCount": 0,
+      "sourceTrustStatus": "unverified",
+      "dataSufficiency": "insufficient",
+      "activationEligibility": "not-eligible",
+      "assessmentSignals": [
+        "source-unverified",
+        "local-applicability-tested",
+        "reproduction-passed",
+        "evidence-unverified",
+        "activation-eligibility-blocked"
+      ],
+      "activityCountIsQuality": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "governanceTriggerRefs": [
+        "PKGTR-001",
+        "PKGTR-005",
+        "PKGTR-006"
+      ],
+      "reviewedBy": [
+        "portable-knowledge-governance-owner",
+        "local-quality-reviewer"
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "portableKnowledgeRevocationPolicies": [
+    {
+      "id": "PKRVP-001",
+      "acceptedNoticeStates": [
+        "active",
+        "disputed"
+      ],
+      "supportedSubjectKinds": [
+        "library",
+        "item",
+        "source-digest",
+        "evidence-origin",
+        "publisher"
+      ],
+      "requireEvidence": true,
+      "requireDependencyClosure": true,
+      "failClosedOnUnknownImpact": true,
+      "preserveHistory": true,
+      "destructiveDeletionAllowed": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "active"
+    }
+  ],
+  "portableKnowledgeRevocationNotices": [
+    {
+      "id": "PKRVN-001",
+      "policyRef": "PKRVP-001",
+      "noticeState": "active",
+      "subjectKind": "item",
+      "itemRef": "PKI-001",
+      "sourceDigest": "sha256:2b724cd432c28cc9a4f2892b5cb1241dbdeac5f66db467ca399b63b615872c78",
+      "reasonCode": "disputed",
+      "reason": "Pilot notice disputes whether the source judgment evidence remains fit for portable reuse.",
+      "effectiveAt": "2026-10-26T00:00:00.000Z",
+      "observedAt": "2026-10-26T00:05:00.000Z",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "expertJudgments",
+          "entityRef": "JDG-DS-001"
+        }
+      ],
+      "issuedBy": "QIF example publisher",
+      "issuerTrustStatus": "unverified",
+      "governanceTriggerRefs": [
+        "PKGTR-007",
+        "PKGTR-008"
+      ],
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeDependencyEdges": [
+    {
+      "id": "PKDE-001",
+      "upstreamRef": "PKI-001",
+      "downstreamRef": "PKLAD-001",
+      "dependencyKind": "applicability",
+      "rationale": "The local applicability decision evaluates this item.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "active": true,
+      "status": "current"
+    },
+    {
+      "id": "PKDE-002",
+      "upstreamRef": "PKI-001",
+      "downstreamRef": "PKLRT-001",
+      "dependencyKind": "evidence",
+      "rationale": "The reproduction trial applies this item.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "reproductionTests",
+          "entityRef": "RPT-EVD-001"
+        }
+      ],
+      "active": true,
+      "status": "current"
+    },
+    {
+      "id": "PKDE-003",
+      "upstreamRef": "PKLAD-001",
+      "downstreamRef": "PKLVA-001",
+      "dependencyKind": "eligibility",
+      "rationale": "The local assessment aggregates this applicability decision.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "active": true,
+      "status": "current"
+    },
+    {
+      "id": "PKDE-004",
+      "upstreamRef": "PKLRT-001",
+      "downstreamRef": "PKLVA-001",
+      "dependencyKind": "eligibility",
+      "rationale": "The local assessment aggregates this reproduction trial.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "reproductionTests",
+          "entityRef": "RPT-EVD-001"
+        }
+      ],
+      "active": true,
+      "status": "current"
+    }
+  ],
+  "portableKnowledgeRevocationImpactAssessments": [
+    {
+      "id": "PKRVIA-001",
+      "policyRef": "PKRVP-001",
+      "noticeRef": "PKRVN-001",
+      "dependencyEdgeRefs": [
+        "PKDE-001",
+        "PKDE-002",
+        "PKDE-003",
+        "PKDE-004"
+      ],
+      "affectedItemRefs": [
+        "PKI-001"
+      ],
+      "directDependentRefs": [
+        "PKLAD-001",
+        "PKLRT-001"
+      ],
+      "transitiveDependentRefs": [
+        "PKLVA-001"
+      ],
+      "unresolvedDependencyRefs": [],
+      "affectedItemCount": 1,
+      "directDependentCount": 2,
+      "transitiveDependentCount": 1,
+      "traversalComplete": true,
+      "eligibilityEffect": "suspended",
+      "preservationStatus": "history-preserved",
+      "destructiveDeletion": false,
+      "dataSufficiency": "insufficient",
+      "assessmentSignals": [
+        "revocation-recorded",
+        "direct-impact-found",
+        "transitive-impact-found",
+        "issuer-unverified",
+        "eligibility-suspended"
+      ],
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "governanceTriggerRefs": [
+        "PKGTR-007",
+        "PKGTR-008"
+      ],
+      "reviewedBy": [
+        "portable-knowledge-governance-owner"
+      ],
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeRevalidationDecisions": [
+    {
+      "id": "PKRVD-001",
+      "policyRef": "PKRVP-001",
+      "noticeRef": "PKRVN-001",
+      "impactAssessmentRef": "PKRVIA-001",
+      "affectedItemRefs": [
+        "PKI-001"
+      ],
+      "priorUseStatus": "candidate",
+      "decision": "keep-suspended",
+      "resultingUseStatus": "suspended",
+      "replacementEvidenceRefs": [],
+      "rationale": "The active notice is unverified and no trusted replacement evidence exists, so reuse fails closed without deleting history.",
+      "decidedBy": "portable-knowledge-governance-owner",
+      "decidedAt": "2026-10-26T00:15:00.000Z",
+      "preserveHistory": true,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "governanceTriggerRefs": [
+        "PKGTR-008",
+        "PKGTR-009"
+      ],
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeTrustPolicies": [
+    {
+      "id": "PKTP-001",
+      "version": "1.0.0",
+      "acceptedIssuers": [
+        "https://token.actions.githubusercontent.com"
+      ],
+      "acceptedSubjectIdentities": [
+        "repo:ai-org-labs/quality-intent-framework:ref:refs/heads/main"
+      ],
+      "acceptedPredicateTypes": [
+        "https://slsa.dev/provenance/v1"
+      ],
+      "trustedRootRevisions": [
+        "sigstore-public-good-v1"
+      ],
+      "validFrom": "2026-10-01T00:00:00.000Z",
+      "validUntil": "2027-10-01T00:00:00.000Z",
+      "requireCryptographicEvidence": true,
+      "requireTransparencyEvidence": true,
+      "requireRevocationCheck": true,
+      "failClosed": true,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "active"
+    }
+  ],
+  "portableKnowledgeAttestations": [
+    {
+      "id": "PKAT-001",
+      "itemRef": "PKI-002",
+      "subjectDigest": "sha256:c59f3490c7ca84f3d32b8c7c2967e6de0b7ec60fea999a76c30bad2c3f12a28e",
+      "issuer": "https://token.actions.githubusercontent.com",
+      "subjectIdentity": "repo:ai-org-labs/quality-intent-framework:ref:refs/heads/main",
+      "predicateType": "https://example.org/unknown",
+      "trustRootRevision": "sigstore-public-good-v1",
+      "issuedAt": "2026-10-26T00:00:00.000Z",
+      "expiresAt": "2026-11-26T00:00:00.000Z",
+      "cryptographicEvidenceStatus": "recorded-verified",
+      "transparencyEvidenceStatus": "recorded-verified",
+      "revocationStatus": "clear",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-DISCOVERY",
+          "entityType": "qualityIntents",
+          "entityRef": "QIN-DS-001"
+        }
+      ],
+      "hiddenReasoningStored": false,
+      "status": "recorded"
+    }
+  ],
+  "portableKnowledgeTrustDecisions": [
+    {
+      "id": "PKTD-001",
+      "policyRef": "PKTP-001",
+      "policyVersion": "1.0.0",
+      "attestationRef": "PKAT-001",
+      "itemRef": "PKI-002",
+      "evaluatedAt": "2026-10-27T00:00:00.000Z",
+      "subjectDigestMatch": true,
+      "issuerAccepted": true,
+      "subjectIdentityAccepted": true,
+      "predicateTypeAccepted": true,
+      "trustRootAccepted": true,
+      "withinPolicyWindow": true,
+      "withinAttestationWindow": true,
+      "cryptographicEvidenceSatisfied": true,
+      "transparencyEvidenceSatisfied": true,
+      "revocationCheckSatisfied": true,
+      "decision": "policy-conformant-candidate",
+      "rationale": "Recorded evidence satisfies this versioned local trust policy; the item remains candidate-only and receives no semantic or operational authority.",
+      "governanceTriggerRefs": [],
+      "activityCountIsQuality": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "decidedBy": "portable-knowledge-governance-owner",
+      "status": "reviewed"
+    }
+  ],
+  "ledgerIndex": {
+    "activeQualityIntentRefs": [
+      {
+        "packageRef": "PKG-GATE",
+        "entityType": "qualityIntents",
+        "entityRef": "QIN-QG-001"
+      }
+    ],
+    "openGovernanceTriggerRefs": [
+      {
+        "packageRef": "PKG-REVIEW",
+        "entityType": "governanceTriggers",
+        "entityRef": "GTR-RR-001"
+      },
+      {
+        "packageRef": "PKG-REVIEW",
+        "entityType": "governanceTriggers",
+        "entityRef": "GTR-RR-002"
+      },
+      {
+        "packageRef": "PKG-WORLD",
+        "entityType": "governanceTriggers",
+        "entityRef": "GTR-WM-001"
+      },
+      {
+        "packageRef": "PKG-CALIB",
+        "entityType": "governanceTriggers",
+        "entityRef": "GTR-WMC-001"
+      },
+      {
+        "packageRef": "PKG-CALIB",
+        "entityType": "governanceTriggers",
+        "entityRef": "GTR-WMC-002"
+      }
+    ],
+    "openResidualRiskRefs": [
+      {
+        "packageRef": "PKG-REVIEW",
+        "entityType": "reviewRuns",
+        "entityRef": "RRN-001"
+      },
+      {
+        "packageRef": "PKG-WORLD",
+        "entityType": "worldModelGapFindings",
+        "entityRef": "WMG-WM-001"
+      },
+      {
+        "packageRef": "PKG-CALIB",
+        "entityType": "calibrationRuns",
+        "entityRef": "CALRUN-WMC-001"
+      }
+    ],
+    "lastUpdated": "2026-10-25",
+    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable quality-knowledge import, and local applicability and unseen-case reproduction evidence without automatic activation or authority."
+  },
+  "verifierBoundary": {
+    "checks": [
+      "package reference resolution",
+      "cross-package entity reference resolution",
+      "quality intent lifecycle evidence",
+      "missed intent feedback closure",
+      "agent trial outcome linkage",
+      "judgment memory policy and source linkage",
+      "dependency disclosure and revision lineage",
+      "governed retirement without destructive deletion",
+      "multi-agent join and assessment reproduction",
+      "portable library source integrity and exact snapshot reproduction",
+      "candidate-only import, applicability, counterexample, trust, and governance boundaries",
+      "local target dimension coverage and mismatch routing",
+      "unseen-case separation, agreement reproduction, evaluator identity separation, and counterexample challenge coverage",
+      "local validation sufficiency and governed-activation eligibility reproduction",
+      "revocation subject matching, dependency closure, fail-closed suspension, and history preservation",
+      "attestation subject, identity, predicate, trust-root, time, transparency, revocation, and policy-decision reproduction"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "expert correctness",
+      "incident root cause correctness",
+      "agent competence",
+      "consensus correctness",
+      "independence truth",
+      "authorization or authority",
+      "imported knowledge applicability or local validity",
+      "evaluator independence beyond recorded identity separation",
+      "counterexample completeness or operational representativeness",
+      "activation approval or semantic fitness for use",
+      "source authenticity, license sufficiency, or safe execution",
+      "revocation notice authenticity or compromise truth",
+      "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness"
+    ],
+    "semanticValidityRequires": [
+      "expert review",
+      "operational feedback",
+      "governance decision",
+      "pilot calibration",
+      "target-specific applicability decision",
+      "local reproduction testing"
+    ]
+  }
+}
