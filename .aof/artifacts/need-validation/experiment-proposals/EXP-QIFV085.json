@@ -1,0 +1,12 @@
+{
+  "artifact_type": "experiment-proposal",
+  "recorded_at": "2026-10-28T04:26:50.391Z",
+  "experiment_proposal_id": "EXP-MVRM4HP3-V2R1TX",
+  "assumption_to_test": "A compact policy-lineage and replay model can deterministically classify changed outcomes without implementing cryptography.",
+  "smallest_testable_validation": "Add one superseding policy revision and replay the v0.8.4 decision against frozen attestation inputs; retain negative fixtures for lineage, mutation, missing input, and governance.",
+  "expected_learning": "Whether policy change, evidence change, and time change can remain separate and reproducible.",
+  "expected_cost": "One qif-ledger schema slice, verifier rules, examples, fixtures, documentation, and release.",
+  "success_threshold": "All declared lineage and replay outputs reproduce; original decision is unchanged; negative fixtures fail; full npm test passes.",
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVRM3VF2-1GRIE8"
+}

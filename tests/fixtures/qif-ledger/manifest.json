@@ -913,6 +913,118 @@
       "rule": "verifier does not claim cryptographic or semantic truth",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness."
+    },
+    {
+      "file": "qif-ledger-portable-trust-lineage-initial-previous.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "initial trust policy has no predecessor",
+      "expect": "fail",
+      "errorIncludes": "PKTP-001 initial revision must not reference a previous policy."
+    },
+    {
+      "file": "qif-ledger-portable-trust-lineage-rotation-previous.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "rotated trust policy names predecessor",
+      "expect": "fail",
+      "errorIncludes": "PKTP-002 non-initial revision requires previousPolicyRef."
+    },
+    {
+      "file": "qif-ledger-portable-trust-lineage-backlink.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "trust policy succession is bidirectional",
+      "expect": "fail",
+      "errorIncludes": "PKTP-002 previous policy must point back through supersededByPolicyRef."
+    },
+    {
+      "file": "qif-ledger-portable-trust-lineage-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "rotation boundary is contiguous",
+      "expect": "fail",
+      "errorIncludes": "PKTP-002 effectiveAt must equal the previous policy validUntil boundary."
+    },
+    {
+      "file": "qif-ledger-portable-trust-lineage-active-count.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "one trust policy revision is active",
+      "expect": "fail",
+      "errorIncludes": "trust policy lineage must contain exactly one active revision."
+    },
+    {
+      "file": "qif-ledger-portable-trust-replay-original-snapshot.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "historical replay freezes original decision",
+      "expect": "fail",
+      "errorIncludes": "PKTR-001 frozen original decision inputs must exactly match PKTD-001."
+    },
+    {
+      "file": "qif-ledger-portable-trust-replay-policy-version.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "historical replay pins later policy version",
+      "expect": "fail",
+      "errorIncludes": "PKTR-001 replayPolicyVersion must exactly match PKTP-002."
+    },
+    {
+      "file": "qif-ledger-portable-trust-replay-distinct-policy.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "historical replay uses a later policy",
+      "expect": "fail",
+      "errorIncludes": "PKTR-001 replay policy must differ from the original policy."
+    },
+    {
+      "file": "qif-ledger-portable-trust-replay-check.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "historical replay checks reproduce",
+      "expect": "fail",
+      "errorIncludes": "PKTR-001 trustRootAccepted must reproduce as false."
+    },
+    {
+      "file": "qif-ledger-portable-trust-replay-decision.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "historical replay decision reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKTR-001 replayDecision must reproduce as governance-required."
+    },
+    {
+      "file": "qif-ledger-portable-trust-replay-delta.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "historical replay outcome delta reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKTR-001 outcomeDelta must reproduce as tightened."
+    },
+    {
+      "file": "qif-ledger-portable-trust-replay-material-change.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "historical replay material change reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKTR-001 materialChange must reproduce as true."
+    },
+    {
+      "file": "qif-ledger-portable-trust-replay-change-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "changed replay routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKTR-001 material outcome change requires a portable-trust-replay-outcome-changed governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-replay-insufficient-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "insufficient replay routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKTR-001 insufficient replay requires a portable-trust-replay-insufficient governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-replay-history-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "historical replay preserves history without authority",
+      "expect": "fail",
+      "errorIncludes": "PKTR-001 must preserve history and frozen inputs, treat counts as evidence, and forbid automatic activation, authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-trust-replay-verifier-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "verifier does not turn replay into current authority",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming historical replay as current authorization, activation, authority, or semantic truth."
     }
   ],
   "rescopedRules": []

@@ -40,6 +40,7 @@
     "portableKnowledgeTrustPolicies",
     "portableKnowledgeAttestations",
     "portableKnowledgeTrustDecisions",
+    "portableKnowledgeTrustReplays",
     "ledgerIndex",
     "verifierBoundary"
   ],
@@ -191,6 +192,7 @@
     "portableKnowledgeTrustPolicies": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portableKnowledgeTrustPolicy" } },
     "portableKnowledgeAttestations": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portableKnowledgeAttestation" } },
     "portableKnowledgeTrustDecisions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portableKnowledgeTrustDecision" } },
+    "portableKnowledgeTrustReplays": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portableKnowledgeTrustReplay" } },
     "ledgerIndex": { "$ref": "#/$defs/ledgerIndex" },
     "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
   },
@@ -515,7 +517,7 @@
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" },
-        "triggerType": { "enum": ["portable-source-unverified", "portable-integrity-mismatch", "portable-applicability-unvalidated", "portable-counterexample-unresolved", "portable-assessment-insufficient", "portable-local-target-mismatch", "portable-local-reproduction-insufficient", "portable-local-evidence-unverified", "portable-local-validation-insufficient", "portable-revocation-source-unverified", "portable-revocation-impact-incomplete", "portable-revocation-dependent-suspended", "portable-revalidation-insufficient", "portable-attestation-subject-mismatch", "portable-attestation-identity-mismatch", "portable-attestation-predicate-mismatch", "portable-attestation-root-untrusted", "portable-attestation-expired", "portable-attestation-transparency-insufficient", "portable-attestation-revocation-uncertain", "portable-attestation-crypto-unverified", "portable-trust-decision-insufficient"] },
+        "triggerType": { "enum": ["portable-source-unverified", "portable-integrity-mismatch", "portable-applicability-unvalidated", "portable-counterexample-unresolved", "portable-assessment-insufficient", "portable-local-target-mismatch", "portable-local-reproduction-insufficient", "portable-local-evidence-unverified", "portable-local-validation-insufficient", "portable-revocation-source-unverified", "portable-revocation-impact-incomplete", "portable-revocation-dependent-suspended", "portable-revalidation-insufficient", "portable-attestation-subject-mismatch", "portable-attestation-identity-mismatch", "portable-attestation-predicate-mismatch", "portable-attestation-root-untrusted", "portable-attestation-expired", "portable-attestation-transparency-insufficient", "portable-attestation-revocation-uncertain", "portable-attestation-crypto-unverified", "portable-trust-decision-insufficient", "portable-trust-policy-lineage-invalid", "portable-trust-replay-input-mismatch", "portable-trust-replay-outcome-changed", "portable-trust-replay-insufficient", "portable-trust-replay-history-mutation"] },
         "reason": { "type": "string", "minLength": 1 },
         "severity": { "enum": ["low", "medium", "high", "critical"] },
         "requiredAction": { "type": "string", "minLength": 1 },
@@ -835,10 +837,12 @@
     },
     "portableKnowledgeTrustPolicy": {
       "type": "object",
-      "required": ["id", "version", "acceptedIssuers", "acceptedSubjectIdentities", "acceptedPredicateTypes", "trustedRootRevisions", "validFrom", "validUntil", "requireCryptographicEvidence", "requireTransparencyEvidence", "requireRevocationCheck", "failClosed", "automaticActivation", "automaticAuthority", "semanticTruthClaimed", "status"],
+      "required": ["id", "version", "revisionKind", "revisionReason", "effectiveAt", "acceptedIssuers", "acceptedSubjectIdentities", "acceptedPredicateTypes", "trustedRootRevisions", "validFrom", "validUntil", "requireCryptographicEvidence", "requireTransparencyEvidence", "requireRevocationCheck", "failClosed", "automaticActivation", "automaticAuthority", "semanticTruthClaimed", "status"],
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" }, "version": { "type": "string", "minLength": 1 },
+        "revisionKind": { "enum": ["initial", "rotation", "emergency-revocation", "policy-change"] }, "revisionReason": { "type": "string", "minLength": 1 }, "effectiveAt": { "type": "string", "format": "date-time" },
+        "previousPolicyRef": { "$ref": "#/$defs/id" }, "supersededByPolicyRef": { "$ref": "#/$defs/id" },
         "acceptedIssuers": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
         "acceptedSubjectIdentities": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
         "acceptedPredicateTypes": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
@@ -874,6 +878,19 @@
         "decision": { "enum": ["policy-conformant-candidate", "rejected", "governance-required"] }, "rationale": { "type": "string", "minLength": 1 },
         "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "activityCountIsQuality": { "const": false }, "automaticActivation": { "const": false }, "automaticAuthority": { "const": false }, "semanticTruthClaimed": { "const": false },
         "decidedBy": { "type": "string", "minLength": 1 }, "status": { "enum": ["reviewed", "governance-required"] }
+      }
+    },
+    "portableKnowledgeTrustReplay": {
+      "type": "object",
+      "required": ["id", "originalDecisionRef", "originalPolicyRef", "replayPolicyRef", "replayPolicyVersion", "attestationRef", "itemRef", "originalDecisionValue", "originalDecisionEvaluatedAt", "replayEvaluatedAt", "subjectDigestMatch", "issuerAccepted", "subjectIdentityAccepted", "predicateTypeAccepted", "trustRootAccepted", "withinPolicyWindow", "withinAttestationWindow", "cryptographicEvidenceSatisfied", "transparencyEvidenceSatisfied", "revocationCheckSatisfied", "replayDecision", "outcomeDelta", "materialChange", "originalDecisionPreserved", "inputsFrozen", "rationale", "governanceTriggerRefs", "activityCountIsQuality", "automaticActivation", "automaticAuthority", "semanticTruthClaimed", "replayedBy", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" }, "originalDecisionRef": { "$ref": "#/$defs/id" }, "originalPolicyRef": { "$ref": "#/$defs/id" }, "replayPolicyRef": { "$ref": "#/$defs/id" }, "replayPolicyVersion": { "type": "string", "minLength": 1 }, "attestationRef": { "$ref": "#/$defs/id" }, "itemRef": { "$ref": "#/$defs/id" },
+        "originalDecisionValue": { "enum": ["policy-conformant-candidate", "rejected", "governance-required"] }, "originalDecisionEvaluatedAt": { "type": "string", "format": "date-time" }, "replayEvaluatedAt": { "type": "string", "format": "date-time" },
+        "subjectDigestMatch": { "type": "boolean" }, "issuerAccepted": { "type": "boolean" }, "subjectIdentityAccepted": { "type": "boolean" }, "predicateTypeAccepted": { "type": "boolean" }, "trustRootAccepted": { "type": "boolean" }, "withinPolicyWindow": { "type": "boolean" }, "withinAttestationWindow": { "type": "boolean" }, "cryptographicEvidenceSatisfied": { "type": "boolean" }, "transparencyEvidenceSatisfied": { "type": "boolean" }, "revocationCheckSatisfied": { "type": "boolean" },
+        "replayDecision": { "enum": ["policy-conformant-candidate", "rejected", "governance-required"] }, "outcomeDelta": { "enum": ["unchanged", "tightened", "relaxed", "indeterminate"] }, "materialChange": { "type": "boolean" },
+        "originalDecisionPreserved": { "const": true }, "inputsFrozen": { "const": true }, "rationale": { "type": "string", "minLength": 1 }, "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "activityCountIsQuality": { "const": false }, "automaticActivation": { "const": false }, "automaticAuthority": { "const": false }, "semanticTruthClaimed": { "const": false }, "replayedBy": { "type": "string", "minLength": 1 }, "status": { "enum": ["reviewed", "governance-required"] }
       }
     },
     "verifierBoundary": {

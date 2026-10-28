@@ -121,6 +121,19 @@ authority.
 - `schemas/qif-ledger-package.schema.json`
 - `examples/qif-ledger-package.json`
 
+## 11. Rotate Trust Policy Without Rewriting History
+
+Keep every trust-policy revision, its predecessor, rotation reason, effective
+boundary, and status. Replay a frozen earlier trust decision under a named
+later policy and reproduce whether the outcome is unchanged, tightened,
+relaxed, or indeterminate. A changed or incomplete replay goes to governance.
+Replay never edits the original decision and never becomes current activation,
+authorization, authority, cryptographic truth, or semantic truth.
+
+- `docs/qif-v0.8.5-trust-policy-replay.md`
+- `schemas/qif-ledger-package.schema.json`
+- `examples/qif-ledger-package.json`
+
 ## Choosing a Package Type
 
 Open `MANIFEST.json` to see every included schema and example. Use a schema only

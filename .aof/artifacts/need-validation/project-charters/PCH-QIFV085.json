@@ -1,0 +1,21 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-28T04:27:00.425Z",
+  "project_charter_id": "PCH-MVRM4PFT-RUFNP0",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV085.json",
+  "validated_objective": "Release QIF v0.8.5 with immutable trust-policy succession and reproducible historical replay that routes changed or incomplete results to governance.",
+  "scope": [
+    "qif-ledger policy lineage and replay entities",
+    "deterministic verifier, negative fixtures, docs, portable package, roadmap, AOF evidence, and release"
+  ],
+  "constraints": [
+    "provider-neutral with no live cryptography, key management, external registry, UI, or history mutation",
+    "no automatic activation, authorization, authority, or semantic truth"
+  ],
+  "expected_outcomes": [
+    "original decisions remain immutable and resolve their original policy revision",
+    "later-policy replay reproduces outcome deltas and fail-closed governance"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVRM3VF2-1GRIE8"
+}

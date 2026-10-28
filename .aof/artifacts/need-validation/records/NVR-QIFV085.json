@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-28T04:26:56.333Z",
+  "validation_id": "NVR-MVRM4MA5-9RO7BY",
+  "raw_need": "Add trust policy rotation and replay",
+  "validation_status": "validated",
+  "validated_need": "Preserve immutable local trust-policy lineage and deterministically replay frozen portable-knowledge trust decisions under named later policy revisions, routing changed or indeterminate outcomes to governance without rewriting history or granting authority.",
+  "decision_summary": "The need is historical policy accountability, not live cryptographic rotation or a mutable current-state recomputation.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What must remain immutable?",
+      "answer": "Original policy revisions, attestation inputs, and trust decisions.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must replay prove?",
+      "answer": "Only deterministic policy-local outcome change from frozen recorded inputs, never semantic trust or authority.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "the latest policy should overwrite historical evaluation"
+  ],
+  "evidence_gaps": [
+    "no live key rotation or independently verified attestation evidence is in scope"
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV085.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV085.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV085.json",
+  "experiment_proposal_ref": ".aof/artifacts/need-validation/experiment-proposals/EXP-QIFV085.json",
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVRM3VF2-1GRIE8"
+}

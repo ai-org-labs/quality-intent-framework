@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.8.5 Trust Policy Rotation and Historical Replay",
-  "updated_at": "2026-10-27T04:41:17.543Z",
+  "content": "QIF v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census",
+  "updated_at": "2026-10-28T04:37:21.323Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MVQ6SV96-D0ZQ33",
-  "source_decision_record_id": "DEC-MVQ6UQPD-1YOWLS",
+  "source_session_id": "SESS-MVRM3RP6-T22G5C",
+  "source_decision_record_id": "DEC-MVRM4RE3-J656DM",
   "declared_complete_at": null
 }

@@ -265,6 +265,7 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeTrustPolicies = requireArray(pkg, "portableKnowledgeTrustPolicies", packagePath);
   const portableKnowledgeAttestations = requireArray(pkg, "portableKnowledgeAttestations", packagePath);
   const portableKnowledgeTrustDecisions = requireArray(pkg, "portableKnowledgeTrustDecisions", packagePath);
+  const portableKnowledgeTrustReplays = requireArray(pkg, "portableKnowledgeTrustReplays", packagePath);
   const packageRefIndex = indexById(packageRefs, `${packagePath}:packageRefs`);
   const crossPackageRefIndex = indexById(crossPackageRefs, `${packagePath}:crossPackageRefs`);
   const lifecycleIndex = indexById(lifecycleRecords, `${packagePath}:qualityIntentLifecycleRecords`);
@@ -294,6 +295,7 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeRevocationImpactAssessmentIndex = indexById(portableKnowledgeRevocationImpactAssessments, `${packagePath}:portableKnowledgeRevocationImpactAssessments`);
   const portableKnowledgeTrustPolicyIndex = indexById(portableKnowledgeTrustPolicies, `${packagePath}:portableKnowledgeTrustPolicies`);
   const portableKnowledgeAttestationIndex = indexById(portableKnowledgeAttestations, `${packagePath}:portableKnowledgeAttestations`);
+  const portableKnowledgeTrustDecisionIndex = indexById(portableKnowledgeTrustDecisions, `${packagePath}:portableKnowledgeTrustDecisions`);
   void crossPackageRefIndex;
   void missedIntentIndex;
 
@@ -934,7 +936,21 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!(Date.parse(policy.validFrom) < Date.parse(policy.validUntil))) errors.push(`${policy.id} validFrom must precede validUntil.`);
     if (policy.requireCryptographicEvidence !== true || policy.requireTransparencyEvidence !== true || policy.requireRevocationCheck !== true || policy.failClosed !== true) errors.push(`${policy.id} must require cryptographic, transparency, and revocation evidence and fail closed.`);
     if (policy.automaticActivation !== false || policy.automaticAuthority !== false || policy.semanticTruthClaimed !== false) errors.push(`${policy.id} must forbid automatic activation, automatic authority, and semantic truth claims.`);
+    if (policy.effectiveAt !== policy.validFrom) errors.push(`${policy.id} effectiveAt must equal validFrom.`);
+    const previous = policy.previousPolicyRef ? portableKnowledgeTrustPolicyIndex.get(policy.previousPolicyRef) : null;
+    if (policy.revisionKind === "initial" && policy.previousPolicyRef) errors.push(`${policy.id} initial revision must not reference a previous policy.`);
+    if (policy.revisionKind !== "initial" && !policy.previousPolicyRef) errors.push(`${policy.id} non-initial revision requires previousPolicyRef.`);
+    if (policy.previousPolicyRef && !previous) errors.push(`${policy.id} references missing previous policy ${policy.previousPolicyRef}.`);
+    if (previous) {
+      if (previous.supersededByPolicyRef !== policy.id) errors.push(`${policy.id} previous policy must point back through supersededByPolicyRef.`);
+      if (previous.status !== "retired") errors.push(`${policy.id} previous policy must be retired.`);
+      if (previous.validUntil !== policy.effectiveAt) errors.push(`${policy.id} effectiveAt must equal the previous policy validUntil boundary.`);
+    }
+    if (policy.status === "active" && policy.supersededByPolicyRef) errors.push(`${policy.id} active policy must not name a superseding policy.`);
+    if (policy.status === "retired" && !policy.supersededByPolicyRef) errors.push(`${policy.id} retired policy requires supersededByPolicyRef.`);
   }
+  if (portableKnowledgeTrustPolicies.filter((policy) => policy.revisionKind === "initial").length !== 1) errors.push(`${packagePath} trust policy lineage must contain exactly one initial revision.`);
+  if (portableKnowledgeTrustPolicies.filter((policy) => policy.status === "active").length !== 1) errors.push(`${packagePath} trust policy lineage must contain exactly one active revision.`);
 
   for (const attestation of portableKnowledgeAttestations) {
     const item = portableKnowledgeItemIndex.get(attestation.itemRef);
@@ -991,6 +1007,54 @@ function validateLedgerPackage(pkg, packagePath) {
     if (decision.activityCountIsQuality !== false || decision.automaticActivation !== false || decision.automaticAuthority !== false || decision.semanticTruthClaimed !== false) errors.push(`${decision.id} must treat checks as evidence and forbid automatic activation, authority, and semantic truth claims.`);
   }
 
+  const trustRank = { rejected: 0, "governance-required": 1, "policy-conformant-candidate": 2 };
+  for (const replay of portableKnowledgeTrustReplays) {
+    const original = portableKnowledgeTrustDecisionIndex.get(replay.originalDecisionRef);
+    const originalPolicy = portableKnowledgeTrustPolicyIndex.get(replay.originalPolicyRef);
+    const replayPolicy = portableKnowledgeTrustPolicyIndex.get(replay.replayPolicyRef);
+    const attestation = portableKnowledgeAttestationIndex.get(replay.attestationRef);
+    const item = portableKnowledgeItemIndex.get(replay.itemRef);
+    if (!original) errors.push(`${replay.id} references missing original trust decision ${replay.originalDecisionRef}.`);
+    if (!originalPolicy) errors.push(`${replay.id} references missing original policy ${replay.originalPolicyRef}.`);
+    if (!replayPolicy) errors.push(`${replay.id} references missing replay policy ${replay.replayPolicyRef}.`);
+    if (!attestation) errors.push(`${replay.id} references missing attestation ${replay.attestationRef}.`);
+    if (!item) errors.push(`${replay.id} references missing portable knowledge item ${replay.itemRef}.`);
+    const originalSnapshotMatches = Boolean(original && original.policyRef === replay.originalPolicyRef && original.attestationRef === replay.attestationRef && original.itemRef === replay.itemRef && original.decision === replay.originalDecisionValue && original.evaluatedAt === replay.originalDecisionEvaluatedAt);
+    if (!originalSnapshotMatches) errors.push(`${replay.id} frozen original decision inputs must exactly match ${replay.originalDecisionRef}.`);
+    if (replayPolicy && replay.replayPolicyVersion !== replayPolicy.version) errors.push(`${replay.id} replayPolicyVersion must exactly match ${replayPolicy.id}.`);
+    if (replay.originalPolicyRef === replay.replayPolicyRef) errors.push(`${replay.id} replay policy must differ from the original policy.`);
+    const evaluatedAt = Date.parse(replay.replayEvaluatedAt);
+    const expectedChecks = {
+      subjectDigestMatch: Boolean(item && attestation && attestation.subjectDigest === item.sourceDigest),
+      issuerAccepted: Boolean(replayPolicy && attestation && replayPolicy.acceptedIssuers.includes(attestation.issuer)),
+      subjectIdentityAccepted: Boolean(replayPolicy && attestation && replayPolicy.acceptedSubjectIdentities.includes(attestation.subjectIdentity)),
+      predicateTypeAccepted: Boolean(replayPolicy && attestation && replayPolicy.acceptedPredicateTypes.includes(attestation.predicateType)),
+      trustRootAccepted: Boolean(replayPolicy && attestation && replayPolicy.trustedRootRevisions.includes(attestation.trustRootRevision)),
+      withinPolicyWindow: Boolean(replayPolicy && evaluatedAt >= Date.parse(replayPolicy.validFrom) && evaluatedAt <= Date.parse(replayPolicy.validUntil)),
+      withinAttestationWindow: Boolean(attestation && evaluatedAt >= Date.parse(attestation.issuedAt) && evaluatedAt <= Date.parse(attestation.expiresAt)),
+      cryptographicEvidenceSatisfied: attestation?.cryptographicEvidenceStatus === "recorded-verified",
+      transparencyEvidenceSatisfied: attestation?.transparencyEvidenceStatus === "recorded-verified",
+      revocationCheckSatisfied: attestation?.revocationStatus === "clear"
+    };
+    for (const [field, value] of Object.entries(expectedChecks)) if (replay[field] !== value) errors.push(`${replay.id} ${field} must reproduce as ${value}.`);
+    const allSatisfied = Object.values(expectedChecks).every(Boolean);
+    const hardReject = attestation?.cryptographicEvidenceStatus === "failed" || attestation?.revocationStatus === "revoked";
+    const expectedDecision = allSatisfied ? "policy-conformant-candidate" : hardReject ? "rejected" : "governance-required";
+    if (replay.replayDecision !== expectedDecision) errors.push(`${replay.id} replayDecision must reproduce as ${expectedDecision}.`);
+    const expectedDelta = !original ? "indeterminate" : trustRank[expectedDecision] < trustRank[original.decision] ? "tightened" : trustRank[expectedDecision] > trustRank[original.decision] ? "relaxed" : "unchanged";
+    if (replay.outcomeDelta !== expectedDelta) errors.push(`${replay.id} outcomeDelta must reproduce as ${expectedDelta}.`);
+    const materialChange = expectedDelta !== "unchanged";
+    if (replay.materialChange !== materialChange) errors.push(`${replay.id} materialChange must reproduce as ${materialChange}.`);
+    if (replay.status !== (expectedDecision === "policy-conformant-candidate" && !materialChange ? "reviewed" : "governance-required")) errors.push(`${replay.id} status must reproduce from replay outcome and material change.`);
+    const types = portableGovernanceTypes(replay.governanceTriggerRefs, replay.id);
+    for (const [field, value] of Object.entries(expectedChecks)) if (!value && !types.has(trustTriggerForCheck[field])) errors.push(`${replay.id} failed ${field} requires a ${trustTriggerForCheck[field]} governance trigger.`);
+    if (!originalSnapshotMatches && !types.has("portable-trust-replay-input-mismatch")) errors.push(`${replay.id} changed frozen input requires a portable-trust-replay-input-mismatch governance trigger.`);
+    if (materialChange && !types.has("portable-trust-replay-outcome-changed")) errors.push(`${replay.id} material outcome change requires a portable-trust-replay-outcome-changed governance trigger.`);
+    if (expectedDecision !== "policy-conformant-candidate" && !types.has("portable-trust-decision-insufficient")) errors.push(`${replay.id} insufficient replay decision requires a portable-trust-decision-insufficient governance trigger.`);
+    if (expectedDecision !== "policy-conformant-candidate" && !types.has("portable-trust-replay-insufficient")) errors.push(`${replay.id} insufficient replay requires a portable-trust-replay-insufficient governance trigger.`);
+    if (replay.originalDecisionPreserved !== true || replay.inputsFrozen !== true || replay.activityCountIsQuality !== false || replay.automaticActivation !== false || replay.automaticAuthority !== false || replay.semanticTruthClaimed !== false) errors.push(`${replay.id} must preserve history and frozen inputs, treat counts as evidence, and forbid automatic activation, authority, and semantic truth claims.`);
+  }
+
   const index = pkg.ledgerIndex;
   if (!index || typeof index !== "object") {
     errors.push(`${packagePath} must include ledgerIndex.`);
@@ -1022,7 +1086,7 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim ?? []).includes("semantic truth")) {
       errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
     }
-    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness"]) {
+    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth"]) {
       if (!(boundary.doesNotClaim ?? []).includes(claim)) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming ${claim}.`);
     }
   }
@@ -1063,7 +1127,8 @@ function validateLedgerPackage(pkg, packagePath) {
       portableKnowledgeRevalidationDecisions: portableKnowledgeRevalidationDecisions.length,
       portableKnowledgeTrustPolicies: portableKnowledgeTrustPolicies.length,
       portableKnowledgeAttestations: portableKnowledgeAttestations.length,
-      portableKnowledgeTrustDecisions: portableKnowledgeTrustDecisions.length
+      portableKnowledgeTrustDecisions: portableKnowledgeTrustDecisions.length,
+      portableKnowledgeTrustReplays: portableKnowledgeTrustReplays.length
     }
   });
 }

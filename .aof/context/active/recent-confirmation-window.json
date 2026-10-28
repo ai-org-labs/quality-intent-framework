@@ -1,34 +1,34 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-27T04:40:32.979Z",
+  "updated_at": "2026-10-28T04:36:27.582Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means each attestation binds to an exact portable item digest and a versioned local trust policy; issuer, subject, predicate, trust-root revision, time window, transparency evidence, and revocation state are evaluated deterministically; mismatch, expiry, unknown root, or incomplete evidence fails closed and opens governance; policy decisions never claim artifact safety, semantic fitness, authorization, or authority.",
-      "recorded_at": "2026-10-27T04:30:14.048Z",
+      "answer": "Success means an original trust decision remains unchanged; every policy revision has explicit predecessor, rotation reason, effective window, and status; replay names original and replay policy revisions plus frozen inputs; outcome changes are reproduced deterministically; incomplete inputs or material changes fail closed into governance; no replay rewrites history or grants authority.",
+      "recorded_at": "2026-10-28T04:26:21.521Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVQ6SV96-D0ZQ33",
+      "source_session_id": "SESS-MVRM3RP6-T22G5C",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The need is not live signature verification or a universal trust oracle; it is an auditable local policy decision over recorded attestation evidence.",
-      "recorded_at": "2026-10-27T04:31:35.092Z",
+      "answer": "The need is historical policy accountability, not live cryptographic rotation or a mutable current-state recomputation.",
+      "recorded_at": "2026-10-28T04:27:02.959Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVQ6SV96-D0ZQ33",
-      "source_decision_record_id": "DEC-MVQ6UQPD-1YOWLS"
+      "source_session_id": "SESS-MVRM3RP6-T22G5C",
+      "source_decision_record_id": "DEC-MVRM4RE3-J656DM"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Trust policy rotation and historical replay remain unimplemented.",
-      "recorded_at": "2026-10-27T04:40:32.979Z",
-      "expectation_state": "Schema, example, deterministic verifier, retained fixtures, documentation, portable package, roadmap, and AOF review evidence pass structural verification. Policy conformance remains distinct from semantic truth, activation, authorization, and authority.",
-      "mismatch_state": "Trust policy rotation and historical replay remain unimplemented.",
-      "scale_direction": "Develop v0.8.5 Trust Policy Rotation and Historical Replay.",
+      "answer": "A proposed trust policy cannot yet be replayed across the complete in-scope portable knowledge population before activation.",
+      "recorded_at": "2026-10-28T04:36:27.582Z",
+      "expectation_state": "Policy lineage, frozen-input replay, outcome delta, governance, schema, examples, verifier, retained fixtures, docs, and portable package pass structural verification. Replay remains historical evidence rather than current authority.",
+      "mismatch_state": "A proposed trust policy cannot yet be replayed across the complete in-scope portable knowledge population before activation.",
+      "scale_direction": "Develop v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census.",
       "source_session_id": null,
       "source_decision_record_id": null
     }

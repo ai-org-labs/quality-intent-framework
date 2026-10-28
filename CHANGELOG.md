@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.8.5
+
+- Added immutable predecessor/successor lineage, revision reasons, and effective boundaries to portable trust policies.
+- Added historical trust replay records that freeze original decisions and inputs while evaluating a named later policy revision.
+- Reproduced later-policy checks, replay decisions, tightened/relaxed/unchanged outcome deltas, material-change state, and governance routing.
+- Added retained negative fixtures for policy lineage, frozen inputs, replay arithmetic, history preservation, and verifier boundaries.
+- Kept historical replay distinct from current cryptographic truth, activation, authorization, authority, and semantic fitness.
+
 ## v0.8.4
 
 - Added versioned portable trust policies, exact item-digest attestation records, and policy-local trust decisions to the Living QIF Ledger.

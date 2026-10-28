@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-28T04:26:50.015Z",
+  "value_hypothesis_id": "VHY-MVRM4HEN-XT068U",
+  "expected_value_creation": "Immutable policy lineage and deterministic historical replay make changed trust outcomes visible and governable without mutating prior evidence.",
+  "beneficiary": "Portable QIF knowledge consumers, governance owners, and auditors",
+  "supporting_evidence": [
+    "GitHub offline attestation guidance requires refreshed trusted roots and warns that stale roots miss revocation.",
+    "Sigstore TUF guidance supports root rotation, revocation timing, and freshness."
+  ],
+  "success_criteria": [
+    "Original decisions remain immutable and resolve their original policy revision.",
+    "Replay under a named later policy reproduces unchanged, tightened, relaxed, or indeterminate outcomes and routes material change or missing inputs to governance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVRM3VF2-1GRIE8"
+}

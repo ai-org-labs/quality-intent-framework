@@ -5270,3 +5270,54 @@ Date: 2026-10-25
 - Next value slices: v0.8.5 Trust Policy Rotation and Historical Replay,
   v0.9 Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger
   Standard.
+
+# QIF v0.8.5 Trust Policy Rotation and Historical Replay
+
+- Date: 2026-10-28.
+- AOF runtime: v12.2.0, managed-project topology.
+- Need: QIF v0.8.4 could evaluate knowledge against one trust-policy snapshot,
+  but could not preserve policy lineage or replay an earlier decision under a
+  later policy without rewriting history.
+- Validated Need: make policy rotation and historical replay deterministic,
+  auditable, fail-closed, and non-authoritative while freezing the original
+  decision, inputs, and policy reference.
+- Need Validation artifacts: `PST-MVRM4HA0-MRS13P`,
+  `VHY-MVRM4HEN-XT068U`, `ALT-MVRM4HJV-CAKXKX`,
+  `EXP-MVRM4HP3-V2R1TX`, Validated Need `NVR-MVRM4MA5-9RO7BY`, and
+  charter `PCH-MVRM4PFT-RUFNP0`. The charter was created only after the Need
+  was validated.
+- Council: planning execution `CRUN-MVRM4UGT-FGKE4Z` included Visionary,
+  Builder, and Guardian; review execution `CRUN-MVRMGRWQ-3DTLVQ` included
+  Guardian and Builder with no veto. Session: `SESS-MVRM3RP6-T22G5C`;
+  decision: `DEC-MVRM4RE3-J656DM`; task: `TASK-078`; actor skill packet:
+  `ASP-MVRM53JK-YI7F32`.
+- Trend evidence: GitHub offline verification requires current trusted-root
+  snapshots and warns that stale roots can miss revocation; Sigstore documents
+  TUF root rotation, air-gap snapshots, and compromise-time handling; SLSA
+  v1.2 continues to separate verifiable provenance from consumer trust policy.
+  Sources:
+  https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/verify-attestations-offline,
+  https://docs.sigstore.dev/policy-controller/overview/,
+  https://docs.sigstore.dev/about/threat-model/, and
+  https://slsa.dev/spec/v1.2/tracks.
+- Decision: add explicit trust-policy revision lineage and
+  `PortableKnowledgeTrustReplay`, reproducing a frozen historical decision
+  under a later policy and routing changed or insufficient outcomes to
+  governance.
+- Implementation boundary: no live trust-root retrieval, cryptographic
+  verification, automatic policy activation, automatic knowledge acceptance,
+  authority grant, or semantic-truth claim. Historical evidence is immutable;
+  replay creates a new assessment.
+- Verification: `npm test` passed with 16/16 positive and 1,398/1,398 retained
+  negative checks; portable v0.8.5 built and verified with 55 files; AOF
+  organization verification passed 295/295 checks. Self-audit:
+  `FSA-QIFV0850`.
+- Outcome report: `OUT-MVRMHXUK-7WB4UW` recorded implementation success. AOF
+  then reset the active next value slice to v0.8.6 and refreshed the learning
+  loop snapshot.
+- Residual gap: QIF cannot yet preview a proposed policy across the complete
+  in-scope knowledge population or report the affected-knowledge census before
+  activation.
+- Next value slices: v0.8.6 Trust Policy Rollout Preview and
+  Affected-Knowledge Census, v0.9 Anticipatory Quality Intent Twin, and v1.0
+  Quality Decision Ledger Standard.

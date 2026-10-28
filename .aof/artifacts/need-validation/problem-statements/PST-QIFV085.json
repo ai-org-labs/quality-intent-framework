@@ -1,0 +1,14 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-28T04:26:49.848Z",
+  "problem_statement_id": "PST-MVRM4HA0-MRS13P",
+  "affected_party": "Organizations re-evaluating portable QIF knowledge after trust-policy or root changes",
+  "actual_problem": "QIF records one policy-local trust decision but cannot preserve policy succession or replay a frozen historical decision under a later policy without rewriting history.",
+  "why_it_matters": "Changed trust policy can silently alter admissibility, conceal historical reasoning, or leave stale candidates active.",
+  "why_now": "v0.8.4 introduced versioned trust policy and attestation binding; rotation and replay are the next required lifecycle boundary.",
+  "evidence_refs": [
+    "docs/qif-v0.8.4-portable-trust-attestation.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVRM3VF2-1GRIE8"
+}

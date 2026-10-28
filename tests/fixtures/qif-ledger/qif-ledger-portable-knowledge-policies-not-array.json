@@ -772,6 +772,42 @@
       "requiredAction": "Require reviewed replacement evidence and a new local validation before reuse.",
       "owner": "portable-knowledge-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "PKGTR-010",
+      "triggerType": "portable-attestation-root-untrusted",
+      "reason": "The frozen attestation names the superseded trust-root revision, which is not accepted by policy v2.0.0.",
+      "severity": "high",
+      "requiredAction": "Review replacement attestation evidence under the rotated root without rewriting the original decision.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-011",
+      "triggerType": "portable-trust-decision-insufficient",
+      "reason": "Historical replay under policy v2.0.0 cannot produce a policy-conformant candidate from the frozen attestation.",
+      "severity": "high",
+      "requiredAction": "Keep the replay result non-authoritative and obtain policy-conformant evidence if reuse is proposed.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-012",
+      "triggerType": "portable-trust-replay-outcome-changed",
+      "reason": "The replay changes the recorded outcome from policy-conformant-candidate to governance-required.",
+      "severity": "high",
+      "requiredAction": "Review the tightened outcome and any affected reuse while preserving the original decision.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-013",
+      "triggerType": "portable-trust-replay-insufficient",
+      "reason": "The replay is structurally reproducible but does not establish live cryptographic validity or semantic fitness.",
+      "severity": "medium",
+      "requiredAction": "Require current independently verified evidence and accountable governance before any operational use.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
     }
   ],
   "portableKnowledgeLibraries": [
@@ -1560,6 +1596,10 @@
     {
       "id": "PKTP-001",
       "version": "1.0.0",
+      "revisionKind": "initial",
+      "revisionReason": "Initial local trust policy for the portable knowledge pilot.",
+      "effectiveAt": "2026-10-01T00:00:00.000Z",
+      "supersededByPolicyRef": "PKTP-002",
       "acceptedIssuers": [
         "https://token.actions.githubusercontent.com"
       ],
@@ -1573,7 +1613,37 @@
         "sigstore-public-good-v1"
       ],
       "validFrom": "2026-10-01T00:00:00.000Z",
-      "validUntil": "2027-10-01T00:00:00.000Z",
+      "validUntil": "2026-10-28T00:00:00.000Z",
+      "requireCryptographicEvidence": true,
+      "requireTransparencyEvidence": true,
+      "requireRevocationCheck": true,
+      "failClosed": true,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "retired"
+    },
+    {
+      "id": "PKTP-002",
+      "version": "2.0.0",
+      "revisionKind": "rotation",
+      "revisionReason": "Rotate to the next recorded Sigstore trust-root revision.",
+      "effectiveAt": "2026-10-28T00:00:00.000Z",
+      "previousPolicyRef": "PKTP-001",
+      "acceptedIssuers": [
+        "https://token.actions.githubusercontent.com"
+      ],
+      "acceptedSubjectIdentities": [
+        "repo:ai-org-labs/quality-intent-framework:ref:refs/heads/main"
+      ],
+      "acceptedPredicateTypes": [
+        "https://slsa.dev/provenance/v1"
+      ],
+      "trustedRootRevisions": [
+        "sigstore-public-good-v2"
+      ],
+      "validFrom": "2026-10-28T00:00:00.000Z",
+      "validUntil": "2027-10-28T00:00:00.000Z",
       "requireCryptographicEvidence": true,
       "requireTransparencyEvidence": true,
       "requireRevocationCheck": true,
@@ -1638,6 +1708,48 @@
       "status": "reviewed"
     }
   ],
+  "portableKnowledgeTrustReplays": [
+    {
+      "id": "PKTR-001",
+      "originalDecisionRef": "PKTD-001",
+      "originalPolicyRef": "PKTP-001",
+      "replayPolicyRef": "PKTP-002",
+      "replayPolicyVersion": "2.0.0",
+      "attestationRef": "PKAT-001",
+      "itemRef": "PKI-002",
+      "originalDecisionValue": "policy-conformant-candidate",
+      "originalDecisionEvaluatedAt": "2026-10-27T00:00:00.000Z",
+      "replayEvaluatedAt": "2026-10-28T12:00:00.000Z",
+      "subjectDigestMatch": true,
+      "issuerAccepted": true,
+      "subjectIdentityAccepted": true,
+      "predicateTypeAccepted": true,
+      "trustRootAccepted": false,
+      "withinPolicyWindow": true,
+      "withinAttestationWindow": true,
+      "cryptographicEvidenceSatisfied": true,
+      "transparencyEvidenceSatisfied": true,
+      "revocationCheckSatisfied": true,
+      "replayDecision": "governance-required",
+      "outcomeDelta": "tightened",
+      "materialChange": true,
+      "originalDecisionPreserved": true,
+      "inputsFrozen": true,
+      "rationale": "The later policy accepts only the rotated root. Replay tightens the result while preserving the original policy, decision, attestation, and evaluation time.",
+      "governanceTriggerRefs": [
+        "PKGTR-010",
+        "PKGTR-011",
+        "PKGTR-012",
+        "PKGTR-013"
+      ],
+      "activityCountIsQuality": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "replayedBy": "portable-knowledge-governance-owner",
+      "status": "governance-required"
+    }
+  ],
   "ledgerIndex": {
     "activeQualityIntentRefs": [
       {
@@ -1690,8 +1802,8 @@
         "entityRef": "CALRUN-WMC-001"
       }
     ],
-    "lastUpdated": "2026-10-25",
-    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable quality-knowledge import, and local applicability and unseen-case reproduction evidence without automatic activation or authority."
+    "lastUpdated": "2026-10-28",
+    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, and immutable historical replay without automatic activation or authority."
   },
   "verifierBoundary": {
     "checks": [
@@ -1710,7 +1822,8 @@
       "unseen-case separation, agreement reproduction, evaluator identity separation, and counterexample challenge coverage",
       "local validation sufficiency and governed-activation eligibility reproduction",
       "revocation subject matching, dependency closure, fail-closed suspension, and history preservation",
-      "attestation subject, identity, predicate, trust-root, time, transparency, revocation, and policy-decision reproduction"
+      "attestation subject, identity, predicate, trust-root, time, transparency, revocation, and policy-decision reproduction",
+      "trust-policy succession, immutable historical decision replay, outcome-delta classification, and change governance"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -1726,7 +1839,8 @@
       "activation approval or semantic fitness for use",
       "source authenticity, license sufficiency, or safe execution",
       "revocation notice authenticity or compromise truth",
-      "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness"
+      "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness",
+      "historical replay as current authorization, activation, authority, or semantic truth"
     ],
     "semanticValidityRequires": [
       "expert review",

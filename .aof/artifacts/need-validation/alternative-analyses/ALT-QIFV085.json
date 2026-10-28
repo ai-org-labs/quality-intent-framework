@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-28T04:26:50.203Z",
+  "alternative_analysis_id": "ALT-MVRM4HJV-CAKXKX",
+  "subject_need": "Govern trust-policy change over portable knowledge",
+  "alternative_solutions": [
+    "Overwrite old policy and recompute current decision only",
+    "Keep policies but perform replay in prose"
+  ],
+  "non_solution_options": [
+    "Treat every old signature as permanently trusted"
+  ],
+  "defer_options": [
+    "Remain on v0.8.4 and require manual governance outside QIF"
+  ],
+  "stop_options": [
+    "Do not implement if replay cannot preserve original decision and frozen input identity"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVRM3VF2-1GRIE8"
+}

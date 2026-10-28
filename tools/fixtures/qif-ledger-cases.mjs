@@ -52,9 +52,10 @@ function revocationNotice(pkg) { return pkg.portableKnowledgeRevocationNotices[0
 function dependencyEdge(pkg, index = 0) { return pkg.portableKnowledgeDependencyEdges[index]; }
 function revocationImpact(pkg) { return pkg.portableKnowledgeRevocationImpactAssessments[0]; }
 function revalidationDecision(pkg) { return pkg.portableKnowledgeRevalidationDecisions[0]; }
-function trustPolicy(pkg) { return pkg.portableKnowledgeTrustPolicies[0]; }
+function trustPolicy(pkg, index = 0) { return pkg.portableKnowledgeTrustPolicies[index]; }
 function attestation(pkg) { return pkg.portableKnowledgeAttestations[0]; }
 function trustDecision(pkg) { return pkg.portableKnowledgeTrustDecisions[0]; }
+function trustReplay(pkg) { return pkg.portableKnowledgeTrustReplays[0]; }
 
 export const cases = [
   {
@@ -794,6 +795,102 @@ export const cases = [
     rule: "verifier does not claim cryptographic or semantic truth",
     expect: "verifierBoundary must explicitly avoid claiming cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness"); }
+  },
+  {
+    id: "portable-trust-lineage-initial-previous",
+    rule: "initial trust policy has no predecessor",
+    expect: "PKTP-001 initial revision must not reference a previous policy.",
+    mutate: (pkg) => { trustPolicy(pkg).previousPolicyRef = "PKTP-002"; }
+  },
+  {
+    id: "portable-trust-lineage-rotation-previous",
+    rule: "rotated trust policy names predecessor",
+    expect: "PKTP-002 non-initial revision requires previousPolicyRef.",
+    mutate: (pkg) => { delete trustPolicy(pkg, 1).previousPolicyRef; }
+  },
+  {
+    id: "portable-trust-lineage-backlink",
+    rule: "trust policy succession is bidirectional",
+    expect: "PKTP-002 previous policy must point back through supersededByPolicyRef.",
+    mutate: (pkg) => { trustPolicy(pkg).supersededByPolicyRef = "PKTP-NOPE-999"; }
+  },
+  {
+    id: "portable-trust-lineage-boundary",
+    rule: "rotation boundary is contiguous",
+    expect: "PKTP-002 effectiveAt must equal the previous policy validUntil boundary.",
+    mutate: (pkg) => { trustPolicy(pkg, 1).effectiveAt = "2026-10-29T00:00:00.000Z"; trustPolicy(pkg, 1).validFrom = "2026-10-29T00:00:00.000Z"; }
+  },
+  {
+    id: "portable-trust-lineage-active-count",
+    rule: "one trust policy revision is active",
+    expect: "trust policy lineage must contain exactly one active revision.",
+    mutate: (pkg) => { trustPolicy(pkg).status = "active"; }
+  },
+  {
+    id: "portable-trust-replay-original-snapshot",
+    rule: "historical replay freezes original decision",
+    expect: "PKTR-001 frozen original decision inputs must exactly match PKTD-001.",
+    mutate: (pkg) => { trustReplay(pkg).originalDecisionValue = "rejected"; }
+  },
+  {
+    id: "portable-trust-replay-policy-version",
+    rule: "historical replay pins later policy version",
+    expect: "PKTR-001 replayPolicyVersion must exactly match PKTP-002.",
+    mutate: (pkg) => { trustReplay(pkg).replayPolicyVersion = "1.9.9"; }
+  },
+  {
+    id: "portable-trust-replay-distinct-policy",
+    rule: "historical replay uses a later policy",
+    expect: "PKTR-001 replay policy must differ from the original policy.",
+    mutate: (pkg) => { trustReplay(pkg).replayPolicyRef = "PKTP-001"; trustReplay(pkg).replayPolicyVersion = "1.0.0"; }
+  },
+  {
+    id: "portable-trust-replay-check",
+    rule: "historical replay checks reproduce",
+    expect: "PKTR-001 trustRootAccepted must reproduce as false.",
+    mutate: (pkg) => { trustReplay(pkg).trustRootAccepted = true; }
+  },
+  {
+    id: "portable-trust-replay-decision",
+    rule: "historical replay decision reproduces",
+    expect: "PKTR-001 replayDecision must reproduce as governance-required.",
+    mutate: (pkg) => { trustReplay(pkg).replayDecision = "policy-conformant-candidate"; }
+  },
+  {
+    id: "portable-trust-replay-delta",
+    rule: "historical replay outcome delta reproduces",
+    expect: "PKTR-001 outcomeDelta must reproduce as tightened.",
+    mutate: (pkg) => { trustReplay(pkg).outcomeDelta = "unchanged"; }
+  },
+  {
+    id: "portable-trust-replay-material-change",
+    rule: "historical replay material change reproduces",
+    expect: "PKTR-001 materialChange must reproduce as true.",
+    mutate: (pkg) => { trustReplay(pkg).materialChange = false; }
+  },
+  {
+    id: "portable-trust-replay-change-trigger",
+    rule: "changed replay routes governance",
+    expect: "PKTR-001 material outcome change requires a portable-trust-replay-outcome-changed governance trigger.",
+    mutate: (pkg) => { trustReplay(pkg).governanceTriggerRefs = trustReplay(pkg).governanceTriggerRefs.filter((ref) => ref !== "PKGTR-012"); }
+  },
+  {
+    id: "portable-trust-replay-insufficient-trigger",
+    rule: "insufficient replay routes governance",
+    expect: "PKTR-001 insufficient replay requires a portable-trust-replay-insufficient governance trigger.",
+    mutate: (pkg) => { trustReplay(pkg).governanceTriggerRefs = trustReplay(pkg).governanceTriggerRefs.filter((ref) => ref !== "PKGTR-013"); }
+  },
+  {
+    id: "portable-trust-replay-history-boundary",
+    rule: "historical replay preserves history without authority",
+    expect: "PKTR-001 must preserve history and frozen inputs, treat counts as evidence, and forbid automatic activation, authority, and semantic truth claims.",
+    mutate: (pkg) => { trustReplay(pkg).automaticAuthority = true; }
+  },
+  {
+    id: "portable-trust-replay-verifier-boundary",
+    rule: "verifier does not turn replay into current authority",
+    expect: "verifierBoundary must explicitly avoid claiming historical replay as current authorization, activation, authority, or semantic truth.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "historical replay as current authorization, activation, authority, or semantic truth"); }
   }
 ];
 

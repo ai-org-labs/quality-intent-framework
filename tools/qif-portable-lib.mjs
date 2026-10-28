@@ -25,6 +25,7 @@ const CANONICAL_DOCS = [
   "docs/qif-v0.8.2-local-applicability-reproduction.md",
   "docs/qif-v0.8.3-portable-knowledge-revocation.md",
   "docs/qif-v0.8.4-portable-trust-attestation.md",
+  "docs/qif-v0.8.5-trust-policy-replay.md",
   "docs/expert-judgment-framework.md"
 ];
 

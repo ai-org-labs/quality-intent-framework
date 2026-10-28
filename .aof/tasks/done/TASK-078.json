@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-078",
+  "title": "Release QIF v0.8.5 Trust Policy Rotation and Historical Replay",
+  "description": "Add immutable trust-policy lineage, frozen-input historical replay, deterministic delta classification, governance, fixtures, docs, portable package, and release.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MVRM3RP6-T22G5C",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MVRM4RE3-J656DM",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-10-28T04:27:10.034Z",
+  "updated_at": "2026-10-28T04:37:14.081Z",
+  "assigned_at": null,
+  "done_at": "2026-10-28T04:37:14.081Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented trust-policy lineage and historical replay, passed QIF verification, AOF review, self-audit, and organization verification."
+}

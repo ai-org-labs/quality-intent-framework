@@ -1,0 +1,24 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-10-28T04:26:05.644Z",
+  "project_root": "/private/tmp/qif-v085-20261028",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "Provide provider-neutral, policy-local structural evaluation of attestation bindings for portable QIF knowledge, with exact subject identity, versioned trust expectations, deterministic fail-closed decisions, and explicit semantic and authority boundaries.",
+  "next_value_slice": "QIF v0.8.5 Trust Policy Rotation and Historical Replay",
+  "current_runtime_stage": "frontier-definition-needed",
+  "primary_frontier_task": null,
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Open an implementation task for the current frontier: QIF v0.8.5 Trust Policy Rotation and Historical Replay",
+    "prioritized_task_ids": [],
+    "scale_direction": "Define or reconcile the next frontier before expanding execution."
+  },
+  "recommended_action": {
+    "recommended_action": "Open an implementation task for the current frontier: QIF v0.8.5 Trust Policy Rotation and Historical Replay",
+    "rationale": "No current open implementation task is aligned to the current operating goal.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  }
+}

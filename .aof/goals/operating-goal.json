@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Provide provider-neutral, policy-local structural evaluation of attestation bindings for portable QIF knowledge, with exact subject identity, versioned trust expectations, deterministic fail-closed decisions, and explicit semantic and authority boundaries.",
-  "updated_at": "2026-10-27T04:31:35.091Z",
+  "content": "Preserve immutable local trust-policy lineage and deterministically replay frozen portable-knowledge trust decisions under named later policy revisions, routing changed or indeterminate outcomes to governance without rewriting history or granting authority.",
+  "updated_at": "2026-10-28T04:27:02.958Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVQ6SV96-D0ZQ33",
-  "source_decision_record_id": "DEC-MVQ6UQPD-1YOWLS",
+  "source_session_id": "SESS-MVRM3RP6-T22G5C",
+  "source_decision_record_id": "DEC-MVRM4RE3-J656DM",
   "declared_complete_at": null
 }
