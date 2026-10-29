@@ -82,6 +82,7 @@ Use additional documents when needed:
 | Suspend portable knowledge affected by a revocation, dispute, stale source, or invalidated evidence | `docs/qif-v0.8.3-portable-knowledge-revocation.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
 | Evaluate recorded attestations against a versioned local trust policy | `docs/qif-v0.8.4-portable-trust-attestation.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
 | Rotate trust policy or replay an earlier trust decision | `docs/qif-v0.8.5-trust-policy-replay.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
+| Preview a draft trust policy across all declared portable knowledge | `docs/qif-v0.8.6-trust-policy-rollout-preview.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
 | Expose selection, missing outcomes, dependence, segments, and drift behind a calibration aggregate | `docs/qif-v0.6.32-calibration-cohort-integrity.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Explain why one calibration error requires stronger governance than another at an explicit loss boundary | `docs/qif-v0.6.33-consequence-sensitive-calibration.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Show whether a decision is brittle under bounded, reviewed threshold alternatives | `docs/qif-v0.6.34-threshold-robustness.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
@@ -963,6 +964,28 @@ Use `PortableKnowledgeLocalValidationPolicy`,
 `PortableKnowledgeReproductionTrial`, and
 `PortableKnowledgeLocalValidationAssessment`. Agreement, case count, and a
 passing trial are evidence, not quality or semantic truth.
+
+## Trust Policy Rollout Preview
+
+Before proposing activation of a portable-knowledge trust policy:
+
+1. Keep the proposed policy revision in `draft` state.
+2. Declare whether the scope is all portable items or an explicit bounded set.
+3. Freeze every scoped item reference and source digest, then reproduce the
+   canonical scope digest.
+4. Create exactly one `PortableKnowledgeRolloutItemPreview` for every scoped
+   item. Never omit an item because its evidence is missing.
+5. For complete inputs, bind the baseline result and proposed-policy replay.
+   For incomplete inputs, record `not-evaluable` and explicit missing inputs.
+6. Reconcile all item results into one `PortableKnowledgeRolloutPreview`
+   census. Counts are impact evidence, never quality.
+7. Route incomplete coverage, duplicate items, unresolved inputs, material
+   changes, or inconsistent census arithmetic to governance.
+8. Keep `previewOnly` true and all activation and authority fields false.
+
+Verifier success proves declared scope and arithmetic consistency only. It
+does not prove that the chosen scope is organizationally complete, the draft
+policy is wise, the evidence is authentic, or activation is authorized.
 
 ## Common Failure Modes
 

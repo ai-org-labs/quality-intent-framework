@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.8.5 baseline)
+## Current Position (v0.8.6 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -252,13 +252,14 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-10-28 against primary-source signals. The
+The roadmap was revalidated on 2026-10-29 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
 
 | Current signal | Quality risk exposed | QIF response | Lead, not follow |
 | --- | --- | --- | --- |
+| GitHub rulesets can run in Evaluate mode to report actions that would pass or fail before enforcement; Sigstore policy-controller can run in warn mode; SLSA Verification Summary Attestations bind results to a named policy and recommend its exact digest. ([GitHub ruleset Evaluate mode](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository), [Sigstore warn mode](https://docs.sigstore.dev/policy-controller/overview/), [SLSA VSA](https://slsa.dev/spec/v1.2/verification_summary)) | A policy can be structurally valid while its population impact is unknown. Sampling can hide omitted items, and warning-only observations can be mistaken for activation readiness. | v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census, followed by v0.8.7 governed activation and rollback contract. | Freeze the declared population, reconcile exactly one proposed-policy result per item, and expose changed or unresolved outcomes before an accountable activation decision is even representable. |
 | GitHub offline attestation verification requires explicit trusted-root snapshots and warns that stale snapshots do not reveal later revocation; Sigstore uses TUF for root rotation, freshness, and compromise-time-aware revocation. ([GitHub offline verification](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/verify-attestations-offline), [Sigstore policy-controller](https://docs.sigstore.dev/policy-controller/overview/), [Sigstore threat model](https://docs.sigstore.dev/about/threat-model/)) | Replacing the current root or policy can silently rewrite the apparent validity of historical decisions, while retaining an old root forever hides freshness and revocation risk. | v0.8.5 Trust Policy Rotation and Historical Replay, followed by v0.8.6 rollout preview. | Preserve the decision made under each policy revision, replay frozen inputs under later policy without mutation, then preview the whole affected knowledge population before policy activation. |
 | GitHub artifact attestations bind provenance to an exact subject digest but explicitly do not guarantee security; Sigstore policy-controller separates trusted identities, authorities, predicates, and trust roots; SLSA verification requires consumers to select trusted builders and expected provenance fields. ([GitHub artifact attestations](https://docs.github.com/en/actions/concepts/security/artifact-attestations), [GitHub attestation verification](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations), [Sigstore policy-controller](https://docs.sigstore.dev/policy-controller/overview/), [SLSA verification](https://slsa.dev/spec/v1.2/verifying-artifacts)) | A signature can validate while its issuer, subject identity, predicate, root, time window, transparency record, or revocation state violates the receiving organization's policy; later policy rotation can also change today's answer without changing yesterday's evidence. | v0.8.4 Portable Trust Policy and Attestation Binding, followed by v0.8.5 historical policy replay. | Reproduce policy-local conformance from recorded inputs now; next preserve policy lineage and replay changed decisions without rewriting history or converting attestation validity into semantic trust. |
 | Supply-chain systems increasingly carry provenance and attestations, while Sigstore explicitly separates signature verification from artifact goodness and requires trust policy and compromise handling; GitHub likewise treats credential revocation and attestations as incident-response evidence rather than semantic safety. ([Sigstore threat model](https://docs.sigstore.dev/about/threat-model/), [GitHub artifact attestations](https://github.blog/changelog/2025-02-18-recent-improvements-to-artifact-attestations/), [GitHub supply-chain response](https://github.blog/security/supply-chain-security/disrupting-supply-chain-attacks-on-npm-and-github-actions/)) | A valid digest or signature can remain structurally correct after an issuer, credential, source version, or evidence basis is disputed; downstream local decisions may stay active because their transitive dependency is invisible. | v0.8.3 Portable Knowledge Supply-Chain Revocation, followed by v0.8.4 attestation-bound trust policy. | Preserve exact revocation subjects and dependency closure now; next bind attestations to explicit issuer scope, expiry, transparency, and local trust policy without converting cryptography into semantic truth. |
@@ -858,10 +859,20 @@ Deliverables:
   unchanged/tightened/relaxed outcome classification, material-change
   governance, and retained negative fixtures. Replay remains historical
   evidence, not current authorization or semantic truth.
+- Implemented seventh v0.8 slice, v0.8.6 Trust Policy Rollout Preview and
+  Affected-Knowledge Census: keep a proposed policy draft, freeze the declared
+  portable-item population and source digests, evaluate every item exactly
+  once, and reconcile changed and unresolved outcomes before activation.
+- Status: implemented through `PortableKnowledgeRolloutItemPreview` and
+  `PortableKnowledgeRolloutPreview`, with deterministic scope-digest, unique
+  coverage, outcome-delta, census, disposition, and governance checks. The
+  committed example is blocked because one item lacks trust inputs and another
+  is materially relaxed; preview never authorizes activation.
 - Next planned slices:
-  - v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census: replay a
-    proposed policy across all in-scope portable items before activation,
-    enumerate changed outcomes and unresolved inputs, and bound blast radius.
+  - v0.8.7 Trust Policy Activation Decision and Rollback Contract: require a
+    sufficient rollout preview, accountable decision owner, activation window,
+    observation signals, rollback conditions, and append-only outcome record
+    without executing policy changes from QIF.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,

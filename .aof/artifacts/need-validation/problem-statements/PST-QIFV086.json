@@ -1,0 +1,16 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-29T04:36:15.021Z",
+  "problem_statement_id": "PST-MVT1WG19-13LO5H",
+  "affected_party": "Organizations planning a portable QIF trust-policy change across an existing knowledge population",
+  "actual_problem": "QIF can replay one historical decision but cannot prove that a proposed policy was evaluated against every in-scope portable knowledge item before activation.",
+  "why_it_matters": "An unseen item, missing attestation, or changed outcome can become an unmeasured blast radius and surprise operators after enforcement.",
+  "why_now": "v0.8.5 added immutable policy lineage and per-decision replay; population-level rollout preview is the next lifecycle boundary.",
+  "evidence_refs": [
+    "docs/qif-v0.8.5-trust-policy-replay.md",
+    "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository",
+    "https://docs.sigstore.dev/policy-controller/overview/"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVT1VOV1-F6IAXV"
+}

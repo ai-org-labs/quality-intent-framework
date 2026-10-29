@@ -1,0 +1,324 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-10-29T04:47:00.305Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MVT1VA57-97LBER",
+    "stage": "review",
+    "executionId": "CRUN-MVT2A9XQ-OHYBGT",
+    "executionStatus": "completed",
+    "invokedModel": true,
+    "seatCount": 2,
+    "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+    "lastCouncilExecutionId": "CRUN-MVT2A9XQ-OHYBGT",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVT1VA57-97LBER",
+              "decision_id": "DEC-MVT1WVSP-GZ4500",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement.",
+              "intent": "Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass.",
+              "active_context": "context: Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement. | success: Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVT1VOUX-NU8KTB",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement. / How should improvement success be judged: which metric or end state matters most? => Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: prevent proposed portable trust-policy changes from surprising operators by previewing every in-scope knowledge item before activation. Intent: implement v0.8.6 rollout preview and affected-knowledge census with frozen scope, per-item replay, exact reconciliation, governance, and non-authority boundaries. Context: v0.8.5 supports one historical replay but not population completeness; GitHub Evaluate mode and Sigstore warn mode show the value of non-enforcing policy observation.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV086.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV086.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV086.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV086.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV086.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-QIFV086.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVT1WVSP-GZ4500"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVT1VA57-97LBER",
+              "decision_id": "DEC-MVT1WVSP-GZ4500",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement.",
+              "intent": "Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass.",
+              "active_context": "context: Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement. | success: Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVT1VOUX-NU8KTB",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement. / How should improvement success be judged: which metric or end state matters most? => Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: prevent proposed portable trust-policy changes from surprising operators by previewing every in-scope knowledge item before activation. Intent: implement v0.8.6 rollout preview and affected-knowledge census with frozen scope, per-item replay, exact reconciliation, governance, and non-authority boundaries. Context: v0.8.5 supports one historical replay but not population completeness; GitHub Evaluate mode and Sigstore warn mode show the value of non-enforcing policy observation.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV086.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV086.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV086.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV086.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV086.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-QIFV086.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVT1WVSP-GZ4500"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MVT2A9XQ-OHYBGT",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "completed",
+      "started_at": "2026-10-29T04:47:00.292Z",
+      "completed_at": "2026-10-29T04:47:00.302Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MVT2A9XQ-OHYBGT-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVT1VA57-97LBER",
+              "decision_id": "DEC-MVT1WVSP-GZ4500",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement.",
+              "intent": "Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass.",
+              "active_context": "context: Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement. | success: Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVT1VOUX-NU8KTB",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement. / How should improvement success be judged: which metric or end state matters most? => Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: prevent proposed portable trust-policy changes from surprising operators by previewing every in-scope knowledge item before activation. Intent: implement v0.8.6 rollout preview and affected-knowledge census with frozen scope, per-item replay, exact reconciliation, governance, and non-authority boundaries. Context: v0.8.5 supports one historical replay but not population completeness; GitHub Evaluate mode and Sigstore warn mode show the value of non-enforcing policy observation.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV086.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV086.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV086.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV086.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV086.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-QIFV086.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVT1WVSP-GZ4500"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-29T04:47:00.302Z",
+          "completed_at": "2026-10-29T04:47:00.302Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-29T04:47:00.302Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian review response: focus on Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement. and align to Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass..",
+            "output_summary": "DECISION: proceed VETO: no Guardian review response: focus on Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Need: prevent proposed portable trust-policy changes from surprising operators by previewing every in-scope knowledge item before activation. Intent: implement v0.8.6 rollout preview and affected-knowledge census with frozen scope, per-item replay, exact reconciliation, governance, and non-authority boundaries. Context: v0.8.5 supports one historical replay but not population completeness; GitHub Evaluate mode and Sigstore warn mode show the value of non-enforcing policy observation.\nNeed: Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement.\nIntent: Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass.\nActive Context: context: Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement. | success: Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement. / How should improvement success be judged: which metric or end state matters most? => Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVT2A9XQ-OHYBGT-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVT1VA57-97LBER",
+              "decision_id": "DEC-MVT1WVSP-GZ4500",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement.",
+              "intent": "Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass.",
+              "active_context": "context: Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement. | success: Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVT1VOUX-NU8KTB",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement. / How should improvement success be judged: which metric or end state matters most? => Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: prevent proposed portable trust-policy changes from surprising operators by previewing every in-scope knowledge item before activation. Intent: implement v0.8.6 rollout preview and affected-knowledge census with frozen scope, per-item replay, exact reconciliation, governance, and non-authority boundaries. Context: v0.8.5 supports one historical replay but not population completeness; GitHub Evaluate mode and Sigstore warn mode show the value of non-enforcing policy observation.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-QIFV086.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-QIFV086.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-QIFV086.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV086.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV086.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-QIFV086.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVT1WVSP-GZ4500"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-29T04:47:00.302Z",
+          "completed_at": "2026-10-29T04:47:00.302Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-29T04:47:00.302Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder review response: focus on Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement. and align to Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass..",
+            "output_summary": "DECISION: proceed VETO: no Builder review response: focus on Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Need: prevent proposed portable trust-policy changes from surprising operators by previewing every in-scope knowledge item before activation. Intent: implement v0.8.6 rollout preview and affected-knowledge census with frozen scope, per-item replay, exact reconciliation, governance, and non-authority boundaries. Context: v0.8.5 supports one historical replay but not population completeness; GitHub Evaluate mode and Sigstore warn mode show the value of non-enforcing policy observation.\nNeed: Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement.\nIntent: Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass.\nActive Context: context: Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement. | success: Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope: qif-ledger portable-knowledge trust policy collections, schema, example, verifier, fixtures, docs, portable package, and release. Out of scope: UI, live registries, live cryptographic verification, automatic policy activation, or enforcement. / How should improvement success be judged: which metric or end state matters most? => Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass."
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

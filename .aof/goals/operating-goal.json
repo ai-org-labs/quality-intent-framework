@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Preserve immutable local trust-policy lineage and deterministically replay frozen portable-knowledge trust decisions under named later policy revisions, routing changed or indeterminate outcomes to governance without rewriting history or granting authority.",
-  "updated_at": "2026-10-28T04:27:02.958Z",
+  "content": "Before activating a proposed portable-knowledge trust policy, freeze the intended item population, deterministically evaluate every in-scope item exactly once from recorded inputs, reconcile changed and unresolved outcomes into an affected-knowledge census, and route incomplete coverage or material impact to governance without executing policy or granting authority.",
+  "updated_at": "2026-10-29T04:36:35.452Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVRM3RP6-T22G5C",
-  "source_decision_record_id": "DEC-MVRM4RE3-J656DM",
+  "source_session_id": "SESS-MVT1VA57-97LBER",
+  "source_decision_record_id": "DEC-MVT1WVSP-GZ4500",
   "declared_complete_at": null
 }

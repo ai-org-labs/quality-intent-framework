@@ -1,0 +1,80 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-29T04:36:56.393Z",
+  "packet_id": "ASP-MVT1XBYH-EA7NCS",
+  "source_task_id": "TASK-079",
+  "source_parent_session_id": "SESS-MVT1VA57-97LBER",
+  "source_decision_record_id": "DEC-MVT1WVSP-GZ4500",
+  "objective": "Implement QIF v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, deterministic census verifier, fixtures, documentation, portable package, and release",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "qif-schema-design",
+    "deterministic-verification"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "qif-ledger-extension",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/qif-ledger-package.schema.json",
+        "tools/validate-qif-ledger.mjs"
+      ],
+      "rationale": "existing qif-ledger trust-policy and replay patterns"
+    }
+  ],
+  "resource_refs": [
+    "qif-repository",
+    "aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "no-history-mutation",
+    "no-semantic-truth",
+    "no-automatic-authority"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "rollout-scope",
+      "item-preview",
+      "affected-knowledge-census",
+      "verifier-boundary"
+    ],
+    "acceptance_criteria": [
+      "npm test passes",
+      "frozen scope reconciles exactly once and unsafe rollout states route governance"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "scope coverage and census arithmetic reproduce",
+      "evaluator_ref": "guardian",
+      "evidence_required": "negative fixture suite",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "population-coverage-gap",
+      "trigger_condition": "an in-scope item is missing or duplicated",
+      "consequence": "require-council-review",
+      "recovery_action": "restore exact scope-to-result reconciliation"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will show the proposed policy impact before anyone turns it on.",
+    "current_action": "Implement v0.8.6",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Run full QIF and AOF review"
+  },
+  "status": "draft"
+}

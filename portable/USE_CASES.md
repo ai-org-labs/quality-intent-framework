@@ -134,6 +134,20 @@ authorization, authority, cryptographic truth, or semantic truth.
 - `schemas/qif-ledger-package.schema.json`
 - `examples/qif-ledger-package.json`
 
+## 12. Preview Trust Policy Before Activation
+
+Keep the proposed policy in draft. Freeze the declared item population and its
+source digests, then record exactly one preview result for every in-scope item.
+Reconcile unchanged, tightened, relaxed, indeterminate, conformant, rejected,
+governance-required, and not-evaluable outcomes into a deterministic census.
+Missing or duplicate coverage, unresolved inputs, and material changes go to
+governance. The preview observes possible impact; it does not activate or
+enforce policy.
+
+- `docs/qif-v0.8.6-trust-policy-rollout-preview.md`
+- `schemas/qif-ledger-package.schema.json`
+- `examples/qif-ledger-package.json`
+
 ## Choosing a Package Type
 
 Open `MANIFEST.json` to see every included schema and example. Use a schema only

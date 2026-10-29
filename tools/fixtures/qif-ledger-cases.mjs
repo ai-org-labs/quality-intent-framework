@@ -55,7 +55,9 @@ function revalidationDecision(pkg) { return pkg.portableKnowledgeRevalidationDec
 function trustPolicy(pkg, index = 0) { return pkg.portableKnowledgeTrustPolicies[index]; }
 function attestation(pkg) { return pkg.portableKnowledgeAttestations[0]; }
 function trustDecision(pkg) { return pkg.portableKnowledgeTrustDecisions[0]; }
-function trustReplay(pkg) { return pkg.portableKnowledgeTrustReplays[0]; }
+function trustReplay(pkg, index = 0) { return pkg.portableKnowledgeTrustReplays[index]; }
+function rolloutItemPreview(pkg, index = 0) { return pkg.portableKnowledgeRolloutItemPreviews[index]; }
+function rolloutPreview(pkg) { return pkg.portableKnowledgeRolloutPreviews[0]; }
 
 export const cases = [
   {
@@ -891,6 +893,114 @@ export const cases = [
     rule: "verifier does not turn replay into current authority",
     expect: "verifierBoundary must explicitly avoid claiming historical replay as current authorization, activation, authority, or semantic truth.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "historical replay as current authorization, activation, authority, or semantic truth"); }
+  },
+  {
+    id: "portable-trust-rollout-proposed-draft",
+    rule: "rollout preview does not activate proposed policy",
+    expect: "PKRP-001 proposed policy must remain draft during preview.",
+    mutate: (pkg) => { trustPolicy(pkg, 2).status = "active"; }
+  },
+  {
+    id: "portable-trust-rollout-scope-digest",
+    rule: "frozen rollout scope digest reproduces",
+    expect: "PKRP-001 scopeDigest must reproduce as",
+    mutate: (pkg) => { rolloutPreview(pkg).scopeDigest = `sha256:${"0".repeat(64)}`; }
+  },
+  {
+    id: "portable-trust-rollout-all-items",
+    rule: "all-items scope covers the complete portable population",
+    expect: "PKRP-001 all-portable-items scope must include every portable knowledge item exactly once.",
+    mutate: (pkg) => { rolloutPreview(pkg).scopeSnapshot.pop(); }
+  },
+  {
+    id: "portable-trust-rollout-item-source-digest",
+    rule: "scope snapshot freezes each item digest",
+    expect: "PKRP-001 scope digest for PKI-001 must match the frozen item sourceDigest.",
+    mutate: (pkg) => { rolloutPreview(pkg).scopeSnapshot[0].sourceDigest = `sha256:${"0".repeat(64)}`; }
+  },
+  {
+    id: "portable-trust-rollout-preview-duplicate",
+    rule: "item previews are unique",
+    expect: "PKRP-001 itemPreviewRefs must not contain duplicates.",
+    mutate: (pkg) => { rolloutPreview(pkg).itemPreviewRefs[1] = "PKRIP-001"; }
+  },
+  {
+    id: "portable-trust-rollout-coverage",
+    rule: "coverage completeness reproduces",
+    expect: "PKRP-001 coverageComplete must reproduce as false.",
+    mutate: (pkg) => { rolloutPreview(pkg).itemPreviewRefs.pop(); }
+  },
+  {
+    id: "portable-trust-rollout-census",
+    rule: "affected-knowledge census arithmetic reproduces",
+    expect: "PKRP-001 relaxedCount must reproduce as 1.",
+    mutate: (pkg) => { rolloutPreview(pkg).relaxedCount = 0; }
+  },
+  {
+    id: "portable-trust-rollout-item-policy-version",
+    rule: "item preview pins proposed policy version",
+    expect: "PKRIP-002 proposedPolicyVersion must exactly match PKTP-003.",
+    mutate: (pkg) => { rolloutItemPreview(pkg, 1).proposedPolicyVersion = "2.9.9"; }
+  },
+  {
+    id: "portable-trust-rollout-baseline",
+    rule: "item preview reproduces baseline result",
+    expect: "PKRIP-002 baselineDecisionValue must reproduce as governance-required.",
+    mutate: (pkg) => { rolloutItemPreview(pkg, 1).baselineDecisionValue = "rejected"; }
+  },
+  {
+    id: "portable-trust-rollout-complete-input",
+    rule: "complete preview input resolves replay evidence",
+    expect: "PKRIP-002 complete input requires attestationRef, baselineResultRef, and replayRef.",
+    mutate: (pkg) => { delete rolloutItemPreview(pkg, 1).replayRef; }
+  },
+  {
+    id: "portable-trust-rollout-unresolved-codes",
+    rule: "incomplete item preview names unresolved input",
+    expect: "PKRIP-001 incomplete input requires unresolvedInputCodes.",
+    mutate: (pkg) => { rolloutItemPreview(pkg).unresolvedInputCodes = []; }
+  },
+  {
+    id: "portable-trust-rollout-replay-result",
+    rule: "item preview mirrors proposed-policy replay",
+    expect: "PKRIP-002 previewDecision must reproduce PKTR-002.",
+    mutate: (pkg) => { rolloutItemPreview(pkg, 1).previewDecision = "governance-required"; }
+  },
+  {
+    id: "portable-trust-rollout-delta",
+    rule: "item preview delta compares baseline and proposed outcomes",
+    expect: "PKRIP-002 outcomeDelta must reproduce as relaxed.",
+    mutate: (pkg) => { rolloutItemPreview(pkg, 1).outcomeDelta = "unchanged"; }
+  },
+  {
+    id: "portable-trust-rollout-input-trigger",
+    rule: "unresolved rollout input routes governance",
+    expect: "PKRIP-001 unresolved input requires a portable-trust-rollout-input-unresolved governance trigger.",
+    mutate: (pkg) => { rolloutItemPreview(pkg).governanceTriggerRefs = rolloutItemPreview(pkg).governanceTriggerRefs.filter((ref) => ref !== "PKGTR-014"); }
+  },
+  {
+    id: "portable-trust-rollout-change-trigger",
+    rule: "material rollout change routes governance",
+    expect: "PKRIP-002 material change requires a portable-trust-rollout-material-change governance trigger.",
+    mutate: (pkg) => { rolloutItemPreview(pkg, 1).governanceTriggerRefs = rolloutItemPreview(pkg, 1).governanceTriggerRefs.filter((ref) => ref !== "PKGTR-015"); }
+  },
+  {
+    id: "portable-trust-rollout-insufficient-trigger",
+    rule: "insufficient rollout blocks activation",
+    expect: "PKRP-001 insufficient rollout preview requires a portable-trust-rollout-insufficient governance trigger.",
+    mutate: (pkg) => { rolloutPreview(pkg).governanceTriggerRefs = rolloutPreview(pkg).governanceTriggerRefs.filter((ref) => ref !== "PKGTR-016"); }
+  },
+  {
+    id: "portable-trust-rollout-authority-boundary",
+    rule: "rollout preview does not authorize activation",
+    expect: "PKRP-001 must remain preview-only, treat counts as evidence, and forbid activation, authority, and semantic truth claims.",
+    mutate: (pkg) => { rolloutPreview(pkg).activationAuthorized = true; }
+  },
+  {
+    id: "portable-trust-rollout-verifier-boundary",
+    rule: "verifier does not turn preview into policy authority",
+    expect: "verifierBoundary must explicitly avoid claiming rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth"); }
   }
 ];
 

@@ -1,0 +1,21 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-29T04:36:33.015Z",
+  "project_charter_id": "PCH-MVT1WTX3-UCCNCP",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-QIFV086.json",
+  "validated_objective": "Release QIF v0.8.6 with a frozen-scope rollout preview that evaluates every in-scope portable item, reconciles an affected-knowledge census, and forces governance before activation when coverage or outcomes are unsafe.",
+  "scope": [
+    "qif-ledger rollout preview policy, item result, and census entities",
+    "deterministic verifier, negative fixtures, docs, portable package, roadmap, AOF evidence, and release"
+  ],
+  "constraints": [
+    "provider-neutral with no UI, live registry, live cryptography, sampling-as-completeness, or history mutation",
+    "no automatic activation, enforcement, authorization, authority, or semantic truth"
+  ],
+  "expected_outcomes": [
+    "every frozen in-scope item is represented exactly once and census arithmetic reconciles",
+    "material changes, unresolved inputs, duplicates, omissions, or stale scope route to governance"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVT1VOV1-F6IAXV"
+}

@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-28T04:36:27.578Z",
-  "audit_id": "FSA-QIFV0850",
-  "scope": "QIF v0.8.5 trust policy rotation and historical replay",
-  "summary": "Policy lineage, frozen-input replay, outcome delta, governance, schema, examples, verifier, retained fixtures, docs, and portable package pass structural verification. Replay remains historical evidence rather than current authority.",
-  "detected_gap": "A proposed trust policy cannot yet be replayed across the complete in-scope portable knowledge population before activation.",
+  "recorded_at": "2026-10-29T04:47:33.614Z",
+  "audit_id": "FSA-QIF-V086",
+  "scope": "QIF v0.8.6 release self-review",
+  "summary": "Rollout previews now freeze the affected portable-knowledge census, reproduce baseline and proposed trust-policy outcomes, and block activation when inputs or governance are incomplete.",
+  "detected_gap": "The preview does not yet authorize activation, define observation gates, or encode rollback decisions.",
   "result_state": "stable",
-  "next_action": "Develop v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census.",
+  "next_action": "Implement QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract.",
   "related_task_ids": [
-    "TASK-078"
+    "TASK-079"
   ],
-  "source_session_id": null,
-  "source_decision_record_id": null
+  "source_session_id": "SESS-MVT1VA57-97LBER",
+  "source_decision_record_id": "DEC-MVT1WVSP-GZ4500"
 }

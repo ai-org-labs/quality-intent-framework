@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-28T04:36:27.582Z",
+  "updated_at": "2026-10-29T04:47:33.617Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means an original trust decision remains unchanged; every policy revision has explicit predecessor, rotation reason, effective window, and status; replay names original and replay policy revisions plus frozen inputs; outcome changes are reproduced deterministically; incomplete inputs or material changes fail closed into governance; no replay rewrites history or grants authority.",
-      "recorded_at": "2026-10-28T04:26:21.521Z",
+      "answer": "Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass.",
+      "recorded_at": "2026-10-29T04:35:39.808Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVRM3RP6-T22G5C",
+      "source_session_id": "SESS-MVT1VA57-97LBER",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The need is historical policy accountability, not live cryptographic rotation or a mutable current-state recomputation.",
-      "recorded_at": "2026-10-28T04:27:02.959Z",
+      "answer": "The need is pre-activation population impact accountability, not a dashboard, sample estimate, or enforcement mechanism.",
+      "recorded_at": "2026-10-29T04:36:35.453Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVRM3RP6-T22G5C",
-      "source_decision_record_id": "DEC-MVRM4RE3-J656DM"
+      "source_session_id": "SESS-MVT1VA57-97LBER",
+      "source_decision_record_id": "DEC-MVT1WVSP-GZ4500"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "A proposed trust policy cannot yet be replayed across the complete in-scope portable knowledge population before activation.",
-      "recorded_at": "2026-10-28T04:36:27.582Z",
-      "expectation_state": "Policy lineage, frozen-input replay, outcome delta, governance, schema, examples, verifier, retained fixtures, docs, and portable package pass structural verification. Replay remains historical evidence rather than current authority.",
-      "mismatch_state": "A proposed trust policy cannot yet be replayed across the complete in-scope portable knowledge population before activation.",
-      "scale_direction": "Develop v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census.",
-      "source_session_id": null,
-      "source_decision_record_id": null
+      "answer": "The preview does not yet authorize activation, define observation gates, or encode rollback decisions.",
+      "recorded_at": "2026-10-29T04:47:33.617Z",
+      "expectation_state": "Rollout previews now freeze the affected portable-knowledge census, reproduce baseline and proposed trust-policy outcomes, and block activation when inputs or governance are incomplete.",
+      "mismatch_state": "The preview does not yet authorize activation, define observation gates, or encode rollback decisions.",
+      "scale_direction": "Implement QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract.",
+      "source_session_id": "SESS-MVT1VA57-97LBER",
+      "source_decision_record_id": "DEC-MVT1WVSP-GZ4500"
     }
   ]
 }

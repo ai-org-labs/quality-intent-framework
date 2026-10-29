@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-29T04:36:15.200Z",
+  "value_hypothesis_id": "VHY-MVT1WG68-K5738A",
+  "expected_value_creation": "A frozen rollout scope, exhaustive per-item replay, and reconciled affected-knowledge census reveal proposed-policy blast radius before activation without granting enforcement authority.",
+  "beneficiary": "Portable QIF knowledge consumers, policy owners, governance reviewers, and operators",
+  "supporting_evidence": [
+    "GitHub ruleset Evaluate mode reports actions that would pass or fail before enforcement.",
+    "Sigstore policy-controller warn mode allows observation of nonconformance without blocking admission.",
+    "SLSA Verification Summary Attestations bind verification to a named policy and policy digest."
+  ],
+  "success_criteria": [
+    "Every frozen in-scope item has exactly one preview result or an explicit unresolved-input result.",
+    "Census totals reproduce from per-item results and changed or incomplete populations route to governance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVT1VOV1-F6IAXV"
+}

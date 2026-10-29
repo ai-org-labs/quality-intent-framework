@@ -1,0 +1,24 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-10-29T04:34:50.080Z",
+  "project_root": "/private/tmp/qif-v086-20261029",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "Preserve immutable local trust-policy lineage and deterministically replay frozen portable-knowledge trust decisions under named later policy revisions, routing changed or indeterminate outcomes to governance without rewriting history or granting authority.",
+  "next_value_slice": "QIF v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census",
+  "current_runtime_stage": "frontier-definition-needed",
+  "primary_frontier_task": null,
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Open an implementation task for the current frontier: QIF v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census",
+    "prioritized_task_ids": [],
+    "scale_direction": "Define or reconcile the next frontier before expanding execution."
+  },
+  "recommended_action": {
+    "recommended_action": "Open an implementation task for the current frontier: QIF v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census",
+    "rationale": "No current open implementation task is aligned to the current operating goal.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  }
+}

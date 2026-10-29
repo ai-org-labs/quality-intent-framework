@@ -5321,3 +5321,54 @@ Date: 2026-10-25
 - Next value slices: v0.8.6 Trust Policy Rollout Preview and
   Affected-Knowledge Census, v0.9 Anticipatory Quality Intent Twin, and v1.0
   Quality Decision Ledger Standard.
+
+# QIF v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census
+
+- Date: 2026-10-29.
+- AOF runtime: v12.2.0, managed-project topology.
+- Need: QIF v0.8.5 could replay one historical decision under a later trust
+  policy, but could not freeze and evaluate the complete in-scope portable
+  knowledge population before a proposed policy is activated.
+- Validated Need: provide a deterministic, non-authoritative rollout preview
+  that evaluates every frozen in-scope item exactly once, reconciles changed,
+  unchanged, unresolved, and missing outcomes, and routes incomplete or
+  material changes to governance.
+- Need Validation artifacts: `PST-MVT1WG19-13LO5H`,
+  `VHY-MVT1WG68-K5738A`, `ALT-MVT1WGAW-P0PRZ5`,
+  `EXP-MVT1WGFK-A613E1`, Validated Need `NVR-MVT1WPBQ-5AXEPY`, and
+  charter `PCH-MVT1WTX3-UCCNCP`. The charter was created only after the Need
+  was validated.
+- Council: planning execution `CRUN-MVT1X0ZX-NBIY31` included Visionary,
+  Builder, and Guardian; review execution `CRUN-MVT2A9XQ-OHYBGT` included
+  Guardian and Builder with no veto. Session: `SESS-MVT1VA57-97LBER`;
+  decision: `DEC-MVT1WVSP-GZ4500`; task: `TASK-079`; actor skill packet:
+  `ASP-MVT1XBYH-EA7NCS`.
+- Trend evidence: GitHub rulesets provide Evaluate mode to observe what would
+  pass or fail before enforcement; Sigstore policy-controller provides warn
+  mode for non-blocking policy observation; SLSA Verification Summary
+  Attestations bind verification to a named policy and artifact digest.
+  Sources:
+  https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository,
+  https://docs.sigstore.dev/policy-controller/overview/,
+  https://slsa.dev/spec/v1.2/verification_summary, and
+  https://slsa.dev/spec/v1.2/verifying-artifacts.
+- Decision: add `PortableKnowledgeRolloutItemPreview` and
+  `PortableKnowledgeRolloutPreview`, freeze scope and digest, reproduce
+  baseline and proposed-policy outcomes per item, and reconcile an exhaustive
+  affected-knowledge census before activation can be considered.
+- Implementation boundary: no policy activation, automatic acceptance,
+  rollout authorization, live cryptographic verification, observation gate,
+  rollback execution, authority grant, or semantic-truth claim. A preview is
+  evidence for governance, not a release decision.
+- Verification: `npm test` passed with 16/16 positive and 1,416/1,416 retained
+  negative checks; portable v0.8.6 built and verified with 56 files; AOF
+  organization verification passed 295/295 checks. Self-audit:
+  `FSA-QIF-V086`.
+- Outcome report: `OUT-MVT2B95O-BHVALY` recorded implementation success. AOF
+  then reset the active next value slice to v0.8.7 and refreshed the learning
+  loop snapshot.
+- Residual gap: the preview does not authorize activation, define observation
+  gates, or encode rollback decisions.
+- Next value slices: v0.8.7 Trust Policy Activation Decision and Rollback
+  Contract, v0.9 Anticipatory Quality Intent Twin, and v1.0 Quality Decision
+  Ledger Standard.

@@ -266,6 +266,8 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeAttestations = requireArray(pkg, "portableKnowledgeAttestations", packagePath);
   const portableKnowledgeTrustDecisions = requireArray(pkg, "portableKnowledgeTrustDecisions", packagePath);
   const portableKnowledgeTrustReplays = requireArray(pkg, "portableKnowledgeTrustReplays", packagePath);
+  const portableKnowledgeRolloutItemPreviews = requireArray(pkg, "portableKnowledgeRolloutItemPreviews", packagePath);
+  const portableKnowledgeRolloutPreviews = requireArray(pkg, "portableKnowledgeRolloutPreviews", packagePath);
   const packageRefIndex = indexById(packageRefs, `${packagePath}:packageRefs`);
   const crossPackageRefIndex = indexById(crossPackageRefs, `${packagePath}:crossPackageRefs`);
   const lifecycleIndex = indexById(lifecycleRecords, `${packagePath}:qualityIntentLifecycleRecords`);
@@ -296,6 +298,9 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeTrustPolicyIndex = indexById(portableKnowledgeTrustPolicies, `${packagePath}:portableKnowledgeTrustPolicies`);
   const portableKnowledgeAttestationIndex = indexById(portableKnowledgeAttestations, `${packagePath}:portableKnowledgeAttestations`);
   const portableKnowledgeTrustDecisionIndex = indexById(portableKnowledgeTrustDecisions, `${packagePath}:portableKnowledgeTrustDecisions`);
+  const portableKnowledgeTrustReplayIndex = indexById(portableKnowledgeTrustReplays, `${packagePath}:portableKnowledgeTrustReplays`);
+  const portableKnowledgeRolloutItemPreviewIndex = indexById(portableKnowledgeRolloutItemPreviews, `${packagePath}:portableKnowledgeRolloutItemPreviews`);
+  const portableKnowledgeRolloutPreviewIndex = indexById(portableKnowledgeRolloutPreviews, `${packagePath}:portableKnowledgeRolloutPreviews`);
   void crossPackageRefIndex;
   void missedIntentIndex;
 
@@ -941,11 +946,11 @@ function validateLedgerPackage(pkg, packagePath) {
     if (policy.revisionKind === "initial" && policy.previousPolicyRef) errors.push(`${policy.id} initial revision must not reference a previous policy.`);
     if (policy.revisionKind !== "initial" && !policy.previousPolicyRef) errors.push(`${policy.id} non-initial revision requires previousPolicyRef.`);
     if (policy.previousPolicyRef && !previous) errors.push(`${policy.id} references missing previous policy ${policy.previousPolicyRef}.`);
-    if (previous) {
+    if (previous && policy.status !== "draft") {
       if (previous.supersededByPolicyRef !== policy.id) errors.push(`${policy.id} previous policy must point back through supersededByPolicyRef.`);
       if (previous.status !== "retired") errors.push(`${policy.id} previous policy must be retired.`);
-      if (previous.validUntil !== policy.effectiveAt) errors.push(`${policy.id} effectiveAt must equal the previous policy validUntil boundary.`);
     }
+    if (previous && previous.validUntil !== policy.effectiveAt) errors.push(`${policy.id} effectiveAt must equal the previous policy validUntil boundary.`);
     if (policy.status === "active" && policy.supersededByPolicyRef) errors.push(`${policy.id} active policy must not name a superseding policy.`);
     if (policy.status === "retired" && !policy.supersededByPolicyRef) errors.push(`${policy.id} retired policy requires supersededByPolicyRef.`);
   }
@@ -1055,6 +1060,110 @@ function validateLedgerPackage(pkg, packagePath) {
     if (replay.originalDecisionPreserved !== true || replay.inputsFrozen !== true || replay.activityCountIsQuality !== false || replay.automaticActivation !== false || replay.automaticAuthority !== false || replay.semanticTruthClaimed !== false) errors.push(`${replay.id} must preserve history and frozen inputs, treat counts as evidence, and forbid automatic activation, authority, and semantic truth claims.`);
   }
 
+  for (const itemPreview of portableKnowledgeRolloutItemPreviews) {
+    const rollout = portableKnowledgeRolloutPreviewIndex.get(itemPreview.rolloutPreviewRef);
+    const item = portableKnowledgeItemIndex.get(itemPreview.itemRef);
+    const proposedPolicy = portableKnowledgeTrustPolicyIndex.get(itemPreview.proposedPolicyRef);
+    const attestation = itemPreview.attestationRef ? portableKnowledgeAttestationIndex.get(itemPreview.attestationRef) : null;
+    const replay = itemPreview.replayRef ? portableKnowledgeTrustReplayIndex.get(itemPreview.replayRef) : null;
+    const baselineResult = itemPreview.baselineResultRef
+      ? portableKnowledgeTrustDecisionIndex.get(itemPreview.baselineResultRef) ?? portableKnowledgeTrustReplayIndex.get(itemPreview.baselineResultRef)
+      : null;
+    if (!rollout) errors.push(`${itemPreview.id} references missing rollout preview ${itemPreview.rolloutPreviewRef}.`);
+    if (!item) errors.push(`${itemPreview.id} references missing portable knowledge item ${itemPreview.itemRef}.`);
+    if (!proposedPolicy) errors.push(`${itemPreview.id} references missing proposed policy ${itemPreview.proposedPolicyRef}.`);
+    if (proposedPolicy && itemPreview.proposedPolicyVersion !== proposedPolicy.version) errors.push(`${itemPreview.id} proposedPolicyVersion must exactly match ${proposedPolicy.id}.`);
+    if (rollout && (itemPreview.proposedPolicyRef !== rollout.proposedPolicyRef || itemPreview.proposedPolicyVersion !== rollout.proposedPolicyVersion)) errors.push(`${itemPreview.id} proposed policy must match ${rollout.id}.`);
+    const baselineValue = baselineResult?.decision ?? baselineResult?.replayDecision ?? "not-evaluable";
+    if (itemPreview.baselineDecisionValue !== baselineValue) errors.push(`${itemPreview.id} baselineDecisionValue must reproduce as ${baselineValue}.`);
+    if (itemPreview.inputState === "complete") {
+      if (!attestation || !replay || !baselineResult) errors.push(`${itemPreview.id} complete input requires attestationRef, baselineResultRef, and replayRef.`);
+      if ((itemPreview.unresolvedInputCodes ?? []).length !== 0) errors.push(`${itemPreview.id} complete input must not include unresolvedInputCodes.`);
+      if (attestation && attestation.itemRef !== itemPreview.itemRef) errors.push(`${itemPreview.id} attestation must reference the same item.`);
+      if (replay && (replay.itemRef !== itemPreview.itemRef || replay.replayPolicyRef !== itemPreview.proposedPolicyRef || replay.attestationRef !== itemPreview.attestationRef)) errors.push(`${itemPreview.id} replay must bind the same item, attestation, and proposed policy.`);
+      if (replay && itemPreview.previewDecision !== replay.replayDecision) errors.push(`${itemPreview.id} previewDecision must reproduce ${replay.id}.`);
+    } else {
+      if ((itemPreview.unresolvedInputCodes ?? []).length === 0) errors.push(`${itemPreview.id} incomplete input requires unresolvedInputCodes.`);
+      if (itemPreview.previewDecision !== "not-evaluable" || itemPreview.outcomeDelta !== "indeterminate" || itemPreview.materialChange !== false) errors.push(`${itemPreview.id} incomplete input must remain not-evaluable, indeterminate, and non-material until resolved.`);
+    }
+    const previewRank = { rejected: 0, "governance-required": 1, "policy-conformant-candidate": 2 };
+    const expectedDelta = baselineValue === "not-evaluable" || itemPreview.previewDecision === "not-evaluable"
+      ? "indeterminate"
+      : previewRank[itemPreview.previewDecision] < previewRank[baselineValue]
+        ? "tightened"
+        : previewRank[itemPreview.previewDecision] > previewRank[baselineValue]
+          ? "relaxed"
+          : "unchanged";
+    if (itemPreview.outcomeDelta !== expectedDelta) errors.push(`${itemPreview.id} outcomeDelta must reproduce as ${expectedDelta}.`);
+    const expectedMaterialChange = !["unchanged", "indeterminate"].includes(expectedDelta);
+    if (itemPreview.materialChange !== expectedMaterialChange) errors.push(`${itemPreview.id} materialChange must reproduce as ${expectedMaterialChange}.`);
+    const types = portableGovernanceTypes(itemPreview.governanceTriggerRefs, itemPreview.id);
+    if (itemPreview.inputState !== "complete" && !types.has("portable-trust-rollout-input-unresolved")) errors.push(`${itemPreview.id} unresolved input requires a portable-trust-rollout-input-unresolved governance trigger.`);
+    if (expectedMaterialChange && !types.has("portable-trust-rollout-material-change")) errors.push(`${itemPreview.id} material change requires a portable-trust-rollout-material-change governance trigger.`);
+    if ((itemPreview.inputState !== "complete" || expectedMaterialChange) && !types.has("portable-trust-rollout-insufficient")) errors.push(`${itemPreview.id} unsafe rollout result requires a portable-trust-rollout-insufficient governance trigger.`);
+    if (itemPreview.activityCountIsQuality !== false || itemPreview.automaticActivation !== false || itemPreview.automaticAuthority !== false || itemPreview.semanticTruthClaimed !== false) errors.push(`${itemPreview.id} must treat counts as evidence and forbid automatic activation, authority, and semantic truth claims.`);
+  }
+
+  for (const rollout of portableKnowledgeRolloutPreviews) {
+    const baselinePolicy = portableKnowledgeTrustPolicyIndex.get(rollout.baselinePolicyRef);
+    const proposedPolicy = portableKnowledgeTrustPolicyIndex.get(rollout.proposedPolicyRef);
+    if (!baselinePolicy) errors.push(`${rollout.id} references missing baseline policy ${rollout.baselinePolicyRef}.`);
+    if (!proposedPolicy) errors.push(`${rollout.id} references missing proposed policy ${rollout.proposedPolicyRef}.`);
+    if (rollout.baselinePolicyRef === rollout.proposedPolicyRef) errors.push(`${rollout.id} proposed policy must differ from the baseline policy.`);
+    if (proposedPolicy && rollout.proposedPolicyVersion !== proposedPolicy.version) errors.push(`${rollout.id} proposedPolicyVersion must exactly match ${proposedPolicy.id}.`);
+    if (proposedPolicy && proposedPolicy.status !== "draft") errors.push(`${rollout.id} proposed policy must remain draft during preview.`);
+    const scopeIds = (rollout.scopeSnapshot ?? []).map((entry) => entry.itemRef);
+    if (new Set(scopeIds).size !== scopeIds.length) errors.push(`${rollout.id} scopeSnapshot must not contain duplicate items.`);
+    for (const entry of rollout.scopeSnapshot ?? []) {
+      const item = portableKnowledgeItemIndex.get(entry.itemRef);
+      if (!item) errors.push(`${rollout.id} scope references missing item ${entry.itemRef}.`);
+      else if (entry.sourceDigest !== item.sourceDigest) errors.push(`${rollout.id} scope digest for ${entry.itemRef} must match the frozen item sourceDigest.`);
+    }
+    const sortedScope = [...(rollout.scopeSnapshot ?? [])].sort((a, b) => a.itemRef.localeCompare(b.itemRef));
+    const expectedScopeDigest = sha256(sortedScope);
+    if (rollout.scopeDigest !== expectedScopeDigest) errors.push(`${rollout.id} scopeDigest must reproduce as ${expectedScopeDigest}.`);
+    if (rollout.scopeKind === "all-portable-items") {
+      const allItemIds = [...portableKnowledgeItemIndex.keys()].sort();
+      if (canonicalJson([...scopeIds].sort()) !== canonicalJson(allItemIds)) errors.push(`${rollout.id} all-portable-items scope must include every portable knowledge item exactly once.`);
+    }
+    const previewRefs = rollout.itemPreviewRefs ?? [];
+    if (new Set(previewRefs).size !== previewRefs.length) errors.push(`${rollout.id} itemPreviewRefs must not contain duplicates.`);
+    const itemPreviews = previewRefs.map((ref) => portableKnowledgeRolloutItemPreviewIndex.get(ref)).filter(Boolean);
+    for (const ref of previewRefs) if (!portableKnowledgeRolloutItemPreviewIndex.has(ref)) errors.push(`${rollout.id} references missing item preview ${ref}.`);
+    if (itemPreviews.some((entry) => entry.rolloutPreviewRef !== rollout.id)) errors.push(`${rollout.id} item previews must point back to the rollout preview.`);
+    const previewItemIds = itemPreviews.map((entry) => entry.itemRef);
+    const coverageComplete = new Set(previewItemIds).size === previewItemIds.length && canonicalJson([...previewItemIds].sort()) === canonicalJson([...scopeIds].sort());
+    if (rollout.coverageComplete !== coverageComplete) errors.push(`${rollout.id} coverageComplete must reproduce as ${coverageComplete}.`);
+    const counts = {
+      totalItemCount: scopeIds.length,
+      coveredItemCount: new Set(previewItemIds).size,
+      unchangedCount: itemPreviews.filter((entry) => entry.outcomeDelta === "unchanged").length,
+      tightenedCount: itemPreviews.filter((entry) => entry.outcomeDelta === "tightened").length,
+      relaxedCount: itemPreviews.filter((entry) => entry.outcomeDelta === "relaxed").length,
+      indeterminateCount: itemPreviews.filter((entry) => entry.outcomeDelta === "indeterminate").length,
+      conformantCount: itemPreviews.filter((entry) => entry.previewDecision === "policy-conformant-candidate").length,
+      governanceRequiredCount: itemPreviews.filter((entry) => entry.previewDecision === "governance-required").length,
+      rejectedCount: itemPreviews.filter((entry) => entry.previewDecision === "rejected").length,
+      notEvaluableCount: itemPreviews.filter((entry) => entry.previewDecision === "not-evaluable").length,
+      materialChangeCount: itemPreviews.filter((entry) => entry.materialChange === true).length,
+      unresolvedInputCount: itemPreviews.filter((entry) => entry.inputState !== "complete").length
+    };
+    for (const [field, value] of Object.entries(counts)) if (rollout[field] !== value) errors.push(`${rollout.id} ${field} must reproduce as ${value}.`);
+    const inputsComplete = counts.unresolvedInputCount === 0;
+    if (rollout.inputsComplete !== inputsComplete) errors.push(`${rollout.id} inputsComplete must reproduce as ${inputsComplete}.`);
+    const sufficient = coverageComplete && inputsComplete;
+    if (rollout.dataSufficiency !== (sufficient ? "sufficient" : "insufficient")) errors.push(`${rollout.id} dataSufficiency must reproduce as ${sufficient ? "sufficient" : "insufficient"}.`);
+    const disposition = !coverageComplete || !inputsComplete ? "blocked" : counts.materialChangeCount > 0 ? "governance-required" : "ready-for-governance-decision";
+    if (rollout.rolloutDisposition !== disposition) errors.push(`${rollout.id} rolloutDisposition must reproduce as ${disposition}.`);
+    const types = portableGovernanceTypes(rollout.governanceTriggerRefs, rollout.id);
+    if (!coverageComplete && !types.has("portable-trust-rollout-scope-mismatch")) errors.push(`${rollout.id} incomplete coverage requires a portable-trust-rollout-scope-mismatch governance trigger.`);
+    if (new Set(previewItemIds).size !== previewItemIds.length && !types.has("portable-trust-rollout-duplicate-item")) errors.push(`${rollout.id} duplicate item previews require a portable-trust-rollout-duplicate-item governance trigger.`);
+    if (!inputsComplete && !types.has("portable-trust-rollout-input-unresolved")) errors.push(`${rollout.id} unresolved inputs require a portable-trust-rollout-input-unresolved governance trigger.`);
+    if (counts.materialChangeCount > 0 && !types.has("portable-trust-rollout-material-change")) errors.push(`${rollout.id} material changes require a portable-trust-rollout-material-change governance trigger.`);
+    if (!sufficient && !types.has("portable-trust-rollout-insufficient")) errors.push(`${rollout.id} insufficient rollout preview requires a portable-trust-rollout-insufficient governance trigger.`);
+    if (rollout.previewOnly !== true || rollout.activityCountIsQuality !== false || rollout.activationAuthorized !== false || rollout.automaticActivation !== false || rollout.automaticAuthority !== false || rollout.semanticTruthClaimed !== false) errors.push(`${rollout.id} must remain preview-only, treat counts as evidence, and forbid activation, authority, and semantic truth claims.`);
+  }
+
   const index = pkg.ledgerIndex;
   if (!index || typeof index !== "object") {
     errors.push(`${packagePath} must include ledgerIndex.`);
@@ -1086,7 +1195,7 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim ?? []).includes("semantic truth")) {
       errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
     }
-    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth"]) {
+    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth", "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth"]) {
       if (!(boundary.doesNotClaim ?? []).includes(claim)) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming ${claim}.`);
     }
   }
@@ -1128,7 +1237,9 @@ function validateLedgerPackage(pkg, packagePath) {
       portableKnowledgeTrustPolicies: portableKnowledgeTrustPolicies.length,
       portableKnowledgeAttestations: portableKnowledgeAttestations.length,
       portableKnowledgeTrustDecisions: portableKnowledgeTrustDecisions.length,
-      portableKnowledgeTrustReplays: portableKnowledgeTrustReplays.length
+      portableKnowledgeTrustReplays: portableKnowledgeTrustReplays.length,
+      portableKnowledgeRolloutItemPreviews: portableKnowledgeRolloutItemPreviews.length,
+      portableKnowledgeRolloutPreviews: portableKnowledgeRolloutPreviews.length
     }
   });
 }

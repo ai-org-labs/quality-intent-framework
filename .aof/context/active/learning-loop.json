@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-28T04:37:23.230Z",
+  "generated_at": "2026-10-29T04:47:49.974Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MVRM3RP6-T22G5C",
-    "report_id": "OUT-MVRMHXUK-7WB4UW",
+    "source_session_id": "SESS-MVT1VA57-97LBER",
+    "report_id": "OUT-MVT2B95O-BHVALY",
     "result": "success",
-    "observed_at": "2026-10-28T04:37:17.851Z",
-    "note": "Released implementation candidate for QIF v0.8.5 with immutable trust-policy lineage, historical replay, deterministic governance routing, 16/16 positive and 1398/1398 negative fixture checks, portable verification, and AOF organization verification 295/295.",
-    "signal_ref": "TASK-078"
+    "observed_at": "2026-10-29T04:47:45.948Z",
+    "note": "QIF v0.8.6 implemented deterministic trust-policy rollout previews with complete affected-knowledge census, governance routing, 16/16 positive checks, 1416/1416 negative checks, and portable package verification.",
+    "signal_ref": "TASK-079"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIFV0850",
-    "recorded_at": "2026-10-28T04:36:27.578Z",
-    "summary": "Policy lineage, frozen-input replay, outcome delta, governance, schema, examples, verifier, retained fixtures, docs, and portable package pass structural verification. Replay remains historical evidence rather than current authority.",
-    "detected_gap": "A proposed trust policy cannot yet be replayed across the complete in-scope portable knowledge population before activation.",
+    "audit_id": "FSA-QIF-V086",
+    "recorded_at": "2026-10-29T04:47:33.614Z",
+    "summary": "Rollout previews now freeze the affected portable-knowledge census, reproduce baseline and proposed trust-policy outcomes, and block activation when inputs or governance are incomplete.",
+    "detected_gap": "The preview does not yet authorize activation, define observation gates, or encode rollback decisions.",
     "result_state": "stable",
-    "next_action": "Develop v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census.",
+    "next_action": "Implement QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract.",
     "related_task_ids": [
-      "TASK-078"
+      "TASK-079"
     ]
   },
   "current_next_value_slice": {
-    "content": "QIF v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census",
-    "updated_at": "2026-10-28T04:37:21.323Z",
+    "content": "QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract",
+    "updated_at": "2026-10-29T04:47:47.994Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MVRM3RP6-T22G5C",
-    "source_decision_record_id": "DEC-MVRM4RE3-J656DM"
+    "source_session_id": "SESS-MVT1VA57-97LBER",
+    "source_decision_record_id": "DEC-MVT1WVSP-GZ4500"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Develop v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census.",
+    "proposed_focus": "Implement QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract.",
     "related_task_ids": [
-      "TASK-078"
+      "TASK-079"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: QIF v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census",
-    "Latest self-audit next action: Develop v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census.",
+    "Current next value slice: QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract",
+    "Latest self-audit next action: Implement QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract.",
     "Latest outcome result: success"
   ]
 }

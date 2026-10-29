@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-29T04:36:27.062Z",
+  "validation_id": "NVR-MVT1WPBQ-5AXEPY",
+  "raw_need": "Add trust-policy rollout preview",
+  "validation_status": "validated",
+  "validated_need": "Before activating a proposed portable-knowledge trust policy, freeze the intended item population, deterministically evaluate every in-scope item exactly once from recorded inputs, reconcile changed and unresolved outcomes into an affected-knowledge census, and route incomplete coverage or material impact to governance without executing policy or granting authority.",
+  "decision_summary": "The need is pre-activation population impact accountability, not a dashboard, sample estimate, or enforcement mechanism.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What population must be covered?",
+      "answer": "A frozen explicit set of portable knowledge item references with a reproducible scope digest.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must the preview prove?",
+      "answer": "Exact per-item coverage and census reconciliation from recorded policy inputs, never semantic trust or authorization.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "a representative sample is sufficient to estimate rollout blast radius"
+  ],
+  "evidence_gaps": [
+    "no live registry or independently verified attestation population is in scope"
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-QIFV086.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-QIFV086.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-QIFV086.json",
+  "experiment_proposal_ref": ".aof/artifacts/need-validation/experiment-proposals/EXP-QIFV086.json",
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVT1VOV1-F6IAXV"
+}

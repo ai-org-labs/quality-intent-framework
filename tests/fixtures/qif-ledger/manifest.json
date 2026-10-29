@@ -1025,6 +1025,132 @@
       "rule": "verifier does not turn replay into current authority",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming historical replay as current authorization, activation, authority, or semantic truth."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-proposed-draft.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "rollout preview does not activate proposed policy",
+      "expect": "fail",
+      "errorIncludes": "PKRP-001 proposed policy must remain draft during preview."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-scope-digest.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "frozen rollout scope digest reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKRP-001 scopeDigest must reproduce as"
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-all-items.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "all-items scope covers the complete portable population",
+      "expect": "fail",
+      "errorIncludes": "PKRP-001 all-portable-items scope must include every portable knowledge item exactly once."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-item-source-digest.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "scope snapshot freezes each item digest",
+      "expect": "fail",
+      "errorIncludes": "PKRP-001 scope digest for PKI-001 must match the frozen item sourceDigest."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-preview-duplicate.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "item previews are unique",
+      "expect": "fail",
+      "errorIncludes": "PKRP-001 itemPreviewRefs must not contain duplicates."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-coverage.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "coverage completeness reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKRP-001 coverageComplete must reproduce as false."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-census.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "affected-knowledge census arithmetic reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKRP-001 relaxedCount must reproduce as 1."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-item-policy-version.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "item preview pins proposed policy version",
+      "expect": "fail",
+      "errorIncludes": "PKRIP-002 proposedPolicyVersion must exactly match PKTP-003."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-baseline.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "item preview reproduces baseline result",
+      "expect": "fail",
+      "errorIncludes": "PKRIP-002 baselineDecisionValue must reproduce as governance-required."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-complete-input.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "complete preview input resolves replay evidence",
+      "expect": "fail",
+      "errorIncludes": "PKRIP-002 complete input requires attestationRef, baselineResultRef, and replayRef."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-unresolved-codes.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "incomplete item preview names unresolved input",
+      "expect": "fail",
+      "errorIncludes": "PKRIP-001 incomplete input requires unresolvedInputCodes."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-replay-result.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "item preview mirrors proposed-policy replay",
+      "expect": "fail",
+      "errorIncludes": "PKRIP-002 previewDecision must reproduce PKTR-002."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-delta.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "item preview delta compares baseline and proposed outcomes",
+      "expect": "fail",
+      "errorIncludes": "PKRIP-002 outcomeDelta must reproduce as relaxed."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-input-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "unresolved rollout input routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKRIP-001 unresolved input requires a portable-trust-rollout-input-unresolved governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-change-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "material rollout change routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKRIP-002 material change requires a portable-trust-rollout-material-change governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-insufficient-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "insufficient rollout blocks activation",
+      "expect": "fail",
+      "errorIncludes": "PKRP-001 insufficient rollout preview requires a portable-trust-rollout-insufficient governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-authority-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "rollout preview does not authorize activation",
+      "expect": "fail",
+      "errorIncludes": "PKRP-001 must remain preview-only, treat counts as evidence, and forbid activation, authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollout-verifier-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "verifier does not turn preview into policy authority",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth."
     }
   ],
   "rescopedRules": []

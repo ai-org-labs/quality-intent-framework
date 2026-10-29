@@ -825,6 +825,33 @@
       "requiredAction": "Require current independently verified evidence and accountable governance before any operational use.",
       "owner": "portable-knowledge-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "PKGTR-014",
+      "triggerType": "portable-trust-rollout-input-unresolved",
+      "reason": "PKI-001 has no recorded attestation or original trust decision, so the proposed policy cannot be evaluated for that item.",
+      "severity": "high",
+      "requiredAction": "Keep the proposed policy non-enforcing and obtain complete item-bound trust inputs or explicitly remove the item through governance.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-015",
+      "triggerType": "portable-trust-rollout-material-change",
+      "reason": "The proposed policy relaxes the current recorded result for PKI-002 from governance-required to policy-conformant-candidate.",
+      "severity": "high",
+      "requiredAction": "Review whether accepting both root revisions is an intentional risk decision before any policy activation.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-016",
+      "triggerType": "portable-trust-rollout-insufficient",
+      "reason": "The rollout scope is fully represented, but one item is not evaluable and another has a material trust outcome change.",
+      "severity": "critical",
+      "requiredAction": "Block activation until accountable governance resolves the incomplete input and material-change findings.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
     }
   ],
   "portableKnowledgeLibraries": [
@@ -1660,7 +1687,7 @@
         "sigstore-public-good-v2"
       ],
       "validFrom": "2026-10-28T00:00:00.000Z",
-      "validUntil": "2027-10-28T00:00:00.000Z",
+      "validUntil": "2026-10-29T00:00:00.000Z",
       "requireCryptographicEvidence": true,
       "requireTransparencyEvidence": true,
       "requireRevocationCheck": true,
@@ -1669,6 +1696,37 @@
       "automaticAuthority": false,
       "semanticTruthClaimed": false,
       "status": "active"
+    },
+    {
+      "id": "PKTP-003",
+      "version": "3.0.0",
+      "revisionKind": "policy-change",
+      "revisionReason": "Proposed compatibility window accepting both recorded trust-root revisions pending rollout review.",
+      "effectiveAt": "2026-10-29T00:00:00.000Z",
+      "previousPolicyRef": "PKTP-002",
+      "acceptedIssuers": [
+        "https://token.actions.githubusercontent.com"
+      ],
+      "acceptedSubjectIdentities": [
+        "repo:ai-org-labs/quality-intent-framework:ref:refs/heads/main"
+      ],
+      "acceptedPredicateTypes": [
+        "https://slsa.dev/provenance/v1"
+      ],
+      "trustedRootRevisions": [
+        "sigstore-public-good-v1",
+        "sigstore-public-good-v2"
+      ],
+      "validFrom": "2026-10-29T00:00:00.000Z",
+      "validUntil": "2027-10-29T00:00:00.000Z",
+      "requireCryptographicEvidence": true,
+      "requireTransparencyEvidence": true,
+      "requireRevocationCheck": true,
+      "failClosed": true,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "draft"
     }
   ],
   "portableKnowledgeAttestations": [
@@ -1765,6 +1823,152 @@
       "semanticTruthClaimed": false,
       "replayedBy": "portable-knowledge-governance-owner",
       "status": "governance-required"
+    },
+    {
+      "id": "PKTR-002",
+      "originalDecisionRef": "PKTD-001",
+      "originalPolicyRef": "PKTP-001",
+      "replayPolicyRef": "PKTP-003",
+      "replayPolicyVersion": "3.0.0",
+      "attestationRef": "PKAT-001",
+      "itemRef": "PKI-002",
+      "originalDecisionValue": "policy-conformant-candidate",
+      "originalDecisionEvaluatedAt": "2026-10-27T00:00:00.000Z",
+      "replayEvaluatedAt": "2026-10-29T12:00:00.000Z",
+      "subjectDigestMatch": true,
+      "issuerAccepted": true,
+      "subjectIdentityAccepted": true,
+      "predicateTypeAccepted": true,
+      "trustRootAccepted": true,
+      "withinPolicyWindow": true,
+      "withinAttestationWindow": true,
+      "cryptographicEvidenceSatisfied": true,
+      "transparencyEvidenceSatisfied": true,
+      "revocationCheckSatisfied": true,
+      "replayDecision": "policy-conformant-candidate",
+      "outcomeDelta": "unchanged",
+      "materialChange": false,
+      "originalDecisionPreserved": true,
+      "inputsFrozen": true,
+      "rationale": "The proposed compatibility policy accepts the recorded v1 root; this is only a preview input and does not activate the draft policy.",
+      "governanceTriggerRefs": [],
+      "activityCountIsQuality": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "replayedBy": "portable-knowledge-governance-owner",
+      "status": "reviewed"
+    }
+  ],
+  "portableKnowledgeRolloutItemPreviews": [
+    {
+      "id": "PKRIP-001",
+      "rolloutPreviewRef": "PKRP-001",
+      "itemRef": "PKI-001",
+      "proposedPolicyRef": "PKTP-003",
+      "proposedPolicyVersion": "3.0.0",
+      "baselineDecisionValue": "not-evaluable",
+      "inputState": "missing-attestation",
+      "unresolvedInputCodes": [
+        "missing-attestation",
+        "missing-original-decision"
+      ],
+      "previewDecision": "not-evaluable",
+      "outcomeDelta": "indeterminate",
+      "materialChange": false,
+      "rationale": "The item is inside the frozen scope but has no item-bound attestation or original trust decision, so the preview records uncertainty instead of guessing.",
+      "governanceTriggerRefs": [
+        "PKGTR-014",
+        "PKGTR-016"
+      ],
+      "activityCountIsQuality": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "PKRIP-002",
+      "rolloutPreviewRef": "PKRP-001",
+      "itemRef": "PKI-002",
+      "proposedPolicyRef": "PKTP-003",
+      "proposedPolicyVersion": "3.0.0",
+      "attestationRef": "PKAT-001",
+      "baselineResultRef": "PKTR-001",
+      "baselineDecisionValue": "governance-required",
+      "replayRef": "PKTR-002",
+      "inputState": "complete",
+      "unresolvedInputCodes": [],
+      "previewDecision": "policy-conformant-candidate",
+      "outcomeDelta": "relaxed",
+      "materialChange": true,
+      "rationale": "Compared with the current v2 replay result, the proposed compatibility policy relaxes the outcome by accepting the older root.",
+      "governanceTriggerRefs": [
+        "PKGTR-015",
+        "PKGTR-016"
+      ],
+      "activityCountIsQuality": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeRolloutPreviews": [
+    {
+      "id": "PKRP-001",
+      "baselinePolicyRef": "PKTP-002",
+      "proposedPolicyRef": "PKTP-003",
+      "proposedPolicyVersion": "3.0.0",
+      "scopeKind": "all-portable-items",
+      "scopeRationale": "Preview every portable knowledge item currently retained in this ledger before considering the draft policy.",
+      "scopeFrozen": true,
+      "scopeSnapshot": [
+        {
+          "itemRef": "PKI-001",
+          "sourceDigest": "sha256:2b724cd432c28cc9a4f2892b5cb1241dbdeac5f66db467ca399b63b615872c78"
+        },
+        {
+          "itemRef": "PKI-002",
+          "sourceDigest": "sha256:c59f3490c7ca84f3d32b8c7c2967e6de0b7ec60fea999a76c30bad2c3f12a28e"
+        }
+      ],
+      "scopeDigest": "sha256:19a2a3619d0f4aff70ee18a38f22da6ba53370d2646acca429bd9935a87e555a",
+      "itemPreviewRefs": [
+        "PKRIP-001",
+        "PKRIP-002"
+      ],
+      "totalItemCount": 2,
+      "coveredItemCount": 2,
+      "unchangedCount": 0,
+      "tightenedCount": 0,
+      "relaxedCount": 1,
+      "indeterminateCount": 1,
+      "conformantCount": 1,
+      "governanceRequiredCount": 0,
+      "rejectedCount": 0,
+      "notEvaluableCount": 1,
+      "materialChangeCount": 1,
+      "unresolvedInputCount": 1,
+      "coverageComplete": true,
+      "inputsComplete": false,
+      "dataSufficiency": "insufficient",
+      "rolloutDisposition": "blocked",
+      "governanceTriggerRefs": [
+        "PKGTR-014",
+        "PKGTR-015",
+        "PKGTR-016"
+      ],
+      "reviewedBy": [
+        "portable-knowledge-governance-owner"
+      ],
+      "previewOnly": true,
+      "activityCountIsQuality": false,
+      "activationAuthorized": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
     }
   ],
   "ledgerIndex": {
@@ -1819,8 +2023,8 @@
         "entityRef": "CALRUN-WMC-001"
       }
     ],
-    "lastUpdated": "2026-10-28",
-    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, and immutable historical replay without automatic activation or authority."
+    "lastUpdated": "2026-10-29",
+    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, immutable historical replay, and frozen-scope rollout preview without automatic activation or authority."
   },
   "verifierBoundary": {
     "checks": [
@@ -1840,7 +2044,8 @@
       "local validation sufficiency and governed-activation eligibility reproduction",
       "revocation subject matching, dependency closure, fail-closed suspension, and history preservation",
       "attestation subject, identity, predicate, trust-root, time, transparency, revocation, and policy-decision reproduction",
-      "trust-policy succession, immutable historical decision replay, outcome-delta classification, and change governance"
+      "trust-policy succession, immutable historical decision replay, outcome-delta classification, and change governance",
+      "frozen rollout scope, exact item coverage, per-item proposed-policy outcomes, affected-knowledge census arithmetic, and pre-activation governance"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -1857,7 +2062,8 @@
       "source authenticity, license sufficiency, or safe execution",
       "revocation notice authenticity or compromise truth",
       "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness",
-      "historical replay as current authorization, activation, authority, or semantic truth"
+      "historical replay as current authorization, activation, authority, or semantic truth",
+      "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth"
     ],
     "semanticValidityRequires": [
       "expert review",

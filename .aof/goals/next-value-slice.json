@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census",
-  "updated_at": "2026-10-28T04:37:21.323Z",
+  "content": "QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract",
+  "updated_at": "2026-10-29T04:47:47.994Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MVRM3RP6-T22G5C",
-  "source_decision_record_id": "DEC-MVRM4RE3-J656DM",
+  "source_session_id": "SESS-MVT1VA57-97LBER",
+  "source_decision_record_id": "DEC-MVT1WVSP-GZ4500",
   "declared_complete_at": null
 }

@@ -1,0 +1,23 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-29T04:36:15.368Z",
+  "alternative_analysis_id": "ALT-MVT1WGAW-P0PRZ5",
+  "subject_need": "Preview the organization-wide effect of a proposed portable trust policy before activation",
+  "alternative_solutions": [
+    "Sample a subset of portable items",
+    "Activate in warning mode and inspect outcomes later",
+    "Write a prose impact estimate"
+  ],
+  "non_solution_options": [
+    "Count policies or attestations as quality",
+    "Treat a single historical replay as population coverage"
+  ],
+  "defer_options": [
+    "Remain on v0.8.5 and require manual census outside QIF"
+  ],
+  "stop_options": [
+    "Do not implement if scope completeness, per-item uniqueness, or census reconciliation cannot be verified"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVT1VOV1-F6IAXV"
+}

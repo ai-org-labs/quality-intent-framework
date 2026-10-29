@@ -1,0 +1,12 @@
+{
+  "artifact_type": "experiment-proposal",
+  "recorded_at": "2026-10-29T04:36:15.536Z",
+  "experiment_proposal_id": "EXP-MVT1WGFK-A613E1",
+  "assumption_to_test": "A compact rollout-preview model can deterministically prove frozen-scope coverage and census arithmetic without executing or activating the proposed policy.",
+  "smallest_testable_validation": "Add one proposed policy and a preview over the committed portable item population, including changed and unresolved outcomes, plus negative fixtures for omission, duplication, stale input, arithmetic, governance, and authority boundaries.",
+  "expected_learning": "Whether rollout scope, replay inputs, outcome deltas, unresolved evidence, and governance can remain distinct and reproducible.",
+  "expected_cost": "One qif-ledger schema slice, verifier rules, example data, retained fixtures, documentation, portable package, AOF evidence, and release.",
+  "success_threshold": "All in-scope items reconcile exactly once; census values reproduce; incomplete or material changes trigger governance; full npm test passes.",
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVT1VOV1-F6IAXV"
+}

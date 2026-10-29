@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.8.6
+
+- Added draft trust-policy rollout previews with a frozen, digest-bound portable-knowledge scope.
+- Added one item-preview result per in-scope item, preserving complete and unresolved inputs without guessing.
+- Added deterministic affected-knowledge census reconciliation for coverage, decision outcomes, deltas, material changes, and unresolved inputs.
+- Added governance for scope mismatch, duplicate coverage, unresolved input, material outcome change, census mismatch, and insufficient rollout evidence.
+- Added retained negative fixtures while keeping preview distinct from activation, enforcement, authority, population fitness, and semantic truth.
+
 ## v0.8.5
 
 - Added immutable predecessor/successor lineage, revision reasons, and effective boundaries to portable trust policies.
