@@ -5372,3 +5372,55 @@ Date: 2026-10-25
 - Next value slices: v0.8.7 Trust Policy Activation Decision and Rollback
   Contract, v0.9 Anticipatory Quality Intent Twin, and v1.0 Quality Decision
   Ledger Standard.
+
+# QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract
+
+- Date: 2026-10-30.
+- AOF runtime: v12.2.0, managed-project topology.
+- Need: QIF v0.8.6 could freeze and evaluate a complete rollout preview, but
+  could not record who authorized activation, how the active policy would be
+  observed, or when and how rollback became mandatory.
+- Validated Need: provide a provider-neutral, auditable bridge from a
+  sufficient rollout preview to a scope-bounded human activation decision,
+  deterministic observation outcome, and governed rollback record.
+- Need Validation artifacts: `PST-MVUH7EDR-A7174W`,
+  `VHY-MVUH7EIN-J0NLFH`, `ALT-MVUH7EN9-MY4JWM`,
+  `EXP-MVUH7ERW-X7LWXS`, Validated Need `NVR-MVUH7MOP-O4UHZC`, and
+  charter `PCH-MVUH7SH7-N4R3BG`. The charter was created only after the Need
+  was validated.
+- Council: planning execution `CRUN-MVUH8B7Y-WT2CL7` included Visionary,
+  Builder, and Guardian; review execution `CRUN-MVUHLBOT-10AFOA` included
+  Guardian and Builder with no veto. Session: `SESS-MVUH6J0A-GHV0QG`;
+  decision: `DEC-MVUH7UIS-7PG1UG`; task: `TASK-080`; actor skill packet:
+  `ASP-MVUH8L48-NGKJ8G`.
+- Trend evidence: the World Economic Forum authorization playbook emphasizes
+  scoped authority for agents; the Australian Government requires continuous
+  evaluation; AWS AgentCore describes canary evaluation and production
+  lifecycle controls. QIF leads these signals with a portable
+  authority-observation-rollback chain before runtime-specific binding.
+  Sources:
+  https://www.weforum.org/publications/ai-agents-in-action-a-playbook-for-trusted-adoption-authorization-and-scaling,
+  https://www.digital.gov.au/policy/ai/agentic-ai-addendum-statements-evaluate,
+  and https://aws.amazon.com/blogs/machine-learning/building-trust-in-ai-agents-a-production-ready-evaluation-framework-with-amazon-bedrock-agentcore/.
+- Decision: add `PortableKnowledgeActivationDecision`,
+  `PortableKnowledgePolicyObservation`, and
+  `PortableKnowledgeRollbackRecord`; require preview sufficiency, exact scope,
+  accountable authority, bounded signals, stop conditions, rollback target,
+  deadline, and governance evidence.
+- Implementation boundary: no live deployment, external integration,
+  cryptographic verification, automatic authority, automatic continuation,
+  automatic rollback execution, or semantic-truth claim. The verifier proves
+  declared structure and deterministic policy arithmetic only.
+- Verification: `npm test` passed with 16/16 positive and 1,435/1,435 retained
+  negative checks; portable v0.8.7 built and verified with 57 files; AOF
+  organization verification passed 295/295 checks. Self-audit:
+  `FSA-QIF-V087`.
+- Outcome report: `OUT-MVUHLTL4-EWD417` recorded implementation success. AOF
+  then reset the active next value slice to v0.8.8 and refreshed the learning
+  loop snapshot.
+- Residual gap: QIF records declared activation and rollback state but does not
+  yet reconcile actual execution, completed recovery evidence, or policy
+  promotion.
+- Next value slices: v0.8.8 Activation Outcome Reconciliation and Policy
+  Promotion, v0.9 Anticipatory Quality Intent Twin, and v1.0 Quality Decision
+  Ledger Standard.

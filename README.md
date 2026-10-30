@@ -1,9 +1,9 @@
 # Quality Intent Framework
 
-Current release: **v0.8.6**. The Living QIF Ledger now previews a draft trust
-policy across a frozen portable-knowledge population, reconciles every item
-into an affected-knowledge census, and blocks activation when coverage,
-inputs, or changed outcomes require governance.
+Current release: **v0.8.7**. The Living QIF Ledger now binds a sufficient trust
+policy preview to an accountable activation decision, bounded observation,
+deterministic stop outcome, and evidence-preserving rollback record without
+executing policy or granting authority.
 
 Quality Intent Framework (QIF) turns an organization's quality theory into an operational, AI-verifiable framework.
 
@@ -93,6 +93,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.8.4 Portable Trust Policy and Attestation Binding: `docs/qif-v0.8.4-portable-trust-attestation.md`
 - QIF v0.8.5 Trust Policy Rotation and Historical Replay: `docs/qif-v0.8.5-trust-policy-replay.md`
 - QIF v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census: `docs/qif-v0.8.6-trust-policy-rollout-preview.md`
+- QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract: `docs/qif-v0.8.7-trust-policy-activation-rollback.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`

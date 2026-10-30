@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract",
-  "updated_at": "2026-10-29T04:47:47.994Z",
+  "content": "QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion",
+  "updated_at": "2026-10-30T04:43:44.234Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MVT1VA57-97LBER",
-  "source_decision_record_id": "DEC-MVT1WVSP-GZ4500",
+  "source_session_id": "SESS-MVUH6J0A-GHV0QG",
+  "source_decision_record_id": "DEC-MVUH7UIS-7PG1UG",
   "declared_complete_at": null
 }

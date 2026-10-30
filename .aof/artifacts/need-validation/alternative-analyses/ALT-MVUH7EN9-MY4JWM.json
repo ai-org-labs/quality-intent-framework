@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-30T04:32:26.853Z",
+  "alternative_analysis_id": "ALT-MVUH7EN9-MY4JWM",
+  "subject_need": "Bridge complete trust-policy rollout preview to governed activation and rollback.",
+  "alternative_solutions": [
+    "Leave activation and rollback outside QIF and document them in prose.",
+    "Add only a human approval flag to the rollout preview.",
+    "Model activation decision, observation contract, and rollback event as distinct linked entities."
+  ],
+  "non_solution_options": [
+    "Treat preview sufficiency or test count as automatic authorization."
+  ],
+  "defer_options": [
+    "Defer if the model cannot preserve accountable authority and immutable historical evidence."
+  ],
+  "stop_options": [
+    "Stop if the design grants automatic authority or rewrites prior trust decisions."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

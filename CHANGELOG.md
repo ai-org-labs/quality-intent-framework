@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.8.7
+
+- Added accountable trust-policy activation decisions bound to sufficient rollout previews and exact frozen scope.
+- Added bounded policy observations with evidence-bearing signals and deterministic continue, hold, or rollback-required outcomes.
+- Added rollback records with baseline target, deadline, execution state, evidence requirements, residual risk, and preserved history.
+- Added governance for insufficient previews, missing authority, scope mismatch, material change, incomplete observation, stop conditions, and incomplete rollback.
+- Added retained negative fixtures while keeping declared decisions distinct from execution, safe continuation, rollback success, authority, and semantic truth.
+
 ## v0.8.6
 
 - Added draft trust-policy rollout previews with a frozen, digest-bound portable-knowledge scope.

@@ -1,0 +1,12 @@
+{
+  "artifact_type": "experiment-proposal",
+  "recorded_at": "2026-10-30T04:32:27.020Z",
+  "experiment_proposal_id": "EXP-MVUH7ERW-X7LWXS",
+  "assumption_to_test": "A three-entity activation, observation, and rollback chain is sufficient to make the transition auditable without executing deployment.",
+  "smallest_testable_validation": "Extend qif-ledger schema, example, verifier, and negative fixtures with one blocked activation and one rollback-complete path derived from the v0.8.6 preview.",
+  "expected_learning": "Whether authorization, observation, stop, and rollback invariants are structurally reproducible and remain non-authoritative.",
+  "expected_cost": "One bounded schema/verifier/docs release slice.",
+  "success_threshold": "Positive example passes; retained negative fixtures reject missing authority, insufficient preview, stale evidence, absent observation, invalid continuation, and incomplete rollback.",
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

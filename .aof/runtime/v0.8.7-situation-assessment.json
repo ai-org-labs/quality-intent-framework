@@ -1,0 +1,24 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-10-30T04:31:28.891Z",
+  "project_root": "/private/tmp/qif-v087-20261030",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "Before activating a proposed portable-knowledge trust policy, freeze the intended item population, deterministically evaluate every in-scope item exactly once from recorded inputs, reconcile changed and unresolved outcomes into an affected-knowledge census, and route incomplete coverage or material impact to governance without executing policy or granting authority.",
+  "next_value_slice": "QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract",
+  "current_runtime_stage": "frontier-definition-needed",
+  "primary_frontier_task": null,
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Open an implementation task for the current frontier: QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract",
+    "prioritized_task_ids": [],
+    "scale_direction": "Define or reconcile the next frontier before expanding execution."
+  },
+  "recommended_action": {
+    "recommended_action": "Open an implementation task for the current frontier: QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract",
+    "rationale": "No current open implementation task is aligned to the current operating goal.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  }
+}

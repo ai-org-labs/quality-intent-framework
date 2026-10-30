@@ -1151,6 +1151,139 @@
       "rule": "verifier does not turn preview into policy authority",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth."
+    },
+    {
+      "file": "qif-ledger-portable-trust-activation-preview-sufficient.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "authorization requires a sufficient rollout preview",
+      "expect": "fail",
+      "errorIncludes": "PKAD-001 cannot authorize an insufficient rollout preview."
+    },
+    {
+      "file": "qif-ledger-portable-trust-activation-scope-digest.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "activation freezes the preview scope",
+      "expect": "fail",
+      "errorIncludes": "PKAD-001 scopeDigest must exactly match PKRP-002."
+    },
+    {
+      "file": "qif-ledger-portable-trust-activation-rollback-target.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "activation names the baseline rollback target",
+      "expect": "fail",
+      "errorIncludes": "PKAD-001 rollback target must be the baseline policy."
+    },
+    {
+      "file": "qif-ledger-portable-trust-activation-material-acknowledgement.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "material rollout changes are acknowledged",
+      "expect": "fail",
+      "errorIncludes": "PKAD-001 materialChangesAcknowledged must reproduce as true."
+    },
+    {
+      "file": "qif-ledger-portable-trust-activation-material-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "material activation routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKAD-001 material change requires a portable-trust-activation-material-change governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-activation-observation-backlink.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "activation and observation are bidirectionally linked",
+      "expect": "fail",
+      "errorIncludes": "PKAD-001 observation must point back to the activation decision."
+    },
+    {
+      "file": "qif-ledger-portable-trust-activation-decision-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "activation decision does not execute or grant authority",
+      "expect": "fail",
+      "errorIncludes": "PKAD-001 must preserve preview evidence, separate decision from execution, treat counts as evidence, and forbid automatic activation, authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-trust-observation-window.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "observation evaluation stays inside its bounded window",
+      "expect": "fail",
+      "errorIncludes": "PKOBS-001 evaluation must occur inside a bounded observation window."
+    },
+    {
+      "file": "qif-ledger-portable-trust-observation-completeness.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "observation completeness reproduces from evidence-bearing signals",
+      "expect": "fail",
+      "errorIncludes": "PKOBS-001 observationComplete must reproduce as false."
+    },
+    {
+      "file": "qif-ledger-portable-trust-observation-stop-condition.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "stop conditions reproduce from signal failures",
+      "expect": "fail",
+      "errorIncludes": "PKOBS-001 stopConditionMet must reproduce as true."
+    },
+    {
+      "file": "qif-ledger-portable-trust-observation-decision.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "observation decision fails closed",
+      "expect": "fail",
+      "errorIncludes": "PKOBS-001 observationDecision must reproduce as rollback-required."
+    },
+    {
+      "file": "qif-ledger-portable-trust-observation-stop-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "stop condition routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKOBS-001 stop condition requires a portable-trust-observation-stop-condition governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-observation-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "observation does not continue automatically",
+      "expect": "fail",
+      "errorIncludes": "PKOBS-001 must treat signal counts as evidence and forbid automatic continuation, authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollback-policy-chain.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "rollback restores the activation baseline",
+      "expect": "fail",
+      "errorIncludes": "PKRB-001 from and target policies must match the activation decision."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollback-deadline.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "rollback deadline matches the activation contract",
+      "expect": "fail",
+      "errorIncludes": "PKRB-001 rollbackDeadline must match the activation decision."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollback-completion-evidence.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "completed rollback requires execution evidence",
+      "expect": "fail",
+      "errorIncludes": "PKRB-001 completed rollback requires completedAt and execution evidence."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollback-incomplete-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "incomplete rollback remains governed",
+      "expect": "fail",
+      "errorIncludes": "PKRB-001 incomplete rollback requires a portable-trust-rollback-incomplete governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-rollback-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "rollback preserves history without automatic authority",
+      "expect": "fail",
+      "errorIncludes": "PKRB-001 must preserve history, forbid destructive deletion, treat counts as evidence, and forbid automatic rollback, authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-trust-activation-verifier-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "verifier does not turn records into execution or semantic proof",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness."
     }
   ],
   "rescopedRules": []

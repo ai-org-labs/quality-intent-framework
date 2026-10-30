@@ -268,6 +268,9 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeTrustReplays = requireArray(pkg, "portableKnowledgeTrustReplays", packagePath);
   const portableKnowledgeRolloutItemPreviews = requireArray(pkg, "portableKnowledgeRolloutItemPreviews", packagePath);
   const portableKnowledgeRolloutPreviews = requireArray(pkg, "portableKnowledgeRolloutPreviews", packagePath);
+  const portableKnowledgeActivationDecisions = requireArray(pkg, "portableKnowledgeActivationDecisions", packagePath);
+  const portableKnowledgePolicyObservations = requireArray(pkg, "portableKnowledgePolicyObservations", packagePath);
+  const portableKnowledgeRollbackRecords = requireArray(pkg, "portableKnowledgeRollbackRecords", packagePath);
   const packageRefIndex = indexById(packageRefs, `${packagePath}:packageRefs`);
   const crossPackageRefIndex = indexById(crossPackageRefs, `${packagePath}:crossPackageRefs`);
   const lifecycleIndex = indexById(lifecycleRecords, `${packagePath}:qualityIntentLifecycleRecords`);
@@ -301,6 +304,9 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeTrustReplayIndex = indexById(portableKnowledgeTrustReplays, `${packagePath}:portableKnowledgeTrustReplays`);
   const portableKnowledgeRolloutItemPreviewIndex = indexById(portableKnowledgeRolloutItemPreviews, `${packagePath}:portableKnowledgeRolloutItemPreviews`);
   const portableKnowledgeRolloutPreviewIndex = indexById(portableKnowledgeRolloutPreviews, `${packagePath}:portableKnowledgeRolloutPreviews`);
+  const portableKnowledgeActivationDecisionIndex = indexById(portableKnowledgeActivationDecisions, `${packagePath}:portableKnowledgeActivationDecisions`);
+  const portableKnowledgePolicyObservationIndex = indexById(portableKnowledgePolicyObservations, `${packagePath}:portableKnowledgePolicyObservations`);
+  const portableKnowledgeRollbackRecordIndex = indexById(portableKnowledgeRollbackRecords, `${packagePath}:portableKnowledgeRollbackRecords`);
   void crossPackageRefIndex;
   void missedIntentIndex;
 
@@ -1164,6 +1170,79 @@ function validateLedgerPackage(pkg, packagePath) {
     if (rollout.previewOnly !== true || rollout.activityCountIsQuality !== false || rollout.activationAuthorized !== false || rollout.automaticActivation !== false || rollout.automaticAuthority !== false || rollout.semanticTruthClaimed !== false) errors.push(`${rollout.id} must remain preview-only, treat counts as evidence, and forbid activation, authority, and semantic truth claims.`);
   }
 
+  for (const activation of portableKnowledgeActivationDecisions) {
+    const rollout = portableKnowledgeRolloutPreviewIndex.get(activation.rolloutPreviewRef);
+    const baselinePolicy = portableKnowledgeTrustPolicyIndex.get(activation.baselinePolicyRef);
+    const proposedPolicy = portableKnowledgeTrustPolicyIndex.get(activation.proposedPolicyRef);
+    const observation = portableKnowledgePolicyObservationIndex.get(activation.observationRef);
+    if (!rollout) errors.push(`${activation.id} references missing rollout preview ${activation.rolloutPreviewRef}.`);
+    if (!baselinePolicy) errors.push(`${activation.id} references missing baseline policy ${activation.baselinePolicyRef}.`);
+    if (!proposedPolicy) errors.push(`${activation.id} references missing proposed policy ${activation.proposedPolicyRef}.`);
+    if (!observation) errors.push(`${activation.id} references missing observation ${activation.observationRef}.`);
+    if (rollout && (activation.baselinePolicyRef !== rollout.baselinePolicyRef || activation.proposedPolicyRef !== rollout.proposedPolicyRef)) errors.push(`${activation.id} policy refs must match ${rollout.id}.`);
+    if (rollout && activation.scopeDigest !== rollout.scopeDigest) errors.push(`${activation.id} scopeDigest must exactly match ${rollout.id}.`);
+    if (observation && observation.activationDecisionRef !== activation.id) errors.push(`${activation.id} observation must point back to the activation decision.`);
+    if (activation.rollbackTargetPolicyRef !== activation.baselinePolicyRef) errors.push(`${activation.id} rollback target must be the baseline policy.`);
+    if (Date.parse(activation.rollbackDeadline) <= Date.parse(activation.decidedAt)) errors.push(`${activation.id} rollbackDeadline must be later than decidedAt.`);
+    const previewSufficient = Boolean(rollout && rollout.coverageComplete && rollout.inputsComplete && rollout.dataSufficiency === "sufficient");
+    if (activation.decision === "authorized" && !previewSufficient) errors.push(`${activation.id} cannot authorize an insufficient rollout preview.`);
+    if (activation.decision === "authorized" && (!activation.decidedBy || !activation.authorityBasis)) errors.push(`${activation.id} authorization requires accountable decidedBy and authorityBasis.`);
+    const materialChange = Boolean(rollout && rollout.materialChangeCount > 0);
+    if (activation.materialChangesAcknowledged !== materialChange) errors.push(`${activation.id} materialChangesAcknowledged must reproduce as ${materialChange}.`);
+    const types = portableGovernanceTypes(activation.governanceTriggerRefs, activation.id);
+    if (!previewSufficient && !types.has("portable-trust-activation-preview-insufficient")) errors.push(`${activation.id} insufficient preview requires a portable-trust-activation-preview-insufficient governance trigger.`);
+    if (materialChange && !types.has("portable-trust-activation-material-change")) errors.push(`${activation.id} material change requires a portable-trust-activation-material-change governance trigger.`);
+    if (activation.status !== (activation.decision === "authorized" && !materialChange ? "reviewed" : "governance-required")) errors.push(`${activation.id} status must reproduce from the decision and material-change state.`);
+    if (activation.previewEvidencePreserved !== true || activation.decisionDoesNotExecuteActivation !== true || activation.activityCountIsQuality !== false || activation.automaticActivation !== false || activation.automaticAuthority !== false || activation.semanticTruthClaimed !== false) errors.push(`${activation.id} must preserve preview evidence, separate decision from execution, treat counts as evidence, and forbid automatic activation, authority, and semantic truth claims.`);
+  }
+
+  for (const observation of portableKnowledgePolicyObservations) {
+    const activation = portableKnowledgeActivationDecisionIndex.get(observation.activationDecisionRef);
+    const rollback = portableKnowledgeRollbackRecordIndex.get(observation.rollbackRecordRef);
+    if (!activation) errors.push(`${observation.id} references missing activation decision ${observation.activationDecisionRef}.`);
+    if (!rollback) errors.push(`${observation.id} references missing rollback record ${observation.rollbackRecordRef}.`);
+    if (activation && activation.observationRef !== observation.id) errors.push(`${observation.id} activation decision must point back to the observation.`);
+    if (activation && activation.decision !== "authorized") errors.push(`${observation.id} requires an authorized activation decision.`);
+    if (rollback && rollback.observationRef !== observation.id) errors.push(`${observation.id} rollback record must point back to the observation.`);
+    const start = Date.parse(observation.windowStartedAt);
+    const end = Date.parse(observation.windowEndsAt);
+    const evaluated = Date.parse(observation.evaluatedAt);
+    if (!(start < end && evaluated >= start && evaluated <= end)) errors.push(`${observation.id} evaluation must occur inside a bounded observation window.`);
+    const signals = observation.signals ?? [];
+    const complete = signals.length > 0 && signals.every((signal) => signal.result !== "missing" && (signal.evidenceRefs ?? []).length > 0);
+    const stopMet = signals.some((signal) => signal.stopOnFailure === true && signal.result === "fail");
+    const expectedDecision = !complete ? "hold" : stopMet ? "rollback-required" : "continue";
+    if (observation.observationComplete !== complete) errors.push(`${observation.id} observationComplete must reproduce as ${complete}.`);
+    if (observation.stopConditionMet !== stopMet) errors.push(`${observation.id} stopConditionMet must reproduce as ${stopMet}.`);
+    if (observation.observationDecision !== expectedDecision) errors.push(`${observation.id} observationDecision must reproduce as ${expectedDecision}.`);
+    const types = portableGovernanceTypes(observation.governanceTriggerRefs, observation.id);
+    if (!complete && !types.has("portable-trust-observation-incomplete")) errors.push(`${observation.id} incomplete observation requires a portable-trust-observation-incomplete governance trigger.`);
+    if (stopMet && !types.has("portable-trust-observation-stop-condition")) errors.push(`${observation.id} stop condition requires a portable-trust-observation-stop-condition governance trigger.`);
+    if (expectedDecision === "rollback-required" && !types.has("portable-trust-rollback-required")) errors.push(`${observation.id} rollback decision requires a portable-trust-rollback-required governance trigger.`);
+    if (observation.status !== (expectedDecision === "continue" ? "reviewed" : "governance-required")) errors.push(`${observation.id} status must reproduce from the observation decision.`);
+    if (observation.activityCountIsQuality !== false || observation.automaticContinuation !== false || observation.automaticAuthority !== false || observation.semanticTruthClaimed !== false) errors.push(`${observation.id} must treat signal counts as evidence and forbid automatic continuation, authority, and semantic truth claims.`);
+  }
+
+  for (const rollback of portableKnowledgeRollbackRecords) {
+    const activation = portableKnowledgeActivationDecisionIndex.get(rollback.activationDecisionRef);
+    const observation = portableKnowledgePolicyObservationIndex.get(rollback.observationRef);
+    if (!activation) errors.push(`${rollback.id} references missing activation decision ${rollback.activationDecisionRef}.`);
+    if (!observation) errors.push(`${rollback.id} references missing observation ${rollback.observationRef}.`);
+    if (activation && (rollback.fromPolicyRef !== activation.proposedPolicyRef || rollback.targetPolicyRef !== activation.rollbackTargetPolicyRef)) errors.push(`${rollback.id} from and target policies must match the activation decision.`);
+    if (observation && (observation.activationDecisionRef !== rollback.activationDecisionRef || observation.rollbackRecordRef !== rollback.id)) errors.push(`${rollback.id} must be the rollback record selected by the same observation chain.`);
+    if (observation && observation.observationDecision !== "rollback-required") errors.push(`${rollback.id} requires a rollback-required observation decision.`);
+    if (activation && rollback.rollbackDeadline !== activation.rollbackDeadline) errors.push(`${rollback.id} rollbackDeadline must match the activation decision.`);
+    if (Date.parse(rollback.initiatedAt) > Date.parse(rollback.rollbackDeadline)) errors.push(`${rollback.id} must be initiated by the rollback deadline.`);
+    const completed = rollback.rollbackStatus === "completed";
+    if (completed && (!rollback.completedAt || (rollback.executionEvidenceRefs ?? []).length === 0)) errors.push(`${rollback.id} completed rollback requires completedAt and execution evidence.`);
+    if (!completed && rollback.completedAt) errors.push(`${rollback.id} non-completed rollback must not claim completedAt.`);
+    const types = portableGovernanceTypes(rollback.governanceTriggerRefs, rollback.id);
+    if (!types.has("portable-trust-rollback-required")) errors.push(`${rollback.id} must retain the portable-trust-rollback-required governance trigger.`);
+    if (!completed && !types.has("portable-trust-rollback-incomplete")) errors.push(`${rollback.id} incomplete rollback requires a portable-trust-rollback-incomplete governance trigger.`);
+    if (rollback.status !== (completed ? "reviewed" : "governance-required")) errors.push(`${rollback.id} status must reproduce from rollback completion.`);
+    if (rollback.historyPreserved !== true || rollback.destructiveDeletion !== false || rollback.activityCountIsQuality !== false || rollback.automaticRollback !== false || rollback.automaticAuthority !== false || rollback.semanticTruthClaimed !== false) errors.push(`${rollback.id} must preserve history, forbid destructive deletion, treat counts as evidence, and forbid automatic rollback, authority, and semantic truth claims.`);
+  }
+
   const index = pkg.ledgerIndex;
   if (!index || typeof index !== "object") {
     errors.push(`${packagePath} must include ledgerIndex.`);
@@ -1195,7 +1274,7 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim ?? []).includes("semantic truth")) {
       errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
     }
-    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth", "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth"]) {
+    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth", "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth", "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness"]) {
       if (!(boundary.doesNotClaim ?? []).includes(claim)) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming ${claim}.`);
     }
   }
@@ -1239,7 +1318,10 @@ function validateLedgerPackage(pkg, packagePath) {
       portableKnowledgeTrustDecisions: portableKnowledgeTrustDecisions.length,
       portableKnowledgeTrustReplays: portableKnowledgeTrustReplays.length,
       portableKnowledgeRolloutItemPreviews: portableKnowledgeRolloutItemPreviews.length,
-      portableKnowledgeRolloutPreviews: portableKnowledgeRolloutPreviews.length
+      portableKnowledgeRolloutPreviews: portableKnowledgeRolloutPreviews.length,
+      portableKnowledgeActivationDecisions: portableKnowledgeActivationDecisions.length,
+      portableKnowledgePolicyObservations: portableKnowledgePolicyObservations.length,
+      portableKnowledgeRollbackRecords: portableKnowledgeRollbackRecords.length
     }
   });
 }

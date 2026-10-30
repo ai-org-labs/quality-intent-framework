@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-30T04:32:26.687Z",
+  "value_hypothesis_id": "VHY-MVUH7EIN-J0NLFH",
+  "expected_value_creation": "Organizations can authorize a policy activation only from sufficient preview evidence, observe a bounded rollout, and prove why continuation, abort, or rollback occurred.",
+  "beneficiary": "Human-governed organizations and independent reviewers",
+  "supporting_evidence": [
+    "v0.8.6 provides frozen scope and deterministic census but explicitly excludes activation and rollback.",
+    "Current governance guidance emphasizes scoped authorization, continuous evaluation, circuit breakers, and rollback."
+  ],
+  "success_criteria": [
+    "Every activation decision references one sufficient rollout preview and accountable authority.",
+    "Every activation has a bounded observation contract with signals, thresholds, deadline, stop conditions, and rollback target.",
+    "Adverse, missing, or stale evidence deterministically blocks continuation or requires rollback and governance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-29T04:47:33.614Z",
-  "audit_id": "FSA-QIF-V086",
-  "scope": "QIF v0.8.6 release self-review",
-  "summary": "Rollout previews now freeze the affected portable-knowledge census, reproduce baseline and proposed trust-policy outcomes, and block activation when inputs or governance are incomplete.",
-  "detected_gap": "The preview does not yet authorize activation, define observation gates, or encode rollback decisions.",
+  "recorded_at": "2026-10-30T04:43:18.960Z",
+  "audit_id": "FSA-QIF-V087",
+  "scope": "QIF v0.8.7 release self-review",
+  "summary": "Activation decisions now require sufficient preview and authority; observation and rollback remain bounded and fail closed.",
+  "detected_gap": "QIF records declared activation and rollback state but does not reconcile actual execution, completed recovery evidence, or policy promotion.",
   "result_state": "stable",
-  "next_action": "Implement QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract.",
+  "next_action": "Implement QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion.",
   "related_task_ids": [
-    "TASK-079"
+    "TASK-080"
   ],
-  "source_session_id": "SESS-MVT1VA57-97LBER",
-  "source_decision_record_id": "DEC-MVT1WVSP-GZ4500"
+  "source_session_id": "SESS-MVUH6J0A-GHV0QG",
+  "source_decision_record_id": "DEC-MVUH7UIS-7PG1UG"
 }

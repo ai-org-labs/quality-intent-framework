@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-29T04:47:33.617Z",
+  "updated_at": "2026-10-30T04:43:18.963Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success: a frozen in-scope population is replayed exactly once per item under a proposed policy; changed, unresolved, missing, and unchanged outcomes reconcile to deterministic census totals; incomplete scope or weak outcomes trigger governance; npm test and AOF verification pass.",
-      "recorded_at": "2026-10-29T04:35:39.808Z",
+      "answer": "Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+      "recorded_at": "2026-10-30T04:31:50.538Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVT1VA57-97LBER",
+      "source_session_id": "SESS-MVUH6J0A-GHV0QG",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The need is pre-activation population impact accountability, not a dashboard, sample estimate, or enforcement mechanism.",
-      "recorded_at": "2026-10-29T04:36:35.453Z",
+      "answer": "The validated need is not generic deployment automation; it is an auditable authority-and-recovery chain between preview and governed policy state.",
+      "recorded_at": "2026-10-30T04:32:47.432Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVT1VA57-97LBER",
-      "source_decision_record_id": "DEC-MVT1WVSP-GZ4500"
+      "source_session_id": "SESS-MVUH6J0A-GHV0QG",
+      "source_decision_record_id": "DEC-MVUH7UIS-7PG1UG"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "The preview does not yet authorize activation, define observation gates, or encode rollback decisions.",
-      "recorded_at": "2026-10-29T04:47:33.617Z",
-      "expectation_state": "Rollout previews now freeze the affected portable-knowledge census, reproduce baseline and proposed trust-policy outcomes, and block activation when inputs or governance are incomplete.",
-      "mismatch_state": "The preview does not yet authorize activation, define observation gates, or encode rollback decisions.",
-      "scale_direction": "Implement QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract.",
-      "source_session_id": "SESS-MVT1VA57-97LBER",
-      "source_decision_record_id": "DEC-MVT1WVSP-GZ4500"
+      "answer": "QIF records declared activation and rollback state but does not reconcile actual execution, completed recovery evidence, or policy promotion.",
+      "recorded_at": "2026-10-30T04:43:18.963Z",
+      "expectation_state": "Activation decisions now require sufficient preview and authority; observation and rollback remain bounded and fail closed.",
+      "mismatch_state": "QIF records declared activation and rollback state but does not reconcile actual execution, completed recovery evidence, or policy promotion.",
+      "scale_direction": "Implement QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion.",
+      "source_session_id": "SESS-MVUH6J0A-GHV0QG",
+      "source_decision_record_id": "DEC-MVUH7UIS-7PG1UG"
     }
   ]
 }

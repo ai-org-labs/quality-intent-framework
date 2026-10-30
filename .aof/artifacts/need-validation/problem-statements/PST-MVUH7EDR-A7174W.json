@@ -1,0 +1,16 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-30T04:32:26.511Z",
+  "problem_statement_id": "PST-MVUH7EDR-A7174W",
+  "affected_party": "Organizations activating portable-knowledge trust policies",
+  "actual_problem": "A sufficient rollout preview cannot yet become an accountable, bounded activation decision with observable stop and rollback conditions.",
+  "why_it_matters": "Activation without explicit authority, observation, and rollback can silently accept or suspend knowledge beyond the intended risk appetite.",
+  "why_now": "QIF v0.8.6 completed exhaustive pre-activation census; current agent governance is moving from static policy toward continuous controls, canaries, circuit breakers, and auditable authorization.",
+  "evidence_refs": [
+    "docs/qif-v0.8.6-trust-policy-rollout-preview.md",
+    "https://www.weforum.org/publications/ai-agents-in-action-a-playbook-for-trusted-adoption-authorization-and-scaling",
+    "https://www.digital.gov.au/policy/ai/agentic-ai-addendum-statements-evaluate"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

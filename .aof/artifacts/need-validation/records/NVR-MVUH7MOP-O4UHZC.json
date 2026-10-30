@@ -1,0 +1,38 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-30T04:32:37.273Z",
+  "validation_id": "NVR-MVUH7MOP-O4UHZC",
+  "raw_need": "Continue QIF development and release the next roadmap slice.",
+  "validation_status": "validated",
+  "validated_need": "Provide a provider-neutral, non-authoritative contract that turns a sufficient complete-population trust-policy preview into an accountable activation decision, bounded observation period, deterministic stop decision, and evidence-preserving rollback.",
+  "decision_summary": "The validated need is not generic deployment automation; it is an auditable authority-and-recovery chain between preview and governed policy state.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What must remain outside this release?",
+      "answer": "UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What proves success?",
+      "answer": "Activation requires sufficient preview and accountable authority; observation and rollback are bounded and deterministic; negative fixtures fail closed.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A sufficient preview does not itself authorize activation.",
+    "Rollback restores a declared prior policy state but cannot erase historical decisions or side effects."
+  ],
+  "evidence_gaps": [
+    "Operational pilot evidence remains unavailable; committed examples remain example-only."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-MVUH7EDR-A7174W.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-MVUH7EIN-J0NLFH.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-MVUH7EN9-MY4JWM.json",
+  "experiment_proposal_ref": ".aof/artifacts/need-validation/experiment-proposals/EXP-MVUH7ERW-X7LWXS.json",
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVUH6MMF-WT14JC"
+}

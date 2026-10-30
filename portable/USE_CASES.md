@@ -148,6 +148,20 @@ enforce policy.
 - `schemas/qif-ledger-package.schema.json`
 - `examples/qif-ledger-package.json`
 
+## 13. Authorize, Observe, and Roll Back a Trust Policy
+
+Start only from a sufficient rollout preview. Bind the exact frozen scope to
+an accountable decision maker, authority basis, observation window, stop
+signals, rollback target, and deadline. Record evidence for every observation
+signal. Continue only after a complete review; hold on missing evidence; route
+a failed stop condition to a history-preserving rollback record. These records
+do not execute policy, prove safe continuation, or grant authority by
+themselves.
+
+- `docs/qif-v0.8.7-trust-policy-activation-rollback.md`
+- `schemas/qif-ledger-package.schema.json`
+- `examples/qif-ledger-package.json`
+
 ## Choosing a Package Type
 
 Open `MANIFEST.json` to see every included schema and example. Use a schema only

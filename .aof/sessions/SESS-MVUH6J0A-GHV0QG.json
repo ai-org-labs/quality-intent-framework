@@ -1,0 +1,604 @@
+{
+  "session_id": "SESS-MVUH6J0A-GHV0QG",
+  "workflow_id": "service-design",
+  "organization_id": "civic-studio",
+  "organization": {
+    "language": "en"
+  },
+  "status": "framed",
+  "trigger": {
+    "trigger_id": "TRG-MVUH6J0A-MB1TY4",
+    "trigger_type": "cli",
+    "received_at": "2026-10-30T04:31:45.850Z",
+    "request_payload": "Need: organizations need an auditable bridge from a complete trust-policy rollout preview to a bounded activation decision with monitored rollback. Intent: define provider-neutral activation, observation, abort, and rollback records that remain human-governed and non-authoritative. Context: QIF v0.8.6 freezes and evaluates the full knowledge population but deliberately stops before activation; current agent-governance practice emphasizes scoped authorization, continuous evaluation, canary rollout, circuit breakers, and rollback."
+  },
+  "current_stage": "planning",
+  "routing_mode": "deep-path",
+  "routing_mode_history": [
+    {
+      "from_mode": null,
+      "to_mode": "deep-path",
+      "at": "2026-10-30T04:31:45.850Z",
+      "reason": "session-created"
+    }
+  ],
+  "context_snapshot_id": "CTX-MVUH6MMD-VY8QRD",
+  "open_decision_ids": [
+    "DEC-MVUH7UIS-7PG1UG"
+  ],
+  "closed_decision_ids": [
+    "DEC-MVUH6J0B-JDF5X0",
+    "DEC-MVUH6MMF-WT14JC"
+  ],
+  "stage_transitions": [
+    {
+      "from_stage": null,
+      "to_stage": "clarification",
+      "from_status": null,
+      "to_status": "waiting_user",
+      "at": "2026-10-30T04:31:45.850Z",
+      "reason": "session-created"
+    },
+    {
+      "from_stage": "clarification",
+      "to_stage": "need-validation",
+      "from_status": "waiting_user",
+      "to_status": "framed",
+      "at": "2026-10-30T04:31:50.533Z",
+      "reason": "clarification-complete"
+    },
+    {
+      "from_stage": "need-validation",
+      "to_stage": "planning",
+      "from_status": "framed",
+      "to_status": "framed",
+      "at": "2026-10-30T04:32:47.430Z",
+      "reason": "need-validation-approved"
+    }
+  ],
+  "reopen_count": 0,
+  "outcome_reports": [
+    {
+      "report_id": "OUT-MVUHLTL4-EWD417",
+      "result": "success",
+      "observed_at": "2026-10-30T04:43:39.400Z",
+      "note": "QIF v0.8.7 adds an auditable, provider-neutral activation, bounded observation, stop-condition, and rollback contract after sufficient trust-policy rollout preview; full tests and AOF verification pass.",
+      "signal_ref": "TASK-080"
+    }
+  ],
+  "clarification": {
+    "round_count": 1,
+    "dimensions": {
+      "need_clarity": "partial",
+      "intent_clarity": "partial",
+      "context_completeness": "missing",
+      "success_criteria_clarity": "missing",
+      "prohibited_conditions_clarity": "partial",
+      "governance_scope_clarity": "clear",
+      "brownfield_orientation_completeness": "clear",
+      "risk_exposure": "partial"
+    },
+    "gaps": [
+      {
+        "dimension": "need_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The underlying need is not specific enough yet."
+      },
+      {
+        "dimension": "intent_clarity",
+        "status": "partial",
+        "trigger_class": "ambiguity",
+        "summary": "The intended direction is not yet explicit."
+      },
+      {
+        "dimension": "context_completeness",
+        "status": "missing",
+        "trigger_class": "missing-constraint",
+        "summary": "Key constraints, scope, and current conditions are missing."
+      },
+      {
+        "dimension": "success_criteria_clarity",
+        "status": "missing",
+        "trigger_class": "missing-success-criteria",
+        "summary": "Success cannot be evaluated yet."
+      },
+      {
+        "dimension": "prohibited_conditions_clarity",
+        "status": "partial",
+        "trigger_class": "missing-prohibition",
+        "summary": "Forbidden changes or non-negotiables are not explicit."
+      }
+    ],
+    "pending_questions": [],
+    "asked_questions": [
+      "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "How should improvement success be judged: which metric or end state matters most?"
+    ],
+    "question_rationale": [],
+    "trigger_classes": [],
+    "target_fields": [],
+    "user_answers": [
+      {
+        "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+        "answer": "Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims.",
+        "target_fields": [
+          "need",
+          "context"
+        ]
+      },
+      {
+        "question": "How should improvement success be judged: which metric or end state matters most?",
+        "answer": "Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+        "target_fields": [
+          "success_criteria",
+          "intent"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "ask_or_assume_decision": "ask",
+    "remaining_gaps": [],
+    "unresolved_ambiguity": [],
+    "question_budget": {
+      "initial_question_budget": 2,
+      "followup_budget": 1,
+      "max_rounds": 2
+    },
+    "next_stop_condition": "need validation can proceed",
+    "clarification_summary": "runtime captured first-round clarification answers and can proceed to need validation",
+    "should_wait_for_user": false
+  },
+  "created_at": "2026-10-30T04:31:45.850Z",
+  "updated_at": "2026-10-30T04:43:39.400Z",
+  "framing": {
+    "request": "Need: organizations need an auditable bridge from a complete trust-policy rollout preview to a bounded activation decision with monitored rollback. Intent: define provider-neutral activation, observation, abort, and rollback records that remain human-governed and non-authoritative. Context: QIF v0.8.6 freezes and evaluates the full knowledge population but deliberately stops before activation; current agent-governance practice emphasizes scoped authorization, continuous evaluation, canary rollout, circuit breakers, and rollback.",
+    "need": "Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims.",
+    "intent": "Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+    "active_context": "context: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. | success: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+    "success_criteria": "Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+    "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass."
+  },
+  "artifact_refs": [
+    ".aof/artifacts/need-validation/records/NVR-MVUH7MOP-O4UHZC.json",
+    ".aof/artifacts/need-validation/project-charters/PCH-MVUH7SH7-N4R3BG.json",
+    ".aof/artifacts/need-validation/problem-statements/PST-MVUH7EDR-A7174W.json",
+    ".aof/artifacts/need-validation/value-hypotheses/VHY-MVUH7EIN-J0NLFH.json",
+    ".aof/artifacts/need-validation/alternative-analyses/ALT-MVUH7EN9-MY4JWM.json",
+    ".aof/artifacts/need-validation/experiment-proposals/EXP-MVUH7ERW-X7LWXS.json"
+  ],
+  "council_execution_runs": [
+    {
+      "execution_id": "CRUN-MVUH8B7Y-WT2CL7",
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Builder",
+        "Visionary",
+        "Guardian"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "status": "completed",
+      "started_at": "2026-10-30T04:33:09.067Z",
+      "completed_at": "2026-10-30T04:33:09.071Z",
+      "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Builder(design-builder-01) -> Visionary(strategy-lead-01) -> Guardian(risk-reviewer-01) with 3 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MVUH8B7Y-WT2CL7-STEP-01",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Builder planning call for actor design-builder-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVUH6J0A-GHV0QG",
+              "decision_id": "DEC-MVUH7UIS-7PG1UG",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims.",
+              "intent": "Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+              "active_context": "context: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. | success: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVUH6MMD-VY8QRD",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: organizations need an auditable bridge from a complete trust-policy rollout preview to a bounded activation decision with monitored rollback. Intent: define provider-neutral activation, observation, abort, and rollback records that remain human-governed and non-authoritative. Context: QIF v0.8.6 freezes and evaluates the full knowledge population but deliberately stops before activation; current agent-governance practice emphasizes scoped authorization, continuous evaluation, canary rollout, circuit breakers, and rollback.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVUH7MOP-O4UHZC.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVUH7SH7-N4R3BG.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVUH7EDR-A7174W.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVUH7EIN-J0NLFH.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVUH7EN9-MY4JWM.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVUH7ERW-X7LWXS.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVUH7UIS-7PG1UG"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-30T04:33:09.070Z",
+          "completed_at": "2026-10-30T04:33:09.071Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-30T04:33:09.070Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder planning response: focus on Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. and align to Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass..",
+            "output_summary": "DECISION: proceed VETO: no Builder planning response: focus on Scope only the qif-ledger trust-policy path after a sufficient v0.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Need: organizations need an auditable bridge from a complete trust-policy rollout preview to a bounded activation decision with monitored rollback. Intent: define provider-neutral activation, observation, abort, and rollback records that remain human-governed and non-authoritative. Context: QIF v0.8.6 freezes and evaluates the full knowledge population but deliberately stops before activation; current agent-governance practice emphasizes scoped authorization, continuous evaluation, canary rollout, circuit breakers, and rollback.\nNeed: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims.\nIntent: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.\nActive Context: context: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. | success: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVUH8B7Y-WT2CL7-STEP-02",
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Visionary planning call for actor strategy-lead-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVUH6J0A-GHV0QG",
+              "decision_id": "DEC-MVUH7UIS-7PG1UG",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims.",
+              "intent": "Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+              "active_context": "context: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. | success: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVUH6MMD-VY8QRD",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: organizations need an auditable bridge from a complete trust-policy rollout preview to a bounded activation decision with monitored rollback. Intent: define provider-neutral activation, observation, abort, and rollback records that remain human-governed and non-authoritative. Context: QIF v0.8.6 freezes and evaluates the full knowledge population but deliberately stops before activation; current agent-governance practice emphasizes scoped authorization, continuous evaluation, canary rollout, circuit breakers, and rollback.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVUH7MOP-O4UHZC.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVUH7SH7-N4R3BG.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVUH7EDR-A7174W.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVUH7EIN-J0NLFH.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVUH7EN9-MY4JWM.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVUH7ERW-X7LWXS.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVUH7UIS-7PG1UG"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-30T04:33:09.071Z",
+          "completed_at": "2026-10-30T04:33:09.071Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-30T04:33:09.071Z",
+            "output_text": "DECISION: proceed\nVETO: no\nVisionary planning response: focus on Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. and align to Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass..",
+            "output_summary": "DECISION: proceed VETO: no Visionary planning response: focus on Scope only the qif-ledger trust-policy path after a sufficient v0.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Visionary in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Need: organizations need an auditable bridge from a complete trust-policy rollout preview to a bounded activation decision with monitored rollback. Intent: define provider-neutral activation, observation, abort, and rollback records that remain human-governed and non-authoritative. Context: QIF v0.8.6 freezes and evaluates the full knowledge population but deliberately stops before activation; current agent-governance practice emphasizes scoped authorization, continuous evaluation, canary rollout, circuit breakers, and rollback.\nNeed: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims.\nIntent: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.\nActive Context: context: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. | success: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVUH8B7Y-WT2CL7-STEP-03",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Guardian planning call for actor risk-reviewer-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVUH6J0A-GHV0QG",
+              "decision_id": "DEC-MVUH7UIS-7PG1UG",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims.",
+              "intent": "Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+              "active_context": "context: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. | success: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVUH6MMD-VY8QRD",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: organizations need an auditable bridge from a complete trust-policy rollout preview to a bounded activation decision with monitored rollback. Intent: define provider-neutral activation, observation, abort, and rollback records that remain human-governed and non-authoritative. Context: QIF v0.8.6 freezes and evaluates the full knowledge population but deliberately stops before activation; current agent-governance practice emphasizes scoped authorization, continuous evaluation, canary rollout, circuit breakers, and rollback.",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVUH7MOP-O4UHZC.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVUH7SH7-N4R3BG.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVUH7EDR-A7174W.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVUH7EIN-J0NLFH.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVUH7EN9-MY4JWM.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVUH7ERW-X7LWXS.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVUH7UIS-7PG1UG"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-30T04:33:09.071Z",
+          "completed_at": "2026-10-30T04:33:09.071Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-30T04:33:09.071Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian planning response: focus on Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. and align to Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass..",
+            "output_summary": "DECISION: proceed VETO: no Guardian planning response: focus on Scope only the qif-ledger trust-policy path after a sufficient v0.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Need: organizations need an auditable bridge from a complete trust-policy rollout preview to a bounded activation decision with monitored rollback. Intent: define provider-neutral activation, observation, abort, and rollback records that remain human-governed and non-authoritative. Context: QIF v0.8.6 freezes and evaluates the full knowledge population but deliberately stops before activation; current agent-governance practice emphasizes scoped authorization, continuous evaluation, canary rollout, circuit breakers, and rollback.\nNeed: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims.\nIntent: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.\nActive Context: context: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. | success: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "execution_id": "CRUN-MVUHLBOT-10AFOA",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "completed",
+      "started_at": "2026-10-30T04:43:16.203Z",
+      "completed_at": "2026-10-30T04:43:16.206Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MVUHLBOT-10AFOA-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVUH6J0A-GHV0QG",
+              "decision_id": "DEC-MVUH7UIS-7PG1UG",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims.",
+              "intent": "Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+              "active_context": "context: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. | success: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVUH6MMD-VY8QRD",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: organizations need an auditable bridge from a complete trust-policy rollout preview to a bounded activation decision with monitored rollback. Intent: define provider-neutral activation, observation, abort, and rollback records that remain human-governed and non-authoritative. Context: QIF v0.8.6 freezes and evaluates the full knowledge population but deliberately stops before activation; current agent-governance practice emphasizes scoped authorization, continuous evaluation, canary rollout, circuit breakers, and rollback.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVUH7MOP-O4UHZC.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVUH7SH7-N4R3BG.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVUH7EDR-A7174W.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVUH7EIN-J0NLFH.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVUH7EN9-MY4JWM.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVUH7ERW-X7LWXS.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVUH7UIS-7PG1UG"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-30T04:43:16.205Z",
+          "completed_at": "2026-10-30T04:43:16.206Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-30T04:43:16.206Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian review response: focus on Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. and align to Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass..",
+            "output_summary": "DECISION: proceed VETO: no Guardian review response: focus on Scope only the qif-ledger trust-policy path after a sufficient v0.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Need: organizations need an auditable bridge from a complete trust-policy rollout preview to a bounded activation decision with monitored rollback. Intent: define provider-neutral activation, observation, abort, and rollback records that remain human-governed and non-authoritative. Context: QIF v0.8.6 freezes and evaluates the full knowledge population but deliberately stops before activation; current agent-governance practice emphasizes scoped authorization, continuous evaluation, canary rollout, circuit breakers, and rollback.\nNeed: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims.\nIntent: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.\nActive Context: context: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. | success: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVUHLBOT-10AFOA-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVUH6J0A-GHV0QG",
+              "decision_id": "DEC-MVUH7UIS-7PG1UG",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims.",
+              "intent": "Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+              "active_context": "context: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. | success: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVUH6MMD-VY8QRD",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: organizations need an auditable bridge from a complete trust-policy rollout preview to a bounded activation decision with monitored rollback. Intent: define provider-neutral activation, observation, abort, and rollback records that remain human-governed and non-authoritative. Context: QIF v0.8.6 freezes and evaluates the full knowledge population but deliberately stops before activation; current agent-governance practice emphasizes scoped authorization, continuous evaluation, canary rollout, circuit breakers, and rollback.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVUH7MOP-O4UHZC.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVUH7SH7-N4R3BG.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVUH7EDR-A7174W.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVUH7EIN-J0NLFH.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVUH7EN9-MY4JWM.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVUH7ERW-X7LWXS.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVUH7UIS-7PG1UG"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-30T04:43:16.206Z",
+          "completed_at": "2026-10-30T04:43:16.206Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-30T04:43:16.206Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder review response: focus on Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. and align to Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass..",
+            "output_summary": "DECISION: proceed VETO: no Builder review response: focus on Scope only the qif-ledger trust-policy path after a sufficient v0.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Need: organizations need an auditable bridge from a complete trust-policy rollout preview to a bounded activation decision with monitored rollback. Intent: define provider-neutral activation, observation, abort, and rollback records that remain human-governed and non-authoritative. Context: QIF v0.8.6 freezes and evaluates the full knowledge population but deliberately stops before activation; current agent-governance practice emphasizes scoped authorization, continuous evaluation, canary rollout, circuit breakers, and rollback.\nNeed: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims.\nIntent: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.\nActive Context: context: Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. | success: Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after a sufficient v0.8.6 rollout preview: accountable activation decision, bounded observation window, abort conditions, rollback plan and execution evidence, plus governance. Exclude UI, live deployment, external integrations, cryptographic verification, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass."
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "last_council_execution_id": "CRUN-MVUHLBOT-10AFOA"
+}

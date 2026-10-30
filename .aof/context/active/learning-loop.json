@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-10-29T04:47:49.974Z",
+  "generated_at": "2026-10-30T04:43:47.308Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MVT1VA57-97LBER",
-    "report_id": "OUT-MVT2B95O-BHVALY",
+    "source_session_id": "SESS-MVUH6J0A-GHV0QG",
+    "report_id": "OUT-MVUHLTL4-EWD417",
     "result": "success",
-    "observed_at": "2026-10-29T04:47:45.948Z",
-    "note": "QIF v0.8.6 implemented deterministic trust-policy rollout previews with complete affected-knowledge census, governance routing, 16/16 positive checks, 1416/1416 negative checks, and portable package verification.",
-    "signal_ref": "TASK-079"
+    "observed_at": "2026-10-30T04:43:39.400Z",
+    "note": "QIF v0.8.7 adds an auditable, provider-neutral activation, bounded observation, stop-condition, and rollback contract after sufficient trust-policy rollout preview; full tests and AOF verification pass.",
+    "signal_ref": "TASK-080"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIF-V086",
-    "recorded_at": "2026-10-29T04:47:33.614Z",
-    "summary": "Rollout previews now freeze the affected portable-knowledge census, reproduce baseline and proposed trust-policy outcomes, and block activation when inputs or governance are incomplete.",
-    "detected_gap": "The preview does not yet authorize activation, define observation gates, or encode rollback decisions.",
+    "audit_id": "FSA-QIF-V087",
+    "recorded_at": "2026-10-30T04:43:18.960Z",
+    "summary": "Activation decisions now require sufficient preview and authority; observation and rollback remain bounded and fail closed.",
+    "detected_gap": "QIF records declared activation and rollback state but does not reconcile actual execution, completed recovery evidence, or policy promotion.",
     "result_state": "stable",
-    "next_action": "Implement QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract.",
+    "next_action": "Implement QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion.",
     "related_task_ids": [
-      "TASK-079"
+      "TASK-080"
     ]
   },
   "current_next_value_slice": {
-    "content": "QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract",
-    "updated_at": "2026-10-29T04:47:47.994Z",
+    "content": "QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion",
+    "updated_at": "2026-10-30T04:43:44.234Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MVT1VA57-97LBER",
-    "source_decision_record_id": "DEC-MVT1WVSP-GZ4500"
+    "source_session_id": "SESS-MVUH6J0A-GHV0QG",
+    "source_decision_record_id": "DEC-MVUH7UIS-7PG1UG"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Implement QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract.",
+    "proposed_focus": "Implement QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion.",
     "related_task_ids": [
-      "TASK-079"
+      "TASK-080"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract",
-    "Latest self-audit next action: Implement QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract.",
+    "Current next value slice: QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion",
+    "Latest self-audit next action: Implement QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion.",
     "Latest outcome result: success"
   ]
 }

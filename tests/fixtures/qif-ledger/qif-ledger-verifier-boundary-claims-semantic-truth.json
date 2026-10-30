@@ -852,6 +852,42 @@
       "requiredAction": "Block activation until accountable governance resolves the incomplete input and material-change findings.",
       "owner": "portable-knowledge-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "PKGTR-017",
+      "triggerType": "portable-trust-activation-material-change",
+      "reason": "The bounded PKI-002 activation intentionally accepts a relaxed trust outcome and therefore requires accountable acknowledgement.",
+      "severity": "high",
+      "requiredAction": "Limit the authorization to the frozen scope and observe the declared stop signals before any expansion.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-018",
+      "triggerType": "portable-trust-observation-stop-condition",
+      "reason": "The bounded observation found an unexpected old-root acceptance outside the reviewed case assumptions.",
+      "severity": "critical",
+      "requiredAction": "Stop continuation and initiate the linked rollback contract.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-019",
+      "triggerType": "portable-trust-rollback-required",
+      "reason": "A stop-on-failure signal requires restoration of the baseline policy for the bounded scope.",
+      "severity": "critical",
+      "requiredAction": "Execute and independently verify the rollback before the deadline.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-020",
+      "triggerType": "portable-trust-rollback-incomplete",
+      "reason": "The rollback has been planned but no execution evidence has yet been recorded.",
+      "severity": "critical",
+      "requiredAction": "Keep the activation stopped and record rollback execution evidence or escalate the failed recovery.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
     }
   ],
   "portableKnowledgeLibraries": [
@@ -1912,6 +1948,32 @@
       "automaticAuthority": false,
       "semanticTruthClaimed": false,
       "status": "governance-required"
+    },
+    {
+      "id": "PKRIP-003",
+      "rolloutPreviewRef": "PKRP-002",
+      "itemRef": "PKI-002",
+      "proposedPolicyRef": "PKTP-003",
+      "proposedPolicyVersion": "3.0.0",
+      "attestationRef": "PKAT-001",
+      "baselineResultRef": "PKTR-001",
+      "baselineDecisionValue": "governance-required",
+      "replayRef": "PKTR-002",
+      "inputState": "complete",
+      "unresolvedInputCodes": [],
+      "previewDecision": "policy-conformant-candidate",
+      "outcomeDelta": "relaxed",
+      "materialChange": true,
+      "rationale": "The explicit bounded scope reuses the same frozen replay evidence while keeping the broader incomplete population excluded from this limited authorization decision.",
+      "governanceTriggerRefs": [
+        "PKGTR-015",
+        "PKGTR-016"
+      ],
+      "activityCountIsQuality": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
     }
   ],
   "portableKnowledgeRolloutPreviews": [
@@ -1969,6 +2031,150 @@
       "automaticAuthority": false,
       "semanticTruthClaimed": false,
       "status": "governance-required"
+    },
+    {
+      "id": "PKRP-002",
+      "baselinePolicyRef": "PKTP-002",
+      "proposedPolicyRef": "PKTP-003",
+      "proposedPolicyVersion": "3.0.0",
+      "scopeKind": "explicit",
+      "scopeRationale": "Bounded canary scope for one fully evaluable portable knowledge item; this does not authorize the blocked all-item rollout.",
+      "scopeFrozen": true,
+      "scopeSnapshot": [
+        {
+          "itemRef": "PKI-002",
+          "sourceDigest": "sha256:c59f3490c7ca84f3d32b8c7c2967e6de0b7ec60fea999a76c30bad2c3f12a28e"
+        }
+      ],
+      "scopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "itemPreviewRefs": [
+        "PKRIP-003"
+      ],
+      "totalItemCount": 1,
+      "coveredItemCount": 1,
+      "unchangedCount": 0,
+      "tightenedCount": 0,
+      "relaxedCount": 1,
+      "indeterminateCount": 0,
+      "conformantCount": 1,
+      "governanceRequiredCount": 0,
+      "rejectedCount": 0,
+      "notEvaluableCount": 0,
+      "materialChangeCount": 1,
+      "unresolvedInputCount": 0,
+      "coverageComplete": true,
+      "inputsComplete": true,
+      "dataSufficiency": "sufficient",
+      "rolloutDisposition": "governance-required",
+      "governanceTriggerRefs": [
+        "PKGTR-015"
+      ],
+      "reviewedBy": [
+        "portable-knowledge-governance-owner"
+      ],
+      "previewOnly": true,
+      "activityCountIsQuality": false,
+      "activationAuthorized": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeActivationDecisions": [
+    {
+      "id": "PKAD-001",
+      "rolloutPreviewRef": "PKRP-002",
+      "baselinePolicyRef": "PKTP-002",
+      "proposedPolicyRef": "PKTP-003",
+      "scopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "decision": "authorized",
+      "decisionRationale": "Authorize only the explicit PKI-002 canary scope after complete preview, with acknowledged relaxation, bounded observation, and mandatory rollback on a stop signal.",
+      "decidedBy": "portable-knowledge-governance-owner",
+      "decidedAt": "2026-10-29T13:00:00.000Z",
+      "authorityBasis": "Documented organizational trust-policy governance authority for the bounded canary scope.",
+      "observationRef": "PKOBS-001",
+      "rollbackTargetPolicyRef": "PKTP-002",
+      "rollbackDeadline": "2026-10-30T13:00:00.000Z",
+      "materialChangesAcknowledged": true,
+      "governanceTriggerRefs": [
+        "PKGTR-017"
+      ],
+      "previewEvidencePreserved": true,
+      "decisionDoesNotExecuteActivation": true,
+      "activityCountIsQuality": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgePolicyObservations": [
+    {
+      "id": "PKOBS-001",
+      "activationDecisionRef": "PKAD-001",
+      "windowStartedAt": "2026-10-29T14:00:00.000Z",
+      "windowEndsAt": "2026-10-30T12:00:00.000Z",
+      "evaluatedAt": "2026-10-29T16:00:00.000Z",
+      "signals": [
+        {
+          "signalId": "PKSIG-001",
+          "description": "No old-root artifact outside the frozen PKI-002 scope becomes eligible under the bounded activation.",
+          "expectedState": "zero out-of-scope eligibility changes",
+          "observedState": "one out-of-scope old-root eligibility change recorded",
+          "result": "fail",
+          "evidenceRefs": [
+            {
+              "packageRef": "PKG-EXPERT",
+              "entityType": "cases",
+              "entityRef": "CAS-SW-001"
+            }
+          ],
+          "stopOnFailure": true
+        }
+      ],
+      "observationComplete": true,
+      "stopConditionMet": true,
+      "observationDecision": "rollback-required",
+      "rollbackRecordRef": "PKRB-001",
+      "rationale": "The stop-on-failure boundary was crossed, so continuation is forbidden and rollback is required regardless of activity volume.",
+      "governanceTriggerRefs": [
+        "PKGTR-018",
+        "PKGTR-019"
+      ],
+      "observedBy": "portable-knowledge-governance-owner",
+      "activityCountIsQuality": false,
+      "automaticContinuation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeRollbackRecords": [
+    {
+      "id": "PKRB-001",
+      "activationDecisionRef": "PKAD-001",
+      "observationRef": "PKOBS-001",
+      "fromPolicyRef": "PKTP-003",
+      "targetPolicyRef": "PKTP-002",
+      "reason": "The bounded observation crossed a declared stop condition and requires restoration of the baseline policy for the canary scope.",
+      "initiatedBy": "portable-knowledge-governance-owner",
+      "initiatedAt": "2026-10-29T16:05:00.000Z",
+      "rollbackDeadline": "2026-10-30T13:00:00.000Z",
+      "rollbackStatus": "planned",
+      "executionEvidenceRefs": [],
+      "residualRisk": "Until execution evidence is independently recorded, the bounded activation remains stopped and rollback completion is unproven.",
+      "governanceTriggerRefs": [
+        "PKGTR-019",
+        "PKGTR-020"
+      ],
+      "historyPreserved": true,
+      "destructiveDeletion": false,
+      "activityCountIsQuality": false,
+      "automaticRollback": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
     }
   ],
   "ledgerIndex": {
@@ -2023,8 +2229,8 @@
         "entityRef": "CALRUN-WMC-001"
       }
     ],
-    "lastUpdated": "2026-10-29",
-    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, immutable historical replay, and frozen-scope rollout preview without automatic activation or authority."
+    "lastUpdated": "2026-10-30",
+    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, immutable replay, frozen-scope rollout preview, and accountable activation, observation, and rollback records without automatic authority."
   },
   "verifierBoundary": {
     "checks": [
@@ -2045,7 +2251,8 @@
       "revocation subject matching, dependency closure, fail-closed suspension, and history preservation",
       "attestation subject, identity, predicate, trust-root, time, transparency, revocation, and policy-decision reproduction",
       "trust-policy succession, immutable historical decision replay, outcome-delta classification, and change governance",
-      "frozen rollout scope, exact item coverage, per-item proposed-policy outcomes, affected-knowledge census arithmetic, and pre-activation governance"
+      "frozen rollout scope, exact item coverage, per-item proposed-policy outcomes, affected-knowledge census arithmetic, and pre-activation governance",
+      "activation authority traceability, bounded observation decisions, stop-condition reproduction, and rollback-chain integrity"
     ],
     "doesNotClaim": [
       "expert correctness"

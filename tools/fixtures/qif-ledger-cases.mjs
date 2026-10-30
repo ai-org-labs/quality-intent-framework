@@ -58,6 +58,9 @@ function trustDecision(pkg) { return pkg.portableKnowledgeTrustDecisions[0]; }
 function trustReplay(pkg, index = 0) { return pkg.portableKnowledgeTrustReplays[index]; }
 function rolloutItemPreview(pkg, index = 0) { return pkg.portableKnowledgeRolloutItemPreviews[index]; }
 function rolloutPreview(pkg) { return pkg.portableKnowledgeRolloutPreviews[0]; }
+function activationDecision(pkg) { return pkg.portableKnowledgeActivationDecisions[0]; }
+function policyObservation(pkg) { return pkg.portableKnowledgePolicyObservations[0]; }
+function rollbackRecord(pkg) { return pkg.portableKnowledgeRollbackRecords[0]; }
 
 export const cases = [
   {
@@ -1001,6 +1004,120 @@ export const cases = [
     rule: "verifier does not turn preview into policy authority",
     expect: "verifierBoundary must explicitly avoid claiming rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth"); }
+  },
+  {
+    id: "portable-trust-activation-preview-sufficient",
+    rule: "authorization requires a sufficient rollout preview",
+    expect: "PKAD-001 cannot authorize an insufficient rollout preview.",
+    mutate: (pkg) => { activationDecision(pkg).rolloutPreviewRef = "PKRP-001"; }
+  },
+  {
+    id: "portable-trust-activation-scope-digest",
+    rule: "activation freezes the preview scope",
+    expect: "PKAD-001 scopeDigest must exactly match PKRP-002.",
+    mutate: (pkg) => { activationDecision(pkg).scopeDigest = `sha256:${"0".repeat(64)}`; }
+  },
+  {
+    id: "portable-trust-activation-rollback-target",
+    rule: "activation names the baseline rollback target",
+    expect: "PKAD-001 rollback target must be the baseline policy.",
+    mutate: (pkg) => { activationDecision(pkg).rollbackTargetPolicyRef = "PKTP-001"; }
+  },
+  {
+    id: "portable-trust-activation-material-acknowledgement",
+    rule: "material rollout changes are acknowledged",
+    expect: "PKAD-001 materialChangesAcknowledged must reproduce as true.",
+    mutate: (pkg) => { activationDecision(pkg).materialChangesAcknowledged = false; }
+  },
+  {
+    id: "portable-trust-activation-material-trigger",
+    rule: "material activation routes governance",
+    expect: "PKAD-001 material change requires a portable-trust-activation-material-change governance trigger.",
+    mutate: (pkg) => { activationDecision(pkg).governanceTriggerRefs = []; }
+  },
+  {
+    id: "portable-trust-activation-observation-backlink",
+    rule: "activation and observation are bidirectionally linked",
+    expect: "PKAD-001 observation must point back to the activation decision.",
+    mutate: (pkg) => { policyObservation(pkg).activationDecisionRef = "PKAD-NOPE"; }
+  },
+  {
+    id: "portable-trust-activation-decision-boundary",
+    rule: "activation decision does not execute or grant authority",
+    expect: "PKAD-001 must preserve preview evidence, separate decision from execution, treat counts as evidence, and forbid automatic activation, authority, and semantic truth claims.",
+    mutate: (pkg) => { activationDecision(pkg).automaticActivation = true; }
+  },
+  {
+    id: "portable-trust-observation-window",
+    rule: "observation evaluation stays inside its bounded window",
+    expect: "PKOBS-001 evaluation must occur inside a bounded observation window.",
+    mutate: (pkg) => { policyObservation(pkg).evaluatedAt = "2026-10-31T00:00:00.000Z"; }
+  },
+  {
+    id: "portable-trust-observation-completeness",
+    rule: "observation completeness reproduces from evidence-bearing signals",
+    expect: "PKOBS-001 observationComplete must reproduce as false.",
+    mutate: (pkg) => { policyObservation(pkg).signals[0].result = "missing"; policyObservation(pkg).signals[0].evidenceRefs = []; }
+  },
+  {
+    id: "portable-trust-observation-stop-condition",
+    rule: "stop conditions reproduce from signal failures",
+    expect: "PKOBS-001 stopConditionMet must reproduce as true.",
+    mutate: (pkg) => { policyObservation(pkg).stopConditionMet = false; }
+  },
+  {
+    id: "portable-trust-observation-decision",
+    rule: "observation decision fails closed",
+    expect: "PKOBS-001 observationDecision must reproduce as rollback-required.",
+    mutate: (pkg) => { policyObservation(pkg).observationDecision = "continue"; }
+  },
+  {
+    id: "portable-trust-observation-stop-trigger",
+    rule: "stop condition routes governance",
+    expect: "PKOBS-001 stop condition requires a portable-trust-observation-stop-condition governance trigger.",
+    mutate: (pkg) => { policyObservation(pkg).governanceTriggerRefs = ["PKGTR-019"]; }
+  },
+  {
+    id: "portable-trust-observation-boundary",
+    rule: "observation does not continue automatically",
+    expect: "PKOBS-001 must treat signal counts as evidence and forbid automatic continuation, authority, and semantic truth claims.",
+    mutate: (pkg) => { policyObservation(pkg).automaticContinuation = true; }
+  },
+  {
+    id: "portable-trust-rollback-policy-chain",
+    rule: "rollback restores the activation baseline",
+    expect: "PKRB-001 from and target policies must match the activation decision.",
+    mutate: (pkg) => { rollbackRecord(pkg).targetPolicyRef = "PKTP-001"; }
+  },
+  {
+    id: "portable-trust-rollback-deadline",
+    rule: "rollback deadline matches the activation contract",
+    expect: "PKRB-001 rollbackDeadline must match the activation decision.",
+    mutate: (pkg) => { rollbackRecord(pkg).rollbackDeadline = "2026-10-31T13:00:00.000Z"; }
+  },
+  {
+    id: "portable-trust-rollback-completion-evidence",
+    rule: "completed rollback requires execution evidence",
+    expect: "PKRB-001 completed rollback requires completedAt and execution evidence.",
+    mutate: (pkg) => { rollbackRecord(pkg).rollbackStatus = "completed"; }
+  },
+  {
+    id: "portable-trust-rollback-incomplete-trigger",
+    rule: "incomplete rollback remains governed",
+    expect: "PKRB-001 incomplete rollback requires a portable-trust-rollback-incomplete governance trigger.",
+    mutate: (pkg) => { rollbackRecord(pkg).governanceTriggerRefs = ["PKGTR-019"]; }
+  },
+  {
+    id: "portable-trust-rollback-boundary",
+    rule: "rollback preserves history without automatic authority",
+    expect: "PKRB-001 must preserve history, forbid destructive deletion, treat counts as evidence, and forbid automatic rollback, authority, and semantic truth claims.",
+    mutate: (pkg) => { rollbackRecord(pkg).automaticRollback = true; }
+  },
+  {
+    id: "portable-trust-activation-verifier-boundary",
+    rule: "verifier does not turn records into execution or semantic proof",
+    expect: "verifierBoundary must explicitly avoid claiming activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness"); }
   }
 ];
 

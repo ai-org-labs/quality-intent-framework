@@ -1,0 +1,80 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-30T04:33:21.896Z",
+  "packet_id": "ASP-MVUH8L48-NGKJ8G",
+  "source_task_id": "TASK-080",
+  "source_parent_session_id": "SESS-MVUH6J0A-GHV0QG",
+  "source_decision_record_id": "DEC-MVUH7UIS-7PG1UG",
+  "objective": "Implement QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, deterministic activation and rollback verifier, fixtures, documentation, portable package, and release",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "qif-schema-design",
+    "deterministic-verification"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "qif-ledger-extension",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/qif-ledger-package.schema.json",
+        "tools/validate-qif-ledger.mjs"
+      ],
+      "rationale": "existing rollout preview, trust policy, replay, and governance patterns"
+    }
+  ],
+  "resource_refs": [
+    "qif-repository",
+    "aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "no-history-mutation",
+    "no-semantic-truth",
+    "no-automatic-authority"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "activation-decision",
+      "observation-contract",
+      "rollback-record",
+      "verifier-boundary"
+    ],
+    "acceptance_criteria": [
+      "npm test passes",
+      "activation, observation, stop, and rollback invariants fail closed and preserve authority boundaries"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "activation and rollback chain reproduces without granting authority",
+      "evaluator_ref": "guardian",
+      "evidence_required": "negative fixture suite",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "activation-without-safe-exit",
+      "trigger_condition": "activation lacks sufficient preview, bounded observation, stop conditions, or rollback target",
+      "consequence": "require-council-review",
+      "recovery_action": "restore complete authority and recovery chain"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will make activation reversible before it becomes permissible.",
+    "current_action": "Implement v0.8.7",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Run full QIF and AOF review"
+  },
+  "status": "draft"
+}
