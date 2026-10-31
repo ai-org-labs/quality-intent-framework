@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.8.7 baseline)
+## Current Position (v0.8.8 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -240,7 +240,11 @@ and adoption surface — not pretending the limits away.
   counterexample challenge outcomes, deterministic agreement, evidence and
   source-trust sufficiency, and governed-activation eligibility. The committed
   memory, library, and local validation remain example-only and insufficient
-  by design.
+  by design. v0.8.3-v0.8.7 add supply-chain revocation, attestation-bound trust
+  policy, immutable policy replay, complete-population rollout preview, and
+  governed activation, observation, and rollback. v0.8.8 reconciles those
+  declared actions with observed state, verifies recovery, and records an
+  accountable promote, hold, retire, or failed-recovery disposition.
 - Weaknesses: v0.6.15 hook behavior is intentionally structural and
   example-file based; starter packages still require users or AI agents to
   replace sample content before use. The first Authoring Template package covers only a
@@ -252,13 +256,14 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-10-30 against primary-source signals. The
+The roadmap was revalidated on 2026-10-31 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
 
 | Current signal | Quality risk exposed | QIF response | Lead, not follow |
 | --- | --- | --- | --- |
+| Agent operations guidance now separates evaluate-only from enforcement, requires explicit promotion criteria, records deployment outcomes and versions, and requires rollback success confirmation. ([Microsoft Agent Governance Toolkit production deployment](https://github.com/microsoft/agent-governance-toolkit/blob/main/policy-engine/docs/PRODUCTION_DEPLOYMENT.md), [Salesforce Agentic Enterprise operational excellence](https://architect.salesforce.com/docs/architect/well-architected/guide/agentic-enterprise-operational-excellence.html), [AWS continuous deployment guidance](https://docs.aws.amazon.com/prescriptive-guidance/latest/mlops-checklist/continuous-deployment.html)) | An authorization can be mistaken for execution, a command exit for effective state, a rollback label for recovery, or a quiet observation window for promotion readiness. Provider-specific logs can also hide scope or version mismatch. | v0.8.8 Activation Outcome Reconciliation and Policy Promotion, followed by v0.8.9 Policy State Drift and Emergency Demotion. | Reconcile declared actions to evidence-backed observed policy and scope before any disposition; next keep promoted state under governed drift observation and preserve emergency demotion evidence. |
 | Deployment-level agent governance is moving toward explicit authorization profiles, continuous evaluation, canary stages, human intervention, circuit breakers, and rollback. ([WEF Agent Capability and Authorization Profile](https://www.weforum.org/publications/ai-agents-in-action-a-playbook-for-trusted-adoption-authorization-and-scaling), [Australian Government continuous evaluation](https://www.digital.gov.au/policy/ai/agentic-ai-addendum-statements-evaluate), [AWS AgentCore evaluation lifecycle](https://aws.amazon.com/blogs/machine-learning/building-trust-in-ai-agents-a-production-ready-evaluation-framework-with-amazon-bedrock-agentcore/)) | A complete preview can be mistaken for authorization; an approval can be mistaken for execution; missing observation can be mistaken for safety; and rollback can be declared without recovery evidence. | v0.8.7 Trust Policy Activation Decision and Rollback Contract, followed by v0.8.8 Activation Outcome Reconciliation and Policy Promotion. | Bind exact preview scope to accountable authority, bounded observation, deterministic stop decisions, and rollback evidence now; next reconcile actual execution and recovery outcomes before policy promotion. |
 | GitHub rulesets can run in Evaluate mode to report actions that would pass or fail before enforcement; Sigstore policy-controller can run in warn mode; SLSA Verification Summary Attestations bind results to a named policy and recommend its exact digest. ([GitHub ruleset Evaluate mode](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository), [Sigstore warn mode](https://docs.sigstore.dev/policy-controller/overview/), [SLSA VSA](https://slsa.dev/spec/v1.2/verification_summary)) | A policy can be structurally valid while its population impact is unknown. Sampling can hide omitted items, and warning-only observations can be mistaken for activation readiness. | v0.8.6 Trust Policy Rollout Preview and Affected-Knowledge Census, followed by v0.8.7 governed activation and rollback contract. | Freeze the declared population, reconcile exactly one proposed-policy result per item, and expose changed or unresolved outcomes before an accountable activation decision is even representable. |
 | GitHub offline attestation verification requires explicit trusted-root snapshots and warns that stale snapshots do not reveal later revocation; Sigstore uses TUF for root rotation, freshness, and compromise-time-aware revocation. ([GitHub offline verification](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/verify-attestations-offline), [Sigstore policy-controller](https://docs.sigstore.dev/policy-controller/overview/), [Sigstore threat model](https://docs.sigstore.dev/about/threat-model/)) | Replacing the current root or policy can silently rewrite the apparent validity of historical decisions, while retaining an old root forever hides freshness and revocation risk. | v0.8.5 Trust Policy Rotation and Historical Replay, followed by v0.8.6 rollout preview. | Preserve the decision made under each policy revision, replay frozen inputs under later policy without mutation, then preview the whole affected knowledge population before policy activation. |
@@ -879,11 +884,20 @@ Deliverables:
   authority traceability, observation-window, stop-condition, rollback-chain,
   evidence, and governance checks. Records do not execute policy or prove safe
   continuation or successful recovery.
+- Implemented ninth v0.8 slice, v0.8.8 Activation Outcome Reconciliation and
+  Policy Promotion: compare declared activation and rollback actions with
+  evidence-backed observed policy and scope, verify restored state and effect
+  checks, then govern promote, hold, retire, or failed-recovery disposition.
+- Status: implemented through `PortableKnowledgeExecutionReconciliation`,
+  `PortableKnowledgeRecoveryVerification`, and
+  `PortableKnowledgePromotionDecision`, with deterministic state matching,
+  recovery completeness, disposition, authority, history, and governance
+  checks. Reconciliation remains structural evidence, not provider
+  authentication, complete side-effect recovery, deployment, or semantic truth.
 - Next planned slices:
-  - v0.8.8 Activation Outcome Reconciliation and Policy Promotion: reconcile
-    declared decisions with execution and recovery evidence, then govern
-    promotion, rollback completion, or failed recovery without rewriting
-    history.
+  - v0.8.9 Policy State Drift and Emergency Demotion: observe promoted policy
+    identity, scope, effects, and evidence freshness over time; reconcile drift
+    and preserve accountable hold or emergency demotion without silent mutation.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,

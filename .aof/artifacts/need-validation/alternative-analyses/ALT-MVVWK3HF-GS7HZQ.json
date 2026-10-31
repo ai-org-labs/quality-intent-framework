@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-10-31T04:29:59.331Z",
+  "alternative_analysis_id": "ALT-MVVWK3HF-GS7HZQ",
+  "subject_need": "Reconcile declared activation and rollback with observed execution before policy promotion.",
+  "alternative_solutions": [
+    "Leave execution truth and promotion outside QIF in provider-specific deployment logs.",
+    "Add one executed boolean and one promoted boolean to existing records.",
+    "Model execution reconciliation, recovery verification, and policy promotion as distinct linked append-only entities."
+  ],
+  "non_solution_options": [
+    "Treat a successful command exit, test count, or elapsed observation window as proof of correct state."
+  ],
+  "defer_options": [
+    "Defer if the model cannot preserve predecessor state and failed recovery evidence without mutation."
+  ],
+  "stop_options": [
+    "Stop if the design grants automatic promotion authority, erases failed attempts, or claims provider execution truth without evidence."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVVWJLZO-DR9KXN"
+}

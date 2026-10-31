@@ -1,6 +1,6 @@
 {
   "packageType": "qif-ledger",
-  "runtimeVersion": "0.8.2",
+  "runtimeVersion": "0.8.8",
   "packageId": "LEDGERPKG-001",
   "packageRefs": [
     {
@@ -779,7 +779,7 @@
       "severity": "high",
       "requiredAction": "Limit the authorization to the frozen scope and observe the declared stop signals before any expansion.",
       "owner": "portable-knowledge-governance-owner",
-      "status": "open"
+      "status": "closed"
     },
     {
       "id": "PKGTR-018",
@@ -788,7 +788,7 @@
       "severity": "critical",
       "requiredAction": "Stop continuation and initiate the linked rollback contract.",
       "owner": "portable-knowledge-governance-owner",
-      "status": "open"
+      "status": "closed"
     },
     {
       "id": "PKGTR-019",
@@ -797,7 +797,7 @@
       "severity": "critical",
       "requiredAction": "Execute and independently verify the rollback before the deadline.",
       "owner": "portable-knowledge-governance-owner",
-      "status": "open"
+      "status": "closed"
     },
     {
       "id": "PKGTR-020",
@@ -806,7 +806,7 @@
       "severity": "critical",
       "requiredAction": "Keep the activation stopped and record rollback execution evidence or escalate the failed recovery.",
       "owner": "portable-knowledge-governance-owner",
-      "status": "open"
+      "status": "closed"
     }
   ],
   "portableKnowledgeLibraries": [
@@ -2080,9 +2080,16 @@
       "initiatedBy": "portable-knowledge-governance-owner",
       "initiatedAt": "2026-10-29T16:05:00.000Z",
       "rollbackDeadline": "2026-10-30T13:00:00.000Z",
-      "rollbackStatus": "planned",
-      "executionEvidenceRefs": [],
-      "residualRisk": "Until execution evidence is independently recorded, the bounded activation remains stopped and rollback completion is unproven.",
+      "rollbackStatus": "completed",
+      "completedAt": "2026-10-29T16:25:00.000Z",
+      "executionEvidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "residualRisk": "The rollback restored the declared baseline policy state, but this example evidence does not prove provider authenticity, absence of delayed effects, or semantic fitness.",
       "governanceTriggerRefs": [
         "PKGTR-019",
         "PKGTR-020"
@@ -2093,7 +2100,149 @@
       "automaticRollback": false,
       "automaticAuthority": false,
       "semanticTruthClaimed": false,
-      "status": "governance-required"
+      "status": "reviewed"
+    }
+  ],
+  "portableKnowledgeExecutionReconciliations": [
+    {
+      "id": "PKXR-001",
+      "activationDecisionRef": "PKAD-001",
+      "actionKind": "activation",
+      "actionRecordRef": "PKAD-001",
+      "expectedPolicyRef": "PKTP-003",
+      "observedPolicyRef": "PKTP-003",
+      "expectedScopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "observedScopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "executionAttempted": true,
+      "executionSucceeded": true,
+      "stateMatched": true,
+      "executionEvidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "reconciledAt": "2026-10-29T14:05:00.000Z",
+      "reconciledBy": "portable-knowledge-governance-owner",
+      "result": "matched",
+      "governanceTriggerRefs": [],
+      "historyPreserved": true,
+      "activityCountIsQuality": false,
+      "automaticStateClaim": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "reviewed"
+    },
+    {
+      "id": "PKXR-002",
+      "activationDecisionRef": "PKAD-001",
+      "actionKind": "rollback",
+      "actionRecordRef": "PKRB-001",
+      "expectedPolicyRef": "PKTP-002",
+      "observedPolicyRef": "PKTP-002",
+      "expectedScopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "observedScopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "executionAttempted": true,
+      "executionSucceeded": true,
+      "stateMatched": true,
+      "executionEvidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "reconciledAt": "2026-10-29T16:30:00.000Z",
+      "reconciledBy": "portable-knowledge-governance-owner",
+      "result": "matched",
+      "governanceTriggerRefs": [
+        "PKGTR-019",
+        "PKGTR-020"
+      ],
+      "historyPreserved": true,
+      "activityCountIsQuality": false,
+      "automaticStateClaim": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "reviewed"
+    }
+  ],
+  "portableKnowledgeRecoveryVerifications": [
+    {
+      "id": "PKRV-001",
+      "activationDecisionRef": "PKAD-001",
+      "rollbackRecordRef": "PKRB-001",
+      "rollbackReconciliationRef": "PKXR-002",
+      "expectedRestoredPolicyRef": "PKTP-002",
+      "observedRestoredPolicyRef": "PKTP-002",
+      "effectChecks": [
+        {
+          "checkId": "PKRC-001",
+          "description": "The frozen canary scope resolves to the baseline trust policy after rollback.",
+          "result": "pass",
+          "evidenceRefs": [
+            {
+              "packageRef": "PKG-EXPERT",
+              "entityType": "cases",
+              "entityRef": "CAS-SW-001"
+            }
+          ]
+        }
+      ],
+      "recoveryComplete": true,
+      "residualEffects": [
+        "Delayed provider effects remain outside this example-only verification boundary."
+      ],
+      "verificationDecision": "verified",
+      "verifiedAt": "2026-10-29T16:35:00.000Z",
+      "verifiedBy": "portable-knowledge-governance-owner",
+      "governanceTriggerRefs": [
+        "PKGTR-019",
+        "PKGTR-020"
+      ],
+      "historyPreserved": true,
+      "activityCountIsQuality": false,
+      "automaticRecoveryClaim": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "reviewed"
+    }
+  ],
+  "portableKnowledgePromotionDecisions": [
+    {
+      "id": "PKPD-001",
+      "activationDecisionRef": "PKAD-001",
+      "activationReconciliationRef": "PKXR-001",
+      "observationRef": "PKOBS-001",
+      "rollbackRecordRef": "PKRB-001",
+      "recoveryVerificationRef": "PKRV-001",
+      "candidatePolicyRef": "PKTP-003",
+      "currentPolicyRef": "PKTP-002",
+      "disposition": "retire",
+      "decisionRationale": "The candidate policy crossed a stop condition and was rolled back to the verified baseline, so it is retired rather than promoted.",
+      "decidedBy": "portable-knowledge-governance-owner",
+      "decidedAt": "2026-10-29T16:40:00.000Z",
+      "authorityBasis": "Documented organizational trust-policy governance authority for the bounded canary scope.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "governanceTriggerRefs": [
+        "PKGTR-018",
+        "PKGTR-019",
+        "PKGTR-020"
+      ],
+      "predecessorStatePreserved": true,
+      "decisionDoesNotExecutePromotion": true,
+      "activityCountIsQuality": false,
+      "automaticPromotion": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "reviewed"
     }
   ],
   "ledgerIndex": {
@@ -2148,8 +2297,8 @@
         "entityRef": "CALRUN-WMC-001"
       }
     ],
-    "lastUpdated": "2026-10-30",
-    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, immutable replay, frozen-scope rollout preview, and accountable activation, observation, and rollback records without automatic authority."
+    "lastUpdated": "2026-10-31",
+    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, immutable replay, frozen-scope rollout preview, accountable activation, execution reconciliation, recovery verification, and governed policy disposition without automatic authority."
   },
   "verifierBoundary": {
     "checks": [
@@ -2171,7 +2320,8 @@
       "attestation subject, identity, predicate, trust-root, time, transparency, revocation, and policy-decision reproduction",
       "trust-policy succession, immutable historical decision replay, outcome-delta classification, and change governance",
       "frozen rollout scope, exact item coverage, per-item proposed-policy outcomes, affected-knowledge census arithmetic, and pre-activation governance",
-      "activation authority traceability, bounded observation decisions, stop-condition reproduction, and rollback-chain integrity"
+      "activation authority traceability, bounded observation decisions, stop-condition reproduction, and rollback-chain integrity",
+      "declared-versus-observed execution reconciliation, recovery-state verification, and governed policy promotion or retirement"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -2190,7 +2340,8 @@
       "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness",
       "historical replay as current authorization, activation, authority, or semantic truth",
       "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth",
-      "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness"
+      "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness",
+      "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness"
     ],
     "semanticValidityRequires": [
       "expert review",

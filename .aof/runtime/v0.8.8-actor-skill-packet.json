@@ -1,0 +1,80 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-10-31T04:30:23.637Z",
+  "packet_id": "ASP-MVVWKM8L-ZCP3VP",
+  "source_task_id": "TASK-081",
+  "source_parent_session_id": "SESS-MVVWJJKC-QZ4PYJ",
+  "source_decision_record_id": "DEC-MVVWKBDW-CGWKE5",
+  "objective": "Implement QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, deterministic reconciliation and promotion verifier, fixtures, documentation, portable package, and release",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "qif-schema-design",
+    "deterministic-verification"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "qif-ledger-extension",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/qif-ledger-package.schema.json",
+        "tools/validate-qif-ledger.mjs"
+      ],
+      "rationale": "existing activation, observation, rollback, trust-policy lineage, and governance patterns"
+    }
+  ],
+  "resource_refs": [
+    "qif-repository",
+    "aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "no-history-mutation",
+    "no-semantic-truth",
+    "no-automatic-authority"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "execution-reconciliation",
+      "recovery-verification",
+      "policy-promotion",
+      "verifier-boundary"
+    ],
+    "acceptance_criteria": [
+      "npm test passes",
+      "execution, recovery, and promotion invariants fail closed and preserve authority boundaries"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "execution reconciliation and policy promotion reproduce without granting deployment or decision authority",
+      "evaluator_ref": "guardian",
+      "evidence_required": "retained negative fixture suite and full npm test",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "promotion-without-reconciled-state",
+      "trigger_condition": "promotion lacks complete activation execution, observation, recovery, authority, or governance evidence",
+      "consequence": "require-council-review",
+      "recovery_action": "restore complete append-only execution and promotion chain"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will reconcile observed state before promotion can be represented.",
+    "current_action": "Implement v0.8.8",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Run full QIF and AOF review"
+  },
+  "status": "draft"
+}

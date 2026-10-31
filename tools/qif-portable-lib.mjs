@@ -28,6 +28,7 @@ const CANONICAL_DOCS = [
   "docs/qif-v0.8.5-trust-policy-replay.md",
   "docs/qif-v0.8.6-trust-policy-rollout-preview.md",
   "docs/qif-v0.8.7-trust-policy-activation-rollback.md",
+  "docs/qif-v0.8.8-activation-outcome-reconciliation.md",
   "docs/expert-judgment-framework.md"
 ];
 

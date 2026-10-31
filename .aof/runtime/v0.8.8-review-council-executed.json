@@ -1,0 +1,324 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-10-31T04:40:48.722Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MVVWJJKC-QZ4PYJ",
+    "stage": "review",
+    "executionId": "CRUN-MVVWY0JZ-4PN7J4",
+    "executionStatus": "completed",
+    "invokedModel": true,
+    "seatCount": 2,
+    "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+    "lastCouncilExecutionId": "CRUN-MVVWY0JZ-4PN7J4",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVVWJJKC-QZ4PYJ",
+              "decision_id": "DEC-MVVWKBDW-CGWKE5",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims.",
+              "intent": "Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass.",
+              "active_context": "context: Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims. | success: Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVVWJLZM-7NDBXT",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: organizations need to know whether an authorized trust-policy activation actually executed as declared, whether a required rollback completed and restored the intended policy state, and whether the observed outcome is sufficient to promote, hold, or retire the policy. Intent: define provider-neutral execution reconciliation, recovery verification, and policy promotion records that preserve history and remain human-governed. Context: QIF v0.8.7 records activation, bounded observation, stop decisions, and rollback plans but deliberately does not prove execution, recovery completion, or promotion.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVVWK75Y-1MDRP0.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVVWK9TA-JWAOGD.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVVWK37Y-PI4RYA.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVVWK3CN-IJC2UP.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVVWK3HF-GS7HZQ.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVVWK3LY-ZYZ0Y0.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVVWKBDW-CGWKE5"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVVWJJKC-QZ4PYJ",
+              "decision_id": "DEC-MVVWKBDW-CGWKE5",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims.",
+              "intent": "Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass.",
+              "active_context": "context: Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims. | success: Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVVWJLZM-7NDBXT",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: organizations need to know whether an authorized trust-policy activation actually executed as declared, whether a required rollback completed and restored the intended policy state, and whether the observed outcome is sufficient to promote, hold, or retire the policy. Intent: define provider-neutral execution reconciliation, recovery verification, and policy promotion records that preserve history and remain human-governed. Context: QIF v0.8.7 records activation, bounded observation, stop decisions, and rollback plans but deliberately does not prove execution, recovery completion, or promotion.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVVWK75Y-1MDRP0.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVVWK9TA-JWAOGD.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVVWK37Y-PI4RYA.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVVWK3CN-IJC2UP.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVVWK3HF-GS7HZQ.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVVWK3LY-ZYZ0Y0.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVVWKBDW-CGWKE5"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MVVWY0JZ-4PN7J4",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "completed",
+      "started_at": "2026-10-31T04:40:48.717Z",
+      "completed_at": "2026-10-31T04:40:48.719Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MVVWY0JZ-4PN7J4-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVVWJJKC-QZ4PYJ",
+              "decision_id": "DEC-MVVWKBDW-CGWKE5",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims.",
+              "intent": "Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass.",
+              "active_context": "context: Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims. | success: Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVVWJLZM-7NDBXT",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: organizations need to know whether an authorized trust-policy activation actually executed as declared, whether a required rollback completed and restored the intended policy state, and whether the observed outcome is sufficient to promote, hold, or retire the policy. Intent: define provider-neutral execution reconciliation, recovery verification, and policy promotion records that preserve history and remain human-governed. Context: QIF v0.8.7 records activation, bounded observation, stop decisions, and rollback plans but deliberately does not prove execution, recovery completion, or promotion.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVVWK75Y-1MDRP0.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVVWK9TA-JWAOGD.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVVWK37Y-PI4RYA.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVVWK3CN-IJC2UP.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVVWK3HF-GS7HZQ.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVVWK3LY-ZYZ0Y0.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVVWKBDW-CGWKE5"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-31T04:40:48.719Z",
+          "completed_at": "2026-10-31T04:40:48.719Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-31T04:40:48.719Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian review response: focus on Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims. and align to Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass..",
+            "output_summary": "DECISION: proceed VETO: no Guardian review response: focus on Scope only the qif-ledger trust-policy path after v0.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Need: organizations need to know whether an authorized trust-policy activation actually executed as declared, whether a required rollback completed and restored the intended policy state, and whether the observed outcome is sufficient to promote, hold, or retire the policy. Intent: define provider-neutral execution reconciliation, recovery verification, and policy promotion records that preserve history and remain human-governed. Context: QIF v0.8.7 records activation, bounded observation, stop decisions, and rollback plans but deliberately does not prove execution, recovery completion, or promotion.\nNeed: Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims.\nIntent: Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass.\nActive Context: context: Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims. | success: Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVVWY0JZ-4PN7J4-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVVWJJKC-QZ4PYJ",
+              "decision_id": "DEC-MVVWKBDW-CGWKE5",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims.",
+              "intent": "Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass.",
+              "active_context": "context: Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims. | success: Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVVWJLZM-7NDBXT",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: organizations need to know whether an authorized trust-policy activation actually executed as declared, whether a required rollback completed and restored the intended policy state, and whether the observed outcome is sufficient to promote, hold, or retire the policy. Intent: define provider-neutral execution reconciliation, recovery verification, and policy promotion records that preserve history and remain human-governed. Context: QIF v0.8.7 records activation, bounded observation, stop decisions, and rollback plans but deliberately does not prove execution, recovery completion, or promotion.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVVWK75Y-1MDRP0.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVVWK9TA-JWAOGD.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVVWK37Y-PI4RYA.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVVWK3CN-IJC2UP.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVVWK3HF-GS7HZQ.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVVWK3LY-ZYZ0Y0.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVVWKBDW-CGWKE5"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-10-31T04:40:48.719Z",
+          "completed_at": "2026-10-31T04:40:48.719Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-10-31T04:40:48.719Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder review response: focus on Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims. and align to Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass..",
+            "output_summary": "DECISION: proceed VETO: no Builder review response: focus on Scope only the qif-ledger trust-policy path after v0.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Need: organizations need to know whether an authorized trust-policy activation actually executed as declared, whether a required rollback completed and restored the intended policy state, and whether the observed outcome is sufficient to promote, hold, or retire the policy. Intent: define provider-neutral execution reconciliation, recovery verification, and policy promotion records that preserve history and remain human-governed. Context: QIF v0.8.7 records activation, bounded observation, stop decisions, and rollback plans but deliberately does not prove execution, recovery completion, or promotion.\nNeed: Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims.\nIntent: Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass.\nActive Context: context: Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims. | success: Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Scope only the qif-ledger trust-policy path after v0.8.7: reconcile declared activation and rollback with execution evidence, verify restored state, and record governed promote, hold, retire, or failed-recovery outcomes. Exclude UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass."
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

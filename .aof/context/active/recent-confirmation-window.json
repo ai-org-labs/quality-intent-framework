@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-10-30T04:43:18.963Z",
+  "updated_at": "2026-10-31T04:41:17.289Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means every activation decision references a sufficient rollout preview and accountable approver; every activated policy has explicit observation signals, stop conditions, rollback target and deadline; adverse or incomplete observations deterministically block or roll back; fixtures, npm test, portable build, and AOF verification pass.",
-      "recorded_at": "2026-10-30T04:31:50.538Z",
+      "answer": "Success means every executed activation or rollback resolves to immutable execution evidence and expected-versus-observed state; promotion is allowed only after complete bounded observation and successful reconciliation; mismatch, incomplete recovery, or absent authority deterministically blocks promotion and triggers governance; fixtures, npm test, portable build, and AOF verification pass.",
+      "recorded_at": "2026-10-31T04:29:36.663Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVUH6J0A-GHV0QG",
+      "source_session_id": "SESS-MVVWJJKC-QZ4PYJ",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The validated need is not generic deployment automation; it is an auditable authority-and-recovery chain between preview and governed policy state.",
-      "recorded_at": "2026-10-30T04:32:47.432Z",
+      "answer": "The validated need is not deployment automation; it is an auditable execution-to-state reconciliation and promotion authority chain.",
+      "recorded_at": "2026-10-31T04:30:09.575Z",
       "expectation_state": "validated",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVUH6J0A-GHV0QG",
-      "source_decision_record_id": "DEC-MVUH7UIS-7PG1UG"
+      "source_session_id": "SESS-MVVWJJKC-QZ4PYJ",
+      "source_decision_record_id": "DEC-MVVWKBDW-CGWKE5"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "QIF records declared activation and rollback state but does not reconcile actual execution, completed recovery evidence, or policy promotion.",
-      "recorded_at": "2026-10-30T04:43:18.963Z",
-      "expectation_state": "Activation decisions now require sufficient preview and authority; observation and rollback remain bounded and fail closed.",
-      "mismatch_state": "QIF records declared activation and rollback state but does not reconcile actual execution, completed recovery evidence, or policy promotion.",
-      "scale_direction": "Implement QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion.",
-      "source_session_id": "SESS-MVUH6J0A-GHV0QG",
-      "source_decision_record_id": "DEC-MVUH7UIS-7PG1UG"
+      "answer": "QIF records one reconciliation and disposition but does not yet observe promoted policy-state drift or preserve emergency demotion evidence over time.",
+      "recorded_at": "2026-10-31T04:41:17.289Z",
+      "expectation_state": "Declared activation and rollback now reconcile to evidence-backed observed state; recovery and policy disposition remain bounded and human-governed.",
+      "mismatch_state": "QIF records one reconciliation and disposition but does not yet observe promoted policy-state drift or preserve emergency demotion evidence over time.",
+      "scale_direction": "Implement QIF v0.8.9 Policy State Drift and Emergency Demotion.",
+      "source_session_id": "SESS-MVVWJJKC-QZ4PYJ",
+      "source_decision_record_id": "DEC-MVVWKBDW-CGWKE5"
     }
   ]
 }

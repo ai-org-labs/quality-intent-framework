@@ -1279,11 +1279,151 @@
       "errorIncludes": "PKRB-001 must preserve history, forbid destructive deletion, treat counts as evidence, and forbid automatic rollback, authority, and semantic truth claims."
     },
     {
+      "file": "qif-ledger-portable-trust-execution-action-record.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "execution reconciliation resolves the declared action",
+      "expect": "fail",
+      "errorIncludes": "PKXR-001 activation actionRecordRef must equal activationDecisionRef."
+    },
+    {
+      "file": "qif-ledger-portable-trust-execution-policy-state.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "expected policy reproduces from the action",
+      "expect": "fail",
+      "errorIncludes": "PKXR-001 expectedPolicyRef must reproduce from the referenced action."
+    },
+    {
+      "file": "qif-ledger-portable-trust-execution-scope.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "execution reconciliation retains activation scope",
+      "expect": "fail",
+      "errorIncludes": "PKXR-001 expectedScopeDigest must match the activation scope."
+    },
+    {
+      "file": "qif-ledger-portable-trust-execution-state-match.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "state match reproduces from observed state",
+      "expect": "fail",
+      "errorIncludes": "PKXR-001 stateMatched must reproduce as false."
+    },
+    {
+      "file": "qif-ledger-portable-trust-execution-result.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "execution result requires evidence",
+      "expect": "fail",
+      "errorIncludes": "PKXR-001 result must reproduce as unverified."
+    },
+    {
+      "file": "qif-ledger-portable-trust-execution-mismatch-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "execution mismatch routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKXR-001 execution mismatch requires a portable-trust-execution-state-mismatch governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-execution-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "reconciliation does not claim provider truth or authority",
+      "expect": "fail",
+      "errorIncludes": "PKXR-001 must preserve history, treat counts as evidence, and forbid automatic state claims, authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-trust-recovery-reconciliation.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "recovery uses the rollback execution reconciliation",
+      "expect": "fail",
+      "errorIncludes": "PKRV-001 reconciliation must describe the referenced rollback."
+    },
+    {
+      "file": "qif-ledger-portable-trust-recovery-policy-state.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "recovery expected state matches rollback target",
+      "expect": "fail",
+      "errorIncludes": "PKRV-001 expectedRestoredPolicyRef must match the rollback target."
+    },
+    {
+      "file": "qif-ledger-portable-trust-recovery-decision.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "recovery decision reproduces from checks and state",
+      "expect": "fail",
+      "errorIncludes": "PKRV-001 verificationDecision must reproduce as failed."
+    },
+    {
+      "file": "qif-ledger-portable-trust-recovery-incomplete-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "incomplete recovery routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKRV-001 incomplete recovery requires a portable-trust-recovery-incomplete governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-recovery-failed-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "failed recovery routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKRV-001 failed recovery requires a portable-trust-recovery-failed governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-recovery-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "recovery verification does not claim automatic recovery",
+      "expect": "fail",
+      "errorIncludes": "PKRV-001 must preserve history, treat counts as evidence, and forbid automatic recovery claims, authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-trust-promotion-activation-reconciliation.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "promotion resolves activation execution evidence",
+      "expect": "fail",
+      "errorIncludes": "PKPD-001 activation reconciliation must describe the same activation decision."
+    },
+    {
+      "file": "qif-ledger-portable-trust-promotion-disposition.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "policy disposition reproduces from observation and recovery",
+      "expect": "fail",
+      "errorIncludes": "PKPD-001 disposition must reproduce as retire."
+    },
+    {
+      "file": "qif-ledger-portable-trust-promotion-current-policy.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "retirement leaves the restored baseline current",
+      "expect": "fail",
+      "errorIncludes": "PKPD-001 retired candidate must leave the baseline policy current."
+    },
+    {
+      "file": "qif-ledger-portable-trust-promotion-blocked-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "failed recovery blocks promotion through governance",
+      "expect": "fail",
+      "errorIncludes": "PKPD-001 blocked promotion requires a portable-trust-promotion-blocked governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-promotion-authority.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "promotion disposition retains accountable authority",
+      "expect": "fail",
+      "errorIncludes": "PKPD-001 requires accountable decidedBy and authorityBasis."
+    },
+    {
+      "file": "qif-ledger-portable-trust-promotion-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "promotion decision does not execute or grant authority",
+      "expect": "fail",
+      "errorIncludes": "PKPD-001 must preserve predecessor state, separate decision from execution, treat counts as evidence, and forbid automatic promotion, authority, and semantic truth claims."
+    },
+    {
       "file": "qif-ledger-portable-trust-activation-verifier-boundary.json",
       "validator": "tools/validate-qif-ledger.mjs",
       "rule": "verifier does not turn records into execution or semantic proof",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness."
+    },
+    {
+      "file": "qif-ledger-portable-trust-promotion-verifier-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "verifier does not turn reconciliation into provider truth or promotion authority",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness."
     }
   ],
   "rescopedRules": []

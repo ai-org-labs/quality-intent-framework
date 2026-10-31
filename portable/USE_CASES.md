@@ -162,6 +162,20 @@ themselves.
 - `schemas/qif-ledger-package.schema.json`
 - `examples/qif-ledger-package.json`
 
+## 14. Reconcile Execution and Govern Policy Promotion
+
+Do not treat authorization or command success as proof of effective state.
+Compare each declared activation or rollback with evidence-backed observed
+policy and scope. Verify rollback recovery through restored-state and effect
+checks, then record one accountable disposition: promote, hold, retire, or
+failed recovery. Preserve every predecessor and failed attempt. Reconciliation
+does not authenticate a provider, prove all side effects are gone, execute a
+promotion, or grant authority.
+
+- `docs/qif-v0.8.8-activation-outcome-reconciliation.md`
+- `schemas/qif-ledger-package.schema.json`
+- `examples/qif-ledger-package.json`
+
 ## Choosing a Package Type
 
 Open `MANIFEST.json` to see every included schema and example. Use a schema only

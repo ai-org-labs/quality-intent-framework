@@ -1,0 +1,38 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-10-31T04:30:04.102Z",
+  "validation_id": "NVR-MVVWK75Y-1MDRP0",
+  "raw_need": "Continue QIF development and release the next roadmap slice.",
+  "validation_status": "validated",
+  "validated_need": "Provide a provider-neutral, non-authoritative contract that reconciles declared trust-policy activation and rollback with observed execution and recovered state, then governs promotion, hold, retirement, or failed recovery without rewriting history.",
+  "decision_summary": "The validated need is not deployment automation; it is an auditable execution-to-state reconciliation and promotion authority chain.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What must remain outside this release?",
+      "answer": "UI, live deployment control, external integrations, cryptographic verification, automatic promotion, automatic authority, and semantic-truth claims.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What proves success?",
+      "answer": "Execution and recovery are reconciled against evidence and expected state; promotion requires complete successful evidence and accountable authority; mismatches fail closed.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Command success is not proof that the intended policy state became effective.",
+    "Rollback completion requires observed restored state and cannot erase side effects or failed attempts."
+  ],
+  "evidence_gaps": [
+    "Operational provider evidence remains unavailable; committed examples remain example-only."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-MVVWK37Y-PI4RYA.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-MVVWK3CN-IJC2UP.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-MVVWK3HF-GS7HZQ.json",
+  "experiment_proposal_ref": ".aof/artifacts/need-validation/experiment-proposals/EXP-MVVWK3LY-ZYZ0Y0.json",
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVVWJLZO-DR9KXN"
+}

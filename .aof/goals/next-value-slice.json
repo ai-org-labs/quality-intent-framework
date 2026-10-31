@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion",
-  "updated_at": "2026-10-30T04:43:44.234Z",
+  "content": "QIF v0.8.9 Policy State Drift and Emergency Demotion",
+  "updated_at": "2026-10-31T04:41:37.228Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MVUH6J0A-GHV0QG",
-  "source_decision_record_id": "DEC-MVUH7UIS-7PG1UG",
+  "source_session_id": "SESS-MVVWJJKC-QZ4PYJ",
+  "source_decision_record_id": "DEC-MVVWKBDW-CGWKE5",
   "declared_complete_at": null
 }

@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-30T04:43:18.960Z",
-  "audit_id": "FSA-QIF-V087",
-  "scope": "QIF v0.8.7 release self-review",
-  "summary": "Activation decisions now require sufficient preview and authority; observation and rollback remain bounded and fail closed.",
-  "detected_gap": "QIF records declared activation and rollback state but does not reconcile actual execution, completed recovery evidence, or policy promotion.",
+  "recorded_at": "2026-10-31T04:41:17.282Z",
+  "audit_id": "FSA-QIF-V088",
+  "scope": "QIF v0.8.8 release self-review",
+  "summary": "Declared activation and rollback now reconcile to evidence-backed observed state; recovery and policy disposition remain bounded and human-governed.",
+  "detected_gap": "QIF records one reconciliation and disposition but does not yet observe promoted policy-state drift or preserve emergency demotion evidence over time.",
   "result_state": "stable",
-  "next_action": "Implement QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion.",
+  "next_action": "Implement QIF v0.8.9 Policy State Drift and Emergency Demotion.",
   "related_task_ids": [
-    "TASK-080"
+    "TASK-081"
   ],
-  "source_session_id": "SESS-MVUH6J0A-GHV0QG",
-  "source_decision_record_id": "DEC-MVUH7UIS-7PG1UG"
+  "source_session_id": "SESS-MVVWJJKC-QZ4PYJ",
+  "source_decision_record_id": "DEC-MVVWKBDW-CGWKE5"
 }

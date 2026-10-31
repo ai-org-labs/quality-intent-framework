@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-10-31T04:29:59.159Z",
+  "value_hypothesis_id": "VHY-MVVWK3CN-IJC2UP",
+  "expected_value_creation": "Organizations can distinguish declared activation from observed execution, prove or reject recovery completion, and promote a trust policy only from reconciled evidence and accountable authority.",
+  "beneficiary": "Human-governed organizations and independent reviewers",
+  "supporting_evidence": [
+    "v0.8.7 makes authority, observation, and rollback plans explicit but deliberately stops short of execution truth and promotion.",
+    "Current production guidance requires mode promotion criteria, deployment outcome records, and evidence that rollback restored the expected state."
+  ],
+  "success_criteria": [
+    "Every execution reconciliation binds one activation or rollback record to observed provider-neutral execution evidence and expected-versus-observed state.",
+    "Every promotion decision requires complete observation, successful reconciliation, accountable authority, and immutable predecessor history.",
+    "Mismatch, absent evidence, failed recovery, or unresolved governance deterministically blocks promotion."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVVWJLZO-DR9KXN"
+}

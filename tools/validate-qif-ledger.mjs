@@ -271,6 +271,9 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeActivationDecisions = requireArray(pkg, "portableKnowledgeActivationDecisions", packagePath);
   const portableKnowledgePolicyObservations = requireArray(pkg, "portableKnowledgePolicyObservations", packagePath);
   const portableKnowledgeRollbackRecords = requireArray(pkg, "portableKnowledgeRollbackRecords", packagePath);
+  const portableKnowledgeExecutionReconciliations = requireArray(pkg, "portableKnowledgeExecutionReconciliations", packagePath);
+  const portableKnowledgeRecoveryVerifications = requireArray(pkg, "portableKnowledgeRecoveryVerifications", packagePath);
+  const portableKnowledgePromotionDecisions = requireArray(pkg, "portableKnowledgePromotionDecisions", packagePath);
   const packageRefIndex = indexById(packageRefs, `${packagePath}:packageRefs`);
   const crossPackageRefIndex = indexById(crossPackageRefs, `${packagePath}:crossPackageRefs`);
   const lifecycleIndex = indexById(lifecycleRecords, `${packagePath}:qualityIntentLifecycleRecords`);
@@ -307,6 +310,8 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeActivationDecisionIndex = indexById(portableKnowledgeActivationDecisions, `${packagePath}:portableKnowledgeActivationDecisions`);
   const portableKnowledgePolicyObservationIndex = indexById(portableKnowledgePolicyObservations, `${packagePath}:portableKnowledgePolicyObservations`);
   const portableKnowledgeRollbackRecordIndex = indexById(portableKnowledgeRollbackRecords, `${packagePath}:portableKnowledgeRollbackRecords`);
+  const portableKnowledgeExecutionReconciliationIndex = indexById(portableKnowledgeExecutionReconciliations, `${packagePath}:portableKnowledgeExecutionReconciliations`);
+  const portableKnowledgeRecoveryVerificationIndex = indexById(portableKnowledgeRecoveryVerifications, `${packagePath}:portableKnowledgeRecoveryVerifications`);
   void crossPackageRefIndex;
   void missedIntentIndex;
 
@@ -1243,6 +1248,85 @@ function validateLedgerPackage(pkg, packagePath) {
     if (rollback.historyPreserved !== true || rollback.destructiveDeletion !== false || rollback.activityCountIsQuality !== false || rollback.automaticRollback !== false || rollback.automaticAuthority !== false || rollback.semanticTruthClaimed !== false) errors.push(`${rollback.id} must preserve history, forbid destructive deletion, treat counts as evidence, and forbid automatic rollback, authority, and semantic truth claims.`);
   }
 
+  for (const reconciliation of portableKnowledgeExecutionReconciliations) {
+    const activation = portableKnowledgeActivationDecisionIndex.get(reconciliation.activationDecisionRef);
+    if (!activation) errors.push(`${reconciliation.id} references missing activation decision ${reconciliation.activationDecisionRef}.`);
+    let expectedPolicyRef = null;
+    if (reconciliation.actionKind === "activation") {
+      if (reconciliation.actionRecordRef !== reconciliation.activationDecisionRef) errors.push(`${reconciliation.id} activation actionRecordRef must equal activationDecisionRef.`);
+      expectedPolicyRef = activation?.proposedPolicyRef ?? null;
+    } else {
+      const rollback = portableKnowledgeRollbackRecordIndex.get(reconciliation.actionRecordRef);
+      if (!rollback) errors.push(`${reconciliation.id} references missing rollback record ${reconciliation.actionRecordRef}.`);
+      if (rollback && rollback.activationDecisionRef !== reconciliation.activationDecisionRef) errors.push(`${reconciliation.id} rollback record must belong to the same activation decision.`);
+      expectedPolicyRef = rollback?.targetPolicyRef ?? null;
+    }
+    if (expectedPolicyRef && reconciliation.expectedPolicyRef !== expectedPolicyRef) errors.push(`${reconciliation.id} expectedPolicyRef must reproduce from the referenced action.`);
+    if (activation && reconciliation.expectedScopeDigest !== activation.scopeDigest) errors.push(`${reconciliation.id} expectedScopeDigest must match the activation scope.`);
+    const stateMatched = Boolean(expectedPolicyRef && reconciliation.observedPolicyRef === expectedPolicyRef && reconciliation.observedScopeDigest === reconciliation.expectedScopeDigest);
+    if (reconciliation.stateMatched !== stateMatched) errors.push(`${reconciliation.id} stateMatched must reproduce as ${stateMatched}.`);
+    const hasEvidence = (reconciliation.executionEvidenceRefs ?? []).length > 0;
+    const expectedResult = !reconciliation.executionAttempted || !hasEvidence ? "unverified" : reconciliation.executionSucceeded && stateMatched ? "matched" : "mismatch";
+    if (reconciliation.result !== expectedResult) errors.push(`${reconciliation.id} result must reproduce as ${expectedResult}.`);
+    const types = portableGovernanceTypes(reconciliation.governanceTriggerRefs, reconciliation.id);
+    if (expectedResult === "unverified" && !types.has("portable-trust-execution-unverified")) errors.push(`${reconciliation.id} unverified execution requires a portable-trust-execution-unverified governance trigger.`);
+    if (expectedResult === "mismatch" && !types.has("portable-trust-execution-state-mismatch")) errors.push(`${reconciliation.id} execution mismatch requires a portable-trust-execution-state-mismatch governance trigger.`);
+    if (reconciliation.status !== (expectedResult === "matched" ? "reviewed" : "governance-required")) errors.push(`${reconciliation.id} status must reproduce from execution reconciliation.`);
+    if (reconciliation.historyPreserved !== true || reconciliation.activityCountIsQuality !== false || reconciliation.automaticStateClaim !== false || reconciliation.automaticAuthority !== false || reconciliation.semanticTruthClaimed !== false) errors.push(`${reconciliation.id} must preserve history, treat counts as evidence, and forbid automatic state claims, authority, and semantic truth claims.`);
+  }
+
+  for (const recovery of portableKnowledgeRecoveryVerifications) {
+    const activation = portableKnowledgeActivationDecisionIndex.get(recovery.activationDecisionRef);
+    const rollback = portableKnowledgeRollbackRecordIndex.get(recovery.rollbackRecordRef);
+    const reconciliation = portableKnowledgeExecutionReconciliationIndex.get(recovery.rollbackReconciliationRef);
+    if (!activation) errors.push(`${recovery.id} references missing activation decision ${recovery.activationDecisionRef}.`);
+    if (!rollback) errors.push(`${recovery.id} references missing rollback record ${recovery.rollbackRecordRef}.`);
+    if (!reconciliation) errors.push(`${recovery.id} references missing rollback reconciliation ${recovery.rollbackReconciliationRef}.`);
+    if (rollback && rollback.activationDecisionRef !== recovery.activationDecisionRef) errors.push(`${recovery.id} rollback record must belong to the same activation decision.`);
+    if (reconciliation && (reconciliation.actionKind !== "rollback" || reconciliation.actionRecordRef !== recovery.rollbackRecordRef)) errors.push(`${recovery.id} reconciliation must describe the referenced rollback.`);
+    if (rollback && recovery.expectedRestoredPolicyRef !== rollback.targetPolicyRef) errors.push(`${recovery.id} expectedRestoredPolicyRef must match the rollback target.`);
+    const checks = recovery.effectChecks ?? [];
+    const checksComplete = checks.length > 0 && checks.every((check) => check.result === "pass" && (check.evidenceRefs ?? []).length > 0);
+    const stateMatched = Boolean(rollback && recovery.observedRestoredPolicyRef === rollback.targetPolicyRef);
+    const verified = Boolean(rollback?.rollbackStatus === "completed" && reconciliation?.result === "matched" && checksComplete && stateMatched);
+    const failed = checks.some((check) => check.result === "fail") || reconciliation?.result === "mismatch" || (rollback?.rollbackStatus === "completed" && !stateMatched);
+    const expectedDecision = verified ? "verified" : failed ? "failed" : "incomplete";
+    if (recovery.recoveryComplete !== verified) errors.push(`${recovery.id} recoveryComplete must reproduce as ${verified}.`);
+    if (recovery.verificationDecision !== expectedDecision) errors.push(`${recovery.id} verificationDecision must reproduce as ${expectedDecision}.`);
+    const types = portableGovernanceTypes(recovery.governanceTriggerRefs, recovery.id);
+    if (expectedDecision === "incomplete" && !types.has("portable-trust-recovery-incomplete")) errors.push(`${recovery.id} incomplete recovery requires a portable-trust-recovery-incomplete governance trigger.`);
+    if (expectedDecision === "failed" && !types.has("portable-trust-recovery-failed")) errors.push(`${recovery.id} failed recovery requires a portable-trust-recovery-failed governance trigger.`);
+    if (recovery.status !== (verified ? "reviewed" : "governance-required")) errors.push(`${recovery.id} status must reproduce from recovery verification.`);
+    if (recovery.historyPreserved !== true || recovery.activityCountIsQuality !== false || recovery.automaticRecoveryClaim !== false || recovery.automaticAuthority !== false || recovery.semanticTruthClaimed !== false) errors.push(`${recovery.id} must preserve history, treat counts as evidence, and forbid automatic recovery claims, authority, and semantic truth claims.`);
+  }
+
+  for (const promotion of portableKnowledgePromotionDecisions) {
+    const activation = portableKnowledgeActivationDecisionIndex.get(promotion.activationDecisionRef);
+    const activationReconciliation = portableKnowledgeExecutionReconciliationIndex.get(promotion.activationReconciliationRef);
+    const observation = portableKnowledgePolicyObservationIndex.get(promotion.observationRef);
+    const rollback = promotion.rollbackRecordRef ? portableKnowledgeRollbackRecordIndex.get(promotion.rollbackRecordRef) : null;
+    const recovery = promotion.recoveryVerificationRef ? portableKnowledgeRecoveryVerificationIndex.get(promotion.recoveryVerificationRef) : null;
+    if (!activation) errors.push(`${promotion.id} references missing activation decision ${promotion.activationDecisionRef}.`);
+    if (!activationReconciliation) errors.push(`${promotion.id} references missing activation reconciliation ${promotion.activationReconciliationRef}.`);
+    if (!observation) errors.push(`${promotion.id} references missing observation ${promotion.observationRef}.`);
+    if (activationReconciliation && (activationReconciliation.actionKind !== "activation" || activationReconciliation.activationDecisionRef !== promotion.activationDecisionRef)) errors.push(`${promotion.id} activation reconciliation must describe the same activation decision.`);
+    if (activation && promotion.candidatePolicyRef !== activation.proposedPolicyRef) errors.push(`${promotion.id} candidatePolicyRef must match the proposed policy.`);
+    let expectedDisposition = "hold";
+    if (activationReconciliation?.result === "matched" && observation?.observationComplete) {
+      if (observation.observationDecision === "continue") expectedDisposition = "promote";
+      if (observation.observationDecision === "rollback-required") expectedDisposition = recovery?.verificationDecision === "verified" ? "retire" : "failed-recovery";
+    }
+    if (promotion.disposition !== expectedDisposition) errors.push(`${promotion.id} disposition must reproduce as ${expectedDisposition}.`);
+    if (expectedDisposition === "promote" && activation && promotion.currentPolicyRef !== activation.proposedPolicyRef) errors.push(`${promotion.id} promoted currentPolicyRef must be the proposed policy.`);
+    if (expectedDisposition === "retire" && activation && promotion.currentPolicyRef !== activation.baselinePolicyRef) errors.push(`${promotion.id} retired candidate must leave the baseline policy current.`);
+    if (["retire", "failed-recovery"].includes(expectedDisposition) && (!rollback || !recovery)) errors.push(`${promotion.id} ${expectedDisposition} requires rollback and recovery verification records.`);
+    const types = portableGovernanceTypes(promotion.governanceTriggerRefs, promotion.id);
+    if (["hold", "failed-recovery"].includes(expectedDisposition) && !types.has("portable-trust-promotion-blocked")) errors.push(`${promotion.id} blocked promotion requires a portable-trust-promotion-blocked governance trigger.`);
+    if (!promotion.decidedBy || !promotion.authorityBasis) errors.push(`${promotion.id} requires accountable decidedBy and authorityBasis.`);
+    if (promotion.status !== (["promote", "retire"].includes(expectedDisposition) ? "reviewed" : "governance-required")) errors.push(`${promotion.id} status must reproduce from policy disposition.`);
+    if (promotion.predecessorStatePreserved !== true || promotion.decisionDoesNotExecutePromotion !== true || promotion.activityCountIsQuality !== false || promotion.automaticPromotion !== false || promotion.automaticAuthority !== false || promotion.semanticTruthClaimed !== false) errors.push(`${promotion.id} must preserve predecessor state, separate decision from execution, treat counts as evidence, and forbid automatic promotion, authority, and semantic truth claims.`);
+  }
+
   const index = pkg.ledgerIndex;
   if (!index || typeof index !== "object") {
     errors.push(`${packagePath} must include ledgerIndex.`);
@@ -1274,7 +1358,7 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim ?? []).includes("semantic truth")) {
       errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
     }
-    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth", "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth", "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness"]) {
+    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth", "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth", "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness", "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness"]) {
       if (!(boundary.doesNotClaim ?? []).includes(claim)) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming ${claim}.`);
     }
   }
@@ -1321,7 +1405,10 @@ function validateLedgerPackage(pkg, packagePath) {
       portableKnowledgeRolloutPreviews: portableKnowledgeRolloutPreviews.length,
       portableKnowledgeActivationDecisions: portableKnowledgeActivationDecisions.length,
       portableKnowledgePolicyObservations: portableKnowledgePolicyObservations.length,
-      portableKnowledgeRollbackRecords: portableKnowledgeRollbackRecords.length
+      portableKnowledgeRollbackRecords: portableKnowledgeRollbackRecords.length,
+      portableKnowledgeExecutionReconciliations: portableKnowledgeExecutionReconciliations.length,
+      portableKnowledgeRecoveryVerifications: portableKnowledgeRecoveryVerifications.length,
+      portableKnowledgePromotionDecisions: portableKnowledgePromotionDecisions.length
     }
   });
 }

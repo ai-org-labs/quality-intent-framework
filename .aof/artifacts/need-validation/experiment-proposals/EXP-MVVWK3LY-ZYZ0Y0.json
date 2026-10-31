@@ -1,0 +1,12 @@
+{
+  "artifact_type": "experiment-proposal",
+  "recorded_at": "2026-10-31T04:29:59.494Z",
+  "experiment_proposal_id": "EXP-MVVWK3LY-ZYZ0Y0",
+  "assumption_to_test": "A three-entity execution reconciliation, recovery verification, and policy promotion chain is sufficient to reproduce state transitions without controlling deployment.",
+  "smallest_testable_validation": "Extend qif-ledger schema, example, verifier, and negative fixtures with one failed activation reconciliation, one verified rollback recovery, and one promotion-blocked outcome derived from v0.8.7 records.",
+  "expected_learning": "Whether declared-versus-observed state, recovery completion, and promotion eligibility can be reproduced deterministically while remaining provider-neutral and non-authoritative.",
+  "expected_cost": "One bounded schema, verifier, documentation, portable package, and release slice.",
+  "success_threshold": "Positive example passes; retained negative fixtures reject absent execution evidence, state mismatch, incomplete recovery, unresolved governance, missing authority, history mutation, and invalid promotion.",
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVVWJLZO-DR9KXN"
+}

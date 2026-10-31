@@ -84,6 +84,7 @@ Use additional documents when needed:
 | Rotate trust policy or replay an earlier trust decision | `docs/qif-v0.8.5-trust-policy-replay.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
 | Preview a draft trust policy across all declared portable knowledge | `docs/qif-v0.8.6-trust-policy-rollout-preview.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
 | Authorize a bounded trust-policy activation and preserve observation and rollback evidence | `docs/qif-v0.8.7-trust-policy-activation-rollback.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
+| Reconcile declared activation or rollback with observed state and govern policy promotion | `docs/qif-v0.8.8-activation-outcome-reconciliation.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
 | Expose selection, missing outcomes, dependence, segments, and drift behind a calibration aggregate | `docs/qif-v0.6.32-calibration-cohort-integrity.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Explain why one calibration error requires stronger governance than another at an explicit loss boundary | `docs/qif-v0.6.33-consequence-sensitive-calibration.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Show whether a decision is brittle under bounded, reviewed threshold alternatives | `docs/qif-v0.6.34-threshold-robustness.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
@@ -1009,6 +1010,31 @@ Use `PortableKnowledgeActivationDecision`,
 `PortableKnowledgePolicyObservation`, and
 `PortableKnowledgeRollbackRecord`. Their structural validity does not prove
 execution, safe continuation, successful recovery, or semantic fitness.
+
+## Activation Outcome Reconciliation and Promotion
+
+After activation or rollback execution is reported:
+
+1. Keep the original decision, observation, and rollback records immutable.
+2. Reconcile each declared action against observed policy, frozen scope digest,
+   and evidence. A successful command without evidence is `unverified`.
+3. Record `matched`, `mismatch`, or `unverified`; route mismatch and missing
+   evidence to governance.
+4. For rollback, verify the restored policy state and every required effect
+   check. Keep delayed or unknown effects explicit.
+5. Reproduce recovery as `verified`, `failed`, or `incomplete`.
+6. Record one accountable disposition: `promote`, `hold`, `retire`, or
+   `failed-recovery`.
+7. Promote only after matched activation and complete observation that says
+   continue. Retire only after required rollback and verified recovery.
+8. Preserve predecessor state and keep automatic state claims, promotion,
+   authority, and semantic truth claims false.
+
+Use `PortableKnowledgeExecutionReconciliation`,
+`PortableKnowledgeRecoveryVerification`, and
+`PortableKnowledgePromotionDecision`. Structural agreement does not prove
+provider authenticity, complete side-effect recovery, operational safety, or
+authority to deploy.
 
 ## Common Failure Modes
 

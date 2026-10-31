@@ -1,0 +1,16 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-10-31T04:29:58.990Z",
+  "problem_statement_id": "PST-MVVWK37Y-PI4RYA",
+  "affected_party": "Organizations governing portable trust-policy activations",
+  "actual_problem": "QIF can declare an activation or rollback path but cannot reconcile the declared action with observed execution, prove recovery completion, or govern promotion of the policy state.",
+  "why_it_matters": "A policy may be promoted after a declared but unexecuted activation, incomplete rollback, stale observation, or state mismatch, creating false assurance and rewriting apparent operational truth.",
+  "why_now": "QIF v0.8.7 completed the authority-observation-rollback contract; current agent operations guidance separates evaluate-only from enforce mode and requires promotion criteria, deployment outcome tracking, and tested rollback confirmation.",
+  "evidence_refs": [
+    "docs/qif-v0.8.7-trust-policy-activation-rollback.md",
+    "https://github.com/microsoft/agent-governance-toolkit/blob/main/policy-engine/docs/PRODUCTION_DEPLOYMENT.md",
+    "https://architect.salesforce.com/docs/architect/well-architected/guide/agentic-enterprise-operational-excellence.html"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVVWJLZO-DR9KXN"
+}

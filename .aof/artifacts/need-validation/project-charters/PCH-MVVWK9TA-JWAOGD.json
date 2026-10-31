@@ -1,0 +1,21 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-10-31T04:30:07.534Z",
+  "project_charter_id": "PCH-MVVWK9TA-JWAOGD",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-MVVWK75Y-1MDRP0.json",
+  "validated_objective": "Release QIF v0.8.8 with executable activation execution reconciliation, recovery verification, and governed policy promotion records.",
+  "scope": [
+    "Extend qif-ledger schema and example with provider-neutral execution reconciliation, recovery verification, and policy promotion entities.",
+    "Enforce exact activation, rollback, observation, policy lineage, evidence, authority, and governance links with deterministic fail-closed outcomes.",
+    "Add retained negative fixtures, documentation, portable package, roadmap update, AOF runtime evidence, tag, and GitHub release."
+  ],
+  "constraints": [
+    "No UI, live deployment control, external integration, cryptographic verification, automatic promotion, automatic authority, or semantic-truth claim."
+  ],
+  "expected_outcomes": [
+    "Every declared execution is reconciled to evidence and expected-versus-observed policy state.",
+    "Promotion is structurally eligible only after complete successful reconciliation, recovery where required, accountable authority, and resolved governance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVVWJLZO-DR9KXN"
+}

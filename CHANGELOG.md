@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.8.8
+
+- Added execution reconciliation records that compare declared activation or rollback actions with evidence-backed observed policy and scope state.
+- Added recovery verification records that reproduce restored policy state, effect-check completeness, and verified, failed, or incomplete recovery outcomes.
+- Added governed policy disposition records for promote, hold, retire, and failed-recovery decisions without executing deployment or granting authority.
+- Added fail-closed governance for unverified execution, state mismatch, incomplete or failed recovery, blocked promotion, missing authority, and history mutation.
+- Added retained negative fixtures and verifier boundaries separating structural reconciliation from provider authenticity, complete side-effect recovery, semantic fitness, and operational authority.
+
 ## v0.8.7
 
 - Added accountable trust-policy activation decisions bound to sufficient rollout previews and exact frozen scope.

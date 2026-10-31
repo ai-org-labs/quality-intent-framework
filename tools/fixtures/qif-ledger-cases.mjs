@@ -61,6 +61,9 @@ function rolloutPreview(pkg) { return pkg.portableKnowledgeRolloutPreviews[0]; }
 function activationDecision(pkg) { return pkg.portableKnowledgeActivationDecisions[0]; }
 function policyObservation(pkg) { return pkg.portableKnowledgePolicyObservations[0]; }
 function rollbackRecord(pkg) { return pkg.portableKnowledgeRollbackRecords[0]; }
+function executionReconciliation(pkg, index = 0) { return pkg.portableKnowledgeExecutionReconciliations[index]; }
+function recoveryVerification(pkg) { return pkg.portableKnowledgeRecoveryVerifications[0]; }
+function promotionDecision(pkg) { return pkg.portableKnowledgePromotionDecisions[0]; }
 
 export const cases = [
   {
@@ -1099,13 +1102,13 @@ export const cases = [
     id: "portable-trust-rollback-completion-evidence",
     rule: "completed rollback requires execution evidence",
     expect: "PKRB-001 completed rollback requires completedAt and execution evidence.",
-    mutate: (pkg) => { rollbackRecord(pkg).rollbackStatus = "completed"; }
+    mutate: (pkg) => { rollbackRecord(pkg).executionEvidenceRefs = []; }
   },
   {
     id: "portable-trust-rollback-incomplete-trigger",
     rule: "incomplete rollback remains governed",
     expect: "PKRB-001 incomplete rollback requires a portable-trust-rollback-incomplete governance trigger.",
-    mutate: (pkg) => { rollbackRecord(pkg).governanceTriggerRefs = ["PKGTR-019"]; }
+    mutate: (pkg) => { rollbackRecord(pkg).rollbackStatus = "planned"; delete rollbackRecord(pkg).completedAt; rollbackRecord(pkg).executionEvidenceRefs = []; rollbackRecord(pkg).status = "governance-required"; rollbackRecord(pkg).governanceTriggerRefs = ["PKGTR-019"]; }
   },
   {
     id: "portable-trust-rollback-boundary",
@@ -1114,10 +1117,130 @@ export const cases = [
     mutate: (pkg) => { rollbackRecord(pkg).automaticRollback = true; }
   },
   {
+    id: "portable-trust-execution-action-record",
+    rule: "execution reconciliation resolves the declared action",
+    expect: "PKXR-001 activation actionRecordRef must equal activationDecisionRef.",
+    mutate: (pkg) => { executionReconciliation(pkg).actionRecordRef = "PKRB-001"; }
+  },
+  {
+    id: "portable-trust-execution-policy-state",
+    rule: "expected policy reproduces from the action",
+    expect: "PKXR-001 expectedPolicyRef must reproduce from the referenced action.",
+    mutate: (pkg) => { executionReconciliation(pkg).expectedPolicyRef = "PKTP-002"; }
+  },
+  {
+    id: "portable-trust-execution-scope",
+    rule: "execution reconciliation retains activation scope",
+    expect: "PKXR-001 expectedScopeDigest must match the activation scope.",
+    mutate: (pkg) => { executionReconciliation(pkg).expectedScopeDigest = `sha256:${"0".repeat(64)}`; }
+  },
+  {
+    id: "portable-trust-execution-state-match",
+    rule: "state match reproduces from observed state",
+    expect: "PKXR-001 stateMatched must reproduce as false.",
+    mutate: (pkg) => { executionReconciliation(pkg).observedPolicyRef = "PKTP-002"; }
+  },
+  {
+    id: "portable-trust-execution-result",
+    rule: "execution result requires evidence",
+    expect: "PKXR-001 result must reproduce as unverified.",
+    mutate: (pkg) => { executionReconciliation(pkg).executionEvidenceRefs = []; }
+  },
+  {
+    id: "portable-trust-execution-mismatch-trigger",
+    rule: "execution mismatch routes governance",
+    expect: "PKXR-001 execution mismatch requires a portable-trust-execution-state-mismatch governance trigger.",
+    mutate: (pkg) => { executionReconciliation(pkg).observedPolicyRef = "PKTP-002"; executionReconciliation(pkg).stateMatched = false; executionReconciliation(pkg).result = "mismatch"; }
+  },
+  {
+    id: "portable-trust-execution-boundary",
+    rule: "reconciliation does not claim provider truth or authority",
+    expect: "PKXR-001 must preserve history, treat counts as evidence, and forbid automatic state claims, authority, and semantic truth claims.",
+    mutate: (pkg) => { executionReconciliation(pkg).automaticStateClaim = true; }
+  },
+  {
+    id: "portable-trust-recovery-reconciliation",
+    rule: "recovery uses the rollback execution reconciliation",
+    expect: "PKRV-001 reconciliation must describe the referenced rollback.",
+    mutate: (pkg) => { recoveryVerification(pkg).rollbackReconciliationRef = "PKXR-001"; }
+  },
+  {
+    id: "portable-trust-recovery-policy-state",
+    rule: "recovery expected state matches rollback target",
+    expect: "PKRV-001 expectedRestoredPolicyRef must match the rollback target.",
+    mutate: (pkg) => { recoveryVerification(pkg).expectedRestoredPolicyRef = "PKTP-003"; }
+  },
+  {
+    id: "portable-trust-recovery-decision",
+    rule: "recovery decision reproduces from checks and state",
+    expect: "PKRV-001 verificationDecision must reproduce as failed.",
+    mutate: (pkg) => { recoveryVerification(pkg).effectChecks[0].result = "fail"; }
+  },
+  {
+    id: "portable-trust-recovery-incomplete-trigger",
+    rule: "incomplete recovery routes governance",
+    expect: "PKRV-001 incomplete recovery requires a portable-trust-recovery-incomplete governance trigger.",
+    mutate: (pkg) => { recoveryVerification(pkg).effectChecks[0].result = "missing"; recoveryVerification(pkg).effectChecks[0].evidenceRefs = []; recoveryVerification(pkg).recoveryComplete = false; recoveryVerification(pkg).verificationDecision = "incomplete"; }
+  },
+  {
+    id: "portable-trust-recovery-failed-trigger",
+    rule: "failed recovery routes governance",
+    expect: "PKRV-001 failed recovery requires a portable-trust-recovery-failed governance trigger.",
+    mutate: (pkg) => { recoveryVerification(pkg).effectChecks[0].result = "fail"; recoveryVerification(pkg).recoveryComplete = false; recoveryVerification(pkg).verificationDecision = "failed"; }
+  },
+  {
+    id: "portable-trust-recovery-boundary",
+    rule: "recovery verification does not claim automatic recovery",
+    expect: "PKRV-001 must preserve history, treat counts as evidence, and forbid automatic recovery claims, authority, and semantic truth claims.",
+    mutate: (pkg) => { recoveryVerification(pkg).automaticRecoveryClaim = true; }
+  },
+  {
+    id: "portable-trust-promotion-activation-reconciliation",
+    rule: "promotion resolves activation execution evidence",
+    expect: "PKPD-001 activation reconciliation must describe the same activation decision.",
+    mutate: (pkg) => { promotionDecision(pkg).activationReconciliationRef = "PKXR-002"; }
+  },
+  {
+    id: "portable-trust-promotion-disposition",
+    rule: "policy disposition reproduces from observation and recovery",
+    expect: "PKPD-001 disposition must reproduce as retire.",
+    mutate: (pkg) => { promotionDecision(pkg).disposition = "promote"; }
+  },
+  {
+    id: "portable-trust-promotion-current-policy",
+    rule: "retirement leaves the restored baseline current",
+    expect: "PKPD-001 retired candidate must leave the baseline policy current.",
+    mutate: (pkg) => { promotionDecision(pkg).currentPolicyRef = "PKTP-003"; }
+  },
+  {
+    id: "portable-trust-promotion-blocked-trigger",
+    rule: "failed recovery blocks promotion through governance",
+    expect: "PKPD-001 blocked promotion requires a portable-trust-promotion-blocked governance trigger.",
+    mutate: (pkg) => { recoveryVerification(pkg).verificationDecision = "failed"; promotionDecision(pkg).disposition = "failed-recovery"; promotionDecision(pkg).status = "governance-required"; }
+  },
+  {
+    id: "portable-trust-promotion-authority",
+    rule: "promotion disposition retains accountable authority",
+    expect: "PKPD-001 requires accountable decidedBy and authorityBasis.",
+    mutate: (pkg) => { promotionDecision(pkg).authorityBasis = ""; }
+  },
+  {
+    id: "portable-trust-promotion-boundary",
+    rule: "promotion decision does not execute or grant authority",
+    expect: "PKPD-001 must preserve predecessor state, separate decision from execution, treat counts as evidence, and forbid automatic promotion, authority, and semantic truth claims.",
+    mutate: (pkg) => { promotionDecision(pkg).automaticPromotion = true; }
+  },
+  {
     id: "portable-trust-activation-verifier-boundary",
     rule: "verifier does not turn records into execution or semantic proof",
     expect: "verifierBoundary must explicitly avoid claiming activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness"); }
+  },
+  {
+    id: "portable-trust-promotion-verifier-boundary",
+    rule: "verifier does not turn reconciliation into provider truth or promotion authority",
+    expect: "verifierBoundary must explicitly avoid claiming execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness"); }
   }
 ];
 

@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Provide a provider-neutral, non-authoritative contract that turns a sufficient complete-population trust-policy preview into an accountable activation decision, bounded observation period, deterministic stop decision, and evidence-preserving rollback.",
-  "updated_at": "2026-10-30T04:32:47.431Z",
+  "content": "Provide a provider-neutral, non-authoritative contract that reconciles declared trust-policy activation and rollback with observed execution and recovered state, then governs promotion, hold, retirement, or failed recovery without rewriting history.",
+  "updated_at": "2026-10-31T04:30:09.574Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVUH6J0A-GHV0QG",
-  "source_decision_record_id": "DEC-MVUH7UIS-7PG1UG",
+  "source_session_id": "SESS-MVVWJJKC-QZ4PYJ",
+  "source_decision_record_id": "DEC-MVVWKBDW-CGWKE5",
   "declared_complete_at": null
 }

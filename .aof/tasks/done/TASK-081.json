@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-081",
+  "title": "Release QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion",
+  "description": "Add provider-neutral execution reconciliation, recovery verification, policy promotion decisions, governance, retained fixtures, docs, portable package, tests, and release.",
+  "status": "done",
+  "origin": null,
+  "orchestrator_session_id": "SESS-MVVWJJKC-QZ4PYJ",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MVVWKBDW-CGWKE5",
+  "operating_goal_ref": null,
+  "created_at": "2026-10-31T04:30:14.689Z",
+  "updated_at": "2026-10-31T04:41:32.813Z",
+  "assigned_at": null,
+  "done_at": "2026-10-31T04:41:32.813Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented and verified QIF v0.8.8 execution reconciliation, recovery verification, and governed policy disposition; npm test and AOF verification pass."
+}
