@@ -176,6 +176,21 @@ promotion, or grant authority.
 - `schemas/qif-ledger-package.schema.json`
 - `examples/qif-ledger-package.json`
 
+## 15. Detect Policy Drift and Govern Emergency Demotion
+
+After a policy is promoted, preserve an append-only sequence of observations
+that compare approved policy, scope, configuration, authority, dependencies,
+and evidence with the current declared state. Assess every changed or missing
+dimension, route uncertainty and material drift to governance, and require
+critical drift before an emergency demotion can be represented. Bind demotion
+to human authority, predecessor policy, exact scope, deadline, execution
+reconciliation, and residual risk. These records do not observe a live
+provider, prove root cause, execute demotion, or grant authority.
+
+- `docs/qif-v0.8.9-policy-state-drift-emergency-demotion.md`
+- `schemas/qif-ledger-package.schema.json`
+- `examples/qif-ledger-package.json`
+
 ## Choosing a Package Type
 
 Open `MANIFEST.json` to see every included schema and example. Use a schema only

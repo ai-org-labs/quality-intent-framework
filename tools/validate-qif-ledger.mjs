@@ -274,6 +274,9 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeExecutionReconciliations = requireArray(pkg, "portableKnowledgeExecutionReconciliations", packagePath);
   const portableKnowledgeRecoveryVerifications = requireArray(pkg, "portableKnowledgeRecoveryVerifications", packagePath);
   const portableKnowledgePromotionDecisions = requireArray(pkg, "portableKnowledgePromotionDecisions", packagePath);
+  const portableKnowledgePolicyStateObservations = requireArray(pkg, "portableKnowledgePolicyStateObservations", packagePath);
+  const portableKnowledgeDriftAssessments = requireArray(pkg, "portableKnowledgeDriftAssessments", packagePath);
+  const portableKnowledgeEmergencyDemotions = requireArray(pkg, "portableKnowledgeEmergencyDemotions", packagePath);
   const packageRefIndex = indexById(packageRefs, `${packagePath}:packageRefs`);
   const crossPackageRefIndex = indexById(crossPackageRefs, `${packagePath}:crossPackageRefs`);
   const lifecycleIndex = indexById(lifecycleRecords, `${packagePath}:qualityIntentLifecycleRecords`);
@@ -312,6 +315,10 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeRollbackRecordIndex = indexById(portableKnowledgeRollbackRecords, `${packagePath}:portableKnowledgeRollbackRecords`);
   const portableKnowledgeExecutionReconciliationIndex = indexById(portableKnowledgeExecutionReconciliations, `${packagePath}:portableKnowledgeExecutionReconciliations`);
   const portableKnowledgeRecoveryVerificationIndex = indexById(portableKnowledgeRecoveryVerifications, `${packagePath}:portableKnowledgeRecoveryVerifications`);
+  const portableKnowledgePromotionDecisionIndex = indexById(portableKnowledgePromotionDecisions, `${packagePath}:portableKnowledgePromotionDecisions`);
+  const portableKnowledgePolicyStateObservationIndex = indexById(portableKnowledgePolicyStateObservations, `${packagePath}:portableKnowledgePolicyStateObservations`);
+  const portableKnowledgeDriftAssessmentIndex = indexById(portableKnowledgeDriftAssessments, `${packagePath}:portableKnowledgeDriftAssessments`);
+  const portableKnowledgeEmergencyDemotionIndex = indexById(portableKnowledgeEmergencyDemotions, `${packagePath}:portableKnowledgeEmergencyDemotions`);
   void crossPackageRefIndex;
   void missedIntentIndex;
 
@@ -1203,9 +1210,8 @@ function validateLedgerPackage(pkg, packagePath) {
 
   for (const observation of portableKnowledgePolicyObservations) {
     const activation = portableKnowledgeActivationDecisionIndex.get(observation.activationDecisionRef);
-    const rollback = portableKnowledgeRollbackRecordIndex.get(observation.rollbackRecordRef);
+    const rollback = observation.rollbackRecordRef ? portableKnowledgeRollbackRecordIndex.get(observation.rollbackRecordRef) : null;
     if (!activation) errors.push(`${observation.id} references missing activation decision ${observation.activationDecisionRef}.`);
-    if (!rollback) errors.push(`${observation.id} references missing rollback record ${observation.rollbackRecordRef}.`);
     if (activation && activation.observationRef !== observation.id) errors.push(`${observation.id} activation decision must point back to the observation.`);
     if (activation && activation.decision !== "authorized") errors.push(`${observation.id} requires an authorized activation decision.`);
     if (rollback && rollback.observationRef !== observation.id) errors.push(`${observation.id} rollback record must point back to the observation.`);
@@ -1224,6 +1230,8 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!complete && !types.has("portable-trust-observation-incomplete")) errors.push(`${observation.id} incomplete observation requires a portable-trust-observation-incomplete governance trigger.`);
     if (stopMet && !types.has("portable-trust-observation-stop-condition")) errors.push(`${observation.id} stop condition requires a portable-trust-observation-stop-condition governance trigger.`);
     if (expectedDecision === "rollback-required" && !types.has("portable-trust-rollback-required")) errors.push(`${observation.id} rollback decision requires a portable-trust-rollback-required governance trigger.`);
+    if (expectedDecision === "rollback-required" && !rollback) errors.push(`${observation.id} rollback-required decision must reference a rollback record.`);
+    if (expectedDecision !== "rollback-required" && observation.rollbackRecordRef) errors.push(`${observation.id} ${expectedDecision} decision must not reference a rollback record.`);
     if (observation.status !== (expectedDecision === "continue" ? "reviewed" : "governance-required")) errors.push(`${observation.id} status must reproduce from the observation decision.`);
     if (observation.activityCountIsQuality !== false || observation.automaticContinuation !== false || observation.automaticAuthority !== false || observation.semanticTruthClaimed !== false) errors.push(`${observation.id} must treat signal counts as evidence and forbid automatic continuation, authority, and semantic truth claims.`);
   }
@@ -1255,11 +1263,17 @@ function validateLedgerPackage(pkg, packagePath) {
     if (reconciliation.actionKind === "activation") {
       if (reconciliation.actionRecordRef !== reconciliation.activationDecisionRef) errors.push(`${reconciliation.id} activation actionRecordRef must equal activationDecisionRef.`);
       expectedPolicyRef = activation?.proposedPolicyRef ?? null;
-    } else {
+    } else if (reconciliation.actionKind === "rollback") {
       const rollback = portableKnowledgeRollbackRecordIndex.get(reconciliation.actionRecordRef);
       if (!rollback) errors.push(`${reconciliation.id} references missing rollback record ${reconciliation.actionRecordRef}.`);
       if (rollback && rollback.activationDecisionRef !== reconciliation.activationDecisionRef) errors.push(`${reconciliation.id} rollback record must belong to the same activation decision.`);
       expectedPolicyRef = rollback?.targetPolicyRef ?? null;
+    } else {
+      const demotion = portableKnowledgeEmergencyDemotionIndex.get(reconciliation.actionRecordRef);
+      if (!demotion) errors.push(`${reconciliation.id} references missing emergency demotion ${reconciliation.actionRecordRef}.`);
+      const promotion = demotion ? portableKnowledgePromotionDecisionIndex.get(demotion.promotionDecisionRef) : null;
+      if (promotion && promotion.activationDecisionRef !== reconciliation.activationDecisionRef) errors.push(`${reconciliation.id} emergency demotion must belong to the same activation decision.`);
+      expectedPolicyRef = demotion?.targetPolicyRef ?? null;
     }
     if (expectedPolicyRef && reconciliation.expectedPolicyRef !== expectedPolicyRef) errors.push(`${reconciliation.id} expectedPolicyRef must reproduce from the referenced action.`);
     if (activation && reconciliation.expectedScopeDigest !== activation.scopeDigest) errors.push(`${reconciliation.id} expectedScopeDigest must match the activation scope.`);
@@ -1327,6 +1341,104 @@ function validateLedgerPackage(pkg, packagePath) {
     if (promotion.predecessorStatePreserved !== true || promotion.decisionDoesNotExecutePromotion !== true || promotion.activityCountIsQuality !== false || promotion.automaticPromotion !== false || promotion.automaticAuthority !== false || promotion.semanticTruthClaimed !== false) errors.push(`${promotion.id} must preserve predecessor state, separate decision from execution, treat counts as evidence, and forbid automatic promotion, authority, and semantic truth claims.`);
   }
 
+  for (const observation of portableKnowledgePolicyStateObservations) {
+    const promotion = portableKnowledgePromotionDecisionIndex.get(observation.promotionDecisionRef);
+    const activation = promotion ? portableKnowledgeActivationDecisionIndex.get(promotion.activationDecisionRef) : null;
+    if (!promotion) errors.push(`${observation.id} references missing promotion decision ${observation.promotionDecisionRef}.`);
+    if (promotion && promotion.disposition !== "promote") errors.push(`${observation.id} requires a promoted policy decision.`);
+    if (promotion && observation.approvedPolicyRef !== promotion.currentPolicyRef) errors.push(`${observation.id} approvedPolicyRef must match the promoted current policy.`);
+    if (activation && observation.approvedScopeDigest !== activation.scopeDigest) errors.push(`${observation.id} approvedScopeDigest must match the activation scope.`);
+    if (!portableKnowledgeTrustPolicyIndex.has(observation.observedPolicyRef)) errors.push(`${observation.id} references missing observed policy ${observation.observedPolicyRef}.`);
+    if (observation.sequence === 1 && observation.previousObservationRef) errors.push(`${observation.id} first observation must not reference a predecessor.`);
+    if (observation.sequence > 1) {
+      const previous = portableKnowledgePolicyStateObservationIndex.get(observation.previousObservationRef);
+      if (!previous) errors.push(`${observation.id} sequence ${observation.sequence} requires a previous observation.`);
+      if (previous && (previous.promotionDecisionRef !== observation.promotionDecisionRef || previous.sequence !== observation.sequence - 1)) errors.push(`${observation.id} previous observation must be contiguous and belong to the same promotion.`);
+      if (previous && Date.parse(previous.observedAt) >= Date.parse(observation.observedAt)) errors.push(`${observation.id} must be observed after its predecessor.`);
+    }
+    const dimensions = observation.stateDimensions ?? [];
+    const dimensionIds = dimensions.map((entry) => entry.dimensionId);
+    if (new Set(dimensionIds).size !== dimensionIds.length) errors.push(`${observation.id} state dimension ids must be unique.`);
+    for (const dimension of dimensions) {
+      const expectedResult = (dimension.evidenceRefs ?? []).length === 0 ? "missing" : dimension.expectedValue === dimension.observedValue ? "match" : "mismatch";
+      if (dimension.result !== expectedResult) errors.push(`${observation.id}/${dimension.dimensionId} result must reproduce as ${expectedResult}.`);
+    }
+    const complete = dimensions.length > 0 && dimensions.every((entry) => entry.result !== "missing" && (entry.evidenceRefs ?? []).length > 0);
+    const stateMatched = Boolean(complete && observation.observedPolicyRef === observation.approvedPolicyRef && observation.observedScopeDigest === observation.approvedScopeDigest && dimensions.every((entry) => entry.result === "match"));
+    if (observation.observationComplete !== complete) errors.push(`${observation.id} observationComplete must reproduce as ${complete}.`);
+    if (observation.stateMatched !== stateMatched) errors.push(`${observation.id} stateMatched must reproduce as ${stateMatched}.`);
+    const types = portableGovernanceTypes(observation.governanceTriggerRefs, observation.id);
+    if (!complete && !types.has("portable-trust-state-observation-unverified")) errors.push(`${observation.id} incomplete state observation requires a portable-trust-state-observation-unverified governance trigger.`);
+    if (complete && !stateMatched && !types.has("portable-trust-state-drift-detected")) errors.push(`${observation.id} state mismatch requires a portable-trust-state-drift-detected governance trigger.`);
+    if (observation.status !== (stateMatched ? "reviewed" : "governance-required")) errors.push(`${observation.id} status must reproduce from state observation.`);
+    if (observation.historyPreserved !== true || observation.activityCountIsQuality !== false || observation.automaticStateClaim !== false || observation.automaticAuthority !== false || observation.semanticTruthClaimed !== false) errors.push(`${observation.id} must preserve history, treat counts as evidence, and forbid automatic state claims, authority, and semantic truth claims.`);
+  }
+
+  const severityRank = new Map([["low", 1], ["medium", 2], ["high", 3], ["critical", 4]]);
+  for (const assessment of portableKnowledgeDriftAssessments) {
+    const promotion = portableKnowledgePromotionDecisionIndex.get(assessment.promotionDecisionRef);
+    const baseline = portableKnowledgePolicyStateObservationIndex.get(assessment.baselineObservationRef);
+    const current = portableKnowledgePolicyStateObservationIndex.get(assessment.currentObservationRef);
+    if (!promotion) errors.push(`${assessment.id} references missing promotion decision ${assessment.promotionDecisionRef}.`);
+    if (!baseline) errors.push(`${assessment.id} references missing baseline observation ${assessment.baselineObservationRef}.`);
+    if (!current) errors.push(`${assessment.id} references missing current observation ${assessment.currentObservationRef}.`);
+    if (baseline && (baseline.promotionDecisionRef !== assessment.promotionDecisionRef || baseline.stateMatched !== true)) errors.push(`${assessment.id} baseline observation must be a matched state for the same promotion.`);
+    if (current && current.promotionDecisionRef !== assessment.promotionDecisionRef) errors.push(`${assessment.id} current observation must belong to the same promotion.`);
+    if (baseline && current && (baseline.sequence >= current.sequence || Date.parse(baseline.observedAt) >= Date.parse(current.observedAt))) errors.push(`${assessment.id} current observation must follow the baseline.`);
+    const changedDimensions = new Map((current?.stateDimensions ?? []).filter((entry) => entry.result !== "match").map((entry) => [entry.dimensionId, entry]));
+    const assessedDimensions = assessment.driftDimensions ?? [];
+    const assessedIds = assessedDimensions.map((entry) => entry.dimensionId);
+    if (new Set(assessedIds).size !== assessedIds.length) errors.push(`${assessment.id} drift dimension ids must be unique.`);
+    if (canonicalJson([...changedDimensions.keys()].sort()) !== canonicalJson([...assessedIds].sort())) errors.push(`${assessment.id} drift dimensions must exactly cover changed or missing current-state dimensions.`);
+    for (const dimension of assessedDimensions) {
+      const source = changedDimensions.get(dimension.dimensionId);
+      if (source && dimension.driftType !== (source.result === "missing" ? "unknown" : source.dimensionType)) errors.push(`${assessment.id}/${dimension.dimensionId} driftType must reproduce from the current observation.`);
+      if (source?.result === "missing" && dimension.severity !== "unknown") errors.push(`${assessment.id}/${dimension.dimensionId} missing evidence requires unknown severity.`);
+    }
+    const driftDetected = assessedDimensions.length > 0;
+    let highestSeverity = "none";
+    if (assessedDimensions.some((entry) => entry.severity === "unknown")) highestSeverity = "unknown";
+    for (const entry of assessedDimensions) if ((severityRank.get(entry.severity) ?? 0) > (severityRank.get(highestSeverity) ?? 0)) highestSeverity = entry.severity;
+    const decision = !driftDetected ? "stable" : highestSeverity === "low" ? "observe" : highestSeverity === "critical" ? "emergency-demotion-required" : "governance-required";
+    if (assessment.driftDetected !== driftDetected) errors.push(`${assessment.id} driftDetected must reproduce as ${driftDetected}.`);
+    if (assessment.highestSeverity !== highestSeverity) errors.push(`${assessment.id} highestSeverity must reproduce as ${highestSeverity}.`);
+    if (assessment.assessmentDecision !== decision) errors.push(`${assessment.id} assessmentDecision must reproduce as ${decision}.`);
+    const materialDrift = [...changedDimensions.values()].some((entry) => entry.material === true);
+    const types = portableGovernanceTypes(assessment.governanceTriggerRefs, assessment.id);
+    if (driftDetected && !types.has("portable-trust-state-drift-detected")) errors.push(`${assessment.id} detected drift requires a portable-trust-state-drift-detected governance trigger.`);
+    if (materialDrift && !types.has("portable-trust-material-drift")) errors.push(`${assessment.id} material drift requires a portable-trust-material-drift governance trigger.`);
+    if (highestSeverity === "unknown" && !types.has("portable-trust-state-observation-unverified")) errors.push(`${assessment.id} unknown drift requires a portable-trust-state-observation-unverified governance trigger.`);
+    if (decision === "emergency-demotion-required" && !types.has("portable-trust-emergency-demotion-required")) errors.push(`${assessment.id} critical drift requires a portable-trust-emergency-demotion-required governance trigger.`);
+    if (assessment.status !== (["stable", "observe"].includes(decision) ? "reviewed" : "governance-required")) errors.push(`${assessment.id} status must reproduce from drift decision.`);
+    if (assessment.historyPreserved !== true || assessment.activityCountIsQuality !== false || assessment.automaticDemotion !== false || assessment.automaticAuthority !== false || assessment.semanticTruthClaimed !== false) errors.push(`${assessment.id} must preserve history, treat counts as evidence, and forbid automatic demotion, authority, and semantic truth claims.`);
+  }
+
+  for (const demotion of portableKnowledgeEmergencyDemotions) {
+    const promotion = portableKnowledgePromotionDecisionIndex.get(demotion.promotionDecisionRef);
+    const assessment = portableKnowledgeDriftAssessmentIndex.get(demotion.driftAssessmentRef);
+    const activation = promotion ? portableKnowledgeActivationDecisionIndex.get(promotion.activationDecisionRef) : null;
+    const reconciliation = portableKnowledgeExecutionReconciliationIndex.get(demotion.executionReconciliationRef);
+    if (!promotion) errors.push(`${demotion.id} references missing promotion decision ${demotion.promotionDecisionRef}.`);
+    if (!assessment) errors.push(`${demotion.id} references missing drift assessment ${demotion.driftAssessmentRef}.`);
+    if (assessment && (assessment.promotionDecisionRef !== demotion.promotionDecisionRef || assessment.assessmentDecision !== "emergency-demotion-required")) errors.push(`${demotion.id} requires a critical drift assessment for the same promotion.`);
+    if (promotion && demotion.fromPolicyRef !== promotion.currentPolicyRef) errors.push(`${demotion.id} fromPolicyRef must match the promoted current policy.`);
+    if (activation && demotion.targetPolicyRef !== activation.baselinePolicyRef) errors.push(`${demotion.id} targetPolicyRef must restore the predecessor baseline policy.`);
+    if (activation && demotion.scopeDigest !== activation.scopeDigest) errors.push(`${demotion.id} scopeDigest must match the promoted activation scope.`);
+    if (!demotion.authorizedBy || !demotion.authorityBasis) errors.push(`${demotion.id} requires accountable authorization and authority basis.`);
+    if (Date.parse(demotion.authorizedAt) >= Date.parse(demotion.deadline)) errors.push(`${demotion.id} deadline must be later than authorization.`);
+    const completed = demotion.demotionStatus === "completed";
+    if (completed && (!demotion.completedAt || Date.parse(demotion.completedAt) > Date.parse(demotion.deadline))) errors.push(`${demotion.id} completed demotion requires completion by the deadline.`);
+    if (!completed && demotion.completedAt) errors.push(`${demotion.id} non-completed demotion must not claim completedAt.`);
+    if (!reconciliation) errors.push(`${demotion.id} references missing execution reconciliation ${demotion.executionReconciliationRef}.`);
+    if (reconciliation && (reconciliation.actionKind !== "emergency-demotion" || reconciliation.actionRecordRef !== demotion.id || reconciliation.result !== (completed ? "matched" : reconciliation.result))) errors.push(`${demotion.id} execution reconciliation must describe the completed emergency demotion.`);
+    const types = portableGovernanceTypes(demotion.governanceTriggerRefs, demotion.id);
+    if (!types.has("portable-trust-emergency-demotion-required")) errors.push(`${demotion.id} must retain the portable-trust-emergency-demotion-required governance trigger.`);
+    if (!["completed", "failed"].includes(demotion.demotionStatus) && !types.has("portable-trust-emergency-demotion-incomplete")) errors.push(`${demotion.id} incomplete emergency demotion requires a portable-trust-emergency-demotion-incomplete governance trigger.`);
+    if (demotion.demotionStatus === "failed" && !types.has("portable-trust-emergency-demotion-failed")) errors.push(`${demotion.id} failed emergency demotion requires a portable-trust-emergency-demotion-failed governance trigger.`);
+    if (demotion.status !== (completed && reconciliation?.result === "matched" ? "reviewed" : "governance-required")) errors.push(`${demotion.id} status must reproduce from demotion reconciliation.`);
+    if (demotion.historyPreserved !== true || demotion.destructiveDeletion !== false || demotion.activityCountIsQuality !== false || demotion.automaticDemotion !== false || demotion.automaticAuthority !== false || demotion.semanticTruthClaimed !== false) errors.push(`${demotion.id} must preserve history, forbid destructive deletion, treat counts as evidence, and forbid automatic demotion, authority, and semantic truth claims.`);
+  }
+
   const index = pkg.ledgerIndex;
   if (!index || typeof index !== "object") {
     errors.push(`${packagePath} must include ledgerIndex.`);
@@ -1358,7 +1470,7 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim ?? []).includes("semantic truth")) {
       errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
     }
-    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth", "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth", "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness", "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness"]) {
+    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth", "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth", "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness", "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness", "policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness"]) {
       if (!(boundary.doesNotClaim ?? []).includes(claim)) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming ${claim}.`);
     }
   }
@@ -1408,7 +1520,10 @@ function validateLedgerPackage(pkg, packagePath) {
       portableKnowledgeRollbackRecords: portableKnowledgeRollbackRecords.length,
       portableKnowledgeExecutionReconciliations: portableKnowledgeExecutionReconciliations.length,
       portableKnowledgeRecoveryVerifications: portableKnowledgeRecoveryVerifications.length,
-      portableKnowledgePromotionDecisions: portableKnowledgePromotionDecisions.length
+      portableKnowledgePromotionDecisions: portableKnowledgePromotionDecisions.length,
+      portableKnowledgePolicyStateObservations: portableKnowledgePolicyStateObservations.length,
+      portableKnowledgeDriftAssessments: portableKnowledgeDriftAssessments.length,
+      portableKnowledgeEmergencyDemotions: portableKnowledgeEmergencyDemotions.length
     }
   });
 }

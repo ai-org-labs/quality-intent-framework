@@ -1,0 +1,24 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-11-01T04:29:15.601Z",
+  "project_charter_id": "PCH-MVXBZ0EP-DFIF4O",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-MVXBYXHZ-C0SMDE.json",
+  "validated_objective": "Release QIF v0.8.9 with deterministic policy-state drift assessment and a bounded, human-governed emergency demotion evidence chain.",
+  "scope": [
+    "Portable policy-state observation history linked to the approved baseline and evidence.",
+    "Deterministic drift classification, severity, governance routing, and current-state reconciliation.",
+    "Emergency demotion authority, target policy, scope, reason, deadline, execution reconciliation, and status.",
+    "Schemas, examples, verifier rules, retained fixtures, docs, portable package, changelog, roadmap, AOF log, tests, tag, and GitHub release."
+  ],
+  "constraints": [
+    "Do not build UI, external integrations, continuous monitoring services, autonomous authority, live deployment, employee surveillance, or semantic-truth claims.",
+    "Do not mutate historical promotion or observation records."
+  ],
+  "expected_outcomes": [
+    "Material and unverified drift fail closed and trigger governance.",
+    "Emergency demotion is explainable, authority-bounded, evidence-linked, and reconciled after execution.",
+    "QIF v0.8.9 passes all local tests and AOF runtime verification and ships with a portable artifact."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVXBYIGV-BAYLCA"
+}

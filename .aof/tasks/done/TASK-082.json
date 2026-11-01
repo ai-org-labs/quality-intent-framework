@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-082",
+  "title": "Release QIF v0.8.9 Policy State Drift and Emergency Demotion",
+  "description": "Add provider-neutral policy-state observations, deterministic drift assessments, human-governed emergency demotion records, governance triggers, retained fixtures, docs, portable package, tests, tag, and release.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MVXBYFXP-7KPV48",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MVXBZ1ZQ-DMT4NC",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-11-01T04:29:32.815Z",
+  "updated_at": "2026-11-01T04:41:37.147Z",
+  "assigned_at": null,
+  "done_at": "2026-11-01T04:41:37.147Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented and verified QIF v0.8.9 policy-state observations, deterministic drift assessment, bounded emergency demotion, retained fixtures, portable package, JSON syntax guard, and release documentation."
+}

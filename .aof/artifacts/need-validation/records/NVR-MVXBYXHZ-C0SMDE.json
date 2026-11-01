@@ -1,0 +1,42 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-01T04:29:11.832Z",
+  "validation_id": "NVR-MVXBYXHZ-C0SMDE",
+  "raw_need": "Continue QIF with the nearest roadmap release using current AOF and AI trends.",
+  "validation_status": "reframed",
+  "validated_need": "QIF must preserve a provider-neutral, evidence-backed post-promotion policy-state history, deterministically identify material or unverified drift, and require accountable human authorization plus post-action reconciliation for emergency demotion.",
+  "decision_summary": "The raw continuation request was reframed from generic feature delivery into the smallest unresolved lifecycle risk after v0.8.8: drift can invalidate a promoted policy, while emergency demotion can create an ungoverned state change. The release must remain portable, fail-closed, history-preserving, and non-authoritative.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What lifecycle boundary is unresolved after v0.8.8?",
+      "answer": "Post-promotion policy-state drift and emergency demotion evidence.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must remain outside QIF authority?",
+      "answer": "Live observation authenticity, external execution, autonomous demotion, and semantic truth.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "How is success judged?",
+      "answer": "Frozen baseline plus evidence-backed observations reproduce drift classification; material or unverified drift triggers governance; demotion requires authority and reconciliation.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A successful promotion decision was assumed to remain valid without continuing state evidence."
+  ],
+  "evidence_gaps": [
+    "No provider-neutral portable record yet proves actual live state; QIF can only verify declared evidence and deterministic consistency."
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-MVXBYTM3-59H1ZE.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-MVXBYTM3-NCITQK.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-MVXBYTM3-0D4FUG.json",
+  "experiment_proposal_ref": ".aof/artifacts/need-validation/experiment-proposals/EXP-MVXBYTM3-S2NZEW.json",
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVXBYIGV-BAYLCA"
+}

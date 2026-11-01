@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-10-31T04:41:17.282Z",
-  "audit_id": "FSA-QIF-V088",
-  "scope": "QIF v0.8.8 release self-review",
-  "summary": "Declared activation and rollback now reconcile to evidence-backed observed state; recovery and policy disposition remain bounded and human-governed.",
-  "detected_gap": "QIF records one reconciliation and disposition but does not yet observe promoted policy-state drift or preserve emergency demotion evidence over time.",
+  "recorded_at": "2026-11-01T04:41:21.621Z",
+  "audit_id": "FSA-QIF-V089",
+  "scope": "QIF v0.8.9 release self-review",
+  "summary": "Promoted trust policy now retains append-only state observations, deterministic declared drift assessment, and bounded human-governed emergency demotion evidence.",
+  "detected_gap": "QIF does not yet establish monitoring-source identity or independence, reconcile conflicting drift signals, or prove incident closure through a post-demotion observation window.",
   "result_state": "stable",
-  "next_action": "Implement QIF v0.8.9 Policy State Drift and Emergency Demotion.",
+  "next_action": "Implement QIF v0.8.10 Drift Signal Integrity and Incident Closure.",
   "related_task_ids": [
-    "TASK-081"
+    "TASK-082"
   ],
-  "source_session_id": "SESS-MVVWJJKC-QZ4PYJ",
-  "source_decision_record_id": "DEC-MVVWKBDW-CGWKE5"
+  "source_session_id": "SESS-MVXBYFXP-7KPV48",
+  "source_decision_record_id": "DEC-MVXBZ1ZQ-DMT4NC"
 }

@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.8.9
+
+- Added append-only post-promotion policy-state observations with evidence-bearing dimensions and reproducible match, mismatch, and missing results.
+- Added drift assessments that cover every changed dimension and deterministically route low, uncertain, material, and critical drift.
+- Added accountable emergency demotion records linked to critical drift, predecessor policy, exact scope, deadline, execution reconciliation, and residual risk.
+- Corrected successful observation and promotion paths so rollback evidence is required only when rollback is selected.
+- Fixed malformed JSON in the ledger schema and added a canonical JSON syntax gate before the full test suite.
+- Added 25 retained negative fixtures and verifier boundaries separating declared drift from live provider truth, root-cause proof, semantic fitness, and operational authority.
+
 ## v0.8.8
 
 - Added execution reconciliation records that compare declared activation or rollback actions with evidence-backed observed policy and scope state.

@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-01T04:29:06.795Z",
+  "problem_statement_id": "PST-MVXBYTM3-59H1ZE",
+  "affected_party": "Organizations using QIF portable trust policy governance",
+  "actual_problem": "A promoted policy can drift from its approved state without a durable comparison, and emergency demotion can occur without an auditable authority and evidence chain.",
+  "why_it_matters": "Undetected drift can silently invalidate prior quality decisions while an ungoverned demotion can create a second uncontrolled state change.",
+  "why_now": "QIF v0.8.8 now reconciles activation and recovery, so the next unresolved lifecycle boundary is post-promotion drift and emergency response.",
+  "evidence_refs": [
+    "docs/qif-v0.8.8-activation-outcome-reconciliation.md",
+    "docs/qif-roadmap.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVXBYIGV-BAYLCA"
+}

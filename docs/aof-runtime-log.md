@@ -5478,3 +5478,66 @@ Date: 2026-10-25
   over time.
 - Next value slices: v0.8.9 Policy State Drift and Emergency Demotion, v0.9
   Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger Standard.
+
+# QIF v0.8.9 Policy State Drift and Emergency Demotion
+
+- Date: 2026-11-01.
+- AOF runtime: v12.2.0, managed-project topology.
+- Need: QIF v0.8.8 could reconcile activation and rollback outcomes and govern
+  promotion, but could not preserve policy-state observations over time,
+  classify drift from the approved baseline, or evidence a bounded emergency
+  demotion.
+- Validated Need: provide a provider-neutral and append-only chain from a
+  promoted policy baseline through evidence-backed state observations and
+  deterministic drift assessment to accountable, human-authorized emergency
+  demotion.
+- Need Validation artifacts: `PST-MVXBYTM3-59H1ZE`,
+  `VHY-MVXBYTM3-NCITQK`, `ALT-MVXBYTM3-0D4FUG`,
+  `EXP-MVXBYTM3-S2NZEW`, Validated Need `NVR-MVXBYXHZ-C0SMDE`, and
+  charter `PCH-MVXBZ0EP-DFIF4O`. The charter was created only after the Need
+  was validated.
+- Council: planning execution `CRUN-MVXBZ5TM-VSV9FH` included Visionary,
+  Builder, and Guardian; review execution `CRUN-MVXCEILF-NEAMIM` included
+  Guardian and Builder with no veto. Session: `SESS-MVXBYFXP-7KPV48`;
+  decision: `DEC-MVXBZ1ZQ-DMT4NC`; task: `TASK-082`; actor skill packet:
+  `ASP-MVXBZKS4-FYMTEA`.
+- Trend evidence: NIST emphasizes continuous measurement and reports current
+  challenges in monitoring deployed AI; Microsoft treats monitoring and
+  retirement as lifecycle responsibilities; Google documents online agent
+  monitoring; AWS identifies agent-configuration drift as an AgentOps risk.
+  QIF leads these signals with a portable, provider-neutral observation,
+  deterministic drift, and emergency-demotion evidence chain. Sources:
+  https://airc.nist.gov/airmf-resources/playbook/measure/,
+  https://www.nist.gov/news-events/news/2026/03/new-report-challenges-monitoring-deployed-ai-systems,
+  https://learn.microsoft.com/en-us/agents/center-of-excellence/agent-lifecycle,
+  https://docs.cloud.google.com/gemini-enterprise-agent-platform/optimize/evaluation/evaluate-online,
+  and
+  https://docs.aws.amazon.com/wellarchitected/latest/agentic-ai-lens/agentops02-bp02.html.
+- Decision: add `PortableKnowledgePolicyStateObservation`,
+  `PortableKnowledgeDriftAssessment`, and
+  `PortableKnowledgeEmergencyDemotion`; compare frozen approved and observed
+  policy state, require evidence for each dimension, derive the highest drift
+  severity deterministically, and bind emergency demotion to accountable
+  authority, exact scope, a deadline, governance triggers, and observed
+  execution reconciliation.
+- Implementation boundary: no background monitoring service, external
+  provider integration, deployment execution, autonomous authority,
+  cryptographic authenticity claim, employee surveillance, or semantic-truth
+  claim. The verifier proves declared structure, traceability, and
+  deterministic rule compliance only.
+- Corrective maintenance: the released v0.8.8 ledger schema contained malformed
+  JSON in `scopeSnapshot`. The schema was repaired and `npm test` now begins
+  with a canonical JSON syntax guard covering 34 files so malformed schemas
+  cannot silently reach a future release.
+- Verification: `npm test` passed with 16/16 positive and 1,480/1,480 retained
+  negative checks; portable v0.8.9 built and verified with 59 files; canonical
+  JSON syntax passed for 34 files; AOF organization verification passed
+  295/295 checks. Self-audit: `FSA-QIF-V089`.
+- Outcome report: `OUT-MVXCEXXH-BCPPGY` recorded implementation success. AOF
+  then reset the active next value slice to v0.8.10 and refreshed the learning
+  loop snapshot.
+- Residual gap: QIF does not yet establish monitoring-source identity or
+  independence, reconcile conflicting drift signals, or prove incident closure
+  through a post-demotion observation window.
+- Next value slices: v0.8.10 Drift Signal Integrity and Incident Closure, v0.9
+  Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger Standard.

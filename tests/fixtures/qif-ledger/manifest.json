@@ -1412,6 +1412,174 @@
       "errorIncludes": "PKPD-001 must preserve predecessor state, separate decision from execution, treat counts as evidence, and forbid automatic promotion, authority, and semantic truth claims."
     },
     {
+      "file": "qif-ledger-portable-trust-state-observation-promotion.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "state observation follows a promoted policy",
+      "expect": "fail",
+      "errorIncludes": "PKSO-001 requires a promoted policy decision."
+    },
+    {
+      "file": "qif-ledger-portable-trust-state-observation-policy.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "approved policy matches promotion",
+      "expect": "fail",
+      "errorIncludes": "PKSO-001 approvedPolicyRef must match the promoted current policy."
+    },
+    {
+      "file": "qif-ledger-portable-trust-state-observation-scope.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "approved scope matches activation",
+      "expect": "fail",
+      "errorIncludes": "PKSO-001 approvedScopeDigest must match the activation scope."
+    },
+    {
+      "file": "qif-ledger-portable-trust-state-observation-lineage.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "state observations form contiguous lineage",
+      "expect": "fail",
+      "errorIncludes": "PKSO-002 sequence 2 requires a previous observation."
+    },
+    {
+      "file": "qif-ledger-portable-trust-state-observation-result.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "dimension result reproduces from values and evidence",
+      "expect": "fail",
+      "errorIncludes": "PKSO-002/PKSD-001 result must reproduce as match."
+    },
+    {
+      "file": "qif-ledger-portable-trust-state-observation-match.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "state match reproduces from all dimensions",
+      "expect": "fail",
+      "errorIncludes": "PKSO-002 stateMatched must reproduce as false."
+    },
+    {
+      "file": "qif-ledger-portable-trust-state-observation-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "state mismatch routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKSO-002 state mismatch requires a portable-trust-state-drift-detected governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-state-observation-unverified-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "missing state evidence routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKSO-002 incomplete state observation requires a portable-trust-state-observation-unverified governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-state-observation-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "state observation does not claim provider truth",
+      "expect": "fail",
+      "errorIncludes": "PKSO-001 must preserve history, treat counts as evidence, and forbid automatic state claims, authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-trust-drift-baseline.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "drift uses a prior matched baseline",
+      "expect": "fail",
+      "errorIncludes": "PKDA-001 baseline observation must be a matched state for the same promotion."
+    },
+    {
+      "file": "qif-ledger-portable-trust-drift-dimensions.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "drift covers every changed dimension",
+      "expect": "fail",
+      "errorIncludes": "PKDA-001 drift dimensions must exactly cover changed or missing current-state dimensions."
+    },
+    {
+      "file": "qif-ledger-portable-trust-drift-severity.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "highest drift severity reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKDA-001 highestSeverity must reproduce as high."
+    },
+    {
+      "file": "qif-ledger-portable-trust-drift-decision.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "critical drift requires emergency demotion",
+      "expect": "fail",
+      "errorIncludes": "PKDA-001 assessmentDecision must reproduce as emergency-demotion-required."
+    },
+    {
+      "file": "qif-ledger-portable-trust-drift-material-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "material drift routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKDA-001 material drift requires a portable-trust-material-drift governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-drift-emergency-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "critical drift routes emergency governance",
+      "expect": "fail",
+      "errorIncludes": "PKDA-001 critical drift requires a portable-trust-emergency-demotion-required governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-drift-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "drift assessment does not demote automatically",
+      "expect": "fail",
+      "errorIncludes": "PKDA-001 must preserve history, treat counts as evidence, and forbid automatic demotion, authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-trust-demotion-assessment.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "demotion follows critical assessment",
+      "expect": "fail",
+      "errorIncludes": "PKED-001 requires a critical drift assessment for the same promotion."
+    },
+    {
+      "file": "qif-ledger-portable-trust-demotion-from-policy.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "demotion starts from promoted policy",
+      "expect": "fail",
+      "errorIncludes": "PKED-001 fromPolicyRef must match the promoted current policy."
+    },
+    {
+      "file": "qif-ledger-portable-trust-demotion-target.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "demotion restores predecessor policy",
+      "expect": "fail",
+      "errorIncludes": "PKED-001 targetPolicyRef must restore the predecessor baseline policy."
+    },
+    {
+      "file": "qif-ledger-portable-trust-demotion-scope.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "demotion retains promoted scope",
+      "expect": "fail",
+      "errorIncludes": "PKED-001 scopeDigest must match the promoted activation scope."
+    },
+    {
+      "file": "qif-ledger-portable-trust-demotion-deadline.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "demotion deadline follows authorization",
+      "expect": "fail",
+      "errorIncludes": "PKED-001 deadline must be later than authorization."
+    },
+    {
+      "file": "qif-ledger-portable-trust-demotion-reconciliation.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "completed demotion reconciles execution",
+      "expect": "fail",
+      "errorIncludes": "PKED-001 execution reconciliation must describe the completed emergency demotion."
+    },
+    {
+      "file": "qif-ledger-portable-trust-demotion-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "demotion retains emergency governance",
+      "expect": "fail",
+      "errorIncludes": "PKED-001 must retain the portable-trust-emergency-demotion-required governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-demotion-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "demotion remains human-authorized",
+      "expect": "fail",
+      "errorIncludes": "PKED-001 must preserve history, forbid destructive deletion, treat counts as evidence, and forbid automatic demotion, authority, and semantic truth claims."
+    },
+    {
       "file": "qif-ledger-portable-trust-activation-verifier-boundary.json",
       "validator": "tools/validate-qif-ledger.mjs",
       "rule": "verifier does not turn records into execution or semantic proof",
@@ -1424,6 +1592,13 @@
       "rule": "verifier does not turn reconciliation into provider truth or promotion authority",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness."
+    },
+    {
+      "file": "qif-ledger-portable-trust-drift-verifier-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "verifier does not turn drift records into live truth or authority",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness."
     }
   ],
   "rescopedRules": []

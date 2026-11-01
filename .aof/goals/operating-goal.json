@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Provide a provider-neutral, non-authoritative contract that reconciles declared trust-policy activation and rollback with observed execution and recovered state, then governs promotion, hold, retirement, or failed recovery without rewriting history.",
-  "updated_at": "2026-10-31T04:30:09.574Z",
+  "content": "QIF must preserve a provider-neutral, evidence-backed post-promotion policy-state history, deterministically identify material or unverified drift, and require accountable human authorization plus post-action reconciliation for emergency demotion.",
+  "updated_at": "2026-11-01T04:29:17.658Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVVWJJKC-QZ4PYJ",
-  "source_decision_record_id": "DEC-MVVWKBDW-CGWKE5",
+  "source_session_id": "SESS-MVXBYFXP-7KPV48",
+  "source_decision_record_id": "DEC-MVXBZ1ZQ-DMT4NC",
   "declared_complete_at": null
 }

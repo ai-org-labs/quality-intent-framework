@@ -49,6 +49,9 @@
     "portableKnowledgeExecutionReconciliations",
     "portableKnowledgeRecoveryVerifications",
     "portableKnowledgePromotionDecisions",
+    "portableKnowledgePolicyStateObservations",
+    "portableKnowledgeDriftAssessments",
+    "portableKnowledgeEmergencyDemotions",
     "ledgerIndex",
     "verifierBoundary"
   ],
@@ -209,6 +212,9 @@
     "portableKnowledgeExecutionReconciliations": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/portableKnowledgeExecutionReconciliation" } },
     "portableKnowledgeRecoveryVerifications": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portableKnowledgeRecoveryVerification" } },
     "portableKnowledgePromotionDecisions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portableKnowledgePromotionDecision" } },
+    "portableKnowledgePolicyStateObservations": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/portableKnowledgePolicyStateObservation" } },
+    "portableKnowledgeDriftAssessments": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portableKnowledgeDriftAssessment" } },
+    "portableKnowledgeEmergencyDemotions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portableKnowledgeEmergencyDemotion" } },
     "ledgerIndex": { "$ref": "#/$defs/ledgerIndex" },
     "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
   },
@@ -533,7 +539,7 @@
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" },
-        "triggerType": { "enum": ["portable-source-unverified", "portable-integrity-mismatch", "portable-applicability-unvalidated", "portable-counterexample-unresolved", "portable-assessment-insufficient", "portable-local-target-mismatch", "portable-local-reproduction-insufficient", "portable-local-evidence-unverified", "portable-local-validation-insufficient", "portable-revocation-source-unverified", "portable-revocation-impact-incomplete", "portable-revocation-dependent-suspended", "portable-revalidation-insufficient", "portable-attestation-subject-mismatch", "portable-attestation-identity-mismatch", "portable-attestation-predicate-mismatch", "portable-attestation-root-untrusted", "portable-attestation-expired", "portable-attestation-transparency-insufficient", "portable-attestation-revocation-uncertain", "portable-attestation-crypto-unverified", "portable-trust-decision-insufficient", "portable-trust-policy-lineage-invalid", "portable-trust-replay-input-mismatch", "portable-trust-replay-outcome-changed", "portable-trust-replay-insufficient", "portable-trust-replay-history-mutation", "portable-trust-rollout-scope-mismatch", "portable-trust-rollout-duplicate-item", "portable-trust-rollout-input-unresolved", "portable-trust-rollout-material-change", "portable-trust-rollout-census-mismatch", "portable-trust-rollout-insufficient", "portable-trust-activation-preview-insufficient", "portable-trust-activation-authority-missing", "portable-trust-activation-scope-mismatch", "portable-trust-activation-material-change", "portable-trust-observation-incomplete", "portable-trust-observation-stop-condition", "portable-trust-rollback-required", "portable-trust-rollback-incomplete", "portable-trust-execution-unverified", "portable-trust-execution-state-mismatch", "portable-trust-recovery-incomplete", "portable-trust-recovery-failed", "portable-trust-promotion-blocked", "portable-trust-promotion-authority-missing", "portable-trust-promotion-history-mutation"] },
+        "triggerType": { "enum": ["portable-source-unverified", "portable-integrity-mismatch", "portable-applicability-unvalidated", "portable-counterexample-unresolved", "portable-assessment-insufficient", "portable-local-target-mismatch", "portable-local-reproduction-insufficient", "portable-local-evidence-unverified", "portable-local-validation-insufficient", "portable-revocation-source-unverified", "portable-revocation-impact-incomplete", "portable-revocation-dependent-suspended", "portable-revalidation-insufficient", "portable-attestation-subject-mismatch", "portable-attestation-identity-mismatch", "portable-attestation-predicate-mismatch", "portable-attestation-root-untrusted", "portable-attestation-expired", "portable-attestation-transparency-insufficient", "portable-attestation-revocation-uncertain", "portable-attestation-crypto-unverified", "portable-trust-decision-insufficient", "portable-trust-policy-lineage-invalid", "portable-trust-replay-input-mismatch", "portable-trust-replay-outcome-changed", "portable-trust-replay-insufficient", "portable-trust-replay-history-mutation", "portable-trust-rollout-scope-mismatch", "portable-trust-rollout-duplicate-item", "portable-trust-rollout-input-unresolved", "portable-trust-rollout-material-change", "portable-trust-rollout-census-mismatch", "portable-trust-rollout-insufficient", "portable-trust-activation-preview-insufficient", "portable-trust-activation-authority-missing", "portable-trust-activation-scope-mismatch", "portable-trust-activation-material-change", "portable-trust-observation-incomplete", "portable-trust-observation-stop-condition", "portable-trust-rollback-required", "portable-trust-rollback-incomplete", "portable-trust-execution-unverified", "portable-trust-execution-state-mismatch", "portable-trust-recovery-incomplete", "portable-trust-recovery-failed", "portable-trust-promotion-blocked", "portable-trust-promotion-authority-missing", "portable-trust-promotion-history-mutation", "portable-trust-state-drift-detected", "portable-trust-state-observation-unverified", "portable-trust-material-drift", "portable-trust-emergency-demotion-required", "portable-trust-emergency-demotion-incomplete", "portable-trust-emergency-demotion-failed", "portable-trust-state-history-mutation"] },
         "reason": { "type": "string", "minLength": 1 },
         "severity": { "enum": ["low", "medium", "high", "critical"] },
         "requiredAction": { "type": "string", "minLength": 1 },
@@ -934,7 +940,7 @@
       "properties": {
         "id": { "$ref": "#/$defs/id" }, "baselinePolicyRef": { "$ref": "#/$defs/id" }, "proposedPolicyRef": { "$ref": "#/$defs/id" }, "proposedPolicyVersion": { "type": "string", "minLength": 1 },
         "scopeKind": { "enum": ["all-portable-items", "explicit"] }, "scopeRationale": { "type": "string", "minLength": 1 },
-        "scopeFrozen": { "const": true }, "scopeSnapshot": { "type": "array", "minItems": 1, "items": { "type": "object", "required": ["itemRef", "sourceDigest"], "additionalProperties": false, "properties": { "itemRef": { "$ref": "#/$defs/id" }, "sourceDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" } } },
+        "scopeFrozen": { "const": true }, "scopeSnapshot": { "type": "array", "minItems": 1, "items": { "type": "object", "required": ["itemRef", "sourceDigest"], "additionalProperties": false, "properties": { "itemRef": { "$ref": "#/$defs/id" }, "sourceDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" } } } },
         "scopeDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }, "itemPreviewRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
         "totalItemCount": { "type": "integer", "minimum": 1 }, "coveredItemCount": { "type": "integer", "minimum": 0 },
         "unchangedCount": { "type": "integer", "minimum": 0 }, "tightenedCount": { "type": "integer", "minimum": 0 }, "relaxedCount": { "type": "integer", "minimum": 0 }, "indeterminateCount": { "type": "integer", "minimum": 0 },
@@ -960,7 +966,7 @@
     },
     "portableKnowledgePolicyObservation": {
       "type": "object",
-      "required": ["id", "activationDecisionRef", "windowStartedAt", "windowEndsAt", "evaluatedAt", "signals", "observationComplete", "stopConditionMet", "observationDecision", "rollbackRecordRef", "rationale", "governanceTriggerRefs", "observedBy", "activityCountIsQuality", "automaticContinuation", "automaticAuthority", "semanticTruthClaimed", "status"],
+      "required": ["id", "activationDecisionRef", "windowStartedAt", "windowEndsAt", "evaluatedAt", "signals", "observationComplete", "stopConditionMet", "observationDecision", "rationale", "governanceTriggerRefs", "observedBy", "activityCountIsQuality", "automaticContinuation", "automaticAuthority", "semanticTruthClaimed", "status"],
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" }, "activationDecisionRef": { "$ref": "#/$defs/id" }, "windowStartedAt": { "type": "string", "format": "date-time" }, "windowEndsAt": { "type": "string", "format": "date-time" }, "evaluatedAt": { "type": "string", "format": "date-time" },
@@ -986,7 +992,7 @@
       "required": ["id", "activationDecisionRef", "actionKind", "actionRecordRef", "expectedPolicyRef", "observedPolicyRef", "expectedScopeDigest", "observedScopeDigest", "executionAttempted", "executionSucceeded", "stateMatched", "executionEvidenceRefs", "reconciledAt", "reconciledBy", "result", "governanceTriggerRefs", "historyPreserved", "activityCountIsQuality", "automaticStateClaim", "automaticAuthority", "semanticTruthClaimed", "status"],
       "additionalProperties": false,
       "properties": {
-        "id": { "$ref": "#/$defs/id" }, "activationDecisionRef": { "$ref": "#/$defs/id" }, "actionKind": { "enum": ["activation", "rollback"] }, "actionRecordRef": { "$ref": "#/$defs/id" },
+        "id": { "$ref": "#/$defs/id" }, "activationDecisionRef": { "$ref": "#/$defs/id" }, "actionKind": { "enum": ["activation", "rollback", "emergency-demotion"] }, "actionRecordRef": { "$ref": "#/$defs/id" },
         "expectedPolicyRef": { "$ref": "#/$defs/id" }, "observedPolicyRef": { "$ref": "#/$defs/id" }, "expectedScopeDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }, "observedScopeDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
         "executionAttempted": { "type": "boolean" }, "executionSucceeded": { "type": "boolean" }, "stateMatched": { "type": "boolean" }, "executionEvidenceRefs": { "type": "array", "items": { "$ref": "#/$defs/externalEntityRef" } },
         "reconciledAt": { "type": "string", "format": "date-time" }, "reconciledBy": { "type": "string", "minLength": 1 }, "result": { "enum": ["matched", "mismatch", "unverified"] }, "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
@@ -1008,13 +1014,46 @@
     },
     "portableKnowledgePromotionDecision": {
       "type": "object",
-      "required": ["id", "activationDecisionRef", "activationReconciliationRef", "observationRef", "rollbackRecordRef", "recoveryVerificationRef", "candidatePolicyRef", "currentPolicyRef", "disposition", "decisionRationale", "decidedBy", "decidedAt", "authorityBasis", "evidenceRefs", "governanceTriggerRefs", "predecessorStatePreserved", "decisionDoesNotExecutePromotion", "activityCountIsQuality", "automaticPromotion", "automaticAuthority", "semanticTruthClaimed", "status"],
+      "required": ["id", "activationDecisionRef", "activationReconciliationRef", "observationRef", "candidatePolicyRef", "currentPolicyRef", "disposition", "decisionRationale", "decidedBy", "decidedAt", "authorityBasis", "evidenceRefs", "governanceTriggerRefs", "predecessorStatePreserved", "decisionDoesNotExecutePromotion", "activityCountIsQuality", "automaticPromotion", "automaticAuthority", "semanticTruthClaimed", "status"],
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/id" }, "activationDecisionRef": { "$ref": "#/$defs/id" }, "activationReconciliationRef": { "$ref": "#/$defs/id" }, "observationRef": { "$ref": "#/$defs/id" }, "rollbackRecordRef": { "anyOf": [{ "$ref": "#/$defs/id" }, { "type": "null" }] }, "recoveryVerificationRef": { "anyOf": [{ "$ref": "#/$defs/id" }, { "type": "null" }] },
         "candidatePolicyRef": { "$ref": "#/$defs/id" }, "currentPolicyRef": { "$ref": "#/$defs/id" }, "disposition": { "enum": ["promote", "hold", "retire", "failed-recovery"] }, "decisionRationale": { "type": "string", "minLength": 1 },
         "decidedBy": { "type": "string", "minLength": 1 }, "decidedAt": { "type": "string", "format": "date-time" }, "authorityBasis": { "type": "string", "minLength": 1 }, "evidenceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/externalEntityRef" } }, "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
         "predecessorStatePreserved": { "const": true }, "decisionDoesNotExecutePromotion": { "const": true }, "activityCountIsQuality": { "const": false }, "automaticPromotion": { "const": false }, "automaticAuthority": { "const": false }, "semanticTruthClaimed": { "const": false }, "status": { "enum": ["reviewed", "governance-required"] }
+      }
+    },
+    "portableKnowledgePolicyStateObservation": {
+      "type": "object",
+      "required": ["id", "promotionDecisionRef", "sequence", "observedAt", "approvedPolicyRef", "observedPolicyRef", "approvedScopeDigest", "observedScopeDigest", "stateDimensions", "observationComplete", "stateMatched", "observedBy", "governanceTriggerRefs", "historyPreserved", "activityCountIsQuality", "automaticStateClaim", "automaticAuthority", "semanticTruthClaimed", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" }, "promotionDecisionRef": { "$ref": "#/$defs/id" }, "previousObservationRef": { "$ref": "#/$defs/id" }, "sequence": { "type": "integer", "minimum": 1 }, "observedAt": { "type": "string", "format": "date-time" },
+        "approvedPolicyRef": { "$ref": "#/$defs/id" }, "observedPolicyRef": { "$ref": "#/$defs/id" }, "approvedScopeDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }, "observedScopeDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "stateDimensions": { "type": "array", "minItems": 1, "items": { "type": "object", "required": ["dimensionId", "dimensionType", "expectedValue", "observedValue", "result", "material", "evidenceRefs"], "additionalProperties": false, "properties": { "dimensionId": { "$ref": "#/$defs/id" }, "dimensionType": { "enum": ["policy", "scope", "configuration", "authority", "dependency", "evidence", "other"] }, "expectedValue": { "type": "string", "minLength": 1 }, "observedValue": { "type": "string", "minLength": 1 }, "result": { "enum": ["match", "mismatch", "missing"] }, "material": { "type": "boolean" }, "evidenceRefs": { "type": "array", "items": { "$ref": "#/$defs/externalEntityRef" } } } } },
+        "observationComplete": { "type": "boolean" }, "stateMatched": { "type": "boolean" }, "observedBy": { "type": "string", "minLength": 1 }, "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "historyPreserved": { "const": true }, "activityCountIsQuality": { "const": false }, "automaticStateClaim": { "const": false }, "automaticAuthority": { "const": false }, "semanticTruthClaimed": { "const": false }, "status": { "enum": ["reviewed", "governance-required"] }
+      }
+    },
+    "portableKnowledgeDriftAssessment": {
+      "type": "object",
+      "required": ["id", "promotionDecisionRef", "baselineObservationRef", "currentObservationRef", "assessedAt", "driftDimensions", "driftDetected", "highestSeverity", "assessmentDecision", "rationale", "reviewedBy", "governanceTriggerRefs", "historyPreserved", "activityCountIsQuality", "automaticDemotion", "automaticAuthority", "semanticTruthClaimed", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" }, "promotionDecisionRef": { "$ref": "#/$defs/id" }, "baselineObservationRef": { "$ref": "#/$defs/id" }, "currentObservationRef": { "$ref": "#/$defs/id" }, "assessedAt": { "type": "string", "format": "date-time" },
+        "driftDimensions": { "type": "array", "items": { "type": "object", "required": ["dimensionId", "driftType", "severity", "rationale"], "additionalProperties": false, "properties": { "dimensionId": { "$ref": "#/$defs/id" }, "driftType": { "enum": ["policy", "scope", "configuration", "authority", "dependency", "evidence", "unknown"] }, "severity": { "enum": ["low", "medium", "high", "critical", "unknown"] }, "rationale": { "type": "string", "minLength": 1 } } } },
+        "driftDetected": { "type": "boolean" }, "highestSeverity": { "enum": ["none", "low", "medium", "high", "critical", "unknown"] }, "assessmentDecision": { "enum": ["stable", "observe", "governance-required", "emergency-demotion-required"] }, "rationale": { "type": "string", "minLength": 1 }, "reviewedBy": { "type": "string", "minLength": 1 }, "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "historyPreserved": { "const": true }, "activityCountIsQuality": { "const": false }, "automaticDemotion": { "const": false }, "automaticAuthority": { "const": false }, "semanticTruthClaimed": { "const": false }, "status": { "enum": ["reviewed", "governance-required"] }
+      }
+    },
+    "portableKnowledgeEmergencyDemotion": {
+      "type": "object",
+      "required": ["id", "promotionDecisionRef", "driftAssessmentRef", "fromPolicyRef", "targetPolicyRef", "scopeDigest", "reason", "severity", "authorizedBy", "authorizedAt", "authorityBasis", "deadline", "demotionStatus", "executionReconciliationRef", "residualRisk", "governanceTriggerRefs", "historyPreserved", "destructiveDeletion", "activityCountIsQuality", "automaticDemotion", "automaticAuthority", "semanticTruthClaimed", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" }, "promotionDecisionRef": { "$ref": "#/$defs/id" }, "driftAssessmentRef": { "$ref": "#/$defs/id" }, "fromPolicyRef": { "$ref": "#/$defs/id" }, "targetPolicyRef": { "$ref": "#/$defs/id" }, "scopeDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }, "reason": { "type": "string", "minLength": 1 }, "severity": { "const": "critical" },
+        "authorizedBy": { "type": "string", "minLength": 1 }, "authorizedAt": { "type": "string", "format": "date-time" }, "authorityBasis": { "type": "string", "minLength": 1 }, "deadline": { "type": "string", "format": "date-time" }, "completedAt": { "type": "string", "format": "date-time" }, "demotionStatus": { "enum": ["planned", "executing", "completed", "failed"] }, "executionReconciliationRef": { "$ref": "#/$defs/id" }, "residualRisk": { "type": "string", "minLength": 1 }, "governanceTriggerRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+        "historyPreserved": { "const": true }, "destructiveDeletion": { "const": false }, "activityCountIsQuality": { "const": false }, "automaticDemotion": { "const": false }, "automaticAuthority": { "const": false }, "semanticTruthClaimed": { "const": false }, "status": { "enum": ["reviewed", "governance-required"] }
       }
     },
     "verifierBoundary": {

@@ -85,6 +85,7 @@ Use additional documents when needed:
 | Preview a draft trust policy across all declared portable knowledge | `docs/qif-v0.8.6-trust-policy-rollout-preview.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
 | Authorize a bounded trust-policy activation and preserve observation and rollback evidence | `docs/qif-v0.8.7-trust-policy-activation-rollback.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
 | Reconcile declared activation or rollback with observed state and govern policy promotion | `docs/qif-v0.8.8-activation-outcome-reconciliation.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
+| Detect declared post-promotion policy drift and preserve accountable emergency demotion evidence | `docs/qif-v0.8.9-policy-state-drift-emergency-demotion.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
 | Expose selection, missing outcomes, dependence, segments, and drift behind a calibration aggregate | `docs/qif-v0.6.32-calibration-cohort-integrity.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Explain why one calibration error requires stronger governance than another at an explicit loss boundary | `docs/qif-v0.6.33-consequence-sensitive-calibration.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Show whether a decision is brittle under bounded, reviewed threshold alternatives | `docs/qif-v0.6.34-threshold-robustness.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
@@ -1035,6 +1036,34 @@ Use `PortableKnowledgeExecutionReconciliation`,
 `PortableKnowledgePromotionDecision`. Structural agreement does not prove
 provider authenticity, complete side-effect recovery, operational safety, or
 authority to deploy.
+
+## Policy State Drift and Emergency Demotion
+
+After an accountable `promote` disposition:
+
+1. Freeze the promoted policy and exact approved scope as the baseline.
+2. Record state observations as an append-only sequence. Do not overwrite an
+   earlier observation when policy, scope, configuration, authority,
+   dependencies, or evidence changes.
+3. Attach evidence to every state dimension. Missing evidence is `missing`,
+   never `match`.
+4. Compare a matched baseline with a later observation and include every
+   changed or missing dimension exactly once in the drift assessment.
+5. Route low drift to observation, medium/high/unknown drift to governance,
+   and critical drift to an emergency-demotion-required decision.
+6. Keep severity as reviewed judgment. The verifier reproduces its use but
+   does not prove severity or root cause.
+7. Require a human authority, predecessor target policy, exact scope, reason,
+   deadline, execution reconciliation, and residual risk for emergency
+   demotion.
+8. Preserve all promotion, observation, drift, and demotion history. Keep
+   automatic demotion, automatic authority, and semantic truth claims false.
+
+Use `PortableKnowledgePolicyStateObservation`,
+`PortableKnowledgeDriftAssessment`, and
+`PortableKnowledgeEmergencyDemotion`. Structural agreement does not prove
+live provider state, evidence authenticity, root cause, operational safety, or
+authority to act.
 
 ## Common Failure Modes
 

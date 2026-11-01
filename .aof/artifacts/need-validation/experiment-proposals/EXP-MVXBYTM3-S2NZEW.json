@@ -1,0 +1,12 @@
+{
+  "artifact_type": "experiment-proposal",
+  "recorded_at": "2026-11-01T04:29:06.795Z",
+  "experiment_proposal_id": "EXP-MVXBYTM3-S2NZEW",
+  "assumption_to_test": "A minimal provider-neutral schema can classify unchanged, material, unverified, and recovered policy state from frozen refs without claiming live observation truth.",
+  "smallest_testable_validation": "Extend the qif-ledger example and verifier with one approved baseline, repeated observations, a material drift assessment, an emergency demotion record, and retained negative fixtures.",
+  "expected_learning": "Whether state lineage, severity, authority, evidence, and reconciliation rules are sufficient and deterministically testable.",
+  "expected_cost": "One bounded schema-verifier-documentation release with no external integration.",
+  "success_threshold": "All new negative fixtures fail for the intended reason, existing fixtures remain green, portable build succeeds, and verifier boundaries explicitly deny live execution and semantic truth.",
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVXBYIGV-BAYLCA"
+}

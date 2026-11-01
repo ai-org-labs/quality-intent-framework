@@ -1,6 +1,6 @@
 {
   "packageType": "qif-ledger",
-  "runtimeVersion": "0.8.8",
+  "runtimeVersion": "0.8.9",
   "packageId": "LEDGERPKG-001",
   "packageRefs": [
     {
@@ -883,6 +883,33 @@
       "reason": "The rollback has been planned but no execution evidence has yet been recorded.",
       "severity": "critical",
       "requiredAction": "Keep the activation stopped and record rollback execution evidence or escalate the failed recovery.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "closed"
+    },
+    {
+      "id": "PKGTR-021",
+      "triggerType": "portable-trust-state-drift-detected",
+      "reason": "A post-promotion state observation differs from the immutable approved baseline.",
+      "severity": "critical",
+      "requiredAction": "Assess the changed dimensions and prevent continued promoted status until governance resolves the drift.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "closed"
+    },
+    {
+      "id": "PKGTR-022",
+      "triggerType": "portable-trust-material-drift",
+      "reason": "The observed authority boundary expanded beyond the approved bounded scope.",
+      "severity": "critical",
+      "requiredAction": "Require accountable emergency action and preserve the approved and observed state evidence.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "closed"
+    },
+    {
+      "id": "PKGTR-023",
+      "triggerType": "portable-trust-emergency-demotion-required",
+      "reason": "Critical authority drift requires demotion from the promoted policy to the predecessor policy.",
+      "severity": "critical",
+      "requiredAction": "Authorize, execute, and reconcile the bounded emergency demotion before the deadline.",
       "owner": "portable-knowledge-governance-owner",
       "status": "closed"
     }
@@ -2104,6 +2131,32 @@
       "automaticAuthority": false,
       "semanticTruthClaimed": false,
       "status": "governance-required"
+    },
+    {
+      "id": "PKAD-002",
+      "rolloutPreviewRef": "PKRP-002",
+      "baselinePolicyRef": "PKTP-002",
+      "proposedPolicyRef": "PKTP-003",
+      "scopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "decision": "authorized",
+      "decisionRationale": "Authorize a second bounded activation after governance accepts the reviewed relaxation and requires post-promotion state observation.",
+      "decidedBy": "portable-knowledge-governance-owner",
+      "decidedAt": "2026-10-30T13:00:00.000Z",
+      "authorityBasis": "Documented organizational trust-policy governance authority for the bounded canary scope.",
+      "observationRef": "PKOBS-002",
+      "rollbackTargetPolicyRef": "PKTP-002",
+      "rollbackDeadline": "2026-11-02T13:00:00.000Z",
+      "materialChangesAcknowledged": true,
+      "governanceTriggerRefs": [
+        "PKGTR-017"
+      ],
+      "previewEvidencePreserved": true,
+      "decisionDoesNotExecuteActivation": true,
+      "activityCountIsQuality": false,
+      "automaticActivation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
     }
   ],
   "portableKnowledgePolicyObservations": [
@@ -2145,6 +2198,43 @@
       "automaticAuthority": false,
       "semanticTruthClaimed": false,
       "status": "governance-required"
+    },
+    {
+      "id": "PKOBS-002",
+      "activationDecisionRef": "PKAD-002",
+      "windowStartedAt": "2026-10-30T14:00:00.000Z",
+      "windowEndsAt": "2026-10-31T12:00:00.000Z",
+      "evaluatedAt": "2026-10-30T16:00:00.000Z",
+      "signals": [
+        {
+          "signalId": "PKSIG-002",
+          "description": "The bounded activation preserves the reviewed policy and scope during the initial observation window.",
+          "expectedState": "reviewed policy and scope remain active",
+          "observedState": "reviewed policy and scope recorded as active",
+          "result": "pass",
+          "evidenceRefs": [
+            {
+              "packageRef": "PKG-EXPERT",
+              "entityType": "cases",
+              "entityRef": "CAS-SW-001"
+            }
+          ],
+          "stopOnFailure": true
+        }
+      ],
+      "observationComplete": true,
+      "stopConditionMet": false,
+      "observationDecision": "continue",
+      "rationale": "All bounded observation signals passed; this permits a human promotion decision but does not itself promote or execute policy state.",
+      "governanceTriggerRefs": [
+        "PKGTR-017"
+      ],
+      "observedBy": "portable-knowledge-governance-owner",
+      "activityCountIsQuality": false,
+      "automaticContinuation": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "reviewed"
     }
   ],
   "portableKnowledgeRollbackRecords": [
@@ -2244,6 +2334,72 @@
       "automaticAuthority": false,
       "semanticTruthClaimed": false,
       "status": "reviewed"
+    },
+    {
+      "id": "PKXR-003",
+      "activationDecisionRef": "PKAD-002",
+      "actionKind": "activation",
+      "actionRecordRef": "PKAD-002",
+      "expectedPolicyRef": "PKTP-003",
+      "observedPolicyRef": "PKTP-003",
+      "expectedScopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "observedScopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "executionAttempted": true,
+      "executionSucceeded": true,
+      "stateMatched": true,
+      "executionEvidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "reconciledAt": "2026-10-30T14:05:00.000Z",
+      "reconciledBy": "portable-knowledge-governance-owner",
+      "result": "matched",
+      "governanceTriggerRefs": [
+        "PKGTR-017"
+      ],
+      "historyPreserved": true,
+      "activityCountIsQuality": false,
+      "automaticStateClaim": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "reviewed"
+    },
+    {
+      "id": "PKXR-004",
+      "activationDecisionRef": "PKAD-002",
+      "actionKind": "emergency-demotion",
+      "actionRecordRef": "PKED-001",
+      "expectedPolicyRef": "PKTP-002",
+      "observedPolicyRef": "PKTP-002",
+      "expectedScopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "observedScopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "executionAttempted": true,
+      "executionSucceeded": true,
+      "stateMatched": true,
+      "executionEvidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "reconciledAt": "2026-11-01T01:25:00.000Z",
+      "reconciledBy": "portable-knowledge-governance-owner",
+      "result": "matched",
+      "governanceTriggerRefs": [
+        "PKGTR-021",
+        "PKGTR-022",
+        "PKGTR-023"
+      ],
+      "historyPreserved": true,
+      "activityCountIsQuality": false,
+      "automaticStateClaim": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "reviewed"
     }
   ],
   "portableKnowledgeRecoveryVerifications": [
@@ -2321,6 +2477,182 @@
       "automaticAuthority": false,
       "semanticTruthClaimed": false,
       "status": "reviewed"
+    },
+    {
+      "id": "PKPD-002",
+      "activationDecisionRef": "PKAD-002",
+      "activationReconciliationRef": "PKXR-003",
+      "observationRef": "PKOBS-002",
+      "candidatePolicyRef": "PKTP-003",
+      "currentPolicyRef": "PKTP-003",
+      "disposition": "promote",
+      "decisionRationale": "The activation reconciled and the bounded observation completed without a stop condition, so accountable governance promotes the candidate for this scope.",
+      "decidedBy": "portable-knowledge-governance-owner",
+      "decidedAt": "2026-10-30T16:10:00.000Z",
+      "authorityBasis": "Documented organizational trust-policy governance authority for the bounded canary scope.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "governanceTriggerRefs": [
+        "PKGTR-017"
+      ],
+      "predecessorStatePreserved": true,
+      "decisionDoesNotExecutePromotion": true,
+      "activityCountIsQuality": false,
+      "automaticPromotion": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "reviewed"
+    }
+  ],
+  "portableKnowledgePolicyStateObservations": [
+    {
+      "id": "PKSO-001",
+      "promotionDecisionRef": "PKPD-002",
+      "sequence": 1,
+      "observedAt": "2026-10-30T17:00:00.000Z",
+      "approvedPolicyRef": "PKTP-003",
+      "observedPolicyRef": "PKTP-003",
+      "approvedScopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "observedScopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "stateDimensions": [
+        {
+          "dimensionId": "PKSD-001",
+          "dimensionType": "authority",
+          "expectedValue": "bounded canary scope only",
+          "observedValue": "bounded canary scope only",
+          "result": "match",
+          "material": true,
+          "evidenceRefs": [
+            {
+              "packageRef": "PKG-EXPERT",
+              "entityType": "cases",
+              "entityRef": "CAS-SW-001"
+            }
+          ]
+        }
+      ],
+      "observationComplete": true,
+      "stateMatched": true,
+      "observedBy": "portable-knowledge-governance-owner",
+      "governanceTriggerRefs": [],
+      "historyPreserved": true,
+      "activityCountIsQuality": false,
+      "automaticStateClaim": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "reviewed"
+    },
+    {
+      "id": "PKSO-002",
+      "promotionDecisionRef": "PKPD-002",
+      "previousObservationRef": "PKSO-001",
+      "sequence": 2,
+      "observedAt": "2026-11-01T00:30:00.000Z",
+      "approvedPolicyRef": "PKTP-003",
+      "observedPolicyRef": "PKTP-003",
+      "approvedScopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "observedScopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "stateDimensions": [
+        {
+          "dimensionId": "PKSD-001",
+          "dimensionType": "authority",
+          "expectedValue": "bounded canary scope only",
+          "observedValue": "all portable knowledge items",
+          "result": "mismatch",
+          "material": true,
+          "evidenceRefs": [
+            {
+              "packageRef": "PKG-EXPERT",
+              "entityType": "cases",
+              "entityRef": "CAS-SW-001"
+            }
+          ]
+        }
+      ],
+      "observationComplete": true,
+      "stateMatched": false,
+      "observedBy": "portable-knowledge-governance-owner",
+      "governanceTriggerRefs": [
+        "PKGTR-021",
+        "PKGTR-022",
+        "PKGTR-023"
+      ],
+      "historyPreserved": true,
+      "activityCountIsQuality": false,
+      "automaticStateClaim": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeDriftAssessments": [
+    {
+      "id": "PKDA-001",
+      "promotionDecisionRef": "PKPD-002",
+      "baselineObservationRef": "PKSO-001",
+      "currentObservationRef": "PKSO-002",
+      "assessedAt": "2026-11-01T00:40:00.000Z",
+      "driftDimensions": [
+        {
+          "dimensionId": "PKSD-001",
+          "driftType": "authority",
+          "severity": "critical",
+          "rationale": "The recorded authority scope expanded from one frozen canary item to the full portable knowledge population."
+        }
+      ],
+      "driftDetected": true,
+      "highestSeverity": "critical",
+      "assessmentDecision": "emergency-demotion-required",
+      "rationale": "Critical authority drift crosses the non-negotiable scope boundary and requires accountable emergency demotion.",
+      "reviewedBy": "portable-knowledge-governance-owner",
+      "governanceTriggerRefs": [
+        "PKGTR-021",
+        "PKGTR-022",
+        "PKGTR-023"
+      ],
+      "historyPreserved": true,
+      "activityCountIsQuality": false,
+      "automaticDemotion": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeEmergencyDemotions": [
+    {
+      "id": "PKED-001",
+      "promotionDecisionRef": "PKPD-002",
+      "driftAssessmentRef": "PKDA-001",
+      "fromPolicyRef": "PKTP-003",
+      "targetPolicyRef": "PKTP-002",
+      "scopeDigest": "sha256:9bfcb4dd73dedc3f24aa5711cba5c0e37c673587a78eaaf5d1c1a54fb6e752c5",
+      "reason": "Critical authority drift exceeded the approved canary boundary.",
+      "severity": "critical",
+      "authorizedBy": "portable-knowledge-governance-owner",
+      "authorizedAt": "2026-11-01T00:45:00.000Z",
+      "authorityBasis": "Documented emergency trust-policy governance authority for the bounded scope.",
+      "deadline": "2026-11-01T02:00:00.000Z",
+      "completedAt": "2026-11-01T01:20:00.000Z",
+      "demotionStatus": "completed",
+      "executionReconciliationRef": "PKXR-004",
+      "residualRisk": "The declared target state reconciles, but provider authenticity, delayed effects, and semantic fitness remain outside local verification.",
+      "governanceTriggerRefs": [
+        "PKGTR-021",
+        "PKGTR-022",
+        "PKGTR-023"
+      ],
+      "historyPreserved": true,
+      "destructiveDeletion": false,
+      "activityCountIsQuality": false,
+      "automaticDemotion": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "reviewed"
     }
   ],
   "ledgerIndex": {
@@ -2375,8 +2707,8 @@
         "entityRef": "CALRUN-WMC-001"
       }
     ],
-    "lastUpdated": "2026-10-31",
-    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, immutable replay, frozen-scope rollout preview, accountable activation, execution reconciliation, recovery verification, and governed policy disposition without automatic authority."
+    "lastUpdated": "2026-11-01",
+    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, immutable replay, frozen-scope rollout preview, accountable activation, execution reconciliation, recovery verification, governed policy disposition, post-promotion drift assessment, and emergency demotion without automatic authority."
   },
   "verifierBoundary": {
     "checks": [
@@ -2399,7 +2731,8 @@
       "trust-policy succession, immutable historical decision replay, outcome-delta classification, and change governance",
       "frozen rollout scope, exact item coverage, per-item proposed-policy outcomes, affected-knowledge census arithmetic, and pre-activation governance",
       "activation authority traceability, bounded observation decisions, stop-condition reproduction, and rollback-chain integrity",
-      "declared-versus-observed execution reconciliation, recovery-state verification, and governed policy promotion or retirement"
+      "declared-versus-observed execution reconciliation, recovery-state verification, and governed policy promotion or retirement",
+      "append-only policy-state observation lineage, deterministic drift severity, governance routing, and emergency demotion reconciliation"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -2419,7 +2752,8 @@
       "historical replay as current authorization, activation, authority, or semantic truth",
       "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth",
       "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness",
-      "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness"
+      "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness",
+      "policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness"
     ],
     "semanticValidityRequires": [
       "expert review",

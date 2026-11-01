@@ -1,0 +1,24 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-11-01T04:28:33.745Z",
+  "project_root": "/private/tmp/qif-v089-20261101",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "Provide a provider-neutral, non-authoritative contract that reconciles declared trust-policy activation and rollback with observed execution and recovered state, then governs promotion, hold, retirement, or failed recovery without rewriting history.",
+  "next_value_slice": "QIF v0.8.9 Policy State Drift and Emergency Demotion",
+  "current_runtime_stage": "frontier-definition-needed",
+  "primary_frontier_task": null,
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Open an implementation task for the current frontier: QIF v0.8.9 Policy State Drift and Emergency Demotion",
+    "prioritized_task_ids": [],
+    "scale_direction": "Define or reconcile the next frontier before expanding execution."
+  },
+  "recommended_action": {
+    "recommended_action": "Open an implementation task for the current frontier: QIF v0.8.9 Policy State Drift and Emergency Demotion",
+    "rationale": "No current open implementation task is aligned to the current operating goal.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  }
+}

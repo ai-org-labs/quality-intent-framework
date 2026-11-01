@@ -1,0 +1,80 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-11-01T04:29:42.004Z",
+  "packet_id": "ASP-MVXBZKS4-FYMTEA",
+  "source_task_id": "TASK-082",
+  "source_parent_session_id": "SESS-MVXBYFXP-7KPV48",
+  "source_decision_record_id": "DEC-MVXBZ1ZQ-DMT4NC",
+  "objective": "Implement QIF v0.8.9 Policy State Drift and Emergency Demotion",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, deterministic drift and demotion verifier, fixtures, documentation, portable package, and release",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "qif-schema-design",
+    "deterministic-verification"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "qif-ledger-extension",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/qif-ledger-package.schema.json",
+        "tools/validate-qif-ledger.mjs"
+      ],
+      "rationale": "existing promotion, execution reconciliation, rollback, trust-policy lineage, and governance patterns"
+    }
+  ],
+  "resource_refs": [
+    "qif-repository",
+    "aof-v12.2.0-runtime"
+  ],
+  "policy_refs": [
+    "no-history-mutation",
+    "no-semantic-truth",
+    "no-automatic-authority"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "policy-state-observation",
+      "drift-assessment",
+      "emergency-demotion",
+      "verifier-boundary"
+    ],
+    "acceptance_criteria": [
+      "npm test passes",
+      "drift and demotion invariants fail closed and preserve authority boundaries"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "drift classification and emergency demotion reproduce without granting live observation or execution authority",
+      "evaluator_ref": "guardian",
+      "evidence_required": "retained negative fixture suite and full npm test",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "demotion-without-authority-or-reconciliation",
+      "trigger_condition": "emergency demotion lacks material drift evidence, accountable authority, target state, or post-action reconciliation",
+      "consequence": "require-council-review",
+      "recovery_action": "restore complete append-only drift and demotion evidence chain"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will preserve the approved baseline, detect declared drift, and keep emergency demotion human-governed.",
+    "current_action": "Implement v0.8.9",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Run full QIF and AOF review"
+  },
+  "status": "draft"
+}

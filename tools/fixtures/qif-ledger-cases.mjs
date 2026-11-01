@@ -64,6 +64,9 @@ function rollbackRecord(pkg) { return pkg.portableKnowledgeRollbackRecords[0]; }
 function executionReconciliation(pkg, index = 0) { return pkg.portableKnowledgeExecutionReconciliations[index]; }
 function recoveryVerification(pkg) { return pkg.portableKnowledgeRecoveryVerifications[0]; }
 function promotionDecision(pkg) { return pkg.portableKnowledgePromotionDecisions[0]; }
+function policyStateObservation(pkg, index = 0) { return pkg.portableKnowledgePolicyStateObservations[index]; }
+function driftAssessment(pkg) { return pkg.portableKnowledgeDriftAssessments[0]; }
+function emergencyDemotion(pkg) { return pkg.portableKnowledgeEmergencyDemotions[0]; }
 
 export const cases = [
   {
@@ -1231,6 +1234,150 @@ export const cases = [
     mutate: (pkg) => { promotionDecision(pkg).automaticPromotion = true; }
   },
   {
+    id: "portable-trust-state-observation-promotion",
+    rule: "state observation follows a promoted policy",
+    expect: "PKSO-001 requires a promoted policy decision.",
+    mutate: (pkg) => { policyStateObservation(pkg).promotionDecisionRef = "PKPD-001"; }
+  },
+  {
+    id: "portable-trust-state-observation-policy",
+    rule: "approved policy matches promotion",
+    expect: "PKSO-001 approvedPolicyRef must match the promoted current policy.",
+    mutate: (pkg) => { policyStateObservation(pkg).approvedPolicyRef = "PKTP-002"; }
+  },
+  {
+    id: "portable-trust-state-observation-scope",
+    rule: "approved scope matches activation",
+    expect: "PKSO-001 approvedScopeDigest must match the activation scope.",
+    mutate: (pkg) => { policyStateObservation(pkg).approvedScopeDigest = `sha256:${"0".repeat(64)}`; }
+  },
+  {
+    id: "portable-trust-state-observation-lineage",
+    rule: "state observations form contiguous lineage",
+    expect: "PKSO-002 sequence 2 requires a previous observation.",
+    mutate: (pkg) => { policyStateObservation(pkg, 1).previousObservationRef = "PKSO-999"; }
+  },
+  {
+    id: "portable-trust-state-observation-result",
+    rule: "dimension result reproduces from values and evidence",
+    expect: "PKSO-002/PKSD-001 result must reproduce as match.",
+    mutate: (pkg) => { policyStateObservation(pkg, 1).stateDimensions[0].observedValue = "bounded canary scope only"; }
+  },
+  {
+    id: "portable-trust-state-observation-match",
+    rule: "state match reproduces from all dimensions",
+    expect: "PKSO-002 stateMatched must reproduce as false.",
+    mutate: (pkg) => { policyStateObservation(pkg, 1).stateMatched = true; }
+  },
+  {
+    id: "portable-trust-state-observation-trigger",
+    rule: "state mismatch routes governance",
+    expect: "PKSO-002 state mismatch requires a portable-trust-state-drift-detected governance trigger.",
+    mutate: (pkg) => { policyStateObservation(pkg, 1).governanceTriggerRefs = ["PKGTR-022", "PKGTR-023"]; }
+  },
+  {
+    id: "portable-trust-state-observation-unverified-trigger",
+    rule: "missing state evidence routes governance",
+    expect: "PKSO-002 incomplete state observation requires a portable-trust-state-observation-unverified governance trigger.",
+    mutate: (pkg) => { const entry = policyStateObservation(pkg, 1); entry.stateDimensions[0].evidenceRefs = []; entry.stateDimensions[0].result = "missing"; entry.observationComplete = false; }
+  },
+  {
+    id: "portable-trust-state-observation-boundary",
+    rule: "state observation does not claim provider truth",
+    expect: "PKSO-001 must preserve history, treat counts as evidence, and forbid automatic state claims, authority, and semantic truth claims.",
+    mutate: (pkg) => { policyStateObservation(pkg).automaticStateClaim = true; }
+  },
+  {
+    id: "portable-trust-drift-baseline",
+    rule: "drift uses a prior matched baseline",
+    expect: "PKDA-001 baseline observation must be a matched state for the same promotion.",
+    mutate: (pkg) => { driftAssessment(pkg).baselineObservationRef = "PKSO-002"; }
+  },
+  {
+    id: "portable-trust-drift-dimensions",
+    rule: "drift covers every changed dimension",
+    expect: "PKDA-001 drift dimensions must exactly cover changed or missing current-state dimensions.",
+    mutate: (pkg) => { driftAssessment(pkg).driftDimensions = []; }
+  },
+  {
+    id: "portable-trust-drift-severity",
+    rule: "highest drift severity reproduces",
+    expect: "PKDA-001 highestSeverity must reproduce as high.",
+    mutate: (pkg) => { driftAssessment(pkg).driftDimensions[0].severity = "high"; }
+  },
+  {
+    id: "portable-trust-drift-decision",
+    rule: "critical drift requires emergency demotion",
+    expect: "PKDA-001 assessmentDecision must reproduce as emergency-demotion-required.",
+    mutate: (pkg) => { driftAssessment(pkg).assessmentDecision = "governance-required"; }
+  },
+  {
+    id: "portable-trust-drift-material-trigger",
+    rule: "material drift routes governance",
+    expect: "PKDA-001 material drift requires a portable-trust-material-drift governance trigger.",
+    mutate: (pkg) => { driftAssessment(pkg).governanceTriggerRefs = ["PKGTR-021", "PKGTR-023"]; }
+  },
+  {
+    id: "portable-trust-drift-emergency-trigger",
+    rule: "critical drift routes emergency governance",
+    expect: "PKDA-001 critical drift requires a portable-trust-emergency-demotion-required governance trigger.",
+    mutate: (pkg) => { driftAssessment(pkg).governanceTriggerRefs = ["PKGTR-021", "PKGTR-022"]; }
+  },
+  {
+    id: "portable-trust-drift-boundary",
+    rule: "drift assessment does not demote automatically",
+    expect: "PKDA-001 must preserve history, treat counts as evidence, and forbid automatic demotion, authority, and semantic truth claims.",
+    mutate: (pkg) => { driftAssessment(pkg).automaticDemotion = true; }
+  },
+  {
+    id: "portable-trust-demotion-assessment",
+    rule: "demotion follows critical assessment",
+    expect: "PKED-001 requires a critical drift assessment for the same promotion.",
+    mutate: (pkg) => { driftAssessment(pkg).assessmentDecision = "governance-required"; }
+  },
+  {
+    id: "portable-trust-demotion-from-policy",
+    rule: "demotion starts from promoted policy",
+    expect: "PKED-001 fromPolicyRef must match the promoted current policy.",
+    mutate: (pkg) => { emergencyDemotion(pkg).fromPolicyRef = "PKTP-002"; }
+  },
+  {
+    id: "portable-trust-demotion-target",
+    rule: "demotion restores predecessor policy",
+    expect: "PKED-001 targetPolicyRef must restore the predecessor baseline policy.",
+    mutate: (pkg) => { emergencyDemotion(pkg).targetPolicyRef = "PKTP-001"; }
+  },
+  {
+    id: "portable-trust-demotion-scope",
+    rule: "demotion retains promoted scope",
+    expect: "PKED-001 scopeDigest must match the promoted activation scope.",
+    mutate: (pkg) => { emergencyDemotion(pkg).scopeDigest = `sha256:${"0".repeat(64)}`; }
+  },
+  {
+    id: "portable-trust-demotion-deadline",
+    rule: "demotion deadline follows authorization",
+    expect: "PKED-001 deadline must be later than authorization.",
+    mutate: (pkg) => { emergencyDemotion(pkg).deadline = "2026-11-01T00:40:00.000Z"; }
+  },
+  {
+    id: "portable-trust-demotion-reconciliation",
+    rule: "completed demotion reconciles execution",
+    expect: "PKED-001 execution reconciliation must describe the completed emergency demotion.",
+    mutate: (pkg) => { emergencyDemotion(pkg).executionReconciliationRef = "PKXR-003"; }
+  },
+  {
+    id: "portable-trust-demotion-trigger",
+    rule: "demotion retains emergency governance",
+    expect: "PKED-001 must retain the portable-trust-emergency-demotion-required governance trigger.",
+    mutate: (pkg) => { emergencyDemotion(pkg).governanceTriggerRefs = ["PKGTR-021", "PKGTR-022"]; }
+  },
+  {
+    id: "portable-trust-demotion-boundary",
+    rule: "demotion remains human-authorized",
+    expect: "PKED-001 must preserve history, forbid destructive deletion, treat counts as evidence, and forbid automatic demotion, authority, and semantic truth claims.",
+    mutate: (pkg) => { emergencyDemotion(pkg).automaticDemotion = true; }
+  },
+  {
     id: "portable-trust-activation-verifier-boundary",
     rule: "verifier does not turn records into execution or semantic proof",
     expect: "verifierBoundary must explicitly avoid claiming activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness.",
@@ -1241,6 +1388,12 @@ export const cases = [
     rule: "verifier does not turn reconciliation into provider truth or promotion authority",
     expect: "verifierBoundary must explicitly avoid claiming execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness"); }
+  },
+  {
+    id: "portable-trust-drift-verifier-boundary",
+    rule: "verifier does not turn drift records into live truth or authority",
+    expect: "verifierBoundary must explicitly avoid claiming policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness"); }
   }
 ];
 

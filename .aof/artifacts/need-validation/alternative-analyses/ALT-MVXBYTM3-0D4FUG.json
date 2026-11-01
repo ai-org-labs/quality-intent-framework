@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-01T04:29:06.795Z",
+  "alternative_analysis_id": "ALT-MVXBYTM3-0D4FUG",
+  "subject_need": "Detect and govern post-promotion trust-policy drift",
+  "alternative_solutions": [
+    "Add a provider-neutral observation, drift assessment, and emergency demotion chain to qif-ledger.",
+    "Keep drift handling in prose guidance only."
+  ],
+  "non_solution_options": [
+    "Treat periodic review counts as proof that the policy remains valid."
+  ],
+  "defer_options": [
+    "Defer until an external monitoring integration exists."
+  ],
+  "stop_options": [
+    "Stop if deterministic drift classification cannot be separated from provider-specific execution or semantic judgment."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVXBYIGV-BAYLCA"
+}
