@@ -5541,3 +5541,60 @@ Date: 2026-10-25
   through a post-demotion observation window.
 - Next value slices: v0.8.10 Drift Signal Integrity and Incident Closure, v0.9
   Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger Standard.
+
+# QIF v0.8.10 Drift Signal Integrity and Incident Closure
+
+- Date: 2026-11-02.
+- AOF runtime: v12.2.0, managed-project topology.
+- Need: QIF v0.8.9 could record drift and emergency demotion but could not
+  distinguish independent confirmation from stale, correlated, conflicted, or
+  unidentified monitoring evidence, or determine when the incident could
+  close.
+- Validated Need: make post-promotion drift signals structurally trustworthy
+  enough for governance and prevent incident closure before a complete,
+  conflict-aware post-action observation window and accountable human
+  decision.
+- Need Validation artifacts: `PST-MVYRH8XE-VK2966`,
+  `VHY-MVYRH926-3SEBJX`, `ALT-MVYRH96Q-LZON4P`,
+  `EXP-MVYRH9B8-NKMWNR`, Validated Need `NVR-MVYRHFBI-V87MV3`, and
+  charter `PCH-MVYRHJ5O-5ELVBN`. The charter was created only after the Need
+  was validated.
+- Council: planning execution `CRUN-MVYRHOCU-TS8F4F` included Visionary,
+  Builder, and Guardian; review execution `CRUN-MVYRW2RD-W4KWHO` included
+  Guardian and Builder with no veto. Session: `SESS-MVYRGXB1-5FTXE6`;
+  decision: `DEC-MVYRHL3F-OSSZS9`; task: `TASK-083`; actor skill packet:
+  `ASP-MVYRHWRX-VHD4S9`.
+- Trend evidence: NIST AI 800-4 identifies fragmented logging, uncertain
+  monitoring methods, weak information sharing, drift, and the unresolved
+  integration of automated and human-validated monitoring. OpenTelemetry is
+  standardizing end-to-end GenAI and agent traces. Microsoft requires shared
+  correlation identifiers, behavioral baselines, reconstructable incidents,
+  privacy controls, and accountable response. Sources:
+  https://www.nist.gov/publications/challenges-monitoring-deployed-ai-systems-center-ai-standards-and-innovation,
+  https://opentelemetry.io/blog/2026/genai-observability/,
+  https://learn.microsoft.com/en-us/security/zero-trust/sfi/observability-ai-systems,
+  and
+  https://learn.microsoft.com/en-us/security/zero-trust/catalog-ai-defense-capabilities/monitoring-detection-forensics.
+- Decision: add `PortableKnowledgeSignalSource`,
+  `PortableKnowledgeSignalReconciliation`, and
+  `PortableKnowledgeIncidentClosure`; reproduce source freshness and
+  correlation-group independence, preserve conflicts and unresolved critical
+  signals, and require complete post-demotion observation plus accountable
+  residual-risk disposition before closure.
+- Implementation boundary: no live telemetry collector, provider integration,
+  autonomous response or closure, employee surveillance, raw sensitive
+  telemetry, source-authenticity proof, causal-independence proof, future
+  safety claim, operational authority, or semantic-truth claim. Signal and
+  alert counts remain evidence, not quality.
+- Verification: `npm test` passed with 16/16 positive and 1,504/1,504 retained
+  negative checks; portable v0.8.10 built and verified with 60 files;
+  canonical JSON syntax passed for 34 files; AOF organization verification
+  passed 295/295 checks. Self-audit: `FSA-QIF-V0810`.
+- Outcome report: `OUT-MVYRWK1M-B61D1U` recorded implementation success. AOF
+  then reset the active next value slice to v0.8.11 and refreshed the learning
+  loop snapshot.
+- Residual gap: reopen conditions remain prose; QIF cannot yet preserve an
+  original closure while ingesting a late signal, reopening the incident, and
+  calibrating closure predictions against later outcomes.
+- Next value slices: v0.8.11 Late-Signal Reopen and Closure Calibration, v0.9
+  Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger Standard.

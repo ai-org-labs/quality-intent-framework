@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.8.10 Drift Signal Integrity and Incident Closure",
-  "updated_at": "2026-11-01T04:41:40.531Z",
+  "content": "QIF v0.8.11 Late-Signal Reopen and Closure Calibration",
+  "updated_at": "2026-11-02T04:43:03.672Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MVXBYFXP-7KPV48",
-  "source_decision_record_id": "DEC-MVXBZ1ZQ-DMT4NC",
+  "source_session_id": "SESS-MVYRGXB1-5FTXE6",
+  "source_decision_record_id": "DEC-MVYRHL3F-OSSZS9",
   "declared_complete_at": null
 }

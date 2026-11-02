@@ -1,0 +1,23 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-11-02T04:31:20.124Z",
+  "project_charter_id": "PCH-MVYRHJ5O-5ELVBN",
+  "validated_need_ref": ".aof/artifacts/need-validation/records/NVR-MVYRHFBI-V87MV3.json",
+  "validated_objective": "Release QIF v0.8.10 with executable signal-source integrity, conflict reconciliation, and incident-closure governance for the portable trust-policy lifecycle",
+  "scope": [
+    "Signal Source records with identity, capture mode, freshness, correlation group, declared independence, privacy, and evidence refs",
+    "Signal Reconciliation records that preserve agreement, conflict, missing evidence, and governance routing",
+    "Incident Closure records with bounded observation window, post-demotion state, unresolved signals, human approval, residual risk, and reopen conditions",
+    "schema, canonical example, verifier, retained fixtures, portable package, docs, changelog, roadmap, AOF log, tests, tag, and release"
+  ],
+  "constraints": [
+    "no live telemetry collection, provider integration, autonomous containment or closure, employee surveillance, raw sensitive telemetry, authenticity proof, causal-independence proof, or semantic-truth claim"
+  ],
+  "expected_outcomes": [
+    "correlated or stale signals cannot satisfy independent confirmation",
+    "conflicting evidence remains visible and blocks closure",
+    "incident closure is reproducible from declared evidence and policy while remaining human-governed"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVYRH0NF-G08IJY"
+}

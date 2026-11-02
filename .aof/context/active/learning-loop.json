@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-11-01T04:41:42.363Z",
+  "generated_at": "2026-11-02T04:43:03.829Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MVXBYFXP-7KPV48",
-    "report_id": "OUT-MVXCEXXH-BCPPGY",
+    "source_session_id": "SESS-MVYRGXB1-5FTXE6",
+    "report_id": "OUT-MVYRWK1M-B61D1U",
     "result": "success",
-    "observed_at": "2026-11-01T04:41:38.884Z",
-    "note": "QIF v0.8.9 adds append-only policy-state observation, deterministic drift assessment, and human-governed emergency demotion; full tests and AOF verification pass.",
-    "signal_ref": "TASK-082"
+    "observed_at": "2026-11-02T04:43:01.114Z",
+    "note": "QIF v0.8.10 adds declared signal-source integrity, deterministic conflict-aware reconciliation, and bounded human-governed incident closure; full QIF tests and AOF verification pass.",
+    "signal_ref": "TASK-083"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIF-V089",
-    "recorded_at": "2026-11-01T04:41:21.621Z",
-    "summary": "Promoted trust policy now retains append-only state observations, deterministic declared drift assessment, and bounded human-governed emergency demotion evidence.",
-    "detected_gap": "QIF does not yet establish monitoring-source identity or independence, reconcile conflicting drift signals, or prove incident closure through a post-demotion observation window.",
+    "audit_id": "FSA-QIF-V0810",
+    "recorded_at": "2026-11-02T04:42:42.234Z",
+    "summary": "Drift evidence now preserves source identity, freshness, declared correlation and independence, current conflict, and bounded human-governed incident closure.",
+    "detected_gap": "Reopen conditions remain prose: QIF does not yet ingest a late post-closure signal, preserve the original closure while reopening the incident, or calibrate whether closure predictions remain correct over later outcomes.",
     "result_state": "stable",
-    "next_action": "Implement QIF v0.8.10 Drift Signal Integrity and Incident Closure.",
+    "next_action": "Implement QIF v0.8.11 Late-Signal Reopen and Closure Calibration.",
     "related_task_ids": [
-      "TASK-082"
+      "TASK-083"
     ]
   },
   "current_next_value_slice": {
-    "content": "QIF v0.8.10 Drift Signal Integrity and Incident Closure",
-    "updated_at": "2026-11-01T04:41:40.531Z",
+    "content": "QIF v0.8.11 Late-Signal Reopen and Closure Calibration",
+    "updated_at": "2026-11-02T04:43:03.672Z",
     "declared_complete_at": null,
-    "source_session_id": "SESS-MVXBYFXP-7KPV48",
-    "source_decision_record_id": "DEC-MVXBZ1ZQ-DMT4NC"
+    "source_session_id": "SESS-MVYRGXB1-5FTXE6",
+    "source_decision_record_id": "DEC-MVYRHL3F-OSSZS9"
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Implement QIF v0.8.10 Drift Signal Integrity and Incident Closure.",
+    "proposed_focus": "Implement QIF v0.8.11 Late-Signal Reopen and Closure Calibration.",
     "related_task_ids": [
-      "TASK-082"
+      "TASK-083"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: QIF v0.8.10 Drift Signal Integrity and Incident Closure",
-    "Latest self-audit next action: Implement QIF v0.8.10 Drift Signal Integrity and Incident Closure.",
+    "Current next value slice: QIF v0.8.11 Late-Signal Reopen and Closure Calibration",
+    "Latest self-audit next action: Implement QIF v0.8.11 Late-Signal Reopen and Closure Calibration.",
     "Latest outcome result: success"
   ]
 }

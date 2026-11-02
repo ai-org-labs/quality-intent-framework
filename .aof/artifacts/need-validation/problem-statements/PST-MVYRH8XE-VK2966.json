@@ -1,0 +1,14 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-02T04:31:06.866Z",
+  "problem_statement_id": "PST-MVYRH8XE-VK2966",
+  "affected_party": "QIF operators, reviewers, and organizations relying on promoted portable trust policies",
+  "actual_problem": "v0.8.9 can record drift and emergency demotion but cannot establish whether monitoring signals are independently trustworthy, reconcile conflicts, or determine whether the incident is safe to close",
+  "why_it_matters": "correlated or stale signals can create false assurance, while premature closure can hide continuing policy drift or unresolved harm",
+  "why_now": "post-deployment AI monitoring is expanding while standards still report fragmented logging, uncertain monitoring methods, and incident-reconstruction gaps",
+  "evidence_refs": [
+    "docs/qif-v0.8.9-policy-state-drift-emergency-demotion.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVYRH0NF-G08IJY"
+}

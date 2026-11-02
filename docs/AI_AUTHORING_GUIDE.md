@@ -86,6 +86,7 @@ Use additional documents when needed:
 | Authorize a bounded trust-policy activation and preserve observation and rollback evidence | `docs/qif-v0.8.7-trust-policy-activation-rollback.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
 | Reconcile declared activation or rollback with observed state and govern policy promotion | `docs/qif-v0.8.8-activation-outcome-reconciliation.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
 | Detect declared post-promotion policy drift and preserve accountable emergency demotion evidence | `docs/qif-v0.8.9-policy-state-drift-emergency-demotion.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
+| Reconcile drift-signal integrity and decide whether a demotion incident may close | `docs/qif-v0.8.10-drift-signal-integrity-incident-closure.md`, `schemas/qif-ledger-package.schema.json`, `examples/qif-ledger-package.json` |
 | Expose selection, missing outcomes, dependence, segments, and drift behind a calibration aggregate | `docs/qif-v0.6.32-calibration-cohort-integrity.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Explain why one calibration error requires stronger governance than another at an explicit loss boundary | `docs/qif-v0.6.33-consequence-sensitive-calibration.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Show whether a decision is brittle under bounded, reviewed threshold alternatives | `docs/qif-v0.6.34-threshold-robustness.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
@@ -1064,6 +1065,34 @@ Use `PortableKnowledgePolicyStateObservation`,
 `PortableKnowledgeEmergencyDemotion`. Structural agreement does not prove
 live provider state, evidence authenticity, root cause, operational safety, or
 authority to act.
+
+## Drift Signal Integrity and Incident Closure
+
+After emergency demotion is reconciled:
+
+1. Identify every signal source, owner, capture mode, freshness window, and
+   privacy boundary.
+2. Declare the source correlation group and independence basis. Different
+   names do not make two signals independent.
+3. Keep stale signals visible but exclude them from current confirmation.
+4. Count at most one independent confirmation per correlation group.
+5. Preserve current disagreement about the same dimension as a conflict; do
+   not average or vote it away.
+6. Keep critical `drift-present` or `unknown` signals unresolved.
+7. Define a post-demotion observation window and place every closure signal
+   inside it.
+8. Close only after completed demotion, matched execution, corroborated
+   recovery, no unresolved signal, residual-risk disposition, and accountable
+   human authority.
+9. Record conditions that reopen the incident. Preserve all earlier evidence.
+10. Keep activity counts, automatic closure, automatic authority, and semantic
+    truth claims false.
+
+Use `PortableKnowledgeSignalSource`,
+`PortableKnowledgeSignalReconciliation`, and
+`PortableKnowledgeIncidentClosure`. Structural agreement does not prove
+source authenticity, causal independence, monitoring completeness, future
+safety, operational recovery, or authority to close.
 
 ## Common Failure Modes
 

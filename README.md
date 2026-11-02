@@ -1,9 +1,10 @@
 # Quality Intent Framework
 
-Current release: **v0.8.9**. The Living QIF Ledger now keeps promoted trust
-policy state under append-only observation, reproduces declared drift, and
-preserves accountable emergency demotion evidence without observing providers,
-executing policy, or granting authority.
+Current release: **v0.8.10**. The Living QIF Ledger now distinguishes current,
+stale, independent, correlated, conflicting, and unverified drift signals and
+closes an emergency-demotion incident only after a bounded observation window
+and accountable human decision, without observing providers or granting
+authority.
 
 Quality Intent Framework (QIF) turns an organization's quality theory into an operational, AI-verifiable framework.
 
@@ -96,6 +97,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.8.7 Trust Policy Activation Decision and Rollback Contract: `docs/qif-v0.8.7-trust-policy-activation-rollback.md`
 - QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion: `docs/qif-v0.8.8-activation-outcome-reconciliation.md`
 - QIF v0.8.9 Policy State Drift and Emergency Demotion: `docs/qif-v0.8.9-policy-state-drift-emergency-demotion.md`
+- QIF v0.8.10 Drift Signal Integrity and Incident Closure: `docs/qif-v0.8.10-drift-signal-integrity-incident-closure.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`

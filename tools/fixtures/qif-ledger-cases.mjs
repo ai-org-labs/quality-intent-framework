@@ -67,6 +67,9 @@ function promotionDecision(pkg) { return pkg.portableKnowledgePromotionDecisions
 function policyStateObservation(pkg, index = 0) { return pkg.portableKnowledgePolicyStateObservations[index]; }
 function driftAssessment(pkg) { return pkg.portableKnowledgeDriftAssessments[0]; }
 function emergencyDemotion(pkg) { return pkg.portableKnowledgeEmergencyDemotions[0]; }
+function signalSource(pkg, index = 0) { return pkg.portableKnowledgeSignalSources[index]; }
+function signalReconciliation(pkg) { return pkg.portableKnowledgeSignalReconciliations[0]; }
+function incidentClosure(pkg) { return pkg.portableKnowledgeIncidentClosures[0]; }
 
 export const cases = [
   {
@@ -1378,6 +1381,163 @@ export const cases = [
     mutate: (pkg) => { emergencyDemotion(pkg).automaticDemotion = true; }
   },
   {
+    id: "portable-trust-signal-source-unverified-trigger",
+    rule: "unknown source independence routes governance",
+    expect: "PKSS-001 unverified signal source requires a portable-trust-signal-source-unverified governance trigger.",
+    mutate: (pkg) => { signalSource(pkg).independenceStatus = "unknown"; signalSource(pkg).status = "governance-required"; }
+  },
+  {
+    id: "portable-trust-signal-source-status",
+    rule: "signal source status reproduces",
+    expect: "PKSS-001 status must reproduce from source evidence and independence declaration.",
+    mutate: (pkg) => { signalSource(pkg).status = "governance-required"; }
+  },
+  {
+    id: "portable-trust-signal-source-boundary",
+    rule: "source records do not claim authenticity or causality",
+    expect: "PKSS-001 must treat source identity and independence as declared evidence, not authenticity, causality, quality, authority, or semantic truth.",
+    mutate: (pkg) => { signalSource(pkg).authenticityClaimed = true; }
+  },
+  {
+    id: "portable-trust-signal-source-reference",
+    rule: "signal claims resolve sources",
+    expect: "PKSR-001/PKSIG-001 references missing signal source PKSS-NOPE.",
+    mutate: (pkg) => { signalReconciliation(pkg).signalClaims[0].sourceRef = "PKSS-NOPE"; }
+  },
+  {
+    id: "portable-trust-signal-freshness",
+    rule: "current signal refs reproduce from freshness windows",
+    expect: "PKSR-001 currentSignalRefs must reproduce from source freshness windows.",
+    mutate: (pkg) => { signalReconciliation(pkg).signalClaims[0].observedAt = "2026-10-31T00:00:00.000Z"; }
+  },
+  {
+    id: "portable-trust-signal-independent-refs",
+    rule: "independent confirmation excludes correlated sources",
+    expect: "PKSR-001 independentSignalRefs must exclude correlated or unverified confirmation.",
+    mutate: (pkg) => { signalReconciliation(pkg).independentSignalRefs.push("PKSIG-003"); }
+  },
+  {
+    id: "portable-trust-signal-correlated-refs",
+    rule: "correlated signals remain explicit",
+    expect: "PKSR-001 correlatedSignalRefs must reproduce from source declarations and correlation groups.",
+    mutate: (pkg) => { signalReconciliation(pkg).correlatedSignalRefs = []; }
+  },
+  {
+    id: "portable-trust-signal-group-count",
+    rule: "independent correlation-group count reproduces",
+    expect: "PKSR-001 independentCorrelationGroupCount must reproduce as 2.",
+    mutate: (pkg) => { signalReconciliation(pkg).independentCorrelationGroupCount = 3; }
+  },
+  {
+    id: "portable-trust-signal-result",
+    rule: "signal reconciliation result reproduces",
+    expect: "PKSR-001 reconciliationResult must reproduce as corroborated-recovery.",
+    mutate: (pkg) => { signalReconciliation(pkg).reconciliationResult = "insufficient"; }
+  },
+  {
+    id: "portable-trust-signal-recommendation",
+    rule: "closure recommendation reproduces",
+    expect: "PKSR-001 closureRecommendation must reproduce as closure-candidate.",
+    mutate: (pkg) => { signalReconciliation(pkg).closureRecommendation = "keep-open"; }
+  },
+  {
+    id: "portable-trust-signal-correlation-trigger",
+    rule: "insufficient correlated evidence routes governance",
+    expect: "PKSR-001 unresolved correlation requires a portable-trust-signal-correlation-unresolved governance trigger.",
+    mutate: (pkg) => {
+      signalSource(pkg, 1).correlationGroup = "runtime-state-plane";
+      const rec = signalReconciliation(pkg);
+      rec.independentSignalRefs = [];
+      rec.correlatedSignalRefs = ["PKSIG-001", "PKSIG-002", "PKSIG-003"];
+      rec.independentCorrelationGroupCount = 0;
+      rec.reconciliationResult = "insufficient";
+      rec.closureRecommendation = "keep-open";
+      rec.governanceTriggerRefs = ["PKGTR-027"];
+      rec.status = "governance-required";
+    }
+  },
+  {
+    id: "portable-trust-signal-conflict-trigger",
+    rule: "conflicting current signals route governance",
+    expect: "PKSR-001 conflicting signal evidence requires a portable-trust-signal-conflict-detected governance trigger.",
+    mutate: (pkg) => {
+      const rec = signalReconciliation(pkg);
+      rec.signalClaims[1].outcome = "drift-present";
+      rec.conflictingSignalRefs = ["PKSIG-001", "PKSIG-002", "PKSIG-003"];
+      rec.unresolvedCriticalSignalRefs = ["PKSIG-002"];
+      rec.reconciliationResult = "conflicted";
+      rec.closureRecommendation = "governance-required";
+      rec.governanceTriggerRefs = ["PKGTR-027"];
+      rec.status = "governance-required";
+    }
+  },
+  {
+    id: "portable-trust-signal-approved-trigger",
+    rule: "closure candidate retains approval trigger",
+    expect: "PKSR-001 closure candidate requires a portable-trust-incident-closure-approved governance trigger.",
+    mutate: (pkg) => { signalReconciliation(pkg).governanceTriggerRefs = []; }
+  },
+  {
+    id: "portable-trust-signal-boundary",
+    rule: "signal reconciliation does not close automatically",
+    expect: "PKSR-001 must preserve signal history, treat counts as evidence, and forbid automatic closure, authority, and semantic truth claims.",
+    mutate: (pkg) => { signalReconciliation(pkg).automaticClosure = true; }
+  },
+  {
+    id: "portable-trust-incident-window",
+    rule: "closure waits for the full observation window",
+    expect: "PKIC-001 windowComplete must reproduce as false.",
+    mutate: (pkg) => { incidentClosure(pkg).observationWindowEnd = "2026-11-01T07:00:00.000Z"; }
+  },
+  {
+    id: "portable-trust-incident-demotion-complete",
+    rule: "closure reproduces demotion completion",
+    expect: "PKIC-001 demotionComplete must reproduce as true.",
+    mutate: (pkg) => { incidentClosure(pkg).demotionComplete = false; }
+  },
+  {
+    id: "portable-trust-incident-execution-match",
+    rule: "closure reproduces execution reconciliation",
+    expect: "PKIC-001 executionMatched must reproduce as true.",
+    mutate: (pkg) => { incidentClosure(pkg).executionMatched = false; }
+  },
+  {
+    id: "portable-trust-incident-signal-satisfied",
+    rule: "closure reproduces signal satisfaction",
+    expect: "PKIC-001 signalReconciliationSatisfied must reproduce as true.",
+    mutate: (pkg) => { incidentClosure(pkg).signalReconciliationSatisfied = false; }
+  },
+  {
+    id: "portable-trust-incident-unresolved-signals",
+    rule: "closure unresolved signals reproduce",
+    expect: "PKIC-001 unresolvedSignalRefs must reproduce from stale, conflicting, and critical signals.",
+    mutate: (pkg) => { incidentClosure(pkg).unresolvedSignalRefs = ["PKSIG-003"]; }
+  },
+  {
+    id: "portable-trust-incident-decision",
+    rule: "closure decision reproduces",
+    expect: "PKIC-001 closureDecision must reproduce as close.",
+    mutate: (pkg) => { incidentClosure(pkg).closureDecision = "keep-open"; }
+  },
+  {
+    id: "portable-trust-incident-trigger",
+    rule: "closed incident retains approval governance",
+    expect: "PKIC-001 closed incident requires a portable-trust-incident-closure-approved governance trigger.",
+    mutate: (pkg) => { incidentClosure(pkg).governanceTriggerRefs = []; }
+  },
+  {
+    id: "portable-trust-incident-status",
+    rule: "incident status reproduces",
+    expect: "PKIC-001 status must reproduce as closed.",
+    mutate: (pkg) => { incidentClosure(pkg).status = "open"; }
+  },
+  {
+    id: "portable-trust-incident-boundary",
+    rule: "incident closure remains human-governed",
+    expect: "PKIC-001 must preserve incident history, treat counts as evidence, and forbid automatic closure, authority, and semantic truth claims.",
+    mutate: (pkg) => { incidentClosure(pkg).automaticClosure = true; }
+  },
+  {
     id: "portable-trust-activation-verifier-boundary",
     rule: "verifier does not turn records into execution or semantic proof",
     expect: "verifierBoundary must explicitly avoid claiming activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness.",
@@ -1394,6 +1554,12 @@ export const cases = [
     rule: "verifier does not turn drift records into live truth or authority",
     expect: "verifierBoundary must explicitly avoid claiming policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness"); }
+  },
+  {
+    id: "portable-trust-closure-verifier-boundary",
+    rule: "verifier does not turn signal records into authenticity or future-safety proof",
+    expect: "verifierBoundary must explicitly avoid claiming signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness"); }
   }
 ];
 

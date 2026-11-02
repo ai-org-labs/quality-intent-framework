@@ -1,0 +1,324 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-11-02T04:42:38.716Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MVYRGXB1-5FTXE6",
+    "stage": "review",
+    "executionId": "CRUN-MVYRW2RD-W4KWHO",
+    "executionStatus": "completed",
+    "invokedModel": true,
+    "seatCount": 2,
+    "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+    "lastCouncilExecutionId": "CRUN-MVYRW2RD-W4KWHO",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVYRGXB1-5FTXE6",
+              "decision_id": "DEC-MVYRHL3F-OSSZS9",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims.",
+              "intent": "Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass.",
+              "active_context": "context: Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims. | success: Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVYRH0ND-GSHYNX",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: QIF must distinguish trustworthy drift signals from correlated, stale, conflicted, or unidentified telemetry and must prove whether an emergency-demotion incident can be closed. Intent: add provider-neutral signal-source integrity, conflict reconciliation, and incident-closure records that fail closed without claiming live monitoring, evidence authenticity, causality, or autonomous authority. Context: QIF v0.8.9 records policy-state observations, drift assessments, and emergency demotion; current NIST, OpenTelemetry, and Microsoft guidance emphasizes post-deployment monitoring, end-to-end correlation, audit reconstruction, baselines, incident response, and recovery. Preserve package portability, append-only history, deterministic local verification, human governance, privacy boundaries, and at least three future roadmap horizons.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVYRHFBI-V87MV3.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVYRHJ5O-5ELVBN.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVYRH8XE-VK2966.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVYRH926-3SEBJX.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVYRH96Q-LZON4P.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVYRH9B8-NKMWNR.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVYRHL3F-OSSZS9"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVYRGXB1-5FTXE6",
+              "decision_id": "DEC-MVYRHL3F-OSSZS9",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims.",
+              "intent": "Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass.",
+              "active_context": "context: Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims. | success: Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVYRH0ND-GSHYNX",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: QIF must distinguish trustworthy drift signals from correlated, stale, conflicted, or unidentified telemetry and must prove whether an emergency-demotion incident can be closed. Intent: add provider-neutral signal-source integrity, conflict reconciliation, and incident-closure records that fail closed without claiming live monitoring, evidence authenticity, causality, or autonomous authority. Context: QIF v0.8.9 records policy-state observations, drift assessments, and emergency demotion; current NIST, OpenTelemetry, and Microsoft guidance emphasizes post-deployment monitoring, end-to-end correlation, audit reconstruction, baselines, incident response, and recovery. Preserve package portability, append-only history, deterministic local verification, human governance, privacy boundaries, and at least three future roadmap horizons.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVYRHFBI-V87MV3.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVYRHJ5O-5ELVBN.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVYRH8XE-VK2966.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVYRH926-3SEBJX.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVYRH96Q-LZON4P.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVYRH9B8-NKMWNR.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVYRHL3F-OSSZS9"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MVYRW2RD-W4KWHO",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "completed",
+      "started_at": "2026-11-02T04:42:38.711Z",
+      "completed_at": "2026-11-02T04:42:38.713Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) with 2 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MVYRW2RD-W4KWHO-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVYRGXB1-5FTXE6",
+              "decision_id": "DEC-MVYRHL3F-OSSZS9",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims.",
+              "intent": "Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass.",
+              "active_context": "context: Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims. | success: Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVYRH0ND-GSHYNX",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: QIF must distinguish trustworthy drift signals from correlated, stale, conflicted, or unidentified telemetry and must prove whether an emergency-demotion incident can be closed. Intent: add provider-neutral signal-source integrity, conflict reconciliation, and incident-closure records that fail closed without claiming live monitoring, evidence authenticity, causality, or autonomous authority. Context: QIF v0.8.9 records policy-state observations, drift assessments, and emergency demotion; current NIST, OpenTelemetry, and Microsoft guidance emphasizes post-deployment monitoring, end-to-end correlation, audit reconstruction, baselines, incident response, and recovery. Preserve package portability, append-only history, deterministic local verification, human governance, privacy boundaries, and at least three future roadmap horizons.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVYRHFBI-V87MV3.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVYRHJ5O-5ELVBN.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVYRH8XE-VK2966.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVYRH926-3SEBJX.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVYRH96Q-LZON4P.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVYRH9B8-NKMWNR.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVYRHL3F-OSSZS9"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-11-02T04:42:38.713Z",
+          "completed_at": "2026-11-02T04:42:38.713Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-11-02T04:42:38.713Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian review response: focus on Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims. and align to Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass..",
+            "output_summary": "DECISION: proceed VETO: no Guardian review response: focus on Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Need: QIF must distinguish trustworthy drift signals from correlated, stale, conflicted, or unidentified telemetry and must prove whether an emergency-demotion incident can be closed. Intent: add provider-neutral signal-source integrity, conflict reconciliation, and incident-closure records that fail closed without claiming live monitoring, evidence authenticity, causality, or autonomous authority. Context: QIF v0.8.9 records policy-state observations, drift assessments, and emergency demotion; current NIST, OpenTelemetry, and Microsoft guidance emphasizes post-deployment monitoring, end-to-end correlation, audit reconstruction, baselines, incident response, and recovery. Preserve package portability, append-only history, deterministic local verification, human governance, privacy boundaries, and at least three future roadmap horizons.\nNeed: Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims.\nIntent: Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass.\nActive Context: context: Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims. | success: Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MVYRW2RD-W4KWHO-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MVYRGXB1-5FTXE6",
+              "decision_id": "DEC-MVYRHL3F-OSSZS9",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims.",
+              "intent": "Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass.",
+              "active_context": "context: Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims. | success: Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass.",
+              "context_snapshot_id": "CTX-MVYRH0ND-GSHYNX",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass."
+            },
+            "task": {
+              "request": "Need: QIF must distinguish trustworthy drift signals from correlated, stale, conflicted, or unidentified telemetry and must prove whether an emergency-demotion incident can be closed. Intent: add provider-neutral signal-source integrity, conflict reconciliation, and incident-closure records that fail closed without claiming live monitoring, evidence authenticity, causality, or autonomous authority. Context: QIF v0.8.9 records policy-state observations, drift assessments, and emergency demotion; current NIST, OpenTelemetry, and Microsoft guidance emphasizes post-deployment monitoring, end-to-end correlation, audit reconstruction, baselines, incident response, and recovery. Preserve package portability, append-only history, deterministic local verification, human governance, privacy boundaries, and at least three future roadmap horizons.",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/artifacts/need-validation/records/NVR-MVYRHFBI-V87MV3.json",
+                ".aof/artifacts/need-validation/project-charters/PCH-MVYRHJ5O-5ELVBN.json",
+                ".aof/artifacts/need-validation/problem-statements/PST-MVYRH8XE-VK2966.json",
+                ".aof/artifacts/need-validation/value-hypotheses/VHY-MVYRH926-3SEBJX.json",
+                ".aof/artifacts/need-validation/alternative-analyses/ALT-MVYRH96Q-LZON4P.json",
+                ".aof/artifacts/need-validation/experiment-proposals/EXP-MVYRH9B8-NKMWNR.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MVYRHL3F-OSSZS9"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-11-02T04:42:38.713Z",
+          "completed_at": "2026-11-02T04:42:38.713Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-11-02T04:42:38.713Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder review response: focus on Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims. and align to Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass..",
+            "output_summary": "DECISION: proceed VETO: no Builder review response: focus on Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: Need: QIF must distinguish trustworthy drift signals from correlated, stale, conflicted, or unidentified telemetry and must prove whether an emergency-demotion incident can be closed. Intent: add provider-neutral signal-source integrity, conflict reconciliation, and incident-closure records that fail closed without claiming live monitoring, evidence authenticity, causality, or autonomous authority. Context: QIF v0.8.9 records policy-state observations, drift assessments, and emergency demotion; current NIST, OpenTelemetry, and Microsoft guidance emphasizes post-deployment monitoring, end-to-end correlation, audit reconstruction, baselines, incident response, and recovery. Preserve package portability, append-only history, deterministic local verification, human governance, privacy boundaries, and at least three future roadmap horizons.\nNeed: Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims.\nIntent: Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass.\nActive Context: context: Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims. | success: Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass.\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => Cover QIF's provider-neutral portable trust-policy lifecycle after a v0.8.9 emergency demotion: identify each monitoring source, record independence and correlation boundaries, reconcile conflicting signals, and close or keep open the incident through a bounded post-action observation window. Exclude live collectors, provider integrations, autonomous response, employee surveillance, raw sensitive telemetry, cryptographic authenticity claims, causal claims, and semantic-truth claims. / How should improvement success be judged: which metric or end state matters most? => Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass."
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

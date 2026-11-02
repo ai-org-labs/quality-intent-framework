@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-02T04:31:15.150Z",
+  "validation_id": "NVR-MVYRHFBI-V87MV3",
+  "raw_need": "Continue QIF development with the nearest roadmap release using latest AOF and current AI trends",
+  "validation_status": "reframed",
+  "validated_need": "QIF must make post-promotion drift signals structurally trustworthy enough for governance and prevent emergency-demotion incidents from being closed before a complete, conflict-aware post-action observation window and accountable human decision.",
+  "decision_summary": "The raw continuation request was reframed to the smallest unresolved lifecycle risk after v0.8.9: correlated, stale, unidentified, or conflicting signals can create false assurance, and demotion completion alone does not establish incident closure.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What must be made trustworthy?",
+      "answer": "The declared source identity, freshness, correlation boundary, independence claim, conflict preservation, and evidence lineage for every signal used in drift or closure.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "When may an incident close?",
+      "answer": "Only after completed demotion and matched reconciliation, a complete bounded post-action observation window, no unresolved critical signal or conflict, accountable human approval, and explicit residual-risk disposition.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "multiple signals were previously liable to be treated as stronger evidence without proving independence"
+  ],
+  "evidence_gaps": [
+    "QIF cannot prove source authenticity, causal independence, live-state truth, or operational safety; these remain explicit semantic and provider boundaries"
+  ],
+  "problem_statement_ref": ".aof/artifacts/need-validation/problem-statements/PST-MVYRH8XE-VK2966.json",
+  "value_hypothesis_ref": ".aof/artifacts/need-validation/value-hypotheses/VHY-MVYRH926-3SEBJX.json",
+  "alternative_analysis_ref": ".aof/artifacts/need-validation/alternative-analyses/ALT-MVYRH96Q-LZON4P.json",
+  "experiment_proposal_ref": ".aof/artifacts/need-validation/experiment-proposals/EXP-MVYRH9B8-NKMWNR.json",
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVYRH0NF-G08IJY"
+}

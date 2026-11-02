@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.8.10
+
+- Added signal-source records with identity, ownership, capture mode, correlation group, declared independence, freshness, privacy handling, and evidence.
+- Added deterministic signal reconciliation that separates current, stale, independent, correlated, conflicting, and unresolved critical signals.
+- Added incident-closure records requiring completed demotion, matched execution, a complete post-action observation window, corroborated recovery, residual-risk disposition, accountable human authority, and reopen conditions.
+- Added fail-closed governance for unverified sources, stale signals, unresolved correlation, signal conflict, blocked closure, and approved closure.
+- Added 24 retained negative fixtures and verifier boundaries separating declared signal integrity from authenticity, causal independence, monitoring completeness, future safety, operational authority, and semantic truth.
+
 ## v0.8.9
 
 - Added append-only post-promotion policy-state observations with evidence-bearing dimensions and reproducible match, mismatch, and missing results.

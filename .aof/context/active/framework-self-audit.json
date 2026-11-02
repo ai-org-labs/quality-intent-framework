@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-11-01T04:41:21.621Z",
-  "audit_id": "FSA-QIF-V089",
-  "scope": "QIF v0.8.9 release self-review",
-  "summary": "Promoted trust policy now retains append-only state observations, deterministic declared drift assessment, and bounded human-governed emergency demotion evidence.",
-  "detected_gap": "QIF does not yet establish monitoring-source identity or independence, reconcile conflicting drift signals, or prove incident closure through a post-demotion observation window.",
+  "recorded_at": "2026-11-02T04:42:42.234Z",
+  "audit_id": "FSA-QIF-V0810",
+  "scope": "QIF v0.8.10 release self-review",
+  "summary": "Drift evidence now preserves source identity, freshness, declared correlation and independence, current conflict, and bounded human-governed incident closure.",
+  "detected_gap": "Reopen conditions remain prose: QIF does not yet ingest a late post-closure signal, preserve the original closure while reopening the incident, or calibrate whether closure predictions remain correct over later outcomes.",
   "result_state": "stable",
-  "next_action": "Implement QIF v0.8.10 Drift Signal Integrity and Incident Closure.",
+  "next_action": "Implement QIF v0.8.11 Late-Signal Reopen and Closure Calibration.",
   "related_task_ids": [
-    "TASK-082"
+    "TASK-083"
   ],
-  "source_session_id": "SESS-MVXBYFXP-7KPV48",
-  "source_decision_record_id": "DEC-MVXBZ1ZQ-DMT4NC"
+  "source_session_id": "SESS-MVYRGXB1-5FTXE6",
+  "source_decision_record_id": "DEC-MVYRHL3F-OSSZS9"
 }

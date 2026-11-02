@@ -1,6 +1,6 @@
 {
   "guidance_type": "cadence-trigger-guidance",
-  "recorded_at": "2026-11-01T04:41:21.639Z",
+  "recorded_at": "2026-11-02T04:42:42.248Z",
   "open_task_count": 1,
   "retire_review_candidate_ids": [],
   "trigger_state": "idle",
@@ -17,6 +17,6 @@
     }
   ],
   "summary": "Current cadence surfaces are present; continue normal cadence monitoring.",
-  "source_session_id": "SESS-MVXBYFXP-7KPV48",
-  "source_decision_record_id": "DEC-MVXBZ1ZQ-DMT4NC"
+  "source_session_id": "SESS-MVYRGXB1-5FTXE6",
+  "source_decision_record_id": "DEC-MVYRHL3F-OSSZS9"
 }

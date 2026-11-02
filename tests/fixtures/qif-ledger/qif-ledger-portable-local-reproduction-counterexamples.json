@@ -1,6 +1,6 @@
 {
   "packageType": "qif-ledger",
-  "runtimeVersion": "0.8.9",
+  "runtimeVersion": "0.8.10",
   "packageId": "LEDGERPKG-001",
   "packageRefs": [
     {
@@ -913,6 +913,51 @@
       "reason": "Critical authority drift requires demotion from the promoted policy to the predecessor policy.",
       "severity": "critical",
       "requiredAction": "Authorize, execute, and reconcile the bounded emergency demotion before the deadline.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "closed"
+    },
+    {
+      "id": "PKGTR-024",
+      "triggerType": "portable-trust-signal-source-unverified",
+      "reason": "A monitoring source lacks enough declared identity, ownership, or evidence to support drift or closure.",
+      "severity": "high",
+      "requiredAction": "Identify and review the source before using its signal in a closure decision.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "closed"
+    },
+    {
+      "id": "PKGTR-025",
+      "triggerType": "portable-trust-signal-stale",
+      "reason": "A signal exceeded its declared freshness window.",
+      "severity": "high",
+      "requiredAction": "Keep the incident open until current evidence is recorded.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "closed"
+    },
+    {
+      "id": "PKGTR-026",
+      "triggerType": "portable-trust-signal-conflict-detected",
+      "reason": "Current signals disagree about the same recovery dimension.",
+      "severity": "critical",
+      "requiredAction": "Preserve the conflict and require accountable adjudication before closure.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "closed"
+    },
+    {
+      "id": "PKGTR-027",
+      "triggerType": "portable-trust-incident-closure-blocked",
+      "reason": "The closure policy is not yet satisfied.",
+      "severity": "critical",
+      "requiredAction": "Keep the incident open and complete the missing observation, reconciliation, or governance evidence.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "closed"
+    },
+    {
+      "id": "PKGTR-028",
+      "triggerType": "portable-trust-incident-closure-approved",
+      "reason": "The bounded post-demotion window completed with two independent correlation groups, no conflict, and accountable human approval.",
+      "severity": "medium",
+      "requiredAction": "Preserve the closure evidence and reopen if a declared condition occurs.",
       "owner": "portable-knowledge-governance-owner",
       "status": "closed"
     }
@@ -2641,6 +2686,210 @@
       "status": "reviewed"
     }
   ],
+  "portableKnowledgeSignalSources": [
+    {
+      "id": "PKSS-001",
+      "sourceIdentity": "bounded-policy-state-telemetry",
+      "sourceKind": "system-telemetry",
+      "captureMode": "automated",
+      "owner": "runtime-observability-owner",
+      "correlationGroup": "runtime-state-plane",
+      "independenceStatus": "independent",
+      "independenceBasis": "Collected from the bounded runtime state plane rather than the governance audit store.",
+      "freshnessWindowSeconds": 14400,
+      "privacyHandling": "Retain normalized state assertions and evidence references only; exclude prompts, personal data, and raw payloads.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "governanceTriggerRefs": [],
+      "authenticityClaimed": false,
+      "causalIndependenceClaimed": false,
+      "activityCountIsQuality": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "reviewed"
+    },
+    {
+      "id": "PKSS-002",
+      "sourceIdentity": "governance-change-audit",
+      "sourceKind": "audit-record",
+      "captureMode": "hybrid",
+      "owner": "portable-knowledge-governance-owner",
+      "correlationGroup": "governance-audit-plane",
+      "independenceStatus": "independent",
+      "independenceBasis": "The change audit has a distinct owner and storage path from runtime-state telemetry.",
+      "freshnessWindowSeconds": 14400,
+      "privacyHandling": "Retain decision metadata and evidence references; redact personal and credential material.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "governanceTriggerRefs": [],
+      "authenticityClaimed": false,
+      "causalIndependenceClaimed": false,
+      "activityCountIsQuality": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "reviewed"
+    },
+    {
+      "id": "PKSS-003",
+      "sourceIdentity": "operator-runtime-summary",
+      "sourceKind": "human-report",
+      "captureMode": "manual",
+      "owner": "runtime-operations-owner",
+      "correlationGroup": "runtime-state-plane",
+      "independenceStatus": "correlated",
+      "independenceBasis": "The operator summary is derived from the same runtime state plane as PKSS-001 and is retained as corroborating context, not independent confirmation.",
+      "freshnessWindowSeconds": 7200,
+      "privacyHandling": "Retain a reviewed summary without employee-performance attribution or raw sensitive telemetry.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "governanceTriggerRefs": [],
+      "authenticityClaimed": false,
+      "causalIndependenceClaimed": false,
+      "activityCountIsQuality": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "reviewed"
+    }
+  ],
+  "portableKnowledgeSignalReconciliations": [
+    {
+      "id": "PKSR-001",
+      "driftAssessmentRef": "PKDA-001",
+      "emergencyDemotionRef": "PKED-001",
+      "evaluatedAt": "2026-11-01T05:00:00.000Z",
+      "requiredIndependentSources": 2,
+      "signalClaims": [
+        {
+          "id": "PKSIG-001",
+          "sourceRef": "PKSS-001",
+          "dimension": "authority-scope",
+          "outcome": "recovered",
+          "severity": "critical",
+          "observedAt": "2026-11-01T03:30:00.000Z",
+          "evidenceRefs": [
+            {
+              "packageRef": "PKG-EXPERT",
+              "entityType": "cases",
+              "entityRef": "CAS-SW-001"
+            }
+          ]
+        },
+        {
+          "id": "PKSIG-002",
+          "sourceRef": "PKSS-002",
+          "dimension": "authority-scope",
+          "outcome": "recovered",
+          "severity": "critical",
+          "observedAt": "2026-11-01T04:00:00.000Z",
+          "evidenceRefs": [
+            {
+              "packageRef": "PKG-EXPERT",
+              "entityType": "cases",
+              "entityRef": "CAS-SW-001"
+            }
+          ]
+        },
+        {
+          "id": "PKSIG-003",
+          "sourceRef": "PKSS-003",
+          "dimension": "authority-scope",
+          "outcome": "recovered",
+          "severity": "high",
+          "observedAt": "2026-11-01T04:15:00.000Z",
+          "evidenceRefs": [
+            {
+              "packageRef": "PKG-EXPERT",
+              "entityType": "cases",
+              "entityRef": "CAS-SW-001"
+            }
+          ]
+        }
+      ],
+      "currentSignalRefs": [
+        "PKSIG-001",
+        "PKSIG-002",
+        "PKSIG-003"
+      ],
+      "staleSignalRefs": [],
+      "independentSignalRefs": [
+        "PKSIG-001",
+        "PKSIG-002"
+      ],
+      "correlatedSignalRefs": [
+        "PKSIG-003"
+      ],
+      "conflictingSignalRefs": [],
+      "unresolvedCriticalSignalRefs": [],
+      "independentCorrelationGroupCount": 2,
+      "reconciliationResult": "corroborated-recovery",
+      "closureRecommendation": "closure-candidate",
+      "reviewedBy": "portable-knowledge-governance-owner",
+      "governanceTriggerRefs": [
+        "PKGTR-028"
+      ],
+      "historyPreserved": true,
+      "activityCountIsQuality": false,
+      "automaticClosure": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "reviewed"
+    }
+  ],
+  "portableKnowledgeIncidentClosures": [
+    {
+      "id": "PKIC-001",
+      "emergencyDemotionRef": "PKED-001",
+      "signalReconciliationRef": "PKSR-001",
+      "observationWindowStart": "2026-11-01T01:25:00.000Z",
+      "observationWindowEnd": "2026-11-01T06:00:00.000Z",
+      "windowComplete": true,
+      "demotionComplete": true,
+      "executionMatched": true,
+      "signalReconciliationSatisfied": true,
+      "unresolvedSignalRefs": [],
+      "residualRisk": "The local record cannot prove provider authenticity, causal independence, delayed effects outside the window, or semantic fitness.",
+      "residualRiskDisposition": "accepted",
+      "closureDecision": "close",
+      "decidedBy": "portable-knowledge-governance-owner",
+      "decidedAt": "2026-11-01T06:10:00.000Z",
+      "authorityBasis": "Documented incident-closure authority for the bounded portable trust-policy scope.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "reopenConditions": [
+        "A critical or conflicting signal appears after the observation window.",
+        "The target policy or approved scope no longer matches the observed state."
+      ],
+      "governanceTriggerRefs": [
+        "PKGTR-028"
+      ],
+      "historyPreserved": true,
+      "activityCountIsQuality": false,
+      "automaticClosure": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "closed"
+    }
+  ],
   "ledgerIndex": {
     "activeQualityIntentRefs": [
       {
@@ -2693,8 +2942,8 @@
         "entityRef": "CALRUN-WMC-001"
       }
     ],
-    "lastUpdated": "2026-11-01",
-    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, immutable replay, frozen-scope rollout preview, accountable activation, execution reconciliation, recovery verification, governed policy disposition, post-promotion drift assessment, and emergency demotion without automatic authority."
+    "lastUpdated": "2026-11-02",
+    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, immutable replay, frozen-scope rollout preview, accountable activation, execution reconciliation, recovery verification, governed policy disposition, post-promotion drift assessment, emergency demotion, signal-source integrity, conflict-aware reconciliation, and human-governed incident closure without automatic authority."
   },
   "verifierBoundary": {
     "checks": [
@@ -2718,7 +2967,8 @@
       "frozen rollout scope, exact item coverage, per-item proposed-policy outcomes, affected-knowledge census arithmetic, and pre-activation governance",
       "activation authority traceability, bounded observation decisions, stop-condition reproduction, and rollback-chain integrity",
       "declared-versus-observed execution reconciliation, recovery-state verification, and governed policy promotion or retirement",
-      "append-only policy-state observation lineage, deterministic drift severity, governance routing, and emergency demotion reconciliation"
+      "append-only policy-state observation lineage, deterministic drift severity, governance routing, and emergency demotion reconciliation",
+      "signal identity, freshness, correlation-group independence, conflict preservation, and incident-closure reproduction"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -2739,7 +2989,8 @@
       "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth",
       "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness",
       "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness",
-      "policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness"
+      "policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness",
+      "signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness"
     ],
     "semanticValidityRequires": [
       "expert review",

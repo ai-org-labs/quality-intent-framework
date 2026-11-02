@@ -1,0 +1,12 @@
+{
+  "artifact_type": "experiment-proposal",
+  "recorded_at": "2026-11-02T04:31:07.364Z",
+  "experiment_proposal_id": "EXP-MVYRH9B8-NKMWNR",
+  "assumption_to_test": "a minimal source-integrity, signal-reconciliation, and closure model can deterministically reject correlated confirmation, unresolved conflicts, and premature closure without claiming semantic truth",
+  "smallest_testable_validation": "extend the canonical ledger example and retained negative fixture suite with one complete incident and mutations for source identity, independence, conflict, window completeness, authority, and closure conditions",
+  "expected_learning": "whether the model is executable, explainable, provider-neutral, and resistant to false closure",
+  "expected_cost": "one bounded schema, verifier, fixture, documentation, and portable-package release slice",
+  "success_threshold": "all positive packages pass, every targeted mutation fails with its expected error, portable verification passes, and AOF review finds no authority or semantic-truth overclaim",
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVYRH0NF-G08IJY"
+}

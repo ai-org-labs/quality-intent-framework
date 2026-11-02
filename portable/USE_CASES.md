@@ -191,6 +191,22 @@ provider, prove root cause, execute demotion, or grant authority.
 - `schemas/qif-ledger-package.schema.json`
 - `examples/qif-ledger-package.json`
 
+## 16. Reconcile Drift Signals and Govern Incident Closure
+
+Do not treat multiple alerts as independent confirmation. Record each source,
+owner, freshness window, correlation group, declared independence, privacy
+handling, and evidence. Exclude stale signals, count a correlation group once,
+preserve disagreement, and keep unresolved critical signals visible. Close a
+demotion incident only after the full observation window, matched execution,
+corroborated recovery, residual-risk disposition, and accountable human
+approval. Record conditions that reopen it. These records do not authenticate
+sources, prove causal independence or future safety, close a provider
+incident, or grant authority.
+
+- `docs/qif-v0.8.10-drift-signal-integrity-incident-closure.md`
+- `schemas/qif-ledger-package.schema.json`
+- `examples/qif-ledger-package.json`
+
 ## Choosing a Package Type
 
 Open `MANIFEST.json` to see every included schema and example. Use a schema only

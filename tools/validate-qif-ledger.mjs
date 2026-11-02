@@ -277,6 +277,9 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgePolicyStateObservations = requireArray(pkg, "portableKnowledgePolicyStateObservations", packagePath);
   const portableKnowledgeDriftAssessments = requireArray(pkg, "portableKnowledgeDriftAssessments", packagePath);
   const portableKnowledgeEmergencyDemotions = requireArray(pkg, "portableKnowledgeEmergencyDemotions", packagePath);
+  const portableKnowledgeSignalSources = requireArray(pkg, "portableKnowledgeSignalSources", packagePath);
+  const portableKnowledgeSignalReconciliations = requireArray(pkg, "portableKnowledgeSignalReconciliations", packagePath);
+  const portableKnowledgeIncidentClosures = requireArray(pkg, "portableKnowledgeIncidentClosures", packagePath);
   const packageRefIndex = indexById(packageRefs, `${packagePath}:packageRefs`);
   const crossPackageRefIndex = indexById(crossPackageRefs, `${packagePath}:crossPackageRefs`);
   const lifecycleIndex = indexById(lifecycleRecords, `${packagePath}:qualityIntentLifecycleRecords`);
@@ -319,6 +322,9 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgePolicyStateObservationIndex = indexById(portableKnowledgePolicyStateObservations, `${packagePath}:portableKnowledgePolicyStateObservations`);
   const portableKnowledgeDriftAssessmentIndex = indexById(portableKnowledgeDriftAssessments, `${packagePath}:portableKnowledgeDriftAssessments`);
   const portableKnowledgeEmergencyDemotionIndex = indexById(portableKnowledgeEmergencyDemotions, `${packagePath}:portableKnowledgeEmergencyDemotions`);
+  const portableKnowledgeSignalSourceIndex = indexById(portableKnowledgeSignalSources, `${packagePath}:portableKnowledgeSignalSources`);
+  const portableKnowledgeSignalReconciliationIndex = indexById(portableKnowledgeSignalReconciliations, `${packagePath}:portableKnowledgeSignalReconciliations`);
+  indexById(portableKnowledgeIncidentClosures, `${packagePath}:portableKnowledgeIncidentClosures`);
   void crossPackageRefIndex;
   void missedIntentIndex;
 
@@ -1439,6 +1445,120 @@ function validateLedgerPackage(pkg, packagePath) {
     if (demotion.historyPreserved !== true || demotion.destructiveDeletion !== false || demotion.activityCountIsQuality !== false || demotion.automaticDemotion !== false || demotion.automaticAuthority !== false || demotion.semanticTruthClaimed !== false) errors.push(`${demotion.id} must preserve history, forbid destructive deletion, treat counts as evidence, and forbid automatic demotion, authority, and semantic truth claims.`);
   }
 
+  for (const source of portableKnowledgeSignalSources) {
+    const evidenceComplete = (source.evidenceRefs ?? []).length > 0;
+    const reviewed = evidenceComplete && source.independenceStatus !== "unknown";
+    const types = portableGovernanceTypes(source.governanceTriggerRefs, source.id);
+    if (!reviewed && !types.has("portable-trust-signal-source-unverified")) errors.push(`${source.id} unverified signal source requires a portable-trust-signal-source-unverified governance trigger.`);
+    if (source.status !== (reviewed ? "reviewed" : "governance-required")) errors.push(`${source.id} status must reproduce from source evidence and independence declaration.`);
+    if (source.authenticityClaimed !== false || source.causalIndependenceClaimed !== false || source.activityCountIsQuality !== false || source.automaticAuthority !== false || source.semanticTruthClaimed !== false) errors.push(`${source.id} must treat source identity and independence as declared evidence, not authenticity, causality, quality, authority, or semantic truth.`);
+  }
+
+  for (const reconciliation of portableKnowledgeSignalReconciliations) {
+    const assessment = portableKnowledgeDriftAssessmentIndex.get(reconciliation.driftAssessmentRef);
+    const demotion = portableKnowledgeEmergencyDemotionIndex.get(reconciliation.emergencyDemotionRef);
+    if (!assessment) errors.push(`${reconciliation.id} references missing drift assessment ${reconciliation.driftAssessmentRef}.`);
+    if (!demotion) errors.push(`${reconciliation.id} references missing emergency demotion ${reconciliation.emergencyDemotionRef}.`);
+    if (assessment && demotion && demotion.driftAssessmentRef !== assessment.id) errors.push(`${reconciliation.id} drift assessment and emergency demotion must describe the same incident.`);
+
+    const claims = reconciliation.signalClaims ?? [];
+    const claimIds = claims.map((claim) => claim.id);
+    if (new Set(claimIds).size !== claimIds.length) errors.push(`${reconciliation.id} signal claim ids must be unique.`);
+    const evaluatedAt = Date.parse(reconciliation.evaluatedAt);
+    const current = [];
+    const stale = [];
+    const unverified = [];
+    const groupCounts = new Map();
+    for (const claim of claims) {
+      const source = portableKnowledgeSignalSourceIndex.get(claim.sourceRef);
+      if (!source) {
+        errors.push(`${reconciliation.id}/${claim.id} references missing signal source ${claim.sourceRef}.`);
+        unverified.push(claim.id);
+        continue;
+      }
+      const observedAt = Date.parse(claim.observedAt);
+      const isCurrent = Number.isFinite(observedAt) && observedAt <= evaluatedAt && evaluatedAt - observedAt <= source.freshnessWindowSeconds * 1000;
+      (isCurrent ? current : stale).push(claim.id);
+      if ((claim.evidenceRefs ?? []).length === 0 || source.status !== "reviewed") unverified.push(claim.id);
+      if (isCurrent && source.independenceStatus === "independent" && (claim.evidenceRefs ?? []).length > 0) groupCounts.set(source.correlationGroup, (groupCounts.get(source.correlationGroup) ?? 0) + 1);
+    }
+    const independent = [];
+    const correlated = [];
+    for (const claim of claims.filter((entry) => current.includes(entry.id))) {
+      const source = portableKnowledgeSignalSourceIndex.get(claim.sourceRef);
+      const isIndependent = source?.independenceStatus === "independent" && (claim.evidenceRefs ?? []).length > 0 && groupCounts.get(source.correlationGroup) === 1;
+      (isIndependent ? independent : correlated).push(claim.id);
+    }
+    const byDimension = new Map();
+    for (const claim of claims.filter((entry) => current.includes(entry.id) && (entry.evidenceRefs ?? []).length > 0)) {
+      if (!byDimension.has(claim.dimension)) byDimension.set(claim.dimension, []);
+      byDimension.get(claim.dimension).push(claim);
+    }
+    const conflicting = [];
+    for (const dimensionClaims of byDimension.values()) if (new Set(dimensionClaims.map((claim) => claim.outcome)).size > 1) conflicting.push(...dimensionClaims.map((claim) => claim.id));
+    const unresolvedCritical = claims.filter((claim) => current.includes(claim.id) && claim.severity === "critical" && claim.outcome !== "recovered").map((claim) => claim.id);
+    const independentGroups = new Set(independent.map((id) => portableKnowledgeSignalSourceIndex.get(claims.find((claim) => claim.id === id)?.sourceRef)?.correlationGroup).filter(Boolean));
+    const recoveredIndependentGroups = new Set(independent.filter((id) => claims.find((claim) => claim.id === id)?.outcome === "recovered").map((id) => portableKnowledgeSignalSourceIndex.get(claims.find((claim) => claim.id === id)?.sourceRef)?.correlationGroup).filter(Boolean));
+
+    const sameIds = (actual, expected) => canonicalJson([...(actual ?? [])].sort()) === canonicalJson([...expected].sort());
+    if (!sameIds(reconciliation.currentSignalRefs, current)) errors.push(`${reconciliation.id} currentSignalRefs must reproduce from source freshness windows.`);
+    if (!sameIds(reconciliation.staleSignalRefs, stale)) errors.push(`${reconciliation.id} staleSignalRefs must reproduce from source freshness windows.`);
+    if (!sameIds(reconciliation.independentSignalRefs, independent)) errors.push(`${reconciliation.id} independentSignalRefs must exclude correlated or unverified confirmation.`);
+    if (!sameIds(reconciliation.correlatedSignalRefs, correlated)) errors.push(`${reconciliation.id} correlatedSignalRefs must reproduce from source declarations and correlation groups.`);
+    if (!sameIds(reconciliation.conflictingSignalRefs, [...new Set(conflicting)])) errors.push(`${reconciliation.id} conflictingSignalRefs must preserve every current conflict.`);
+    if (!sameIds(reconciliation.unresolvedCriticalSignalRefs, unresolvedCritical)) errors.push(`${reconciliation.id} unresolvedCriticalSignalRefs must reproduce from current critical outcomes.`);
+    if (reconciliation.independentCorrelationGroupCount !== independentGroups.size) errors.push(`${reconciliation.id} independentCorrelationGroupCount must reproduce as ${independentGroups.size}.`);
+
+    const result = unverified.length > 0 ? "unverified" : conflicting.length > 0 ? "conflicted" : recoveredIndependentGroups.size >= reconciliation.requiredIndependentSources && unresolvedCritical.length === 0 ? "corroborated-recovery" : "insufficient";
+    const recommendation = result === "corroborated-recovery" ? "closure-candidate" : ["conflicted", "unverified"].includes(result) ? "governance-required" : "keep-open";
+    if (reconciliation.reconciliationResult !== result) errors.push(`${reconciliation.id} reconciliationResult must reproduce as ${result}.`);
+    if (reconciliation.closureRecommendation !== recommendation) errors.push(`${reconciliation.id} closureRecommendation must reproduce as ${recommendation}.`);
+    const types = portableGovernanceTypes(reconciliation.governanceTriggerRefs, reconciliation.id);
+    if (unverified.length > 0 && !types.has("portable-trust-signal-source-unverified")) errors.push(`${reconciliation.id} unverified signal evidence requires a portable-trust-signal-source-unverified governance trigger.`);
+    if (stale.length > 0 && !types.has("portable-trust-signal-stale")) errors.push(`${reconciliation.id} stale signal evidence requires a portable-trust-signal-stale governance trigger.`);
+    if (conflicting.length > 0 && !types.has("portable-trust-signal-conflict-detected")) errors.push(`${reconciliation.id} conflicting signal evidence requires a portable-trust-signal-conflict-detected governance trigger.`);
+    if (result === "insufficient" && correlated.length > 0 && !types.has("portable-trust-signal-correlation-unresolved")) errors.push(`${reconciliation.id} unresolved correlation requires a portable-trust-signal-correlation-unresolved governance trigger.`);
+    if (recommendation !== "closure-candidate" && !types.has("portable-trust-incident-closure-blocked")) errors.push(`${reconciliation.id} non-candidate closure requires a portable-trust-incident-closure-blocked governance trigger.`);
+    if (recommendation === "closure-candidate" && !types.has("portable-trust-incident-closure-approved")) errors.push(`${reconciliation.id} closure candidate requires a portable-trust-incident-closure-approved governance trigger.`);
+    if (reconciliation.status !== (recommendation === "closure-candidate" ? "reviewed" : "governance-required")) errors.push(`${reconciliation.id} status must reproduce from signal reconciliation.`);
+    if (reconciliation.historyPreserved !== true || reconciliation.activityCountIsQuality !== false || reconciliation.automaticClosure !== false || reconciliation.automaticAuthority !== false || reconciliation.semanticTruthClaimed !== false) errors.push(`${reconciliation.id} must preserve signal history, treat counts as evidence, and forbid automatic closure, authority, and semantic truth claims.`);
+  }
+
+  for (const closure of portableKnowledgeIncidentClosures) {
+    const demotion = portableKnowledgeEmergencyDemotionIndex.get(closure.emergencyDemotionRef);
+    const reconciliation = portableKnowledgeSignalReconciliationIndex.get(closure.signalReconciliationRef);
+    const execution = demotion ? portableKnowledgeExecutionReconciliationIndex.get(demotion.executionReconciliationRef) : null;
+    if (!demotion) errors.push(`${closure.id} references missing emergency demotion ${closure.emergencyDemotionRef}.`);
+    if (!reconciliation) errors.push(`${closure.id} references missing signal reconciliation ${closure.signalReconciliationRef}.`);
+    if (reconciliation && reconciliation.emergencyDemotionRef !== closure.emergencyDemotionRef) errors.push(`${closure.id} signal reconciliation must describe the same emergency demotion.`);
+    const start = Date.parse(closure.observationWindowStart);
+    const end = Date.parse(closure.observationWindowEnd);
+    const decidedAt = Date.parse(closure.decidedAt);
+    const claimsInsideWindow = (reconciliation?.signalClaims ?? []).every((claim) => Date.parse(claim.observedAt) >= start && Date.parse(claim.observedAt) <= end);
+    const windowComplete = Number.isFinite(start) && Number.isFinite(end) && start < end && decidedAt >= end && (!demotion?.completedAt || start >= Date.parse(demotion.completedAt)) && (!reconciliation || Date.parse(reconciliation.evaluatedAt) <= end) && claimsInsideWindow;
+    const demotionComplete = demotion?.demotionStatus === "completed";
+    const executionMatched = execution?.result === "matched" && execution?.actionRecordRef === demotion?.id;
+    const signalSatisfied = reconciliation?.reconciliationResult === "corroborated-recovery" && reconciliation?.closureRecommendation === "closure-candidate";
+    const unresolved = [...new Set([...(reconciliation?.staleSignalRefs ?? []), ...(reconciliation?.conflictingSignalRefs ?? []), ...(reconciliation?.unresolvedCriticalSignalRefs ?? [])])];
+    if (closure.windowComplete !== windowComplete) errors.push(`${closure.id} windowComplete must reproduce as ${windowComplete}.`);
+    if (closure.demotionComplete !== demotionComplete) errors.push(`${closure.id} demotionComplete must reproduce as ${demotionComplete}.`);
+    if (closure.executionMatched !== executionMatched) errors.push(`${closure.id} executionMatched must reproduce as ${executionMatched}.`);
+    if (closure.signalReconciliationSatisfied !== signalSatisfied) errors.push(`${closure.id} signalReconciliationSatisfied must reproduce as ${signalSatisfied}.`);
+    if (canonicalJson([...(closure.unresolvedSignalRefs ?? [])].sort()) !== canonicalJson(unresolved.sort())) errors.push(`${closure.id} unresolvedSignalRefs must reproduce from stale, conflicting, and critical signals.`);
+    const authorityComplete = Boolean(closure.decidedBy && closure.authorityBasis && (closure.evidenceRefs ?? []).length > 0);
+    const riskDisposed = ["accepted", "mitigated"].includes(closure.residualRiskDisposition);
+    const canClose = windowComplete && demotionComplete && executionMatched && signalSatisfied && unresolved.length === 0 && authorityComplete && riskDisposed;
+    const decision = canClose ? "close" : !authorityComplete || reconciliation?.reconciliationResult === "conflicted" || reconciliation?.reconciliationResult === "unverified" ? "governance-required" : "keep-open";
+    if (closure.closureDecision !== decision) errors.push(`${closure.id} closureDecision must reproduce as ${decision}.`);
+    const types = portableGovernanceTypes(closure.governanceTriggerRefs, closure.id);
+    if (decision === "close" && !types.has("portable-trust-incident-closure-approved")) errors.push(`${closure.id} closed incident requires a portable-trust-incident-closure-approved governance trigger.`);
+    if (decision !== "close" && !types.has("portable-trust-incident-closure-blocked")) errors.push(`${closure.id} non-closed incident requires a portable-trust-incident-closure-blocked governance trigger.`);
+    const expectedStatus = decision === "close" ? "closed" : decision === "keep-open" ? "open" : "governance-required";
+    if (closure.status !== expectedStatus) errors.push(`${closure.id} status must reproduce as ${expectedStatus}.`);
+    if ((closure.reopenConditions ?? []).length === 0) errors.push(`${closure.id} must define at least one reopen condition.`);
+    if (closure.historyPreserved !== true || closure.activityCountIsQuality !== false || closure.automaticClosure !== false || closure.automaticAuthority !== false || closure.semanticTruthClaimed !== false) errors.push(`${closure.id} must preserve incident history, treat counts as evidence, and forbid automatic closure, authority, and semantic truth claims.`);
+  }
+
   const index = pkg.ledgerIndex;
   if (!index || typeof index !== "object") {
     errors.push(`${packagePath} must include ledgerIndex.`);
@@ -1470,7 +1590,7 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim ?? []).includes("semantic truth")) {
       errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
     }
-    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth", "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth", "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness", "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness", "policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness"]) {
+    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth", "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth", "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness", "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness", "policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness", "signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness"]) {
       if (!(boundary.doesNotClaim ?? []).includes(claim)) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming ${claim}.`);
     }
   }
@@ -1523,7 +1643,10 @@ function validateLedgerPackage(pkg, packagePath) {
       portableKnowledgePromotionDecisions: portableKnowledgePromotionDecisions.length,
       portableKnowledgePolicyStateObservations: portableKnowledgePolicyStateObservations.length,
       portableKnowledgeDriftAssessments: portableKnowledgeDriftAssessments.length,
-      portableKnowledgeEmergencyDemotions: portableKnowledgeEmergencyDemotions.length
+      portableKnowledgeEmergencyDemotions: portableKnowledgeEmergencyDemotions.length,
+      portableKnowledgeSignalSources: portableKnowledgeSignalSources.length,
+      portableKnowledgeSignalReconciliations: portableKnowledgeSignalReconciliations.length,
+      portableKnowledgeIncidentClosures: portableKnowledgeIncidentClosures.length
     }
   });
 }

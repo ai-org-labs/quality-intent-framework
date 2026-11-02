@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-11-02T04:31:07.038Z",
+  "value_hypothesis_id": "VHY-MVYRH926-3SEBJX",
+  "expected_value_creation": "make drift evidence and incident closure structurally auditable without depending on a provider or trusting signal volume",
+  "beneficiary": "QIF operators, accountable decision makers, independent reviewers, and downstream affected stakeholders",
+  "supporting_evidence": [
+    "NIST AI 800-4 identifies fragmented logging, drift detection, monitoring-method trust, and automated-versus-human monitoring as open challenges",
+    "Microsoft guidance requires end-to-end correlation and telemetry sufficient for incident reconstruction"
+  ],
+  "success_criteria": [
+    "signal identity, freshness, correlation, independence, and conflicts are explicit and verifiable",
+    "incident closure is blocked until post-demotion observations and human governance satisfy a deterministic closure policy"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVYRH0NF-G08IJY"
+}

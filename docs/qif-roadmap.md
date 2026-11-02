@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.8.9 baseline)
+## Current Position (v0.8.10 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -258,13 +258,14 @@ and adoption surface — not pretending the limits away.
 
 ## 2026 Agentic AI Trend Check
 
-The roadmap was revalidated on 2026-11-01 against primary-source signals. The
+The roadmap was revalidated on 2026-11-02 against primary-source signals. The
 goal is not to chase product features. It is to identify which quality claims
 become dangerous as agents gain longer horizons, tools, parallelism, and wider
 organizational authority.
 
 | Current signal | Quality risk exposed | QIF response | Lead, not follow |
 | --- | --- | --- | --- |
+| NIST identifies fragmented logging, uncertain monitoring methods, weak information sharing, and the unresolved balance between automation and human validation. OpenTelemetry is standardizing end-to-end agent traces, while Microsoft requires correlation identifiers, behavioral baselines, tamper-resistant evidence, and telemetry sufficient for incident reconstruction. ([NIST AI 800-4](https://www.nist.gov/publications/challenges-monitoring-deployed-ai-systems-center-ai-standards-and-innovation), [OpenTelemetry GenAI observability](https://opentelemetry.io/blog/2026/genai-observability/), [Microsoft AI observability](https://learn.microsoft.com/en-us/security/zero-trust/sfi/observability-ai-systems), [Microsoft monitoring, detection, and forensics](https://learn.microsoft.com/en-us/security/zero-trust/catalog-ai-defense-capabilities/monitoring-detection-forensics)) | Multiple alerts can share one cause or telemetry plane, stale signals can appear current, conflict can be averaged away, and completed containment can be mistaken for incident closure. A late signal can then invalidate a final-looking closure record. | v0.8.10 Drift Signal Integrity and Incident Closure, followed by v0.8.11 Late-Signal Reopen and Closure Calibration. | Identify sources and correlation groups, exclude stale evidence, preserve conflict, and require a bounded observation plus human closure now; next make late-signal reopening and empirical closure calibration executable. |
 | Post-deployment AI guidance now treats drift monitoring, accountable ownership, continuous evaluation, incident response, recovery, and retirement as lifecycle obligations. NIST also identifies fragmented logging and the balance between automation and human validation as open monitoring problems. ([NIST AI RMF Measure](https://airc.nist.gov/airmf-resources/playbook/measure/), [NIST deployed-AI monitoring challenges](https://www.nist.gov/news-events/news/2026/03/new-report-challenges-monitoring-deployed-ai-systems), [Microsoft agent lifecycle](https://learn.microsoft.com/en-us/agents/center-of-excellence/agent-lifecycle), [Google Cloud online agent evaluation](https://docs.cloud.google.com/gemini-enterprise-agent-platform/optimize/evaluation/evaluate-online), [AWS agent configuration drift](https://docs.aws.amazon.com/wellarchitected/latest/agentic-ai-lens/agentops02-bp02.html)) | A point-in-time promotion can retain authority after its policy, scope, configuration, dependencies, or evidence have drifted. Monitoring can itself be incomplete or compromised, while an emergency rollback can silently become another ungoverned state change. | v0.8.9 Policy State Drift and Emergency Demotion, followed by v0.8.10 Drift Signal Integrity and Incident Closure. | Preserve an immutable approved baseline, exact observation lineage, changed dimensions, severity, human authority, emergency target, and execution reconciliation now; next prove monitoring-source diversity and close incidents only after bounded post-demotion observation. |
 | Agent operations guidance now separates evaluate-only from enforcement, requires explicit promotion criteria, records deployment outcomes and versions, and requires rollback success confirmation. ([Microsoft Agent Governance Toolkit production deployment](https://github.com/microsoft/agent-governance-toolkit/blob/main/policy-engine/docs/PRODUCTION_DEPLOYMENT.md), [Salesforce Agentic Enterprise operational excellence](https://architect.salesforce.com/docs/architect/well-architected/guide/agentic-enterprise-operational-excellence.html), [AWS continuous deployment guidance](https://docs.aws.amazon.com/prescriptive-guidance/latest/mlops-checklist/continuous-deployment.html)) | An authorization can be mistaken for execution, a command exit for effective state, a rollback label for recovery, or a quiet observation window for promotion readiness. Provider-specific logs can also hide scope or version mismatch. | v0.8.8 Activation Outcome Reconciliation and Policy Promotion, followed by v0.8.9 Policy State Drift and Emergency Demotion. | Reconcile declared actions to evidence-backed observed policy and scope before any disposition; next keep promoted state under governed drift observation and preserve emergency demotion evidence. |
 | Deployment-level agent governance is moving toward explicit authorization profiles, continuous evaluation, canary stages, human intervention, circuit breakers, and rollback. ([WEF Agent Capability and Authorization Profile](https://www.weforum.org/publications/ai-agents-in-action-a-playbook-for-trusted-adoption-authorization-and-scaling), [Australian Government continuous evaluation](https://www.digital.gov.au/policy/ai/agentic-ai-addendum-statements-evaluate), [AWS AgentCore evaluation lifecycle](https://aws.amazon.com/blogs/machine-learning/building-trust-in-ai-agents-a-production-ready-evaluation-framework-with-amazon-bedrock-agentcore/)) | A complete preview can be mistaken for authorization; an approval can be mistaken for execution; missing observation can be mistaken for safety; and rollback can be declared without recovery evidence. | v0.8.7 Trust Policy Activation Decision and Rollback Contract, followed by v0.8.8 Activation Outcome Reconciliation and Policy Promotion. | Bind exact preview scope to accountable authority, bounded observation, deterministic stop decisions, and rollback evidence now; next reconcile actual execution and recovery outcomes before policy promotion. |
@@ -909,11 +910,22 @@ Deliverables:
   target-state, reconciliation, history, and governance checks. Records do not
   prove live provider state, evidence authenticity, root cause, severity truth,
   authority, or semantic fitness.
+- Implemented eleventh v0.8 slice, v0.8.10 Drift Signal Integrity and Incident
+  Closure: identify signal sources and freshness, separate independent from
+  correlated confirmation, preserve conflicts and unresolved critical signals,
+  and close a demotion incident only after a bounded post-action observation
+  and accountable residual-risk decision.
+- Status: implemented through `PortableKnowledgeSignalSource`,
+  `PortableKnowledgeSignalReconciliation`, and
+  `PortableKnowledgeIncidentClosure`, with deterministic freshness,
+  correlation-group, conflict, observation-window, execution-match, residual
+  risk, authority, history, and governance checks. Records do not prove source
+  authenticity, causal independence, monitoring completeness, future safety,
+  operational recovery, authority, or semantic fitness.
 - Next planned slices:
-  - v0.8.10 Drift Signal Integrity and Incident Closure: preserve monitoring
-    source identity and independence, detect missing or conflicting signals,
-    and close a drift incident only after post-demotion observation and
-    accountable residual-risk acceptance.
+  - v0.8.11 Late-Signal Reopen and Closure Calibration: turn reopen conditions
+    into executable late-signal decisions and compare closure predictions with
+    later observed outcomes without rewriting the original closure.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,

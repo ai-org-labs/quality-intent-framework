@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-11-01T04:41:21.624Z",
+  "updated_at": "2026-11-02T04:42:42.237Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means every drift assessment is reproducible from a frozen approved baseline and evidence-backed observation; material or unverified drift deterministically triggers governance; emergency demotion requires accountable authority, target policy, reason, evidence, scope, deadline, and post-action reconciliation; history stays append-only; npm test, retained fixtures, portable build, and AOF verification pass.",
-      "recorded_at": "2026-11-01T04:28:52.357Z",
+      "answer": "Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass.",
+      "recorded_at": "2026-11-02T04:30:56.142Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVXBYFXP-7KPV48",
+      "source_session_id": "SESS-MVYRGXB1-5FTXE6",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The raw continuation request was reframed from generic feature delivery into the smallest unresolved lifecycle risk after v0.8.8: drift can invalidate a promoted policy, while emergency demotion can create an ungoverned state change. The release must remain portable, fail-closed, history-preserving, and non-authoritative.",
-      "recorded_at": "2026-11-01T04:29:17.660Z",
+      "answer": "The raw continuation request was reframed to the smallest unresolved lifecycle risk after v0.8.9: correlated, stale, unidentified, or conflicting signals can create false assurance, and demotion completion alone does not establish incident closure.",
+      "recorded_at": "2026-11-02T04:31:22.638Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVXBYFXP-7KPV48",
-      "source_decision_record_id": "DEC-MVXBZ1ZQ-DMT4NC"
+      "source_session_id": "SESS-MVYRGXB1-5FTXE6",
+      "source_decision_record_id": "DEC-MVYRHL3F-OSSZS9"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "QIF does not yet establish monitoring-source identity or independence, reconcile conflicting drift signals, or prove incident closure through a post-demotion observation window.",
-      "recorded_at": "2026-11-01T04:41:21.624Z",
-      "expectation_state": "Promoted trust policy now retains append-only state observations, deterministic declared drift assessment, and bounded human-governed emergency demotion evidence.",
-      "mismatch_state": "QIF does not yet establish monitoring-source identity or independence, reconcile conflicting drift signals, or prove incident closure through a post-demotion observation window.",
-      "scale_direction": "Implement QIF v0.8.10 Drift Signal Integrity and Incident Closure.",
-      "source_session_id": "SESS-MVXBYFXP-7KPV48",
-      "source_decision_record_id": "DEC-MVXBZ1ZQ-DMT4NC"
+      "answer": "Reopen conditions remain prose: QIF does not yet ingest a late post-closure signal, preserve the original closure while reopening the incident, or calibrate whether closure predictions remain correct over later outcomes.",
+      "recorded_at": "2026-11-02T04:42:42.237Z",
+      "expectation_state": "Drift evidence now preserves source identity, freshness, declared correlation and independence, current conflict, and bounded human-governed incident closure.",
+      "mismatch_state": "Reopen conditions remain prose: QIF does not yet ingest a late post-closure signal, preserve the original closure while reopening the incident, or calibrate whether closure predictions remain correct over later outcomes.",
+      "scale_direction": "Implement QIF v0.8.11 Late-Signal Reopen and Closure Calibration.",
+      "source_session_id": "SESS-MVYRGXB1-5FTXE6",
+      "source_decision_record_id": "DEC-MVYRHL3F-OSSZS9"
     }
   ]
 }

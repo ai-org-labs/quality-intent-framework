@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "QIF must preserve a provider-neutral, evidence-backed post-promotion policy-state history, deterministically identify material or unverified drift, and require accountable human authorization plus post-action reconciliation for emergency demotion.",
-  "updated_at": "2026-11-01T04:29:17.658Z",
+  "content": "QIF must make post-promotion drift signals structurally trustworthy enough for governance and prevent emergency-demotion incidents from being closed before a complete, conflict-aware post-action observation window and accountable human decision.",
+  "updated_at": "2026-11-02T04:31:22.637Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVXBYFXP-7KPV48",
-  "source_decision_record_id": "DEC-MVXBZ1ZQ-DMT4NC",
+  "source_session_id": "SESS-MVYRGXB1-5FTXE6",
+  "source_decision_record_id": "DEC-MVYRHL3F-OSSZS9",
   "declared_complete_at": null
 }

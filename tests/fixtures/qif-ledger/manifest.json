@@ -1580,6 +1580,167 @@
       "errorIncludes": "PKED-001 must preserve history, forbid destructive deletion, treat counts as evidence, and forbid automatic demotion, authority, and semantic truth claims."
     },
     {
+      "file": "qif-ledger-portable-trust-signal-source-unverified-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "unknown source independence routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKSS-001 unverified signal source requires a portable-trust-signal-source-unverified governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-signal-source-status.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "signal source status reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKSS-001 status must reproduce from source evidence and independence declaration."
+    },
+    {
+      "file": "qif-ledger-portable-trust-signal-source-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "source records do not claim authenticity or causality",
+      "expect": "fail",
+      "errorIncludes": "PKSS-001 must treat source identity and independence as declared evidence, not authenticity, causality, quality, authority, or semantic truth."
+    },
+    {
+      "file": "qif-ledger-portable-trust-signal-source-reference.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "signal claims resolve sources",
+      "expect": "fail",
+      "errorIncludes": "PKSR-001/PKSIG-001 references missing signal source PKSS-NOPE."
+    },
+    {
+      "file": "qif-ledger-portable-trust-signal-freshness.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "current signal refs reproduce from freshness windows",
+      "expect": "fail",
+      "errorIncludes": "PKSR-001 currentSignalRefs must reproduce from source freshness windows."
+    },
+    {
+      "file": "qif-ledger-portable-trust-signal-independent-refs.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "independent confirmation excludes correlated sources",
+      "expect": "fail",
+      "errorIncludes": "PKSR-001 independentSignalRefs must exclude correlated or unverified confirmation."
+    },
+    {
+      "file": "qif-ledger-portable-trust-signal-correlated-refs.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "correlated signals remain explicit",
+      "expect": "fail",
+      "errorIncludes": "PKSR-001 correlatedSignalRefs must reproduce from source declarations and correlation groups."
+    },
+    {
+      "file": "qif-ledger-portable-trust-signal-group-count.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "independent correlation-group count reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKSR-001 independentCorrelationGroupCount must reproduce as 2."
+    },
+    {
+      "file": "qif-ledger-portable-trust-signal-result.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "signal reconciliation result reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKSR-001 reconciliationResult must reproduce as corroborated-recovery."
+    },
+    {
+      "file": "qif-ledger-portable-trust-signal-recommendation.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "closure recommendation reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKSR-001 closureRecommendation must reproduce as closure-candidate."
+    },
+    {
+      "file": "qif-ledger-portable-trust-signal-correlation-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "insufficient correlated evidence routes governance",
+      "expect": "fail",
+      "errorIncludes": "PKSR-001 unresolved correlation requires a portable-trust-signal-correlation-unresolved governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-signal-conflict-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "conflicting current signals route governance",
+      "expect": "fail",
+      "errorIncludes": "PKSR-001 conflicting signal evidence requires a portable-trust-signal-conflict-detected governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-signal-approved-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "closure candidate retains approval trigger",
+      "expect": "fail",
+      "errorIncludes": "PKSR-001 closure candidate requires a portable-trust-incident-closure-approved governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-signal-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "signal reconciliation does not close automatically",
+      "expect": "fail",
+      "errorIncludes": "PKSR-001 must preserve signal history, treat counts as evidence, and forbid automatic closure, authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-trust-incident-window.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "closure waits for the full observation window",
+      "expect": "fail",
+      "errorIncludes": "PKIC-001 windowComplete must reproduce as false."
+    },
+    {
+      "file": "qif-ledger-portable-trust-incident-demotion-complete.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "closure reproduces demotion completion",
+      "expect": "fail",
+      "errorIncludes": "PKIC-001 demotionComplete must reproduce as true."
+    },
+    {
+      "file": "qif-ledger-portable-trust-incident-execution-match.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "closure reproduces execution reconciliation",
+      "expect": "fail",
+      "errorIncludes": "PKIC-001 executionMatched must reproduce as true."
+    },
+    {
+      "file": "qif-ledger-portable-trust-incident-signal-satisfied.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "closure reproduces signal satisfaction",
+      "expect": "fail",
+      "errorIncludes": "PKIC-001 signalReconciliationSatisfied must reproduce as true."
+    },
+    {
+      "file": "qif-ledger-portable-trust-incident-unresolved-signals.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "closure unresolved signals reproduce",
+      "expect": "fail",
+      "errorIncludes": "PKIC-001 unresolvedSignalRefs must reproduce from stale, conflicting, and critical signals."
+    },
+    {
+      "file": "qif-ledger-portable-trust-incident-decision.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "closure decision reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKIC-001 closureDecision must reproduce as close."
+    },
+    {
+      "file": "qif-ledger-portable-trust-incident-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "closed incident retains approval governance",
+      "expect": "fail",
+      "errorIncludes": "PKIC-001 closed incident requires a portable-trust-incident-closure-approved governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-incident-status.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "incident status reproduces",
+      "expect": "fail",
+      "errorIncludes": "PKIC-001 status must reproduce as closed."
+    },
+    {
+      "file": "qif-ledger-portable-trust-incident-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "incident closure remains human-governed",
+      "expect": "fail",
+      "errorIncludes": "PKIC-001 must preserve incident history, treat counts as evidence, and forbid automatic closure, authority, and semantic truth claims."
+    },
+    {
       "file": "qif-ledger-portable-trust-activation-verifier-boundary.json",
       "validator": "tools/validate-qif-ledger.mjs",
       "rule": "verifier does not turn records into execution or semantic proof",
@@ -1599,6 +1760,13 @@
       "rule": "verifier does not turn drift records into live truth or authority",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness."
+    },
+    {
+      "file": "qif-ledger-portable-trust-closure-verifier-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "verifier does not turn signal records into authenticity or future-safety proof",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness."
     }
   ],
   "rescopedRules": []

@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-02T04:31:07.202Z",
+  "alternative_analysis_id": "ALT-MVYRH96Q-LZON4P",
+  "subject_need": "Prevent false confidence from weak drift signals and premature emergency-demotion incident closure",
+  "alternative_solutions": [
+    "document signal guidance only, without executable schema or verifier enforcement",
+    "delegate monitoring and incident closure entirely to provider-specific systems"
+  ],
+  "non_solution_options": [
+    "count alerts, logs, or monitoring sources as quality"
+  ],
+  "defer_options": [
+    "retain v0.8.9 and require manual review for every conflict and closure"
+  ],
+  "stop_options": [
+    "do not release if QIF cannot preserve conflicting evidence or define a provider-neutral closure boundary"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MVYRH0NF-G08IJY"
+}
