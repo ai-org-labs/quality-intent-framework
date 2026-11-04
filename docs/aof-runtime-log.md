@@ -5598,3 +5598,59 @@ Date: 2026-10-25
   calibrating closure predictions against later outcomes.
 - Next value slices: v0.8.11 Late-Signal Reopen and Closure Calibration, v0.9
   Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger Standard.
+
+## 2026-11-04 - v0.8.11 Late-Signal Reopen and Closure Calibration
+
+- Latest AOF check: GitHub release API confirmed `v12.2.0`; runtime source was
+  resolved at commit `fc7599b02816ba8140e996444e3bf3632f7c5399` and executed
+  with Node 22.
+- Situation assessment: `.aof/runtime/v0.8.11-situation-assessment.json`
+  identified v0.8.11 as the live frontier.
+- Initial Need Validation correctly failed at the implementation boundary:
+  the first charter placed the records in `calibration-report`, but the
+  pre-implementation self-audit `AUD-QIFV0811-SCOPE-001` found that
+  `qif-ledger` already owns `PortableKnowledgeIncidentClosure`. `TASK-084` was
+  retired before code changes so lifecycle ownership would not be duplicated.
+- Corrected Validated Need: extend `qif-ledger` with append-only late-signal,
+  accountable reopen-decision, and closure-calibration records. Evidence:
+  `.aof/runtime/NVR-QIFV0811-LEDGER.json`; charter:
+  `.aof/runtime/PCH-QIFV0811-LEDGER.json`; source problem, value, and
+  alternatives: `PST-QIFV0811-LEDGER.json`, `VHY-QIFV0811-LEDGER.json`, and
+  `ALT-QIFV0811-LEDGER.json`.
+- Council: corrected planning execution `CRUN-MW1MG7JM-JSC7XP` included
+  Visionary, Builder, and Guardian with no veto. Session:
+  `SESS-MW1MF4VZ-UVU944`; decision: `DEC-MW1MG3LF-WPFLX4`; task:
+  `TASK-085`; actor skill packet: `ASP-MW1MGO9Y-5KKQJ7`.
+- Trend evidence: NIST AI 800-4 identifies delayed or unavailable ground truth
+  and longitudinal tracking as post-deployment monitoring barriers.
+  OpenTelemetry separates event `Timestamp` from `ObservedTimestamp`.
+  Microsoft incident guidance requires explicit closure criteria, designated
+  authority, validation, documentation, and post-incident learning. Sources:
+  https://www.nist.gov/publications/challenges-monitoring-deployed-ai-systems-center-ai-standards-and-innovation,
+  https://opentelemetry.io/docs/specs/otel/logs/data-model/, and
+  https://learn.microsoft.com/en-us/azure/well-architected/design-guides/incident-management.
+- Decision: add `PortableKnowledgeLateSignal`,
+  `PortableKnowledgeIncidentReopenDecision`, and
+  `PortableKnowledgeClosureCalibration` beside the original closure. Preserve
+  occurrence/receipt timing, source and condition linkage, human authority,
+  bounded observation horizon, append-only history, and governance routing.
+- Implementation boundary: no source-authenticity proof, automatic reopening,
+  operational incident mutation, material-impact truth, causal inference,
+  future-safety claim, authority grant, employee surveillance, or semantic
+  truth. Signal and decision counts remain evidence, not quality.
+- Verification: `npm test` passed with 16/16 positive and 1,537/1,537 retained
+  negative checks; portable v0.8.11 built and verified with 60 files;
+  canonical JSON syntax passed for 34 files; AOF organization verification
+  passed 295/295 checks.
+- Review and self-review: council execution `CRUN-MW1N1R8Z-46ITTY`
+  included Guardian, Builder, and Visionary with no veto. Self-audit
+  `FSA-QIF-V0811` classified the release candidate as stable and kept closure
+  policy revision plus counterfactual replay as the next value slice.
+- Outcome and retrospective: `OUT-MW1N2Z1D-WF6CMI` recorded success;
+  `learning-loop-snapshot` reported a stable loop, and the post-release
+  situation assessment identified v0.8.12 as the next frontier with no truth
+  conflicts. The decisive learning was that ownership inspection must precede
+  schema work: AOF prevented duplicate lifecycle ownership before coding.
+- Next value slices: v0.8.12 Closure Policy Revision and Counterfactual Replay,
+  v0.9 Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger
+  Standard.

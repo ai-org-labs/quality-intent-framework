@@ -1,0 +1,22 @@
+{
+  "task_id": "TASK-085",
+  "title": "QIF v0.8.11 qif-ledger Late-Signal Reopen and Closure Calibration",
+  "description": "Extend the existing qif-ledger incident lifecycle with immutable late-signal, accountable reopen-decision, and closure-calibration records; update verifier, fixtures, example, docs, portable package, AOF evidence, and release.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MW1MF4VZ-UVU944",
+  "assigned_session_ids": [
+    "SESS-MW1MF4VZ-UVU944"
+  ],
+  "related_decision_record_id": "DEC-MW1MG3LF-WPFLX4",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-11-04T04:33:45.672Z",
+  "updated_at": "2026-11-04T04:51:20.750Z",
+  "assigned_at": null,
+  "done_at": "2026-11-04T04:51:20.750Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented in qif-ledger; npm test 16/16 positive and 1537/1537 negative; portable 60 files; AOF review CRUN-MW1N1R8Z-46ITTY no veto; organization verify 295/295."
+}

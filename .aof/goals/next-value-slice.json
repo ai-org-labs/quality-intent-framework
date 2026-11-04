@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.8.11 Late-Signal Reopen and Closure Calibration",
-  "updated_at": "2026-11-02T04:43:03.672Z",
+  "content": "QIF v0.8.12 Closure Policy Revision and Counterfactual Replay",
+  "updated_at": "2026-11-04T04:51:20.931Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MVYRGXB1-5FTXE6",
-  "source_decision_record_id": "DEC-MVYRHL3F-OSSZS9",
-  "declared_complete_at": null
+  "source_session_id": "SESS-MW1MF4VZ-UVU944",
+  "source_decision_record_id": null,
+  "declared_complete_at": "2026-11-04T04:51:20.931Z"
 }

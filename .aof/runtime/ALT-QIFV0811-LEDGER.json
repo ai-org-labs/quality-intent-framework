@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-04T04:33:10.101Z",
+  "alternative_analysis_id": "ALT-MW1MFLCL-N4JXIA",
+  "subject_need": "govern late evidence after a qif-ledger incident closure",
+  "alternative_solutions": [
+    "leave reopen conditions as prose",
+    "rewrite the original closure with new evidence",
+    "append three linked lifecycle records beside the original closure"
+  ],
+  "non_solution_options": [
+    "move closure lifecycle ownership into calibration-report"
+  ],
+  "defer_options": [
+    "wait for a hosted monitoring backend"
+  ],
+  "stop_options": [
+    "stop if append-only linkage, human authority, and verifier boundaries cannot be preserved"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MW1MF9SH-1Q39C9"
+}

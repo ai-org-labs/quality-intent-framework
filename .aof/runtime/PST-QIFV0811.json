@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-04T04:31:00.086Z",
+  "problem_statement_id": "PST-MW1MCT12-D9OG15",
+  "affected_party": "quality reviewers, incident owners, operators, and stakeholders relying on a prior closure",
+  "actual_problem": "a signal received after closure cannot be evaluated, linked, and governed without either mutating the original closure or leaving the reopen decision as prose",
+  "why_it_matters": "late evidence can reveal false assurance, but ungoverned reopening can also destabilize accountable decisions and erase audit history",
+  "why_now": "QIF v0.8.10 now closes incidents structurally and explicitly names late-signal reopening as the next missing executable boundary",
+  "evidence_refs": [
+    "docs/qif-v0.8.10-drift-signal-integrity-incident-closure.md",
+    "https://doi.org/10.6028/NIST.AI.800-4"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MW1MCC5W-V6TDWI"
+}

@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.8.11
+
+- Added append-only late-signal records that distinguish occurrence time from receipt time and resolve to the original incident closure and signal source.
+- Added accountable incident-reopen decisions that cite preserved reopen conditions, human authority, evidence, and continuation incidents without changing or executing the original closure.
+- Added closure-calibration records that reproduce aligned, false-assurance, false-alarm, and unknown classifications over bounded later-observation horizons.
+- Added fail-closed governance for unverified or material late signals, reopened incidents, adverse calibration, and insufficient calibration evidence.
+- Added 33 retained negative fixtures and verifier boundaries separating declared late-evidence structure from source truth, material impact, causality, operational reopening, future safety, and semantic truth.
+
 ## v0.8.10
 
 - Added signal-source records with identity, ownership, capture mode, correlation group, declared independence, freshness, privacy handling, and evidence.

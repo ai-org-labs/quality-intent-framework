@@ -1741,6 +1741,230 @@
       "errorIncludes": "PKIC-001 must preserve incident history, treat counts as evidence, and forbid automatic closure, authority, and semantic truth claims."
     },
     {
+      "file": "qif-ledger-portable-trust-late-signals-not-array.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "late signals required",
+      "expect": "fail",
+      "errorIncludes": "portableKnowledgeLateSignals must be an array."
+    },
+    {
+      "file": "qif-ledger-portable-trust-reopen-decisions-not-array.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "reopen decisions required",
+      "expect": "fail",
+      "errorIncludes": "portableKnowledgeIncidentReopenDecisions must be an array."
+    },
+    {
+      "file": "qif-ledger-portable-trust-closure-calibrations-not-array.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "closure calibrations required",
+      "expect": "fail",
+      "errorIncludes": "portableKnowledgeClosureCalibrations must be an array."
+    },
+    {
+      "file": "qif-ledger-portable-trust-late-signal-closure.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "late signal closure lineage",
+      "expect": "fail",
+      "errorIncludes": "PKLS-001 references missing incident closure PKIC-NOPE."
+    },
+    {
+      "file": "qif-ledger-portable-trust-late-signal-source.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "late signal source lineage",
+      "expect": "fail",
+      "errorIncludes": "PKLS-001 references missing signal source PKSS-NOPE."
+    },
+    {
+      "file": "qif-ledger-portable-trust-late-signal-timing.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "late signal arrival timing",
+      "expect": "fail",
+      "errorIncludes": "PKLS-001 must be received after occurrence and after the referenced closure decision."
+    },
+    {
+      "file": "qif-ledger-portable-trust-late-signal-lateness.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "late signal latency arithmetic",
+      "expect": "fail",
+      "errorIncludes": "PKLS-001 latenessSeconds must reproduce as 3600."
+    },
+    {
+      "file": "qif-ledger-portable-trust-late-signal-materiality.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "late signal materiality reproduction",
+      "expect": "fail",
+      "errorIncludes": "PKLS-001 materiality must reproduce as material."
+    },
+    {
+      "file": "qif-ledger-portable-trust-late-signal-unverified-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "late signal evidence governance",
+      "expect": "fail",
+      "errorIncludes": "PKLS-001 non-verified late signal requires a portable-trust-late-signal-unverified governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-late-signal-material-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "material late signal governance",
+      "expect": "fail",
+      "errorIncludes": "PKLS-001 material late signal requires a portable-trust-late-signal-material governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-late-signal-status.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "late signal status reproduction",
+      "expect": "fail",
+      "errorIncludes": "PKLS-001 status must reproduce as governance-required."
+    },
+    {
+      "file": "qif-ledger-portable-trust-late-signal-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "late signal does not reopen or claim truth",
+      "expect": "fail",
+      "errorIncludes": "PKLS-001 must preserve closure history, treat counts as evidence, and forbid automatic reopen, authenticity, causality, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-trust-reopen-closure.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "reopen closure lineage",
+      "expect": "fail",
+      "errorIncludes": "PKIRD-001 references missing incident closure PKIC-NOPE."
+    },
+    {
+      "file": "qif-ledger-portable-trust-reopen-signal.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "reopen signal lineage",
+      "expect": "fail",
+      "errorIncludes": "PKIRD-001 references missing late signal PKLS-NOPE."
+    },
+    {
+      "file": "qif-ledger-portable-trust-reopen-condition.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "reopen condition reproduction",
+      "expect": "fail",
+      "errorIncludes": "PKIRD-001 reopenConditionMatched must reproduce as true."
+    },
+    {
+      "file": "qif-ledger-portable-trust-reopen-condition-source.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "reopen condition cites original closure",
+      "expect": "fail",
+      "errorIncludes": "PKIRD-001 matchedReopenConditions must cite conditions from the original closure."
+    },
+    {
+      "file": "qif-ledger-portable-trust-reopen-decision.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "reopen decision reproduction",
+      "expect": "fail",
+      "errorIncludes": "PKIRD-001 decision must reproduce as reopen."
+    },
+    {
+      "file": "qif-ledger-portable-trust-reopen-time.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "reopen decision follows signal receipt",
+      "expect": "fail",
+      "errorIncludes": "PKIRD-001 decidedAt must not precede cited late-signal receipt."
+    },
+    {
+      "file": "qif-ledger-portable-trust-reopen-continuation.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "reopened incident continuation",
+      "expect": "fail",
+      "errorIncludes": "PKIRD-001 reopened incident requires continuationIncidentRef."
+    },
+    {
+      "file": "qif-ledger-portable-trust-reopen-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "reopen governance",
+      "expect": "fail",
+      "errorIncludes": "PKIRD-001 reopened incident requires a portable-trust-incident-reopened governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-reopen-status.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "reopen status reproduction",
+      "expect": "fail",
+      "errorIncludes": "PKIRD-001 status must reproduce as governance-required."
+    },
+    {
+      "file": "qif-ledger-portable-trust-reopen-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "reopen decision remains non-executing",
+      "expect": "fail",
+      "errorIncludes": "PKIRD-001 must preserve closure history, keep decisions non-executing, treat counts as evidence, and forbid automatic reopen, authority, and semantic truth claims."
+    },
+    {
+      "file": "qif-ledger-portable-trust-calibration-closure.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "calibration closure lineage",
+      "expect": "fail",
+      "errorIncludes": "PKCC-001 references missing incident closure PKIC-NOPE."
+    },
+    {
+      "file": "qif-ledger-portable-trust-calibration-reopen.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "calibration reopen lineage",
+      "expect": "fail",
+      "errorIncludes": "PKCC-001 references missing reopen decision PKIRD-NOPE."
+    },
+    {
+      "file": "qif-ledger-portable-trust-calibration-signal-set.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "calibration signal-set closure",
+      "expect": "fail",
+      "errorIncludes": "PKCC-001 lateSignalRefs must reproduce the reopen decision signal set."
+    },
+    {
+      "file": "qif-ledger-portable-trust-calibration-original-decision.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "calibration preserves original decision",
+      "expect": "fail",
+      "errorIncludes": "PKCC-001 originalClosureDecision must reproduce the immutable closure decision."
+    },
+    {
+      "file": "qif-ledger-portable-trust-calibration-later-state.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "calibration later-state reproduction",
+      "expect": "fail",
+      "errorIncludes": "PKCC-001 laterObservedState must reproduce as drift-present."
+    },
+    {
+      "file": "qif-ledger-portable-trust-calibration-classification.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "calibration classification reproduction",
+      "expect": "fail",
+      "errorIncludes": "PKCC-001 calibrationClassification must reproduce as false-assurance."
+    },
+    {
+      "file": "qif-ledger-portable-trust-calibration-evidence.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "calibration evidence horizon",
+      "expect": "fail",
+      "errorIncludes": "PKCC-001 evidenceComplete must reproduce as false."
+    },
+    {
+      "file": "qif-ledger-portable-trust-calibration-trigger.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "adverse calibration governance",
+      "expect": "fail",
+      "errorIncludes": "PKCC-001 adverse closure calibration requires a portable-trust-closure-calibration-adverse governance trigger."
+    },
+    {
+      "file": "qif-ledger-portable-trust-calibration-status.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "calibration status reproduction",
+      "expect": "fail",
+      "errorIncludes": "PKCC-001 status must reproduce as governance-required."
+    },
+    {
+      "file": "qif-ledger-portable-trust-calibration-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "calibration does not infer causality or quality",
+      "expect": "fail",
+      "errorIncludes": "PKCC-001 must preserve closure history, treat counts as evidence, and forbid causal inference, automatic quality verdicts, and semantic truth claims."
+    },
+    {
       "file": "qif-ledger-portable-trust-activation-verifier-boundary.json",
       "validator": "tools/validate-qif-ledger.mjs",
       "rule": "verifier does not turn records into execution or semantic proof",
@@ -1767,6 +1991,13 @@
       "rule": "verifier does not turn signal records into authenticity or future-safety proof",
       "expect": "fail",
       "errorIncludes": "verifierBoundary must explicitly avoid claiming signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness."
+    },
+    {
+      "file": "qif-ledger-portable-trust-late-signal-verifier-boundary.json",
+      "validator": "tools/validate-qif-ledger.mjs",
+      "rule": "verifier does not turn late evidence into truth or operational authority",
+      "expect": "fail",
+      "errorIncludes": "verifierBoundary must explicitly avoid claiming late-signal authenticity, material impact, causal attribution, operational reopening, closure-calibration truth, future safety, or semantic fitness."
     }
   ],
   "rescopedRules": []

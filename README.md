@@ -1,10 +1,9 @@
 # Quality Intent Framework
 
-Current release: **v0.8.10**. The Living QIF Ledger now distinguishes current,
-stale, independent, correlated, conflicting, and unverified drift signals and
-closes an emergency-demotion incident only after a bounded observation window
-and accountable human decision, without observing providers or granting
-authority.
+Current release: **v0.8.11**. The Living QIF Ledger now preserves evidence
+received after incident closure, records accountable human reopen decisions,
+and calibrates the old closure against later declared outcomes without
+rewriting history, operating providers, or granting authority.
 
 Quality Intent Framework (QIF) turns an organization's quality theory into an operational, AI-verifiable framework.
 
@@ -98,6 +97,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.8.8 Activation Outcome Reconciliation and Policy Promotion: `docs/qif-v0.8.8-activation-outcome-reconciliation.md`
 - QIF v0.8.9 Policy State Drift and Emergency Demotion: `docs/qif-v0.8.9-policy-state-drift-emergency-demotion.md`
 - QIF v0.8.10 Drift Signal Integrity and Incident Closure: `docs/qif-v0.8.10-drift-signal-integrity-incident-closure.md`
+- QIF v0.8.11 Late-Signal Reopen and Closure Calibration: `docs/qif-v0.8.11-late-signal-reopen-closure-calibration.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`

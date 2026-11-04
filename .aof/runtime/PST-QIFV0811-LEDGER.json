@@ -1,0 +1,16 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-04T04:33:09.767Z",
+  "problem_statement_id": "PST-MW1MFL3B-Q7D661",
+  "affected_party": "quality reviewers, incident owners, operators, and stakeholders relying on a prior qif-ledger closure",
+  "actual_problem": "qif-ledger can close an incident and preserve prose reopen conditions, but cannot append late evidence, record a human reopen judgment, or calibrate the old closure against later outcomes",
+  "why_it_matters": "without an append-only path, organizations either ignore late evidence or rewrite historical decisions, weakening accountability",
+  "why_now": "v0.8.10 established closure ownership in qif-ledger and official monitoring guidance highlights delayed labels and longitudinal observation",
+  "evidence_refs": [
+    "schemas/qif-ledger-package.schema.json",
+    "docs/qif-v0.8.10-drift-signal-integrity-incident-closure.md",
+    "https://doi.org/10.6028/NIST.AI.800-4"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MW1MF9SH-1Q39C9"
+}

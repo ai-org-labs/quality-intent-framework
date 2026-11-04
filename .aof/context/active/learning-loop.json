@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-11-02T04:43:03.829Z",
+  "generated_at": "2026-11-04T04:51:30.791Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MVYRGXB1-5FTXE6",
-    "report_id": "OUT-MVYRWK1M-B61D1U",
+    "source_session_id": "SESS-MW1MF4VZ-UVU944",
+    "report_id": "OUT-MW1N2Z1D-WF6CMI",
     "result": "success",
-    "observed_at": "2026-11-02T04:43:01.114Z",
-    "note": "QIF v0.8.10 adds declared signal-source integrity, deterministic conflict-aware reconciliation, and bounded human-governed incident closure; full QIF tests and AOF verification pass.",
-    "signal_ref": "TASK-083"
+    "observed_at": "2026-11-04T04:51:20.929Z",
+    "note": "QIF v0.8.11 late-signal, accountable reopen-decision, and closure-calibration runtime passed full QIF and AOF verification and is release-ready.",
+    "signal_ref": "CRUN-MW1N1R8Z-46ITTY"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIF-V0810",
-    "recorded_at": "2026-11-02T04:42:42.234Z",
-    "summary": "Drift evidence now preserves source identity, freshness, declared correlation and independence, current conflict, and bounded human-governed incident closure.",
-    "detected_gap": "Reopen conditions remain prose: QIF does not yet ingest a late post-closure signal, preserve the original closure while reopening the incident, or calibrate whether closure predictions remain correct over later outcomes.",
+    "audit_id": "FSA-QIF-V0811",
+    "recorded_at": "2026-11-04T04:50:39.786Z",
+    "summary": "Late signal, accountable reopen decision, and closure calibration are implemented in qif-ledger with immutable lineage, governance routing, retained negative fixtures, portable output, and explicit verifier boundaries.",
+    "detected_gap": "Closure policy revision and counterfactual replay remain outside this release and are the next value slice.",
     "result_state": "stable",
-    "next_action": "Implement QIF v0.8.11 Late-Signal Reopen and Closure Calibration.",
+    "next_action": "Deliver v0.8.12 closure policy revision and counterfactual replay without mutating historical decisions.",
     "related_task_ids": [
-      "TASK-083"
+      "TASK-085"
     ]
   },
   "current_next_value_slice": {
-    "content": "QIF v0.8.11 Late-Signal Reopen and Closure Calibration",
-    "updated_at": "2026-11-02T04:43:03.672Z",
-    "declared_complete_at": null,
-    "source_session_id": "SESS-MVYRGXB1-5FTXE6",
-    "source_decision_record_id": "DEC-MVYRHL3F-OSSZS9"
+    "content": "QIF v0.8.12 Closure Policy Revision and Counterfactual Replay",
+    "updated_at": "2026-11-04T04:51:20.931Z",
+    "declared_complete_at": "2026-11-04T04:51:20.931Z",
+    "source_session_id": "SESS-MW1MF4VZ-UVU944",
+    "source_decision_record_id": null
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Implement QIF v0.8.11 Late-Signal Reopen and Closure Calibration.",
+    "proposed_focus": "Deliver v0.8.12 closure policy revision and counterfactual replay without mutating historical decisions.",
     "related_task_ids": [
-      "TASK-083"
+      "TASK-085"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: QIF v0.8.11 Late-Signal Reopen and Closure Calibration",
-    "Latest self-audit next action: Implement QIF v0.8.11 Late-Signal Reopen and Closure Calibration.",
+    "Current next value slice: QIF v0.8.12 Closure Policy Revision and Counterfactual Replay",
+    "Latest self-audit next action: Deliver v0.8.12 closure policy revision and counterfactual replay without mutating historical decisions.",
     "Latest outcome result: success"
   ]
 }

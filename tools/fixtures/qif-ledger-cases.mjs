@@ -70,6 +70,9 @@ function emergencyDemotion(pkg) { return pkg.portableKnowledgeEmergencyDemotions
 function signalSource(pkg, index = 0) { return pkg.portableKnowledgeSignalSources[index]; }
 function signalReconciliation(pkg) { return pkg.portableKnowledgeSignalReconciliations[0]; }
 function incidentClosure(pkg) { return pkg.portableKnowledgeIncidentClosures[0]; }
+function lateSignal(pkg) { return pkg.portableKnowledgeLateSignals[0]; }
+function reopenDecision(pkg) { return pkg.portableKnowledgeIncidentReopenDecisions[0]; }
+function closureCalibration(pkg) { return pkg.portableKnowledgeClosureCalibrations[0]; }
 
 export const cases = [
   {
@@ -1538,6 +1541,198 @@ export const cases = [
     mutate: (pkg) => { incidentClosure(pkg).automaticClosure = true; }
   },
   {
+    id: "portable-trust-late-signals-not-array",
+    rule: "late signals required",
+    expect: "portableKnowledgeLateSignals must be an array.",
+    mutate: (pkg) => { pkg.portableKnowledgeLateSignals = null; }
+  },
+  {
+    id: "portable-trust-reopen-decisions-not-array",
+    rule: "reopen decisions required",
+    expect: "portableKnowledgeIncidentReopenDecisions must be an array.",
+    mutate: (pkg) => { pkg.portableKnowledgeIncidentReopenDecisions = null; }
+  },
+  {
+    id: "portable-trust-closure-calibrations-not-array",
+    rule: "closure calibrations required",
+    expect: "portableKnowledgeClosureCalibrations must be an array.",
+    mutate: (pkg) => { pkg.portableKnowledgeClosureCalibrations = null; }
+  },
+  {
+    id: "portable-trust-late-signal-closure",
+    rule: "late signal closure lineage",
+    expect: "PKLS-001 references missing incident closure PKIC-NOPE.",
+    mutate: (pkg) => { lateSignal(pkg).incidentClosureRef = "PKIC-NOPE"; }
+  },
+  {
+    id: "portable-trust-late-signal-source",
+    rule: "late signal source lineage",
+    expect: "PKLS-001 references missing signal source PKSS-NOPE.",
+    mutate: (pkg) => { lateSignal(pkg).sourceRef = "PKSS-NOPE"; }
+  },
+  {
+    id: "portable-trust-late-signal-timing",
+    rule: "late signal arrival timing",
+    expect: "PKLS-001 must be received after occurrence and after the referenced closure decision.",
+    mutate: (pkg) => { lateSignal(pkg).receivedAt = "2026-11-01T06:00:00.000Z"; lateSignal(pkg).latenessSeconds = -3600; }
+  },
+  {
+    id: "portable-trust-late-signal-lateness",
+    rule: "late signal latency arithmetic",
+    expect: "PKLS-001 latenessSeconds must reproduce as 3600.",
+    mutate: (pkg) => { lateSignal(pkg).latenessSeconds = 7200; }
+  },
+  {
+    id: "portable-trust-late-signal-materiality",
+    rule: "late signal materiality reproduction",
+    expect: "PKLS-001 materiality must reproduce as material.",
+    mutate: (pkg) => { lateSignal(pkg).materiality = "non-material"; }
+  },
+  {
+    id: "portable-trust-late-signal-unverified-trigger",
+    rule: "late signal evidence governance",
+    expect: "PKLS-001 non-verified late signal requires a portable-trust-late-signal-unverified governance trigger.",
+    mutate: (pkg) => { lateSignal(pkg).governanceTriggerRefs = ["PKGTR-030"]; }
+  },
+  {
+    id: "portable-trust-late-signal-material-trigger",
+    rule: "material late signal governance",
+    expect: "PKLS-001 material late signal requires a portable-trust-late-signal-material governance trigger.",
+    mutate: (pkg) => { lateSignal(pkg).governanceTriggerRefs = ["PKGTR-029"]; }
+  },
+  {
+    id: "portable-trust-late-signal-status",
+    rule: "late signal status reproduction",
+    expect: "PKLS-001 status must reproduce as governance-required.",
+    mutate: (pkg) => { lateSignal(pkg).status = "reviewed"; }
+  },
+  {
+    id: "portable-trust-late-signal-boundary",
+    rule: "late signal does not reopen or claim truth",
+    expect: "PKLS-001 must preserve closure history, treat counts as evidence, and forbid automatic reopen, authenticity, causality, and semantic truth claims.",
+    mutate: (pkg) => { lateSignal(pkg).automaticReopen = true; }
+  },
+  {
+    id: "portable-trust-reopen-closure",
+    rule: "reopen closure lineage",
+    expect: "PKIRD-001 references missing incident closure PKIC-NOPE.",
+    mutate: (pkg) => { reopenDecision(pkg).incidentClosureRef = "PKIC-NOPE"; }
+  },
+  {
+    id: "portable-trust-reopen-signal",
+    rule: "reopen signal lineage",
+    expect: "PKIRD-001 references missing late signal PKLS-NOPE.",
+    mutate: (pkg) => { reopenDecision(pkg).lateSignalRefs = ["PKLS-NOPE"]; }
+  },
+  {
+    id: "portable-trust-reopen-condition",
+    rule: "reopen condition reproduction",
+    expect: "PKIRD-001 reopenConditionMatched must reproduce as true.",
+    mutate: (pkg) => { reopenDecision(pkg).reopenConditionMatched = false; }
+  },
+  {
+    id: "portable-trust-reopen-condition-source",
+    rule: "reopen condition cites original closure",
+    expect: "PKIRD-001 matchedReopenConditions must cite conditions from the original closure.",
+    mutate: (pkg) => { reopenDecision(pkg).matchedReopenConditions = ["A newly invented condition."]; }
+  },
+  {
+    id: "portable-trust-reopen-decision",
+    rule: "reopen decision reproduction",
+    expect: "PKIRD-001 decision must reproduce as reopen.",
+    mutate: (pkg) => { reopenDecision(pkg).decision = "keep-closed"; }
+  },
+  {
+    id: "portable-trust-reopen-time",
+    rule: "reopen decision follows signal receipt",
+    expect: "PKIRD-001 decidedAt must not precede cited late-signal receipt.",
+    mutate: (pkg) => { reopenDecision(pkg).decidedAt = "2026-11-01T07:30:00.000Z"; }
+  },
+  {
+    id: "portable-trust-reopen-continuation",
+    rule: "reopened incident continuation",
+    expect: "PKIRD-001 reopened incident requires continuationIncidentRef.",
+    mutate: (pkg) => { reopenDecision(pkg).continuationIncidentRef = null; }
+  },
+  {
+    id: "portable-trust-reopen-trigger",
+    rule: "reopen governance",
+    expect: "PKIRD-001 reopened incident requires a portable-trust-incident-reopened governance trigger.",
+    mutate: (pkg) => { reopenDecision(pkg).governanceTriggerRefs = ["PKGTR-029"]; }
+  },
+  {
+    id: "portable-trust-reopen-status",
+    rule: "reopen status reproduction",
+    expect: "PKIRD-001 status must reproduce as governance-required.",
+    mutate: (pkg) => { reopenDecision(pkg).status = "reviewed"; }
+  },
+  {
+    id: "portable-trust-reopen-boundary",
+    rule: "reopen decision remains non-executing",
+    expect: "PKIRD-001 must preserve closure history, keep decisions non-executing, treat counts as evidence, and forbid automatic reopen, authority, and semantic truth claims.",
+    mutate: (pkg) => { reopenDecision(pkg).decisionDoesNotExecuteReopen = false; }
+  },
+  {
+    id: "portable-trust-calibration-closure",
+    rule: "calibration closure lineage",
+    expect: "PKCC-001 references missing incident closure PKIC-NOPE.",
+    mutate: (pkg) => { closureCalibration(pkg).incidentClosureRef = "PKIC-NOPE"; }
+  },
+  {
+    id: "portable-trust-calibration-reopen",
+    rule: "calibration reopen lineage",
+    expect: "PKCC-001 references missing reopen decision PKIRD-NOPE.",
+    mutate: (pkg) => { closureCalibration(pkg).reopenDecisionRef = "PKIRD-NOPE"; }
+  },
+  {
+    id: "portable-trust-calibration-signal-set",
+    rule: "calibration signal-set closure",
+    expect: "PKCC-001 lateSignalRefs must reproduce the reopen decision signal set.",
+    mutate: (pkg) => { closureCalibration(pkg).lateSignalRefs = ["PKLS-NOPE"]; }
+  },
+  {
+    id: "portable-trust-calibration-original-decision",
+    rule: "calibration preserves original decision",
+    expect: "PKCC-001 originalClosureDecision must reproduce the immutable closure decision.",
+    mutate: (pkg) => { closureCalibration(pkg).originalClosureDecision = "keep-open"; }
+  },
+  {
+    id: "portable-trust-calibration-later-state",
+    rule: "calibration later-state reproduction",
+    expect: "PKCC-001 laterObservedState must reproduce as drift-present.",
+    mutate: (pkg) => { closureCalibration(pkg).laterObservedState = "recovered"; }
+  },
+  {
+    id: "portable-trust-calibration-classification",
+    rule: "calibration classification reproduction",
+    expect: "PKCC-001 calibrationClassification must reproduce as false-assurance.",
+    mutate: (pkg) => { closureCalibration(pkg).calibrationClassification = "aligned"; }
+  },
+  {
+    id: "portable-trust-calibration-evidence",
+    rule: "calibration evidence horizon",
+    expect: "PKCC-001 evidenceComplete must reproduce as false.",
+    mutate: (pkg) => { closureCalibration(pkg).observationHorizonEnd = "2026-11-01T07:30:00.000Z"; }
+  },
+  {
+    id: "portable-trust-calibration-trigger",
+    rule: "adverse calibration governance",
+    expect: "PKCC-001 adverse closure calibration requires a portable-trust-closure-calibration-adverse governance trigger.",
+    mutate: (pkg) => { closureCalibration(pkg).governanceTriggerRefs = []; }
+  },
+  {
+    id: "portable-trust-calibration-status",
+    rule: "calibration status reproduction",
+    expect: "PKCC-001 status must reproduce as governance-required.",
+    mutate: (pkg) => { closureCalibration(pkg).status = "reviewed"; }
+  },
+  {
+    id: "portable-trust-calibration-boundary",
+    rule: "calibration does not infer causality or quality",
+    expect: "PKCC-001 must preserve closure history, treat counts as evidence, and forbid causal inference, automatic quality verdicts, and semantic truth claims.",
+    mutate: (pkg) => { closureCalibration(pkg).automaticCausalInference = true; }
+  },
+  {
     id: "portable-trust-activation-verifier-boundary",
     rule: "verifier does not turn records into execution or semantic proof",
     expect: "verifierBoundary must explicitly avoid claiming activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness.",
@@ -1560,6 +1755,12 @@ export const cases = [
     rule: "verifier does not turn signal records into authenticity or future-safety proof",
     expect: "verifierBoundary must explicitly avoid claiming signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness"); }
+  },
+  {
+    id: "portable-trust-late-signal-verifier-boundary",
+    rule: "verifier does not turn late evidence into truth or operational authority",
+    expect: "verifierBoundary must explicitly avoid claiming late-signal authenticity, material impact, causal attribution, operational reopening, closure-calibration truth, future safety, or semantic fitness.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "late-signal authenticity, material impact, causal attribution, operational reopening, closure-calibration truth, future safety, or semantic fitness"); }
   }
 ];
 

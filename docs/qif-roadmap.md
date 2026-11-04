@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.8.10 baseline)
+## Current Position (v0.8.11 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -922,10 +922,22 @@ Deliverables:
   risk, authority, history, and governance checks. Records do not prove source
   authenticity, causal independence, monitoring completeness, future safety,
   operational recovery, authority, or semantic fitness.
+- Implemented twelfth v0.8 slice, v0.8.11 Late-Signal Reopen and Closure
+  Calibration: preserve occurrence and receipt time for evidence that arrives
+  after closure, bind material signals to original reopen conditions, record
+  an accountable human reopen decision, and compare the old disposition with
+  later declared outcomes without changing the old closure.
+- Status: implemented through `PortableKnowledgeLateSignal`,
+  `PortableKnowledgeIncidentReopenDecision`, and
+  `PortableKnowledgeClosureCalibration`, with deterministic timing,
+  materiality, condition matching, authority, horizon, classification,
+  history, and governance checks. Records do not prove source authenticity,
+  material impact, causality, operational reopening, future safety, authority,
+  or semantic fitness.
 - Next planned slices:
-  - v0.8.11 Late-Signal Reopen and Closure Calibration: turn reopen conditions
-    into executable late-signal decisions and compare closure predictions with
-    later observed outcomes without rewriting the original closure.
+  - v0.8.12 Closure Policy Revision and Counterfactual Replay: turn repeated
+    calibration outcomes into governed closure-policy candidates, replay them
+    against frozen historical cases, and preserve every prior decision.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,

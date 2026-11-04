@@ -1,0 +1,22 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-04T04:31:00.435Z",
+  "alternative_analysis_id": "ALT-MW1MCTAR-V8TDGH",
+  "subject_need": "govern late evidence after incident closure",
+  "alternative_solutions": [
+    "retain prose-only reopen conditions in the existing incident closure",
+    "append late evidence directly to the existing closure record",
+    "add immutable late-signal, reopen-decision, and calibration records"
+  ],
+  "non_solution_options": [
+    "count late alerts or reviewer votes as quality or confidence"
+  ],
+  "defer_options": [
+    "defer until a hosted monitoring integration exists"
+  ],
+  "stop_options": [
+    "stop if the slice requires automatic reopening, semantic truth, causality, or mutation of historical closure records"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MW1MCC5W-V6TDWI"
+}

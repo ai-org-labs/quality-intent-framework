@@ -1,0 +1,84 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-11-04T04:31:59.693Z",
+  "packet_id": "ASP-MW1ME30T-M5XGT1",
+  "source_task_id": "TASK-084",
+  "source_parent_session_id": "SESS-MW1MC6GF-T8HEG5",
+  "source_decision_record_id": "DEC-MW1MDBPQ-QQJUMJ",
+  "objective": "Implement and release QIF v0.8.11 Late-Signal Reopen and Closure Calibration",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns the schema, deterministic verification, fixtures, documentation, portable output, and release while Guardian reviews history and authority boundaries",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "qif-schema-design",
+    "deterministic-verification"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "qif-calibration-report-extension",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/calibration-report-package.schema.json",
+        "tools/validate-calibration-report.mjs",
+        "docs/qif-v0.8.10-drift-signal-integrity-incident-closure.md"
+      ],
+      "rationale": "existing late-effect, signal-source, reconciliation, incident-closure, governance, and retained mutation patterns provide the required implementation base"
+    }
+  ],
+  "resource_refs": [
+    "qif-repository",
+    "aof-v12.2.0-runtime",
+    "nist-ai-800-4",
+    "opentelemetry-log-data-model"
+  ],
+  "policy_refs": [
+    "no-history-mutation",
+    "no-semantic-truth",
+    "no-automatic-authority",
+    "privacy-preserving-observation"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "late-signal",
+      "reopen-decision",
+      "closure-calibration",
+      "verifier-boundary"
+    ],
+    "acceptance_criteria": [
+      "npm test passes and retained negative fixtures fail exact late-signal, reopen, calibration, and governance violations",
+      "portable package verifies and the exact reviewed commit is tagged and released as v0.8.11"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "late evidence changes current governance only through traceable human decisions while original closure history remains immutable",
+      "evaluator_ref": "guardian",
+      "evidence_required": "schema validation, deterministic verifier, retained negative fixtures, full npm test, and AOF organization verification",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "ungoverned-late-signal-reopen",
+      "trigger_condition": "a late signal mutates closure, reopens automatically, lacks source or materiality evidence, or converts counts into quality",
+      "consequence": "require-council-review",
+      "recovery_action": "restore immutable history, explicit evidence, human authority, and governance routing"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will preserve the old closure, separate when a signal happened from when it arrived, and require a human decision before reopening.",
+    "current_action": "Implement v0.8.11",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Run full QIF and AOF review"
+  },
+  "status": "draft"
+}

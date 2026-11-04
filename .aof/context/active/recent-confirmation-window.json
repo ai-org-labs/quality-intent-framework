@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-11-02T04:42:42.237Z",
+  "updated_at": "2026-11-04T04:50:39.789Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means every signal used for drift or closure resolves to an identified source and freshness boundary; correlated signals cannot masquerade as independent confirmation; conflicts are preserved and deterministically route to governance; incident closure requires completed demotion, matched reconciliation, a complete post-action observation window, no unresolved critical signal, accountable human approval, and residual-risk disposition; npm test, retained fixtures, portable build, and AOF verification pass.",
-      "recorded_at": "2026-11-02T04:30:56.142Z",
+      "answer": "Success means late signals resolve to existing source and closure records with occurrence/receipt timing and materiality; human reopen decisions preserve closure history; later observations classify closure alignment with uncertainty routed to governance; full QIF/AOF tests pass; exact commit releases as v0.8.11.",
+      "recorded_at": "2026-11-04T04:32:55.124Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MVYRGXB1-5FTXE6",
+      "source_session_id": "SESS-MW1MF4VZ-UVU944",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The raw continuation request was reframed to the smallest unresolved lifecycle risk after v0.8.9: correlated, stale, unidentified, or conflicting signals can create false assurance, and demotion completion alone does not establish incident closure.",
-      "recorded_at": "2026-11-02T04:31:22.638Z",
+      "answer": "Validated after rejecting calibration-report duplication. The smallest coherent slice stays beside PortableKnowledgeIncidentClosure, distinguishes occurrence and receipt time, requires source/materiality evidence and human authority, and routes uncertain calibration to governance.",
+      "recorded_at": "2026-11-04T04:33:33.750Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MVYRGXB1-5FTXE6",
-      "source_decision_record_id": "DEC-MVYRHL3F-OSSZS9"
+      "source_session_id": "SESS-MW1MF4VZ-UVU944",
+      "source_decision_record_id": "DEC-MW1MG3LF-WPFLX4"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Reopen conditions remain prose: QIF does not yet ingest a late post-closure signal, preserve the original closure while reopening the incident, or calibrate whether closure predictions remain correct over later outcomes.",
-      "recorded_at": "2026-11-02T04:42:42.237Z",
-      "expectation_state": "Drift evidence now preserves source identity, freshness, declared correlation and independence, current conflict, and bounded human-governed incident closure.",
-      "mismatch_state": "Reopen conditions remain prose: QIF does not yet ingest a late post-closure signal, preserve the original closure while reopening the incident, or calibrate whether closure predictions remain correct over later outcomes.",
-      "scale_direction": "Implement QIF v0.8.11 Late-Signal Reopen and Closure Calibration.",
-      "source_session_id": "SESS-MVYRGXB1-5FTXE6",
-      "source_decision_record_id": "DEC-MVYRHL3F-OSSZS9"
+      "answer": "Closure policy revision and counterfactual replay remain outside this release and are the next value slice.",
+      "recorded_at": "2026-11-04T04:50:39.789Z",
+      "expectation_state": "Late signal, accountable reopen decision, and closure calibration are implemented in qif-ledger with immutable lineage, governance routing, retained negative fixtures, portable output, and explicit verifier boundaries.",
+      "mismatch_state": "Closure policy revision and counterfactual replay remain outside this release and are the next value slice.",
+      "scale_direction": "Deliver v0.8.12 closure policy revision and counterfactual replay without mutating historical decisions.",
+      "source_session_id": "SESS-MW1MF4VZ-UVU944",
+      "source_decision_record_id": "DEC-MW1MG3LF-WPFLX4"
     }
   ]
 }

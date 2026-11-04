@@ -1,0 +1,22 @@
+{
+  "task_id": "TASK-084",
+  "title": "QIF v0.8.11 Late-Signal Reopen and Closure Calibration",
+  "description": "Implement three immutable calibration-report record families for late signal receipt, accountable incident reopen decisions, and retrospective closure calibration; update verifier, fixtures, examples, docs, roadmap, portable package, AOF evidence, and release.",
+  "status": "retired",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MW1MC6GF-T8HEG5",
+  "assigned_session_ids": [
+    "SESS-MW1MC6GF-T8HEG5"
+  ],
+  "related_decision_record_id": "DEC-MW1MDBPQ-QQJUMJ",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-11-04T04:31:44.350Z",
+  "updated_at": "2026-11-04T04:32:42.325Z",
+  "assigned_at": null,
+  "done_at": null,
+  "retired_at": "2026-11-04T04:32:42.325Z",
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Retired before implementation: package ownership review found original closure records belong to qif-ledger, not calibration-report. Replacement task will preserve the validated value while correcting the ownership boundary."
+}

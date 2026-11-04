@@ -280,6 +280,9 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeSignalSources = requireArray(pkg, "portableKnowledgeSignalSources", packagePath);
   const portableKnowledgeSignalReconciliations = requireArray(pkg, "portableKnowledgeSignalReconciliations", packagePath);
   const portableKnowledgeIncidentClosures = requireArray(pkg, "portableKnowledgeIncidentClosures", packagePath);
+  const portableKnowledgeLateSignals = requireArray(pkg, "portableKnowledgeLateSignals", packagePath);
+  const portableKnowledgeIncidentReopenDecisions = requireArray(pkg, "portableKnowledgeIncidentReopenDecisions", packagePath);
+  const portableKnowledgeClosureCalibrations = requireArray(pkg, "portableKnowledgeClosureCalibrations", packagePath);
   const packageRefIndex = indexById(packageRefs, `${packagePath}:packageRefs`);
   const crossPackageRefIndex = indexById(crossPackageRefs, `${packagePath}:crossPackageRefs`);
   const lifecycleIndex = indexById(lifecycleRecords, `${packagePath}:qualityIntentLifecycleRecords`);
@@ -324,7 +327,10 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeEmergencyDemotionIndex = indexById(portableKnowledgeEmergencyDemotions, `${packagePath}:portableKnowledgeEmergencyDemotions`);
   const portableKnowledgeSignalSourceIndex = indexById(portableKnowledgeSignalSources, `${packagePath}:portableKnowledgeSignalSources`);
   const portableKnowledgeSignalReconciliationIndex = indexById(portableKnowledgeSignalReconciliations, `${packagePath}:portableKnowledgeSignalReconciliations`);
-  indexById(portableKnowledgeIncidentClosures, `${packagePath}:portableKnowledgeIncidentClosures`);
+  const portableKnowledgeIncidentClosureIndex = indexById(portableKnowledgeIncidentClosures, `${packagePath}:portableKnowledgeIncidentClosures`);
+  const portableKnowledgeLateSignalIndex = indexById(portableKnowledgeLateSignals, `${packagePath}:portableKnowledgeLateSignals`);
+  const portableKnowledgeIncidentReopenDecisionIndex = indexById(portableKnowledgeIncidentReopenDecisions, `${packagePath}:portableKnowledgeIncidentReopenDecisions`);
+  indexById(portableKnowledgeClosureCalibrations, `${packagePath}:portableKnowledgeClosureCalibrations`);
   void crossPackageRefIndex;
   void missedIntentIndex;
 
@@ -1559,6 +1565,96 @@ function validateLedgerPackage(pkg, packagePath) {
     if (closure.historyPreserved !== true || closure.activityCountIsQuality !== false || closure.automaticClosure !== false || closure.automaticAuthority !== false || closure.semanticTruthClaimed !== false) errors.push(`${closure.id} must preserve incident history, treat counts as evidence, and forbid automatic closure, authority, and semantic truth claims.`);
   }
 
+  for (const signal of portableKnowledgeLateSignals) {
+    const closure = portableKnowledgeIncidentClosureIndex.get(signal.incidentClosureRef);
+    if (!closure) errors.push(`${signal.id} references missing incident closure ${signal.incidentClosureRef}.`);
+    if (!portableKnowledgeSignalSourceIndex.has(signal.sourceRef)) errors.push(`${signal.id} references missing signal source ${signal.sourceRef}.`);
+    const occurredAt = Date.parse(signal.occurredAt);
+    const receivedAt = Date.parse(signal.receivedAt);
+    const closureAt = Date.parse(closure?.decidedAt);
+    const expectedLateness = Number.isFinite(occurredAt) && Number.isFinite(receivedAt) ? Math.floor((receivedAt - occurredAt) / 1000) : NaN;
+    if (!(receivedAt > occurredAt && receivedAt > closureAt)) errors.push(`${signal.id} must be received after occurrence and after the referenced closure decision.`);
+    if (signal.latenessSeconds !== expectedLateness) errors.push(`${signal.id} latenessSeconds must reproduce as ${expectedLateness}.`);
+    if (signal.arrivalState !== "after-closure") errors.push(`${signal.id} arrivalState must be after-closure.`);
+    const expectedMateriality = signal.outcome === "unknown" || signal.severity === "unknown"
+      ? "unknown"
+      : signal.outcome === "drift-present" && ["high", "critical"].includes(signal.severity)
+        ? "material"
+        : "non-material";
+    if (signal.materiality !== expectedMateriality) errors.push(`${signal.id} materiality must reproduce as ${expectedMateriality}.`);
+    const types = portableGovernanceTypes(signal.governanceTriggerRefs, signal.id);
+    if (signal.evidenceStatus !== "verified" && !types.has("portable-trust-late-signal-unverified")) errors.push(`${signal.id} non-verified late signal requires a portable-trust-late-signal-unverified governance trigger.`);
+    if (expectedMateriality === "material" && !types.has("portable-trust-late-signal-material")) errors.push(`${signal.id} material late signal requires a portable-trust-late-signal-material governance trigger.`);
+    const expectedStatus = signal.evidenceStatus === "verified" && expectedMateriality !== "unknown" ? "reviewed" : "governance-required";
+    if (signal.status !== expectedStatus) errors.push(`${signal.id} status must reproduce as ${expectedStatus}.`);
+    if (signal.originalClosurePreserved !== true || signal.activityCountIsQuality !== false || signal.automaticReopen !== false || signal.authenticityClaimed !== false || signal.causalClaimed !== false || signal.semanticTruthClaimed !== false) errors.push(`${signal.id} must preserve closure history, treat counts as evidence, and forbid automatic reopen, authenticity, causality, and semantic truth claims.`);
+  }
+
+  for (const decision of portableKnowledgeIncidentReopenDecisions) {
+    const closure = portableKnowledgeIncidentClosureIndex.get(decision.incidentClosureRef);
+    if (!closure) errors.push(`${decision.id} references missing incident closure ${decision.incidentClosureRef}.`);
+    const signals = (decision.lateSignalRefs ?? []).map((id) => portableKnowledgeLateSignalIndex.get(id)).filter(Boolean);
+    for (const id of decision.lateSignalRefs ?? []) {
+      const signal = portableKnowledgeLateSignalIndex.get(id);
+      if (!signal) errors.push(`${decision.id} references missing late signal ${id}.`);
+      else if (signal.incidentClosureRef !== decision.incidentClosureRef) errors.push(`${decision.id} late signal ${id} must reference the same incident closure.`);
+    }
+    const matched = signals.some((signal) => signal.materiality === "material" && signal.outcome === "drift-present");
+    if (decision.reopenConditionMatched !== matched) errors.push(`${decision.id} reopenConditionMatched must reproduce as ${matched}.`);
+    if (matched && (!(decision.matchedReopenConditions ?? []).length || !(decision.matchedReopenConditions ?? []).every((condition) => closure?.reopenConditions?.includes(condition)))) errors.push(`${decision.id} matchedReopenConditions must cite conditions from the original closure.`);
+    if (!matched && (decision.matchedReopenConditions ?? []).length > 0) errors.push(`${decision.id} unmatched reopen decision must not list matchedReopenConditions.`);
+    const uncertain = signals.some((signal) => signal.materiality === "unknown" || signal.evidenceStatus !== "verified");
+    const expectedDecision = matched ? "reopen" : uncertain ? "governance-required" : "keep-closed";
+    if (decision.decision !== expectedDecision) errors.push(`${decision.id} decision must reproduce as ${expectedDecision}.`);
+    const latestReceipt = Math.max(...signals.map((signal) => Date.parse(signal.receivedAt)));
+    if (!(Date.parse(decision.decidedAt) >= latestReceipt)) errors.push(`${decision.id} decidedAt must not precede cited late-signal receipt.`);
+    if (expectedDecision === "reopen" && (typeof decision.continuationIncidentRef !== "string" || decision.continuationIncidentRef.trim() === "")) errors.push(`${decision.id} reopened incident requires continuationIncidentRef.`);
+    if (expectedDecision !== "reopen" && decision.continuationIncidentRef !== null) errors.push(`${decision.id} non-reopen decision must use null continuationIncidentRef.`);
+    const types = portableGovernanceTypes(decision.governanceTriggerRefs, decision.id);
+    if (expectedDecision === "reopen" && !types.has("portable-trust-incident-reopened")) errors.push(`${decision.id} reopened incident requires a portable-trust-incident-reopened governance trigger.`);
+    if (uncertain && !types.has("portable-trust-late-signal-unverified")) errors.push(`${decision.id} uncertain reopen evidence requires a portable-trust-late-signal-unverified governance trigger.`);
+    const expectedStatus = expectedDecision === "governance-required" || uncertain ? "governance-required" : "reviewed";
+    if (decision.status !== expectedStatus) errors.push(`${decision.id} status must reproduce as ${expectedStatus}.`);
+    if (decision.originalClosurePreserved !== true || decision.decisionDoesNotExecuteReopen !== true || decision.activityCountIsQuality !== false || decision.automaticReopen !== false || decision.automaticAuthority !== false || decision.semanticTruthClaimed !== false) errors.push(`${decision.id} must preserve closure history, keep decisions non-executing, treat counts as evidence, and forbid automatic reopen, authority, and semantic truth claims.`);
+  }
+
+  for (const calibration of portableKnowledgeClosureCalibrations) {
+    const closure = portableKnowledgeIncidentClosureIndex.get(calibration.incidentClosureRef);
+    const decision = portableKnowledgeIncidentReopenDecisionIndex.get(calibration.reopenDecisionRef);
+    if (!closure) errors.push(`${calibration.id} references missing incident closure ${calibration.incidentClosureRef}.`);
+    if (!decision) errors.push(`${calibration.id} references missing reopen decision ${calibration.reopenDecisionRef}.`);
+    if (decision && decision.incidentClosureRef !== calibration.incidentClosureRef) errors.push(`${calibration.id} reopen decision must reference the same incident closure.`);
+    if (decision && !sameSet(calibration.lateSignalRefs, decision.lateSignalRefs)) errors.push(`${calibration.id} lateSignalRefs must reproduce the reopen decision signal set.`);
+    const signals = (calibration.lateSignalRefs ?? []).map((id) => portableKnowledgeLateSignalIndex.get(id)).filter(Boolean);
+    if (calibration.originalClosureDecision !== closure?.closureDecision) errors.push(`${calibration.id} originalClosureDecision must reproduce the immutable closure decision.`);
+    const laterState = signals.some((signal) => signal.materiality === "material" && signal.outcome === "drift-present")
+      ? "drift-present"
+      : signals.some((signal) => signal.outcome === "unknown" || signal.materiality === "unknown")
+        ? "unknown"
+        : "recovered";
+    if (calibration.laterObservedState !== laterState) errors.push(`${calibration.id} laterObservedState must reproduce as ${laterState}.`);
+    const classification = laterState === "unknown"
+      ? "unknown"
+      : closure?.closureDecision === "close" && laterState === "drift-present"
+        ? "false-assurance"
+        : closure?.closureDecision !== "close" && laterState === "recovered"
+          ? "false-alarm"
+          : "aligned";
+    if (calibration.calibrationClassification !== classification) errors.push(`${calibration.id} calibrationClassification must reproduce as ${classification}.`);
+    const start = Date.parse(calibration.observationHorizonStart);
+    const end = Date.parse(calibration.observationHorizonEnd);
+    const reviewedAt = Date.parse(calibration.reviewedAt);
+    const horizonContainsSignals = signals.every((signal) => Date.parse(signal.occurredAt) >= start && Date.parse(signal.receivedAt) <= end);
+    const evidenceComplete = Number.isFinite(start) && Number.isFinite(end) && start >= Date.parse(closure?.decidedAt) && end > start && reviewedAt >= end && horizonContainsSignals && signals.length === (calibration.lateSignalRefs ?? []).length && signals.every((signal) => (signal.evidenceRefs ?? []).length > 0);
+    if (calibration.evidenceComplete !== evidenceComplete) errors.push(`${calibration.id} evidenceComplete must reproduce as ${evidenceComplete}.`);
+    const types = portableGovernanceTypes(calibration.governanceTriggerRefs, calibration.id);
+    if (["false-assurance", "false-alarm"].includes(classification) && !types.has("portable-trust-closure-calibration-adverse")) errors.push(`${calibration.id} adverse closure calibration requires a portable-trust-closure-calibration-adverse governance trigger.`);
+    if ((!evidenceComplete || classification === "unknown") && !types.has("portable-trust-closure-calibration-insufficient")) errors.push(`${calibration.id} incomplete or unknown closure calibration requires a portable-trust-closure-calibration-insufficient governance trigger.`);
+    const expectedStatus = evidenceComplete && classification === "aligned" ? "reviewed" : "governance-required";
+    if (calibration.status !== expectedStatus) errors.push(`${calibration.id} status must reproduce as ${expectedStatus}.`);
+    if (calibration.originalClosurePreserved !== true || calibration.activityCountIsQuality !== false || calibration.automaticCausalInference !== false || calibration.automaticQualityVerdict !== false || calibration.semanticTruthClaimed !== false) errors.push(`${calibration.id} must preserve closure history, treat counts as evidence, and forbid causal inference, automatic quality verdicts, and semantic truth claims.`);
+  }
+
   const index = pkg.ledgerIndex;
   if (!index || typeof index !== "object") {
     errors.push(`${packagePath} must include ledgerIndex.`);
@@ -1590,7 +1686,7 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim ?? []).includes("semantic truth")) {
       errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
     }
-    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth", "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth", "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness", "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness", "policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness", "signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness"]) {
+    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth", "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth", "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness", "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness", "policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness", "signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness", "late-signal authenticity, material impact, causal attribution, operational reopening, closure-calibration truth, future safety, or semantic fitness"]) {
       if (!(boundary.doesNotClaim ?? []).includes(claim)) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming ${claim}.`);
     }
   }
@@ -1646,7 +1742,10 @@ function validateLedgerPackage(pkg, packagePath) {
       portableKnowledgeEmergencyDemotions: portableKnowledgeEmergencyDemotions.length,
       portableKnowledgeSignalSources: portableKnowledgeSignalSources.length,
       portableKnowledgeSignalReconciliations: portableKnowledgeSignalReconciliations.length,
-      portableKnowledgeIncidentClosures: portableKnowledgeIncidentClosures.length
+      portableKnowledgeIncidentClosures: portableKnowledgeIncidentClosures.length,
+      portableKnowledgeLateSignals: portableKnowledgeLateSignals.length,
+      portableKnowledgeIncidentReopenDecisions: portableKnowledgeIncidentReopenDecisions.length,
+      portableKnowledgeClosureCalibrations: portableKnowledgeClosureCalibrations.length
     }
   });
 }

@@ -1,0 +1,23 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-11-04T04:31:19.838Z",
+  "project_charter_id": "PCH-MW1MD89Q-6P7J98",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0811.json",
+  "validated_objective": "Release the smallest domain-general QIF slice that governs late evidence after closure while preserving historical decisions and accountable human authority",
+  "scope": [
+    "calibration-report schema, example, deterministic verifier, and retained negative fixtures",
+    "late signal occurrence/receipt distinction, source and closure traceability, materiality, reopen decision, closure calibration, and governance",
+    "docs, AI authoring guide, roadmap, portable package, AOF evidence, tag, and public release"
+  ],
+  "constraints": [
+    "original closure records are immutable and late signals never reopen incidents automatically",
+    "no source authenticity, causality, operational recovery, future safety, autonomous authority, or semantic truth claims"
+  ],
+  "expected_outcomes": [
+    "late evidence can be attached to a prior closure and evaluated without rewriting history",
+    "reopen or keep-closed decisions require accountable human rationale and evidence",
+    "later outcomes calibrate prior closure as aligned, false assurance, false alarm, or unknown, with governance for uncertainty"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MW1MCC5W-V6TDWI"
+}

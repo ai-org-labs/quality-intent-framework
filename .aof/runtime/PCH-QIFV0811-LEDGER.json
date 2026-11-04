@@ -1,0 +1,23 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-11-04T04:33:29.232Z",
+  "project_charter_id": "PCH-MW1MG040-MEM1BF",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0811-LEDGER.json",
+  "validated_objective": "Release an append-only qif-ledger incident lifecycle extension for late evidence, human reopening, and retrospective closure calibration",
+  "scope": [
+    "qif-ledger schema, example, verifier, and retained negative fixtures",
+    "late signal, incident reopen decision, closure calibration, governance triggers, and verifier limits",
+    "docs, AI guide, roadmap, portable package, AOF evidence, tag, and public release"
+  ],
+  "constraints": [
+    "retain lifecycle ownership in qif-ledger and preserve the original closure unchanged",
+    "no automatic reopening, count-based quality, source truth, causality, operational authority, or semantic truth"
+  ],
+  "expected_outcomes": [
+    "late evidence is append-only and traceable to existing source and closure records",
+    "reopen decisions require accountable human authority and explicit rationale",
+    "closure calibration classifies later outcome alignment and governs unknown or adverse results"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MW1MF9SH-1Q39C9"
+}

@@ -1087,12 +1087,25 @@ After emergency demotion is reconciled:
 9. Record conditions that reopen the incident. Preserve all earlier evidence.
 10. Keep activity counts, automatic closure, automatic authority, and semantic
     truth claims false.
+11. When evidence arrives after closure, record occurrence time separately
+    from receipt time and link it to the original source and closure.
+12. Reproduce materiality from outcome and severity; do not infer importance
+    from alert volume or reviewer count.
+13. Cite the original reopen condition and require an accountable human
+    decision. Keep the original closure unchanged and use a separate
+    continuation incident.
+14. Calibrate the old closure as aligned, false assurance, false alarm, or
+    unknown over a bounded horizon. Route adverse or incomplete calibration
+    to governance without claiming causality.
 
 Use `PortableKnowledgeSignalSource`,
 `PortableKnowledgeSignalReconciliation`, and
-`PortableKnowledgeIncidentClosure`. Structural agreement does not prove
-source authenticity, causal independence, monitoring completeness, future
-safety, operational recovery, or authority to close.
+`PortableKnowledgeIncidentClosure`, followed when needed by
+`PortableKnowledgeLateSignal`, `PortableKnowledgeIncidentReopenDecision`, and
+`PortableKnowledgeClosureCalibration`. Structural agreement does not prove
+source authenticity, causal independence, monitoring completeness, material
+impact, causality, future safety, operational recovery or reopening, or
+authority to close.
 
 ## Common Failure Modes
 

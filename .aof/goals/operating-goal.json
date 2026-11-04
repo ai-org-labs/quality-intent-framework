@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "QIF must make post-promotion drift signals structurally trustworthy enough for governance and prevent emergency-demotion incidents from being closed before a complete, conflict-aware post-action observation window and accountable human decision.",
-  "updated_at": "2026-11-02T04:31:22.637Z",
+  "content": "Extend qif-ledger, the existing incident-lifecycle owner, with immutable late-signal, accountable reopen-decision, and closure-calibration records so later evidence changes current governance without rewriting historical closure facts.",
+  "updated_at": "2026-11-04T04:33:33.749Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MVYRGXB1-5FTXE6",
-  "source_decision_record_id": "DEC-MVYRHL3F-OSSZS9",
+  "source_session_id": "SESS-MW1MF4VZ-UVU944",
+  "source_decision_record_id": "DEC-MW1MG3LF-WPFLX4",
   "declared_complete_at": null
 }

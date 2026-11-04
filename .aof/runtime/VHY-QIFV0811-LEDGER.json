@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-11-04T04:33:09.936Z",
+  "value_hypothesis_id": "VHY-MW1MFL80-VSJCF5",
+  "expected_value_creation": "extend the incident lifecycle owner with append-only late-signal, human reopen, and closure-calibration records",
+  "beneficiary": "human and AI-assisted quality organizations in any domain",
+  "supporting_evidence": [
+    "qif-ledger already owns source, reconciliation, and closure records",
+    "official monitoring standards distinguish event time from observation time and identify delayed ground truth"
+  ],
+  "success_criteria": [
+    "all new records resolve directly to the existing incident closure chain",
+    "history mutation and automatic reopening fail structural verification"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MW1MF9SH-1Q39C9"
+}

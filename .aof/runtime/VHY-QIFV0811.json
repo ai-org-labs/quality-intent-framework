@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-11-04T04:31:00.268Z",
+  "value_hypothesis_id": "VHY-MW1MCT64-MEUQL6",
+  "expected_value_creation": "make late-signal receipt, materiality, reopen authority, and closure calibration portable and mechanically auditable without overwriting prior decisions",
+  "beneficiary": "human and AI-assisted quality organizations across software and non-software domains",
+  "supporting_evidence": [
+    "NIST AI 800-4 identifies delayed ground truth and longitudinal tracking as deployment-monitoring barriers",
+    "OpenTelemetry separates event occurrence time from observed receipt time"
+  ],
+  "success_criteria": [
+    "late signals resolve to source evidence and immutable original closure records",
+    "reopen decisions and closure calibration reproduce while uncertainty routes to governance"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MW1MCC5W-V6TDWI"
+}

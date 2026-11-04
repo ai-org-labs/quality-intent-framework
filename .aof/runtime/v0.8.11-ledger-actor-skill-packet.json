@@ -1,0 +1,84 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-11-04T04:34:00.550Z",
+  "packet_id": "ASP-MW1MGO9Y-5KKQJ7",
+  "source_task_id": "TASK-085",
+  "source_parent_session_id": "SESS-MW1MF4VZ-UVU944",
+  "source_decision_record_id": "DEC-MW1MG3LF-WPFLX4",
+  "objective": "Implement and release corrected QIF v0.8.11 qif-ledger lifecycle extension",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns the qif-ledger schema, verifier, fixtures, example, docs, portable package, and release; Guardian checks immutable history and authority boundaries",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "qif-schema-design",
+    "deterministic-verification"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "qif-ledger-incident-lifecycle-extension",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/qif-ledger-package.schema.json",
+        "tools/validate-qif-ledger.mjs",
+        "examples/qif-ledger-package.json"
+      ],
+      "rationale": "the same package owns signal sources, reconciliations, incident closures, governance triggers, and append-only portable knowledge"
+    }
+  ],
+  "resource_refs": [
+    "qif-repository",
+    "aof-v12.2.0-runtime",
+    "nist-ai-800-4",
+    "opentelemetry-log-data-model"
+  ],
+  "policy_refs": [
+    "qif-ledger-lifecycle-ownership",
+    "no-history-mutation",
+    "no-semantic-truth",
+    "no-automatic-authority"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "late-signal",
+      "reopen-decision",
+      "closure-calibration",
+      "verifier-boundary"
+    ],
+    "acceptance_criteria": [
+      "npm test passes with exact retained negative cases for all new rules",
+      "portable package verifies and exact reviewed commit releases as v0.8.11"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "new records preserve original closure and source history while requiring traceable evidence and accountable human authority",
+      "evaluator_ref": "guardian",
+      "evidence_required": "schema, deterministic verifier, retained negative fixtures, npm test, portable verification, and AOF organization verification",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "late-signal-lifecycle-boundary-breach",
+      "trigger_condition": "record duplicates ownership, mutates closure, auto-reopens, lacks materiality or authority, or overclaims truth",
+      "consequence": "require-council-review",
+      "recovery_action": "restore qif-ledger ownership, append-only linkage, human decision, evidence, and verifier boundary"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will append late evidence beside the old closure and keep the old decision unchanged.",
+    "current_action": "Implement corrected v0.8.11",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run full QIF and AOF review"
+  },
+  "status": "draft"
+}

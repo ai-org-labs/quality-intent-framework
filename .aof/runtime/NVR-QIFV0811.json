@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-04T04:31:11.282Z",
+  "validation_id": "NVR-MW1MD1O2-N0HEQA",
+  "raw_need": "Implement the next QIF release from the current roadmap",
+  "validation_status": "reframed",
+  "validated_need": "Extend the standalone QIF calibration runtime with immutable late-signal, accountable reopen-decision, and closure-calibration records so evidence received after incident closure can change current governance without changing historical facts.",
+  "decision_summary": "The release is justified only as a bounded auditability gap: occurrence and receipt time must be distinct, original closure remains immutable, materiality and authority are explicit, and uncertain or conflicting outcomes route to governance. Automatic reopening and semantic truth remain prohibited.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "Why is the existing closure record insufficient?",
+      "answer": "It names reopen conditions but cannot record late evidence, a target-specific reopen judgment, or retrospective closure calibration without mutation.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What is the smallest useful slice?",
+      "answer": "Three records inside calibration-report: late signal, reopen decision, and closure calibration, plus deterministic verifier and retained negative cases.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "a late signal was assumed to invalidate closure automatically; it may instead be immaterial, untrusted, duplicated, or context-mismatched"
+  ],
+  "evidence_gaps": [
+    "committed examples cannot prove real incident recovery, source authenticity, causal attribution, or future safety"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0811.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0811.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0811.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MW1MCC5W-V6TDWI"
+}

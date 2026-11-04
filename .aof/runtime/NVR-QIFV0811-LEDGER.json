@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-04T04:33:20.891Z",
+  "validation_id": "NVR-MW1MFTOB-PWIUXK",
+  "raw_need": "Implement v0.8.11 after correcting package ownership",
+  "validation_status": "reframed",
+  "validated_need": "Extend qif-ledger, the existing incident-lifecycle owner, with immutable late-signal, accountable reopen-decision, and closure-calibration records so later evidence changes current governance without rewriting historical closure facts.",
+  "decision_summary": "Validated after rejecting calibration-report duplication. The smallest coherent slice stays beside PortableKnowledgeIncidentClosure, distinguishes occurrence and receipt time, requires source/materiality evidence and human authority, and routes uncertain calibration to governance.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "Which package owns the lifecycle?",
+      "answer": "qif-ledger, because it already owns PortableKnowledgeSignalSource, SignalReconciliation, and IncidentClosure.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must remain impossible?",
+      "answer": "history mutation, automatic reopening, count-based quality, causality claims, and semantic-truth claims.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "calibration semantics were initially assumed to require calibration-report ownership, but lifecycle calibration belongs with the immutable closure chain"
+  ],
+  "evidence_gaps": [
+    "example records cannot establish live source authenticity, material impact, causal attribution, recovery, or future safety"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0811-LEDGER.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0811-LEDGER.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0811-LEDGER.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MW1MF9SH-1Q39C9"
+}

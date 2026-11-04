@@ -955,6 +955,42 @@
       "requiredAction": "Preserve the closure evidence and reopen if a declared condition occurs.",
       "owner": "portable-knowledge-governance-owner",
       "status": "closed"
+    },
+    {
+      "id": "PKGTR-029",
+      "triggerType": "portable-trust-late-signal-unverified",
+      "reason": "A signal received after closure is illustrative and has not been independently verified.",
+      "severity": "high",
+      "requiredAction": "Preserve the signal and require source verification while retaining accountable human review.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-030",
+      "triggerType": "portable-trust-late-signal-material",
+      "reason": "A critical post-closure signal crosses the recorded authority-scope loss boundary.",
+      "severity": "critical",
+      "requiredAction": "Assess the original reopen condition and make an accountable reopen decision.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-031",
+      "triggerType": "portable-trust-incident-reopened",
+      "reason": "A material late signal matched an original reopen condition.",
+      "severity": "critical",
+      "requiredAction": "Track the continuation incident without changing the original closure record.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-032",
+      "triggerType": "portable-trust-closure-calibration-adverse",
+      "reason": "Later declared evidence classifies the original close decision as false assurance.",
+      "severity": "high",
+      "requiredAction": "Review closure policy, observation horizon, and reopen conditions without inferring causality.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
     }
   ],
   "portableKnowledgeLibraries": [
@@ -2902,6 +2938,107 @@
       "status": "closed"
     }
   ],
+  "portableKnowledgeLateSignals": [
+    {
+      "id": "PKLS-001",
+      "incidentClosureRef": "PKIC-001",
+      "sourceRef": "PKSS-002",
+      "occurredAt": "2026-11-01T07:00:00.000Z",
+      "receivedAt": "2026-11-01T08:00:00.000Z",
+      "latenessSeconds": 3600,
+      "arrivalState": "after-closure",
+      "dimension": "authority-scope",
+      "outcome": "drift-present",
+      "severity": "critical",
+      "materiality": "material",
+      "materialityRationale": "The declared late audit record indicates the authority scope again exceeded the approved bounded scope.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "evidenceStatus": "example-only",
+      "assessedBy": "portable-knowledge-governance-owner",
+      "governanceTriggerRefs": [
+        "PKGTR-029",
+        "PKGTR-030"
+      ],
+      "originalClosurePreserved": true,
+      "activityCountIsQuality": false,
+      "automaticReopen": false,
+      "authenticityClaimed": false,
+      "causalClaimed": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeIncidentReopenDecisions": [
+    {
+      "id": "PKIRD-001",
+      "incidentClosureRef": "PKIC-001",
+      "lateSignalRefs": [
+        "PKLS-001"
+      ],
+      "reopenConditionMatched": true,
+      "matchedReopenConditions": [
+        "The target policy or approved scope no longer matches the observed state."
+      ],
+      "decision": "reopen",
+      "decisionRationale": "The critical late signal matches the preserved scope-mismatch condition; reopening is precautionary and does not establish source truth or causality.",
+      "decidedBy": "portable-knowledge-governance-owner",
+      "decidedAt": "2026-11-01T08:20:00.000Z",
+      "authorityBasis": "Documented incident-reopen authority for the bounded portable trust-policy scope.",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "continuationIncidentRef": "PKINC-CONT-001",
+      "governanceTriggerRefs": [
+        "PKGTR-029",
+        "PKGTR-031"
+      ],
+      "originalClosurePreserved": true,
+      "decisionDoesNotExecuteReopen": true,
+      "activityCountIsQuality": false,
+      "automaticReopen": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeClosureCalibrations": [
+    {
+      "id": "PKCC-001",
+      "incidentClosureRef": "PKIC-001",
+      "reopenDecisionRef": "PKIRD-001",
+      "lateSignalRefs": [
+        "PKLS-001"
+      ],
+      "originalClosureDecision": "close",
+      "laterObservedState": "drift-present",
+      "calibrationClassification": "false-assurance",
+      "observationHorizonStart": "2026-11-01T06:10:00.000Z",
+      "observationHorizonEnd": "2026-11-01T09:00:00.000Z",
+      "evidenceComplete": true,
+      "reviewedBy": "portable-knowledge-governance-owner",
+      "reviewedAt": "2026-11-01T09:10:00.000Z",
+      "rationale": "Within the declared example horizon, a material post-closure drift signal changed the governance disposition; this is calibration evidence, not causal or semantic truth.",
+      "governanceTriggerRefs": [
+        "PKGTR-032"
+      ],
+      "originalClosurePreserved": true,
+      "activityCountIsQuality": false,
+      "automaticCausalInference": false,
+      "automaticQualityVerdict": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    }
+  ],
   "ledgerIndex": {
     "activeQualityIntentRefs": [
       {
@@ -2954,8 +3091,8 @@
         "entityRef": "CALRUN-WMC-001"
       }
     ],
-    "lastUpdated": "2026-11-02",
-    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, immutable replay, frozen-scope rollout preview, accountable activation, execution reconciliation, recovery verification, governed policy disposition, post-promotion drift assessment, emergency demotion, signal-source integrity, conflict-aware reconciliation, and human-governed incident closure without automatic authority."
+    "lastUpdated": "2026-11-04",
+    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, immutable replay, frozen-scope rollout preview, accountable activation, execution reconciliation, recovery verification, governed policy disposition, post-promotion drift assessment, emergency demotion, signal-source integrity, conflict-aware reconciliation, human-governed incident closure, late-signal reopening, and closure calibration without automatic authority."
   },
   "verifierBoundary": {
     "checks": [
@@ -2980,7 +3117,8 @@
       "activation authority traceability, bounded observation decisions, stop-condition reproduction, and rollback-chain integrity",
       "declared-versus-observed execution reconciliation, recovery-state verification, and governed policy promotion or retirement",
       "append-only policy-state observation lineage, deterministic drift severity, governance routing, and emergency demotion reconciliation",
-      "signal identity, freshness, correlation-group independence, conflict preservation, and incident-closure reproduction"
+      "signal identity, freshness, correlation-group independence, conflict preservation, and incident-closure reproduction",
+      "late-signal occurrence and receipt timing, materiality, reopen-decision authority, immutable closure linkage, and closure-calibration reproduction"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -3002,7 +3140,8 @@
       "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness",
       "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness",
       "policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness",
-      "signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness"
+      "signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness",
+      "late-signal authenticity, material impact, causal attribution, operational reopening, closure-calibration truth, future safety, or semantic fitness"
     ],
     "semanticValidityRequires": [
       "expert review",
