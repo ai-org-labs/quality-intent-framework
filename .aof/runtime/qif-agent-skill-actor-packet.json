@@ -1,0 +1,84 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-11-12T16:34:47.297Z",
+  "packet_id": "ASP-MWDRQF0H-S86K8M",
+  "source_task_id": "TASK-086",
+  "source_parent_session_id": "SESS-MWDRMRSZ-C4A062",
+  "source_decision_record_id": "DEC-MWDROKNS-SEB4NU",
+  "objective": "Implement and validate the QIF open Agent Skill distribution",
+  "assignment": {
+    "actor_ref": "parent-codex",
+    "role_ref": "builder",
+    "team_ref": null,
+    "assignment_reason": "Builder owns skill structure, deterministic packaging, verifier reuse, tests, and release integration",
+    "execution_mode": "tool-backed"
+  },
+  "required_skill_refs": [
+    "skill-creator",
+    "qif-runtime"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-agent-skill-authoring",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "/Users/mn/.codex/skills/.system/skill-creator/SKILL.md",
+        "https://developers.openai.com/api/docs/guides/tools-skills"
+      ],
+      "rationale": "Open Agent Skills structure and progressive disclosure requirements are available"
+    }
+  ],
+  "resource_refs": [
+    "resource-repo-main"
+  ],
+  "policy_refs": [
+    "policy-runtime-backed-answer-discipline",
+    "policy-no-semantic-truth"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-agent-skill-distribution",
+    "artifact_schema_ref": null,
+    "required_sections": [
+      "SKILL.md routing and boundaries",
+      "references, scripts, assets, and agents metadata",
+      "deterministic build and validation"
+    ],
+    "acceptance_criteria": [
+      "skill-creator quick_validate passes",
+      "QIF skill smoke tests and npm test pass",
+      "portable and dedicated skill zips are deterministic and version aligned"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "Agent Skills compliance and routing precision",
+      "evaluator_ref": "guardian",
+      "evidence_required": "quick_validate and negative routing fixtures",
+      "blocking": true
+    },
+    {
+      "criterion": "QIF boundary preservation",
+      "evaluator_ref": "guardian",
+      "evidence_required": "skill instructions and verifier outputs",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "skill-claims-authority",
+      "trigger_condition": "Skill claims semantic truth, approval authority, or autonomous permission",
+      "consequence": "block-assignment",
+      "recovery_action": "restore explicit QIF authority and verifier boundaries"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will package QIF as a portable skill without turning it into an authority.",
+    "current_action": "Create progressive-disclosure skill bundle and deterministic release integration",
+    "confidence_label": "high",
+    "visible_blockers": [],
+    "next_action": "Run independent routing and boundary review"
+  },
+  "status": "ready-for-assignment"
+}

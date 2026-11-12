@@ -5,8 +5,9 @@
 QIF is a way to make quality judgments explicit, evidence-backed, reproducible,
 and challengeable. Humans, AI agents, and hybrid organizations can use it.
 
-QIF is not an agent. It is a representation and evaluation framework an agent
-can follow.
+QIF is not an autonomous authority. Its standard Agent Skill packages the
+representation and evaluation framework so a compatible agent can discover
+and follow it without granting that agent approval or execution authority.
 
 ## Core Chain
 

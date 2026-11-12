@@ -5654,3 +5654,48 @@ Date: 2026-10-25
 - Next value slices: v0.8.12 Closure Policy Revision and Counterfactual Replay,
   v0.9 Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger
   Standard.
+
+## 2026-11-13 - v0.8.12 Agent Skill Distribution
+
+- Latest AOF check: the official GitHub release API confirmed AOF `v12.2.0`;
+  the managed-project runtime was executed with Node 22.
+- Need Validation: the raw request to make QIF a standard agent was reframed
+  as an interoperable Agent Skill, not an autonomous actor. Problem statement,
+  value hypothesis, alternatives, Validated Need, and post-validation charter:
+  `PST-MWDRNQAD-7BSSKC`, `VHY-MWDRNQFO-NX4TIL`,
+  `ALT-MWDRNQKM-F3J3RO`, `NVR-MWDRO3RK-A4KN2U`, and
+  `PCH-MWDROGEC-22I9ND`.
+- Council and execution: session `SESS-MWDRMRSZ-C4A062`, decision
+  `DEC-MWDROKNS-SEB4NU`, task `TASK-086`, actor skill packet
+  `ASP-MWDRQF0H-S86K8M`. Planning council
+  `CRUN-MWDRP9L4-84FON4` and review council
+  `CRUN-MWDSKMXI-ZN2U5Y` included Visionary, Builder, and Guardian; neither
+  recorded a veto.
+- Trend evidence: the open Agent Skills specification defines `SKILL.md`,
+  discovery metadata, optional scripts/references/assets, progressive
+  disclosure, and reference validation. OpenAI documents top-level skill
+  folders and distribution limits. Sources:
+  https://agentskills.io/specification,
+  https://agentskills.io/home, and
+  https://developers.openai.com/api/docs/guides/tools-skills.
+- Decision: publish one `quality-intent-framework` Skill with a concise router,
+  mode-specific references, reusable review asset, and a thin CLI wrapper.
+  Keep the document-oriented portable distribution and embed the same Skill
+  within it. Split the Skill later only if real routing evidence shows overlap.
+- Implementation boundary: no autonomous execution, approval delegation,
+  organizational authority, provider-specific dependency, evidence invention,
+  or semantic-truth claim. The bundled script delegates to the canonical QIF
+  CLI so the Skill cannot create a second verifier semantics.
+- Verification: QIF source validation, Codex Skill validation, and the official
+  Agent Skills `skills-ref` all passed. The dedicated bundle built 145 files
+  in a 3,086,169-byte zip with one top-level folder and deterministic SHA-256;
+  bundled CLI validation and mutation rejection passed. The portable package
+  built and verified 98 files. `npm test` passed 16/16 positive and
+  1,537/1,537 negative checks. AOF organization verification passed 295/295.
+- Self-review: `FSA-QIF-V0812` classified the implementation as stable while
+  preserving the unproven boundary that structural validation cannot establish
+  cross-client model behavior or real-user routing quality.
+- Outcome and learning: `OUT-MWDSLDTR-V63WIQ` recorded success and the learning
+  loop remained stable. The next value slice is v0.8.13 Closure Policy Revision
+  and Counterfactual Replay; independent-client Skill pilots remain required
+  before claiming behavioral interoperability.

@@ -14,7 +14,9 @@ It is not a fixed checklist and it is not an autonomous agent.
 
 1. Keep this folder together. Do not upload only one file.
 2. Give the folder or zip to your AI system as reference material.
-3. Ask the AI to read `SYSTEM_INSTRUCTIONS.md` first.
+3. In an Agent Skills-compatible client, install
+   `skills/quality-intent-framework/` and invoke `$quality-intent-framework`.
+   In a document-only client, ask the AI to read `SYSTEM_INSTRUCTIONS.md` first.
 4. Give it the target document, repository, product, process, or requirement.
 5. Choose one of these requests:
 
@@ -56,15 +58,17 @@ For a normal review:
 3. `USE_CASES.md`
 4. `OUTPUT_TEMPLATE.json`
 
-The `docs/`, `schemas/`, and `examples/` folders provide deeper guidance and
-machine-readable package definitions. `MANIFEST.json` records the QIF version,
-canonical source path, byte size, and SHA-256 digest of every included file.
+The `skills/quality-intent-framework/` folder is the standard Agent Skill
+entrypoint. The `docs/`, `schemas/`, `examples/`, and `tools/` folders provide
+deeper guidance, machine-readable definitions, and local structural
+verification. `MANIFEST.json` records the QIF version, canonical source path,
+byte size, and SHA-256 digest of every included file.
 
 ## Important Boundary
 
 Reading this package can guide an AI to act in QIF style. It does not by itself:
 
-- execute QIF's repository verifiers;
+- prove that running a bundled QIF verifier establishes semantic quality;
 - prove that cited evidence exists or is true;
 - guarantee that an AI followed every instruction;
 - grant authority to approve, release, operate, or accept risk;

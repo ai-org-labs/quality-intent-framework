@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-12T16:32:59.408Z",
+  "validation_id": "NVR-MWDRO3RK-A4KN2U",
+  "raw_need": "QIFをskills.mdのような標準のエージェントにしたい",
+  "validation_status": "reframed",
+  "validated_need": "QIFを自律権限主体ではなく、open Agent Skills標準に準拠した移植可能で検証可能な品質判断Skillとして配布し、AIが必要なQIF知識と既存verifierを段階的に利用できるようにする",
+  "decision_summary": "原要求の標準エージェント化は、AI製品固有の自律agentではなく、相互運用可能なSKILL.md bundleとして再定義する。単一Skillから開始し、実利用でルーティング衝突が確認された場合のみ分割する。",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "何を標準化するか",
+      "answer": "Agent Skills標準のSKILL.md、references、scripts、assetsからなるQIF skill bundle",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "何を標準化しないか",
+      "answer": "自律実行権限、承認権限、意味的真実、特定AI製品の専用runtime",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "1つのSkillでQIFの主要依頼を識別可能である"
+  ],
+  "evidence_gaps": [
+    "ClaudeおよびGeminiでの実機自動選択挙動はこのリリースでは独立検証できない"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIF-AGENT-SKILL.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIF-AGENT-SKILL.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIF-AGENT-SKILL.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWDRN1F8-X4PG14"
+}

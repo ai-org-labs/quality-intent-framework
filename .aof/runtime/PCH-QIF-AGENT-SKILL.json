@@ -1,0 +1,25 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-11-12T16:33:15.780Z",
+  "project_charter_id": "PCH-MWDROGEC-22I9ND",
+  "validated_need_ref": ".aof/runtime/NVR-QIF-AGENT-SKILL.json",
+  "validated_objective": "QIF v0.8.12としてopen Agent Skills準拠のquality-intent-framework skill bundleを実装し、portable releaseへ常時同梱する",
+  "scope": [
+    "skills/quality-intent-framework/SKILL.mdとagents/openai.yaml",
+    "用途別references、既存QIF CLIを呼ぶ薄いscripts、最小templates/assets",
+    "skill bundleのbuild、standard validation、QIF smoke test、portable/release統合",
+    "AI authoring guide、README、roadmap、changelog、AOF runtime evidence"
+  ],
+  "constraints": [
+    "巨大なQIF資料群をSKILL.mdへ複製しない",
+    "外部連携、UI、自律実行、承認代行、意味的真実の保証を追加しない",
+    "既存QIF schemas/verifiersを正本とし、skill固有ロジックを重複実装しない"
+  ],
+  "expected_outcomes": [
+    "標準skill bundleをzipまたはdirectoryとしてCodex/ChatGPT等へ渡せる",
+    "QIF portable packageが同じversionのskill bundleを常に含む",
+    "agentは品質意図発見、要件漏れ評価、証拠付きレビュー、QIF artifact作成を適切に選択できる"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWDRN1F8-X4PG14"
+}

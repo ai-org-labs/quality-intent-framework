@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-11-12T16:32:42.132Z",
+  "value_hypothesis_id": "VHY-MWDRNQFO-NX4TIL",
+  "expected_value_creation": "QIFを標準Skillとして発見・選択・実行でき、依頼から適切なQIFモードと検証器へ段階的に到達できる",
+  "beneficiary": "QIF利用者、AIエージェント運用者、複数AI製品をまたぐ組織",
+  "supporting_evidence": [
+    "QIFには既存のportable package、AI authoring guide、schema、example、deterministic verifierがある",
+    "open Agent Skills標準はSKILL.mdとreferences/scripts/assetsによるprogressive disclosureを定義している"
+  ],
+  "success_criteria": [
+    "Agent Skills準拠のbundleが標準validatorとQIF package verifierを通る",
+    "portable releaseが常に同じskill bundleとversionを出力する",
+    "SKILL.mdは依頼を発見・評価・作成・検証へルーティングし、権限や意味的真実を主張しない"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWDRN1F8-X4PG14"
+}

@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-12T16:32:41.941Z",
+  "problem_statement_id": "PST-MWDRNQAD-7BSSKC",
+  "affected_party": "QIFを使って品質レビューや品質意図発見を行う人とAIエージェント",
+  "actual_problem": "QIFは実行可能な資料・schema・verifierを持つが、open Agent Skills標準の発見可能なSKILL.md bundleではなく、AIごとに導入方法と読ませ方が異なる",
+  "why_it_matters": "利用者が巨大な資料群を手動で選び、QIFの境界や正しいワークフローを見落としやすい",
+  "why_now": "Agent Skillsが複数プラットフォームで標準化され、QIFの既存portable packageを小さなルーターと段階的参照へ変換できる",
+  "evidence_refs": [
+    "README.md",
+    "docs/AI_AUTHORING_GUIDE.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWDRN1F8-X4PG14"
+}

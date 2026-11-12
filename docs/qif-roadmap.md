@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.8.11 baseline)
+## Current Position (v0.8.12 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -934,8 +934,17 @@ Deliverables:
   history, and governance checks. Records do not prove source authenticity,
   material impact, causality, operational reopening, future safety, authority,
   or semantic fitness.
+- Implemented thirteenth v0.8 slice, v0.8.12 Agent Skill Distribution:
+  package QIF as a standard, progressively disclosed Agent Skill that can be
+  discovered and invoked by compatible AI runtimes while delegating all
+  deterministic checks to the canonical QIF CLI.
+- Status: implemented through `SKILL.md`, scoped references, an output asset,
+  a runtime wrapper, deterministic versioned bundles, source and distribution
+  verification, mutation rejection, portable-package composition, and release
+  assets. The Skill guides an agent but does not create semantic truth,
+  approval authority, execution authority, or autonomous permission.
 - Next planned slices:
-  - v0.8.12 Closure Policy Revision and Counterfactual Replay: turn repeated
+  - v0.8.13 Closure Policy Revision and Counterfactual Replay: turn repeated
     calibration outcomes into governed closure-policy candidates, replay them
     against frozen historical cases, and preserve every prior decision.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries

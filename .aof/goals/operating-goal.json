@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Extend qif-ledger, the existing incident-lifecycle owner, with immutable late-signal, accountable reopen-decision, and closure-calibration records so later evidence changes current governance without rewriting historical closure facts.",
-  "updated_at": "2026-11-04T04:33:33.749Z",
+  "content": "QIFを自律権限主体ではなく、open Agent Skills標準に準拠した移植可能で検証可能な品質判断Skillとして配布し、AIが必要なQIF知識と既存verifierを段階的に利用できるようにする",
+  "updated_at": "2026-11-12T16:33:21.307Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MW1MF4VZ-UVU944",
-  "source_decision_record_id": "DEC-MW1MG3LF-WPFLX4",
+  "source_session_id": "SESS-MWDRMRSZ-C4A062",
+  "source_decision_record_id": "DEC-MWDROKNS-SEB4NU",
   "declared_complete_at": null
 }

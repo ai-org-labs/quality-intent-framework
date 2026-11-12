@@ -22,11 +22,14 @@ qif-portable-v<VERSION>/
 |- SHA256SUMS
 |- docs/
 |- schemas/
-`- examples/
+|- examples/
+|- tools/
+`- skills/quality-intent-framework/
 ```
 
 The short root documents provide the first-use path. Canonical documents,
-schemas, and examples remain available for deeper or machine-readable work.
+schemas, examples, CLI tools, and the standard Agent Skill remain available
+for deeper or machine-readable work.
 
 ## Build and Verify
 
@@ -64,6 +67,10 @@ For document-context AI systems:
 The package is vendor-neutral. Vendor-specific project instructions may point
 to `SYSTEM_INSTRUCTIONS.md`, but must not silently weaken its evidence,
 uncertainty, authority, or verifier boundaries.
+
+Agent Skills-compatible systems should instead install
+`skills/quality-intent-framework/`, or use the dedicated, smaller Agent Skill
+bundle described in `docs/qif-v0.8.12-agent-skill-distribution.md`.
 
 ## Verification Boundary
 

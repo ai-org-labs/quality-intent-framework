@@ -1,0 +1,22 @@
+{
+  "task_id": "TASK-086",
+  "title": "QIF v0.8.12 Agent Skill Distribution",
+  "description": "Implement an open Agent Skills compliant QIF bundle with progressive disclosure, thin verifier scripts, deterministic build and validation, portable release integration, docs, tests, and AOF evidence.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MWDRMRSZ-C4A062",
+  "assigned_session_ids": [
+    "SESS-MWDRMRSZ-C4A062"
+  ],
+  "related_decision_record_id": "DEC-MWDROKNS-SEB4NU",
+  "operating_goal_ref": ".aof/goals/operating-goal.json",
+  "created_at": "2026-11-12T16:34:09.324Z",
+  "updated_at": "2026-11-12T16:58:51.954Z",
+  "assigned_at": null,
+  "done_at": "2026-11-12T16:58:51.954Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented and verified QIF v0.8.12 Agent Skill distribution; review council CRUN-MWDSKMXI-ZN2U5Y had no veto."
+}

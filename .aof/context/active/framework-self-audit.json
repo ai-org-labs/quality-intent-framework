@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-11-04T04:50:39.786Z",
-  "audit_id": "FSA-QIF-V0811",
-  "scope": "QIF v0.8.11 release candidate",
-  "summary": "Late signal, accountable reopen decision, and closure calibration are implemented in qif-ledger with immutable lineage, governance routing, retained negative fixtures, portable output, and explicit verifier boundaries.",
-  "detected_gap": "Closure policy revision and counterfactual replay remain outside this release and are the next value slice.",
+  "recorded_at": "2026-11-12T16:58:51.613Z",
+  "audit_id": "FSA-QIF-V0812",
+  "scope": "QIF v0.8.12 Agent Skill distribution",
+  "summary": "Standard Agent Skill source and deterministic distributions pass three structural validators, bundled CLI and mutation tests, and the full QIF regression suite; council review proceeded without veto.",
+  "detected_gap": "Cross-client model behavior and real-user routing quality are not proven by structural package validation.",
   "result_state": "stable",
-  "next_action": "Deliver v0.8.12 closure policy revision and counterfactual replay without mutating historical decisions.",
+  "next_action": "Pilot the released Skill in at least two independent Agent Skills-compatible clients and preserve behavioral evidence before making interoperability claims.",
   "related_task_ids": [
-    "TASK-085"
+    "TASK-086"
   ],
-  "source_session_id": "SESS-MW1MF4VZ-UVU944",
-  "source_decision_record_id": "DEC-MW1MG3LF-WPFLX4"
+  "source_session_id": "SESS-MWDRMRSZ-C4A062",
+  "source_decision_record_id": "DEC-MWDROKNS-SEB4NU"
 }

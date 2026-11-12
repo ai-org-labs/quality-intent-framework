@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-12T16:32:42.310Z",
+  "alternative_analysis_id": "ALT-MWDRNQKM-F3J3RO",
+  "subject_need": "QIFを標準的なAIエージェント能力として移植可能にする",
+  "alternative_solutions": [
+    "単一のQIF Agent Skill bundleを作り、SKILL.mdをルーター、referencesを選択的知識、scriptsを検証器アダプタにする",
+    "用途別に複数Skillへ分割する"
+  ],
+  "non_solution_options": [
+    "既存portable packageを丸ごと毎回プロンプトへ投入する"
+  ],
+  "defer_options": [
+    "各AI製品の専用エージェント形式がさらに収束するまで待つ"
+  ],
+  "stop_options": [
+    "標準検証を通らない、または既存QIF verifierを再利用せず挙動が説明不能になる場合は公開しない"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWDRN1F8-X4PG14"
+}

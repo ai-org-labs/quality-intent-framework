@@ -3,6 +3,10 @@
 Use these instructions as the operating policy for QIF work. Higher-priority
 system and user instructions still apply.
 
+Agent Skills-compatible clients should use
+`skills/quality-intent-framework/SKILL.md` as the progressive-disclosure
+entrypoint. This file remains the document-context fallback.
+
 ## Required Behavior
 
 1. Start with Need, Intent, and Context. Do not turn the raw request directly

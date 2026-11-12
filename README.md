@@ -1,15 +1,28 @@
 # Quality Intent Framework
 
-Current release: **v0.8.11**. The Living QIF Ledger now preserves evidence
-received after incident closure, records accountable human reopen decisions,
-and calibrates the old closure against later declared outcomes without
-rewriting history, operating providers, or granting authority.
+Current release: **v0.8.12**. QIF is now distributed as a standard Agent
+Skill: compatible agents can discover the QIF procedure from `SKILL.md`, load
+deeper guidance only when needed, and invoke the canonical verifier without
+turning QIF into an autonomous authority.
 
 Quality Intent Framework (QIF) turns an organization's quality theory into an operational, AI-verifiable framework.
 
 QIF does not define quality as output volume. Page count, review count, and test count are treated only as possible evidence signals when they are linked to a quality intent, a risk, and a loss boundary.
 
 ## Portable AI Package
+
+For an Agent Skills-compatible client, build the dedicated skill bundle:
+
+```bash
+npm run skill:release
+```
+
+Install `dist/qif-agent-skill-current/quality-intent-framework/` in the
+client's skill directory, or upload `dist/qif-agent-skill-v<VERSION>.zip`.
+Invoke it as `$quality-intent-framework` where explicit skill invocation is
+supported. The skill provides QIF-guided behavior and bundles the canonical
+local runtime; it does not grant approval, execution, or semantic-truth
+authority. See `docs/qif-v0.8.12-agent-skill-distribution.md`.
 
 To use QIF with Gemini, Claude, Codex, or another AI without cloning the full
 repository:
@@ -27,9 +40,9 @@ current schemas, and all current examples. `npm run portable:verify` rejects
 stale, missing, added, modified, or version-mismatched content. See
 `docs/qif-v0.6.43-portable-ai-package.md`.
 
-The portable package guides an AI but is not itself an agent or the complete
-QIF Runtime. Its integrity check does not prove semantic quality or grant
-decision authority.
+The document package guides an AI but is not itself an agent. The Agent Skill
+is an agent capability package, not an autonomous actor. Neither package's
+integrity check proves semantic quality or grants decision authority.
 
 ## Current Baseline
 
@@ -98,6 +111,7 @@ This repository contains the executable QIF baseline through v0.2.1, the v0.3.0 
 - QIF v0.8.9 Policy State Drift and Emergency Demotion: `docs/qif-v0.8.9-policy-state-drift-emergency-demotion.md`
 - QIF v0.8.10 Drift Signal Integrity and Incident Closure: `docs/qif-v0.8.10-drift-signal-integrity-incident-closure.md`
 - QIF v0.8.11 Late-Signal Reopen and Closure Calibration: `docs/qif-v0.8.11-late-signal-reopen-closure-calibration.md`
+- QIF v0.8.12 Agent Skill Distribution: `docs/qif-v0.8.12-agent-skill-distribution.md`
 - Quality theory summary: `docs/quality-theory-report.md`
 - Canonical package schema: `schemas/qif-package.schema.json`
 - QIF ledger package schema: `schemas/qif-ledger-package.schema.json`

@@ -31,6 +31,8 @@ const CANONICAL_DOCS = [
   "docs/qif-v0.8.8-activation-outcome-reconciliation.md",
   "docs/qif-v0.8.9-policy-state-drift-emergency-demotion.md",
   "docs/qif-v0.8.10-drift-signal-integrity-incident-closure.md",
+  "docs/qif-v0.8.11-late-signal-reopen-closure-calibration.md",
+  "docs/qif-v0.8.12-agent-skill-distribution.md",
   "docs/expert-judgment-framework.md"
 ];
 
@@ -45,12 +47,27 @@ function listJsonFiles(root, directory) {
     .map((name) => `${directory}/${name}`);
 }
 
+function listFiles(root, directory, predicate = () => true, prefix = "") {
+  const result = [];
+  for (const entry of fs.readdirSync(path.join(root, directory, prefix), { withFileTypes: true })) {
+    const relative = path.join(prefix, entry.name);
+    if (entry.isDirectory()) result.push(...listFiles(root, directory, predicate, relative));
+    else if (predicate(relative)) result.push(`${directory}/${relative}`.split(path.sep).join("/"));
+  }
+  return result.sort();
+}
+
 function sourceDescriptors(root) {
+  const skillRoot = ".agents/skills/quality-intent-framework";
   return [
     ...PORTABLE_FILES.map((name) => ({ source: `portable/${name}`, target: name })),
     ...CANONICAL_DOCS.map((source) => ({ source, target: source })),
     ...listJsonFiles(root, "schemas").map((source) => ({ source, target: source })),
-    ...listJsonFiles(root, "examples").map((source) => ({ source, target: source }))
+    ...listJsonFiles(root, "examples").map((source) => ({ source, target: source })),
+    ...listFiles(root, "tools", (name) => name.endsWith(".mjs") && !name.startsWith("fixtures/"))
+      .map((source) => ({ source, target: source })),
+    ...listFiles(root, skillRoot)
+      .map((source) => ({ source, target: `skills/quality-intent-framework/${source.slice(`${skillRoot}/`.length)}` }))
   ].sort((a, b) => a.target.localeCompare(b.target));
 }
 
@@ -96,6 +113,7 @@ export function expectedPortablePackage(root) {
     entryCount: entries.length,
     boundaries: {
       isAgent: false,
+      containsAgentSkill: true,
       isCompleteRuntime: false,
       provesSemanticTruth: false,
       grantsAuthority: false

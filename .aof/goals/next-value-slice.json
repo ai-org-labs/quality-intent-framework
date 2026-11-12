@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.8.12 Closure Policy Revision and Counterfactual Replay",
-  "updated_at": "2026-11-04T04:51:20.931Z",
+  "content": "v0.8.13 Closure Policy Revision and Counterfactual Replay",
+  "updated_at": "2026-11-12T16:58:52.097Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MW1MF4VZ-UVU944",
+  "source_session_id": "SESS-MWDRMRSZ-C4A062",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-11-04T04:51:20.931Z"
+  "declared_complete_at": "2026-11-12T16:58:52.097Z"
 }

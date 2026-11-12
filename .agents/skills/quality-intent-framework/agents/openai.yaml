@@ -1,0 +1,4 @@
+interface:
+  display_name: "Quality Intent Framework"
+  short_description: "Discover quality intent and create evidence-backed reviews"
+  default_prompt: "Use $quality-intent-framework to discover what must not fail, evaluate the supplied target, and explain the evidence, uncertainty, verdict, and residual risk."

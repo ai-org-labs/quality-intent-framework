@@ -1,4 +1,4 @@
-name: Attach current QIF portable package
+name: Attach current QIF distributions
 
 on:
   release:
@@ -17,12 +17,12 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 22
-      - name: Verify release version and build portable package
+      - name: Verify release version and build distributions
         shell: bash
         run: |
           test "v$(node -p "require('./package.json').version")" = "${{ github.event.release.tag_name }}"
           npm test
-      - name: Attach portable package and checksum
+      - name: Attach portable and Agent Skill packages
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -31,4 +31,6 @@ jobs:
           gh release upload "v${VERSION}" \
             "dist/qif-portable-v${VERSION}.zip" \
             "dist/qif-portable-v${VERSION}.zip.sha256" \
+            "dist/qif-agent-skill-v${VERSION}.zip" \
+            "dist/qif-agent-skill-v${VERSION}.zip.sha256" \
             --clobber

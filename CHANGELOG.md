@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.8.12
+
+- Added a standards-conformant `quality-intent-framework` Agent Skill with precise discovery metadata, progressive-disclosure references, a review template, and a canonical CLI wrapper.
+- Added deterministic, versioned Agent Skill directory and zip builds with manifests, SHA-256 checksums, platform-size limits, source validation, mutation rejection, and end-to-end runtime checks.
+- Embedded the same Agent Skill in the vendor-neutral portable package so document-only and skill-aware AI environments share one QIF behavior contract.
+- Updated AI authoring guidance, release automation, and the roadmap while keeping QIF distinct from autonomous execution, semantic truth, approval authority, and organizational decision authority.
+
 ## v0.8.11
 
 - Added append-only late-signal records that distinguish occurrence time from receipt time and resolve to the original incident closure and signal source.

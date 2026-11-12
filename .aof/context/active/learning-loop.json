@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-11-04T04:51:30.791Z",
+  "generated_at": "2026-11-12T16:58:52.251Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MW1MF4VZ-UVU944",
-    "report_id": "OUT-MW1N2Z1D-WF6CMI",
+    "source_session_id": "SESS-MWDRMRSZ-C4A062",
+    "report_id": "OUT-MWDSLDTR-V63WIQ",
     "result": "success",
-    "observed_at": "2026-11-04T04:51:20.929Z",
-    "note": "QIF v0.8.11 late-signal, accountable reopen-decision, and closure-calibration runtime passed full QIF and AOF verification and is release-ready.",
-    "signal_ref": "CRUN-MW1N1R8Z-46ITTY"
+    "observed_at": "2026-11-12T16:58:52.095Z",
+    "note": "QIF v0.8.12 standard Agent Skill, deterministic distributions, portable composition, and release automation completed; full tests passed.",
+    "signal_ref": "CRUN-MWDSKMXI-ZN2U5Y"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIF-V0811",
-    "recorded_at": "2026-11-04T04:50:39.786Z",
-    "summary": "Late signal, accountable reopen decision, and closure calibration are implemented in qif-ledger with immutable lineage, governance routing, retained negative fixtures, portable output, and explicit verifier boundaries.",
-    "detected_gap": "Closure policy revision and counterfactual replay remain outside this release and are the next value slice.",
+    "audit_id": "FSA-QIF-V0812",
+    "recorded_at": "2026-11-12T16:58:51.613Z",
+    "summary": "Standard Agent Skill source and deterministic distributions pass three structural validators, bundled CLI and mutation tests, and the full QIF regression suite; council review proceeded without veto.",
+    "detected_gap": "Cross-client model behavior and real-user routing quality are not proven by structural package validation.",
     "result_state": "stable",
-    "next_action": "Deliver v0.8.12 closure policy revision and counterfactual replay without mutating historical decisions.",
+    "next_action": "Pilot the released Skill in at least two independent Agent Skills-compatible clients and preserve behavioral evidence before making interoperability claims.",
     "related_task_ids": [
-      "TASK-085"
+      "TASK-086"
     ]
   },
   "current_next_value_slice": {
-    "content": "QIF v0.8.12 Closure Policy Revision and Counterfactual Replay",
-    "updated_at": "2026-11-04T04:51:20.931Z",
-    "declared_complete_at": "2026-11-04T04:51:20.931Z",
-    "source_session_id": "SESS-MW1MF4VZ-UVU944",
+    "content": "v0.8.13 Closure Policy Revision and Counterfactual Replay",
+    "updated_at": "2026-11-12T16:58:52.097Z",
+    "declared_complete_at": "2026-11-12T16:58:52.097Z",
+    "source_session_id": "SESS-MWDRMRSZ-C4A062",
     "source_decision_record_id": null
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Deliver v0.8.12 closure policy revision and counterfactual replay without mutating historical decisions.",
+    "proposed_focus": "Pilot the released Skill in at least two independent Agent Skills-compatible clients and preserve behavioral evidence before making interoperability claims.",
     "related_task_ids": [
-      "TASK-085"
+      "TASK-086"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: QIF v0.8.12 Closure Policy Revision and Counterfactual Replay",
-    "Latest self-audit next action: Deliver v0.8.12 closure policy revision and counterfactual replay without mutating historical decisions.",
+    "Current next value slice: v0.8.13 Closure Policy Revision and Counterfactual Replay",
+    "Latest self-audit next action: Pilot the released Skill in at least two independent Agent Skills-compatible clients and preserve behavioral evidence before making interoperability claims.",
     "Latest outcome result: success"
   ]
 }

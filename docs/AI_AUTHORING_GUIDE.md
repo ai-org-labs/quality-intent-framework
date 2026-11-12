@@ -2,7 +2,10 @@
 
 ## Purpose
 
-This is the first document an AI agent should read before using or extending QIF.
+This is the first repository document an AI agent should read before using or
+extending QIF. An Agent Skills-compatible runtime should begin at
+`.agents/skills/quality-intent-framework/SKILL.md`; that file routes the task
+and loads this guide only when deeper repository context is needed.
 
 The goal is to make the agent act in QIF style:
 
@@ -47,12 +50,13 @@ Who can accept or reject the residual risk?
 
 For most tasks, read in this order:
 
-1. `README.md`
-2. `docs/AI_AUTHORING_GUIDE.md`
-3. `docs/qif-operational-framework.md`
-4. `docs/qif-pre-implementation-review.md`
-5. `docs/qif-negative-acceptance.md`
-6. `docs/qif-v0.2-discovery-application-runtime.md`
+1. `.agents/skills/quality-intent-framework/SKILL.md` when skill support exists
+2. `README.md`
+3. `docs/AI_AUTHORING_GUIDE.md`
+4. `docs/qif-operational-framework.md`
+5. `docs/qif-pre-implementation-review.md`
+6. `docs/qif-negative-acceptance.md`
+7. `docs/qif-v0.2-discovery-application-runtime.md`
 
 Use additional documents when needed:
 
@@ -99,6 +103,7 @@ Use additional documents when needed:
 | Test whether a judge changes its answer when consequences or abstention options change, without treating abstention as failure or accuracy as authority | `docs/qif-v0.6.41-judge-consequence-abstention-robustness.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Check whether an evaluation stayed blind, within allowed tools, and free of detected grader shortcuts without claiming contamination freedom | `docs/qif-v0.6.42-sequestered-replay-policy-gaming.md`, `schemas/calibration-report-package.schema.json`, `examples/calibration-report-package.json` |
 | Package current QIF guidance for Gemini, Claude, Codex, or another AI | `docs/qif-v0.6.43-portable-ai-package.md`, then run `npm run portable:build` and `npm run portable:verify` |
+| Install QIF as a standard Agent Skill | `docs/qif-v0.8.12-agent-skill-distribution.md`, then run `npm run skill:release` and install the generated `quality-intent-framework` directory |
 | Understand quality theory background | `docs/quality-theory-report.md` |
 
 ## Multi-Agent Judgment Memory
