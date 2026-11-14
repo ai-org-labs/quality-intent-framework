@@ -996,6 +996,33 @@
       "requiredAction": "Review closure policy, observation horizon, and reopen conditions without inferring causality.",
       "owner": "portable-knowledge-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "PKGTR-033",
+      "triggerType": "portable-trust-closure-policy-candidate",
+      "reason": "An adverse closure calibration has produced a candidate policy revision.",
+      "severity": "high",
+      "requiredAction": "Replay the candidate against frozen historical cases before any adoption decision.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-034",
+      "triggerType": "portable-trust-closure-policy-replay-example-only",
+      "reason": "The counterfactual replay depends on example-only late-signal evidence.",
+      "severity": "high",
+      "requiredAction": "Require human governance and verified operational evidence before policy adoption.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "PKGTR-035",
+      "triggerType": "portable-trust-closure-policy-revision-governance",
+      "reason": "The candidate has insufficient verified replay evidence for accountable adoption.",
+      "severity": "high",
+      "requiredAction": "Keep the baseline policy effective and obtain reviewed replay evidence.",
+      "owner": "portable-knowledge-governance-owner",
+      "status": "open"
     }
   ],
   "portableKnowledgeLibraries": [
@@ -3046,6 +3073,115 @@
       "status": "governance-required"
     }
   ],
+  "portableKnowledgeClosurePolicyRevisionCandidates": [
+    {
+      "id": "PKCPRC-001",
+      "baselinePolicyVersion": "closure-policy-v1",
+      "candidatePolicyVersion": "closure-policy-v2-candidate",
+      "sourceCalibrationRefs": [
+        "PKCC-001"
+      ],
+      "targetClassifications": [
+        "false-assurance"
+      ],
+      "proposedDisposition": "keep-open",
+      "proposedChanges": [
+        {
+          "dimension": "observation-window",
+          "baselineValue": "close after the declared bounded window",
+          "candidateValue": "keep open when a materially adverse case class is replayed",
+          "rationale": "The frozen false-assurance case exposes a loss boundary not controlled by the baseline disposition."
+        }
+      ],
+      "applicabilityBoundary": "Portable knowledge incidents with the same declared authority-scope loss boundary; no claim is made for other domains or live providers.",
+      "minimumReplayCases": 1,
+      "candidateRationale": "Propose a bounded candidate from an adverse calibration while retaining the baseline until governance decides.",
+      "proposedBy": "portable-knowledge-governance-owner",
+      "proposedAt": "2026-11-01T09:20:00.000Z",
+      "governanceTriggerRefs": [
+        "PKGTR-033"
+      ],
+      "baselinePolicyPreserved": true,
+      "candidateOnly": true,
+      "activityCountIsQuality": false,
+      "automaticAdoption": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeClosurePolicyCounterfactualReplays": [
+    {
+      "id": "PKCPR-001",
+      "candidateRef": "PKCPRC-001",
+      "sourceCalibrationRef": "PKCC-001",
+      "incidentClosureRef": "PKIC-001",
+      "baselineDecision": "close",
+      "baselineClassification": "false-assurance",
+      "frozenInputRefs": [
+        "PKCC-001",
+        "PKIC-001",
+        "PKLS-001"
+      ],
+      "inputsFrozen": true,
+      "replayedAt": "2026-11-01T09:30:00.000Z",
+      "candidateDecision": "keep-open",
+      "outcomeDelta": "prevented-false-assurance",
+      "adverseOutcomePrevented": true,
+      "replayedBy": "QIF deterministic replay verifier",
+      "evidenceRefs": [
+        {
+          "packageRef": "PKG-EXPERT",
+          "entityType": "cases",
+          "entityRef": "CAS-SW-001"
+        }
+      ],
+      "governanceTriggerRefs": [
+        "PKGTR-034"
+      ],
+      "historyPreserved": true,
+      "replayOnly": true,
+      "activityCountIsQuality": false,
+      "automaticAdoption": false,
+      "causalClaimed": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    }
+  ],
+  "portableKnowledgeClosurePolicyRevisionDecisions": [
+    {
+      "id": "PKCPRD-001",
+      "candidateRef": "PKCPRC-001",
+      "replayRefs": [
+        "PKCPR-001"
+      ],
+      "reviewedCalibrationRefs": [
+        "PKCC-001"
+      ],
+      "replayCoverageComplete": true,
+      "minimumReplayCasesMet": true,
+      "preventedFalseAssuranceCount": 1,
+      "introducedFalseAlarmCount": 0,
+      "indeterminateCount": 0,
+      "decision": "governance-required",
+      "rationale": "The structural replay favors the candidate, but its source signal is example-only and cannot authorize policy adoption.",
+      "decidedBy": "portable-knowledge-governance-owner",
+      "decidedAt": "2026-11-01T09:40:00.000Z",
+      "authorityBasis": "Documented closure-policy review authority; adoption remains outside verifier authority.",
+      "effectivePolicyVersion": null,
+      "rollbackPolicyVersion": "closure-policy-v1",
+      "governanceTriggerRefs": [
+        "PKGTR-035"
+      ],
+      "historyPreserved": true,
+      "decisionDoesNotExecutePolicy": true,
+      "activityCountIsQuality": false,
+      "automaticAdoption": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    }
+  ],
   "ledgerIndex": {
     "activeQualityIntentRefs": [
       {
@@ -3098,8 +3234,8 @@
         "entityRef": "CALRUN-WMC-001"
       }
     ],
-    "lastUpdated": "2026-11-04",
-    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, immutable replay, frozen-scope rollout preview, accountable activation, execution reconciliation, recovery verification, governed policy disposition, post-promotion drift assessment, emergency demotion, signal-source integrity, conflict-aware reconciliation, human-governed incident closure, late-signal reopening, and closure calibration without automatic authority."
+    "lastUpdated": "2026-11-14",
+    "summary": "Living Ledger index plus multi-agent judgment memory, candidate-only portable knowledge, revocation, trust-policy lineage, immutable replay, frozen-scope rollout preview, accountable activation, execution reconciliation, recovery verification, governed policy disposition, post-promotion drift assessment, emergency demotion, signal-source integrity, conflict-aware reconciliation, human-governed incident closure, late-signal reopening, closure calibration, candidate policy revision, frozen counterfactual replay, and accountable revision decisions without automatic authority."
   },
   "verifierBoundary": {
     "checks": [
@@ -3125,7 +3261,8 @@
       "declared-versus-observed execution reconciliation, recovery-state verification, and governed policy promotion or retirement",
       "append-only policy-state observation lineage, deterministic drift severity, governance routing, and emergency demotion reconciliation",
       "signal identity, freshness, correlation-group independence, conflict preservation, and incident-closure reproduction",
-      "late-signal occurrence and receipt timing, materiality, reopen-decision authority, immutable closure linkage, and closure-calibration reproduction"
+      "late-signal occurrence and receipt timing, materiality, reopen-decision authority, immutable closure linkage, and closure-calibration reproduction",
+      "closure-policy candidate lineage, frozen historical counterfactual replay, outcome-delta reproduction, and accountable revision decisions"
     ],
     "doesNotClaim": [
       "semantic truth",
@@ -3148,7 +3285,8 @@
       "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness",
       "policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness",
       "signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness",
-      "late-signal authenticity, material impact, causal attribution, operational reopening, closure-calibration truth, future safety, or semantic fitness"
+      "late-signal authenticity, material impact, causal attribution, operational reopening, closure-calibration truth, future safety, or semantic fitness",
+      "counterfactual replay as causal proof, closure-policy adoption authority, live policy execution, future safety, or semantic fitness"
     ],
     "semanticValidityRequires": [
       "expert review",

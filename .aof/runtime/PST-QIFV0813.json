@@ -1,0 +1,14 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-14T04:37:07.506Z",
+  "problem_statement_id": "PST-MWFWZ776-1269JS",
+  "affected_party": "QIF operators and governance owners",
+  "actual_problem": "QIF can calibrate closure decisions but cannot yet turn adverse calibrations into auditable policy revision candidates and frozen counterfactual evidence.",
+  "why_it_matters": "Repeated false assurance can be observed without a reproducible, history-preserving policy learning path.",
+  "why_now": "The v0.8.11 calibration lifecycle is implemented and exposes the next missing control.",
+  "evidence_refs": [
+    "examples/qif-ledger-package.json"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

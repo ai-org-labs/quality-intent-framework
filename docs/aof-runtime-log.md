@@ -5699,3 +5699,45 @@ Date: 2026-10-25
   loop remained stable. The next value slice is v0.8.13 Closure Policy Revision
   and Counterfactual Replay; independent-client Skill pilots remain required
   before claiming behavioral interoperability.
+
+## 2026-11-14 - v0.8.13 Closure Policy Revision and Counterfactual Replay
+
+- Latest AOF: `v12.2.0`, executed with Node 22 against the managed-project
+  runtime. Situation assessment: `.aof/runtime/v0.8.13-situation.json`.
+- Need / Intent / Context: session `SESS-MWFWYJIM-DKHP9L` reframed the raw
+  feature request into a non-executing, history-preserving policy-learning
+  need. Problem, value, alternatives, Validated Need, and post-validation
+  charter are `PST-MWFWZ776-1269JS`, `VHY-MWFWZ7B6-5HPQQE`,
+  `ALT-MWFWZ7EY-LIUO4C`, `NVR-MWFWZP1P-LBJ1QV`, and
+  `PCH-MWFWZVP9-7AYDYJ`.
+- Direction: planning council `CRUN-MWFWZZN3-NI71NB` included Visionary,
+  Builder, and Guardian with no veto. Task `TASK-087` and actor skill packet
+  `ASP-MWFX0HLF-07QMB7` bind capability, repository/test resources, runtime
+  policy, acceptance evidence, and an authority-overclaim blocker.
+- Trend evidence: NIST's October 2026 incident-readiness guidance recommends
+  replaying incident trajectories and actions to verify controls before
+  resuming activity. OpenTelemetry's November 2026 agent-instrumentation work
+  combines agent-generated mappings with registry-backed deterministic
+  validators and human review. These support frozen replay plus explicit
+  governance rather than autonomous policy mutation. Sources:
+  https://www.nist.gov/system/files/documents/2026/10/16/Key_Practices_for_Incident_Readiness_and_Response_in_Super_Intelligence%20_Training_and_Evaluation.pdf
+  and https://opentelemetry.io/blog/2026/agent-harness-genai-instrumentation/.
+- Implementation decision: extend the existing qif-ledger owner with
+  `PortableKnowledgeClosurePolicyRevisionCandidate`, frozen historical
+  `PortableKnowledgeClosurePolicyCounterfactualReplay`, and accountable
+  `PortableKnowledgeClosurePolicyRevisionDecision`. Do not create a second
+  policy runtime or treat counterfactual replay as causal truth.
+- Verification: `npm test` passed 16/16 positive and 1,550/1,550 retained
+  negative checks. The Agent Skill built and verified 146 files; the portable
+  package built and verified 99 files. AOF organization verification passed
+  295/295 checks.
+- Review: council `CRUN-MWFX9KER-5KDG4Z` included Guardian, Builder, and
+  Visionary with no veto. Self-audit `FSA-QIF-V0813` kept example-only replay
+  evidence at `governance-required` and identified the absence of independent
+  client behavior evidence as the main residual gap.
+- Retrospective: outcome `OUT-MWFX9QUR-ADUDH6` recorded success and the AOF
+  learning loop remained stable. The decisive boundary is that reproducible
+  counterfactual arithmetic can support governance, but cannot establish
+  causality, future safety, live execution, or adoption authority.
+- Next value slices: v0.8.14 Agent Skill Behavioral Portability Pilot, v0.9
+  Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger Standard.

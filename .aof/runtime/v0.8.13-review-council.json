@@ -1,0 +1,455 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-11-14T04:45:11.192Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MWFWYJIM-DKHP9L",
+    "stage": "review",
+    "executionId": "CRUN-MWFX9KER-5KDG4Z",
+    "executionStatus": "completed",
+    "invokedModel": true,
+    "seatCount": 3,
+    "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) -> Visionary(strategy-lead-01) with 3 completed model calls",
+    "lastCouncilExecutionId": "CRUN-MWFX9KER-5KDG4Z",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "required_roles": [
+        "Guardian",
+        "Builder",
+        "Visionary"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWFWYJIM-DKHP9L",
+              "decision_id": "DEC-MWFWZVTM-DMH1EN",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。",
+              "intent": "候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。",
+              "active_context": "context: qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 | success: 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。",
+              "context_snapshot_id": "CTX-MWFWYOLL-S93NS7",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 / How should improvement success be judged: which metric or end state matters most? => 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。"
+            },
+            "task": {
+              "request": "QIF v0.8.13で、既存の閉鎖較正から履歴を改変せず候補ポリシーを作り、凍結した過去ケースで反実仮想リプレイし、人間の統治判断へつなぐ。自動採用・因果真実・ライブ実行は行わない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0813.json",
+                ".aof/runtime/PCH-QIFV0813.json",
+                ".aof/runtime/PST-QIFV0813.json",
+                ".aof/runtime/VHY-QIFV0813.json",
+                ".aof/runtime/ALT-QIFV0813.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWFWZVTM-DMH1EN"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWFWYJIM-DKHP9L",
+              "decision_id": "DEC-MWFWZVTM-DMH1EN",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。",
+              "intent": "候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。",
+              "active_context": "context: qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 | success: 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。",
+              "context_snapshot_id": "CTX-MWFWYOLL-S93NS7",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 / How should improvement success be judged: which metric or end state matters most? => 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。"
+            },
+            "task": {
+              "request": "QIF v0.8.13で、既存の閉鎖較正から履歴を改変せず候補ポリシーを作り、凍結した過去ケースで反実仮想リプレイし、人間の統治判断へつなぐ。自動採用・因果真実・ライブ実行は行わない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0813.json",
+                ".aof/runtime/PCH-QIFV0813.json",
+                ".aof/runtime/PST-QIFV0813.json",
+                ".aof/runtime/VHY-QIFV0813.json",
+                ".aof/runtime/ALT-QIFV0813.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWFWZVTM-DMH1EN"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required-specialist",
+          "lane": "specialist",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWFWYJIM-DKHP9L",
+              "decision_id": "DEC-MWFWZVTM-DMH1EN",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。",
+              "intent": "候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。",
+              "active_context": "context: qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 | success: 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。",
+              "context_snapshot_id": "CTX-MWFWYOLL-S93NS7",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 / How should improvement success be judged: which metric or end state matters most? => 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。"
+            },
+            "task": {
+              "request": "QIF v0.8.13で、既存の閉鎖較正から履歴を改変せず候補ポリシーを作り、凍結した過去ケースで反実仮想リプレイし、人間の統治判断へつなぐ。自動採用・因果真実・ライブ実行は行わない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0813.json",
+                ".aof/runtime/PCH-QIFV0813.json",
+                ".aof/runtime/PST-QIFV0813.json",
+                ".aof/runtime/VHY-QIFV0813.json",
+                ".aof/runtime/ALT-QIFV0813.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWFWZVTM-DMH1EN"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MWFX9KER-5KDG4Z",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder",
+        "Visionary"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "completed",
+      "started_at": "2026-11-14T04:45:11.187Z",
+      "completed_at": "2026-11-14T04:45:11.188Z",
+      "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01) -> Visionary(strategy-lead-01) with 3 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MWFX9KER-5KDG4Z-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWFWYJIM-DKHP9L",
+              "decision_id": "DEC-MWFWZVTM-DMH1EN",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。",
+              "intent": "候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。",
+              "active_context": "context: qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 | success: 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。",
+              "context_snapshot_id": "CTX-MWFWYOLL-S93NS7",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 / How should improvement success be judged: which metric or end state matters most? => 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。"
+            },
+            "task": {
+              "request": "QIF v0.8.13で、既存の閉鎖較正から履歴を改変せず候補ポリシーを作り、凍結した過去ケースで反実仮想リプレイし、人間の統治判断へつなぐ。自動採用・因果真実・ライブ実行は行わない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0813.json",
+                ".aof/runtime/PCH-QIFV0813.json",
+                ".aof/runtime/PST-QIFV0813.json",
+                ".aof/runtime/VHY-QIFV0813.json",
+                ".aof/runtime/ALT-QIFV0813.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWFWZVTM-DMH1EN"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-11-14T04:45:11.188Z",
+          "completed_at": "2026-11-14T04:45:11.188Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-11-14T04:45:11.188Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian review response: focus on qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 and align to 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。.",
+            "output_summary": "DECISION: proceed VETO: no Guardian review response: focus on qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.8.13で、既存の閉鎖較正から履歴を改変せず候補ポリシーを作り、凍結した過去ケースで反実仮想リプレイし、人間の統治判断へつなぐ。自動採用・因果真実・ライブ実行は行わない。\nNeed: qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。\nIntent: 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。\nActive Context: context: qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 | success: 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 / How should improvement success be judged: which metric or end state matters most? => 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。"
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MWFX9KER-5KDG4Z-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWFWYJIM-DKHP9L",
+              "decision_id": "DEC-MWFWZVTM-DMH1EN",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。",
+              "intent": "候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。",
+              "active_context": "context: qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 | success: 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。",
+              "context_snapshot_id": "CTX-MWFWYOLL-S93NS7",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 / How should improvement success be judged: which metric or end state matters most? => 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。"
+            },
+            "task": {
+              "request": "QIF v0.8.13で、既存の閉鎖較正から履歴を改変せず候補ポリシーを作り、凍結した過去ケースで反実仮想リプレイし、人間の統治判断へつなぐ。自動採用・因果真実・ライブ実行は行わない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0813.json",
+                ".aof/runtime/PCH-QIFV0813.json",
+                ".aof/runtime/PST-QIFV0813.json",
+                ".aof/runtime/VHY-QIFV0813.json",
+                ".aof/runtime/ALT-QIFV0813.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWFWZVTM-DMH1EN"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-11-14T04:45:11.188Z",
+          "completed_at": "2026-11-14T04:45:11.188Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-11-14T04:45:11.188Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder review response: focus on qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 and align to 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。.",
+            "output_summary": "DECISION: proceed VETO: no Builder review response: focus on qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.8.13で、既存の閉鎖較正から履歴を改変せず候補ポリシーを作り、凍結した過去ケースで反実仮想リプレイし、人間の統治判断へつなぐ。自動採用・因果真実・ライブ実行は行わない。\nNeed: qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。\nIntent: 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。\nActive Context: context: qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 | success: 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 / How should improvement success be judged: which metric or end state matters most? => 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。"
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MWFX9KER-5KDG4Z-STEP-03",
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required-specialist",
+          "lane": "specialist",
+          "call_purpose": "generate-review",
+          "status": "completed",
+          "summary": "prepare Visionary review call for actor strategy-lead-01 as required-specialist",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWFWYJIM-DKHP9L",
+              "decision_id": "DEC-MWFWZVTM-DMH1EN",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。",
+              "intent": "候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。",
+              "active_context": "context: qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 | success: 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。",
+              "context_snapshot_id": "CTX-MWFWYOLL-S93NS7",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 / How should improvement success be judged: which metric or end state matters most? => 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。"
+            },
+            "task": {
+              "request": "QIF v0.8.13で、既存の閉鎖較正から履歴を改変せず候補ポリシーを作り、凍結した過去ケースで反実仮想リプレイし、人間の統治判断へつなぐ。自動採用・因果真実・ライブ実行は行わない。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0813.json",
+                ".aof/runtime/PCH-QIFV0813.json",
+                ".aof/runtime/PST-QIFV0813.json",
+                ".aof/runtime/VHY-QIFV0813.json",
+                ".aof/runtime/ALT-QIFV0813.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWFWZVTM-DMH1EN"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-11-14T04:45:11.188Z",
+          "completed_at": "2026-11-14T04:45:11.188Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-11-14T04:45:11.188Z",
+            "output_text": "DECISION: proceed\nVETO: no\nVisionary review response: focus on qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 and align to 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。.",
+            "output_summary": "DECISION: proceed VETO: no Visionary review response: focus on qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Visionary in an AI Organization Framework runtime.\nCurrent stage: review.\nCall purpose: generate-review.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.8.13で、既存の閉鎖較正から履歴を改変せず候補ポリシーを作り、凍結した過去ケースで反実仮想リプレイし、人間の統治判断へつなぐ。自動採用・因果真実・ライブ実行は行わない。\nNeed: qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。\nIntent: 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。\nActive Context: context: qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 | success: 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。\nCurrent Goal: evaluate proposal quality, safety, and failure modes\nExpected Output Kind: review\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。 / How should improvement success be judged: which metric or end state matters most? => 候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。"
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

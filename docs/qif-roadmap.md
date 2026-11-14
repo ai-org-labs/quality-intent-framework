@@ -943,10 +943,14 @@ Deliverables:
   verification, mutation rejection, portable-package composition, and release
   assets. The Skill guides an agent but does not create semantic truth,
   approval authority, execution authority, or autonomous permission.
+- Implemented fourteenth v0.8 slice, v0.8.13 Closure Policy Revision and
+  Counterfactual Replay: adverse closure calibration now produces bounded
+  candidate policies, frozen historical replay, reproducible outcome deltas,
+  and accountable decisions without rewriting history or activating policy.
 - Next planned slices:
-  - v0.8.13 Closure Policy Revision and Counterfactual Replay: turn repeated
-    calibration outcomes into governed closure-policy candidates, replay them
-    against frozen historical cases, and preserve every prior decision.
+  - v0.8.14 Agent Skill Behavioral Portability Pilot: measure discovery,
+    routing, instruction following, and evidence quality across independent
+    compatible clients without treating model agreement as truth.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,

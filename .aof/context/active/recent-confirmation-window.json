@@ -1,36 +1,46 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-11-12T16:58:51.628Z",
+  "updated_at": "2026-11-14T04:45:11.343Z",
   "entries": [
     {
-      "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "成功は、1つの配布可能なskill bundleが標準検証を通り、AIが依頼を品質意図発見・要件漏れ評価・証拠付き判定へ適切にルーティングし、既存QIF verifierを再利用でき、portable releaseへ毎回自動同梱されること。既存QIF全資料の単純コピーや巨大な一枚プロンプトにはしない。",
-      "recorded_at": "2026-11-12T16:32:09.719Z",
+      "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "answer": "qif-ledgerのPortableKnowledgeIncidentClosure直後の政策学習ライフサイクル。外部サービス統合、ライブ実行、従業員監視、因果・意味的真実の主張は対象外。",
+      "recorded_at": "2026-11-14T04:36:43.414Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MWDRMRSZ-C4A062",
+      "source_session_id": "SESS-MWFWYJIM-DKHP9L",
+      "source_decision_record_id": null
+    },
+    {
+      "question": "How should improvement success be judged: which metric or end state matters most?",
+      "answer": "候補・凍結リプレイ・責任ある判断がスキーマ、例、検証器、負例、文書で一貫し、npm testが通り、曖昧な証拠は必ずgovernance-requiredになること。",
+      "recorded_at": "2026-11-14T04:36:43.416Z",
+      "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
+      "mismatch_state": null,
+      "scale_direction": "complete need validation before planning",
+      "source_session_id": "SESS-MWFWYJIM-DKHP9L",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "原要求の標準エージェント化は、AI製品固有の自律agentではなく、相互運用可能なSKILL.md bundleとして再定義する。単一Skillから開始し、実利用でルーティング衝突が確認された場合のみ分割する。",
-      "recorded_at": "2026-11-12T16:33:21.308Z",
+      "answer": "Build the bounded qif-ledger lifecycle; reject automatic adoption, causal claims, and live integrations.",
+      "recorded_at": "2026-11-14T04:37:39.423Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MWDRMRSZ-C4A062",
-      "source_decision_record_id": "DEC-MWDROKNS-SEB4NU"
+      "source_session_id": "SESS-MWFWYJIM-DKHP9L",
+      "source_decision_record_id": "DEC-MWFWZVTM-DMH1EN"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Cross-client model behavior and real-user routing quality are not proven by structural package validation.",
-      "recorded_at": "2026-11-12T16:58:51.628Z",
-      "expectation_state": "Standard Agent Skill source and deterministic distributions pass three structural validators, bundled CLI and mutation tests, and the full QIF regression suite; council review proceeded without veto.",
-      "mismatch_state": "Cross-client model behavior and real-user routing quality are not proven by structural package validation.",
-      "scale_direction": "Pilot the released Skill in at least two independent Agent Skills-compatible clients and preserve behavioral evidence before making interoperability claims.",
-      "source_session_id": "SESS-MWDRMRSZ-C4A062",
-      "source_decision_record_id": "DEC-MWDROKNS-SEB4NU"
+      "answer": "No verified operational replay corpus or cross-client Agent Skill behavior evidence exists.",
+      "recorded_at": "2026-11-14T04:45:11.343Z",
+      "expectation_state": "Candidate, frozen replay, and accountable decision are structurally executable and fail closed for example-only evidence.",
+      "mismatch_state": "No verified operational replay corpus or cross-client Agent Skill behavior evidence exists.",
+      "scale_direction": "Run v0.8.14 independent-client Agent Skill behavioral portability pilot.",
+      "source_session_id": "SESS-MWFWYJIM-DKHP9L",
+      "source_decision_record_id": null
     }
   ]
 }

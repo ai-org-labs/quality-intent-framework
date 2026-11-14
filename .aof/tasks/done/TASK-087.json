@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-087",
+  "title": "QIF v0.8.13 Closure Policy Revision and Counterfactual Replay",
+  "description": null,
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MWFWYJIM-DKHP9L",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MWFWZVTM-DMH1EN",
+  "operating_goal_ref": "v0.8.13-closure-policy-revision-replay",
+  "created_at": "2026-11-14T04:37:56.029Z",
+  "updated_at": "2026-11-14T04:45:19.368Z",
+  "assigned_at": null,
+  "done_at": "2026-11-14T04:45:19.368Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": null
+}

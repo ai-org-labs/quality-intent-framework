@@ -9,6 +9,11 @@ QIF is not an autonomous authority. Its standard Agent Skill packages the
 representation and evaluation framework so a compatible agent can discover
 and follow it without granting that agent approval or execution authority.
 
+When closure calibration reveals false assurance or another adverse outcome,
+preserve the original decision. Create a bounded policy revision candidate,
+replay it against frozen historical inputs, and route uncertain evidence to an
+accountable human decision. Replay is not causal proof or live activation.
+
 ## Core Chain
 
 ```text

@@ -58,6 +58,9 @@
     "portableKnowledgeLateSignals",
     "portableKnowledgeIncidentReopenDecisions",
     "portableKnowledgeClosureCalibrations",
+    "portableKnowledgeClosurePolicyRevisionCandidates",
+    "portableKnowledgeClosurePolicyCounterfactualReplays",
+    "portableKnowledgeClosurePolicyRevisionDecisions",
     "ledgerIndex",
     "verifierBoundary"
   ],
@@ -227,6 +230,9 @@
     "portableKnowledgeLateSignals": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portableKnowledgeLateSignal" } },
     "portableKnowledgeIncidentReopenDecisions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portableKnowledgeIncidentReopenDecision" } },
     "portableKnowledgeClosureCalibrations": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portableKnowledgeClosureCalibration" } },
+    "portableKnowledgeClosurePolicyRevisionCandidates": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portableKnowledgeClosurePolicyRevisionCandidate" } },
+    "portableKnowledgeClosurePolicyCounterfactualReplays": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portableKnowledgeClosurePolicyCounterfactualReplay" } },
+    "portableKnowledgeClosurePolicyRevisionDecisions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portableKnowledgeClosurePolicyRevisionDecision" } },
     "ledgerIndex": { "$ref": "#/$defs/ledgerIndex" },
     "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
   },
@@ -1137,6 +1143,44 @@
         "observationHorizonStart": { "type": "string", "format": "date-time" }, "observationHorizonEnd": { "type": "string", "format": "date-time" }, "evidenceComplete": { "type": "boolean" }, "reviewedBy": { "type": "string", "minLength": 1 }, "reviewedAt": { "type": "string", "format": "date-time" }, "rationale": { "type": "string", "minLength": 1 },
         "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "originalClosurePreserved": { "const": true }, "activityCountIsQuality": { "const": false }, "automaticCausalInference": { "const": false }, "automaticQualityVerdict": { "const": false }, "semanticTruthClaimed": { "const": false },
         "status": { "enum": ["reviewed", "governance-required"] }
+      }
+    },
+    "portableKnowledgeClosurePolicyRevisionCandidate": {
+      "type": "object",
+      "required": ["id", "baselinePolicyVersion", "candidatePolicyVersion", "sourceCalibrationRefs", "targetClassifications", "proposedDisposition", "proposedChanges", "applicabilityBoundary", "minimumReplayCases", "candidateRationale", "proposedBy", "proposedAt", "governanceTriggerRefs", "baselinePolicyPreserved", "candidateOnly", "activityCountIsQuality", "automaticAdoption", "automaticAuthority", "semanticTruthClaimed", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" }, "baselinePolicyVersion": { "type": "string", "minLength": 1 }, "candidatePolicyVersion": { "type": "string", "minLength": 1 },
+        "sourceCalibrationRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+        "targetClassifications": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["false-assurance", "false-alarm", "unknown"] } },
+        "proposedDisposition": { "enum": ["keep-open", "governance-required"] },
+        "proposedChanges": { "type": "array", "minItems": 1, "items": { "type": "object", "required": ["dimension", "baselineValue", "candidateValue", "rationale"], "additionalProperties": false, "properties": { "dimension": { "enum": ["observation-window", "independent-source-threshold", "conflict-routing", "reopen-condition", "authority-boundary"] }, "baselineValue": { "type": "string", "minLength": 1 }, "candidateValue": { "type": "string", "minLength": 1 }, "rationale": { "type": "string", "minLength": 1 } } } },
+        "applicabilityBoundary": { "type": "string", "minLength": 1 }, "minimumReplayCases": { "type": "integer", "minimum": 1 }, "candidateRationale": { "type": "string", "minLength": 1 }, "proposedBy": { "type": "string", "minLength": 1 }, "proposedAt": { "type": "string", "format": "date-time" },
+        "governanceTriggerRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } }, "baselinePolicyPreserved": { "const": true }, "candidateOnly": { "const": true }, "activityCountIsQuality": { "const": false }, "automaticAdoption": { "const": false }, "automaticAuthority": { "const": false }, "semanticTruthClaimed": { "const": false }, "status": { "enum": ["draft", "review-ready", "governance-required"] }
+      }
+    },
+    "portableKnowledgeClosurePolicyCounterfactualReplay": {
+      "type": "object",
+      "required": ["id", "candidateRef", "sourceCalibrationRef", "incidentClosureRef", "baselineDecision", "baselineClassification", "frozenInputRefs", "inputsFrozen", "replayedAt", "candidateDecision", "outcomeDelta", "adverseOutcomePrevented", "replayedBy", "evidenceRefs", "governanceTriggerRefs", "historyPreserved", "replayOnly", "activityCountIsQuality", "automaticAdoption", "causalClaimed", "semanticTruthClaimed", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" }, "candidateRef": { "$ref": "#/$defs/id" }, "sourceCalibrationRef": { "$ref": "#/$defs/id" }, "incidentClosureRef": { "$ref": "#/$defs/id" },
+        "baselineDecision": { "enum": ["close", "keep-open", "governance-required"] }, "baselineClassification": { "enum": ["aligned", "false-assurance", "false-alarm", "unknown"] },
+        "frozenInputRefs": { "type": "array", "minItems": 3, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }, "inputsFrozen": { "const": true }, "replayedAt": { "type": "string", "format": "date-time" },
+        "candidateDecision": { "enum": ["close", "keep-open", "governance-required"] }, "outcomeDelta": { "enum": ["unchanged", "prevented-false-assurance", "introduced-false-alarm", "indeterminate"] }, "adverseOutcomePrevented": { "type": "boolean" }, "replayedBy": { "type": "string", "minLength": 1 },
+        "evidenceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/externalEntityRef" } }, "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "historyPreserved": { "const": true }, "replayOnly": { "const": true }, "activityCountIsQuality": { "const": false }, "automaticAdoption": { "const": false }, "causalClaimed": { "const": false }, "semanticTruthClaimed": { "const": false }, "status": { "enum": ["reviewed", "governance-required"] }
+      }
+    },
+    "portableKnowledgeClosurePolicyRevisionDecision": {
+      "type": "object",
+      "required": ["id", "candidateRef", "replayRefs", "reviewedCalibrationRefs", "replayCoverageComplete", "minimumReplayCasesMet", "preventedFalseAssuranceCount", "introducedFalseAlarmCount", "indeterminateCount", "decision", "rationale", "decidedBy", "decidedAt", "authorityBasis", "effectivePolicyVersion", "rollbackPolicyVersion", "governanceTriggerRefs", "historyPreserved", "decisionDoesNotExecutePolicy", "activityCountIsQuality", "automaticAdoption", "automaticAuthority", "semanticTruthClaimed", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" }, "candidateRef": { "$ref": "#/$defs/id" }, "replayRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }, "reviewedCalibrationRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+        "replayCoverageComplete": { "type": "boolean" }, "minimumReplayCasesMet": { "type": "boolean" }, "preventedFalseAssuranceCount": { "type": "integer", "minimum": 0 }, "introducedFalseAlarmCount": { "type": "integer", "minimum": 0 }, "indeterminateCount": { "type": "integer", "minimum": 0 },
+        "decision": { "enum": ["adopt-candidate", "revise-candidate", "reject-candidate", "governance-required"] }, "rationale": { "type": "string", "minLength": 1 }, "decidedBy": { "type": "string", "minLength": 1 }, "decidedAt": { "type": "string", "format": "date-time" }, "authorityBasis": { "type": "string", "minLength": 1 }, "effectivePolicyVersion": { "type": ["string", "null"] }, "rollbackPolicyVersion": { "type": "string", "minLength": 1 },
+        "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "historyPreserved": { "const": true }, "decisionDoesNotExecutePolicy": { "const": true }, "activityCountIsQuality": { "const": false }, "automaticAdoption": { "const": false }, "automaticAuthority": { "const": false }, "semanticTruthClaimed": { "const": false }, "status": { "enum": ["reviewed", "governance-required"] }
       }
     },
     "verifierBoundary": {

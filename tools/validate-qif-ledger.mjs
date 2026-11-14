@@ -283,6 +283,9 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeLateSignals = requireArray(pkg, "portableKnowledgeLateSignals", packagePath);
   const portableKnowledgeIncidentReopenDecisions = requireArray(pkg, "portableKnowledgeIncidentReopenDecisions", packagePath);
   const portableKnowledgeClosureCalibrations = requireArray(pkg, "portableKnowledgeClosureCalibrations", packagePath);
+  const portableKnowledgeClosurePolicyRevisionCandidates = requireArray(pkg, "portableKnowledgeClosurePolicyRevisionCandidates", packagePath);
+  const portableKnowledgeClosurePolicyCounterfactualReplays = requireArray(pkg, "portableKnowledgeClosurePolicyCounterfactualReplays", packagePath);
+  const portableKnowledgeClosurePolicyRevisionDecisions = requireArray(pkg, "portableKnowledgeClosurePolicyRevisionDecisions", packagePath);
   const packageRefIndex = indexById(packageRefs, `${packagePath}:packageRefs`);
   const crossPackageRefIndex = indexById(crossPackageRefs, `${packagePath}:crossPackageRefs`);
   const lifecycleIndex = indexById(lifecycleRecords, `${packagePath}:qualityIntentLifecycleRecords`);
@@ -330,7 +333,10 @@ function validateLedgerPackage(pkg, packagePath) {
   const portableKnowledgeIncidentClosureIndex = indexById(portableKnowledgeIncidentClosures, `${packagePath}:portableKnowledgeIncidentClosures`);
   const portableKnowledgeLateSignalIndex = indexById(portableKnowledgeLateSignals, `${packagePath}:portableKnowledgeLateSignals`);
   const portableKnowledgeIncidentReopenDecisionIndex = indexById(portableKnowledgeIncidentReopenDecisions, `${packagePath}:portableKnowledgeIncidentReopenDecisions`);
-  indexById(portableKnowledgeClosureCalibrations, `${packagePath}:portableKnowledgeClosureCalibrations`);
+  const portableKnowledgeClosureCalibrationIndex = indexById(portableKnowledgeClosureCalibrations, `${packagePath}:portableKnowledgeClosureCalibrations`);
+  const portableKnowledgeClosurePolicyRevisionCandidateIndex = indexById(portableKnowledgeClosurePolicyRevisionCandidates, `${packagePath}:portableKnowledgeClosurePolicyRevisionCandidates`);
+  const portableKnowledgeClosurePolicyCounterfactualReplayIndex = indexById(portableKnowledgeClosurePolicyCounterfactualReplays, `${packagePath}:portableKnowledgeClosurePolicyCounterfactualReplays`);
+  indexById(portableKnowledgeClosurePolicyRevisionDecisions, `${packagePath}:portableKnowledgeClosurePolicyRevisionDecisions`);
   void crossPackageRefIndex;
   void missedIntentIndex;
 
@@ -1655,6 +1661,80 @@ function validateLedgerPackage(pkg, packagePath) {
     if (calibration.originalClosurePreserved !== true || calibration.activityCountIsQuality !== false || calibration.automaticCausalInference !== false || calibration.automaticQualityVerdict !== false || calibration.semanticTruthClaimed !== false) errors.push(`${calibration.id} must preserve closure history, treat counts as evidence, and forbid causal inference, automatic quality verdicts, and semantic truth claims.`);
   }
 
+  for (const candidate of portableKnowledgeClosurePolicyRevisionCandidates) {
+    const calibrations = (candidate.sourceCalibrationRefs ?? []).map((id) => portableKnowledgeClosureCalibrationIndex.get(id)).filter(Boolean);
+    for (const ref of candidate.sourceCalibrationRefs ?? []) if (!portableKnowledgeClosureCalibrationIndex.has(ref)) errors.push(`${candidate.id} references missing closure calibration ${ref}.`);
+    const sourceClasses = new Set(calibrations.map((item) => item.calibrationClassification));
+    for (const classification of candidate.targetClassifications ?? []) if (!sourceClasses.has(classification)) errors.push(`${candidate.id} target classification ${classification} is not grounded in source calibrations.`);
+    if (candidate.baselinePolicyVersion === candidate.candidatePolicyVersion) errors.push(`${candidate.id} candidatePolicyVersion must differ from baselinePolicyVersion.`);
+    const types = portableGovernanceTypes(candidate.governanceTriggerRefs, candidate.id);
+    if (!types.has("portable-trust-closure-policy-candidate")) errors.push(`${candidate.id} requires a portable-trust-closure-policy-candidate governance trigger.`);
+    const expectedStatus = calibrations.some((item) => item.status === "governance-required") ? "governance-required" : "review-ready";
+    if (candidate.status !== expectedStatus) errors.push(`${candidate.id} status must reproduce as ${expectedStatus}.`);
+    if (candidate.baselinePolicyPreserved !== true || candidate.candidateOnly !== true || candidate.activityCountIsQuality !== false || candidate.automaticAdoption !== false || candidate.automaticAuthority !== false || candidate.semanticTruthClaimed !== false) errors.push(`${candidate.id} must preserve the baseline, remain candidate-only, treat counts as evidence, and forbid automatic adoption, authority, and semantic truth claims.`);
+  }
+
+  for (const replay of portableKnowledgeClosurePolicyCounterfactualReplays) {
+    const candidate = portableKnowledgeClosurePolicyRevisionCandidateIndex.get(replay.candidateRef);
+    const calibration = portableKnowledgeClosureCalibrationIndex.get(replay.sourceCalibrationRef);
+    const closure = portableKnowledgeIncidentClosureIndex.get(replay.incidentClosureRef);
+    if (!candidate) errors.push(`${replay.id} references missing closure-policy candidate ${replay.candidateRef}.`);
+    if (!calibration) errors.push(`${replay.id} references missing closure calibration ${replay.sourceCalibrationRef}.`);
+    if (!closure) errors.push(`${replay.id} references missing incident closure ${replay.incidentClosureRef}.`);
+    if (calibration && calibration.incidentClosureRef !== replay.incidentClosureRef) errors.push(`${replay.id} calibration and replay must reference the same incident closure.`);
+    if (candidate && !(candidate.sourceCalibrationRefs ?? []).includes(replay.sourceCalibrationRef)) errors.push(`${replay.id} source calibration must be declared by the candidate.`);
+    if (replay.baselineDecision !== closure?.closureDecision) errors.push(`${replay.id} baselineDecision must reproduce the immutable closure decision.`);
+    if (replay.baselineClassification !== calibration?.calibrationClassification) errors.push(`${replay.id} baselineClassification must reproduce the source calibration.`);
+    const expectedFrozen = calibration ? [calibration.id, calibration.incidentClosureRef, ...(calibration.lateSignalRefs ?? [])] : [];
+    if (!sameSet(replay.frozenInputRefs, expectedFrozen)) errors.push(`${replay.id} frozenInputRefs must reproduce the calibration, closure, and late-signal set.`);
+    const targeted = candidate?.targetClassifications?.includes(calibration?.calibrationClassification);
+    const expectedDecision = targeted ? candidate.proposedDisposition : closure?.closureDecision;
+    if (replay.candidateDecision !== expectedDecision) errors.push(`${replay.id} candidateDecision must reproduce as ${expectedDecision}.`);
+    const expectedDelta = !candidate || !calibration || !closure ? "indeterminate"
+      : calibration.calibrationClassification === "unknown" ? "indeterminate"
+        : calibration.calibrationClassification === "false-assurance" && closure.closureDecision === "close" && expectedDecision !== "close" ? "prevented-false-assurance"
+          : calibration.calibrationClassification === "aligned" && expectedDecision !== closure.closureDecision ? "introduced-false-alarm"
+            : "unchanged";
+    if (replay.outcomeDelta !== expectedDelta) errors.push(`${replay.id} outcomeDelta must reproduce as ${expectedDelta}.`);
+    if (replay.adverseOutcomePrevented !== (expectedDelta === "prevented-false-assurance")) errors.push(`${replay.id} adverseOutcomePrevented must reproduce from outcomeDelta.`);
+    const sourceSignals = (calibration?.lateSignalRefs ?? []).map((id) => portableKnowledgeLateSignalIndex.get(id)).filter(Boolean);
+    const uncertain = calibration?.status === "governance-required" || sourceSignals.some((signal) => signal.evidenceStatus !== "verified");
+    const types = portableGovernanceTypes(replay.governanceTriggerRefs, replay.id);
+    if (uncertain && !types.has("portable-trust-closure-policy-replay-example-only")) errors.push(`${replay.id} uncertain replay evidence requires a portable-trust-closure-policy-replay-example-only governance trigger.`);
+    const expectedStatus = uncertain ? "governance-required" : "reviewed";
+    if (replay.status !== expectedStatus) errors.push(`${replay.id} status must reproduce as ${expectedStatus}.`);
+    if (replay.historyPreserved !== true || replay.inputsFrozen !== true || replay.replayOnly !== true || replay.activityCountIsQuality !== false || replay.automaticAdoption !== false || replay.causalClaimed !== false || replay.semanticTruthClaimed !== false) errors.push(`${replay.id} must use frozen inputs, preserve history, remain replay-only, treat counts as evidence, and forbid automatic adoption, causal claims, and semantic truth claims.`);
+  }
+
+  for (const decision of portableKnowledgeClosurePolicyRevisionDecisions) {
+    const candidate = portableKnowledgeClosurePolicyRevisionCandidateIndex.get(decision.candidateRef);
+    const replays = (decision.replayRefs ?? []).map((id) => portableKnowledgeClosurePolicyCounterfactualReplayIndex.get(id)).filter(Boolean);
+    if (!candidate) errors.push(`${decision.id} references missing closure-policy candidate ${decision.candidateRef}.`);
+    for (const ref of decision.replayRefs ?? []) if (!portableKnowledgeClosurePolicyCounterfactualReplayIndex.has(ref)) errors.push(`${decision.id} references missing counterfactual replay ${ref}.`);
+    if (replays.some((replay) => replay.candidateRef !== decision.candidateRef)) errors.push(`${decision.id} all replays must reference the selected candidate.`);
+    const replayCalibrationRefs = replays.map((replay) => replay.sourceCalibrationRef);
+    if (!sameSet(decision.reviewedCalibrationRefs, replayCalibrationRefs)) errors.push(`${decision.id} reviewedCalibrationRefs must reproduce the replay calibration set.`);
+    const coverageComplete = Boolean(candidate) && sameSet(replayCalibrationRefs, candidate.sourceCalibrationRefs);
+    if (decision.replayCoverageComplete !== coverageComplete) errors.push(`${decision.id} replayCoverageComplete must reproduce as ${coverageComplete}.`);
+    const minimumMet = Boolean(candidate) && replays.length >= candidate.minimumReplayCases;
+    if (decision.minimumReplayCasesMet !== minimumMet) errors.push(`${decision.id} minimumReplayCasesMet must reproduce as ${minimumMet}.`);
+    const prevented = replays.filter((replay) => replay.outcomeDelta === "prevented-false-assurance").length;
+    const introduced = replays.filter((replay) => replay.outcomeDelta === "introduced-false-alarm").length;
+    const indeterminate = replays.filter((replay) => replay.outcomeDelta === "indeterminate").length;
+    if (decision.preventedFalseAssuranceCount !== prevented || decision.introducedFalseAlarmCount !== introduced || decision.indeterminateCount !== indeterminate) errors.push(`${decision.id} replay outcome counts must reproduce from cited replays.`);
+    const requiresGovernance = !coverageComplete || !minimumMet || replays.some((replay) => replay.status === "governance-required");
+    const expectedDecision = requiresGovernance ? "governance-required" : prevented > introduced && indeterminate === 0 ? "adopt-candidate" : "revise-candidate";
+    if (decision.decision !== expectedDecision) errors.push(`${decision.id} decision must reproduce as ${expectedDecision}.`);
+    const expectedEffectiveVersion = expectedDecision === "adopt-candidate" ? candidate?.candidatePolicyVersion : null;
+    if (decision.effectivePolicyVersion !== expectedEffectiveVersion) errors.push(`${decision.id} effectivePolicyVersion must reproduce from the accountable decision.`);
+    if (decision.rollbackPolicyVersion !== candidate?.baselinePolicyVersion) errors.push(`${decision.id} rollbackPolicyVersion must preserve the baseline policy version.`);
+    const types = portableGovernanceTypes(decision.governanceTriggerRefs, decision.id);
+    if (requiresGovernance && !types.has("portable-trust-closure-policy-revision-governance")) errors.push(`${decision.id} requires a portable-trust-closure-policy-revision-governance trigger.`);
+    const expectedStatus = requiresGovernance ? "governance-required" : "reviewed";
+    if (decision.status !== expectedStatus) errors.push(`${decision.id} status must reproduce as ${expectedStatus}.`);
+    if (decision.historyPreserved !== true || decision.decisionDoesNotExecutePolicy !== true || decision.activityCountIsQuality !== false || decision.automaticAdoption !== false || decision.automaticAuthority !== false || decision.semanticTruthClaimed !== false) errors.push(`${decision.id} must preserve history, remain non-executing, treat counts as evidence, and forbid automatic adoption, authority, and semantic truth claims.`);
+  }
+
   const index = pkg.ledgerIndex;
   if (!index || typeof index !== "object") {
     errors.push(`${packagePath} must include ledgerIndex.`);
@@ -1686,7 +1766,7 @@ function validateLedgerPackage(pkg, packagePath) {
     if (!(boundary.doesNotClaim ?? []).includes("semantic truth")) {
       errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming semantic truth.`);
     }
-    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth", "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth", "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness", "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness", "policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness", "signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness", "late-signal authenticity, material impact, causal attribution, operational reopening, closure-calibration truth, future safety, or semantic fitness"]) {
+    for (const claim of ["agent competence", "consensus correctness", "independence truth", "authorization or authority", "imported knowledge applicability or local validity", "source authenticity, license sufficiency, or safe execution", "evaluator independence beyond recorded identity separation", "counterexample completeness or operational representativeness", "activation approval or semantic fitness for use", "revocation notice authenticity or compromise truth", "cryptographic validity beyond recorded evidence, artifact safety, or attestation semantic fitness", "historical replay as current authorization, activation, authority, or semantic truth", "rollout preview as policy activation approval, enforcement authority, population fitness, or semantic truth", "activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness", "execution reconciliation as provider authenticity, complete side-effect recovery, automatic promotion authority, or semantic fitness", "policy-state observation as live provider truth, drift assessment as root-cause proof, emergency demotion as automatic authority, or semantic fitness", "signal source authenticity or causal independence, monitoring completeness, incident closure as future safety, or semantic fitness", "late-signal authenticity, material impact, causal attribution, operational reopening, closure-calibration truth, future safety, or semantic fitness", "counterfactual replay as causal proof, closure-policy adoption authority, live policy execution, future safety, or semantic fitness"]) {
       if (!(boundary.doesNotClaim ?? []).includes(claim)) errors.push(`${packagePath} verifierBoundary must explicitly avoid claiming ${claim}.`);
     }
   }
@@ -1745,7 +1825,10 @@ function validateLedgerPackage(pkg, packagePath) {
       portableKnowledgeIncidentClosures: portableKnowledgeIncidentClosures.length,
       portableKnowledgeLateSignals: portableKnowledgeLateSignals.length,
       portableKnowledgeIncidentReopenDecisions: portableKnowledgeIncidentReopenDecisions.length,
-      portableKnowledgeClosureCalibrations: portableKnowledgeClosureCalibrations.length
+      portableKnowledgeClosureCalibrations: portableKnowledgeClosureCalibrations.length,
+      portableKnowledgeClosurePolicyRevisionCandidates: portableKnowledgeClosurePolicyRevisionCandidates.length,
+      portableKnowledgeClosurePolicyCounterfactualReplays: portableKnowledgeClosurePolicyCounterfactualReplays.length,
+      portableKnowledgeClosurePolicyRevisionDecisions: portableKnowledgeClosurePolicyRevisionDecisions.length
     }
   });
 }

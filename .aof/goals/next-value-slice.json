@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.8.13 Closure Policy Revision and Counterfactual Replay",
-  "updated_at": "2026-11-12T16:58:52.097Z",
+  "content": "v0.8.14 Agent Skill Behavioral Portability Pilot",
+  "updated_at": "2026-11-14T04:45:19.541Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MWDRMRSZ-C4A062",
+  "source_session_id": "SESS-MWFWYJIM-DKHP9L",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-11-12T16:58:52.097Z"
+  "declared_complete_at": "2026-11-14T04:45:19.541Z"
 }

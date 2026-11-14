@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-14T04:37:30.637Z",
+  "validation_id": "NVR-MWFWZP1P-LBJ1QV",
+  "raw_need": "Implement QIF v0.8.13 closure policy revision and counterfactual replay",
+  "validation_status": "reframed",
+  "validated_need": "Provide a non-executing, history-preserving, deterministic policy learning path from adverse closure calibration to candidate, frozen replay, and accountable governance decision.",
+  "decision_summary": "Build the bounded qif-ledger lifecycle; reject automatic adoption, causal claims, and live integrations.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What owns this lifecycle?",
+      "answer": "qif-ledger because it already owns incident closure and calibration.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must remain human-governed?",
+      "answer": "Policy adoption, authority, semantic validity, and live execution.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Historical replay can inform policy without proving causality."
+  ],
+  "evidence_gaps": [
+    "No verified operational replay corpus exists; example evidence must route to governance."
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0813.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0813.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0813.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

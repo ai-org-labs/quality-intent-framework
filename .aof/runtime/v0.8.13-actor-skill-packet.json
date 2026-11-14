@@ -1,0 +1,77 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-11-14T04:38:07.635Z",
+  "packet_id": "ASP-MWFX0HLF-07QMB7",
+  "source_task_id": "TASK-087",
+  "source_parent_session_id": "SESS-MWFWYJIM-DKHP9L",
+  "source_decision_record_id": null,
+  "objective": "Implement and verify QIF v0.8.13 closure policy revision and frozen replay",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "runtime-team",
+    "assignment_reason": "Builder owns schema, verifier, fixtures, docs, and release integration",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "skill-schema-review"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-contract-alignment",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/qif-ledger-package.schema.json",
+        "tools/validate-qif-ledger.mjs"
+      ],
+      "rationale": "The task is a schema-backed deterministic runtime extension."
+    }
+  ],
+  "resource_refs": [
+    "resource-repo-main",
+    "resource-npm-test"
+  ],
+  "policy_refs": [
+    "policy-runtime-backed-answer-discipline"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/qif-ledger-package.schema.json",
+    "required_sections": [
+      "schema",
+      "verifier",
+      "fixtures",
+      "documentation"
+    ],
+    "acceptance_criteria": [
+      "npm test passes",
+      "uncertain replay evidence routes to governance"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "history and authority boundaries remain fail-closed",
+      "evaluator_ref": "guardian",
+      "evidence_required": "negative fixtures and verifier boundary",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "history-or-authority-overclaim",
+      "trigger_condition": "implementation mutates prior decisions or implies automatic policy authority",
+      "consequence": "require-council-review",
+      "recovery_action": "restore append-only records and explicit human governance"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I can extend the existing ledger without creating a second authority model.",
+    "current_action": "Implement candidate, replay, and decision lifecycle",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Run full verification and council review"
+  },
+  "status": "draft"
+}

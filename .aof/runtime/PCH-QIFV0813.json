@@ -1,0 +1,19 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-11-14T04:37:39.261Z",
+  "project_charter_id": "PCH-MWFWZVP9-7AYDYJ",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0813.json",
+  "validated_objective": "Implement and release QIF v0.8.13 closure policy revision and frozen counterfactual replay",
+  "scope": [
+    "Canonical qif-ledger schemas, example, verifier, fixtures, docs, and portable skill distributions",
+    "AOF council, review, self-review, and retrospective evidence"
+  ],
+  "constraints": [
+    "No automatic adoption, live integration, causal truth, semantic truth, or history mutation"
+  ],
+  "expected_outcomes": [
+    "A versioned release whose uncertain example evidence fails closed to governance"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-14T04:37:07.786Z",
+  "alternative_analysis_id": "ALT-MWFWZ7EY-LIUO4C",
+  "subject_need": "Learn from adverse closure calibration without rewriting history",
+  "alternative_solutions": [
+    "Add candidate plus frozen replay plus accountable decision",
+    "Only document recommendations"
+  ],
+  "non_solution_options": [
+    "Automatically activate policy changes"
+  ],
+  "defer_options": [
+    "Keep calibration as observation only"
+  ],
+  "stop_options": [
+    "Stop if history preservation or authority boundaries cannot be enforced"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

@@ -3,7 +3,7 @@ name: quality-intent-framework
 description: Discover context-specific quality intent, find requirement and non-functional gaps, define target-specific quality checks, and produce evidence-backed QIF reviews or artifacts. Use when evaluating a repository, document, requirement, product, service, operation, or expert judgment; when the user asks what must not fail; or when quality, risk, evidence, verdict, world-model, or acceptance criteria need to be made explicit. Do not use for generic copyediting or for merely running tests without interpreting quality risk.
 metadata:
   author: ai-org-labs
-  version: "0.8.12"
+  version: "0.8.13"
 ---
 
 # Quality Intent Framework

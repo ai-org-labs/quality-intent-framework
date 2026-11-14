@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.8.13
+
+- Added closure-policy revision candidates grounded in adverse closure calibration while preserving the effective baseline.
+- Added frozen historical counterfactual replay with reproducible candidate decisions and outcome deltas.
+- Added accountable revision decisions with replay coverage, minimum-case sufficiency, outcome arithmetic, rollback lineage, and fail-closed governance.
+- Added retained negative fixtures and explicit boundaries separating structural replay from causality, future safety, live execution, authority, and semantic truth.
+
 ## v0.8.12
 
 - Added a standards-conformant `quality-intent-framework` Agent Skill with precise discovery metadata, progressive-disclosure references, a review template, and a canonical CLI wrapper.

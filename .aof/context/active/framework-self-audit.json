@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-11-12T16:58:51.613Z",
-  "audit_id": "FSA-QIF-V0812",
-  "scope": "QIF v0.8.12 Agent Skill distribution",
-  "summary": "Standard Agent Skill source and deterministic distributions pass three structural validators, bundled CLI and mutation tests, and the full QIF regression suite; council review proceeded without veto.",
-  "detected_gap": "Cross-client model behavior and real-user routing quality are not proven by structural package validation.",
+  "recorded_at": "2026-11-14T04:45:11.339Z",
+  "audit_id": "FSA-QIF-V0813",
+  "scope": "QIF v0.8.13 release candidate",
+  "summary": "Candidate, frozen replay, and accountable decision are structurally executable and fail closed for example-only evidence.",
+  "detected_gap": "No verified operational replay corpus or cross-client Agent Skill behavior evidence exists.",
   "result_state": "stable",
-  "next_action": "Pilot the released Skill in at least two independent Agent Skills-compatible clients and preserve behavioral evidence before making interoperability claims.",
+  "next_action": "Run v0.8.14 independent-client Agent Skill behavioral portability pilot.",
   "related_task_ids": [
-    "TASK-086"
+    "TASK-087"
   ],
-  "source_session_id": "SESS-MWDRMRSZ-C4A062",
-  "source_decision_record_id": "DEC-MWDROKNS-SEB4NU"
+  "source_session_id": "SESS-MWFWYJIM-DKHP9L",
+  "source_decision_record_id": null
 }

@@ -1,0 +1,15 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-11-14T04:37:07.650Z",
+  "value_hypothesis_id": "VHY-MWFWZ7B6-5HPQQE",
+  "expected_value_creation": "Governed policy learning from calibrated closure outcomes",
+  "beneficiary": "QIF operators and accountable governance owners",
+  "supporting_evidence": [
+    "Existing closure calibration is machine-verifiable"
+  ],
+  "success_criteria": [
+    "Candidate, replay, and decision reproduce deterministically and uncertain evidence fails closed"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

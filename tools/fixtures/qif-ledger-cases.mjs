@@ -73,6 +73,9 @@ function incidentClosure(pkg) { return pkg.portableKnowledgeIncidentClosures[0];
 function lateSignal(pkg) { return pkg.portableKnowledgeLateSignals[0]; }
 function reopenDecision(pkg) { return pkg.portableKnowledgeIncidentReopenDecisions[0]; }
 function closureCalibration(pkg) { return pkg.portableKnowledgeClosureCalibrations[0]; }
+function closurePolicyCandidate(pkg) { return pkg.portableKnowledgeClosurePolicyRevisionCandidates[0]; }
+function closurePolicyReplay(pkg) { return pkg.portableKnowledgeClosurePolicyCounterfactualReplays[0]; }
+function closurePolicyDecision(pkg) { return pkg.portableKnowledgeClosurePolicyRevisionDecisions[0]; }
 
 export const cases = [
   {
@@ -1733,6 +1736,78 @@ export const cases = [
     mutate: (pkg) => { closureCalibration(pkg).automaticCausalInference = true; }
   },
   {
+    id: "portable-trust-policy-candidates-not-array",
+    rule: "closure policy candidates are structured",
+    expect: "portableKnowledgeClosurePolicyRevisionCandidates must be an array.",
+    mutate: (pkg) => { pkg.portableKnowledgeClosurePolicyRevisionCandidates = null; }
+  },
+  {
+    id: "portable-trust-policy-candidate-source",
+    rule: "candidate source calibration resolves",
+    expect: "PKCPRC-001 references missing closure calibration PKCC-NOPE.",
+    mutate: (pkg) => { closurePolicyCandidate(pkg).sourceCalibrationRefs = ["PKCC-NOPE"]; }
+  },
+  {
+    id: "portable-trust-policy-candidate-trigger",
+    rule: "candidate requires governance trace",
+    expect: "PKCPRC-001 requires a portable-trust-closure-policy-candidate governance trigger.",
+    mutate: (pkg) => { closurePolicyCandidate(pkg).governanceTriggerRefs = []; }
+  },
+  {
+    id: "portable-trust-policy-candidate-boundary",
+    rule: "candidate cannot auto-adopt",
+    expect: "PKCPRC-001 must preserve the baseline, remain candidate-only, treat counts as evidence, and forbid automatic adoption, authority, and semantic truth claims.",
+    mutate: (pkg) => { closurePolicyCandidate(pkg).automaticAdoption = true; }
+  },
+  {
+    id: "portable-trust-policy-replay-frozen-inputs",
+    rule: "replay inputs reproduce frozen history",
+    expect: "PKCPR-001 frozenInputRefs must reproduce the calibration, closure, and late-signal set.",
+    mutate: (pkg) => { closurePolicyReplay(pkg).frozenInputRefs = ["PKCC-001", "PKIC-001", "PKLS-NOPE"]; }
+  },
+  {
+    id: "portable-trust-policy-replay-decision",
+    rule: "candidate disposition is reproducible",
+    expect: "PKCPR-001 candidateDecision must reproduce as keep-open.",
+    mutate: (pkg) => { closurePolicyReplay(pkg).candidateDecision = "close"; }
+  },
+  {
+    id: "portable-trust-policy-replay-delta",
+    rule: "replay outcome delta is reproducible",
+    expect: "PKCPR-001 outcomeDelta must reproduce as prevented-false-assurance.",
+    mutate: (pkg) => { closurePolicyReplay(pkg).outcomeDelta = "unchanged"; }
+  },
+  {
+    id: "portable-trust-policy-replay-trigger",
+    rule: "uncertain replay routes to governance",
+    expect: "PKCPR-001 uncertain replay evidence requires a portable-trust-closure-policy-replay-example-only governance trigger.",
+    mutate: (pkg) => { closurePolicyReplay(pkg).governanceTriggerRefs = []; }
+  },
+  {
+    id: "portable-trust-policy-decision-counts",
+    rule: "revision counts reproduce replay outcomes",
+    expect: "PKCPRD-001 replay outcome counts must reproduce from cited replays.",
+    mutate: (pkg) => { closurePolicyDecision(pkg).preventedFalseAssuranceCount = 0; }
+  },
+  {
+    id: "portable-trust-policy-decision-result",
+    rule: "revision decision preserves governance uncertainty",
+    expect: "PKCPRD-001 decision must reproduce as governance-required.",
+    mutate: (pkg) => { closurePolicyDecision(pkg).decision = "adopt-candidate"; }
+  },
+  {
+    id: "portable-trust-policy-decision-effective-version",
+    rule: "non-adopted candidates cannot become effective",
+    expect: "PKCPRD-001 effectivePolicyVersion must reproduce from the accountable decision.",
+    mutate: (pkg) => { closurePolicyDecision(pkg).effectivePolicyVersion = "closure-policy-v2-candidate"; }
+  },
+  {
+    id: "portable-trust-policy-decision-boundary",
+    rule: "revision decision does not execute policy",
+    expect: "PKCPRD-001 must preserve history, remain non-executing, treat counts as evidence, and forbid automatic adoption, authority, and semantic truth claims.",
+    mutate: (pkg) => { closurePolicyDecision(pkg).decisionDoesNotExecutePolicy = false; }
+  },
+  {
     id: "portable-trust-activation-verifier-boundary",
     rule: "verifier does not turn records into execution or semantic proof",
     expect: "verifierBoundary must explicitly avoid claiming activation decision as proof of execution, safe continuation, successful rollback, or semantic fitness.",
@@ -1761,6 +1836,12 @@ export const cases = [
     rule: "verifier does not turn late evidence into truth or operational authority",
     expect: "verifierBoundary must explicitly avoid claiming late-signal authenticity, material impact, causal attribution, operational reopening, closure-calibration truth, future safety, or semantic fitness.",
     mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "late-signal authenticity, material impact, causal attribution, operational reopening, closure-calibration truth, future safety, or semantic fitness"); }
+  },
+  {
+    id: "portable-trust-policy-revision-verifier-boundary",
+    rule: "verifier does not turn replay into causality, authority, or live execution",
+    expect: "verifierBoundary must explicitly avoid claiming counterfactual replay as causal proof, closure-policy adoption authority, live policy execution, future safety, or semantic fitness.",
+    mutate: (pkg) => { pkg.verifierBoundary.doesNotClaim = pkg.verifierBoundary.doesNotClaim.filter((claim) => claim !== "counterfactual replay as causal proof, closure-policy adoption authority, live policy execution, future safety, or semantic fitness"); }
   }
 ];
 
