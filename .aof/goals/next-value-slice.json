@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.8.14 Agent Skill Behavioral Portability Pilot",
-  "updated_at": "2026-11-14T04:45:19.541Z",
+  "content": "v0.8.15 Verified Cross-Client Portability Corpus",
+  "updated_at": "2026-11-15T04:46:53.943Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MWFWYJIM-DKHP9L",
+  "source_session_id": "SESS-MWHC96MK-JYK873",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-11-14T04:45:19.541Z"
+  "declared_complete_at": "2026-11-15T04:46:53.943Z"
 }

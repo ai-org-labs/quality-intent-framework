@@ -1,5 +1,9 @@
 # QIF Core in Plain Language
 
+QIF v0.8.14 can evaluate observable matched baseline and Skill-enabled
+behavior across clients. Example-only runs remain provisional and cannot prove
+semantic truth, Skill causality, model competence, or authority.
+
 ## What QIF Is
 
 QIF is a way to make quality judgments explicit, evidence-backed, reproducible,

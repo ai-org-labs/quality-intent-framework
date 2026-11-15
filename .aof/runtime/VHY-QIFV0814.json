@@ -1,0 +1,15 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-11-15T04:32:51.110Z",
+  "value_hypothesis_id": "VHY-MWHC9K12-L1C1DV",
+  "expected_value_creation": "Comparable evidence of QIF Skill behavior across independent clients",
+  "beneficiary": "QIF adopters and maintainers",
+  "supporting_evidence": [
+    "2026 Agent Skills research identifies cross-platform portability and skill-specific evaluation as unresolved"
+  ],
+  "success_criteria": [
+    "Matched baseline and skill runs reproduce coverage, deltas, and governance routing without claiming model agreement as truth"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

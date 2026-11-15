@@ -1,0 +1,19 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-11-15T04:33:04.632Z",
+  "project_charter_id": "PCH-MWHC9UGO-Z42E7L",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0814.json",
+  "validated_objective": "Implement and release a provider-neutral Agent Skill behavioral portability evaluation runtime",
+  "scope": [
+    "Schema, example, verifier, fixtures, CLI integration, docs, and portable distributions",
+    "Matched baseline and skill runs with evidence and governance boundaries"
+  ],
+  "constraints": [
+    "No live vendor integration, automatic execution, employee surveillance, semantic truth, or authority grant"
+  ],
+  "expected_outcomes": [
+    "A versioned package whose example-only pilot remains provisional and governance-routed"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

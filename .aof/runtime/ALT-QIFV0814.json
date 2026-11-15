@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-15T04:32:51.244Z",
+  "alternative_analysis_id": "ALT-MWHC9K4S-PJYNF9",
+  "subject_need": "Evaluate QIF Skill behavior across clients",
+  "alternative_solutions": [
+    "Add a provider-neutral matched-run portability evaluation package",
+    "Document manual testing only"
+  ],
+  "non_solution_options": [
+    "Declare portability from schema conformance"
+  ],
+  "defer_options": [
+    "Wait for live client integrations"
+  ],
+  "stop_options": [
+    "Stop if transcripts, input identity, or authority boundaries cannot be preserved"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

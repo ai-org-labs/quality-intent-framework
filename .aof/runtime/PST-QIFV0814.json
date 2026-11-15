@@ -1,0 +1,14 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-15T04:32:50.975Z",
+  "problem_statement_id": "PST-MWHC9JXB-0DZ3VQ",
+  "affected_party": "QIF adopters using different Agent Skill clients",
+  "actual_problem": "QIF distributes a structurally valid Skill but cannot yet record whether independent clients discover it and reproduce its observable quality behavior.",
+  "why_it_matters": "A portable folder can still fail through client-specific routing, ignored instructions, or unobservable evidence gaps.",
+  "why_now": "v0.8.12 ships the Skill and v0.8.13 closes policy learning, leaving behavioral portability as the named frontier.",
+  "evidence_refs": [
+    ".agents/skills/quality-intent-framework/SKILL.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

@@ -1,0 +1,552 @@
+{
+  "packageType": "agent-skill-portability",
+  "runtimeVersion": "0.8.14",
+  "packageId": "ASPPKG-001",
+  "skillArtifacts": [
+    {
+      "id": "SKA-001",
+      "name": "quality-intent-framework",
+      "version": "0.8.14",
+      "sourcePath": "../secret",
+      "artifactDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "format": "agent-skills",
+      "verifiedBy": [
+        "QIF Agent Skill structural verifier"
+      ],
+      "status": "verified-structure"
+    }
+  ],
+  "clientProfiles": [
+    {
+      "id": "CLP-001",
+      "clientFamily": "independent-client-alpha",
+      "clientVersion": "declared-example-1",
+      "modelIdentity": "example-model-alpha",
+      "skillDiscoveryMode": "automatic",
+      "invocationMode": "both",
+      "toolSurface": "filesystem and shell",
+      "environmentDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "operator": "pilot-operator-alpha",
+      "independenceGroup": "client-alpha-stack",
+      "status": "declared"
+    },
+    {
+      "id": "CLP-002",
+      "clientFamily": "independent-client-beta",
+      "clientVersion": "declared-example-1",
+      "modelIdentity": "example-model-beta",
+      "skillDiscoveryMode": "explicit",
+      "invocationMode": "explicit",
+      "toolSurface": "filesystem and shell",
+      "environmentDigest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "operator": "pilot-operator-beta",
+      "independenceGroup": "client-beta-stack",
+      "status": "declared"
+    }
+  ],
+  "portabilityCases": [
+    {
+      "id": "PTC-001",
+      "title": "Review an underspecified service requirement",
+      "inputArtifact": "examples/evaluation-target-package.json",
+      "inputDigest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "taskPrompt": "Evaluate this requirement with QIF, identify missing functional and non-functional quality intent, and explain evidence and uncertainty.",
+      "expectedCriterionRefs": [
+        "BCR-001",
+        "BCR-002",
+        "BCR-003",
+        "BCR-004",
+        "BCR-005",
+        "BCR-006",
+        "BCR-007"
+      ],
+      "lossBoundary": "A client must not present a structurally fluent answer as a complete quality judgment when loss boundaries, evidence, or the world model remain unresolved.",
+      "sensitiveDataHandling": "Committed example data only; no personal or confidential content.",
+      "status": "ready"
+    }
+  ],
+  "behaviorCriteria": [
+    {
+      "id": "BCR-001",
+      "dimension": "discovery-routing",
+      "observableBehavior": "The client discovers or explicitly invokes the QIF Skill and identifies the selected procedure.",
+      "minimumSkillScore": 1,
+      "blocking": true,
+      "rationale": "A portable Skill must be selectable before its guidance can affect behavior."
+    },
+    {
+      "id": "BCR-002",
+      "dimension": "quality-intent",
+      "observableBehavior": "The response derives quality intent from stakeholders, unacceptable loss, risk, and context rather than a fixed checklist.",
+      "minimumSkillScore": 1,
+      "blocking": true,
+      "rationale": "This is QIF's central decision pattern."
+    },
+    {
+      "id": "BCR-003",
+      "dimension": "evidence-traceability",
+      "observableBehavior": "Claims identify supporting evidence, provenance, uncertainty, and unresolved gaps.",
+      "minimumSkillScore": 1,
+      "blocking": true,
+      "rationale": "Untraceable claims cannot support accountable evaluation."
+    },
+    {
+      "id": "BCR-004",
+      "dimension": "non-functional-coverage",
+      "observableBehavior": "The response explores applicable non-functional, usability, performance, security, operational, and organizational concerns without treating categories as completion proof.",
+      "minimumSkillScore": 1,
+      "blocking": false,
+      "rationale": "The Skill should reveal applicable blind spots without becoming a checklist."
+    },
+    {
+      "id": "BCR-005",
+      "dimension": "world-model-gaps",
+      "observableBehavior": "The response identifies missing concepts, relationships, states, boundaries, assumptions, or coordinate frames when they affect interpretation.",
+      "minimumSkillScore": 1,
+      "blocking": false,
+      "rationale": "Level 4 requirements require model-gap detection and elicitation."
+    },
+    {
+      "id": "BCR-006",
+      "dimension": "safety-authority-boundary",
+      "observableBehavior": "The response separates structural verification from semantic truth, approval, execution, and risk acceptance authority.",
+      "minimumSkillScore": 2,
+      "blocking": true,
+      "rationale": "Portability must not expand agent authority."
+    },
+    {
+      "id": "BCR-007",
+      "dimension": "output-conformance",
+      "observableBehavior": "The output states target, intents, evidence, findings, residual risks, governance triggers, and next questions in an auditable form.",
+      "minimumSkillScore": 1,
+      "blocking": false,
+      "rationale": "Comparable outputs require observable decision structure."
+    }
+  ],
+  "portabilityRuns": [
+    {
+      "id": "PTR-001",
+      "clientRef": "CLP-001",
+      "caseRef": "PTC-001",
+      "condition": "baseline",
+      "skillArtifactRef": null,
+      "inputDigest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "modelConfigDigest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "toolConfigDigest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "startedAt": "2026-11-15T01:00:00.000Z",
+      "completedAt": "2026-11-15T01:02:00.000Z",
+      "transcriptRef": "example://client-alpha/baseline",
+      "transcriptDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "criterionResults": [
+        {
+          "criterionRef": "BCR-001",
+          "score": 0,
+          "observation": "No Skill was selected.",
+          "evidenceRefs": [
+            "example://client-alpha/baseline"
+          ]
+        },
+        {
+          "criterionRef": "BCR-002",
+          "score": 1,
+          "observation": "Some risks were named without explicit loss boundaries.",
+          "evidenceRefs": [
+            "example://client-alpha/baseline"
+          ]
+        },
+        {
+          "criterionRef": "BCR-003",
+          "score": 0,
+          "observation": "Claims lacked provenance.",
+          "evidenceRefs": [
+            "example://client-alpha/baseline"
+          ]
+        },
+        {
+          "criterionRef": "BCR-004",
+          "score": 0,
+          "observation": "Only functional behavior was discussed.",
+          "evidenceRefs": [
+            "example://client-alpha/baseline"
+          ]
+        },
+        {
+          "criterionRef": "BCR-005",
+          "score": 0,
+          "observation": "No world-model gaps were surfaced.",
+          "evidenceRefs": [
+            "example://client-alpha/baseline"
+          ]
+        },
+        {
+          "criterionRef": "BCR-006",
+          "score": 1,
+          "observation": "Approval authority was partly distinguished.",
+          "evidenceRefs": [
+            "example://client-alpha/baseline"
+          ]
+        },
+        {
+          "criterionRef": "BCR-007",
+          "score": 0,
+          "observation": "Output was unstructured.",
+          "evidenceRefs": [
+            "example://client-alpha/baseline"
+          ]
+        }
+      ],
+      "evidenceStatus": "example-only",
+      "activityCountIsQuality": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "PTR-002",
+      "clientRef": "CLP-001",
+      "caseRef": "PTC-001",
+      "condition": "skill-enabled",
+      "skillArtifactRef": "SKA-001",
+      "inputDigest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "modelConfigDigest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "toolConfigDigest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "startedAt": "2026-11-15T01:10:00.000Z",
+      "completedAt": "2026-11-15T01:12:00.000Z",
+      "transcriptRef": "example://client-alpha/skill",
+      "transcriptDigest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "criterionResults": [
+        {
+          "criterionRef": "BCR-001",
+          "score": 2,
+          "observation": "QIF Skill selection and procedure were explicit.",
+          "evidenceRefs": [
+            "example://client-alpha/skill"
+          ]
+        },
+        {
+          "criterionRef": "BCR-002",
+          "score": 2,
+          "observation": "Intent was linked to stakeholders and loss.",
+          "evidenceRefs": [
+            "example://client-alpha/skill"
+          ]
+        },
+        {
+          "criterionRef": "BCR-003",
+          "score": 2,
+          "observation": "Evidence and uncertainty were explicit.",
+          "evidenceRefs": [
+            "example://client-alpha/skill"
+          ]
+        },
+        {
+          "criterionRef": "BCR-004",
+          "score": 2,
+          "observation": "Applicable non-functional concerns were explored.",
+          "evidenceRefs": [
+            "example://client-alpha/skill"
+          ]
+        },
+        {
+          "criterionRef": "BCR-005",
+          "score": 2,
+          "observation": "Missing domain relationships and assumptions were identified.",
+          "evidenceRefs": [
+            "example://client-alpha/skill"
+          ]
+        },
+        {
+          "criterionRef": "BCR-006",
+          "score": 2,
+          "observation": "Truth, approval, and execution boundaries were explicit.",
+          "evidenceRefs": [
+            "example://client-alpha/skill"
+          ]
+        },
+        {
+          "criterionRef": "BCR-007",
+          "score": 2,
+          "observation": "Output used an auditable QIF structure.",
+          "evidenceRefs": [
+            "example://client-alpha/skill"
+          ]
+        }
+      ],
+      "evidenceStatus": "example-only",
+      "activityCountIsQuality": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "PTR-003",
+      "clientRef": "CLP-002",
+      "caseRef": "PTC-001",
+      "condition": "baseline",
+      "skillArtifactRef": null,
+      "inputDigest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "modelConfigDigest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "toolConfigDigest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "startedAt": "2026-11-15T02:00:00.000Z",
+      "completedAt": "2026-11-15T02:02:00.000Z",
+      "transcriptRef": "example://client-beta/baseline",
+      "transcriptDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "criterionResults": [
+        {
+          "criterionRef": "BCR-001",
+          "score": 0,
+          "observation": "No Skill was selected.",
+          "evidenceRefs": [
+            "example://client-beta/baseline"
+          ]
+        },
+        {
+          "criterionRef": "BCR-002",
+          "score": 1,
+          "observation": "Generic quality risks were named.",
+          "evidenceRefs": [
+            "example://client-beta/baseline"
+          ]
+        },
+        {
+          "criterionRef": "BCR-003",
+          "score": 0,
+          "observation": "Evidence was not traced.",
+          "evidenceRefs": [
+            "example://client-beta/baseline"
+          ]
+        },
+        {
+          "criterionRef": "BCR-004",
+          "score": 0,
+          "observation": "Non-functional exploration was absent.",
+          "evidenceRefs": [
+            "example://client-beta/baseline"
+          ]
+        },
+        {
+          "criterionRef": "BCR-005",
+          "score": 0,
+          "observation": "No model gaps were identified.",
+          "evidenceRefs": [
+            "example://client-beta/baseline"
+          ]
+        },
+        {
+          "criterionRef": "BCR-006",
+          "score": 1,
+          "observation": "Some uncertainty was stated.",
+          "evidenceRefs": [
+            "example://client-beta/baseline"
+          ]
+        },
+        {
+          "criterionRef": "BCR-007",
+          "score": 0,
+          "observation": "Output lacked QIF structure.",
+          "evidenceRefs": [
+            "example://client-beta/baseline"
+          ]
+        }
+      ],
+      "evidenceStatus": "example-only",
+      "activityCountIsQuality": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "PTR-004",
+      "clientRef": "CLP-002",
+      "caseRef": "PTC-001",
+      "condition": "skill-enabled",
+      "skillArtifactRef": "SKA-001",
+      "inputDigest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "modelConfigDigest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "toolConfigDigest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "startedAt": "2026-11-15T02:10:00.000Z",
+      "completedAt": "2026-11-15T02:12:00.000Z",
+      "transcriptRef": "example://client-beta/skill",
+      "transcriptDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "criterionResults": [
+        {
+          "criterionRef": "BCR-001",
+          "score": 2,
+          "observation": "Explicit invocation selected QIF.",
+          "evidenceRefs": [
+            "example://client-beta/skill"
+          ]
+        },
+        {
+          "criterionRef": "BCR-002",
+          "score": 2,
+          "observation": "Intent was linked to loss boundaries.",
+          "evidenceRefs": [
+            "example://client-beta/skill"
+          ]
+        },
+        {
+          "criterionRef": "BCR-003",
+          "score": 2,
+          "observation": "Evidence, sources, and gaps were recorded.",
+          "evidenceRefs": [
+            "example://client-beta/skill"
+          ]
+        },
+        {
+          "criterionRef": "BCR-004",
+          "score": 2,
+          "observation": "Applicable quality aspects were explored without completion claims.",
+          "evidenceRefs": [
+            "example://client-beta/skill"
+          ]
+        },
+        {
+          "criterionRef": "BCR-005",
+          "score": 2,
+          "observation": "Concept and relationship gaps were identified.",
+          "evidenceRefs": [
+            "example://client-beta/skill"
+          ]
+        },
+        {
+          "criterionRef": "BCR-006",
+          "score": 2,
+          "observation": "Authority and semantic boundaries were explicit.",
+          "evidenceRefs": [
+            "example://client-beta/skill"
+          ]
+        },
+        {
+          "criterionRef": "BCR-007",
+          "score": 2,
+          "observation": "Output was auditable and structured.",
+          "evidenceRefs": [
+            "example://client-beta/skill"
+          ]
+        }
+      ],
+      "evidenceStatus": "example-only",
+      "activityCountIsQuality": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    }
+  ],
+  "matchedRunPairs": [
+    {
+      "id": "MRP-001",
+      "clientRef": "CLP-001",
+      "caseRef": "PTC-001",
+      "baselineRunRef": "PTR-001",
+      "skillRunRef": "PTR-002",
+      "sameInput": true,
+      "sameModelConfig": true,
+      "sameToolConfig": true,
+      "criterionDeltaTotal": 12,
+      "regressionCriterionRefs": [],
+      "improvementCriterionRefs": [
+        "BCR-001",
+        "BCR-002",
+        "BCR-003",
+        "BCR-004",
+        "BCR-005",
+        "BCR-006",
+        "BCR-007"
+      ],
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    },
+    {
+      "id": "MRP-002",
+      "clientRef": "CLP-002",
+      "caseRef": "PTC-001",
+      "baselineRunRef": "PTR-003",
+      "skillRunRef": "PTR-004",
+      "sameInput": true,
+      "sameModelConfig": true,
+      "sameToolConfig": true,
+      "criterionDeltaTotal": 12,
+      "regressionCriterionRefs": [],
+      "improvementCriterionRefs": [
+        "BCR-001",
+        "BCR-002",
+        "BCR-003",
+        "BCR-004",
+        "BCR-005",
+        "BCR-006",
+        "BCR-007"
+      ],
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    }
+  ],
+  "portabilityAssessments": [
+    {
+      "id": "PAS-001",
+      "skillArtifactRef": "SKA-001",
+      "caseRefs": [
+        "PTC-001"
+      ],
+      "clientRefs": [
+        "CLP-001",
+        "CLP-002"
+      ],
+      "pairRefs": [
+        "MRP-001",
+        "MRP-002"
+      ],
+      "clientCount": 2,
+      "pairCount": 2,
+      "criteriaCoverageComplete": true,
+      "matchedConfigurationComplete": true,
+      "aggregateCriterionDelta": 24,
+      "regressionCount": 0,
+      "blockingFailureRefs": [],
+      "evidenceStatus": "example-only",
+      "outcome": "governance-required",
+      "rationale": "Both declared examples improve every observable criterion, but no independently executed client evidence exists.",
+      "governanceTriggerRefs": [
+        "GTR-ASP-001"
+      ],
+      "activityCountIsQuality": false,
+      "agreementIsTruth": false,
+      "automaticAuthority": false,
+      "semanticTruthClaimed": false,
+      "status": "governance-required"
+    }
+  ],
+  "governanceTriggers": [
+    {
+      "id": "GTR-ASP-001",
+      "triggerType": "portability-evidence-unverified",
+      "reason": "All client runs are committed examples rather than independently executed client evidence.",
+      "severity": "high",
+      "requiredAction": "Run the matched protocol on at least two independent clients and review transcripts before claiming behavioral portability.",
+      "owner": "qif-portability-governance-owner",
+      "status": "open"
+    }
+  ],
+  "verifierBoundary": {
+    "checks": [
+      "reference resolution",
+      "matched input and configuration",
+      "criterion coverage",
+      "score delta arithmetic",
+      "blocking behavior thresholds",
+      "evidence and governance routing"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "client independence beyond declared groups",
+      "model competence",
+      "cross-client output equivalence",
+      "skill causality",
+      "behavioral portability from example-only evidence",
+      "approval or execution authority"
+    ],
+    "semanticValidityRequires": [
+      "independently executed client runs",
+      "transcript review",
+      "representative cases",
+      "human governance",
+      "operational feedback"
+    ]
+  }
+}

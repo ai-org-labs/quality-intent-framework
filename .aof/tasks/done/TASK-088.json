@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-088",
+  "title": "QIF v0.8.14 Agent Skill Behavioral Portability Pilot",
+  "description": null,
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MWHC96MK-JYK873",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MWHC9UKY-T6C7O1",
+  "operating_goal_ref": "v0.8.14-agent-skill-portability",
+  "created_at": "2026-11-15T04:33:12.494Z",
+  "updated_at": "2026-11-15T04:46:53.945Z",
+  "assigned_at": null,
+  "done_at": "2026-11-15T04:46:53.945Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "v0.8.14 implemented; npm test 17/17 positive and 1570/1570 negative; review council no veto."
+}

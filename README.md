@@ -1,6 +1,6 @@
 # Quality Intent Framework
 
-Current release: **v0.8.13**. QIF is distributed as a standard Agent
+Current release: **v0.8.14**. QIF is distributed as a standard Agent
 Skill: compatible agents can discover the QIF procedure from `SKILL.md`, load
 deeper guidance only when needed, and invoke the canonical verifier without
 turning QIF into an autonomous authority.
@@ -28,6 +28,11 @@ The current ledger frontier also converts adverse incident-closure calibration
 into bounded policy revision candidates, replays them against frozen history,
 and records accountable revision decisions. See
 `docs/qif-v0.8.13-closure-policy-revision-replay.md`.
+
+The Agent Skill portability pilot compares matched baseline and Skill-enabled
+runs across declared independent clients without turning example output into a
+portability, causality, competence, truth, or authority claim. See
+`docs/qif-v0.8.14-agent-skill-behavioral-portability.md`.
 
 To use QIF with Gemini, Claude, Codex, or another AI without cloning the full
 repository:

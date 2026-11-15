@@ -1,0 +1,77 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-11-15T04:33:23.139Z",
+  "packet_id": "ASP-MWHCA8QR-F5HKGA",
+  "source_task_id": "TASK-088",
+  "source_parent_session_id": "SESS-MWHC96MK-JYK873",
+  "source_decision_record_id": null,
+  "objective": "Implement QIF v0.8.14 Agent Skill behavioral portability evaluation",
+  "assignment": {
+    "actor_ref": "codex",
+    "role_ref": "builder",
+    "team_ref": "runtime-team",
+    "assignment_reason": "Builder owns package schema, verifier, fixture, CLI, docs, and distribution integration",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "skill-schema-review"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "cap-contract-alignment",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        ".agents/skills/quality-intent-framework/SKILL.md",
+        "tools/qif.mjs"
+      ],
+      "rationale": "The slice evaluates a standard Skill through a provider-neutral structured contract."
+    }
+  ],
+  "resource_refs": [
+    "resource-repo-main",
+    "resource-npm-test"
+  ],
+  "policy_refs": [
+    "policy-runtime-backed-answer-discipline"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/agent-skill-portability-package.schema.json",
+    "required_sections": [
+      "schema",
+      "verifier",
+      "matched-runs",
+      "governance"
+    ],
+    "acceptance_criteria": [
+      "npm test passes",
+      "example-only client evidence cannot establish portability"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "matched-input and authority boundaries fail closed",
+      "evaluator_ref": "guardian",
+      "evidence_required": "negative fixtures and verifier boundary",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "portability-overclaim",
+      "trigger_condition": "implementation infers cross-client truth from structure or agreement",
+      "consequence": "require-council-review",
+      "recovery_action": "restore provenance, matched-run, and governance boundaries"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I can make client behavior comparable without pretending outputs are identical or true.",
+    "current_action": "Implement matched baseline and Skill-run evaluation",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Run full verification and council review"
+  },
+  "status": "draft"
+}

@@ -947,10 +947,13 @@ Deliverables:
   Counterfactual Replay: adverse closure calibration now produces bounded
   candidate policies, frozen historical replay, reproducible outcome deltas,
   and accountable decisions without rewriting history or activating policy.
-- Next planned slices:
-  - v0.8.14 Agent Skill Behavioral Portability Pilot: measure discovery,
+- Implemented fifteenth v0.8 slice, v0.8.14 Agent Skill Behavioral
+  Portability Pilot: measure discovery,
     routing, instruction following, and evidence quality across independent
     compatible clients without treating model agreement as truth.
+- Next planned slices:
+  - v0.8.15 Verified Cross-Client Portability Corpus: replace illustrative
+    matched runs with imported, provenance-bearing independent client evidence.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,

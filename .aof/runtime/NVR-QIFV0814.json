@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-15T04:33:04.493Z",
+  "validation_id": "NVR-MWHC9UCT-QRF5H1",
+  "raw_need": "Implement QIF v0.8.14 Agent Skill Behavioral Portability Pilot",
+  "validation_status": "reframed",
+  "validated_need": "Provide a provider-neutral, matched-run evaluation package that records observable QIF Skill discovery, routing, behavior, evidence, and safety differences across declared clients without asserting semantic or cross-client truth.",
+  "decision_summary": "Build a new evaluation package and verifier; keep actual client execution and authority external.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is portable?",
+      "answer": "The evaluation contract and QIF behavior criteria, not identical model outputs.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What evidence is required?",
+      "answer": "Frozen case input, client/runtime identity, baseline and skill transcripts, structured observations, and provenance.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Observable behavior can be compared without equating agreement with correctness."
+  ],
+  "evidence_gaps": [
+    "No independently executed live client records are available in-repository."
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0814.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0814.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0814.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

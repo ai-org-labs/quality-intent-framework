@@ -34,6 +34,7 @@ const CANONICAL_DOCS = [
   "docs/qif-v0.8.11-late-signal-reopen-closure-calibration.md",
   "docs/qif-v0.8.12-agent-skill-distribution.md",
   "docs/qif-v0.8.13-closure-policy-revision-replay.md",
+  "docs/qif-v0.8.14-agent-skill-behavioral-portability.md",
   "docs/expert-judgment-framework.md"
 ];
 

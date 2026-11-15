@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.8.14
+
+- Added the Agent Skill Behavioral Portability Pilot package, schema, example,
+  verifier, CLI support, negative fixtures, and portable documentation.
+- Added matched baseline versus Skill-enabled behavior evaluation across
+  multiple declared client independence groups.
+- Required example-only or unverified evidence to remain under governance and
+  preserved semantic, causality, competence, and authority boundaries.
+
 ## v0.8.13
 
 - Added closure-policy revision candidates grounded in adverse closure calibration while preserving the effective baseline.

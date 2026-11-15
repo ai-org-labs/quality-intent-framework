@@ -5741,3 +5741,32 @@ Date: 2026-10-25
   causality, future safety, live execution, or adoption authority.
 - Next value slices: v0.8.14 Agent Skill Behavioral Portability Pilot, v0.9
   Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger Standard.
+
+## 2026-11-15 - QIF v0.8.14 Agent Skill Behavioral Portability
+
+- Latest AOF runtime confirmed as v12.2.0. Session
+  `SESS-MWHC96MK-JYK873` organized Need, Intent, and Context before chartering.
+- Validated Need `NVR-MWHC9UCT-QRF5H1` preceded charter
+  `PCH-MWHC9UGO-Z42E7L`; decision records are `DEC-MWHC96MN-L9LQVB`,
+  `DEC-MWHC9BIR-MSCL9H`, and `DEC-MWHC9UKY-T6C7O1`.
+- Planning council `CRUN-MWHCA0F3-BGYSI7` included Visionary, Builder, and
+  Guardian with no veto. Actor packet `ASP-MWHCA8QR-F5HKGA` constrained the
+  implementation to observable behavior and blocked portability overclaims.
+- Primary research indicates that Skill portability and cross-runtime outcome
+  equivalence remain open problems. Sources: https://openreview.net/pdf?id=Er0p92BsmW,
+  https://openreview.net/attachment?id=n0AIlfxDU0&name=pdf,
+  https://doi.org/10.1145/3786335.3813130, and
+  https://arxiv.org/abs/2608.21208.
+- Decision: add a standalone `agent-skill-portability` evaluation package,
+  not a ledger entity. Committed matched runs are examples, so their assessment
+  remains `governance-required` until independently executed evidence exists.
+- Verification: `npm test` passed 17/17 positive and 1,570/1,570 retained
+  negative checks. The Agent Skill built and verified 150 files; the portable
+  package built and verified 103 files. AOF organization verification passed
+  295/295 checks.
+- Review: council `CRUN-MWHCKB0K-3SBLB5` included Guardian, Builder, and
+  Visionary with no veto. Self-audit `FSA-QIF-V0814` preserved example-only
+  evidence at `governance-required` and identified independent client evidence
+  as the next required value slice.
+- Next value slices: v0.8.15 Verified Cross-Client Portability Corpus, v0.9
+  Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger Standard.

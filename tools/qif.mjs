@@ -20,7 +20,8 @@ const examplePackages = [
   "examples/guided-elicitation-package.json",
   "examples/world-model-elicitation-package.json",
   "examples/action-quality-contract-package.json",
-  "examples/authoring-template-package.json"
+  "examples/authoring-template-package.json",
+  "examples/agent-skill-portability-package.json"
 ];
 
 const runtimeTypes = new Set([
@@ -42,7 +43,8 @@ const validatorsByType = new Map([
   ["world-model-elicitation", "tools/validate-world-model-elicitation.mjs"],
   ["action-quality-contract", "tools/validate-action-quality-contract.mjs"],
   ["authoring-template", "tools/validate-authoring-template.mjs"],
-  ["calibration-report", "tools/validate-calibration-report.mjs"]
+  ["calibration-report", "tools/validate-calibration-report.mjs"],
+  ["agent-skill-portability", "tools/validate-agent-skill-portability.mjs"]
 ]);
 
 function usage() {
@@ -329,6 +331,10 @@ const packageTypeDescriptions = new Map([
   ["calibration-report", {
     purpose: "Compare declared probability forecasts with observed outcomes through reproducible scores, buckets, sample boundaries, and governance routing.",
     lifecycleRole: "confidence-outcome-calibration-reporting"
+  }],
+  ["agent-skill-portability", {
+    purpose: "Evaluate observable QIF Agent Skill behavior across matched baseline and skill-enabled client runs.",
+    lifecycleRole: "agent-skill-behavioral-portability"
   }]
 ]);
 
