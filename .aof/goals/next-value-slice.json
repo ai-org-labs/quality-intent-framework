@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.8.15 Verified Cross-Client Portability Corpus",
-  "updated_at": "2026-11-15T04:46:53.943Z",
+  "content": "v0.8.16 Skill Supply Chain Manifest and Dependency Trust",
+  "updated_at": "2026-11-16T04:45:08.716Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MWHC96MK-JYK873",
+  "source_session_id": "SESS-MWIRMIRJ-5N1XI4",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-11-15T04:46:53.943Z"
+  "declared_complete_at": "2026-11-16T04:45:08.716Z"
 }

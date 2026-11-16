@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-11-15T04:41:31.393Z",
+  "updated_at": "2026-11-16T04:44:54.846Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "同一ケース・同一入力でskillなし/ありの対照を取り、発見、選択、作法順守、証拠追跡、非機能・世界モデル欠落、安全境界をクライアント別に記録し、未検証データはgovernance-requiredになること。",
-      "recorded_at": "2026-11-15T04:32:40.086Z",
+      "answer": "Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.",
+      "recorded_at": "2026-11-16T04:30:44.731Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MWHC96MK-JYK873",
+      "source_session_id": "SESS-MWIRMIRJ-5N1XI4",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "Build a new evaluation package and verifier; keep actual client execution and authority external.",
-      "recorded_at": "2026-11-15T04:33:04.788Z",
+      "answer": "The roadmap wording implied a real verified corpus, which cannot be truthfully fabricated. The validated need is the executable intake and readiness boundary that makes a future verified corpus possible.",
+      "recorded_at": "2026-11-16T04:31:43.751Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MWHC96MK-JYK873",
-      "source_decision_record_id": "DEC-MWHC9UKY-T6C7O1"
+      "source_session_id": "SESS-MWIRMIRJ-5N1XI4",
+      "source_decision_record_id": "DEC-MWIRNYPX-7WNE03"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Committed runs are example-only and do not establish independent client behavior, skill causality, or semantic validity.",
-      "recorded_at": "2026-11-15T04:41:31.393Z",
-      "expectation_state": "Matched-run schema, verifier, fixtures, CLI routing, portable bundles, and provisional governance boundary implemented.",
-      "mismatch_state": "Committed runs are example-only and do not establish independent client behavior, skill causality, or semantic validity.",
-      "scale_direction": "Collect provenance-bearing matched runs from at least two independently operated compatible clients.",
-      "source_session_id": "SESS-MWHC96MK-JYK873",
-      "source_decision_record_id": "DEC-MWHC9UKY-T6C7O1"
+      "answer": "No independently executed external-client evidence exists; local verification cannot authenticate sources or prove execution.",
+      "recorded_at": "2026-11-16T04:44:54.846Z",
+      "expectation_state": "Provenance, execution attestation, custody, import decision, corpus readiness, fixtures, portable bundles, and governance boundaries implemented.",
+      "mismatch_state": "No independently executed external-client evidence exists; local verification cannot authenticate sources or prove execution.",
+      "scale_direction": "Define typed Skill supply-chain manifests, locked dependency identity, and dependency-risk propagation without treating identity as safety.",
+      "source_session_id": "SESS-MWIRMIRJ-5N1XI4",
+      "source_decision_record_id": "DEC-MWIRNYPX-7WNE03"
     }
   ]
 }

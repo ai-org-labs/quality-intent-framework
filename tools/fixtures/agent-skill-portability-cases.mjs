@@ -1,8 +1,18 @@
 const run = (p, i=0) => p.portabilityRuns[i];
 const pair = (p, i=0) => p.matchedRunPairs[i];
 const assessment = p => p.portabilityAssessments[0];
+const source = (p, i=0) => p.evidenceSources[i];
+const attestation = (p, i=0) => p.executionAttestations[i];
+const custody = (p, i=0) => p.evidenceCustodyEvents[i];
+const imported = (p, i=0) => p.evidenceImportDecisions[i];
+const corpus = p => p.corpusReadinessAssessments[0];
 
 export const cases = [
+  { id:"sources-array", rule:"evidence sources required", expect:"package evidenceSources must be an array.", mutate:p=>{p.evidenceSources=null;} },
+  { id:"attestations-array", rule:"execution attestations required", expect:"package executionAttestations must be an array.", mutate:p=>{p.executionAttestations=null;} },
+  { id:"custody-array", rule:"custody events required", expect:"package evidenceCustodyEvents must be an array.", mutate:p=>{p.evidenceCustodyEvents=null;} },
+  { id:"imports-array", rule:"import decisions required", expect:"package evidenceImportDecisions must be an array.", mutate:p=>{p.evidenceImportDecisions=null;} },
+  { id:"corpus-array", rule:"corpus assessments required", expect:"package corpusReadinessAssessments must be an array.", mutate:p=>{p.corpusReadinessAssessments=null;} },
   { id:"clients-array", rule:"client profiles required", expect:"package clientProfiles must be an array.", mutate:p=>{p.clientProfiles=null;} },
   { id:"independence-groups", rule:"declared client independence", expect:"at least two distinct independenceGroup", mutate:p=>{p.clientProfiles[1].independenceGroup=p.clientProfiles[0].independenceGroup;} },
   { id:"skill-path", rule:"portable source path", expect:"sourcePath must be repository-relative", mutate:p=>{p.skillArtifacts[0].sourcePath="../secret";} },
@@ -22,6 +32,20 @@ export const cases = [
   { id:"assessment-outcome", rule:"provisional evidence governance", expect:"outcome must reproduce as governance-required", mutate:p=>{assessment(p).outcome="portable-candidate";} },
   { id:"assessment-trigger", rule:"portability governance trigger", expect:"requires portability-evidence-unverified trigger", mutate:p=>{assessment(p).governanceTriggerRefs=[];} },
   { id:"assessment-authority", rule:"authority boundary", expect:"must preserve quality, truth, and authority boundaries", mutate:p=>{assessment(p).automaticAuthority=true;} },
+  { id:"attestation-digest", rule:"attestation digest alignment", expect:"attested digests must align", mutate:p=>{attestation(p).transcriptDigest="sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";} },
+  { id:"attestation-acceptance", rule:"attestation acceptance boundary", expect:"accepted status requires reviewed attestation", mutate:p=>{attestation(p).status="accepted";} },
+  { id:"custody-prior", rule:"custody predecessor resolution", expect:"references missing prior custody event", mutate:p=>{custody(p).priorEventRef="ECE-NOPE";} },
+  { id:"import-chain", rule:"evidence chain closure", expect:"must form one evidence chain", mutate:p=>{imported(p).sourceRef="EVS-002";} },
+  { id:"import-digest", rule:"import digest reproduction", expect:"digestAlignment must reproduce as true", mutate:p=>{imported(p).digestAlignment=false;} },
+  { id:"import-custody", rule:"custody completeness reproduction", expect:"custodyComplete must reproduce as true", mutate:p=>{imported(p).custodyComplete=false;} },
+  { id:"import-review", rule:"attestation review reproduction", expect:"attestationReviewed must reproduce as false", mutate:p=>{imported(p).attestationReviewed=true;} },
+  { id:"import-decision", rule:"import decision reproduction", expect:"decision must reproduce as provisional", mutate:p=>{imported(p).decision="accepted";} },
+  { id:"import-status", rule:"unresolved import governance", expect:"unresolved import requires governance-required status", mutate:p=>{imported(p).status="reviewed";} },
+  { id:"corpus-groups", rule:"corpus group reproduction", expect:"observedIndependentGroups must reproduce as 2", mutate:p=>{corpus(p).observedIndependentGroups=1;} },
+  { id:"corpus-verified-count", rule:"verified pair reproduction", expect:"verifiedPairCount must reproduce as 0", mutate:p=>{corpus(p).verifiedPairCount=2;} },
+  { id:"corpus-readiness", rule:"corpus readiness reproduction", expect:"readiness must reproduce as governance-required", mutate:p=>{corpus(p).readiness="ready-for-external-review";} },
+  { id:"corpus-trigger", rule:"non-ready corpus governance", expect:"requires corpus-evidence-not-ready trigger", mutate:p=>{corpus(p).governanceTriggerRefs=[];} },
+  { id:"corpus-boundary", rule:"authenticity authority boundary", expect:"must preserve authenticity and authority boundaries", mutate:p=>{corpus(p).sourceAuthenticityClaimed=true;} },
   { id:"verifier-boundary", rule:"verifier claim boundary", expect:"must explicitly not claim skill causality", mutate:p=>{p.verifierBoundary.doesNotClaim=p.verifierBoundary.doesNotClaim.filter(x=>x!=="skill causality");} }
 ];
 

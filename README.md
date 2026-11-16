@@ -1,6 +1,6 @@
 # Quality Intent Framework
 
-Current release: **v0.8.14**. QIF is distributed as a standard Agent
+Current release: **v0.8.15**. QIF is distributed as a standard Agent
 Skill: compatible agents can discover the QIF procedure from `SKILL.md`, load
 deeper guidance only when needed, and invoke the canonical verifier without
 turning QIF into an autonomous authority.
@@ -33,6 +33,11 @@ The Agent Skill portability pilot compares matched baseline and Skill-enabled
 runs across declared independent clients without turning example output into a
 portability, causality, competence, truth, or authority claim. See
 `docs/qif-v0.8.14-agent-skill-behavioral-portability.md`.
+
+The cross-client evidence intake layer now records source provenance,
+execution attestations, custody continuity, import decisions, and reproducible
+corpus readiness without claiming external source authenticity. See
+`docs/qif-v0.8.15-cross-client-portability-evidence-intake.md`.
 
 To use QIF with Gemini, Claude, Codex, or another AI without cloning the full
 repository:

@@ -1,12 +1,12 @@
 {
   "packageType": "agent-skill-portability",
-  "runtimeVersion": "0.8.14",
+  "runtimeVersion": "0.8.15",
   "packageId": "ASPPKG-001",
   "skillArtifacts": [
     {
       "id": "SKA-001",
       "name": "quality-intent-framework",
-      "version": "0.8.14",
+      "version": "0.8.15",
       "sourcePath": "../secret",
       "artifactDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "format": "agent-skills",
@@ -512,6 +512,274 @@
       "status": "governance-required"
     }
   ],
+  "evidenceSources": [
+    {
+      "id": "EVS-001",
+      "sourceType": "committed-example",
+      "provider": "qif-repository",
+      "locator": "example://client-alpha/baseline",
+      "acquiredAt": "2026-11-15T01:02:00.000Z",
+      "artifactDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "collectionMethod": "committed illustrative transcript",
+      "sensitiveDataHandling": "No personal or confidential data.",
+      "evidenceStatus": "example-only",
+      "stale": false
+    },
+    {
+      "id": "EVS-002",
+      "sourceType": "committed-example",
+      "provider": "qif-repository",
+      "locator": "example://client-alpha/skill",
+      "acquiredAt": "2026-11-15T01:12:00.000Z",
+      "artifactDigest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "collectionMethod": "committed illustrative transcript",
+      "sensitiveDataHandling": "No personal or confidential data.",
+      "evidenceStatus": "example-only",
+      "stale": false
+    },
+    {
+      "id": "EVS-003",
+      "sourceType": "committed-example",
+      "provider": "qif-repository",
+      "locator": "example://client-beta/baseline",
+      "acquiredAt": "2026-11-15T02:02:00.000Z",
+      "artifactDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "collectionMethod": "committed illustrative transcript",
+      "sensitiveDataHandling": "No personal or confidential data.",
+      "evidenceStatus": "example-only",
+      "stale": false
+    },
+    {
+      "id": "EVS-004",
+      "sourceType": "committed-example",
+      "provider": "qif-repository",
+      "locator": "example://client-beta/skill",
+      "acquiredAt": "2026-11-15T02:12:00.000Z",
+      "artifactDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "collectionMethod": "committed illustrative transcript",
+      "sensitiveDataHandling": "No personal or confidential data.",
+      "evidenceStatus": "example-only",
+      "stale": false
+    }
+  ],
+  "executionAttestations": [
+    {
+      "id": "EAT-001",
+      "runRef": "PTR-001",
+      "sourceRef": "EVS-001",
+      "attestedBy": "example-author",
+      "attesterRole": "illustrative-data-author",
+      "issuedAt": "2026-11-15T03:00:00.000Z",
+      "environmentDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "skillArtifactDigest": null,
+      "inputDigest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "transcriptDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "reviewedBy": [],
+      "reviewStatus": "unreviewed",
+      "conflictRefs": [],
+      "status": "provisional"
+    },
+    {
+      "id": "EAT-002",
+      "runRef": "PTR-002",
+      "sourceRef": "EVS-002",
+      "attestedBy": "example-author",
+      "attesterRole": "illustrative-data-author",
+      "issuedAt": "2026-11-15T03:01:00.000Z",
+      "environmentDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "skillArtifactDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "inputDigest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "transcriptDigest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "reviewedBy": [],
+      "reviewStatus": "unreviewed",
+      "conflictRefs": [],
+      "status": "provisional"
+    },
+    {
+      "id": "EAT-003",
+      "runRef": "PTR-003",
+      "sourceRef": "EVS-003",
+      "attestedBy": "example-author",
+      "attesterRole": "illustrative-data-author",
+      "issuedAt": "2026-11-15T03:02:00.000Z",
+      "environmentDigest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "skillArtifactDigest": null,
+      "inputDigest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "transcriptDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "reviewedBy": [],
+      "reviewStatus": "unreviewed",
+      "conflictRefs": [],
+      "status": "provisional"
+    },
+    {
+      "id": "EAT-004",
+      "runRef": "PTR-004",
+      "sourceRef": "EVS-004",
+      "attestedBy": "example-author",
+      "attesterRole": "illustrative-data-author",
+      "issuedAt": "2026-11-15T03:03:00.000Z",
+      "environmentDigest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "skillArtifactDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "inputDigest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "transcriptDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "reviewedBy": [],
+      "reviewStatus": "unreviewed",
+      "conflictRefs": [],
+      "status": "provisional"
+    }
+  ],
+  "evidenceCustodyEvents": [
+    {
+      "id": "ECE-001",
+      "sourceRef": "EVS-001",
+      "priorEventRef": null,
+      "eventType": "capture",
+      "actor": "example-author",
+      "occurredAt": "2026-11-15T03:00:00.000Z",
+      "inputDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "outputDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "evidenceRef": "example://custody/alpha-baseline"
+    },
+    {
+      "id": "ECE-002",
+      "sourceRef": "EVS-002",
+      "priorEventRef": null,
+      "eventType": "capture",
+      "actor": "example-author",
+      "occurredAt": "2026-11-15T03:01:00.000Z",
+      "inputDigest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "outputDigest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "evidenceRef": "example://custody/alpha-skill"
+    },
+    {
+      "id": "ECE-003",
+      "sourceRef": "EVS-003",
+      "priorEventRef": null,
+      "eventType": "capture",
+      "actor": "example-author",
+      "occurredAt": "2026-11-15T03:02:00.000Z",
+      "inputDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "outputDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "evidenceRef": "example://custody/beta-baseline"
+    },
+    {
+      "id": "ECE-004",
+      "sourceRef": "EVS-004",
+      "priorEventRef": null,
+      "eventType": "capture",
+      "actor": "example-author",
+      "occurredAt": "2026-11-15T03:03:00.000Z",
+      "inputDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "outputDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "evidenceRef": "example://custody/beta-skill"
+    }
+  ],
+  "evidenceImportDecisions": [
+    {
+      "id": "EID-001",
+      "runRef": "PTR-001",
+      "sourceRef": "EVS-001",
+      "attestationRef": "EAT-001",
+      "custodyEventRefs": [
+        "ECE-001"
+      ],
+      "digestAlignment": true,
+      "custodyComplete": true,
+      "attestationReviewed": false,
+      "conflictsResolved": true,
+      "decision": "provisional",
+      "rationale": "Digests align, but the source is illustrative and the attestation is unreviewed.",
+      "governanceTriggerRefs": [
+        "GTR-ASP-002"
+      ],
+      "status": "governance-required"
+    },
+    {
+      "id": "EID-002",
+      "runRef": "PTR-002",
+      "sourceRef": "EVS-002",
+      "attestationRef": "EAT-002",
+      "custodyEventRefs": [
+        "ECE-002"
+      ],
+      "digestAlignment": true,
+      "custodyComplete": true,
+      "attestationReviewed": false,
+      "conflictsResolved": true,
+      "decision": "provisional",
+      "rationale": "Digests align, but the source is illustrative and the attestation is unreviewed.",
+      "governanceTriggerRefs": [
+        "GTR-ASP-002"
+      ],
+      "status": "governance-required"
+    },
+    {
+      "id": "EID-003",
+      "runRef": "PTR-003",
+      "sourceRef": "EVS-003",
+      "attestationRef": "EAT-003",
+      "custodyEventRefs": [
+        "ECE-003"
+      ],
+      "digestAlignment": true,
+      "custodyComplete": true,
+      "attestationReviewed": false,
+      "conflictsResolved": true,
+      "decision": "provisional",
+      "rationale": "Digests align, but the source is illustrative and the attestation is unreviewed.",
+      "governanceTriggerRefs": [
+        "GTR-ASP-002"
+      ],
+      "status": "governance-required"
+    },
+    {
+      "id": "EID-004",
+      "runRef": "PTR-004",
+      "sourceRef": "EVS-004",
+      "attestationRef": "EAT-004",
+      "custodyEventRefs": [
+        "ECE-004"
+      ],
+      "digestAlignment": true,
+      "custodyComplete": true,
+      "attestationReviewed": false,
+      "conflictsResolved": true,
+      "decision": "provisional",
+      "rationale": "Digests align, but the source is illustrative and the attestation is unreviewed.",
+      "governanceTriggerRefs": [
+        "GTR-ASP-002"
+      ],
+      "status": "governance-required"
+    }
+  ],
+  "corpusReadinessAssessments": [
+    {
+      "id": "CRA-001",
+      "pairRefs": [
+        "MRP-001",
+        "MRP-002"
+      ],
+      "importDecisionRefs": [
+        "EID-001",
+        "EID-002",
+        "EID-003",
+        "EID-004"
+      ],
+      "minimumIndependentGroups": 2,
+      "observedIndependentGroups": 2,
+      "verifiedPairCount": 0,
+      "unresolvedImportCount": 4,
+      "staleSourceCount": 0,
+      "readiness": "governance-required",
+      "rationale": "Declared client diversity exists, but every source is example-only and every attestation remains unreviewed.",
+      "governanceTriggerRefs": [
+        "GTR-ASP-002"
+      ],
+      "sourceAuthenticityClaimed": false,
+      "automaticAuthority": false,
+      "status": "governance-required"
+    }
+  ],
   "governanceTriggers": [
     {
       "id": "GTR-ASP-001",
@@ -519,6 +787,15 @@
       "reason": "All client runs are committed examples rather than independently executed client evidence.",
       "severity": "high",
       "requiredAction": "Run the matched protocol on at least two independent clients and review transcripts before claiming behavioral portability.",
+      "owner": "qif-portability-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-ASP-002",
+      "triggerType": "corpus-evidence-not-ready",
+      "reason": "Evidence sources are committed examples and execution attestations are unreviewed.",
+      "severity": "high",
+      "requiredAction": "Import independently executed client exports with reviewed attestations and complete custody before external corpus review.",
       "owner": "qif-portability-governance-owner",
       "status": "open"
     }
@@ -530,10 +807,15 @@
       "criterion coverage",
       "score delta arithmetic",
       "blocking behavior thresholds",
+      "evidence provenance and digest alignment",
+      "custody continuity",
+      "attestation review",
+      "corpus readiness reproduction",
       "evidence and governance routing"
     ],
     "doesNotClaim": [
       "semantic truth",
+      "source authenticity",
       "client independence beyond declared groups",
       "model competence",
       "cross-client output equivalence",
@@ -543,6 +825,7 @@
     ],
     "semanticValidityRequires": [
       "independently executed client runs",
+      "independent source authentication",
       "transcript review",
       "representative cases",
       "human governance",

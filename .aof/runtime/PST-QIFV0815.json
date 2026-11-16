@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-16T04:31:03.791Z",
+  "problem_statement_id": "PST-MWIRN3VZ-TZXT06",
+  "affected_party": "QIF maintainers and adopters evaluating Agent Skill behavior across clients",
+  "actual_problem": "Matched-run results can be imported without sufficient provenance, execution attestation, Skill identity, or custody evidence, allowing example data or tampered records to be mistaken for cross-client evidence.",
+  "why_it_matters": "A false portability claim can misroute quality decisions and expand trust or authority without evidence.",
+  "why_now": "v0.8.14 defines matched behavior evaluation; current research highlights Skill dependency, provenance, portability, and supply-chain risks.",
+  "evidence_refs": [
+    "docs/qif-v0.8.14-agent-skill-behavioral-portability.md",
+    "https://arxiv.org/abs/2607.01136"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

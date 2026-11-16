@@ -3,7 +3,7 @@
   "$id": "https://ai-org-labs.example/qif/agent-skill-portability-package.schema.json",
   "title": "QIF Agent Skill Behavioral Portability Package",
   "type": "object",
-  "required": ["packageType", "runtimeVersion", "packageId", "skillArtifacts", "clientProfiles", "portabilityCases", "behaviorCriteria", "portabilityRuns", "matchedRunPairs", "portabilityAssessments", "governanceTriggers", "verifierBoundary"],
+  "required": ["packageType", "runtimeVersion", "packageId", "skillArtifacts", "clientProfiles", "portabilityCases", "behaviorCriteria", "portabilityRuns", "matchedRunPairs", "portabilityAssessments", "evidenceSources", "executionAttestations", "evidenceCustodyEvents", "evidenceImportDecisions", "corpusReadinessAssessments", "governanceTriggers", "verifierBoundary"],
   "additionalProperties": false,
   "properties": {
     "packageType": { "const": "agent-skill-portability" },
@@ -16,6 +16,11 @@
     "portabilityRuns": { "type": "array", "minItems": 4, "items": { "$ref": "#/$defs/portabilityRun" } },
     "matchedRunPairs": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/matchedRunPair" } },
     "portabilityAssessments": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/portabilityAssessment" } },
+    "evidenceSources": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidenceSource" } },
+    "executionAttestations": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/executionAttestation" } },
+    "evidenceCustodyEvents": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidenceCustodyEvent" } },
+    "evidenceImportDecisions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidenceImportDecision" } },
+    "corpusReadinessAssessments": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/corpusReadinessAssessment" } },
     "governanceTriggers": { "type": "array", "items": { "$ref": "#/$defs/governanceTrigger" } },
     "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
   },
@@ -54,9 +59,29 @@
       "type": "object", "required": ["id", "skillArtifactRef", "caseRefs", "clientRefs", "pairRefs", "clientCount", "pairCount", "criteriaCoverageComplete", "matchedConfigurationComplete", "aggregateCriterionDelta", "regressionCount", "blockingFailureRefs", "evidenceStatus", "outcome", "rationale", "governanceTriggerRefs", "activityCountIsQuality", "agreementIsTruth", "automaticAuthority", "semanticTruthClaimed", "status"], "additionalProperties": false,
       "properties": { "id": { "$ref": "#/$defs/id" }, "skillArtifactRef": { "$ref": "#/$defs/id" }, "caseRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }, "clientRefs": { "type": "array", "minItems": 2, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }, "pairRefs": { "type": "array", "minItems": 2, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }, "clientCount": { "type": "integer", "minimum": 0 }, "pairCount": { "type": "integer", "minimum": 0 }, "criteriaCoverageComplete": { "type": "boolean" }, "matchedConfigurationComplete": { "type": "boolean" }, "aggregateCriterionDelta": { "type": "integer" }, "regressionCount": { "type": "integer", "minimum": 0 }, "blockingFailureRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "evidenceStatus": { "enum": ["verified", "unverified", "example-only"] }, "outcome": { "enum": ["portable-candidate", "not-portable", "governance-required"] }, "rationale": { "type": "string", "minLength": 1 }, "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "activityCountIsQuality": { "const": false }, "agreementIsTruth": { "const": false }, "automaticAuthority": { "const": false }, "semanticTruthClaimed": { "const": false }, "status": { "enum": ["reviewed", "governance-required"] } }
     },
+    "evidenceSource": {
+      "type": "object", "required": ["id", "sourceType", "provider", "locator", "acquiredAt", "artifactDigest", "collectionMethod", "sensitiveDataHandling", "evidenceStatus", "stale"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "sourceType": { "enum": ["external-client-export", "local-run-export", "committed-example"] }, "provider": { "type": "string", "minLength": 1 }, "locator": { "type": "string", "minLength": 1 }, "acquiredAt": { "type": "string", "format": "date-time" }, "artifactDigest": { "$ref": "#/$defs/digest" }, "collectionMethod": { "type": "string", "minLength": 1 }, "sensitiveDataHandling": { "type": "string", "minLength": 1 }, "evidenceStatus": { "enum": ["verified", "unverified", "example-only"] }, "stale": { "type": "boolean" } }
+    },
+    "executionAttestation": {
+      "type": "object", "required": ["id", "runRef", "sourceRef", "attestedBy", "attesterRole", "issuedAt", "environmentDigest", "skillArtifactDigest", "inputDigest", "transcriptDigest", "reviewedBy", "reviewStatus", "conflictRefs", "status"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "runRef": { "$ref": "#/$defs/id" }, "sourceRef": { "$ref": "#/$defs/id" }, "attestedBy": { "type": "string", "minLength": 1 }, "attesterRole": { "type": "string", "minLength": 1 }, "issuedAt": { "type": "string", "format": "date-time" }, "environmentDigest": { "$ref": "#/$defs/digest" }, "skillArtifactDigest": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] }, "inputDigest": { "$ref": "#/$defs/digest" }, "transcriptDigest": { "$ref": "#/$defs/digest" }, "reviewedBy": { "type": "array", "items": { "type": "string", "minLength": 1 } }, "reviewStatus": { "enum": ["reviewed", "unreviewed", "conflicted"] }, "conflictRefs": { "type": "array", "items": { "type": "string", "minLength": 1 } }, "status": { "enum": ["accepted", "provisional", "rejected"] } }
+    },
+    "evidenceCustodyEvent": {
+      "type": "object", "required": ["id", "sourceRef", "priorEventRef", "eventType", "actor", "occurredAt", "inputDigest", "outputDigest", "evidenceRef"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "sourceRef": { "$ref": "#/$defs/id" }, "priorEventRef": { "type": ["string", "null"] }, "eventType": { "enum": ["capture", "transfer", "import", "review", "redaction"] }, "actor": { "type": "string", "minLength": 1 }, "occurredAt": { "type": "string", "format": "date-time" }, "inputDigest": { "$ref": "#/$defs/digest" }, "outputDigest": { "$ref": "#/$defs/digest" }, "evidenceRef": { "type": "string", "minLength": 1 } }
+    },
+    "evidenceImportDecision": {
+      "type": "object", "required": ["id", "runRef", "sourceRef", "attestationRef", "custodyEventRefs", "digestAlignment", "custodyComplete", "attestationReviewed", "conflictsResolved", "decision", "rationale", "governanceTriggerRefs", "status"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "runRef": { "$ref": "#/$defs/id" }, "sourceRef": { "$ref": "#/$defs/id" }, "attestationRef": { "$ref": "#/$defs/id" }, "custodyEventRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }, "digestAlignment": { "type": "boolean" }, "custodyComplete": { "type": "boolean" }, "attestationReviewed": { "type": "boolean" }, "conflictsResolved": { "type": "boolean" }, "decision": { "enum": ["accepted", "provisional", "rejected"] }, "rationale": { "type": "string", "minLength": 1 }, "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "status": { "enum": ["reviewed", "governance-required"] } }
+    },
+    "corpusReadinessAssessment": {
+      "type": "object", "required": ["id", "pairRefs", "importDecisionRefs", "minimumIndependentGroups", "observedIndependentGroups", "verifiedPairCount", "unresolvedImportCount", "staleSourceCount", "readiness", "rationale", "governanceTriggerRefs", "sourceAuthenticityClaimed", "automaticAuthority", "status"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "pairRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }, "importDecisionRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }, "minimumIndependentGroups": { "type": "integer", "minimum": 2 }, "observedIndependentGroups": { "type": "integer", "minimum": 0 }, "verifiedPairCount": { "type": "integer", "minimum": 0 }, "unresolvedImportCount": { "type": "integer", "minimum": 0 }, "staleSourceCount": { "type": "integer", "minimum": 0 }, "readiness": { "enum": ["ready-for-external-review", "not-ready", "governance-required"] }, "rationale": { "type": "string", "minLength": 1 }, "governanceTriggerRefs": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "sourceAuthenticityClaimed": { "const": false }, "automaticAuthority": { "const": false }, "status": { "enum": ["reviewed", "governance-required"] } }
+    },
     "governanceTrigger": {
       "type": "object", "required": ["id", "triggerType", "reason", "severity", "requiredAction", "owner", "status"], "additionalProperties": false,
-      "properties": { "id": { "$ref": "#/$defs/id" }, "triggerType": { "enum": ["portability-evidence-unverified", "configuration-mismatch", "blocking-behavior-failure", "cross-client-disagreement"] }, "reason": { "type": "string", "minLength": 1 }, "severity": { "enum": ["low", "medium", "high", "critical"] }, "requiredAction": { "type": "string", "minLength": 1 }, "owner": { "type": "string", "minLength": 1 }, "status": { "enum": ["open", "closed"] } }
+      "properties": { "id": { "$ref": "#/$defs/id" }, "triggerType": { "enum": ["portability-evidence-unverified", "configuration-mismatch", "blocking-behavior-failure", "cross-client-disagreement", "corpus-evidence-not-ready", "custody-incomplete", "attestation-conflict", "evidence-stale"] }, "reason": { "type": "string", "minLength": 1 }, "severity": { "enum": ["low", "medium", "high", "critical"] }, "requiredAction": { "type": "string", "minLength": 1 }, "owner": { "type": "string", "minLength": 1 }, "status": { "enum": ["open", "closed"] } }
     },
     "verifierBoundary": {
       "type": "object", "required": ["checks", "doesNotClaim", "semanticValidityRequires"], "additionalProperties": false,

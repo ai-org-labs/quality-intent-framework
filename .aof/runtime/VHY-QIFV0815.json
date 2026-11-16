@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-11-16T04:31:03.791Z",
+  "value_hypothesis_id": "VHY-MWIRN3VZ-OJCZFF",
+  "expected_value_creation": "A provider-neutral intake protocol makes imported matched-run evidence traceable and routes weak evidence to governance before corpus claims.",
+  "beneficiary": "QIF maintainers, independent evaluators, and organizations adopting QIF Skills",
+  "supporting_evidence": [
+    "v0.8.14 already provides matched-run evaluation but intentionally leaves committed runs example-only.",
+    "2026 Skill research identifies portability, dependency identity, and provenance as unresolved trust problems."
+  ],
+  "success_criteria": [
+    "Every imported run resolves source, executor, client/environment, Skill digest, input/transcript digest, custody events, and attestation.",
+    "Corpus readiness is reproducible and cannot become verified when evidence is example-only, conflicted, stale, or custody-incomplete."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

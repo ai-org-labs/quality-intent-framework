@@ -5770,3 +5770,35 @@ Date: 2026-10-25
   as the next required value slice.
 - Next value slices: v0.8.15 Verified Cross-Client Portability Corpus, v0.9
   Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger Standard.
+
+## 2026-11-16 - QIF v0.8.15 Cross-Client Portability Evidence Intake
+
+- Latest AOF runtime remained v12.2.0. Session
+  `SESS-MWIRMIRJ-5N1XI4` organized Need, Intent, and Context before planning.
+- Need Validation reframed the impossible request to fabricate a verified
+  corpus into an executable intake and readiness boundary. Validated Need
+  `NVR-MWIRNYLR-EYTRZZ` preceded charter `PCH-MWIRNITO-VR0SFC`; the planning
+  decision is `DEC-MWIRNYPX-7WNE03`.
+- Planning council `CRUN-MWIRO4EO-JUD3HI` included Visionary, Builder, and
+  Guardian with no veto. Task `TASK-089` and actor packet
+  `ASP-MWIROTKN-AL0V0T` bind schema, verifier, evidence, policy, and review.
+- Primary research shows that Skills carry mixed Skill, package, service, and
+  tool dependencies; that identity and lineage must remain distinct from
+  behavioral safety; and that provenance can span expression, implementation,
+  and operational traces. Sources: https://arxiv.org/abs/2607.01136,
+  https://arxiv.org/abs/2606.31272, https://arxiv.org/abs/2608.05204, and
+  https://arxiv.org/abs/2606.17819.
+- Decision: extend the existing `agent-skill-portability` package with evidence
+  sources, execution attestations, custody events, import decisions, and corpus
+  readiness. The committed example remains illustrative and cannot become a
+  verified corpus through local structural checks.
+- Verification: `npm test` passed 17/17 positive and 1,589/1,589 retained
+  negative checks. The Agent Skill built and verified 151 files; the portable
+  package built and verified 104 files. AOF organization verification passed
+  295/295 checks.
+- Review: council `CRUN-MWIS4S7M-HA4NN0` included Guardian, Builder, and
+  Visionary with no veto. Self-audit `FSA-QIF-V0815` preserved the distinction
+  between structural evidence closure and external source authenticity.
+- Next value slices: v0.8.16 Skill Supply Chain Manifest and Dependency Trust,
+  v0.9 Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger
+  Standard.

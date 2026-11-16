@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Provide a provider-neutral, matched-run evaluation package that records observable QIF Skill discovery, routing, behavior, evidence, and safety differences across declared clients without asserting semantic or cross-client truth.",
-  "updated_at": "2026-11-15T04:33:04.788Z",
+  "content": "Add a provider-neutral evidence intake and corpus-readiness layer to the existing Agent Skill portability package so imported runs require resolvable source, executor, environment, exact Skill identity, transcript/input digests, custody, and review attestation; keep live execution and authenticity claims outside local verification.",
+  "updated_at": "2026-11-16T04:31:43.750Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MWHC96MK-JYK873",
-  "source_decision_record_id": "DEC-MWHC9UKY-T6C7O1",
+  "source_session_id": "SESS-MWIRMIRJ-5N1XI4",
+  "source_decision_record_id": "DEC-MWIRNYPX-7WNE03",
   "declared_complete_at": null
 }

@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-11-15T04:46:53.965Z",
+  "generated_at": "2026-11-16T04:45:12.496Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MWHC96MK-JYK873",
-    "report_id": "OUT-MWHCRMCX-4KIW50",
+    "source_session_id": "SESS-MWIRMIRJ-5N1XI4",
+    "report_id": "OUT-MWIS57U1-537LK7",
     "result": "success",
-    "observed_at": "2026-11-15T04:46:53.933Z",
-    "note": "QIF v0.8.14 matched Agent Skill portability protocol implemented and verified; example evidence remains governance-required.",
-    "signal_ref": "FSA-QIF-V0814"
+    "observed_at": "2026-11-16T04:45:08.709Z",
+    "note": "QIF v0.8.15 evidence intake and corpus readiness runtime implemented; committed evidence remains governance-required.",
+    "signal_ref": "FSA-QIF-V0815"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIF-V0814",
-    "recorded_at": "2026-11-15T04:41:31.385Z",
-    "summary": "Matched-run schema, verifier, fixtures, CLI routing, portable bundles, and provisional governance boundary implemented.",
-    "detected_gap": "Committed runs are example-only and do not establish independent client behavior, skill causality, or semantic validity.",
+    "audit_id": "FSA-QIF-V0815",
+    "recorded_at": "2026-11-16T04:44:54.843Z",
+    "summary": "Provenance, execution attestation, custody, import decision, corpus readiness, fixtures, portable bundles, and governance boundaries implemented.",
+    "detected_gap": "No independently executed external-client evidence exists; local verification cannot authenticate sources or prove execution.",
     "result_state": "stable",
-    "next_action": "Collect provenance-bearing matched runs from at least two independently operated compatible clients.",
+    "next_action": "Define typed Skill supply-chain manifests, locked dependency identity, and dependency-risk propagation without treating identity as safety.",
     "related_task_ids": [
-      "TASK-088"
+      "TASK-089"
     ]
   },
   "current_next_value_slice": {
-    "content": "v0.8.15 Verified Cross-Client Portability Corpus",
-    "updated_at": "2026-11-15T04:41:31.399Z",
-    "declared_complete_at": null,
-    "source_session_id": "SESS-MWHC96MK-JYK873",
-    "source_decision_record_id": "DEC-MWHC9UKY-T6C7O1"
+    "content": "v0.8.16 Skill Supply Chain Manifest and Dependency Trust",
+    "updated_at": "2026-11-16T04:45:08.716Z",
+    "declared_complete_at": "2026-11-16T04:45:08.716Z",
+    "source_session_id": "SESS-MWIRMIRJ-5N1XI4",
+    "source_decision_record_id": null
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Collect provenance-bearing matched runs from at least two independently operated compatible clients.",
+    "proposed_focus": "Define typed Skill supply-chain manifests, locked dependency identity, and dependency-risk propagation without treating identity as safety.",
     "related_task_ids": [
-      "TASK-088"
+      "TASK-089"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: v0.8.15 Verified Cross-Client Portability Corpus",
-    "Latest self-audit next action: Collect provenance-bearing matched runs from at least two independently operated compatible clients.",
+    "Current next value slice: v0.8.16 Skill Supply Chain Manifest and Dependency Trust",
+    "Latest self-audit next action: Define typed Skill supply-chain manifests, locked dependency identity, and dependency-risk propagation without treating identity as safety.",
     "Latest outcome result: success"
   ]
 }

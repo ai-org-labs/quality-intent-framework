@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-089",
+  "title": "QIF v0.8.15 Cross-Client Portability Evidence Intake",
+  "description": "Extend the portability package with provenance, attestation, custody, import decisions, and corpus-readiness governance.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MWIRMIRJ-5N1XI4",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MWIRNYPX-7WNE03",
+  "operating_goal_ref": "v0.8.15-cross-client-evidence-intake",
+  "created_at": "2026-11-16T04:31:56.134Z",
+  "updated_at": "2026-11-16T04:45:08.719Z",
+  "assigned_at": null,
+  "done_at": "2026-11-16T04:45:08.719Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "v0.8.15 implemented; npm test 17/17 positive and 1589/1589 negative; council review no veto."
+}

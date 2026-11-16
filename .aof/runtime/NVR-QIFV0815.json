@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-16T04:31:43.599Z",
+  "validation_id": "NVR-MWIRNYLR-EYTRZZ",
+  "raw_need": "Build the v0.8.15 verified cross-client corpus",
+  "validation_status": "reframed",
+  "validated_need": "Add a provider-neutral evidence intake and corpus-readiness layer to the existing Agent Skill portability package so imported runs require resolvable source, executor, environment, exact Skill identity, transcript/input digests, custody, and review attestation; keep live execution and authenticity claims outside local verification.",
+  "decision_summary": "The roadmap wording implied a real verified corpus, which cannot be truthfully fabricated. The validated need is the executable intake and readiness boundary that makes a future verified corpus possible.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What is in scope?",
+      "answer": "Evidence intake, traceability, custody, attestation, readiness, and governance only.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must never be inferred?",
+      "answer": "Local structure cannot prove external source authenticity, client independence, Skill causality, semantic truth, or authority.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A committed example could be called a verified corpus without external execution evidence."
+  ],
+  "evidence_gaps": [
+    "No independently executed external-client evidence is available in-repository."
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0815.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0815.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0815.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": ".aof/runtime/PCH-QIFV0815.json",
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWIRMP6G-WWEWM0"
+}

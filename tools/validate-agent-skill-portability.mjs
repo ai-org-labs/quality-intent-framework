@@ -6,7 +6,7 @@ import process from "node:process";
 
 const files = process.argv.slice(2).length ? process.argv.slice(2) : ["examples/agent-skill-portability-package.json"];
 const errors = [];
-const requiredClaims = ["semantic truth", "client independence beyond declared groups", "model competence", "cross-client output equivalence", "skill causality", "behavioral portability from example-only evidence", "approval or execution authority"];
+const requiredClaims = ["semantic truth", "source authenticity", "client independence beyond declared groups", "model competence", "cross-client output equivalence", "skill causality", "behavioral portability from example-only evidence", "approval or execution authority"];
 const sameSet = (a, b) => Array.isArray(a) && [...new Set(a)].sort().join("\0") === [...new Set(b)].sort().join("\0");
 const array = (p, k) => Array.isArray(p[k]) ? p[k] : (errors.push(`package ${k} must be an array.`), []);
 const index = (xs, name) => { const m = new Map(); for (const x of xs) { if (!x?.id) errors.push(`${name} contains an item without an id.`); else if (m.has(x.id)) errors.push(`Duplicate id ${x.id} in ${name}.`); else m.set(x.id, x); } return m; };
@@ -19,7 +19,9 @@ for (const file of files) {
   const skills = array(p, "skillArtifacts"), clients = array(p, "clientProfiles"), cases = array(p, "portabilityCases");
   const criteria = array(p, "behaviorCriteria"), runs = array(p, "portabilityRuns"), pairs = array(p, "matchedRunPairs");
   const assessments = array(p, "portabilityAssessments"), triggers = array(p, "governanceTriggers");
+  const sources=array(p,"evidenceSources"), attestations=array(p,"executionAttestations"), custody=array(p,"evidenceCustodyEvents"), imports=array(p,"evidenceImportDecisions"), corpus=array(p,"corpusReadinessAssessments");
   const S=index(skills,"skillArtifacts"), C=index(clients,"clientProfiles"), K=index(cases,"portabilityCases"), B=index(criteria,"behaviorCriteria"), R=index(runs,"portabilityRuns"), M=index(pairs,"matchedRunPairs"), G=index(triggers,"governanceTriggers");
+  const ES=index(sources,"evidenceSources"), EA=index(attestations,"executionAttestations"), EC=index(custody,"evidenceCustodyEvents"), EI=index(imports,"evidenceImportDecisions");
   if (clients.length < 2 || new Set(clients.map(x=>x.independenceGroup)).size < 2) errors.push("clientProfiles must declare at least two distinct independenceGroup values.");
   for (const s of skills) {
     if (path.isAbsolute(s.sourcePath||"") || String(s.sourcePath||"").split(/[\\/]/).includes("..")) errors.push(`${s.id} sourcePath must be repository-relative without parent traversal.`);
@@ -75,7 +77,48 @@ for (const file of files) {
     if(outcome==="governance-required" && !(a.governanceTriggerRefs||[]).some(id=>G.get(id)?.triggerType==="portability-evidence-unverified")) errors.push(`${a.id} governance-required outcome requires portability-evidence-unverified trigger.`);
     if([a.activityCountIsQuality,a.agreementIsTruth,a.automaticAuthority,a.semanticTruthClaimed].some(x=>x!==false)) errors.push(`${a.id} must preserve quality, truth, and authority boundaries.`);
   }
+  const importComputed=new Map();
+  for (const a of attestations) {
+    const r=resolve(R,a.runRef,"run",a.id), s=resolve(ES,a.sourceRef,"evidence source",a.id); if(!r||!s) continue;
+    const client=C.get(r.clientRef), skill=r.skillArtifactRef?S.get(r.skillArtifactRef):null;
+    const aligned=a.environmentDigest===client?.environmentDigest && a.inputDigest===r.inputDigest && a.transcriptDigest===r.transcriptDigest && a.skillArtifactDigest===(skill?.artifactDigest??null) && s.artifactDigest===r.transcriptDigest;
+    if(!aligned) errors.push(`${a.id} attested digests must align with its run, client, Skill, and evidence source.`);
+    const reviewed=a.reviewStatus==="reviewed" && Array.isArray(a.reviewedBy) && a.reviewedBy.length>0;
+    if(a.status==="accepted" && (!reviewed || s.evidenceStatus!=="verified")) errors.push(`${a.id} accepted status requires reviewed attestation and verified source evidence.`);
+  }
+  for (const e of custody) {
+    resolve(ES,e.sourceRef,"evidence source",e.id);
+    if(e.priorEventRef!==null) { const prior=resolve(EC,e.priorEventRef,"prior custody event",e.id); if(prior && (prior.sourceRef!==e.sourceRef || prior.outputDigest!==e.inputDigest || Date.parse(prior.occurredAt)>Date.parse(e.occurredAt))) errors.push(`${e.id} custody predecessor must preserve source, digest continuity, and chronology.`); }
+  }
+  for (const d of imports) {
+    const r=resolve(R,d.runRef,"run",d.id), s=resolve(ES,d.sourceRef,"evidence source",d.id), a=resolve(EA,d.attestationRef,"execution attestation",d.id);
+    const events=(d.custodyEventRefs||[]).map(id=>resolve(EC,id,"custody event",d.id)).filter(Boolean);
+    if(!r||!s||!a) continue;
+    if(a.runRef!==r.id || a.sourceRef!==s.id || events.some(e=>e.sourceRef!==s.id)) errors.push(`${d.id} run, source, attestation, and custody references must form one evidence chain.`);
+    const digestAlignment=a.inputDigest===r.inputDigest && a.transcriptDigest===r.transcriptDigest && s.artifactDigest===r.transcriptDigest;
+    const roots=events.filter(e=>e.priorEventRef===null), leaves=events.filter(e=>!events.some(x=>x.priorEventRef===e.id));
+    const custodyComplete=events.length>0 && roots.length===1 && leaves.length===1 && roots[0].inputDigest===s.artifactDigest && leaves[0].outputDigest===s.artifactDigest;
+    const reviewed=a.reviewStatus==="reviewed" && a.reviewedBy.length>0, conflicts=a.conflictRefs.length===0;
+    for(const [field,value] of Object.entries({digestAlignment,custodyComplete,attestationReviewed:reviewed,conflictsResolved:conflicts})) if(d[field]!==value) errors.push(`${d.id} ${field} must reproduce as ${value}.`);
+    const decision=digestAlignment&&custodyComplete&&conflicts ? (reviewed&&s.evidenceStatus==="verified"?"accepted":"provisional") : "rejected";
+    if(d.decision!==decision) errors.push(`${d.id} decision must reproduce as ${decision}.`);
+    if(decision!=="accepted" && d.status!=="governance-required") errors.push(`${d.id} unresolved import requires governance-required status.`);
+    importComputed.set(d.id,{d,r,s,decision});
+  }
+  for(const a of corpus) {
+    const ps=(a.pairRefs||[]).map(id=>resolve(M,id,"matched pair",a.id)).filter(Boolean), ds=(a.importDecisionRefs||[]).map(id=>importComputed.get(id)||(errors.push(`${a.id} references missing import decision: ${id}`),null)).filter(Boolean);
+    const groups=new Set(ps.map(x=>C.get(x.clientRef)?.independenceGroup)).size;
+    const acceptedRuns=new Set(ds.filter(x=>x.decision==="accepted").map(x=>x.r.id));
+    const verifiedPairs=ps.filter(x=>acceptedRuns.has(x.baselineRunRef)&&acceptedRuns.has(x.skillRunRef)&&x.evidenceStatus==="verified").length;
+    const unresolved=ds.filter(x=>x.decision!=="accepted").length, stale=new Set(ds.filter(x=>x.s.stale).map(x=>x.s.id)).size;
+    for(const [field,value] of Object.entries({observedIndependentGroups:groups,verifiedPairCount:verifiedPairs,unresolvedImportCount:unresolved,staleSourceCount:stale})) if(a[field]!==value) errors.push(`${a.id} ${field} must reproduce as ${value}.`);
+    const ready=groups>=a.minimumIndependentGroups && verifiedPairs===ps.length && unresolved===0 && stale===0;
+    const readiness=ready?"ready-for-external-review":"governance-required";
+    if(a.readiness!==readiness) errors.push(`${a.id} readiness must reproduce as ${readiness}.`);
+    if(!ready && !(a.governanceTriggerRefs||[]).some(id=>G.get(id)?.triggerType==="corpus-evidence-not-ready")) errors.push(`${a.id} non-ready corpus requires corpus-evidence-not-ready trigger.`);
+    if(a.sourceAuthenticityClaimed!==false || a.automaticAuthority!==false) errors.push(`${a.id} must preserve authenticity and authority boundaries.`);
+  }
   for (const claim of requiredClaims) if (!p.verifierBoundary?.doesNotClaim?.includes(claim)) errors.push(`verifierBoundary must explicitly not claim ${claim}.`);
-  if (errors.length===0) console.log(JSON.stringify({ok:true,package:file,counts:{clients:clients.length,cases:cases.length,runs:runs.length,pairs:pairs.length,assessments:assessments.length}},null,2));
+  if (errors.length===0) console.log(JSON.stringify({ok:true,package:file,counts:{clients:clients.length,cases:cases.length,runs:runs.length,pairs:pairs.length,assessments:assessments.length,sources:sources.length,attestations:attestations.length,custodyEvents:custody.length,importDecisions:imports.length,corpusAssessments:corpus.length}},null,2));
 }
 if (errors.length) { console.error(errors.join("\n")); process.exit(1); }

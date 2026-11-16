@@ -951,9 +951,13 @@ Deliverables:
   Portability Pilot: measure discovery,
     routing, instruction following, and evidence quality across independent
     compatible clients without treating model agreement as truth.
+- Implemented sixteenth v0.8 slice, v0.8.15 Cross-Client Portability Evidence
+  Intake: record provenance, execution attestation, custody, import decisions,
+  and corpus readiness while refusing to fabricate external verification.
 - Next planned slices:
-  - v0.8.15 Verified Cross-Client Portability Corpus: replace illustrative
-    matched runs with imported, provenance-bearing independent client evidence.
+  - v0.8.16 Skill Supply Chain Manifest and Dependency Trust: model typed Skill,
+    package, service, and tool dependencies with locked identities and risk
+    propagation while keeping identity distinct from safety.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,

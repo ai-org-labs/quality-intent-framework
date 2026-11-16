@@ -1,0 +1,455 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-11-16T04:31:51.122Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MWIRMIRJ-5N1XI4",
+    "stage": "planning",
+    "executionId": "CRUN-MWIRO4EO-JUD3HI",
+    "executionStatus": "completed",
+    "invokedModel": true,
+    "seatCount": 3,
+    "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Builder(design-builder-01) -> Visionary(strategy-lead-01) -> Guardian(risk-reviewer-01) with 3 completed model calls",
+    "lastCouncilExecutionId": "CRUN-MWIRO4EO-JUD3HI",
+    "escalation": null,
+    "plan": {
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "required_roles": [
+        "Builder",
+        "Visionary",
+        "Guardian"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWIRMIRJ-5N1XI4",
+              "decision_id": "DEC-MWIRNYPX-7WNE03",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope.",
+              "intent": "Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.",
+              "active_context": "context: QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. | success: Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.",
+              "context_snapshot_id": "CTX-MWIRMP6E-69Q8QM",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required."
+            },
+            "task": {
+              "request": "QIF v0.8.15として、複数クライアントから得たAgent Skill評価証拠を、出所・実行者・環境・Skill同一性・チェーンオブカストディとともに取り込み、真正性を過剰主張せず corpus readiness を判定できる provider-neutral な Evidence Intake runtime を開発する。実クライアント実行、認証、秘密情報、外部API統合、自動承認は行わない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0815.json",
+                ".aof/runtime/PCH-QIFV0815.json",
+                ".aof/runtime/PST-QIFV0815.json",
+                ".aof/runtime/VHY-QIFV0815.json",
+                ".aof/runtime/ALT-QIFV0815.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWIRNYPX-7WNE03"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWIRMIRJ-5N1XI4",
+              "decision_id": "DEC-MWIRNYPX-7WNE03",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope.",
+              "intent": "Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.",
+              "active_context": "context: QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. | success: Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.",
+              "context_snapshot_id": "CTX-MWIRMP6E-69Q8QM",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required."
+            },
+            "task": {
+              "request": "QIF v0.8.15として、複数クライアントから得たAgent Skill評価証拠を、出所・実行者・環境・Skill同一性・チェーンオブカストディとともに取り込み、真正性を過剰主張せず corpus readiness を判定できる provider-neutral な Evidence Intake runtime を開発する。実クライアント実行、認証、秘密情報、外部API統合、自動承認は行わない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0815.json",
+                ".aof/runtime/PCH-QIFV0815.json",
+                ".aof/runtime/PST-QIFV0815.json",
+                ".aof/runtime/VHY-QIFV0815.json",
+                ".aof/runtime/ALT-QIFV0815.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWIRNYPX-7WNE03"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWIRMIRJ-5N1XI4",
+              "decision_id": "DEC-MWIRNYPX-7WNE03",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope.",
+              "intent": "Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.",
+              "active_context": "context: QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. | success: Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.",
+              "context_snapshot_id": "CTX-MWIRMP6E-69Q8QM",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required."
+            },
+            "task": {
+              "request": "QIF v0.8.15として、複数クライアントから得たAgent Skill評価証拠を、出所・実行者・環境・Skill同一性・チェーンオブカストディとともに取り込み、真正性を過剰主張せず corpus readiness を判定できる provider-neutral な Evidence Intake runtime を開発する。実クライアント実行、認証、秘密情報、外部API統合、自動承認は行わない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0815.json",
+                ".aof/runtime/PCH-QIFV0815.json",
+                ".aof/runtime/PST-QIFV0815.json",
+                ".aof/runtime/VHY-QIFV0815.json",
+                ".aof/runtime/ALT-QIFV0815.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWIRNYPX-7WNE03"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MWIRO4EO-JUD3HI",
+      "stage": "planning",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Builder",
+        "Visionary",
+        "Guardian"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Builder",
+      "approval_mode": "single",
+      "status": "completed",
+      "started_at": "2026-11-16T04:31:51.119Z",
+      "completed_at": "2026-11-16T04:31:51.120Z",
+      "summary": "prototype council execution prepared 3 routed seat calls in single-instance-role-switching: Builder(design-builder-01) -> Visionary(strategy-lead-01) -> Guardian(risk-reviewer-01) with 3 completed model calls",
+      "steps": [
+        {
+          "step_id": "CRUN-MWIRO4EO-JUD3HI-STEP-01",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Builder planning call for actor design-builder-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWIRMIRJ-5N1XI4",
+              "decision_id": "DEC-MWIRNYPX-7WNE03",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope.",
+              "intent": "Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.",
+              "active_context": "context: QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. | success: Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.",
+              "context_snapshot_id": "CTX-MWIRMP6E-69Q8QM",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required."
+            },
+            "task": {
+              "request": "QIF v0.8.15として、複数クライアントから得たAgent Skill評価証拠を、出所・実行者・環境・Skill同一性・チェーンオブカストディとともに取り込み、真正性を過剰主張せず corpus readiness を判定できる provider-neutral な Evidence Intake runtime を開発する。実クライアント実行、認証、秘密情報、外部API統合、自動承認は行わない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0815.json",
+                ".aof/runtime/PCH-QIFV0815.json",
+                ".aof/runtime/PST-QIFV0815.json",
+                ".aof/runtime/VHY-QIFV0815.json",
+                ".aof/runtime/ALT-QIFV0815.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWIRNYPX-7WNE03"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-11-16T04:31:51.120Z",
+          "completed_at": "2026-11-16T04:31:51.120Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-11-16T04:31:51.120Z",
+            "output_text": "DECISION: proceed\nVETO: no\nBuilder planning response: focus on QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. and align to Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required..",
+            "output_summary": "DECISION: proceed VETO: no Builder planning response: focus on QIF Agent Skill portability evidence intake and local verification only.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Builder in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.8.15として、複数クライアントから得たAgent Skill評価証拠を、出所・実行者・環境・Skill同一性・チェーンオブカストディとともに取り込み、真正性を過剰主張せず corpus readiness を判定できる provider-neutral な Evidence Intake runtime を開発する。実クライアント実行、認証、秘密情報、外部API統合、自動承認は行わない。\nNeed: QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope.\nIntent: Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.\nActive Context: context: QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. | success: Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MWIRO4EO-JUD3HI-STEP-02",
+          "role": "Visionary",
+          "actor_ref": "strategy-lead-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Visionary planning call for actor strategy-lead-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWIRMIRJ-5N1XI4",
+              "decision_id": "DEC-MWIRNYPX-7WNE03",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "strategy-lead-01",
+              "actor_kind": "ai",
+              "active_role": "Visionary",
+              "capabilities": [
+                "need-framing",
+                "scope-definition"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope.",
+              "intent": "Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.",
+              "active_context": "context: QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. | success: Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.",
+              "context_snapshot_id": "CTX-MWIRMP6E-69Q8QM",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required."
+            },
+            "task": {
+              "request": "QIF v0.8.15として、複数クライアントから得たAgent Skill評価証拠を、出所・実行者・環境・Skill同一性・チェーンオブカストディとともに取り込み、真正性を過剰主張せず corpus readiness を判定できる provider-neutral な Evidence Intake runtime を開発する。実クライアント実行、認証、秘密情報、外部API統合、自動承認は行わない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0815.json",
+                ".aof/runtime/PCH-QIFV0815.json",
+                ".aof/runtime/PST-QIFV0815.json",
+                ".aof/runtime/VHY-QIFV0815.json",
+                ".aof/runtime/ALT-QIFV0815.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWIRNYPX-7WNE03"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-11-16T04:31:51.120Z",
+          "completed_at": "2026-11-16T04:31:51.120Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-11-16T04:31:51.120Z",
+            "output_text": "DECISION: proceed\nVETO: no\nVisionary planning response: focus on QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. and align to Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required..",
+            "output_summary": "DECISION: proceed VETO: no Visionary planning response: focus on QIF Agent Skill portability evidence intake and local verification only.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Visionary in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.8.15として、複数クライアントから得たAgent Skill評価証拠を、出所・実行者・環境・Skill同一性・チェーンオブカストディとともに取り込み、真正性を過剰主張せず corpus readiness を判定できる provider-neutral な Evidence Intake runtime を開発する。実クライアント実行、認証、秘密情報、外部API統合、自動承認は行わない。\nNeed: QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope.\nIntent: Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.\nActive Context: context: QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. | success: Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required."
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MWIRO4EO-JUD3HI-STEP-03",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-plan",
+          "status": "completed",
+          "summary": "prepare Guardian planning call for actor risk-reviewer-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWIRMIRJ-5N1XI4",
+              "decision_id": "DEC-MWIRNYPX-7WNE03",
+              "stage": "planning",
+              "call_purpose": "generate-plan"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope.",
+              "intent": "Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.",
+              "active_context": "context: QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. | success: Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.",
+              "context_snapshot_id": "CTX-MWIRMP6E-69Q8QM",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required."
+            },
+            "task": {
+              "request": "QIF v0.8.15として、複数クライアントから得たAgent Skill評価証拠を、出所・実行者・環境・Skill同一性・チェーンオブカストディとともに取り込み、真正性を過剰主張せず corpus readiness を判定できる provider-neutral な Evidence Intake runtime を開発する。実クライアント実行、認証、秘密情報、外部API統合、自動承認は行わない。",
+              "current_goal": "prepare the next executable plan from the framed request",
+              "expected_output_kind": "plan"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0815.json",
+                ".aof/runtime/PCH-QIFV0815.json",
+                ".aof/runtime/PST-QIFV0815.json",
+                ".aof/runtime/VHY-QIFV0815.json",
+                ".aof/runtime/ALT-QIFV0815.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWIRNYPX-7WNE03"
+              ],
+              "relevant_signals": []
+            }
+          },
+          "started_at": "2026-11-16T04:31:51.120Z",
+          "completed_at": "2026-11-16T04:31:51.120Z",
+          "result": {
+            "provider": "mock",
+            "model": "aof-mock-model",
+            "generated_at": "2026-11-16T04:31:51.120Z",
+            "output_text": "DECISION: proceed\nVETO: no\nGuardian planning response: focus on QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. and align to Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required..",
+            "output_summary": "DECISION: proceed VETO: no Guardian planning response: focus on QIF Agent Skill portability evidence intake and local verification only.",
+            "decision_signal": {
+              "recommendation": "proceed",
+              "veto": false
+            },
+            "prompt_bundle": {
+              "system": "You are acting as Guardian in an AI Organization Framework runtime.\nCurrent stage: planning.\nCall purpose: generate-plan.\nDecision rule: majority-with-guardian-veto.\nRespond concisely and focus on the current seat responsibility.",
+              "user": "Request: QIF v0.8.15として、複数クライアントから得たAgent Skill評価証拠を、出所・実行者・環境・Skill同一性・チェーンオブカストディとともに取り込み、真正性を過剰主張せず corpus readiness を判定できる provider-neutral な Evidence Intake runtime を開発する。実クライアント実行、認証、秘密情報、外部API統合、自動承認は行わない。\nNeed: QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope.\nIntent: Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.\nActive Context: context: QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. | success: Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required.\nCurrent Goal: prepare the next executable plan from the framed request\nExpected Output Kind: plan\nClarifications or Assumptions: Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => QIF Agent Skill portability evidence intake and local verification only. Live client execution, authentication, secrets, external APIs, employee monitoring, and automatic authority remain out of scope. / How should improvement success be judged: which metric or end state matters most? => Success means every imported run resolves to source, executor, client/environment, exact Skill digest, input/transcript digest, custody history, and reviewer attestation; unverifiable or conflicting evidence must make corpus readiness governance-required."
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

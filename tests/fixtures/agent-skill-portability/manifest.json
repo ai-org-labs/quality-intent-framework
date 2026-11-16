@@ -72,6 +72,41 @@
   ],
   "negatives": [
     {
+      "file": "agent-skill-portability-sources-array.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "evidence sources required",
+      "expect": "fail",
+      "errorIncludes": "package evidenceSources must be an array."
+    },
+    {
+      "file": "agent-skill-portability-attestations-array.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "execution attestations required",
+      "expect": "fail",
+      "errorIncludes": "package executionAttestations must be an array."
+    },
+    {
+      "file": "agent-skill-portability-custody-array.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "custody events required",
+      "expect": "fail",
+      "errorIncludes": "package evidenceCustodyEvents must be an array."
+    },
+    {
+      "file": "agent-skill-portability-imports-array.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "import decisions required",
+      "expect": "fail",
+      "errorIncludes": "package evidenceImportDecisions must be an array."
+    },
+    {
+      "file": "agent-skill-portability-corpus-array.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "corpus assessments required",
+      "expect": "fail",
+      "errorIncludes": "package corpusReadinessAssessments must be an array."
+    },
+    {
       "file": "agent-skill-portability-clients-array.json",
       "validator": "tools/validate-agent-skill-portability.mjs",
       "rule": "client profiles required",
@@ -203,6 +238,104 @@
       "rule": "authority boundary",
       "expect": "fail",
       "errorIncludes": "must preserve quality, truth, and authority boundaries"
+    },
+    {
+      "file": "agent-skill-portability-attestation-digest.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "attestation digest alignment",
+      "expect": "fail",
+      "errorIncludes": "attested digests must align"
+    },
+    {
+      "file": "agent-skill-portability-attestation-acceptance.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "attestation acceptance boundary",
+      "expect": "fail",
+      "errorIncludes": "accepted status requires reviewed attestation"
+    },
+    {
+      "file": "agent-skill-portability-custody-prior.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "custody predecessor resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing prior custody event"
+    },
+    {
+      "file": "agent-skill-portability-import-chain.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "evidence chain closure",
+      "expect": "fail",
+      "errorIncludes": "must form one evidence chain"
+    },
+    {
+      "file": "agent-skill-portability-import-digest.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "import digest reproduction",
+      "expect": "fail",
+      "errorIncludes": "digestAlignment must reproduce as true"
+    },
+    {
+      "file": "agent-skill-portability-import-custody.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "custody completeness reproduction",
+      "expect": "fail",
+      "errorIncludes": "custodyComplete must reproduce as true"
+    },
+    {
+      "file": "agent-skill-portability-import-review.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "attestation review reproduction",
+      "expect": "fail",
+      "errorIncludes": "attestationReviewed must reproduce as false"
+    },
+    {
+      "file": "agent-skill-portability-import-decision.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "import decision reproduction",
+      "expect": "fail",
+      "errorIncludes": "decision must reproduce as provisional"
+    },
+    {
+      "file": "agent-skill-portability-import-status.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "unresolved import governance",
+      "expect": "fail",
+      "errorIncludes": "unresolved import requires governance-required status"
+    },
+    {
+      "file": "agent-skill-portability-corpus-groups.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "corpus group reproduction",
+      "expect": "fail",
+      "errorIncludes": "observedIndependentGroups must reproduce as 2"
+    },
+    {
+      "file": "agent-skill-portability-corpus-verified-count.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "verified pair reproduction",
+      "expect": "fail",
+      "errorIncludes": "verifiedPairCount must reproduce as 0"
+    },
+    {
+      "file": "agent-skill-portability-corpus-readiness.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "corpus readiness reproduction",
+      "expect": "fail",
+      "errorIncludes": "readiness must reproduce as governance-required"
+    },
+    {
+      "file": "agent-skill-portability-corpus-trigger.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "non-ready corpus governance",
+      "expect": "fail",
+      "errorIncludes": "requires corpus-evidence-not-ready trigger"
+    },
+    {
+      "file": "agent-skill-portability-corpus-boundary.json",
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "rule": "authenticity authority boundary",
+      "expect": "fail",
+      "errorIncludes": "must preserve authenticity and authority boundaries"
     },
     {
       "file": "agent-skill-portability-verifier-boundary.json",

@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.8.15
+
+- Extended Agent Skill portability evaluation with evidence sources,
+  execution attestations, custody events, import decisions, and corpus
+  readiness assessments.
+- Added deterministic digest alignment, evidence-chain closure, attestation
+  review, stale-source, independent-group, and readiness verification.
+- Kept committed examples provisional and governance-required; local
+  verification does not prove source authenticity or external execution.
+
 ## v0.8.14
 
 - Added the Agent Skill Behavioral Portability Pilot package, schema, example,

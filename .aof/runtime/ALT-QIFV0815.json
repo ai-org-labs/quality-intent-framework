@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-16T04:31:03.791Z",
+  "alternative_analysis_id": "ALT-MWIRN3VZ-Y5W58R",
+  "subject_need": "Prevent unsupported cross-client Agent Skill portability evidence claims",
+  "alternative_solutions": [
+    "Extend the existing portability package with provenance, attestation, custody, and corpus-readiness records",
+    "Create a separate evidence registry and compose it by reference"
+  ],
+  "non_solution_options": [
+    "Accept client labels and transcript paths as sufficient evidence"
+  ],
+  "defer_options": [
+    "Keep all v0.8.14 results example-only and postpone external evidence intake"
+  ],
+  "stop_options": [
+    "Do not release if the verifier can classify illustrative or unresolved evidence as verified corpus evidence"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}
