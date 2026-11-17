@@ -46,6 +46,7 @@ import { cases as authoringTemplateCases, spec as authoringTemplateSpec } from "
 import { cases as qualityGateCases, spec as qualityGateSpec } from "./fixtures/quality-gate-cases.mjs";
 import { cases as calibrationReportCases, spec as calibrationReportSpec } from "./fixtures/calibration-report-cases.mjs";
 import { cases as agentSkillPortabilityCases, spec as agentSkillPortabilitySpec } from "./fixtures/agent-skill-portability-cases.mjs";
+import { cases as skillSupplyChainCases, spec as skillSupplyChainSpec } from "./fixtures/skill-supply-chain-cases.mjs";
 
 const projectRoot = process.cwd();
 const args = process.argv.slice(2);
@@ -75,7 +76,8 @@ const fixtureSuites = [
   { ...authoringTemplateSpec, cases: authoringTemplateCases },
   { ...qualityGateSpec, cases: qualityGateCases },
   { ...calibrationReportSpec, cases: calibrationReportCases },
-  { ...agentSkillPortabilitySpec, cases: agentSkillPortabilityCases }
+  { ...agentSkillPortabilitySpec, cases: agentSkillPortabilityCases },
+  { ...skillSupplyChainSpec, cases: skillSupplyChainCases }
 ];
 
 // Positive packages: valid examples that must pass their verifier.
@@ -96,7 +98,8 @@ const positivePackages = [
   { validator: "tools/validate-authoring-template.mjs", package: "examples/authoring-template-package.json" },
   { validator: "tools/validate-qif-runtime.mjs", package: "examples/quality-gate-package.json" },
   { validator: "tools/validate-calibration-report.mjs", package: "examples/calibration-report-package.json" },
-  { validator: "tools/validate-agent-skill-portability.mjs", package: "examples/agent-skill-portability-package.json" }
+  { validator: "tools/validate-agent-skill-portability.mjs", package: "examples/agent-skill-portability-package.json" },
+  { validator: "tools/validate-skill-supply-chain.mjs", package: "examples/skill-supply-chain-package.json" }
 ];
 
 function serialize(value) {

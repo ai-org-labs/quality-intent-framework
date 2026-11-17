@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-11-16T04:45:12.496Z",
+  "generated_at": "2026-11-17T04:45:37.772Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MWIRMIRJ-5N1XI4",
-    "report_id": "OUT-MWIS57U1-537LK7",
+    "source_session_id": "SESS-MWK71MX8-NG7Q7E",
+    "report_id": "OUT-MWK7LOSX-89N1FV",
     "result": "success",
-    "observed_at": "2026-11-16T04:45:08.709Z",
-    "note": "QIF v0.8.15 evidence intake and corpus readiness runtime implemented; committed evidence remains governance-required.",
-    "signal_ref": "FSA-QIF-V0815"
+    "observed_at": "2026-11-17T04:45:37.617Z",
+    "note": "QIF v0.8.16 implemented and verified with explicit identity, safety, trust, permission, and authority boundaries.",
+    "signal_ref": null
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIF-V0815",
-    "recorded_at": "2026-11-16T04:44:54.843Z",
-    "summary": "Provenance, execution attestation, custody, import decision, corpus readiness, fixtures, portable bundles, and governance boundaries implemented.",
-    "detected_gap": "No independently executed external-client evidence exists; local verification cannot authenticate sources or prove execution.",
+    "audit_id": "FSA-QIF-V0816",
+    "recorded_at": "2026-11-17T04:45:37.161Z",
+    "summary": "Schema, example, verifier, CLI, portable bundles, and 22 retained negative fixtures reproduce typed dependency manifests, locks, graph risk, and governance readiness without treating identity as safety or authority.",
+    "detected_gap": "The committed risk evidence is example-only and no live dependency inventory, source-authenticity proof, or behavioral safety assessment exists.",
     "result_state": "stable",
-    "next_action": "Define typed Skill supply-chain manifests, locked dependency identity, and dependency-risk propagation without treating identity as safety.",
+    "next_action": "Implement v0.8.17 dependency change impact and quarantine while requiring independent operational evidence for trust decisions.",
     "related_task_ids": [
-      "TASK-089"
+      "TASK-090"
     ]
   },
   "current_next_value_slice": {
-    "content": "v0.8.16 Skill Supply Chain Manifest and Dependency Trust",
-    "updated_at": "2026-11-16T04:45:08.716Z",
-    "declared_complete_at": "2026-11-16T04:45:08.716Z",
-    "source_session_id": "SESS-MWIRMIRJ-5N1XI4",
+    "content": "v0.8.17 Skill Dependency Change Impact and Quarantine",
+    "updated_at": "2026-11-17T04:45:37.619Z",
+    "declared_complete_at": "2026-11-17T04:45:37.619Z",
+    "source_session_id": "SESS-MWK71MX8-NG7Q7E",
     "source_decision_record_id": null
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Define typed Skill supply-chain manifests, locked dependency identity, and dependency-risk propagation without treating identity as safety.",
+    "proposed_focus": "Implement v0.8.17 dependency change impact and quarantine while requiring independent operational evidence for trust decisions.",
     "related_task_ids": [
-      "TASK-089"
+      "TASK-090"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: v0.8.16 Skill Supply Chain Manifest and Dependency Trust",
-    "Latest self-audit next action: Define typed Skill supply-chain manifests, locked dependency identity, and dependency-risk propagation without treating identity as safety.",
+    "Current next value slice: v0.8.17 Skill Dependency Change Impact and Quarantine",
+    "Latest self-audit next action: Implement v0.8.17 dependency change impact and quarantine while requiring independent operational evidence for trust decisions.",
     "Latest outcome result: success"
   ]
 }

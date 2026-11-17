@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-11-16T04:44:54.843Z",
-  "audit_id": "FSA-QIF-V0815",
-  "scope": "QIF v0.8.15 cross-client portability evidence intake",
-  "summary": "Provenance, execution attestation, custody, import decision, corpus readiness, fixtures, portable bundles, and governance boundaries implemented.",
-  "detected_gap": "No independently executed external-client evidence exists; local verification cannot authenticate sources or prove execution.",
+  "recorded_at": "2026-11-17T04:45:37.161Z",
+  "audit_id": "FSA-QIF-V0816",
+  "scope": "QIF v0.8.16 Skill supply-chain implementation and release readiness",
+  "summary": "Schema, example, verifier, CLI, portable bundles, and 22 retained negative fixtures reproduce typed dependency manifests, locks, graph risk, and governance readiness without treating identity as safety or authority.",
+  "detected_gap": "The committed risk evidence is example-only and no live dependency inventory, source-authenticity proof, or behavioral safety assessment exists.",
   "result_state": "stable",
-  "next_action": "Define typed Skill supply-chain manifests, locked dependency identity, and dependency-risk propagation without treating identity as safety.",
+  "next_action": "Implement v0.8.17 dependency change impact and quarantine while requiring independent operational evidence for trust decisions.",
   "related_task_ids": [
-    "TASK-089"
+    "TASK-090"
   ],
-  "source_session_id": "SESS-MWIRMIRJ-5N1XI4",
-  "source_decision_record_id": "DEC-MWIRNYPX-7WNE03"
+  "source_session_id": "SESS-MWK71MX8-NG7Q7E",
+  "source_decision_record_id": "DEC-MWK72EBI-FV7VRL"
 }

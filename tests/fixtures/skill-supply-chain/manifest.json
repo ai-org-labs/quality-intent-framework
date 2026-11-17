@@ -1,0 +1,234 @@
+{
+  "description": "QIF skill-supply-chain negative fixture corpus. Each file is an invalid package that a conformant verifier must reject with an error containing errorIncludes. Generated from tools/fixtures/skill-supply-chain-cases.mjs; do not edit by hand.",
+  "positives": [
+    {
+      "validator": "tools/validate-qif.mjs",
+      "package": "examples/qif-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-expert-judgment.mjs",
+      "package": "examples/expert-judgment-sample-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/discovery-session-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/organizational-quality-culture-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/evaluation-target-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/review-run-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-ledger.mjs",
+      "package": "examples/qif-ledger-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-review.mjs",
+      "package": "examples/world-model-review-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-calibration.mjs",
+      "package": "examples/world-model-calibration-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-pilot-corpus.mjs",
+      "package": "examples/world-model-pilot-corpus-package.json"
+    },
+    {
+      "validator": "tools/validate-guided-elicitation.mjs",
+      "package": "examples/guided-elicitation-package.json"
+    },
+    {
+      "validator": "tools/validate-world-model-elicitation.mjs",
+      "package": "examples/world-model-elicitation-package.json"
+    },
+    {
+      "validator": "tools/validate-action-quality-contract.mjs",
+      "package": "examples/action-quality-contract-package.json"
+    },
+    {
+      "validator": "tools/validate-authoring-template.mjs",
+      "package": "examples/authoring-template-package.json"
+    },
+    {
+      "validator": "tools/validate-qif-runtime.mjs",
+      "package": "examples/quality-gate-package.json"
+    },
+    {
+      "validator": "tools/validate-calibration-report.mjs",
+      "package": "examples/calibration-report-package.json"
+    },
+    {
+      "validator": "tools/validate-agent-skill-portability.mjs",
+      "package": "examples/agent-skill-portability-package.json"
+    },
+    {
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "package": "examples/skill-supply-chain-package.json"
+    }
+  ],
+  "negatives": [
+    {
+      "file": "skill-supply-chain-nodes-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "dependency nodes required",
+      "expect": "fail",
+      "errorIncludes": "package dependencyNodes must be an array."
+    },
+    {
+      "file": "skill-supply-chain-component-coverage.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "component identity closure",
+      "expect": "fail",
+      "errorIncludes": "componentRefs must exactly cover"
+    },
+    {
+      "file": "skill-supply-chain-runtime-version.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "skill version alignment",
+      "expect": "fail",
+      "errorIncludes": "version must equal runtimeVersion"
+    },
+    {
+      "file": "skill-supply-chain-missing-component.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "required component presence",
+      "expect": "fail",
+      "errorIncludes": "required component must not be missing"
+    },
+    {
+      "file": "skill-supply-chain-edge-reference.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "edge reference resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing dependency node"
+    },
+    {
+      "file": "skill-supply-chain-self-edge.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "self dependency rejection",
+      "expect": "fail",
+      "errorIncludes": "must not be a self dependency"
+    },
+    {
+      "file": "skill-supply-chain-manifest-nodes.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "manifest node closure",
+      "expect": "fail",
+      "errorIncludes": "nodeRefs must exactly cover"
+    },
+    {
+      "file": "skill-supply-chain-manifest-edges.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "manifest edge closure",
+      "expect": "fail",
+      "errorIncludes": "edgeRefs must exactly cover"
+    },
+    {
+      "file": "skill-supply-chain-unresolved-reproduction.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "unresolved dependency reproduction",
+      "expect": "fail",
+      "errorIncludes": "unresolvedDependencyRefs must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-complete-reproduction.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "manifest completeness",
+      "expect": "fail",
+      "errorIncludes": "complete must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-lock-node.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lock reference resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing dependency node"
+    },
+    {
+      "file": "skill-supply-chain-lock-identity.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lock identity alignment",
+      "expect": "fail",
+      "errorIncludes": "locked version and digest must match"
+    },
+    {
+      "file": "skill-supply-chain-risk-node.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "risk reference resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing dependency node"
+    },
+    {
+      "file": "skill-supply-chain-graph-counts.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "graph count reproduction",
+      "expect": "fail",
+      "errorIncludes": "nodeCount and edgeCount must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-lock-count.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lock count reproduction",
+      "expect": "fail",
+      "errorIncludes": "lockedRequiredNodeCount must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-direct-risk.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "direct risk reproduction",
+      "expect": "fail",
+      "errorIncludes": "directRiskNodeRefs must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-propagated-risk.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "upstream risk reproduction",
+      "expect": "fail",
+      "errorIncludes": "propagatedRiskNodeRefs must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-cycle.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "cycle detection",
+      "expect": "fail",
+      "errorIncludes": "cycleDetected must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-readiness.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "risk readiness",
+      "expect": "fail",
+      "errorIncludes": "readiness and status must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "risk governance",
+      "expect": "fail",
+      "errorIncludes": "requires dependency-risk governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-trust-boundary.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "identity trust separation",
+      "expect": "fail",
+      "errorIncludes": "must preserve identity, safety, authenticity, trust, permission, and authority boundaries"
+    },
+    {
+      "file": "skill-supply-chain-verifier-boundary.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "verifier claim boundary",
+      "expect": "fail",
+      "errorIncludes": "must explicitly not claim dependency safety"
+    }
+  ],
+  "rescopedRules": []
+}

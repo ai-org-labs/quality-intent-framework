@@ -954,10 +954,14 @@ Deliverables:
 - Implemented sixteenth v0.8 slice, v0.8.15 Cross-Client Portability Evidence
   Intake: record provenance, execution attestation, custody, import decisions,
   and corpus readiness while refusing to fabricate external verification.
+- Implemented seventeenth v0.8 slice, v0.8.16 Skill Supply Chain Manifest and
+  Dependency Trust: typed Skill components and dependencies, exact locks,
+  cycle and unresolved detection, upstream risk propagation, and reproducible
+  review readiness while keeping identity distinct from safety and authority.
 - Next planned slices:
-  - v0.8.16 Skill Supply Chain Manifest and Dependency Trust: model typed Skill,
-    package, service, and tool dependencies with locked identities and risk
-    propagation while keeping identity distinct from safety.
+  - v0.8.17 Skill Dependency Change Impact and Quarantine: compare successive
+    manifests, explain blast radius, and quarantine materially changed or
+    newly risky dependencies without silently granting remediation authority.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,

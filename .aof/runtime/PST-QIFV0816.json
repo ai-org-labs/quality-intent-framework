@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-17T04:30:21.723Z",
+  "problem_statement_id": "PST-MWK7223F-1BYSIP",
+  "affected_party": "QIF Skill maintainers and adopters",
+  "actual_problem": "A Skill can appear structurally valid while hiding package, service, tool, model, or nested Skill dependencies whose identity, version, provenance, and risk are unresolved.",
+  "why_it_matters": "Unseen dependencies can change behavior or expand the attack and authority surface beyond the reviewed Skill.",
+  "why_now": "v0.8.15 closes evidence intake while current research shows that Skill metadata is activation-ready but governance-poor and single-Skill inspection misses dependency risk.",
+  "evidence_refs": [
+    "https://arxiv.org/abs/2607.01136",
+    "https://arxiv.org/abs/2606.31272"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

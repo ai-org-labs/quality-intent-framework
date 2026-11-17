@@ -5802,3 +5802,37 @@ Date: 2026-10-25
 - Next value slices: v0.8.16 Skill Supply Chain Manifest and Dependency Trust,
   v0.9 Anticipatory Quality Intent Twin, and v1.0 Quality Decision Ledger
   Standard.
+
+## 2026-11-17 - QIF v0.8.16 Skill Supply Chain Manifest and Dependency Trust
+
+- Latest AOF runtime remained v12.2.0. Session
+  `SESS-MWK71MX8-NG7Q7E` organized Need, Intent, and Context before planning.
+- Validated Need `NVR-MWK72E3O-EONLD9` preceded charter
+  `PCH-MWK72E7H-V6RO6Q`; decisions are `DEC-MWK71MX9-1UUP41`,
+  `DEC-MWK71QXL-EHV8JC`, and `DEC-MWK72EBI-FV7VRL`.
+- Planning council `CRUN-MWK72L3K-A7N0SN` included Visionary, Builder, and
+  Guardian with no veto. Task `TASK-090` and actor packet
+  `ASP-MWK74EMS-VCMJDS` bind schema, verifier, resources, policy, and review.
+- Primary research shows that Agent Skills form mixed Skill, package, service,
+  tool, model, and runtime dependency graphs; per-component identity and
+  provenance improve inspection but do not prove behavioral equivalence,
+  safety, or trust. Sources: https://arxiv.org/abs/2607.01136,
+  https://arxiv.org/abs/2606.31272, https://arxiv.org/abs/2607.18816, and
+  https://arxiv.org/abs/2607.10113.
+- Decision: add a standalone `skill-supply-chain` package with typed
+  components and dependencies, exact locks, cycle and unresolved detection,
+  upstream risk propagation, and reproducible review readiness. Do not build
+  marketplace integration, network scanning, installation, credential access,
+  automatic trust elevation, permission, or authority.
+- Verification: `npm test` passed 18/18 positive and 1,611/1,611 retained
+  negative checks. The Agent Skill built and verified 155 files; the portable
+  package built and verified 108 files. AOF organization verification passed
+  295/295 checks.
+- Review: council `CRUN-MWK7LED3-SDJHR5` included Guardian, Builder, and
+  Visionary with no veto. Self-audit `FSA-QIF-V0816` kept example-only risk
+  evidence at `governance-required` and preserved identity, authenticity,
+  behavioral-equivalence, safety, trust, permission, and authority boundaries.
+- Retrospective: outcome `OUT-MWK7LOSX-89N1FV` recorded success and the AOF
+  learning loop remained stable. The next value slices are v0.8.17 Skill
+  Dependency Change Impact and Quarantine, v0.9 Anticipatory Quality Intent
+  Twin, and v1.0 Quality Decision Ledger Standard.

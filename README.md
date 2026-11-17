@@ -1,6 +1,6 @@
 # Quality Intent Framework
 
-Current release: **v0.8.15**. QIF is distributed as a standard Agent
+Current release: **v0.8.16**. QIF is distributed as a standard Agent
 Skill: compatible agents can discover the QIF procedure from `SKILL.md`, load
 deeper guidance only when needed, and invoke the canonical verifier without
 turning QIF into an autonomous authority.
@@ -38,6 +38,11 @@ The cross-client evidence intake layer now records source provenance,
 execution attestations, custody continuity, import decisions, and reproducible
 corpus readiness without claiming external source authenticity. See
 `docs/qif-v0.8.15-cross-client-portability-evidence-intake.md`.
+
+The Skill supply-chain layer records typed components and dependencies, exact
+locks, graph cycles, unresolved or stale dependencies, and upstream risk
+propagation. Identity evidence never becomes a safety, trust, permission, or
+authority claim. See `docs/qif-v0.8.16-skill-supply-chain-manifest.md`.
 
 To use QIF with Gemini, Claude, Codex, or another AI without cloning the full
 repository:

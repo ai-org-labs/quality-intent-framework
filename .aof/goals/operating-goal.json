@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Add a provider-neutral evidence intake and corpus-readiness layer to the existing Agent Skill portability package so imported runs require resolvable source, executor, environment, exact Skill identity, transcript/input digests, custody, and review attestation; keep live execution and authenticity claims outside local verification.",
-  "updated_at": "2026-11-16T04:31:43.750Z",
+  "content": "Add a standalone provider-neutral skill-supply-chain package that records component identity, typed dependency graphs, lock records, evidence-backed risk signals, transitive risk, and readiness while explicitly separating identity from safety, trust, behavior, and authority.",
+  "updated_at": "2026-11-17T04:30:37.567Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MWIRMIRJ-5N1XI4",
-  "source_decision_record_id": "DEC-MWIRNYPX-7WNE03",
+  "source_session_id": "SESS-MWK71MX8-NG7Q7E",
+  "source_decision_record_id": "DEC-MWK72EBI-FV7VRL",
   "declared_complete_at": null
 }

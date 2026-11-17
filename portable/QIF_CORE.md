@@ -88,3 +88,12 @@ A schema or verifier can prove that fields exist, references resolve, arithmetic
 reproduces, and declared rules are followed. It cannot prove that the model of
 the world is correct, evidence is honest, a decision is wise, or stakeholders
 accept the risk. Those require semantic review and observed outcomes.
+
+## Agent Skill Supply Chains
+
+Treat an Agent Skill as a component and dependency graph, not as one prompt.
+Record instruction, code, tool-declaration, and resource identities; type every
+runtime, package, service, tool, model, or Skill dependency; lock required
+resolved nodes; and propagate direct dependency risk upstream. A matching hash
+or lock proves declared identity only. It never proves authenticity, behavioral
+equivalence, safety, trustworthiness, permission, or authority.

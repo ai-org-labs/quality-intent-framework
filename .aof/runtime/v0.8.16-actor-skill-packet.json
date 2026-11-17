@@ -1,0 +1,77 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-11-17T04:32:11.284Z",
+  "packet_id": "ASP-MWK74EMS-VCMJDS",
+  "source_task_id": "TASK-090",
+  "source_parent_session_id": "SESS-MWK71MX8-NG7Q7E",
+  "source_decision_record_id": "DEC-MWK72EBI-FV7VRL",
+  "objective": "Implement QIF v0.8.16 Skill Supply Chain Manifest and Dependency Trust",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "Builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, verifier, fixture, documentation, and release integration while Guardian reviews identity and safety overclaims.",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "qif-runtime-schema-verification"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "schema-verifier-engineering",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "tools/run-fixture-tests.mjs",
+        "tools/validate-agent-skill-portability.mjs"
+      ],
+      "rationale": "Existing validators and retained fixture harness provide the implementation extension point."
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository"
+  ],
+  "policy_refs": [
+    "policy-no-identity-safety-or-authority-overclaim"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/skill-supply-chain-package.schema.json",
+    "required_sections": [
+      "components",
+      "dependency-graph",
+      "locks",
+      "risk-propagation",
+      "readiness"
+    ],
+    "acceptance_criteria": [
+      "npm test passes all positive and retained negative cases",
+      "example-only dependency risk remains governance-required"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "dependency traceability and trust boundary",
+      "evaluator_ref": "Guardian",
+      "evidence_required": "negative fixtures and council review",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "identity-becomes-safety",
+      "trigger_condition": "identity, digest, or lock evidence is interpreted as behavioral safety, permission, trustworthiness, or authority",
+      "consequence": "block-assignment",
+      "recovery_action": "restore explicit boundary and add regression fixture"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will make dependency lineage executable without turning identity into trust.",
+    "current_action": "Implement Skill supply chain manifest",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Submit implementation and verifier evidence to council review"
+  },
+  "status": "draft"
+}

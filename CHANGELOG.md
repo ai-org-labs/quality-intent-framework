@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.8.16
+
+- Added the standalone `skill-supply-chain` package, schema, example, verifier,
+  CLI support, retained fixtures, and portable documentation.
+- Added typed component and dependency identity, exact locks, cycle detection,
+  unresolved and stale dependency checks, and upstream risk propagation.
+- Preserved strict boundaries between identity or lock evidence and source
+  authenticity, behavioral equivalence, safety, trust, permission, or authority.
+
 ## v0.8.15
 
 - Extended Agent Skill portability evaluation with evidence sources,

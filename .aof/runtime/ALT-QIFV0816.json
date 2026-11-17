@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-17T04:30:21.723Z",
+  "alternative_analysis_id": "ALT-MWK7223F-RZDB22",
+  "subject_need": "Expose and govern Agent Skill supply-chain dependencies",
+  "alternative_solutions": [
+    "Create a standalone skill-supply-chain package composed with the existing Skill and portability runtime",
+    "Embed dependency entities directly in the portability package"
+  ],
+  "non_solution_options": [
+    "Scan SKILL.md text only and assume undeclared dependencies do not exist"
+  ],
+  "defer_options": [
+    "Keep a manual dependency list without executable readiness checks"
+  ],
+  "stop_options": [
+    "Do not release if identity, digest equality, or lock completeness can be interpreted as a safety or trust verdict"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

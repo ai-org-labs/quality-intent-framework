@@ -21,7 +21,8 @@ const examplePackages = [
   "examples/world-model-elicitation-package.json",
   "examples/action-quality-contract-package.json",
   "examples/authoring-template-package.json",
-  "examples/agent-skill-portability-package.json"
+  "examples/agent-skill-portability-package.json",
+  "examples/skill-supply-chain-package.json"
 ];
 
 const runtimeTypes = new Set([
@@ -44,7 +45,8 @@ const validatorsByType = new Map([
   ["action-quality-contract", "tools/validate-action-quality-contract.mjs"],
   ["authoring-template", "tools/validate-authoring-template.mjs"],
   ["calibration-report", "tools/validate-calibration-report.mjs"],
-  ["agent-skill-portability", "tools/validate-agent-skill-portability.mjs"]
+  ["agent-skill-portability", "tools/validate-agent-skill-portability.mjs"],
+  ["skill-supply-chain", "tools/validate-skill-supply-chain.mjs"]
 ]);
 
 function usage() {
@@ -335,6 +337,10 @@ const packageTypeDescriptions = new Map([
   ["agent-skill-portability", {
     purpose: "Evaluate observable QIF Agent Skill behavior across matched baseline and skill-enabled client runs.",
     lifecycleRole: "agent-skill-behavioral-portability"
+  }],
+  ["skill-supply-chain", {
+    purpose: "Describe typed Skill dependencies, component identities, locks, risk propagation, and review readiness without equating identity with safety or authority.",
+    lifecycleRole: "agent-skill-supply-chain-governance"
   }]
 ]);
 

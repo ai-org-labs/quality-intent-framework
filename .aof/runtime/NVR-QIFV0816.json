@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-17T04:30:37.284Z",
+  "validation_id": "NVR-MWK72E3O-EONLD9",
+  "raw_need": "Build Skill Supply Chain dependency trust",
+  "validation_status": "reframed",
+  "validated_need": "Add a standalone provider-neutral skill-supply-chain package that records component identity, typed dependency graphs, lock records, evidence-backed risk signals, transitive risk, and readiness while explicitly separating identity from safety, trust, behavior, and authority.",
+  "decision_summary": "Dependency trust is reframed as reviewable evidence and governance readiness, not an automatic trust score or safety verdict.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What must be executable?",
+      "answer": "Reference closure, component coverage, lock alignment, cycle detection, unresolved required dependencies, stale locks, and risk propagation.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must not be inferred?",
+      "answer": "Identity or digest equality does not prove safety, behavioral equivalence, source authenticity, permission, or authority.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A complete manifest makes a Skill safe."
+  ],
+  "evidence_gaps": [
+    "The committed package can demonstrate structure but not external dependency authenticity or runtime safety."
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0816.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0816.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0816.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWK71QXL-EHV8JC"
+}

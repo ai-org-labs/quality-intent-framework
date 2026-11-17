@@ -68,6 +68,10 @@
     {
       "validator": "tools/validate-agent-skill-portability.mjs",
       "package": "examples/agent-skill-portability-package.json"
+    },
+    {
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "package": "examples/skill-supply-chain-package.json"
     }
   ],
   "negatives": [

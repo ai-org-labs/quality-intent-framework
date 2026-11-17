@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-11-17T04:30:21.723Z",
+  "value_hypothesis_id": "VHY-MWK7223F-392W84",
+  "expected_value_creation": "Typed, locked dependency graphs make hidden Skill supply-chain assumptions reviewable and route unresolved or propagated risk to governance.",
+  "beneficiary": "Skill authors, evaluators, runtime operators, and organizations adopting portable QIF",
+  "supporting_evidence": [
+    "Research over large Skill corpora recommends typed manifests, dependency-cluster management, risk warnings, and lockfile-like records."
+  ],
+  "success_criteria": [
+    "Every declared component and dependency resolves by type, identity, evidence, and lock state.",
+    "Cycles, unresolved required dependencies, stale locks, direct risk, and transitive risk reproduce deterministically.",
+    "Identity and lineage remain explicitly distinct from safety, behavior, trust, and authority."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

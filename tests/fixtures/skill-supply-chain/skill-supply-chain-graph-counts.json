@@ -1,0 +1,277 @@
+{
+  "packageType": "skill-supply-chain",
+  "runtimeVersion": "0.8.16",
+  "packageId": "SSCP-QIF-001",
+  "skillArtifacts": [
+    {
+      "id": "SKA-QIF-001",
+      "name": "Quality Intent Framework",
+      "version": "0.8.16",
+      "rootNodeRef": "DPN-QIF-SKILL",
+      "componentRefs": [
+        "SKC-QIF-INSTRUCTION",
+        "SKC-QIF-CODE",
+        "SKC-QIF-TOOL"
+      ],
+      "artifactDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "status": "verified-structure"
+    }
+  ],
+  "skillComponents": [
+    {
+      "id": "SKC-QIF-INSTRUCTION",
+      "skillRef": "SKA-QIF-001",
+      "componentType": "instruction",
+      "locator": ".agents/skills/quality-intent-framework/SKILL.md",
+      "digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "required": true,
+      "status": "verified-identity"
+    },
+    {
+      "id": "SKC-QIF-CODE",
+      "skillRef": "SKA-QIF-001",
+      "componentType": "code",
+      "locator": "tools/qif.mjs",
+      "digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "required": true,
+      "status": "verified-identity"
+    },
+    {
+      "id": "SKC-QIF-TOOL",
+      "skillRef": "SKA-QIF-001",
+      "componentType": "tool-declaration",
+      "locator": "package.json#bin.qif",
+      "digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "required": true,
+      "status": "verified-identity"
+    }
+  ],
+  "dependencyNodes": [
+    {
+      "id": "DPN-QIF-SKILL",
+      "nodeType": "skill",
+      "name": "quality-intent-framework",
+      "version": "0.8.16",
+      "locator": ".agents/skills/quality-intent-framework",
+      "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "provider": "ai-org-labs",
+      "required": true,
+      "status": "resolved"
+    },
+    {
+      "id": "DPN-NODE-RUNTIME",
+      "nodeType": "runtime",
+      "name": "Node.js",
+      "version": "22",
+      "locator": "runtime:node",
+      "digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "provider": "OpenJS Foundation",
+      "required": true,
+      "status": "resolved"
+    },
+    {
+      "id": "DPN-SHELL-TOOL",
+      "nodeType": "tool",
+      "name": "local-shell",
+      "version": "system",
+      "locator": "tool:shell",
+      "digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "provider": "local-operator",
+      "required": true,
+      "status": "resolved"
+    },
+    {
+      "id": "DPN-GITHUB-SERVICE",
+      "nodeType": "service",
+      "name": "GitHub",
+      "version": "api-v3",
+      "locator": "service:github",
+      "digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+      "provider": "GitHub",
+      "required": false,
+      "status": "resolved"
+    }
+  ],
+  "dependencyEdges": [
+    {
+      "id": "DPE-QIF-NODE",
+      "fromNodeRef": "DPN-QIF-SKILL",
+      "toNodeRef": "DPN-NODE-RUNTIME",
+      "relation": "requires",
+      "evidenceRefs": [
+        "package.json#engines"
+      ],
+      "required": true,
+      "riskPropagation": "upstream"
+    },
+    {
+      "id": "DPE-QIF-SHELL",
+      "fromNodeRef": "DPN-QIF-SKILL",
+      "toNodeRef": "DPN-SHELL-TOOL",
+      "relation": "uses",
+      "evidenceRefs": [
+        "tools/qif.mjs"
+      ],
+      "required": true,
+      "riskPropagation": "upstream"
+    },
+    {
+      "id": "DPE-QIF-GITHUB",
+      "fromNodeRef": "DPN-QIF-SKILL",
+      "toNodeRef": "DPN-GITHUB-SERVICE",
+      "relation": "connects",
+      "evidenceRefs": [
+        "RELEASE.md"
+      ],
+      "required": false,
+      "riskPropagation": "upstream"
+    }
+  ],
+  "dependencyManifests": [
+    {
+      "id": "DPM-QIF-001",
+      "skillRef": "SKA-QIF-001",
+      "nodeRefs": [
+        "DPN-QIF-SKILL",
+        "DPN-NODE-RUNTIME",
+        "DPN-SHELL-TOOL",
+        "DPN-GITHUB-SERVICE"
+      ],
+      "edgeRefs": [
+        "DPE-QIF-NODE",
+        "DPE-QIF-SHELL",
+        "DPE-QIF-GITHUB"
+      ],
+      "generatedAt": "2026-11-17T04:30:00Z",
+      "complete": true,
+      "unresolvedDependencyRefs": [],
+      "status": "governance-required"
+    }
+  ],
+  "lockRecords": [
+    {
+      "id": "LCK-QIF-SKILL",
+      "manifestRef": "DPM-QIF-001",
+      "nodeRef": "DPN-QIF-SKILL",
+      "lockedVersion": "0.8.16",
+      "lockedDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "resolutionSource": "local-release",
+      "verified": true,
+      "stale": false,
+      "status": "active"
+    },
+    {
+      "id": "LCK-NODE-RUNTIME",
+      "manifestRef": "DPM-QIF-001",
+      "nodeRef": "DPN-NODE-RUNTIME",
+      "lockedVersion": "22",
+      "lockedDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "resolutionSource": "runtime-inventory",
+      "verified": true,
+      "stale": false,
+      "status": "active"
+    },
+    {
+      "id": "LCK-SHELL-TOOL",
+      "manifestRef": "DPM-QIF-001",
+      "nodeRef": "DPN-SHELL-TOOL",
+      "lockedVersion": "system",
+      "lockedDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "resolutionSource": "runtime-inventory",
+      "verified": true,
+      "stale": false,
+      "status": "active"
+    }
+  ],
+  "riskSignals": [
+    {
+      "id": "RSK-SHELL-PRIVILEGE",
+      "nodeRef": "DPN-SHELL-TOOL",
+      "riskType": "privilege",
+      "severity": "high",
+      "evidenceRefs": [
+        "example:operator-review-needed"
+      ],
+      "evidenceStatus": "example-only",
+      "status": "open"
+    }
+  ],
+  "supplyChainAssessments": [
+    {
+      "id": "SCA-QIF-001",
+      "manifestRef": "DPM-QIF-001",
+      "nodeCount": 99,
+      "edgeCount": 3,
+      "lockedRequiredNodeCount": 3,
+      "unresolvedRequiredNodeCount": 0,
+      "staleLockCount": 0,
+      "directRiskNodeRefs": [
+        "DPN-SHELL-TOOL"
+      ],
+      "propagatedRiskNodeRefs": [
+        "DPN-QIF-SKILL"
+      ],
+      "cycleDetected": false,
+      "concentrationRisk": false,
+      "readiness": "governance-required",
+      "governanceTriggerRefs": [
+        "GTR-DEPENDENCY-RISK",
+        "GTR-EVIDENCE-UNVERIFIED"
+      ],
+      "identityIsSafety": false,
+      "behavioralEquivalenceClaimed": false,
+      "sourceAuthenticityClaimed": false,
+      "automaticTrustElevation": false,
+      "automaticPermission": false,
+      "automaticAuthority": false,
+      "status": "governance-required"
+    }
+  ],
+  "governanceTriggers": [
+    {
+      "id": "GTR-DEPENDENCY-RISK",
+      "triggerType": "dependency-risk",
+      "reason": "A privileged tool dependency propagates risk to the Skill root.",
+      "severity": "high",
+      "requiredAction": "Review containment and least-privilege controls.",
+      "owner": "QIF maintainer",
+      "status": "open"
+    },
+    {
+      "id": "GTR-EVIDENCE-UNVERIFIED",
+      "triggerType": "evidence-unverified",
+      "reason": "The risk signal is example-only and has not been independently verified.",
+      "severity": "medium",
+      "requiredAction": "Replace example evidence with reviewed operational evidence.",
+      "owner": "QIF maintainer",
+      "status": "open"
+    }
+  ],
+  "verifierBoundary": {
+    "checks": [
+      "reference resolution",
+      "manifest coverage",
+      "required dependency locks",
+      "cycle detection",
+      "upstream risk propagation",
+      "readiness reproduction"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "source authenticity",
+      "component lineage beyond declared evidence",
+      "behavioral equivalence",
+      "dependency safety",
+      "Skill trustworthiness",
+      "permission or execution authority",
+      "automatic trust elevation"
+    ],
+    "semanticValidityRequires": [
+      "independent source review",
+      "behavioral evaluation",
+      "security review",
+      "operational feedback",
+      "governance decision"
+    ]
+  }
+}
