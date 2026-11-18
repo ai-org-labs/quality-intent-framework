@@ -1,0 +1,18 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-11-18T04:31:08.935Z",
+  "value_hypothesis_id": "VHY-MWLMIX6V-Q8182W",
+  "expected_value_creation": "Make dependency transitions reviewable by reproducing manifest deltas, upstream blast radius, risk change, quarantine candidates, and accountable decisions.",
+  "beneficiary": "Agent Skill adopters and governance owners",
+  "supporting_evidence": [
+    "v0.8.16 already supplies stable typed nodes, edges, locks, and risks that can be compared without network access.",
+    "2026 agentic AIBOM and runtime-governance research identifies drift and dynamic composition as unresolved assurance surfaces."
+  ],
+  "success_criteria": [
+    "Every declared delta reproduces from predecessor and successor manifests.",
+    "Material, unverified, risky, or unresolved changes create governance-required quarantine candidates.",
+    "Quarantine records do not execute blocking or grant authority."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

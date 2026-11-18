@@ -1,6 +1,6 @@
 # Quality Intent Framework
 
-Current release: **v0.8.16**. QIF is distributed as a standard Agent
+Current release: **v0.8.17**. QIF is distributed as a standard Agent
 Skill: compatible agents can discover the QIF procedure from `SKILL.md`, load
 deeper guidance only when needed, and invoke the canonical verifier without
 turning QIF into an autonomous authority.
@@ -43,6 +43,12 @@ The Skill supply-chain layer records typed components and dependencies, exact
 locks, graph cycles, unresolved or stale dependencies, and upstream risk
 propagation. Identity evidence never becomes a safety, trust, permission, or
 authority claim. See `docs/qif-v0.8.16-skill-supply-chain-manifest.md`.
+
+Dependency transitions are now first-class: QIF compares baseline and
+candidate snapshots, reproduces node, edge, lock, and risk deltas, traces the
+upstream blast radius, and routes material or uncertain changes to a
+non-executing quarantine decision. See
+`docs/qif-v0.8.17-skill-dependency-change-quarantine.md`.
 
 To use QIF with Gemini, Claude, Codex, or another AI without cloning the full
 repository:

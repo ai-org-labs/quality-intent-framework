@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-11-17T04:45:37.772Z",
+  "generated_at": "2026-11-18T04:53:27.047Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MWK71MX8-NG7Q7E",
-    "report_id": "OUT-MWK7LOSX-89N1FV",
+    "source_session_id": "SESS-MWLMIF3W-LE70MD",
+    "report_id": "OUT-MWLNBLKL-LQ6C5I",
     "result": "success",
-    "observed_at": "2026-11-17T04:45:37.617Z",
-    "note": "QIF v0.8.16 implemented and verified with explicit identity, safety, trust, permission, and authority boundaries.",
-    "signal_ref": null
+    "observed_at": "2026-11-18T04:53:26.900Z",
+    "note": "QIF v0.8.17 deterministically verifies dependency changes, blast radius, loss-boundary impact, quarantine review candidates, and accountable defer/approve/reject records without claiming live enforcement.",
+    "signal_ref": "CRUN-MWLN6V0K-Y33XXI"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIF-V0816",
-    "recorded_at": "2026-11-17T04:45:37.161Z",
-    "summary": "Schema, example, verifier, CLI, portable bundles, and 22 retained negative fixtures reproduce typed dependency manifests, locks, graph risk, and governance readiness without treating identity as safety or authority.",
-    "detected_gap": "The committed risk evidence is example-only and no live dependency inventory, source-authenticity proof, or behavioral safety assessment exists.",
+    "audit_id": "FSA-QIF-V0817",
+    "recorded_at": "2026-11-18T04:53:19.733Z",
+    "summary": "Skill dependency change sets, deterministic node edge lock and risk deltas, blast-radius loss-boundary mapping, governance-required quarantine candidates, accountable quarantine decisions, 28 new negative fixtures, and explicit non-authority boundaries are implemented and verified.",
+    "detected_gap": "Evidence remains example-only: no live runtime state, actual containment effectiveness, or safe re-entry outcome is proven.",
     "result_state": "stable",
-    "next_action": "Implement v0.8.17 dependency change impact and quarantine while requiring independent operational evidence for trust decisions.",
+    "next_action": "Implement v0.8.18 Quarantine Outcome and Safe Re-entry Evidence without granting automatic enforcement authority.",
     "related_task_ids": [
-      "TASK-090"
+      "TASK-091"
     ]
   },
   "current_next_value_slice": {
-    "content": "v0.8.17 Skill Dependency Change Impact and Quarantine",
-    "updated_at": "2026-11-17T04:45:37.619Z",
-    "declared_complete_at": "2026-11-17T04:45:37.619Z",
-    "source_session_id": "SESS-MWK71MX8-NG7Q7E",
+    "content": "QIF v0.8.18 Quarantine Outcome and Safe Re-entry Evidence",
+    "updated_at": "2026-11-18T04:53:26.903Z",
+    "declared_complete_at": "2026-11-18T04:53:26.903Z",
+    "source_session_id": "SESS-MWLMIF3W-LE70MD",
     "source_decision_record_id": null
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Implement v0.8.17 dependency change impact and quarantine while requiring independent operational evidence for trust decisions.",
+    "proposed_focus": "Implement v0.8.18 Quarantine Outcome and Safe Re-entry Evidence without granting automatic enforcement authority.",
     "related_task_ids": [
-      "TASK-090"
+      "TASK-091"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: v0.8.17 Skill Dependency Change Impact and Quarantine",
-    "Latest self-audit next action: Implement v0.8.17 dependency change impact and quarantine while requiring independent operational evidence for trust decisions.",
+    "Current next value slice: QIF v0.8.18 Quarantine Outcome and Safe Re-entry Evidence",
+    "Latest self-audit next action: Implement v0.8.18 Quarantine Outcome and Safe Re-entry Evidence without granting automatic enforcement authority.",
     "Latest outcome result: success"
   ]
 }

@@ -223,6 +223,202 @@
       "errorIncludes": "must preserve identity, safety, authenticity, trust, permission, and authority boundaries"
     },
     {
+      "file": "skill-supply-chain-snapshots-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "snapshot history required",
+      "expect": "fail",
+      "errorIncludes": "package manifestSnapshots must be an array."
+    },
+    {
+      "file": "skill-supply-chain-snapshot-manifest.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "snapshot manifest resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing manifest"
+    },
+    {
+      "file": "skill-supply-chain-snapshot-edge-endpoint.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "snapshot graph closure",
+      "expect": "fail",
+      "errorIncludes": "endpoints must exist in the same snapshot"
+    },
+    {
+      "file": "skill-supply-chain-snapshot-lock-node.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "snapshot lock closure",
+      "expect": "fail",
+      "errorIncludes": "lock node must exist in the same snapshot"
+    },
+    {
+      "file": "skill-supply-chain-snapshot-risk-node.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "snapshot risk closure",
+      "expect": "fail",
+      "errorIncludes": "risk node must exist in the same snapshot"
+    },
+    {
+      "file": "skill-supply-chain-snapshot-chronology.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "transition chronology",
+      "expect": "fail",
+      "errorIncludes": "candidate snapshot must be later"
+    },
+    {
+      "file": "skill-supply-chain-node-delta.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "node delta reproduction",
+      "expect": "fail",
+      "errorIncludes": "node additions and removals must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-changed-node.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "node field delta",
+      "expect": "fail",
+      "errorIncludes": "changedNodes must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-edge-delta.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "edge delta reproduction",
+      "expect": "fail",
+      "errorIncludes": "edge additions and removals must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-lock-delta.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lock delta reproduction",
+      "expect": "fail",
+      "errorIncludes": "changedLockNodeRefs must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-risk-delta.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "risk delta reproduction",
+      "expect": "fail",
+      "errorIncludes": "risk additions and removals must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-material-delta.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "material transition rules",
+      "expect": "fail",
+      "errorIncludes": "materialChangeRefs must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-unresolved-delta.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "unresolved transition rules",
+      "expect": "fail",
+      "errorIncludes": "unresolvedChangeRefs must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-change-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "change evidence readiness",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce change evidence readiness"
+    },
+    {
+      "file": "skill-supply-chain-direct-impact.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "direct impact reproduction",
+      "expect": "fail",
+      "errorIncludes": "directlyChangedNodeRefs must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-upstream-impact.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "upstream impact reproduction",
+      "expect": "fail",
+      "errorIncludes": "affectedUpstreamNodeRefs must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-blast-count.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "blast radius arithmetic",
+      "expect": "fail",
+      "errorIncludes": "blastRadiusCount must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-impact-counts.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "change count arithmetic",
+      "expect": "fail",
+      "errorIncludes": "material and unresolved counts must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-candidate-coverage.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "quarantine candidate coverage",
+      "expect": "fail",
+      "errorIncludes": "quarantineCandidateRefs must cover"
+    },
+    {
+      "file": "skill-supply-chain-candidate-required.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "fail closed quarantine routing",
+      "expect": "fail",
+      "errorIncludes": "requires a quarantine candidate"
+    },
+    {
+      "file": "skill-supply-chain-candidate-reference.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "quarantine change resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing change set"
+    },
+    {
+      "file": "skill-supply-chain-candidate-execution.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "non-executing quarantine",
+      "expect": "fail",
+      "errorIncludes": "must remain a non-executing quarantine candidate"
+    },
+    {
+      "file": "skill-supply-chain-material-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "material change governance",
+      "expect": "fail",
+      "errorIncludes": "requires dependency-change-material governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-quarantine-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "quarantine review governance",
+      "expect": "fail",
+      "errorIncludes": "requires quarantine-review-required governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-change-evidence-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "change evidence governance",
+      "expect": "fail",
+      "errorIncludes": "requires evidence-unverified governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-decision-reference.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "quarantine decision resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing quarantine candidate"
+    },
+    {
+      "file": "skill-supply-chain-decision-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "unverified decision boundary",
+      "expect": "fail",
+      "errorIncludes": "unverified candidate decision must remain governance-required"
+    },
+    {
+      "file": "skill-supply-chain-decision-execution.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "decision execution boundary",
+      "expect": "fail",
+      "errorIncludes": "must not authorize quarantine execution"
+    },
+    {
       "file": "skill-supply-chain-verifier-boundary.json",
       "validator": "tools/validate-skill-supply-chain.mjs",
       "rule": "verifier claim boundary",

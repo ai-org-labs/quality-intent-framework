@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.8.17 Skill Dependency Change Impact and Quarantine",
-  "updated_at": "2026-11-17T04:45:37.619Z",
+  "content": "QIF v0.8.18 Quarantine Outcome and Safe Re-entry Evidence",
+  "updated_at": "2026-11-18T04:53:26.903Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MWK71MX8-NG7Q7E",
+  "source_session_id": "SESS-MWLMIF3W-LE70MD",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-11-17T04:45:37.619Z"
+  "declared_complete_at": "2026-11-18T04:53:26.903Z"
 }

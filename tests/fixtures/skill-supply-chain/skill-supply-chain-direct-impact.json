@@ -1,0 +1,685 @@
+{
+  "packageType": "skill-supply-chain",
+  "runtimeVersion": "0.8.17",
+  "packageId": "SSCP-QIF-001",
+  "skillArtifacts": [
+    {
+      "id": "SKA-QIF-001",
+      "name": "Quality Intent Framework",
+      "version": "0.8.17",
+      "rootNodeRef": "DPN-QIF-SKILL",
+      "componentRefs": [
+        "SKC-QIF-INSTRUCTION",
+        "SKC-QIF-CODE",
+        "SKC-QIF-TOOL"
+      ],
+      "artifactDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "status": "verified-structure"
+    }
+  ],
+  "skillComponents": [
+    {
+      "id": "SKC-QIF-INSTRUCTION",
+      "skillRef": "SKA-QIF-001",
+      "componentType": "instruction",
+      "locator": ".agents/skills/quality-intent-framework/SKILL.md",
+      "digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "required": true,
+      "status": "verified-identity"
+    },
+    {
+      "id": "SKC-QIF-CODE",
+      "skillRef": "SKA-QIF-001",
+      "componentType": "code",
+      "locator": "tools/qif.mjs",
+      "digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "required": true,
+      "status": "verified-identity"
+    },
+    {
+      "id": "SKC-QIF-TOOL",
+      "skillRef": "SKA-QIF-001",
+      "componentType": "tool-declaration",
+      "locator": "package.json#bin.qif",
+      "digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "required": true,
+      "status": "verified-identity"
+    }
+  ],
+  "dependencyNodes": [
+    {
+      "id": "DPN-QIF-SKILL",
+      "nodeType": "skill",
+      "name": "quality-intent-framework",
+      "version": "0.8.17",
+      "locator": ".agents/skills/quality-intent-framework",
+      "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "provider": "ai-org-labs",
+      "required": true,
+      "status": "resolved"
+    },
+    {
+      "id": "DPN-NODE-RUNTIME",
+      "nodeType": "runtime",
+      "name": "Node.js",
+      "version": "22",
+      "locator": "runtime:node",
+      "digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "provider": "OpenJS Foundation",
+      "required": true,
+      "status": "resolved"
+    },
+    {
+      "id": "DPN-SHELL-TOOL",
+      "nodeType": "tool",
+      "name": "local-shell",
+      "version": "system",
+      "locator": "tool:shell",
+      "digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "provider": "local-operator",
+      "required": true,
+      "status": "resolved"
+    },
+    {
+      "id": "DPN-GITHUB-SERVICE",
+      "nodeType": "service",
+      "name": "GitHub",
+      "version": "api-v3",
+      "locator": "service:github",
+      "digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+      "provider": "GitHub",
+      "required": false,
+      "status": "resolved"
+    },
+    {
+      "id": "DPN-REMOTE-TOOL",
+      "nodeType": "tool",
+      "name": "remote-analysis-adapter",
+      "version": "1.0.0",
+      "locator": "tool:remote-analysis",
+      "digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+      "provider": "example-provider",
+      "required": true,
+      "status": "resolved"
+    }
+  ],
+  "dependencyEdges": [
+    {
+      "id": "DPE-QIF-NODE",
+      "fromNodeRef": "DPN-QIF-SKILL",
+      "toNodeRef": "DPN-NODE-RUNTIME",
+      "relation": "requires",
+      "evidenceRefs": [
+        "package.json#engines"
+      ],
+      "required": true,
+      "riskPropagation": "upstream"
+    },
+    {
+      "id": "DPE-QIF-SHELL",
+      "fromNodeRef": "DPN-QIF-SKILL",
+      "toNodeRef": "DPN-SHELL-TOOL",
+      "relation": "uses",
+      "evidenceRefs": [
+        "tools/qif.mjs"
+      ],
+      "required": true,
+      "riskPropagation": "upstream"
+    },
+    {
+      "id": "DPE-QIF-GITHUB",
+      "fromNodeRef": "DPN-QIF-SKILL",
+      "toNodeRef": "DPN-GITHUB-SERVICE",
+      "relation": "connects",
+      "evidenceRefs": [
+        "RELEASE.md"
+      ],
+      "required": false,
+      "riskPropagation": "upstream"
+    },
+    {
+      "id": "DPE-QIF-REMOTE",
+      "fromNodeRef": "DPN-QIF-SKILL",
+      "toNodeRef": "DPN-REMOTE-TOOL",
+      "relation": "invokes",
+      "evidenceRefs": [
+        "example:candidate-manifest"
+      ],
+      "required": true,
+      "riskPropagation": "upstream"
+    }
+  ],
+  "dependencyManifests": [
+    {
+      "id": "DPM-QIF-001",
+      "skillRef": "SKA-QIF-001",
+      "nodeRefs": [
+        "DPN-QIF-SKILL",
+        "DPN-NODE-RUNTIME",
+        "DPN-SHELL-TOOL",
+        "DPN-GITHUB-SERVICE",
+        "DPN-REMOTE-TOOL"
+      ],
+      "edgeRefs": [
+        "DPE-QIF-NODE",
+        "DPE-QIF-SHELL",
+        "DPE-QIF-GITHUB",
+        "DPE-QIF-REMOTE"
+      ],
+      "generatedAt": "2026-11-18T04:30:00Z",
+      "complete": true,
+      "unresolvedDependencyRefs": [],
+      "status": "governance-required"
+    }
+  ],
+  "lockRecords": [
+    {
+      "id": "LCK-QIF-SKILL",
+      "manifestRef": "DPM-QIF-001",
+      "nodeRef": "DPN-QIF-SKILL",
+      "lockedVersion": "0.8.17",
+      "lockedDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "resolutionSource": "local-release",
+      "verified": true,
+      "stale": false,
+      "status": "active"
+    },
+    {
+      "id": "LCK-NODE-RUNTIME",
+      "manifestRef": "DPM-QIF-001",
+      "nodeRef": "DPN-NODE-RUNTIME",
+      "lockedVersion": "22",
+      "lockedDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "resolutionSource": "runtime-inventory",
+      "verified": true,
+      "stale": false,
+      "status": "active"
+    },
+    {
+      "id": "LCK-SHELL-TOOL",
+      "manifestRef": "DPM-QIF-001",
+      "nodeRef": "DPN-SHELL-TOOL",
+      "lockedVersion": "system",
+      "lockedDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "resolutionSource": "runtime-inventory",
+      "verified": true,
+      "stale": false,
+      "status": "active"
+    },
+    {
+      "id": "LCK-REMOTE-TOOL",
+      "manifestRef": "DPM-QIF-001",
+      "nodeRef": "DPN-REMOTE-TOOL",
+      "lockedVersion": "1.0.0",
+      "lockedDigest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+      "resolutionSource": "example-candidate",
+      "verified": true,
+      "stale": false,
+      "status": "active"
+    }
+  ],
+  "riskSignals": [
+    {
+      "id": "RSK-SHELL-PRIVILEGE",
+      "nodeRef": "DPN-SHELL-TOOL",
+      "riskType": "privilege",
+      "severity": "high",
+      "evidenceRefs": [
+        "example:operator-review-needed"
+      ],
+      "evidenceStatus": "example-only",
+      "status": "open"
+    },
+    {
+      "id": "RSK-REMOTE-PROVENANCE",
+      "nodeRef": "DPN-REMOTE-TOOL",
+      "riskType": "provenance-gap",
+      "severity": "high",
+      "evidenceRefs": [
+        "example:new-dependency-unreviewed"
+      ],
+      "evidenceStatus": "example-only",
+      "status": "open"
+    }
+  ],
+  "supplyChainAssessments": [
+    {
+      "id": "SCA-QIF-001",
+      "manifestRef": "DPM-QIF-001",
+      "nodeCount": 5,
+      "edgeCount": 4,
+      "lockedRequiredNodeCount": 4,
+      "unresolvedRequiredNodeCount": 0,
+      "staleLockCount": 0,
+      "directRiskNodeRefs": [
+        "DPN-SHELL-TOOL",
+        "DPN-REMOTE-TOOL"
+      ],
+      "propagatedRiskNodeRefs": [
+        "DPN-QIF-SKILL"
+      ],
+      "cycleDetected": false,
+      "concentrationRisk": false,
+      "readiness": "governance-required",
+      "governanceTriggerRefs": [
+        "GTR-DEPENDENCY-RISK",
+        "GTR-EVIDENCE-UNVERIFIED"
+      ],
+      "identityIsSafety": false,
+      "behavioralEquivalenceClaimed": false,
+      "sourceAuthenticityClaimed": false,
+      "automaticTrustElevation": false,
+      "automaticPermission": false,
+      "automaticAuthority": false,
+      "status": "governance-required"
+    }
+  ],
+  "manifestSnapshots": [
+    {
+      "id": "MSS-QIF-BASELINE",
+      "manifestRef": "DPM-QIF-001",
+      "observedAt": "2026-11-17T04:30:00Z",
+      "nodeStates": [
+        {
+          "nodeRef": "DPN-QIF-SKILL",
+          "version": "0.8.16",
+          "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "required": true,
+          "status": "resolved"
+        },
+        {
+          "nodeRef": "DPN-NODE-RUNTIME",
+          "version": "22",
+          "digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+          "required": true,
+          "status": "resolved"
+        },
+        {
+          "nodeRef": "DPN-SHELL-TOOL",
+          "version": "system",
+          "digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+          "required": true,
+          "status": "resolved"
+        },
+        {
+          "nodeRef": "DPN-GITHUB-SERVICE",
+          "version": "api-v3",
+          "digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+          "required": false,
+          "status": "resolved"
+        }
+      ],
+      "edgeStates": [
+        {
+          "edgeRef": "DPE-QIF-NODE",
+          "fromNodeRef": "DPN-QIF-SKILL",
+          "toNodeRef": "DPN-NODE-RUNTIME",
+          "relation": "requires",
+          "required": true,
+          "riskPropagation": "upstream"
+        },
+        {
+          "edgeRef": "DPE-QIF-SHELL",
+          "fromNodeRef": "DPN-QIF-SKILL",
+          "toNodeRef": "DPN-SHELL-TOOL",
+          "relation": "uses",
+          "required": true,
+          "riskPropagation": "upstream"
+        },
+        {
+          "edgeRef": "DPE-QIF-GITHUB",
+          "fromNodeRef": "DPN-QIF-SKILL",
+          "toNodeRef": "DPN-GITHUB-SERVICE",
+          "relation": "connects",
+          "required": false,
+          "riskPropagation": "upstream"
+        }
+      ],
+      "lockStates": [
+        {
+          "nodeRef": "DPN-QIF-SKILL",
+          "lockedVersion": "0.8.16",
+          "lockedDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "verified": true,
+          "stale": false
+        },
+        {
+          "nodeRef": "DPN-NODE-RUNTIME",
+          "lockedVersion": "22",
+          "lockedDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+          "verified": true,
+          "stale": false
+        },
+        {
+          "nodeRef": "DPN-SHELL-TOOL",
+          "lockedVersion": "system",
+          "lockedDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+          "verified": true,
+          "stale": false
+        }
+      ],
+      "riskStates": [
+        {
+          "riskRef": "RSK-SHELL-PRIVILEGE",
+          "nodeRef": "DPN-SHELL-TOOL",
+          "severity": "high",
+          "evidenceStatus": "example-only",
+          "status": "open"
+        }
+      ],
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    },
+    {
+      "id": "MSS-QIF-CANDIDATE",
+      "manifestRef": "DPM-QIF-001",
+      "observedAt": "2026-11-18T04:30:00Z",
+      "nodeStates": [
+        {
+          "nodeRef": "DPN-QIF-SKILL",
+          "version": "0.8.17",
+          "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "required": true,
+          "status": "resolved"
+        },
+        {
+          "nodeRef": "DPN-NODE-RUNTIME",
+          "version": "22",
+          "digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+          "required": true,
+          "status": "resolved"
+        },
+        {
+          "nodeRef": "DPN-SHELL-TOOL",
+          "version": "system",
+          "digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+          "required": true,
+          "status": "resolved"
+        },
+        {
+          "nodeRef": "DPN-GITHUB-SERVICE",
+          "version": "api-v3",
+          "digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+          "required": false,
+          "status": "resolved"
+        },
+        {
+          "nodeRef": "DPN-REMOTE-TOOL",
+          "version": "1.0.0",
+          "digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+          "required": true,
+          "status": "resolved"
+        }
+      ],
+      "edgeStates": [
+        {
+          "edgeRef": "DPE-QIF-NODE",
+          "fromNodeRef": "DPN-QIF-SKILL",
+          "toNodeRef": "DPN-NODE-RUNTIME",
+          "relation": "requires",
+          "required": true,
+          "riskPropagation": "upstream"
+        },
+        {
+          "edgeRef": "DPE-QIF-SHELL",
+          "fromNodeRef": "DPN-QIF-SKILL",
+          "toNodeRef": "DPN-SHELL-TOOL",
+          "relation": "uses",
+          "required": true,
+          "riskPropagation": "upstream"
+        },
+        {
+          "edgeRef": "DPE-QIF-GITHUB",
+          "fromNodeRef": "DPN-QIF-SKILL",
+          "toNodeRef": "DPN-GITHUB-SERVICE",
+          "relation": "connects",
+          "required": false,
+          "riskPropagation": "upstream"
+        },
+        {
+          "edgeRef": "DPE-QIF-REMOTE",
+          "fromNodeRef": "DPN-QIF-SKILL",
+          "toNodeRef": "DPN-REMOTE-TOOL",
+          "relation": "invokes",
+          "required": true,
+          "riskPropagation": "upstream"
+        }
+      ],
+      "lockStates": [
+        {
+          "nodeRef": "DPN-QIF-SKILL",
+          "lockedVersion": "0.8.17",
+          "lockedDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "verified": true,
+          "stale": false
+        },
+        {
+          "nodeRef": "DPN-NODE-RUNTIME",
+          "lockedVersion": "22",
+          "lockedDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+          "verified": true,
+          "stale": false
+        },
+        {
+          "nodeRef": "DPN-SHELL-TOOL",
+          "lockedVersion": "system",
+          "lockedDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+          "verified": true,
+          "stale": false
+        },
+        {
+          "nodeRef": "DPN-REMOTE-TOOL",
+          "lockedVersion": "1.0.0",
+          "lockedDigest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+          "verified": true,
+          "stale": false
+        }
+      ],
+      "riskStates": [
+        {
+          "riskRef": "RSK-SHELL-PRIVILEGE",
+          "nodeRef": "DPN-SHELL-TOOL",
+          "severity": "high",
+          "evidenceStatus": "example-only",
+          "status": "open"
+        },
+        {
+          "riskRef": "RSK-REMOTE-PROVENANCE",
+          "nodeRef": "DPN-REMOTE-TOOL",
+          "severity": "high",
+          "evidenceStatus": "example-only",
+          "status": "open"
+        }
+      ],
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    }
+  ],
+  "dependencyChangeSets": [
+    {
+      "id": "DCS-QIF-001",
+      "baselineSnapshotRef": "MSS-QIF-BASELINE",
+      "candidateSnapshotRef": "MSS-QIF-CANDIDATE",
+      "addedNodeRefs": [
+        "DPN-REMOTE-TOOL"
+      ],
+      "removedNodeRefs": [],
+      "changedNodes": [
+        {
+          "entityRef": "DPN-QIF-SKILL",
+          "changedFields": [
+            "version"
+          ]
+        }
+      ],
+      "addedEdgeRefs": [
+        "DPE-QIF-REMOTE"
+      ],
+      "removedEdgeRefs": [],
+      "changedEdges": [],
+      "changedLockNodeRefs": [
+        "DPN-QIF-SKILL",
+        "DPN-REMOTE-TOOL"
+      ],
+      "addedRiskRefs": [
+        "RSK-REMOTE-PROVENANCE"
+      ],
+      "removedRiskRefs": [],
+      "changedRisks": [],
+      "materialChangeRefs": [
+        "edge:DPE-QIF-REMOTE",
+        "lock:DPN-QIF-SKILL",
+        "lock:DPN-REMOTE-TOOL",
+        "node:DPN-QIF-SKILL",
+        "node:DPN-REMOTE-TOOL",
+        "risk:RSK-REMOTE-PROVENANCE"
+      ],
+      "unresolvedChangeRefs": [],
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    }
+  ],
+  "changeImpactAssessments": [
+    {
+      "id": "CIA-QIF-001",
+      "changeSetRef": "DCS-QIF-001",
+      "directlyChangedNodeRefs": [],
+      "affectedUpstreamNodeRefs": [],
+      "affectedLossBoundaries": [
+        "Unreviewed remote dependencies must not gain access to protected execution paths.",
+        "A changed Skill must not be treated as equivalent to its predecessor without evidence."
+      ],
+      "blastRadiusCount": 2,
+      "materialChangeCount": 6,
+      "unresolvedChangeCount": 0,
+      "quarantineCandidateRefs": [
+        "QRC-QIF-001"
+      ],
+      "governanceTriggerRefs": [
+        "GTR-CHANGE-MATERIAL",
+        "GTR-QUARANTINE-REVIEW",
+        "GTR-EVIDENCE-UNVERIFIED"
+      ],
+      "readiness": "governance-required",
+      "status": "governance-required"
+    }
+  ],
+  "quarantineCandidates": [
+    {
+      "id": "QRC-QIF-001",
+      "changeSetRef": "DCS-QIF-001",
+      "subjectNodeRefs": [
+        "DPN-REMOTE-TOOL"
+      ],
+      "reasonCodes": [
+        "material-change",
+        "unverified-evidence",
+        "new-risk",
+        "blast-radius"
+      ],
+      "evidenceRefs": [
+        "MSS-QIF-BASELINE",
+        "MSS-QIF-CANDIDATE",
+        "RSK-REMOTE-PROVENANCE"
+      ],
+      "evidenceStatus": "example-only",
+      "proposedAction": "hold-for-review",
+      "scope": "Candidate decision only for the new remote tool dependency.",
+      "expiresAt": "2026-12-18T04:30:00Z",
+      "executionState": "not-executed",
+      "automaticEnforcement": false,
+      "status": "governance-required"
+    }
+  ],
+  "quarantineDecisions": [
+    {
+      "id": "QRD-QIF-001",
+      "candidateRef": "QRC-QIF-001",
+      "decision": "defer",
+      "decidedBy": "qif-supply-chain-governance-owner",
+      "decidedAt": "2026-11-18T04:30:00Z",
+      "decisionRationale": "Example-only evidence cannot authorize containment or release; obtain independent provenance and behavioral evidence.",
+      "evidenceRefs": [
+        "QRC-QIF-001",
+        "GTR-QUARANTINE-REVIEW"
+      ],
+      "authorityConfirmed": true,
+      "executionAuthorized": false,
+      "status": "governance-required"
+    }
+  ],
+  "governanceTriggers": [
+    {
+      "id": "GTR-DEPENDENCY-RISK",
+      "triggerType": "dependency-risk",
+      "reason": "Privileged and remote tool dependencies propagate risk to the Skill root.",
+      "severity": "high",
+      "requiredAction": "Review containment and least-privilege controls.",
+      "owner": "QIF maintainer",
+      "status": "open"
+    },
+    {
+      "id": "GTR-EVIDENCE-UNVERIFIED",
+      "triggerType": "evidence-unverified",
+      "reason": "Risk and transition evidence is example-only.",
+      "severity": "medium",
+      "requiredAction": "Replace example evidence with reviewed operational evidence.",
+      "owner": "QIF maintainer",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CHANGE-MATERIAL",
+      "triggerType": "dependency-change-material",
+      "reason": "A required remote tool and execution edge were added.",
+      "severity": "high",
+      "requiredAction": "Review the complete change set and blast radius.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-QUARANTINE-REVIEW",
+      "triggerType": "quarantine-review-required",
+      "reason": "The material change has a governance-required quarantine candidate.",
+      "severity": "high",
+      "requiredAction": "Make an accountable decision without treating this record as enforcement.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    }
+  ],
+  "verifierBoundary": {
+    "checks": [
+      "reference resolution",
+      "manifest coverage",
+      "required dependency locks",
+      "cycle detection",
+      "upstream risk propagation",
+      "snapshot chronology",
+      "dependency delta reproduction",
+      "blast-radius reproduction",
+      "quarantine candidate routing",
+      "readiness reproduction"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "source authenticity",
+      "component lineage beyond declared evidence",
+      "behavioral equivalence",
+      "dependency safety",
+      "Skill trustworthiness",
+      "exploitability",
+      "containment effectiveness",
+      "live execution state",
+      "permission or execution authority",
+      "automatic trust elevation",
+      "automatic quarantine enforcement"
+    ],
+    "semanticValidityRequires": [
+      "independent source review",
+      "behavioral evaluation",
+      "security review",
+      "operational feedback",
+      "accountable quarantine decision",
+      "governance decision"
+    ]
+  }
+}

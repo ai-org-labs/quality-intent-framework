@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.8.17
+
+- Added manifest snapshots and deterministic node, edge, lock, and risk delta
+  reproduction to `skill-supply-chain` packages.
+- Added upstream blast-radius and affected-loss-boundary assessment.
+- Added non-executing quarantine candidates, accountable decisions, and
+  fail-closed governance for material, unresolved, or unverified changes.
+- Preserved boundaries from exploitability, containment, safety, live-state,
+  permission, trust, and authority claims.
+
 ## v0.8.16
 
 - Added the standalone `skill-supply-chain` package, schema, example, verifier,

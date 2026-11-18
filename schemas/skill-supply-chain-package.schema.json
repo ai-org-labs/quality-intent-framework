@@ -3,7 +3,7 @@
   "$id": "https://ai-org-labs.example/qif/skill-supply-chain-package.schema.json",
   "title": "QIF Skill Supply Chain Package",
   "type": "object",
-  "required": ["packageType", "runtimeVersion", "packageId", "skillArtifacts", "skillComponents", "dependencyNodes", "dependencyEdges", "dependencyManifests", "lockRecords", "riskSignals", "supplyChainAssessments", "governanceTriggers", "verifierBoundary"],
+  "required": ["packageType", "runtimeVersion", "packageId", "skillArtifacts", "skillComponents", "dependencyNodes", "dependencyEdges", "dependencyManifests", "lockRecords", "riskSignals", "supplyChainAssessments", "manifestSnapshots", "dependencyChangeSets", "changeImpactAssessments", "quarantineCandidates", "quarantineDecisions", "governanceTriggers", "verifierBoundary"],
   "additionalProperties": false,
   "properties": {
     "packageType": { "const": "skill-supply-chain" },
@@ -17,6 +17,11 @@
     "lockRecords": { "type": "array", "items": { "$ref": "#/$defs/lockRecord" } },
     "riskSignals": { "type": "array", "items": { "$ref": "#/$defs/riskSignal" } },
     "supplyChainAssessments": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/assessment" } },
+    "manifestSnapshots": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/manifestSnapshot" } },
+    "dependencyChangeSets": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/dependencyChangeSet" } },
+    "changeImpactAssessments": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/changeImpactAssessment" } },
+    "quarantineCandidates": { "type": "array", "items": { "$ref": "#/$defs/quarantineCandidate" } },
+    "quarantineDecisions": { "type": "array", "items": { "$ref": "#/$defs/quarantineDecision" } },
     "governanceTriggers": { "type": "array", "items": { "$ref": "#/$defs/governanceTrigger" } },
     "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
   },
@@ -56,9 +61,49 @@
       "type": "object", "required": ["id", "manifestRef", "nodeCount", "edgeCount", "lockedRequiredNodeCount", "unresolvedRequiredNodeCount", "staleLockCount", "directRiskNodeRefs", "propagatedRiskNodeRefs", "cycleDetected", "concentrationRisk", "readiness", "governanceTriggerRefs", "identityIsSafety", "behavioralEquivalenceClaimed", "sourceAuthenticityClaimed", "automaticTrustElevation", "automaticPermission", "automaticAuthority", "status"], "additionalProperties": false,
       "properties": { "id": { "$ref": "#/$defs/id" }, "manifestRef": { "$ref": "#/$defs/id" }, "nodeCount": { "type": "integer", "minimum": 0 }, "edgeCount": { "type": "integer", "minimum": 0 }, "lockedRequiredNodeCount": { "type": "integer", "minimum": 0 }, "unresolvedRequiredNodeCount": { "type": "integer", "minimum": 0 }, "staleLockCount": { "type": "integer", "minimum": 0 }, "directRiskNodeRefs": { "$ref": "#/$defs/ids" }, "propagatedRiskNodeRefs": { "$ref": "#/$defs/ids" }, "cycleDetected": { "type": "boolean" }, "concentrationRisk": { "type": "boolean" }, "readiness": { "enum": ["ready-for-review", "not-ready", "governance-required"] }, "governanceTriggerRefs": { "$ref": "#/$defs/ids" }, "identityIsSafety": { "const": false }, "behavioralEquivalenceClaimed": { "const": false }, "sourceAuthenticityClaimed": { "const": false }, "automaticTrustElevation": { "const": false }, "automaticPermission": { "const": false }, "automaticAuthority": { "const": false }, "status": { "enum": ["reviewed", "governance-required"] } }
     },
+    "nodeState": {
+      "type": "object", "required": ["nodeRef", "version", "digest", "required", "status"], "additionalProperties": false,
+      "properties": { "nodeRef": { "$ref": "#/$defs/id" }, "version": { "type": "string", "minLength": 1 }, "digest": { "$ref": "#/$defs/digest" }, "required": { "type": "boolean" }, "status": { "enum": ["resolved", "unresolved"] } }
+    },
+    "edgeState": {
+      "type": "object", "required": ["edgeRef", "fromNodeRef", "toNodeRef", "relation", "required", "riskPropagation"], "additionalProperties": false,
+      "properties": { "edgeRef": { "$ref": "#/$defs/id" }, "fromNodeRef": { "$ref": "#/$defs/id" }, "toNodeRef": { "$ref": "#/$defs/id" }, "relation": { "enum": ["requires", "uses", "invokes", "loads", "connects"] }, "required": { "type": "boolean" }, "riskPropagation": { "enum": ["upstream", "none"] } }
+    },
+    "snapshotLock": {
+      "type": "object", "required": ["nodeRef", "lockedVersion", "lockedDigest", "verified", "stale"], "additionalProperties": false,
+      "properties": { "nodeRef": { "$ref": "#/$defs/id" }, "lockedVersion": { "type": "string", "minLength": 1 }, "lockedDigest": { "$ref": "#/$defs/digest" }, "verified": { "type": "boolean" }, "stale": { "type": "boolean" } }
+    },
+    "riskState": {
+      "type": "object", "required": ["riskRef", "nodeRef", "severity", "evidenceStatus", "status"], "additionalProperties": false,
+      "properties": { "riskRef": { "$ref": "#/$defs/id" }, "nodeRef": { "$ref": "#/$defs/id" }, "severity": { "enum": ["low", "medium", "high", "critical"] }, "evidenceStatus": { "enum": ["verified", "unverified", "example-only"] }, "status": { "enum": ["open", "accepted", "closed"] } }
+    },
+    "manifestSnapshot": {
+      "type": "object", "required": ["id", "manifestRef", "observedAt", "nodeStates", "edgeStates", "lockStates", "riskStates", "evidenceStatus", "status"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "manifestRef": { "$ref": "#/$defs/id" }, "observedAt": { "type": "string", "format": "date-time" }, "nodeStates": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/nodeState" } }, "edgeStates": { "type": "array", "items": { "$ref": "#/$defs/edgeState" } }, "lockStates": { "type": "array", "items": { "$ref": "#/$defs/snapshotLock" } }, "riskStates": { "type": "array", "items": { "$ref": "#/$defs/riskState" } }, "evidenceStatus": { "enum": ["verified", "unverified", "example-only"] }, "status": { "enum": ["recorded", "governance-required"] } }
+    },
+    "changedEntity": {
+      "type": "object", "required": ["entityRef", "changedFields"], "additionalProperties": false,
+      "properties": { "entityRef": { "$ref": "#/$defs/id" }, "changedFields": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } } }
+    },
+    "dependencyChangeSet": {
+      "type": "object", "required": ["id", "baselineSnapshotRef", "candidateSnapshotRef", "addedNodeRefs", "removedNodeRefs", "changedNodes", "addedEdgeRefs", "removedEdgeRefs", "changedEdges", "changedLockNodeRefs", "addedRiskRefs", "removedRiskRefs", "changedRisks", "materialChangeRefs", "unresolvedChangeRefs", "evidenceStatus", "status"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "baselineSnapshotRef": { "$ref": "#/$defs/id" }, "candidateSnapshotRef": { "$ref": "#/$defs/id" }, "addedNodeRefs": { "$ref": "#/$defs/ids" }, "removedNodeRefs": { "$ref": "#/$defs/ids" }, "changedNodes": { "type": "array", "items": { "$ref": "#/$defs/changedEntity" } }, "addedEdgeRefs": { "$ref": "#/$defs/ids" }, "removedEdgeRefs": { "$ref": "#/$defs/ids" }, "changedEdges": { "type": "array", "items": { "$ref": "#/$defs/changedEntity" } }, "changedLockNodeRefs": { "$ref": "#/$defs/ids" }, "addedRiskRefs": { "$ref": "#/$defs/ids" }, "removedRiskRefs": { "$ref": "#/$defs/ids" }, "changedRisks": { "type": "array", "items": { "$ref": "#/$defs/changedEntity" } }, "materialChangeRefs": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }, "unresolvedChangeRefs": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }, "evidenceStatus": { "enum": ["verified", "unverified", "example-only"] }, "status": { "enum": ["reviewed", "governance-required"] } }
+    },
+    "changeImpactAssessment": {
+      "type": "object", "required": ["id", "changeSetRef", "directlyChangedNodeRefs", "affectedUpstreamNodeRefs", "affectedLossBoundaries", "blastRadiusCount", "materialChangeCount", "unresolvedChangeCount", "quarantineCandidateRefs", "governanceTriggerRefs", "readiness", "status"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "changeSetRef": { "$ref": "#/$defs/id" }, "directlyChangedNodeRefs": { "$ref": "#/$defs/ids" }, "affectedUpstreamNodeRefs": { "$ref": "#/$defs/ids" }, "affectedLossBoundaries": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }, "blastRadiusCount": { "type": "integer", "minimum": 0 }, "materialChangeCount": { "type": "integer", "minimum": 0 }, "unresolvedChangeCount": { "type": "integer", "minimum": 0 }, "quarantineCandidateRefs": { "$ref": "#/$defs/ids" }, "governanceTriggerRefs": { "$ref": "#/$defs/ids" }, "readiness": { "enum": ["ready-for-review", "not-ready", "governance-required"] }, "status": { "enum": ["reviewed", "governance-required"] } }
+    },
+    "quarantineCandidate": {
+      "type": "object", "required": ["id", "changeSetRef", "subjectNodeRefs", "reasonCodes", "evidenceRefs", "evidenceStatus", "proposedAction", "scope", "expiresAt", "executionState", "automaticEnforcement", "status"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "changeSetRef": { "$ref": "#/$defs/id" }, "subjectNodeRefs": { "$ref": "#/$defs/ids", "minItems": 1 }, "reasonCodes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["material-change", "unverified-evidence", "new-risk", "unresolved-dependency", "blast-radius"] } }, "evidenceRefs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }, "evidenceStatus": { "enum": ["verified", "unverified", "example-only"] }, "proposedAction": { "enum": ["hold-for-review", "allow-with-conditions", "no-quarantine"] }, "scope": { "type": "string", "minLength": 1 }, "expiresAt": { "type": "string", "format": "date-time" }, "executionState": { "const": "not-executed" }, "automaticEnforcement": { "const": false }, "status": { "enum": ["candidate", "governance-required", "retired"] } }
+    },
+    "quarantineDecision": {
+      "type": "object", "required": ["id", "candidateRef", "decision", "decidedBy", "decidedAt", "decisionRationale", "evidenceRefs", "authorityConfirmed", "executionAuthorized", "status"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "candidateRef": { "$ref": "#/$defs/id" }, "decision": { "enum": ["approve-hold", "reject-hold", "conditioned-release", "defer"] }, "decidedBy": { "type": "string", "minLength": 1 }, "decidedAt": { "type": "string", "format": "date-time" }, "decisionRationale": { "type": "string", "minLength": 1 }, "evidenceRefs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }, "authorityConfirmed": { "type": "boolean" }, "executionAuthorized": { "const": false }, "status": { "enum": ["recorded", "governance-required"] } }
+    },
     "governanceTrigger": {
       "type": "object", "required": ["id", "triggerType", "reason", "severity", "requiredAction", "owner", "status"], "additionalProperties": false,
-      "properties": { "id": { "$ref": "#/$defs/id" }, "triggerType": { "enum": ["unresolved-dependency", "dependency-cycle", "stale-lock", "dependency-risk", "concentration-risk", "evidence-unverified"] }, "reason": { "type": "string", "minLength": 1 }, "severity": { "enum": ["low", "medium", "high", "critical"] }, "requiredAction": { "type": "string", "minLength": 1 }, "owner": { "type": "string", "minLength": 1 }, "status": { "enum": ["open", "closed"] } }
+      "properties": { "id": { "$ref": "#/$defs/id" }, "triggerType": { "enum": ["unresolved-dependency", "dependency-cycle", "stale-lock", "dependency-risk", "concentration-risk", "evidence-unverified", "dependency-change-material", "quarantine-review-required"] }, "reason": { "type": "string", "minLength": 1 }, "severity": { "enum": ["low", "medium", "high", "critical"] }, "requiredAction": { "type": "string", "minLength": 1 }, "owner": { "type": "string", "minLength": 1 }, "status": { "enum": ["open", "closed"] } }
     },
     "verifierBoundary": {
       "type": "object", "required": ["checks", "doesNotClaim", "semanticValidityRequires"], "additionalProperties": false,

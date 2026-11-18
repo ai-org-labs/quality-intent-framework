@@ -1,15 +1,15 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-11-17T04:45:37.161Z",
-  "audit_id": "FSA-QIF-V0816",
-  "scope": "QIF v0.8.16 Skill supply-chain implementation and release readiness",
-  "summary": "Schema, example, verifier, CLI, portable bundles, and 22 retained negative fixtures reproduce typed dependency manifests, locks, graph risk, and governance readiness without treating identity as safety or authority.",
-  "detected_gap": "The committed risk evidence is example-only and no live dependency inventory, source-authenticity proof, or behavioral safety assessment exists.",
+  "recorded_at": "2026-11-18T04:53:19.733Z",
+  "audit_id": "FSA-QIF-V0817",
+  "scope": "QIF v0.8.17 implementation and release review",
+  "summary": "Skill dependency change sets, deterministic node edge lock and risk deltas, blast-radius loss-boundary mapping, governance-required quarantine candidates, accountable quarantine decisions, 28 new negative fixtures, and explicit non-authority boundaries are implemented and verified.",
+  "detected_gap": "Evidence remains example-only: no live runtime state, actual containment effectiveness, or safe re-entry outcome is proven.",
   "result_state": "stable",
-  "next_action": "Implement v0.8.17 dependency change impact and quarantine while requiring independent operational evidence for trust decisions.",
+  "next_action": "Implement v0.8.18 Quarantine Outcome and Safe Re-entry Evidence without granting automatic enforcement authority.",
   "related_task_ids": [
-    "TASK-090"
+    "TASK-091"
   ],
-  "source_session_id": "SESS-MWK71MX8-NG7Q7E",
-  "source_decision_record_id": "DEC-MWK72EBI-FV7VRL"
+  "source_session_id": null,
+  "source_decision_record_id": null
 }

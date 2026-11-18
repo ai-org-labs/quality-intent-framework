@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-18T04:31:08.795Z",
+  "problem_statement_id": "PST-MWLMIX2Z-N9D19E",
+  "affected_party": "Agent Skill operators, reviewers, and governed AI organizations",
+  "actual_problem": "A valid current manifest does not explain what changed from its predecessor, which dependents inherit exposure, or whether a changed dependency should be held for governance review.",
+  "why_it_matters": "Organizations can accept a materially changed Skill dependency because each snapshot validates independently while the risky transition remains invisible.",
+  "why_now": "v0.8.16 established typed manifests and current-state risk; current research emphasizes runtime drift, change-aware AIBOMs, dependency steering, and execution assurance.",
+  "evidence_refs": [
+    "docs/qif-v0.8.16-skill-supply-chain-manifest.md",
+    "https://arxiv.org/abs/2607.01136"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

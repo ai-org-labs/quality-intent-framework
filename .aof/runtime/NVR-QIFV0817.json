@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-18T04:31:19.296Z",
+  "validation_id": "NVR-MWLMJ56O-7XYGKM",
+  "raw_need": "Implement the next QIF roadmap release using latest AOF and AI trends",
+  "validation_status": "reframed",
+  "validated_need": "Extend the local skill-supply-chain package with deterministic predecessor-successor change analysis, upstream blast radius, risk delta, quarantine candidates, and accountable governance decisions without executing quarantine or claiming safety.",
+  "decision_summary": "The valuable next slice is transition assurance on top of v0.8.16, not a live scanner or security authority. Reusing the package keeps snapshot and transition evidence coherent.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What exact loss is prevented?",
+      "answer": "A materially changed dependency must not be accepted merely because both snapshots validate independently.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must remain outside scope?",
+      "answer": "Network scanning, marketplace integration, install/remove/disable actions, credentials, automatic trust, permission, or authority.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A hash or version change alone explains operational impact"
+  ],
+  "evidence_gaps": [
+    "Committed examples cannot prove exploitability, live runtime state, or actual containment effectiveness"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0817.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0817.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0817.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

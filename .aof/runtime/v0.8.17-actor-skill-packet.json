@@ -1,0 +1,78 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-11-18T04:31:49.214Z",
+  "packet_id": "ASP-MWLMJS9Q-QDWKKO",
+  "source_task_id": "TASK-091",
+  "source_parent_session_id": "SESS-MWLMIF3W-LE70MD",
+  "source_decision_record_id": "DEC-MWLMJBTO-5X9D8I",
+  "objective": "Implement QIF v0.8.17 Skill Dependency Change Impact and Quarantine",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "Builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, verifier, fixture, documentation, and release integration while Guardian checks non-executing quarantine and semantic boundaries.",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "qif-runtime-schema-verification"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "schema-verifier-engineering",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/skill-supply-chain-package.schema.json",
+        "tools/validate-skill-supply-chain.mjs",
+        "tools/run-fixture-tests.mjs"
+      ],
+      "rationale": "v0.8.16 provides typed manifests and deterministic graph verification to extend with transitions."
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository"
+  ],
+  "policy_refs": [
+    "policy-no-automatic-quarantine-or-safety-overclaim"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/skill-supply-chain-package.schema.json",
+    "required_sections": [
+      "manifest-snapshots",
+      "dependency-changes",
+      "blast-radius",
+      "quarantine-candidates",
+      "governance-decisions"
+    ],
+    "acceptance_criteria": [
+      "npm test passes all positive and retained negative cases",
+      "material or unverified changes remain governance-required without executing quarantine"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "change impact and quarantine authority boundary",
+      "evaluator_ref": "Guardian",
+      "evidence_required": "negative fixtures and council review",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "quarantine-becomes-execution",
+      "trigger_condition": "a structural candidate automatically disables, removes, blocks, installs, trusts, or grants authority",
+      "consequence": "block-assignment",
+      "recovery_action": "restore decision-only boundary and add regression fixture"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will explain dependency change impact without pretending the record enforces containment.",
+    "current_action": "Implement Skill dependency transition governance",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Submit deterministic delta evidence to council review"
+  },
+  "status": "draft"
+}

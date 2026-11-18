@@ -339,8 +339,8 @@ const packageTypeDescriptions = new Map([
     lifecycleRole: "agent-skill-behavioral-portability"
   }],
   ["skill-supply-chain", {
-    purpose: "Describe typed Skill dependencies, component identities, locks, risk propagation, and review readiness without equating identity with safety or authority.",
-    lifecycleRole: "agent-skill-supply-chain-governance"
+    purpose: "Describe typed Skill dependencies, compare manifest transitions, reproduce blast radius, and route non-executing quarantine review without equating identity with safety or authority.",
+    lifecycleRole: "agent-skill-supply-chain-change-governance"
   }]
 ]);
 

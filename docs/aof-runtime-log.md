@@ -5836,3 +5836,38 @@ Date: 2026-10-25
   learning loop remained stable. The next value slices are v0.8.17 Skill
   Dependency Change Impact and Quarantine, v0.9 Anticipatory Quality Intent
   Twin, and v1.0 Quality Decision Ledger Standard.
+
+## 2026-11-18 - QIF v0.8.17 Skill Dependency Change Impact and Quarantine
+
+- Latest AOF runtime remained v12.2.0. Session
+  `SESS-MWLMIF3W-LE70MD` organized Need, Intent, and Context before planning.
+- Validated Need `NVR-MWLMJ56O-7XYGKM` preceded charter
+  `PCH-MWLMJBPF-4P7NIQ`; decisions are `DEC-MWLMIF3Y-3WIB2F`,
+  `DEC-MWLMIJLL-3QUUJB`, and `DEC-MWLMJBTO-5X9D8I`.
+- Planning council `CRUN-MWLMJHUT-TAP5PB` included Visionary, Builder, and
+  Guardian with no veto. Task `TASK-091` and actor packet
+  `ASP-MWLMJS9Q-QDWKKO` bound capability, resources, policy, and review evidence.
+- Primary research indicates that composable Skills create runtime drift,
+  dependency steering, provenance, and change-aware inventory risks that static
+  manifests alone cannot address. Sources: https://arxiv.org/abs/2607.01136,
+  https://www.mdpi.com/2073-431X/15/8/510,
+  https://papers.ssrn.com/sol3/Delivery.cfm/6407478.pdf?abstractid=6407478&mirid=1&type=2,
+  https://csrc.nist.gov/csrc/media/presentations/2026/governance-for-trustworthy-agentic-ai/images-media/20260922_willisbeyond.pdf,
+  https://arxiv.org/abs/2605.09594, and https://arxiv.org/abs/2604.03081.
+- Decision: extend `skill-supply-chain` with ordered manifest snapshots,
+  reproducible node, edge, lock, and risk deltas, loss-boundary blast radius,
+  quarantine review candidates, and accountable quarantine decisions. A
+  quarantine candidate is a proposal for governance review, not an automatic
+  install, removal, permission, containment, or execution action.
+- Verification: `npm test` passed 18/18 positive and 1,639/1,639 retained
+  negative checks, including 28 new transition cases. The Agent Skill built and
+  verified 156 files; the portable package built and verified 109 files. AOF
+  organization verification passed 295/295 checks.
+- Review: council `CRUN-MWLN6V0K-Y33XXI` included Guardian, Builder, and
+  Visionary with no veto. Self-audit `FSA-QIF-V0817` preserved the example-only
+  boundary: live runtime state, actual containment effectiveness, and safe
+  re-entry outcomes remain unproven.
+- Retrospective: outcome `OUT-MWLNBLKL-LQ6C5I` recorded success and the AOF
+  learning loop remained stable. The next value slices are v0.8.18 Quarantine
+  Outcome and Safe Re-entry Evidence, v0.9 Anticipatory Quality Intent Twin,
+  and v1.0 Quality Decision Ledger Standard.

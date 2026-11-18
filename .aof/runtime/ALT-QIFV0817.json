@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-18T04:31:09.066Z",
+  "alternative_analysis_id": "ALT-MWLMIXAI-Z6LESQ",
+  "subject_need": "Prevent unnoticed risk when a Skill dependency graph changes",
+  "alternative_solutions": [
+    "Extend skill-supply-chain with transition records, impact analysis, quarantine candidates, and governance decisions",
+    "Create a separate change package referencing two supply-chain packages"
+  ],
+  "non_solution_options": [
+    "Rely on version numbers or hashes without explaining semantic graph impact"
+  ],
+  "defer_options": [
+    "Wait for marketplace or live scanner integration"
+  ],
+  "stop_options": [
+    "Do not proceed if the model must automatically install, remove, disable, or trust dependencies"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

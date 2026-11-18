@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Add a standalone provider-neutral skill-supply-chain package that records component identity, typed dependency graphs, lock records, evidence-backed risk signals, transitive risk, and readiness while explicitly separating identity from safety, trust, behavior, and authority.",
-  "updated_at": "2026-11-17T04:30:37.567Z",
+  "content": "Extend the local skill-supply-chain package with deterministic predecessor-successor change analysis, upstream blast radius, risk delta, quarantine candidates, and accountable governance decisions without executing quarantine or claiming safety.",
+  "updated_at": "2026-11-18T04:31:27.902Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MWK71MX8-NG7Q7E",
-  "source_decision_record_id": "DEC-MWK72EBI-FV7VRL",
+  "source_session_id": "SESS-MWLMIF3W-LE70MD",
+  "source_decision_record_id": "DEC-MWLMJBTO-5X9D8I",
   "declared_complete_at": null
 }

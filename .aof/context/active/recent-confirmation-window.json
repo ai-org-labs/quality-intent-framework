@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-11-17T04:45:37.169Z",
+  "updated_at": "2026-11-18T04:53:19.740Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means every dependency is typed and evidence-linked, required nodes are locked, unresolved/cyclic/stale/risky dependencies are reproducibly detected, transitive risk is visible, and identity evidence never becomes a safety or authority claim.",
-      "recorded_at": "2026-11-17T04:30:07.260Z",
+      "answer": "Success means two manifests can be compared deterministically; all node, edge, lock, and risk deltas resolve; affected upstream dependents and loss boundaries are explicit; material or unverified changes fail closed into governance-required quarantine candidates; and no structural result is treated as exploit proof, safety, trust, or execution authority.",
+      "recorded_at": "2026-11-18T04:30:51.323Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MWK71MX8-NG7Q7E",
+      "source_session_id": "SESS-MWLMIF3W-LE70MD",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "Dependency trust is reframed as reviewable evidence and governance readiness, not an automatic trust score or safety verdict.",
-      "recorded_at": "2026-11-17T04:30:37.568Z",
+      "answer": "The valuable next slice is transition assurance on top of v0.8.16, not a live scanner or security authority. Reusing the package keeps snapshot and transition evidence coherent.",
+      "recorded_at": "2026-11-18T04:31:27.903Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MWK71MX8-NG7Q7E",
-      "source_decision_record_id": "DEC-MWK72EBI-FV7VRL"
+      "source_session_id": "SESS-MWLMIF3W-LE70MD",
+      "source_decision_record_id": "DEC-MWLMJBTO-5X9D8I"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "The committed risk evidence is example-only and no live dependency inventory, source-authenticity proof, or behavioral safety assessment exists.",
-      "recorded_at": "2026-11-17T04:45:37.169Z",
-      "expectation_state": "Schema, example, verifier, CLI, portable bundles, and 22 retained negative fixtures reproduce typed dependency manifests, locks, graph risk, and governance readiness without treating identity as safety or authority.",
-      "mismatch_state": "The committed risk evidence is example-only and no live dependency inventory, source-authenticity proof, or behavioral safety assessment exists.",
-      "scale_direction": "Implement v0.8.17 dependency change impact and quarantine while requiring independent operational evidence for trust decisions.",
-      "source_session_id": "SESS-MWK71MX8-NG7Q7E",
-      "source_decision_record_id": "DEC-MWK72EBI-FV7VRL"
+      "answer": "Evidence remains example-only: no live runtime state, actual containment effectiveness, or safe re-entry outcome is proven.",
+      "recorded_at": "2026-11-18T04:53:19.740Z",
+      "expectation_state": "Skill dependency change sets, deterministic node edge lock and risk deltas, blast-radius loss-boundary mapping, governance-required quarantine candidates, accountable quarantine decisions, 28 new negative fixtures, and explicit non-authority boundaries are implemented and verified.",
+      "mismatch_state": "Evidence remains example-only: no live runtime state, actual containment effectiveness, or safe re-entry outcome is proven.",
+      "scale_direction": "Implement v0.8.18 Quarantine Outcome and Safe Re-entry Evidence without granting automatic enforcement authority.",
+      "source_session_id": null,
+      "source_decision_record_id": null
     }
   ]
 }

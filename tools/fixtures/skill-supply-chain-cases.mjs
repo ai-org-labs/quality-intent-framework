@@ -1,4 +1,4 @@
-const skill=p=>p.skillArtifacts[0], component=p=>p.skillComponents[0], edge=p=>p.dependencyEdges[0], manifest=p=>p.dependencyManifests[0], lock=p=>p.lockRecords[0], risk=p=>p.riskSignals[0], assessment=p=>p.supplyChainAssessments[0];
+const skill=p=>p.skillArtifacts[0], component=p=>p.skillComponents[0], edge=p=>p.dependencyEdges[0], manifest=p=>p.dependencyManifests[0], lock=p=>p.lockRecords[0], risk=p=>p.riskSignals[0], assessment=p=>p.supplyChainAssessments[0], baseline=p=>p.manifestSnapshots[0], candidate=p=>p.manifestSnapshots[1], change=p=>p.dependencyChangeSets[0], impact=p=>p.changeImpactAssessments[0], quarantine=p=>p.quarantineCandidates[0], decision=p=>p.quarantineDecisions[0];
 export const cases=[
   {id:"nodes-array",rule:"dependency nodes required",expect:"package dependencyNodes must be an array.",mutate:p=>{p.dependencyNodes=null;}},
   {id:"component-coverage",rule:"component identity closure",expect:"componentRefs must exactly cover",mutate:p=>{skill(p).componentRefs.pop();}},
@@ -21,6 +21,34 @@ export const cases=[
   {id:"readiness",rule:"risk readiness",expect:"readiness and status must reproduce",mutate:p=>{assessment(p).readiness="ready-for-review";}},
   {id:"trigger",rule:"risk governance",expect:"requires dependency-risk governance trigger",mutate:p=>{assessment(p).governanceTriggerRefs=[];}},
   {id:"trust-boundary",rule:"identity trust separation",expect:"must preserve identity, safety, authenticity, trust, permission, and authority boundaries",mutate:p=>{assessment(p).identityIsSafety=true;}},
+  {id:"snapshots-array",rule:"snapshot history required",expect:"package manifestSnapshots must be an array.",mutate:p=>{p.manifestSnapshots=null;}},
+  {id:"snapshot-manifest",rule:"snapshot manifest resolution",expect:"references missing manifest",mutate:p=>{baseline(p).manifestRef="DPM-MISSING";}},
+  {id:"snapshot-edge-endpoint",rule:"snapshot graph closure",expect:"endpoints must exist in the same snapshot",mutate:p=>{candidate(p).nodeStates.pop();}},
+  {id:"snapshot-lock-node",rule:"snapshot lock closure",expect:"lock node must exist in the same snapshot",mutate:p=>{candidate(p).lockStates[0].nodeRef="DPN-MISSING";}},
+  {id:"snapshot-risk-node",rule:"snapshot risk closure",expect:"risk node must exist in the same snapshot",mutate:p=>{candidate(p).riskStates[0].nodeRef="DPN-MISSING";}},
+  {id:"snapshot-chronology",rule:"transition chronology",expect:"candidate snapshot must be later",mutate:p=>{candidate(p).observedAt=baseline(p).observedAt;}},
+  {id:"node-delta",rule:"node delta reproduction",expect:"node additions and removals must reproduce",mutate:p=>{change(p).addedNodeRefs=[];}},
+  {id:"changed-node",rule:"node field delta",expect:"changedNodes must reproduce",mutate:p=>{change(p).changedNodes=[];}},
+  {id:"edge-delta",rule:"edge delta reproduction",expect:"edge additions and removals must reproduce",mutate:p=>{change(p).addedEdgeRefs=[];}},
+  {id:"lock-delta",rule:"lock delta reproduction",expect:"changedLockNodeRefs must reproduce",mutate:p=>{change(p).changedLockNodeRefs=[];}},
+  {id:"risk-delta",rule:"risk delta reproduction",expect:"risk additions and removals must reproduce",mutate:p=>{change(p).addedRiskRefs=[];}},
+  {id:"material-delta",rule:"material transition rules",expect:"materialChangeRefs must reproduce",mutate:p=>{change(p).materialChangeRefs=[];}},
+  {id:"unresolved-delta",rule:"unresolved transition rules",expect:"unresolvedChangeRefs must reproduce",mutate:p=>{candidate(p).nodeStates.at(-1).status="unresolved";}},
+  {id:"change-status",rule:"change evidence readiness",expect:"status must reproduce change evidence readiness",mutate:p=>{change(p).status="reviewed";}},
+  {id:"direct-impact",rule:"direct impact reproduction",expect:"directlyChangedNodeRefs must reproduce",mutate:p=>{impact(p).directlyChangedNodeRefs=[];}},
+  {id:"upstream-impact",rule:"upstream impact reproduction",expect:"affectedUpstreamNodeRefs must reproduce",mutate:p=>{impact(p).affectedUpstreamNodeRefs=["DPN-QIF-SKILL"];}},
+  {id:"blast-count",rule:"blast radius arithmetic",expect:"blastRadiusCount must reproduce",mutate:p=>{impact(p).blastRadiusCount=99;}},
+  {id:"impact-counts",rule:"change count arithmetic",expect:"material and unresolved counts must reproduce",mutate:p=>{impact(p).materialChangeCount=0;}},
+  {id:"candidate-coverage",rule:"quarantine candidate coverage",expect:"quarantineCandidateRefs must cover",mutate:p=>{impact(p).quarantineCandidateRefs=[];}},
+  {id:"candidate-required",rule:"fail closed quarantine routing",expect:"requires a quarantine candidate",mutate:p=>{p.quarantineCandidates=[];impact(p).quarantineCandidateRefs=[];}},
+  {id:"candidate-reference",rule:"quarantine change resolution",expect:"references missing change set",mutate:p=>{quarantine(p).changeSetRef="DCS-MISSING";}},
+  {id:"candidate-execution",rule:"non-executing quarantine",expect:"must remain a non-executing quarantine candidate",mutate:p=>{quarantine(p).automaticEnforcement=true;}},
+  {id:"material-trigger",rule:"material change governance",expect:"requires dependency-change-material governance trigger",mutate:p=>{impact(p).governanceTriggerRefs=impact(p).governanceTriggerRefs.filter(x=>x!=="GTR-CHANGE-MATERIAL");}},
+  {id:"quarantine-trigger",rule:"quarantine review governance",expect:"requires quarantine-review-required governance trigger",mutate:p=>{impact(p).governanceTriggerRefs=impact(p).governanceTriggerRefs.filter(x=>x!=="GTR-QUARANTINE-REVIEW");}},
+  {id:"change-evidence-trigger",rule:"change evidence governance",expect:"requires evidence-unverified governance trigger",mutate:p=>{impact(p).governanceTriggerRefs=impact(p).governanceTriggerRefs.filter(x=>x!=="GTR-EVIDENCE-UNVERIFIED");}},
+  {id:"decision-reference",rule:"quarantine decision resolution",expect:"references missing quarantine candidate",mutate:p=>{decision(p).candidateRef="QRC-MISSING";}},
+  {id:"decision-status",rule:"unverified decision boundary",expect:"unverified candidate decision must remain governance-required",mutate:p=>{decision(p).status="recorded";}},
+  {id:"decision-execution",rule:"decision execution boundary",expect:"must not authorize quarantine execution",mutate:p=>{decision(p).executionAuthorized=true;}},
   {id:"verifier-boundary",rule:"verifier claim boundary",expect:"must explicitly not claim dependency safety",mutate:p=>{p.verifierBoundary.doesNotClaim=p.verifierBoundary.doesNotClaim.filter(x=>x!=="dependency safety");}}
 ];
 export const spec={suiteId:"skill-supply-chain",filePrefix:"skill-supply-chain",validator:"tools/validate-skill-supply-chain.mjs",basePackage:"examples/skill-supply-chain-package.json",corpusDir:"tests/fixtures/skill-supply-chain"};

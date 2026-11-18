@@ -97,3 +97,9 @@ runtime, package, service, tool, model, or Skill dependency; lock required
 resolved nodes; and propagate direct dependency risk upstream. A matching hash
 or lock proves declared identity only. It never proves authenticity, behavioral
 equivalence, safety, trustworthiness, permission, or authority.
+
+When dependencies change, compare explicit baseline and candidate snapshots.
+Reproduce node, edge, lock, and risk deltas; trace affected dependents toward
+the Skill root; name the loss boundaries; and route material or uncertain
+changes to a quarantine candidate. A quarantine candidate is review evidence,
+not an executed block, removal, isolation, permission change, or authority.

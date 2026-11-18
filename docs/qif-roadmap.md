@@ -958,10 +958,14 @@ Deliverables:
   Dependency Trust: typed Skill components and dependencies, exact locks,
   cycle and unresolved detection, upstream risk propagation, and reproducible
   review readiness while keeping identity distinct from safety and authority.
+- Implemented eighteenth v0.8 slice, v0.8.17 Skill Dependency Change Impact
+  and Quarantine: compare successive manifests, reproduce node, edge, lock,
+  and risk deltas, trace blast radius to loss boundaries, and route material
+  or uncertain changes to non-executing quarantine governance.
 - Next planned slices:
-  - v0.8.17 Skill Dependency Change Impact and Quarantine: compare successive
-    manifests, explain blast radius, and quarantine materially changed or
-    newly risky dependencies without silently granting remediation authority.
+  - v0.8.18 Quarantine Outcome and Safe Re-entry Evidence: reconcile declared
+    containment with observed state, require bounded re-entry evidence, and
+    preserve rollback without claiming remediation effectiveness or authority.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,

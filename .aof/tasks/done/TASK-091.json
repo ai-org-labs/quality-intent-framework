@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-091",
+  "title": "QIF v0.8.17 Skill Dependency Change Impact and Quarantine",
+  "description": "Add deterministic manifest transition, blast-radius, risk-delta, quarantine-candidate, and governance-decision verification without live enforcement.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MWLMIF3W-LE70MD",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MWLMJBTO-5X9D8I",
+  "operating_goal_ref": "v0.8.17-skill-dependency-change",
+  "created_at": "2026-11-18T04:31:35.859Z",
+  "updated_at": "2026-11-18T04:53:26.762Z",
+  "assigned_at": null,
+  "done_at": "2026-11-18T04:53:26.762Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented and verified v0.8.17 transition assurance with review council CRUN-MWLN6V0K-Y33XXI and self-audit FSA-QIF-V0817."
+}

@@ -1,0 +1,24 @@
+{
+  "artifact_type": "situation-assessment",
+  "generated_at": "2026-11-18T04:30:45.213Z",
+  "project_root": "/private/tmp/qif-v0817",
+  "active_release_version": null,
+  "active_release_track": null,
+  "operating_goal": "Add a standalone provider-neutral skill-supply-chain package that records component identity, typed dependency graphs, lock records, evidence-backed risk signals, transitive risk, and readiness while explicitly separating identity from safety, trust, behavior, and authority.",
+  "next_value_slice": "v0.8.17 Skill Dependency Change Impact and Quarantine",
+  "current_runtime_stage": "frontier-definition-needed",
+  "primary_frontier_task": null,
+  "stale_release_tasks": [],
+  "current_truth_conflicts": [],
+  "operator_alignment": {
+    "question": "What is the highest-leverage operating move now?",
+    "answer": "Open an implementation task for the current frontier: v0.8.17 Skill Dependency Change Impact and Quarantine",
+    "prioritized_task_ids": [],
+    "scale_direction": "Define or reconcile the next frontier before expanding execution."
+  },
+  "recommended_action": {
+    "recommended_action": "Open an implementation task for the current frontier: v0.8.17 Skill Dependency Change Impact and Quarantine",
+    "rationale": "No current open implementation task is aligned to the current operating goal.",
+    "artifact_ref": ".aof/goals/next-value-slice.json"
+  }
+}
