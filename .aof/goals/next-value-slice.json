@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.8.18 Quarantine Outcome and Safe Re-entry Evidence",
-  "updated_at": "2026-11-18T04:53:26.903Z",
+  "content": "QIF v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation",
+  "updated_at": "2026-11-19T04:46:17.005Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MWLMIF3W-LE70MD",
+  "source_session_id": "SESS-MWN1Z9HJ-A590AU",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-11-18T04:53:26.903Z"
+  "declared_complete_at": "2026-11-19T04:46:17.005Z"
 }

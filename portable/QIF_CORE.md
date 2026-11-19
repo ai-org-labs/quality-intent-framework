@@ -8,6 +8,11 @@ QIF v0.8.15 adds provenance, attestation, custody, import decisions, and
 corpus-readiness checks. Structural closure does not prove source authenticity
 or that an external client actually executed the run.
 
+QIF v0.8.18 links a quarantine decision to observed outcome, recorded
+remediation, replay, observation, residual risk, and accountable re-entry
+review. Structural completeness does not prove containment, remediation,
+stability, or safe restart and never grants restart authority.
+
 ## What QIF Is
 
 QIF is a way to make quality judgments explicit, evidence-backed, reproducible,

@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.8.18
+
+- Added quarantine outcomes, recorded remediation actions, replay validation,
+  bounded observation windows, residual-risk assessments, and governance-owned
+  re-entry assessments to `skill-supply-chain` packages.
+- Added deterministic recovery lineage, replay-result, observation-duration,
+  residual-severity, prerequisite, readiness, and governance-trigger checks.
+- Added 30 retained negative fixtures and preserved strict boundaries from
+  containment or remediation effectiveness, replay representativeness,
+  operational stability, safe re-entry, restart authority, and automatic action.
+
 ## v0.8.17
 
 - Added manifest snapshots and deterministic node, edge, lock, and risk delta

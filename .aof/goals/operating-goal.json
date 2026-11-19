@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Extend the local skill-supply-chain package with deterministic predecessor-successor change analysis, upstream blast radius, risk delta, quarantine candidates, and accountable governance decisions without executing quarantine or claiming safety.",
-  "updated_at": "2026-11-18T04:31:27.902Z",
+  "content": "Extend the existing local skill-supply-chain evidence graph with quarantine outcome, remediation action, replay validation, observation window, residual-risk assessment, and governance-owned re-entry assessment records; structurally reproduce state and timing while explicitly excluding live enforcement and automatic restart authority.",
+  "updated_at": "2026-11-19T04:32:42.204Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MWLMIF3W-LE70MD",
-  "source_decision_record_id": "DEC-MWLMJBTO-5X9D8I",
+  "source_session_id": "SESS-MWN1Z9HJ-A590AU",
+  "source_decision_record_id": "DEC-MWN20RTM-UJ71TB",
   "declared_complete_at": null
 }

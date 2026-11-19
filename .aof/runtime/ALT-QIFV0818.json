@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-19T04:32:09.785Z",
+  "alternative_analysis_id": "ALT-MWN202T5-SQ0HE0",
+  "subject_need": "Govern quarantine outcomes and safe re-entry evidence",
+  "alternative_solutions": [
+    "Extend the existing skill-supply-chain package so candidate, decision, outcome, remediation, replay, observation, residual risk, and re-entry assessment share one resolvable evidence graph",
+    "Create a separate recovery package linked to skill-supply-chain"
+  ],
+  "non_solution_options": [
+    "Treat a defer or quarantine decision as proof that containment succeeded"
+  ],
+  "defer_options": [
+    "Keep v0.8.17 and require entirely manual recovery review"
+  ],
+  "stop_options": [
+    "Do not implement if the schema would authorize restart, execute remediation, or claim operational safety from structural validation"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

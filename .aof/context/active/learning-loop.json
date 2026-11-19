@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-11-18T04:53:27.047Z",
+  "generated_at": "2026-11-19T04:46:17.163Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MWLMIF3W-LE70MD",
-    "report_id": "OUT-MWLNBLKL-LQ6C5I",
+    "source_session_id": "SESS-MWN1Z9HJ-A590AU",
+    "report_id": "OUT-MWN2I8IZ-5R9INC",
     "result": "success",
-    "observed_at": "2026-11-18T04:53:26.900Z",
-    "note": "QIF v0.8.17 deterministically verifies dependency changes, blast radius, loss-boundary impact, quarantine review candidates, and accountable defer/approve/reject records without claiming live enforcement.",
-    "signal_ref": "CRUN-MWLN6V0K-Y33XXI"
+    "observed_at": "2026-11-19T04:46:17.003Z",
+    "note": "QIF v0.8.18 traces quarantine outcome, recorded remediation, replay, observation, residual risk, and governance-owned re-entry readiness without executing or authorizing restart.",
+    "signal_ref": "CRUN-MWN2HXFP-MCW6WB"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIF-V0817",
-    "recorded_at": "2026-11-18T04:53:19.733Z",
-    "summary": "Skill dependency change sets, deterministic node edge lock and risk deltas, blast-radius loss-boundary mapping, governance-required quarantine candidates, accountable quarantine decisions, 28 new negative fixtures, and explicit non-authority boundaries are implemented and verified.",
-    "detected_gap": "Evidence remains example-only: no live runtime state, actual containment effectiveness, or safe re-entry outcome is proven.",
+    "audit_id": "FSA-QIF-V0818",
+    "recorded_at": "2026-11-19T04:46:09.394Z",
+    "summary": "Quarantine outcome, remediation, replay, observation, residual-risk, and re-entry evidence are linked and deterministically verified with 30 new negative fixtures and explicit non-execution boundaries.",
+    "detected_gap": "Evidence remains example-only and does not establish independence between the agent, containment runtime, monitor, replay harness, evidence source, and reviewer.",
     "result_state": "stable",
-    "next_action": "Implement v0.8.18 Quarantine Outcome and Safe Re-entry Evidence without granting automatic enforcement authority.",
+    "next_action": "Implement v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation.",
     "related_task_ids": [
-      "TASK-091"
+      "TASK-092"
     ]
   },
   "current_next_value_slice": {
-    "content": "QIF v0.8.18 Quarantine Outcome and Safe Re-entry Evidence",
-    "updated_at": "2026-11-18T04:53:26.903Z",
-    "declared_complete_at": "2026-11-18T04:53:26.903Z",
-    "source_session_id": "SESS-MWLMIF3W-LE70MD",
+    "content": "QIF v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation",
+    "updated_at": "2026-11-19T04:46:17.005Z",
+    "declared_complete_at": "2026-11-19T04:46:17.005Z",
+    "source_session_id": "SESS-MWN1Z9HJ-A590AU",
     "source_decision_record_id": null
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Implement v0.8.18 Quarantine Outcome and Safe Re-entry Evidence without granting automatic enforcement authority.",
+    "proposed_focus": "Implement v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation.",
     "related_task_ids": [
-      "TASK-091"
+      "TASK-092"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: QIF v0.8.18 Quarantine Outcome and Safe Re-entry Evidence",
-    "Latest self-audit next action: Implement v0.8.18 Quarantine Outcome and Safe Re-entry Evidence without granting automatic enforcement authority.",
+    "Current next value slice: QIF v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation",
+    "Latest self-audit next action: Implement v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation.",
     "Latest outcome result: success"
   ]
 }

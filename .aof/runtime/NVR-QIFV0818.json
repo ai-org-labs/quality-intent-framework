@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-19T04:32:32.583Z",
+  "validation_id": "NVR-MWN20KEF-5F74MQ",
+  "raw_need": "Implement QIF v0.8.18 quarantine outcome and safe re-entry evidence",
+  "validation_status": "reframed",
+  "validated_need": "Extend the existing local skill-supply-chain evidence graph with quarantine outcome, remediation action, replay validation, observation window, residual-risk assessment, and governance-owned re-entry assessment records; structurally reproduce state and timing while explicitly excluding live enforcement and automatic restart authority.",
+  "decision_summary": "The need is valuable as recovery evidence governance, not as a claim that QIF can contain or restart agents. Extending the existing package preserves transition lineage and avoids a second overlapping recovery graph.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What must be proven before re-entry can be considered?",
+      "answer": "Candidate and decision lineage, observed containment outcome, completed remediation evidence, replay against the relevant failure trajectory, a completed observation window, explicit residual risk, and accountable governance disposition.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What must QIF not do?",
+      "answer": "It must not execute containment or remediation, restart a dependency, grant permissions, infer operational safety from examples, or treat structural validity as authorization.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A structurally complete replay may still be semantically irrelevant to the actual incident"
+  ],
+  "evidence_gaps": [
+    "No committed example can prove live containment effectiveness, restoration integrity, or production stability"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0818.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0818.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0818.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

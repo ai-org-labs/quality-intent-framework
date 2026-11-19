@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-11-19T04:32:09.653Z",
+  "value_hypothesis_id": "VHY-MWN202PH-9VAV1K",
+  "expected_value_creation": "Make quarantine outcomes and re-entry readiness reproducible and governable without turning QIF into a live enforcement system",
+  "beneficiary": "human, AI, and hybrid organizations reviewing changed Skill dependencies",
+  "supporting_evidence": [
+    "NIST incident guidance requires verified baselines, functional containment layers, replay against strengthened controls, documented recovery decisions, and residual risk before resuming agent activity",
+    "v0.8.17 already provides deterministic change impact and quarantine candidate lineage"
+  ],
+  "success_criteria": [
+    "Every quarantine outcome links to its candidate and decision, every remediation claim links to evidence, replay results reproduce expected and observed outcomes, observation windows reproduce duration and status, and safe re-entry remains governance-owned",
+    "Example-only or incomplete evidence cannot produce a ready re-entry disposition"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

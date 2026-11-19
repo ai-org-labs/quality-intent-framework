@@ -38,6 +38,7 @@ const CANONICAL_DOCS = [
   "docs/qif-v0.8.15-cross-client-portability-evidence-intake.md",
   "docs/qif-v0.8.16-skill-supply-chain-manifest.md",
   "docs/qif-v0.8.17-skill-dependency-change-quarantine.md",
+  "docs/qif-v0.8.18-quarantine-outcome-safe-reentry.md",
   "docs/expert-judgment-framework.md"
 ];
 

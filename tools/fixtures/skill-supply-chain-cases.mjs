@@ -1,4 +1,4 @@
-const skill=p=>p.skillArtifacts[0], component=p=>p.skillComponents[0], edge=p=>p.dependencyEdges[0], manifest=p=>p.dependencyManifests[0], lock=p=>p.lockRecords[0], risk=p=>p.riskSignals[0], assessment=p=>p.supplyChainAssessments[0], baseline=p=>p.manifestSnapshots[0], candidate=p=>p.manifestSnapshots[1], change=p=>p.dependencyChangeSets[0], impact=p=>p.changeImpactAssessments[0], quarantine=p=>p.quarantineCandidates[0], decision=p=>p.quarantineDecisions[0];
+const skill=p=>p.skillArtifacts[0], component=p=>p.skillComponents[0], edge=p=>p.dependencyEdges[0], manifest=p=>p.dependencyManifests[0], lock=p=>p.lockRecords[0], risk=p=>p.riskSignals[0], assessment=p=>p.supplyChainAssessments[0], baseline=p=>p.manifestSnapshots[0], candidate=p=>p.manifestSnapshots[1], change=p=>p.dependencyChangeSets[0], impact=p=>p.changeImpactAssessments[0], quarantine=p=>p.quarantineCandidates[0], decision=p=>p.quarantineDecisions[0], outcome=p=>p.quarantineOutcomes[0], remediation=p=>p.remediationActions[0], replay=p=>p.replayValidations[0], window=p=>p.observationWindows[0], residual=p=>p.residualRiskAssessments[0], reentry=p=>p.reentryAssessments[0];
 export const cases=[
   {id:"nodes-array",rule:"dependency nodes required",expect:"package dependencyNodes must be an array.",mutate:p=>{p.dependencyNodes=null;}},
   {id:"component-coverage",rule:"component identity closure",expect:"componentRefs must exactly cover",mutate:p=>{skill(p).componentRefs.pop();}},
@@ -49,6 +49,36 @@ export const cases=[
   {id:"decision-reference",rule:"quarantine decision resolution",expect:"references missing quarantine candidate",mutate:p=>{decision(p).candidateRef="QRC-MISSING";}},
   {id:"decision-status",rule:"unverified decision boundary",expect:"unverified candidate decision must remain governance-required",mutate:p=>{decision(p).status="recorded";}},
   {id:"decision-execution",rule:"decision execution boundary",expect:"must not authorize quarantine execution",mutate:p=>{decision(p).executionAuthorized=true;}},
+  {id:"outcomes-array",rule:"quarantine outcomes required",expect:"package quarantineOutcomes must be an array.",mutate:p=>{p.quarantineOutcomes=null;}},
+  {id:"outcome-candidate-reference",rule:"outcome candidate resolution",expect:"references missing quarantine candidate",mutate:p=>{outcome(p).candidateRef="QRC-MISSING";}},
+  {id:"outcome-decision-reference",rule:"outcome decision resolution",expect:"references missing quarantine decision",mutate:p=>{outcome(p).decisionRef="QRD-MISSING";}},
+  {id:"outcome-lineage",rule:"outcome lineage consistency",expect:"candidate and decision lineage must agree",mutate:p=>{decision(p).candidateRef="QRC-OTHER";}},
+  {id:"outcome-status",rule:"outcome evidence readiness",expect:"status must reproduce containment outcome evidence",mutate:p=>{outcome(p).status="reviewed";}},
+  {id:"outcome-claim",rule:"containment claim boundary",expect:"must not claim containment effectiveness",mutate:p=>{outcome(p).containmentEffectivenessClaimed=true;}},
+  {id:"remediations-array",rule:"remediation records required",expect:"package remediationActions must be an array.",mutate:p=>{p.remediationActions=null;}},
+  {id:"remediation-reference",rule:"remediation outcome resolution",expect:"references missing quarantine outcome",mutate:p=>{remediation(p).outcomeRef="QRO-MISSING";}},
+  {id:"remediation-status",rule:"remediation evidence readiness",expect:"status must reproduce remediation evidence state",mutate:p=>{remediation(p).status="recorded";}},
+  {id:"remediation-execution",rule:"record-only remediation boundary",expect:"must remain a recorded, non-executing remediation action",mutate:p=>{remediation(p).automaticExecution=true;}},
+  {id:"replays-array",rule:"replay validations required",expect:"package replayValidations must be an array.",mutate:p=>{p.replayValidations=null;}},
+  {id:"replay-remediation-reference",rule:"replay remediation resolution",expect:"references missing remediation action",mutate:p=>{replay(p).remediationRefs=["RMA-MISSING"];}},
+  {id:"replay-result",rule:"replay result reproduction",expect:"resultMatched must reproduce expected and observed replay results",mutate:p=>{replay(p).resultMatched=false;}},
+  {id:"replay-status",rule:"replay evidence readiness",expect:"status must reproduce replay result and evidence state",mutate:p=>{replay(p).status="passed";}},
+  {id:"windows-array",rule:"observation windows required",expect:"package observationWindows must be an array.",mutate:p=>{p.observationWindows=null;}},
+  {id:"window-duration",rule:"observation duration arithmetic",expect:"observedDurationHours must reproduce observation timestamps",mutate:p=>{window(p).observedDurationHours=23;}},
+  {id:"window-completion",rule:"observation completion reproduction",expect:"completed must reproduce required observation duration",mutate:p=>{window(p).completed=false;}},
+  {id:"window-status",rule:"observation evidence readiness",expect:"status must reproduce observation completion and evidence state",mutate:p=>{window(p).status="completed";}},
+  {id:"residuals-array",rule:"residual risk assessments required",expect:"package residualRiskAssessments must be an array.",mutate:p=>{p.residualRiskAssessments=null;}},
+  {id:"residual-risk-reference",rule:"residual risk resolution",expect:"references missing risk signal",mutate:p=>{residual(p).openRiskRefs=["RSK-MISSING"];}},
+  {id:"residual-severity",rule:"residual severity reproduction",expect:"highestSeverity must reproduce referenced open risks",mutate:p=>{residual(p).highestSeverity="low";}},
+  {id:"residual-status",rule:"residual risk readiness",expect:"status must reproduce residual risk evidence and disposition",mutate:p=>{residual(p).status="reviewed";}},
+  {id:"reentries-array",rule:"re-entry assessments required",expect:"package reentryAssessments must be an array.",mutate:p=>{p.reentryAssessments=null;}},
+  {id:"reentry-residual-reference",rule:"re-entry residual resolution",expect:"references missing residual risk assessment",mutate:p=>{reentry(p).residualRiskAssessmentRef="RRA-MISSING";}},
+  {id:"reentry-prerequisite",rule:"re-entry prerequisite reproduction",expect:"prerequisite containmentObserved must reproduce linked recovery evidence",mutate:p=>{reentry(p).prerequisites.containmentObserved=false;}},
+  {id:"reentry-readiness",rule:"re-entry readiness reproduction",expect:"readiness and status must reproduce safe re-entry prerequisites",mutate:p=>{reentry(p).readiness="not-ready";}},
+  {id:"reentry-authority",rule:"restart authority boundary",expect:"must not authorize restart or automatic re-entry",mutate:p=>{reentry(p).restartAuthorized=true;}},
+  {id:"reentry-trigger",rule:"re-entry governance routing",expect:"requires reentry-review-required governance trigger",mutate:p=>{reentry(p).governanceTriggerRefs=reentry(p).governanceTriggerRefs.filter(x=>x!=="GTR-REENTRY-REVIEW");}},
+  {id:"containment-trigger",rule:"containment evidence governance",expect:"requires containment-outcome-unverified governance trigger",mutate:p=>{reentry(p).governanceTriggerRefs=reentry(p).governanceTriggerRefs.filter(x=>x!=="GTR-CONTAINMENT-UNVERIFIED");}},
+  {id:"remediation-trigger",rule:"remediation evidence governance",expect:"requires remediation-incomplete governance trigger",mutate:p=>{reentry(p).governanceTriggerRefs=reentry(p).governanceTriggerRefs.filter(x=>x!=="GTR-REMEDIATION-INCOMPLETE");}},
   {id:"verifier-boundary",rule:"verifier claim boundary",expect:"must explicitly not claim dependency safety",mutate:p=>{p.verifierBoundary.doesNotClaim=p.verifierBoundary.doesNotClaim.filter(x=>x!=="dependency safety");}}
 ];
 export const spec={suiteId:"skill-supply-chain",filePrefix:"skill-supply-chain",validator:"tools/validate-skill-supply-chain.mjs",basePackage:"examples/skill-supply-chain-package.json",corpusDir:"tests/fixtures/skill-supply-chain"};

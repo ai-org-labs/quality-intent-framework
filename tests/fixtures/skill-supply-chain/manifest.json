@@ -419,6 +419,216 @@
       "errorIncludes": "must not authorize quarantine execution"
     },
     {
+      "file": "skill-supply-chain-outcomes-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "quarantine outcomes required",
+      "expect": "fail",
+      "errorIncludes": "package quarantineOutcomes must be an array."
+    },
+    {
+      "file": "skill-supply-chain-outcome-candidate-reference.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "outcome candidate resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing quarantine candidate"
+    },
+    {
+      "file": "skill-supply-chain-outcome-decision-reference.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "outcome decision resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing quarantine decision"
+    },
+    {
+      "file": "skill-supply-chain-outcome-lineage.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "outcome lineage consistency",
+      "expect": "fail",
+      "errorIncludes": "candidate and decision lineage must agree"
+    },
+    {
+      "file": "skill-supply-chain-outcome-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "outcome evidence readiness",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce containment outcome evidence"
+    },
+    {
+      "file": "skill-supply-chain-outcome-claim.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "containment claim boundary",
+      "expect": "fail",
+      "errorIncludes": "must not claim containment effectiveness"
+    },
+    {
+      "file": "skill-supply-chain-remediations-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "remediation records required",
+      "expect": "fail",
+      "errorIncludes": "package remediationActions must be an array."
+    },
+    {
+      "file": "skill-supply-chain-remediation-reference.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "remediation outcome resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing quarantine outcome"
+    },
+    {
+      "file": "skill-supply-chain-remediation-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "remediation evidence readiness",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce remediation evidence state"
+    },
+    {
+      "file": "skill-supply-chain-remediation-execution.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "record-only remediation boundary",
+      "expect": "fail",
+      "errorIncludes": "must remain a recorded, non-executing remediation action"
+    },
+    {
+      "file": "skill-supply-chain-replays-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "replay validations required",
+      "expect": "fail",
+      "errorIncludes": "package replayValidations must be an array."
+    },
+    {
+      "file": "skill-supply-chain-replay-remediation-reference.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "replay remediation resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing remediation action"
+    },
+    {
+      "file": "skill-supply-chain-replay-result.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "replay result reproduction",
+      "expect": "fail",
+      "errorIncludes": "resultMatched must reproduce expected and observed replay results"
+    },
+    {
+      "file": "skill-supply-chain-replay-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "replay evidence readiness",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce replay result and evidence state"
+    },
+    {
+      "file": "skill-supply-chain-windows-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "observation windows required",
+      "expect": "fail",
+      "errorIncludes": "package observationWindows must be an array."
+    },
+    {
+      "file": "skill-supply-chain-window-duration.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "observation duration arithmetic",
+      "expect": "fail",
+      "errorIncludes": "observedDurationHours must reproduce observation timestamps"
+    },
+    {
+      "file": "skill-supply-chain-window-completion.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "observation completion reproduction",
+      "expect": "fail",
+      "errorIncludes": "completed must reproduce required observation duration"
+    },
+    {
+      "file": "skill-supply-chain-window-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "observation evidence readiness",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce observation completion and evidence state"
+    },
+    {
+      "file": "skill-supply-chain-residuals-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "residual risk assessments required",
+      "expect": "fail",
+      "errorIncludes": "package residualRiskAssessments must be an array."
+    },
+    {
+      "file": "skill-supply-chain-residual-risk-reference.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "residual risk resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing risk signal"
+    },
+    {
+      "file": "skill-supply-chain-residual-severity.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "residual severity reproduction",
+      "expect": "fail",
+      "errorIncludes": "highestSeverity must reproduce referenced open risks"
+    },
+    {
+      "file": "skill-supply-chain-residual-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "residual risk readiness",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce residual risk evidence and disposition"
+    },
+    {
+      "file": "skill-supply-chain-reentries-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "re-entry assessments required",
+      "expect": "fail",
+      "errorIncludes": "package reentryAssessments must be an array."
+    },
+    {
+      "file": "skill-supply-chain-reentry-residual-reference.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "re-entry residual resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing residual risk assessment"
+    },
+    {
+      "file": "skill-supply-chain-reentry-prerequisite.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "re-entry prerequisite reproduction",
+      "expect": "fail",
+      "errorIncludes": "prerequisite containmentObserved must reproduce linked recovery evidence"
+    },
+    {
+      "file": "skill-supply-chain-reentry-readiness.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "re-entry readiness reproduction",
+      "expect": "fail",
+      "errorIncludes": "readiness and status must reproduce safe re-entry prerequisites"
+    },
+    {
+      "file": "skill-supply-chain-reentry-authority.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "restart authority boundary",
+      "expect": "fail",
+      "errorIncludes": "must not authorize restart or automatic re-entry"
+    },
+    {
+      "file": "skill-supply-chain-reentry-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "re-entry governance routing",
+      "expect": "fail",
+      "errorIncludes": "requires reentry-review-required governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-containment-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "containment evidence governance",
+      "expect": "fail",
+      "errorIncludes": "requires containment-outcome-unverified governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-remediation-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "remediation evidence governance",
+      "expect": "fail",
+      "errorIncludes": "requires remediation-incomplete governance trigger"
+    },
+    {
       "file": "skill-supply-chain-verifier-boundary.json",
       "validator": "tools/validate-skill-supply-chain.mjs",
       "rule": "verifier claim boundary",

@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-092",
+  "title": "QIF v0.8.18 Quarantine Outcome and Safe Re-entry Evidence",
+  "description": "Extend skill-supply-chain with quarantine outcomes, remediation evidence, replay validation, observation windows, residual risk, and governance-owned re-entry assessment without live enforcement.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MWN1Z9HJ-A590AU",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MWN20RTM-UJ71TB",
+  "operating_goal_ref": "v0.8.18-quarantine-reentry",
+  "created_at": "2026-11-19T04:32:55.691Z",
+  "updated_at": "2026-11-19T04:46:16.862Z",
+  "assigned_at": null,
+  "done_at": "2026-11-19T04:46:16.862Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented and verified v0.8.18 with review council CRUN-MWN2HXFP-MCW6WB and self-audit FSA-QIF-V0818."
+}

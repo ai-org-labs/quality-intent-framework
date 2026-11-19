@@ -1,0 +1,23 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-11-19T04:32:42.053Z",
+  "project_charter_id": "PCH-MWN20RPH-I6EP6G",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0818.json",
+  "validated_objective": "Deliver QIF v0.8.18 as an executable, auditable extension of skill-supply-chain for quarantine outcome and safe re-entry evidence",
+  "scope": [
+    "Quarantine outcome and containment observation records",
+    "Remediation actions and evidence",
+    "Incident replay validations and observation windows",
+    "Residual risk and governance-owned re-entry assessments"
+  ],
+  "constraints": [
+    "No live quarantine, remediation, dependency restart, permission mutation, credential use, or external integration",
+    "Examples remain example-only and structural validation cannot prove containment effectiveness or safety"
+  ],
+  "expected_outcomes": [
+    "All recovery and re-entry references, counts, state transitions, and timing arithmetic are deterministic",
+    "Incomplete, unverified, failed replay, insufficient observation, or high residual risk produces governance-required rather than ready"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

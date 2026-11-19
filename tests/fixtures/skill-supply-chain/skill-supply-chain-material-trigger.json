@@ -1,12 +1,12 @@
 {
   "packageType": "skill-supply-chain",
-  "runtimeVersion": "0.8.17",
+  "runtimeVersion": "0.8.18",
   "packageId": "SSCP-QIF-001",
   "skillArtifacts": [
     {
       "id": "SKA-QIF-001",
       "name": "Quality Intent Framework",
-      "version": "0.8.17",
+      "version": "0.8.18",
       "rootNodeRef": "DPN-QIF-SKILL",
       "componentRefs": [
         "SKC-QIF-INSTRUCTION",
@@ -51,7 +51,7 @@
       "id": "DPN-QIF-SKILL",
       "nodeType": "skill",
       "name": "quality-intent-framework",
-      "version": "0.8.17",
+      "version": "0.8.18",
       "locator": ".agents/skills/quality-intent-framework",
       "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
       "provider": "ai-org-labs",
@@ -177,7 +177,7 @@
       "id": "LCK-QIF-SKILL",
       "manifestRef": "DPM-QIF-001",
       "nodeRef": "DPN-QIF-SKILL",
-      "lockedVersion": "0.8.17",
+      "lockedVersion": "0.8.18",
       "lockedDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
       "resolutionSource": "local-release",
       "verified": true,
@@ -610,6 +610,141 @@
       "status": "governance-required"
     }
   ],
+  "quarantineOutcomes": [
+    {
+      "id": "QRO-QIF-001",
+      "candidateRef": "QRC-QIF-001",
+      "decisionRef": "QRD-QIF-001",
+      "observedState": "contained",
+      "observedAt": "2026-11-18T05:00:00Z",
+      "affectedNodeRefs": [
+        "DPN-REMOTE-TOOL"
+      ],
+      "evidenceRefs": [
+        "example:containment-log"
+      ],
+      "evidenceStatus": "example-only",
+      "containmentEffectivenessClaimed": false,
+      "status": "governance-required"
+    }
+  ],
+  "remediationActions": [
+    {
+      "id": "RMA-QIF-001",
+      "outcomeRef": "QRO-QIF-001",
+      "actionType": "restrict",
+      "subjectNodeRefs": [
+        "DPN-REMOTE-TOOL"
+      ],
+      "completedAt": "2026-11-18T06:00:00Z",
+      "evidenceRefs": [
+        "example:restricted-egress-policy"
+      ],
+      "evidenceStatus": "example-only",
+      "verificationState": "pending",
+      "recordedActionOnly": true,
+      "automaticExecution": false,
+      "status": "governance-required"
+    }
+  ],
+  "replayValidations": [
+    {
+      "id": "RPV-QIF-001",
+      "sourceOutcomeRef": "QRO-QIF-001",
+      "remediationRefs": [
+        "RMA-QIF-001"
+      ],
+      "trajectoryRef": "example:remote-tool-egress-trajectory",
+      "environmentProfile": "isolated example replay environment",
+      "expectedResult": "remote tool egress is denied and recorded",
+      "observedResult": "remote tool egress is denied and recorded",
+      "resultMatched": true,
+      "executedAt": "2026-11-18T07:00:00Z",
+      "evidenceRefs": [
+        "example:replay-transcript"
+      ],
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    }
+  ],
+  "observationWindows": [
+    {
+      "id": "OBW-QIF-001",
+      "replayRef": "RPV-QIF-001",
+      "startedAt": "2026-11-18T08:00:00Z",
+      "endedAt": "2026-11-19T08:00:00Z",
+      "requiredDurationHours": 24,
+      "observedDurationHours": 24,
+      "incidentRecurrenceCount": 0,
+      "monitorEvidenceRefs": [
+        "example:observation-log"
+      ],
+      "evidenceStatus": "example-only",
+      "completed": true,
+      "status": "governance-required"
+    }
+  ],
+  "residualRiskAssessments": [
+    {
+      "id": "RRA-QIF-001",
+      "outcomeRef": "QRO-QIF-001",
+      "remediationRefs": [
+        "RMA-QIF-001"
+      ],
+      "replayRefs": [
+        "RPV-QIF-001"
+      ],
+      "observationWindowRefs": [
+        "OBW-QIF-001"
+      ],
+      "openRiskRefs": [
+        "RSK-SHELL-PRIVILEGE",
+        "RSK-REMOTE-PROVENANCE"
+      ],
+      "highestSeverity": "high",
+      "disposition": "unknown",
+      "acceptedRiskRationale": "Example-only replay and observation evidence cannot establish acceptable residual risk.",
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    }
+  ],
+  "reentryAssessments": [
+    {
+      "id": "REA-QIF-001",
+      "candidateRef": "QRC-QIF-001",
+      "decisionRef": "QRD-QIF-001",
+      "outcomeRef": "QRO-QIF-001",
+      "remediationRefs": [
+        "RMA-QIF-001"
+      ],
+      "replayRefs": [
+        "RPV-QIF-001"
+      ],
+      "observationWindowRefs": [
+        "OBW-QIF-001"
+      ],
+      "residualRiskAssessmentRef": "RRA-QIF-001",
+      "prerequisites": {
+        "containmentObserved": true,
+        "remediationVerified": false,
+        "replayPassed": false,
+        "observationCompleted": false,
+        "residualRiskAcceptable": false,
+        "evidenceVerified": false
+      },
+      "readiness": "governance-required",
+      "governanceTriggerRefs": [
+        "GTR-CONTAINMENT-UNVERIFIED",
+        "GTR-REMEDIATION-INCOMPLETE",
+        "GTR-REENTRY-REVIEW"
+      ],
+      "assessedBy": "qif-supply-chain-governance-owner",
+      "assessedAt": "2026-11-19T09:00:00Z",
+      "restartAuthorized": false,
+      "automaticReentry": false,
+      "status": "governance-required"
+    }
+  ],
   "governanceTriggers": [
     {
       "id": "GTR-DEPENDENCY-RISK",
@@ -646,6 +781,33 @@
       "requiredAction": "Make an accountable decision without treating this record as enforcement.",
       "owner": "qif-supply-chain-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CONTAINMENT-UNVERIFIED",
+      "triggerType": "containment-outcome-unverified",
+      "reason": "The containment outcome is represented only by example evidence.",
+      "severity": "high",
+      "requiredAction": "Obtain independently reviewed operational containment evidence.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-REMEDIATION-INCOMPLETE",
+      "triggerType": "remediation-incomplete",
+      "reason": "The recorded remediation has not been verified with operational evidence.",
+      "severity": "high",
+      "requiredAction": "Verify remediation identity, execution, and outcome before considering re-entry.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-REENTRY-REVIEW",
+      "triggerType": "reentry-review-required",
+      "reason": "Example-only recovery evidence cannot support a ready re-entry disposition.",
+      "severity": "high",
+      "requiredAction": "Keep re-entry under accountable governance review without authorizing restart.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -659,6 +821,12 @@
       "dependency delta reproduction",
       "blast-radius reproduction",
       "quarantine candidate routing",
+      "quarantine outcome lineage",
+      "remediation evidence lineage",
+      "replay result reproduction",
+      "observation duration reproduction",
+      "residual risk severity reproduction",
+      "safe re-entry prerequisite reproduction",
       "readiness reproduction"
     ],
     "doesNotClaim": [
@@ -670,17 +838,29 @@
       "Skill trustworthiness",
       "exploitability",
       "containment effectiveness",
+      "remediation effectiveness",
+      "replay representativeness",
+      "future incident freedom",
+      "operational stability",
+      "safe re-entry",
       "live execution state",
       "permission or execution authority",
+      "restart authority",
       "automatic trust elevation",
-      "automatic quarantine enforcement"
+      "automatic quarantine enforcement",
+      "automatic re-entry"
     ],
     "semanticValidityRequires": [
       "independent source review",
       "behavioral evaluation",
       "security review",
       "operational feedback",
+      "verified containment evidence",
+      "verified remediation evidence",
+      "representative replay review",
+      "completed operational observation",
       "accountable quarantine decision",
+      "accountable re-entry decision",
       "governance decision"
     ]
   }

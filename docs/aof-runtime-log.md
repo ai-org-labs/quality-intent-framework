@@ -5871,3 +5871,40 @@ Date: 2026-10-25
   learning loop remained stable. The next value slices are v0.8.18 Quarantine
   Outcome and Safe Re-entry Evidence, v0.9 Anticipatory Quality Intent Twin,
   and v1.0 Quality Decision Ledger Standard.
+
+## 2026-11-19 - QIF v0.8.18 Quarantine Outcome and Safe Re-entry Evidence
+
+- Latest AOF runtime remained v12.2.0. Session
+  `SESS-MWN1Z9HJ-A590AU` organized Need, Intent, and Context before planning.
+- Validated Need `NVR-MWN20KEF-5F74MQ` preceded charter
+  `PCH-MWN20RPH-I6EP6G`; decisions are `DEC-MWN1Z9HK-T6WWIA`,
+  `DEC-MWN1ZELW-VQWL4V`, and `DEC-MWN20RTM-UJ71TB`.
+- Planning council `CRUN-MWN20XNI-NS2TYO` included Visionary, Builder, and
+  Guardian with no veto. Task `TASK-092` and actor packet
+  `ASP-MWN21GLJ-YBEHMW` bound capability, resources, policy, and review evidence.
+- Current research emphasizes recovery from verified baselines, replaying
+  incident trajectories against strengthened controls, documenting residual
+  risk before resumption, runtime assurance under changing agent state, and
+  separating model proposals from independent execution authority. Sources:
+  https://www.nist.gov/system/files/documents/2026/10/16/Key_Practices_for_Incident_Readiness_and_Response_in_Super_Intelligence%20_Training_and_Evaluation.pdf,
+  https://www.aipriorities.org/files/Singapore_Consensus_2026.pdf,
+  https://www.icck.org/article/abs/jrsc.2026.526903,
+  https://arxiv.org/abs/2608.14590, and https://arxiv.org/abs/2608.11274.
+- Decision: extend `skill-supply-chain` instead of creating a second recovery
+  package. The chain now covers observed quarantine outcome, recorded
+  remediation, failure-trajectory replay, bounded observation, residual risk,
+  and governance-owned re-entry readiness. No record executes remediation or
+  authorizes restart.
+- Verification: `npm test` passed 18/18 positive and 1,669/1,669 retained
+  negative checks, including 30 new recovery cases. The Agent Skill built and
+  verified 157 files; the portable package built and verified 110 files. AOF
+  organization verification passed 295/295 checks.
+- Review: council `CRUN-MWN2HXFP-MCW6WB` included Guardian, Builder, and
+  Visionary with no veto. Self-audit `FSA-QIF-V0818` preserved the example-only
+  boundary and identified recovery-evidence independence across the agent,
+  containment runtime, monitor, replay harness, source, and reviewer as the
+  next gap.
+- Retrospective: outcome `OUT-MWN2I8IZ-5R9INC` recorded success and the AOF
+  learning loop remained stable. The next value slices are v0.8.19 Recovery
+  Evidence Independence and Cross-Layer Attestation, v0.9 Anticipatory Quality
+  Intent Twin, and v1.0 Quality Decision Ledger Standard.

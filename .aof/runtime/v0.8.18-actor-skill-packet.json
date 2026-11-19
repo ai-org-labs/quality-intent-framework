@@ -1,0 +1,79 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-11-19T04:33:14.311Z",
+  "packet_id": "ASP-MWN21GLJ-YBEHMW",
+  "source_task_id": "TASK-092",
+  "source_parent_session_id": "SESS-MWN1Z9HJ-A590AU",
+  "source_decision_record_id": "DEC-MWN20RTM-UJ71TB",
+  "objective": "Implement QIF v0.8.18 Quarantine Outcome and Safe Re-entry Evidence",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "Builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns schema, verifier, fixtures, documentation, packaging, and release integration while Guardian checks re-entry authority and semantic boundaries.",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "qif-runtime-schema-verification"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "schema-verifier-engineering",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/skill-supply-chain-package.schema.json",
+        "tools/validate-skill-supply-chain.mjs",
+        "tools/run-fixture-tests.mjs"
+      ],
+      "rationale": "v0.8.17 provides a deterministic quarantine decision graph that can be extended with recovery evidence."
+    }
+  ],
+  "resource_refs": [
+    "resource-qif-repository"
+  ],
+  "policy_refs": [
+    "policy-no-automatic-reentry-or-safety-overclaim"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/skill-supply-chain-package.schema.json",
+    "required_sections": [
+      "quarantine-outcomes",
+      "remediation-evidence",
+      "replay-validations",
+      "observation-windows",
+      "residual-risk-assessments",
+      "reentry-assessments"
+    ],
+    "acceptance_criteria": [
+      "npm test passes all positive and retained negative cases",
+      "incomplete or example-only recovery evidence cannot become re-entry-ready"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "safe re-entry evidence and authority boundary",
+      "evaluator_ref": "Guardian",
+      "evidence_required": "negative fixtures, verifier output, and council review",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "reentry-becomes-execution",
+      "trigger_condition": "a structural assessment restarts, enables, trusts, grants permission to, or claims safety for a dependency",
+      "consequence": "block-assignment",
+      "recovery_action": "restore governance-only decision boundary and add regression fixture"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will trace recovery evidence without pretending QIF restarts or proves a dependency safe.",
+    "current_action": "Implement quarantine outcome and re-entry evidence",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Submit deterministic recovery evidence to council review"
+  },
+  "status": "draft"
+}

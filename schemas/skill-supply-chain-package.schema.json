@@ -3,7 +3,7 @@
   "$id": "https://ai-org-labs.example/qif/skill-supply-chain-package.schema.json",
   "title": "QIF Skill Supply Chain Package",
   "type": "object",
-  "required": ["packageType", "runtimeVersion", "packageId", "skillArtifacts", "skillComponents", "dependencyNodes", "dependencyEdges", "dependencyManifests", "lockRecords", "riskSignals", "supplyChainAssessments", "manifestSnapshots", "dependencyChangeSets", "changeImpactAssessments", "quarantineCandidates", "quarantineDecisions", "governanceTriggers", "verifierBoundary"],
+  "required": ["packageType", "runtimeVersion", "packageId", "skillArtifacts", "skillComponents", "dependencyNodes", "dependencyEdges", "dependencyManifests", "lockRecords", "riskSignals", "supplyChainAssessments", "manifestSnapshots", "dependencyChangeSets", "changeImpactAssessments", "quarantineCandidates", "quarantineDecisions", "quarantineOutcomes", "remediationActions", "replayValidations", "observationWindows", "residualRiskAssessments", "reentryAssessments", "governanceTriggers", "verifierBoundary"],
   "additionalProperties": false,
   "properties": {
     "packageType": { "const": "skill-supply-chain" },
@@ -22,6 +22,12 @@
     "changeImpactAssessments": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/changeImpactAssessment" } },
     "quarantineCandidates": { "type": "array", "items": { "$ref": "#/$defs/quarantineCandidate" } },
     "quarantineDecisions": { "type": "array", "items": { "$ref": "#/$defs/quarantineDecision" } },
+    "quarantineOutcomes": { "type": "array", "items": { "$ref": "#/$defs/quarantineOutcome" } },
+    "remediationActions": { "type": "array", "items": { "$ref": "#/$defs/remediationAction" } },
+    "replayValidations": { "type": "array", "items": { "$ref": "#/$defs/replayValidation" } },
+    "observationWindows": { "type": "array", "items": { "$ref": "#/$defs/observationWindow" } },
+    "residualRiskAssessments": { "type": "array", "items": { "$ref": "#/$defs/residualRiskAssessment" } },
+    "reentryAssessments": { "type": "array", "items": { "$ref": "#/$defs/reentryAssessment" } },
     "governanceTriggers": { "type": "array", "items": { "$ref": "#/$defs/governanceTrigger" } },
     "verifierBoundary": { "$ref": "#/$defs/verifierBoundary" }
   },
@@ -101,9 +107,33 @@
       "type": "object", "required": ["id", "candidateRef", "decision", "decidedBy", "decidedAt", "decisionRationale", "evidenceRefs", "authorityConfirmed", "executionAuthorized", "status"], "additionalProperties": false,
       "properties": { "id": { "$ref": "#/$defs/id" }, "candidateRef": { "$ref": "#/$defs/id" }, "decision": { "enum": ["approve-hold", "reject-hold", "conditioned-release", "defer"] }, "decidedBy": { "type": "string", "minLength": 1 }, "decidedAt": { "type": "string", "format": "date-time" }, "decisionRationale": { "type": "string", "minLength": 1 }, "evidenceRefs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }, "authorityConfirmed": { "type": "boolean" }, "executionAuthorized": { "const": false }, "status": { "enum": ["recorded", "governance-required"] } }
     },
+    "quarantineOutcome": {
+      "type": "object", "required": ["id", "candidateRef", "decisionRef", "observedState", "observedAt", "affectedNodeRefs", "evidenceRefs", "evidenceStatus", "containmentEffectivenessClaimed", "status"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "candidateRef": { "$ref": "#/$defs/id" }, "decisionRef": { "$ref": "#/$defs/id" }, "observedState": { "enum": ["not-observed", "contained", "partially-contained", "containment-failed", "released-without-containment"] }, "observedAt": { "type": "string", "format": "date-time" }, "affectedNodeRefs": { "$ref": "#/$defs/ids", "minItems": 1 }, "evidenceRefs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }, "evidenceStatus": { "enum": ["verified", "unverified", "example-only"] }, "containmentEffectivenessClaimed": { "const": false }, "status": { "enum": ["reviewed", "governance-required"] } }
+    },
+    "remediationAction": {
+      "type": "object", "required": ["id", "outcomeRef", "actionType", "subjectNodeRefs", "completedAt", "evidenceRefs", "evidenceStatus", "verificationState", "recordedActionOnly", "automaticExecution", "status"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "outcomeRef": { "$ref": "#/$defs/id" }, "actionType": { "enum": ["patch", "replace", "remove", "reconfigure", "restrict", "rollback", "investigate"] }, "subjectNodeRefs": { "$ref": "#/$defs/ids", "minItems": 1 }, "completedAt": { "type": "string", "format": "date-time" }, "evidenceRefs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }, "evidenceStatus": { "enum": ["verified", "unverified", "example-only"] }, "verificationState": { "enum": ["pending", "verified", "failed"] }, "recordedActionOnly": { "const": true }, "automaticExecution": { "const": false }, "status": { "enum": ["recorded", "governance-required"] } }
+    },
+    "replayValidation": {
+      "type": "object", "required": ["id", "sourceOutcomeRef", "remediationRefs", "trajectoryRef", "environmentProfile", "expectedResult", "observedResult", "resultMatched", "executedAt", "evidenceRefs", "evidenceStatus", "status"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "sourceOutcomeRef": { "$ref": "#/$defs/id" }, "remediationRefs": { "$ref": "#/$defs/ids", "minItems": 1 }, "trajectoryRef": { "type": "string", "minLength": 1 }, "environmentProfile": { "type": "string", "minLength": 1 }, "expectedResult": { "type": "string", "minLength": 1 }, "observedResult": { "type": "string", "minLength": 1 }, "resultMatched": { "type": "boolean" }, "executedAt": { "type": "string", "format": "date-time" }, "evidenceRefs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }, "evidenceStatus": { "enum": ["verified", "unverified", "example-only"] }, "status": { "enum": ["passed", "failed", "governance-required"] } }
+    },
+    "observationWindow": {
+      "type": "object", "required": ["id", "replayRef", "startedAt", "endedAt", "requiredDurationHours", "observedDurationHours", "incidentRecurrenceCount", "monitorEvidenceRefs", "evidenceStatus", "completed", "status"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "replayRef": { "$ref": "#/$defs/id" }, "startedAt": { "type": "string", "format": "date-time" }, "endedAt": { "type": "string", "format": "date-time" }, "requiredDurationHours": { "type": "number", "exclusiveMinimum": 0 }, "observedDurationHours": { "type": "number", "minimum": 0 }, "incidentRecurrenceCount": { "type": "integer", "minimum": 0 }, "monitorEvidenceRefs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }, "evidenceStatus": { "enum": ["verified", "unverified", "example-only"] }, "completed": { "type": "boolean" }, "status": { "enum": ["observing", "completed", "governance-required"] } }
+    },
+    "residualRiskAssessment": {
+      "type": "object", "required": ["id", "outcomeRef", "remediationRefs", "replayRefs", "observationWindowRefs", "openRiskRefs", "highestSeverity", "disposition", "acceptedRiskRationale", "evidenceStatus", "status"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "outcomeRef": { "$ref": "#/$defs/id" }, "remediationRefs": { "$ref": "#/$defs/ids", "minItems": 1 }, "replayRefs": { "$ref": "#/$defs/ids", "minItems": 1 }, "observationWindowRefs": { "$ref": "#/$defs/ids", "minItems": 1 }, "openRiskRefs": { "$ref": "#/$defs/ids" }, "highestSeverity": { "enum": ["none", "low", "medium", "high", "critical"] }, "disposition": { "enum": ["acceptable", "conditional", "unacceptable", "unknown"] }, "acceptedRiskRationale": { "type": "string", "minLength": 1 }, "evidenceStatus": { "enum": ["verified", "unverified", "example-only"] }, "status": { "enum": ["reviewed", "governance-required"] } }
+    },
+    "reentryAssessment": {
+      "type": "object", "required": ["id", "candidateRef", "decisionRef", "outcomeRef", "remediationRefs", "replayRefs", "observationWindowRefs", "residualRiskAssessmentRef", "prerequisites", "readiness", "governanceTriggerRefs", "assessedBy", "assessedAt", "restartAuthorized", "automaticReentry", "status"], "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "candidateRef": { "$ref": "#/$defs/id" }, "decisionRef": { "$ref": "#/$defs/id" }, "outcomeRef": { "$ref": "#/$defs/id" }, "remediationRefs": { "$ref": "#/$defs/ids", "minItems": 1 }, "replayRefs": { "$ref": "#/$defs/ids", "minItems": 1 }, "observationWindowRefs": { "$ref": "#/$defs/ids", "minItems": 1 }, "residualRiskAssessmentRef": { "$ref": "#/$defs/id" }, "prerequisites": { "type": "object", "required": ["containmentObserved", "remediationVerified", "replayPassed", "observationCompleted", "residualRiskAcceptable", "evidenceVerified"], "additionalProperties": false, "properties": { "containmentObserved": { "type": "boolean" }, "remediationVerified": { "type": "boolean" }, "replayPassed": { "type": "boolean" }, "observationCompleted": { "type": "boolean" }, "residualRiskAcceptable": { "type": "boolean" }, "evidenceVerified": { "type": "boolean" } } }, "readiness": { "enum": ["not-ready", "governance-required", "ready-for-governance-decision"] }, "governanceTriggerRefs": { "$ref": "#/$defs/ids" }, "assessedBy": { "type": "string", "minLength": 1 }, "assessedAt": { "type": "string", "format": "date-time" }, "restartAuthorized": { "const": false }, "automaticReentry": { "const": false }, "status": { "enum": ["reviewed", "governance-required"] } }
+    },
     "governanceTrigger": {
       "type": "object", "required": ["id", "triggerType", "reason", "severity", "requiredAction", "owner", "status"], "additionalProperties": false,
-      "properties": { "id": { "$ref": "#/$defs/id" }, "triggerType": { "enum": ["unresolved-dependency", "dependency-cycle", "stale-lock", "dependency-risk", "concentration-risk", "evidence-unverified", "dependency-change-material", "quarantine-review-required"] }, "reason": { "type": "string", "minLength": 1 }, "severity": { "enum": ["low", "medium", "high", "critical"] }, "requiredAction": { "type": "string", "minLength": 1 }, "owner": { "type": "string", "minLength": 1 }, "status": { "enum": ["open", "closed"] } }
+      "properties": { "id": { "$ref": "#/$defs/id" }, "triggerType": { "enum": ["unresolved-dependency", "dependency-cycle", "stale-lock", "dependency-risk", "concentration-risk", "evidence-unverified", "dependency-change-material", "quarantine-review-required", "containment-outcome-unverified", "remediation-incomplete", "replay-failed", "observation-incomplete", "residual-risk-unacceptable", "reentry-review-required"] }, "reason": { "type": "string", "minLength": 1 }, "severity": { "enum": ["low", "medium", "high", "critical"] }, "requiredAction": { "type": "string", "minLength": 1 }, "owner": { "type": "string", "minLength": 1 }, "status": { "enum": ["open", "closed"] } }
     },
     "verifierBoundary": {
       "type": "object", "required": ["checks", "doesNotClaim", "semanticValidityRequires"], "additionalProperties": false,

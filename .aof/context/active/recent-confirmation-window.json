@@ -1,34 +1,34 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-11-18T04:53:19.740Z",
+  "updated_at": "2026-11-19T04:46:09.426Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "Success means two manifests can be compared deterministically; all node, edge, lock, and risk deltas resolve; affected upstream dependents and loss boundaries are explicit; material or unverified changes fail closed into governance-required quarantine candidates; and no structural result is treated as exploit proof, safety, trust, or execution authority.",
-      "recorded_at": "2026-11-18T04:30:51.323Z",
+      "answer": "成功は、quarantine候補から結果・修復・再検証・観察期間・残存リスク・再開判断までが参照解決され、算術と状態遷移が再現可能で、未検証・観察不足・残存高リスクはfail closedでgovernance reviewとなり、構造検証が安全性や再開権限を主張しないこと。",
+      "recorded_at": "2026-11-19T04:31:38.423Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MWLMIF3W-LE70MD",
+      "source_session_id": "SESS-MWN1Z9HJ-A590AU",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The valuable next slice is transition assurance on top of v0.8.16, not a live scanner or security authority. Reusing the package keeps snapshot and transition evidence coherent.",
-      "recorded_at": "2026-11-18T04:31:27.903Z",
+      "answer": "The need is valuable as recovery evidence governance, not as a claim that QIF can contain or restart agents. Extending the existing package preserves transition lineage and avoids a second overlapping recovery graph.",
+      "recorded_at": "2026-11-19T04:32:42.205Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MWLMIF3W-LE70MD",
-      "source_decision_record_id": "DEC-MWLMJBTO-5X9D8I"
+      "source_session_id": "SESS-MWN1Z9HJ-A590AU",
+      "source_decision_record_id": "DEC-MWN20RTM-UJ71TB"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Evidence remains example-only: no live runtime state, actual containment effectiveness, or safe re-entry outcome is proven.",
-      "recorded_at": "2026-11-18T04:53:19.740Z",
-      "expectation_state": "Skill dependency change sets, deterministic node edge lock and risk deltas, blast-radius loss-boundary mapping, governance-required quarantine candidates, accountable quarantine decisions, 28 new negative fixtures, and explicit non-authority boundaries are implemented and verified.",
-      "mismatch_state": "Evidence remains example-only: no live runtime state, actual containment effectiveness, or safe re-entry outcome is proven.",
-      "scale_direction": "Implement v0.8.18 Quarantine Outcome and Safe Re-entry Evidence without granting automatic enforcement authority.",
+      "answer": "Evidence remains example-only and does not establish independence between the agent, containment runtime, monitor, replay harness, evidence source, and reviewer.",
+      "recorded_at": "2026-11-19T04:46:09.426Z",
+      "expectation_state": "Quarantine outcome, remediation, replay, observation, residual-risk, and re-entry evidence are linked and deterministically verified with 30 new negative fixtures and explicit non-execution boundaries.",
+      "mismatch_state": "Evidence remains example-only and does not establish independence between the agent, containment runtime, monitor, replay harness, evidence source, and reviewer.",
+      "scale_direction": "Implement v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation.",
       "source_session_id": null,
       "source_decision_record_id": null
     }

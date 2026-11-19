@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-19T04:32:09.514Z",
+  "problem_statement_id": "PST-MWN202LM-S9C100",
+  "affected_party": "operators and governance reviewers deciding whether a quarantined Skill dependency may return to use",
+  "actual_problem": "QIF records quarantine candidates and decisions but cannot yet prove what containment, remediation, replay, observation, and residual-risk evidence supports a safe re-entry decision",
+  "why_it_matters": "A quarantine decision without outcome and re-entry evidence can become indefinite blocking or premature restoration, either of which can cross organizational loss boundaries",
+  "why_now": "v0.8.17 deliberately stops at quarantine review, while current incident-response guidance requires verified baselines, replay, observation, residual-risk documentation, and accountable recovery decisions before resumption",
+  "evidence_refs": [
+    "docs/qif-v0.8.17-skill-dependency-change-quarantine.md",
+    "docs/qif-roadmap.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

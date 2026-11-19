@@ -962,10 +962,14 @@ Deliverables:
   and Quarantine: compare successive manifests, reproduce node, edge, lock,
   and risk deltas, trace blast radius to loss boundaries, and route material
   or uncertain changes to non-executing quarantine governance.
+- Implemented nineteenth v0.8 slice, v0.8.18 Quarantine Outcome and Safe
+  Re-entry Evidence: trace observed containment, recorded remediation, replay,
+  observation duration, residual risk, and re-entry prerequisites while
+  keeping restart and enforcement authority outside QIF.
 - Next planned slices:
-  - v0.8.18 Quarantine Outcome and Safe Re-entry Evidence: reconcile declared
-    containment with observed state, require bounded re-entry evidence, and
-    preserve rollback without claiming remediation effectiveness or authority.
+  - v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation:
+    identify shared failure domains among the agent, containment runtime,
+    monitor, replay harness, and reviewer before recovery evidence is trusted.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,

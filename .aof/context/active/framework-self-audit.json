@@ -1,14 +1,14 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-11-18T04:53:19.733Z",
-  "audit_id": "FSA-QIF-V0817",
-  "scope": "QIF v0.8.17 implementation and release review",
-  "summary": "Skill dependency change sets, deterministic node edge lock and risk deltas, blast-radius loss-boundary mapping, governance-required quarantine candidates, accountable quarantine decisions, 28 new negative fixtures, and explicit non-authority boundaries are implemented and verified.",
-  "detected_gap": "Evidence remains example-only: no live runtime state, actual containment effectiveness, or safe re-entry outcome is proven.",
+  "recorded_at": "2026-11-19T04:46:09.394Z",
+  "audit_id": "FSA-QIF-V0818",
+  "scope": "QIF v0.8.18 implementation and release review",
+  "summary": "Quarantine outcome, remediation, replay, observation, residual-risk, and re-entry evidence are linked and deterministically verified with 30 new negative fixtures and explicit non-execution boundaries.",
+  "detected_gap": "Evidence remains example-only and does not establish independence between the agent, containment runtime, monitor, replay harness, evidence source, and reviewer.",
   "result_state": "stable",
-  "next_action": "Implement v0.8.18 Quarantine Outcome and Safe Re-entry Evidence without granting automatic enforcement authority.",
+  "next_action": "Implement v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation.",
   "related_task_ids": [
-    "TASK-091"
+    "TASK-092"
   ],
   "source_session_id": null,
   "source_decision_record_id": null

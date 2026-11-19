@@ -1,6 +1,6 @@
 # Quality Intent Framework
 
-Current release: **v0.8.17**. QIF is distributed as a standard Agent
+Current release: **v0.8.18**. QIF is distributed as a standard Agent
 Skill: compatible agents can discover the QIF procedure from `SKILL.md`, load
 deeper guidance only when needed, and invoke the canonical verifier without
 turning QIF into an autonomous authority.
@@ -49,6 +49,12 @@ candidate snapshots, reproduces node, edge, lock, and risk deltas, traces the
 upstream blast radius, and routes material or uncertain changes to a
 non-executing quarantine decision. See
 `docs/qif-v0.8.17-skill-dependency-change-quarantine.md`.
+
+Quarantine recovery is now evidence-bearing: QIF links the observed outcome,
+recorded remediation, incident replay, bounded observation, residual risk, and
+governance-owned re-entry assessment. A structurally complete record never
+authorizes restart or proves operational safety. See
+`docs/qif-v0.8.18-quarantine-outcome-safe-reentry.md`.
 
 To use QIF with Gemini, Claude, Codex, or another AI without cloning the full
 repository:
