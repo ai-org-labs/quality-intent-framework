@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-21T04:26:54.345Z",
+  "problem_statement_id": "PST-MWPWP0QX-UI7HSF",
+  "affected_party": "operators and governance reviewers deciding whether recovery evidence can support re-entry review",
+  "actual_problem": "QIF v0.8.18 links recovery evidence but cannot show whether agent, runtime, monitor, replay harness, evidence collector, and reviewer share control, substrate, or failure modes",
+  "why_it_matters": "Correlated or self-reported evidence can appear complete while every layer repeats the same blind spot or compromise",
+  "why_now": "Current research and incident guidance emphasize independent monitoring, third-party evaluation, full-system incident roles, and graded principal, substrate, and evidence independence",
+  "evidence_refs": [
+    "docs/qif-v0.8.18-quarantine-outcome-safe-reentry.md",
+    "docs/qif-roadmap.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

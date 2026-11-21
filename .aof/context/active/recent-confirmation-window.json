@@ -1,34 +1,34 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-11-19T04:46:09.426Z",
+  "updated_at": "2026-11-21T04:42:25.179Z",
   "entries": [
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "成功は、quarantine候補から結果・修復・再検証・観察期間・残存リスク・再開判断までが参照解決され、算術と状態遷移が再現可能で、未検証・観察不足・残存高リスクはfail closedでgovernance reviewとなり、構造検証が安全性や再開権限を主張しないこと。",
-      "recorded_at": "2026-11-19T04:31:38.423Z",
+      "answer": "成功は、各回復証拠の発行主体・基盤・収集経路・レビュー主体と共有障害ドメインが解決され、宣言された独立性gradeとcoverageが再現され、不足・自己証明・共通障害・未検証attestationはfail closedでgovernance-requiredとなること。件数やgradeを品質、安全性、真正性、権限そのものとして扱わない。",
+      "recorded_at": "2026-11-21T04:26:41.795Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MWN1Z9HJ-A590AU",
+      "source_session_id": "SESS-MWPWOLPX-RHWDLC",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The need is valuable as recovery evidence governance, not as a claim that QIF can contain or restart agents. Extending the existing package preserves transition lineage and avoids a second overlapping recovery graph.",
-      "recorded_at": "2026-11-19T04:32:42.205Z",
+      "answer": "The valuable slice is common-cause visibility over the existing recovery chain, not cryptographic attestation infrastructure or a generic audit framework.",
+      "recorded_at": "2026-11-21T04:27:16.680Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MWN1Z9HJ-A590AU",
-      "source_decision_record_id": "DEC-MWN20RTM-UJ71TB"
+      "source_session_id": "SESS-MWPWOLPX-RHWDLC",
+      "source_decision_record_id": "DEC-MWPWPHZ9-GYCNCL"
     },
     {
       "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Evidence remains example-only and does not establish independence between the agent, containment runtime, monitor, replay harness, evidence source, and reviewer.",
-      "recorded_at": "2026-11-19T04:46:09.426Z",
-      "expectation_state": "Quarantine outcome, remediation, replay, observation, residual-risk, and re-entry evidence are linked and deterministically verified with 30 new negative fixtures and explicit non-execution boundaries.",
-      "mismatch_state": "Evidence remains example-only and does not establish independence between the agent, containment runtime, monitor, replay harness, evidence source, and reviewer.",
-      "scale_direction": "Implement v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation.",
+      "answer": "Declared independence can still be gamed or remain wrong until source loss, tamper, contradiction, and common-cause challenges are executed.",
+      "recorded_at": "2026-11-21T04:42:25.179Z",
+      "expectation_state": "Schemas, examples, verifier rules, portable and Agent Skill builds, and 1696 retained negative checks pass; review council proceeded without Guardian veto.",
+      "mismatch_state": "Declared independence can still be gamed or remain wrong until source loss, tamper, contradiction, and common-cause challenges are executed.",
+      "scale_direction": "Implement v0.8.20 Recovery Evidence Challenge and Adversarial Validation.",
       "source_session_id": null,
       "source_decision_record_id": null
     }

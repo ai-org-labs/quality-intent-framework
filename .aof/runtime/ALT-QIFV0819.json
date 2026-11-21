@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-21T04:26:54.609Z",
+  "alternative_analysis_id": "ALT-MWPWP0Y9-Q8WM2B",
+  "subject_need": "Evaluate recovery evidence independence and cross-layer attestation",
+  "alternative_solutions": [
+    "Extend skill-supply-chain with source profiles, failure domains, attestations, and an independence assessment linked to re-entry",
+    "Create a generic external audit package"
+  ],
+  "non_solution_options": [
+    "Count evidence sources or reviewers as proof of independence"
+  ],
+  "defer_options": [
+    "Keep independence as free-text governance commentary"
+  ],
+  "stop_options": [
+    "Do not implement if a grade or attestation becomes a claim of authenticity, safety, or authority"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

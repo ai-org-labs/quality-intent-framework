@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-11-21T04:26:54.480Z",
+  "value_hypothesis_id": "VHY-MWPWP0UO-JW5RYJ",
+  "expected_value_creation": "Expose common-cause recovery evidence risk before structurally complete evidence is trusted for re-entry governance",
+  "beneficiary": "human, AI, and hybrid organizations reviewing agent recovery",
+  "supporting_evidence": [
+    "Independent audit research separates principal, substrate, and evidence independence",
+    "NIST incident work treats the full distributed agentic system and cross-party roles as the recovery boundary"
+  ],
+  "success_criteria": [
+    "Every recovery evidence source names principal, substrate, collection path, reviewer, and failure domains",
+    "Independence grade and coverage gaps are reproduced and insufficient or correlated evidence remains governance-required"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

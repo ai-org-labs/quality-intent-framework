@@ -966,10 +966,15 @@ Deliverables:
   Re-entry Evidence: trace observed containment, recorded remediation, replay,
   observation duration, residual risk, and re-entry prerequisites while
   keeping restart and enforcement authority outside QIF.
+- Implemented twentieth v0.8 slice, v0.8.19 Recovery Evidence Independence and
+  Cross-Layer Attestation: reproduce layer coverage, principal, substrate,
+  evidence, collection, and review separation; identify shared failure domains;
+  and govern incomplete, correlated, self-attested, or unverified recovery
+  evidence without claiming actual independence or recovery sufficiency.
 - Next planned slices:
-  - v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation:
-    identify shared failure domains among the agent, containment runtime,
-    monitor, replay harness, and reviewer before recovery evidence is trusted.
+  - v0.8.20 Recovery Evidence Challenge and Adversarial Validation: challenge
+    declared independence with controlled tamper, contradiction, source-loss,
+    and common-cause scenarios while preserving test and authority boundaries.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,

@@ -629,6 +629,195 @@
       "errorIncludes": "requires remediation-incomplete governance trigger"
     },
     {
+      "file": "skill-supply-chain-recovery-sources-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "recovery evidence sources required",
+      "expect": "fail",
+      "errorIncludes": "package recoveryEvidenceSources must be an array."
+    },
+    {
+      "file": "skill-supply-chain-source-domain-reference.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "source failure-domain resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing shared failure domain"
+    },
+    {
+      "file": "skill-supply-chain-source-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "source readiness reproduction",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce recovery evidence source readiness"
+    },
+    {
+      "file": "skill-supply-chain-failure-domains-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "shared failure domains required",
+      "expect": "fail",
+      "errorIncludes": "package sharedFailureDomains must be an array."
+    },
+    {
+      "file": "skill-supply-chain-failure-domain-source.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "failure-domain source resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery evidence source"
+    },
+    {
+      "file": "skill-supply-chain-failure-domain-reciprocal.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "reciprocal failure-domain linkage",
+      "expect": "fail",
+      "errorIncludes": "must declare reciprocal failure-domain linkage"
+    },
+    {
+      "file": "skill-supply-chain-attestations-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "cross-layer attestations required",
+      "expect": "fail",
+      "errorIncludes": "package crossLayerAttestations must be an array."
+    },
+    {
+      "file": "skill-supply-chain-attestation-source.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "attestation source resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery evidence source"
+    },
+    {
+      "file": "skill-supply-chain-attestation-self.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "self-attestation reproduction",
+      "expect": "fail",
+      "errorIncludes": "selfAttestation must reproduce attestor and source principals"
+    },
+    {
+      "file": "skill-supply-chain-attestation-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "attestation readiness reproduction",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce attestation verification state"
+    },
+    {
+      "file": "skill-supply-chain-independence-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "independence assessments required",
+      "expect": "fail",
+      "errorIncludes": "package recoveryIndependenceAssessments must be an array."
+    },
+    {
+      "file": "skill-supply-chain-independence-reentry.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "independence re-entry resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing re-entry assessment"
+    },
+    {
+      "file": "skill-supply-chain-independence-coverage.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "coverage reproduction",
+      "expect": "fail",
+      "errorIncludes": "coveredLayers and missingLayers must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-independence-correlation.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "failure-domain reproduction",
+      "expect": "fail",
+      "errorIncludes": "sharedFailureDomainRefs must reproduce correlated evidence sources"
+    },
+    {
+      "file": "skill-supply-chain-independence-principal.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "principal separation reproduction",
+      "expect": "fail",
+      "errorIncludes": "principalSeparation must reproduce linked recovery evidence independence"
+    },
+    {
+      "file": "skill-supply-chain-independence-substrate.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "substrate separation reproduction",
+      "expect": "fail",
+      "errorIncludes": "substrateSeparation must reproduce linked recovery evidence independence"
+    },
+    {
+      "file": "skill-supply-chain-independence-evidence.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "evidence separation reproduction",
+      "expect": "fail",
+      "errorIncludes": "evidenceSeparation must reproduce linked recovery evidence independence"
+    },
+    {
+      "file": "skill-supply-chain-independence-collection.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "collection separation reproduction",
+      "expect": "fail",
+      "errorIncludes": "collectionSeparation must reproduce linked recovery evidence independence"
+    },
+    {
+      "file": "skill-supply-chain-independence-review.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "review separation reproduction",
+      "expect": "fail",
+      "errorIncludes": "reviewSeparation must reproduce linked recovery evidence independence"
+    },
+    {
+      "file": "skill-supply-chain-independence-grade.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "independence grade reproduction",
+      "expect": "fail",
+      "errorIncludes": "independenceGrade must reproduce coverage, verification, and separation axes"
+    },
+    {
+      "file": "skill-supply-chain-independence-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "independence status reproduction",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce recovery independence grade"
+    },
+    {
+      "file": "skill-supply-chain-independence-proof.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "independence proof boundary",
+      "expect": "fail",
+      "errorIncludes": "must not claim actual evidence independence"
+    },
+    {
+      "file": "skill-supply-chain-coverage-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "coverage gap governance",
+      "expect": "fail",
+      "errorIncludes": "requires recovery-coverage-gap governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-correlation-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "correlation governance",
+      "expect": "fail",
+      "errorIncludes": "requires recovery-evidence-correlated governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-attestation-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "attestation governance",
+      "expect": "fail",
+      "errorIncludes": "requires recovery-attestation-unverified governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-independence-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "independence governance",
+      "expect": "fail",
+      "errorIncludes": "requires recovery-independence-review-required governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-independence-boundary.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "independence verifier boundary",
+      "expect": "fail",
+      "errorIncludes": "must explicitly not claim actual evidence independence"
+    },
+    {
       "file": "skill-supply-chain-verifier-boundary.json",
       "validator": "tools/validate-skill-supply-chain.mjs",
       "rule": "verifier claim boundary",

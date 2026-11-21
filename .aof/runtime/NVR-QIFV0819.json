@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-21T04:27:08.213Z",
+  "validation_id": "NVR-MWPWPBG5-DK18DD",
+  "raw_need": "Implement QIF v0.8.19 recovery evidence independence",
+  "validation_status": "reframed",
+  "validated_need": "Extend the existing skill-supply-chain recovery graph with recovery evidence source profiles, shared failure domains, cross-layer attestations, and a reproducible independence assessment linked to re-entry; grade declared principal, substrate, evidence, collection, and review separation without claiming authenticity, actual independence, safety, or authority.",
+  "decision_summary": "The valuable slice is common-cause visibility over the existing recovery chain, not cryptographic attestation infrastructure or a generic audit framework.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "Which independence dimensions matter?",
+      "answer": "Principal control, execution substrate, evidence origin, collection path, and review authority, together with explicit shared failure domains.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What remains unproven?",
+      "answer": "Declared independence, signatures, and source profiles do not prove authenticity, compromise freedom, monitor validity, safety, or restart authority.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "Different labels or vendors imply independent failure modes"
+  ],
+  "evidence_gaps": [
+    "Committed examples cannot prove organizational separation, substrate isolation, or attestation authenticity"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0819.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0819.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0819.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

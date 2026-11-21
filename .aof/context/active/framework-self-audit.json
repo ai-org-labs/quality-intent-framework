@@ -1,14 +1,14 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-11-19T04:46:09.394Z",
-  "audit_id": "FSA-QIF-V0818",
-  "scope": "QIF v0.8.18 implementation and release review",
-  "summary": "Quarantine outcome, remediation, replay, observation, residual-risk, and re-entry evidence are linked and deterministically verified with 30 new negative fixtures and explicit non-execution boundaries.",
-  "detected_gap": "Evidence remains example-only and does not establish independence between the agent, containment runtime, monitor, replay harness, evidence source, and reviewer.",
+  "recorded_at": "2026-11-21T04:42:25.176Z",
+  "audit_id": "FSA-QIF-V0819",
+  "scope": "QIF v0.8.19 recovery evidence independence release review",
+  "summary": "Schemas, examples, verifier rules, portable and Agent Skill builds, and 1696 retained negative checks pass; review council proceeded without Guardian veto.",
+  "detected_gap": "Declared independence can still be gamed or remain wrong until source loss, tamper, contradiction, and common-cause challenges are executed.",
   "result_state": "stable",
-  "next_action": "Implement v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation.",
+  "next_action": "Implement v0.8.20 Recovery Evidence Challenge and Adversarial Validation.",
   "related_task_ids": [
-    "TASK-092"
+    "TASK-093"
   ],
   "source_session_id": null,
   "source_decision_record_id": null

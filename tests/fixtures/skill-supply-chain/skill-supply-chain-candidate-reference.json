@@ -1,12 +1,12 @@
 {
   "packageType": "skill-supply-chain",
-  "runtimeVersion": "0.8.18",
+  "runtimeVersion": "0.8.19",
   "packageId": "SSCP-QIF-001",
   "skillArtifacts": [
     {
       "id": "SKA-QIF-001",
       "name": "Quality Intent Framework",
-      "version": "0.8.18",
+      "version": "0.8.19",
       "rootNodeRef": "DPN-QIF-SKILL",
       "componentRefs": [
         "SKC-QIF-INSTRUCTION",
@@ -51,7 +51,7 @@
       "id": "DPN-QIF-SKILL",
       "nodeType": "skill",
       "name": "quality-intent-framework",
-      "version": "0.8.18",
+      "version": "0.8.19",
       "locator": ".agents/skills/quality-intent-framework",
       "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
       "provider": "ai-org-labs",
@@ -177,7 +177,7 @@
       "id": "LCK-QIF-SKILL",
       "manifestRef": "DPM-QIF-001",
       "nodeRef": "DPN-QIF-SKILL",
-      "lockedVersion": "0.8.18",
+      "lockedVersion": "0.8.19",
       "lockedDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
       "resolutionSource": "local-release",
       "verified": true,
@@ -746,6 +746,147 @@
       "status": "governance-required"
     }
   ],
+  "recoveryEvidenceSources": [
+    {
+      "id": "RES-QIF-RUNTIME",
+      "evidenceRef": "example:containment-log",
+      "layer": "containment-runtime",
+      "principalRef": "example-operator-team",
+      "substrateRef": "example-shared-host",
+      "collectionPathRef": "example-runtime-log-export",
+      "reviewerRef": "qif-independent-auditor",
+      "failureDomainRefs": [
+        "SFD-QIF-HOST"
+      ],
+      "sourceMode": "system-observed",
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    },
+    {
+      "id": "RES-QIF-REPLAY",
+      "evidenceRef": "example:replay-transcript",
+      "layer": "replay-harness",
+      "principalRef": "example-test-team",
+      "substrateRef": "example-shared-host",
+      "collectionPathRef": "example-replay-export",
+      "reviewerRef": "qif-independent-auditor",
+      "failureDomainRefs": [
+        "SFD-QIF-HOST"
+      ],
+      "sourceMode": "system-observed",
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    },
+    {
+      "id": "RES-QIF-REVIEW",
+      "evidenceRef": "REA-QIF-001",
+      "layer": "reviewer",
+      "principalRef": "qif-supply-chain-governance-owner",
+      "substrateRef": "example-review-workstation",
+      "collectionPathRef": "example-review-record",
+      "reviewerRef": "qif-second-reviewer",
+      "failureDomainRefs": [],
+      "sourceMode": "third-party-attested",
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    }
+  ],
+  "sharedFailureDomains": [
+    {
+      "id": "SFD-QIF-HOST",
+      "domainType": "host",
+      "memberSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-REPLAY"
+      ],
+      "description": "The containment runtime and replay harness share one declared host, so a host fault may corrupt both evidence paths.",
+      "status": "open"
+    }
+  ],
+  "crossLayerAttestations": [
+    {
+      "id": "CLA-QIF-RUNTIME",
+      "sourceRefs": [
+        "RES-QIF-RUNTIME"
+      ],
+      "attestorPrincipalRef": "example-operator-team",
+      "subjectLayer": "containment-runtime",
+      "claimType": "execution",
+      "receiptType": "digest",
+      "evidenceRefs": [
+        "example:runtime-attestation"
+      ],
+      "evidenceStatus": "example-only",
+      "selfAttestation": true,
+      "verificationState": "pending",
+      "expiresAt": "2026-12-21T00:00:00Z",
+      "status": "governance-required"
+    },
+    {
+      "id": "CLA-QIF-REVIEW",
+      "sourceRefs": [
+        "RES-QIF-REVIEW"
+      ],
+      "attestorPrincipalRef": "qif-independent-auditor",
+      "subjectLayer": "reviewer",
+      "claimType": "review",
+      "receiptType": "external-receipt",
+      "evidenceRefs": [
+        "example:review-attestation"
+      ],
+      "evidenceStatus": "example-only",
+      "selfAttestation": false,
+      "verificationState": "pending",
+      "expiresAt": "2026-12-21T00:00:00Z",
+      "status": "governance-required"
+    }
+  ],
+  "recoveryIndependenceAssessments": [
+    {
+      "id": "RIA-QIF-001",
+      "reentryAssessmentRef": "REA-QIF-001",
+      "sourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-REPLAY",
+        "RES-QIF-REVIEW"
+      ],
+      "attestationRefs": [
+        "CLA-QIF-RUNTIME",
+        "CLA-QIF-REVIEW"
+      ],
+      "requiredLayers": [
+        "containment-runtime",
+        "monitor",
+        "replay-harness",
+        "reviewer"
+      ],
+      "coveredLayers": [
+        "containment-runtime",
+        "replay-harness",
+        "reviewer"
+      ],
+      "missingLayers": [
+        "monitor"
+      ],
+      "sharedFailureDomainRefs": [
+        "SFD-QIF-HOST"
+      ],
+      "principalSeparation": true,
+      "substrateSeparation": false,
+      "evidenceSeparation": false,
+      "collectionSeparation": true,
+      "reviewSeparation": true,
+      "independenceGrade": "insufficient",
+      "governanceTriggerRefs": [
+        "GTR-RECOVERY-CORRELATED",
+        "GTR-RECOVERY-ATTESTATION",
+        "GTR-RECOVERY-COVERAGE",
+        "GTR-RECOVERY-INDEPENDENCE"
+      ],
+      "independenceProven": false,
+      "status": "governance-required"
+    }
+  ],
   "governanceTriggers": [
     {
       "id": "GTR-DEPENDENCY-RISK",
@@ -809,6 +950,42 @@
       "requiredAction": "Keep re-entry under accountable governance review without authorizing restart.",
       "owner": "qif-supply-chain-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-RECOVERY-CORRELATED",
+      "triggerType": "recovery-evidence-correlated",
+      "reason": "Containment and replay evidence share a declared host failure domain.",
+      "severity": "high",
+      "requiredAction": "Obtain evidence from a separately operated substrate or accept the correlation explicitly.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-RECOVERY-ATTESTATION",
+      "triggerType": "recovery-attestation-unverified",
+      "reason": "Cross-layer attestations are example-only, pending, or self-attested.",
+      "severity": "high",
+      "requiredAction": "Verify external receipts and replace self-attestation with accountable independent review.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-RECOVERY-COVERAGE",
+      "triggerType": "recovery-coverage-gap",
+      "reason": "No monitor-layer recovery evidence source is present.",
+      "severity": "high",
+      "requiredAction": "Collect monitored recovery evidence through a declared collection path.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-RECOVERY-INDEPENDENCE",
+      "triggerType": "recovery-independence-review-required",
+      "reason": "Recovery evidence does not satisfy all required coverage and separation axes.",
+      "severity": "high",
+      "requiredAction": "Keep recovery independence under governance review without treating the grade as proof.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -828,6 +1005,10 @@
       "observation duration reproduction",
       "residual risk severity reproduction",
       "safe re-entry prerequisite reproduction",
+      "recovery layer coverage reproduction",
+      "shared failure-domain reproduction",
+      "attestation self-reference reproduction",
+      "multi-axis independence grade reproduction",
       "readiness reproduction"
     ],
     "doesNotClaim": [
@@ -844,6 +1025,11 @@
       "future incident freedom",
       "operational stability",
       "safe re-entry",
+      "actual evidence independence",
+      "attestation authenticity",
+      "monitor validity",
+      "common-cause freedom",
+      "recovery evidence sufficiency",
       "live execution state",
       "permission or execution authority",
       "restart authority",
@@ -860,6 +1046,9 @@
       "verified remediation evidence",
       "representative replay review",
       "completed operational observation",
+      "independent evidence collection review",
+      "shared failure-domain analysis",
+      "attestation verification",
       "accountable quarantine decision",
       "accountable re-entry decision",
       "governance decision"

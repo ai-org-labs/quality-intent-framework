@@ -1,0 +1,22 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-11-21T04:27:08.356Z",
+  "project_charter_id": "PCH-MWPWPBK4-J37GXS",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0819.json",
+  "validated_objective": "Deliver QIF v0.8.19 as an executable recovery-evidence independence extension of skill-supply-chain",
+  "scope": [
+    "Recovery evidence source profiles and shared failure domains",
+    "Cross-layer attestations covering recovery evidence",
+    "Reproducible independence dimensions, grade, coverage gaps, and re-entry governance routing"
+  ],
+  "constraints": [
+    "No external attestation service, cryptographic signing, live monitoring, credential access, enforcement, or restart",
+    "Counts, grades, signatures, and attestations are evidence, not quality, truth, safety, or authority"
+  ],
+  "expected_outcomes": [
+    "Common-cause and self-attestation gaps fail closed into governance review",
+    "Independence dimensions and grade reproduce from referenced source and attestation records"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": null
+}

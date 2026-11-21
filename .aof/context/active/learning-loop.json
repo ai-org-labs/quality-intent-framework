@@ -2,38 +2,38 @@
   "snapshot_type": "aof-learning-loop",
   "snapshot_format_version": 1,
   "organization_ref": ".aof/organization.json",
-  "generated_at": "2026-11-19T04:46:17.163Z",
+  "generated_at": "2026-11-21T04:43:00.491Z",
   "latest_outcome": {
-    "source_session_id": "SESS-MWN1Z9HJ-A590AU",
-    "report_id": "OUT-MWN2I8IZ-5R9INC",
+    "source_session_id": "SESS-MWPWOLPX-RHWDLC",
+    "report_id": "OUT-MWPX9Q41-1INF9G",
     "result": "success",
-    "observed_at": "2026-11-19T04:46:17.003Z",
-    "note": "QIF v0.8.18 traces quarantine outcome, recorded remediation, replay, observation, residual risk, and governance-owned re-entry readiness without executing or authorizing restart.",
-    "signal_ref": "CRUN-MWN2HXFP-MCW6WB"
+    "observed_at": "2026-11-21T04:43:00.337Z",
+    "note": "QIF v0.8.19 implemented recovery evidence source, shared failure-domain, cross-layer attestation, and reproducible independence grading with fail-closed governance; full test suite passed.",
+    "signal_ref": ".aof/runtime/v0.8.19-review-council.json"
   },
   "latest_self_audit": {
-    "audit_id": "FSA-QIF-V0818",
-    "recorded_at": "2026-11-19T04:46:09.394Z",
-    "summary": "Quarantine outcome, remediation, replay, observation, residual-risk, and re-entry evidence are linked and deterministically verified with 30 new negative fixtures and explicit non-execution boundaries.",
-    "detected_gap": "Evidence remains example-only and does not establish independence between the agent, containment runtime, monitor, replay harness, evidence source, and reviewer.",
+    "audit_id": "FSA-QIF-V0819",
+    "recorded_at": "2026-11-21T04:42:25.176Z",
+    "summary": "Schemas, examples, verifier rules, portable and Agent Skill builds, and 1696 retained negative checks pass; review council proceeded without Guardian veto.",
+    "detected_gap": "Declared independence can still be gamed or remain wrong until source loss, tamper, contradiction, and common-cause challenges are executed.",
     "result_state": "stable",
-    "next_action": "Implement v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation.",
+    "next_action": "Implement v0.8.20 Recovery Evidence Challenge and Adversarial Validation.",
     "related_task_ids": [
-      "TASK-092"
+      "TASK-093"
     ]
   },
   "current_next_value_slice": {
-    "content": "QIF v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation",
-    "updated_at": "2026-11-19T04:46:17.005Z",
-    "declared_complete_at": "2026-11-19T04:46:17.005Z",
-    "source_session_id": "SESS-MWN1Z9HJ-A590AU",
+    "content": "v0.8.20 Recovery Evidence Challenge and Adversarial Validation",
+    "updated_at": "2026-11-21T04:43:00.340Z",
+    "declared_complete_at": "2026-11-21T04:43:00.340Z",
+    "source_session_id": "SESS-MWPWOLPX-RHWDLC",
     "source_decision_record_id": null
   },
   "improvement_proposal": {
     "proposal_basis": "framework-self-audit",
-    "proposed_focus": "Implement v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation.",
+    "proposed_focus": "Implement v0.8.20 Recovery Evidence Challenge and Adversarial Validation.",
     "related_task_ids": [
-      "TASK-092"
+      "TASK-093"
     ],
     "open_task_count": 0
   },
@@ -44,8 +44,8 @@
     "loop_state": "stable"
   },
   "observations": [
-    "Current next value slice: QIF v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation",
-    "Latest self-audit next action: Implement v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation.",
+    "Current next value slice: v0.8.20 Recovery Evidence Challenge and Adversarial Validation",
+    "Latest self-audit next action: Implement v0.8.20 Recovery Evidence Challenge and Adversarial Validation.",
     "Latest outcome result: success"
   ]
 }

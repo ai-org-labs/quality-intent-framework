@@ -13,6 +13,12 @@ remediation, replay, observation, residual risk, and accountable re-entry
 review. Structural completeness does not prove containment, remediation,
 stability, or safe restart and never grants restart authority.
 
+QIF v0.8.19 separates evidence quantity from evidence independence. It records
+which principal, substrate, collection path, reviewer, and failure domain each
+recovery source depends on, then reproduces coverage and separation grades.
+Cross-layer attestations and grades do not prove authenticity, independence,
+common-cause freedom, sufficient recovery evidence, or safe restart.
+
 ## What QIF Is
 
 QIF is a way to make quality judgments explicit, evidence-backed, reproducible,

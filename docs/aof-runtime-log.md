@@ -5908,3 +5908,54 @@ Date: 2026-10-25
   learning loop remained stable. The next value slices are v0.8.19 Recovery
   Evidence Independence and Cross-Layer Attestation, v0.9 Anticipatory Quality
   Intent Twin, and v1.0 Quality Decision Ledger Standard.
+
+## 2026-11-21 - QIF v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation
+
+- AOF runtime: v12.2.0, managed-project topology.
+- Session: `SESS-MWPWOLPX-RHWDLC`; task: `TASK-093`.
+- Need Validation: `NVR-MWPWPBG5-DK18DD`; charter:
+  `PCH-MWPWPBK4-J37GXS`; actor skill packet:
+  `ASP-MWPWPWDY-KUQLYF`.
+- Planning council: `CRUN-MWPWPI3D-UIGV6Z` with Visionary, Builder, and
+  Guardian; all proceeded and Guardian did not veto. Review council:
+  `CRUN-MWPX8TGF-UEQUXI` with Guardian and Builder; both proceeded and
+  Guardian did not veto.
+- Decision: extend the existing `skill-supply-chain` package rather than add a
+  generic audit package. Model recovery evidence sources, reciprocal shared
+  failure domains, cross-layer attestations, and a reproducible independence
+  assessment linked to re-entry. Keep external attestation services,
+  cryptographic signing, live monitors, credentials, enforcement, and restart
+  authority outside this release.
+- Trend evidence reviewed: independent principal/substrate/evidence audit
+  boundaries in <https://arxiv.org/abs/2609.18272>; full agentic-system role
+  analysis in NIST IR 8621; independent telemetry and tamper evidence in TRACE
+  (<https://doi.org/10.1109/ACCESS.2026.3733578>); distributed recovery and
+  cross-layer trust work in
+  <https://rsync.nic.funet.fi/pub/doc/netinfo/internet-drafts/draft-das-distributed-effect-recovery-00.html>
+  and <https://arxiv.org/abs/2611.23202>.
+- Implementation evidence: `schemas/skill-supply-chain-package.schema.json`,
+  `examples/skill-supply-chain-package.json`,
+  `tools/validate-skill-supply-chain.mjs`, 108 retained package fixtures,
+  `docs/qif-v0.8.19-recovery-evidence-independence.md`, and portable/Agent
+  Skill release artifacts.
+- Verification: `npm test` passed; 18/18 positive fixture packages and
+  1696/1696 negative fixtures passed; Agent Skill v0.8.19 built and verified;
+  portable v0.8.19 built, verified, and mutation rejection passed; AOF
+  `organization-verify` passed 295/295 checks.
+- AOF release-state audit was also executed. It correctly remained incomplete
+  because this managed project has no AOF active-release manifest and tasks
+  `TASK-071` through `TASK-092` predate the current ArchMap, review-provenance,
+  and evidence-independence records. These are historical AOF migration gaps,
+  not QIF v0.8.19 product-test failures. This release therefore does not claim
+  AOF runtime release sign-off; it relies on the recorded v0.8.19 Need
+  Validation, council review, self-audit, QIF tests, and organization verify.
+- Self-review: `FSA-QIF-V0819` records that structural separation declarations
+  can still be gamed or wrong. The next slice is v0.8.20 Recovery Evidence
+  Challenge and Adversarial Validation using controlled source-loss, tamper,
+  contradiction, and common-cause scenarios.
+- Outcome: `OUT-MWPX9Q41-1INF9G` recorded success; the AOF learning loop is
+  stable and `TASK-093` is done.
+- Boundary: counts, attestations, separation axes, and grades are evidence and
+  routing signals. They do not prove actual independence, authenticity,
+  monitor validity, common-cause freedom, recovery sufficiency, safety, or
+  authority.

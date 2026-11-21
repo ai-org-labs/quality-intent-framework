@@ -1,6 +1,6 @@
 # Quality Intent Framework
 
-Current release: **v0.8.18**. QIF is distributed as a standard Agent
+Current release: **v0.8.19**. QIF is distributed as a standard Agent
 Skill: compatible agents can discover the QIF procedure from `SKILL.md`, load
 deeper guidance only when needed, and invoke the canonical verifier without
 turning QIF into an autonomous authority.
@@ -55,6 +55,12 @@ recorded remediation, incident replay, bounded observation, residual risk, and
 governance-owned re-entry assessment. A structurally complete record never
 authorizes restart or proves operational safety. See
 `docs/qif-v0.8.18-quarantine-outcome-safe-reentry.md`.
+
+Recovery evidence can now be tested for declared independence across principal,
+substrate, collection, evidence, and review axes. QIF records missing layers,
+shared failure domains, and cross-layer attestations; a high grade remains a
+reproducible classification rather than proof of independence or safe recovery.
+See `docs/qif-v0.8.19-recovery-evidence-independence.md`.
 
 To use QIF with Gemini, Claude, Codex, or another AI without cloning the full
 repository:

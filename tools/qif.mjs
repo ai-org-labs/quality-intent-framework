@@ -339,8 +339,8 @@ const packageTypeDescriptions = new Map([
     lifecycleRole: "agent-skill-behavioral-portability"
   }],
   ["skill-supply-chain", {
-    purpose: "Describe typed Skill dependencies, compare manifest transitions, govern non-executing quarantine, and trace recovery evidence to accountable re-entry review without equating records with safety or authority.",
-    lifecycleRole: "agent-skill-supply-chain-change-recovery-governance"
+    purpose: "Describe typed Skill dependencies, govern change and recovery, and assess recovery-evidence independence across declared layers and failure domains without equating records with safety or authority.",
+    lifecycleRole: "agent-skill-supply-chain-change-recovery-independence-governance"
   }]
 ]);
 

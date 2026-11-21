@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.8.19
+
+- Added recovery evidence sources, shared failure domains, cross-layer
+  attestations, and multi-axis recovery independence assessments to the
+  `skill-supply-chain` package.
+- Added deterministic layer coverage, self-attestation, correlation,
+  separation-axis, grade, status, and governance-trigger reproduction.
+- Added retained negative fixtures and explicit boundaries from actual
+  independence, attestation authenticity, monitor validity, common-cause
+  freedom, recovery evidence sufficiency, safety, and restart authority.
+
 ## v0.8.18
 
 - Added quarantine outcomes, recorded remediation actions, replay validation,

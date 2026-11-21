@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Extend the existing local skill-supply-chain evidence graph with quarantine outcome, remediation action, replay validation, observation window, residual-risk assessment, and governance-owned re-entry assessment records; structurally reproduce state and timing while explicitly excluding live enforcement and automatic restart authority.",
-  "updated_at": "2026-11-19T04:32:42.204Z",
+  "content": "Extend the existing skill-supply-chain recovery graph with recovery evidence source profiles, shared failure domains, cross-layer attestations, and a reproducible independence assessment linked to re-entry; grade declared principal, substrate, evidence, collection, and review separation without claiming authenticity, actual independence, safety, or authority.",
+  "updated_at": "2026-11-21T04:27:16.678Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MWN1Z9HJ-A590AU",
-  "source_decision_record_id": "DEC-MWN20RTM-UJ71TB",
+  "source_session_id": "SESS-MWPWOLPX-RHWDLC",
+  "source_decision_record_id": "DEC-MWPWPHZ9-GYCNCL",
   "declared_complete_at": null
 }

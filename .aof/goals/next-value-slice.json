@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "QIF v0.8.19 Recovery Evidence Independence and Cross-Layer Attestation",
-  "updated_at": "2026-11-19T04:46:17.005Z",
+  "content": "v0.8.20 Recovery Evidence Challenge and Adversarial Validation",
+  "updated_at": "2026-11-21T04:43:00.340Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MWN1Z9HJ-A590AU",
+  "source_session_id": "SESS-MWPWOLPX-RHWDLC",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-11-19T04:46:17.005Z"
+  "declared_complete_at": "2026-11-21T04:43:00.340Z"
 }
