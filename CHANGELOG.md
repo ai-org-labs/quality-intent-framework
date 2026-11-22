@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.8.20
+
+- Added controlled recovery challenge protocols, runs, observations, and
+  challenge-adjusted assessments to the `skill-supply-chain` package.
+- Added deterministic source-loss, evidence-tamper, contradiction,
+  common-cause, and multi-session coverage, outcome, exposure, evasion,
+  failure-domain, grade, status, and governance-trigger reproduction.
+- Added retained negative fixtures and explicit boundaries from challenge
+  representativeness, adversarial robustness, actual monitor coverage,
+  real-world defense, attacker capability, and safety improvement.
+
 ## v0.8.19
 
 - Added recovery evidence sources, shared failure domains, cross-layer

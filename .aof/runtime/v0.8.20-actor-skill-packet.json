@@ -1,0 +1,69 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-11-22T04:32:40Z",
+  "packet_id": "ASP-QIFV0820-CODEX",
+  "source_task_id": "TASK-094",
+  "source_parent_session_id": "SESS-MWRC9ZNZ-PD6DAW",
+  "source_decision_record_id": "DEC-MWRCBST4-3QJKIT",
+  "objective": "Implement QIF v0.8.20 Recovery Evidence Challenge and Adversarial Validation",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "Builder",
+    "team_ref": "qif-runtime-team",
+    "assignment_reason": "Builder owns the schema, verifier, fixtures, documentation, package builds, and release while Guardian reviews challenge and safety overclaims.",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": ["qif-runtime-schema-verification"],
+  "capability_fit": [{
+    "capability_ref": "schema-verifier-engineering",
+    "fit_state": "sufficient",
+    "evidence_refs": [
+      "schemas/skill-supply-chain-package.schema.json",
+      "tools/validate-skill-supply-chain.mjs",
+      "tools/run-fixture-tests.mjs"
+    ],
+    "rationale": "v0.8.19 provides a reproducible independence assessment that controlled challenges can test and downgrade."
+  }],
+  "resource_refs": ["resource-qif-repository"],
+  "policy_refs": [
+    "policy-no-live-attack-or-automatic-recovery",
+    "policy-no-challenge-success-overclaim"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/skill-supply-chain-package.schema.json",
+    "required_sections": [
+      "recovery-challenge-protocols",
+      "recovery-challenge-runs",
+      "challenge-observations",
+      "challenge-assessments"
+    ],
+    "acceptance_criteria": [
+      "npm test passes all positive and retained negative cases",
+      "unexecuted, unverified, failed, evaded, or common-cause-exposed challenges remain governance-required",
+      "challenge-adjusted grade reproduces linked observations without granting restart authority"
+    ]
+  },
+  "review_criteria": [{
+    "criterion": "challenge execution and safety boundary",
+    "evaluator_ref": "Guardian",
+    "evidence_required": "negative fixtures, verifier output, and council review",
+    "blocking": true
+  }],
+  "blocker_semantics": [{
+    "blocker_code": "challenge-becomes-proof-or-attack",
+    "trigger_condition": "a local challenge is treated as real-world safety proof, live attack permission, or automatic recovery authority",
+    "consequence": "block-assignment",
+    "recovery_action": "restore evidence-only and non-executing boundaries and add regression fixtures"
+  }],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will test the independence claim without turning a controlled challenge into a safety claim.",
+    "current_action": "Implement recovery evidence challenges",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Submit challenge-adjusted evidence to Guardian review"
+  },
+  "status": "draft"
+}

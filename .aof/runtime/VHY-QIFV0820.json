@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-11-22T04:31:43.431Z",
+  "value_hypothesis_id": "VHY-MWRCB2H3-VPMZI4",
+  "expected_value_creation": "回復証拠の独立性宣言を制御されたchallengeで反証可能にし、破綻時にgradeを下げてgovernanceへ送れる",
+  "beneficiary": "QIFを使って再開判断を準備する人間、AI、ハイブリッド組織",
+  "supporting_evidence": [
+    "v0.8.19 already models source, layer, principal, substrate, collection, reviewer, and failure domains",
+    "Current monitor red-teaming finds injection, coverage-gap, and multi-context bypasses that static declarations miss"
+  ],
+  "success_criteria": [
+    "challenge protocol, run, observation, finding, grade impact, and governance refs resolve",
+    "unexecuted, unverified, failed, evaded, or common-cause-exposed challenges fail closed"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWRCA4QI-3SZIYU"
+}

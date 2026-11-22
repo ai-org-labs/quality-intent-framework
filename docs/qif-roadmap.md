@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.8.12 baseline)
+## Current Position (v0.8.20 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -971,10 +971,17 @@ Deliverables:
   evidence, collection, and review separation; identify shared failure domains;
   and govern incomplete, correlated, self-attested, or unverified recovery
   evidence without claiming actual independence or recovery sufficiency.
+- Implemented twenty-first v0.8 slice, v0.8.20 Recovery Evidence Challenge and
+  Adversarial Validation: record bounded challenge protocols, controlled runs,
+  observations, and challenge-adjusted assessments across source loss, tamper,
+  contradiction, common-cause, and multi-session scenarios. Exposed or evaded
+  conditions lower the declared grade and force governance without claiming
+  challenge representativeness, adversarial robustness, real-world defense,
+  safety improvement, or execution authority.
 - Next planned slices:
-  - v0.8.20 Recovery Evidence Challenge and Adversarial Validation: challenge
-    declared independence with controlled tamper, contradiction, source-loss,
-    and common-cause scenarios while preserving test and authority boundaries.
+  - v0.8.21 Challenge Corpus Mutation and Coverage Calibration: mutate held-out
+    challenge families, measure detection gaps and false alarms across declared
+    contexts, and prevent one narrow corpus from becoming a defense claim.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,

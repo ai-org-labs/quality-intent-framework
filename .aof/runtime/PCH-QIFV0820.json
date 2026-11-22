@@ -1,0 +1,22 @@
+{
+  "artifact_type": "project-charter",
+  "recorded_at": "2026-11-22T04:32:17.410Z",
+  "project_charter_id": "PCH-MWRCBSOY-KDHU0S",
+  "validated_need_ref": ".aof/runtime/NVR-QIFV0820.json",
+  "validated_objective": "回復証拠独立性を制御challengeで反証可能にし、結果に応じたgradeとgovernance routingを再現する",
+  "scope": [
+    "skill-supply-chain schemaとexample",
+    "challenge protocol、run、observation、assessment",
+    "verifier、negative fixtures、docs、portable Skill"
+  ],
+  "constraints": [
+    "実システム攻撃と外部provider統合は行わない",
+    "challenge件数やpassを品質、安全性、真正性、権限として扱わない"
+  ],
+  "expected_outcomes": [
+    "未実行・未検証・failed・evaded・common-cause exposureがgovernance-requiredとなる",
+    "宣言gradeとchallenge-adjusted gradeの差が説明できる"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWRCA4QI-3SZIYU"
+}

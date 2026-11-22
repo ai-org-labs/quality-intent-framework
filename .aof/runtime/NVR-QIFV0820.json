@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-22T04:32:08.323Z",
+  "validation_id": "NVR-MWRCBLOJ-D0XEGI",
+  "raw_need": "QIF v0.8.20として回復証拠独立性宣言を敵対的に検証する",
+  "validation_status": "reframed",
+  "validated_need": "既存skill-supply-chain packageに非実行型のchallenge protocol、run、observation、assessmentを追加し、宣言gradeを反証可能にする",
+  "decision_summary": "価値のある最小単位は外部red-team基盤ではなく、制御challengeの計画・観測・影響を再現し、未実行・失敗・回避・共通障害をgovernanceへ送るローカルruntimeである",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "何を検証するか",
+      "answer": "v0.8.19のrecovery evidence independence宣言",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "何を作らないか",
+      "answer": "live attack、外部サービス統合、自動復旧、自動再開、権限付与",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "challengeが成功しても実運用の防御力や安全性が証明されるとは限らない"
+  ],
+  "evidence_gaps": [
+    "実運用または第三者のchallenge結果は未取得"
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0820.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0820.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0820.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWRCA4QI-3SZIYU"
+}

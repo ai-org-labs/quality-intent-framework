@@ -1,6 +1,6 @@
 # Quality Intent Framework
 
-Current release: **v0.8.19**. QIF is distributed as a standard Agent
+Current release: **v0.8.20**. QIF is distributed as a standard Agent
 Skill: compatible agents can discover the QIF procedure from `SKILL.md`, load
 deeper guidance only when needed, and invoke the canonical verifier without
 turning QIF into an autonomous authority.
@@ -61,6 +61,13 @@ substrate, collection, evidence, and review axes. QIF records missing layers,
 shared failure domains, and cross-layer attestations; a high grade remains a
 reproducible classification rather than proof of independence or safe recovery.
 See `docs/qif-v0.8.19-recovery-evidence-independence.md`.
+
+Declared recovery independence can now be challenged in a controlled harness
+through source-loss, tamper, contradiction, common-cause, and multi-session
+scenarios. QIF reproduces challenge coverage, exposed or evaded conditions,
+and a challenge-adjusted grade without claiming adversarial robustness or
+real-world defense. See
+`docs/qif-v0.8.20-recovery-evidence-challenge.md`.
 
 To use QIF with Gemini, Claude, Codex, or another AI without cloning the full
 repository:

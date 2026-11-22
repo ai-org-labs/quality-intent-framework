@@ -818,6 +818,195 @@
       "errorIncludes": "must explicitly not claim actual evidence independence"
     },
     {
+      "file": "skill-supply-chain-challenge-protocols-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge protocols required",
+      "expect": "fail",
+      "errorIncludes": "package recoveryChallengeProtocols must be an array."
+    },
+    {
+      "file": "skill-supply-chain-challenge-runs-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge runs required",
+      "expect": "fail",
+      "errorIncludes": "package recoveryChallengeRuns must be an array."
+    },
+    {
+      "file": "skill-supply-chain-challenge-observations-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge observations required",
+      "expect": "fail",
+      "errorIncludes": "package recoveryChallengeObservations must be an array."
+    },
+    {
+      "file": "skill-supply-chain-challenge-assessments-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge assessments required",
+      "expect": "fail",
+      "errorIncludes": "package recoveryChallengeAssessments must be an array."
+    },
+    {
+      "file": "skill-supply-chain-challenge-protocol-independence.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge target resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery independence assessment"
+    },
+    {
+      "file": "skill-supply-chain-challenge-protocol-source.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge source resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery evidence source"
+    },
+    {
+      "file": "skill-supply-chain-challenge-protocol-boundary.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "controlled challenge boundary",
+      "expect": "fail",
+      "errorIncludes": "must remain a controlled, non-executing challenge protocol"
+    },
+    {
+      "file": "skill-supply-chain-challenge-protocol-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge protocol governance",
+      "expect": "fail",
+      "errorIncludes": "challenge protocol must remain governance-required"
+    },
+    {
+      "file": "skill-supply-chain-challenge-observation-run.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge observation lineage",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery challenge run"
+    },
+    {
+      "file": "skill-supply-chain-challenge-observation-type.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge perturbation alignment",
+      "expect": "fail",
+      "errorIncludes": "perturbationType must match its run challengeType"
+    },
+    {
+      "file": "skill-supply-chain-challenge-observation-source.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge affected source resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery evidence source"
+    },
+    {
+      "file": "skill-supply-chain-challenge-observation-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge observation readiness",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce challenge observation evidence and impact"
+    },
+    {
+      "file": "skill-supply-chain-challenge-run-protocol.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge protocol lineage",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery challenge protocol"
+    },
+    {
+      "file": "skill-supply-chain-challenge-run-observation.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge observation closure",
+      "expect": "fail",
+      "errorIncludes": "observationRefs must exactly cover observations for the run"
+    },
+    {
+      "file": "skill-supply-chain-challenge-run-outcome.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge outcome reproduction",
+      "expect": "fail",
+      "errorIncludes": "outcome must reproduce challenge observations"
+    },
+    {
+      "file": "skill-supply-chain-challenge-run-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge run readiness",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce challenge outcome and evidence"
+    },
+    {
+      "file": "skill-supply-chain-challenge-run-effect.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "external effect boundary",
+      "expect": "fail",
+      "errorIncludes": "must not claim or perform an external effect"
+    },
+    {
+      "file": "skill-supply-chain-challenge-assessment-independence.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge assessment target",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery independence assessment"
+    },
+    {
+      "file": "skill-supply-chain-challenge-assessment-coverage.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge coverage reproduction",
+      "expect": "fail",
+      "errorIncludes": "challenge coverage, exposure, evasion, and failure domains must reproduce linked runs"
+    },
+    {
+      "file": "skill-supply-chain-challenge-assessment-grade.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge-adjusted grade reproduction",
+      "expect": "fail",
+      "errorIncludes": "challenge-adjusted grade must reproduce declared grade and challenge outcomes"
+    },
+    {
+      "file": "skill-supply-chain-challenge-assessment-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge assessment governance",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce challenge evidence and adjusted grade"
+    },
+    {
+      "file": "skill-supply-chain-challenge-unverified-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge evidence governance",
+      "expect": "fail",
+      "errorIncludes": "requires recovery-challenge-unverified governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-challenge-exposed-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge exposure governance",
+      "expect": "fail",
+      "errorIncludes": "requires recovery-challenge-exposed governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-challenge-evasion-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge evasion governance",
+      "expect": "fail",
+      "errorIncludes": "requires recovery-challenge-evasion governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-challenge-review-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge review governance",
+      "expect": "fail",
+      "errorIncludes": "requires recovery-challenge-review-required governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-challenge-quality-boundary.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "activity count quality boundary",
+      "expect": "fail",
+      "errorIncludes": "must not treat challenge counts as quality or claim real-world defense"
+    },
+    {
+      "file": "skill-supply-chain-challenge-verifier-boundary.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "adversarial robustness boundary",
+      "expect": "fail",
+      "errorIncludes": "must explicitly not claim adversarial robustness"
+    },
+    {
       "file": "skill-supply-chain-verifier-boundary.json",
       "validator": "tools/validate-skill-supply-chain.mjs",
       "rule": "verifier claim boundary",

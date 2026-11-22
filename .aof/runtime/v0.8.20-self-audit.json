@@ -1,0 +1,35 @@
+{
+  "artifactType": "framework-self-audit",
+  "id": "FSA-QIF-V0820",
+  "version": "0.8.20",
+  "sessionRef": "SESS-MWRC9ZNZ-PD6DAW",
+  "taskRef": "TASK-094",
+  "validatedNeedRef": "NVR-MWRCBLOJ-D0XEGI",
+  "charterRef": "PCH-MWRCBSOY-KDHU0S",
+  "planningCouncilRef": "CRUN-MWRCBW3C-SS51W3",
+  "reviewCouncilRef": "CRUN-MWRD1S16-A99RM7",
+  "evidence": {
+    "npmTest": "passed",
+    "positiveFixtures": "18/18",
+    "negativeFixtures": "1723/1723",
+    "skillSupplyChainFixtures": 135,
+    "organizationVerify": "295/295",
+    "releaseStateAudit": "incomplete-historical-governance-migration"
+  },
+  "guardianReview": {
+    "verdict": "proceed-with-explicit-boundaries",
+    "veto": false,
+    "reason": "The implementation is controlled, non-executing, fail-closed, and explicitly refuses to turn challenge activity into safety, quality, defense, or authority claims."
+  },
+  "builderReview": {
+    "verdict": "proceed",
+    "reason": "Schema, example, verifier, retained fixtures, CLI metadata, Skill guidance, portable sources, and documentation align with the validated scope."
+  },
+  "residualRisks": [
+    "The five challenge families are declared coverage, not evidence that the corpus represents real adversaries or operating contexts.",
+    "Example-only runs do not prove monitor effectiveness, attacker capability, operational defense, or safety improvement.",
+    "AOF release-state sign-off is unavailable until historical governance artifacts and an active release manifest are addressed."
+  ],
+  "nextValueSlice": "v0.8.21 Challenge Corpus Mutation and Coverage Calibration",
+  "status": "reviewed"
+}

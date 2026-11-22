@@ -339,8 +339,8 @@ const packageTypeDescriptions = new Map([
     lifecycleRole: "agent-skill-behavioral-portability"
   }],
   ["skill-supply-chain", {
-    purpose: "Describe typed Skill dependencies, govern change and recovery, and assess recovery-evidence independence across declared layers and failure domains without equating records with safety or authority.",
-    lifecycleRole: "agent-skill-supply-chain-change-recovery-independence-governance"
+    purpose: "Describe typed Skill dependencies, govern change and recovery, and challenge declared recovery-evidence independence without equating controlled results with safety or authority.",
+    lifecycleRole: "agent-skill-supply-chain-change-recovery-independence-challenge-governance"
   }]
 ]);
 
@@ -515,6 +515,14 @@ function status() {
     },
     roadmapFrontier,
     trendRationale: [
+      {
+        signal: "Agent monitoring research increasingly tests monitor injection, coverage gaps, multi-context behavior, and attempts to disable oversight.",
+        qifResponse: "QIF recovery evidence should be challenged with controlled perturbations and downgraded when exposure or evasion is reproduced, without claiming real-world defense."
+      },
+      {
+        signal: "Evaluation results can diverge from deployed behavior and persistent adversaries can bypass narrow static defenses.",
+        qifResponse: "QIF should preserve the boundary between a bounded challenge corpus and operational robustness, then calibrate corpus coverage in the next release."
+      },
       {
         signal: "Agent frameworks expose tracing, guardrails, sessions, and memory as operational surfaces.",
         qifResponse: "QIF should expose compact machine-readable status before AI agents act."

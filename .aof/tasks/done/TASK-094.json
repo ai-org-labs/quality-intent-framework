@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-094",
+  "title": "QIF v0.8.20 Recovery Evidence Challenge and Adversarial Validation",
+  "description": "Extend skill-supply-chain with controlled recovery evidence challenge protocols, runs, observations, challenge-adjusted grades, and fail-closed governance.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MWRC9ZNZ-PD6DAW",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MWRCBST4-3QJKIT",
+  "operating_goal_ref": "v0.8.20-recovery-challenge",
+  "created_at": "2026-11-22T04:32:31.485Z",
+  "updated_at": "2026-11-22T04:53:17.850Z",
+  "assigned_at": null,
+  "done_at": "2026-11-22T04:53:17.850Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented and verified. Planning council CRUN-MWRCBW3C-SS51W3 and review council CRUN-MWRD1S16-A99RM7 proceeded without veto; npm test passed. Release-state-audit remains unavailable due historical governance artifacts and no active AOF release manifest, not QIF product test failure."
+}

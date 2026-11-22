@@ -1,0 +1,32 @@
+{
+  "artifactType": "review-evidence",
+  "id": "REV-QIF-V0820",
+  "taskRef": "TASK-094",
+  "actorSkillPacketRef": "ASP-QIFV0820-CODEX",
+  "capabilitiesUsed": [
+    "schema-design",
+    "deterministic-verification",
+    "retained-negative-testing",
+    "release-governance"
+  ],
+  "resourcesUsed": [
+    "AOF v12.2.0 runtime",
+    "QIF v0.8.19 baseline",
+    "local Node.js runtime",
+    "current primary research sources"
+  ],
+  "policyBoundaries": [
+    "no live attacks",
+    "no external credentials",
+    "no automatic remediation or restart",
+    "no semantic truth or adversarial robustness claim",
+    "challenge count is not quality"
+  ],
+  "verification": [
+    "npm test",
+    "node tools/run-fixture-tests.mjs",
+    "aof organization-verify",
+    "aof release-state-audit"
+  ],
+  "status": "reviewed"
+}

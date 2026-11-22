@@ -5959,3 +5959,55 @@ Date: 2026-10-25
   routing signals. They do not prove actual independence, authenticity,
   monitor validity, common-cause freedom, recovery sufficiency, safety, or
   authority.
+
+## 2026-11-22 - QIF v0.8.20 Recovery Evidence Challenge and Adversarial Validation
+
+- AOF runtime: v12.2.0, managed-project topology. Session:
+  `SESS-MWRC9ZNZ-PD6DAW`; task: `TASK-094`.
+- Need/Intent/Context were framed before project work. Validated Need:
+  `NVR-MWRCBLOJ-D0XEGI`; charter: `PCH-MWRCBSOY-KDHU0S`; actor skill packet:
+  `ASP-QIFV0820-CODEX`.
+- Planning council `CRUN-MWRCBW3C-SS51W3` used Visionary, Builder, and
+  Guardian; all proceeded without veto. Review council
+  `CRUN-MWRD1S16-A99RM7` used Guardian and Builder; both proceeded without
+  veto. Review evidence is `REV-QIF-V0820` and self-audit is
+  `FSA-QIF-V0820`.
+- Decision: extend `skill-supply-chain` rather than add a generic red-team
+  package. Add controlled protocol, run, observation, and assessment records
+  for source loss, evidence tamper, contradiction, common-cause failure, and
+  multi-session evasion. Keep live attacks, credentials, external providers,
+  automatic remediation, restart, trust elevation, and authority out of scope.
+- Trend evidence reviewed: OpenAI monitoring research on coverage gaps and
+  monitor-disable attempts (<https://alignment.openai.com/how-we-detect-frontier-model-misalignment>),
+  the evaluation-to-production behavior gap
+  (<https://alignment.openai.com/eval-production-behavior-gap>), Anthropic
+  controlled monitor injection and multi-context red-teaming
+  (<https://alignment.anthropic.com/2026/red-teaming-auto-mode/>), SLEIGHT-Bench
+  (<https://alignment.anthropic.com/2026/sleight-bench/>), NIST deployed-AI
+  monitoring guidance (<https://www.nist.gov/publications/challenges-monitoring-deployed-ai-systems-center-ai-standards-and-innovation>),
+  and MonitoringBench (<https://arxiv.org/abs/2605.09684>).
+- Implementation evidence: `schemas/skill-supply-chain-package.schema.json`,
+  `examples/skill-supply-chain-package.json`,
+  `tools/validate-skill-supply-chain.mjs`, 135 retained package fixtures,
+  `docs/qif-v0.8.20-recovery-evidence-challenge.md`, and regenerated portable
+  and Agent Skill release artifacts.
+- Verification: `npm test` passed; 18/18 positive fixture packages and
+  1723/1723 negative fixtures passed; Agent Skill v0.8.20 built and verified;
+  portable v0.8.20 built, verified, and mutation rejection passed; AOF
+  `organization-verify` passed 295/295 checks.
+- AOF `release-state-audit` was executed and remained incomplete because no
+  active AOF release manifest exists and TASK-071 through TASK-093 predate
+  current ArchMap, review-provenance, and evidence-independence records.
+  TASK-094 also lacks an ArchMap impact artifact. These are AOF governance
+  migration gaps, not QIF v0.8.20 product-test failures. This release does not
+  claim AOF runtime release sign-off.
+- Self-review: controlled challenge coverage is not corpus
+  representativeness. The five challenge families may miss novel, composed,
+  or context-specific attacks and may have unknown false-positive cost. The
+  next slice is v0.8.21 Challenge Corpus Mutation and Coverage Calibration.
+- Outcome `OUT-MWRD2T4T-RKR5K8` recorded success; `TASK-094` is done and the
+  next-value projection is v0.8.21.
+- Boundary: challenge counts and pass rates are evidence, not quality. Local
+  verification does not prove challenge representativeness, adversarial
+  robustness, actual monitor coverage, attacker capability, real-world
+  defense, safety improvement, recovery sufficiency, or authority.

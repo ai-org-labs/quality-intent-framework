@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-22T04:31:43.431Z",
+  "alternative_analysis_id": "ALT-MWRCB2H3-87POZN",
+  "subject_need": "宣言された回復証拠独立性を反証可能にする",
+  "alternative_solutions": [
+    "既存skill-supply-chain packageへchallenge protocol、run、observation、assessmentを追加する",
+    "外部red-teamサービスとlive monitorを統合する"
+  ],
+  "non_solution_options": [
+    "固定チェックリストでchallenge件数だけ数える"
+  ],
+  "defer_options": [
+    "v0.9まで静的gradeのまま延期する"
+  ],
+  "stop_options": [
+    "challengeが実システム攻撃、自動権限、自動復旧、自動再開を必要とするなら停止する"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWRCA4QI-3SZIYU"
+}

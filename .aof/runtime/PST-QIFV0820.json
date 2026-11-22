@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-22T04:31:43.431Z",
+  "problem_statement_id": "PST-MWRCB2H3-NSAC2D",
+  "affected_party": "QIFを使うAI、評価者、運用責任者",
+  "actual_problem": "v0.8.19は回復証拠の独立性を宣言と構造から評価できるが、欠損・改ざん・矛盾・共通障害・複数セッション回避に耐えるかを実行結果から検証できない",
+  "why_it_matters": "宣言だけの独立性gradeを安全性や回復十分性と誤認すると、破られる証拠系に基づいて再開判断が行われる",
+  "why_now": "2026年の監視研究はcoverage gap、monitor injection、multi-context attack、eval-production gapを主要な未解決リスクとして示している",
+  "evidence_refs": [
+    "docs/qif-v0.8.19-recovery-evidence-independence.md",
+    "docs/qif-roadmap.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWRCA4QI-3SZIYU"
+}

@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.8.20 Recovery Evidence Challenge and Adversarial Validation",
-  "updated_at": "2026-11-21T04:43:00.340Z",
+  "content": "v0.8.21 Challenge Corpus Mutation and Coverage Calibration",
+  "updated_at": "2026-11-22T04:53:22.269Z",
   "agreed_with_human": null,
-  "source_session_id": "SESS-MWPWOLPX-RHWDLC",
+  "source_session_id": "SESS-MWRC9ZNZ-PD6DAW",
   "source_decision_record_id": null,
-  "declared_complete_at": "2026-11-21T04:43:00.340Z"
+  "declared_complete_at": null
 }

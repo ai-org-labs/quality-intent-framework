@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-11-21T04:42:25.179Z",
+  "updated_at": "2026-11-22T04:32:17.563Z",
   "entries": [
     {
-      "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "成功は、各回復証拠の発行主体・基盤・収集経路・レビュー主体と共有障害ドメインが解決され、宣言された独立性gradeとcoverageが再現され、不足・自己証明・共通障害・未検証attestationはfail closedでgovernance-requiredとなること。件数やgradeを品質、安全性、真正性、権限そのものとして扱わない。",
-      "recorded_at": "2026-11-21T04:26:41.795Z",
+      "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
+      "answer": "対象はローカルskill-supply-chain packageのrecovery evidence sources、shared failure domains、cross-layer attestations、independence assessmentsとre-entry linkage。外部システムへの攻撃、live monitor、credential、実運用の自動遮断・復旧・再開は対象外。",
+      "recorded_at": "2026-11-22T04:30:59.708Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MWPWOLPX-RHWDLC",
+      "source_session_id": "SESS-MWRC9ZNZ-PD6DAW",
+      "source_decision_record_id": null
+    },
+    {
+      "question": "How should improvement success be judged: which metric or end state matters most?",
+      "answer": "成功は、challenge protocol、challenge run、observed perturbation、detection、grade impact、governance routingが参照解決され、未実行・未検証・失敗・common-cause露出・monitor evasionはfail closedとなること。challenge件数や成功率を品質、安全性、実際の防御力、権限として扱わない。",
+      "recorded_at": "2026-11-22T04:30:59.709Z",
+      "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
+      "mismatch_state": null,
+      "scale_direction": "complete need validation before planning",
+      "source_session_id": "SESS-MWRC9ZNZ-PD6DAW",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The valuable slice is common-cause visibility over the existing recovery chain, not cryptographic attestation infrastructure or a generic audit framework.",
-      "recorded_at": "2026-11-21T04:27:16.680Z",
+      "answer": "価値のある最小単位は外部red-team基盤ではなく、制御challengeの計画・観測・影響を再現し、未実行・失敗・回避・共通障害をgovernanceへ送るローカルruntimeである",
+      "recorded_at": "2026-11-22T04:32:17.563Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MWPWOLPX-RHWDLC",
-      "source_decision_record_id": "DEC-MWPWPHZ9-GYCNCL"
-    },
-    {
-      "question": "framework self-audit で次に残る gap は何か",
-      "answer": "Declared independence can still be gamed or remain wrong until source loss, tamper, contradiction, and common-cause challenges are executed.",
-      "recorded_at": "2026-11-21T04:42:25.179Z",
-      "expectation_state": "Schemas, examples, verifier rules, portable and Agent Skill builds, and 1696 retained negative checks pass; review council proceeded without Guardian veto.",
-      "mismatch_state": "Declared independence can still be gamed or remain wrong until source loss, tamper, contradiction, and common-cause challenges are executed.",
-      "scale_direction": "Implement v0.8.20 Recovery Evidence Challenge and Adversarial Validation.",
-      "source_session_id": null,
-      "source_decision_record_id": null
+      "source_session_id": "SESS-MWRC9ZNZ-PD6DAW",
+      "source_decision_record_id": "DEC-MWRCBST4-3QJKIT"
     }
   ]
 }
