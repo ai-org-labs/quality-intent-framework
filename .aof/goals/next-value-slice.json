@@ -1,9 +1,9 @@
 {
   "goal_type": "next-value-slice",
-  "content": "v0.8.21 Challenge Corpus Mutation and Coverage Calibration",
-  "updated_at": "2026-11-22T04:53:22.269Z",
-  "agreed_with_human": null,
-  "source_session_id": "SESS-MWRC9ZNZ-PD6DAW",
-  "source_decision_record_id": null,
+  "content": "v0.8.22 Adaptive Challenge Promotion and Regression Governance: govern promotion of reviewed novel failures into retained regression families, preserve revision and retirement rationale, and detect overfitting to visible challenge corpora without claiming robustness.",
+  "updated_at": "2026-11-23T04:56:54.392Z",
+  "agreed_with_human": true,
+  "source_session_id": "SESS-MWSRLJJE-AVVEUS",
+  "source_decision_record_id": "DEC-MWSRMUVV-DZNRIP",
   "declared_complete_at": null
 }

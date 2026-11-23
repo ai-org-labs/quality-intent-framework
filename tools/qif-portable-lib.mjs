@@ -41,6 +41,7 @@ const CANONICAL_DOCS = [
   "docs/qif-v0.8.18-quarantine-outcome-safe-reentry.md",
   "docs/qif-v0.8.19-recovery-evidence-independence.md",
   "docs/qif-v0.8.20-recovery-evidence-challenge.md",
+  "docs/qif-v0.8.21-challenge-corpus-calibration.md",
   "docs/expert-judgment-framework.md"
 ];
 

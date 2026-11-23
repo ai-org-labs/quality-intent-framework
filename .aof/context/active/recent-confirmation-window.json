@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-11-22T04:32:17.563Z",
+  "updated_at": "2026-11-23T04:28:33.886Z",
   "entries": [
     {
       "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
-      "answer": "対象はローカルskill-supply-chain packageのrecovery evidence sources、shared failure domains、cross-layer attestations、independence assessmentsとre-entry linkage。外部システムへの攻撃、live monitor、credential、実運用の自動遮断・復旧・再開は対象外。",
-      "recorded_at": "2026-11-22T04:30:59.708Z",
+      "answer": "対象はローカルskill-supply-chain packageのrecovery challenge protocol/run/observation/assessment。外部攻撃、live provider、credential、実システム副作用、自動防御・復旧・権限付与は対象外。",
+      "recorded_at": "2026-11-23T04:27:39.081Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MWRC9ZNZ-PD6DAW",
+      "source_session_id": "SESS-MWSRLJJE-AVVEUS",
       "source_decision_record_id": null
     },
     {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "成功は、challenge protocol、challenge run、observed perturbation、detection、grade impact、governance routingが参照解決され、未実行・未検証・失敗・common-cause露出・monitor evasionはfail closedとなること。challenge件数や成功率を品質、安全性、実際の防御力、権限として扱わない。",
-      "recorded_at": "2026-11-22T04:30:59.709Z",
+      "answer": "成功はseedからmutantとholdoutの由来が追跡でき、benign controlを含む検出・見逃し・誤警報・未知変異の結果とgrade impactが再現され、証拠不足や役割競合がfail closedでgovernanceへ送られること。件数や率は品質そのものにしない。",
+      "recorded_at": "2026-11-23T04:27:39.082Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MWRC9ZNZ-PD6DAW",
+      "source_session_id": "SESS-MWSRLJJE-AVVEUS",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "価値のある最小単位は外部red-team基盤ではなく、制御challengeの計画・観測・影響を再現し、未実行・失敗・回避・共通障害をgovernanceへ送るローカルruntimeである",
-      "recorded_at": "2026-11-22T04:32:17.563Z",
+      "answer": "The raw continuation request was reframed into the smallest executable value slice. Extending the current package preserves lineage; a generic red-team runtime or live integration is unnecessary and unsafe for this release.",
+      "recorded_at": "2026-11-23T04:28:33.886Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MWRC9ZNZ-PD6DAW",
-      "source_decision_record_id": "DEC-MWRCBST4-3QJKIT"
+      "source_session_id": "SESS-MWSRLJJE-AVVEUS",
+      "source_decision_record_id": "DEC-MWSRMUVV-DZNRIP"
     }
   ]
 }

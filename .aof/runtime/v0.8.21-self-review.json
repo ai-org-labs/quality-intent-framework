@@ -1,0 +1,29 @@
+{
+  "artifact_type": "focused-self-audit",
+  "id": "FSA-QIF-V0821",
+  "task_ref": "TASK-095",
+  "session_ref": "SESS-MWSRLJJE-AVVEUS",
+  "review_council_ref": "CRUN-MWSSFALR-WO9U0X",
+  "scope": "QIF v0.8.21 challenge corpus mutation and coverage calibration",
+  "evidence_refs": [
+    "npm test: 18/18 positive and 1751/1751 negative fixtures",
+    "schemas/skill-supply-chain-package.schema.json",
+    "examples/skill-supply-chain-package.json",
+    "tools/validate-skill-supply-chain.mjs",
+    ".aof/runtime/v0.8.21-review-council.json"
+  ],
+  "findings": [
+    {
+      "severity": "medium",
+      "finding": "A finite visible corpus can be overfit even when lineage, holdouts, and false alarms are structurally correct.",
+      "disposition": "Carry into v0.8.22 Adaptive Challenge Promotion and Regression Governance."
+    },
+    {
+      "severity": "low",
+      "finding": "The example has one holdout and one benign control, so its rates are mathematically reproducible but statistically weak.",
+      "disposition": "Keep the example insufficient and governance-required; do not claim representativeness or robustness."
+    }
+  ],
+  "decision": "release",
+  "reason": "The release adds bounded structural capability and deliberately demonstrates failure routing. Product tests pass and all semantic and operational non-claims remain explicit."
+}

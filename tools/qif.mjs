@@ -520,8 +520,12 @@ function status() {
         qifResponse: "QIF recovery evidence should be challenged with controlled perturbations and downgraded when exposure or evasion is reproduced, without claiming real-world defense."
       },
       {
-        signal: "Evaluation results can diverge from deployed behavior and persistent adversaries can bypass narrow static defenses.",
-        qifResponse: "QIF should preserve the boundary between a bounded challenge corpus and operational robustness, then calibrate corpus coverage in the next release."
+        signal: "Closed-loop red teaming increasingly adapts probes from observed failures and separates challenger, target, and judge roles instead of replaying one fixed prompt set.",
+        qifResponse: "QIF records mutation lineage, sequestered holdouts, benign controls, misses, false alarms, and role separation while refusing to infer generalization from one corpus."
+      },
+      {
+        signal: "Adaptive evaluation creates a new overfitting risk when visible discoveries are repeatedly tuned into the target.",
+        qifResponse: "The next QIF slice should govern promotion, revision, retirement, and regression retention for novel challenge failures."
       },
       {
         signal: "Agent frameworks expose tracing, guardrails, sessions, and memory as operational surfaces.",

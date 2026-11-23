@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-23T04:28:24.509Z",
+  "validation_id": "NVR-MWSRMNNH-ICGGHO",
+  "raw_need": "Continue QIF with the latest AOF and implement the nearest roadmap release ahead of current AI trends.",
+  "validation_status": "reframed",
+  "validated_need": "Extend the existing skill-supply-chain recovery challenge model with a controlled, non-executing corpus calibration layer that preserves seed and mutation lineage, separates holdout and benign controls, reproduces misses and false alarms, checks Challenger/Judge role separation, and routes insufficient or unverified coverage to governance without claiming quality, safety, or operational defense.",
+  "decision_summary": "The raw continuation request was reframed into the smallest executable value slice. Extending the current package preserves lineage; a generic red-team runtime or live integration is unnecessary and unsafe for this release.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What environment is in scope?",
+      "answer": "The local skill-supply-chain package only; no live systems, providers, credentials, or side effects.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "How is success judged?",
+      "answer": "Reproducible lineage, holdout and benign-control outcomes, role separation, and fail-closed governance; rates are not quality.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "A larger static challenge count would imply broader defense coverage."
+  ],
+  "evidence_gaps": [
+    "No real external challenge corpus or deployment outcome exists; all examples remain controlled and example-only."
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0821.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0821.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0821.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWSRLOLJ-3DCTCZ"
+}

@@ -1,0 +1,173 @@
+{
+  "ok": false,
+  "artifact_type": "release-state-audit",
+  "generated_at": "2026-11-23T04:56:04.989Z",
+  "project_root": "/private/tmp/qif-v0821-1123",
+  "active_release": null,
+  "governance_audit_cutoff_task_id": "TASK-071",
+  "governance_audits": [
+    {
+      "name": "archmap-impact-audit",
+      "ok": false,
+      "artifact_type": "archmap-impact-audit",
+      "scoped_task_count": 24,
+      "failing_check_count": 24,
+      "error_count": 24,
+      "errors": [
+        "TASK-071 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-071.json",
+        "TASK-072 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-072.json",
+        "TASK-073 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-073.json",
+        "TASK-074 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-074.json",
+        "TASK-075 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-075.json",
+        "TASK-076 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-076.json",
+        "TASK-077 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-077.json",
+        "TASK-078 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-078.json",
+        "TASK-079 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-079.json",
+        "TASK-080 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-080.json",
+        "TASK-081 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-081.json",
+        "TASK-082 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-082.json",
+        "TASK-083 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-083.json",
+        "TASK-085 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-085.json",
+        "TASK-086 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-086.json",
+        "TASK-087 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-087.json",
+        "TASK-088 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-088.json",
+        "TASK-089 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-089.json",
+        "TASK-090 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-090.json",
+        "TASK-091 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-091.json",
+        "TASK-092 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-092.json",
+        "TASK-093 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-093.json",
+        "TASK-094 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-094.json",
+        "TASK-095 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-095.json"
+      ]
+    },
+    {
+      "name": "review-provenance-audit",
+      "ok": false,
+      "artifact_type": "review-provenance-audit",
+      "scoped_task_count": 23,
+      "failing_check_count": 23,
+      "error_count": 23,
+      "errors": [
+        "TASK-071 council review presence: missing council review artifact",
+        "TASK-072 council review presence: missing council review artifact",
+        "TASK-073 council review presence: missing council review artifact",
+        "TASK-074 council review presence: missing council review artifact",
+        "TASK-075 council review presence: missing council review artifact",
+        "TASK-076 council review presence: missing council review artifact",
+        "TASK-077 council review presence: missing council review artifact",
+        "TASK-078 council review presence: missing council review artifact",
+        "TASK-079 council review presence: missing council review artifact",
+        "TASK-080 council review presence: missing council review artifact",
+        "TASK-081 council review presence: missing council review artifact",
+        "TASK-082 council review presence: missing council review artifact",
+        "TASK-083 council review presence: missing council review artifact",
+        "TASK-085 council review presence: missing council review artifact",
+        "TASK-086 council review presence: missing council review artifact",
+        "TASK-087 council review presence: missing council review artifact",
+        "TASK-088 council review presence: missing council review artifact",
+        "TASK-089 council review presence: missing council review artifact",
+        "TASK-090 council review presence: missing council review artifact",
+        "TASK-091 council review presence: missing council review artifact",
+        "TASK-092 council review presence: missing council review artifact",
+        "TASK-093 council review presence: missing council review artifact",
+        "TASK-094 council review presence: missing council review artifact"
+      ]
+    },
+    {
+      "name": "evidence-independence-audit",
+      "ok": false,
+      "artifact_type": "evidence-independence-audit",
+      "scoped_task_count": 23,
+      "failing_check_count": 46,
+      "error_count": 46,
+      "errors": [
+        "TASK-071 evidence presence: 0 evidence ref(s)",
+        "TASK-071 independent evidence presence: no evidence",
+        "TASK-072 evidence presence: 0 evidence ref(s)",
+        "TASK-072 independent evidence presence: no evidence",
+        "TASK-073 evidence presence: 0 evidence ref(s)",
+        "TASK-073 independent evidence presence: no evidence",
+        "TASK-074 evidence presence: 0 evidence ref(s)",
+        "TASK-074 independent evidence presence: no evidence",
+        "TASK-075 evidence presence: 0 evidence ref(s)",
+        "TASK-075 independent evidence presence: no evidence",
+        "TASK-076 evidence presence: 0 evidence ref(s)",
+        "TASK-076 independent evidence presence: no evidence",
+        "TASK-077 evidence presence: 0 evidence ref(s)",
+        "TASK-077 independent evidence presence: no evidence",
+        "TASK-078 evidence presence: 0 evidence ref(s)",
+        "TASK-078 independent evidence presence: no evidence",
+        "TASK-079 evidence presence: 0 evidence ref(s)",
+        "TASK-079 independent evidence presence: no evidence",
+        "TASK-080 evidence presence: 0 evidence ref(s)",
+        "TASK-080 independent evidence presence: no evidence",
+        "TASK-081 evidence presence: 0 evidence ref(s)",
+        "TASK-081 independent evidence presence: no evidence",
+        "TASK-082 evidence presence: 0 evidence ref(s)",
+        "TASK-082 independent evidence presence: no evidence",
+        "TASK-083 evidence presence: 0 evidence ref(s)",
+        "TASK-083 independent evidence presence: no evidence",
+        "TASK-085 evidence presence: 0 evidence ref(s)",
+        "TASK-085 independent evidence presence: no evidence",
+        "TASK-086 evidence presence: 0 evidence ref(s)",
+        "TASK-086 independent evidence presence: no evidence",
+        "TASK-087 evidence presence: 0 evidence ref(s)",
+        "TASK-087 independent evidence presence: no evidence",
+        "TASK-088 evidence presence: 0 evidence ref(s)",
+        "TASK-088 independent evidence presence: no evidence",
+        "TASK-089 evidence presence: 0 evidence ref(s)",
+        "TASK-089 independent evidence presence: no evidence",
+        "TASK-090 evidence presence: 0 evidence ref(s)",
+        "TASK-090 independent evidence presence: no evidence",
+        "TASK-091 evidence presence: 0 evidence ref(s)",
+        "TASK-091 independent evidence presence: no evidence",
+        "TASK-092 evidence presence: 0 evidence ref(s)",
+        "TASK-092 independent evidence presence: no evidence",
+        "TASK-093 evidence presence: 0 evidence ref(s)",
+        "TASK-093 independent evidence presence: no evidence",
+        "TASK-094 evidence presence: 0 evidence ref(s)",
+        "TASK-094 independent evidence presence: no evidence"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "name": "active release manifest presence",
+      "status": "fail",
+      "detail": "no active release manifest was found"
+    },
+    {
+      "name": "bootstrap version alignment",
+      "status": "fail",
+      "detail": "cannot evaluate without an active release manifest"
+    },
+    {
+      "name": "governance release contract alignment",
+      "status": "fail",
+      "detail": "cannot evaluate without an active release manifest"
+    },
+    {
+      "name": "archmap-impact-audit release gate",
+      "status": "fail",
+      "detail": "24 error(s): TASK-071 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-071.json; TASK-072 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-072.json; TASK-073 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-073.json"
+    },
+    {
+      "name": "review-provenance-audit release gate",
+      "status": "fail",
+      "detail": "23 error(s): TASK-071 council review presence: missing council review artifact; TASK-072 council review presence: missing council review artifact; TASK-073 council review presence: missing council review artifact"
+    },
+    {
+      "name": "evidence-independence-audit release gate",
+      "status": "fail",
+      "detail": "46 error(s): TASK-071 evidence presence: 0 evidence ref(s); TASK-071 independent evidence presence: no evidence; TASK-072 evidence presence: 0 evidence ref(s)"
+    }
+  ],
+  "errors": [
+    "active release manifest presence: no active release manifest was found",
+    "bootstrap version alignment: cannot evaluate without an active release manifest",
+    "governance release contract alignment: cannot evaluate without an active release manifest",
+    "archmap-impact-audit release gate: 24 error(s): TASK-071 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-071.json; TASK-072 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-072.json; TASK-073 archmap impact record presence: missing .aof/artifacts/archmap/impact/TASK-073.json",
+    "review-provenance-audit release gate: 23 error(s): TASK-071 council review presence: missing council review artifact; TASK-072 council review presence: missing council review artifact; TASK-073 council review presence: missing council review artifact",
+    "evidence-independence-audit release gate: 46 error(s): TASK-071 evidence presence: 0 evidence ref(s); TASK-071 independent evidence presence: no evidence; TASK-072 evidence presence: 0 evidence ref(s)"
+  ]
+}

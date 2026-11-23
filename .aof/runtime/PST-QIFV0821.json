@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-23T04:28:13.017Z",
+  "problem_statement_id": "PST-MWSRMES9-W48CJP",
+  "affected_party": "QIF maintainers and organizations relying on agent recovery evidence",
+  "actual_problem": "A fixed challenge set can repeatedly pass while missing novel, composed, or context-shifted weaknesses and can create false confidence without benign controls.",
+  "why_it_matters": "A narrow corpus can make a declared recovery grade look robust while monitor evasions or excessive false alarms remain undiscovered.",
+  "why_now": "QIF v0.8.20 introduced controlled challenges, and current 2026 research has moved toward adaptive, diverse, holdout-based red teaming with false-positive controls.",
+  "evidence_refs": [
+    "docs/qif-v0.8.20-recovery-evidence-challenge.md",
+    "docs/qif-roadmap.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWSRLOLJ-3DCTCZ"
+}

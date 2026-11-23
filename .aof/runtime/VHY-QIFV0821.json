@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-11-23T04:28:13.159Z",
+  "value_hypothesis_id": "VHY-MWSRMEW7-YHDO58",
+  "expected_value_creation": "Make challenge-corpus limitations visible and reproducibly measure whether controlled mutations reveal detection gaps without turning rates into quality claims.",
+  "beneficiary": "Human, AI, and hybrid QIF reviewers",
+  "supporting_evidence": [
+    "CART reports static seed replay misses failures found by adaptive diverse probes.",
+    "Recent monitor red teaming identifies coverage gaps, multi-context attacks, and cost-sensitive false positives."
+  ],
+  "success_criteria": [
+    "Seed, mutant, holdout, and benign-control lineage resolves.",
+    "Detection, miss, false-alarm, novelty, and role-separation outcomes are reproducible and fail closed."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWSRLOLJ-3DCTCZ"
+}

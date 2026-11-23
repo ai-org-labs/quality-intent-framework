@@ -13,7 +13,7 @@ remediation, replay, observation, residual risk, and accountable re-entry
 review. Structural completeness does not prove containment, remediation,
 stability, or safe restart and never grants restart authority.
 
-QIF v0.8.20 separates evidence quantity from evidence independence. It records
+QIF v0.8.21 separates evidence quantity from evidence independence. It records
 which principal, substrate, collection path, reviewer, and failure domain each
 recovery source depends on, then reproduces coverage and separation grades.
 Cross-layer attestations and grades do not prove authenticity, independence,
@@ -23,6 +23,11 @@ It can also record controlled source-loss, tamper, contradiction, common-cause,
 and multi-session challenges, lower the declared grade when weaknesses are
 exposed, and route uncertainty to governance. Challenge counts and pass rates
 are evidence, not quality or proof of real-world defense.
+
+It also keeps known challenge seeds separate from traceable mutations,
+sequestered holdouts, and harmless lookalikes. Missed holdouts and false alarms
+are reported independently. Corpus size, mutation coverage, and rates do not
+prove completeness, generalization, robustness, or acceptable user impact.
 
 ## What QIF Is
 

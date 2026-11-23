@@ -1,0 +1,98 @@
+{
+  "packet_type": "actor-skill-packet",
+  "packet_format_version": 1,
+  "recorded_at": "2026-11-23T04:31:15.550Z",
+  "packet_id": "ASP-MWSRQBMM-E2DEKK",
+  "source_task_id": "TASK-095",
+  "source_parent_session_id": "SESS-MWSRLJJE-AVVEUS",
+  "source_decision_record_id": null,
+  "objective": "Implement QIF v0.8.21 challenge corpus mutation and coverage calibration",
+  "assignment": {
+    "actor_ref": "codex-parent",
+    "role_ref": "builder",
+    "team_ref": "integration-team",
+    "assignment_reason": "Builder owns schema, deterministic verifier, fixtures, documentation, and release integration under Guardian review.",
+    "execution_mode": "single-actor"
+  },
+  "required_skill_refs": [
+    "qif-schema-verification"
+  ],
+  "capability_fit": [
+    {
+      "capability_ref": "schema-design",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "schemas/skill-supply-chain-package.schema.json",
+        "tools/validate-skill-supply-chain.mjs"
+      ],
+      "rationale": "Existing QIF runtime patterns cover schema and deterministic verifier evolution."
+    },
+    {
+      "capability_ref": "release-governance",
+      "fit_state": "sufficient",
+      "evidence_refs": [
+        "docs/aof-runtime-log.md",
+        "package.json"
+      ],
+      "rationale": "Existing release pipeline builds and verifies Agent Skill and portable assets."
+    }
+  ],
+  "resource_refs": [
+    "repository-local-runtime",
+    "aof-v12.2.0"
+  ],
+  "policy_refs": [
+    "no-live-attack",
+    "evidence-is-not-quality"
+  ],
+  "expected_output_contract": {
+    "artifact_type": "qif-release",
+    "artifact_schema_ref": "schemas/skill-supply-chain-package.schema.json",
+    "required_sections": [
+      "corpus-lineage",
+      "holdout-calibration",
+      "benign-controls"
+    ],
+    "acceptance_criteria": [
+      "npm test passes",
+      "negative fixtures reject lineage, rate, role, governance, and claim-boundary inconsistencies"
+    ]
+  },
+  "review_criteria": [
+    {
+      "criterion": "Need and scope alignment",
+      "evaluator_ref": "visionary",
+      "evidence_required": "validated need and charter",
+      "blocking": true
+    },
+    {
+      "criterion": "Verifier and fixture reproducibility",
+      "evaluator_ref": "guardian",
+      "evidence_required": "npm test and retained negative fixtures",
+      "blocking": true
+    }
+  ],
+  "blocker_semantics": [
+    {
+      "blocker_code": "live-side-effect",
+      "trigger_condition": "implementation requires live attack, credential, or external system mutation",
+      "consequence": "block-assignment",
+      "recovery_action": "return to controlled record-only design"
+    },
+    {
+      "blocker_code": "metric-as-quality",
+      "trigger_condition": "count or rate is treated as quality, safety, robustness, or authority",
+      "consequence": "require-council-review",
+      "recovery_action": "restore evidence-only boundary and governance routing"
+    }
+  ],
+  "hri_projection": {
+    "character_label": "Builder",
+    "speech_bubble": "I will make corpus limits reproducible without turning scores into safety.",
+    "current_action": "Implement controlled corpus calibration",
+    "confidence_label": "medium",
+    "visible_blockers": [],
+    "next_action": "Submit verifier and retained fixtures to Guardian review"
+  },
+  "status": "draft"
+}

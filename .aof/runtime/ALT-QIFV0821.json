@@ -1,0 +1,23 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-23T04:28:13.292Z",
+  "alternative_analysis_id": "ALT-MWSRMEZW-554GFP",
+  "subject_need": "Prevent a fixed v0.8.20 challenge corpus from being mistaken for broad recovery-defense coverage.",
+  "alternative_solutions": [
+    "Only add more hand-authored challenge runs.",
+    "Create a separate generic red-team package.",
+    "Extend skill-supply-chain with corpus items, mutation lineage, holdout evaluation, benign controls, and calibration assessment."
+  ],
+  "non_solution_options": [
+    "Document the limitation without executable records."
+  ],
+  "defer_options": [
+    "Wait for real external red-team integrations."
+  ],
+  "stop_options": [
+    "Stop if the model would execute live attacks or require credentials.",
+    "Stop if counts or rates become a quality, safety, or authority score."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWSRLOLJ-3DCTCZ"
+}

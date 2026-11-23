@@ -1,0 +1,20 @@
+{
+  "task_id": "TASK-095",
+  "title": "QIF v0.8.21 Challenge Corpus Mutation and Coverage Calibration",
+  "description": "Extend skill-supply-chain with challenge corpus items, mutation lineage, holdout and benign controls, calibration assessments, fail-closed verifier rules, fixtures, docs, and release assets.",
+  "status": "done",
+  "origin": "orchestrator",
+  "orchestrator_session_id": "SESS-MWSRLJJE-AVVEUS",
+  "assigned_session_ids": [],
+  "related_decision_record_id": "DEC-MWSRMUVV-DZNRIP",
+  "operating_goal_ref": "v0.8.21-challenge-corpus-calibration",
+  "created_at": "2026-11-23T04:28:46.282Z",
+  "updated_at": "2026-11-23T04:56:54.403Z",
+  "assigned_at": null,
+  "done_at": "2026-11-23T04:56:54.403Z",
+  "retired_at": null,
+  "last_triaged_at": null,
+  "stale_candidate_at": null,
+  "retire_candidate_at": null,
+  "triage_notes": "Implemented and verified v0.8.21; review council CRUN-MWSSFALR-WO9U0X; self-review FSA-QIF-V0821; outcome OUT-MWSSN3RE-DWGPXI; npm test 18/18 positive and 1751/1751 negative."
+}

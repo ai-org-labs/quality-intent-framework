@@ -35,7 +35,7 @@ Growth means pushing hard against everything *outside* these limits — cost of
 authoring, cost of verification, cross-package memory, empirical calibration,
 and adoption surface — not pretending the limits away.
 
-## Current Position (v0.8.20 baseline)
+## Current Position (v0.8.21 baseline)
 
 - Executable package types: qif-package, expert-judgment, discovery-session,
   organizational-quality-culture, evaluation-target, review-run, quality-gate,
@@ -978,10 +978,16 @@ Deliverables:
   conditions lower the declared grade and force governance without claiming
   challenge representativeness, adversarial robustness, real-world defense,
   safety improvement, or execution authority.
+- Implemented twenty-second v0.8 slice, v0.8.21 Challenge Corpus Mutation and
+  Coverage Calibration: preserve seed-to-mutation lineage, sequester holdouts
+  and benign controls, reproduce misses and false alarms, and enforce declared
+  challenger, target, and judge separation without converting corpus metrics
+  into quality or robustness claims.
 - Next planned slices:
-  - v0.8.21 Challenge Corpus Mutation and Coverage Calibration: mutate held-out
-    challenge families, measure detection gaps and false alarms across declared
-    contexts, and prevent one narrow corpus from becoming a defense claim.
+  - v0.8.22 Adaptive Challenge Promotion and Regression Governance: promote
+    reviewed novel failures into retained regression families, record why
+    stale cases are revised or retired, and detect tuning that overfits the
+    visible corpus.
   - v0.9 Anticipatory Quality Intent Twin: simulate emerging loss boundaries
     while keeping forecasts distinct from observed evidence and authority.
   - v1.0 Quality Decision Ledger Standard: stabilize interoperable semantics,

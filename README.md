@@ -1,6 +1,6 @@
 # Quality Intent Framework
 
-Current release: **v0.8.20**. QIF is distributed as a standard Agent
+Current release: **v0.8.21**. QIF is distributed as a standard Agent
 Skill: compatible agents can discover the QIF procedure from `SKILL.md`, load
 deeper guidance only when needed, and invoke the canonical verifier without
 turning QIF into an autonomous authority.
@@ -68,6 +68,12 @@ scenarios. QIF reproduces challenge coverage, exposed or evaded conditions,
 and a challenge-adjusted grade without claiming adversarial robustness or
 real-world defense. See
 `docs/qif-v0.8.20-recovery-evidence-challenge.md`.
+
+Challenge evaluation now distinguishes known seeds, traceable mutations,
+sequestered holdouts, and benign lookalikes. QIF reproduces misses and false
+alarms separately and checks challenger, target, and judge role separation;
+the resulting rates remain evidence rather than robustness claims. See
+`docs/qif-v0.8.21-challenge-corpus-calibration.md`.
 
 To use QIF with Gemini, Claude, Codex, or another AI without cloning the full
 repository:

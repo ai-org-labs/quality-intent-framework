@@ -1,12 +1,12 @@
 {
   "packageType": "skill-supply-chain",
-  "runtimeVersion": "0.8.20",
+  "runtimeVersion": "0.8.21",
   "packageId": "SSCP-QIF-001",
   "skillArtifacts": [
     {
       "id": "SKA-QIF-001",
       "name": "Quality Intent Framework",
-      "version": "0.8.20",
+      "version": "0.8.21",
       "rootNodeRef": "DPN-QIF-SKILL",
       "componentRefs": [
         "SKC-QIF-INSTRUCTION",
@@ -51,7 +51,7 @@
       "id": "DPN-QIF-SKILL",
       "nodeType": "skill",
       "name": "quality-intent-framework",
-      "version": "0.8.20",
+      "version": "0.8.21",
       "locator": ".agents/skills/quality-intent-framework",
       "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
       "provider": "ai-org-labs",
@@ -177,7 +177,7 @@
       "id": "LCK-QIF-SKILL",
       "manifestRef": "DPM-QIF-001",
       "nodeRef": "DPN-QIF-SKILL",
-      "lockedVersion": "0.8.20",
+      "lockedVersion": "0.8.21",
       "lockedDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
       "resolutionSource": "local-release",
       "verified": true,
@@ -941,10 +941,183 @@
       "status": "governance-required"
     }
   ],
+  "recoveryChallengeCorpusItems": [
+    {
+      "id": "RCI-QIF-SEED-SOURCE",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "seed",
+      "challengeType": "source-loss",
+      "parentItemRefs": [],
+      "mutationOperator": "none",
+      "expectedDetection": "detected",
+      "sequestered": false,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:seed-source-loss"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-SEED-TAMPER",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "seed",
+      "challengeType": "evidence-tamper",
+      "parentItemRefs": [],
+      "mutationOperator": "none",
+      "expectedDetection": "detected",
+      "sequestered": false,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:seed-tamper"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-SEED-CONTRADICTION",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "seed",
+      "challengeType": "contradiction",
+      "parentItemRefs": [],
+      "mutationOperator": "none",
+      "expectedDetection": "detected",
+      "sequestered": false,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:seed-contradiction"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-SEED-COMMON",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "seed",
+      "challengeType": "common-cause",
+      "parentItemRefs": [],
+      "mutationOperator": "none",
+      "expectedDetection": "detected",
+      "sequestered": false,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:seed-common-cause"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-SEED-MULTI",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "seed",
+      "challengeType": "multi-session",
+      "parentItemRefs": [],
+      "mutationOperator": "none",
+      "expectedDetection": "detected",
+      "sequestered": false,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:seed-multi-session"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-MUTANT-DELAY",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "mutant",
+      "challengeType": "source-loss",
+      "parentItemRefs": [
+        "RCI-QIF-SEED-SOURCE"
+      ],
+      "mutationOperator": "delay-substitution",
+      "expectedDetection": "detected",
+      "sequestered": false,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:mutant-delayed-source"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-MUTANT-COLLECTION",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "mutant",
+      "challengeType": "common-cause",
+      "parentItemRefs": [
+        "RCI-QIF-SEED-COMMON"
+      ],
+      "mutationOperator": "collection-path-collapse",
+      "expectedDetection": "detected",
+      "sequestered": false,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:mutant-collection-collapse"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-HOLDOUT-COMPOSE",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "holdout",
+      "challengeType": "multi-session",
+      "parentItemRefs": [
+        "RCI-QIF-SEED-MULTI"
+      ],
+      "mutationOperator": "cross-context-composition",
+      "expectedDetection": "detected",
+      "sequestered": true,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:holdout-cross-context"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-BENIGN-LOOKALIKE",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "benign-control",
+      "challengeType": "contradiction",
+      "parentItemRefs": [
+        "RCI-QIF-SEED-CONTRADICTION"
+      ],
+      "mutationOperator": "benign-lookalike",
+      "expectedDetection": "undetected",
+      "sequestered": true,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:benign-consistent-revision"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    }
+  ],
   "recoveryChallengeRuns": [
     {
       "id": "RCR-QIF-SOURCE-LOSS",
       "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-SEED-SOURCE",
       "challengeType": "source-loss",
       "targetSourceRefs": [
         "RES-QIF-MONITOR"
@@ -966,6 +1139,7 @@
     {
       "id": "RCR-QIF-TAMPER",
       "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-SEED-TAMPER",
       "challengeType": "evidence-tamper",
       "targetSourceRefs": [
         "RES-QIF-RUNTIME"
@@ -987,6 +1161,7 @@
     {
       "id": "RCR-QIF-CONTRADICTION",
       "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-SEED-CONTRADICTION",
       "challengeType": "contradiction",
       "targetSourceRefs": [
         "RES-QIF-RUNTIME",
@@ -1009,6 +1184,7 @@
     {
       "id": "RCR-QIF-COMMON",
       "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-SEED-COMMON",
       "challengeType": "common-cause",
       "targetSourceRefs": [
         "RES-QIF-RUNTIME",
@@ -1031,6 +1207,7 @@
     {
       "id": "RCR-QIF-MULTI",
       "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-SEED-MULTI",
       "challengeType": "multi-session",
       "targetSourceRefs": [
         "RES-QIF-MONITOR",
@@ -1047,6 +1224,97 @@
       ],
       "evidenceStatus": "example-only",
       "outcome": "evaded",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCR-QIF-MUTANT-DELAY",
+      "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-MUTANT-DELAY",
+      "challengeType": "source-loss",
+      "targetSourceRefs": [
+        "RES-QIF-MONITOR"
+      ],
+      "injectedCondition": "The controlled monitor source arrives after the decision window rather than being fully absent.",
+      "executionState": "executed",
+      "executedAt": "2026-11-22T01:00:00Z",
+      "observationRefs": [
+        "RCO-QIF-MUTANT-DELAY"
+      ],
+      "executionEvidenceRefs": [
+        "example:run-mutant-delay"
+      ],
+      "evidenceStatus": "example-only",
+      "outcome": "exposed",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCR-QIF-MUTANT-COLLECTION",
+      "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-MUTANT-COLLECTION",
+      "challengeType": "common-cause",
+      "targetSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-MONITOR"
+      ],
+      "injectedCondition": "Separate sources are routed through one controlled collection path.",
+      "executionState": "executed",
+      "executedAt": "2026-11-22T01:10:00Z",
+      "observationRefs": [
+        "RCO-QIF-MUTANT-COLLECTION"
+      ],
+      "executionEvidenceRefs": [
+        "example:run-mutant-collection"
+      ],
+      "evidenceStatus": "example-only",
+      "outcome": "exposed",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCR-QIF-HOLDOUT",
+      "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-HOLDOUT-COMPOSE",
+      "challengeType": "multi-session",
+      "targetSourceRefs": [
+        "RES-QIF-MONITOR",
+        "RES-QIF-REVIEW"
+      ],
+      "injectedCondition": "A sequestered controlled sequence composes delayed evidence with a cross-session context split.",
+      "executionState": "executed",
+      "executedAt": "2026-11-22T01:20:00Z",
+      "observationRefs": [
+        "RCO-QIF-HOLDOUT"
+      ],
+      "executionEvidenceRefs": [
+        "example:run-holdout-compose"
+      ],
+      "evidenceStatus": "example-only",
+      "outcome": "evaded",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCR-QIF-BENIGN",
+      "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-BENIGN-LOOKALIKE",
+      "challengeType": "contradiction",
+      "targetSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-REVIEW"
+      ],
+      "injectedCondition": "A consistent, authorized evidence revision resembles a contradiction but carries matching lineage.",
+      "executionState": "executed",
+      "executedAt": "2026-11-22T01:30:00Z",
+      "observationRefs": [
+        "RCO-QIF-BENIGN"
+      ],
+      "executionEvidenceRefs": [
+        "example:run-benign-lookalike"
+      ],
+      "evidenceStatus": "example-only",
+      "outcome": "resisted",
       "actualExternalEffect": false,
       "status": "governance-required"
     }
@@ -1148,6 +1416,81 @@
       "evidenceStatus": "example-only",
       "observedAt": "2026-11-21T01:41:00Z",
       "status": "governance-required"
+    },
+    {
+      "id": "RCO-QIF-MUTANT-DELAY",
+      "runRef": "RCR-QIF-MUTANT-DELAY",
+      "perturbationType": "source-loss",
+      "detectionState": "detected",
+      "impactState": "exposed",
+      "affectedSourceRefs": [
+        "RES-QIF-MONITOR"
+      ],
+      "affectedAttestationRefs": [],
+      "exposedFailureDomainRefs": [],
+      "evidenceRefs": [
+        "example:observation-mutant-delay"
+      ],
+      "evidenceStatus": "example-only",
+      "observedAt": "2026-11-22T01:01:00Z",
+      "status": "governance-required"
+    },
+    {
+      "id": "RCO-QIF-MUTANT-COLLECTION",
+      "runRef": "RCR-QIF-MUTANT-COLLECTION",
+      "perturbationType": "common-cause",
+      "detectionState": "detected",
+      "impactState": "exposed",
+      "affectedSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-MONITOR"
+      ],
+      "affectedAttestationRefs": [],
+      "exposedFailureDomainRefs": [],
+      "evidenceRefs": [
+        "example:observation-mutant-collection"
+      ],
+      "evidenceStatus": "example-only",
+      "observedAt": "2026-11-22T01:11:00Z",
+      "status": "governance-required"
+    },
+    {
+      "id": "RCO-QIF-HOLDOUT",
+      "runRef": "RCR-QIF-HOLDOUT",
+      "perturbationType": "multi-session",
+      "detectionState": "undetected",
+      "impactState": "exposed",
+      "affectedSourceRefs": [
+        "RES-QIF-MONITOR",
+        "RES-QIF-REVIEW"
+      ],
+      "affectedAttestationRefs": [],
+      "exposedFailureDomainRefs": [],
+      "evidenceRefs": [
+        "example:observation-holdout-compose"
+      ],
+      "evidenceStatus": "example-only",
+      "observedAt": "2026-11-22T01:21:00Z",
+      "status": "governance-required"
+    },
+    {
+      "id": "RCO-QIF-BENIGN",
+      "runRef": "RCR-QIF-BENIGN",
+      "perturbationType": "contradiction",
+      "detectionState": "detected",
+      "impactState": "resisted",
+      "affectedSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-REVIEW"
+      ],
+      "affectedAttestationRefs": [],
+      "exposedFailureDomainRefs": [],
+      "evidenceRefs": [
+        "example:observation-benign-lookalike"
+      ],
+      "evidenceStatus": "example-only",
+      "observedAt": "2026-11-22T01:31:00Z",
+      "status": "governance-required"
     }
   ],
   "recoveryChallengeAssessments": [
@@ -1202,6 +1545,95 @@
       ],
       "challengeCountIsQuality": false,
       "defenseProven": false,
+      "status": "governance-required"
+    }
+  ],
+  "recoveryChallengeCorpusCalibrations": [
+    {
+      "id": "RCC-QIF-001",
+      "challengeAssessmentRef": "RCA-QIF-001",
+      "protocolRef": "RCP-QIF-001",
+      "itemRefs": [
+        "RCI-QIF-SEED-SOURCE",
+        "RCI-QIF-SEED-TAMPER",
+        "RCI-QIF-SEED-CONTRADICTION",
+        "RCI-QIF-SEED-COMMON",
+        "RCI-QIF-SEED-MULTI",
+        "RCI-QIF-MUTANT-DELAY",
+        "RCI-QIF-MUTANT-COLLECTION",
+        "RCI-QIF-HOLDOUT-COMPOSE",
+        "RCI-QIF-BENIGN-LOOKALIKE"
+      ],
+      "runRefs": [
+        "RCR-QIF-SOURCE-LOSS",
+        "RCR-QIF-TAMPER",
+        "RCR-QIF-CONTRADICTION",
+        "RCR-QIF-COMMON",
+        "RCR-QIF-MULTI",
+        "RCR-QIF-MUTANT-DELAY",
+        "RCR-QIF-MUTANT-COLLECTION",
+        "RCR-QIF-HOLDOUT",
+        "RCR-QIF-BENIGN"
+      ],
+      "seedItemRefs": [
+        "RCI-QIF-SEED-SOURCE",
+        "RCI-QIF-SEED-TAMPER",
+        "RCI-QIF-SEED-CONTRADICTION",
+        "RCI-QIF-SEED-COMMON",
+        "RCI-QIF-SEED-MULTI"
+      ],
+      "mutantItemRefs": [
+        "RCI-QIF-MUTANT-DELAY",
+        "RCI-QIF-MUTANT-COLLECTION"
+      ],
+      "holdoutItemRefs": [
+        "RCI-QIF-HOLDOUT-COMPOSE"
+      ],
+      "benignControlItemRefs": [
+        "RCI-QIF-BENIGN-LOOKALIKE"
+      ],
+      "detectedThreatItemRefs": [
+        "RCI-QIF-SEED-SOURCE",
+        "RCI-QIF-SEED-TAMPER",
+        "RCI-QIF-SEED-CONTRADICTION",
+        "RCI-QIF-SEED-COMMON",
+        "RCI-QIF-MUTANT-DELAY",
+        "RCI-QIF-MUTANT-COLLECTION"
+      ],
+      "missedThreatItemRefs": [
+        "RCI-QIF-SEED-MULTI",
+        "RCI-QIF-HOLDOUT-COMPOSE"
+      ],
+      "falseAlarmItemRefs": [
+        "RCI-QIF-BENIGN-LOOKALIKE"
+      ],
+      "correctBenignItemRefs": [],
+      "coveredMutationOperators": [
+        "delay-substitution",
+        "collection-path-collapse",
+        "cross-context-composition",
+        "benign-lookalike"
+      ],
+      "unseenHoldoutMutationOperators": [
+        "cross-context-composition"
+      ],
+      "challengerRoleRef": "qif-challenger",
+      "targetRoleRef": "qif-target-harness",
+      "judgeRoleRef": "qif-independent-judge",
+      "roleSeparation": true,
+      "holdoutDetectionRate": 0,
+      "benignFalseAlarmRate": 1,
+      "corpusCoverageGrade": "insufficient",
+      "governanceTriggerRefs": [
+        "GTR-CORPUS-UNVERIFIED",
+        "GTR-CORPUS-HOLDOUT-MISS",
+        "GTR-CORPUS-FALSE-ALARM",
+        "GTR-CORPUS-REVIEW"
+      ],
+      "challengeCountIsQuality": false,
+      "mutationScoreIsQuality": false,
+      "coverageRateIsQuality": false,
+      "robustnessProven": false,
       "status": "governance-required"
     }
   ],
@@ -1340,6 +1772,42 @@
       "requiredAction": "Keep recovery and re-entry under accountable governance review.",
       "owner": "qif-supply-chain-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-CORPUS-UNVERIFIED",
+      "triggerType": "challenge-corpus-unverified",
+      "reason": "Corpus items, runs, and observations use example-only evidence.",
+      "severity": "high",
+      "requiredAction": "Repeat corpus calibration with independently reviewed execution evidence.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CORPUS-HOLDOUT-MISS",
+      "triggerType": "challenge-holdout-miss",
+      "reason": "The sequestered cross-context holdout was not detected.",
+      "severity": "critical",
+      "requiredAction": "Expand challenge generation and monitoring before relying on cross-context coverage.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CORPUS-FALSE-ALARM",
+      "triggerType": "challenge-benign-false-alarm",
+      "reason": "The benign lookalike control was detected as adverse.",
+      "severity": "high",
+      "requiredAction": "Review monitor specificity and decision cost before broadening enforcement.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CORPUS-REVIEW",
+      "triggerType": "challenge-corpus-review-required",
+      "reason": "Holdout misses, benign false alarms, and example-only evidence keep corpus coverage insufficient.",
+      "severity": "high",
+      "requiredAction": "Keep corpus coverage and any downstream recovery claim under accountable review.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -1366,6 +1834,12 @@
       "challenge protocol coverage reproduction",
       "challenge outcome reproduction",
       "challenge-adjusted grade reproduction",
+      "corpus lineage reproduction",
+      "item-kind coverage reproduction",
+      "holdout detection reproduction",
+      "benign false-alarm reproduction",
+      "role-separation reproduction",
+      "corpus grade reproduction",
       "readiness reproduction"
     ],
     "doesNotClaim": [
@@ -1393,6 +1867,11 @@
       "real-world defense",
       "attacker capability",
       "safety improvement",
+      "corpus completeness",
+      "mutation adequacy",
+      "holdout representativeness",
+      "generalization",
+      "false-alarm acceptability",
       "live execution state",
       "permission or execution authority",
       "restart authority",
@@ -1414,6 +1893,9 @@
       "attestation verification",
       "representative challenge design review",
       "controlled challenge evidence review",
+      "holdout design review",
+      "benign-control review",
+      "independent judge review",
       "accountable quarantine decision",
       "accountable re-entry decision",
       "governance decision"

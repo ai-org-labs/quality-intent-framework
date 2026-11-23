@@ -1007,6 +1007,202 @@
       "errorIncludes": "must explicitly not claim adversarial robustness"
     },
     {
+      "file": "skill-supply-chain-corpus-items-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge corpus items required",
+      "expect": "fail",
+      "errorIncludes": "package recoveryChallengeCorpusItems must be an array."
+    },
+    {
+      "file": "skill-supply-chain-corpus-calibrations-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge corpus calibrations required",
+      "expect": "fail",
+      "errorIncludes": "package recoveryChallengeCorpusCalibrations must be an array."
+    },
+    {
+      "file": "skill-supply-chain-corpus-item-protocol.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "corpus protocol resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery challenge protocol"
+    },
+    {
+      "file": "skill-supply-chain-corpus-item-parent.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "corpus parent resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery challenge corpus item"
+    },
+    {
+      "file": "skill-supply-chain-corpus-seed-lineage.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "seed lineage reproduction",
+      "expect": "fail",
+      "errorIncludes": "seed lineage must have no parent and mutationOperator none"
+    },
+    {
+      "file": "skill-supply-chain-corpus-derived-lineage.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "derived lineage reproduction",
+      "expect": "fail",
+      "errorIncludes": "derived corpus item must declare parent lineage and a mutation operator"
+    },
+    {
+      "file": "skill-supply-chain-corpus-sequestered.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "holdout sequestration",
+      "expect": "fail",
+      "errorIncludes": "holdout and benign controls must be sequestered"
+    },
+    {
+      "file": "skill-supply-chain-corpus-role-separation.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "corpus role separation",
+      "expect": "fail",
+      "errorIncludes": "generator and judge roles must be separated"
+    },
+    {
+      "file": "skill-supply-chain-corpus-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "corpus evidence readiness",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce corpus item evidence readiness"
+    },
+    {
+      "file": "skill-supply-chain-corpus-attack-boundary.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "controlled corpus boundary",
+      "expect": "fail",
+      "errorIncludes": "must remain a controlled corpus record, not an actual attack"
+    },
+    {
+      "file": "skill-supply-chain-challenge-run-corpus.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "run corpus resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery challenge corpus item"
+    },
+    {
+      "file": "skill-supply-chain-challenge-run-corpus-alignment.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "run corpus alignment",
+      "expect": "fail",
+      "errorIncludes": "corpus item, protocol, and challengeType must align"
+    },
+    {
+      "file": "skill-supply-chain-calibration-assessment.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "calibration assessment resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery challenge assessment"
+    },
+    {
+      "file": "skill-supply-chain-calibration-protocol.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "calibration protocol resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery challenge protocol"
+    },
+    {
+      "file": "skill-supply-chain-calibration-coverage.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "one-to-one calibration coverage",
+      "expect": "fail",
+      "errorIncludes": "items and runs must form one-to-one calibration coverage"
+    },
+    {
+      "file": "skill-supply-chain-calibration-partitions.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "corpus kind reproduction",
+      "expect": "fail",
+      "errorIncludes": "item-kind partitions must reproduce corpus items"
+    },
+    {
+      "file": "skill-supply-chain-calibration-detection.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "detection partition reproduction",
+      "expect": "fail",
+      "errorIncludes": "detection, miss, false-alarm, and benign-control partitions must reproduce observations"
+    },
+    {
+      "file": "skill-supply-chain-calibration-mutations.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "mutation coverage reproduction",
+      "expect": "fail",
+      "errorIncludes": "mutation coverage and unseen holdout operators must reproduce corpus lineage"
+    },
+    {
+      "file": "skill-supply-chain-calibration-role-separation.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "calibration role reproduction",
+      "expect": "fail",
+      "errorIncludes": "roleSeparation must reproduce challenger, target, and judge separation"
+    },
+    {
+      "file": "skill-supply-chain-calibration-rates.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "calibration rate reproduction",
+      "expect": "fail",
+      "errorIncludes": "holdout detection and benign false-alarm rates must reproduce observations"
+    },
+    {
+      "file": "skill-supply-chain-calibration-grade.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "calibration grade reproduction",
+      "expect": "fail",
+      "errorIncludes": "corpusCoverageGrade must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-calibration-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "calibration governance status",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce corpus calibration grade"
+    },
+    {
+      "file": "skill-supply-chain-calibration-unverified-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "corpus evidence governance",
+      "expect": "fail",
+      "errorIncludes": "requires challenge-corpus-unverified governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-calibration-holdout-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "holdout miss governance",
+      "expect": "fail",
+      "errorIncludes": "requires challenge-holdout-miss governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-calibration-false-alarm-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "false alarm governance",
+      "expect": "fail",
+      "errorIncludes": "requires challenge-benign-false-alarm governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-calibration-review-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "corpus review governance",
+      "expect": "fail",
+      "errorIncludes": "requires challenge-corpus-review-required governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-calibration-quality-boundary.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "corpus metric boundary",
+      "expect": "fail",
+      "errorIncludes": "must not treat corpus metrics as quality or claim robustness"
+    },
+    {
+      "file": "skill-supply-chain-calibration-verifier-boundary.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "generalization boundary",
+      "expect": "fail",
+      "errorIncludes": "must explicitly not claim generalization"
+    },
+    {
       "file": "skill-supply-chain-verifier-boundary.json",
       "validator": "tools/validate-skill-supply-chain.mjs",
       "rule": "verifier claim boundary",

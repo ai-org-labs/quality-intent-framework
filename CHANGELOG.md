@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.8.21
+
+- Added traceable seed, mutant, sequestered holdout, and benign-control items
+  to the controlled recovery challenge corpus.
+- Added deterministic detection-miss, false-alarm, mutation-coverage,
+  holdout-rate, role-separation, grade, status, and governance reproduction.
+- Added retained negative fixtures and explicit boundaries from corpus
+  completeness, mutation adequacy, holdout representativeness,
+  generalization, false-alarm acceptability, and adversarial robustness.
+
 ## v0.8.20
 
 - Added controlled recovery challenge protocols, runs, observations, and

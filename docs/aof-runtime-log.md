@@ -6011,3 +6011,54 @@ Date: 2026-10-25
   verification does not prove challenge representativeness, adversarial
   robustness, actual monitor coverage, attacker capability, real-world
   defense, safety improvement, recovery sufficiency, or authority.
+
+## 2026-11-23 - QIF v0.8.21 Challenge Corpus Mutation and Coverage Calibration
+
+- AOF runtime: v12.2.0, managed-project topology. Session:
+  `SESS-MWSRLJJE-AVVEUS`; task: `TASK-095`.
+- Need/Intent/Context were framed before project work. Validated Need:
+  `NVR-MWSRMNNH-ICGGHO`; charter: `PCH-MWSRMURQ-OOXTO6`; actor skill packet:
+  `ASP-MWSRQBMM-E2DEKK`.
+- Planning council `CRUN-MWSRMZC0-5PU81D` used Visionary, Builder, and
+  Guardian. Review council `CRUN-MWSSFALR-WO9U0X` used Guardian and Builder.
+  All mock-provider seats proceeded without veto. The mock council is routing
+  evidence, not independent semantic approval.
+- Decision: extend `skill-supply-chain` with traceable seed, mutant,
+  sequestered holdout, and benign-control corpus items plus a reproducible
+  calibration assessment. Keep live attacks, external providers, credentials,
+  automatic defense, remediation, quarantine, re-entry, and authority outside
+  this release.
+- Trend evidence reviewed: Anthropic Red-Teaming Auto Mode on monitor
+  injection, multi-context attacks, and persistent adversaries
+  (<https://alignment.anthropic.com/2026/red-teaming-auto-mode/>); Microsoft
+  CART on closed-loop adaptive and role-separated evaluation
+  (<https://www.microsoft.com/en-us/research/publication/cart-closed-loop-adaptive-red-teaming-for-large-language-models/>);
+  OpenAI automated red teaming on task coverage and repeated robustness
+  evaluation (<https://cdn.openai.com/pdf/OAI_Improving_Fuzzy_Robustness_in_LLM_Safety_with_Automated_Red_Teaming.pdf>);
+  and NIST large-scale agent red teaming
+  (<https://www.nist.gov/blogs/caissi-research-blog/insights-ai-agent-security-large-scale-red-teaming-competition>).
+- Implementation evidence: `schemas/skill-supply-chain-package.schema.json`,
+  `examples/skill-supply-chain-package.json`,
+  `tools/validate-skill-supply-chain.mjs`, 163 retained package fixtures,
+  `docs/qif-v0.8.21-challenge-corpus-calibration.md`, and regenerated portable
+  and Agent Skill release artifacts.
+- Verification: `npm test` passed; 18/18 positive fixture packages and
+  1751/1751 negative fixtures passed; Agent Skill v0.8.21 and portable
+  v0.8.21 built, verified, and passed mutation rejection; Agent Skill
+  `quick_validate.py` passed; AOF `organization-verify` passed 295/295 checks.
+- AOF `release-state-audit` remained incomplete because no active AOF release
+  manifest exists and tasks from TASK-071 predate current ArchMap,
+  review-provenance, and evidence-independence requirements. TASK-095 also has
+  no ArchMap impact record. These are AOF governance migration gaps, not QIF
+  v0.8.21 product-test failures; this release does not claim AOF release-state
+  sign-off.
+- Self-review `FSA-QIF-V0821`: a finite visible corpus can still be overfit,
+  and one holdout plus one benign control is not statistically representative.
+  The example therefore remains insufficient and governance-required. The
+  next slice is v0.8.22 Adaptive Challenge Promotion and Regression Governance.
+- Outcome `OUT-MWSSN3RE-DWGPXI` recorded success; `TASK-095` is done and the
+  AOF next-value projection now names v0.8.22.
+- Boundary: corpus counts, mutation coverage, holdout rates, false-alarm
+  rates, and grades are evidence only. They do not prove completeness,
+  mutation adequacy, holdout representativeness, generalization, acceptable
+  false-alarm cost, adversarial robustness, operational safety, or authority.

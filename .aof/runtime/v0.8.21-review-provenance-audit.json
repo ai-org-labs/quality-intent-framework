@@ -1,0 +1,34 @@
+{
+  "ok": false,
+  "artifact_type": "review-provenance-audit",
+  "generated_at": "2026-11-23T04:56:04.943Z",
+  "project_root": "/private/tmp/qif-v0821-1123",
+  "cutoff_task_id": "TASK-095",
+  "audited_status_dirs": [
+    "done"
+  ],
+  "valid_review_statuses": [
+    "approved",
+    "changes-requested",
+    "blocked",
+    "deferred"
+  ],
+  "summary": {
+    "scoped_task_count": 0,
+    "review_record_count": 0,
+    "missing_review_record_count": 0,
+    "failing_check_count": 1
+  },
+  "tasks": [],
+  "review_records": [],
+  "checks": [
+    {
+      "name": "done task discovery",
+      "status": "fail",
+      "detail": "0 done task(s) at or after TASK-095"
+    }
+  ],
+  "errors": [
+    "done task discovery: 0 done task(s) at or after TASK-095"
+  ]
+}
