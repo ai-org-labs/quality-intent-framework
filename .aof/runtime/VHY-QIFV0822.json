@@ -1,0 +1,17 @@
+{
+  "artifact_type": "value-hypothesis",
+  "recorded_at": "2026-11-24T04:31:46.342Z",
+  "value_hypothesis_id": "VHY-MWU76U1Y-C0I0FF",
+  "expected_value_creation": "Make every challenge-corpus lifecycle decision traceable, reversible, independently reviewed, and sensitive to contamination or overfitting signals.",
+  "beneficiary": "QIF users evaluating agents, skills, services, or other governed targets",
+  "supporting_evidence": [
+    "Closed-loop adaptive red teaming finds failures missed by static replay.",
+    "Current monitoring practice audits unflagged traffic and tracks evaluation-to-production gaps."
+  ],
+  "success_criteria": [
+    "Candidate discoveries have reproducible promote, revise, retain, reject, or retire decisions.",
+    "Holdout exposure, evaluation-objective leakage, stale evidence, and missing independent review force governance."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWU76AQ6-E57ROS"
+}

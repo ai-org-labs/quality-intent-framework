@@ -1,36 +1,36 @@
 {
   "window_type": "recent-confirmation-window",
-  "updated_at": "2026-11-23T04:28:33.886Z",
+  "updated_at": "2026-11-24T04:51:43.344Z",
   "entries": [
     {
-      "question": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope?",
-      "answer": "対象はローカルskill-supply-chain packageのrecovery challenge protocol/run/observation/assessment。外部攻撃、live provider、credential、実システム副作用、自動防御・復旧・権限付与は対象外。",
-      "recorded_at": "2026-11-23T04:27:39.081Z",
-      "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
-      "mismatch_state": null,
-      "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MWSRLJJE-AVVEUS",
-      "source_decision_record_id": null
-    },
-    {
       "question": "How should improvement success be judged: which metric or end state matters most?",
-      "answer": "成功はseedからmutantとholdoutの由来が追跡でき、benign controlを含む検出・見逃し・誤警報・未知変異の結果とgrade impactが再現され、証拠不足や役割競合がfail closedでgovernanceへ送られること。件数や率は品質そのものにしない。",
-      "recorded_at": "2026-11-23T04:27:39.082Z",
+      "answer": "成功は、発見ケースのcandidateからretained/revised/retired/rejectedまでの判断、由来、独立レビュー、保留コーパス汚染、評価目的露出、未検出サンプル監査を再現でき、過適合または証拠不足をfail closedでgovernanceへ送れること。件数や率は品質ではない。",
+      "recorded_at": "2026-11-24T04:31:21.297Z",
       "expectation_state": "runtime captured first-round clarification answers and can proceed to need validation",
       "mismatch_state": null,
       "scale_direction": "complete need validation before planning",
-      "source_session_id": "SESS-MWSRLJJE-AVVEUS",
+      "source_session_id": "SESS-MWU765PL-T29WTA",
       "source_decision_record_id": null
     },
     {
       "question": "need validation で何が確定したか",
-      "answer": "The raw continuation request was reframed into the smallest executable value slice. Extending the current package preserves lineage; a generic red-team runtime or live integration is unnecessary and unsafe for this release.",
-      "recorded_at": "2026-11-23T04:28:33.886Z",
+      "answer": "The raw continuation request was narrowed to the smallest capability gap exposed by v0.8.21 and current adaptive-evaluation practice.",
+      "recorded_at": "2026-11-24T04:32:10.236Z",
       "expectation_state": "reframed",
       "mismatch_state": null,
       "scale_direction": "advance toward planning",
-      "source_session_id": "SESS-MWSRLJJE-AVVEUS",
-      "source_decision_record_id": "DEC-MWSRMUVV-DZNRIP"
+      "source_session_id": "SESS-MWU765PL-T29WTA",
+      "source_decision_record_id": "DEC-MWU77CHK-OTHUOO"
+    },
+    {
+      "question": "framework self-audit で次に残る gap は何か",
+      "answer": "Committed evidence remains example-only and deployment-context transfer is not yet governed",
+      "recorded_at": "2026-11-24T04:51:43.344Z",
+      "expectation_state": "Four lifecycle entities, fail-closed governance, 198 skill-supply-chain negative fixtures, and portable artifacts are structurally verified",
+      "mismatch_state": "Committed evidence remains example-only and deployment-context transfer is not yet governed",
+      "scale_direction": "Implement v0.8.23 deployment-linked challenge drift and refresh governance",
+      "source_session_id": null,
+      "source_decision_record_id": null
     }
   ]
 }

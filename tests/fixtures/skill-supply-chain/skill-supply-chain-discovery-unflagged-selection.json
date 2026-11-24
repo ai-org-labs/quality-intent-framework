@@ -1,0 +1,2251 @@
+{
+  "packageType": "skill-supply-chain",
+  "runtimeVersion": "0.8.22",
+  "packageId": "SSCP-QIF-001",
+  "skillArtifacts": [
+    {
+      "id": "SKA-QIF-001",
+      "name": "Quality Intent Framework",
+      "version": "0.8.22",
+      "rootNodeRef": "DPN-QIF-SKILL",
+      "componentRefs": [
+        "SKC-QIF-INSTRUCTION",
+        "SKC-QIF-CODE",
+        "SKC-QIF-TOOL"
+      ],
+      "artifactDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "status": "verified-structure"
+    }
+  ],
+  "skillComponents": [
+    {
+      "id": "SKC-QIF-INSTRUCTION",
+      "skillRef": "SKA-QIF-001",
+      "componentType": "instruction",
+      "locator": ".agents/skills/quality-intent-framework/SKILL.md",
+      "digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "required": true,
+      "status": "verified-identity"
+    },
+    {
+      "id": "SKC-QIF-CODE",
+      "skillRef": "SKA-QIF-001",
+      "componentType": "code",
+      "locator": "tools/qif.mjs",
+      "digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "required": true,
+      "status": "verified-identity"
+    },
+    {
+      "id": "SKC-QIF-TOOL",
+      "skillRef": "SKA-QIF-001",
+      "componentType": "tool-declaration",
+      "locator": "package.json#bin.qif",
+      "digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "required": true,
+      "status": "verified-identity"
+    }
+  ],
+  "dependencyNodes": [
+    {
+      "id": "DPN-QIF-SKILL",
+      "nodeType": "skill",
+      "name": "quality-intent-framework",
+      "version": "0.8.22",
+      "locator": ".agents/skills/quality-intent-framework",
+      "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "provider": "ai-org-labs",
+      "required": true,
+      "status": "resolved"
+    },
+    {
+      "id": "DPN-NODE-RUNTIME",
+      "nodeType": "runtime",
+      "name": "Node.js",
+      "version": "22",
+      "locator": "runtime:node",
+      "digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "provider": "OpenJS Foundation",
+      "required": true,
+      "status": "resolved"
+    },
+    {
+      "id": "DPN-SHELL-TOOL",
+      "nodeType": "tool",
+      "name": "local-shell",
+      "version": "system",
+      "locator": "tool:shell",
+      "digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "provider": "local-operator",
+      "required": true,
+      "status": "resolved"
+    },
+    {
+      "id": "DPN-GITHUB-SERVICE",
+      "nodeType": "service",
+      "name": "GitHub",
+      "version": "api-v3",
+      "locator": "service:github",
+      "digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+      "provider": "GitHub",
+      "required": false,
+      "status": "resolved"
+    },
+    {
+      "id": "DPN-REMOTE-TOOL",
+      "nodeType": "tool",
+      "name": "remote-analysis-adapter",
+      "version": "1.0.0",
+      "locator": "tool:remote-analysis",
+      "digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+      "provider": "example-provider",
+      "required": true,
+      "status": "resolved"
+    }
+  ],
+  "dependencyEdges": [
+    {
+      "id": "DPE-QIF-NODE",
+      "fromNodeRef": "DPN-QIF-SKILL",
+      "toNodeRef": "DPN-NODE-RUNTIME",
+      "relation": "requires",
+      "evidenceRefs": [
+        "package.json#engines"
+      ],
+      "required": true,
+      "riskPropagation": "upstream"
+    },
+    {
+      "id": "DPE-QIF-SHELL",
+      "fromNodeRef": "DPN-QIF-SKILL",
+      "toNodeRef": "DPN-SHELL-TOOL",
+      "relation": "uses",
+      "evidenceRefs": [
+        "tools/qif.mjs"
+      ],
+      "required": true,
+      "riskPropagation": "upstream"
+    },
+    {
+      "id": "DPE-QIF-GITHUB",
+      "fromNodeRef": "DPN-QIF-SKILL",
+      "toNodeRef": "DPN-GITHUB-SERVICE",
+      "relation": "connects",
+      "evidenceRefs": [
+        "RELEASE.md"
+      ],
+      "required": false,
+      "riskPropagation": "upstream"
+    },
+    {
+      "id": "DPE-QIF-REMOTE",
+      "fromNodeRef": "DPN-QIF-SKILL",
+      "toNodeRef": "DPN-REMOTE-TOOL",
+      "relation": "invokes",
+      "evidenceRefs": [
+        "example:candidate-manifest"
+      ],
+      "required": true,
+      "riskPropagation": "upstream"
+    }
+  ],
+  "dependencyManifests": [
+    {
+      "id": "DPM-QIF-001",
+      "skillRef": "SKA-QIF-001",
+      "nodeRefs": [
+        "DPN-QIF-SKILL",
+        "DPN-NODE-RUNTIME",
+        "DPN-SHELL-TOOL",
+        "DPN-GITHUB-SERVICE",
+        "DPN-REMOTE-TOOL"
+      ],
+      "edgeRefs": [
+        "DPE-QIF-NODE",
+        "DPE-QIF-SHELL",
+        "DPE-QIF-GITHUB",
+        "DPE-QIF-REMOTE"
+      ],
+      "generatedAt": "2026-11-18T04:30:00Z",
+      "complete": true,
+      "unresolvedDependencyRefs": [],
+      "status": "governance-required"
+    }
+  ],
+  "lockRecords": [
+    {
+      "id": "LCK-QIF-SKILL",
+      "manifestRef": "DPM-QIF-001",
+      "nodeRef": "DPN-QIF-SKILL",
+      "lockedVersion": "0.8.22",
+      "lockedDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "resolutionSource": "local-release",
+      "verified": true,
+      "stale": false,
+      "status": "active"
+    },
+    {
+      "id": "LCK-NODE-RUNTIME",
+      "manifestRef": "DPM-QIF-001",
+      "nodeRef": "DPN-NODE-RUNTIME",
+      "lockedVersion": "22",
+      "lockedDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "resolutionSource": "runtime-inventory",
+      "verified": true,
+      "stale": false,
+      "status": "active"
+    },
+    {
+      "id": "LCK-SHELL-TOOL",
+      "manifestRef": "DPM-QIF-001",
+      "nodeRef": "DPN-SHELL-TOOL",
+      "lockedVersion": "system",
+      "lockedDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "resolutionSource": "runtime-inventory",
+      "verified": true,
+      "stale": false,
+      "status": "active"
+    },
+    {
+      "id": "LCK-REMOTE-TOOL",
+      "manifestRef": "DPM-QIF-001",
+      "nodeRef": "DPN-REMOTE-TOOL",
+      "lockedVersion": "1.0.0",
+      "lockedDigest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+      "resolutionSource": "example-candidate",
+      "verified": true,
+      "stale": false,
+      "status": "active"
+    }
+  ],
+  "riskSignals": [
+    {
+      "id": "RSK-SHELL-PRIVILEGE",
+      "nodeRef": "DPN-SHELL-TOOL",
+      "riskType": "privilege",
+      "severity": "high",
+      "evidenceRefs": [
+        "example:operator-review-needed"
+      ],
+      "evidenceStatus": "example-only",
+      "status": "open"
+    },
+    {
+      "id": "RSK-REMOTE-PROVENANCE",
+      "nodeRef": "DPN-REMOTE-TOOL",
+      "riskType": "provenance-gap",
+      "severity": "high",
+      "evidenceRefs": [
+        "example:new-dependency-unreviewed"
+      ],
+      "evidenceStatus": "example-only",
+      "status": "open"
+    }
+  ],
+  "supplyChainAssessments": [
+    {
+      "id": "SCA-QIF-001",
+      "manifestRef": "DPM-QIF-001",
+      "nodeCount": 5,
+      "edgeCount": 4,
+      "lockedRequiredNodeCount": 4,
+      "unresolvedRequiredNodeCount": 0,
+      "staleLockCount": 0,
+      "directRiskNodeRefs": [
+        "DPN-SHELL-TOOL",
+        "DPN-REMOTE-TOOL"
+      ],
+      "propagatedRiskNodeRefs": [
+        "DPN-QIF-SKILL"
+      ],
+      "cycleDetected": false,
+      "concentrationRisk": false,
+      "readiness": "governance-required",
+      "governanceTriggerRefs": [
+        "GTR-DEPENDENCY-RISK",
+        "GTR-EVIDENCE-UNVERIFIED"
+      ],
+      "identityIsSafety": false,
+      "behavioralEquivalenceClaimed": false,
+      "sourceAuthenticityClaimed": false,
+      "automaticTrustElevation": false,
+      "automaticPermission": false,
+      "automaticAuthority": false,
+      "status": "governance-required"
+    }
+  ],
+  "manifestSnapshots": [
+    {
+      "id": "MSS-QIF-BASELINE",
+      "manifestRef": "DPM-QIF-001",
+      "observedAt": "2026-11-17T04:30:00Z",
+      "nodeStates": [
+        {
+          "nodeRef": "DPN-QIF-SKILL",
+          "version": "0.8.16",
+          "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "required": true,
+          "status": "resolved"
+        },
+        {
+          "nodeRef": "DPN-NODE-RUNTIME",
+          "version": "22",
+          "digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+          "required": true,
+          "status": "resolved"
+        },
+        {
+          "nodeRef": "DPN-SHELL-TOOL",
+          "version": "system",
+          "digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+          "required": true,
+          "status": "resolved"
+        },
+        {
+          "nodeRef": "DPN-GITHUB-SERVICE",
+          "version": "api-v3",
+          "digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+          "required": false,
+          "status": "resolved"
+        }
+      ],
+      "edgeStates": [
+        {
+          "edgeRef": "DPE-QIF-NODE",
+          "fromNodeRef": "DPN-QIF-SKILL",
+          "toNodeRef": "DPN-NODE-RUNTIME",
+          "relation": "requires",
+          "required": true,
+          "riskPropagation": "upstream"
+        },
+        {
+          "edgeRef": "DPE-QIF-SHELL",
+          "fromNodeRef": "DPN-QIF-SKILL",
+          "toNodeRef": "DPN-SHELL-TOOL",
+          "relation": "uses",
+          "required": true,
+          "riskPropagation": "upstream"
+        },
+        {
+          "edgeRef": "DPE-QIF-GITHUB",
+          "fromNodeRef": "DPN-QIF-SKILL",
+          "toNodeRef": "DPN-GITHUB-SERVICE",
+          "relation": "connects",
+          "required": false,
+          "riskPropagation": "upstream"
+        }
+      ],
+      "lockStates": [
+        {
+          "nodeRef": "DPN-QIF-SKILL",
+          "lockedVersion": "0.8.16",
+          "lockedDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "verified": true,
+          "stale": false
+        },
+        {
+          "nodeRef": "DPN-NODE-RUNTIME",
+          "lockedVersion": "22",
+          "lockedDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+          "verified": true,
+          "stale": false
+        },
+        {
+          "nodeRef": "DPN-SHELL-TOOL",
+          "lockedVersion": "system",
+          "lockedDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+          "verified": true,
+          "stale": false
+        }
+      ],
+      "riskStates": [
+        {
+          "riskRef": "RSK-SHELL-PRIVILEGE",
+          "nodeRef": "DPN-SHELL-TOOL",
+          "severity": "high",
+          "evidenceStatus": "example-only",
+          "status": "open"
+        }
+      ],
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    },
+    {
+      "id": "MSS-QIF-CANDIDATE",
+      "manifestRef": "DPM-QIF-001",
+      "observedAt": "2026-11-18T04:30:00Z",
+      "nodeStates": [
+        {
+          "nodeRef": "DPN-QIF-SKILL",
+          "version": "0.8.17",
+          "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "required": true,
+          "status": "resolved"
+        },
+        {
+          "nodeRef": "DPN-NODE-RUNTIME",
+          "version": "22",
+          "digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+          "required": true,
+          "status": "resolved"
+        },
+        {
+          "nodeRef": "DPN-SHELL-TOOL",
+          "version": "system",
+          "digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+          "required": true,
+          "status": "resolved"
+        },
+        {
+          "nodeRef": "DPN-GITHUB-SERVICE",
+          "version": "api-v3",
+          "digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+          "required": false,
+          "status": "resolved"
+        },
+        {
+          "nodeRef": "DPN-REMOTE-TOOL",
+          "version": "1.0.0",
+          "digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+          "required": true,
+          "status": "resolved"
+        }
+      ],
+      "edgeStates": [
+        {
+          "edgeRef": "DPE-QIF-NODE",
+          "fromNodeRef": "DPN-QIF-SKILL",
+          "toNodeRef": "DPN-NODE-RUNTIME",
+          "relation": "requires",
+          "required": true,
+          "riskPropagation": "upstream"
+        },
+        {
+          "edgeRef": "DPE-QIF-SHELL",
+          "fromNodeRef": "DPN-QIF-SKILL",
+          "toNodeRef": "DPN-SHELL-TOOL",
+          "relation": "uses",
+          "required": true,
+          "riskPropagation": "upstream"
+        },
+        {
+          "edgeRef": "DPE-QIF-GITHUB",
+          "fromNodeRef": "DPN-QIF-SKILL",
+          "toNodeRef": "DPN-GITHUB-SERVICE",
+          "relation": "connects",
+          "required": false,
+          "riskPropagation": "upstream"
+        },
+        {
+          "edgeRef": "DPE-QIF-REMOTE",
+          "fromNodeRef": "DPN-QIF-SKILL",
+          "toNodeRef": "DPN-REMOTE-TOOL",
+          "relation": "invokes",
+          "required": true,
+          "riskPropagation": "upstream"
+        }
+      ],
+      "lockStates": [
+        {
+          "nodeRef": "DPN-QIF-SKILL",
+          "lockedVersion": "0.8.17",
+          "lockedDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "verified": true,
+          "stale": false
+        },
+        {
+          "nodeRef": "DPN-NODE-RUNTIME",
+          "lockedVersion": "22",
+          "lockedDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+          "verified": true,
+          "stale": false
+        },
+        {
+          "nodeRef": "DPN-SHELL-TOOL",
+          "lockedVersion": "system",
+          "lockedDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+          "verified": true,
+          "stale": false
+        },
+        {
+          "nodeRef": "DPN-REMOTE-TOOL",
+          "lockedVersion": "1.0.0",
+          "lockedDigest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+          "verified": true,
+          "stale": false
+        }
+      ],
+      "riskStates": [
+        {
+          "riskRef": "RSK-SHELL-PRIVILEGE",
+          "nodeRef": "DPN-SHELL-TOOL",
+          "severity": "high",
+          "evidenceStatus": "example-only",
+          "status": "open"
+        },
+        {
+          "riskRef": "RSK-REMOTE-PROVENANCE",
+          "nodeRef": "DPN-REMOTE-TOOL",
+          "severity": "high",
+          "evidenceStatus": "example-only",
+          "status": "open"
+        }
+      ],
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    }
+  ],
+  "dependencyChangeSets": [
+    {
+      "id": "DCS-QIF-001",
+      "baselineSnapshotRef": "MSS-QIF-BASELINE",
+      "candidateSnapshotRef": "MSS-QIF-CANDIDATE",
+      "addedNodeRefs": [
+        "DPN-REMOTE-TOOL"
+      ],
+      "removedNodeRefs": [],
+      "changedNodes": [
+        {
+          "entityRef": "DPN-QIF-SKILL",
+          "changedFields": [
+            "version"
+          ]
+        }
+      ],
+      "addedEdgeRefs": [
+        "DPE-QIF-REMOTE"
+      ],
+      "removedEdgeRefs": [],
+      "changedEdges": [],
+      "changedLockNodeRefs": [
+        "DPN-QIF-SKILL",
+        "DPN-REMOTE-TOOL"
+      ],
+      "addedRiskRefs": [
+        "RSK-REMOTE-PROVENANCE"
+      ],
+      "removedRiskRefs": [],
+      "changedRisks": [],
+      "materialChangeRefs": [
+        "edge:DPE-QIF-REMOTE",
+        "lock:DPN-QIF-SKILL",
+        "lock:DPN-REMOTE-TOOL",
+        "node:DPN-QIF-SKILL",
+        "node:DPN-REMOTE-TOOL",
+        "risk:RSK-REMOTE-PROVENANCE"
+      ],
+      "unresolvedChangeRefs": [],
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    }
+  ],
+  "changeImpactAssessments": [
+    {
+      "id": "CIA-QIF-001",
+      "changeSetRef": "DCS-QIF-001",
+      "directlyChangedNodeRefs": [
+        "DPN-QIF-SKILL",
+        "DPN-REMOTE-TOOL"
+      ],
+      "affectedUpstreamNodeRefs": [],
+      "affectedLossBoundaries": [
+        "Unreviewed remote dependencies must not gain access to protected execution paths.",
+        "A changed Skill must not be treated as equivalent to its predecessor without evidence."
+      ],
+      "blastRadiusCount": 2,
+      "materialChangeCount": 6,
+      "unresolvedChangeCount": 0,
+      "quarantineCandidateRefs": [
+        "QRC-QIF-001"
+      ],
+      "governanceTriggerRefs": [
+        "GTR-CHANGE-MATERIAL",
+        "GTR-QUARANTINE-REVIEW",
+        "GTR-EVIDENCE-UNVERIFIED"
+      ],
+      "readiness": "governance-required",
+      "status": "governance-required"
+    }
+  ],
+  "quarantineCandidates": [
+    {
+      "id": "QRC-QIF-001",
+      "changeSetRef": "DCS-QIF-001",
+      "subjectNodeRefs": [
+        "DPN-REMOTE-TOOL"
+      ],
+      "reasonCodes": [
+        "material-change",
+        "unverified-evidence",
+        "new-risk",
+        "blast-radius"
+      ],
+      "evidenceRefs": [
+        "MSS-QIF-BASELINE",
+        "MSS-QIF-CANDIDATE",
+        "RSK-REMOTE-PROVENANCE"
+      ],
+      "evidenceStatus": "example-only",
+      "proposedAction": "hold-for-review",
+      "scope": "Candidate decision only for the new remote tool dependency.",
+      "expiresAt": "2026-12-18T04:30:00Z",
+      "executionState": "not-executed",
+      "automaticEnforcement": false,
+      "status": "governance-required"
+    }
+  ],
+  "quarantineDecisions": [
+    {
+      "id": "QRD-QIF-001",
+      "candidateRef": "QRC-QIF-001",
+      "decision": "defer",
+      "decidedBy": "qif-supply-chain-governance-owner",
+      "decidedAt": "2026-11-18T04:30:00Z",
+      "decisionRationale": "Example-only evidence cannot authorize containment or release; obtain independent provenance and behavioral evidence.",
+      "evidenceRefs": [
+        "QRC-QIF-001",
+        "GTR-QUARANTINE-REVIEW"
+      ],
+      "authorityConfirmed": true,
+      "executionAuthorized": false,
+      "status": "governance-required"
+    }
+  ],
+  "quarantineOutcomes": [
+    {
+      "id": "QRO-QIF-001",
+      "candidateRef": "QRC-QIF-001",
+      "decisionRef": "QRD-QIF-001",
+      "observedState": "contained",
+      "observedAt": "2026-11-18T05:00:00Z",
+      "affectedNodeRefs": [
+        "DPN-REMOTE-TOOL"
+      ],
+      "evidenceRefs": [
+        "example:containment-log"
+      ],
+      "evidenceStatus": "example-only",
+      "containmentEffectivenessClaimed": false,
+      "status": "governance-required"
+    }
+  ],
+  "remediationActions": [
+    {
+      "id": "RMA-QIF-001",
+      "outcomeRef": "QRO-QIF-001",
+      "actionType": "restrict",
+      "subjectNodeRefs": [
+        "DPN-REMOTE-TOOL"
+      ],
+      "completedAt": "2026-11-18T06:00:00Z",
+      "evidenceRefs": [
+        "example:restricted-egress-policy"
+      ],
+      "evidenceStatus": "example-only",
+      "verificationState": "pending",
+      "recordedActionOnly": true,
+      "automaticExecution": false,
+      "status": "governance-required"
+    }
+  ],
+  "replayValidations": [
+    {
+      "id": "RPV-QIF-001",
+      "sourceOutcomeRef": "QRO-QIF-001",
+      "remediationRefs": [
+        "RMA-QIF-001"
+      ],
+      "trajectoryRef": "example:remote-tool-egress-trajectory",
+      "environmentProfile": "isolated example replay environment",
+      "expectedResult": "remote tool egress is denied and recorded",
+      "observedResult": "remote tool egress is denied and recorded",
+      "resultMatched": true,
+      "executedAt": "2026-11-18T07:00:00Z",
+      "evidenceRefs": [
+        "example:replay-transcript"
+      ],
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    }
+  ],
+  "observationWindows": [
+    {
+      "id": "OBW-QIF-001",
+      "replayRef": "RPV-QIF-001",
+      "startedAt": "2026-11-18T08:00:00Z",
+      "endedAt": "2026-11-19T08:00:00Z",
+      "requiredDurationHours": 24,
+      "observedDurationHours": 24,
+      "incidentRecurrenceCount": 0,
+      "monitorEvidenceRefs": [
+        "example:observation-log"
+      ],
+      "evidenceStatus": "example-only",
+      "completed": true,
+      "status": "governance-required"
+    }
+  ],
+  "residualRiskAssessments": [
+    {
+      "id": "RRA-QIF-001",
+      "outcomeRef": "QRO-QIF-001",
+      "remediationRefs": [
+        "RMA-QIF-001"
+      ],
+      "replayRefs": [
+        "RPV-QIF-001"
+      ],
+      "observationWindowRefs": [
+        "OBW-QIF-001"
+      ],
+      "openRiskRefs": [
+        "RSK-SHELL-PRIVILEGE",
+        "RSK-REMOTE-PROVENANCE"
+      ],
+      "highestSeverity": "high",
+      "disposition": "unknown",
+      "acceptedRiskRationale": "Example-only replay and observation evidence cannot establish acceptable residual risk.",
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    }
+  ],
+  "reentryAssessments": [
+    {
+      "id": "REA-QIF-001",
+      "candidateRef": "QRC-QIF-001",
+      "decisionRef": "QRD-QIF-001",
+      "outcomeRef": "QRO-QIF-001",
+      "remediationRefs": [
+        "RMA-QIF-001"
+      ],
+      "replayRefs": [
+        "RPV-QIF-001"
+      ],
+      "observationWindowRefs": [
+        "OBW-QIF-001"
+      ],
+      "residualRiskAssessmentRef": "RRA-QIF-001",
+      "prerequisites": {
+        "containmentObserved": true,
+        "remediationVerified": false,
+        "replayPassed": false,
+        "observationCompleted": false,
+        "residualRiskAcceptable": false,
+        "evidenceVerified": false
+      },
+      "readiness": "governance-required",
+      "governanceTriggerRefs": [
+        "GTR-CONTAINMENT-UNVERIFIED",
+        "GTR-REMEDIATION-INCOMPLETE",
+        "GTR-REENTRY-REVIEW"
+      ],
+      "assessedBy": "qif-supply-chain-governance-owner",
+      "assessedAt": "2026-11-19T09:00:00Z",
+      "restartAuthorized": false,
+      "automaticReentry": false,
+      "status": "governance-required"
+    }
+  ],
+  "recoveryEvidenceSources": [
+    {
+      "id": "RES-QIF-RUNTIME",
+      "evidenceRef": "example:containment-log",
+      "layer": "containment-runtime",
+      "principalRef": "example-operator-team",
+      "substrateRef": "example-shared-host",
+      "collectionPathRef": "example-runtime-log-export",
+      "reviewerRef": "qif-independent-auditor",
+      "failureDomainRefs": [
+        "SFD-QIF-HOST"
+      ],
+      "sourceMode": "system-observed",
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    },
+    {
+      "id": "RES-QIF-REPLAY",
+      "evidenceRef": "example:replay-transcript",
+      "layer": "replay-harness",
+      "principalRef": "example-test-team",
+      "substrateRef": "example-shared-host",
+      "collectionPathRef": "example-replay-export",
+      "reviewerRef": "qif-independent-auditor",
+      "failureDomainRefs": [
+        "SFD-QIF-HOST"
+      ],
+      "sourceMode": "system-observed",
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    },
+    {
+      "id": "RES-QIF-REVIEW",
+      "evidenceRef": "REA-QIF-001",
+      "layer": "reviewer",
+      "principalRef": "qif-supply-chain-governance-owner",
+      "substrateRef": "example-review-workstation",
+      "collectionPathRef": "example-review-record",
+      "reviewerRef": "qif-second-reviewer",
+      "failureDomainRefs": [],
+      "sourceMode": "third-party-attested",
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    },
+    {
+      "id": "RES-QIF-MONITOR",
+      "evidenceRef": "example:monitor-log",
+      "layer": "monitor",
+      "principalRef": "example-monitor-team",
+      "substrateRef": "example-monitor-host",
+      "collectionPathRef": "example-monitor-export",
+      "reviewerRef": "qif-independent-auditor",
+      "failureDomainRefs": [],
+      "sourceMode": "independent-observed",
+      "evidenceStatus": "example-only",
+      "status": "governance-required"
+    }
+  ],
+  "sharedFailureDomains": [
+    {
+      "id": "SFD-QIF-HOST",
+      "domainType": "host",
+      "memberSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-REPLAY"
+      ],
+      "description": "The containment runtime and replay harness share one declared host, so a host fault may corrupt both evidence paths.",
+      "status": "open"
+    }
+  ],
+  "crossLayerAttestations": [
+    {
+      "id": "CLA-QIF-RUNTIME",
+      "sourceRefs": [
+        "RES-QIF-RUNTIME"
+      ],
+      "attestorPrincipalRef": "example-operator-team",
+      "subjectLayer": "containment-runtime",
+      "claimType": "execution",
+      "receiptType": "digest",
+      "evidenceRefs": [
+        "example:runtime-attestation"
+      ],
+      "evidenceStatus": "example-only",
+      "selfAttestation": true,
+      "verificationState": "pending",
+      "expiresAt": "2026-12-21T00:00:00Z",
+      "status": "governance-required"
+    },
+    {
+      "id": "CLA-QIF-REVIEW",
+      "sourceRefs": [
+        "RES-QIF-REVIEW"
+      ],
+      "attestorPrincipalRef": "qif-independent-auditor",
+      "subjectLayer": "reviewer",
+      "claimType": "review",
+      "receiptType": "external-receipt",
+      "evidenceRefs": [
+        "example:review-attestation"
+      ],
+      "evidenceStatus": "example-only",
+      "selfAttestation": false,
+      "verificationState": "pending",
+      "expiresAt": "2026-12-21T00:00:00Z",
+      "status": "governance-required"
+    }
+  ],
+  "recoveryIndependenceAssessments": [
+    {
+      "id": "RIA-QIF-001",
+      "reentryAssessmentRef": "REA-QIF-001",
+      "sourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-REPLAY",
+        "RES-QIF-REVIEW"
+      ],
+      "attestationRefs": [
+        "CLA-QIF-RUNTIME",
+        "CLA-QIF-REVIEW"
+      ],
+      "requiredLayers": [
+        "containment-runtime",
+        "monitor",
+        "replay-harness",
+        "reviewer"
+      ],
+      "coveredLayers": [
+        "containment-runtime",
+        "replay-harness",
+        "reviewer"
+      ],
+      "missingLayers": [
+        "monitor"
+      ],
+      "sharedFailureDomainRefs": [
+        "SFD-QIF-HOST"
+      ],
+      "principalSeparation": true,
+      "substrateSeparation": false,
+      "evidenceSeparation": false,
+      "collectionSeparation": true,
+      "reviewSeparation": true,
+      "independenceGrade": "insufficient",
+      "governanceTriggerRefs": [
+        "GTR-RECOVERY-CORRELATED",
+        "GTR-RECOVERY-ATTESTATION",
+        "GTR-RECOVERY-COVERAGE",
+        "GTR-RECOVERY-INDEPENDENCE"
+      ],
+      "independenceProven": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RIA-QIF-CHALLENGE",
+      "reentryAssessmentRef": "REA-QIF-001",
+      "sourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-REPLAY",
+        "RES-QIF-REVIEW",
+        "RES-QIF-MONITOR"
+      ],
+      "attestationRefs": [
+        "CLA-QIF-RUNTIME",
+        "CLA-QIF-REVIEW"
+      ],
+      "requiredLayers": [
+        "containment-runtime",
+        "monitor",
+        "replay-harness",
+        "reviewer"
+      ],
+      "coveredLayers": [
+        "containment-runtime",
+        "monitor",
+        "replay-harness",
+        "reviewer"
+      ],
+      "missingLayers": [],
+      "sharedFailureDomainRefs": [
+        "SFD-QIF-HOST"
+      ],
+      "principalSeparation": true,
+      "substrateSeparation": false,
+      "evidenceSeparation": false,
+      "collectionSeparation": true,
+      "reviewSeparation": true,
+      "independenceGrade": "declared-separated",
+      "governanceTriggerRefs": [
+        "GTR-RECOVERY-CORRELATED",
+        "GTR-RECOVERY-ATTESTATION",
+        "GTR-RECOVERY-INDEPENDENCE"
+      ],
+      "independenceProven": false,
+      "status": "governance-required"
+    }
+  ],
+  "recoveryChallengeProtocols": [
+    {
+      "id": "RCP-QIF-001",
+      "independenceAssessmentRef": "RIA-QIF-CHALLENGE",
+      "requiredChallengeTypes": [
+        "source-loss",
+        "evidence-tamper",
+        "contradiction",
+        "common-cause",
+        "multi-session"
+      ],
+      "targetSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-REPLAY",
+        "RES-QIF-REVIEW",
+        "RES-QIF-MONITOR"
+      ],
+      "targetAttestationRefs": [
+        "CLA-QIF-RUNTIME",
+        "CLA-QIF-REVIEW"
+      ],
+      "targetFailureDomainRefs": [
+        "SFD-QIF-HOST"
+      ],
+      "controlledEnvironment": "isolated example challenge harness",
+      "stopConditions": [
+        "external side effect observed",
+        "credential access requested",
+        "uncontrolled network access attempted"
+      ],
+      "realSystemAttack": false,
+      "automaticExecution": false,
+      "status": "governance-required"
+    }
+  ],
+  "recoveryChallengeCorpusItems": [
+    {
+      "id": "RCI-QIF-SEED-SOURCE",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "seed",
+      "challengeType": "source-loss",
+      "parentItemRefs": [],
+      "mutationOperator": "none",
+      "expectedDetection": "detected",
+      "sequestered": false,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:seed-source-loss"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-SEED-TAMPER",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "seed",
+      "challengeType": "evidence-tamper",
+      "parentItemRefs": [],
+      "mutationOperator": "none",
+      "expectedDetection": "detected",
+      "sequestered": false,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:seed-tamper"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-SEED-CONTRADICTION",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "seed",
+      "challengeType": "contradiction",
+      "parentItemRefs": [],
+      "mutationOperator": "none",
+      "expectedDetection": "detected",
+      "sequestered": false,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:seed-contradiction"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-SEED-COMMON",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "seed",
+      "challengeType": "common-cause",
+      "parentItemRefs": [],
+      "mutationOperator": "none",
+      "expectedDetection": "detected",
+      "sequestered": false,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:seed-common-cause"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-SEED-MULTI",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "seed",
+      "challengeType": "multi-session",
+      "parentItemRefs": [],
+      "mutationOperator": "none",
+      "expectedDetection": "detected",
+      "sequestered": false,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:seed-multi-session"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-MUTANT-DELAY",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "mutant",
+      "challengeType": "source-loss",
+      "parentItemRefs": [
+        "RCI-QIF-SEED-SOURCE"
+      ],
+      "mutationOperator": "delay-substitution",
+      "expectedDetection": "detected",
+      "sequestered": false,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:mutant-delayed-source"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-MUTANT-COLLECTION",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "mutant",
+      "challengeType": "common-cause",
+      "parentItemRefs": [
+        "RCI-QIF-SEED-COMMON"
+      ],
+      "mutationOperator": "collection-path-collapse",
+      "expectedDetection": "detected",
+      "sequestered": false,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:mutant-collection-collapse"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-HOLDOUT-COMPOSE",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "holdout",
+      "challengeType": "multi-session",
+      "parentItemRefs": [
+        "RCI-QIF-SEED-MULTI"
+      ],
+      "mutationOperator": "cross-context-composition",
+      "expectedDetection": "detected",
+      "sequestered": true,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:holdout-cross-context"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCI-QIF-BENIGN-LOOKALIKE",
+      "protocolRef": "RCP-QIF-001",
+      "itemKind": "benign-control",
+      "challengeType": "contradiction",
+      "parentItemRefs": [
+        "RCI-QIF-SEED-CONTRADICTION"
+      ],
+      "mutationOperator": "benign-lookalike",
+      "expectedDetection": "undetected",
+      "sequestered": true,
+      "generatedByRoleRef": "qif-challenger",
+      "judgedByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:benign-consistent-revision"
+      ],
+      "evidenceStatus": "example-only",
+      "actualAttack": false,
+      "status": "governance-required"
+    }
+  ],
+  "recoveryChallengeRuns": [
+    {
+      "id": "RCR-QIF-SOURCE-LOSS",
+      "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-SEED-SOURCE",
+      "challengeType": "source-loss",
+      "targetSourceRefs": [
+        "RES-QIF-MONITOR"
+      ],
+      "injectedCondition": "The monitor source is withheld from the controlled evidence bundle.",
+      "executionState": "executed",
+      "executedAt": "2026-11-21T01:00:00Z",
+      "observationRefs": [
+        "RCO-QIF-SOURCE-LOSS"
+      ],
+      "executionEvidenceRefs": [
+        "example:challenge-source-loss"
+      ],
+      "evidenceStatus": "example-only",
+      "outcome": "exposed",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCR-QIF-TAMPER",
+      "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-SEED-TAMPER",
+      "challengeType": "evidence-tamper",
+      "targetSourceRefs": [
+        "RES-QIF-RUNTIME"
+      ],
+      "injectedCondition": "A digest mismatch is introduced into the controlled runtime evidence copy.",
+      "executionState": "executed",
+      "executedAt": "2026-11-21T01:10:00Z",
+      "observationRefs": [
+        "RCO-QIF-TAMPER"
+      ],
+      "executionEvidenceRefs": [
+        "example:challenge-tamper"
+      ],
+      "evidenceStatus": "example-only",
+      "outcome": "resisted",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCR-QIF-CONTRADICTION",
+      "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-SEED-CONTRADICTION",
+      "challengeType": "contradiction",
+      "targetSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-REVIEW"
+      ],
+      "injectedCondition": "Runtime and reviewer evidence assert incompatible recovery states.",
+      "executionState": "executed",
+      "executedAt": "2026-11-21T01:20:00Z",
+      "observationRefs": [
+        "RCO-QIF-CONTRADICTION"
+      ],
+      "executionEvidenceRefs": [
+        "example:challenge-contradiction"
+      ],
+      "evidenceStatus": "example-only",
+      "outcome": "exposed",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCR-QIF-COMMON",
+      "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-SEED-COMMON",
+      "challengeType": "common-cause",
+      "targetSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-REPLAY"
+      ],
+      "injectedCondition": "The declared shared host stops both evidence paths in the controlled harness.",
+      "executionState": "executed",
+      "executedAt": "2026-11-21T01:30:00Z",
+      "observationRefs": [
+        "RCO-QIF-COMMON"
+      ],
+      "executionEvidenceRefs": [
+        "example:challenge-common-cause"
+      ],
+      "evidenceStatus": "example-only",
+      "outcome": "exposed",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCR-QIF-MULTI",
+      "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-SEED-MULTI",
+      "challengeType": "multi-session",
+      "targetSourceRefs": [
+        "RES-QIF-MONITOR",
+        "RES-QIF-REVIEW"
+      ],
+      "injectedCondition": "Related evidence is split across two controlled sessions to test cross-session detection.",
+      "executionState": "executed",
+      "executedAt": "2026-11-21T01:40:00Z",
+      "observationRefs": [
+        "RCO-QIF-MULTI"
+      ],
+      "executionEvidenceRefs": [
+        "example:challenge-multi-session"
+      ],
+      "evidenceStatus": "example-only",
+      "outcome": "evaded",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCR-QIF-MUTANT-DELAY",
+      "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-MUTANT-DELAY",
+      "challengeType": "source-loss",
+      "targetSourceRefs": [
+        "RES-QIF-MONITOR"
+      ],
+      "injectedCondition": "The controlled monitor source arrives after the decision window rather than being fully absent.",
+      "executionState": "executed",
+      "executedAt": "2026-11-22T01:00:00Z",
+      "observationRefs": [
+        "RCO-QIF-MUTANT-DELAY"
+      ],
+      "executionEvidenceRefs": [
+        "example:run-mutant-delay"
+      ],
+      "evidenceStatus": "example-only",
+      "outcome": "exposed",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCR-QIF-MUTANT-COLLECTION",
+      "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-MUTANT-COLLECTION",
+      "challengeType": "common-cause",
+      "targetSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-MONITOR"
+      ],
+      "injectedCondition": "Separate sources are routed through one controlled collection path.",
+      "executionState": "executed",
+      "executedAt": "2026-11-22T01:10:00Z",
+      "observationRefs": [
+        "RCO-QIF-MUTANT-COLLECTION"
+      ],
+      "executionEvidenceRefs": [
+        "example:run-mutant-collection"
+      ],
+      "evidenceStatus": "example-only",
+      "outcome": "exposed",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCR-QIF-HOLDOUT",
+      "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-HOLDOUT-COMPOSE",
+      "challengeType": "multi-session",
+      "targetSourceRefs": [
+        "RES-QIF-MONITOR",
+        "RES-QIF-REVIEW"
+      ],
+      "injectedCondition": "A sequestered controlled sequence composes delayed evidence with a cross-session context split.",
+      "executionState": "executed",
+      "executedAt": "2026-11-22T01:20:00Z",
+      "observationRefs": [
+        "RCO-QIF-HOLDOUT"
+      ],
+      "executionEvidenceRefs": [
+        "example:run-holdout-compose"
+      ],
+      "evidenceStatus": "example-only",
+      "outcome": "evaded",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCR-QIF-BENIGN",
+      "protocolRef": "RCP-QIF-001",
+      "corpusItemRef": "RCI-QIF-BENIGN-LOOKALIKE",
+      "challengeType": "contradiction",
+      "targetSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-REVIEW"
+      ],
+      "injectedCondition": "A consistent, authorized evidence revision resembles a contradiction but carries matching lineage.",
+      "executionState": "executed",
+      "executedAt": "2026-11-22T01:30:00Z",
+      "observationRefs": [
+        "RCO-QIF-BENIGN"
+      ],
+      "executionEvidenceRefs": [
+        "example:run-benign-lookalike"
+      ],
+      "evidenceStatus": "example-only",
+      "outcome": "resisted",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    }
+  ],
+  "recoveryChallengeObservations": [
+    {
+      "id": "RCO-QIF-SOURCE-LOSS",
+      "runRef": "RCR-QIF-SOURCE-LOSS",
+      "perturbationType": "source-loss",
+      "detectionState": "detected",
+      "impactState": "exposed",
+      "affectedSourceRefs": [
+        "RES-QIF-MONITOR"
+      ],
+      "affectedAttestationRefs": [],
+      "exposedFailureDomainRefs": [],
+      "evidenceRefs": [
+        "example:challenge-source-loss-observation"
+      ],
+      "evidenceStatus": "example-only",
+      "observedAt": "2026-11-21T01:01:00Z",
+      "status": "governance-required"
+    },
+    {
+      "id": "RCO-QIF-TAMPER",
+      "runRef": "RCR-QIF-TAMPER",
+      "perturbationType": "evidence-tamper",
+      "detectionState": "detected",
+      "impactState": "resisted",
+      "affectedSourceRefs": [
+        "RES-QIF-RUNTIME"
+      ],
+      "affectedAttestationRefs": [],
+      "exposedFailureDomainRefs": [],
+      "evidenceRefs": [
+        "example:challenge-tamper-observation"
+      ],
+      "evidenceStatus": "example-only",
+      "observedAt": "2026-11-21T01:11:00Z",
+      "status": "governance-required"
+    },
+    {
+      "id": "RCO-QIF-CONTRADICTION",
+      "runRef": "RCR-QIF-CONTRADICTION",
+      "perturbationType": "contradiction",
+      "detectionState": "detected",
+      "impactState": "exposed",
+      "affectedSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-REVIEW"
+      ],
+      "affectedAttestationRefs": [
+        "CLA-QIF-REVIEW"
+      ],
+      "exposedFailureDomainRefs": [],
+      "evidenceRefs": [
+        "example:challenge-contradiction-observation"
+      ],
+      "evidenceStatus": "example-only",
+      "observedAt": "2026-11-21T01:21:00Z",
+      "status": "governance-required"
+    },
+    {
+      "id": "RCO-QIF-COMMON",
+      "runRef": "RCR-QIF-COMMON",
+      "perturbationType": "common-cause",
+      "detectionState": "detected",
+      "impactState": "exposed",
+      "affectedSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-REPLAY"
+      ],
+      "affectedAttestationRefs": [],
+      "exposedFailureDomainRefs": [
+        "SFD-QIF-HOST"
+      ],
+      "evidenceRefs": [
+        "example:challenge-common-cause-observation"
+      ],
+      "evidenceStatus": "example-only",
+      "observedAt": "2026-11-21T01:31:00Z",
+      "status": "governance-required"
+    },
+    {
+      "id": "RCO-QIF-MULTI",
+      "runRef": "RCR-QIF-MULTI",
+      "perturbationType": "multi-session",
+      "detectionState": "undetected",
+      "impactState": "exposed",
+      "affectedSourceRefs": [
+        "RES-QIF-MONITOR",
+        "RES-QIF-REVIEW"
+      ],
+      "affectedAttestationRefs": [],
+      "exposedFailureDomainRefs": [],
+      "evidenceRefs": [
+        "example:challenge-multi-session-observation"
+      ],
+      "evidenceStatus": "example-only",
+      "observedAt": "2026-11-21T01:41:00Z",
+      "status": "governance-required"
+    },
+    {
+      "id": "RCO-QIF-MUTANT-DELAY",
+      "runRef": "RCR-QIF-MUTANT-DELAY",
+      "perturbationType": "source-loss",
+      "detectionState": "detected",
+      "impactState": "exposed",
+      "affectedSourceRefs": [
+        "RES-QIF-MONITOR"
+      ],
+      "affectedAttestationRefs": [],
+      "exposedFailureDomainRefs": [],
+      "evidenceRefs": [
+        "example:observation-mutant-delay"
+      ],
+      "evidenceStatus": "example-only",
+      "observedAt": "2026-11-22T01:01:00Z",
+      "status": "governance-required"
+    },
+    {
+      "id": "RCO-QIF-MUTANT-COLLECTION",
+      "runRef": "RCR-QIF-MUTANT-COLLECTION",
+      "perturbationType": "common-cause",
+      "detectionState": "detected",
+      "impactState": "exposed",
+      "affectedSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-MONITOR"
+      ],
+      "affectedAttestationRefs": [],
+      "exposedFailureDomainRefs": [],
+      "evidenceRefs": [
+        "example:observation-mutant-collection"
+      ],
+      "evidenceStatus": "example-only",
+      "observedAt": "2026-11-22T01:11:00Z",
+      "status": "governance-required"
+    },
+    {
+      "id": "RCO-QIF-HOLDOUT",
+      "runRef": "RCR-QIF-HOLDOUT",
+      "perturbationType": "multi-session",
+      "detectionState": "undetected",
+      "impactState": "exposed",
+      "affectedSourceRefs": [
+        "RES-QIF-MONITOR",
+        "RES-QIF-REVIEW"
+      ],
+      "affectedAttestationRefs": [],
+      "exposedFailureDomainRefs": [],
+      "evidenceRefs": [
+        "example:observation-holdout-compose"
+      ],
+      "evidenceStatus": "example-only",
+      "observedAt": "2026-11-22T01:21:00Z",
+      "status": "governance-required"
+    },
+    {
+      "id": "RCO-QIF-BENIGN",
+      "runRef": "RCR-QIF-BENIGN",
+      "perturbationType": "contradiction",
+      "detectionState": "detected",
+      "impactState": "resisted",
+      "affectedSourceRefs": [
+        "RES-QIF-RUNTIME",
+        "RES-QIF-REVIEW"
+      ],
+      "affectedAttestationRefs": [],
+      "exposedFailureDomainRefs": [],
+      "evidenceRefs": [
+        "example:observation-benign-lookalike"
+      ],
+      "evidenceStatus": "example-only",
+      "observedAt": "2026-11-22T01:31:00Z",
+      "status": "governance-required"
+    }
+  ],
+  "recoveryChallengeAssessments": [
+    {
+      "id": "RCA-QIF-001",
+      "independenceAssessmentRef": "RIA-QIF-CHALLENGE",
+      "protocolRefs": [
+        "RCP-QIF-001"
+      ],
+      "runRefs": [
+        "RCR-QIF-SOURCE-LOSS",
+        "RCR-QIF-TAMPER",
+        "RCR-QIF-CONTRADICTION",
+        "RCR-QIF-COMMON",
+        "RCR-QIF-MULTI"
+      ],
+      "requiredChallengeTypes": [
+        "source-loss",
+        "evidence-tamper",
+        "contradiction",
+        "common-cause",
+        "multi-session"
+      ],
+      "executedChallengeTypes": [
+        "source-loss",
+        "evidence-tamper",
+        "contradiction",
+        "common-cause",
+        "multi-session"
+      ],
+      "missingChallengeTypes": [],
+      "exposedChallengeTypes": [
+        "source-loss",
+        "contradiction",
+        "common-cause",
+        "multi-session"
+      ],
+      "evadedChallengeTypes": [
+        "multi-session"
+      ],
+      "exposedFailureDomainRefs": [
+        "SFD-QIF-HOST"
+      ],
+      "declaredGrade": "declared-separated",
+      "challengeAdjustedGrade": "insufficient",
+      "gradeChanged": true,
+      "governanceTriggerRefs": [
+        "GTR-CHALLENGE-UNVERIFIED",
+        "GTR-CHALLENGE-EXPOSED",
+        "GTR-CHALLENGE-EVASION",
+        "GTR-CHALLENGE-REVIEW"
+      ],
+      "challengeCountIsQuality": false,
+      "defenseProven": false,
+      "status": "governance-required"
+    }
+  ],
+  "recoveryChallengeCorpusCalibrations": [
+    {
+      "id": "RCC-QIF-001",
+      "challengeAssessmentRef": "RCA-QIF-001",
+      "protocolRef": "RCP-QIF-001",
+      "itemRefs": [
+        "RCI-QIF-SEED-SOURCE",
+        "RCI-QIF-SEED-TAMPER",
+        "RCI-QIF-SEED-CONTRADICTION",
+        "RCI-QIF-SEED-COMMON",
+        "RCI-QIF-SEED-MULTI",
+        "RCI-QIF-MUTANT-DELAY",
+        "RCI-QIF-MUTANT-COLLECTION",
+        "RCI-QIF-HOLDOUT-COMPOSE",
+        "RCI-QIF-BENIGN-LOOKALIKE"
+      ],
+      "runRefs": [
+        "RCR-QIF-SOURCE-LOSS",
+        "RCR-QIF-TAMPER",
+        "RCR-QIF-CONTRADICTION",
+        "RCR-QIF-COMMON",
+        "RCR-QIF-MULTI",
+        "RCR-QIF-MUTANT-DELAY",
+        "RCR-QIF-MUTANT-COLLECTION",
+        "RCR-QIF-HOLDOUT",
+        "RCR-QIF-BENIGN"
+      ],
+      "seedItemRefs": [
+        "RCI-QIF-SEED-SOURCE",
+        "RCI-QIF-SEED-TAMPER",
+        "RCI-QIF-SEED-CONTRADICTION",
+        "RCI-QIF-SEED-COMMON",
+        "RCI-QIF-SEED-MULTI"
+      ],
+      "mutantItemRefs": [
+        "RCI-QIF-MUTANT-DELAY",
+        "RCI-QIF-MUTANT-COLLECTION"
+      ],
+      "holdoutItemRefs": [
+        "RCI-QIF-HOLDOUT-COMPOSE"
+      ],
+      "benignControlItemRefs": [
+        "RCI-QIF-BENIGN-LOOKALIKE"
+      ],
+      "detectedThreatItemRefs": [
+        "RCI-QIF-SEED-SOURCE",
+        "RCI-QIF-SEED-TAMPER",
+        "RCI-QIF-SEED-CONTRADICTION",
+        "RCI-QIF-SEED-COMMON",
+        "RCI-QIF-MUTANT-DELAY",
+        "RCI-QIF-MUTANT-COLLECTION"
+      ],
+      "missedThreatItemRefs": [
+        "RCI-QIF-SEED-MULTI",
+        "RCI-QIF-HOLDOUT-COMPOSE"
+      ],
+      "falseAlarmItemRefs": [
+        "RCI-QIF-BENIGN-LOOKALIKE"
+      ],
+      "correctBenignItemRefs": [],
+      "coveredMutationOperators": [
+        "delay-substitution",
+        "collection-path-collapse",
+        "cross-context-composition",
+        "benign-lookalike"
+      ],
+      "unseenHoldoutMutationOperators": [
+        "cross-context-composition"
+      ],
+      "challengerRoleRef": "qif-challenger",
+      "targetRoleRef": "qif-target-harness",
+      "judgeRoleRef": "qif-independent-judge",
+      "roleSeparation": true,
+      "holdoutDetectionRate": 0,
+      "benignFalseAlarmRate": 1,
+      "corpusCoverageGrade": "insufficient",
+      "governanceTriggerRefs": [
+        "GTR-CORPUS-UNVERIFIED",
+        "GTR-CORPUS-HOLDOUT-MISS",
+        "GTR-CORPUS-FALSE-ALARM",
+        "GTR-CORPUS-REVIEW"
+      ],
+      "challengeCountIsQuality": false,
+      "mutationScoreIsQuality": false,
+      "coverageRateIsQuality": false,
+      "robustnessProven": false,
+      "status": "governance-required"
+    }
+  ],
+  "recoveryChallengeDiscoveries": [
+    {
+      "id": "RCD-QIF-HOLDOUT-MISS",
+      "protocolRef": "RCP-QIF-001",
+      "calibrationRef": "RCC-QIF-001",
+      "sourceRunRefs": [
+        "RCR-QIF-HOLDOUT"
+      ],
+      "sourceItemRefs": [
+        "RCI-QIF-HOLDOUT-COMPOSE"
+      ],
+      "discoveryType": "missed-threat",
+      "flagStateAtSelection": "flagged",
+      "selectedBeforeOutcome": true,
+      "evaluationObjectiveExposure": "partially-exposed",
+      "noveltyState": "new-variant",
+      "proposedItemRef": "RCI-QIF-HOLDOUT-COMPOSE",
+      "discoveredByRoleRef": "qif-challenger",
+      "evidenceRefs": [
+        "example:holdout-miss-discovery"
+      ],
+      "evidenceStatus": "example-only",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCD-QIF-BENIGN-FALSE-ALARM",
+      "protocolRef": "RCP-QIF-001",
+      "calibrationRef": "RCC-QIF-001",
+      "sourceRunRefs": [
+        "RCR-QIF-BENIGN"
+      ],
+      "sourceItemRefs": [
+        "RCI-QIF-BENIGN-LOOKALIKE"
+      ],
+      "discoveryType": "false-alarm",
+      "flagStateAtSelection": "flagged",
+      "selectedBeforeOutcome": true,
+      "evaluationObjectiveExposure": "hidden",
+      "noveltyState": "known-family",
+      "proposedItemRef": "RCI-QIF-BENIGN-LOOKALIKE",
+      "discoveredByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:benign-false-alarm-discovery"
+      ],
+      "evidenceStatus": "example-only",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCD-QIF-UNFLAGGED-MULTI",
+      "protocolRef": "RCP-QIF-001",
+      "calibrationRef": "RCC-QIF-001",
+      "sourceRunRefs": [
+        "RCR-QIF-MULTI"
+      ],
+      "sourceItemRefs": [
+        "RCI-QIF-SEED-MULTI"
+      ],
+      "discoveryType": "unflagged-sample",
+      "flagStateAtSelection": "unflagged",
+      "selectedBeforeOutcome": false,
+      "evaluationObjectiveExposure": "hidden",
+      "noveltyState": "unresolved",
+      "proposedItemRef": "RCI-QIF-SEED-MULTI",
+      "discoveredByRoleRef": "qif-audit-sampler",
+      "evidenceRefs": [
+        "example:preselected-unflagged-sample"
+      ],
+      "evidenceStatus": "example-only",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    }
+  ],
+  "recoveryChallengeLifecycleDecisions": [
+    {
+      "id": "RCLD-QIF-HOLDOUT-PROMOTE",
+      "discoveryRefs": [
+        "RCD-QIF-HOLDOUT-MISS"
+      ],
+      "corpusItemRef": "RCI-QIF-HOLDOUT-COMPOSE",
+      "decision": "promote",
+      "regressionFamilyRef": "RCRF-QIF-THREAT",
+      "decisionRationale": "Retain the missed cross-context composition as a visible regression case while treating the original holdout as exposed.",
+      "decidedByRoleRef": "qif-lifecycle-owner",
+      "reviewedByRoleRefs": [
+        "qif-independent-judge"
+      ],
+      "independentReview": true,
+      "holdoutExposureState": "exposed",
+      "evaluationObjectiveExposure": "partially-exposed",
+      "postDecisionRunRefs": [
+        "RCR-QIF-HOLDOUT"
+      ],
+      "evidenceRefs": [
+        "example:holdout-promotion-review"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticAction": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCLD-QIF-BENIGN-RETAIN",
+      "discoveryRefs": [
+        "RCD-QIF-BENIGN-FALSE-ALARM"
+      ],
+      "corpusItemRef": "RCI-QIF-BENIGN-LOOKALIKE",
+      "decision": "retain",
+      "regressionFamilyRef": "RCRF-QIF-BENIGN",
+      "decisionRationale": "Retain the benign lookalike to expose specificity regressions and decision cost.",
+      "decidedByRoleRef": "qif-lifecycle-owner",
+      "reviewedByRoleRefs": [
+        "qif-independent-judge"
+      ],
+      "independentReview": true,
+      "holdoutExposureState": "not-applicable",
+      "evaluationObjectiveExposure": "hidden",
+      "postDecisionRunRefs": [
+        "RCR-QIF-BENIGN"
+      ],
+      "evidenceRefs": [
+        "example:benign-retention-review"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticAction": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCLD-QIF-MULTI-DEFER",
+      "discoveryRefs": [
+        "RCD-QIF-UNFLAGGED-MULTI"
+      ],
+      "corpusItemRef": "RCI-QIF-SEED-MULTI",
+      "decision": "defer",
+      "decisionRationale": "Keep the randomly selected unflagged miss unresolved until independently verified evidence distinguishes a known case from a new family.",
+      "decidedByRoleRef": "qif-lifecycle-owner",
+      "reviewedByRoleRefs": [
+        "qif-independent-judge"
+      ],
+      "independentReview": true,
+      "holdoutExposureState": "not-applicable",
+      "evaluationObjectiveExposure": "hidden",
+      "postDecisionRunRefs": [],
+      "evidenceRefs": [
+        "example:unflagged-sample-defer-review"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticAction": false,
+      "status": "governance-required"
+    }
+  ],
+  "recoveryChallengeRegressionFamilies": [
+    {
+      "id": "RCRF-QIF-THREAT",
+      "protocolRef": "RCP-QIF-001",
+      "rootItemRef": "RCI-QIF-HOLDOUT-COMPOSE",
+      "activeItemRefs": [
+        "RCI-QIF-HOLDOUT-COMPOSE"
+      ],
+      "retiredItemRefs": [],
+      "decisionRefs": [
+        "RCLD-QIF-HOLDOUT-PROMOTE"
+      ],
+      "protectedHoldoutItemRefs": [],
+      "familyPurpose": "Preserve cross-context composition failures as visible regression evidence after holdout exposure.",
+      "revision": 1,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCRF-QIF-BENIGN",
+      "protocolRef": "RCP-QIF-001",
+      "rootItemRef": "RCI-QIF-BENIGN-LOOKALIKE",
+      "activeItemRefs": [
+        "RCI-QIF-BENIGN-LOOKALIKE"
+      ],
+      "retiredItemRefs": [],
+      "decisionRefs": [
+        "RCLD-QIF-BENIGN-RETAIN"
+      ],
+      "protectedHoldoutItemRefs": [],
+      "familyPurpose": "Preserve benign lookalikes that reveal false alarms and specificity regressions.",
+      "revision": 1,
+      "status": "governance-required"
+    }
+  ],
+  "recoveryChallengeLifecycleAssessments": [
+    {
+      "id": "RCLA-QIF-001",
+      "protocolRef": "RCP-QIF-001",
+      "calibrationRef": "RCC-QIF-001",
+      "discoveryRefs": [
+        "RCD-QIF-HOLDOUT-MISS",
+        "RCD-QIF-BENIGN-FALSE-ALARM",
+        "RCD-QIF-UNFLAGGED-MULTI"
+      ],
+      "decisionRefs": [
+        "RCLD-QIF-HOLDOUT-PROMOTE",
+        "RCLD-QIF-BENIGN-RETAIN",
+        "RCLD-QIF-MULTI-DEFER"
+      ],
+      "regressionFamilyRefs": [
+        "RCRF-QIF-THREAT",
+        "RCRF-QIF-BENIGN"
+      ],
+      "unflaggedSampleDiscoveryRefs": [
+        "RCD-QIF-UNFLAGGED-MULTI"
+      ],
+      "unresolvedDiscoveryRefs": [
+        "RCD-QIF-UNFLAGGED-MULTI"
+      ],
+      "contaminatedHoldoutItemRefs": [
+        "RCI-QIF-HOLDOUT-COMPOSE"
+      ],
+      "objectiveExposedDiscoveryRefs": [
+        "RCD-QIF-HOLDOUT-MISS"
+      ],
+      "unreviewedDecisionRefs": [],
+      "failedRegressionDecisionRefs": [
+        "RCLD-QIF-HOLDOUT-PROMOTE"
+      ],
+      "lifecycleGrade": "insufficient",
+      "governanceTriggerRefs": [
+        "GTR-LIFECYCLE-UNRESOLVED",
+        "GTR-LIFECYCLE-HOLDOUT",
+        "GTR-LIFECYCLE-OBJECTIVE",
+        "GTR-LIFECYCLE-REGRESSION",
+        "GTR-LIFECYCLE-EVIDENCE",
+        "GTR-LIFECYCLE-REVIEW"
+      ],
+      "discoveryCountIsQuality": false,
+      "promotionRateIsQuality": false,
+      "familySizeIsQuality": false,
+      "generalizationProven": false,
+      "operationalSafetyProven": false,
+      "status": "governance-required"
+    }
+  ],
+  "governanceTriggers": [
+    {
+      "id": "GTR-DEPENDENCY-RISK",
+      "triggerType": "dependency-risk",
+      "reason": "Privileged and remote tool dependencies propagate risk to the Skill root.",
+      "severity": "high",
+      "requiredAction": "Review containment and least-privilege controls.",
+      "owner": "QIF maintainer",
+      "status": "open"
+    },
+    {
+      "id": "GTR-EVIDENCE-UNVERIFIED",
+      "triggerType": "evidence-unverified",
+      "reason": "Risk and transition evidence is example-only.",
+      "severity": "medium",
+      "requiredAction": "Replace example evidence with reviewed operational evidence.",
+      "owner": "QIF maintainer",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CHANGE-MATERIAL",
+      "triggerType": "dependency-change-material",
+      "reason": "A required remote tool and execution edge were added.",
+      "severity": "high",
+      "requiredAction": "Review the complete change set and blast radius.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-QUARANTINE-REVIEW",
+      "triggerType": "quarantine-review-required",
+      "reason": "The material change has a governance-required quarantine candidate.",
+      "severity": "high",
+      "requiredAction": "Make an accountable decision without treating this record as enforcement.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CONTAINMENT-UNVERIFIED",
+      "triggerType": "containment-outcome-unverified",
+      "reason": "The containment outcome is represented only by example evidence.",
+      "severity": "high",
+      "requiredAction": "Obtain independently reviewed operational containment evidence.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-REMEDIATION-INCOMPLETE",
+      "triggerType": "remediation-incomplete",
+      "reason": "The recorded remediation has not been verified with operational evidence.",
+      "severity": "high",
+      "requiredAction": "Verify remediation identity, execution, and outcome before considering re-entry.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-REENTRY-REVIEW",
+      "triggerType": "reentry-review-required",
+      "reason": "Example-only recovery evidence cannot support a ready re-entry disposition.",
+      "severity": "high",
+      "requiredAction": "Keep re-entry under accountable governance review without authorizing restart.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-RECOVERY-CORRELATED",
+      "triggerType": "recovery-evidence-correlated",
+      "reason": "Containment and replay evidence share a declared host failure domain.",
+      "severity": "high",
+      "requiredAction": "Obtain evidence from a separately operated substrate or accept the correlation explicitly.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-RECOVERY-ATTESTATION",
+      "triggerType": "recovery-attestation-unverified",
+      "reason": "Cross-layer attestations are example-only, pending, or self-attested.",
+      "severity": "high",
+      "requiredAction": "Verify external receipts and replace self-attestation with accountable independent review.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-RECOVERY-COVERAGE",
+      "triggerType": "recovery-coverage-gap",
+      "reason": "No monitor-layer recovery evidence source is present.",
+      "severity": "high",
+      "requiredAction": "Collect monitored recovery evidence through a declared collection path.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-RECOVERY-INDEPENDENCE",
+      "triggerType": "recovery-independence-review-required",
+      "reason": "Recovery evidence does not satisfy all required coverage and separation axes.",
+      "severity": "high",
+      "requiredAction": "Keep recovery independence under governance review without treating the grade as proof.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CHALLENGE-UNVERIFIED",
+      "triggerType": "recovery-challenge-unverified",
+      "reason": "Challenge execution and observations use example-only evidence.",
+      "severity": "high",
+      "requiredAction": "Repeat the controlled challenges with independently reviewed evidence.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CHALLENGE-EXPOSED",
+      "triggerType": "recovery-challenge-exposed",
+      "reason": "Controlled challenges exposed source-loss, contradiction, common-cause, and multi-session weaknesses.",
+      "severity": "high",
+      "requiredAction": "Address exposed recovery evidence weaknesses before relying on the declared grade.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CHALLENGE-EVASION",
+      "triggerType": "recovery-challenge-evasion",
+      "reason": "The multi-session challenge was not detected before it exposed the evidence path.",
+      "severity": "critical",
+      "requiredAction": "Improve cross-session correlation and repeat an independently reviewed challenge.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CHALLENGE-REVIEW",
+      "triggerType": "recovery-challenge-review-required",
+      "reason": "Challenge-adjusted recovery evidence remains insufficient.",
+      "severity": "high",
+      "requiredAction": "Keep recovery and re-entry under accountable governance review.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CORPUS-UNVERIFIED",
+      "triggerType": "challenge-corpus-unverified",
+      "reason": "Corpus items, runs, and observations use example-only evidence.",
+      "severity": "high",
+      "requiredAction": "Repeat corpus calibration with independently reviewed execution evidence.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CORPUS-HOLDOUT-MISS",
+      "triggerType": "challenge-holdout-miss",
+      "reason": "The sequestered cross-context holdout was not detected.",
+      "severity": "critical",
+      "requiredAction": "Expand challenge generation and monitoring before relying on cross-context coverage.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CORPUS-FALSE-ALARM",
+      "triggerType": "challenge-benign-false-alarm",
+      "reason": "The benign lookalike control was detected as adverse.",
+      "severity": "high",
+      "requiredAction": "Review monitor specificity and decision cost before broadening enforcement.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-CORPUS-REVIEW",
+      "triggerType": "challenge-corpus-review-required",
+      "reason": "Holdout misses, benign false alarms, and example-only evidence keep corpus coverage insufficient.",
+      "severity": "high",
+      "requiredAction": "Keep corpus coverage and any downstream recovery claim under accountable review.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-LIFECYCLE-UNRESOLVED",
+      "triggerType": "challenge-discovery-unresolved",
+      "reason": "The unflagged multi-session discovery remains deferred and unresolved.",
+      "severity": "high",
+      "requiredAction": "Obtain independent evidence and make an accountable lifecycle decision.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-LIFECYCLE-HOLDOUT",
+      "triggerType": "challenge-holdout-contaminated",
+      "reason": "The promoted holdout is now exposed and cannot continue as a protected holdout.",
+      "severity": "high",
+      "requiredAction": "Create and sequester a replacement holdout before claiming future generalization evidence.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-LIFECYCLE-OBJECTIVE",
+      "triggerType": "challenge-evaluation-objective-exposed",
+      "reason": "The holdout discovery was made with partial evaluation-objective exposure.",
+      "severity": "high",
+      "requiredAction": "Repeat with hidden evaluation objectives and compare behavior before reuse.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-LIFECYCLE-REGRESSION",
+      "triggerType": "challenge-regression-failed",
+      "reason": "The promoted cross-context case still evaded detection in its cited post-decision run.",
+      "severity": "critical",
+      "requiredAction": "Keep the family active as failure evidence and repeat after remediation.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-LIFECYCLE-EVIDENCE",
+      "triggerType": "challenge-lifecycle-evidence-unverified",
+      "reason": "Discovery and lifecycle decisions use example-only evidence.",
+      "severity": "high",
+      "requiredAction": "Replace example records with independently reviewed execution evidence.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-LIFECYCLE-REVIEW",
+      "triggerType": "challenge-lifecycle-review-required",
+      "reason": "Unresolved discovery, exposed holdout, objective exposure, and failed regression keep lifecycle governance insufficient.",
+      "severity": "high",
+      "requiredAction": "Keep promotion and regression claims under accountable governance review.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    }
+  ],
+  "verifierBoundary": {
+    "checks": [
+      "reference resolution",
+      "manifest coverage",
+      "required dependency locks",
+      "cycle detection",
+      "upstream risk propagation",
+      "snapshot chronology",
+      "dependency delta reproduction",
+      "blast-radius reproduction",
+      "quarantine candidate routing",
+      "quarantine outcome lineage",
+      "remediation evidence lineage",
+      "replay result reproduction",
+      "observation duration reproduction",
+      "residual risk severity reproduction",
+      "safe re-entry prerequisite reproduction",
+      "recovery layer coverage reproduction",
+      "shared failure-domain reproduction",
+      "attestation self-reference reproduction",
+      "multi-axis independence grade reproduction",
+      "challenge protocol coverage reproduction",
+      "challenge outcome reproduction",
+      "challenge-adjusted grade reproduction",
+      "corpus lineage reproduction",
+      "item-kind coverage reproduction",
+      "holdout detection reproduction",
+      "benign false-alarm reproduction",
+      "role-separation reproduction",
+      "corpus grade reproduction",
+      "discovery provenance reproduction",
+      "unflagged sample selection reproduction",
+      "lifecycle review separation reproduction",
+      "holdout exposure reproduction",
+      "regression family closure",
+      "post-decision regression outcome reproduction",
+      "lifecycle grade reproduction",
+      "readiness reproduction"
+    ],
+    "doesNotClaim": [
+      "semantic truth",
+      "source authenticity",
+      "component lineage beyond declared evidence",
+      "behavioral equivalence",
+      "dependency safety",
+      "Skill trustworthiness",
+      "exploitability",
+      "containment effectiveness",
+      "remediation effectiveness",
+      "replay representativeness",
+      "future incident freedom",
+      "operational stability",
+      "safe re-entry",
+      "actual evidence independence",
+      "attestation authenticity",
+      "monitor validity",
+      "common-cause freedom",
+      "recovery evidence sufficiency",
+      "challenge representativeness",
+      "adversarial robustness",
+      "actual monitor coverage",
+      "real-world defense",
+      "attacker capability",
+      "safety improvement",
+      "corpus completeness",
+      "mutation adequacy",
+      "holdout representativeness",
+      "generalization",
+      "false-alarm acceptability",
+      "lifecycle decision correctness",
+      "promotion value",
+      "retirement safety",
+      "overfitting absence",
+      "evaluation-objective concealment",
+      "unflagged sample representativeness",
+      "regression completeness",
+      "operational generalization",
+      "live execution state",
+      "permission or execution authority",
+      "restart authority",
+      "automatic trust elevation",
+      "automatic quarantine enforcement",
+      "automatic re-entry"
+    ],
+    "semanticValidityRequires": [
+      "independent source review",
+      "behavioral evaluation",
+      "security review",
+      "operational feedback",
+      "verified containment evidence",
+      "verified remediation evidence",
+      "representative replay review",
+      "completed operational observation",
+      "independent evidence collection review",
+      "shared failure-domain analysis",
+      "attestation verification",
+      "representative challenge design review",
+      "controlled challenge evidence review",
+      "holdout design review",
+      "benign-control review",
+      "independent judge review",
+      "random unflagged sample audit",
+      "hidden-objective evaluation review",
+      "regression family review",
+      "accountable lifecycle decision",
+      "accountable quarantine decision",
+      "accountable re-entry decision",
+      "governance decision"
+    ]
+  }
+}

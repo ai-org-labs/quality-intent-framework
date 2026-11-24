@@ -1,0 +1,37 @@
+{
+  "record_type": "need-validation-record",
+  "recorded_at": "2026-11-24T04:31:56.923Z",
+  "validation_id": "NVR-MWU7727V-5ZAI8X",
+  "raw_need": "Continue QIF with the next roadmap release using current AI trends.",
+  "validation_status": "reframed",
+  "validated_need": "Add a bounded, non-executing challenge-corpus lifecycle governance layer that records discovery provenance, promotion or rejection rationale, holdout contamination and evaluation-objective leakage, retained regression lineage, revision or retirement decisions, independent review, and fail-closed governance without treating corpus activity as quality or robustness.",
+  "decision_summary": "The raw continuation request was narrowed to the smallest capability gap exposed by v0.8.21 and current adaptive-evaluation practice.",
+  "authority_action": "approve-project-charter",
+  "project_creation_recommendation": "create-project",
+  "validation_questions_answered": [
+    {
+      "question": "What stays in scope?",
+      "answer": "Local skill-supply-chain corpus lifecycle records and deterministic verification only.",
+      "evidence_state": "sufficient"
+    },
+    {
+      "question": "What indicates success?",
+      "answer": "Reproducible lifecycle decisions and fail-closed handling of contamination, leakage, staleness, or missing independent review.",
+      "evidence_state": "sufficient"
+    }
+  ],
+  "hidden_assumptions": [
+    "More retained challenges automatically improve generalization."
+  ],
+  "evidence_gaps": [
+    "No operational corpus supplies empirical promotion outcomes; committed examples remain illustrative."
+  ],
+  "problem_statement_ref": ".aof/runtime/PST-QIFV0822.json",
+  "value_hypothesis_ref": ".aof/runtime/VHY-QIFV0822.json",
+  "alternative_analysis_ref": ".aof/runtime/ALT-QIFV0822.json",
+  "experiment_proposal_ref": null,
+  "project_charter_ref": null,
+  "discovery_handoff_ref": null,
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWU76AQ6-E57ROS"
+}

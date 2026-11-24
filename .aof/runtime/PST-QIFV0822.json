@@ -1,0 +1,15 @@
+{
+  "artifact_type": "problem-statement",
+  "recorded_at": "2026-11-24T04:31:46.342Z",
+  "problem_statement_id": "PST-MWU76U1Y-EXLE68",
+  "affected_party": "QIF maintainers, independent evaluators, and organizations relying on retained challenge corpora",
+  "actual_problem": "Newly discovered failures can be added, revised, or removed without a reproducible promotion decision, allowing visible-corpus overfitting, holdout contamination, and silent loss of regression evidence.",
+  "why_it_matters": "A growing test corpus can appear stronger while becoming less independent, less current, or easier to game.",
+  "why_now": "v0.8.21 made mutation and holdout performance visible; the next missing control is lifecycle governance for what the corpus retains and exposes.",
+  "evidence_refs": [
+    "docs/qif-v0.8.21-challenge-corpus-calibration.md",
+    "docs/qif-roadmap.md"
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWU76AQ6-E57ROS"
+}

@@ -1,0 +1,286 @@
+{
+  "artifact_type": "council-exec",
+  "generated_at": "2026-11-24T04:44:41.436Z",
+  "payload": {
+    "ok": true,
+    "sessionId": "SESS-MWU765PL-T29WTA",
+    "stage": "review",
+    "executionId": "CRUN-MWU7NG49-X3BADH",
+    "executionStatus": "prepared",
+    "invokedModel": false,
+    "seatCount": 2,
+    "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01)",
+    "lastCouncilExecutionId": "CRUN-MWU7NG49-X3BADH",
+    "escalation": null,
+    "plan": {
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "routing_status": "ready",
+      "seats": [
+        {
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWU765PL-T29WTA",
+              "decision_id": "DEC-MWU77CHK-OTHUOO",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はローカルのskill-supply-chain challenge corpusとそのgovernance記録。外部攻撃、実システム実行、provider統合、credential、モデル訓練、自動防御・昇格・退役・権限付与は対象外。",
+              "intent": "成功は、発見ケースのcandidateからretained/revised/retired/rejectedまでの判断、由来、独立レビュー、保留コーパス汚染、評価目的露出、未検出サンプル監査を再現でき、過適合または証拠不足をfail closedでgovernanceへ送れること。件数や率は品質ではない。",
+              "active_context": "context: 対象はローカルのskill-supply-chain challenge corpusとそのgovernance記録。外部攻撃、実システム実行、provider統合、credential、モデル訓練、自動防御・昇格・退役・権限付与は対象外。 | success: 成功は、発見ケースのcandidateからretained/revised/retired/rejectedまでの判断、由来、独立レビュー、保留コーパス汚染、評価目的露出、未検出サンプル監査を再現でき、過適合または証拠不足をfail closedでgovernanceへ送れること。件数や率は品質ではない。",
+              "context_snapshot_id": "CTX-MWU76AQ3-2H6HSS",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はローカルのskill-supply-chain challenge corpusとそのgovernance記録。外部攻撃、実システム実行、provider統合、credential、モデル訓練、自動防御・昇格・退役・権限付与は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、発見ケースのcandidateからretained/revised/retired/rejectedまでの判断、由来、独立レビュー、保留コーパス汚染、評価目的露出、未検出サンプル監査を再現でき、過適合または証拠不足をfail closedでgovernanceへ送れること。件数や率は品質ではない。"
+            },
+            "task": {
+              "request": "QIF v0.8.22として、v0.8.21で発見された新規失敗を回帰コーパスへ昇格・改訂・退役する判断を追跡可能にし、可視コーパスへの過適合、評価目的認識、未検出領域の監査漏れを統治する。固定件数や成功率を品質・一般化・実運用安全性の証明にせず、昇格判断、保持理由、隔離境界、退役根拠、独立レビューを再現可能にする。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0822.json",
+                "/private/tmp/qif-v0822-1124/.aof/runtime/PCH-QIFV0822.json",
+                ".aof/runtime/PST-QIFV0822.json",
+                ".aof/runtime/VHY-QIFV0822.json",
+                ".aof/runtime/ALT-QIFV0822.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWU77CHK-OTHUOO"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWU765PL-T29WTA",
+              "decision_id": "DEC-MWU77CHK-OTHUOO",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はローカルのskill-supply-chain challenge corpusとそのgovernance記録。外部攻撃、実システム実行、provider統合、credential、モデル訓練、自動防御・昇格・退役・権限付与は対象外。",
+              "intent": "成功は、発見ケースのcandidateからretained/revised/retired/rejectedまでの判断、由来、独立レビュー、保留コーパス汚染、評価目的露出、未検出サンプル監査を再現でき、過適合または証拠不足をfail closedでgovernanceへ送れること。件数や率は品質ではない。",
+              "active_context": "context: 対象はローカルのskill-supply-chain challenge corpusとそのgovernance記録。外部攻撃、実システム実行、provider統合、credential、モデル訓練、自動防御・昇格・退役・権限付与は対象外。 | success: 成功は、発見ケースのcandidateからretained/revised/retired/rejectedまでの判断、由来、独立レビュー、保留コーパス汚染、評価目的露出、未検出サンプル監査を再現でき、過適合または証拠不足をfail closedでgovernanceへ送れること。件数や率は品質ではない。",
+              "context_snapshot_id": "CTX-MWU76AQ3-2H6HSS",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はローカルのskill-supply-chain challenge corpusとそのgovernance記録。外部攻撃、実システム実行、provider統合、credential、モデル訓練、自動防御・昇格・退役・権限付与は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、発見ケースのcandidateからretained/revised/retired/rejectedまでの判断、由来、独立レビュー、保留コーパス汚染、評価目的露出、未検出サンプル監査を再現でき、過適合または証拠不足をfail closedでgovernanceへ送れること。件数や率は品質ではない。"
+            },
+            "task": {
+              "request": "QIF v0.8.22として、v0.8.21で発見された新規失敗を回帰コーパスへ昇格・改訂・退役する判断を追跡可能にし、可視コーパスへの過適合、評価目的認識、未検出領域の監査漏れを統治する。固定件数や成功率を品質・一般化・実運用安全性の証明にせず、昇格判断、保持理由、隔離境界、退役根拠、独立レビューを再現可能にする。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0822.json",
+                "/private/tmp/qif-v0822-1124/.aof/runtime/PCH-QIFV0822.json",
+                ".aof/runtime/PST-QIFV0822.json",
+                ".aof/runtime/VHY-QIFV0822.json",
+                ".aof/runtime/ALT-QIFV0822.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWU77CHK-OTHUOO"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "execution_id": "CRUN-MWU7NG49-X3BADH",
+      "stage": "review",
+      "routing_mode": "deep-path",
+      "routing_status": "ready",
+      "required_roles": [
+        "Guardian",
+        "Builder"
+      ],
+      "unresolved_roles": [],
+      "execution_model": "single-instance-role-switching",
+      "primary_role": "Guardian",
+      "approval_mode": "review-with-veto",
+      "status": "prepared",
+      "started_at": "2026-11-24T04:44:41.432Z",
+      "completed_at": "2026-11-24T04:44:41.432Z",
+      "summary": "prototype council execution prepared 2 routed seat calls in single-instance-role-switching: Guardian(risk-reviewer-01) -> Builder(design-builder-01)",
+      "steps": [
+        {
+          "step_id": "CRUN-MWU7NG49-X3BADH-STEP-01",
+          "role": "Guardian",
+          "actor_ref": "risk-reviewer-01",
+          "participation_mode": "primary",
+          "lane": "primary",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Guardian review call for actor risk-reviewer-01 as primary",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWU765PL-T29WTA",
+              "decision_id": "DEC-MWU77CHK-OTHUOO",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "risk-reviewer-01",
+              "actor_kind": "ai",
+              "active_role": "Guardian",
+              "capabilities": [
+                "safety-review",
+                "compliance-review"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はローカルのskill-supply-chain challenge corpusとそのgovernance記録。外部攻撃、実システム実行、provider統合、credential、モデル訓練、自動防御・昇格・退役・権限付与は対象外。",
+              "intent": "成功は、発見ケースのcandidateからretained/revised/retired/rejectedまでの判断、由来、独立レビュー、保留コーパス汚染、評価目的露出、未検出サンプル監査を再現でき、過適合または証拠不足をfail closedでgovernanceへ送れること。件数や率は品質ではない。",
+              "active_context": "context: 対象はローカルのskill-supply-chain challenge corpusとそのgovernance記録。外部攻撃、実システム実行、provider統合、credential、モデル訓練、自動防御・昇格・退役・権限付与は対象外。 | success: 成功は、発見ケースのcandidateからretained/revised/retired/rejectedまでの判断、由来、独立レビュー、保留コーパス汚染、評価目的露出、未検出サンプル監査を再現でき、過適合または証拠不足をfail closedでgovernanceへ送れること。件数や率は品質ではない。",
+              "context_snapshot_id": "CTX-MWU76AQ3-2H6HSS",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はローカルのskill-supply-chain challenge corpusとそのgovernance記録。外部攻撃、実システム実行、provider統合、credential、モデル訓練、自動防御・昇格・退役・権限付与は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、発見ケースのcandidateからretained/revised/retired/rejectedまでの判断、由来、独立レビュー、保留コーパス汚染、評価目的露出、未検出サンプル監査を再現でき、過適合または証拠不足をfail closedでgovernanceへ送れること。件数や率は品質ではない。"
+            },
+            "task": {
+              "request": "QIF v0.8.22として、v0.8.21で発見された新規失敗を回帰コーパスへ昇格・改訂・退役する判断を追跡可能にし、可視コーパスへの過適合、評価目的認識、未検出領域の監査漏れを統治する。固定件数や成功率を品質・一般化・実運用安全性の証明にせず、昇格判断、保持理由、隔離境界、退役根拠、独立レビューを再現可能にする。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0822.json",
+                "/private/tmp/qif-v0822-1124/.aof/runtime/PCH-QIFV0822.json",
+                ".aof/runtime/PST-QIFV0822.json",
+                ".aof/runtime/VHY-QIFV0822.json",
+                ".aof/runtime/ALT-QIFV0822.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWU77CHK-OTHUOO"
+              ],
+              "relevant_signals": []
+            }
+          }
+        },
+        {
+          "step_id": "CRUN-MWU7NG49-X3BADH-STEP-02",
+          "role": "Builder",
+          "actor_ref": "design-builder-01",
+          "participation_mode": "required",
+          "lane": "follow-up",
+          "call_purpose": "generate-review",
+          "status": "prepared",
+          "summary": "prepare Builder review call for actor design-builder-01 as required",
+          "packet": {
+            "metadata": {
+              "session_id": "SESS-MWU765PL-T29WTA",
+              "decision_id": "DEC-MWU77CHK-OTHUOO",
+              "stage": "review",
+              "call_purpose": "generate-review"
+            },
+            "actor": {
+              "actor_id": "design-builder-01",
+              "actor_kind": "ai",
+              "active_role": "Builder",
+              "capabilities": [
+                "concept-design",
+                "delivery-planning"
+              ],
+              "policy_profile": "default-generic-policy"
+            },
+            "governance": {
+              "governance_model": "council-of-three",
+              "governance_scope": "concept-approval",
+              "routing_mode": "deep-path",
+              "decision_rule": "majority-with-guardian-veto",
+              "veto_rule": "Guardian"
+            },
+            "context": {
+              "need": "対象はローカルのskill-supply-chain challenge corpusとそのgovernance記録。外部攻撃、実システム実行、provider統合、credential、モデル訓練、自動防御・昇格・退役・権限付与は対象外。",
+              "intent": "成功は、発見ケースのcandidateからretained/revised/retired/rejectedまでの判断、由来、独立レビュー、保留コーパス汚染、評価目的露出、未検出サンプル監査を再現でき、過適合または証拠不足をfail closedでgovernanceへ送れること。件数や率は品質ではない。",
+              "active_context": "context: 対象はローカルのskill-supply-chain challenge corpusとそのgovernance記録。外部攻撃、実システム実行、provider統合、credential、モデル訓練、自動防御・昇格・退役・権限付与は対象外。 | success: 成功は、発見ケースのcandidateからretained/revised/retired/rejectedまでの判断、由来、独立レビュー、保留コーパス汚染、評価目的露出、未検出サンプル監査を再現でき、過適合または証拠不足をfail closedでgovernanceへ送れること。件数や率は品質ではない。",
+              "context_snapshot_id": "CTX-MWU76AQ3-2H6HSS",
+              "clarifications_or_assumptions": "Which service touchpoint or environment should this redesign cover, and what should stay out of scope? => 対象はローカルのskill-supply-chain challenge corpusとそのgovernance記録。外部攻撃、実システム実行、provider統合、credential、モデル訓練、自動防御・昇格・退役・権限付与は対象外。 / How should improvement success be judged: which metric or end state matters most? => 成功は、発見ケースのcandidateからretained/revised/retired/rejectedまでの判断、由来、独立レビュー、保留コーパス汚染、評価目的露出、未検出サンプル監査を再現でき、過適合または証拠不足をfail closedでgovernanceへ送れること。件数や率は品質ではない。"
+            },
+            "task": {
+              "request": "QIF v0.8.22として、v0.8.21で発見された新規失敗を回帰コーパスへ昇格・改訂・退役する判断を追跡可能にし、可視コーパスへの過適合、評価目的認識、未検出領域の監査漏れを統治する。固定件数や成功率を品質・一般化・実運用安全性の証明にせず、昇格判断、保持理由、隔離境界、退役根拠、独立レビューを再現可能にする。",
+              "current_goal": "evaluate proposal quality, safety, and failure modes",
+              "expected_output_kind": "review"
+            },
+            "evidence": {
+              "relevant_artifacts": [
+                ".aof/runtime/NVR-QIFV0822.json",
+                "/private/tmp/qif-v0822-1124/.aof/runtime/PCH-QIFV0822.json",
+                ".aof/runtime/PST-QIFV0822.json",
+                ".aof/runtime/VHY-QIFV0822.json",
+                ".aof/runtime/ALT-QIFV0822.json"
+              ],
+              "relevant_decisions": [
+                "DEC-MWU77CHK-OTHUOO"
+              ],
+              "relevant_signals": []
+            }
+          }
+        }
+      ]
+    },
+    "projectMemory": {
+      "confirmationResult": null
+    }
+  }
+}

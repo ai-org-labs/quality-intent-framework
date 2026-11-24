@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.8.22
+
+- Added first-class recovery challenge discoveries, lifecycle decisions,
+  regression families, and lifecycle assessments.
+- Added deterministic discovery provenance, pre-outcome unflagged sampling,
+  independent review, holdout exposure, evaluation-objective exposure,
+  post-decision regression, grade, status, and governance reproduction.
+- Added retained negative fixtures and explicit boundaries from lifecycle
+  correctness, promotion value, retirement safety, overfitting absence,
+  objective concealment, sample representativeness, regression completeness,
+  operational generalization, robustness, and safety.
+
 ## v0.8.21
 
 - Added traceable seed, mutant, sequestered holdout, and benign-control items

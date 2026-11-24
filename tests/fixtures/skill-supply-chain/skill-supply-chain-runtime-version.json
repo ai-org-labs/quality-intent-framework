@@ -1,6 +1,6 @@
 {
   "packageType": "skill-supply-chain",
-  "runtimeVersion": "0.8.21",
+  "runtimeVersion": "0.8.22",
   "packageId": "SSCP-QIF-001",
   "skillArtifacts": [
     {
@@ -51,7 +51,7 @@
       "id": "DPN-QIF-SKILL",
       "nodeType": "skill",
       "name": "quality-intent-framework",
-      "version": "0.8.21",
+      "version": "0.8.22",
       "locator": ".agents/skills/quality-intent-framework",
       "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
       "provider": "ai-org-labs",
@@ -177,7 +177,7 @@
       "id": "LCK-QIF-SKILL",
       "manifestRef": "DPM-QIF-001",
       "nodeRef": "DPN-QIF-SKILL",
-      "lockedVersion": "0.8.21",
+      "lockedVersion": "0.8.22",
       "lockedDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
       "resolutionSource": "local-release",
       "verified": true,
@@ -1674,6 +1674,243 @@
       "status": "governance-required"
     }
   ],
+  "recoveryChallengeDiscoveries": [
+    {
+      "id": "RCD-QIF-HOLDOUT-MISS",
+      "protocolRef": "RCP-QIF-001",
+      "calibrationRef": "RCC-QIF-001",
+      "sourceRunRefs": [
+        "RCR-QIF-HOLDOUT"
+      ],
+      "sourceItemRefs": [
+        "RCI-QIF-HOLDOUT-COMPOSE"
+      ],
+      "discoveryType": "missed-threat",
+      "flagStateAtSelection": "flagged",
+      "selectedBeforeOutcome": true,
+      "evaluationObjectiveExposure": "partially-exposed",
+      "noveltyState": "new-variant",
+      "proposedItemRef": "RCI-QIF-HOLDOUT-COMPOSE",
+      "discoveredByRoleRef": "qif-challenger",
+      "evidenceRefs": [
+        "example:holdout-miss-discovery"
+      ],
+      "evidenceStatus": "example-only",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCD-QIF-BENIGN-FALSE-ALARM",
+      "protocolRef": "RCP-QIF-001",
+      "calibrationRef": "RCC-QIF-001",
+      "sourceRunRefs": [
+        "RCR-QIF-BENIGN"
+      ],
+      "sourceItemRefs": [
+        "RCI-QIF-BENIGN-LOOKALIKE"
+      ],
+      "discoveryType": "false-alarm",
+      "flagStateAtSelection": "flagged",
+      "selectedBeforeOutcome": true,
+      "evaluationObjectiveExposure": "hidden",
+      "noveltyState": "known-family",
+      "proposedItemRef": "RCI-QIF-BENIGN-LOOKALIKE",
+      "discoveredByRoleRef": "qif-independent-judge",
+      "evidenceRefs": [
+        "example:benign-false-alarm-discovery"
+      ],
+      "evidenceStatus": "example-only",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCD-QIF-UNFLAGGED-MULTI",
+      "protocolRef": "RCP-QIF-001",
+      "calibrationRef": "RCC-QIF-001",
+      "sourceRunRefs": [
+        "RCR-QIF-MULTI"
+      ],
+      "sourceItemRefs": [
+        "RCI-QIF-SEED-MULTI"
+      ],
+      "discoveryType": "unflagged-sample",
+      "flagStateAtSelection": "unflagged",
+      "selectedBeforeOutcome": true,
+      "evaluationObjectiveExposure": "hidden",
+      "noveltyState": "unresolved",
+      "proposedItemRef": "RCI-QIF-SEED-MULTI",
+      "discoveredByRoleRef": "qif-audit-sampler",
+      "evidenceRefs": [
+        "example:preselected-unflagged-sample"
+      ],
+      "evidenceStatus": "example-only",
+      "actualExternalEffect": false,
+      "status": "governance-required"
+    }
+  ],
+  "recoveryChallengeLifecycleDecisions": [
+    {
+      "id": "RCLD-QIF-HOLDOUT-PROMOTE",
+      "discoveryRefs": [
+        "RCD-QIF-HOLDOUT-MISS"
+      ],
+      "corpusItemRef": "RCI-QIF-HOLDOUT-COMPOSE",
+      "decision": "promote",
+      "regressionFamilyRef": "RCRF-QIF-THREAT",
+      "decisionRationale": "Retain the missed cross-context composition as a visible regression case while treating the original holdout as exposed.",
+      "decidedByRoleRef": "qif-lifecycle-owner",
+      "reviewedByRoleRefs": [
+        "qif-independent-judge"
+      ],
+      "independentReview": true,
+      "holdoutExposureState": "exposed",
+      "evaluationObjectiveExposure": "partially-exposed",
+      "postDecisionRunRefs": [
+        "RCR-QIF-HOLDOUT"
+      ],
+      "evidenceRefs": [
+        "example:holdout-promotion-review"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticAction": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCLD-QIF-BENIGN-RETAIN",
+      "discoveryRefs": [
+        "RCD-QIF-BENIGN-FALSE-ALARM"
+      ],
+      "corpusItemRef": "RCI-QIF-BENIGN-LOOKALIKE",
+      "decision": "retain",
+      "regressionFamilyRef": "RCRF-QIF-BENIGN",
+      "decisionRationale": "Retain the benign lookalike to expose specificity regressions and decision cost.",
+      "decidedByRoleRef": "qif-lifecycle-owner",
+      "reviewedByRoleRefs": [
+        "qif-independent-judge"
+      ],
+      "independentReview": true,
+      "holdoutExposureState": "not-applicable",
+      "evaluationObjectiveExposure": "hidden",
+      "postDecisionRunRefs": [
+        "RCR-QIF-BENIGN"
+      ],
+      "evidenceRefs": [
+        "example:benign-retention-review"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticAction": false,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCLD-QIF-MULTI-DEFER",
+      "discoveryRefs": [
+        "RCD-QIF-UNFLAGGED-MULTI"
+      ],
+      "corpusItemRef": "RCI-QIF-SEED-MULTI",
+      "decision": "defer",
+      "decisionRationale": "Keep the randomly selected unflagged miss unresolved until independently verified evidence distinguishes a known case from a new family.",
+      "decidedByRoleRef": "qif-lifecycle-owner",
+      "reviewedByRoleRefs": [
+        "qif-independent-judge"
+      ],
+      "independentReview": true,
+      "holdoutExposureState": "not-applicable",
+      "evaluationObjectiveExposure": "hidden",
+      "postDecisionRunRefs": [],
+      "evidenceRefs": [
+        "example:unflagged-sample-defer-review"
+      ],
+      "evidenceStatus": "example-only",
+      "automaticAction": false,
+      "status": "governance-required"
+    }
+  ],
+  "recoveryChallengeRegressionFamilies": [
+    {
+      "id": "RCRF-QIF-THREAT",
+      "protocolRef": "RCP-QIF-001",
+      "rootItemRef": "RCI-QIF-HOLDOUT-COMPOSE",
+      "activeItemRefs": [
+        "RCI-QIF-HOLDOUT-COMPOSE"
+      ],
+      "retiredItemRefs": [],
+      "decisionRefs": [
+        "RCLD-QIF-HOLDOUT-PROMOTE"
+      ],
+      "protectedHoldoutItemRefs": [],
+      "familyPurpose": "Preserve cross-context composition failures as visible regression evidence after holdout exposure.",
+      "revision": 1,
+      "status": "governance-required"
+    },
+    {
+      "id": "RCRF-QIF-BENIGN",
+      "protocolRef": "RCP-QIF-001",
+      "rootItemRef": "RCI-QIF-BENIGN-LOOKALIKE",
+      "activeItemRefs": [
+        "RCI-QIF-BENIGN-LOOKALIKE"
+      ],
+      "retiredItemRefs": [],
+      "decisionRefs": [
+        "RCLD-QIF-BENIGN-RETAIN"
+      ],
+      "protectedHoldoutItemRefs": [],
+      "familyPurpose": "Preserve benign lookalikes that reveal false alarms and specificity regressions.",
+      "revision": 1,
+      "status": "governance-required"
+    }
+  ],
+  "recoveryChallengeLifecycleAssessments": [
+    {
+      "id": "RCLA-QIF-001",
+      "protocolRef": "RCP-QIF-001",
+      "calibrationRef": "RCC-QIF-001",
+      "discoveryRefs": [
+        "RCD-QIF-HOLDOUT-MISS",
+        "RCD-QIF-BENIGN-FALSE-ALARM",
+        "RCD-QIF-UNFLAGGED-MULTI"
+      ],
+      "decisionRefs": [
+        "RCLD-QIF-HOLDOUT-PROMOTE",
+        "RCLD-QIF-BENIGN-RETAIN",
+        "RCLD-QIF-MULTI-DEFER"
+      ],
+      "regressionFamilyRefs": [
+        "RCRF-QIF-THREAT",
+        "RCRF-QIF-BENIGN"
+      ],
+      "unflaggedSampleDiscoveryRefs": [
+        "RCD-QIF-UNFLAGGED-MULTI"
+      ],
+      "unresolvedDiscoveryRefs": [
+        "RCD-QIF-UNFLAGGED-MULTI"
+      ],
+      "contaminatedHoldoutItemRefs": [
+        "RCI-QIF-HOLDOUT-COMPOSE"
+      ],
+      "objectiveExposedDiscoveryRefs": [
+        "RCD-QIF-HOLDOUT-MISS"
+      ],
+      "unreviewedDecisionRefs": [],
+      "failedRegressionDecisionRefs": [
+        "RCLD-QIF-HOLDOUT-PROMOTE"
+      ],
+      "lifecycleGrade": "insufficient",
+      "governanceTriggerRefs": [
+        "GTR-LIFECYCLE-UNRESOLVED",
+        "GTR-LIFECYCLE-HOLDOUT",
+        "GTR-LIFECYCLE-OBJECTIVE",
+        "GTR-LIFECYCLE-REGRESSION",
+        "GTR-LIFECYCLE-EVIDENCE",
+        "GTR-LIFECYCLE-REVIEW"
+      ],
+      "discoveryCountIsQuality": false,
+      "promotionRateIsQuality": false,
+      "familySizeIsQuality": false,
+      "generalizationProven": false,
+      "operationalSafetyProven": false,
+      "status": "governance-required"
+    }
+  ],
   "governanceTriggers": [
     {
       "id": "GTR-DEPENDENCY-RISK",
@@ -1845,6 +2082,60 @@
       "requiredAction": "Keep corpus coverage and any downstream recovery claim under accountable review.",
       "owner": "qif-supply-chain-governance-owner",
       "status": "open"
+    },
+    {
+      "id": "GTR-LIFECYCLE-UNRESOLVED",
+      "triggerType": "challenge-discovery-unresolved",
+      "reason": "The unflagged multi-session discovery remains deferred and unresolved.",
+      "severity": "high",
+      "requiredAction": "Obtain independent evidence and make an accountable lifecycle decision.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-LIFECYCLE-HOLDOUT",
+      "triggerType": "challenge-holdout-contaminated",
+      "reason": "The promoted holdout is now exposed and cannot continue as a protected holdout.",
+      "severity": "high",
+      "requiredAction": "Create and sequester a replacement holdout before claiming future generalization evidence.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-LIFECYCLE-OBJECTIVE",
+      "triggerType": "challenge-evaluation-objective-exposed",
+      "reason": "The holdout discovery was made with partial evaluation-objective exposure.",
+      "severity": "high",
+      "requiredAction": "Repeat with hidden evaluation objectives and compare behavior before reuse.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-LIFECYCLE-REGRESSION",
+      "triggerType": "challenge-regression-failed",
+      "reason": "The promoted cross-context case still evaded detection in its cited post-decision run.",
+      "severity": "critical",
+      "requiredAction": "Keep the family active as failure evidence and repeat after remediation.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-LIFECYCLE-EVIDENCE",
+      "triggerType": "challenge-lifecycle-evidence-unverified",
+      "reason": "Discovery and lifecycle decisions use example-only evidence.",
+      "severity": "high",
+      "requiredAction": "Replace example records with independently reviewed execution evidence.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
+    },
+    {
+      "id": "GTR-LIFECYCLE-REVIEW",
+      "triggerType": "challenge-lifecycle-review-required",
+      "reason": "Unresolved discovery, exposed holdout, objective exposure, and failed regression keep lifecycle governance insufficient.",
+      "severity": "high",
+      "requiredAction": "Keep promotion and regression claims under accountable governance review.",
+      "owner": "qif-supply-chain-governance-owner",
+      "status": "open"
     }
   ],
   "verifierBoundary": {
@@ -1877,6 +2168,13 @@
       "benign false-alarm reproduction",
       "role-separation reproduction",
       "corpus grade reproduction",
+      "discovery provenance reproduction",
+      "unflagged sample selection reproduction",
+      "lifecycle review separation reproduction",
+      "holdout exposure reproduction",
+      "regression family closure",
+      "post-decision regression outcome reproduction",
+      "lifecycle grade reproduction",
       "readiness reproduction"
     ],
     "doesNotClaim": [
@@ -1909,6 +2207,14 @@
       "holdout representativeness",
       "generalization",
       "false-alarm acceptability",
+      "lifecycle decision correctness",
+      "promotion value",
+      "retirement safety",
+      "overfitting absence",
+      "evaluation-objective concealment",
+      "unflagged sample representativeness",
+      "regression completeness",
+      "operational generalization",
       "live execution state",
       "permission or execution authority",
       "restart authority",
@@ -1933,6 +2239,10 @@
       "holdout design review",
       "benign-control review",
       "independent judge review",
+      "random unflagged sample audit",
+      "hidden-objective evaluation review",
+      "regression family review",
+      "accountable lifecycle decision",
       "accountable quarantine decision",
       "accountable re-entry decision",
       "governance decision"

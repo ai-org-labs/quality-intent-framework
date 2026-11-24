@@ -6062,3 +6062,61 @@ Date: 2026-10-25
   rates, and grades are evidence only. They do not prove completeness,
   mutation adequacy, holdout representativeness, generalization, acceptable
   false-alarm cost, adversarial robustness, operational safety, or authority.
+
+## 2026-11-24 - QIF v0.8.22 Adaptive Challenge Promotion and Regression Governance
+
+- Runtime: AOF v12.2.0, session `SESS-MWU765PL-T29WTA`; initial decision
+  `DEC-MWU765PN-1VGG93`; context decision `DEC-MWU76AQ6-E57ROS`; context
+  snapshot `CTX-MWU76AQ3-2H6HSS`; planning decision
+  `DEC-MWU77CHK-OTHUOO`.
+- Need framing artifacts: problem `PST-MWU76U1Y-EXLE68`; value hypothesis
+  `VHY-MWU76U1Y-C0I0FF`; alternatives `ALT-MWU76U1Y-S0ZO38`; Validated Need
+  `NVR-MWU7727V-5ZAI8X`; Project Charter `PCH-MWU778TS-8C3JMA`; actor skill
+  packet `ASP-MWU77ZCJ-K35FC4`.
+- Planning council `CRUN-MWU77FYZ-8L7YQC` routed Visionary, Builder, and
+  Guardian. Review council `CRUN-MWU7NG49-X3BADH` routed Guardian and Builder.
+  Mock-provider council output is routing and review evidence, not independent
+  semantic approval.
+- Decision: extend the existing `skill-supply-chain` package with Recovery
+  Challenge Discovery, Lifecycle Decision, Regression Family, and Lifecycle
+  Assessment. Keep external attacks, real-system execution, provider
+  integration, credentials, model training, automatic defense, automatic
+  promotion or retirement, and authority outside this release.
+- Trend evidence reviewed: Microsoft CART on closed-loop adaptive red teaming
+  and separated challenger, target, and judge roles
+  (<https://www.microsoft.com/en-us/research/publication/cart-closed-loop-adaptive-red-teaming-for-large-language-models/>);
+  OpenAI on random audits of unflagged traffic and unfamiliar monitor failures
+  (<https://openai.com/index/how-we-detect-frontier-model-misalignment/>),
+  evaluation-objective awareness and the evaluation-to-production behavior gap
+  (<https://openai.com/safety-alignment/eval-production-behavior-gap/>), and
+  adaptive repeated robustness evaluation
+  (<https://openai.com/safety-alignment/fuzzy-robustness/>); NIST agent
+  security and incident-readiness guidance; and Microsoft multi-agent red
+  teaming. The resulting design is an inference: lifecycle governance must
+  preserve selection timing, objective exposure, holdout exposure, independent
+  review, and post-decision regression evidence.
+- Implementation evidence: `schemas/skill-supply-chain-package.schema.json`,
+  `examples/skill-supply-chain-package.json`,
+  `tools/validate-skill-supply-chain.mjs`, 198 retained package fixtures,
+  `docs/qif-v0.8.22-adaptive-challenge-governance.md`, updated Agent Skill,
+  and updated portable package.
+- Verification: `npm test` passed; 18/18 positive fixture packages and
+  1786/1786 negative fixtures passed; Agent Skill v0.8.22 and portable
+  v0.8.22 built, verified, and passed mutation rejection; Agent Skill
+  `quick_validate.py` passed; AOF `organization-verify` passed 295/295 checks.
+- AOF `release-state-audit` remained incomplete because no active AOF release
+  manifest exists and historical tasks from TASK-071 lack later-required
+  ArchMap impact, council review provenance, and independent evidence records.
+  This is a managed-project governance migration gap, not a QIF v0.8.22
+  product-test failure; no AOF release-state sign-off is claimed.
+- Self-review `FSA-QIF-V0822` recorded that all committed lifecycle evidence is
+  still example-only and deployment-context transfer is not yet governed.
+  Outcome `OUT-MWU7WRNM-PE7WCJ` recorded success; `TASK-096` is done; the next
+  value slice is v0.8.23 Deployment-Linked Challenge Drift and Refresh
+  Governance.
+- Boundary: discovery counts, promotion rates, family sizes, and regression
+  pass rates are evidence only. Structural verification does not prove
+  lifecycle decision correctness, promotion value, retirement safety,
+  overfitting absence, evaluation-objective concealment, unflagged-sample
+  representativeness, regression completeness, operational generalization,
+  robustness, safety, or authority.

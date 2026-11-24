@@ -1,9 +1,9 @@
 {
   "goal_type": "operating-goal",
-  "content": "Extend the existing skill-supply-chain recovery challenge model with a controlled, non-executing corpus calibration layer that preserves seed and mutation lineage, separates holdout and benign controls, reproduces misses and false alarms, checks Challenger/Judge role separation, and routes insufficient or unverified coverage to governance without claiming quality, safety, or operational defense.",
-  "updated_at": "2026-11-23T04:28:33.885Z",
+  "content": "Add a bounded, non-executing challenge-corpus lifecycle governance layer that records discovery provenance, promotion or rejection rationale, holdout contamination and evaluation-objective leakage, retained regression lineage, revision or retirement decisions, independent review, and fail-closed governance without treating corpus activity as quality or robustness.",
+  "updated_at": "2026-11-24T04:32:10.234Z",
   "agreed_with_human": true,
-  "source_session_id": "SESS-MWSRLJJE-AVVEUS",
-  "source_decision_record_id": "DEC-MWSRMUVV-DZNRIP",
+  "source_session_id": "SESS-MWU765PL-T29WTA",
+  "source_decision_record_id": "DEC-MWU77CHK-OTHUOO",
   "declared_complete_at": null
 }

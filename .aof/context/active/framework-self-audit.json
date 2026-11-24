@@ -1,14 +1,14 @@
 {
   "audit_type": "framework-self-audit",
-  "recorded_at": "2026-11-21T04:42:25.176Z",
-  "audit_id": "FSA-QIF-V0819",
-  "scope": "QIF v0.8.19 recovery evidence independence release review",
-  "summary": "Schemas, examples, verifier rules, portable and Agent Skill builds, and 1696 retained negative checks pass; review council proceeded without Guardian veto.",
-  "detected_gap": "Declared independence can still be gamed or remain wrong until source loss, tamper, contradiction, and common-cause challenges are executed.",
+  "recorded_at": "2026-11-24T04:51:43.339Z",
+  "audit_id": "FSA-QIF-V0822",
+  "scope": "QIF v0.8.22 adaptive challenge lifecycle implementation and release review",
+  "summary": "Four lifecycle entities, fail-closed governance, 198 skill-supply-chain negative fixtures, and portable artifacts are structurally verified",
+  "detected_gap": "Committed evidence remains example-only and deployment-context transfer is not yet governed",
   "result_state": "stable",
-  "next_action": "Implement v0.8.20 Recovery Evidence Challenge and Adversarial Validation.",
+  "next_action": "Implement v0.8.23 deployment-linked challenge drift and refresh governance",
   "related_task_ids": [
-    "TASK-093"
+    "TASK-096"
   ],
   "source_session_id": null,
   "source_decision_record_id": null

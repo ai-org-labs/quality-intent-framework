@@ -1203,6 +1203,251 @@
       "errorIncludes": "must explicitly not claim generalization"
     },
     {
+      "file": "skill-supply-chain-discoveries-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "challenge discoveries required",
+      "expect": "fail",
+      "errorIncludes": "package recoveryChallengeDiscoveries must be an array."
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-decisions-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lifecycle decisions required",
+      "expect": "fail",
+      "errorIncludes": "package recoveryChallengeLifecycleDecisions must be an array."
+    },
+    {
+      "file": "skill-supply-chain-regression-families-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "regression families required",
+      "expect": "fail",
+      "errorIncludes": "package recoveryChallengeRegressionFamilies must be an array."
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-assessments-array.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lifecycle assessments required",
+      "expect": "fail",
+      "errorIncludes": "package recoveryChallengeLifecycleAssessments must be an array."
+    },
+    {
+      "file": "skill-supply-chain-discovery-calibration.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "discovery calibration resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery challenge corpus calibration"
+    },
+    {
+      "file": "skill-supply-chain-discovery-source-closure.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "discovery source closure",
+      "expect": "fail",
+      "errorIncludes": "sourceItemRefs must reproduce source-run corpus items"
+    },
+    {
+      "file": "skill-supply-chain-discovery-unflagged-selection.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "unflagged sample selection",
+      "expect": "fail",
+      "errorIncludes": "unflagged sample must be selected before outcome"
+    },
+    {
+      "file": "skill-supply-chain-discovery-objective-exposure.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "evaluation objective exposure",
+      "expect": "fail",
+      "errorIncludes": "evaluation-objective leakage must record objective exposure"
+    },
+    {
+      "file": "skill-supply-chain-discovery-effect-boundary.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "discovery external effect boundary",
+      "expect": "fail",
+      "errorIncludes": "must remain a recorded discovery without external effect"
+    },
+    {
+      "file": "skill-supply-chain-discovery-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "discovery readiness",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce discovery evidence"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-discovery.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lifecycle discovery resolution",
+      "expect": "fail",
+      "errorIncludes": "references missing recovery challenge discovery"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-item-alignment.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lifecycle item alignment",
+      "expect": "fail",
+      "errorIncludes": "corpus item must match each source discovery"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-review-separation.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "independent lifecycle review",
+      "expect": "fail",
+      "errorIncludes": "independentReview must reproduce decider and reviewer separation"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-family-required.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "active lifecycle family",
+      "expect": "fail",
+      "errorIncludes": "active lifecycle decision requires a regression family"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-run-required.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "post-decision validation",
+      "expect": "fail",
+      "errorIncludes": "active lifecycle decision requires post-decision challenge runs"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-revise-result.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "revision lineage",
+      "expect": "fail",
+      "errorIncludes": "revise decision requires a different resulting corpus item"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-run-item.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "post-decision item alignment",
+      "expect": "fail",
+      "errorIncludes": "post-decision runs must exercise the decided corpus item"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lifecycle readiness",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce lifecycle evidence"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-auto-boundary.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "automatic lifecycle boundary",
+      "expect": "fail",
+      "errorIncludes": "must not authorize automatic lifecycle action"
+    },
+    {
+      "file": "skill-supply-chain-family-root-membership.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "regression root membership",
+      "expect": "fail",
+      "errorIncludes": "root item must be active or retired"
+    },
+    {
+      "file": "skill-supply-chain-family-disjoint.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "regression membership disjointness",
+      "expect": "fail",
+      "errorIncludes": "active and retired corpus items must be disjoint"
+    },
+    {
+      "file": "skill-supply-chain-family-decision-closure.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "regression decision closure",
+      "expect": "fail",
+      "errorIncludes": "decisionRefs must exactly cover lifecycle decisions"
+    },
+    {
+      "file": "skill-supply-chain-family-protected-holdout.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "protected holdout validity",
+      "expect": "fail",
+      "errorIncludes": "protected holdouts must be sequestered holdout items"
+    },
+    {
+      "file": "skill-supply-chain-family-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "regression family readiness",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce lifecycle decision readiness"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-partitions.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lifecycle partition reproduction",
+      "expect": "fail",
+      "errorIncludes": "lifecycle partitions must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-grade.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lifecycle grade reproduction",
+      "expect": "fail",
+      "errorIncludes": "lifecycleGrade must reproduce"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-assessment-status.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lifecycle assessment governance",
+      "expect": "fail",
+      "errorIncludes": "status must reproduce lifecycle grade"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-unresolved-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "unresolved discovery governance",
+      "expect": "fail",
+      "errorIncludes": "requires challenge-discovery-unresolved governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-holdout-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "holdout contamination governance",
+      "expect": "fail",
+      "errorIncludes": "requires challenge-holdout-contaminated governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-objective-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "objective exposure governance",
+      "expect": "fail",
+      "errorIncludes": "requires challenge-evaluation-objective-exposed governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-regression-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "regression failure governance",
+      "expect": "fail",
+      "errorIncludes": "requires challenge-regression-failed governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-evidence-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lifecycle evidence governance",
+      "expect": "fail",
+      "errorIncludes": "requires challenge-lifecycle-evidence-unverified governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-review-trigger.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lifecycle review governance",
+      "expect": "fail",
+      "errorIncludes": "requires challenge-lifecycle-review-required governance trigger"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-quality-boundary.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "lifecycle activity quality boundary",
+      "expect": "fail",
+      "errorIncludes": "must not treat lifecycle activity as quality"
+    },
+    {
+      "file": "skill-supply-chain-lifecycle-verifier-boundary.json",
+      "validator": "tools/validate-skill-supply-chain.mjs",
+      "rule": "overfitting claim boundary",
+      "expect": "fail",
+      "errorIncludes": "must explicitly not claim overfitting absence"
+    },
+    {
       "file": "skill-supply-chain-verifier-boundary.json",
       "validator": "tools/validate-skill-supply-chain.mjs",
       "rule": "verifier claim boundary",

@@ -1,0 +1,21 @@
+{
+  "artifact_type": "alternative-analysis",
+  "recorded_at": "2026-11-24T04:31:46.342Z",
+  "alternative_analysis_id": "ALT-MWU76U1Y-S0ZO38",
+  "subject_need": "Govern adaptive challenge corpus evolution without mistaking corpus growth for quality.",
+  "alternative_solutions": [
+    "Extend skill-supply-chain with first-class discovery, promotion decision, retained-family, and lifecycle assessment records.",
+    "Add only free-text release notes for new challenge cases."
+  ],
+  "non_solution_options": [
+    "Automatically promote every detected failure based on count or severity alone."
+  ],
+  "defer_options": [
+    "Keep v0.8.21 static and wait for operational incidents."
+  ],
+  "stop_options": [
+    "Do not add live attacks, provider integration, credentials, autonomous model training, or automatic defense actions."
+  ],
+  "source_task_id": null,
+  "source_decision_record_id": "DEC-MWU76AQ6-E57ROS"
+}

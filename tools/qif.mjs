@@ -525,7 +525,11 @@ function status() {
       },
       {
         signal: "Adaptive evaluation creates a new overfitting risk when visible discoveries are repeatedly tuned into the target.",
-        qifResponse: "The next QIF slice should govern promotion, revision, retirement, and regression retention for novel challenge failures."
+        qifResponse: "QIF now governs promotion, revision, retirement, regression retention, holdout exposure, unflagged sampling, and post-decision failure without treating lifecycle activity as quality."
+      },
+      {
+        signal: "Recent frontier evaluations report that evaluation-objective awareness and deployment context can change model behavior, weakening transfer from a fixed test corpus.",
+        qifResponse: "The next QIF slice should compare declared evaluation context with bounded deployment-like observations and govern drift-driven challenge refresh without claiming production truth."
       },
       {
         signal: "Agent frameworks expose tracing, guardrails, sessions, and memory as operational surfaces.",
